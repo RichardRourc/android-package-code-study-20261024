@@ -82,7 +82,7 @@ Spark 中一个长方法在本次 30 秒预算内超时，已从原分析目录�
 
 ## 怎样阅读
 
-先看每个模块的 `resources/AndroidManifest.xml`，再在 `sources` 中按包名和类名浏览。需要确认某个类是否在原始 DEX 里，可搜索类映射 TSV；最后一列给出它在指令文件中的行号。Java 方法缺失或有 `JADX ERROR` 时，核对对应 `bytecode` 文件；原生函数以 `functions.tsv` 为索引，查看对应 `.c`，需要时再核对库汇编。
+先看每个模块的 `resources/AndroidManifest.xml`，再在 `sources` 中按包名和类名浏览。需要确认某个类是否在原始 DEX 里，可搜索类映射 TSV；`instruction_listing` 列给出仓库内指令文件路径，`instruction_listing_line` 列给出文件中的行号。Java 方法缺失或有 `JADX ERROR` 时，核对对应 `bytecode` 文件；原生函数以 `functions.tsv` 为索引，查看对应 `.c`，需要时再核对库汇编。
 
 在 VS Code 里，`Ctrl+P` 按文件名查找，`Ctrl+Shift+F` 搜索代码，`Ctrl+G` 跳到指定行。指令文件已按类拆分，优先用类映射定位。
 
