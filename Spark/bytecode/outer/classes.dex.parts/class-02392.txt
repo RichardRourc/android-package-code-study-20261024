@@ -1,0 +1,605 @@
+Class #2392            -
+  Class descriptor  : 'Landroidx/loader/content/ModernAsyncTask;'
+  Access flags      : 0x0400 (ABSTRACT)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'CORE_POOL_SIZE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 5
+    #1              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'KEEP_ALIVE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1
+    #2              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'LOG_TAG'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "AsyncTask"
+    #3              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'MAXIMUM_POOL_SIZE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 128
+    #4              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'MESSAGE_POST_PROGRESS'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 2
+    #5              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'MESSAGE_POST_RESULT'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1
+    #6              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'THREAD_POOL_EXECUTOR'
+      type          : 'Ljava/util/concurrent/Executor;'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+    #7              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'sDefaultExecutor'
+      type          : 'Ljava/util/concurrent/Executor;'
+      access        : 0x004a (PRIVATE STATIC VOLATILE)
+    #8              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'sHandler'
+      type          : 'Landroidx/loader/content/ModernAsyncTask$InternalHandler;'
+      access        : 0x000a (PRIVATE STATIC)
+    #9              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'sPoolWorkQueue'
+      type          : 'Ljava/util/concurrent/BlockingQueue;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+    #10              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'sThreadFactory'
+      type          : 'Ljava/util/concurrent/ThreadFactory;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+    #0              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'mCancelled'
+      type          : 'Ljava/util/concurrent/atomic/AtomicBoolean;'
+      access        : 0x0010 (FINAL)
+    #1              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'mFuture'
+      type          : 'Ljava/util/concurrent/FutureTask;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'mStatus'
+      type          : 'Landroidx/loader/content/ModernAsyncTask$Status;'
+      access        : 0x0042 (PRIVATE VOLATILE)
+    #3              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'mTaskInvoked'
+      type          : 'Ljava/util/concurrent/atomic/AtomicBoolean;'
+      access        : 0x0010 (FINAL)
+    #4              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'mWorker'
+      type          : 'Landroidx/loader/content/ModernAsyncTask$WorkerRunnable;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 8
+      ins           : 0
+      outs          : 8
+      insns size    : 33 16-bit code units
+1dd978:                                        |[1dd978] androidx.loader.content.ModernAsyncTask.<clinit>:()V
+1dd988: 2207 c60b                              |0000: new-instance v7, Landroidx/loader/content/ModernAsyncTask$1; // type@0bc6
+1dd98c: 7010 8253 0700                         |0002: invoke-direct {v7}, Landroidx/loader/content/ModernAsyncTask$1;.<init>:()V // method@5382
+1dd992: 6907 7422                              |0005: sput-object v7, Landroidx/loader/content/ModernAsyncTask;.sThreadFactory:Ljava/util/concurrent/ThreadFactory; // field@2274
+1dd996: 2206 5d12                              |0007: new-instance v6, Ljava/util/concurrent/LinkedBlockingQueue; // type@125d
+1dd99a: 1300 0a00                              |0009: const/16 v0, #int 10 // #a
+1dd99e: 7020 ec75 0600                         |000b: invoke-direct {v6, v0}, Ljava/util/concurrent/LinkedBlockingQueue;.<init>:(I)V // method@75ec
+1dd9a4: 6906 7322                              |000e: sput-object v6, Landroidx/loader/content/ModernAsyncTask;.sPoolWorkQueue:Ljava/util/concurrent/BlockingQueue; // field@2273
+1dd9a8: 2200 6612                              |0010: new-instance v0, Ljava/util/concurrent/ThreadPoolExecutor; // type@1266
+1dd9ac: 1603 0100                              |0012: const-wide/16 v3, #int 1 // #1
+1dd9b0: 6205 2d3a                              |0014: sget-object v5, Ljava/util/concurrent/TimeUnit;.SECONDS:Ljava/util/concurrent/TimeUnit; // field@3a2d
+1dd9b4: 1251                                   |0016: const/4 v1, #int 5 // #5
+1dd9b6: 1302 8000                              |0017: const/16 v2, #int 128 // #80
+1dd9ba: 7608 0276 0000                         |0019: invoke-direct/range {v0, v1, v2, v3, v4, v5, v6, v7}, Ljava/util/concurrent/ThreadPoolExecutor;.<init>:(IIJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/BlockingQueue;Ljava/util/concurrent/ThreadFactory;)V // method@7602
+1dd9c0: 6900 6b22                              |001c: sput-object v0, Landroidx/loader/content/ModernAsyncTask;.THREAD_POOL_EXECUTOR:Ljava/util/concurrent/Executor; // field@226b
+1dd9c4: 6900 7122                              |001e: sput-object v0, Landroidx/loader/content/ModernAsyncTask;.sDefaultExecutor:Ljava/util/concurrent/Executor; // field@2271
+1dd9c8: 0e00                                   |0020: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=60
+        0x0007 line=69
+        0x0010 line=75
+        0x001e line=84
+      locals        :
+
+    #1              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 36 16-bit code units
+1dd9cc:                                        |[1dd9cc] androidx.loader.content.ModernAsyncTask.<init>:()V
+1dd9dc: 7010 df71 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@71df
+1dd9e2: 6200 6222                              |0003: sget-object v0, Landroidx/loader/content/ModernAsyncTask$Status;.PENDING:Landroidx/loader/content/ModernAsyncTask$Status; // field@2262
+1dd9e6: 5b20 6e22                              |0005: iput-object v0, v2, Landroidx/loader/content/ModernAsyncTask;.mStatus:Landroidx/loader/content/ModernAsyncTask$Status; // field@226e
+1dd9ea: 2200 6912                              |0007: new-instance v0, Ljava/util/concurrent/atomic/AtomicBoolean; // type@1269
+1dd9ee: 7010 1476 0000                         |0009: invoke-direct {v0}, Ljava/util/concurrent/atomic/AtomicBoolean;.<init>:()V // method@7614
+1dd9f4: 5b20 6c22                              |000c: iput-object v0, v2, Landroidx/loader/content/ModernAsyncTask;.mCancelled:Ljava/util/concurrent/atomic/AtomicBoolean; // field@226c
+1dd9f8: 2200 6912                              |000e: new-instance v0, Ljava/util/concurrent/atomic/AtomicBoolean; // type@1269
+1dd9fc: 7010 1476 0000                         |0010: invoke-direct {v0}, Ljava/util/concurrent/atomic/AtomicBoolean;.<init>:()V // method@7614
+1dda02: 5b20 6f22                              |0013: iput-object v0, v2, Landroidx/loader/content/ModernAsyncTask;.mTaskInvoked:Ljava/util/concurrent/atomic/AtomicBoolean; // field@226f
+1dda06: 2200 c70b                              |0015: new-instance v0, Landroidx/loader/content/ModernAsyncTask$2; // type@0bc7
+1dda0a: 7020 8453 2000                         |0017: invoke-direct {v0, v2}, Landroidx/loader/content/ModernAsyncTask$2;.<init>:(Landroidx/loader/content/ModernAsyncTask;)V // method@5384
+1dda10: 5b20 7022                              |001a: iput-object v0, v2, Landroidx/loader/content/ModernAsyncTask;.mWorker:Landroidx/loader/content/ModernAsyncTask$WorkerRunnable; // field@2270
+1dda14: 2201 c80b                              |001c: new-instance v1, Landroidx/loader/content/ModernAsyncTask$3; // type@0bc8
+1dda18: 7030 8653 2100                         |001e: invoke-direct {v1, v2, v0}, Landroidx/loader/content/ModernAsyncTask$3;.<init>:(Landroidx/loader/content/ModernAsyncTask;Ljava/util/concurrent/Callable;)V // method@5386
+1dda1e: 5b21 6d22                              |0021: iput-object v1, v2, Landroidx/loader/content/ModernAsyncTask;.mFuture:Ljava/util/concurrent/FutureTask; // field@226d
+1dda22: 0e00                                   |0023: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=132
+        0x0003 line=88
+        0x0007 line=90
+        0x000e line=92
+        0x0015 line=133
+        0x001c line=153
+      locals        :
+        0x0000 - 0x0024 reg=2 this Landroidx/loader/content/ModernAsyncTask;
+
+    #2              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'execute'
+      type          : '(Ljava/lang/Runnable;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 6 16-bit code units
+1dda24:                                        |[1dda24] androidx.loader.content.ModernAsyncTask.execute:(Ljava/lang/Runnable;)V
+1dda34: 6200 7122                              |0000: sget-object v0, Landroidx/loader/content/ModernAsyncTask;.sDefaultExecutor:Ljava/util/concurrent/Executor; // field@2271
+1dda38: 7220 d375 1000                         |0002: invoke-interface {v0, v1}, Ljava/util/concurrent/Executor;.execute:(Ljava/lang/Runnable;)V // method@75d3
+1dda3e: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=462
+      locals        :
+        0x0000 - 0x0006 reg=1 (null) Ljava/lang/Runnable;
+
+    #3              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'getHandler'
+      type          : '()Landroid/os/Handler;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 1
+      insns size    : 21 16-bit code units
+1dd7a0:                                        |[1dd7a0] androidx.loader.content.ModernAsyncTask.getHandler:()Landroid/os/Handler;
+1dd7b0: 1c00 ce0b                              |0000: const-class v0, Landroidx/loader/content/ModernAsyncTask; // type@0bce
+1dd7b4: 1d00                                   |0002: monitor-enter v0
+1dd7b6: 6201 7222                              |0003: sget-object v1, Landroidx/loader/content/ModernAsyncTask;.sHandler:Landroidx/loader/content/ModernAsyncTask$InternalHandler; // field@2272
+1dd7ba: 3901 0900                              |0005: if-nez v1, 000e // +0009
+1dd7be: 2201 cb0b                              |0007: new-instance v1, Landroidx/loader/content/ModernAsyncTask$InternalHandler; // type@0bcb
+1dd7c2: 7010 8b53 0100                         |0009: invoke-direct {v1}, Landroidx/loader/content/ModernAsyncTask$InternalHandler;.<init>:()V // method@538b
+1dd7c8: 6901 7222                              |000c: sput-object v1, Landroidx/loader/content/ModernAsyncTask;.sHandler:Landroidx/loader/content/ModernAsyncTask$InternalHandler; // field@2272
+1dd7cc: 6201 7222                              |000e: sget-object v1, Landroidx/loader/content/ModernAsyncTask;.sHandler:Landroidx/loader/content/ModernAsyncTask$InternalHandler; // field@2272
+1dd7d0: 1e00                                   |0010: monitor-exit v0
+1dd7d2: 1101                                   |0011: return-object v1
+1dd7d4: 0d01                                   |0012: move-exception v1
+1dd7d6: 1e00                                   |0013: monitor-exit v0
+1dd7d8: 2701                                   |0014: throw v1
+      catches       : 1
+        0x0003 - 0x0014
+          <any> -> 0x0012
+      positions     :
+        0x0000 line=115
+        0x0003 line=116
+        0x0007 line=117
+        0x000e line=119
+        0x0013 line=120
+      locals        :
+
+    #4              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'setDefaultExecutor'
+      type          : '(Ljava/util/concurrent/Executor;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+1ddb44:                                        |[1ddb44] androidx.loader.content.ModernAsyncTask.setDefaultExecutor:(Ljava/util/concurrent/Executor;)V
+1ddb54: 6900 7122                              |0000: sput-object v0, Landroidx/loader/content/ModernAsyncTask;.sDefaultExecutor:Ljava/util/concurrent/Executor; // field@2271
+1ddb58: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=126
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Ljava/util/concurrent/Executor;
+
+  Virtual methods   -
+    #0              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'cancel'
+      type          : '(Z)Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 13 16-bit code units
+1dd8b0:                                        |[1dd8b0] androidx.loader.content.ModernAsyncTask.cancel:(Z)Z
+1dd8c0: 5420 6c22                              |0000: iget-object v0, v2, Landroidx/loader/content/ModernAsyncTask;.mCancelled:Ljava/util/concurrent/atomic/AtomicBoolean; // field@226c
+1dd8c4: 1211                                   |0002: const/4 v1, #int 1 // #1
+1dd8c6: 6e20 1976 1000                         |0003: invoke-virtual {v0, v1}, Ljava/util/concurrent/atomic/AtomicBoolean;.set:(Z)V // method@7619
+1dd8cc: 5420 6d22                              |0006: iget-object v0, v2, Landroidx/loader/content/ModernAsyncTask;.mFuture:Ljava/util/concurrent/FutureTask; // field@226d
+1dd8d0: 6e20 e775 3000                         |0008: invoke-virtual {v0, v3}, Ljava/util/concurrent/FutureTask;.cancel:(Z)Z // method@75e7
+1dd8d6: 0a03                                   |000b: move-result v3
+1dd8d8: 0f03                                   |000c: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=332
+        0x0006 line=333
+      locals        :
+        0x0000 - 0x000d reg=2 this Landroidx/loader/content/ModernAsyncTask;
+        0x0000 - 0x000d reg=3 (null) Z
+
+    #1              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'doInBackground'
+      type          : '([Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0484 (PROTECTED VARARGS ABSTRACT)
+      code          : (none)
+
+    #2              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'execute'
+      type          : '([Ljava/lang/Object;)Landroidx/loader/content/ModernAsyncTask;'
+      access        : 0x0091 (PUBLIC FINAL VARARGS)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 7 16-bit code units
+1dd7e8:                                        |[1dd7e8] androidx.loader.content.ModernAsyncTask.execute:([Ljava/lang/Object;)Landroidx/loader/content/ModernAsyncTask;
+1dd7f8: 6200 7122                              |0000: sget-object v0, Landroidx/loader/content/ModernAsyncTask;.sDefaultExecutor:Ljava/util/concurrent/Executor; // field@2271
+1dd7fc: 6e30 9953 0102                         |0002: invoke-virtual {v1, v0, v2}, Landroidx/loader/content/ModernAsyncTask;.executeOnExecutor:(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroidx/loader/content/ModernAsyncTask; // method@5399
+1dd802: 0c02                                   |0005: move-result-object v2
+1dd804: 1102                                   |0006: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=398
+      locals        :
+        0x0000 - 0x0007 reg=1 this Landroidx/loader/content/ModernAsyncTask;
+        0x0000 - 0x0007 reg=2 (null) [Ljava/lang/Object;
+
+    #3              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'executeOnExecutor'
+      type          : '(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroidx/loader/content/ModernAsyncTask;'
+      access        : 0x0091 (PUBLIC FINAL VARARGS)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 2
+      insns size    : 63 16-bit code units
+1dd808:                                        |[1dd808] androidx.loader.content.ModernAsyncTask.executeOnExecutor:(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroidx/loader/content/ModernAsyncTask;
+1dd818: 5420 6e22                              |0000: iget-object v0, v2, Landroidx/loader/content/ModernAsyncTask;.mStatus:Landroidx/loader/content/ModernAsyncTask$Status; // field@226e
+1dd81c: 6201 6222                              |0002: sget-object v1, Landroidx/loader/content/ModernAsyncTask$Status;.PENDING:Landroidx/loader/content/ModernAsyncTask$Status; // field@2262
+1dd820: 3210 2a00                              |0004: if-eq v0, v1, 002e // +002a
+1dd824: 6203 5d22                              |0006: sget-object v3, Landroidx/loader/content/ModernAsyncTask$4;.$SwitchMap$androidx$loader$content$ModernAsyncTask$Status:[I // field@225d
+1dd828: 5424 6e22                              |0008: iget-object v4, v2, Landroidx/loader/content/ModernAsyncTask;.mStatus:Landroidx/loader/content/ModernAsyncTask$Status; // field@226e
+1dd82c: 6e10 8f53 0400                         |000a: invoke-virtual {v4}, Landroidx/loader/content/ModernAsyncTask$Status;.ordinal:()I // method@538f
+1dd832: 0a04                                   |000d: move-result v4
+1dd834: 4403 0304                              |000e: aget v3, v3, v4
+1dd838: 1214                                   |0010: const/4 v4, #int 1 // #1
+1dd83a: 3243 1500                              |0011: if-eq v3, v4, 0026 // +0015
+1dd83e: 1224                                   |0013: const/4 v4, #int 2 // #2
+1dd840: 3243 0a00                              |0014: if-eq v3, v4, 001e // +000a
+1dd844: 2203 6a11                              |0016: new-instance v3, Ljava/lang/IllegalStateException; // type@116a
+1dd848: 1a04 355c                              |0018: const-string v4, "We should never reach this state" // string@5c35
+1dd84c: 7020 7071 4300                         |001a: invoke-direct {v3, v4}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+1dd852: 2703                                   |001d: throw v3
+1dd854: 2203 6a11                              |001e: new-instance v3, Ljava/lang/IllegalStateException; // type@116a
+1dd858: 1a04 561f                              |0020: const-string v4, "Cannot execute task: the task has already been executed (a task can be executed only once)" // string@1f56
+1dd85c: 7020 7071 4300                         |0022: invoke-direct {v3, v4}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+1dd862: 2703                                   |0025: throw v3
+1dd864: 2203 6a11                              |0026: new-instance v3, Ljava/lang/IllegalStateException; // type@116a
+1dd868: 1a04 571f                              |0028: const-string v4, "Cannot execute task: the task is already running." // string@1f57
+1dd86c: 7020 7071 4300                         |002a: invoke-direct {v3, v4}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+1dd872: 2703                                   |002d: throw v3
+1dd874: 6200 6322                              |002e: sget-object v0, Landroidx/loader/content/ModernAsyncTask$Status;.RUNNING:Landroidx/loader/content/ModernAsyncTask$Status; // field@2263
+1dd878: 5b20 6e22                              |0030: iput-object v0, v2, Landroidx/loader/content/ModernAsyncTask;.mStatus:Landroidx/loader/content/ModernAsyncTask$Status; // field@226e
+1dd87c: 6e10 a353 0200                         |0032: invoke-virtual {v2}, Landroidx/loader/content/ModernAsyncTask;.onPreExecute:()V // method@53a3
+1dd882: 5420 7022                              |0035: iget-object v0, v2, Landroidx/loader/content/ModernAsyncTask;.mWorker:Landroidx/loader/content/ModernAsyncTask$WorkerRunnable; // field@2270
+1dd886: 5b04 6422                              |0037: iput-object v4, v0, Landroidx/loader/content/ModernAsyncTask$WorkerRunnable;.mParams:[Ljava/lang/Object; // field@2264
+1dd88a: 5424 6d22                              |0039: iget-object v4, v2, Landroidx/loader/content/ModernAsyncTask;.mFuture:Ljava/util/concurrent/FutureTask; // field@226d
+1dd88e: 7220 d375 4300                         |003b: invoke-interface {v3, v4}, Ljava/util/concurrent/Executor;.execute:(Ljava/lang/Runnable;)V // method@75d3
+1dd894: 1102                                   |003e: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=433
+        0x0006 line=434
+        0x0016 line=443
+        0x001e line=439
+        0x0026 line=436
+        0x002e line=447
+        0x0032 line=449
+        0x0035 line=451
+        0x0039 line=452
+      locals        :
+        0x0000 - 0x003f reg=2 this Landroidx/loader/content/ModernAsyncTask;
+        0x0000 - 0x003f reg=3 (null) Ljava/util/concurrent/Executor;
+        0x0000 - 0x003f reg=4 (null) [Ljava/lang/Object;
+
+    #4              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'finish'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 18 16-bit code units
+1dda40:                                        |[1dda40] androidx.loader.content.ModernAsyncTask.finish:(Ljava/lang/Object;)V
+1dda50: 6e10 9f53 0100                         |0000: invoke-virtual {v1}, Landroidx/loader/content/ModernAsyncTask;.isCancelled:()Z // method@539f
+1dda56: 0a00                                   |0003: move-result v0
+1dda58: 3800 0600                              |0004: if-eqz v0, 000a // +0006
+1dda5c: 6e20 a153 2100                         |0006: invoke-virtual {v1, v2}, Landroidx/loader/content/ModernAsyncTask;.onCancelled:(Ljava/lang/Object;)V // method@53a1
+1dda62: 2804                                   |0009: goto 000d // +0004
+1dda64: 6e20 a253 2100                         |000a: invoke-virtual {v1, v2}, Landroidx/loader/content/ModernAsyncTask;.onPostExecute:(Ljava/lang/Object;)V // method@53a2
+1dda6a: 6202 6122                              |000d: sget-object v2, Landroidx/loader/content/ModernAsyncTask$Status;.FINISHED:Landroidx/loader/content/ModernAsyncTask$Status; // field@2261
+1dda6e: 5b12 6e22                              |000f: iput-object v2, v1, Landroidx/loader/content/ModernAsyncTask;.mStatus:Landroidx/loader/content/ModernAsyncTask$Status; // field@226e
+1dda72: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=487
+        0x0006 line=488
+        0x000a line=490
+        0x000d line=492
+      locals        :
+        0x0000 - 0x0012 reg=1 this Landroidx/loader/content/ModernAsyncTask;
+        0x0000 - 0x0012 reg=2 (null) Ljava/lang/Object;
+
+    #5              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'get'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+1dd8fc:                                        |[1dd8fc] androidx.loader.content.ModernAsyncTask.get:()Ljava/lang/Object;
+1dd90c: 5410 6d22                              |0000: iget-object v0, v1, Landroidx/loader/content/ModernAsyncTask;.mFuture:Ljava/util/concurrent/FutureTask; // field@226d
+1dd910: 6e10 e875 0000                         |0002: invoke-virtual {v0}, Ljava/util/concurrent/FutureTask;.get:()Ljava/lang/Object; // method@75e8
+1dd916: 0c00                                   |0005: move-result-object v0
+1dd918: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=348
+      locals        :
+        0x0000 - 0x0007 reg=1 this Landroidx/loader/content/ModernAsyncTask;
+
+    #6              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'get'
+      type          : '(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 4
+      insns size    : 7 16-bit code units
+1dd91c:                                        |[1dd91c] androidx.loader.content.ModernAsyncTask.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+1dd92c: 5410 6d22                              |0000: iget-object v0, v1, Landroidx/loader/content/ModernAsyncTask;.mFuture:Ljava/util/concurrent/FutureTask; // field@226d
+1dd930: 6e40 e975 2043                         |0002: invoke-virtual {v0, v2, v3, v4}, Ljava/util/concurrent/FutureTask;.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; // method@75e9
+1dd936: 0c02                                   |0005: move-result-object v2
+1dd938: 1102                                   |0006: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=368
+      locals        :
+        0x0000 - 0x0007 reg=1 this Landroidx/loader/content/ModernAsyncTask;
+        0x0000 - 0x0007 reg=2 (null) J
+        0x0000 - 0x0007 reg=4 (null) Ljava/util/concurrent/TimeUnit;
+
+    #7              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'getStatus'
+      type          : '()Landroidx/loader/content/ModernAsyncTask$Status;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+1dd898:                                        |[1dd898] androidx.loader.content.ModernAsyncTask.getStatus:()Landroidx/loader/content/ModernAsyncTask$Status;
+1dd8a8: 5410 6e22                              |0000: iget-object v0, v1, Landroidx/loader/content/ModernAsyncTask;.mStatus:Landroidx/loader/content/ModernAsyncTask$Status; // field@226e
+1dd8ac: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=195
+      locals        :
+        0x0000 - 0x0003 reg=1 this Landroidx/loader/content/ModernAsyncTask;
+
+    #8              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'isCancelled'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+1dd8dc:                                        |[1dd8dc] androidx.loader.content.ModernAsyncTask.isCancelled:()Z
+1dd8ec: 5410 6c22                              |0000: iget-object v0, v1, Landroidx/loader/content/ModernAsyncTask;.mCancelled:Ljava/util/concurrent/atomic/AtomicBoolean; // field@226c
+1dd8f0: 6e10 1776 0000                         |0002: invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicBoolean;.get:()Z // method@7617
+1dd8f6: 0a00                                   |0005: move-result v0
+1dd8f8: 0f00                                   |0006: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=299
+      locals        :
+        0x0000 - 0x0007 reg=1 this Landroidx/loader/content/ModernAsyncTask;
+
+    #9              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'onCancelled'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 1 16-bit code units
+1dda74:                                        |[1dda74] androidx.loader.content.ModernAsyncTask.onCancelled:()V
+1dda84: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #10              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'onCancelled'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 4 16-bit code units
+1dda88:                                        |[1dda88] androidx.loader.content.ModernAsyncTask.onCancelled:(Ljava/lang/Object;)V
+1dda98: 6e10 a053 0000                         |0000: invoke-virtual {v0}, Landroidx/loader/content/ModernAsyncTask;.onCancelled:()V // method@53a0
+1dda9e: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=270
+      locals        :
+        0x0000 - 0x0004 reg=0 this Landroidx/loader/content/ModernAsyncTask;
+        0x0000 - 0x0004 reg=1 (null) Ljava/lang/Object;
+
+    #11              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'onPostExecute'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 1 16-bit code units
+1ddaa0:                                        |[1ddaa0] androidx.loader.content.ModernAsyncTask.onPostExecute:(Ljava/lang/Object;)V
+1ddab0: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #12              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'onPreExecute'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 1 16-bit code units
+1ddab4:                                        |[1ddab4] androidx.loader.content.ModernAsyncTask.onPreExecute:()V
+1ddac4: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #13              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'onProgressUpdate'
+      type          : '([Ljava/lang/Object;)V'
+      access        : 0x0084 (PROTECTED VARARGS)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 1 16-bit code units
+1ddac8:                                        |[1ddac8] androidx.loader.content.ModernAsyncTask.onProgressUpdate:([Ljava/lang/Object;)V
+1ddad8: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #14              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'postResult'
+      type          : '(Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 22 16-bit code units
+1dd93c:                                        |[1dd93c] androidx.loader.content.ModernAsyncTask.postResult:(Ljava/lang/Object;)Ljava/lang/Object;
+1dd94c: 7100 9d53 0000                         |0000: invoke-static {}, Landroidx/loader/content/ModernAsyncTask;.getHandler:()Landroid/os/Handler; // method@539d
+1dd952: 0c00                                   |0003: move-result-object v0
+1dd954: 2201 ca0b                              |0004: new-instance v1, Landroidx/loader/content/ModernAsyncTask$AsyncTaskResult; // type@0bca
+1dd958: 2410 ac1a 0400                         |0006: filled-new-array {v4}, [Ljava/lang/Object; // type@1aac
+1dd95e: 0c02                                   |0009: move-result-object v2
+1dd960: 7030 8a53 3102                         |000a: invoke-direct {v1, v3, v2}, Landroidx/loader/content/ModernAsyncTask$AsyncTaskResult;.<init>:(Landroidx/loader/content/ModernAsyncTask;[Ljava/lang/Object;)V // method@538a
+1dd966: 1212                                   |000d: const/4 v2, #int 1 // #1
+1dd968: 6e30 f406 2001                         |000e: invoke-virtual {v0, v2, v1}, Landroid/os/Handler;.obtainMessage:(ILjava/lang/Object;)Landroid/os/Message; // method@06f4
+1dd96e: 0c00                                   |0011: move-result-object v0
+1dd970: 6e10 2007 0000                         |0012: invoke-virtual {v0}, Landroid/os/Message;.sendToTarget:()V // method@0720
+1dd976: 1104                                   |0015: return-object v4
+      catches       : (none)
+      positions     :
+        0x0000 line=183
+        0x0012 line=185
+      locals        :
+        0x0000 - 0x0016 reg=3 this Landroidx/loader/content/ModernAsyncTask;
+        0x0000 - 0x0016 reg=4 (null) Ljava/lang/Object;
+
+    #15              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'postResultIfNotInvoked'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 12 16-bit code units
+1ddadc:                                        |[1ddadc] androidx.loader.content.ModernAsyncTask.postResultIfNotInvoked:(Ljava/lang/Object;)V
+1ddaec: 5410 6f22                              |0000: iget-object v0, v1, Landroidx/loader/content/ModernAsyncTask;.mTaskInvoked:Ljava/util/concurrent/atomic/AtomicBoolean; // field@226f
+1ddaf0: 6e10 1776 0000                         |0002: invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicBoolean;.get:()Z // method@7617
+1ddaf6: 0a00                                   |0005: move-result v0
+1ddaf8: 3900 0500                              |0006: if-nez v0, 000b // +0005
+1ddafc: 6e20 a553 2100                         |0008: invoke-virtual {v1, v2}, Landroidx/loader/content/ModernAsyncTask;.postResult:(Ljava/lang/Object;)Ljava/lang/Object; // method@53a5
+1ddb02: 0e00                                   |000b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=176
+        0x0008 line=178
+      locals        :
+        0x0000 - 0x000c reg=1 this Landroidx/loader/content/ModernAsyncTask;
+        0x0000 - 0x000c reg=2 (null) Ljava/lang/Object;
+
+    #16              : (in Landroidx/loader/content/ModernAsyncTask;)
+      name          : 'publishProgress'
+      type          : '([Ljava/lang/Object;)V'
+      access        : 0x0094 (PROTECTED FINAL VARARGS)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 24 16-bit code units
+1ddb04:                                        |[1ddb04] androidx.loader.content.ModernAsyncTask.publishProgress:([Ljava/lang/Object;)V
+1ddb14: 6e10 9f53 0200                         |0000: invoke-virtual {v2}, Landroidx/loader/content/ModernAsyncTask;.isCancelled:()Z // method@539f
+1ddb1a: 0a00                                   |0003: move-result v0
+1ddb1c: 3900 1300                              |0004: if-nez v0, 0017 // +0013
+1ddb20: 7100 9d53 0000                         |0006: invoke-static {}, Landroidx/loader/content/ModernAsyncTask;.getHandler:()Landroid/os/Handler; // method@539d
+1ddb26: 0c00                                   |0009: move-result-object v0
+1ddb28: 2201 ca0b                              |000a: new-instance v1, Landroidx/loader/content/ModernAsyncTask$AsyncTaskResult; // type@0bca
+1ddb2c: 7030 8a53 2103                         |000c: invoke-direct {v1, v2, v3}, Landroidx/loader/content/ModernAsyncTask$AsyncTaskResult;.<init>:(Landroidx/loader/content/ModernAsyncTask;[Ljava/lang/Object;)V // method@538a
+1ddb32: 1223                                   |000f: const/4 v3, #int 2 // #2
+1ddb34: 6e30 f406 3001                         |0010: invoke-virtual {v0, v3, v1}, Landroid/os/Handler;.obtainMessage:(ILjava/lang/Object;)Landroid/os/Message; // method@06f4
+1ddb3a: 0c03                                   |0013: move-result-object v3
+1ddb3c: 6e10 2007 0300                         |0014: invoke-virtual {v3}, Landroid/os/Message;.sendToTarget:()V // method@0720
+1ddb42: 0e00                                   |0017: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=480
+        0x0006 line=481
+        0x0014 line=482
+      locals        :
+        0x0000 - 0x0018 reg=2 this Landroidx/loader/content/ModernAsyncTask;
+        0x0000 - 0x0018 reg=3 (null) [Ljava/lang/Object;
+
+  source_file_idx   : 19115 (ModernAsyncTask.java)
+

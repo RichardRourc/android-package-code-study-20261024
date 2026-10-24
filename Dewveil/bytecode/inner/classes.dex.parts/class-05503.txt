@@ -1,0 +1,493 @@
+Class #5503            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/ServiceStarter;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'ERROR_UNKNOWN'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 500
+    #1              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'SUCCESS'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : -1
+    #2              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'instance'
+      type          : 'Lcom/google/firebase/messaging/ServiceStarter;'
+      access        : 0x000a (PRIVATE STATIC)
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'firebaseMessagingServiceClassName'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'hasAccessNetworkStatePermission'
+      type          : 'Ljava/lang/Boolean;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'hasWakeLockPermission'
+      type          : 'Ljava/lang/Boolean;'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'messagingEvents'
+      type          : 'Ljava/util/Queue;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 18 16-bit code units
+729edc:                                        |[729edc] com.google.firebase.messaging.ServiceStarter.<init>:()V
+729eec: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+729ef2: 1200                                   |0003: const/4 v0, #int 0 // #0
+729ef4: 5b10 d673                              |0004: iput-object v0, v1, Lcom/google/firebase/messaging/ServiceStarter;.firebaseMessagingServiceClassName:Ljava/lang/String; // field@73d6
+729ef8: 5b10 d873                              |0006: iput-object v0, v1, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:Ljava/lang/Boolean; // field@73d8
+729efc: 5b10 d773                              |0008: iput-object v0, v1, Lcom/google/firebase/messaging/ServiceStarter;.hasAccessNetworkStatePermission:Ljava/lang/Boolean; // field@73d7
+729f00: 2200 391b                              |000a: new-instance v0, Ljava/util/ArrayDeque; // type@1b39
+729f04: 7010 90d4 0000                         |000c: invoke-direct {v0}, Ljava/util/ArrayDeque;.<init>:()V // method@d490
+729f0a: 5b10 da73                              |000f: iput-object v0, v1, Lcom/google/firebase/messaging/ServiceStarter;.messagingEvents:Ljava/util/Queue; // field@73da
+729f0e: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x000c line=1
+      locals        :
+        0x0000 - 0x0012 reg=1 this Lcom/google/firebase/messaging/ServiceStarter;
+
+    #1              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'doStartService'
+      type          : '(Landroid/content/Context;Landroid/content/Intent;)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 3
+      insns size    : 122 16-bit code units
+729f10:                                        |[729f10] com.google.firebase.messaging.ServiceStarter.doStartService:(Landroid/content/Context;Landroid/content/Intent;)I
+729f20: 7030 e7c0 5406                         |0000: invoke-direct {v4, v5, v6}, Lcom/google/firebase/messaging/ServiceStarter;.resolveServiceClassName:(Landroid/content/Context;Landroid/content/Intent;)Ljava/lang/String; // method@c0e7
+729f26: 0c00                                   |0003: move-result-object v0
+729f28: 1a01 6c28                              |0004: const-string v1, "FirebaseMessaging" // string@286c
+729f2c: 3800 2500                              |0006: if-eqz v0, 002b // +0025
+729f30: 1232                                   |0008: const/4 v2, #int 3 // #3
+729f32: 7120 2308 2100                         |0009: invoke-static {v1, v2}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+729f38: 0a02                                   |000c: move-result v2
+729f3a: 3802 1700                              |000d: if-eqz v2, 0024 // +0017
+729f3e: 6e10 16d2 0000                         |000f: invoke-virtual {v0}, Ljava/lang/String;.length:()I // method@d216
+729f44: 0a02                                   |0012: move-result v2
+729f46: 1a03 575e                              |0013: const-string v3, "Restricting intent to a specific service: " // string@5e57
+729f4a: 3802 0700                              |0015: if-eqz v2, 001c // +0007
+729f4e: 6e20 fdd1 0300                         |0017: invoke-virtual {v3, v0}, Ljava/lang/String;.concat:(Ljava/lang/String;)Ljava/lang/String; // method@d1fd
+729f54: 0c02                                   |001a: move-result-object v2
+729f56: 2806                                   |001b: goto 0021 // +0006
+729f58: 2202 971a                              |001c: new-instance v2, Ljava/lang/String; // type@1a97
+729f5c: 7020 ecd1 3200                         |001e: invoke-direct {v2, v3}, Ljava/lang/String;.<init>:(Ljava/lang/String;)V // method@d1ec
+729f62: 7120 1c08 2100                         |0021: invoke-static {v1, v2}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+729f68: 6e10 4602 0500                         |0024: invoke-virtual {v5}, Landroid/content/Context;.getPackageName:()Ljava/lang/String; // method@0246
+729f6e: 0c02                                   |0027: move-result-object v2
+729f70: 6e30 9f02 2600                         |0028: invoke-virtual {v6, v2, v0}, Landroid/content/Intent;.setClassName:(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent; // method@029f
+729f76: 6e20 e6c0 5400                         |002b: invoke-virtual {v4, v5}, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:(Landroid/content/Context;)Z // method@c0e6
+729f7c: 0a04                                   |002e: move-result v4
+729f7e: 3804 0700                              |002f: if-eqz v4, 0036 // +0007
+729f82: 7120 4cc1 6500                         |0031: invoke-static {v5, v6}, Lcom/google/firebase/messaging/WakeLockHolder;.startWakefulService:(Landroid/content/Context;Landroid/content/Intent;)Landroid/content/ComponentName; // method@c14c
+729f88: 0c04                                   |0034: move-result-object v4
+729f8a: 280a                                   |0035: goto 003f // +000a
+729f8c: 6e20 6102 6500                         |0036: invoke-virtual {v5, v6}, Landroid/content/Context;.startService:(Landroid/content/Intent;)Landroid/content/ComponentName; // method@0261
+729f92: 0c04                                   |0039: move-result-object v4
+729f94: 1a05 9856                              |003a: const-string v5, "Missing wake lock permission, service start may be delayed" // string@5698
+729f98: 7120 1c08 5100                         |003c: invoke-static {v1, v5}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+729f9e: 3904 0a00                              |003f: if-nez v4, 0049 // +000a
+729fa2: 1a04 e524                              |0041: const-string v4, "Error while delivering the message: ServiceIntent not found." // string@24e5
+729fa6: 7120 1e08 4100                         |0043: invoke-static {v1, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@081e
+729fac: 1304 9401                              |0046: const/16 v4, #int 404 // #194
+729fb0: 0f04                                   |0048: return v4
+729fb2: 12f4                                   |0049: const/4 v4, #int -1 // #ff
+729fb4: 0f04                                   |004a: return v4
+729fb6: 0d04                                   |004b: move-exception v4
+729fb8: 7110 30d2 0400                         |004c: invoke-static {v4}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+729fbe: 0c04                                   |004f: move-result-object v4
+729fc0: 7110 30d2 0400                         |0050: invoke-static {v4}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+729fc6: 0c05                                   |0053: move-result-object v5
+729fc8: 6e10 16d2 0500                         |0054: invoke-virtual {v5}, Ljava/lang/String;.length:()I // method@d216
+729fce: 0a05                                   |0057: move-result v5
+729fd0: 2206 991a                              |0058: new-instance v6, Ljava/lang/StringBuilder; // type@1a99
+729fd4: d805 052d                              |005a: add-int/lit8 v5, v5, #int 45 // #2d
+729fd8: 7020 3ad2 5600                         |005c: invoke-direct {v6, v5}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+729fde: 1a05 ea27                              |005f: const-string v5, "Failed to start service while in background: " // string@27ea
+729fe2: 6e20 45d2 5600                         |0061: invoke-virtual {v6, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+729fe8: 6e20 45d2 4600                         |0064: invoke-virtual {v6, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+729fee: 6e10 58d2 0600                         |0067: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+729ff4: 0c04                                   |006a: move-result-object v4
+729ff6: 7120 1e08 4100                         |006b: invoke-static {v1, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@081e
+729ffc: 1304 9201                              |006e: const/16 v4, #int 402 // #192
+72a000: 0f04                                   |0070: return v4
+72a002: 0d04                                   |0071: move-exception v4
+72a004: 1a05 e424                              |0072: const-string v5, "Error while delivering the message to the serviceIntent" // string@24e4
+72a008: 7130 1f08 5104                         |0074: invoke-static {v1, v5, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I // method@081f
+72a00e: 1304 9101                              |0077: const/16 v4, #int 401 // #191
+72a012: 0f04                                   |0079: return v4
+      catches       : 1
+        0x002b - 0x0046
+          Ljava/lang/SecurityException; -> 0x0071
+          Ljava/lang/IllegalStateException; -> 0x004b
+      positions     :
+        0x0000 line=1
+        0x0009 line=2
+        0x000f line=3
+        0x001c line=8
+        0x001e line=3
+        0x0024 line=4
+        0x002b line=5
+        0x0031 line=6
+        0x0036 line=7
+        0x003c line=8
+        0x0041 line=6
+        0x0043 line=9
+        0x004c line=10
+        0x0072 line=3
+        0x0074 line=11
+      locals        :
+        0x0000 - 0x007a reg=4 this Lcom/google/firebase/messaging/ServiceStarter;
+        0x0000 - 0x007a reg=5 (null) Landroid/content/Context;
+        0x0000 - 0x007a reg=6 (null) Landroid/content/Intent;
+
+    #2              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'getInstance'
+      type          : '()Lcom/google/firebase/messaging/ServiceStarter;'
+      access        : 0x20008 (STATIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 1
+      insns size    : 21 16-bit code units
+72a024:                                        |[72a024] com.google.firebase.messaging.ServiceStarter.getInstance:()Lcom/google/firebase/messaging/ServiceStarter;
+72a034: 1c00 f917                              |0000: const-class v0, Lcom/google/firebase/messaging/ServiceStarter; // type@17f9
+72a038: 1d00                                   |0002: monitor-enter v0
+72a03a: 6201 d973                              |0003: sget-object v1, Lcom/google/firebase/messaging/ServiceStarter;.instance:Lcom/google/firebase/messaging/ServiceStarter; // field@73d9
+72a03e: 3901 0900                              |0005: if-nez v1, 000e // +0009
+72a042: 2201 f917                              |0007: new-instance v1, Lcom/google/firebase/messaging/ServiceStarter; // type@17f9
+72a046: 7010 e1c0 0100                         |0009: invoke-direct {v1}, Lcom/google/firebase/messaging/ServiceStarter;.<init>:()V // method@c0e1
+72a04c: 6901 d973                              |000c: sput-object v1, Lcom/google/firebase/messaging/ServiceStarter;.instance:Lcom/google/firebase/messaging/ServiceStarter; // field@73d9
+72a050: 6201 d973                              |000e: sget-object v1, Lcom/google/firebase/messaging/ServiceStarter;.instance:Lcom/google/firebase/messaging/ServiceStarter; // field@73d9
+72a054: 1e00                                   |0010: monitor-exit v0
+72a056: 1101                                   |0011: return-object v1
+72a058: 0d01                                   |0012: move-exception v1
+72a05a: 1e00                                   |0013: monitor-exit v0
+72a05c: 2701                                   |0014: throw v1
+      catches       : 2
+        0x0003 - 0x0010
+          <any> -> 0x0012
+        0x0013 - 0x0014
+          <any> -> 0x0012
+      positions     :
+        0x0009 line=1
+      locals        :
+
+    #3              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'resolveServiceClassName'
+      type          : '(Landroid/content/Context;Landroid/content/Intent;)Ljava/lang/String;'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 3
+      insns size    : 163 16-bit code units
+72a074:                                        |[72a074] com.google.firebase.messaging.ServiceStarter.resolveServiceClassName:(Landroid/content/Context;Landroid/content/Intent;)Ljava/lang/String;
+72a084: 1d04                                   |0000: monitor-enter v4
+72a086: 5440 d673                              |0001: iget-object v0, v4, Lcom/google/firebase/messaging/ServiceStarter;.firebaseMessagingServiceClassName:Ljava/lang/String; // field@73d6
+72a08a: 3800 0400                              |0003: if-eqz v0, 0007 // +0004
+72a08e: 1e04                                   |0005: monitor-exit v4
+72a090: 1100                                   |0006: return-object v0
+72a092: 6e10 4502 0500                         |0007: invoke-virtual {v5}, Landroid/content/Context;.getPackageManager:()Landroid/content/pm/PackageManager; // method@0245
+72a098: 0c00                                   |000a: move-result-object v0
+72a09a: 1201                                   |000b: const/4 v1, #int 0 // #0
+72a09c: 6e30 e702 6001                         |000c: invoke-virtual {v0, v6, v1}, Landroid/content/pm/PackageManager;.resolveService:(Landroid/content/Intent;I)Landroid/content/pm/ResolveInfo; // method@02e7
+72a0a2: 0c06                                   |000f: move-result-object v6
+72a0a4: 1200                                   |0010: const/4 v0, #int 0 // #0
+72a0a6: 3806 8600                              |0011: if-eqz v6, 0097 // +0086
+72a0aa: 5461 4200                              |0013: iget-object v1, v6, Landroid/content/pm/ResolveInfo;.serviceInfo:Landroid/content/pm/ServiceInfo; // field@0042
+72a0ae: 3901 0400                              |0015: if-nez v1, 0019 // +0004
+72a0b2: 2900 8000                              |0017: goto/16 0097 // +0080
+72a0b6: 5466 4200                              |0019: iget-object v6, v6, Landroid/content/pm/ResolveInfo;.serviceInfo:Landroid/content/pm/ServiceInfo; // field@0042
+72a0ba: 6e10 4602 0500                         |001b: invoke-virtual {v5}, Landroid/content/Context;.getPackageName:()Ljava/lang/String; // method@0246
+72a0c0: 0c01                                   |001e: move-result-object v1
+72a0c2: 5462 4700                              |001f: iget-object v2, v6, Landroid/content/pm/ServiceInfo;.packageName:Ljava/lang/String; // field@0047
+72a0c6: 6e20 03d2 2100                         |0021: invoke-virtual {v1, v2}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+72a0cc: 0a01                                   |0024: move-result v1
+72a0ce: 3801 3b00                              |0025: if-eqz v1, 0060 // +003b
+72a0d2: 5461 4600                              |0027: iget-object v1, v6, Landroid/content/pm/ServiceInfo;.name:Ljava/lang/String; // field@0046
+72a0d6: 3901 0300                              |0029: if-nez v1, 002c // +0003
+72a0da: 2835                                   |002b: goto 0060 // +0035
+72a0dc: 5460 4600                              |002c: iget-object v0, v6, Landroid/content/pm/ServiceInfo;.name:Ljava/lang/String; // field@0046
+72a0e0: 1a01 c40f                              |002e: const-string v1, "." // string@0fc4
+72a0e4: 6e20 20d2 1000                         |0030: invoke-virtual {v0, v1}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@d220
+72a0ea: 0a00                                   |0033: move-result v0
+72a0ec: 3800 2400                              |0034: if-eqz v0, 0058 // +0024
+72a0f0: 6e10 4602 0500                         |0036: invoke-virtual {v5}, Landroid/content/Context;.getPackageName:()Ljava/lang/String; // method@0246
+72a0f6: 0c05                                   |0039: move-result-object v5
+72a0f8: 7110 30d2 0500                         |003a: invoke-static {v5}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72a0fe: 0c05                                   |003d: move-result-object v5
+72a100: 5466 4600                              |003e: iget-object v6, v6, Landroid/content/pm/ServiceInfo;.name:Ljava/lang/String; // field@0046
+72a104: 7110 30d2 0600                         |0040: invoke-static {v6}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72a10a: 0c06                                   |0043: move-result-object v6
+72a10c: 6e10 16d2 0600                         |0044: invoke-virtual {v6}, Ljava/lang/String;.length:()I // method@d216
+72a112: 0a00                                   |0047: move-result v0
+72a114: 3800 0700                              |0048: if-eqz v0, 004f // +0007
+72a118: 6e20 fdd1 6500                         |004a: invoke-virtual {v5, v6}, Ljava/lang/String;.concat:(Ljava/lang/String;)Ljava/lang/String; // method@d1fd
+72a11e: 0c05                                   |004d: move-result-object v5
+72a120: 2807                                   |004e: goto 0055 // +0007
+72a122: 2206 971a                              |004f: new-instance v6, Ljava/lang/String; // type@1a97
+72a126: 7020 ecd1 5600                         |0051: invoke-direct {v6, v5}, Ljava/lang/String;.<init>:(Ljava/lang/String;)V // method@d1ec
+72a12c: 0765                                   |0054: move-object v5, v6
+72a12e: 5b45 d673                              |0055: iput-object v5, v4, Lcom/google/firebase/messaging/ServiceStarter;.firebaseMessagingServiceClassName:Ljava/lang/String; // field@73d6
+72a132: 2805                                   |0057: goto 005c // +0005
+72a134: 5465 4600                              |0058: iget-object v5, v6, Landroid/content/pm/ServiceInfo;.name:Ljava/lang/String; // field@0046
+72a138: 5b45 d673                              |005a: iput-object v5, v4, Lcom/google/firebase/messaging/ServiceStarter;.firebaseMessagingServiceClassName:Ljava/lang/String; // field@73d6
+72a13c: 5445 d673                              |005c: iget-object v5, v4, Lcom/google/firebase/messaging/ServiceStarter;.firebaseMessagingServiceClassName:Ljava/lang/String; // field@73d6
+72a140: 1e04                                   |005e: monitor-exit v4
+72a142: 1105                                   |005f: return-object v5
+72a144: 5465 4700                              |0060: iget-object v5, v6, Landroid/content/pm/ServiceInfo;.packageName:Ljava/lang/String; // field@0047
+72a148: 5466 4600                              |0062: iget-object v6, v6, Landroid/content/pm/ServiceInfo;.name:Ljava/lang/String; // field@0046
+72a14c: 7110 30d2 0500                         |0064: invoke-static {v5}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72a152: 0c01                                   |0067: move-result-object v1
+72a154: 6e10 16d2 0100                         |0068: invoke-virtual {v1}, Ljava/lang/String;.length:()I // method@d216
+72a15a: 0a01                                   |006b: move-result v1
+72a15c: 7110 30d2 0600                         |006c: invoke-static {v6}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72a162: 0c02                                   |006f: move-result-object v2
+72a164: 6e10 16d2 0200                         |0070: invoke-virtual {v2}, Ljava/lang/String;.length:()I // method@d216
+72a16a: 0a02                                   |0073: move-result v2
+72a16c: 2203 991a                              |0074: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+72a170: d801 015e                              |0076: add-int/lit8 v1, v1, #int 94 // #5e
+72a174: b021                                   |0078: add-int/2addr v1, v2
+72a176: 7020 3ad2 1300                         |0079: invoke-direct {v3, v1}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+72a17c: 1a01 c424                              |007c: const-string v1, "Error resolving target intent service, skipping classname enforcement. Resolved service was: " // string@24c4
+72a180: 6e20 45d2 1300                         |007e: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72a186: 6e20 45d2 5300                         |0081: invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72a18c: 1a05 0110                              |0084: const-string v5, "/" // string@1001
+72a190: 6e20 45d2 5300                         |0086: invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72a196: 6e20 45d2 6300                         |0089: invoke-virtual {v3, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72a19c: 1a05 6c28                              |008c: const-string v5, "FirebaseMessaging" // string@286c
+72a1a0: 6e10 58d2 0300                         |008e: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+72a1a6: 0c06                                   |0091: move-result-object v6
+72a1a8: 7120 1e08 6500                         |0092: invoke-static {v5, v6}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@081e
+72a1ae: 1e04                                   |0095: monitor-exit v4
+72a1b0: 1100                                   |0096: return-object v0
+72a1b2: 1a05 6c28                              |0097: const-string v5, "FirebaseMessaging" // string@286c
+72a1b6: 1a06 bd27                              |0099: const-string v6, "Failed to resolve target intent service, skipping classname enforcement" // string@27bd
+72a1ba: 7120 1e08 6500                         |009b: invoke-static {v5, v6}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@081e
+72a1c0: 1e04                                   |009e: monitor-exit v4
+72a1c2: 1100                                   |009f: return-object v0
+72a1c4: 0d05                                   |00a0: move-exception v5
+72a1c6: 1e04                                   |00a1: monitor-exit v4
+72a1c8: 2705                                   |00a2: throw v5
+      catches       : 5
+        0x0001 - 0x0003
+          <any> -> 0x00a0
+        0x0007 - 0x005e
+          <any> -> 0x00a0
+        0x0060 - 0x0095
+          <any> -> 0x00a0
+        0x0097 - 0x009e
+          <any> -> 0x00a0
+        0x00a1 - 0x00a2
+          <any> -> 0x00a0
+      positions     :
+        0x0007 line=1
+        0x0013 line=2
+        0x0019 line=4
+        0x001b line=5
+        0x002c line=7
+        0x0036 line=8
+        0x0058 line=9
+        0x005c line=8
+        0x0060 line=6
+        0x0097 line=2
+        0x009b line=3
+      locals        :
+        0x0000 - 0x00a3 reg=4 this Lcom/google/firebase/messaging/ServiceStarter;
+        0x0000 - 0x00a3 reg=5 (null) Landroid/content/Context;
+        0x0000 - 0x00a3 reg=6 (null) Landroid/content/Intent;
+
+    #4              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'setForTesting'
+      type          : '(Lcom/google/firebase/messaging/ServiceStarter;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+72a1f8:                                        |[72a1f8] com.google.firebase.messaging.ServiceStarter.setForTesting:(Lcom/google/firebase/messaging/ServiceStarter;)V
+72a208: 6900 d973                              |0000: sput-object v0, Lcom/google/firebase/messaging/ServiceStarter;.instance:Lcom/google/firebase/messaging/ServiceStarter; // field@73d9
+72a20c: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'getMessagingEvent'
+      type          : '()Landroid/content/Intent;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+72a210:                                        |[72a210] com.google.firebase.messaging.ServiceStarter.getMessagingEvent:()Landroid/content/Intent;
+72a220: 5400 da73                              |0000: iget-object v0, v0, Lcom/google/firebase/messaging/ServiceStarter;.messagingEvents:Ljava/util/Queue; // field@73da
+72a224: 7210 1dd6 0000                         |0002: invoke-interface {v0}, Ljava/util/Queue;.poll:()Ljava/lang/Object; // method@d61d
+72a22a: 0c00                                   |0005: move-result-object v0
+72a22c: 1f00 7200                              |0006: check-cast v0, Landroid/content/Intent; // type@0072
+72a230: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lcom/google/firebase/messaging/ServiceStarter;
+
+    #1              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'hasAccessNetworkStatePermission'
+      type          : '(Landroid/content/Context;)Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 50 16-bit code units
+72a234:                                        |[72a234] com.google.firebase.messaging.ServiceStarter.hasAccessNetworkStatePermission:(Landroid/content/Context;)Z
+72a244: 5410 d773                              |0000: iget-object v0, v1, Lcom/google/firebase/messaging/ServiceStarter;.hasAccessNetworkStatePermission:Ljava/lang/Boolean; // field@73d7
+72a248: 3900 1300                              |0002: if-nez v0, 0015 // +0013
+72a24c: 1a00 1c7f                              |0004: const-string v0, "android.permission.ACCESS_NETWORK_STATE" // string@7f1c
+72a250: 6e20 2902 0200                         |0006: invoke-virtual {v2, v0}, Landroid/content/Context;.checkCallingOrSelfPermission:(Ljava/lang/String;)I // method@0229
+72a256: 0a02                                   |0009: move-result v2
+72a258: 3902 0400                              |000a: if-nez v2, 000e // +0004
+72a25c: 1212                                   |000c: const/4 v2, #int 1 // #1
+72a25e: 2802                                   |000d: goto 000f // +0002
+72a260: 1202                                   |000e: const/4 v2, #int 0 // #0
+72a262: 7110 a3d0 0200                         |000f: invoke-static {v2}, Ljava/lang/Boolean;.valueOf:(Z)Ljava/lang/Boolean; // method@d0a3
+72a268: 0c02                                   |0012: move-result-object v2
+72a26a: 5b12 d773                              |0013: iput-object v2, v1, Lcom/google/firebase/messaging/ServiceStarter;.hasAccessNetworkStatePermission:Ljava/lang/Boolean; // field@73d7
+72a26e: 5412 d873                              |0015: iget-object v2, v1, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:Ljava/lang/Boolean; // field@73d8
+72a272: 6e10 9bd0 0200                         |0017: invoke-virtual {v2}, Ljava/lang/Boolean;.booleanValue:()Z // method@d09b
+72a278: 0a02                                   |001a: move-result v2
+72a27a: 3902 1000                              |001b: if-nez v2, 002b // +0010
+72a27e: 1232                                   |001d: const/4 v2, #int 3 // #3
+72a280: 1a00 6c28                              |001e: const-string v0, "FirebaseMessaging" // string@286c
+72a284: 7120 2308 2000                         |0020: invoke-static {v0, v2}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+72a28a: 0a02                                   |0023: move-result v2
+72a28c: 3802 0700                              |0024: if-eqz v2, 002b // +0007
+72a290: 1a02 7b56                              |0026: const-string v2, "Missing Permission: android.permission.ACCESS_NETWORK_STATE this should normally be included by the manifest merger, but may needed to be manually added to your manifest" // string@567b
+72a294: 7120 1c08 2000                         |0028: invoke-static {v0, v2}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+72a29a: 5411 d773                              |002b: iget-object v1, v1, Lcom/google/firebase/messaging/ServiceStarter;.hasAccessNetworkStatePermission:Ljava/lang/Boolean; // field@73d7
+72a29e: 6e10 9bd0 0100                         |002d: invoke-virtual {v1}, Ljava/lang/Boolean;.booleanValue:()Z // method@d09b
+72a2a4: 0a01                                   |0030: move-result v1
+72a2a6: 0f01                                   |0031: return v1
+      catches       : (none)
+      positions     :
+        0x0006 line=1
+        0x0017 line=2
+        0x001e line=3
+        0x0028 line=4
+        0x002d line=5
+      locals        :
+        0x0000 - 0x0032 reg=1 this Lcom/google/firebase/messaging/ServiceStarter;
+        0x0000 - 0x0032 reg=2 (null) Landroid/content/Context;
+
+    #2              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'hasWakeLockPermission'
+      type          : '(Landroid/content/Context;)Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 50 16-bit code units
+72a2a8:                                        |[72a2a8] com.google.firebase.messaging.ServiceStarter.hasWakeLockPermission:(Landroid/content/Context;)Z
+72a2b8: 5410 d873                              |0000: iget-object v0, v1, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:Ljava/lang/Boolean; // field@73d8
+72a2bc: 3900 1300                              |0002: if-nez v0, 0015 // +0013
+72a2c0: 1a00 217f                              |0004: const-string v0, "android.permission.WAKE_LOCK" // string@7f21
+72a2c4: 6e20 2902 0200                         |0006: invoke-virtual {v2, v0}, Landroid/content/Context;.checkCallingOrSelfPermission:(Ljava/lang/String;)I // method@0229
+72a2ca: 0a02                                   |0009: move-result v2
+72a2cc: 3902 0400                              |000a: if-nez v2, 000e // +0004
+72a2d0: 1212                                   |000c: const/4 v2, #int 1 // #1
+72a2d2: 2802                                   |000d: goto 000f // +0002
+72a2d4: 1202                                   |000e: const/4 v2, #int 0 // #0
+72a2d6: 7110 a3d0 0200                         |000f: invoke-static {v2}, Ljava/lang/Boolean;.valueOf:(Z)Ljava/lang/Boolean; // method@d0a3
+72a2dc: 0c02                                   |0012: move-result-object v2
+72a2de: 5b12 d873                              |0013: iput-object v2, v1, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:Ljava/lang/Boolean; // field@73d8
+72a2e2: 5412 d873                              |0015: iget-object v2, v1, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:Ljava/lang/Boolean; // field@73d8
+72a2e6: 6e10 9bd0 0200                         |0017: invoke-virtual {v2}, Ljava/lang/Boolean;.booleanValue:()Z // method@d09b
+72a2ec: 0a02                                   |001a: move-result v2
+72a2ee: 3902 1000                              |001b: if-nez v2, 002b // +0010
+72a2f2: 1232                                   |001d: const/4 v2, #int 3 // #3
+72a2f4: 1a00 6c28                              |001e: const-string v0, "FirebaseMessaging" // string@286c
+72a2f8: 7120 2308 2000                         |0020: invoke-static {v0, v2}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+72a2fe: 0a02                                   |0023: move-result v2
+72a300: 3802 0700                              |0024: if-eqz v2, 002b // +0007
+72a304: 1a02 7c56                              |0026: const-string v2, "Missing Permission: android.permission.WAKE_LOCK this should normally be included by the manifest merger, but may needed to be manually added to your manifest" // string@567c
+72a308: 7120 1c08 2000                         |0028: invoke-static {v0, v2}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+72a30e: 5411 d873                              |002b: iget-object v1, v1, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:Ljava/lang/Boolean; // field@73d8
+72a312: 6e10 9bd0 0100                         |002d: invoke-virtual {v1}, Ljava/lang/Boolean;.booleanValue:()Z // method@d09b
+72a318: 0a01                                   |0030: move-result v1
+72a31a: 0f01                                   |0031: return v1
+      catches       : (none)
+      positions     :
+        0x0006 line=1
+        0x0017 line=2
+        0x001e line=3
+        0x0028 line=4
+        0x002d line=5
+      locals        :
+        0x0000 - 0x0032 reg=1 this Lcom/google/firebase/messaging/ServiceStarter;
+        0x0000 - 0x0032 reg=2 (null) Landroid/content/Context;
+
+    #3              : (in Lcom/google/firebase/messaging/ServiceStarter;)
+      name          : 'startMessagingService'
+      type          : '(Landroid/content/Context;Landroid/content/Intent;)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 38 16-bit code units
+72a31c:                                        |[72a31c] com.google.firebase.messaging.ServiceStarter.startMessagingService:(Landroid/content/Context;Landroid/content/Intent;)I
+72a32c: 1230                                   |0000: const/4 v0, #int 3 // #3
+72a32e: 1a01 6c28                              |0001: const-string v1, "FirebaseMessaging" // string@286c
+72a332: 7120 2308 0100                         |0003: invoke-static {v1, v0}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+72a338: 0a00                                   |0006: move-result v0
+72a33a: 3800 0700                              |0007: if-eqz v0, 000e // +0007
+72a33e: 1a00 4063                              |0009: const-string v0, "Starting service" // string@6340
+72a342: 7120 1c08 0100                         |000b: invoke-static {v1, v0}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+72a348: 5420 da73                              |000e: iget-object v0, v2, Lcom/google/firebase/messaging/ServiceStarter;.messagingEvents:Ljava/util/Queue; // field@73da
+72a34c: 7220 1cd6 4000                         |0010: invoke-interface {v0, v4}, Ljava/util/Queue;.offer:(Ljava/lang/Object;)Z // method@d61c
+72a352: 2204 7200                              |0013: new-instance v4, Landroid/content/Intent; // type@0072
+72a356: 1a00 1588                              |0015: const-string v0, "com.google.firebase.MESSAGING_EVENT" // string@8815
+72a35a: 7020 7302 0400                         |0017: invoke-direct {v4, v0}, Landroid/content/Intent;.<init>:(Ljava/lang/String;)V // method@0273
+72a360: 6e10 4602 0300                         |001a: invoke-virtual {v3}, Landroid/content/Context;.getPackageName:()Ljava/lang/String; // method@0246
+72a366: 0c00                                   |001d: move-result-object v0
+72a368: 6e20 a402 0400                         |001e: invoke-virtual {v4, v0}, Landroid/content/Intent;.setPackage:(Ljava/lang/String;)Landroid/content/Intent; // method@02a4
+72a36e: 7030 e2c0 3204                         |0021: invoke-direct {v2, v3, v4}, Lcom/google/firebase/messaging/ServiceStarter;.doStartService:(Landroid/content/Context;Landroid/content/Intent;)I // method@c0e2
+72a374: 0a02                                   |0024: move-result v2
+72a376: 0f02                                   |0025: return v2
+      catches       : (none)
+      positions     :
+        0x0001 line=1
+        0x000b line=2
+        0x0010 line=3
+        0x0017 line=4
+        0x001a line=5
+        0x0021 line=6
+      locals        :
+        0x0000 - 0x0026 reg=2 this Lcom/google/firebase/messaging/ServiceStarter;
+        0x0000 - 0x0026 reg=3 (null) Landroid/content/Context;
+        0x0000 - 0x0026 reg=4 (null) Landroid/content/Intent;
+
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

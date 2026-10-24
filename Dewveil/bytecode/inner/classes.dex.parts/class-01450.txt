@@ -1,0 +1,196 @@
+Class #1450            -
+  Class descriptor  : 'Landroidx/legacy/content/WakefulBroadcastReceiver;'
+  Access flags      : 0x0401 (PUBLIC ABSTRACT)
+  Superclass        : 'Landroid/content/BroadcastReceiver;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/legacy/content/WakefulBroadcastReceiver;)
+      name          : 'EXTRA_WAKE_LOCK_ID'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "androidx.contentpager.content.wakelockid"
+    #1              : (in Landroidx/legacy/content/WakefulBroadcastReceiver;)
+      name          : 'mNextId'
+      type          : 'I'
+      access        : 0x000a (PRIVATE STATIC)
+    #2              : (in Landroidx/legacy/content/WakefulBroadcastReceiver;)
+      name          : 'sActiveWakeLocks'
+      type          : 'Landroid/util/SparseArray;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Landroidx/legacy/content/WakefulBroadcastReceiver;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 11 16-bit code units
+54224c:                                        |[54224c] androidx.legacy.content.WakefulBroadcastReceiver.<clinit>:()V
+54225c: 2200 b201                              |0000: new-instance v0, Landroid/util/SparseArray; // type@01b2
+542260: 7010 3c08 0000                         |0002: invoke-direct {v0}, Landroid/util/SparseArray;.<init>:()V // method@083c
+542266: 6900 9e30                              |0005: sput-object v0, Landroidx/legacy/content/WakefulBroadcastReceiver;.sActiveWakeLocks:Landroid/util/SparseArray; // field@309e
+54226a: 1210                                   |0007: const/4 v0, #int 1 // #1
+54226c: 6700 9d30                              |0008: sput v0, Landroidx/legacy/content/WakefulBroadcastReceiver;.mNextId:I // field@309d
+542270: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=76
+        0x0008 line=77
+      locals        :
+
+    #1              : (in Landroidx/legacy/content/WakefulBroadcastReceiver;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+542274:                                        |[542274] androidx.legacy.content.WakefulBroadcastReceiver.<init>:()V
+542284: 7010 0302 0000                         |0000: invoke-direct {v0}, Landroid/content/BroadcastReceiver;.<init>:()V // method@0203
+54228a: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=73
+      locals        :
+        0x0000 - 0x0004 reg=0 this Landroidx/legacy/content/WakefulBroadcastReceiver;
+
+    #2              : (in Landroidx/legacy/content/WakefulBroadcastReceiver;)
+      name          : 'completeWakefulIntent'
+      type          : '(Landroid/content/Intent;)Z'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 3
+      insns size    : 55 16-bit code units
+54228c:                                        |[54228c] androidx.legacy.content.WakefulBroadcastReceiver.completeWakefulIntent:(Landroid/content/Intent;)Z
+54229c: 1a00 3958                              |0000: const-string v0, "No active wake lock id #" // string@5839
+5422a0: 1a01 a57f                              |0002: const-string v1, "androidx.contentpager.content.wakelockid" // string@7fa5
+5422a4: 1202                                   |0004: const/4 v2, #int 0 // #0
+5422a6: 6e30 8302 1502                         |0005: invoke-virtual {v5, v1, v2}, Landroid/content/Intent;.getIntExtra:(Ljava/lang/String;I)I // method@0283
+5422ac: 0a05                                   |0008: move-result v5
+5422ae: 3905 0300                              |0009: if-nez v5, 000c // +0003
+5422b2: 0f02                                   |000b: return v2
+5422b4: 6201 9e30                              |000c: sget-object v1, Landroidx/legacy/content/WakefulBroadcastReceiver;.sActiveWakeLocks:Landroid/util/SparseArray; // field@309e
+5422b8: 1d01                                   |000e: monitor-enter v1
+5422ba: 6e20 4208 5100                         |000f: invoke-virtual {v1, v5}, Landroid/util/SparseArray;.get:(I)Ljava/lang/Object; // method@0842
+5422c0: 0c02                                   |0012: move-result-object v2
+5422c2: 1f02 4201                              |0013: check-cast v2, Landroid/os/PowerManager$WakeLock; // type@0142
+5422c6: 1213                                   |0015: const/4 v3, #int 1 // #1
+5422c8: 3802 0a00                              |0016: if-eqz v2, 0020 // +000a
+5422cc: 6e10 c806 0200                         |0018: invoke-virtual {v2}, Landroid/os/PowerManager$WakeLock;.release:()V // method@06c8
+5422d2: 6e20 4608 5100                         |001b: invoke-virtual {v1, v5}, Landroid/util/SparseArray;.remove:(I)V // method@0846
+5422d8: 1e01                                   |001e: monitor-exit v1
+5422da: 0f03                                   |001f: return v3
+5422dc: 1a02 2f6f                              |0020: const-string v2, "WakefulBroadcastReceiv." // string@6f2f
+5422e0: 2204 991a                              |0022: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+5422e4: 7020 3cd2 0400                         |0024: invoke-direct {v4, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5422ea: 6e20 40d2 5400                         |0027: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+5422f0: 0c05                                   |002a: move-result-object v5
+5422f2: 6e10 58d2 0500                         |002b: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5422f8: 0c05                                   |002e: move-result-object v5
+5422fa: 7120 2708 5200                         |002f: invoke-static {v2, v5}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+542300: 1e01                                   |0032: monitor-exit v1
+542302: 0f03                                   |0033: return v3
+542304: 0d05                                   |0034: move-exception v5
+542306: 1e01                                   |0035: monitor-exit v1
+542308: 2705                                   |0036: throw v5
+      catches       : 1
+        0x000f - 0x0036
+          <any> -> 0x0034
+      positions     :
+        0x0002 line=126
+        0x000c line=130
+        0x000f line=131
+        0x0018 line=133
+        0x001b line=134
+        0x001e line=135
+        0x0020 line=143
+        0x0032 line=144
+        0x0035 line=145
+      locals        :
+        0x0000 - 0x0037 reg=5 (null) Landroid/content/Intent;
+
+    #3              : (in Landroidx/legacy/content/WakefulBroadcastReceiver;)
+      name          : 'startWakefulService'
+      type          : '(Landroid/content/Context;Landroid/content/Intent;)Landroid/content/ComponentName;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 3
+      insns size    : 77 16-bit code units
+542318:                                        |[542318] androidx.legacy.content.WakefulBroadcastReceiver.startWakefulService:(Landroid/content/Context;Landroid/content/Intent;)Landroid/content/ComponentName;
+542328: 1a00 b07f                              |0000: const-string v0, "androidx.core:wake:" // string@7fb0
+54232c: 6201 9e30                              |0002: sget-object v1, Landroidx/legacy/content/WakefulBroadcastReceiver;.sActiveWakeLocks:Landroid/util/SparseArray; // field@309e
+542330: 1d01                                   |0004: monitor-enter v1
+542332: 6002 9d30                              |0005: sget v2, Landroidx/legacy/content/WakefulBroadcastReceiver;.mNextId:I // field@309d
+542336: d803 0201                              |0007: add-int/lit8 v3, v2, #int 1 // #01
+54233a: 6703 9d30                              |0009: sput v3, Landroidx/legacy/content/WakefulBroadcastReceiver;.mNextId:I // field@309d
+54233e: 1214                                   |000b: const/4 v4, #int 1 // #1
+542340: 3c03 0400                              |000c: if-gtz v3, 0010 // +0004
+542344: 6704 9d30                              |000e: sput v4, Landroidx/legacy/content/WakefulBroadcastReceiver;.mNextId:I // field@309d
+542348: 1a03 a57f                              |0010: const-string v3, "androidx.contentpager.content.wakelockid" // string@7fa5
+54234c: 6e30 8f02 3602                         |0012: invoke-virtual {v6, v3, v2}, Landroid/content/Intent;.putExtra:(Ljava/lang/String;I)Landroid/content/Intent; // method@028f
+542352: 6e20 6102 6500                         |0015: invoke-virtual {v5, v6}, Landroid/content/Context;.startService:(Landroid/content/Intent;)Landroid/content/ComponentName; // method@0261
+542358: 0c06                                   |0018: move-result-object v6
+54235a: 3906 0500                              |0019: if-nez v6, 001e // +0005
+54235e: 1e01                                   |001b: monitor-exit v1
+542360: 1205                                   |001c: const/4 v5, #int 0 // #0
+542362: 1105                                   |001d: return-object v5
+542364: 1a03 58ca                              |001e: const-string v3, "power" // string@ca58
+542368: 6e20 4c02 3500                         |0020: invoke-virtual {v5, v3}, Landroid/content/Context;.getSystemService:(Ljava/lang/String;)Ljava/lang/Object; // method@024c
+54236e: 0c05                                   |0023: move-result-object v5
+542370: 1f05 4301                              |0024: check-cast v5, Landroid/os/PowerManager; // type@0143
+542374: 2203 991a                              |0026: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+542378: 7020 3cd2 0300                         |0028: invoke-direct {v3, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+54237e: 6e10 0e02 0600                         |002b: invoke-virtual {v6}, Landroid/content/ComponentName;.flattenToShortString:()Ljava/lang/String; // method@020e
+542384: 0c00                                   |002e: move-result-object v0
+542386: 6e20 45d2 0300                         |002f: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54238c: 0c00                                   |0032: move-result-object v0
+54238e: 6e10 58d2 0000                         |0033: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+542394: 0c00                                   |0036: move-result-object v0
+542396: 6e30 cc06 4500                         |0037: invoke-virtual {v5, v4, v0}, Landroid/os/PowerManager;.newWakeLock:(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock; // method@06cc
+54239c: 0c05                                   |003a: move-result-object v5
+54239e: 1200                                   |003b: const/4 v0, #int 0 // #0
+5423a0: 6e20 c906 0500                         |003c: invoke-virtual {v5, v0}, Landroid/os/PowerManager$WakeLock;.setReferenceCounted:(Z)V // method@06c9
+5423a6: 1703 60ea 0000                         |003f: const-wide/32 v3, #float 8.40779e-41 // #0000ea60
+5423ac: 6e30 c606 3504                         |0042: invoke-virtual {v5, v3, v4}, Landroid/os/PowerManager$WakeLock;.acquire:(J)V // method@06c6
+5423b2: 6e30 4508 2105                         |0045: invoke-virtual {v1, v2, v5}, Landroid/util/SparseArray;.put:(ILjava/lang/Object;)V // method@0845
+5423b8: 1e01                                   |0048: monitor-exit v1
+5423ba: 1106                                   |0049: return-object v6
+5423bc: 0d05                                   |004a: move-exception v5
+5423be: 1e01                                   |004b: monitor-exit v1
+5423c0: 2705                                   |004c: throw v5
+      catches       : 1
+        0x0005 - 0x004c
+          <any> -> 0x004a
+      positions     :
+        0x0002 line=94
+        0x0005 line=95
+        0x0009 line=96
+        0x000e line=98
+        0x0010 line=101
+        0x0015 line=102
+        0x001b line=104
+        0x001e line=107
+        0x0026 line=108
+        0x002b line=109
+        0x0037 line=108
+        0x003c line=110
+        0x0042 line=111
+        0x0045 line=112
+        0x0048 line=113
+        0x004b line=114
+      locals        :
+        0x0000 - 0x004d reg=5 (null) Landroid/content/Context;
+        0x0000 - 0x004d reg=6 (null) Landroid/content/Intent;
+
+  Virtual methods   -
+  source_file_idx   : 28464 (WakefulBroadcastReceiver.java)
+

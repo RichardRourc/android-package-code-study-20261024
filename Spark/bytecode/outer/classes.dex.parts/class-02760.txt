@@ -1,0 +1,438 @@
+Class #2760            -
+  Class descriptor  : 'Lcom/adjust/sdk/Logger;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lcom/adjust/sdk/ILogger;'
+  Static fields     -
+    #0              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'formatErrorMessage'
+      type          : 'Ljava/lang/String;'
+      access        : 0x000a (PRIVATE STATIC)
+      value         : "Error formating log message: %s, with params: %s"
+  Instance fields   -
+    #0              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'isProductionEnvironment'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'logLevel'
+      type          : 'Lcom/adjust/sdk/LogLevel;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'logLevelLocked'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/adjust/sdk/Logger;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 14 16-bit code units
+20193c:                                        |[20193c] com.adjust.sdk.Logger.<init>:()V
+20194c: 7010 df71 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@71df
+201952: 1200                                   |0003: const/4 v0, #int 0 // #0
+201954: 5c20 a029                              |0004: iput-boolean v0, v2, Lcom/adjust/sdk/Logger;.isProductionEnvironment:Z // field@29a0
+201958: 5c20 a229                              |0006: iput-boolean v0, v2, Lcom/adjust/sdk/Logger;.logLevelLocked:Z // field@29a2
+20195c: 6201 9a29                              |0008: sget-object v1, Lcom/adjust/sdk/LogLevel;.INFO:Lcom/adjust/sdk/LogLevel; // field@299a
+201960: 6e30 ce5c 1200                         |000a: invoke-virtual {v2, v1, v0}, Lcom/adjust/sdk/Logger;.setLogLevel:(Lcom/adjust/sdk/LogLevel;Z)V // method@5cce
+201966: 0e00                                   |000d: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0004 line=2
+        0x0006 line=3
+        0x0008 line=4
+      locals        :
+        0x0000 - 0x000e reg=2 this Lcom/adjust/sdk/Logger;
+
+  Virtual methods   -
+    #0              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'Assert'
+      type          : '(Ljava/lang/String;[Ljava/lang/Object;)V'
+      access        : 0x0081 (PUBLIC VARARGS)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 3
+      insns size    : 40 16-bit code units
+201968:                                        |[201968] com.adjust.sdk.Logger.Assert:(Ljava/lang/String;[Ljava/lang/Object;)V
+201978: 1a00 7b1a                              |0000: const-string v0, "Adjust" // string@1a7b
+20197c: 5531 a029                              |0002: iget-boolean v1, v3, Lcom/adjust/sdk/Logger;.isProductionEnvironment:Z // field@29a0
+201980: 3801 0300                              |0004: if-eqz v1, 0007 // +0003
+201984: 2821                                   |0006: goto 0027 // +0021
+201986: 5431 a129                              |0007: iget-object v1, v3, Lcom/adjust/sdk/Logger;.logLevel:Lcom/adjust/sdk/LogLevel; // field@29a1
+20198a: 5211 9e29                              |0009: iget v1, v1, Lcom/adjust/sdk/LogLevel;.androidLogLevel:I // field@299e
+20198e: 1272                                   |000b: const/4 v2, #int 7 // #7
+201990: 3621 1b00                              |000c: if-gt v1, v2, 0027 // +001b
+201994: 7120 1a5e 5400                         |000e: invoke-static {v4, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+20199a: 0c01                                   |0011: move-result-object v1
+20199c: 7130 3109 0201                         |0012: invoke-static {v2, v0, v1}, Landroid/util/Log;.println:(ILjava/lang/String;Ljava/lang/String;)I // method@0931
+2019a2: 0e00                                   |0015: return-void
+2019a4: 6201 9f29                              |0016: sget-object v1, Lcom/adjust/sdk/Logger;.formatErrorMessage:Ljava/lang/String; // field@299f
+2019a8: 7110 9574 0500                         |0018: invoke-static {v5}, Ljava/util/Arrays;.toString:([Ljava/lang/Object;)Ljava/lang/String; // method@7495
+2019ae: 0c05                                   |001b: move-result-object v5
+2019b0: 2420 ac1a 5400                         |001c: filled-new-array {v4, v5}, [Ljava/lang/Object; // type@1aac
+2019b6: 0c04                                   |001f: move-result-object v4
+2019b8: 7120 1a5e 4100                         |0020: invoke-static {v1, v4}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+2019be: 0c04                                   |0023: move-result-object v4
+2019c0: 7120 2b09 4000                         |0024: invoke-static {v0, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@092b
+2019c6: 0e00                                   |0027: return-void
+      catches       : 1
+        0x000e - 0x0015
+          Ljava/lang/Exception; -> 0x0016
+      positions     :
+        0x0002 line=1
+        0x0007 line=4
+        0x000e line=6
+        0x0016 line=8
+      locals        :
+        0x0000 - 0x0028 reg=3 this Lcom/adjust/sdk/Logger;
+        0x0000 - 0x0028 reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x0028 reg=5 (null) [Ljava/lang/Object;
+
+    #1              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'debug'
+      type          : '(Ljava/lang/String;[Ljava/lang/Object;)V'
+      access        : 0x0081 (PUBLIC VARARGS)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 40 16-bit code units
+2019d8:                                        |[2019d8] com.adjust.sdk.Logger.debug:(Ljava/lang/String;[Ljava/lang/Object;)V
+2019e8: 1a00 7b1a                              |0000: const-string v0, "Adjust" // string@1a7b
+2019ec: 5531 a029                              |0002: iget-boolean v1, v3, Lcom/adjust/sdk/Logger;.isProductionEnvironment:Z // field@29a0
+2019f0: 3801 0300                              |0004: if-eqz v1, 0007 // +0003
+2019f4: 2821                                   |0006: goto 0027 // +0021
+2019f6: 5431 a129                              |0007: iget-object v1, v3, Lcom/adjust/sdk/Logger;.logLevel:Lcom/adjust/sdk/LogLevel; // field@29a1
+2019fa: 5211 9e29                              |0009: iget v1, v1, Lcom/adjust/sdk/LogLevel;.androidLogLevel:I // field@299e
+2019fe: 1232                                   |000b: const/4 v2, #int 3 // #3
+201a00: 3621 1b00                              |000c: if-gt v1, v2, 0027 // +001b
+201a04: 7120 1a5e 5400                         |000e: invoke-static {v4, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201a0a: 0c01                                   |0011: move-result-object v1
+201a0c: 7120 2909 1000                         |0012: invoke-static {v0, v1}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@0929
+201a12: 0e00                                   |0015: return-void
+201a14: 6201 9f29                              |0016: sget-object v1, Lcom/adjust/sdk/Logger;.formatErrorMessage:Ljava/lang/String; // field@299f
+201a18: 7110 9574 0500                         |0018: invoke-static {v5}, Ljava/util/Arrays;.toString:([Ljava/lang/Object;)Ljava/lang/String; // method@7495
+201a1e: 0c05                                   |001b: move-result-object v5
+201a20: 2420 ac1a 5400                         |001c: filled-new-array {v4, v5}, [Ljava/lang/Object; // type@1aac
+201a26: 0c04                                   |001f: move-result-object v4
+201a28: 7120 1a5e 4100                         |0020: invoke-static {v1, v4}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201a2e: 0c04                                   |0023: move-result-object v4
+201a30: 7120 2b09 4000                         |0024: invoke-static {v0, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@092b
+201a36: 0e00                                   |0027: return-void
+      catches       : 1
+        0x000e - 0x0015
+          Ljava/lang/Exception; -> 0x0016
+      positions     :
+        0x0002 line=1
+        0x0007 line=4
+        0x000e line=6
+        0x0016 line=8
+      locals        :
+        0x0000 - 0x0028 reg=3 this Lcom/adjust/sdk/Logger;
+        0x0000 - 0x0028 reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x0028 reg=5 (null) [Ljava/lang/Object;
+
+    #2              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'error'
+      type          : '(Ljava/lang/String;[Ljava/lang/Object;)V'
+      access        : 0x0081 (PUBLIC VARARGS)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 40 16-bit code units
+201a48:                                        |[201a48] com.adjust.sdk.Logger.error:(Ljava/lang/String;[Ljava/lang/Object;)V
+201a58: 1a00 7b1a                              |0000: const-string v0, "Adjust" // string@1a7b
+201a5c: 5531 a029                              |0002: iget-boolean v1, v3, Lcom/adjust/sdk/Logger;.isProductionEnvironment:Z // field@29a0
+201a60: 3801 0300                              |0004: if-eqz v1, 0007 // +0003
+201a64: 2821                                   |0006: goto 0027 // +0021
+201a66: 5431 a129                              |0007: iget-object v1, v3, Lcom/adjust/sdk/Logger;.logLevel:Lcom/adjust/sdk/LogLevel; // field@29a1
+201a6a: 5211 9e29                              |0009: iget v1, v1, Lcom/adjust/sdk/LogLevel;.androidLogLevel:I // field@299e
+201a6e: 1262                                   |000b: const/4 v2, #int 6 // #6
+201a70: 3621 1b00                              |000c: if-gt v1, v2, 0027 // +001b
+201a74: 7120 1a5e 5400                         |000e: invoke-static {v4, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201a7a: 0c01                                   |0011: move-result-object v1
+201a7c: 7120 2b09 1000                         |0012: invoke-static {v0, v1}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@092b
+201a82: 0e00                                   |0015: return-void
+201a84: 6201 9f29                              |0016: sget-object v1, Lcom/adjust/sdk/Logger;.formatErrorMessage:Ljava/lang/String; // field@299f
+201a88: 7110 9574 0500                         |0018: invoke-static {v5}, Ljava/util/Arrays;.toString:([Ljava/lang/Object;)Ljava/lang/String; // method@7495
+201a8e: 0c05                                   |001b: move-result-object v5
+201a90: 2420 ac1a 5400                         |001c: filled-new-array {v4, v5}, [Ljava/lang/Object; // type@1aac
+201a96: 0c04                                   |001f: move-result-object v4
+201a98: 7120 1a5e 4100                         |0020: invoke-static {v1, v4}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201a9e: 0c04                                   |0023: move-result-object v4
+201aa0: 7120 2b09 4000                         |0024: invoke-static {v0, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@092b
+201aa6: 0e00                                   |0027: return-void
+      catches       : 1
+        0x000e - 0x0015
+          Ljava/lang/Exception; -> 0x0016
+      positions     :
+        0x0002 line=1
+        0x0007 line=4
+        0x000e line=6
+        0x0016 line=8
+      locals        :
+        0x0000 - 0x0028 reg=3 this Lcom/adjust/sdk/Logger;
+        0x0000 - 0x0028 reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x0028 reg=5 (null) [Ljava/lang/Object;
+
+    #3              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'info'
+      type          : '(Ljava/lang/String;[Ljava/lang/Object;)V'
+      access        : 0x0081 (PUBLIC VARARGS)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 40 16-bit code units
+201ab8:                                        |[201ab8] com.adjust.sdk.Logger.info:(Ljava/lang/String;[Ljava/lang/Object;)V
+201ac8: 1a00 7b1a                              |0000: const-string v0, "Adjust" // string@1a7b
+201acc: 5531 a029                              |0002: iget-boolean v1, v3, Lcom/adjust/sdk/Logger;.isProductionEnvironment:Z // field@29a0
+201ad0: 3801 0300                              |0004: if-eqz v1, 0007 // +0003
+201ad4: 2821                                   |0006: goto 0027 // +0021
+201ad6: 5431 a129                              |0007: iget-object v1, v3, Lcom/adjust/sdk/Logger;.logLevel:Lcom/adjust/sdk/LogLevel; // field@29a1
+201ada: 5211 9e29                              |0009: iget v1, v1, Lcom/adjust/sdk/LogLevel;.androidLogLevel:I // field@299e
+201ade: 1242                                   |000b: const/4 v2, #int 4 // #4
+201ae0: 3621 1b00                              |000c: if-gt v1, v2, 0027 // +001b
+201ae4: 7120 1a5e 5400                         |000e: invoke-static {v4, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201aea: 0c01                                   |0011: move-result-object v1
+201aec: 7120 2e09 1000                         |0012: invoke-static {v0, v1}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@092e
+201af2: 0e00                                   |0015: return-void
+201af4: 6201 9f29                              |0016: sget-object v1, Lcom/adjust/sdk/Logger;.formatErrorMessage:Ljava/lang/String; // field@299f
+201af8: 7110 9574 0500                         |0018: invoke-static {v5}, Ljava/util/Arrays;.toString:([Ljava/lang/Object;)Ljava/lang/String; // method@7495
+201afe: 0c05                                   |001b: move-result-object v5
+201b00: 2420 ac1a 5400                         |001c: filled-new-array {v4, v5}, [Ljava/lang/Object; // type@1aac
+201b06: 0c04                                   |001f: move-result-object v4
+201b08: 7120 1a5e 4100                         |0020: invoke-static {v1, v4}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201b0e: 0c04                                   |0023: move-result-object v4
+201b10: 7120 2b09 4000                         |0024: invoke-static {v0, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@092b
+201b16: 0e00                                   |0027: return-void
+      catches       : 1
+        0x000e - 0x0015
+          Ljava/lang/Exception; -> 0x0016
+      positions     :
+        0x0002 line=1
+        0x0007 line=4
+        0x000e line=6
+        0x0016 line=8
+      locals        :
+        0x0000 - 0x0028 reg=3 this Lcom/adjust/sdk/Logger;
+        0x0000 - 0x0028 reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x0028 reg=5 (null) [Ljava/lang/Object;
+
+    #4              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'lockLogLevel'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 4 16-bit code units
+201b28:                                        |[201b28] com.adjust.sdk.Logger.lockLogLevel:()V
+201b38: 1210                                   |0000: const/4 v0, #int 1 // #1
+201b3a: 5c10 a229                              |0001: iput-boolean v0, v1, Lcom/adjust/sdk/Logger;.logLevelLocked:Z // field@29a2
+201b3e: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=1
+      locals        :
+        0x0000 - 0x0004 reg=1 this Lcom/adjust/sdk/Logger;
+
+    #5              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'setLogLevel'
+      type          : '(Lcom/adjust/sdk/LogLevel;Z)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 0
+      insns size    : 10 16-bit code units
+201b40:                                        |[201b40] com.adjust.sdk.Logger.setLogLevel:(Lcom/adjust/sdk/LogLevel;Z)V
+201b50: 5510 a229                              |0000: iget-boolean v0, v1, Lcom/adjust/sdk/Logger;.logLevelLocked:Z // field@29a2
+201b54: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+201b58: 0e00                                   |0004: return-void
+201b5a: 5b12 a129                              |0005: iput-object v2, v1, Lcom/adjust/sdk/Logger;.logLevel:Lcom/adjust/sdk/LogLevel; // field@29a1
+201b5e: 5c13 a029                              |0007: iput-boolean v3, v1, Lcom/adjust/sdk/Logger;.isProductionEnvironment:Z // field@29a0
+201b62: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0005 line=4
+        0x0007 line=5
+      locals        :
+        0x0000 - 0x000a reg=1 this Lcom/adjust/sdk/Logger;
+        0x0000 - 0x000a reg=2 (null) Lcom/adjust/sdk/LogLevel;
+        0x0000 - 0x000a reg=3 (null) Z
+
+    #6              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'setLogLevelString'
+      type          : '(Ljava/lang/String;Z)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 26 16-bit code units
+201b64:                                        |[201b64] com.adjust.sdk.Logger.setLogLevelString:(Ljava/lang/String;Z)V
+201b74: 3802 1900                              |0000: if-eqz v2, 0019 // +0019
+201b78: 6200 263a                              |0002: sget-object v0, Ljava/util/Locale;.US:Ljava/util/Locale; // field@3a26
+201b7c: 6e20 4072 0200                         |0004: invoke-virtual {v2, v0}, Ljava/lang/String;.toUpperCase:(Ljava/util/Locale;)Ljava/lang/String; // method@7240
+201b82: 0c00                                   |0007: move-result-object v0
+201b84: 7110 c65c 0000                         |0008: invoke-static {v0}, Lcom/adjust/sdk/LogLevel;.valueOf:(Ljava/lang/String;)Lcom/adjust/sdk/LogLevel; // method@5cc6
+201b8a: 0c00                                   |000b: move-result-object v0
+201b8c: 6e30 ce5c 0103                         |000c: invoke-virtual {v1, v0, v3}, Lcom/adjust/sdk/Logger;.setLogLevel:(Lcom/adjust/sdk/LogLevel;Z)V // method@5cce
+201b92: 0e00                                   |000f: return-void
+201b94: 2410 ac1a 0200                         |0010: filled-new-array {v2}, [Ljava/lang/Object; // type@1aac
+201b9a: 0c02                                   |0013: move-result-object v2
+201b9c: 1a03 0f4a                              |0014: const-string v3, "Malformed logLevel '%s', falling back to 'info'" // string@4a0f
+201ba0: 6e30 cb5c 3102                         |0016: invoke-virtual {v1, v3, v2}, Lcom/adjust/sdk/Logger;.error:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5ccb
+201ba6: 0e00                                   |0019: return-void
+      catches       : 1
+        0x0002 - 0x000f
+          Ljava/lang/IllegalArgumentException; -> 0x0010
+      positions     :
+        0x0002 line=1
+        0x0010 line=3
+      locals        :
+        0x0000 - 0x001a reg=1 this Lcom/adjust/sdk/Logger;
+        0x0000 - 0x001a reg=2 (null) Ljava/lang/String;
+        0x0000 - 0x001a reg=3 (null) Z
+
+    #7              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'verbose'
+      type          : '(Ljava/lang/String;[Ljava/lang/Object;)V'
+      access        : 0x0081 (PUBLIC VARARGS)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 40 16-bit code units
+201bb8:                                        |[201bb8] com.adjust.sdk.Logger.verbose:(Ljava/lang/String;[Ljava/lang/Object;)V
+201bc8: 1a00 7b1a                              |0000: const-string v0, "Adjust" // string@1a7b
+201bcc: 5531 a029                              |0002: iget-boolean v1, v3, Lcom/adjust/sdk/Logger;.isProductionEnvironment:Z // field@29a0
+201bd0: 3801 0300                              |0004: if-eqz v1, 0007 // +0003
+201bd4: 2821                                   |0006: goto 0027 // +0021
+201bd6: 5431 a129                              |0007: iget-object v1, v3, Lcom/adjust/sdk/Logger;.logLevel:Lcom/adjust/sdk/LogLevel; // field@29a1
+201bda: 5211 9e29                              |0009: iget v1, v1, Lcom/adjust/sdk/LogLevel;.androidLogLevel:I // field@299e
+201bde: 1222                                   |000b: const/4 v2, #int 2 // #2
+201be0: 3621 1b00                              |000c: if-gt v1, v2, 0027 // +001b
+201be4: 7120 1a5e 5400                         |000e: invoke-static {v4, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201bea: 0c01                                   |0011: move-result-object v1
+201bec: 7120 3209 1000                         |0012: invoke-static {v0, v1}, Landroid/util/Log;.v:(Ljava/lang/String;Ljava/lang/String;)I // method@0932
+201bf2: 0e00                                   |0015: return-void
+201bf4: 6201 9f29                              |0016: sget-object v1, Lcom/adjust/sdk/Logger;.formatErrorMessage:Ljava/lang/String; // field@299f
+201bf8: 7110 9574 0500                         |0018: invoke-static {v5}, Ljava/util/Arrays;.toString:([Ljava/lang/Object;)Ljava/lang/String; // method@7495
+201bfe: 0c05                                   |001b: move-result-object v5
+201c00: 2420 ac1a 5400                         |001c: filled-new-array {v4, v5}, [Ljava/lang/Object; // type@1aac
+201c06: 0c04                                   |001f: move-result-object v4
+201c08: 7120 1a5e 4100                         |0020: invoke-static {v1, v4}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201c0e: 0c04                                   |0023: move-result-object v4
+201c10: 7120 2b09 4000                         |0024: invoke-static {v0, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@092b
+201c16: 0e00                                   |0027: return-void
+      catches       : 1
+        0x000e - 0x0015
+          Ljava/lang/Exception; -> 0x0016
+      positions     :
+        0x0002 line=1
+        0x0007 line=4
+        0x000e line=6
+        0x0016 line=8
+      locals        :
+        0x0000 - 0x0028 reg=3 this Lcom/adjust/sdk/Logger;
+        0x0000 - 0x0028 reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x0028 reg=5 (null) [Ljava/lang/Object;
+
+    #8              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'warn'
+      type          : '(Ljava/lang/String;[Ljava/lang/Object;)V'
+      access        : 0x0081 (PUBLIC VARARGS)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 40 16-bit code units
+201c28:                                        |[201c28] com.adjust.sdk.Logger.warn:(Ljava/lang/String;[Ljava/lang/Object;)V
+201c38: 1a00 7b1a                              |0000: const-string v0, "Adjust" // string@1a7b
+201c3c: 5531 a029                              |0002: iget-boolean v1, v3, Lcom/adjust/sdk/Logger;.isProductionEnvironment:Z // field@29a0
+201c40: 3801 0300                              |0004: if-eqz v1, 0007 // +0003
+201c44: 2821                                   |0006: goto 0027 // +0021
+201c46: 5431 a129                              |0007: iget-object v1, v3, Lcom/adjust/sdk/Logger;.logLevel:Lcom/adjust/sdk/LogLevel; // field@29a1
+201c4a: 5211 9e29                              |0009: iget v1, v1, Lcom/adjust/sdk/LogLevel;.androidLogLevel:I // field@299e
+201c4e: 1252                                   |000b: const/4 v2, #int 5 // #5
+201c50: 3621 1b00                              |000c: if-gt v1, v2, 0027 // +001b
+201c54: 7120 1a5e 5400                         |000e: invoke-static {v4, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201c5a: 0c01                                   |0011: move-result-object v1
+201c5c: 7120 3409 1000                         |0012: invoke-static {v0, v1}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0934
+201c62: 0e00                                   |0015: return-void
+201c64: 6201 9f29                              |0016: sget-object v1, Lcom/adjust/sdk/Logger;.formatErrorMessage:Ljava/lang/String; // field@299f
+201c68: 7110 9574 0500                         |0018: invoke-static {v5}, Ljava/util/Arrays;.toString:([Ljava/lang/Object;)Ljava/lang/String; // method@7495
+201c6e: 0c05                                   |001b: move-result-object v5
+201c70: 2420 ac1a 5400                         |001c: filled-new-array {v4, v5}, [Ljava/lang/Object; // type@1aac
+201c76: 0c04                                   |001f: move-result-object v4
+201c78: 7120 1a5e 4100                         |0020: invoke-static {v1, v4}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201c7e: 0c04                                   |0023: move-result-object v4
+201c80: 7120 2b09 4000                         |0024: invoke-static {v0, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@092b
+201c86: 0e00                                   |0027: return-void
+      catches       : 1
+        0x000e - 0x0015
+          Ljava/lang/Exception; -> 0x0016
+      positions     :
+        0x0002 line=1
+        0x0007 line=4
+        0x000e line=6
+        0x0016 line=8
+      locals        :
+        0x0000 - 0x0028 reg=3 this Lcom/adjust/sdk/Logger;
+        0x0000 - 0x0028 reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x0028 reg=5 (null) [Ljava/lang/Object;
+
+    #9              : (in Lcom/adjust/sdk/Logger;)
+      name          : 'warnInProduction'
+      type          : '(Ljava/lang/String;[Ljava/lang/Object;)V'
+      access        : 0x0081 (PUBLIC VARARGS)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 35 16-bit code units
+201c98:                                        |[201c98] com.adjust.sdk.Logger.warnInProduction:(Ljava/lang/String;[Ljava/lang/Object;)V
+201ca8: 1a00 7b1a                              |0000: const-string v0, "Adjust" // string@1a7b
+201cac: 5431 a129                              |0002: iget-object v1, v3, Lcom/adjust/sdk/Logger;.logLevel:Lcom/adjust/sdk/LogLevel; // field@29a1
+201cb0: 5211 9e29                              |0004: iget v1, v1, Lcom/adjust/sdk/LogLevel;.androidLogLevel:I // field@299e
+201cb4: 1252                                   |0006: const/4 v2, #int 5 // #5
+201cb6: 3621 1b00                              |0007: if-gt v1, v2, 0022 // +001b
+201cba: 7120 1a5e 5400                         |0009: invoke-static {v4, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201cc0: 0c01                                   |000c: move-result-object v1
+201cc2: 7120 3409 1000                         |000d: invoke-static {v0, v1}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0934
+201cc8: 0e00                                   |0010: return-void
+201cca: 6201 9f29                              |0011: sget-object v1, Lcom/adjust/sdk/Logger;.formatErrorMessage:Ljava/lang/String; // field@299f
+201cce: 7110 9574 0500                         |0013: invoke-static {v5}, Ljava/util/Arrays;.toString:([Ljava/lang/Object;)Ljava/lang/String; // method@7495
+201cd4: 0c05                                   |0016: move-result-object v5
+201cd6: 2420 ac1a 5400                         |0017: filled-new-array {v4, v5}, [Ljava/lang/Object; // type@1aac
+201cdc: 0c04                                   |001a: move-result-object v4
+201cde: 7120 1a5e 4100                         |001b: invoke-static {v1, v4}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201ce4: 0c04                                   |001e: move-result-object v4
+201ce6: 7120 2b09 4000                         |001f: invoke-static {v0, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@092b
+201cec: 0e00                                   |0022: return-void
+      catches       : 1
+        0x0009 - 0x0010
+          Ljava/lang/Exception; -> 0x0011
+      positions     :
+        0x0002 line=1
+        0x0009 line=3
+        0x0011 line=5
+      locals        :
+        0x0000 - 0x0023 reg=3 this Lcom/adjust/sdk/Logger;
+        0x0000 - 0x0023 reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x0023 reg=5 (null) [Ljava/lang/Object;
+
+  source_file_idx   : 21628 (SourceFile)
+

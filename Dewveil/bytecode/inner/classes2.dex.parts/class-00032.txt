@@ -1,0 +1,302 @@
+Class #32            -
+  Class descriptor  : 'Landroidx/core/smain/utils/VPNDetector;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/core/smain/utils/VPNDetector;)
+      name          : 'm_isntance'
+      type          : 'Landroidx/core/smain/utils/VPNDetector;'
+      access        : 0x000a (PRIVATE STATIC)
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Landroidx/core/smain/utils/VPNDetector;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 0
+      ins           : 0
+      outs          : 0
+      insns size    : 1 16-bit code units
+028ae4:                                        |[028ae4] androidx.core.smain.utils.VPNDetector.<clinit>:()V
+028af4: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Landroidx/core/smain/utils/VPNDetector;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+028af8:                                        |[028af8] androidx.core.smain.utils.VPNDetector.<init>:()V
+028b08: 7010 3502 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@0235
+028b0e: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=14
+      locals        :
+        0x0000 - 0x0004 reg=0 this Landroidx/core/smain/utils/VPNDetector;
+
+    #2              : (in Landroidx/core/smain/utils/VPNDetector;)
+      name          : 'checkTunInterface'
+      type          : '()Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 71 16-bit code units
+028b10:                                        |[028b10] androidx.core.smain.utils.VPNDetector.checkTunInterface:()Z
+028b20: 7100 9a02 0000                         |0000: invoke-static {}, Ljava/net/NetworkInterface;.getNetworkInterfaces:()Ljava/util/Enumeration; // method@029a
+028b26: 0c00                                   |0003: move-result-object v0
+028b28: 7110 ba02 0000                         |0004: invoke-static {v0}, Ljava/util/Collections;.list:(Ljava/util/Enumeration;)Ljava/util/ArrayList; // method@02ba
+028b2e: 0c00                                   |0007: move-result-object v0
+028b30: 6e10 b202 0000                         |0008: invoke-virtual {v0}, Ljava/util/ArrayList;.iterator:()Ljava/util/Iterator; // method@02b2
+028b36: 0c00                                   |000b: move-result-object v0
+028b38: 7210 c102 0000                         |000c: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@02c1
+028b3e: 0a01                                   |000f: move-result v1
+028b40: 3801 3500                              |0010: if-eqz v1, 0045 // +0035
+028b44: 7210 c202 0000                         |0012: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@02c2
+028b4a: 0c01                                   |0015: move-result-object v1
+028b4c: 1f01 e500                              |0016: check-cast v1, Ljava/net/NetworkInterface; // type@00e5
+028b50: 6e10 9902 0100                         |0018: invoke-virtual {v1}, Ljava/net/NetworkInterface;.getName:()Ljava/lang/String; // method@0299
+028b56: 0c01                                   |001b: move-result-object v1
+028b58: 3901 0300                              |001c: if-nez v1, 001f // +0003
+028b5c: 28ee                                   |001e: goto 000c // -0012
+028b5e: 6e10 5702 0100                         |001f: invoke-virtual {v1}, Ljava/lang/String;.toLowerCase:()Ljava/lang/String; // method@0257
+028b64: 0c01                                   |0022: move-result-object v1
+028b66: 1a02 9b0a                              |0023: const-string v2, "tun" // string@0a9b
+028b6a: 6e20 5402 2100                         |0025: invoke-virtual {v1, v2}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@0254
+028b70: 0a02                                   |0028: move-result v2
+028b72: 3902 1a00                              |0029: if-nez v2, 0043 // +001a
+028b76: 1a02 4c09                              |002b: const-string v2, "ppp" // string@094c
+028b7a: 6e20 5402 2100                         |002d: invoke-virtual {v1, v2}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@0254
+028b80: 0a02                                   |0030: move-result v2
+028b82: 3902 1200                              |0031: if-nez v2, 0043 // +0012
+028b86: 1a02 ca0a                              |0033: const-string v2, "wg" // string@0aca
+028b8a: 6e20 5402 2100                         |0035: invoke-virtual {v1, v2}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@0254
+028b90: 0a02                                   |0038: move-result v2
+028b92: 3902 0a00                              |0039: if-nez v2, 0043 // +000a
+028b96: 1a02 c60a                              |003b: const-string v2, "vpn" // string@0ac6
+028b9a: 6e20 4802 2100                         |003d: invoke-virtual {v1, v2}, Ljava/lang/String;.contains:(Ljava/lang/CharSequence;)Z // method@0248
+028ba0: 0a01                                   |0040: move-result v1
+028ba2: 3801 cbff                              |0041: if-eqz v1, 000c // -0035
+028ba6: 1210                                   |0043: const/4 v0, #int 1 // #1
+028ba8: 0f00                                   |0044: return v0
+028baa: 1200                                   |0045: const/4 v0, #int 0 // #0
+028bac: 0f00                                   |0046: return v0
+      catches       : 1
+        0x0000 - 0x0041
+          <any> -> 0x0045
+      positions     :
+        0x0000 line=84
+        0x0004 line=87
+        0x0018 line=89
+        0x001f line=94
+        0x0025 line=96
+        0x002d line=97
+        0x0035 line=98
+        0x003d line=99
+      locals        :
+        0x0000 - 0x0047 reg=3 this Landroidx/core/smain/utils/VPNDetector;
+
+    #3              : (in Landroidx/core/smain/utils/VPNDetector;)
+      name          : 'checkVpnApps'
+      type          : '(Landroid/content/Context;)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 3
+      insns size    : 79 16-bit code units
+028bbc:                                        |[028bbc] androidx.core.smain.utils.VPNDetector.checkVpnApps:(Landroid/content/Context;)Z
+028bcc: 6e10 1600 0700                         |0000: invoke-virtual {v7}, Landroid/content/Context;.getPackageManager:()Landroid/content/pm/PackageManager; // method@0016
+028bd2: 0c07                                   |0003: move-result-object v7
+028bd4: 1300 0b00                              |0004: const/16 v0, #int 11 // #b
+028bd8: 2301 ce01                              |0006: new-array v1, v0, [Ljava/lang/String; // type@01ce
+028bdc: 1a02 e705                              |0008: const-string v2, "com.github.kr328.clash" // string@05e7
+028be0: 1203                                   |000a: const/4 v3, #int 0 // #0
+028be2: 4d02 0103                              |000b: aput-object v2, v1, v3
+028be6: 1a02 e805                              |000d: const-string v2, "com.github.metacubex.clash.meta" // string@05e8
+028bea: 1214                                   |000f: const/4 v4, #int 1 // #1
+028bec: 4d02 0104                              |0010: aput-object v2, v1, v4
+028bf0: 1222                                   |0012: const/4 v2, #int 2 // #2
+028bf2: 1a05 f205                              |0013: const-string v5, "com.v2ray.ang" // string@05f2
+028bf6: 4d05 0102                              |0015: aput-object v5, v1, v2
+028bfa: 1232                                   |0017: const/4 v2, #int 3 // #3
+028bfc: 1a05 f305                              |0018: const-string v5, "com.wireguard.android" // string@05f3
+028c00: 4d05 0102                              |001a: aput-object v5, v1, v2
+028c04: 1242                                   |001c: const/4 v2, #int 4 // #4
+028c06: 1a05 2b06                              |001d: const-string v5, "de.blinkt.openvpn" // string@062b
+028c0a: 4d05 0102                              |001f: aput-object v5, v1, v2
+028c0e: 1252                                   |0021: const/4 v2, #int 5 // #5
+028c10: 1a05 f105                              |0022: const-string v5, "com.surfshark.vpnclient.android" // string@05f1
+028c14: 4d05 0102                              |0024: aput-object v5, v1, v2
+028c18: 1262                                   |0026: const/4 v2, #int 6 // #6
+028c1a: 1a05 ef05                              |0027: const-string v5, "com.nordvpn.android" // string@05ef
+028c1e: 4d05 0102                              |0029: aput-object v5, v1, v2
+028c22: 1272                                   |002b: const/4 v2, #int 7 // #7
+028c24: 1a05 e505                              |002c: const-string v5, "com.expressvpn.vpn" // string@05e5
+028c28: 4d05 0102                              |002e: aput-object v5, v1, v2
+028c2c: 1302 0800                              |0030: const/16 v2, #int 8 // #8
+028c30: 1a05 b505                              |0032: const-string v5, "ch.protonvpn.android" // string@05b5
+028c34: 4d05 0102                              |0034: aput-object v5, v1, v2
+028c38: 1302 0900                              |0036: const/16 v2, #int 9 // #9
+028c3c: 1a05 f005                              |0038: const-string v5, "com.psiphon3" // string@05f0
+028c40: 4d05 0102                              |003a: aput-object v5, v1, v2
+028c44: 1302 0a00                              |003c: const/16 v2, #int 10 // #a
+028c48: 1a05 ec05                              |003e: const-string v5, "com.jrzheng.supervpnfree" // string@05ec
+028c4c: 4d05 0102                              |0040: aput-object v5, v1, v2
+028c50: 1202                                   |0042: const/4 v2, #int 0 // #0
+028c52: 3502 0b00                              |0043: if-ge v2, v0, 004e // +000b
+028c56: 4605 0102                              |0045: aget-object v5, v1, v2
+028c5a: 6e30 2b00 5703                         |0047: invoke-virtual {v7, v5, v3}, Landroid/content/pm/PackageManager;.getPackageInfo:(Ljava/lang/String;I)Landroid/content/pm/PackageInfo; // method@002b
+028c60: 0f04                                   |004a: return v4
+028c62: d802 0201                              |004b: add-int/lit8 v2, v2, #int 1 // #01
+028c66: 28f6                                   |004d: goto 0043 // -000a
+028c68: 0f03                                   |004e: return v3
+      catches       : 1
+        0x0047 - 0x004a
+          <any> -> 0x004b
+      positions     :
+        0x0000 line=117
+        0x0045 line=153
+        0x0047 line=157
+      locals        :
+        0x0000 - 0x004f reg=6 this Landroidx/core/smain/utils/VPNDetector;
+        0x0000 - 0x004f reg=7 (null) Landroid/content/Context;
+
+    #4              : (in Landroidx/core/smain/utils/VPNDetector;)
+      name          : 'checkVpnTransport'
+      type          : '(Landroid/content/Context;)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 33 16-bit code units
+028c78:                                        |[028c78] androidx.core.smain.utils.VPNDetector.checkVpnTransport:(Landroid/content/Context;)Z
+028c88: 1200                                   |0000: const/4 v0, #int 0 // #0
+028c8a: 1a01 0006                              |0001: const-string v1, "connectivity" // string@0600
+028c8e: 6e20 1900 1300                         |0003: invoke-virtual {v3, v1}, Landroid/content/Context;.getSystemService:(Ljava/lang/String;)Ljava/lang/Object; // method@0019
+028c94: 0c03                                   |0006: move-result-object v3
+028c96: 1f03 3000                              |0007: check-cast v3, Landroid/net/ConnectivityManager; // type@0030
+028c9a: 3903 0300                              |0009: if-nez v3, 000c // +0003
+028c9e: 0f00                                   |000b: return v0
+028ca0: 6e10 7500 0300                         |000c: invoke-virtual {v3}, Landroid/net/ConnectivityManager;.getActiveNetwork:()Landroid/net/Network; // method@0075
+028ca6: 0c01                                   |000f: move-result-object v1
+028ca8: 3901 0300                              |0010: if-nez v1, 0013 // +0003
+028cac: 0f00                                   |0012: return v0
+028cae: 6e20 7600 1300                         |0013: invoke-virtual {v3, v1}, Landroid/net/ConnectivityManager;.getNetworkCapabilities:(Landroid/net/Network;)Landroid/net/NetworkCapabilities; // method@0076
+028cb4: 0c03                                   |0016: move-result-object v3
+028cb6: 3903 0300                              |0017: if-nez v3, 001a // +0003
+028cba: 0f00                                   |0019: return v0
+028cbc: 1241                                   |001a: const/4 v1, #int 4 // #4
+028cbe: 6e20 7700 1300                         |001b: invoke-virtual {v3, v1}, Landroid/net/NetworkCapabilities;.hasTransport:(I)Z // method@0077
+028cc4: 0a03                                   |001e: move-result v3
+028cc6: 0f03                                   |001f: return v3
+028cc8: 0f00                                   |0020: return v0
+      catches       : 1
+        0x0001 - 0x001f
+          <any> -> 0x0020
+      positions     :
+        0x0003 line=52
+        0x000c line=57
+        0x0013 line=63
+        0x001b line=68
+      locals        :
+        0x0000 - 0x0021 reg=2 this Landroidx/core/smain/utils/VPNDetector;
+        0x0000 - 0x0021 reg=3 (null) Landroid/content/Context;
+
+    #5              : (in Landroidx/core/smain/utils/VPNDetector;)
+      name          : 'getInstance'
+      type          : '()Landroidx/core/smain/utils/VPNDetector;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 14 16-bit code units
+028cd8:                                        |[028cd8] androidx.core.smain.utils.VPNDetector.getInstance:()Landroidx/core/smain/utils/VPNDetector;
+028ce8: 6200 7d00                              |0000: sget-object v0, Landroidx/core/smain/utils/VPNDetector;.m_isntance:Landroidx/core/smain/utils/VPNDetector; // field@007d
+028cec: 3900 0900                              |0002: if-nez v0, 000b // +0009
+028cf0: 2200 7600                              |0004: new-instance v0, Landroidx/core/smain/utils/VPNDetector; // type@0076
+028cf4: 7010 a301 0000                         |0006: invoke-direct {v0}, Landroidx/core/smain/utils/VPNDetector;.<init>:()V // method@01a3
+028cfa: 6900 7d00                              |0009: sput-object v0, Landroidx/core/smain/utils/VPNDetector;.m_isntance:Landroidx/core/smain/utils/VPNDetector; // field@007d
+028cfe: 6200 7d00                              |000b: sget-object v0, Landroidx/core/smain/utils/VPNDetector;.m_isntance:Landroidx/core/smain/utils/VPNDetector; // field@007d
+028d02: 1100                                   |000d: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=17
+        0x0004 line=18
+        0x000b line=20
+      locals        :
+
+    #6              : (in Landroidx/core/smain/utils/VPNDetector;)
+      name          : 'getScore'
+      type          : '(Landroid/content/Context;)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 26 16-bit code units
+028d04:                                        |[028d04] androidx.core.smain.utils.VPNDetector.getScore:(Landroid/content/Context;)I
+028d14: 7020 a601 3200                         |0000: invoke-direct {v2, v3}, Landroidx/core/smain/utils/VPNDetector;.checkVpnTransport:(Landroid/content/Context;)Z // method@01a6
+028d1a: 0a00                                   |0003: move-result v0
+028d1c: 3800 0400                              |0004: if-eqz v0, 0008 // +0004
+028d20: 1250                                   |0006: const/4 v0, #int 5 // #5
+028d22: 2802                                   |0007: goto 0009 // +0002
+028d24: 1200                                   |0008: const/4 v0, #int 0 // #0
+028d26: 7010 a401 0200                         |0009: invoke-direct {v2}, Landroidx/core/smain/utils/VPNDetector;.checkTunInterface:()Z // method@01a4
+028d2c: 0a01                                   |000c: move-result v1
+028d2e: 3801 0400                              |000d: if-eqz v1, 0011 // +0004
+028d32: d800 0003                              |000f: add-int/lit8 v0, v0, #int 3 // #03
+028d36: 7020 a501 3200                         |0011: invoke-direct {v2, v3}, Landroidx/core/smain/utils/VPNDetector;.checkVpnApps:(Landroid/content/Context;)Z // method@01a5
+028d3c: 0a03                                   |0014: move-result v3
+028d3e: 3803 0400                              |0015: if-eqz v3, 0019 // +0004
+028d42: d800 0002                              |0017: add-int/lit8 v0, v0, #int 2 // #02
+028d46: 0f00                                   |0019: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=31
+        0x0009 line=34
+        0x0011 line=37
+      locals        :
+        0x0000 - 0x001a reg=2 this Landroidx/core/smain/utils/VPNDetector;
+        0x0000 - 0x001a reg=3 (null) Landroid/content/Context;
+
+  Virtual methods   -
+    #0              : (in Landroidx/core/smain/utils/VPNDetector;)
+      name          : 'isVpnActive'
+      type          : '(Landroid/content/Context;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 11 16-bit code units
+028d48:                                        |[028d48] androidx.core.smain.utils.VPNDetector.isVpnActive:(Landroid/content/Context;)Z
+028d58: 7020 a801 2100                         |0000: invoke-direct {v1, v2}, Landroidx/core/smain/utils/VPNDetector;.getScore:(Landroid/content/Context;)I // method@01a8
+028d5e: 0a02                                   |0003: move-result v2
+028d60: 1230                                   |0004: const/4 v0, #int 3 // #3
+028d62: 3402 0400                              |0005: if-lt v2, v0, 0009 // +0004
+028d66: 1212                                   |0007: const/4 v2, #int 1 // #1
+028d68: 2802                                   |0008: goto 000a // +0002
+028d6a: 1202                                   |0009: const/4 v2, #int 0 // #0
+028d6c: 0f02                                   |000a: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=24
+      locals        :
+        0x0000 - 0x000b reg=1 this Landroidx/core/smain/utils/VPNDetector;
+        0x0000 - 0x000b reg=2 (null) Landroid/content/Context;
+
+  source_file_idx   : 1283 (VPNDetector.java)
+

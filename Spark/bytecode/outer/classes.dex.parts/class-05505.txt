@@ -1,0 +1,342 @@
+Class #5505            -
+  Class descriptor  : 'Lkotlinx/coroutines/scheduling/LimitingDispatcher;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Lkotlinx/coroutines/ExecutorCoroutineDispatcher;'
+  Interfaces        -
+    #0              : 'Lkotlinx/coroutines/scheduling/TaskContext;'
+    #1              : 'Ljava/util/concurrent/Executor;'
+  Static fields     -
+    #0              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'inFlightTasks$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;'
+      access        : 0x101a (PRIVATE STATIC FINAL SYNTHETIC)
+  Instance fields   -
+    #0              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'dispatcher'
+      type          : 'Lkotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'inFlightTasks'
+      type          : 'I'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #2              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'name'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'parallelism'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'queue'
+      type          : 'Ljava/util/concurrent/ConcurrentLinkedQueue;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'taskMode'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 2
+      insns size    : 11 16-bit code units
+3530c4:                                        |[3530c4] kotlinx.coroutines.scheduling.LimitingDispatcher.<clinit>:()V
+3530d4: 1c00 ad19                              |0000: const-class v0, Lkotlinx/coroutines/scheduling/LimitingDispatcher; // type@19ad
+3530d8: 1a01 ed83                              |0002: const-string v1, "inFlightTasks" // string@83ed
+3530dc: 7120 2776 1000                         |0004: invoke-static {v0, v1}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // method@7627
+3530e2: 0c00                                   |0007: move-result-object v0
+3530e4: 6900 b646                              |0008: sput-object v0, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.inFlightTasks$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46b6
+3530e8: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : '<init>'
+      type          : '(Lkotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher;ILjava/lang/String;I)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 1
+      insns size    : 22 16-bit code units
+3530ec:                                        |[3530ec] kotlinx.coroutines.scheduling.LimitingDispatcher.<init>:(Lkotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher;ILjava/lang/String;I)V
+3530fc: 7010 cea4 0000                         |0000: invoke-direct {v0}, Lkotlinx/coroutines/ExecutorCoroutineDispatcher;.<init>:()V // method@a4ce
+353102: 5b01 b446                              |0003: iput-object v1, v0, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.dispatcher:Lkotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher; // field@46b4
+353106: 5902 b846                              |0005: iput v2, v0, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.parallelism:I // field@46b8
+35310a: 5b03 b746                              |0007: iput-object v3, v0, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.name:Ljava/lang/String; // field@46b7
+35310e: 5904 ba46                              |0009: iput v4, v0, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.taskMode:I // field@46ba
+353112: 2201 4e12                              |000b: new-instance v1, Ljava/util/concurrent/ConcurrentLinkedQueue; // type@124e
+353116: 7010 bb75 0100                         |000d: invoke-direct {v1}, Ljava/util/concurrent/ConcurrentLinkedQueue;.<init>:()V // method@75bb
+35311c: 5b01 b946                              |0010: iput-object v1, v0, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.queue:Ljava/util/concurrent/ConcurrentLinkedQueue; // field@46b9
+353120: 1201                                   |0012: const/4 v1, #int 0 // #0
+353122: 5901 b546                              |0013: iput v1, v0, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.inFlightTasks:I // field@46b5
+353126: 0e00                                   |0015: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=116
+        0x0003 line=112
+        0x0005 line=113
+        0x0007 line=114
+        0x0009 line=115
+        0x000b line=118
+        0x0013 line=119
+      locals        :
+        0x0000 - 0x0016 reg=0 this Lkotlinx/coroutines/scheduling/LimitingDispatcher;
+        0x0000 - 0x0016 reg=1 (null) Lkotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher;
+        0x0000 - 0x0016 reg=2 (null) I
+        0x0000 - 0x0016 reg=3 (null) Ljava/lang/String;
+        0x0000 - 0x0016 reg=4 (null) I
+
+    #2              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'dispatch'
+      type          : '(Ljava/lang/Runnable;Z)V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 4
+      insns size    : 44 16-bit code units
+3531b0:                                        |[3531b0] kotlinx.coroutines.scheduling.LimitingDispatcher.dispatch:(Ljava/lang/Runnable;Z)V
+3531c0: 6200 b646                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.inFlightTasks$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46b6
+3531c4: 6e20 2676 3000                         |0002: invoke-virtual {v0, v3}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.incrementAndGet:(Ljava/lang/Object;)I // method@7626
+3531ca: 0a01                                   |0005: move-result v1
+3531cc: 5232 b846                              |0006: iget v2, v3, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.parallelism:I // field@46b8
+3531d0: 3621 0b00                              |0008: if-gt v1, v2, 0013 // +000b
+3531d4: 5430 b446                              |000a: iget-object v0, v3, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.dispatcher:Lkotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher; // field@46b4
+3531d8: 0731                                   |000c: move-object v1, v3
+3531da: 1f01 b219                              |000d: check-cast v1, Lkotlinx/coroutines/scheduling/TaskContext; // type@19b2
+3531de: 6e40 63b3 4051                         |000f: invoke-virtual {v0, v4, v1, v5}, Lkotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher;.dispatchWithContext$kotlinx_coroutines_core:(Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;Z)V // method@b363
+3531e4: 0e00                                   |0012: return-void
+3531e6: 5431 b946                              |0013: iget-object v1, v3, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.queue:Ljava/util/concurrent/ConcurrentLinkedQueue; // field@46b9
+3531ea: 6e20 bc75 4100                         |0015: invoke-virtual {v1, v4}, Ljava/util/concurrent/ConcurrentLinkedQueue;.add:(Ljava/lang/Object;)Z // method@75bc
+3531f0: 6e20 2376 3000                         |0018: invoke-virtual {v0, v3}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.decrementAndGet:(Ljava/lang/Object;)I // method@7623
+3531f6: 0a04                                   |001b: move-result v4
+3531f8: 5230 b846                              |001c: iget v0, v3, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.parallelism:I // field@46b8
+3531fc: 3404 0300                              |001e: if-lt v4, v0, 0021 // +0003
+353200: 280b                                   |0020: goto 002b // +000b
+353202: 5434 b946                              |0021: iget-object v4, v3, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.queue:Ljava/util/concurrent/ConcurrentLinkedQueue; // field@46b9
+353206: 6e10 bd75 0400                         |0023: invoke-virtual {v4}, Ljava/util/concurrent/ConcurrentLinkedQueue;.poll:()Ljava/lang/Object; // method@75bd
+35320c: 0c04                                   |0026: move-result-object v4
+35320e: 1f04 7e11                              |0027: check-cast v4, Ljava/lang/Runnable; // type@117e
+353212: 3904 d7ff                              |0029: if-nez v4, 0000 // -0029
+353216: 0e00                                   |002b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=134
+        0x0006 line=137
+        0x000a line=138
+        0x0013 line=143
+        0x0018 line=160
+        0x0021 line=164
+      locals        :
+        0x0000 - 0x002c reg=3 this Lkotlinx/coroutines/scheduling/LimitingDispatcher;
+        0x0000 - 0x002c reg=4 (null) Ljava/lang/Runnable;
+        0x0000 - 0x002c reg=5 (null) Z
+
+  Virtual methods   -
+    #0              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'afterTask'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 40 16-bit code units
+353128:                                        |[353128] kotlinx.coroutines.scheduling.LimitingDispatcher.afterTask:()V
+353138: 5440 b946                              |0000: iget-object v0, v4, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.queue:Ljava/util/concurrent/ConcurrentLinkedQueue; // field@46b9
+35313c: 6e10 bd75 0000                         |0002: invoke-virtual {v0}, Ljava/util/concurrent/ConcurrentLinkedQueue;.poll:()Ljava/lang/Object; // method@75bd
+353142: 0c00                                   |0005: move-result-object v0
+353144: 1f00 7e11                              |0006: check-cast v0, Ljava/lang/Runnable; // type@117e
+353148: 1211                                   |0008: const/4 v1, #int 1 // #1
+35314a: 3800 0b00                              |0009: if-eqz v0, 0014 // +000b
+35314e: 5442 b446                              |000b: iget-object v2, v4, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.dispatcher:Lkotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher; // field@46b4
+353152: 0743                                   |000d: move-object v3, v4
+353154: 1f03 b219                              |000e: check-cast v3, Lkotlinx/coroutines/scheduling/TaskContext; // type@19b2
+353158: 6e40 63b3 0213                         |0010: invoke-virtual {v2, v0, v3, v1}, Lkotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher;.dispatchWithContext$kotlinx_coroutines_core:(Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;Z)V // method@b363
+35315e: 0e00                                   |0013: return-void
+353160: 6200 b646                              |0014: sget-object v0, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.inFlightTasks$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46b6
+353164: 6e20 2376 4000                         |0016: invoke-virtual {v0, v4}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.decrementAndGet:(Ljava/lang/Object;)I // method@7623
+35316a: 5440 b946                              |0019: iget-object v0, v4, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.queue:Ljava/util/concurrent/ConcurrentLinkedQueue; // field@46b9
+35316e: 6e10 bd75 0000                         |001b: invoke-virtual {v0}, Ljava/util/concurrent/ConcurrentLinkedQueue;.poll:()Ljava/lang/Object; // method@75bd
+353174: 0c00                                   |001e: move-result-object v0
+353176: 1f00 7e11                              |001f: check-cast v0, Ljava/lang/Runnable; // type@117e
+35317a: 3900 0300                              |0021: if-nez v0, 0024 // +0003
+35317e: 0e00                                   |0023: return-void
+353180: 7030 71b3 0401                         |0024: invoke-direct {v4, v0, v1}, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.dispatch:(Ljava/lang/Runnable;Z)V // method@b371
+353186: 0e00                                   |0027: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=190
+        0x000b line=193
+        0x0014 line=196
+        0x0019 line=209
+        0x0024 line=210
+      locals        :
+        0x0000 - 0x0028 reg=4 this Lkotlinx/coroutines/scheduling/LimitingDispatcher;
+
+    #1              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 12 16-bit code units
+353188:                                        |[353188] kotlinx.coroutines.scheduling.LimitingDispatcher.close:()V
+353198: 2200 6a11                              |0000: new-instance v0, Ljava/lang/IllegalStateException; // type@116a
+35319c: 1a01 e11f                              |0002: const-string v1, "Close cannot be invoked on LimitingBlockingDispatcher" // string@1fe1
+3531a0: 6e10 e671 0100                         |0004: invoke-virtual {v1}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+3531a6: 0c01                                   |0007: move-result-object v1
+3531a8: 7020 7071 1000                         |0008: invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+3531ae: 2700                                   |000b: throw v0
+      catches       : (none)
+      positions     :
+        0x0002 line=126
+      locals        :
+        0x0000 - 0x000c reg=2 this Lkotlinx/coroutines/scheduling/LimitingDispatcher;
+
+    #2              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'dispatch'
+      type          : '(Lkotlin/coroutines/CoroutineContext;Ljava/lang/Runnable;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 5 16-bit code units
+353218:                                        |[353218] kotlinx.coroutines.scheduling.LimitingDispatcher.dispatch:(Lkotlin/coroutines/CoroutineContext;Ljava/lang/Runnable;)V
+353228: 1201                                   |0000: const/4 v1, #int 0 // #0
+35322a: 7030 71b3 2001                         |0001: invoke-direct {v0, v2, v1}, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.dispatch:(Ljava/lang/Runnable;Z)V // method@b371
+353230: 0e00                                   |0004: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=128
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lkotlinx/coroutines/scheduling/LimitingDispatcher;
+        0x0000 - 0x0005 reg=1 (null) Lkotlin/coroutines/CoroutineContext;
+        0x0000 - 0x0005 reg=2 (null) Ljava/lang/Runnable;
+
+    #3              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'dispatchYield'
+      type          : '(Lkotlin/coroutines/CoroutineContext;Ljava/lang/Runnable;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 5 16-bit code units
+353234:                                        |[353234] kotlinx.coroutines.scheduling.LimitingDispatcher.dispatchYield:(Lkotlin/coroutines/CoroutineContext;Ljava/lang/Runnable;)V
+353244: 1211                                   |0000: const/4 v1, #int 1 // #1
+353246: 7030 71b3 2001                         |0001: invoke-direct {v0, v2, v1}, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.dispatch:(Ljava/lang/Runnable;Z)V // method@b371
+35324c: 0e00                                   |0004: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=169
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lkotlinx/coroutines/scheduling/LimitingDispatcher;
+        0x0000 - 0x0005 reg=1 (null) Lkotlin/coroutines/CoroutineContext;
+        0x0000 - 0x0005 reg=2 (null) Ljava/lang/Runnable;
+
+    #4              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'execute'
+      type          : '(Ljava/lang/Runnable;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 5 16-bit code units
+353250:                                        |[353250] kotlinx.coroutines.scheduling.LimitingDispatcher.execute:(Ljava/lang/Runnable;)V
+353260: 1200                                   |0000: const/4 v0, #int 0 // #0
+353262: 7030 71b3 2100                         |0001: invoke-direct {v1, v2, v0}, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.dispatch:(Ljava/lang/Runnable;Z)V // method@b371
+353268: 0e00                                   |0004: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=124
+      locals        :
+        0x0000 - 0x0005 reg=1 this Lkotlinx/coroutines/scheduling/LimitingDispatcher;
+        0x0000 - 0x0005 reg=2 (null) Ljava/lang/Runnable;
+
+    #5              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'getExecutor'
+      type          : '()Ljava/util/concurrent/Executor;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 4 16-bit code units
+3530ac:                                        |[3530ac] kotlinx.coroutines.scheduling.LimitingDispatcher.getExecutor:()Ljava/util/concurrent/Executor;
+3530bc: 0710                                   |0000: move-object v0, v1
+3530be: 1f00 5612                              |0001: check-cast v0, Ljava/util/concurrent/Executor; // type@1256
+3530c2: 1100                                   |0003: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=122
+      locals        :
+        0x0000 - 0x0004 reg=1 this Lkotlinx/coroutines/scheduling/LimitingDispatcher;
+
+    #6              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'getTaskMode'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+353034:                                        |[353034] kotlinx.coroutines.scheduling.LimitingDispatcher.getTaskMode:()I
+353044: 5210 ba46                              |0000: iget v0, v1, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.taskMode:I // field@46ba
+353048: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=115
+      locals        :
+        0x0000 - 0x0003 reg=1 this Lkotlinx/coroutines/scheduling/LimitingDispatcher;
+
+    #7              : (in Lkotlinx/coroutines/scheduling/LimitingDispatcher;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 40 16-bit code units
+35304c:                                        |[35304c] kotlinx.coroutines.scheduling.LimitingDispatcher.toString:()Ljava/lang/String;
+35305c: 5420 b746                              |0000: iget-object v0, v2, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.name:Ljava/lang/String; // field@46b7
+353060: 3900 2500                              |0002: if-nez v0, 0027 // +0025
+353064: 2200 8811                              |0004: new-instance v0, Ljava/lang/StringBuilder; // type@1188
+353068: 7010 4b72 0000                         |0006: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+35306e: 6f10 d1a4 0200                         |0009: invoke-super {v2}, Lkotlinx/coroutines/ExecutorCoroutineDispatcher;.toString:()Ljava/lang/String; // method@a4d1
+353074: 0c01                                   |000c: move-result-object v1
+353076: 6e20 5772 1000                         |000d: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+35307c: 0c00                                   |0010: move-result-object v0
+35307e: 1a01 9a5e                              |0011: const-string v1, "[dispatcher = " // string@5e9a
+353082: 6e20 5772 1000                         |0013: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+353088: 0c00                                   |0016: move-result-object v0
+35308a: 5421 b446                              |0017: iget-object v1, v2, Lkotlinx/coroutines/scheduling/LimitingDispatcher;.dispatcher:Lkotlinx/coroutines/scheduling/ExperimentalCoroutineDispatcher; // field@46b4
+35308e: 6e20 5672 1000                         |0019: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+353094: 0c00                                   |001c: move-result-object v0
+353096: 1301 5d00                              |001d: const/16 v1, #int 93 // #5d
+35309a: 6e20 4f72 1000                         |001f: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@724f
+3530a0: 0c00                                   |0022: move-result-object v0
+3530a2: 6e10 6b72 0000                         |0023: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+3530a8: 0c00                                   |0026: move-result-object v0
+3530aa: 1100                                   |0027: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=173
+      locals        :
+        0x0000 - 0x0028 reg=2 this Lkotlinx/coroutines/scheduling/LimitingDispatcher;
+
+  source_file_idx   : 8829 (Deprecated.kt)
+

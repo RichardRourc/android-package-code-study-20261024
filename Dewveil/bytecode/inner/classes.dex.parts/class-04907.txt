@@ -1,0 +1,648 @@
+Class #4907            -
+  Class descriptor  : 'Lcom/google/android/material/appbar/HeaderBehavior;'
+  Access flags      : 0x0400 (ABSTRACT)
+  Superclass        : 'Lcom/google/android/material/appbar/ViewOffsetBehavior;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'INVALID_POINTER'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : -1
+  Instance fields   -
+    #0              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'activePointerId'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'flingRunnable'
+      type          : 'Ljava/lang/Runnable;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'isBeingDragged'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'lastMotionY'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'scroller'
+      type          : 'Landroid/widget/OverScroller;'
+      access        : 0x0000 ()
+    #5              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'touchSlop'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #6              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'velocityTracker'
+      type          : 'Landroid/view/VelocityTracker;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+6f3a10:                                        |[6f3a10] com.google.android.material.appbar.HeaderBehavior.<init>:()V
+6f3a20: 7010 a9b0 0100                         |0000: invoke-direct {v1}, Lcom/google/android/material/appbar/ViewOffsetBehavior;.<init>:()V // method@b0a9
+6f3a26: 12f0                                   |0003: const/4 v0, #int -1 // #ff
+6f3a28: 5910 de69                              |0004: iput v0, v1, Lcom/google/android/material/appbar/HeaderBehavior;.activePointerId:I // field@69de
+6f3a2c: 5910 e369                              |0006: iput v0, v1, Lcom/google/android/material/appbar/HeaderBehavior;.touchSlop:I // field@69e3
+6f3a30: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=48
+        0x0004 line=43
+        0x0006 line=45
+      locals        :
+        0x0000 - 0x0009 reg=1 this Lcom/google/android/material/appbar/HeaderBehavior;
+
+    #1              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : '<init>'
+      type          : '(Landroid/content/Context;Landroid/util/AttributeSet;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 9 16-bit code units
+6f3a34:                                        |[6f3a34] com.google.android.material.appbar.HeaderBehavior.<init>:(Landroid/content/Context;Landroid/util/AttributeSet;)V
+6f3a44: 7030 aab0 1002                         |0000: invoke-direct {v0, v1, v2}, Lcom/google/android/material/appbar/ViewOffsetBehavior;.<init>:(Landroid/content/Context;Landroid/util/AttributeSet;)V // method@b0aa
+6f3a4a: 12f1                                   |0003: const/4 v1, #int -1 // #ff
+6f3a4c: 5901 de69                              |0004: iput v1, v0, Lcom/google/android/material/appbar/HeaderBehavior;.activePointerId:I // field@69de
+6f3a50: 5901 e369                              |0006: iput v1, v0, Lcom/google/android/material/appbar/HeaderBehavior;.touchSlop:I // field@69e3
+6f3a54: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=51
+        0x0004 line=43
+        0x0006 line=45
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lcom/google/android/material/appbar/HeaderBehavior;
+        0x0000 - 0x0009 reg=1 (null) Landroid/content/Context;
+        0x0000 - 0x0009 reg=2 (null) Landroid/util/AttributeSet;
+
+    #2              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'ensureVelocityTracker'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 11 16-bit code units
+6f3a58:                                        |[6f3a58] com.google.android.material.appbar.HeaderBehavior.ensureVelocityTracker:()V
+6f3a68: 5410 e469                              |0000: iget-object v0, v1, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3a6c: 3900 0800                              |0002: if-nez v0, 000a // +0008
+6f3a70: 7100 4209 0000                         |0004: invoke-static {}, Landroid/view/VelocityTracker;.obtain:()Landroid/view/VelocityTracker; // method@0942
+6f3a76: 0c00                                   |0007: move-result-object v0
+6f3a78: 5b10 e469                              |0008: iput-object v0, v1, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3a7c: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=295
+        0x0004 line=296
+      locals        :
+        0x0000 - 0x000b reg=1 this Lcom/google/android/material/appbar/HeaderBehavior;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'canDragView'
+      type          : '(Landroid/view/View;)Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 2 16-bit code units
+6f3a80:                                        |[6f3a80] com.google.android.material.appbar.HeaderBehavior.canDragView:(Landroid/view/View;)Z
+6f3a90: 1200                                   |0000: const/4 v0, #int 0 // #0
+6f3a92: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'fling'
+      type          : '(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;IIF)Z'
+      access        : 0x0010 (FINAL)
+      code          -
+      registers     : 19
+      ins           : 6
+      outs          : 9
+      insns size    : 75 16-bit code units
+6f3a94:                                        |[6f3a94] com.google.android.material.appbar.HeaderBehavior.fling:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;IIF)Z
+6f3aa4: 07d0                                   |0000: move-object v0, v13
+6f3aa6: 07f1                                   |0001: move-object v1, v15
+6f3aa8: 5402 df69                              |0002: iget-object v2, v0, Lcom/google/android/material/appbar/HeaderBehavior;.flingRunnable:Ljava/lang/Runnable; // field@69df
+6f3aac: 3802 0800                              |0004: if-eqz v2, 000c // +0008
+6f3ab0: 6e20 080a 2f00                         |0006: invoke-virtual {v15, v2}, Landroid/view/View;.removeCallbacks:(Ljava/lang/Runnable;)Z // method@0a08
+6f3ab6: 1202                                   |0009: const/4 v2, #int 0 // #0
+6f3ab8: 5b02 df69                              |000a: iput-object v2, v0, Lcom/google/android/material/appbar/HeaderBehavior;.flingRunnable:Ljava/lang/Runnable; // field@69df
+6f3abc: 5402 e269                              |000c: iget-object v2, v0, Lcom/google/android/material/appbar/HeaderBehavior;.scroller:Landroid/widget/OverScroller; // field@69e2
+6f3ac0: 3902 0d00                              |000e: if-nez v2, 001b // +000d
+6f3ac4: 2202 6f02                              |0010: new-instance v2, Landroid/widget/OverScroller; // type@026f
+6f3ac8: 6e10 8809 0f00                         |0012: invoke-virtual {v15}, Landroid/view/View;.getContext:()Landroid/content/Context; // method@0988
+6f3ace: 0c03                                   |0015: move-result-object v3
+6f3ad0: 7020 af0e 3200                         |0016: invoke-direct {v2, v3}, Landroid/widget/OverScroller;.<init>:(Landroid/content/Context;)V // method@0eaf
+6f3ad6: 5b02 e269                              |0019: iput-object v2, v0, Lcom/google/android/material/appbar/HeaderBehavior;.scroller:Landroid/widget/OverScroller; // field@69e2
+6f3ada: 5404 e269                              |001b: iget-object v4, v0, Lcom/google/android/material/appbar/HeaderBehavior;.scroller:Landroid/widget/OverScroller; // field@69e2
+6f3ade: 6e10 8bb0 0d00                         |001d: invoke-virtual {v13}, Lcom/google/android/material/appbar/HeaderBehavior;.getTopAndBottomOffset:()I // method@b08b
+6f3ae4: 0a06                                   |0020: move-result v6
+6f3ae6: 7701 a8d1 1200                         |0021: invoke-static/range {v18}, Ljava/lang/Math;.round:(F)I // method@d1a8
+6f3aec: 0a08                                   |0024: move-result v8
+6f3aee: 1209                                   |0025: const/4 v9, #int 0 // #0
+6f3af0: 120a                                   |0026: const/4 v10, #int 0 // #0
+6f3af2: 1205                                   |0027: const/4 v5, #int 0 // #0
+6f3af4: 1207                                   |0028: const/4 v7, #int 0 // #0
+6f3af6: 020b 1000                              |0029: move/from16 v11, v16
+6f3afa: 020c 1100                              |002b: move/from16 v12, v17
+6f3afe: 7409 b30e 0400                         |002d: invoke-virtual/range {v4, v5, v6, v7, v8, v9, v10, v11, v12}, Landroid/widget/OverScroller;.fling:(IIIIIIII)V // method@0eb3
+6f3b04: 5402 e269                              |0030: iget-object v2, v0, Lcom/google/android/material/appbar/HeaderBehavior;.scroller:Landroid/widget/OverScroller; // field@69e2
+6f3b08: 6e10 b20e 0200                         |0032: invoke-virtual {v2}, Landroid/widget/OverScroller;.computeScrollOffset:()Z // method@0eb2
+6f3b0e: 0a02                                   |0035: move-result v2
+6f3b10: 3802 0f00                              |0036: if-eqz v2, 0045 // +000f
+6f3b14: 2202 ae15                              |0038: new-instance v2, Lcom/google/android/material/appbar/HeaderBehavior$FlingRunnable; // type@15ae
+6f3b18: 07e3                                   |003a: move-object v3, v14
+6f3b1a: 7040 82b0 d2fe                         |003b: invoke-direct {v2, v13, v14, v15}, Lcom/google/android/material/appbar/HeaderBehavior$FlingRunnable;.<init>:(Lcom/google/android/material/appbar/HeaderBehavior;Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;)V // method@b082
+6f3b20: 5b02 df69                              |003e: iput-object v2, v0, Lcom/google/android/material/appbar/HeaderBehavior;.flingRunnable:Ljava/lang/Runnable; // field@69df
+6f3b24: 7120 743a 2f00                         |0040: invoke-static {v15, v2}, Landroidx/core/view/ViewCompat;.postOnAnimation:(Landroid/view/View;Ljava/lang/Runnable;)V // method@3a74
+6f3b2a: 1210                                   |0043: const/4 v0, #int 1 // #1
+6f3b2c: 0f00                                   |0044: return v0
+6f3b2e: 07e3                                   |0045: move-object v3, v14
+6f3b30: 6e30 8db0 ed0f                         |0046: invoke-virtual {v13, v14, v15}, Lcom/google/android/material/appbar/HeaderBehavior;.onFlingFinished:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;)V // method@b08d
+6f3b36: 1200                                   |0049: const/4 v0, #int 0 // #0
+6f3b38: 0f00                                   |004a: return v0
+      catches       : (none)
+      positions     :
+        0x0002 line=243
+        0x0006 line=244
+        0x000a line=245
+        0x000c line=248
+        0x0010 line=249
+        0x001b line=252
+        0x001d line=254
+        0x0021 line=256
+        0x002d line=252
+        0x0030 line=262
+        0x0038 line=263
+        0x0040 line=264
+        0x0046 line=267
+      locals        :
+        0x0000 - 0x004b reg=13 this Lcom/google/android/material/appbar/HeaderBehavior;
+        0x0000 - 0x004b reg=14 (null) Landroidx/coordinatorlayout/widget/CoordinatorLayout;
+        0x0000 - 0x004b reg=15 (null) Landroid/view/View;
+        0x0000 - 0x004b reg=16 (null) I
+        0x0000 - 0x004b reg=17 (null) I
+        0x0000 - 0x004b reg=18 (null) F
+
+    #2              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'getMaxDragOffset'
+      type          : '(Landroid/view/View;)I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 6 16-bit code units
+6f3b3c:                                        |[6f3b3c] com.google.android.material.appbar.HeaderBehavior.getMaxDragOffset:(Landroid/view/View;)I
+6f3b4c: 6e10 9009 0100                         |0000: invoke-virtual {v1}, Landroid/view/View;.getHeight:()I // method@0990
+6f3b52: 0a00                                   |0003: move-result v0
+6f3b54: 7b00                                   |0004: neg-int v0, v0
+6f3b56: 0f00                                   |0005: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=287
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/google/android/material/appbar/HeaderBehavior;
+        0x0000 - 0x0006 reg=1 (null) Landroid/view/View;
+
+    #3              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'getScrollRangeForDragFling'
+      type          : '(Landroid/view/View;)I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 5 16-bit code units
+6f3b58:                                        |[6f3b58] com.google.android.material.appbar.HeaderBehavior.getScrollRangeForDragFling:(Landroid/view/View;)I
+6f3b68: 6e10 9009 0100                         |0000: invoke-virtual {v1}, Landroid/view/View;.getHeight:()I // method@0990
+6f3b6e: 0a00                                   |0003: move-result v0
+6f3b70: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=291
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lcom/google/android/material/appbar/HeaderBehavior;
+        0x0000 - 0x0005 reg=1 (null) Landroid/view/View;
+
+    #4              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'getTopBottomOffsetForScrollingSibling'
+      type          : '()I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+6f3b74:                                        |[6f3b74] com.google.android.material.appbar.HeaderBehavior.getTopBottomOffsetForScrollingSibling:()I
+6f3b84: 6e10 8bb0 0000                         |0000: invoke-virtual {v0}, Lcom/google/android/material/appbar/HeaderBehavior;.getTopAndBottomOffset:()I // method@b08b
+6f3b8a: 0a00                                   |0003: move-result v0
+6f3b8c: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=224
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lcom/google/android/material/appbar/HeaderBehavior;
+
+    #5              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'onFlingFinished'
+      type          : '(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 0
+      insns size    : 1 16-bit code units
+6f3b90:                                        |[6f3b90] com.google.android.material.appbar.HeaderBehavior.onFlingFinished:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;)V
+6f3ba0: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #6              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'onInterceptTouchEvent'
+      type          : '(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;Landroid/view/MotionEvent;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 4
+      outs          : 4
+      insns size    : 141 16-bit code units
+6f3ba4:                                        |[6f3ba4] com.google.android.material.appbar.HeaderBehavior.onInterceptTouchEvent:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;Landroid/view/MotionEvent;)Z
+6f3bb4: 5240 e369                              |0000: iget v0, v4, Lcom/google/android/material/appbar/HeaderBehavior;.touchSlop:I // field@69e3
+6f3bb8: 3b00 1000                              |0002: if-gez v0, 0012 // +0010
+6f3bbc: 6e10 7330 0500                         |0004: invoke-virtual {v5}, Landroidx/coordinatorlayout/widget/CoordinatorLayout;.getContext:()Landroid/content/Context; // method@3073
+6f3bc2: 0c00                                   |0007: move-result-object v0
+6f3bc4: 7110 6d0a 0000                         |0008: invoke-static {v0}, Landroid/view/ViewConfiguration;.get:(Landroid/content/Context;)Landroid/view/ViewConfiguration; // method@0a6d
+6f3bca: 0c00                                   |000b: move-result-object v0
+6f3bcc: 6e10 760a 0000                         |000c: invoke-virtual {v0}, Landroid/view/ViewConfiguration;.getScaledTouchSlop:()I // method@0a76
+6f3bd2: 0a00                                   |000f: move-result v0
+6f3bd4: 5940 e369                              |0010: iput v0, v4, Lcom/google/android/material/appbar/HeaderBehavior;.touchSlop:I // field@69e3
+6f3bd8: 6e10 0d09 0700                         |0012: invoke-virtual {v7}, Landroid/view/MotionEvent;.getAction:()I // method@090d
+6f3bde: 0a00                                   |0015: move-result v0
+6f3be0: 1221                                   |0016: const/4 v1, #int 2 // #2
+6f3be2: 1212                                   |0017: const/4 v2, #int 1 // #1
+6f3be4: 3310 0700                              |0018: if-ne v0, v1, 001f // +0007
+6f3be8: 5540 e069                              |001a: iget-boolean v0, v4, Lcom/google/android/material/appbar/HeaderBehavior;.isBeingDragged:Z // field@69e0
+6f3bec: 3800 0300                              |001c: if-eqz v0, 001f // +0003
+6f3bf0: 0f02                                   |001e: return v2
+6f3bf2: 6e10 0f09 0700                         |001f: invoke-virtual {v7}, Landroid/view/MotionEvent;.getActionMasked:()I // method@090f
+6f3bf8: 0a00                                   |0022: move-result v0
+6f3bfa: 1203                                   |0023: const/4 v3, #int 0 // #0
+6f3bfc: 3800 3c00                              |0024: if-eqz v0, 0060 // +003c
+6f3c00: 12f5                                   |0026: const/4 v5, #int -1 // #ff
+6f3c02: 3220 2a00                              |0027: if-eq v0, v2, 0051 // +002a
+6f3c06: 3210 0600                              |0029: if-eq v0, v1, 002f // +0006
+6f3c0a: 1236                                   |002b: const/4 v6, #int 3 // #3
+6f3c0c: 3260 2500                              |002c: if-eq v0, v6, 0051 // +0025
+6f3c10: 2855                                   |002e: goto 0083 // +0055
+6f3c12: 5246 de69                              |002f: iget v6, v4, Lcom/google/android/material/appbar/HeaderBehavior;.activePointerId:I // field@69de
+6f3c16: 3356 0300                              |0031: if-ne v6, v5, 0034 // +0003
+6f3c1a: 2850                                   |0033: goto 0083 // +0050
+6f3c1c: 6e20 0c09 6700                         |0034: invoke-virtual {v7, v6}, Landroid/view/MotionEvent;.findPointerIndex:(I)I // method@090c
+6f3c22: 0a06                                   |0037: move-result v6
+6f3c24: 3356 0300                              |0038: if-ne v6, v5, 003b // +0003
+6f3c28: 2849                                   |003a: goto 0083 // +0049
+6f3c2a: 6e20 1e09 6700                         |003b: invoke-virtual {v7, v6}, Landroid/view/MotionEvent;.getY:(I)F // method@091e
+6f3c30: 0a05                                   |003e: move-result v5
+6f3c32: 8755                                   |003f: float-to-int v5, v5
+6f3c34: 5246 e169                              |0040: iget v6, v4, Lcom/google/android/material/appbar/HeaderBehavior;.lastMotionY:I // field@69e1
+6f3c38: 9106 0506                              |0042: sub-int v6, v5, v6
+6f3c3c: 7110 87d1 0600                         |0044: invoke-static {v6}, Ljava/lang/Math;.abs:(I)I // method@d187
+6f3c42: 0a06                                   |0047: move-result v6
+6f3c44: 5240 e369                              |0048: iget v0, v4, Lcom/google/android/material/appbar/HeaderBehavior;.touchSlop:I // field@69e3
+6f3c48: 3706 3900                              |004a: if-le v6, v0, 0083 // +0039
+6f3c4c: 5c42 e069                              |004c: iput-boolean v2, v4, Lcom/google/android/material/appbar/HeaderBehavior;.isBeingDragged:Z // field@69e0
+6f3c50: 5945 e169                              |004e: iput v5, v4, Lcom/google/android/material/appbar/HeaderBehavior;.lastMotionY:I // field@69e1
+6f3c54: 2833                                   |0050: goto 0083 // +0033
+6f3c56: 5c43 e069                              |0051: iput-boolean v3, v4, Lcom/google/android/material/appbar/HeaderBehavior;.isBeingDragged:Z // field@69e0
+6f3c5a: 5945 de69                              |0053: iput v5, v4, Lcom/google/android/material/appbar/HeaderBehavior;.activePointerId:I // field@69de
+6f3c5e: 5445 e469                              |0055: iget-object v5, v4, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3c62: 3805 2c00                              |0057: if-eqz v5, 0083 // +002c
+6f3c66: 6e10 4309 0500                         |0059: invoke-virtual {v5}, Landroid/view/VelocityTracker;.recycle:()V // method@0943
+6f3c6c: 1205                                   |005c: const/4 v5, #int 0 // #0
+6f3c6e: 5b45 e469                              |005d: iput-object v5, v4, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3c72: 2824                                   |005f: goto 0083 // +0024
+6f3c74: 5c43 e069                              |0060: iput-boolean v3, v4, Lcom/google/android/material/appbar/HeaderBehavior;.isBeingDragged:Z // field@69e0
+6f3c78: 6e10 1b09 0700                         |0062: invoke-virtual {v7}, Landroid/view/MotionEvent;.getX:()F // method@091b
+6f3c7e: 0a00                                   |0065: move-result v0
+6f3c80: 8700                                   |0066: float-to-int v0, v0
+6f3c82: 6e10 1d09 0700                         |0067: invoke-virtual {v7}, Landroid/view/MotionEvent;.getY:()F // method@091d
+6f3c88: 0a01                                   |006a: move-result v1
+6f3c8a: 8711                                   |006b: float-to-int v1, v1
+6f3c8c: 6e20 86b0 6400                         |006c: invoke-virtual {v4, v6}, Lcom/google/android/material/appbar/HeaderBehavior;.canDragView:(Landroid/view/View;)Z // method@b086
+6f3c92: 0a02                                   |006f: move-result v2
+6f3c94: 3802 1300                              |0070: if-eqz v2, 0083 // +0013
+6f3c98: 6e40 9230 6510                         |0072: invoke-virtual {v5, v6, v0, v1}, Landroidx/coordinatorlayout/widget/CoordinatorLayout;.isPointInChildBounds:(Landroid/view/View;II)Z // method@3092
+6f3c9e: 0a05                                   |0075: move-result v5
+6f3ca0: 3805 0d00                              |0076: if-eqz v5, 0083 // +000d
+6f3ca4: 5941 e169                              |0078: iput v1, v4, Lcom/google/android/material/appbar/HeaderBehavior;.lastMotionY:I // field@69e1
+6f3ca8: 6e20 1709 3700                         |007a: invoke-virtual {v7, v3}, Landroid/view/MotionEvent;.getPointerId:(I)I // method@0917
+6f3cae: 0a05                                   |007d: move-result v5
+6f3cb0: 5945 de69                              |007e: iput v5, v4, Lcom/google/android/material/appbar/HeaderBehavior;.activePointerId:I // field@69de
+6f3cb4: 7010 87b0 0400                         |0080: invoke-direct {v4}, Lcom/google/android/material/appbar/HeaderBehavior;.ensureVelocityTracker:()V // method@b087
+6f3cba: 5445 e469                              |0083: iget-object v5, v4, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3cbe: 3805 0500                              |0085: if-eqz v5, 008a // +0005
+6f3cc2: 6e20 3a09 7500                         |0087: invoke-virtual {v5, v7}, Landroid/view/VelocityTracker;.addMovement:(Landroid/view/MotionEvent;)V // method@093a
+6f3cc8: 5544 e069                              |008a: iget-boolean v4, v4, Lcom/google/android/material/appbar/HeaderBehavior;.isBeingDragged:Z // field@69e0
+6f3ccc: 0f04                                   |008c: return v4
+      catches       : (none)
+      positions     :
+        0x0000 line=56
+        0x0004 line=57
+        0x0012 line=60
+        0x001a line=63
+        0x001f line=67
+        0x002f line=83
+        0x0034 line=88
+        0x003b line=93
+        0x0040 line=94
+        0x0048 line=95
+        0x004c line=96
+        0x004e line=97
+        0x0051 line=105
+        0x0053 line=106
+        0x0055 line=107
+        0x0059 line=108
+        0x005d line=109
+        0x0060 line=70
+        0x0062 line=71
+        0x0067 line=72
+        0x006c line=73
+        0x0078 line=74
+        0x007a line=75
+        0x0080 line=76
+        0x0083 line=115
+        0x0087 line=116
+        0x008a line=119
+      locals        :
+        0x0000 - 0x008d reg=4 this Lcom/google/android/material/appbar/HeaderBehavior;
+        0x0000 - 0x008d reg=5 (null) Landroidx/coordinatorlayout/widget/CoordinatorLayout;
+        0x0000 - 0x008d reg=6 (null) Landroid/view/View;
+        0x0000 - 0x008d reg=7 (null) Landroid/view/MotionEvent;
+
+    #7              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'onTouchEvent'
+      type          : '(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;Landroid/view/MotionEvent;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 15
+      ins           : 4
+      outs          : 6
+      insns size    : 183 16-bit code units
+6f3cd0:                                        |[6f3cd0] com.google.android.material.appbar.HeaderBehavior.onTouchEvent:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;Landroid/view/MotionEvent;)Z
+6f3ce0: 52b0 e369                              |0000: iget v0, v11, Lcom/google/android/material/appbar/HeaderBehavior;.touchSlop:I // field@69e3
+6f3ce4: 3b00 1000                              |0002: if-gez v0, 0012 // +0010
+6f3ce8: 6e10 7330 0c00                         |0004: invoke-virtual {v12}, Landroidx/coordinatorlayout/widget/CoordinatorLayout;.getContext:()Landroid/content/Context; // method@3073
+6f3cee: 0c00                                   |0007: move-result-object v0
+6f3cf0: 7110 6d0a 0000                         |0008: invoke-static {v0}, Landroid/view/ViewConfiguration;.get:(Landroid/content/Context;)Landroid/view/ViewConfiguration; // method@0a6d
+6f3cf6: 0c00                                   |000b: move-result-object v0
+6f3cf8: 6e10 760a 0000                         |000c: invoke-virtual {v0}, Landroid/view/ViewConfiguration;.getScaledTouchSlop:()I // method@0a76
+6f3cfe: 0a00                                   |000f: move-result v0
+6f3d00: 59b0 e369                              |0010: iput v0, v11, Lcom/google/android/material/appbar/HeaderBehavior;.touchSlop:I // field@69e3
+6f3d04: 6e10 0f09 0e00                         |0012: invoke-virtual {v14}, Landroid/view/MotionEvent;.getActionMasked:()I // method@090f
+6f3d0a: 0a00                                   |0015: move-result v0
+6f3d0c: 1211                                   |0016: const/4 v1, #int 1 // #1
+6f3d0e: 1202                                   |0017: const/4 v2, #int 0 // #0
+6f3d10: 3800 7500                              |0018: if-eqz v0, 008d // +0075
+6f3d14: 12f3                                   |001a: const/4 v3, #int -1 // #ff
+6f3d16: 3210 4100                              |001b: if-eq v0, v1, 005c // +0041
+6f3d1a: 1224                                   |001d: const/4 v4, #int 2 // #2
+6f3d1c: 3240 0700                              |001e: if-eq v0, v4, 0025 // +0007
+6f3d20: 123c                                   |0020: const/4 v12, #int 3 // #3
+6f3d22: 32c0 5d00                              |0021: if-eq v0, v12, 007e // +005d
+6f3d26: 2900 8b00                              |0023: goto/16 00ae // +008b
+6f3d2a: 52b0 de69                              |0025: iget v0, v11, Lcom/google/android/material/appbar/HeaderBehavior;.activePointerId:I // field@69de
+6f3d2e: 6e20 0c09 0e00                         |0027: invoke-virtual {v14, v0}, Landroid/view/MotionEvent;.findPointerIndex:(I)I // method@090c
+6f3d34: 0a00                                   |002a: move-result v0
+6f3d36: 3330 0300                              |002b: if-ne v0, v3, 002e // +0003
+6f3d3a: 0f02                                   |002d: return v2
+6f3d3c: 6e20 1e09 0e00                         |002e: invoke-virtual {v14, v0}, Landroid/view/MotionEvent;.getY:(I)F // method@091e
+6f3d42: 0a00                                   |0031: move-result v0
+6f3d44: 8700                                   |0032: float-to-int v0, v0
+6f3d46: 52b2 e169                              |0033: iget v2, v11, Lcom/google/android/material/appbar/HeaderBehavior;.lastMotionY:I // field@69e1
+6f3d4a: b102                                   |0035: sub-int/2addr v2, v0
+6f3d4c: 55b3 e069                              |0036: iget-boolean v3, v11, Lcom/google/android/material/appbar/HeaderBehavior;.isBeingDragged:Z // field@69e0
+6f3d50: 3903 1100                              |0038: if-nez v3, 0049 // +0011
+6f3d54: 7110 87d1 0200                         |003a: invoke-static {v2}, Ljava/lang/Math;.abs:(I)I // method@d187
+6f3d5a: 0a03                                   |003d: move-result v3
+6f3d5c: 52b4 e369                              |003e: iget v4, v11, Lcom/google/android/material/appbar/HeaderBehavior;.touchSlop:I // field@69e3
+6f3d60: 3743 0900                              |0040: if-le v3, v4, 0049 // +0009
+6f3d64: 5cb1 e069                              |0042: iput-boolean v1, v11, Lcom/google/android/material/appbar/HeaderBehavior;.isBeingDragged:Z // field@69e0
+6f3d68: 3d02 0400                              |0044: if-lez v2, 0048 // +0004
+6f3d6c: b142                                   |0046: sub-int/2addr v2, v4
+6f3d6e: 2802                                   |0047: goto 0049 // +0002
+6f3d70: b042                                   |0048: add-int/2addr v2, v4
+6f3d72: 0126                                   |0049: move v6, v2
+6f3d74: 55b2 e069                              |004a: iget-boolean v2, v11, Lcom/google/android/material/appbar/HeaderBehavior;.isBeingDragged:Z // field@69e0
+6f3d78: 3802 6200                              |004c: if-eqz v2, 00ae // +0062
+6f3d7c: 59b0 e169                              |004e: iput v0, v11, Lcom/google/android/material/appbar/HeaderBehavior;.lastMotionY:I // field@69e1
+6f3d80: 6e20 89b0 db00                         |0050: invoke-virtual {v11, v13}, Lcom/google/android/material/appbar/HeaderBehavior;.getMaxDragOffset:(Landroid/view/View;)I // method@b089
+6f3d86: 0a07                                   |0053: move-result v7
+6f3d88: 1208                                   |0054: const/4 v8, #int 0 // #0
+6f3d8a: 07b3                                   |0055: move-object v3, v11
+6f3d8c: 07c4                                   |0056: move-object v4, v12
+6f3d8e: 07d5                                   |0057: move-object v5, v13
+6f3d90: 7406 94b0 0300                         |0058: invoke-virtual/range {v3, v4, v5, v6, v7, v8}, Lcom/google/android/material/appbar/HeaderBehavior;.scroll:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;III)I // method@b094
+6f3d96: 2853                                   |005b: goto 00ae // +0053
+6f3d98: 54b0 e469                              |005c: iget-object v0, v11, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3d9c: 3800 2000                              |005e: if-eqz v0, 007e // +0020
+6f3da0: 6e20 3a09 e000                         |0060: invoke-virtual {v0, v14}, Landroid/view/VelocityTracker;.addMovement:(Landroid/view/MotionEvent;)V // method@093a
+6f3da6: 54b0 e469                              |0063: iget-object v0, v11, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3daa: 1304 e803                              |0065: const/16 v4, #int 1000 // #3e8
+6f3dae: 6e20 3c09 4000                         |0067: invoke-virtual {v0, v4}, Landroid/view/VelocityTracker;.computeCurrentVelocity:(I)V // method@093c
+6f3db4: 54b0 e469                              |006a: iget-object v0, v11, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3db8: 52b4 de69                              |006c: iget v4, v11, Lcom/google/android/material/appbar/HeaderBehavior;.activePointerId:I // field@69de
+6f3dbc: 6e20 4109 4000                         |006e: invoke-virtual {v0, v4}, Landroid/view/VelocityTracker;.getYVelocity:(I)F // method@0941
+6f3dc2: 0a0a                                   |0071: move-result v10
+6f3dc4: 6e20 8ab0 db00                         |0072: invoke-virtual {v11, v13}, Lcom/google/android/material/appbar/HeaderBehavior;.getScrollRangeForDragFling:(Landroid/view/View;)I // method@b08a
+6f3dca: 0a00                                   |0075: move-result v0
+6f3dcc: 7b08                                   |0076: neg-int v8, v0
+6f3dce: 1209                                   |0077: const/4 v9, #int 0 // #0
+6f3dd0: 07b5                                   |0078: move-object v5, v11
+6f3dd2: 07c6                                   |0079: move-object v6, v12
+6f3dd4: 07d7                                   |007a: move-object v7, v13
+6f3dd6: 7406 88b0 0500                         |007b: invoke-virtual/range {v5, v6, v7, v8, v9, v10}, Lcom/google/android/material/appbar/HeaderBehavior;.fling:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;IIF)Z // method@b088
+6f3ddc: 5cb2 e069                              |007e: iput-boolean v2, v11, Lcom/google/android/material/appbar/HeaderBehavior;.isBeingDragged:Z // field@69e0
+6f3de0: 59b3 de69                              |0080: iput v3, v11, Lcom/google/android/material/appbar/HeaderBehavior;.activePointerId:I // field@69de
+6f3de4: 54bc e469                              |0082: iget-object v12, v11, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3de8: 380c 2a00                              |0084: if-eqz v12, 00ae // +002a
+6f3dec: 6e10 4309 0c00                         |0086: invoke-virtual {v12}, Landroid/view/VelocityTracker;.recycle:()V // method@0943
+6f3df2: 120c                                   |0089: const/4 v12, #int 0 // #0
+6f3df4: 5bbc e469                              |008a: iput-object v12, v11, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3df8: 2822                                   |008c: goto 00ae // +0022
+6f3dfa: 6e10 1b09 0e00                         |008d: invoke-virtual {v14}, Landroid/view/MotionEvent;.getX:()F // method@091b
+6f3e00: 0a00                                   |0090: move-result v0
+6f3e02: 8700                                   |0091: float-to-int v0, v0
+6f3e04: 6e10 1d09 0e00                         |0092: invoke-virtual {v14}, Landroid/view/MotionEvent;.getY:()F // method@091d
+6f3e0a: 0a03                                   |0095: move-result v3
+6f3e0c: 8733                                   |0096: float-to-int v3, v3
+6f3e0e: 6e40 9230 dc30                         |0097: invoke-virtual {v12, v13, v0, v3}, Landroidx/coordinatorlayout/widget/CoordinatorLayout;.isPointInChildBounds:(Landroid/view/View;II)Z // method@3092
+6f3e14: 0a0c                                   |009a: move-result v12
+6f3e16: 380c 1b00                              |009b: if-eqz v12, 00b6 // +001b
+6f3e1a: 6e20 86b0 db00                         |009d: invoke-virtual {v11, v13}, Lcom/google/android/material/appbar/HeaderBehavior;.canDragView:(Landroid/view/View;)Z // method@b086
+6f3e20: 0a0c                                   |00a0: move-result v12
+6f3e22: 380c 1500                              |00a1: if-eqz v12, 00b6 // +0015
+6f3e26: 59b3 e169                              |00a3: iput v3, v11, Lcom/google/android/material/appbar/HeaderBehavior;.lastMotionY:I // field@69e1
+6f3e2a: 6e20 1709 2e00                         |00a5: invoke-virtual {v14, v2}, Landroid/view/MotionEvent;.getPointerId:(I)I // method@0917
+6f3e30: 0a0c                                   |00a8: move-result v12
+6f3e32: 59bc de69                              |00a9: iput v12, v11, Lcom/google/android/material/appbar/HeaderBehavior;.activePointerId:I // field@69de
+6f3e36: 7010 87b0 0b00                         |00ab: invoke-direct {v11}, Lcom/google/android/material/appbar/HeaderBehavior;.ensureVelocityTracker:()V // method@b087
+6f3e3c: 54bb e469                              |00ae: iget-object v11, v11, Lcom/google/android/material/appbar/HeaderBehavior;.velocityTracker:Landroid/view/VelocityTracker; // field@69e4
+6f3e40: 380b 0500                              |00b0: if-eqz v11, 00b5 // +0005
+6f3e44: 6e20 3a09 eb00                         |00b2: invoke-virtual {v11, v14}, Landroid/view/VelocityTracker;.addMovement:(Landroid/view/MotionEvent;)V // method@093a
+6f3e4a: 0f01                                   |00b5: return v1
+6f3e4c: 0f02                                   |00b6: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=124
+        0x0004 line=125
+        0x0012 line=128
+        0x0025 line=146
+        0x002e line=151
+        0x0033 line=152
+        0x0036 line=154
+        0x0042 line=155
+        0x004a line=163
+        0x004e line=164
+        0x0050 line=166
+        0x005c line=172
+        0x0060 line=173
+        0x0063 line=174
+        0x006a line=175
+        0x0072 line=176
+        0x007e line=181
+        0x0080 line=182
+        0x0082 line=183
+        0x0086 line=184
+        0x008a line=185
+        0x008d line=131
+        0x0092 line=132
+        0x0097 line=134
+        0x00a3 line=135
+        0x00a5 line=136
+        0x00ab line=137
+        0x00ae line=191
+        0x00b2 line=192
+      locals        :
+        0x0000 - 0x00b7 reg=11 this Lcom/google/android/material/appbar/HeaderBehavior;
+        0x0000 - 0x00b7 reg=12 (null) Landroidx/coordinatorlayout/widget/CoordinatorLayout;
+        0x0000 - 0x00b7 reg=13 (null) Landroid/view/View;
+        0x0000 - 0x00b7 reg=14 (null) Landroid/view/MotionEvent;
+
+    #8              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'scroll'
+      type          : '(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;III)I'
+      access        : 0x0010 (FINAL)
+      code          -
+      registers     : 13
+      ins           : 6
+      outs          : 6
+      insns size    : 16 16-bit code units
+6f3e50:                                        |[6f3e50] com.google.android.material.appbar.HeaderBehavior.scroll:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;III)I
+6f3e60: 6e10 8cb0 0700                         |0000: invoke-virtual {v7}, Lcom/google/android/material/appbar/HeaderBehavior;.getTopBottomOffsetForScrollingSibling:()I // method@b08c
+6f3e66: 0a00                                   |0003: move-result v0
+6f3e68: 9104 000a                              |0004: sub-int v4, v0, v10
+6f3e6c: 0771                                   |0006: move-object v1, v7
+6f3e6e: 0782                                   |0007: move-object v2, v8
+6f3e70: 0793                                   |0008: move-object v3, v9
+6f3e72: 01b5                                   |0009: move v5, v11
+6f3e74: 01c6                                   |000a: move v6, v12
+6f3e76: 7406 96b0 0100                         |000b: invoke-virtual/range {v1, v2, v3, v4, v5, v6}, Lcom/google/android/material/appbar/HeaderBehavior;.setHeaderTopBottomOffset:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;III)I // method@b096
+6f3e7c: 0a07                                   |000e: move-result v7
+6f3e7e: 0f07                                   |000f: return v7
+      catches       : (none)
+      positions     :
+        0x0000 line=232
+        0x000b line=229
+      locals        :
+        0x0000 - 0x0010 reg=7 this Lcom/google/android/material/appbar/HeaderBehavior;
+        0x0000 - 0x0010 reg=8 (null) Landroidx/coordinatorlayout/widget/CoordinatorLayout;
+        0x0000 - 0x0010 reg=9 (null) Landroid/view/View;
+        0x0000 - 0x0010 reg=10 (null) I
+        0x0000 - 0x0010 reg=11 (null) I
+        0x0000 - 0x0010 reg=12 (null) I
+
+    #9              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'setHeaderTopBottomOffset'
+      type          : '(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;I)I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 6
+      insns size    : 14 16-bit code units
+6f3e80:                                        |[6f3e80] com.google.android.material.appbar.HeaderBehavior.setHeaderTopBottomOffset:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;I)I
+6f3e90: 1504 0080                              |0000: const/high16 v4, #int -2147483648 // #8000
+6f3e94: 1405 ffff ff7f                         |0002: const v5, #float nan // #7fffffff
+6f3e9a: 0760                                   |0005: move-object v0, v6
+6f3e9c: 0771                                   |0006: move-object v1, v7
+6f3e9e: 0782                                   |0007: move-object v2, v8
+6f3ea0: 0193                                   |0008: move v3, v9
+6f3ea2: 7406 96b0 0000                         |0009: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lcom/google/android/material/appbar/HeaderBehavior;.setHeaderTopBottomOffset:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;III)I // method@b096
+6f3ea8: 0a06                                   |000c: move-result v6
+6f3eaa: 0f06                                   |000d: return v6
+      catches       : (none)
+      positions     :
+        0x0009 line=199
+      locals        :
+        0x0000 - 0x000e reg=6 this Lcom/google/android/material/appbar/HeaderBehavior;
+        0x0000 - 0x000e reg=7 (null) Landroidx/coordinatorlayout/widget/CoordinatorLayout;
+        0x0000 - 0x000e reg=8 (null) Landroid/view/View;
+        0x0000 - 0x000e reg=9 (null) I
+
+    #10              : (in Lcom/google/android/material/appbar/HeaderBehavior;)
+      name          : 'setHeaderTopBottomOffset'
+      type          : '(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;III)I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 6
+      ins           : 6
+      outs          : 3
+      insns size    : 23 16-bit code units
+6f3eac:                                        |[6f3eac] com.google.android.material.appbar.HeaderBehavior.setHeaderTopBottomOffset:(Landroidx/coordinatorlayout/widget/CoordinatorLayout;Landroid/view/View;III)I
+6f3ebc: 6e10 8bb0 0000                         |0000: invoke-virtual {v0}, Lcom/google/android/material/appbar/HeaderBehavior;.getTopAndBottomOffset:()I // method@b08b
+6f3ec2: 0a01                                   |0003: move-result v1
+6f3ec4: 3804 1100                              |0004: if-eqz v4, 0015 // +0011
+6f3ec8: 3441 0f00                              |0006: if-lt v1, v4, 0015 // +000f
+6f3ecc: 3651 0d00                              |0008: if-gt v1, v5, 0015 // +000d
+6f3ed0: 7130 f136 4305                         |000a: invoke-static {v3, v4, v5}, Landroidx/core/math/MathUtils;.clamp:(III)I // method@36f1
+6f3ed6: 0a02                                   |000d: move-result v2
+6f3ed8: 3221 0700                              |000e: if-eq v1, v2, 0015 // +0007
+6f3edc: 6e20 97b0 2000                         |0010: invoke-virtual {v0, v2}, Lcom/google/android/material/appbar/HeaderBehavior;.setTopAndBottomOffset:(I)Z // method@b097
+6f3ee2: b121                                   |0013: sub-int/2addr v1, v2
+6f3ee4: 2802                                   |0014: goto 0016 // +0002
+6f3ee6: 1201                                   |0015: const/4 v1, #int 0 // #0
+6f3ee8: 0f01                                   |0016: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=205
+        0x000a line=211
+        0x0010 line=214
+      locals        :
+        0x0000 - 0x0017 reg=0 this Lcom/google/android/material/appbar/HeaderBehavior;
+        0x0000 - 0x0017 reg=1 (null) Landroidx/coordinatorlayout/widget/CoordinatorLayout;
+        0x0000 - 0x0017 reg=2 (null) Landroid/view/View;
+        0x0000 - 0x0017 reg=3 (null) I
+        0x0000 - 0x0017 reg=4 (null) I
+        0x0000 - 0x0017 reg=5 (null) I
+
+  source_file_idx   : 10877 (HeaderBehavior.java)
+

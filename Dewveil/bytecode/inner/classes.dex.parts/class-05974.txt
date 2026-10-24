@@ -1,0 +1,1948 @@
+Class #5974            -
+  Class descriptor  : 'Lcom/squareup/okhttp/internal/http/HttpEngine;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'EMPTY_BODY'
+      type          : 'Lcom/squareup/okhttp/ResponseBody;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : null
+    #1              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'MAX_FOLLOW_UPS'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 20
+  Instance fields   -
+    #0              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'bufferRequestBody'
+      type          : 'Z'
+      access        : 0x0011 (PUBLIC FINAL)
+    #1              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'bufferedRequestBody'
+      type          : 'Lokio/BufferedSink;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'cacheResponse'
+      type          : 'Lcom/squareup/okhttp/Response;'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'cacheStrategy'
+      type          : 'Lcom/squareup/okhttp/internal/http/CacheStrategy;'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'callerWritesRequestBody'
+      type          : 'Z'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'client'
+      type          : 'Lcom/squareup/okhttp/OkHttpClient;'
+      access        : 0x0010 (FINAL)
+    #6              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'forWebSocket'
+      type          : 'Z'
+      access        : 0x0012 (PRIVATE FINAL)
+    #7              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'httpStream'
+      type          : 'Lcom/squareup/okhttp/internal/http/HttpStream;'
+      access        : 0x0002 (PRIVATE)
+    #8              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'networkRequest'
+      type          : 'Lcom/squareup/okhttp/Request;'
+      access        : 0x0002 (PRIVATE)
+    #9              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'priorResponse'
+      type          : 'Lcom/squareup/okhttp/Response;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #10              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'requestBodyOut'
+      type          : 'Lokio/Sink;'
+      access        : 0x0002 (PRIVATE)
+    #11              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'sentRequestMillis'
+      type          : 'J'
+      access        : 0x0000 ()
+    #12              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'storeRequest'
+      type          : 'Lcom/squareup/okhttp/internal/http/CacheRequest;'
+      access        : 0x0002 (PRIVATE)
+    #13              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'streamAllocation'
+      type          : 'Lcom/squareup/okhttp/internal/http/StreamAllocation;'
+      access        : 0x0011 (PUBLIC FINAL)
+    #14              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'transparentGzip'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #15              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'userRequest'
+      type          : 'Lcom/squareup/okhttp/Request;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #16              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'userResponse'
+      type          : 'Lcom/squareup/okhttp/Response;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 8 16-bit code units
+764af8:                                        |[764af8] com.squareup.okhttp.internal.http.HttpEngine.<clinit>:()V
+764b08: 2200 ce19                              |0000: new-instance v0, Lcom/squareup/okhttp/internal/http/HttpEngine$1; // type@19ce
+764b0c: 7010 bccd 0000                         |0002: invoke-direct {v0}, Lcom/squareup/okhttp/internal/http/HttpEngine$1;.<init>:()V // method@cdbc
+764b12: 6900 4689                              |0005: sput-object v0, Lcom/squareup/okhttp/internal/http/HttpEngine;.EMPTY_BODY:Lcom/squareup/okhttp/ResponseBody; // field@8946
+764b16: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=94
+      locals        :
+
+    #1              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : '<init>'
+      type          : '(Lcom/squareup/okhttp/OkHttpClient;Lcom/squareup/okhttp/Request;ZZZLcom/squareup/okhttp/internal/http/StreamAllocation;Lcom/squareup/okhttp/internal/http/RetryableSink;Lcom/squareup/okhttp/Response;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 11
+      ins           : 9
+      outs          : 3
+      insns size    : 40 16-bit code units
+764b18:                                        |[764b18] com.squareup.okhttp.internal.http.HttpEngine.<init>:(Lcom/squareup/okhttp/OkHttpClient;Lcom/squareup/okhttp/Request;ZZZLcom/squareup/okhttp/internal/http/StreamAllocation;Lcom/squareup/okhttp/internal/http/RetryableSink;Lcom/squareup/okhttp/Response;)V
+764b28: 7010 c8d1 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@d1c8
+764b2e: 1600 ffff                              |0003: const-wide/16 v0, #int -1 // #ffff
+764b32: 5a20 5389                              |0005: iput-wide v0, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.sentRequestMillis:J // field@8953
+764b36: 5b23 4d89                              |0007: iput-object v3, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+764b3a: 5b24 5789                              |0009: iput-object v4, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+764b3e: 5c25 4889                              |000b: iput-boolean v5, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.bufferRequestBody:Z // field@8948
+764b42: 5c26 4c89                              |000d: iput-boolean v6, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.callerWritesRequestBody:Z // field@894c
+764b46: 5c27 4e89                              |000f: iput-boolean v7, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.forWebSocket:Z // field@894e
+764b4a: 3808 0300                              |0011: if-eqz v8, 0014 // +0003
+764b4e: 280e                                   |0013: goto 0021 // +000e
+764b50: 2208 dd19                              |0014: new-instance v8, Lcom/squareup/okhttp/internal/http/StreamAllocation; // type@19dd
+764b54: 6e10 0dca 0300                         |0016: invoke-virtual {v3}, Lcom/squareup/okhttp/OkHttpClient;.getConnectionPool:()Lcom/squareup/okhttp/ConnectionPool; // method@ca0d
+764b5a: 0c05                                   |0019: move-result-object v5
+764b5c: 7120 d2cd 4300                         |001a: invoke-static {v3, v4}, Lcom/squareup/okhttp/internal/http/HttpEngine;.createAddress:(Lcom/squareup/okhttp/OkHttpClient;Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Address; // method@cdd2
+764b62: 0c03                                   |001d: move-result-object v3
+764b64: 7030 37ce 5803                         |001e: invoke-direct {v8, v5, v3}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.<init>:(Lcom/squareup/okhttp/ConnectionPool;Lcom/squareup/okhttp/Address;)V // method@ce37
+764b6a: 5b28 5589                              |0021: iput-object v8, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+764b6e: 5b29 5289                              |0023: iput-object v9, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+764b72: 5b2a 5189                              |0025: iput-object v10, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.priorResponse:Lcom/squareup/okhttp/Response; // field@8951
+764b76: 0e00                                   |0027: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=174
+        0x0005 line=113
+        0x0007 line=175
+        0x0009 line=176
+        0x000b line=177
+        0x000d line=178
+        0x000f line=179
+        0x0014 line=180
+        0x0016 line=182
+        0x0023 line=183
+        0x0025 line=184
+      locals        :
+        0x0000 - 0x0028 reg=2 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x0028 reg=3 (null) Lcom/squareup/okhttp/OkHttpClient;
+        0x0000 - 0x0028 reg=4 (null) Lcom/squareup/okhttp/Request;
+        0x0000 - 0x0028 reg=5 (null) Z
+        0x0000 - 0x0028 reg=6 (null) Z
+        0x0000 - 0x0028 reg=7 (null) Z
+        0x0000 - 0x0028 reg=8 (null) Lcom/squareup/okhttp/internal/http/StreamAllocation;
+        0x0000 - 0x0028 reg=9 (null) Lcom/squareup/okhttp/internal/http/RetryableSink;
+        0x0000 - 0x0028 reg=10 (null) Lcom/squareup/okhttp/Response;
+
+    #2              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'access$000'
+      type          : '(Lcom/squareup/okhttp/internal/http/HttpEngine;)Lcom/squareup/okhttp/internal/http/HttpStream;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+764b78:                                        |[764b78] com.squareup.okhttp.internal.http.HttpEngine.access$000:(Lcom/squareup/okhttp/internal/http/HttpEngine;)Lcom/squareup/okhttp/internal/http/HttpStream;
+764b88: 5400 4f89                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+764b8c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=87
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #3              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'access$102'
+      type          : '(Lcom/squareup/okhttp/internal/http/HttpEngine;Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Request;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+764b90:                                        |[764b90] com.squareup.okhttp.internal.http.HttpEngine.access$102:(Lcom/squareup/okhttp/internal/http/HttpEngine;Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Request;
+764ba0: 5b01 5089                              |0000: iput-object v1, v0, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+764ba4: 1101                                   |0002: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=87
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x0003 reg=1 (null) Lcom/squareup/okhttp/Request;
+
+    #4              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'access$200'
+      type          : '(Lcom/squareup/okhttp/internal/http/HttpEngine;)Lcom/squareup/okhttp/Response;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+764ba8:                                        |[764ba8] com.squareup.okhttp.internal.http.HttpEngine.access$200:(Lcom/squareup/okhttp/internal/http/HttpEngine;)Lcom/squareup/okhttp/Response;
+764bb8: 7010 decd 0000                         |0000: invoke-direct {v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.readNetworkResponse:()Lcom/squareup/okhttp/Response; // method@cdde
+764bbe: 0c00                                   |0003: move-result-object v0
+764bc0: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=87
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #5              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'cacheWritingResponse'
+      type          : '(Lcom/squareup/okhttp/internal/http/CacheRequest;Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 5
+      insns size    : 53 16-bit code units
+764bc4:                                        |[764bc4] com.squareup.okhttp.internal.http.HttpEngine.cacheWritingResponse:(Lcom/squareup/okhttp/internal/http/CacheRequest;Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response;
+764bd4: 3904 0300                              |0000: if-nez v4, 0003 // +0003
+764bd8: 1105                                   |0002: return-object v5
+764bda: 7210 57cd 0400                         |0003: invoke-interface {v4}, Lcom/squareup/okhttp/internal/http/CacheRequest;.body:()Lokio/Sink; // method@cd57
+764be0: 0c00                                   |0006: move-result-object v0
+764be2: 3900 0300                              |0007: if-nez v0, 000a // +0003
+764be6: 1105                                   |0009: return-object v5
+764be8: 6e10 abca 0500                         |000a: invoke-virtual {v5}, Lcom/squareup/okhttp/Response;.body:()Lcom/squareup/okhttp/ResponseBody; // method@caab
+764bee: 0c01                                   |000d: move-result-object v1
+764bf0: 6e10 cdca 0100                         |000e: invoke-virtual {v1}, Lcom/squareup/okhttp/ResponseBody;.source:()Lokio/BufferedSource; // method@cacd
+764bf6: 0c01                                   |0011: move-result-object v1
+764bf8: 7110 79fe 0000                         |0012: invoke-static {v0}, Lokio/Okio;.buffer:(Lokio/Sink;)Lokio/BufferedSink; // method@fe79
+764bfe: 0c00                                   |0015: move-result-object v0
+764c00: 2202 cf19                              |0016: new-instance v2, Lcom/squareup/okhttp/internal/http/HttpEngine$2; // type@19cf
+764c04: 7050 c0cd 3241                         |0018: invoke-direct {v2, v3, v1, v4, v0}, Lcom/squareup/okhttp/internal/http/HttpEngine$2;.<init>:(Lcom/squareup/okhttp/internal/http/HttpEngine;Lokio/BufferedSource;Lcom/squareup/okhttp/internal/http/CacheRequest;Lokio/BufferedSink;)V // method@cdc0
+764c0a: 6e10 b9ca 0500                         |001b: invoke-virtual {v5}, Lcom/squareup/okhttp/Response;.newBuilder:()Lcom/squareup/okhttp/Response$Builder; // method@cab9
+764c10: 0c03                                   |001e: move-result-object v3
+764c12: 2204 d619                              |001f: new-instance v4, Lcom/squareup/okhttp/internal/http/RealResponseBody; // type@19d6
+764c16: 6e10 b3ca 0500                         |0021: invoke-virtual {v5}, Lcom/squareup/okhttp/Response;.headers:()Lcom/squareup/okhttp/Headers; // method@cab3
+764c1c: 0c05                                   |0024: move-result-object v5
+764c1e: 7110 7afe 0200                         |0025: invoke-static {v2}, Lokio/Okio;.buffer:(Lokio/Source;)Lokio/BufferedSource; // method@fe7a
+764c24: 0c00                                   |0028: move-result-object v0
+764c26: 7030 0ece 5400                         |0029: invoke-direct {v4, v5, v0}, Lcom/squareup/okhttp/internal/http/RealResponseBody;.<init>:(Lcom/squareup/okhttp/Headers;Lokio/BufferedSource;)V // method@ce0e
+764c2c: 6e20 90ca 4300                         |002c: invoke-virtual {v3, v4}, Lcom/squareup/okhttp/Response$Builder;.body:(Lcom/squareup/okhttp/ResponseBody;)Lcom/squareup/okhttp/Response$Builder; // method@ca90
+764c32: 0c03                                   |002f: move-result-object v3
+764c34: 6e10 91ca 0300                         |0030: invoke-virtual {v3}, Lcom/squareup/okhttp/Response$Builder;.build:()Lcom/squareup/okhttp/Response; // method@ca91
+764c3a: 0c03                                   |0033: move-result-object v3
+764c3c: 1103                                   |0034: return-object v3
+      catches       : (none)
+      positions     :
+        0x0003 line=767
+        0x000a line=770
+        0x0012 line=771
+        0x0016 line=773
+        0x001b line=815
+        0x0021 line=816
+        0x0030 line=817
+      locals        :
+        0x0000 - 0x0035 reg=3 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x0035 reg=4 (null) Lcom/squareup/okhttp/internal/http/CacheRequest;
+        0x0000 - 0x0035 reg=5 (null) Lcom/squareup/okhttp/Response;
+
+    #6              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'combine'
+      type          : '(Lcom/squareup/okhttp/Headers;Lcom/squareup/okhttp/Headers;)Lcom/squareup/okhttp/Headers;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 3
+      insns size    : 96 16-bit code units
+764c40:                                        |[764c40] com.squareup.okhttp.internal.http.HttpEngine.combine:(Lcom/squareup/okhttp/Headers;Lcom/squareup/okhttp/Headers;)Lcom/squareup/okhttp/Headers;
+764c50: 2200 5919                              |0000: new-instance v0, Lcom/squareup/okhttp/Headers$Builder; // type@1959
+764c54: 7010 50c9 0000                         |0002: invoke-direct {v0}, Lcom/squareup/okhttp/Headers$Builder;.<init>:()V // method@c950
+764c5a: 6e10 66c9 0700                         |0005: invoke-virtual {v7}, Lcom/squareup/okhttp/Headers;.size:()I // method@c966
+764c60: 0a01                                   |0008: move-result v1
+764c62: 1202                                   |0009: const/4 v2, #int 0 // #0
+764c64: 0123                                   |000a: move v3, v2
+764c66: 3513 2d00                              |000b: if-ge v3, v1, 0038 // +002d
+764c6a: 6e20 61c9 3700                         |000d: invoke-virtual {v7, v3}, Lcom/squareup/okhttp/Headers;.name:(I)Ljava/lang/String; // method@c961
+764c70: 0c04                                   |0010: move-result-object v4
+764c72: 6e20 69c9 3700                         |0011: invoke-virtual {v7, v3}, Lcom/squareup/okhttp/Headers;.value:(I)Ljava/lang/String; // method@c969
+764c78: 0c05                                   |0014: move-result-object v5
+764c7a: 1a06 346f                              |0015: const-string v6, "Warning" // string@6f34
+764c7e: 6e20 04d2 4600                         |0017: invoke-virtual {v6, v4}, Ljava/lang/String;.equalsIgnoreCase:(Ljava/lang/String;)Z // method@d204
+764c84: 0a06                                   |001a: move-result v6
+764c86: 3806 0b00                              |001b: if-eqz v6, 0026 // +000b
+764c8a: 1a06 3710                              |001d: const-string v6, "1" // string@1037
+764c8e: 6e20 20d2 6500                         |001f: invoke-virtual {v5, v6}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@d220
+764c94: 0a06                                   |0022: move-result v6
+764c96: 3806 0300                              |0023: if-eqz v6, 0026 // +0003
+764c9a: 2810                                   |0025: goto 0035 // +0010
+764c9c: 7110 04ce 0400                         |0026: invoke-static {v4}, Lcom/squareup/okhttp/internal/http/OkHeaders;.isEndToEnd:(Ljava/lang/String;)Z // method@ce04
+764ca2: 0a06                                   |0029: move-result v6
+764ca4: 3806 0800                              |002a: if-eqz v6, 0032 // +0008
+764ca8: 6e20 5ec9 4800                         |002c: invoke-virtual {v8, v4}, Lcom/squareup/okhttp/Headers;.get:(Ljava/lang/String;)Ljava/lang/String; // method@c95e
+764cae: 0c06                                   |002f: move-result-object v6
+764cb0: 3906 0500                              |0030: if-nez v6, 0035 // +0005
+764cb4: 6e30 53c9 4005                         |0032: invoke-virtual {v0, v4, v5}, Lcom/squareup/okhttp/Headers$Builder;.add:(Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/okhttp/Headers$Builder; // method@c953
+764cba: d803 0301                              |0035: add-int/lit8 v3, v3, #int 1 // #01
+764cbe: 28d4                                   |0037: goto 000b // -002c
+764cc0: 6e10 66c9 0800                         |0038: invoke-virtual {v8}, Lcom/squareup/okhttp/Headers;.size:()I // method@c966
+764cc6: 0a07                                   |003b: move-result v7
+764cc8: 3572 1f00                              |003c: if-ge v2, v7, 005b // +001f
+764ccc: 6e20 61c9 2800                         |003e: invoke-virtual {v8, v2}, Lcom/squareup/okhttp/Headers;.name:(I)Ljava/lang/String; // method@c961
+764cd2: 0c01                                   |0041: move-result-object v1
+764cd4: 1a03 4c1f                              |0042: const-string v3, "Content-Length" // string@1f4c
+764cd8: 6e20 04d2 1300                         |0044: invoke-virtual {v3, v1}, Ljava/lang/String;.equalsIgnoreCase:(Ljava/lang/String;)Z // method@d204
+764cde: 0a03                                   |0047: move-result v3
+764ce0: 3803 0300                              |0048: if-eqz v3, 004b // +0003
+764ce4: 280e                                   |004a: goto 0058 // +000e
+764ce6: 7110 04ce 0100                         |004b: invoke-static {v1}, Lcom/squareup/okhttp/internal/http/OkHeaders;.isEndToEnd:(Ljava/lang/String;)Z // method@ce04
+764cec: 0a03                                   |004e: move-result v3
+764cee: 3803 0900                              |004f: if-eqz v3, 0058 // +0009
+764cf2: 6e20 69c9 2800                         |0051: invoke-virtual {v8, v2}, Lcom/squareup/okhttp/Headers;.value:(I)Ljava/lang/String; // method@c969
+764cf8: 0c03                                   |0054: move-result-object v3
+764cfa: 6e30 53c9 1003                         |0055: invoke-virtual {v0, v1, v3}, Lcom/squareup/okhttp/Headers$Builder;.add:(Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/okhttp/Headers$Builder; // method@c953
+764d00: d802 0201                              |0058: add-int/lit8 v2, v2, #int 1 // #01
+764d04: 28e2                                   |005a: goto 003c // -001e
+764d06: 6e10 56c9 0000                         |005b: invoke-virtual {v0}, Lcom/squareup/okhttp/Headers$Builder;.build:()Lcom/squareup/okhttp/Headers; // method@c956
+764d0c: 0c07                                   |005e: move-result-object v7
+764d0e: 1107                                   |005f: return-object v7
+      catches       : (none)
+      positions     :
+        0x0000 line=849
+        0x0005 line=851
+        0x000d line=852
+        0x0011 line=853
+        0x0015 line=854
+        0x0026 line=857
+        0x0032 line=858
+        0x0038 line=862
+        0x003e line=863
+        0x0042 line=864
+        0x004b line=867
+        0x0051 line=868
+        0x005b line=872
+      locals        :
+        0x0000 - 0x0060 reg=7 (null) Lcom/squareup/okhttp/Headers;
+        0x0000 - 0x0060 reg=8 (null) Lcom/squareup/okhttp/Headers;
+
+    #7              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'connect'
+      type          : '()Lcom/squareup/okhttp/internal/http/HttpStream;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 1
+      outs          : 6
+      insns size    : 45 16-bit code units
+764d10:                                        |[764d10] com.squareup.okhttp.internal.http.HttpEngine.connect:()Lcom/squareup/okhttp/internal/http/HttpStream;
+764d20: 5470 5089                              |0000: iget-object v0, v7, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+764d24: 6e10 66ca 0000                         |0002: invoke-virtual {v0}, Lcom/squareup/okhttp/Request;.method:()Ljava/lang/String; // method@ca66
+764d2a: 0c00                                   |0005: move-result-object v0
+764d2c: 1a01 4a29                              |0006: const-string v1, "GET" // string@294a
+764d30: 6e20 03d2 1000                         |0008: invoke-virtual {v0, v1}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+764d36: 0a00                                   |000b: move-result v0
+764d38: df06 0001                              |000c: xor-int/lit8 v6, v0, #int 1 // #01
+764d3c: 5471 5589                              |000e: iget-object v1, v7, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+764d40: 5470 4d89                              |0010: iget-object v0, v7, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+764d44: 6e10 0cca 0000                         |0012: invoke-virtual {v0}, Lcom/squareup/okhttp/OkHttpClient;.getConnectTimeout:()I // method@ca0c
+764d4a: 0a02                                   |0015: move-result v2
+764d4c: 5470 4d89                              |0016: iget-object v0, v7, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+764d50: 6e10 19ca 0000                         |0018: invoke-virtual {v0}, Lcom/squareup/okhttp/OkHttpClient;.getReadTimeout:()I // method@ca19
+764d56: 0a03                                   |001b: move-result v3
+764d58: 5470 4d89                              |001c: iget-object v0, v7, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+764d5c: 6e10 1dca 0000                         |001e: invoke-virtual {v0}, Lcom/squareup/okhttp/OkHttpClient;.getWriteTimeout:()I // method@ca1d
+764d62: 0a04                                   |0021: move-result v4
+764d64: 5477 4d89                              |0022: iget-object v7, v7, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+764d68: 6e10 1aca 0700                         |0024: invoke-virtual {v7}, Lcom/squareup/okhttp/OkHttpClient;.getRetryOnConnectionFailure:()Z // method@ca1a
+764d6e: 0a05                                   |0027: move-result v5
+764d70: 7406 42ce 0100                         |0028: invoke-virtual/range {v1, v2, v3, v4, v5, v6}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.newStream:(IIIZZ)Lcom/squareup/okhttp/internal/http/HttpStream; // method@ce42
+764d76: 0c07                                   |002b: move-result-object v7
+764d78: 1107                                   |002c: return-object v7
+      catches       : (none)
+      positions     :
+        0x0000 line=280
+        0x000e line=281
+        0x0018 line=282
+        0x0024 line=283
+        0x0028 line=281
+      locals        :
+        0x0000 - 0x002d reg=7 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #8              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'createAddress'
+      type          : '(Lcom/squareup/okhttp/OkHttpClient;Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Address;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 16
+      ins           : 2
+      outs          : 13
+      insns size    : 77 16-bit code units
+764d7c:                                        |[764d7c] com.squareup.okhttp.internal.http.HttpEngine.createAddress:(Lcom/squareup/okhttp/OkHttpClient;Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Address;
+764d8c: 6e10 65ca 0f00                         |0000: invoke-virtual {v15}, Lcom/squareup/okhttp/Request;.isHttps:()Z // method@ca65
+764d92: 0a00                                   |0003: move-result v0
+764d94: 3800 1200                              |0004: if-eqz v0, 0016 // +0012
+764d98: 6e10 1cca 0e00                         |0006: invoke-virtual {v14}, Lcom/squareup/okhttp/OkHttpClient;.getSslSocketFactory:()Ljavax/net/ssl/SSLSocketFactory; // method@ca1c
+764d9e: 0c00                                   |0009: move-result-object v0
+764da0: 6e10 15ca 0e00                         |000a: invoke-virtual {v14}, Lcom/squareup/okhttp/OkHttpClient;.getHostnameVerifier:()Ljavax/net/ssl/HostnameVerifier; // method@ca15
+764da6: 0c01                                   |000d: move-result-object v1
+764da8: 6e10 0bca 0e00                         |000e: invoke-virtual {v14}, Lcom/squareup/okhttp/OkHttpClient;.getCertificatePinner:()Lcom/squareup/okhttp/CertificatePinner; // method@ca0b
+764dae: 0c02                                   |0011: move-result-object v2
+764db0: 0706                                   |0012: move-object v6, v0
+764db2: 0717                                   |0013: move-object v7, v1
+764db4: 0728                                   |0014: move-object v8, v2
+764db6: 2805                                   |0015: goto 001a // +0005
+764db8: 1200                                   |0016: const/4 v0, #int 0 // #0
+764dba: 0706                                   |0017: move-object v6, v0
+764dbc: 0767                                   |0018: move-object v7, v6
+764dbe: 0778                                   |0019: move-object v8, v7
+764dc0: 2200 3519                              |001a: new-instance v0, Lcom/squareup/okhttp/Address; // type@1935
+764dc4: 6e10 64ca 0f00                         |001c: invoke-virtual {v15}, Lcom/squareup/okhttp/Request;.httpUrl:()Lcom/squareup/okhttp/HttpUrl; // method@ca64
+764dca: 0c01                                   |001f: move-result-object v1
+764dcc: 6e10 b9c9 0100                         |0020: invoke-virtual {v1}, Lcom/squareup/okhttp/HttpUrl;.host:()Ljava/lang/String; // method@c9b9
+764dd2: 0c02                                   |0023: move-result-object v2
+764dd4: 6e10 64ca 0f00                         |0024: invoke-virtual {v15}, Lcom/squareup/okhttp/Request;.httpUrl:()Lcom/squareup/okhttp/HttpUrl; // method@ca64
+764dda: 0c0f                                   |0027: move-result-object v15
+764ddc: 6e10 c6c9 0f00                         |0028: invoke-virtual {v15}, Lcom/squareup/okhttp/HttpUrl;.port:()I // method@c9c6
+764de2: 0a03                                   |002b: move-result v3
+764de4: 6e10 12ca 0e00                         |002c: invoke-virtual {v14}, Lcom/squareup/okhttp/OkHttpClient;.getDns:()Lcom/squareup/okhttp/Dns; // method@ca12
+764dea: 0c04                                   |002f: move-result-object v4
+764dec: 6e10 1bca 0e00                         |0030: invoke-virtual {v14}, Lcom/squareup/okhttp/OkHttpClient;.getSocketFactory:()Ljavax/net/SocketFactory; // method@ca1b
+764df2: 0c05                                   |0033: move-result-object v5
+764df4: 6e10 09ca 0e00                         |0034: invoke-virtual {v14}, Lcom/squareup/okhttp/OkHttpClient;.getAuthenticator:()Lcom/squareup/okhttp/Authenticator; // method@ca09
+764dfa: 0c09                                   |0037: move-result-object v9
+764dfc: 6e10 17ca 0e00                         |0038: invoke-virtual {v14}, Lcom/squareup/okhttp/OkHttpClient;.getProxy:()Ljava/net/Proxy; // method@ca17
+764e02: 0c0a                                   |003b: move-result-object v10
+764e04: 6e10 16ca 0e00                         |003c: invoke-virtual {v14}, Lcom/squareup/okhttp/OkHttpClient;.getProtocols:()Ljava/util/List; // method@ca16
+764e0a: 0c0b                                   |003f: move-result-object v11
+764e0c: 6e10 0eca 0e00                         |0040: invoke-virtual {v14}, Lcom/squareup/okhttp/OkHttpClient;.getConnectionSpecs:()Ljava/util/List; // method@ca0e
+764e12: 0c0c                                   |0043: move-result-object v12
+764e14: 6e10 18ca 0e00                         |0044: invoke-virtual {v14}, Lcom/squareup/okhttp/OkHttpClient;.getProxySelector:()Ljava/net/ProxySelector; // method@ca18
+764e1a: 0c0d                                   |0047: move-result-object v13
+764e1c: 0701                                   |0048: move-object v1, v0
+764e1e: 760d 50c8 0100                         |0049: invoke-direct/range {v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13}, Lcom/squareup/okhttp/Address;.<init>:(Ljava/lang/String;ILcom/squareup/okhttp/Dns;Ljavax/net/SocketFactory;Ljavax/net/ssl/SSLSocketFactory;Ljavax/net/ssl/HostnameVerifier;Lcom/squareup/okhttp/CertificatePinner;Lcom/squareup/okhttp/Authenticator;Ljava/net/Proxy;Ljava/util/List;Ljava/util/List;Ljava/net/ProxySelector;)V // method@c850
+764e24: 1100                                   |004c: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=976
+        0x0006 line=977
+        0x000a line=978
+        0x000e line=979
+        0x001a line=982
+        0x0030 line=983
+        0x0034 line=984
+        0x0040 line=985
+      locals        :
+        0x0000 - 0x004d reg=14 (null) Lcom/squareup/okhttp/OkHttpClient;
+        0x0000 - 0x004d reg=15 (null) Lcom/squareup/okhttp/Request;
+
+    #9              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'hasBody'
+      type          : '(Lcom/squareup/okhttp/Response;)Z'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 9
+      ins           : 1
+      outs          : 2
+      insns size    : 67 16-bit code units
+764e28:                                        |[764e28] com.squareup.okhttp.internal.http.HttpEngine.hasBody:(Lcom/squareup/okhttp/Response;)Z
+764e38: 6e10 bcca 0800                         |0000: invoke-virtual {v8}, Lcom/squareup/okhttp/Response;.request:()Lcom/squareup/okhttp/Request; // method@cabc
+764e3e: 0c00                                   |0003: move-result-object v0
+764e40: 6e10 66ca 0000                         |0004: invoke-virtual {v0}, Lcom/squareup/okhttp/Request;.method:()Ljava/lang/String; // method@ca66
+764e46: 0c00                                   |0007: move-result-object v0
+764e48: 1a01 0a2a                              |0008: const-string v1, "HEAD" // string@2a0a
+764e4c: 6e20 03d2 1000                         |000a: invoke-virtual {v0, v1}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+764e52: 0a00                                   |000d: move-result v0
+764e54: 1201                                   |000e: const/4 v1, #int 0 // #0
+764e56: 3800 0300                              |000f: if-eqz v0, 0012 // +0003
+764e5a: 0f01                                   |0011: return v1
+764e5c: 6e10 afca 0800                         |0012: invoke-virtual {v8}, Lcom/squareup/okhttp/Response;.code:()I // method@caaf
+764e62: 0a00                                   |0015: move-result v0
+764e64: 1302 6400                              |0016: const/16 v2, #int 100 // #64
+764e68: 1213                                   |0018: const/4 v3, #int 1 // #1
+764e6a: 3420 0600                              |0019: if-lt v0, v2, 001f // +0006
+764e6e: 1302 c800                              |001b: const/16 v2, #int 200 // #c8
+764e72: 3420 0b00                              |001d: if-lt v0, v2, 0028 // +000b
+764e76: 1302 cc00                              |001f: const/16 v2, #int 204 // #cc
+764e7a: 3220 0700                              |0021: if-eq v0, v2, 0028 // +0007
+764e7e: 1302 3001                              |0023: const/16 v2, #int 304 // #130
+764e82: 3220 0300                              |0025: if-eq v0, v2, 0028 // +0003
+764e86: 0f03                                   |0027: return v3
+764e88: 7110 01ce 0800                         |0028: invoke-static {v8}, Lcom/squareup/okhttp/internal/http/OkHeaders;.contentLength:(Lcom/squareup/okhttp/Response;)J // method@ce01
+764e8e: 0b04                                   |002b: move-result-wide v4
+764e90: 1606 ffff                              |002c: const-wide/16 v6, #int -1 // #ffff
+764e94: 3100 0406                              |002e: cmp-long v0, v4, v6
+764e98: 3900 1200                              |0030: if-nez v0, 0042 // +0012
+764e9c: 1a00 1069                              |0032: const-string v0, "Transfer-Encoding" // string@6910
+764ea0: 6e20 b1ca 0800                         |0034: invoke-virtual {v8, v0}, Lcom/squareup/okhttp/Response;.header:(Ljava/lang/String;)Ljava/lang/String; // method@cab1
+764ea6: 0c08                                   |0037: move-result-object v8
+764ea8: 1a00 2c86                              |0038: const-string v0, "chunked" // string@862c
+764eac: 6e20 04d2 8000                         |003a: invoke-virtual {v0, v8}, Ljava/lang/String;.equalsIgnoreCase:(Ljava/lang/String;)Z // method@d204
+764eb2: 0a08                                   |003d: move-result v8
+764eb4: 3808 0300                              |003e: if-eqz v8, 0041 // +0003
+764eb8: 2802                                   |0040: goto 0042 // +0002
+764eba: 0f01                                   |0041: return v1
+764ebc: 0f03                                   |0042: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=490
+        0x0012 line=494
+        0x0028 line=504
+        0x0034 line=505
+      locals        :
+        0x0000 - 0x0043 reg=8 (null) Lcom/squareup/okhttp/Response;
+
+    #10              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'maybeCache'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 52 16-bit code units
+764ec0:                                        |[764ec0] com.squareup.okhttp.internal.http.HttpEngine.maybeCache:()V
+764ed0: 6200 e387                              |0000: sget-object v0, Lcom/squareup/okhttp/internal/Internal;.instance:Lcom/squareup/okhttp/internal/Internal; // field@87e3
+764ed4: 5431 4d89                              |0002: iget-object v1, v3, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+764ed8: 6e20 50cb 1000                         |0004: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/internal/Internal;.internalCache:(Lcom/squareup/okhttp/OkHttpClient;)Lcom/squareup/okhttp/internal/InternalCache; // method@cb50
+764ede: 0c00                                   |0007: move-result-object v0
+764ee0: 3900 0300                              |0008: if-nez v0, 000b // +0003
+764ee4: 0e00                                   |000a: return-void
+764ee6: 5431 5889                              |000b: iget-object v1, v3, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+764eea: 5432 5089                              |000d: iget-object v2, v3, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+764eee: 7120 61cd 2100                         |000f: invoke-static {v1, v2}, Lcom/squareup/okhttp/internal/http/CacheStrategy;.isCacheable:(Lcom/squareup/okhttp/Response;Lcom/squareup/okhttp/Request;)Z // method@cd61
+764ef4: 0a01                                   |0012: move-result v1
+764ef6: 3901 1400                              |0013: if-nez v1, 0027 // +0014
+764efa: 5431 5089                              |0015: iget-object v1, v3, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+764efe: 6e10 66ca 0100                         |0017: invoke-virtual {v1}, Lcom/squareup/okhttp/Request;.method:()Ljava/lang/String; // method@ca66
+764f04: 0c01                                   |001a: move-result-object v1
+764f06: 7110 eccd 0100                         |001b: invoke-static {v1}, Lcom/squareup/okhttp/internal/http/HttpMethod;.invalidatesCache:(Ljava/lang/String;)Z // method@cdec
+764f0c: 0a01                                   |001e: move-result v1
+764f0e: 3801 0700                              |001f: if-eqz v1, 0026 // +0007
+764f12: 5433 5089                              |0021: iget-object v3, v3, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+764f16: 7220 56cb 3000                         |0023: invoke-interface {v0, v3}, Lcom/squareup/okhttp/internal/InternalCache;.remove:(Lcom/squareup/okhttp/Request;)V // method@cb56
+764f1c: 0e00                                   |0026: return-void
+764f1e: 5431 5889                              |0027: iget-object v1, v3, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+764f22: 7110 e7cd 0100                         |0029: invoke-static {v1}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+764f28: 0c01                                   |002c: move-result-object v1
+764f2a: 7220 55cb 1000                         |002d: invoke-interface {v0, v1}, Lcom/squareup/okhttp/internal/InternalCache;.put:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/internal/http/CacheRequest; // method@cb55
+764f30: 0c00                                   |0030: move-result-object v0
+764f32: 5b30 5489                              |0031: iput-object v0, v3, Lcom/squareup/okhttp/internal/http/HttpEngine;.storeRequest:Lcom/squareup/okhttp/internal/http/CacheRequest; // field@8954
+764f36: 0e00                                   |0033: return-void
+      catches       : 1
+        0x0021 - 0x0026
+          Ljava/io/IOException; -> 0x0026
+      positions     :
+        0x0000 line=388
+        0x000b line=392
+        0x0015 line=393
+        0x0021 line=395
+        0x0027 line=404
+      locals        :
+        0x0000 - 0x0034 reg=3 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #11              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'networkRequest'
+      type          : '(Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Request;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 104 16-bit code units
+764f48:                                        |[764f48] com.squareup.okhttp.internal.http.HttpEngine.networkRequest:(Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Request;
+764f58: 6e10 67ca 0400                         |0000: invoke-virtual {v4}, Lcom/squareup/okhttp/Request;.newBuilder:()Lcom/squareup/okhttp/Request$Builder; // method@ca67
+764f5e: 0c00                                   |0003: move-result-object v0
+764f60: 1a01 9e2a                              |0004: const-string v1, "Host" // string@2a9e
+764f64: 6e20 61ca 1400                         |0006: invoke-virtual {v4, v1}, Lcom/squareup/okhttp/Request;.header:(Ljava/lang/String;)Ljava/lang/String; // method@ca61
+764f6a: 0c02                                   |0009: move-result-object v2
+764f6c: 3902 0d00                              |000a: if-nez v2, 0017 // +000d
+764f70: 6e10 64ca 0400                         |000c: invoke-virtual {v4}, Lcom/squareup/okhttp/Request;.httpUrl:()Lcom/squareup/okhttp/HttpUrl; // method@ca64
+764f76: 0c02                                   |000f: move-result-object v2
+764f78: 7110 9ecb 0200                         |0010: invoke-static {v2}, Lcom/squareup/okhttp/internal/Util;.hostHeader:(Lcom/squareup/okhttp/HttpUrl;)Ljava/lang/String; // method@cb9e
+764f7e: 0c02                                   |0013: move-result-object v2
+764f80: 6e30 4dca 1002                         |0014: invoke-virtual {v0, v1, v2}, Lcom/squareup/okhttp/Request$Builder;.header:(Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/okhttp/Request$Builder; // method@ca4d
+764f86: 1a01 d11d                              |0017: const-string v1, "Connection" // string@1dd1
+764f8a: 6e20 61ca 1400                         |0019: invoke-virtual {v4, v1}, Lcom/squareup/okhttp/Request;.header:(Ljava/lang/String;)Ljava/lang/String; // method@ca61
+764f90: 0c02                                   |001c: move-result-object v2
+764f92: 3902 0700                              |001d: if-nez v2, 0024 // +0007
+764f96: 1a02 892f                              |001f: const-string v2, "Keep-Alive" // string@2f89
+764f9a: 6e30 4dca 1002                         |0021: invoke-virtual {v0, v1, v2}, Lcom/squareup/okhttp/Request$Builder;.header:(Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/okhttp/Request$Builder; // method@ca4d
+764fa0: 1a01 2714                              |0024: const-string v1, "Accept-Encoding" // string@1427
+764fa4: 6e20 61ca 1400                         |0026: invoke-virtual {v4, v1}, Lcom/squareup/okhttp/Request;.header:(Ljava/lang/String;)Ljava/lang/String; // method@ca61
+764faa: 0c02                                   |0029: move-result-object v2
+764fac: 3902 0a00                              |002a: if-nez v2, 0034 // +000a
+764fb0: 1212                                   |002c: const/4 v2, #int 1 // #1
+764fb2: 5c32 5689                              |002d: iput-boolean v2, v3, Lcom/squareup/okhttp/internal/http/HttpEngine;.transparentGzip:Z // field@8956
+764fb6: 1a02 0fa6                              |002f: const-string v2, "gzip" // string@a60f
+764fba: 6e30 4dca 1002                         |0031: invoke-virtual {v0, v1, v2}, Lcom/squareup/okhttp/Request$Builder;.header:(Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/okhttp/Request$Builder; // method@ca4d
+764fc0: 5433 4d89                              |0034: iget-object v3, v3, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+764fc4: 6e10 0fca 0300                         |0036: invoke-virtual {v3}, Lcom/squareup/okhttp/OkHttpClient;.getCookieHandler:()Ljava/net/CookieHandler; // method@ca0f
+764fca: 0c03                                   |0039: move-result-object v3
+764fcc: 3803 1a00                              |003a: if-eqz v3, 0054 // +001a
+764fd0: 6e10 47ca 0000                         |003c: invoke-virtual {v0}, Lcom/squareup/okhttp/Request$Builder;.build:()Lcom/squareup/okhttp/Request; // method@ca47
+764fd6: 0c01                                   |003f: move-result-object v1
+764fd8: 6e10 62ca 0100                         |0040: invoke-virtual {v1}, Lcom/squareup/okhttp/Request;.headers:()Lcom/squareup/okhttp/Headers; // method@ca62
+764fde: 0c01                                   |0043: move-result-object v1
+764fe0: 1202                                   |0044: const/4 v2, #int 0 // #0
+764fe2: 7120 08ce 2100                         |0045: invoke-static {v1, v2}, Lcom/squareup/okhttp/internal/http/OkHeaders;.toMultimap:(Lcom/squareup/okhttp/Headers;Ljava/lang/String;)Ljava/util/Map; // method@ce08
+764fe8: 0c01                                   |0048: move-result-object v1
+764fea: 6e10 6aca 0400                         |0049: invoke-virtual {v4}, Lcom/squareup/okhttp/Request;.uri:()Ljava/net/URI; // method@ca6a
+764ff0: 0c02                                   |004c: move-result-object v2
+764ff2: 6e30 35d3 2301                         |004d: invoke-virtual {v3, v2, v1}, Ljava/net/CookieHandler;.get:(Ljava/net/URI;Ljava/util/Map;)Ljava/util/Map; // method@d335
+764ff8: 0c03                                   |0050: move-result-object v3
+764ffa: 7120 fdcd 3000                         |0051: invoke-static {v0, v3}, Lcom/squareup/okhttp/internal/http/OkHeaders;.addCookies:(Lcom/squareup/okhttp/Request$Builder;Ljava/util/Map;)V // method@cdfd
+765000: 1a03 a16b                              |0054: const-string v3, "User-Agent" // string@6ba1
+765004: 6e20 61ca 3400                         |0056: invoke-virtual {v4, v3}, Lcom/squareup/okhttp/Request;.header:(Ljava/lang/String;)Ljava/lang/String; // method@ca61
+76500a: 0c04                                   |0059: move-result-object v4
+76500c: 3904 0900                              |005a: if-nez v4, 0063 // +0009
+765010: 7100 accb 0000                         |005c: invoke-static {}, Lcom/squareup/okhttp/internal/Version;.userAgent:()Ljava/lang/String; // method@cbac
+765016: 0c04                                   |005f: move-result-object v4
+765018: 6e30 4dca 3004                         |0060: invoke-virtual {v0, v3, v4}, Lcom/squareup/okhttp/Request$Builder;.header:(Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/okhttp/Request$Builder; // method@ca4d
+76501e: 6e10 47ca 0000                         |0063: invoke-virtual {v0}, Lcom/squareup/okhttp/Request$Builder;.build:()Lcom/squareup/okhttp/Request; // method@ca47
+765024: 0c03                                   |0066: move-result-object v3
+765026: 1103                                   |0067: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=519
+        0x0004 line=521
+        0x000c line=522
+        0x0017 line=525
+        0x001f line=526
+        0x0024 line=529
+        0x002d line=530
+        0x002f line=531
+        0x0034 line=534
+        0x003c line=539
+        0x0049 line=541
+        0x0051 line=544
+        0x0054 line=547
+        0x005c line=548
+        0x0063 line=551
+      locals        :
+        0x0000 - 0x0068 reg=3 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x0068 reg=4 (null) Lcom/squareup/okhttp/Request;
+
+    #12              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'readNetworkResponse'
+      type          : '()Lcom/squareup/okhttp/Response;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 3
+      insns size    : 117 16-bit code units
+765028:                                        |[765028] com.squareup.okhttp.internal.http.HttpEngine.readNetworkResponse:()Lcom/squareup/okhttp/Response;
+765038: 5440 4f89                              |0000: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+76503c: 7210 f2cd 0000                         |0002: invoke-interface {v0}, Lcom/squareup/okhttp/internal/http/HttpStream;.finishRequest:()V // method@cdf2
+765042: 5440 4f89                              |0005: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+765046: 7210 f4cd 0000                         |0007: invoke-interface {v0}, Lcom/squareup/okhttp/internal/http/HttpStream;.readResponseHeaders:()Lcom/squareup/okhttp/Response$Builder; // method@cdf4
+76504c: 0c00                                   |000a: move-result-object v0
+76504e: 5441 5089                              |000b: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+765052: 6e20 9eca 1000                         |000d: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.request:(Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Response$Builder; // method@ca9e
+765058: 0c00                                   |0010: move-result-object v0
+76505a: 5441 5589                              |0011: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+76505e: 6e10 3ace 0100                         |0013: invoke-virtual {v1}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.connection:()Lcom/squareup/okhttp/internal/io/RealConnection; // method@ce3a
+765064: 0c01                                   |0016: move-result-object v1
+765066: 6e10 66ce 0100                         |0017: invoke-virtual {v1}, Lcom/squareup/okhttp/internal/io/RealConnection;.getHandshake:()Lcom/squareup/okhttp/Handshake; // method@ce66
+76506c: 0c01                                   |001a: move-result-object v1
+76506e: 6e20 96ca 1000                         |001b: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.handshake:(Lcom/squareup/okhttp/Handshake;)Lcom/squareup/okhttp/Response$Builder; // method@ca96
+765074: 0c00                                   |001e: move-result-object v0
+765076: 6201 5f89                              |001f: sget-object v1, Lcom/squareup/okhttp/internal/http/OkHeaders;.SENT_MILLIS:Ljava/lang/String; // field@895f
+76507a: 5342 5389                              |0021: iget-wide v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.sentRequestMillis:J // field@8953
+76507e: 7120 80d1 3200                         |0023: invoke-static {v2, v3}, Ljava/lang/Long;.toString:(J)Ljava/lang/String; // method@d180
+765084: 0c02                                   |0026: move-result-object v2
+765086: 6e30 97ca 1002                         |0027: invoke-virtual {v0, v1, v2}, Lcom/squareup/okhttp/Response$Builder;.header:(Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/okhttp/Response$Builder; // method@ca97
+76508c: 0c00                                   |002a: move-result-object v0
+76508e: 6201 5c89                              |002b: sget-object v1, Lcom/squareup/okhttp/internal/http/OkHeaders;.RECEIVED_MILLIS:Ljava/lang/String; // field@895c
+765092: 7100 5bd2 0000                         |002d: invoke-static {}, Ljava/lang/System;.currentTimeMillis:()J // method@d25b
+765098: 0b02                                   |0030: move-result-wide v2
+76509a: 7120 80d1 3200                         |0031: invoke-static {v2, v3}, Ljava/lang/Long;.toString:(J)Ljava/lang/String; // method@d180
+7650a0: 0c02                                   |0034: move-result-object v2
+7650a2: 6e30 97ca 1002                         |0035: invoke-virtual {v0, v1, v2}, Lcom/squareup/okhttp/Response$Builder;.header:(Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/okhttp/Response$Builder; // method@ca97
+7650a8: 0c00                                   |0038: move-result-object v0
+7650aa: 6e10 91ca 0000                         |0039: invoke-virtual {v0}, Lcom/squareup/okhttp/Response$Builder;.build:()Lcom/squareup/okhttp/Response; // method@ca91
+7650b0: 0c00                                   |003c: move-result-object v0
+7650b2: 5541 4e89                              |003d: iget-boolean v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.forWebSocket:Z // field@894e
+7650b6: 3901 1400                              |003f: if-nez v1, 0053 // +0014
+7650ba: 6e10 b9ca 0000                         |0041: invoke-virtual {v0}, Lcom/squareup/okhttp/Response;.newBuilder:()Lcom/squareup/okhttp/Response$Builder; // method@cab9
+7650c0: 0c01                                   |0044: move-result-object v1
+7650c2: 5442 4f89                              |0045: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+7650c6: 7220 f3cd 0200                         |0047: invoke-interface {v2, v0}, Lcom/squareup/okhttp/internal/http/HttpStream;.openResponseBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/ResponseBody; // method@cdf3
+7650cc: 0c00                                   |004a: move-result-object v0
+7650ce: 6e20 90ca 0100                         |004b: invoke-virtual {v1, v0}, Lcom/squareup/okhttp/Response$Builder;.body:(Lcom/squareup/okhttp/ResponseBody;)Lcom/squareup/okhttp/Response$Builder; // method@ca90
+7650d4: 0c00                                   |004e: move-result-object v0
+7650d6: 6e10 91ca 0000                         |004f: invoke-virtual {v0}, Lcom/squareup/okhttp/Response$Builder;.build:()Lcom/squareup/okhttp/Response; // method@ca91
+7650dc: 0c00                                   |0052: move-result-object v0
+7650de: 6e10 bcca 0000                         |0053: invoke-virtual {v0}, Lcom/squareup/okhttp/Response;.request:()Lcom/squareup/okhttp/Request; // method@cabc
+7650e4: 0c01                                   |0056: move-result-object v1
+7650e6: 1a02 d11d                              |0057: const-string v2, "Connection" // string@1dd1
+7650ea: 6e20 61ca 2100                         |0059: invoke-virtual {v1, v2}, Lcom/squareup/okhttp/Request;.header:(Ljava/lang/String;)Ljava/lang/String; // method@ca61
+7650f0: 0c01                                   |005c: move-result-object v1
+7650f2: 1a03 c986                              |005d: const-string v3, "close" // string@86c9
+7650f6: 6e20 04d2 1300                         |005f: invoke-virtual {v3, v1}, Ljava/lang/String;.equalsIgnoreCase:(Ljava/lang/String;)Z // method@d204
+7650fc: 0a01                                   |0062: move-result v1
+7650fe: 3901 0c00                              |0063: if-nez v1, 006f // +000c
+765102: 6e20 b1ca 2000                         |0065: invoke-virtual {v0, v2}, Lcom/squareup/okhttp/Response;.header:(Ljava/lang/String;)Ljava/lang/String; // method@cab1
+765108: 0c01                                   |0068: move-result-object v1
+76510a: 6e20 04d2 1300                         |0069: invoke-virtual {v3, v1}, Ljava/lang/String;.equalsIgnoreCase:(Ljava/lang/String;)Z // method@d204
+765110: 0a01                                   |006c: move-result v1
+765112: 3801 0700                              |006d: if-eqz v1, 0074 // +0007
+765116: 5444 5589                              |006f: iget-object v4, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+76511a: 6e10 43ce 0400                         |0071: invoke-virtual {v4}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.noNewStreams:()V // method@ce43
+765120: 1100                                   |0074: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=735
+        0x0005 line=737
+        0x000d line=738
+        0x0013 line=739
+        0x0023 line=740
+        0x002d line=741
+        0x0039 line=742
+        0x003d line=744
+        0x0041 line=745
+        0x0047 line=746
+        0x004f line=747
+        0x0053 line=750
+        0x0065 line=751
+        0x006f line=752
+      locals        :
+        0x0000 - 0x0075 reg=4 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #13              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'stripBody'
+      type          : '(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 22 16-bit code units
+765124:                                        |[765124] com.squareup.okhttp.internal.http.HttpEngine.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response;
+765134: 3801 1500                              |0000: if-eqz v1, 0015 // +0015
+765138: 6e10 abca 0100                         |0002: invoke-virtual {v1}, Lcom/squareup/okhttp/Response;.body:()Lcom/squareup/okhttp/ResponseBody; // method@caab
+76513e: 0c00                                   |0005: move-result-object v0
+765140: 3800 0f00                              |0006: if-eqz v0, 0015 // +000f
+765144: 6e10 b9ca 0100                         |0008: invoke-virtual {v1}, Lcom/squareup/okhttp/Response;.newBuilder:()Lcom/squareup/okhttp/Response$Builder; // method@cab9
+76514a: 0c01                                   |000b: move-result-object v1
+76514c: 1200                                   |000c: const/4 v0, #int 0 // #0
+76514e: 6e20 90ca 0100                         |000d: invoke-virtual {v1, v0}, Lcom/squareup/okhttp/Response$Builder;.body:(Lcom/squareup/okhttp/ResponseBody;)Lcom/squareup/okhttp/Response$Builder; // method@ca90
+765154: 0c01                                   |0010: move-result-object v1
+765156: 6e10 91ca 0100                         |0011: invoke-virtual {v1}, Lcom/squareup/okhttp/Response$Builder;.build:()Lcom/squareup/okhttp/Response; // method@ca91
+76515c: 0c01                                   |0014: move-result-object v1
+76515e: 1101                                   |0015: return-object v1
+      catches       : (none)
+      positions     :
+        0x0002 line=287
+        0x0008 line=288
+      locals        :
+        0x0000 - 0x0016 reg=1 (null) Lcom/squareup/okhttp/Response;
+
+    #14              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'unzip'
+      type          : '(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 90 16-bit code units
+765160:                                        |[765160] com.squareup.okhttp.internal.http.HttpEngine.unzip:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response;
+765170: 5520 5689                              |0000: iget-boolean v0, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.transparentGzip:Z // field@8956
+765174: 3800 5700                              |0002: if-eqz v0, 0059 // +0057
+765178: 5422 5889                              |0004: iget-object v2, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+76517c: 1a00 4a1f                              |0006: const-string v0, "Content-Encoding" // string@1f4a
+765180: 6e20 b1ca 0200                         |0008: invoke-virtual {v2, v0}, Lcom/squareup/okhttp/Response;.header:(Ljava/lang/String;)Ljava/lang/String; // method@cab1
+765186: 0c02                                   |000b: move-result-object v2
+765188: 1a01 0fa6                              |000c: const-string v1, "gzip" // string@a60f
+76518c: 6e20 04d2 2100                         |000e: invoke-virtual {v1, v2}, Ljava/lang/String;.equalsIgnoreCase:(Ljava/lang/String;)Z // method@d204
+765192: 0a02                                   |0011: move-result v2
+765194: 3902 0300                              |0012: if-nez v2, 0015 // +0003
+765198: 2845                                   |0014: goto 0059 // +0045
+76519a: 6e10 abca 0300                         |0015: invoke-virtual {v3}, Lcom/squareup/okhttp/Response;.body:()Lcom/squareup/okhttp/ResponseBody; // method@caab
+7651a0: 0c02                                   |0018: move-result-object v2
+7651a2: 3902 0300                              |0019: if-nez v2, 001c // +0003
+7651a6: 1103                                   |001b: return-object v3
+7651a8: 2202 4b1f                              |001c: new-instance v2, Lokio/GzipSource; // type@1f4b
+7651ac: 6e10 abca 0300                         |001e: invoke-virtual {v3}, Lcom/squareup/okhttp/Response;.body:()Lcom/squareup/okhttp/ResponseBody; // method@caab
+7651b2: 0c01                                   |0021: move-result-object v1
+7651b4: 6e10 cdca 0100                         |0022: invoke-virtual {v1}, Lcom/squareup/okhttp/ResponseBody;.source:()Lokio/BufferedSource; // method@cacd
+7651ba: 0c01                                   |0025: move-result-object v1
+7651bc: 7020 75fe 1200                         |0026: invoke-direct {v2, v1}, Lokio/GzipSource;.<init>:(Lokio/Source;)V // method@fe75
+7651c2: 6e10 b3ca 0300                         |0029: invoke-virtual {v3}, Lcom/squareup/okhttp/Response;.headers:()Lcom/squareup/okhttp/Headers; // method@cab3
+7651c8: 0c01                                   |002c: move-result-object v1
+7651ca: 6e10 63c9 0100                         |002d: invoke-virtual {v1}, Lcom/squareup/okhttp/Headers;.newBuilder:()Lcom/squareup/okhttp/Headers$Builder; // method@c963
+7651d0: 0c01                                   |0030: move-result-object v1
+7651d2: 6e20 59c9 0100                         |0031: invoke-virtual {v1, v0}, Lcom/squareup/okhttp/Headers$Builder;.removeAll:(Ljava/lang/String;)Lcom/squareup/okhttp/Headers$Builder; // method@c959
+7651d8: 0c00                                   |0034: move-result-object v0
+7651da: 1a01 4c1f                              |0035: const-string v1, "Content-Length" // string@1f4c
+7651de: 6e20 59c9 1000                         |0037: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Headers$Builder;.removeAll:(Ljava/lang/String;)Lcom/squareup/okhttp/Headers$Builder; // method@c959
+7651e4: 0c00                                   |003a: move-result-object v0
+7651e6: 6e10 56c9 0000                         |003b: invoke-virtual {v0}, Lcom/squareup/okhttp/Headers$Builder;.build:()Lcom/squareup/okhttp/Headers; // method@c956
+7651ec: 0c00                                   |003e: move-result-object v0
+7651ee: 6e10 b9ca 0300                         |003f: invoke-virtual {v3}, Lcom/squareup/okhttp/Response;.newBuilder:()Lcom/squareup/okhttp/Response$Builder; // method@cab9
+7651f4: 0c03                                   |0042: move-result-object v3
+7651f6: 6e20 98ca 0300                         |0043: invoke-virtual {v3, v0}, Lcom/squareup/okhttp/Response$Builder;.headers:(Lcom/squareup/okhttp/Headers;)Lcom/squareup/okhttp/Response$Builder; // method@ca98
+7651fc: 0c03                                   |0046: move-result-object v3
+7651fe: 2201 d619                              |0047: new-instance v1, Lcom/squareup/okhttp/internal/http/RealResponseBody; // type@19d6
+765202: 7110 7afe 0200                         |0049: invoke-static {v2}, Lokio/Okio;.buffer:(Lokio/Source;)Lokio/BufferedSource; // method@fe7a
+765208: 0c02                                   |004c: move-result-object v2
+76520a: 7030 0ece 0102                         |004d: invoke-direct {v1, v0, v2}, Lcom/squareup/okhttp/internal/http/RealResponseBody;.<init>:(Lcom/squareup/okhttp/Headers;Lokio/BufferedSource;)V // method@ce0e
+765210: 6e20 90ca 1300                         |0050: invoke-virtual {v3, v1}, Lcom/squareup/okhttp/Response$Builder;.body:(Lcom/squareup/okhttp/ResponseBody;)Lcom/squareup/okhttp/Response$Builder; // method@ca90
+765216: 0c02                                   |0053: move-result-object v2
+765218: 6e10 91ca 0200                         |0054: invoke-virtual {v2}, Lcom/squareup/okhttp/Response$Builder;.build:()Lcom/squareup/okhttp/Response; // method@ca91
+76521e: 0c02                                   |0057: move-result-object v2
+765220: 1102                                   |0058: return-object v2
+765222: 1103                                   |0059: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=465
+        0x0015 line=469
+        0x001c line=473
+        0x0029 line=474
+        0x0031 line=475
+        0x0037 line=476
+        0x003b line=477
+        0x003f line=478
+        0x0043 line=479
+        0x0049 line=480
+        0x0054 line=481
+      locals        :
+        0x0000 - 0x005a reg=2 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x005a reg=3 (null) Lcom/squareup/okhttp/Response;
+
+    #15              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'validate'
+      type          : '(Lcom/squareup/okhttp/Response;Lcom/squareup/okhttp/Response;)Z'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 47 16-bit code units
+765224:                                        |[765224] com.squareup.okhttp.internal.http.HttpEngine.validate:(Lcom/squareup/okhttp/Response;Lcom/squareup/okhttp/Response;)Z
+765234: 6e10 afca 0400                         |0000: invoke-virtual {v4}, Lcom/squareup/okhttp/Response;.code:()I // method@caaf
+76523a: 0a00                                   |0003: move-result v0
+76523c: 1301 3001                              |0004: const/16 v1, #int 304 // #130
+765240: 1212                                   |0006: const/4 v2, #int 1 // #1
+765242: 3310 0300                              |0007: if-ne v0, v1, 000a // +0003
+765246: 0f02                                   |0009: return v2
+765248: 6e10 b3ca 0300                         |000a: invoke-virtual {v3}, Lcom/squareup/okhttp/Response;.headers:()Lcom/squareup/okhttp/Headers; // method@cab3
+76524e: 0c03                                   |000d: move-result-object v3
+765250: 1a00 c53c                              |000e: const-string v0, "Last-Modified" // string@3cc5
+765254: 6e20 60c9 0300                         |0010: invoke-virtual {v3, v0}, Lcom/squareup/okhttp/Headers;.getDate:(Ljava/lang/String;)Ljava/util/Date; // method@c960
+76525a: 0c03                                   |0013: move-result-object v3
+76525c: 3803 1900                              |0014: if-eqz v3, 002d // +0019
+765260: 6e10 b3ca 0400                         |0016: invoke-virtual {v4}, Lcom/squareup/okhttp/Response;.headers:()Lcom/squareup/okhttp/Headers; // method@cab3
+765266: 0c04                                   |0019: move-result-object v4
+765268: 6e20 60c9 0400                         |001a: invoke-virtual {v4, v0}, Lcom/squareup/okhttp/Headers;.getDate:(Ljava/lang/String;)Ljava/util/Date; // method@c960
+76526e: 0c04                                   |001d: move-result-object v4
+765270: 3804 0f00                              |001e: if-eqz v4, 002d // +000f
+765274: 6e10 5ed5 0400                         |0020: invoke-virtual {v4}, Ljava/util/Date;.getTime:()J // method@d55e
+76527a: 0b00                                   |0023: move-result-wide v0
+76527c: 6e10 5ed5 0300                         |0024: invoke-virtual {v3}, Ljava/util/Date;.getTime:()J // method@d55e
+765282: 0b03                                   |0027: move-result-wide v3
+765284: 3103 0003                              |0028: cmp-long v3, v0, v3
+765288: 3b03 0300                              |002a: if-gez v3, 002d // +0003
+76528c: 0f02                                   |002c: return v2
+76528e: 1203                                   |002d: const/4 v3, #int 0 // #0
+765290: 0f03                                   |002e: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=825
+        0x000a line=832
+        0x0016 line=834
+        0x0020 line=836
+      locals        :
+        0x0000 - 0x002f reg=3 (null) Lcom/squareup/okhttp/Response;
+        0x0000 - 0x002f reg=4 (null) Lcom/squareup/okhttp/Response;
+
+  Virtual methods   -
+    #0              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'cancel'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 6 16-bit code units
+765294:                                        |[765294] com.squareup.okhttp.internal.http.HttpEngine.cancel:()V
+7652a4: 5400 5589                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+7652a8: 6e10 39ce 0000                         |0002: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.cancel:()V // method@ce39
+7652ae: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=426
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #1              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'close'
+      type          : '()Lcom/squareup/okhttp/internal/http/StreamAllocation;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 35 16-bit code units
+7652b0:                                        |[7652b0] com.squareup.okhttp.internal.http.HttpEngine.close:()Lcom/squareup/okhttp/internal/http/StreamAllocation;
+7652c0: 5410 4989                              |0000: iget-object v0, v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.bufferedRequestBody:Lokio/BufferedSink; // field@8949
+7652c4: 3800 0600                              |0002: if-eqz v0, 0008 // +0006
+7652c8: 7110 97cb 0000                         |0004: invoke-static {v0}, Lcom/squareup/okhttp/internal/Util;.closeQuietly:(Ljava/io/Closeable;)V // method@cb97
+7652ce: 2808                                   |0007: goto 000f // +0008
+7652d0: 5410 5289                              |0008: iget-object v0, v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+7652d4: 3800 0500                              |000a: if-eqz v0, 000f // +0005
+7652d8: 7110 97cb 0000                         |000c: invoke-static {v0}, Lcom/squareup/okhttp/internal/Util;.closeQuietly:(Ljava/io/Closeable;)V // method@cb97
+7652de: 5410 5889                              |000f: iget-object v0, v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+7652e2: 3800 0a00                              |0011: if-eqz v0, 001b // +000a
+7652e6: 6e10 abca 0000                         |0013: invoke-virtual {v0}, Lcom/squareup/okhttp/Response;.body:()Lcom/squareup/okhttp/ResponseBody; // method@caab
+7652ec: 0c00                                   |0016: move-result-object v0
+7652ee: 7110 97cb 0000                         |0017: invoke-static {v0}, Lcom/squareup/okhttp/internal/Util;.closeQuietly:(Ljava/io/Closeable;)V // method@cb97
+7652f4: 2806                                   |001a: goto 0020 // +0006
+7652f6: 5410 5589                              |001b: iget-object v0, v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+7652fa: 6e10 3bce 0000                         |001d: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.connectionFailed:()V // method@ce3b
+765300: 5411 5589                              |0020: iget-object v1, v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+765304: 1101                                   |0022: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=434
+        0x0004 line=436
+        0x0008 line=437
+        0x000c line=438
+        0x000f line=441
+        0x0013 line=442
+        0x001b line=445
+        0x0020 line=448
+      locals        :
+        0x0000 - 0x0023 reg=1 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #2              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'followUpRequest'
+      type          : '()Lcom/squareup/okhttp/Request;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 3
+      insns size    : 252 16-bit code units
+765308:                                        |[765308] com.squareup.okhttp.internal.http.HttpEngine.followUpRequest:()Lcom/squareup/okhttp/Request;
+765318: 5460 5889                              |0000: iget-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+76531c: 3800 e700                              |0002: if-eqz v0, 00e9 // +00e7
+765320: 5460 5589                              |0004: iget-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+765324: 6e10 3ace 0000                         |0006: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.connection:()Lcom/squareup/okhttp/internal/io/RealConnection; // method@ce3a
+76532a: 0c00                                   |0009: move-result-object v0
+76532c: 1201                                   |000a: const/4 v1, #int 0 // #0
+76532e: 3800 0700                              |000b: if-eqz v0, 0012 // +0007
+765332: 7210 f7c8 0000                         |000d: invoke-interface {v0}, Lcom/squareup/okhttp/Connection;.getRoute:()Lcom/squareup/okhttp/Route; // method@c8f7
+765338: 0c00                                   |0010: move-result-object v0
+76533a: 2802                                   |0011: goto 0013 // +0002
+76533c: 0710                                   |0012: move-object v0, v1
+76533e: 3800 0700                              |0013: if-eqz v0, 001a // +0007
+765342: 6e10 d2ca 0000                         |0015: invoke-virtual {v0}, Lcom/squareup/okhttp/Route;.getProxy:()Ljava/net/Proxy; // method@cad2
+765348: 0c00                                   |0018: move-result-object v0
+76534a: 2807                                   |0019: goto 0020 // +0007
+76534c: 5460 4d89                              |001a: iget-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+765350: 6e10 17ca 0000                         |001c: invoke-virtual {v0}, Lcom/squareup/okhttp/OkHttpClient;.getProxy:()Ljava/net/Proxy; // method@ca17
+765356: 0c00                                   |001f: move-result-object v0
+765358: 5462 5889                              |0020: iget-object v2, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+76535c: 6e10 afca 0200                         |0022: invoke-virtual {v2}, Lcom/squareup/okhttp/Response;.code:()I // method@caaf
+765362: 0a02                                   |0025: move-result v2
+765364: 5463 5789                              |0026: iget-object v3, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765368: 6e10 66ca 0300                         |0028: invoke-virtual {v3}, Lcom/squareup/okhttp/Request;.method:()Ljava/lang/String; // method@ca66
+76536e: 0c03                                   |002b: move-result-object v3
+765370: 1304 3301                              |002c: const/16 v4, #int 307 // #133
+765374: 1a05 4a29                              |002e: const-string v5, "GET" // string@294a
+765378: 3242 3000                              |0030: if-eq v2, v4, 0060 // +0030
+76537c: 1304 3401                              |0032: const/16 v4, #int 308 // #134
+765380: 3242 2c00                              |0034: if-eq v2, v4, 0060 // +002c
+765384: 1304 9101                              |0036: const/16 v4, #int 401 // #191
+765388: 3242 1b00                              |0038: if-eq v2, v4, 0053 // +001b
+76538c: 1304 9701                              |003a: const/16 v4, #int 407 // #197
+765390: 3242 0600                              |003c: if-eq v2, v4, 0042 // +0006
+765394: 2b02 b200 0000                         |003e: packed-switch v2, 000000f0 // +000000b2
+76539a: 1101                                   |0041: return-object v1
+76539c: 6e10 67d3 0000                         |0042: invoke-virtual {v0}, Ljava/net/Proxy;.type:()Ljava/net/Proxy$Type; // method@d367
+7653a2: 0c01                                   |0045: move-result-object v1
+7653a4: 6202 378a                              |0046: sget-object v2, Ljava/net/Proxy$Type;.HTTP:Ljava/net/Proxy$Type; // field@8a37
+7653a8: 3321 0300                              |0048: if-ne v1, v2, 004b // +0003
+7653ac: 2809                                   |004a: goto 0053 // +0009
+7653ae: 2206 d11a                              |004b: new-instance v6, Ljava/net/ProtocolException; // type@1ad1
+7653b2: 1a00 a35d                              |004d: const-string v0, "Received HTTP_PROXY_AUTH (407) code while not using proxy" // string@5da3
+7653b6: 7020 63d3 0600                         |004f: invoke-direct {v6, v0}, Ljava/net/ProtocolException;.<init>:(Ljava/lang/String;)V // method@d363
+7653bc: 2706                                   |0052: throw v6
+7653be: 5461 4d89                              |0053: iget-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+7653c2: 6e10 09ca 0100                         |0055: invoke-virtual {v1}, Lcom/squareup/okhttp/OkHttpClient;.getAuthenticator:()Lcom/squareup/okhttp/Authenticator; // method@ca09
+7653c8: 0c01                                   |0058: move-result-object v1
+7653ca: 5466 5889                              |0059: iget-object v6, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+7653ce: 7130 06ce 6100                         |005b: invoke-static {v1, v6, v0}, Lcom/squareup/okhttp/internal/http/OkHeaders;.processAuthHeader:(Lcom/squareup/okhttp/Authenticator;Lcom/squareup/okhttp/Response;Ljava/net/Proxy;)Lcom/squareup/okhttp/Request; // method@ce06
+7653d4: 0c06                                   |005e: move-result-object v6
+7653d6: 1106                                   |005f: return-object v6
+7653d8: 6e20 03d2 5300                         |0060: invoke-virtual {v3, v5}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+7653de: 0a00                                   |0063: move-result v0
+7653e0: 3900 0b00                              |0064: if-nez v0, 006f // +000b
+7653e4: 1a00 0a2a                              |0066: const-string v0, "HEAD" // string@2a0a
+7653e8: 6e20 03d2 0300                         |0068: invoke-virtual {v3, v0}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+7653ee: 0a00                                   |006b: move-result v0
+7653f0: 3900 0300                              |006c: if-nez v0, 006f // +0003
+7653f4: 1101                                   |006e: return-object v1
+7653f6: 5460 4d89                              |006f: iget-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+7653fa: 6e10 13ca 0000                         |0071: invoke-virtual {v0}, Lcom/squareup/okhttp/OkHttpClient;.getFollowRedirects:()Z // method@ca13
+765400: 0a00                                   |0074: move-result v0
+765402: 3900 0300                              |0075: if-nez v0, 0078 // +0003
+765406: 1101                                   |0077: return-object v1
+765408: 5460 5889                              |0078: iget-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+76540c: 1a02 a453                              |007a: const-string v2, "Location" // string@53a4
+765410: 6e20 b1ca 2000                         |007c: invoke-virtual {v0, v2}, Lcom/squareup/okhttp/Response;.header:(Ljava/lang/String;)Ljava/lang/String; // method@cab1
+765416: 0c00                                   |007f: move-result-object v0
+765418: 3900 0300                              |0080: if-nez v0, 0083 // +0003
+76541c: 1101                                   |0082: return-object v1
+76541e: 5462 5789                              |0083: iget-object v2, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765422: 6e10 64ca 0200                         |0085: invoke-virtual {v2}, Lcom/squareup/okhttp/Request;.httpUrl:()Lcom/squareup/okhttp/HttpUrl; // method@ca64
+765428: 0c02                                   |0088: move-result-object v2
+76542a: 6e20 cfc9 0200                         |0089: invoke-virtual {v2, v0}, Lcom/squareup/okhttp/HttpUrl;.resolve:(Ljava/lang/String;)Lcom/squareup/okhttp/HttpUrl; // method@c9cf
+765430: 0c00                                   |008c: move-result-object v0
+765432: 3900 0300                              |008d: if-nez v0, 0090 // +0003
+765436: 1101                                   |008f: return-object v1
+765438: 6e10 d0c9 0000                         |0090: invoke-virtual {v0}, Lcom/squareup/okhttp/HttpUrl;.scheme:()Ljava/lang/String; // method@c9d0
+76543e: 0c02                                   |0093: move-result-object v2
+765440: 5464 5789                              |0094: iget-object v4, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765444: 6e10 64ca 0400                         |0096: invoke-virtual {v4}, Lcom/squareup/okhttp/Request;.httpUrl:()Lcom/squareup/okhttp/HttpUrl; // method@ca64
+76544a: 0c04                                   |0099: move-result-object v4
+76544c: 6e10 d0c9 0400                         |009a: invoke-virtual {v4}, Lcom/squareup/okhttp/HttpUrl;.scheme:()Ljava/lang/String; // method@c9d0
+765452: 0c04                                   |009d: move-result-object v4
+765454: 6e20 03d2 4200                         |009e: invoke-virtual {v2, v4}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+76545a: 0a02                                   |00a1: move-result v2
+76545c: 3902 0b00                              |00a2: if-nez v2, 00ad // +000b
+765460: 5462 4d89                              |00a4: iget-object v2, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+765464: 6e10 14ca 0200                         |00a6: invoke-virtual {v2}, Lcom/squareup/okhttp/OkHttpClient;.getFollowSslRedirects:()Z // method@ca14
+76546a: 0a02                                   |00a9: move-result v2
+76546c: 3902 0300                              |00aa: if-nez v2, 00ad // +0003
+765470: 1101                                   |00ac: return-object v1
+765472: 5462 5789                              |00ad: iget-object v2, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765476: 6e10 67ca 0200                         |00af: invoke-virtual {v2}, Lcom/squareup/okhttp/Request;.newBuilder:()Lcom/squareup/okhttp/Request$Builder; // method@ca67
+76547c: 0c02                                   |00b2: move-result-object v2
+76547e: 7110 edcd 0300                         |00b3: invoke-static {v3}, Lcom/squareup/okhttp/internal/http/HttpMethod;.permitsRequestBody:(Ljava/lang/String;)Z // method@cded
+765484: 0a04                                   |00b6: move-result v4
+765486: 3804 1e00                              |00b7: if-eqz v4, 00d5 // +001e
+76548a: 7110 eecd 0300                         |00b9: invoke-static {v3}, Lcom/squareup/okhttp/internal/http/HttpMethod;.redirectsToGet:(Ljava/lang/String;)Z // method@cdee
+765490: 0a04                                   |00bc: move-result v4
+765492: 3804 0600                              |00bd: if-eqz v4, 00c3 // +0006
+765496: 6e30 4fca 5201                         |00bf: invoke-virtual {v2, v5, v1}, Lcom/squareup/okhttp/Request$Builder;.method:(Ljava/lang/String;Lcom/squareup/okhttp/RequestBody;)Lcom/squareup/okhttp/Request$Builder; // method@ca4f
+76549c: 2804                                   |00c2: goto 00c6 // +0004
+76549e: 6e30 4fca 3201                         |00c3: invoke-virtual {v2, v3, v1}, Lcom/squareup/okhttp/Request$Builder;.method:(Ljava/lang/String;Lcom/squareup/okhttp/RequestBody;)Lcom/squareup/okhttp/Request$Builder; // method@ca4f
+7654a4: 1a01 1069                              |00c6: const-string v1, "Transfer-Encoding" // string@6910
+7654a8: 6e20 53ca 1200                         |00c8: invoke-virtual {v2, v1}, Lcom/squareup/okhttp/Request$Builder;.removeHeader:(Ljava/lang/String;)Lcom/squareup/okhttp/Request$Builder; // method@ca53
+7654ae: 1a01 4c1f                              |00cb: const-string v1, "Content-Length" // string@1f4c
+7654b2: 6e20 53ca 1200                         |00cd: invoke-virtual {v2, v1}, Lcom/squareup/okhttp/Request$Builder;.removeHeader:(Ljava/lang/String;)Lcom/squareup/okhttp/Request$Builder; // method@ca53
+7654b8: 1a01 501f                              |00d0: const-string v1, "Content-Type" // string@1f50
+7654bc: 6e20 53ca 1200                         |00d2: invoke-virtual {v2, v1}, Lcom/squareup/okhttp/Request$Builder;.removeHeader:(Ljava/lang/String;)Lcom/squareup/okhttp/Request$Builder; // method@ca53
+7654c2: 6e20 e5cd 0600                         |00d5: invoke-virtual {v6, v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.sameConnection:(Lcom/squareup/okhttp/HttpUrl;)Z // method@cde5
+7654c8: 0a06                                   |00d8: move-result v6
+7654ca: 3906 0700                              |00d9: if-nez v6, 00e0 // +0007
+7654ce: 1a06 2b17                              |00db: const-string v6, "Authorization" // string@172b
+7654d2: 6e20 53ca 6200                         |00dd: invoke-virtual {v2, v6}, Lcom/squareup/okhttp/Request$Builder;.removeHeader:(Ljava/lang/String;)Lcom/squareup/okhttp/Request$Builder; // method@ca53
+7654d8: 6e20 55ca 0200                         |00e0: invoke-virtual {v2, v0}, Lcom/squareup/okhttp/Request$Builder;.url:(Lcom/squareup/okhttp/HttpUrl;)Lcom/squareup/okhttp/Request$Builder; // method@ca55
+7654de: 0c06                                   |00e3: move-result-object v6
+7654e0: 6e10 47ca 0600                         |00e4: invoke-virtual {v6}, Lcom/squareup/okhttp/Request$Builder;.build:()Lcom/squareup/okhttp/Request; // method@ca47
+7654e6: 0c06                                   |00e7: move-result-object v6
+7654e8: 1106                                   |00e8: return-object v6
+7654ea: 2206 7b1a                              |00e9: new-instance v6, Ljava/lang/IllegalStateException; // type@1a7b
+7654ee: 7010 4bd1 0600                         |00eb: invoke-direct {v6}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+7654f4: 2706                                   |00ee: throw v6
+7654f6: 0000                                   |00ef: nop // spacer
+7654f8: 0001 0400 2c01 0000 3100 0000 3100 ... |00f0: packed-switch-data (12 units)
+      catches       : (none)
+      positions     :
+        0x0000 line=888
+        0x0004 line=889
+        0x000d line=891
+        0x0015 line=894
+        0x001c line=895
+        0x0020 line=896
+        0x0026 line=898
+        0x002e line=899
+        0x0042 line=901
+        0x004b line=902
+        0x0053 line=906
+        0x0060 line=912
+        0x006f line=921
+        0x0078 line=923
+        0x0083 line=925
+        0x0090 line=931
+        0x00a4 line=932
+        0x00ad line=935
+        0x00b3 line=936
+        0x00b9 line=937
+        0x00bf line=938
+        0x00c3 line=940
+        0x00c6 line=942
+        0x00cb line=943
+        0x00d0 line=944
+        0x00d5 line=950
+        0x00db line=951
+        0x00e0 line=954
+        0x00e9 line=888
+      locals        :
+        0x0000 - 0x00fc reg=6 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #3              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'getBufferedRequestBody'
+      type          : '()Lokio/BufferedSink;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 20 16-bit code units
+765510:                                        |[765510] com.squareup.okhttp.internal.http.HttpEngine.getBufferedRequestBody:()Lokio/BufferedSink;
+765520: 5410 4989                              |0000: iget-object v0, v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.bufferedRequestBody:Lokio/BufferedSink; // field@8949
+765524: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+765528: 1100                                   |0004: return-object v0
+76552a: 6e10 d7cd 0100                         |0005: invoke-virtual {v1}, Lcom/squareup/okhttp/internal/http/HttpEngine;.getRequestBody:()Lokio/Sink; // method@cdd7
+765530: 0c00                                   |0008: move-result-object v0
+765532: 3800 0900                              |0009: if-eqz v0, 0012 // +0009
+765536: 7110 79fe 0000                         |000b: invoke-static {v0}, Lokio/Okio;.buffer:(Lokio/Sink;)Lokio/BufferedSink; // method@fe79
+76553c: 0c00                                   |000e: move-result-object v0
+76553e: 5b10 4989                              |000f: iput-object v0, v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.bufferedRequestBody:Lokio/BufferedSink; // field@8949
+765542: 2802                                   |0011: goto 0013 // +0002
+765544: 1200                                   |0012: const/4 v0, #int 0 // #0
+765546: 1100                                   |0013: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=313
+        0x0005 line=315
+        0x000b line=317
+      locals        :
+        0x0000 - 0x0014 reg=1 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #4              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'getConnection'
+      type          : '()Lcom/squareup/okhttp/Connection;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+765548:                                        |[765548] com.squareup.okhttp.internal.http.HttpEngine.getConnection:()Lcom/squareup/okhttp/Connection;
+765558: 5400 5589                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+76555c: 6e10 3ace 0000                         |0002: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.connection:()Lcom/squareup/okhttp/internal/io/RealConnection; // method@ce3a
+765562: 0c00                                   |0005: move-result-object v0
+765564: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=337
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #5              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'getRequest'
+      type          : '()Lcom/squareup/okhttp/Request;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+765568:                                        |[765568] com.squareup.okhttp.internal.http.HttpEngine.getRequest:()Lcom/squareup/okhttp/Request;
+765578: 5400 5789                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+76557c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=326
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #6              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'getRequestBody'
+      type          : '()Lokio/Sink;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 13 16-bit code units
+765580:                                        |[765580] com.squareup.okhttp.internal.http.HttpEngine.getRequestBody:()Lokio/Sink;
+765590: 5410 4b89                              |0000: iget-object v0, v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheStrategy:Lcom/squareup/okhttp/internal/http/CacheStrategy; // field@894b
+765594: 3800 0500                              |0002: if-eqz v0, 0007 // +0005
+765598: 5411 5289                              |0004: iget-object v1, v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+76559c: 1101                                   |0006: return-object v1
+76559e: 2201 7b1a                              |0007: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+7655a2: 7010 4bd1 0100                         |0009: invoke-direct {v1}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+7655a8: 2701                                   |000c: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=308
+        0x0004 line=309
+        0x0007 line=308
+      locals        :
+        0x0000 - 0x000d reg=1 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #7              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'getResponse'
+      type          : '()Lcom/squareup/okhttp/Response;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 11 16-bit code units
+7655ac:                                        |[7655ac] com.squareup.okhttp.internal.http.HttpEngine.getResponse:()Lcom/squareup/okhttp/Response;
+7655bc: 5400 5889                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+7655c0: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+7655c4: 1100                                   |0004: return-object v0
+7655c6: 2200 7b1a                              |0005: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+7655ca: 7010 4bd1 0000                         |0007: invoke-direct {v0}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+7655d0: 2700                                   |000a: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=332
+      locals        :
+        0x0000 - 0x000b reg=0 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #8              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'hasResponse'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+7655d4:                                        |[7655d4] com.squareup.okhttp.internal.http.HttpEngine.hasResponse:()Z
+7655e4: 5400 5889                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+7655e8: 3800 0400                              |0002: if-eqz v0, 0006 // +0004
+7655ec: 1210                                   |0004: const/4 v0, #int 1 // #1
+7655ee: 2802                                   |0005: goto 0007 // +0002
+7655f0: 1200                                   |0006: const/4 v0, #int 0 // #0
+7655f2: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=322
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #9              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'permitsRequestBody'
+      type          : '(Lcom/squareup/okhttp/Request;)Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 9 16-bit code units
+7655f4:                                        |[7655f4] com.squareup.okhttp.internal.http.HttpEngine.permitsRequestBody:(Lcom/squareup/okhttp/Request;)Z
+765604: 6e10 66ca 0100                         |0000: invoke-virtual {v1}, Lcom/squareup/okhttp/Request;.method:()Ljava/lang/String; // method@ca66
+76560a: 0c00                                   |0003: move-result-object v0
+76560c: 7110 edcd 0000                         |0004: invoke-static {v0}, Lcom/squareup/okhttp/internal/http/HttpMethod;.permitsRequestBody:(Ljava/lang/String;)Z // method@cded
+765612: 0a00                                   |0007: move-result v0
+765614: 0f00                                   |0008: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=303
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x0009 reg=1 (null) Lcom/squareup/okhttp/Request;
+
+    #10              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'readResponse'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 372 16-bit code units
+765618:                                        |[765618] com.squareup.okhttp.internal.http.HttpEngine.readResponse:()V
+765628: 5440 5889                              |0000: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+76562c: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+765630: 0e00                                   |0004: return-void
+765632: 5440 5089                              |0005: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+765636: 3900 0f00                              |0007: if-nez v0, 0016 // +000f
+76563a: 5441 4a89                              |0009: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+76563e: 3801 0300                              |000b: if-eqz v1, 000e // +0003
+765642: 2809                                   |000d: goto 0016 // +0009
+765644: 2204 7b1a                              |000e: new-instance v4, Ljava/lang/IllegalStateException; // type@1a7b
+765648: 1a00 5084                              |0010: const-string v0, "call sendRequest() first!" // string@8450
+76564c: 7020 4cd1 0400                         |0012: invoke-direct {v4, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+765652: 2704                                   |0015: throw v4
+765654: 3900 0300                              |0016: if-nez v0, 0019 // +0003
+765658: 0e00                                   |0018: return-void
+76565a: 5541 4e89                              |0019: iget-boolean v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.forWebSocket:Z // field@894e
+76565e: 3801 0d00                              |001b: if-eqz v1, 0028 // +000d
+765662: 5441 4f89                              |001d: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+765666: 7220 f7cd 0100                         |001f: invoke-interface {v1, v0}, Lcom/squareup/okhttp/internal/http/HttpStream;.writeRequestHeaders:(Lcom/squareup/okhttp/Request;)V // method@cdf7
+76566c: 7010 decd 0400                         |0022: invoke-direct {v4}, Lcom/squareup/okhttp/internal/http/HttpEngine;.readNetworkResponse:()Lcom/squareup/okhttp/Response; // method@cdde
+765672: 0c00                                   |0025: move-result-object v0
+765674: 2900 8700                              |0026: goto/16 00ad // +0087
+765678: 5540 4c89                              |0028: iget-boolean v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.callerWritesRequestBody:Z // field@894c
+76567c: 3900 1100                              |002a: if-nez v0, 003b // +0011
+765680: 2200 d019                              |002c: new-instance v0, Lcom/squareup/okhttp/internal/http/HttpEngine$NetworkInterceptorChain; // type@19d0
+765684: 1201                                   |002e: const/4 v1, #int 0 // #0
+765686: 5442 5089                              |002f: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+76568a: 7040 c4cd 4021                         |0031: invoke-direct {v0, v4, v1, v2}, Lcom/squareup/okhttp/internal/http/HttpEngine$NetworkInterceptorChain;.<init>:(Lcom/squareup/okhttp/internal/http/HttpEngine;ILcom/squareup/okhttp/Request;)V // method@cdc4
+765690: 5441 5089                              |0034: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+765694: 6e20 c6cd 1000                         |0036: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/internal/http/HttpEngine$NetworkInterceptorChain;.proceed:(Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Response; // method@cdc6
+76569a: 0c00                                   |0039: move-result-object v0
+76569c: 2873                                   |003a: goto 00ad // +0073
+76569e: 5440 4989                              |003b: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.bufferedRequestBody:Lokio/BufferedSink; // field@8949
+7656a2: 3800 1500                              |003d: if-eqz v0, 0052 // +0015
+7656a6: 7210 3cfe 0000                         |003f: invoke-interface {v0}, Lokio/BufferedSink;.buffer:()Lokio/Buffer; // method@fe3c
+7656ac: 0c00                                   |0042: move-result-object v0
+7656ae: 6e10 2ffe 0000                         |0043: invoke-virtual {v0}, Lokio/Buffer;.size:()J // method@fe2f
+7656b4: 0b00                                   |0046: move-result-wide v0
+7656b6: 1602 0000                              |0047: const-wide/16 v2, #int 0 // #0
+7656ba: 3100 0002                              |0049: cmp-long v0, v0, v2
+7656be: 3d00 0700                              |004b: if-lez v0, 0052 // +0007
+7656c2: 5440 4989                              |004d: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.bufferedRequestBody:Lokio/BufferedSink; // field@8949
+7656c6: 7210 3efe 0000                         |004f: invoke-interface {v0}, Lokio/BufferedSink;.emit:()Lokio/BufferedSink; // method@fe3e
+7656cc: 5340 5389                              |0052: iget-wide v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.sentRequestMillis:J // field@8953
+7656d0: 1602 ffff                              |0054: const-wide/16 v2, #int -1 // #ffff
+7656d4: 3100 0002                              |0056: cmp-long v0, v0, v2
+7656d8: 3900 3500                              |0058: if-nez v0, 008d // +0035
+7656dc: 5440 5089                              |005a: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+7656e0: 7110 00ce 0000                         |005c: invoke-static {v0}, Lcom/squareup/okhttp/internal/http/OkHeaders;.contentLength:(Lcom/squareup/okhttp/Request;)J // method@ce00
+7656e6: 0b00                                   |005f: move-result-wide v0
+7656e8: 3100 0002                              |0060: cmp-long v0, v0, v2
+7656ec: 3900 2400                              |0062: if-nez v0, 0086 // +0024
+7656f0: 5440 5289                              |0064: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+7656f4: 2001 d919                              |0066: instance-of v1, v0, Lcom/squareup/okhttp/internal/http/RetryableSink; // type@19d9
+7656f8: 3801 1e00                              |0068: if-eqz v1, 0086 // +001e
+7656fc: 1f00 d919                              |006a: check-cast v0, Lcom/squareup/okhttp/internal/http/RetryableSink; // type@19d9
+765700: 6e10 1cce 0000                         |006c: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/http/RetryableSink;.contentLength:()J // method@ce1c
+765706: 0b00                                   |006f: move-result-wide v0
+765708: 5442 5089                              |0070: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+76570c: 6e10 67ca 0200                         |0072: invoke-virtual {v2}, Lcom/squareup/okhttp/Request;.newBuilder:()Lcom/squareup/okhttp/Request$Builder; // method@ca67
+765712: 0c02                                   |0075: move-result-object v2
+765714: 1a03 4c1f                              |0076: const-string v3, "Content-Length" // string@1f4c
+765718: 7120 80d1 1000                         |0078: invoke-static {v0, v1}, Ljava/lang/Long;.toString:(J)Ljava/lang/String; // method@d180
+76571e: 0c00                                   |007b: move-result-object v0
+765720: 6e30 4dca 3200                         |007c: invoke-virtual {v2, v3, v0}, Lcom/squareup/okhttp/Request$Builder;.header:(Ljava/lang/String;Ljava/lang/String;)Lcom/squareup/okhttp/Request$Builder; // method@ca4d
+765726: 0c00                                   |007f: move-result-object v0
+765728: 6e10 47ca 0000                         |0080: invoke-virtual {v0}, Lcom/squareup/okhttp/Request$Builder;.build:()Lcom/squareup/okhttp/Request; // method@ca47
+76572e: 0c00                                   |0083: move-result-object v0
+765730: 5b40 5089                              |0084: iput-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+765734: 5440 4f89                              |0086: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+765738: 5441 5089                              |0088: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+76573c: 7220 f7cd 1000                         |008a: invoke-interface {v0, v1}, Lcom/squareup/okhttp/internal/http/HttpStream;.writeRequestHeaders:(Lcom/squareup/okhttp/Request;)V // method@cdf7
+765742: 5440 5289                              |008d: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+765746: 3800 1a00                              |008f: if-eqz v0, 00a9 // +001a
+76574a: 5441 4989                              |0091: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.bufferedRequestBody:Lokio/BufferedSink; // field@8949
+76574e: 3801 0600                              |0093: if-eqz v1, 0099 // +0006
+765752: 7210 3dfe 0100                         |0095: invoke-interface {v1}, Lokio/BufferedSink;.close:()V // method@fe3d
+765758: 2804                                   |0098: goto 009c // +0004
+76575a: 7210 7ffe 0000                         |0099: invoke-interface {v0}, Lokio/Sink;.close:()V // method@fe7f
+765760: 5440 5289                              |009c: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+765764: 2001 d919                              |009e: instance-of v1, v0, Lcom/squareup/okhttp/internal/http/RetryableSink; // type@19d9
+765768: 3801 0900                              |00a0: if-eqz v1, 00a9 // +0009
+76576c: 5441 4f89                              |00a2: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+765770: 1f00 d919                              |00a4: check-cast v0, Lcom/squareup/okhttp/internal/http/RetryableSink; // type@19d9
+765774: 7220 f6cd 0100                         |00a6: invoke-interface {v1, v0}, Lcom/squareup/okhttp/internal/http/HttpStream;.writeRequestBody:(Lcom/squareup/okhttp/internal/http/RetryableSink;)V // method@cdf6
+76577a: 7010 decd 0400                         |00a9: invoke-direct {v4}, Lcom/squareup/okhttp/internal/http/HttpEngine;.readNetworkResponse:()Lcom/squareup/okhttp/Response; // method@cdde
+765780: 0c00                                   |00ac: move-result-object v0
+765782: 6e10 b3ca 0000                         |00ad: invoke-virtual {v0}, Lcom/squareup/okhttp/Response;.headers:()Lcom/squareup/okhttp/Headers; // method@cab3
+765788: 0c01                                   |00b0: move-result-object v1
+76578a: 6e20 e0cd 1400                         |00b1: invoke-virtual {v4, v1}, Lcom/squareup/okhttp/internal/http/HttpEngine;.receiveHeaders:(Lcom/squareup/okhttp/Headers;)V // method@cde0
+765790: 5441 4a89                              |00b4: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+765794: 3801 7a00                              |00b6: if-eqz v1, 0130 // +007a
+765798: 7120 e9cd 0100                         |00b8: invoke-static {v1, v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.validate:(Lcom/squareup/okhttp/Response;Lcom/squareup/okhttp/Response;)Z // method@cde9
+76579e: 0a01                                   |00bb: move-result v1
+7657a0: 3801 6b00                              |00bc: if-eqz v1, 0127 // +006b
+7657a4: 5441 4a89                              |00be: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+7657a8: 6e10 b9ca 0100                         |00c0: invoke-virtual {v1}, Lcom/squareup/okhttp/Response;.newBuilder:()Lcom/squareup/okhttp/Response$Builder; // method@cab9
+7657ae: 0c01                                   |00c3: move-result-object v1
+7657b0: 5442 5789                              |00c4: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+7657b4: 6e20 9eca 2100                         |00c6: invoke-virtual {v1, v2}, Lcom/squareup/okhttp/Response$Builder;.request:(Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Response$Builder; // method@ca9e
+7657ba: 0c01                                   |00c9: move-result-object v1
+7657bc: 5442 5189                              |00ca: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.priorResponse:Lcom/squareup/okhttp/Response; // field@8951
+7657c0: 7110 e7cd 0200                         |00cc: invoke-static {v2}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+7657c6: 0c02                                   |00cf: move-result-object v2
+7657c8: 6e20 9bca 2100                         |00d0: invoke-virtual {v1, v2}, Lcom/squareup/okhttp/Response$Builder;.priorResponse:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response$Builder; // method@ca9b
+7657ce: 0c01                                   |00d3: move-result-object v1
+7657d0: 5442 4a89                              |00d4: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+7657d4: 6e10 b3ca 0200                         |00d6: invoke-virtual {v2}, Lcom/squareup/okhttp/Response;.headers:()Lcom/squareup/okhttp/Headers; // method@cab3
+7657da: 0c02                                   |00d9: move-result-object v2
+7657dc: 6e10 b3ca 0000                         |00da: invoke-virtual {v0}, Lcom/squareup/okhttp/Response;.headers:()Lcom/squareup/okhttp/Headers; // method@cab3
+7657e2: 0c03                                   |00dd: move-result-object v3
+7657e4: 7120 d0cd 3200                         |00de: invoke-static {v2, v3}, Lcom/squareup/okhttp/internal/http/HttpEngine;.combine:(Lcom/squareup/okhttp/Headers;Lcom/squareup/okhttp/Headers;)Lcom/squareup/okhttp/Headers; // method@cdd0
+7657ea: 0c02                                   |00e1: move-result-object v2
+7657ec: 6e20 98ca 2100                         |00e2: invoke-virtual {v1, v2}, Lcom/squareup/okhttp/Response$Builder;.headers:(Lcom/squareup/okhttp/Headers;)Lcom/squareup/okhttp/Response$Builder; // method@ca98
+7657f2: 0c01                                   |00e5: move-result-object v1
+7657f4: 5442 4a89                              |00e6: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+7657f8: 7110 e7cd 0200                         |00e8: invoke-static {v2}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+7657fe: 0c02                                   |00eb: move-result-object v2
+765800: 6e20 92ca 2100                         |00ec: invoke-virtual {v1, v2}, Lcom/squareup/okhttp/Response$Builder;.cacheResponse:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response$Builder; // method@ca92
+765806: 0c01                                   |00ef: move-result-object v1
+765808: 7110 e7cd 0000                         |00f0: invoke-static {v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+76580e: 0c02                                   |00f3: move-result-object v2
+765810: 6e20 9aca 2100                         |00f4: invoke-virtual {v1, v2}, Lcom/squareup/okhttp/Response$Builder;.networkResponse:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response$Builder; // method@ca9a
+765816: 0c01                                   |00f7: move-result-object v1
+765818: 6e10 91ca 0100                         |00f8: invoke-virtual {v1}, Lcom/squareup/okhttp/Response$Builder;.build:()Lcom/squareup/okhttp/Response; // method@ca91
+76581e: 0c01                                   |00fb: move-result-object v1
+765820: 5b41 5889                              |00fc: iput-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+765824: 6e10 abca 0000                         |00fe: invoke-virtual {v0}, Lcom/squareup/okhttp/Response;.body:()Lcom/squareup/okhttp/ResponseBody; // method@caab
+76582a: 0c00                                   |0101: move-result-object v0
+76582c: 6e10 c7ca 0000                         |0102: invoke-virtual {v0}, Lcom/squareup/okhttp/ResponseBody;.close:()V // method@cac7
+765832: 6e10 e4cd 0400                         |0105: invoke-virtual {v4}, Lcom/squareup/okhttp/internal/http/HttpEngine;.releaseStreamAllocation:()V // method@cde4
+765838: 6200 e387                              |0108: sget-object v0, Lcom/squareup/okhttp/internal/Internal;.instance:Lcom/squareup/okhttp/internal/Internal; // field@87e3
+76583c: 5441 4d89                              |010a: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+765840: 6e20 50cb 1000                         |010c: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/internal/Internal;.internalCache:(Lcom/squareup/okhttp/OkHttpClient;)Lcom/squareup/okhttp/internal/InternalCache; // method@cb50
+765846: 0c00                                   |010f: move-result-object v0
+765848: 7210 57cb 0000                         |0110: invoke-interface {v0}, Lcom/squareup/okhttp/internal/InternalCache;.trackConditionalCacheHit:()V // method@cb57
+76584e: 5441 4a89                              |0113: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+765852: 5442 5889                              |0115: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+765856: 7110 e7cd 0200                         |0117: invoke-static {v2}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+76585c: 0c02                                   |011a: move-result-object v2
+76585e: 7230 59cb 1002                         |011b: invoke-interface {v0, v1, v2}, Lcom/squareup/okhttp/internal/InternalCache;.update:(Lcom/squareup/okhttp/Response;Lcom/squareup/okhttp/Response;)V // method@cb59
+765864: 5440 5889                              |011e: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+765868: 7020 e8cd 0400                         |0120: invoke-direct {v4, v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.unzip:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde8
+76586e: 0c00                                   |0123: move-result-object v0
+765870: 5b40 5889                              |0124: iput-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+765874: 0e00                                   |0126: return-void
+765876: 5441 4a89                              |0127: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+76587a: 6e10 abca 0100                         |0129: invoke-virtual {v1}, Lcom/squareup/okhttp/Response;.body:()Lcom/squareup/okhttp/ResponseBody; // method@caab
+765880: 0c01                                   |012c: move-result-object v1
+765882: 7110 97cb 0100                         |012d: invoke-static {v1}, Lcom/squareup/okhttp/internal/Util;.closeQuietly:(Ljava/io/Closeable;)V // method@cb97
+765888: 6e10 b9ca 0000                         |0130: invoke-virtual {v0}, Lcom/squareup/okhttp/Response;.newBuilder:()Lcom/squareup/okhttp/Response$Builder; // method@cab9
+76588e: 0c01                                   |0133: move-result-object v1
+765890: 5442 5789                              |0134: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765894: 6e20 9eca 2100                         |0136: invoke-virtual {v1, v2}, Lcom/squareup/okhttp/Response$Builder;.request:(Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Response$Builder; // method@ca9e
+76589a: 0c01                                   |0139: move-result-object v1
+76589c: 5442 5189                              |013a: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.priorResponse:Lcom/squareup/okhttp/Response; // field@8951
+7658a0: 7110 e7cd 0200                         |013c: invoke-static {v2}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+7658a6: 0c02                                   |013f: move-result-object v2
+7658a8: 6e20 9bca 2100                         |0140: invoke-virtual {v1, v2}, Lcom/squareup/okhttp/Response$Builder;.priorResponse:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response$Builder; // method@ca9b
+7658ae: 0c01                                   |0143: move-result-object v1
+7658b0: 5442 4a89                              |0144: iget-object v2, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+7658b4: 7110 e7cd 0200                         |0146: invoke-static {v2}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+7658ba: 0c02                                   |0149: move-result-object v2
+7658bc: 6e20 92ca 2100                         |014a: invoke-virtual {v1, v2}, Lcom/squareup/okhttp/Response$Builder;.cacheResponse:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response$Builder; // method@ca92
+7658c2: 0c01                                   |014d: move-result-object v1
+7658c4: 7110 e7cd 0000                         |014e: invoke-static {v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+7658ca: 0c00                                   |0151: move-result-object v0
+7658cc: 6e20 9aca 0100                         |0152: invoke-virtual {v1, v0}, Lcom/squareup/okhttp/Response$Builder;.networkResponse:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response$Builder; // method@ca9a
+7658d2: 0c00                                   |0155: move-result-object v0
+7658d4: 6e10 91ca 0000                         |0156: invoke-virtual {v0}, Lcom/squareup/okhttp/Response$Builder;.build:()Lcom/squareup/okhttp/Response; // method@ca91
+7658da: 0c00                                   |0159: move-result-object v0
+7658dc: 5b40 5889                              |015a: iput-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+7658e0: 7110 d9cd 0000                         |015c: invoke-static {v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.hasBody:(Lcom/squareup/okhttp/Response;)Z // method@cdd9
+7658e6: 0a00                                   |015f: move-result v0
+7658e8: 3800 1300                              |0160: if-eqz v0, 0173 // +0013
+7658ec: 7010 dbcd 0400                         |0162: invoke-direct {v4}, Lcom/squareup/okhttp/internal/http/HttpEngine;.maybeCache:()V // method@cddb
+7658f2: 5440 5489                              |0165: iget-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.storeRequest:Lcom/squareup/okhttp/internal/http/CacheRequest; // field@8954
+7658f6: 5441 5889                              |0167: iget-object v1, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+7658fa: 7030 cdcd 0401                         |0169: invoke-direct {v4, v0, v1}, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheWritingResponse:(Lcom/squareup/okhttp/internal/http/CacheRequest;Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cdcd
+765900: 0c00                                   |016c: move-result-object v0
+765902: 7020 e8cd 0400                         |016d: invoke-direct {v4, v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.unzip:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde8
+765908: 0c00                                   |0170: move-result-object v0
+76590a: 5b40 5889                              |0171: iput-object v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+76590e: 0e00                                   |0173: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=559
+        0x0005 line=562
+        0x000e line=563
+        0x0019 line=571
+        0x001d line=572
+        0x0022 line=573
+        0x0028 line=575
+        0x002c line=576
+        0x003b line=580
+        0x004d line=581
+        0x0052 line=585
+        0x005a line=586
+        0x006a line=588
+        0x0070 line=589
+        0x0078 line=590
+        0x0080 line=591
+        0x0086 line=593
+        0x008d line=597
+        0x0091 line=598
+        0x0095 line=600
+        0x0099 line=602
+        0x009c line=604
+        0x00a2 line=605
+        0x00a9 line=609
+        0x00ad line=612
+        0x00b4 line=615
+        0x00b8 line=616
+        0x00be line=617
+        0x00c6 line=618
+        0x00cc line=619
+        0x00d6 line=620
+        0x00e8 line=621
+        0x00f0 line=622
+        0x00f8 line=623
+        0x00fe line=624
+        0x0105 line=625
+        0x0108 line=629
+        0x0110 line=630
+        0x0113 line=631
+        0x011e line=632
+        0x0127 line=635
+        0x0130 line=639
+        0x0136 line=640
+        0x013c line=641
+        0x0146 line=642
+        0x014e line=643
+        0x0156 line=644
+        0x015c line=646
+        0x0162 line=647
+        0x0165 line=648
+      locals        :
+        0x0000 - 0x0174 reg=4 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #11              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'receiveHeaders'
+      type          : '(Lcom/squareup/okhttp/Headers;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 23 16-bit code units
+765910:                                        |[765910] com.squareup.okhttp.internal.http.HttpEngine.receiveHeaders:(Lcom/squareup/okhttp/Headers;)V
+765920: 5420 4d89                              |0000: iget-object v0, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+765924: 6e10 0fca 0000                         |0002: invoke-virtual {v0}, Lcom/squareup/okhttp/OkHttpClient;.getCookieHandler:()Ljava/net/CookieHandler; // method@ca0f
+76592a: 0c00                                   |0005: move-result-object v0
+76592c: 3800 1000                              |0006: if-eqz v0, 0016 // +0010
+765930: 5422 5789                              |0008: iget-object v2, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765934: 6e10 6aca 0200                         |000a: invoke-virtual {v2}, Lcom/squareup/okhttp/Request;.uri:()Ljava/net/URI; // method@ca6a
+76593a: 0c02                                   |000d: move-result-object v2
+76593c: 1201                                   |000e: const/4 v1, #int 0 // #0
+76593e: 7120 08ce 1300                         |000f: invoke-static {v3, v1}, Lcom/squareup/okhttp/internal/http/OkHeaders;.toMultimap:(Lcom/squareup/okhttp/Headers;Ljava/lang/String;)Ljava/util/Map; // method@ce08
+765944: 0c03                                   |0012: move-result-object v3
+765946: 6e30 37d3 2003                         |0013: invoke-virtual {v0, v2, v3}, Ljava/net/CookieHandler;.put:(Ljava/net/URI;Ljava/util/Map;)V // method@d337
+76594c: 0e00                                   |0016: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=876
+        0x0008 line=878
+      locals        :
+        0x0000 - 0x0017 reg=2 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x0017 reg=3 (null) Lcom/squareup/okhttp/Headers;
+
+    #12              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'recover'
+      type          : '(Lcom/squareup/okhttp/internal/http/RouteException;)Lcom/squareup/okhttp/internal/http/HttpEngine;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 12
+      ins           : 2
+      outs          : 9
+      insns size    : 47 16-bit code units
+765950:                                        |[765950] com.squareup.okhttp.internal.http.HttpEngine.recover:(Lcom/squareup/okhttp/internal/http/RouteException;)Lcom/squareup/okhttp/internal/http/HttpEngine;
+765960: 54a0 5589                              |0000: iget-object v0, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+765964: 6e20 44ce b000                         |0002: invoke-virtual {v0, v11}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.recover:(Lcom/squareup/okhttp/internal/http/RouteException;)Z // method@ce44
+76596a: 0a0b                                   |0005: move-result v11
+76596c: 1200                                   |0006: const/4 v0, #int 0 // #0
+76596e: 390b 0300                              |0007: if-nez v11, 000a // +0003
+765972: 1100                                   |0009: return-object v0
+765974: 54ab 4d89                              |000a: iget-object v11, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+765978: 6e10 1aca 0b00                         |000c: invoke-virtual {v11}, Lcom/squareup/okhttp/OkHttpClient;.getRetryOnConnectionFailure:()Z // method@ca1a
+76597e: 0a0b                                   |000f: move-result v11
+765980: 390b 0300                              |0010: if-nez v11, 0013 // +0003
+765984: 1100                                   |0012: return-object v0
+765986: 6e10 cfcd 0a00                         |0013: invoke-virtual {v10}, Lcom/squareup/okhttp/internal/http/HttpEngine;.close:()Lcom/squareup/okhttp/internal/http/StreamAllocation; // method@cdcf
+76598c: 0c07                                   |0016: move-result-object v7
+76598e: 220b d119                              |0017: new-instance v11, Lcom/squareup/okhttp/internal/http/HttpEngine; // type@19d1
+765992: 54a2 4d89                              |0019: iget-object v2, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+765996: 54a3 5789                              |001b: iget-object v3, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+76599a: 55a4 4889                              |001d: iget-boolean v4, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.bufferRequestBody:Z // field@8948
+76599e: 55a5 4c89                              |001f: iget-boolean v5, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.callerWritesRequestBody:Z // field@894c
+7659a2: 55a6 4e89                              |0021: iget-boolean v6, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.forWebSocket:Z // field@894e
+7659a6: 54a0 5289                              |0023: iget-object v0, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+7659aa: 0708                                   |0025: move-object v8, v0
+7659ac: 1f08 d919                              |0026: check-cast v8, Lcom/squareup/okhttp/internal/http/RetryableSink; // type@19d9
+7659b0: 54a9 5189                              |0028: iget-object v9, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.priorResponse:Lcom/squareup/okhttp/Response; // field@8951
+7659b4: 07b1                                   |002a: move-object v1, v11
+7659b6: 7609 c9cd 0100                         |002b: invoke-direct/range {v1, v2, v3, v4, v5, v6, v7, v8, v9}, Lcom/squareup/okhttp/internal/http/HttpEngine;.<init>:(Lcom/squareup/okhttp/OkHttpClient;Lcom/squareup/okhttp/Request;ZZZLcom/squareup/okhttp/internal/http/StreamAllocation;Lcom/squareup/okhttp/internal/http/RetryableSink;Lcom/squareup/okhttp/Response;)V // method@cdc9
+7659bc: 110b                                   |002e: return-object v11
+      catches       : (none)
+      positions     :
+        0x0000 line=346
+        0x000a line=350
+        0x0013 line=354
+        0x0017 line=357
+      locals        :
+        0x0000 - 0x002f reg=10 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x002f reg=11 (null) Lcom/squareup/okhttp/internal/http/RouteException;
+
+    #13              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'recover'
+      type          : '(Ljava/io/IOException;)Lcom/squareup/okhttp/internal/http/HttpEngine;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 7 16-bit code units
+7659c0:                                        |[7659c0] com.squareup.okhttp.internal.http.HttpEngine.recover:(Ljava/io/IOException;)Lcom/squareup/okhttp/internal/http/HttpEngine;
+7659d0: 5410 5289                              |0000: iget-object v0, v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+7659d4: 6e30 e3cd 2100                         |0002: invoke-virtual {v1, v2, v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.recover:(Ljava/io/IOException;Lokio/Sink;)Lcom/squareup/okhttp/internal/http/HttpEngine; // method@cde3
+7659da: 0c01                                   |0005: move-result-object v1
+7659dc: 1101                                   |0006: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=384
+      locals        :
+        0x0000 - 0x0007 reg=1 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x0007 reg=2 (null) Ljava/io/IOException;
+
+    #14              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'recover'
+      type          : '(Ljava/io/IOException;Lokio/Sink;)Lcom/squareup/okhttp/internal/http/HttpEngine;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 13
+      ins           : 3
+      outs          : 9
+      insns size    : 45 16-bit code units
+7659e0:                                        |[7659e0] com.squareup.okhttp.internal.http.HttpEngine.recover:(Ljava/io/IOException;Lokio/Sink;)Lcom/squareup/okhttp/internal/http/HttpEngine;
+7659f0: 54a0 5589                              |0000: iget-object v0, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+7659f4: 6e30 45ce b00c                         |0002: invoke-virtual {v0, v11, v12}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.recover:(Ljava/io/IOException;Lokio/Sink;)Z // method@ce45
+7659fa: 0a0b                                   |0005: move-result v11
+7659fc: 1200                                   |0006: const/4 v0, #int 0 // #0
+7659fe: 390b 0300                              |0007: if-nez v11, 000a // +0003
+765a02: 1100                                   |0009: return-object v0
+765a04: 54ab 4d89                              |000a: iget-object v11, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+765a08: 6e10 1aca 0b00                         |000c: invoke-virtual {v11}, Lcom/squareup/okhttp/OkHttpClient;.getRetryOnConnectionFailure:()Z // method@ca1a
+765a0e: 0a0b                                   |000f: move-result v11
+765a10: 390b 0300                              |0010: if-nez v11, 0013 // +0003
+765a14: 1100                                   |0012: return-object v0
+765a16: 6e10 cfcd 0a00                         |0013: invoke-virtual {v10}, Lcom/squareup/okhttp/internal/http/HttpEngine;.close:()Lcom/squareup/okhttp/internal/http/StreamAllocation; // method@cdcf
+765a1c: 0c07                                   |0016: move-result-object v7
+765a1e: 220b d119                              |0017: new-instance v11, Lcom/squareup/okhttp/internal/http/HttpEngine; // type@19d1
+765a22: 54a2 4d89                              |0019: iget-object v2, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+765a26: 54a3 5789                              |001b: iget-object v3, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765a2a: 55a4 4889                              |001d: iget-boolean v4, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.bufferRequestBody:Z // field@8948
+765a2e: 55a5 4c89                              |001f: iget-boolean v5, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.callerWritesRequestBody:Z // field@894c
+765a32: 55a6 4e89                              |0021: iget-boolean v6, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.forWebSocket:Z // field@894e
+765a36: 07c8                                   |0023: move-object v8, v12
+765a38: 1f08 d919                              |0024: check-cast v8, Lcom/squareup/okhttp/internal/http/RetryableSink; // type@19d9
+765a3c: 54a9 5189                              |0026: iget-object v9, v10, Lcom/squareup/okhttp/internal/http/HttpEngine;.priorResponse:Lcom/squareup/okhttp/Response; // field@8951
+765a40: 07b1                                   |0028: move-object v1, v11
+765a42: 7609 c9cd 0100                         |0029: invoke-direct/range {v1, v2, v3, v4, v5, v6, v7, v8, v9}, Lcom/squareup/okhttp/internal/http/HttpEngine;.<init>:(Lcom/squareup/okhttp/OkHttpClient;Lcom/squareup/okhttp/Request;ZZZLcom/squareup/okhttp/internal/http/StreamAllocation;Lcom/squareup/okhttp/internal/http/RetryableSink;Lcom/squareup/okhttp/Response;)V // method@cdc9
+765a48: 110b                                   |002c: return-object v11
+      catches       : (none)
+      positions     :
+        0x0000 line=368
+        0x000a line=372
+        0x0013 line=376
+        0x0017 line=379
+      locals        :
+        0x0000 - 0x002d reg=10 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x002d reg=11 (null) Ljava/io/IOException;
+        0x0000 - 0x002d reg=12 (null) Lokio/Sink;
+
+    #15              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'releaseStreamAllocation'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 6 16-bit code units
+765a4c:                                        |[765a4c] com.squareup.okhttp.internal.http.HttpEngine.releaseStreamAllocation:()V
+765a5c: 5400 5589                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/http/HttpEngine;.streamAllocation:Lcom/squareup/okhttp/internal/http/StreamAllocation; // field@8955
+765a60: 6e10 46ce 0000                         |0002: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.release:()V // method@ce46
+765a66: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=413
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #16              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'sameConnection'
+      type          : '(Lcom/squareup/okhttp/HttpUrl;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 48 16-bit code units
+765a68:                                        |[765a68] com.squareup.okhttp.internal.http.HttpEngine.sameConnection:(Lcom/squareup/okhttp/HttpUrl;)Z
+765a78: 5422 5789                              |0000: iget-object v2, v2, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765a7c: 6e10 64ca 0200                         |0002: invoke-virtual {v2}, Lcom/squareup/okhttp/Request;.httpUrl:()Lcom/squareup/okhttp/HttpUrl; // method@ca64
+765a82: 0c02                                   |0005: move-result-object v2
+765a84: 6e10 b9c9 0200                         |0006: invoke-virtual {v2}, Lcom/squareup/okhttp/HttpUrl;.host:()Ljava/lang/String; // method@c9b9
+765a8a: 0c00                                   |0009: move-result-object v0
+765a8c: 6e10 b9c9 0300                         |000a: invoke-virtual {v3}, Lcom/squareup/okhttp/HttpUrl;.host:()Ljava/lang/String; // method@c9b9
+765a92: 0c01                                   |000d: move-result-object v1
+765a94: 6e20 03d2 1000                         |000e: invoke-virtual {v0, v1}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+765a9a: 0a00                                   |0011: move-result v0
+765a9c: 3800 1c00                              |0012: if-eqz v0, 002e // +001c
+765aa0: 6e10 c6c9 0200                         |0014: invoke-virtual {v2}, Lcom/squareup/okhttp/HttpUrl;.port:()I // method@c9c6
+765aa6: 0a00                                   |0017: move-result v0
+765aa8: 6e10 c6c9 0300                         |0018: invoke-virtual {v3}, Lcom/squareup/okhttp/HttpUrl;.port:()I // method@c9c6
+765aae: 0a01                                   |001b: move-result v1
+765ab0: 3310 1200                              |001c: if-ne v0, v1, 002e // +0012
+765ab4: 6e10 d0c9 0200                         |001e: invoke-virtual {v2}, Lcom/squareup/okhttp/HttpUrl;.scheme:()Ljava/lang/String; // method@c9d0
+765aba: 0c02                                   |0021: move-result-object v2
+765abc: 6e10 d0c9 0300                         |0022: invoke-virtual {v3}, Lcom/squareup/okhttp/HttpUrl;.scheme:()Ljava/lang/String; // method@c9d0
+765ac2: 0c03                                   |0025: move-result-object v3
+765ac4: 6e20 03d2 3200                         |0026: invoke-virtual {v2, v3}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+765aca: 0a02                                   |0029: move-result v2
+765acc: 3802 0400                              |002a: if-eqz v2, 002e // +0004
+765ad0: 1212                                   |002c: const/4 v2, #int 1 // #1
+765ad2: 2802                                   |002d: goto 002f // +0002
+765ad4: 1202                                   |002e: const/4 v2, #int 0 // #0
+765ad6: 0f02                                   |002f: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=966
+        0x0006 line=967
+        0x0014 line=968
+        0x001e line=969
+      locals        :
+        0x0000 - 0x0030 reg=2 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+        0x0000 - 0x0030 reg=3 (null) Lcom/squareup/okhttp/HttpUrl;
+
+    #17              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'sendRequest'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 5
+      insns size    : 285 16-bit code units
+765ad8:                                        |[765ad8] com.squareup.okhttp.internal.http.HttpEngine.sendRequest:()V
+765ae8: 5460 4b89                              |0000: iget-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheStrategy:Lcom/squareup/okhttp/internal/http/CacheStrategy; // field@894b
+765aec: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+765af0: 0e00                                   |0004: return-void
+765af2: 5460 4f89                              |0005: iget-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+765af6: 3900 1001                              |0007: if-nez v0, 0117 // +0110
+765afa: 5460 5789                              |0009: iget-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765afe: 7020 dccd 0600                         |000b: invoke-direct {v6, v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:(Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Request; // method@cddc
+765b04: 0c00                                   |000e: move-result-object v0
+765b06: 6201 e387                              |000f: sget-object v1, Lcom/squareup/okhttp/internal/Internal;.instance:Lcom/squareup/okhttp/internal/Internal; // field@87e3
+765b0a: 5462 4d89                              |0011: iget-object v2, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.client:Lcom/squareup/okhttp/OkHttpClient; // field@894d
+765b0e: 6e20 50cb 2100                         |0013: invoke-virtual {v1, v2}, Lcom/squareup/okhttp/internal/Internal;.internalCache:(Lcom/squareup/okhttp/OkHttpClient;)Lcom/squareup/okhttp/internal/InternalCache; // method@cb50
+765b14: 0c01                                   |0016: move-result-object v1
+765b16: 3801 0700                              |0017: if-eqz v1, 001e // +0007
+765b1a: 7220 54cb 0100                         |0019: invoke-interface {v1, v0}, Lcom/squareup/okhttp/internal/InternalCache;.get:(Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Response; // method@cb54
+765b20: 0c02                                   |001c: move-result-object v2
+765b22: 2802                                   |001d: goto 001f // +0002
+765b24: 1202                                   |001e: const/4 v2, #int 0 // #0
+765b26: 7100 5bd2 0000                         |001f: invoke-static {}, Ljava/lang/System;.currentTimeMillis:()J // method@d25b
+765b2c: 0b03                                   |0022: move-result-wide v3
+765b2e: 2205 bf19                              |0023: new-instance v5, Lcom/squareup/okhttp/internal/http/CacheStrategy$Factory; // type@19bf
+765b32: 7052 58cd 3504                         |0025: invoke-direct {v5, v3, v4, v0, v2}, Lcom/squareup/okhttp/internal/http/CacheStrategy$Factory;.<init>:(JLcom/squareup/okhttp/Request;Lcom/squareup/okhttp/Response;)V // method@cd58
+765b38: 6e10 5bcd 0500                         |0028: invoke-virtual {v5}, Lcom/squareup/okhttp/internal/http/CacheStrategy$Factory;.get:()Lcom/squareup/okhttp/internal/http/CacheStrategy; // method@cd5b
+765b3e: 0c03                                   |002b: move-result-object v3
+765b40: 5b63 4b89                              |002c: iput-object v3, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheStrategy:Lcom/squareup/okhttp/internal/http/CacheStrategy; // field@894b
+765b44: 5433 0589                              |002e: iget-object v3, v3, Lcom/squareup/okhttp/internal/http/CacheStrategy;.networkRequest:Lcom/squareup/okhttp/Request; // field@8905
+765b48: 5b63 5089                              |0030: iput-object v3, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+765b4c: 5463 4b89                              |0032: iget-object v3, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheStrategy:Lcom/squareup/okhttp/internal/http/CacheStrategy; // field@894b
+765b50: 5433 0489                              |0034: iget-object v3, v3, Lcom/squareup/okhttp/internal/http/CacheStrategy;.cacheResponse:Lcom/squareup/okhttp/Response; // field@8904
+765b54: 5b63 4a89                              |0036: iput-object v3, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+765b58: 3801 0700                              |0038: if-eqz v1, 003f // +0007
+765b5c: 5463 4b89                              |003a: iget-object v3, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheStrategy:Lcom/squareup/okhttp/internal/http/CacheStrategy; // field@894b
+765b60: 7220 58cb 3100                         |003c: invoke-interface {v1, v3}, Lcom/squareup/okhttp/internal/InternalCache;.trackResponse:(Lcom/squareup/okhttp/internal/http/CacheStrategy;)V // method@cb58
+765b66: 3802 0d00                              |003f: if-eqz v2, 004c // +000d
+765b6a: 5461 4a89                              |0041: iget-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+765b6e: 3901 0900                              |0043: if-nez v1, 004c // +0009
+765b72: 6e10 abca 0200                         |0045: invoke-virtual {v2}, Lcom/squareup/okhttp/Response;.body:()Lcom/squareup/okhttp/ResponseBody; // method@caab
+765b78: 0c01                                   |0048: move-result-object v1
+765b7a: 7110 97cb 0100                         |0049: invoke-static {v1}, Lcom/squareup/okhttp/internal/Util;.closeQuietly:(Ljava/io/Closeable;)V // method@cb97
+765b80: 5461 5089                              |004c: iget-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+765b84: 3801 6400                              |004e: if-eqz v1, 00b2 // +0064
+765b88: 7010 d1cd 0600                         |0050: invoke-direct {v6}, Lcom/squareup/okhttp/internal/http/HttpEngine;.connect:()Lcom/squareup/okhttp/internal/http/HttpStream; // method@cdd1
+765b8e: 0c01                                   |0053: move-result-object v1
+765b90: 5b61 4f89                              |0054: iput-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+765b94: 7220 f5cd 6100                         |0056: invoke-interface {v1, v6}, Lcom/squareup/okhttp/internal/http/HttpStream;.setHttpEngine:(Lcom/squareup/okhttp/internal/http/HttpEngine;)V // method@cdf5
+765b9a: 5561 4c89                              |0059: iget-boolean v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.callerWritesRequestBody:Z // field@894c
+765b9e: 3801 bb00                              |005b: if-eqz v1, 0116 // +00bb
+765ba2: 5461 5089                              |005d: iget-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+765ba6: 6e20 ddcd 1600                         |005f: invoke-virtual {v6, v1}, Lcom/squareup/okhttp/internal/http/HttpEngine;.permitsRequestBody:(Lcom/squareup/okhttp/Request;)Z // method@cddd
+765bac: 0a01                                   |0062: move-result v1
+765bae: 3801 b300                              |0063: if-eqz v1, 0116 // +00b3
+765bb2: 5461 5289                              |0065: iget-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+765bb6: 3901 af00                              |0067: if-nez v1, 0116 // +00af
+765bba: 7110 00ce 0000                         |0069: invoke-static {v0}, Lcom/squareup/okhttp/internal/http/OkHeaders;.contentLength:(Lcom/squareup/okhttp/Request;)J // method@ce00
+765bc0: 0b00                                   |006c: move-result-wide v0
+765bc2: 5562 4889                              |006d: iget-boolean v2, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.bufferRequestBody:Z // field@8948
+765bc6: 3802 3100                              |006f: if-eqz v2, 00a0 // +0031
+765bca: 1702 ffff ff7f                         |0071: const-wide/32 v2, #float nan // #7fffffff
+765bd0: 3102 0002                              |0074: cmp-long v2, v0, v2
+765bd4: 3c02 2200                              |0076: if-gtz v2, 0098 // +0022
+765bd8: 1602 ffff                              |0078: const-wide/16 v2, #int -1 // #ffff
+765bdc: 3102 0002                              |007a: cmp-long v2, v0, v2
+765be0: 3802 1300                              |007c: if-eqz v2, 008f // +0013
+765be4: 5462 4f89                              |007e: iget-object v2, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+765be8: 5463 5089                              |0080: iget-object v3, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+765bec: 7220 f7cd 3200                         |0082: invoke-interface {v2, v3}, Lcom/squareup/okhttp/internal/http/HttpStream;.writeRequestHeaders:(Lcom/squareup/okhttp/Request;)V // method@cdf7
+765bf2: 2202 d919                              |0085: new-instance v2, Lcom/squareup/okhttp/internal/http/RetryableSink; // type@19d9
+765bf6: 8400                                   |0087: long-to-int v0, v0
+765bf8: 7020 1ace 0200                         |0088: invoke-direct {v2, v0}, Lcom/squareup/okhttp/internal/http/RetryableSink;.<init>:(I)V // method@ce1a
+765bfe: 5b62 5289                              |008b: iput-object v2, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+765c02: 2900 8900                              |008d: goto/16 0116 // +0089
+765c06: 2200 d919                              |008f: new-instance v0, Lcom/squareup/okhttp/internal/http/RetryableSink; // type@19d9
+765c0a: 7010 19ce 0000                         |0091: invoke-direct {v0}, Lcom/squareup/okhttp/internal/http/RetryableSink;.<init>:()V // method@ce19
+765c10: 5b60 5289                              |0094: iput-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+765c14: 2900 8000                              |0096: goto/16 0116 // +0080
+765c18: 2206 7b1a                              |0098: new-instance v6, Ljava/lang/IllegalStateException; // type@1a7b
+765c1c: 1a00 8d6b                              |009a: const-string v0, "Use setFixedLengthStreamingMode() or setChunkedStreamingMode() for requests larger than 2 GiB." // string@6b8d
+765c20: 7020 4cd1 0600                         |009c: invoke-direct {v6, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+765c26: 2706                                   |009f: throw v6
+765c28: 5462 4f89                              |00a0: iget-object v2, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+765c2c: 5463 5089                              |00a2: iget-object v3, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+765c30: 7220 f7cd 3200                         |00a4: invoke-interface {v2, v3}, Lcom/squareup/okhttp/internal/http/HttpStream;.writeRequestHeaders:(Lcom/squareup/okhttp/Request;)V // method@cdf7
+765c36: 5462 4f89                              |00a7: iget-object v2, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.httpStream:Lcom/squareup/okhttp/internal/http/HttpStream; // field@894f
+765c3a: 5463 5089                              |00a9: iget-object v3, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.networkRequest:Lcom/squareup/okhttp/Request; // field@8950
+765c3e: 7240 f1cd 3210                         |00ab: invoke-interface {v2, v3, v0, v1}, Lcom/squareup/okhttp/internal/http/HttpStream;.createRequestBody:(Lcom/squareup/okhttp/Request;J)Lokio/Sink; // method@cdf1
+765c44: 0c00                                   |00ae: move-result-object v0
+765c46: 5b60 5289                              |00af: iput-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.requestBodyOut:Lokio/Sink; // field@8952
+765c4a: 2865                                   |00b1: goto 0116 // +0065
+765c4c: 5460 4a89                              |00b2: iget-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+765c50: 3800 2700                              |00b4: if-eqz v0, 00db // +0027
+765c54: 6e10 b9ca 0000                         |00b6: invoke-virtual {v0}, Lcom/squareup/okhttp/Response;.newBuilder:()Lcom/squareup/okhttp/Response$Builder; // method@cab9
+765c5a: 0c00                                   |00b9: move-result-object v0
+765c5c: 5461 5789                              |00ba: iget-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765c60: 6e20 9eca 1000                         |00bc: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.request:(Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Response$Builder; // method@ca9e
+765c66: 0c00                                   |00bf: move-result-object v0
+765c68: 5461 5189                              |00c0: iget-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.priorResponse:Lcom/squareup/okhttp/Response; // field@8951
+765c6c: 7110 e7cd 0100                         |00c2: invoke-static {v1}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+765c72: 0c01                                   |00c5: move-result-object v1
+765c74: 6e20 9bca 1000                         |00c6: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.priorResponse:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response$Builder; // method@ca9b
+765c7a: 0c00                                   |00c9: move-result-object v0
+765c7c: 5461 4a89                              |00ca: iget-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.cacheResponse:Lcom/squareup/okhttp/Response; // field@894a
+765c80: 7110 e7cd 0100                         |00cc: invoke-static {v1}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+765c86: 0c01                                   |00cf: move-result-object v1
+765c88: 6e20 92ca 1000                         |00d0: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.cacheResponse:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response$Builder; // method@ca92
+765c8e: 0c00                                   |00d3: move-result-object v0
+765c90: 6e10 91ca 0000                         |00d4: invoke-virtual {v0}, Lcom/squareup/okhttp/Response$Builder;.build:()Lcom/squareup/okhttp/Response; // method@ca91
+765c96: 0c00                                   |00d7: move-result-object v0
+765c98: 5b60 5889                              |00d8: iput-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+765c9c: 2834                                   |00da: goto 010e // +0034
+765c9e: 2200 6f19                              |00db: new-instance v0, Lcom/squareup/okhttp/Response$Builder; // type@196f
+765ca2: 7010 82ca 0000                         |00dd: invoke-direct {v0}, Lcom/squareup/okhttp/Response$Builder;.<init>:()V // method@ca82
+765ca8: 5461 5789                              |00e0: iget-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userRequest:Lcom/squareup/okhttp/Request; // field@8957
+765cac: 6e20 9eca 1000                         |00e2: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.request:(Lcom/squareup/okhttp/Request;)Lcom/squareup/okhttp/Response$Builder; // method@ca9e
+765cb2: 0c00                                   |00e5: move-result-object v0
+765cb4: 5461 5189                              |00e6: iget-object v1, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.priorResponse:Lcom/squareup/okhttp/Response; // field@8951
+765cb8: 7110 e7cd 0100                         |00e8: invoke-static {v1}, Lcom/squareup/okhttp/internal/http/HttpEngine;.stripBody:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde7
+765cbe: 0c01                                   |00eb: move-result-object v1
+765cc0: 6e20 9bca 1000                         |00ec: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.priorResponse:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response$Builder; // method@ca9b
+765cc6: 0c00                                   |00ef: move-result-object v0
+765cc8: 6201 6a87                              |00f0: sget-object v1, Lcom/squareup/okhttp/Protocol;.HTTP_1_1:Lcom/squareup/okhttp/Protocol; // field@876a
+765ccc: 6e20 9cca 1000                         |00f2: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.protocol:(Lcom/squareup/okhttp/Protocol;)Lcom/squareup/okhttp/Response$Builder; // method@ca9c
+765cd2: 0c00                                   |00f5: move-result-object v0
+765cd4: 1301 f801                              |00f6: const/16 v1, #int 504 // #1f8
+765cd8: 6e20 95ca 1000                         |00f8: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.code:(I)Lcom/squareup/okhttp/Response$Builder; // method@ca95
+765cde: 0c00                                   |00fb: move-result-object v0
+765ce0: 1a01 296b                              |00fc: const-string v1, "Unsatisfiable Request (only-if-cached)" // string@6b29
+765ce4: 6e20 99ca 1000                         |00fe: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.message:(Ljava/lang/String;)Lcom/squareup/okhttp/Response$Builder; // method@ca99
+765cea: 0c00                                   |0101: move-result-object v0
+765cec: 6201 4689                              |0102: sget-object v1, Lcom/squareup/okhttp/internal/http/HttpEngine;.EMPTY_BODY:Lcom/squareup/okhttp/ResponseBody; // field@8946
+765cf0: 6e20 90ca 1000                         |0104: invoke-virtual {v0, v1}, Lcom/squareup/okhttp/Response$Builder;.body:(Lcom/squareup/okhttp/ResponseBody;)Lcom/squareup/okhttp/Response$Builder; // method@ca90
+765cf6: 0c00                                   |0107: move-result-object v0
+765cf8: 6e10 91ca 0000                         |0108: invoke-virtual {v0}, Lcom/squareup/okhttp/Response$Builder;.build:()Lcom/squareup/okhttp/Response; // method@ca91
+765cfe: 0c00                                   |010b: move-result-object v0
+765d00: 5b60 5889                              |010c: iput-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+765d04: 5460 5889                              |010e: iget-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+765d08: 7020 e8cd 0600                         |0110: invoke-direct {v6, v0}, Lcom/squareup/okhttp/internal/http/HttpEngine;.unzip:(Lcom/squareup/okhttp/Response;)Lcom/squareup/okhttp/Response; // method@cde8
+765d0e: 0c00                                   |0113: move-result-object v0
+765d10: 5b60 5889                              |0114: iput-object v0, v6, Lcom/squareup/okhttp/internal/http/HttpEngine;.userResponse:Lcom/squareup/okhttp/Response; // field@8958
+765d14: 0e00                                   |0116: return-void
+765d16: 2206 7b1a                              |0117: new-instance v6, Ljava/lang/IllegalStateException; // type@1a7b
+765d1a: 7010 4bd1 0600                         |0119: invoke-direct {v6}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+765d20: 2706                                   |011c: throw v6
+      catches       : (none)
+      positions     :
+        0x0000 line=200
+        0x0005 line=201
+        0x0009 line=203
+        0x000f line=205
+        0x0019 line=207
+        0x001f line=210
+        0x0023 line=211
+        0x002e line=212
+        0x0032 line=213
+        0x003a line=216
+        0x0041 line=219
+        0x0045 line=220
+        0x004c line=223
+        0x0050 line=224
+        0x0056 line=225
+        0x0059 line=231
+        0x0069 line=232
+        0x006d line=233
+        0x007e line=241
+        0x0085 line=242
+        0x008f line=247
+        0x0098 line=235
+        0x00a0 line=250
+        0x00a7 line=251
+        0x00b2 line=256
+        0x00b6 line=258
+        0x00bc line=259
+        0x00c2 line=260
+        0x00cc line=261
+        0x00d4 line=262
+        0x00db line=265
+        0x00e2 line=266
+        0x00e8 line=267
+        0x00f2 line=268
+        0x00f8 line=269
+        0x00fe line=270
+        0x0104 line=271
+        0x0108 line=272
+        0x010e line=275
+        0x0117 line=201
+      locals        :
+        0x0000 - 0x011d reg=6 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+    #18              : (in Lcom/squareup/okhttp/internal/http/HttpEngine;)
+      name          : 'writingRequestHeaders'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 1
+      insns size    : 21 16-bit code units
+765d24:                                        |[765d24] com.squareup.okhttp.internal.http.HttpEngine.writingRequestHeaders:()V
+765d34: 5340 5389                              |0000: iget-wide v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.sentRequestMillis:J // field@8953
+765d38: 1602 ffff                              |0002: const-wide/16 v2, #int -1 // #ffff
+765d3c: 3100 0002                              |0004: cmp-long v0, v0, v2
+765d40: 3900 0900                              |0006: if-nez v0, 000f // +0009
+765d44: 7100 5bd2 0000                         |0008: invoke-static {}, Ljava/lang/System;.currentTimeMillis:()J // method@d25b
+765d4a: 0b00                                   |000b: move-result-wide v0
+765d4c: 5a40 5389                              |000c: iput-wide v0, v4, Lcom/squareup/okhttp/internal/http/HttpEngine;.sentRequestMillis:J // field@8953
+765d50: 0e00                                   |000e: return-void
+765d52: 2204 7b1a                              |000f: new-instance v4, Ljava/lang/IllegalStateException; // type@1a7b
+765d56: 7010 4bd1 0400                         |0011: invoke-direct {v4}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+765d5c: 2704                                   |0014: throw v4
+      catches       : (none)
+      positions     :
+        0x0000 line=298
+        0x0008 line=299
+        0x000f line=298
+      locals        :
+        0x0000 - 0x0015 reg=4 this Lcom/squareup/okhttp/internal/http/HttpEngine;
+
+  source_file_idx   : 10920 (HttpEngine.java)
+

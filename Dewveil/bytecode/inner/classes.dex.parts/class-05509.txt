@@ -1,0 +1,417 @@
+Class #5509            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/SyncTask;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/lang/Runnable;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : 'firebaseMessaging'
+      type          : 'Lcom/google/firebase/messaging/FirebaseMessaging;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : 'nextDelaySeconds'
+      type          : 'J'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : 'processorExecutor'
+      type          : 'Ljava/util/concurrent/ExecutorService;'
+      access        : 0x0000 ()
+    #3              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : 'syncWakeLock'
+      type          : 'Landroid/os/PowerManager$WakeLock;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : '<init>'
+      type          : '(Lcom/google/firebase/messaging/FirebaseMessaging;J)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 13
+      ins           : 4
+      outs          : 8
+      insns size    : 59 16-bit code units
+72acb8:                                        |[72acb8] com.google.firebase.messaging.SyncTask.<init>:(Lcom/google/firebase/messaging/FirebaseMessaging;J)V
+72acc8: 7010 c8d1 0900                         |0000: invoke-direct {v9}, Ljava/lang/Object;.<init>:()V // method@d1c8
+72acce: 2208 8c1b                              |0003: new-instance v8, Ljava/util/concurrent/ThreadPoolExecutor; // type@1b8c
+72acd2: 6205 4b8a                              |0005: sget-object v5, Ljava/util/concurrent/TimeUnit;.SECONDS:Ljava/util/concurrent/TimeUnit; // field@8a4b
+72acd6: 2206 821b                              |0007: new-instance v6, Ljava/util/concurrent/LinkedBlockingQueue; // type@1b82
+72acda: 7010 c4d6 0600                         |0009: invoke-direct {v6}, Ljava/util/concurrent/LinkedBlockingQueue;.<init>:()V // method@d6c4
+72ace0: 2207 9911                              |000c: new-instance v7, Lcom/google/android/gms/common/util/concurrent/NamedThreadFactory; // type@1199
+72ace4: 1a00 b395                              |000e: const-string v0, "firebase-iid-executor" // string@95b3
+72ace8: 7020 c799 0700                         |0010: invoke-direct {v7, v0}, Lcom/google/android/gms/common/util/concurrent/NamedThreadFactory;.<init>:(Ljava/lang/String;)V // method@99c7
+72acee: 1212                                   |0013: const/4 v2, #int 1 // #1
+72acf0: 1603 1e00                              |0014: const-wide/16 v3, #int 30 // #1e
+72acf4: 1201                                   |0016: const/4 v1, #int 0 // #0
+72acf6: 0780                                   |0017: move-object v0, v8
+72acf8: 7608 e0d6 0000                         |0018: invoke-direct/range {v0, v1, v2, v3, v4, v5, v6, v7}, Ljava/util/concurrent/ThreadPoolExecutor;.<init>:(IIJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/BlockingQueue;Ljava/util/concurrent/ThreadFactory;)V // method@d6e0
+72acfe: 5b98 eb73                              |001b: iput-object v8, v9, Lcom/google/firebase/messaging/SyncTask;.processorExecutor:Ljava/util/concurrent/ExecutorService; // field@73eb
+72ad02: 5b9a e973                              |001d: iput-object v10, v9, Lcom/google/firebase/messaging/SyncTask;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73e9
+72ad06: 5a9b ea73                              |001f: iput-wide v11, v9, Lcom/google/firebase/messaging/SyncTask;.nextDelaySeconds:J // field@73ea
+72ad0a: 6e10 09c1 0900                         |0021: invoke-virtual {v9}, Lcom/google/firebase/messaging/SyncTask;.getContext:()Landroid/content/Context; // method@c109
+72ad10: 0c0a                                   |0024: move-result-object v10
+72ad12: 1a0b 58ca                              |0025: const-string v11, "power" // string@ca58
+72ad16: 6e20 4c02 ba00                         |0027: invoke-virtual {v10, v11}, Landroid/content/Context;.getSystemService:(Ljava/lang/String;)Ljava/lang/Object; // method@024c
+72ad1c: 0c0a                                   |002a: move-result-object v10
+72ad1e: 1f0a 4301                              |002b: check-cast v10, Landroid/os/PowerManager; // type@0143
+72ad22: 121b                                   |002d: const/4 v11, #int 1 // #1
+72ad24: 1a0c ae93                              |002e: const-string v12, "fiid-sync" // string@93ae
+72ad28: 6e30 cc06 ba0c                         |0030: invoke-virtual {v10, v11, v12}, Landroid/os/PowerManager;.newWakeLock:(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock; // method@06cc
+72ad2e: 0c0a                                   |0033: move-result-object v10
+72ad30: 5b9a ec73                              |0034: iput-object v10, v9, Lcom/google/firebase/messaging/SyncTask;.syncWakeLock:Landroid/os/PowerManager$WakeLock; // field@73ec
+72ad34: 1209                                   |0036: const/4 v9, #int 0 // #0
+72ad36: 6e20 c906 9a00                         |0037: invoke-virtual {v10, v9}, Landroid/os/PowerManager$WakeLock;.setReferenceCounted:(Z)V // method@06c9
+72ad3c: 0e00                                   |003a: return-void
+      catches       : (none)
+      positions     :
+        0x0009 line=1
+        0x0021 line=2
+        0x0030 line=3
+        0x0037 line=4
+      locals        :
+        0x0000 - 0x003b reg=9 this Lcom/google/firebase/messaging/SyncTask;
+        0x0000 - 0x003b reg=10 (null) Lcom/google/firebase/messaging/FirebaseMessaging;
+        0x0000 - 0x003b reg=11 (null) J
+
+    #1              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : 'access$000'
+      type          : '(Lcom/google/firebase/messaging/SyncTask;)Lcom/google/firebase/messaging/FirebaseMessaging;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+72ad40:                                        |[72ad40] com.google.firebase.messaging.SyncTask.access$000:(Lcom/google/firebase/messaging/SyncTask;)Lcom/google/firebase/messaging/FirebaseMessaging;
+72ad50: 5400 e973                              |0000: iget-object v0, v0, Lcom/google/firebase/messaging/SyncTask;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73e9
+72ad54: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/google/firebase/messaging/SyncTask;
+
+    #2              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : 'isDebugLogEnabled'
+      type          : '()Z'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 2
+      insns size    : 8 16-bit code units
+72ad58:                                        |[72ad58] com.google.firebase.messaging.SyncTask.isDebugLogEnabled:()Z
+72ad68: 1a00 6c28                              |0000: const-string v0, "FirebaseMessaging" // string@286c
+72ad6c: 1231                                   |0002: const/4 v1, #int 3 // #3
+72ad6e: 7120 2308 1000                         |0003: invoke-static {v0, v1}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+72ad74: 0a00                                   |0006: move-result v0
+72ad76: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0003 line=1
+      locals        :
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : 'getContext'
+      type          : '()Landroid/content/Context;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+72ad78:                                        |[72ad78] com.google.firebase.messaging.SyncTask.getContext:()Landroid/content/Context;
+72ad88: 5400 e973                              |0000: iget-object v0, v0, Lcom/google/firebase/messaging/SyncTask;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73e9
+72ad8c: 6e10 01c0 0000                         |0002: invoke-virtual {v0}, Lcom/google/firebase/messaging/FirebaseMessaging;.getApplicationContext:()Landroid/content/Context; // method@c001
+72ad92: 0c00                                   |0005: move-result-object v0
+72ad94: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/google/firebase/messaging/SyncTask;
+
+    #1              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : 'isDeviceConnected'
+      type          : '()Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 32 16-bit code units
+72ad98:                                        |[72ad98] com.google.firebase.messaging.SyncTask.isDeviceConnected:()Z
+72ada8: 6e10 09c1 0100                         |0000: invoke-virtual {v1}, Lcom/google/firebase/messaging/SyncTask;.getContext:()Landroid/content/Context; // method@c109
+72adae: 0c01                                   |0003: move-result-object v1
+72adb0: 1a00 4489                              |0004: const-string v0, "connectivity" // string@8944
+72adb4: 6e20 4c02 0100                         |0006: invoke-virtual {v1, v0}, Landroid/content/Context;.getSystemService:(Ljava/lang/String;)Ljava/lang/Object; // method@024c
+72adba: 0c01                                   |0009: move-result-object v1
+72adbc: 1f01 1601                              |000a: check-cast v1, Landroid/net/ConnectivityManager; // type@0116
+72adc0: 3801 0700                              |000c: if-eqz v1, 0013 // +0007
+72adc4: 6e10 9c05 0100                         |000e: invoke-virtual {v1}, Landroid/net/ConnectivityManager;.getActiveNetworkInfo:()Landroid/net/NetworkInfo; // method@059c
+72adca: 0c01                                   |0011: move-result-object v1
+72adcc: 2802                                   |0012: goto 0014 // +0002
+72adce: 1201                                   |0013: const/4 v1, #int 0 // #0
+72add0: 3801 0a00                              |0014: if-eqz v1, 001e // +000a
+72add4: 6e10 a405 0100                         |0016: invoke-virtual {v1}, Landroid/net/NetworkInfo;.isConnected:()Z // method@05a4
+72adda: 0a01                                   |0019: move-result v1
+72addc: 3801 0400                              |001a: if-eqz v1, 001e // +0004
+72ade0: 1211                                   |001c: const/4 v1, #int 1 // #1
+72ade2: 0f01                                   |001d: return v1
+72ade4: 1201                                   |001e: const/4 v1, #int 0 // #0
+72ade6: 0f01                                   |001f: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x000e line=2
+        0x0016 line=3
+      locals        :
+        0x0000 - 0x0020 reg=1 this Lcom/google/firebase/messaging/SyncTask;
+
+    #2              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : 'maybeRefreshToken'
+      type          : '()Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 101 16-bit code units
+72ade8:                                        |[72ade8] com.google.firebase.messaging.SyncTask.maybeRefreshToken:()Z
+72adf8: 1a00 6c28                              |0000: const-string v0, "FirebaseMessaging" // string@286c
+72adfc: 1201                                   |0002: const/4 v1, #int 0 // #0
+72adfe: 5444 e973                              |0003: iget-object v4, v4, Lcom/google/firebase/messaging/SyncTask;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73e9
+72ae02: 6e10 fcbf 0400                         |0005: invoke-virtual {v4}, Lcom/google/firebase/messaging/FirebaseMessaging;.blockingGetToken:()Ljava/lang/String; // method@bffc
+72ae08: 0c04                                   |0008: move-result-object v4
+72ae0a: 3904 0800                              |0009: if-nez v4, 0011 // +0008
+72ae0e: 1a04 b868                              |000b: const-string v4, "Token retrieval failed: null" // string@68b8
+72ae12: 7120 1e08 4000                         |000d: invoke-static {v0, v4}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@081e
+72ae18: 0f01                                   |0010: return v1
+72ae1a: 1234                                   |0011: const/4 v4, #int 3 // #3
+72ae1c: 7120 2308 4000                         |0012: invoke-static {v0, v4}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+72ae22: 0a04                                   |0015: move-result v4
+72ae24: 3804 0700                              |0016: if-eqz v4, 001d // +0007
+72ae28: 1a04 b968                              |0018: const-string v4, "Token successfully retrieved" // string@68b9
+72ae2c: 7120 1c08 4000                         |001a: invoke-static {v0, v4}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+72ae32: 1214                                   |001d: const/4 v4, #int 1 // #1
+72ae34: 0f04                                   |001e: return v4
+72ae36: 1a04 b568                              |001f: const-string v4, "Token retrieval failed with SecurityException. Will retry token retrieval" // string@68b5
+72ae3a: 7120 2708 4000                         |0021: invoke-static {v0, v4}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+72ae40: 0f01                                   |0024: return v1
+72ae42: 0d04                                   |0025: move-exception v4
+72ae44: 6e10 18d0 0400                         |0026: invoke-virtual {v4}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+72ae4a: 0c02                                   |0029: move-result-object v2
+72ae4c: 7110 40c0 0200                         |002a: invoke-static {v2}, Lcom/google/firebase/messaging/GmsRpc;.isErrorMessageForRetryableError:(Ljava/lang/String;)Z // method@c040
+72ae52: 0a02                                   |002d: move-result v2
+72ae54: 3802 2a00                              |002e: if-eqz v2, 0058 // +002a
+72ae58: 6e10 18d0 0400                         |0030: invoke-virtual {v4}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+72ae5e: 0c04                                   |0033: move-result-object v4
+72ae60: 7110 30d2 0400                         |0034: invoke-static {v4}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72ae66: 0c02                                   |0037: move-result-object v2
+72ae68: 6e10 16d2 0200                         |0038: invoke-virtual {v2}, Ljava/lang/String;.length:()I // method@d216
+72ae6e: 0a02                                   |003b: move-result v2
+72ae70: 2203 991a                              |003c: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+72ae74: d802 0234                              |003e: add-int/lit8 v2, v2, #int 52 // #34
+72ae78: 7020 3ad2 2300                         |0040: invoke-direct {v3, v2}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+72ae7e: 1a02 b768                              |0043: const-string v2, "Token retrieval failed: " // string@68b7
+72ae82: 6e20 45d2 2300                         |0045: invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72ae88: 6e20 45d2 4300                         |0048: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72ae8e: 1a04 dc0f                              |004b: const-string v4, ". Will retry token retrieval" // string@0fdc
+72ae92: 6e20 45d2 4300                         |004d: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72ae98: 6e10 58d2 0300                         |0050: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+72ae9e: 0c04                                   |0053: move-result-object v4
+72aea0: 7120 2708 4000                         |0054: invoke-static {v0, v4}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+72aea6: 0f01                                   |0057: return v1
+72aea8: 6e10 18d0 0400                         |0058: invoke-virtual {v4}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+72aeae: 0c02                                   |005b: move-result-object v2
+72aeb0: 3902 0800                              |005c: if-nez v2, 0064 // +0008
+72aeb4: 1a04 b668                              |005e: const-string v4, "Token retrieval failed without exception message. Will retry token retrieval" // string@68b6
+72aeb8: 7120 2708 4000                         |0060: invoke-static {v0, v4}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+72aebe: 0f01                                   |0063: return v1
+72aec0: 2704                                   |0064: throw v4
+      catches       : 1
+        0x0003 - 0x001d
+          Ljava/io/IOException; -> 0x0025
+          Ljava/lang/SecurityException; -> 0x001f
+      positions     :
+        0x0005 line=1
+        0x000d line=2
+        0x0012 line=3
+        0x001a line=4
+        0x001f line=7
+        0x0021 line=5
+        0x0026 line=6
+        0x0030 line=7
+        0x0058 line=8
+        0x005e line=10
+        0x0060 line=9
+        0x0064 line=10
+      locals        :
+        0x0000 - 0x0065 reg=4 this Lcom/google/firebase/messaging/SyncTask;
+
+    #3              : (in Lcom/google/firebase/messaging/SyncTask;)
+      name          : 'run'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 3
+      insns size    : 224 16-bit code units
+72aed4:                                        |[72aed4] com.google.firebase.messaging.SyncTask.run:()V
+72aee4: 7100 e3c0 0000                         |0000: invoke-static {}, Lcom/google/firebase/messaging/ServiceStarter;.getInstance:()Lcom/google/firebase/messaging/ServiceStarter; // method@c0e3
+72aeea: 0c00                                   |0003: move-result-object v0
+72aeec: 6e10 09c1 0500                         |0004: invoke-virtual {v5}, Lcom/google/firebase/messaging/SyncTask;.getContext:()Landroid/content/Context; // method@c109
+72aef2: 0c01                                   |0007: move-result-object v1
+72aef4: 6e20 e6c0 1000                         |0008: invoke-virtual {v0, v1}, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:(Landroid/content/Context;)Z // method@c0e6
+72aefa: 0a00                                   |000b: move-result v0
+72aefc: 3800 0700                              |000c: if-eqz v0, 0013 // +0007
+72af00: 5450 ec73                              |000e: iget-object v0, v5, Lcom/google/firebase/messaging/SyncTask;.syncWakeLock:Landroid/os/PowerManager$WakeLock; // field@73ec
+72af04: 6e10 c506 0000                         |0010: invoke-virtual {v0}, Landroid/os/PowerManager$WakeLock;.acquire:()V // method@06c5
+72af0a: 1200                                   |0013: const/4 v0, #int 0 // #0
+72af0c: 5451 e973                              |0014: iget-object v1, v5, Lcom/google/firebase/messaging/SyncTask;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73e9
+72af10: 1212                                   |0016: const/4 v2, #int 1 // #1
+72af12: 6e20 18c0 2100                         |0017: invoke-virtual {v1, v2}, Lcom/google/firebase/messaging/FirebaseMessaging;.setSyncScheduledOrRunning:(Z)V // method@c018
+72af18: 5451 e973                              |001a: iget-object v1, v5, Lcom/google/firebase/messaging/SyncTask;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73e9
+72af1c: 6e10 0ac0 0100                         |001c: invoke-virtual {v1}, Lcom/google/firebase/messaging/FirebaseMessaging;.isGmsCorePresent:()Z // method@c00a
+72af22: 0a01                                   |001f: move-result v1
+72af24: 3901 1b00                              |0020: if-nez v1, 003b // +001b
+72af28: 5451 e973                              |0022: iget-object v1, v5, Lcom/google/firebase/messaging/SyncTask;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73e9
+72af2c: 6e20 18c0 0100                         |0024: invoke-virtual {v1, v0}, Lcom/google/firebase/messaging/FirebaseMessaging;.setSyncScheduledOrRunning:(Z)V // method@c018
+72af32: 7100 e3c0 0000                         |0027: invoke-static {}, Lcom/google/firebase/messaging/ServiceStarter;.getInstance:()Lcom/google/firebase/messaging/ServiceStarter; // method@c0e3
+72af38: 0c00                                   |002a: move-result-object v0
+72af3a: 6e10 09c1 0500                         |002b: invoke-virtual {v5}, Lcom/google/firebase/messaging/SyncTask;.getContext:()Landroid/content/Context; // method@c109
+72af40: 0c01                                   |002e: move-result-object v1
+72af42: 6e20 e6c0 1000                         |002f: invoke-virtual {v0, v1}, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:(Landroid/content/Context;)Z // method@c0e6
+72af48: 0a00                                   |0032: move-result v0
+72af4a: 3800 0700                              |0033: if-eqz v0, 003a // +0007
+72af4e: 5455 ec73                              |0035: iget-object v5, v5, Lcom/google/firebase/messaging/SyncTask;.syncWakeLock:Landroid/os/PowerManager$WakeLock; // field@73ec
+72af52: 6e10 c806 0500                         |0037: invoke-virtual {v5}, Landroid/os/PowerManager$WakeLock;.release:()V // method@06c8
+72af58: 0e00                                   |003a: return-void
+72af5a: 7100 e3c0 0000                         |003b: invoke-static {}, Lcom/google/firebase/messaging/ServiceStarter;.getInstance:()Lcom/google/firebase/messaging/ServiceStarter; // method@c0e3
+72af60: 0c01                                   |003e: move-result-object v1
+72af62: 6e10 09c1 0500                         |003f: invoke-virtual {v5}, Lcom/google/firebase/messaging/SyncTask;.getContext:()Landroid/content/Context; // method@c109
+72af68: 0c02                                   |0042: move-result-object v2
+72af6a: 6e20 e5c0 2100                         |0043: invoke-virtual {v1, v2}, Lcom/google/firebase/messaging/ServiceStarter;.hasAccessNetworkStatePermission:(Landroid/content/Context;)Z // method@c0e5
+72af70: 0a01                                   |0046: move-result v1
+72af72: 3801 2000                              |0047: if-eqz v1, 0067 // +0020
+72af76: 6e10 0bc1 0500                         |0049: invoke-virtual {v5}, Lcom/google/firebase/messaging/SyncTask;.isDeviceConnected:()Z // method@c10b
+72af7c: 0a01                                   |004c: move-result v1
+72af7e: 3901 1a00                              |004d: if-nez v1, 0067 // +001a
+72af82: 2201 fe17                              |004f: new-instance v1, Lcom/google/firebase/messaging/SyncTask$ConnectivityChangeReceiver; // type@17fe
+72af86: 7020 04c1 5100                         |0051: invoke-direct {v1, v5}, Lcom/google/firebase/messaging/SyncTask$ConnectivityChangeReceiver;.<init>:(Lcom/google/firebase/messaging/SyncTask;)V // method@c104
+72af8c: 6e10 06c1 0100                         |0054: invoke-virtual {v1}, Lcom/google/firebase/messaging/SyncTask$ConnectivityChangeReceiver;.registerReceiver:()V // method@c106
+72af92: 7100 e3c0 0000                         |0057: invoke-static {}, Lcom/google/firebase/messaging/ServiceStarter;.getInstance:()Lcom/google/firebase/messaging/ServiceStarter; // method@c0e3
+72af98: 0c00                                   |005a: move-result-object v0
+72af9a: 6e10 09c1 0500                         |005b: invoke-virtual {v5}, Lcom/google/firebase/messaging/SyncTask;.getContext:()Landroid/content/Context; // method@c109
+72afa0: 0c01                                   |005e: move-result-object v1
+72afa2: 6e20 e6c0 1000                         |005f: invoke-virtual {v0, v1}, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:(Landroid/content/Context;)Z // method@c0e6
+72afa8: 0a00                                   |0062: move-result v0
+72afaa: 3800 0300                              |0063: if-eqz v0, 0066 // +0003
+72afae: 28d0                                   |0065: goto 0035 // -0030
+72afb0: 0e00                                   |0066: return-void
+72afb2: 6e10 0cc1 0500                         |0067: invoke-virtual {v5}, Lcom/google/firebase/messaging/SyncTask;.maybeRefreshToken:()Z // method@c10c
+72afb8: 0a01                                   |006a: move-result v1
+72afba: 3801 0800                              |006b: if-eqz v1, 0073 // +0008
+72afbe: 5451 e973                              |006d: iget-object v1, v5, Lcom/google/firebase/messaging/SyncTask;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73e9
+72afc2: 6e20 18c0 0100                         |006f: invoke-virtual {v1, v0}, Lcom/google/firebase/messaging/FirebaseMessaging;.setSyncScheduledOrRunning:(Z)V // method@c018
+72afc8: 2808                                   |0072: goto 007a // +0008
+72afca: 5451 e973                              |0073: iget-object v1, v5, Lcom/google/firebase/messaging/SyncTask;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73e9
+72afce: 5352 ea73                              |0075: iget-wide v2, v5, Lcom/google/firebase/messaging/SyncTask;.nextDelaySeconds:J // field@73ea
+72afd2: 6e30 1cc0 2103                         |0077: invoke-virtual {v1, v2, v3}, Lcom/google/firebase/messaging/FirebaseMessaging;.syncWithDelaySecondsInternal:(J)V // method@c01c
+72afd8: 7100 e3c0 0000                         |007a: invoke-static {}, Lcom/google/firebase/messaging/ServiceStarter;.getInstance:()Lcom/google/firebase/messaging/ServiceStarter; // method@c0e3
+72afde: 0c00                                   |007d: move-result-object v0
+72afe0: 6e10 09c1 0500                         |007e: invoke-virtual {v5}, Lcom/google/firebase/messaging/SyncTask;.getContext:()Landroid/content/Context; // method@c109
+72afe6: 0c01                                   |0081: move-result-object v1
+72afe8: 6e20 e6c0 1000                         |0082: invoke-virtual {v0, v1}, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:(Landroid/content/Context;)Z // method@c0e6
+72afee: 0a00                                   |0085: move-result v0
+72aff0: 3800 4400                              |0086: if-eqz v0, 00ca // +0044
+72aff4: 28ad                                   |0088: goto 0035 // -0053
+72aff6: 0d00                                   |0089: move-exception v0
+72aff8: 2841                                   |008a: goto 00cb // +0041
+72affa: 0d01                                   |008b: move-exception v1
+72affc: 1a02 6c28                              |008c: const-string v2, "FirebaseMessaging" // string@286c
+72b000: 6e10 18d0 0100                         |008e: invoke-virtual {v1}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+72b006: 0c01                                   |0091: move-result-object v1
+72b008: 7110 30d2 0100                         |0092: invoke-static {v1}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72b00e: 0c03                                   |0095: move-result-object v3
+72b010: 6e10 16d2 0300                         |0096: invoke-virtual {v3}, Ljava/lang/String;.length:()I // method@d216
+72b016: 0a03                                   |0099: move-result v3
+72b018: d803 035d                              |009a: add-int/lit8 v3, v3, #int 93 // #5d
+72b01c: 2204 991a                              |009c: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+72b020: 7020 3ad2 3400                         |009e: invoke-direct {v4, v3}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+72b026: 1a03 0369                              |00a1: const-string v3, "Topic sync or token retrieval failed on hard failure exceptions: " // string@6903
+72b02a: 6e20 45d2 3400                         |00a3: invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72b030: 6e20 45d2 1400                         |00a6: invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72b036: 1a01 dd0f                              |00a9: const-string v1, ". Won't retry the operation." // string@0fdd
+72b03a: 6e20 45d2 1400                         |00ab: invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72b040: 6e10 58d2 0400                         |00ae: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+72b046: 0c01                                   |00b1: move-result-object v1
+72b048: 7120 1e08 1200                         |00b2: invoke-static {v2, v1}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@081e
+72b04e: 5451 e973                              |00b5: iget-object v1, v5, Lcom/google/firebase/messaging/SyncTask;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73e9
+72b052: 6e20 18c0 0100                         |00b7: invoke-virtual {v1, v0}, Lcom/google/firebase/messaging/FirebaseMessaging;.setSyncScheduledOrRunning:(Z)V // method@c018
+72b058: 7100 e3c0 0000                         |00ba: invoke-static {}, Lcom/google/firebase/messaging/ServiceStarter;.getInstance:()Lcom/google/firebase/messaging/ServiceStarter; // method@c0e3
+72b05e: 0c00                                   |00bd: move-result-object v0
+72b060: 6e10 09c1 0500                         |00be: invoke-virtual {v5}, Lcom/google/firebase/messaging/SyncTask;.getContext:()Landroid/content/Context; // method@c109
+72b066: 0c01                                   |00c1: move-result-object v1
+72b068: 6e20 e6c0 1000                         |00c2: invoke-virtual {v0, v1}, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:(Landroid/content/Context;)Z // method@c0e6
+72b06e: 0a00                                   |00c5: move-result v0
+72b070: 3800 0400                              |00c6: if-eqz v0, 00ca // +0004
+72b074: 2900 6dff                              |00c8: goto/16 0035 // -0093
+72b078: 0e00                                   |00ca: return-void
+72b07a: 7100 e3c0 0000                         |00cb: invoke-static {}, Lcom/google/firebase/messaging/ServiceStarter;.getInstance:()Lcom/google/firebase/messaging/ServiceStarter; // method@c0e3
+72b080: 0c01                                   |00ce: move-result-object v1
+72b082: 6e10 09c1 0500                         |00cf: invoke-virtual {v5}, Lcom/google/firebase/messaging/SyncTask;.getContext:()Landroid/content/Context; // method@c109
+72b088: 0c02                                   |00d2: move-result-object v2
+72b08a: 6e20 e6c0 2100                         |00d3: invoke-virtual {v1, v2}, Lcom/google/firebase/messaging/ServiceStarter;.hasWakeLockPermission:(Landroid/content/Context;)Z // method@c0e6
+72b090: 0a01                                   |00d6: move-result v1
+72b092: 3901 0300                              |00d7: if-nez v1, 00da // +0003
+72b096: 2806                                   |00d9: goto 00df // +0006
+72b098: 5455 ec73                              |00da: iget-object v5, v5, Lcom/google/firebase/messaging/SyncTask;.syncWakeLock:Landroid/os/PowerManager$WakeLock; // field@73ec
+72b09c: 6e10 c806 0500                         |00dc: invoke-virtual {v5}, Landroid/os/PowerManager$WakeLock;.release:()V // method@06c8
+72b0a2: 2700                                   |00df: throw v0
+      catches       : 4
+        0x0014 - 0x0027
+          Ljava/io/IOException; -> 0x008b
+          <any> -> 0x0089
+        0x003b - 0x0057
+          Ljava/io/IOException; -> 0x008b
+          <any> -> 0x0089
+        0x0067 - 0x007a
+          Ljava/io/IOException; -> 0x008b
+          <any> -> 0x0089
+        0x008c - 0x00ba
+          <any> -> 0x0089
+      positions     :
+        0x0000 line=1
+        0x0010 line=2
+        0x0017 line=3
+        0x001c line=4
+        0x0024 line=5
+        0x0027 line=6
+        0x0037 line=7
+        0x003b line=8
+        0x0049 line=9
+        0x0051 line=13
+        0x0054 line=14
+        0x0057 line=6
+        0x0067 line=10
+        0x006f line=11
+        0x0073 line=7
+        0x0077 line=12
+        0x007a line=6
+        0x008c line=12
+        0x008e line=15
+        0x00b2 line=16
+        0x00b7 line=17
+        0x00ba line=6
+        0x00da line=18
+        0x00dc line=7
+        0x00df line=18
+      locals        :
+        0x0000 - 0x00e0 reg=5 this Lcom/google/firebase/messaging/SyncTask;
+
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

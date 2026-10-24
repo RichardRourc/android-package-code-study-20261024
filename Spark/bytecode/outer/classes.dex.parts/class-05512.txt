@@ -1,0 +1,605 @@
+Class #5512            -
+  Class descriptor  : 'Lkotlinx/coroutines/scheduling/WorkQueue;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'blockingTasksInBuffer$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;'
+      access        : 0x101a (PRIVATE STATIC FINAL SYNTHETIC)
+    #1              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'consumerIndex$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;'
+      access        : 0x101a (PRIVATE STATIC FINAL SYNTHETIC)
+    #2              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'lastScheduledTask$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;'
+      access        : 0x101a (PRIVATE STATIC FINAL SYNTHETIC)
+    #3              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'producerIndex$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;'
+      access        : 0x101a (PRIVATE STATIC FINAL SYNTHETIC)
+  Instance fields   -
+    #0              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'blockingTasksInBuffer'
+      type          : 'I'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #1              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'buffer'
+      type          : 'Ljava/util/concurrent/atomic/AtomicReferenceArray;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'consumerIndex'
+      type          : 'I'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #3              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'lastScheduledTask'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #4              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'producerIndex'
+      type          : 'I'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+  Direct methods    -
+    #0              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 0
+      outs          : 3
+      insns size    : 37 16-bit code units
+353bb0:                                        |[353bb0] kotlinx.coroutines.scheduling.WorkQueue.<clinit>:()V
+353bc0: 1c00 7a11                              |0000: const-class v0, Ljava/lang/Object; // type@117a
+353bc4: 1a01 9a8b                              |0002: const-string v1, "lastScheduledTask" // string@8b9a
+353bc8: 1c02 b719                              |0004: const-class v2, Lkotlinx/coroutines/scheduling/WorkQueue; // type@19b7
+353bcc: 7130 4276 0201                         |0006: invoke-static {v2, v0, v1}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // method@7642
+353bd2: 0c00                                   |0009: move-result-object v0
+353bd4: 6900 d846                              |000a: sput-object v0, Lkotlinx/coroutines/scheduling/WorkQueue;.lastScheduledTask$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46d8
+353bd8: 1a00 4a9e                              |000c: const-string v0, "producerIndex" // string@9e4a
+353bdc: 7120 2776 0200                         |000e: invoke-static {v2, v0}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // method@7627
+353be2: 0c00                                   |0011: move-result-object v0
+353be4: 6900 da46                              |0012: sput-object v0, Lkotlinx/coroutines/scheduling/WorkQueue;.producerIndex$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46da
+353be8: 1a00 e86c                              |0014: const-string v0, "consumerIndex" // string@6ce8
+353bec: 7120 2776 0200                         |0016: invoke-static {v2, v0}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // method@7627
+353bf2: 0c00                                   |0019: move-result-object v0
+353bf4: 6900 d646                              |001a: sput-object v0, Lkotlinx/coroutines/scheduling/WorkQueue;.consumerIndex$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46d6
+353bf8: 1a00 f167                              |001c: const-string v0, "blockingTasksInBuffer" // string@67f1
+353bfc: 7120 2776 0200                         |001e: invoke-static {v2, v0}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // method@7627
+353c02: 0c00                                   |0021: move-result-object v0
+353c04: 6900 d346                              |0022: sput-object v0, Lkotlinx/coroutines/scheduling/WorkQueue;.blockingTasksInBuffer$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46d3
+353c08: 0e00                                   |0024: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 23 16-bit code units
+353c0c:                                        |[353c0c] kotlinx.coroutines.scheduling.WorkQueue.<init>:()V
+353c1c: 7010 df71 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@71df
+353c22: 2200 6f12                              |0003: new-instance v0, Ljava/util/concurrent/atomic/AtomicReferenceArray; // type@126f
+353c26: 1301 8000                              |0005: const/16 v1, #int 128 // #80
+353c2a: 7020 3776 1000                         |0007: invoke-direct {v0, v1}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.<init>:(I)V // method@7637
+353c30: 5b20 d446                              |000a: iput-object v0, v2, Lkotlinx/coroutines/scheduling/WorkQueue;.buffer:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@46d4
+353c34: 1200                                   |000c: const/4 v0, #int 0 // #0
+353c36: 5b20 d746                              |000d: iput-object v0, v2, Lkotlinx/coroutines/scheduling/WorkQueue;.lastScheduledTask:Ljava/lang/Object; // field@46d7
+353c3a: 1200                                   |000f: const/4 v0, #int 0 // #0
+353c3c: 5920 d946                              |0010: iput v0, v2, Lkotlinx/coroutines/scheduling/WorkQueue;.producerIndex:I // field@46d9
+353c40: 5920 d546                              |0012: iput v0, v2, Lkotlinx/coroutines/scheduling/WorkQueue;.consumerIndex:I // field@46d5
+353c44: 5920 d246                              |0014: iput v0, v2, Lkotlinx/coroutines/scheduling/WorkQueue;.blockingTasksInBuffer:I // field@46d2
+353c48: 0e00                                   |0016: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=37
+        0x0003 line=54
+        0x000d line=55
+        0x0010 line=57
+        0x0012 line=58
+        0x0014 line=60
+      locals        :
+        0x0000 - 0x0017 reg=2 this Lkotlinx/coroutines/scheduling/WorkQueue;
+
+    #2              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'add$default'
+      type          : '(Lkotlinx/coroutines/scheduling/WorkQueue;Lkotlinx/coroutines/scheduling/Task;ZILjava/lang/Object;)Lkotlinx/coroutines/scheduling/Task;'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 3
+      insns size    : 10 16-bit code units
+35389c:                                        |[35389c] kotlinx.coroutines.scheduling.WorkQueue.add$default:(Lkotlinx/coroutines/scheduling/WorkQueue;Lkotlinx/coroutines/scheduling/Task;ZILjava/lang/Object;)Lkotlinx/coroutines/scheduling/Task;
+3538ac: dd03 0302                              |0000: and-int/lit8 v3, v3, #int 2 // #02
+3538b0: 3803 0300                              |0002: if-eqz v3, 0005 // +0003
+3538b4: 1202                                   |0004: const/4 v2, #int 0 // #0
+3538b6: 6e30 9eb3 1002                         |0005: invoke-virtual {v0, v1, v2}, Lkotlinx/coroutines/scheduling/WorkQueue;.add:(Lkotlinx/coroutines/scheduling/Task;Z)Lkotlinx/coroutines/scheduling/Task; // method@b39e
+3538bc: 0c00                                   |0008: move-result-object v0
+3538be: 1100                                   |0009: return-object v0
+      catches       : (none)
+      positions     :
+        0x0005 line=72
+      locals        :
+        0x0000 - 0x000a reg=0 (null) Lkotlinx/coroutines/scheduling/WorkQueue;
+        0x0000 - 0x000a reg=1 (null) Lkotlinx/coroutines/scheduling/Task;
+        0x0000 - 0x000a reg=2 (null) Z
+        0x0000 - 0x000a reg=3 (null) I
+        0x0000 - 0x000a reg=4 (null) Ljava/lang/Object;
+
+    #3              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'addLast'
+      type          : '(Lkotlinx/coroutines/scheduling/Task;)Lkotlinx/coroutines/scheduling/Task;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 50 16-bit code units
+353900:                                        |[353900] kotlinx.coroutines.scheduling.WorkQueue.addLast:(Lkotlinx/coroutines/scheduling/Task;)Lkotlinx/coroutines/scheduling/Task;
+353910: 5430 c246                              |0000: iget-object v0, v3, Lkotlinx/coroutines/scheduling/Task;.taskContext:Lkotlinx/coroutines/scheduling/TaskContext; // field@46c2
+353914: 7210 8eb3 0000                         |0002: invoke-interface {v0}, Lkotlinx/coroutines/scheduling/TaskContext;.getTaskMode:()I // method@b38e
+35391a: 0a00                                   |0005: move-result v0
+35391c: 1211                                   |0006: const/4 v1, #int 1 // #1
+35391e: 3310 0700                              |0007: if-ne v0, v1, 000e // +0007
+353922: 6200 d346                              |0009: sget-object v0, Lkotlinx/coroutines/scheduling/WorkQueue;.blockingTasksInBuffer$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46d3
+353926: 6e20 2676 2000                         |000b: invoke-virtual {v0, v2}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.incrementAndGet:(Ljava/lang/Object;)I // method@7626
+35392c: 6e10 a2b3 0200                         |000e: invoke-virtual {v2}, Lkotlinx/coroutines/scheduling/WorkQueue;.getBufferSize$kotlinx_coroutines_core:()I // method@b3a2
+353932: 0a00                                   |0011: move-result v0
+353934: 1301 7f00                              |0012: const/16 v1, #int 127 // #7f
+353938: 3310 0300                              |0014: if-ne v0, v1, 0017 // +0003
+35393c: 1103                                   |0016: return-object v3
+35393e: 5220 d946                              |0017: iget v0, v2, Lkotlinx/coroutines/scheduling/WorkQueue;.producerIndex:I // field@46d9
+353942: b510                                   |0019: and-int/2addr v0, v1
+353944: 5421 d446                              |001a: iget-object v1, v2, Lkotlinx/coroutines/scheduling/WorkQueue;.buffer:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@46d4
+353948: 6e20 3976 0100                         |001c: invoke-virtual {v1, v0}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.get:(I)Ljava/lang/Object; // method@7639
+35394e: 0c01                                   |001f: move-result-object v1
+353950: 3801 0600                              |0020: if-eqz v1, 0026 // +0006
+353954: 7100 8f72 0000                         |0022: invoke-static {}, Ljava/lang/Thread;.yield:()V // method@728f
+35395a: 28f5                                   |0025: goto 001a // -000b
+35395c: 5421 d446                              |0026: iget-object v1, v2, Lkotlinx/coroutines/scheduling/WorkQueue;.buffer:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@46d4
+353960: 6e30 3b76 0103                         |0028: invoke-virtual {v1, v0, v3}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.lazySet:(ILjava/lang/Object;)V // method@763b
+353966: 6203 da46                              |002b: sget-object v3, Lkotlinx/coroutines/scheduling/WorkQueue;.producerIndex$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46da
+35396a: 6e20 2676 2300                         |002d: invoke-virtual {v3, v2}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.incrementAndGet:(Ljava/lang/Object;)I // method@7626
+353970: 1203                                   |0030: const/4 v3, #int 0 // #0
+353972: 1103                                   |0031: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=202
+        0x0009 line=83
+        0x000e line=84
+        0x0017 line=85
+        0x001a line=94
+        0x0022 line=95
+        0x0026 line=97
+        0x002b line=98
+      locals        :
+        0x0000 - 0x0032 reg=2 this Lkotlinx/coroutines/scheduling/WorkQueue;
+        0x0000 - 0x0032 reg=3 (null) Lkotlinx/coroutines/scheduling/Task;
+
+    #4              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'decrementIfBlocking'
+      type          : '(Lkotlinx/coroutines/scheduling/Task;)V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 33 16-bit code units
+353c4c:                                        |[353c4c] kotlinx.coroutines.scheduling.WorkQueue.decrementIfBlocking:(Lkotlinx/coroutines/scheduling/Task;)V
+353c5c: 3802 2000                              |0000: if-eqz v2, 0020 // +0020
+353c60: 5422 c246                              |0002: iget-object v2, v2, Lkotlinx/coroutines/scheduling/Task;.taskContext:Lkotlinx/coroutines/scheduling/TaskContext; // field@46c2
+353c64: 7210 8eb3 0200                         |0004: invoke-interface {v2}, Lkotlinx/coroutines/scheduling/TaskContext;.getTaskMode:()I // method@b38e
+353c6a: 0a02                                   |0007: move-result v2
+353c6c: 1210                                   |0008: const/4 v0, #int 1 // #1
+353c6e: 3302 1700                              |0009: if-ne v2, v0, 0020 // +0017
+353c72: 6202 d346                              |000b: sget-object v2, Lkotlinx/coroutines/scheduling/WorkQueue;.blockingTasksInBuffer$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46d3
+353c76: 6e20 2376 1200                         |000d: invoke-virtual {v2, v1}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.decrementAndGet:(Ljava/lang/Object;)I // method@7623
+353c7c: 0a02                                   |0010: move-result v2
+353c7e: 7100 f4a3 0000                         |0011: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+353c84: 0a00                                   |0014: move-result v0
+353c86: 3800 0b00                              |0015: if-eqz v0, 0020 // +000b
+353c8a: 3a02 0300                              |0017: if-ltz v2, 001a // +0003
+353c8e: 0e00                                   |0019: return-void
+353c90: 2202 5311                              |001a: new-instance v2, Ljava/lang/AssertionError; // type@1153
+353c94: 7010 d570 0200                         |001c: invoke-direct {v2}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+353c9a: 2702                                   |001f: throw v2
+353c9c: 0e00                                   |0020: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=206
+        0x000b line=196
+        0x0011 line=197
+      locals        :
+        0x0000 - 0x0021 reg=1 this Lkotlinx/coroutines/scheduling/WorkQueue;
+        0x0000 - 0x0021 reg=2 (null) Lkotlinx/coroutines/scheduling/Task;
+
+    #5              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'pollBuffer'
+      type          : '()Lkotlinx/coroutines/scheduling/Task;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 4
+      insns size    : 37 16-bit code units
+3539a4:                                        |[3539a4] kotlinx.coroutines.scheduling.WorkQueue.pollBuffer:()Lkotlinx/coroutines/scheduling/Task;
+3539b4: 5250 d546                              |0000: iget v0, v5, Lkotlinx/coroutines/scheduling/WorkQueue;.consumerIndex:I // field@46d5
+3539b8: 5251 d946                              |0002: iget v1, v5, Lkotlinx/coroutines/scheduling/WorkQueue;.producerIndex:I // field@46d9
+3539bc: 9101 0001                              |0004: sub-int v1, v0, v1
+3539c0: 1202                                   |0006: const/4 v2, #int 0 // #0
+3539c2: 3901 0300                              |0007: if-nez v1, 000a // +0003
+3539c6: 1102                                   |0009: return-object v2
+3539c8: dd01 007f                              |000a: and-int/lit8 v1, v0, #int 127 // #7f
+3539cc: 6203 d646                              |000c: sget-object v3, Lkotlinx/coroutines/scheduling/WorkQueue;.consumerIndex$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46d6
+3539d0: d804 0001                              |000e: add-int/lit8 v4, v0, #int 1 // #01
+3539d4: 6e40 2276 5340                         |0010: invoke-virtual {v3, v5, v0, v4}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.compareAndSet:(Ljava/lang/Object;II)Z // method@7622
+3539da: 0a00                                   |0013: move-result v0
+3539dc: 3800 ecff                              |0014: if-eqz v0, 0000 // -0014
+3539e0: 5450 d446                              |0016: iget-object v0, v5, Lkotlinx/coroutines/scheduling/WorkQueue;.buffer:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@46d4
+3539e4: 6e30 3a76 1002                         |0018: invoke-virtual {v0, v1, v2}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.getAndSet:(ILjava/lang/Object;)Ljava/lang/Object; // method@763a
+3539ea: 0c00                                   |001b: move-result-object v0
+3539ec: 1f00 b119                              |001c: check-cast v0, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+3539f0: 3900 0300                              |001e: if-nez v0, 0021 // +0003
+3539f4: 28e0                                   |0020: goto 0000 // -0020
+3539f6: 7020 a1b3 0500                         |0021: invoke-direct {v5, v0}, Lkotlinx/coroutines/scheduling/WorkQueue;.decrementIfBlocking:(Lkotlinx/coroutines/scheduling/Task;)V // method@b3a1
+3539fc: 1100                                   |0024: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=182
+        0x0002 line=183
+        0x000c line=185
+        0x0016 line=187
+        0x0021 line=188
+      locals        :
+        0x0000 - 0x0025 reg=5 this Lkotlinx/coroutines/scheduling/WorkQueue;
+
+    #6              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'pollTo'
+      type          : '(Lkotlinx/coroutines/scheduling/GlobalQueue;)Z'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 13 16-bit code units
+353824:                                        |[353824] kotlinx.coroutines.scheduling.WorkQueue.pollTo:(Lkotlinx/coroutines/scheduling/GlobalQueue;)Z
+353834: 7010 a6b3 0100                         |0000: invoke-direct {v1}, Lkotlinx/coroutines/scheduling/WorkQueue;.pollBuffer:()Lkotlinx/coroutines/scheduling/Task; // method@b3a6
+35383a: 0c00                                   |0003: move-result-object v0
+35383c: 3900 0400                              |0004: if-nez v0, 0008 // +0004
+353840: 1202                                   |0006: const/4 v2, #int 0 // #0
+353842: 0f02                                   |0007: return v2
+353844: 6e20 69b3 0200                         |0008: invoke-virtual {v2, v0}, Lkotlinx/coroutines/scheduling/GlobalQueue;.addLast:(Ljava/lang/Object;)Z // method@b369
+35384a: 1212                                   |000b: const/4 v2, #int 1 // #1
+35384c: 0f02                                   |000c: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=175
+        0x0008 line=176
+      locals        :
+        0x0000 - 0x000d reg=1 this Lkotlinx/coroutines/scheduling/WorkQueue;
+        0x0000 - 0x000d reg=2 (null) Lkotlinx/coroutines/scheduling/GlobalQueue;
+
+    #7              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'tryStealLastScheduled'
+      type          : '(Lkotlinx/coroutines/scheduling/WorkQueue;Z)J'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 8
+      ins           : 3
+      outs          : 5
+      insns size    : 58 16-bit code units
+353b2c:                                        |[353b2c] kotlinx.coroutines.scheduling.WorkQueue.tryStealLastScheduled:(Lkotlinx/coroutines/scheduling/WorkQueue;Z)J
+353b3c: 5460 d746                              |0000: iget-object v0, v6, Lkotlinx/coroutines/scheduling/WorkQueue;.lastScheduledTask:Ljava/lang/Object; // field@46d7
+353b40: 1f00 b119                              |0002: check-cast v0, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+353b44: 1601 feff                              |0004: const-wide/16 v1, #int -2 // #fffe
+353b48: 3900 0300                              |0006: if-nez v0, 0009 // +0003
+353b4c: 1001                                   |0008: return-wide v1
+353b4e: 3807 0d00                              |0009: if-eqz v7, 0016 // +000d
+353b52: 5403 c246                              |000b: iget-object v3, v0, Lkotlinx/coroutines/scheduling/Task;.taskContext:Lkotlinx/coroutines/scheduling/TaskContext; // field@46c2
+353b56: 7210 8eb3 0300                         |000d: invoke-interface {v3}, Lkotlinx/coroutines/scheduling/TaskContext;.getTaskMode:()I // method@b38e
+353b5c: 0a03                                   |0010: move-result v3
+353b5e: 1214                                   |0011: const/4 v4, #int 1 // #1
+353b60: 3343 0300                              |0012: if-ne v3, v4, 0015 // +0003
+353b64: 2802                                   |0014: goto 0016 // +0002
+353b66: 1001                                   |0015: return-wide v1
+353b68: 6201 d046                              |0016: sget-object v1, Lkotlinx/coroutines/scheduling/TasksKt;.schedulerTimeSource:Lkotlinx/coroutines/scheduling/SchedulerTimeSource; // field@46d0
+353b6c: 6e10 88b3 0100                         |0018: invoke-virtual {v1}, Lkotlinx/coroutines/scheduling/SchedulerTimeSource;.nanoTime:()J // method@b388
+353b72: 0b01                                   |001b: move-result-wide v1
+353b74: 5303 c146                              |001c: iget-wide v3, v0, Lkotlinx/coroutines/scheduling/Task;.submissionTime:J // field@46c1
+353b78: bc31                                   |001e: sub-long/2addr v1, v3
+353b7a: 6103 cf46                              |001f: sget-wide v3, Lkotlinx/coroutines/scheduling/TasksKt;.WORK_STEALING_TIME_RESOLUTION_NS:J // field@46cf
+353b7e: 3103 0103                              |0021: cmp-long v3, v1, v3
+353b82: 3b03 0600                              |0023: if-gez v3, 0029 // +0006
+353b86: 6106 cf46                              |0025: sget-wide v6, Lkotlinx/coroutines/scheduling/TasksKt;.WORK_STEALING_TIME_RESOLUTION_NS:J // field@46cf
+353b8a: bc16                                   |0027: sub-long/2addr v6, v1
+353b8c: 1006                                   |0028: return-wide v6
+353b8e: 6201 d846                              |0029: sget-object v1, Lkotlinx/coroutines/scheduling/WorkQueue;.lastScheduledTask$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46d8
+353b92: 1202                                   |002b: const/4 v2, #int 0 // #0
+353b94: 7140 ec29 6120                         |002c: invoke-static {v1, v6, v0, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+353b9a: 0a01                                   |002f: move-result v1
+353b9c: 3801 d0ff                              |0030: if-eqz v1, 0000 // -0030
+353ba0: 1206                                   |0032: const/4 v6, #int 0 // #0
+353ba2: 1227                                   |0033: const/4 v7, #int 2 // #2
+353ba4: 7152 9fb3 0576                         |0034: invoke-static {v5, v0, v6, v7, v2}, Lkotlinx/coroutines/scheduling/WorkQueue;.add$default:(Lkotlinx/coroutines/scheduling/WorkQueue;Lkotlinx/coroutines/scheduling/Task;ZILjava/lang/Object;)Lkotlinx/coroutines/scheduling/Task; // method@b39f
+353baa: 1606 ffff                              |0037: const-wide/16 v6, #int -1 // #ffff
+353bae: 1006                                   |0039: return-wide v6
+      catches       : (none)
+      positions     :
+        0x0000 line=152
+        0x000b line=205
+        0x0016 line=156
+        0x001c line=157
+        0x001f line=158
+        0x0025 line=159
+        0x0029 line=166
+        0x0034 line=167
+      locals        :
+        0x0000 - 0x003a reg=5 this Lkotlinx/coroutines/scheduling/WorkQueue;
+        0x0000 - 0x003a reg=6 (null) Lkotlinx/coroutines/scheduling/WorkQueue;
+        0x0000 - 0x003a reg=7 (null) Z
+
+  Virtual methods   -
+    #0              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'add'
+      type          : '(Lkotlinx/coroutines/scheduling/Task;Z)Lkotlinx/coroutines/scheduling/Task;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 24 16-bit code units
+3538c0:                                        |[3538c0] kotlinx.coroutines.scheduling.WorkQueue.add:(Lkotlinx/coroutines/scheduling/Task;Z)Lkotlinx/coroutines/scheduling/Task;
+3538d0: 3802 0700                              |0000: if-eqz v2, 0007 // +0007
+3538d4: 7020 a0b3 1000                         |0002: invoke-direct {v0, v1}, Lkotlinx/coroutines/scheduling/WorkQueue;.addLast:(Lkotlinx/coroutines/scheduling/Task;)Lkotlinx/coroutines/scheduling/Task; // method@b3a0
+3538da: 0c01                                   |0005: move-result-object v1
+3538dc: 1101                                   |0006: return-object v1
+3538de: 6202 d846                              |0007: sget-object v2, Lkotlinx/coroutines/scheduling/WorkQueue;.lastScheduledTask$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46d8
+3538e2: 6e30 4076 0201                         |0009: invoke-virtual {v2, v0, v1}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.getAndSet:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@7640
+3538e8: 0c01                                   |000c: move-result-object v1
+3538ea: 1f01 b119                              |000d: check-cast v1, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+3538ee: 3901 0400                              |000f: if-nez v1, 0013 // +0004
+3538f2: 1201                                   |0011: const/4 v1, #int 0 // #0
+3538f4: 1101                                   |0012: return-object v1
+3538f6: 7020 a0b3 1000                         |0013: invoke-direct {v0, v1}, Lkotlinx/coroutines/scheduling/WorkQueue;.addLast:(Lkotlinx/coroutines/scheduling/Task;)Lkotlinx/coroutines/scheduling/Task; // method@b3a0
+3538fc: 0c01                                   |0016: move-result-object v1
+3538fe: 1101                                   |0017: return-object v1
+      catches       : (none)
+      positions     :
+        0x0002 line=73
+        0x0007 line=74
+        0x0013 line=75
+      locals        :
+        0x0000 - 0x0018 reg=0 this Lkotlinx/coroutines/scheduling/WorkQueue;
+        0x0000 - 0x0018 reg=1 (null) Lkotlinx/coroutines/scheduling/Task;
+        0x0000 - 0x0018 reg=2 (null) Z
+
+    #1              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'getBufferSize$kotlinx_coroutines_core'
+      type          : '()I'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 6 16-bit code units
+353850:                                        |[353850] kotlinx.coroutines.scheduling.WorkQueue.getBufferSize$kotlinx_coroutines_core:()I
+353860: 5220 d946                              |0000: iget v0, v2, Lkotlinx/coroutines/scheduling/WorkQueue;.producerIndex:I // field@46d9
+353864: 5221 d546                              |0002: iget v1, v2, Lkotlinx/coroutines/scheduling/WorkQueue;.consumerIndex:I // field@46d5
+353868: b110                                   |0004: sub-int/2addr v0, v1
+35386a: 0f00                                   |0005: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=52
+      locals        :
+        0x0000 - 0x0006 reg=2 this Lkotlinx/coroutines/scheduling/WorkQueue;
+
+    #2              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'getSize$kotlinx_coroutines_core'
+      type          : '()I'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 16 16-bit code units
+35386c:                                        |[35386c] kotlinx.coroutines.scheduling.WorkQueue.getSize$kotlinx_coroutines_core:()I
+35387c: 5410 d746                              |0000: iget-object v0, v1, Lkotlinx/coroutines/scheduling/WorkQueue;.lastScheduledTask:Ljava/lang/Object; // field@46d7
+353880: 3800 0900                              |0002: if-eqz v0, 000b // +0009
+353884: 6e10 a2b3 0100                         |0004: invoke-virtual {v1}, Lkotlinx/coroutines/scheduling/WorkQueue;.getBufferSize$kotlinx_coroutines_core:()I // method@b3a2
+35388a: 0a00                                   |0007: move-result v0
+35388c: d800 0001                              |0008: add-int/lit8 v0, v0, #int 1 // #01
+353890: 0f00                                   |000a: return v0
+353892: 6e10 a2b3 0100                         |000b: invoke-virtual {v1}, Lkotlinx/coroutines/scheduling/WorkQueue;.getBufferSize$kotlinx_coroutines_core:()I // method@b3a2
+353898: 0a00                                   |000e: move-result v0
+35389a: 0f00                                   |000f: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=53
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lkotlinx/coroutines/scheduling/WorkQueue;
+
+    #3              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'offloadAllWorkTo'
+      type          : '(Lkotlinx/coroutines/scheduling/GlobalQueue;)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 21 16-bit code units
+353ca0:                                        |[353ca0] kotlinx.coroutines.scheduling.WorkQueue.offloadAllWorkTo:(Lkotlinx/coroutines/scheduling/GlobalQueue;)V
+353cb0: 6200 d846                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/WorkQueue;.lastScheduledTask$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46d8
+353cb4: 1201                                   |0002: const/4 v1, #int 0 // #0
+353cb6: 6e30 4076 2001                         |0003: invoke-virtual {v0, v2, v1}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.getAndSet:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@7640
+353cbc: 0c00                                   |0006: move-result-object v0
+353cbe: 1f00 b119                              |0007: check-cast v0, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+353cc2: 3800 0500                              |0009: if-eqz v0, 000e // +0005
+353cc6: 6e20 69b3 0300                         |000b: invoke-virtual {v3, v0}, Lkotlinx/coroutines/scheduling/GlobalQueue;.addLast:(Ljava/lang/Object;)Z // method@b369
+353ccc: 7020 a7b3 3200                         |000e: invoke-direct {v2, v3}, Lkotlinx/coroutines/scheduling/WorkQueue;.pollTo:(Lkotlinx/coroutines/scheduling/GlobalQueue;)Z // method@b3a7
+353cd2: 0a00                                   |0011: move-result v0
+353cd4: 3900 fcff                              |0012: if-nez v0, 000e // -0004
+353cd8: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=141
+        0x000e line=142
+      locals        :
+        0x0000 - 0x0015 reg=2 this Lkotlinx/coroutines/scheduling/WorkQueue;
+        0x0000 - 0x0015 reg=3 (null) Lkotlinx/coroutines/scheduling/GlobalQueue;
+
+    #4              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'poll'
+      type          : '()Lkotlinx/coroutines/scheduling/Task;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 16 16-bit code units
+353974:                                        |[353974] kotlinx.coroutines.scheduling.WorkQueue.poll:()Lkotlinx/coroutines/scheduling/Task;
+353984: 6200 d846                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/WorkQueue;.lastScheduledTask$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46d8
+353988: 1201                                   |0002: const/4 v1, #int 0 // #0
+35398a: 6e30 4076 2001                         |0003: invoke-virtual {v0, v2, v1}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.getAndSet:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@7640
+353990: 0c00                                   |0006: move-result-object v0
+353992: 1f00 b119                              |0007: check-cast v0, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+353996: 3900 0600                              |0009: if-nez v0, 000f // +0006
+35399a: 7010 a6b3 0200                         |000b: invoke-direct {v2}, Lkotlinx/coroutines/scheduling/WorkQueue;.pollBuffer:()Lkotlinx/coroutines/scheduling/Task; // method@b3a6
+3539a0: 0c00                                   |000e: move-result-object v0
+3539a2: 1100                                   |000f: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=66
+      locals        :
+        0x0000 - 0x0010 reg=2 this Lkotlinx/coroutines/scheduling/WorkQueue;
+
+    #5              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'tryStealBlockingFrom'
+      type          : '(Lkotlinx/coroutines/scheduling/WorkQueue;)J'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 5
+      insns size    : 78 16-bit code units
+353a00:                                        |[353a00] kotlinx.coroutines.scheduling.WorkQueue.tryStealBlockingFrom:(Lkotlinx/coroutines/scheduling/WorkQueue;)J
+353a10: 7100 f4a3 0000                         |0000: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+353a16: 0a00                                   |0003: move-result v0
+353a18: 3800 0f00                              |0004: if-eqz v0, 0013 // +000f
+353a1c: 6e10 a2b3 0700                         |0006: invoke-virtual {v7}, Lkotlinx/coroutines/scheduling/WorkQueue;.getBufferSize$kotlinx_coroutines_core:()I // method@b3a2
+353a22: 0a00                                   |0009: move-result v0
+353a24: 3900 0300                              |000a: if-nez v0, 000d // +0003
+353a28: 2807                                   |000c: goto 0013 // +0007
+353a2a: 2208 5311                              |000d: new-instance v8, Ljava/lang/AssertionError; // type@1153
+353a2e: 7010 d570 0800                         |000f: invoke-direct {v8}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+353a34: 2708                                   |0012: throw v8
+353a36: 5280 d546                              |0013: iget v0, v8, Lkotlinx/coroutines/scheduling/WorkQueue;.consumerIndex:I // field@46d5
+353a3a: 5281 d946                              |0015: iget v1, v8, Lkotlinx/coroutines/scheduling/WorkQueue;.producerIndex:I // field@46d9
+353a3e: 5482 d446                              |0017: iget-object v2, v8, Lkotlinx/coroutines/scheduling/WorkQueue;.buffer:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@46d4
+353a42: 1213                                   |0019: const/4 v3, #int 1 // #1
+353a44: 3210 2f00                              |001a: if-eq v0, v1, 0049 // +002f
+353a48: dd04 007f                              |001c: and-int/lit8 v4, v0, #int 127 // #7f
+353a4c: 5285 d246                              |001e: iget v5, v8, Lkotlinx/coroutines/scheduling/WorkQueue;.blockingTasksInBuffer:I // field@46d2
+353a50: 3805 2900                              |0020: if-eqz v5, 0049 // +0029
+353a54: 6e20 3976 4200                         |0022: invoke-virtual {v2, v4}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.get:(I)Ljava/lang/Object; // method@7639
+353a5a: 0c05                                   |0025: move-result-object v5
+353a5c: 1f05 b119                              |0026: check-cast v5, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+353a60: 3805 1e00                              |0028: if-eqz v5, 0046 // +001e
+353a64: 5456 c246                              |002a: iget-object v6, v5, Lkotlinx/coroutines/scheduling/Task;.taskContext:Lkotlinx/coroutines/scheduling/TaskContext; // field@46c2
+353a68: 7210 8eb3 0600                         |002c: invoke-interface {v6}, Lkotlinx/coroutines/scheduling/TaskContext;.getTaskMode:()I // method@b38e
+353a6e: 0a06                                   |002f: move-result v6
+353a70: 3336 1600                              |0030: if-ne v6, v3, 0046 // +0016
+353a74: 1203                                   |0032: const/4 v3, #int 0 // #0
+353a76: 7140 92aa 4235                         |0033: invoke-static {v2, v4, v5, v3}, Lkotlinx/coroutines/debug/internal/ConcurrentWeakMap$Core$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceArray;ILjava/lang/Object;Ljava/lang/Object;)Z // method@aa92
+353a7c: 0a04                                   |0036: move-result v4
+353a7e: 3804 0f00                              |0037: if-eqz v4, 0046 // +000f
+353a82: 6200 d346                              |0039: sget-object v0, Lkotlinx/coroutines/scheduling/WorkQueue;.blockingTasksInBuffer$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46d3
+353a86: 6e20 2376 8000                         |003b: invoke-virtual {v0, v8}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.decrementAndGet:(Ljava/lang/Object;)I // method@7623
+353a8c: 1208                                   |003e: const/4 v8, #int 0 // #0
+353a8e: 1220                                   |003f: const/4 v0, #int 2 // #2
+353a90: 7153 9fb3 5708                         |0040: invoke-static {v7, v5, v8, v0, v3}, Lkotlinx/coroutines/scheduling/WorkQueue;.add$default:(Lkotlinx/coroutines/scheduling/WorkQueue;Lkotlinx/coroutines/scheduling/Task;ZILjava/lang/Object;)Lkotlinx/coroutines/scheduling/Task; // method@b39f
+353a96: 1600 ffff                              |0043: const-wide/16 v0, #int -1 // #ffff
+353a9a: 1000                                   |0045: return-wide v0
+353a9c: d800 0001                              |0046: add-int/lit8 v0, v0, #int 1 // #01
+353aa0: 28d1                                   |0048: goto 0019 // -002f
+353aa2: 7030 aab3 8703                         |0049: invoke-direct {v7, v8, v3}, Lkotlinx/coroutines/scheduling/WorkQueue;.tryStealLastScheduled:(Lkotlinx/coroutines/scheduling/WorkQueue;Z)J // method@b3aa
+353aa8: 0b00                                   |004c: move-result-wide v0
+353aaa: 1000                                   |004d: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0000 line=120
+        0x0013 line=121
+        0x0015 line=122
+        0x0017 line=123
+        0x001e line=127
+        0x0022 line=128
+        0x002a line=204
+        0x0033 line=129
+        0x0039 line=130
+        0x0040 line=131
+        0x0049 line=137
+      locals        :
+        0x0000 - 0x004e reg=7 this Lkotlinx/coroutines/scheduling/WorkQueue;
+        0x0000 - 0x004e reg=8 (null) Lkotlinx/coroutines/scheduling/WorkQueue;
+
+    #6              : (in Lkotlinx/coroutines/scheduling/WorkQueue;)
+      name          : 'tryStealFrom'
+      type          : '(Lkotlinx/coroutines/scheduling/WorkQueue;)J'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 5
+      insns size    : 55 16-bit code units
+353aac:                                        |[353aac] kotlinx.coroutines.scheduling.WorkQueue.tryStealFrom:(Lkotlinx/coroutines/scheduling/WorkQueue;)J
+353abc: 7100 f4a3 0000                         |0000: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+353ac2: 0a00                                   |0003: move-result v0
+353ac4: 3800 0f00                              |0004: if-eqz v0, 0013 // +000f
+353ac8: 6e10 a2b3 0300                         |0006: invoke-virtual {v3}, Lkotlinx/coroutines/scheduling/WorkQueue;.getBufferSize$kotlinx_coroutines_core:()I // method@b3a2
+353ace: 0a00                                   |0009: move-result v0
+353ad0: 3900 0300                              |000a: if-nez v0, 000d // +0003
+353ad4: 2807                                   |000c: goto 0013 // +0007
+353ad6: 2204 5311                              |000d: new-instance v4, Ljava/lang/AssertionError; // type@1153
+353ada: 7010 d570 0400                         |000f: invoke-direct {v4}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+353ae0: 2704                                   |0012: throw v4
+353ae2: 7010 a6b3 0400                         |0013: invoke-direct {v4}, Lkotlinx/coroutines/scheduling/WorkQueue;.pollBuffer:()Lkotlinx/coroutines/scheduling/Task; // method@b3a6
+353ae8: 0c00                                   |0016: move-result-object v0
+353aea: 1201                                   |0017: const/4 v1, #int 0 // #0
+353aec: 3800 1a00                              |0018: if-eqz v0, 0032 // +001a
+353af0: 1224                                   |001a: const/4 v4, #int 2 // #2
+353af2: 1202                                   |001b: const/4 v2, #int 0 // #0
+353af4: 7152 9fb3 0341                         |001c: invoke-static {v3, v0, v1, v4, v2}, Lkotlinx/coroutines/scheduling/WorkQueue;.add$default:(Lkotlinx/coroutines/scheduling/WorkQueue;Lkotlinx/coroutines/scheduling/Task;ZILjava/lang/Object;)Lkotlinx/coroutines/scheduling/Task; // method@b39f
+353afa: 0c04                                   |001f: move-result-object v4
+353afc: 7100 f4a3 0000                         |0020: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+353b02: 0a00                                   |0023: move-result v0
+353b04: 3800 0b00                              |0024: if-eqz v0, 002f // +000b
+353b08: 3904 0300                              |0026: if-nez v4, 0029 // +0003
+353b0c: 2807                                   |0028: goto 002f // +0007
+353b0e: 2204 5311                              |0029: new-instance v4, Ljava/lang/AssertionError; // type@1153
+353b12: 7010 d570 0400                         |002b: invoke-direct {v4}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+353b18: 2704                                   |002e: throw v4
+353b1a: 1600 ffff                              |002f: const-wide/16 v0, #int -1 // #ffff
+353b1e: 1000                                   |0031: return-wide v0
+353b20: 7030 aab3 4301                         |0032: invoke-direct {v3, v4, v1}, Lkotlinx/coroutines/scheduling/WorkQueue;.tryStealLastScheduled:(Lkotlinx/coroutines/scheduling/WorkQueue;Z)J // method@b3aa
+353b26: 0b00                                   |0035: move-result-wide v0
+353b28: 1000                                   |0036: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0000 line=109
+        0x0013 line=110
+        0x001c line=112
+        0x0020 line=113
+        0x0032 line=116
+      locals        :
+        0x0000 - 0x0037 reg=3 this Lkotlinx/coroutines/scheduling/WorkQueue;
+        0x0000 - 0x0037 reg=4 (null) Lkotlinx/coroutines/scheduling/WorkQueue;
+
+  source_file_idx   : 23710 (WorkQueue.kt)
+

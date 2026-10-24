@@ -1,0 +1,1137 @@
+Class #5929            -
+  Class descriptor  : 'Lcom/squareup/okhttp/internal/framed/FramedStream;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : '$assertionsDisabled'
+      type          : 'Z'
+      access        : 0x1018 (STATIC FINAL SYNTHETIC)
+  Instance fields   -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'bytesLeftInWriteWindow'
+      type          : 'J'
+      access        : 0x0000 ()
+    #1              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'connection'
+      type          : 'Lcom/squareup/okhttp/internal/framed/FramedConnection;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'errorCode'
+      type          : 'Lcom/squareup/okhttp/internal/framed/ErrorCode;'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'id'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'readTimeout'
+      type          : 'Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'requestHeaders'
+      type          : 'Ljava/util/List;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #6              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'responseHeaders'
+      type          : 'Ljava/util/List;'
+      access        : 0x0002 (PRIVATE)
+    #7              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'sink'
+      type          : 'Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;'
+      access        : 0x0010 (FINAL)
+    #8              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'source'
+      type          : 'Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #9              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'unacknowledgedBytesRead'
+      type          : 'J'
+      access        : 0x0000 ()
+    #10              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'writeTimeout'
+      type          : 'Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 0
+      ins           : 0
+      outs          : 0
+      insns size    : 1 16-bit code units
+75ca78:                                        |[75ca78] com.squareup.okhttp.internal.framed.FramedStream.<clinit>:()V
+75ca88: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : '<init>'
+      type          : '(ILcom/squareup/okhttp/internal/framed/FramedConnection;ZZLjava/util/List;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 10
+      ins           : 6
+      outs          : 5
+      insns size    : 89 16-bit code units
+75ca8c:                                        |[75ca8c] com.squareup.okhttp.internal.framed.FramedStream.<init>:(ILcom/squareup/okhttp/internal/framed/FramedConnection;ZZLjava/util/List;)V
+75ca9c: 7010 c8d1 0400                         |0000: invoke-direct {v4}, Ljava/lang/Object;.<init>:()V // method@d1c8
+75caa2: 1600 0000                              |0003: const-wide/16 v0, #int 0 // #0
+75caa6: 5a40 7388                              |0005: iput-wide v0, v4, Lcom/squareup/okhttp/internal/framed/FramedStream;.unacknowledgedBytesRead:J // field@8873
+75caaa: 2200 a319                              |0007: new-instance v0, Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // type@19a3
+75caae: 7020 57cc 4000                         |0009: invoke-direct {v0, v4}, Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;.<init>:(Lcom/squareup/okhttp/internal/framed/FramedStream;)V // method@cc57
+75cab4: 5b40 6e88                              |000c: iput-object v0, v4, Lcom/squareup/okhttp/internal/framed/FramedStream;.readTimeout:Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // field@886e
+75cab8: 2200 a319                              |000e: new-instance v0, Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // type@19a3
+75cabc: 7020 57cc 4000                         |0010: invoke-direct {v0, v4}, Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;.<init>:(Lcom/squareup/okhttp/internal/framed/FramedStream;)V // method@cc57
+75cac2: 5b40 7488                              |0013: iput-object v0, v4, Lcom/squareup/okhttp/internal/framed/FramedStream;.writeTimeout:Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // field@8874
+75cac6: 1200                                   |0015: const/4 v0, #int 0 // #0
+75cac8: 5b40 6c88                              |0016: iput-object v0, v4, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75cacc: 3806 3900                              |0018: if-eqz v6, 0051 // +0039
+75cad0: 3809 2f00                              |001a: if-eqz v9, 0049 // +002f
+75cad4: 5945 6d88                              |001c: iput v5, v4, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75cad8: 5b46 6b88                              |001e: iput-object v6, v4, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75cadc: 5465 4f88                              |0020: iget-object v5, v6, Lcom/squareup/okhttp/internal/framed/FramedConnection;.peerSettings:Lcom/squareup/okhttp/internal/framed/Settings; // field@884f
+75cae0: 1501 0100                              |0022: const/high16 v1, #int 65536 // #1
+75cae4: 6e20 1dcd 1500                         |0024: invoke-virtual {v5, v1}, Lcom/squareup/okhttp/internal/framed/Settings;.getInitialWindowSize:(I)I // method@cd1d
+75caea: 0a05                                   |0027: move-result v5
+75caec: 8152                                   |0028: int-to-long v2, v5
+75caee: 5a42 6a88                              |0029: iput-wide v2, v4, Lcom/squareup/okhttp/internal/framed/FramedStream;.bytesLeftInWriteWindow:J // field@886a
+75caf2: 2205 a219                              |002b: new-instance v5, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource; // type@19a2
+75caf6: 5466 4e88                              |002d: iget-object v6, v6, Lcom/squareup/okhttp/internal/framed/FramedConnection;.okHttpSettings:Lcom/squareup/okhttp/internal/framed/Settings; // field@884e
+75cafa: 6e20 1dcd 1600                         |002f: invoke-virtual {v6, v1}, Lcom/squareup/okhttp/internal/framed/Settings;.getInitialWindowSize:(I)I // method@cd1d
+75cb00: 0a06                                   |0032: move-result v6
+75cb02: 8161                                   |0033: int-to-long v1, v6
+75cb04: 7050 4dcc 4521                         |0034: invoke-direct {v5, v4, v1, v2, v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;.<init>:(Lcom/squareup/okhttp/internal/framed/FramedStream;JLcom/squareup/okhttp/internal/framed/FramedStream$1;)V // method@cc4d
+75cb0a: 5b45 7288                              |0037: iput-object v5, v4, Lcom/squareup/okhttp/internal/framed/FramedStream;.source:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource; // field@8872
+75cb0e: 2206 a119                              |0039: new-instance v6, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // type@19a1
+75cb12: 7020 42cc 4600                         |003b: invoke-direct {v6, v4}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;.<init>:(Lcom/squareup/okhttp/internal/framed/FramedStream;)V // method@cc42
+75cb18: 5b46 7188                              |003e: iput-object v6, v4, Lcom/squareup/okhttp/internal/framed/FramedStream;.sink:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // field@8871
+75cb1c: 7120 4fcc 8500                         |0040: invoke-static {v5, v8}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;.access$102:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;Z)Z // method@cc4f
+75cb22: 7120 44cc 7600                         |0043: invoke-static {v6, v7}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;.access$202:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;Z)Z // method@cc44
+75cb28: 5b49 6f88                              |0046: iput-object v9, v4, Lcom/squareup/okhttp/internal/framed/FramedStream;.requestHeaders:Ljava/util/List; // field@886f
+75cb2c: 0e00                                   |0048: return-void
+75cb2e: 2204 881a                              |0049: new-instance v4, Ljava/lang/NullPointerException; // type@1a88
+75cb32: 1a05 10cf                              |004b: const-string v5, "requestHeaders == null" // string@cf10
+75cb36: 7020 bdd1 5400                         |004d: invoke-direct {v4, v5}, Ljava/lang/NullPointerException;.<init>:(Ljava/lang/String;)V // method@d1bd
+75cb3c: 2704                                   |0050: throw v4
+75cb3e: 2204 881a                              |0051: new-instance v4, Ljava/lang/NullPointerException; // type@1a88
+75cb42: 1a05 3889                              |0053: const-string v5, "connection == null" // string@8938
+75cb46: 7020 bdd1 5400                         |0055: invoke-direct {v4, v5}, Ljava/lang/NullPointerException;.<init>:(Ljava/lang/String;)V // method@d1bd
+75cb4c: 2704                                   |0058: throw v4
+      catches       : (none)
+      positions     :
+        0x0000 line=77
+        0x0005 line=45
+        0x0007 line=66
+        0x000e line=67
+        0x0016 line=74
+        0x001c line=80
+        0x001e line=81
+        0x0020 line=82
+        0x0024 line=83
+        0x002b line=84
+        0x002f line=85
+        0x0039 line=86
+        0x0040 line=87
+        0x0043 line=88
+        0x0046 line=89
+        0x0049 line=79
+        0x0051 line=78
+      locals        :
+        0x0000 - 0x0059 reg=4 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+        0x0000 - 0x0059 reg=5 (null) I
+        0x0000 - 0x0059 reg=6 (null) Lcom/squareup/okhttp/internal/framed/FramedConnection;
+        0x0000 - 0x0059 reg=7 (null) Z
+        0x0000 - 0x0059 reg=8 (null) Z
+        0x0000 - 0x0059 reg=9 (null) Ljava/util/List;
+
+    #2              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'access$1000'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FramedStream;)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+75cb50:                                        |[75cb50] com.squareup.okhttp.internal.framed.FramedStream.access$1000:(Lcom/squareup/okhttp/internal/framed/FramedStream;)V
+75cb60: 7010 68cc 0000                         |0000: invoke-direct {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream;.cancelStreamIfNecessary:()V // method@cc68
+75cb66: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #3              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'access$1100'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FramedStream;)Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75cb68:                                        |[75cb68] com.squareup.okhttp.internal.framed.FramedStream.access$1100:(Lcom/squareup/okhttp/internal/framed/FramedStream;)Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;
+75cb78: 5400 7488                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.writeTimeout:Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // field@8874
+75cb7c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #4              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'access$1200'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FramedStream;)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+75cb80:                                        |[75cb80] com.squareup.okhttp.internal.framed.FramedStream.access$1200:(Lcom/squareup/okhttp/internal/framed/FramedStream;)V
+75cb90: 7010 69cc 0000                         |0000: invoke-direct {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream;.checkOutNotClosed:()V // method@cc69
+75cb96: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #5              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'access$500'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FramedStream;)Lcom/squareup/okhttp/internal/framed/FramedConnection;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75cb98:                                        |[75cb98] com.squareup.okhttp.internal.framed.FramedStream.access$500:(Lcom/squareup/okhttp/internal/framed/FramedStream;)Lcom/squareup/okhttp/internal/framed/FramedConnection;
+75cba8: 5400 6b88                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75cbac: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #6              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'access$600'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FramedStream;)I'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75cbb0:                                        |[75cbb0] com.squareup.okhttp.internal.framed.FramedStream.access$600:(Lcom/squareup/okhttp/internal/framed/FramedStream;)I
+75cbc0: 5200 6d88                              |0000: iget v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75cbc4: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #7              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'access$700'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FramedStream;)Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75cbc8:                                        |[75cbc8] com.squareup.okhttp.internal.framed.FramedStream.access$700:(Lcom/squareup/okhttp/internal/framed/FramedStream;)Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;
+75cbd8: 5400 6e88                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.readTimeout:Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // field@886e
+75cbdc: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #8              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'access$800'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FramedStream;)Lcom/squareup/okhttp/internal/framed/ErrorCode;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75cbe0:                                        |[75cbe0] com.squareup.okhttp.internal.framed.FramedStream.access$800:(Lcom/squareup/okhttp/internal/framed/FramedStream;)Lcom/squareup/okhttp/internal/framed/ErrorCode;
+75cbf0: 5400 6c88                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75cbf4: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #9              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'access$900'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FramedStream;)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+75cbf8:                                        |[75cbf8] com.squareup.okhttp.internal.framed.FramedStream.access$900:(Lcom/squareup/okhttp/internal/framed/FramedStream;)V
+75cc08: 7010 7ccc 0000                         |0000: invoke-direct {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream;.waitForIo:()V // method@cc7c
+75cc0e: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #10              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'cancelStreamIfNecessary'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 62 16-bit code units
+75cc10:                                        |[75cc10] com.squareup.okhttp.internal.framed.FramedStream.cancelStreamIfNecessary:()V
+75cc20: 1d02                                   |0000: monitor-enter v2
+75cc22: 5420 7288                              |0001: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.source:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource; // field@8872
+75cc26: 7110 4ecc 0000                         |0003: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;.access$100:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;)Z // method@cc4e
+75cc2c: 0a00                                   |0006: move-result v0
+75cc2e: 3900 1c00                              |0007: if-nez v0, 0023 // +001c
+75cc32: 5420 7288                              |0009: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.source:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource; // field@8872
+75cc36: 7110 50cc 0000                         |000b: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;.access$300:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;)Z // method@cc50
+75cc3c: 0a00                                   |000e: move-result v0
+75cc3e: 3800 1400                              |000f: if-eqz v0, 0023 // +0014
+75cc42: 5420 7188                              |0011: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.sink:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // field@8871
+75cc46: 7110 43cc 0000                         |0013: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;.access$200:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;)Z // method@cc43
+75cc4c: 0a00                                   |0016: move-result v0
+75cc4e: 3900 0a00                              |0017: if-nez v0, 0021 // +000a
+75cc52: 5420 7188                              |0019: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.sink:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // field@8871
+75cc56: 7110 45cc 0000                         |001b: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;.access$400:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;)Z // method@cc45
+75cc5c: 0a00                                   |001e: move-result v0
+75cc5e: 3800 0400                              |001f: if-eqz v0, 0023 // +0004
+75cc62: 1210                                   |0021: const/4 v0, #int 1 // #1
+75cc64: 2802                                   |0022: goto 0024 // +0002
+75cc66: 1200                                   |0023: const/4 v0, #int 0 // #0
+75cc68: 6e10 75cc 0200                         |0024: invoke-virtual {v2}, Lcom/squareup/okhttp/internal/framed/FramedStream;.isOpen:()Z // method@cc75
+75cc6e: 0a01                                   |0027: move-result v1
+75cc70: 1e02                                   |0028: monitor-exit v2
+75cc72: 3800 0800                              |0029: if-eqz v0, 0031 // +0008
+75cc76: 6200 0288                              |002b: sget-object v0, Lcom/squareup/okhttp/internal/framed/ErrorCode;.CANCEL:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@8802
+75cc7a: 6e20 6acc 0200                         |002d: invoke-virtual {v2, v0}, Lcom/squareup/okhttp/internal/framed/FramedStream;.close:(Lcom/squareup/okhttp/internal/framed/ErrorCode;)V // method@cc6a
+75cc80: 280a                                   |0030: goto 003a // +000a
+75cc82: 3901 0900                              |0031: if-nez v1, 003a // +0009
+75cc86: 5420 6b88                              |0033: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75cc8a: 5222 6d88                              |0035: iget v2, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75cc8e: 6e20 35cc 2000                         |0037: invoke-virtual {v0, v2}, Lcom/squareup/okhttp/internal/framed/FramedConnection;.removeStream:(I)Lcom/squareup/okhttp/internal/framed/FramedStream; // method@cc35
+75cc94: 0e00                                   |003a: return-void
+75cc96: 0d00                                   |003b: move-exception v0
+75cc98: 1e02                                   |003c: monitor-exit v2
+75cc9a: 2700                                   |003d: throw v0
+      catches       : 2
+        0x0001 - 0x0029
+          <any> -> 0x003b
+        0x003c - 0x003d
+          <any> -> 0x003b
+      positions     :
+        0x0000 line=451
+        0x0001 line=452
+        0x0024 line=453
+        0x0028 line=454
+        0x002b line=460
+        0x0033 line=462
+        0x003c line=454
+      locals        :
+        0x0000 - 0x003e reg=2 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #11              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'checkOutNotClosed'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 60 16-bit code units
+75ccb0:                                        |[75ccb0] com.squareup.okhttp.internal.framed.FramedStream.checkOutNotClosed:()V
+75ccc0: 5430 7188                              |0000: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.sink:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // field@8871
+75ccc4: 7110 45cc 0000                         |0002: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;.access$400:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;)Z // method@cc45
+75ccca: 0a00                                   |0005: move-result v0
+75cccc: 3900 2e00                              |0006: if-nez v0, 0034 // +002e
+75ccd0: 5430 7188                              |0008: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.sink:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // field@8871
+75ccd4: 7110 43cc 0000                         |000a: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;.access$200:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;)Z // method@cc43
+75ccda: 0a00                                   |000d: move-result v0
+75ccdc: 3900 1e00                              |000e: if-nez v0, 002c // +001e
+75cce0: 5430 6c88                              |0010: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75cce4: 3900 0300                              |0012: if-nez v0, 0015 // +0003
+75cce8: 0e00                                   |0014: return-void
+75ccea: 2200 481a                              |0015: new-instance v0, Ljava/io/IOException; // type@1a48
+75ccee: 2201 991a                              |0017: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+75ccf2: 1a02 c9de                              |0019: const-string v2, "stream was reset: " // string@dec9
+75ccf6: 7020 3cd2 2100                         |001b: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+75ccfc: 5433 6c88                              |001e: iget-object v3, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75cd00: 6e20 44d2 3100                         |0020: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+75cd06: 0c03                                   |0023: move-result-object v3
+75cd08: 6e10 58d2 0300                         |0024: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+75cd0e: 0c03                                   |0027: move-result-object v3
+75cd10: 7020 14d0 3000                         |0028: invoke-direct {v0, v3}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+75cd16: 2700                                   |002b: throw v0
+75cd18: 2203 481a                              |002c: new-instance v3, Ljava/io/IOException; // type@1a48
+75cd1c: 1a00 c8de                              |002e: const-string v0, "stream finished" // string@dec8
+75cd20: 7020 14d0 0300                         |0030: invoke-direct {v3, v0}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+75cd26: 2703                                   |0033: throw v3
+75cd28: 2203 481a                              |0034: new-instance v3, Ljava/io/IOException; // type@1a48
+75cd2c: 1a00 c7de                              |0036: const-string v0, "stream closed" // string@dec7
+75cd30: 7020 14d0 0300                         |0038: invoke-direct {v3, v0}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+75cd36: 2703                                   |003b: throw v3
+      catches       : (none)
+      positions     :
+        0x0000 line=573
+        0x0008 line=575
+        0x0010 line=577
+        0x0015 line=578
+        0x002c line=576
+        0x0034 line=574
+      locals        :
+        0x0000 - 0x003c reg=3 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #12              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'closeInternal'
+      type          : '(Lcom/squareup/okhttp/internal/framed/ErrorCode;)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 44 16-bit code units
+75cd38:                                        |[75cd38] com.squareup.okhttp.internal.framed.FramedStream.closeInternal:(Lcom/squareup/okhttp/internal/framed/ErrorCode;)Z
+75cd48: 1d02                                   |0000: monitor-enter v2
+75cd4a: 5420 6c88                              |0001: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75cd4e: 1201                                   |0003: const/4 v1, #int 0 // #0
+75cd50: 3800 0400                              |0004: if-eqz v0, 0008 // +0004
+75cd54: 1e02                                   |0006: monitor-exit v2
+75cd56: 0f01                                   |0007: return v1
+75cd58: 5420 7288                              |0008: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.source:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource; // field@8872
+75cd5c: 7110 4ecc 0000                         |000a: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;.access$100:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;)Z // method@cc4e
+75cd62: 0a00                                   |000d: move-result v0
+75cd64: 3800 0c00                              |000e: if-eqz v0, 001a // +000c
+75cd68: 5420 7188                              |0010: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.sink:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // field@8871
+75cd6c: 7110 43cc 0000                         |0012: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;.access$200:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;)Z // method@cc43
+75cd72: 0a00                                   |0015: move-result v0
+75cd74: 3800 0400                              |0016: if-eqz v0, 001a // +0004
+75cd78: 1e02                                   |0018: monitor-exit v2
+75cd7a: 0f01                                   |0019: return v1
+75cd7c: 5b23 6c88                              |001a: iput-object v3, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75cd80: 6e10 cfd1 0200                         |001c: invoke-virtual {v2}, Ljava/lang/Object;.notifyAll:()V // method@d1cf
+75cd86: 1e02                                   |001f: monitor-exit v2
+75cd88: 5423 6b88                              |0020: iget-object v3, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75cd8c: 5222 6d88                              |0022: iget v2, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75cd90: 6e20 35cc 2300                         |0024: invoke-virtual {v3, v2}, Lcom/squareup/okhttp/internal/framed/FramedConnection;.removeStream:(I)Lcom/squareup/okhttp/internal/framed/FramedStream; // method@cc35
+75cd96: 1212                                   |0027: const/4 v2, #int 1 // #1
+75cd98: 0f02                                   |0028: return v2
+75cd9a: 0d03                                   |0029: move-exception v3
+75cd9c: 1e02                                   |002a: monitor-exit v2
+75cd9e: 2703                                   |002b: throw v3
+      catches       : 2
+        0x0001 - 0x0020
+          <any> -> 0x0029
+        0x002a - 0x002b
+          <any> -> 0x0029
+      positions     :
+        0x0000 line=239
+        0x0001 line=240
+        0x0006 line=241
+        0x0008 line=243
+        0x0018 line=244
+        0x001a line=246
+        0x001c line=247
+        0x001f line=248
+        0x0020 line=249
+        0x002a line=248
+      locals        :
+        0x0000 - 0x002c reg=2 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+        0x0000 - 0x002c reg=3 (null) Lcom/squareup/okhttp/internal/framed/ErrorCode;
+
+    #13              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'waitForIo'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 10 16-bit code units
+75cdb4:                                        |[75cdb4] com.squareup.okhttp.internal.framed.FramedStream.waitForIo:()V
+75cdc4: 6e10 d1d1 0000                         |0000: invoke-virtual {v0}, Ljava/lang/Object;.wait:()V // method@d1d1
+75cdca: 0e00                                   |0003: return-void
+75cdcc: 2200 4b1a                              |0004: new-instance v0, Ljava/io/InterruptedIOException; // type@1a4b
+75cdd0: 7010 29d0 0000                         |0006: invoke-direct {v0}, Ljava/io/InterruptedIOException;.<init>:()V // method@d029
+75cdd6: 2700                                   |0009: throw v0
+      catches       : 1
+        0x0000 - 0x0003
+          Ljava/lang/InterruptedException; -> 0x0004
+      positions     :
+        0x0000 line=588
+        0x0004 line=590
+      locals        :
+        0x0000 - 0x000a reg=0 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+  Virtual methods   -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'addBytesToWriteWindow'
+      type          : '(J)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 1
+      insns size    : 15 16-bit code units
+75cde8:                                        |[75cde8] com.squareup.okhttp.internal.framed.FramedStream.addBytesToWriteWindow:(J)V
+75cdf8: 5320 6a88                              |0000: iget-wide v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.bytesLeftInWriteWindow:J // field@886a
+75cdfc: bb30                                   |0002: add-long/2addr v0, v3
+75cdfe: 5a20 6a88                              |0003: iput-wide v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.bytesLeftInWriteWindow:J // field@886a
+75ce02: 1600 0000                              |0005: const-wide/16 v0, #int 0 // #0
+75ce06: 3103 0300                              |0007: cmp-long v3, v3, v0
+75ce0a: 3d03 0500                              |0009: if-lez v3, 000e // +0005
+75ce0e: 6e10 cfd1 0200                         |000b: invoke-virtual {v2}, Ljava/lang/Object;.notifyAll:()V // method@d1cf
+75ce14: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=568
+        0x000b line=569
+      locals        :
+        0x0000 - 0x000f reg=2 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+        0x0000 - 0x000f reg=3 (null) J
+
+    #1              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'close'
+      type          : '(Lcom/squareup/okhttp/internal/framed/ErrorCode;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 15 16-bit code units
+75ce18:                                        |[75ce18] com.squareup.okhttp.internal.framed.FramedStream.close:(Lcom/squareup/okhttp/internal/framed/ErrorCode;)V
+75ce28: 7020 6bcc 2100                         |0000: invoke-direct {v1, v2}, Lcom/squareup/okhttp/internal/framed/FramedStream;.closeInternal:(Lcom/squareup/okhttp/internal/framed/ErrorCode;)Z // method@cc6b
+75ce2e: 0a00                                   |0003: move-result v0
+75ce30: 3900 0300                              |0004: if-nez v0, 0007 // +0003
+75ce34: 0e00                                   |0006: return-void
+75ce36: 5410 6b88                              |0007: iget-object v0, v1, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75ce3a: 5211 6d88                              |0009: iget v1, v1, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75ce3e: 6e30 3ecc 1002                         |000b: invoke-virtual {v0, v1, v2}, Lcom/squareup/okhttp/internal/framed/FramedConnection;.writeSynReset:(ILcom/squareup/okhttp/internal/framed/ErrorCode;)V // method@cc3e
+75ce44: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=219
+        0x0007 line=222
+      locals        :
+        0x0000 - 0x000f reg=1 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+        0x0000 - 0x000f reg=2 (null) Lcom/squareup/okhttp/internal/framed/ErrorCode;
+
+    #2              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'closeLater'
+      type          : '(Lcom/squareup/okhttp/internal/framed/ErrorCode;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 15 16-bit code units
+75ce48:                                        |[75ce48] com.squareup.okhttp.internal.framed.FramedStream.closeLater:(Lcom/squareup/okhttp/internal/framed/ErrorCode;)V
+75ce58: 7020 6bcc 2100                         |0000: invoke-direct {v1, v2}, Lcom/squareup/okhttp/internal/framed/FramedStream;.closeInternal:(Lcom/squareup/okhttp/internal/framed/ErrorCode;)Z // method@cc6b
+75ce5e: 0a00                                   |0003: move-result v0
+75ce60: 3900 0300                              |0004: if-nez v0, 0007 // +0003
+75ce64: 0e00                                   |0006: return-void
+75ce66: 5410 6b88                              |0007: iget-object v0, v1, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75ce6a: 5211 6d88                              |0009: iget v1, v1, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75ce6e: 6e30 3fcc 1002                         |000b: invoke-virtual {v0, v1, v2}, Lcom/squareup/okhttp/internal/framed/FramedConnection;.writeSynResetLater:(ILcom/squareup/okhttp/internal/framed/ErrorCode;)V // method@cc3f
+75ce74: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=230
+        0x0007 line=233
+      locals        :
+        0x0000 - 0x000f reg=1 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+        0x0000 - 0x000f reg=2 (null) Lcom/squareup/okhttp/internal/framed/ErrorCode;
+
+    #3              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'getConnection'
+      type          : '()Lcom/squareup/okhttp/internal/framed/FramedConnection;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75ce78:                                        |[75ce78] com.squareup.okhttp.internal.framed.FramedStream.getConnection:()Lcom/squareup/okhttp/internal/framed/FramedConnection;
+75ce88: 5400 6b88                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75ce8c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=125
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #4              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'getErrorCode'
+      type          : '()Lcom/squareup/okhttp/internal/framed/ErrorCode;'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+75ce90:                                        |[75ce90] com.squareup.okhttp.internal.framed.FramedStream.getErrorCode:()Lcom/squareup/okhttp/internal/framed/ErrorCode;
+75cea0: 1d01                                   |0000: monitor-enter v1
+75cea2: 5410 6c88                              |0001: iget-object v0, v1, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75cea6: 1e01                                   |0003: monitor-exit v1
+75cea8: 1100                                   |0004: return-object v0
+75ceaa: 0d00                                   |0005: move-exception v0
+75ceac: 1e01                                   |0006: monitor-exit v1
+75ceae: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=154
+      locals        :
+        0x0000 - 0x0008 reg=1 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #5              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'getId'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75cec4:                                        |[75cec4] com.squareup.okhttp.internal.framed.FramedStream.getId:()I
+75ced4: 5200 6d88                              |0000: iget v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75ced8: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=93
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #6              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'getRequestHeaders'
+      type          : '()Ljava/util/List;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75cedc:                                        |[75cedc] com.squareup.okhttp.internal.framed.FramedStream.getRequestHeaders:()Ljava/util/List;
+75ceec: 5400 6f88                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.requestHeaders:Ljava/util/List; // field@886f
+75cef0: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=129
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #7              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'getResponseHeaders'
+      type          : '()Ljava/util/List;'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 66 16-bit code units
+75cef4:                                        |[75cef4] com.squareup.okhttp.internal.framed.FramedStream.getResponseHeaders:()Ljava/util/List;
+75cf04: 1d03                                   |0000: monitor-enter v3
+75cf06: 5430 6e88                              |0001: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.readTimeout:Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // field@886e
+75cf0a: 6e10 58cc 0000                         |0003: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;.enter:()V // method@cc58
+75cf10: 5430 7088                              |0006: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.responseHeaders:Ljava/util/List; // field@8870
+75cf14: 3900 0a00                              |0008: if-nez v0, 0012 // +000a
+75cf18: 5430 6c88                              |000a: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75cf1c: 3900 0600                              |000c: if-nez v0, 0012 // +0006
+75cf20: 7010 7ccc 0300                         |000e: invoke-direct {v3}, Lcom/squareup/okhttp/internal/framed/FramedStream;.waitForIo:()V // method@cc7c
+75cf26: 28f5                                   |0011: goto 0006 // -000b
+75cf28: 5430 6e88                              |0012: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.readTimeout:Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // field@886e
+75cf2c: 6e10 5acc 0000                         |0014: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;.exitAndThrowIfTimedOut:()V // method@cc5a
+75cf32: 5430 7088                              |0017: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.responseHeaders:Ljava/util/List; // field@8870
+75cf36: 3800 0400                              |0019: if-eqz v0, 001d // +0004
+75cf3a: 1e03                                   |001b: monitor-exit v3
+75cf3c: 1100                                   |001c: return-object v0
+75cf3e: 2200 481a                              |001d: new-instance v0, Ljava/io/IOException; // type@1a48
+75cf42: 2201 991a                              |001f: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+75cf46: 7010 39d2 0100                         |0021: invoke-direct {v1}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+75cf4c: 1a02 c9de                              |0024: const-string v2, "stream was reset: " // string@dec9
+75cf50: 6e20 45d2 2100                         |0026: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+75cf56: 0c01                                   |0029: move-result-object v1
+75cf58: 5432 6c88                              |002a: iget-object v2, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75cf5c: 6e20 44d2 2100                         |002c: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+75cf62: 0c01                                   |002f: move-result-object v1
+75cf64: 6e10 58d2 0100                         |0030: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+75cf6a: 0c01                                   |0033: move-result-object v1
+75cf6c: 7020 14d0 1000                         |0034: invoke-direct {v0, v1}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+75cf72: 2700                                   |0037: throw v0
+75cf74: 0d00                                   |0038: move-exception v0
+75cf76: 5431 6e88                              |0039: iget-object v1, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.readTimeout:Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // field@886e
+75cf7a: 6e10 5acc 0100                         |003b: invoke-virtual {v1}, Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout;.exitAndThrowIfTimedOut:()V // method@cc5a
+75cf80: 2700                                   |003e: throw v0
+75cf82: 0d00                                   |003f: move-exception v0
+75cf84: 1e03                                   |0040: monitor-exit v3
+75cf86: 2700                                   |0041: throw v0
+      catches       : 4
+        0x0001 - 0x0006
+          <any> -> 0x003f
+        0x0006 - 0x0011
+          <any> -> 0x0038
+        0x0012 - 0x0019
+          <any> -> 0x003f
+        0x001d - 0x0041
+          <any> -> 0x003f
+      positions     :
+        0x0001 line=137
+        0x0006 line=139
+        0x000e line=140
+        0x0012 line=143
+        0x0017 line=145
+        0x001d line=146
+        0x0039 line=143
+      locals        :
+        0x0000 - 0x0042 reg=3 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #8              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'getSink'
+      type          : '()Lokio/Sink;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 27 16-bit code units
+75cfb0:                                        |[75cfb0] com.squareup.okhttp.internal.framed.FramedStream.getSink:()Lokio/Sink;
+75cfc0: 1d02                                   |0000: monitor-enter v2
+75cfc2: 5420 7088                              |0001: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.responseHeaders:Ljava/util/List; // field@8870
+75cfc6: 3900 1100                              |0003: if-nez v0, 0014 // +0011
+75cfca: 6e10 74cc 0200                         |0005: invoke-virtual {v2}, Lcom/squareup/okhttp/internal/framed/FramedStream;.isLocallyInitiated:()Z // method@cc74
+75cfd0: 0a00                                   |0008: move-result v0
+75cfd2: 3800 0300                              |0009: if-eqz v0, 000c // +0003
+75cfd6: 2809                                   |000b: goto 0014 // +0009
+75cfd8: 2200 7b1a                              |000c: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+75cfdc: 1a01 d8ce                              |000e: const-string v1, "reply before requesting the sink" // string@ced8
+75cfe0: 7020 4cd1 1000                         |0010: invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+75cfe6: 2700                                   |0013: throw v0
+75cfe8: 1e02                                   |0014: monitor-exit v2
+75cfea: 5422 7188                              |0015: iget-object v2, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.sink:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // field@8871
+75cfee: 1102                                   |0017: return-object v2
+75cff0: 0d00                                   |0018: move-exception v0
+75cff2: 1e02                                   |0019: monitor-exit v2
+75cff4: 2700                                   |001a: throw v0
+      catches       : 2
+        0x0001 - 0x0015
+          <any> -> 0x0018
+        0x0019 - 0x001a
+          <any> -> 0x0018
+      positions     :
+        0x0000 line=206
+        0x0001 line=207
+        0x000c line=208
+        0x0014 line=210
+        0x0015 line=211
+        0x0019 line=210
+      locals        :
+        0x0000 - 0x001b reg=2 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #9              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'getSource'
+      type          : '()Lokio/Source;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75d00c:                                        |[75d00c] com.squareup.okhttp.internal.framed.FramedStream.getSource:()Lokio/Source;
+75d01c: 5400 7288                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.source:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource; // field@8872
+75d020: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=196
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #10              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'isLocallyInitiated'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 0
+      insns size    : 19 16-bit code units
+75d024:                                        |[75d024] com.squareup.okhttp.internal.framed.FramedStream.isLocallyInitiated:()Z
+75d034: 5230 6d88                              |0000: iget v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75d038: 1211                                   |0002: const/4 v1, #int 1 // #1
+75d03a: b510                                   |0003: and-int/2addr v0, v1
+75d03c: 1202                                   |0004: const/4 v2, #int 0 // #0
+75d03e: 3310 0400                              |0005: if-ne v0, v1, 0009 // +0004
+75d042: 0110                                   |0007: move v0, v1
+75d044: 2802                                   |0008: goto 000a // +0002
+75d046: 0120                                   |0009: move v0, v2
+75d048: 5433 6b88                              |000a: iget-object v3, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75d04c: 5533 4488                              |000c: iget-boolean v3, v3, Lcom/squareup/okhttp/internal/framed/FramedConnection;.client:Z // field@8844
+75d050: 3303 0300                              |000e: if-ne v3, v0, 0011 // +0003
+75d054: 2802                                   |0010: goto 0012 // +0002
+75d056: 0121                                   |0011: move v1, v2
+75d058: 0f01                                   |0012: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=120
+        0x000a line=121
+      locals        :
+        0x0000 - 0x0013 reg=3 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #11              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'isOpen'
+      type          : '()Z'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 52 16-bit code units
+75d05c:                                        |[75d05c] com.squareup.okhttp.internal.framed.FramedStream.isOpen:()Z
+75d06c: 1d02                                   |0000: monitor-enter v2
+75d06e: 5420 6c88                              |0001: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75d072: 1201                                   |0003: const/4 v1, #int 0 // #0
+75d074: 3800 0400                              |0004: if-eqz v0, 0008 // +0004
+75d078: 1e02                                   |0006: monitor-exit v2
+75d07a: 0f01                                   |0007: return v1
+75d07c: 5420 7288                              |0008: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.source:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource; // field@8872
+75d080: 7110 4ecc 0000                         |000a: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;.access$100:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;)Z // method@cc4e
+75d086: 0a00                                   |000d: move-result v0
+75d088: 3900 0a00                              |000e: if-nez v0, 0018 // +000a
+75d08c: 5420 7288                              |0010: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.source:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource; // field@8872
+75d090: 7110 50cc 0000                         |0012: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;.access$300:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;)Z // method@cc50
+75d096: 0a00                                   |0015: move-result v0
+75d098: 3800 1800                              |0016: if-eqz v0, 002e // +0018
+75d09c: 5420 7188                              |0018: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.sink:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // field@8871
+75d0a0: 7110 43cc 0000                         |001a: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;.access$200:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;)Z // method@cc43
+75d0a6: 0a00                                   |001d: move-result v0
+75d0a8: 3900 0a00                              |001e: if-nez v0, 0028 // +000a
+75d0ac: 5420 7188                              |0020: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.sink:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // field@8871
+75d0b0: 7110 45cc 0000                         |0022: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;.access$400:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;)Z // method@cc45
+75d0b6: 0a00                                   |0025: move-result v0
+75d0b8: 3800 0800                              |0026: if-eqz v0, 002e // +0008
+75d0bc: 5420 7088                              |0028: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.responseHeaders:Ljava/util/List; // field@8870
+75d0c0: 3800 0400                              |002a: if-eqz v0, 002e // +0004
+75d0c4: 1e02                                   |002c: monitor-exit v2
+75d0c6: 0f01                                   |002d: return v1
+75d0c8: 1e02                                   |002e: monitor-exit v2
+75d0ca: 1212                                   |002f: const/4 v2, #int 1 // #1
+75d0cc: 0f02                                   |0030: return v2
+75d0ce: 0d00                                   |0031: move-exception v0
+75d0d0: 1e02                                   |0032: monitor-exit v2
+75d0d2: 2700                                   |0033: throw v0
+      catches       : 3
+        0x0001 - 0x0003
+          <any> -> 0x0031
+        0x0008 - 0x002a
+          <any> -> 0x0031
+        0x0032 - 0x0033
+          <any> -> 0x0031
+      positions     :
+        0x0001 line=107
+        0x0006 line=108
+        0x0008 line=110
+        0x001a line=111
+        0x002c line=113
+        0x002e line=115
+      locals        :
+        0x0000 - 0x0034 reg=2 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #12              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'readTimeout'
+      type          : '()Lokio/Timeout;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75d0f0:                                        |[75d0f0] com.squareup.okhttp.internal.framed.FramedStream.readTimeout:()Lokio/Timeout;
+75d100: 5400 6e88                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.readTimeout:Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // field@886e
+75d104: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=187
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #13              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'receiveData'
+      type          : '(Lokio/BufferedSource;I)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 4
+      insns size    : 7 16-bit code units
+75d108:                                        |[75d108] com.squareup.okhttp.internal.framed.FramedStream.receiveData:(Lokio/BufferedSource;I)V
+75d118: 5422 7288                              |0000: iget-object v2, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.source:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource; // field@8872
+75d11c: 8140                                   |0002: int-to-long v0, v4
+75d11e: 6e40 54cc 3210                         |0003: invoke-virtual {v2, v3, v0, v1}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;.receive:(Lokio/BufferedSource;J)V // method@cc54
+75d124: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=286
+      locals        :
+        0x0000 - 0x0007 reg=2 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+        0x0000 - 0x0007 reg=3 (null) Lokio/BufferedSource;
+        0x0000 - 0x0007 reg=4 (null) I
+
+    #14              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'receiveFin'
+      type          : '()V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 28 16-bit code units
+75d128:                                        |[75d128] com.squareup.okhttp.internal.framed.FramedStream.receiveFin:()V
+75d138: 1d02                                   |0000: monitor-enter v2
+75d13a: 5420 7288                              |0001: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.source:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource; // field@8872
+75d13e: 1211                                   |0003: const/4 v1, #int 1 // #1
+75d140: 7120 4fcc 1000                         |0004: invoke-static {v0, v1}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;.access$102:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSource;Z)Z // method@cc4f
+75d146: 6e10 75cc 0200                         |0007: invoke-virtual {v2}, Lcom/squareup/okhttp/internal/framed/FramedStream;.isOpen:()Z // method@cc75
+75d14c: 0a00                                   |000a: move-result v0
+75d14e: 6e10 cfd1 0200                         |000b: invoke-virtual {v2}, Ljava/lang/Object;.notifyAll:()V // method@d1cf
+75d154: 1e02                                   |000e: monitor-exit v2
+75d156: 3900 0900                              |000f: if-nez v0, 0018 // +0009
+75d15a: 5420 6b88                              |0011: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75d15e: 5222 6d88                              |0013: iget v2, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75d162: 6e20 35cc 2000                         |0015: invoke-virtual {v0, v2}, Lcom/squareup/okhttp/internal/framed/FramedConnection;.removeStream:(I)Lcom/squareup/okhttp/internal/framed/FramedStream; // method@cc35
+75d168: 0e00                                   |0018: return-void
+75d16a: 0d00                                   |0019: move-exception v0
+75d16c: 1e02                                   |001a: monitor-exit v2
+75d16e: 2700                                   |001b: throw v0
+      catches       : 2
+        0x0001 - 0x000f
+          <any> -> 0x0019
+        0x001a - 0x001b
+          <any> -> 0x0019
+      positions     :
+        0x0000 line=292
+        0x0001 line=293
+        0x0007 line=294
+        0x000b line=295
+        0x000e line=296
+        0x0011 line=298
+        0x001a line=296
+      locals        :
+        0x0000 - 0x001c reg=2 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+    #15              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'receiveHeaders'
+      type          : '(Ljava/util/List;Lcom/squareup/okhttp/internal/framed/HeadersMode;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 70 16-bit code units
+75d184:                                        |[75d184] com.squareup.okhttp.internal.framed.FramedStream.receiveHeaders:(Ljava/util/List;Lcom/squareup/okhttp/internal/framed/HeadersMode;)V
+75d194: 1d03                                   |0000: monitor-enter v3
+75d196: 5430 7088                              |0001: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.responseHeaders:Ljava/util/List; // field@8870
+75d19a: 1201                                   |0003: const/4 v1, #int 0 // #0
+75d19c: 1212                                   |0004: const/4 v2, #int 1 // #1
+75d19e: 3900 1500                              |0005: if-nez v0, 001a // +0015
+75d1a2: 6e10 87cc 0500                         |0007: invoke-virtual {v5}, Lcom/squareup/okhttp/internal/framed/HeadersMode;.failIfHeadersAbsent:()Z // method@cc87
+75d1a8: 0a05                                   |000a: move-result v5
+75d1aa: 3805 0500                              |000b: if-eqz v5, 0010 // +0005
+75d1ae: 6201 0e88                              |000d: sget-object v1, Lcom/squareup/okhttp/internal/framed/ErrorCode;.PROTOCOL_ERROR:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@880e
+75d1b2: 2823                                   |000f: goto 0032 // +0023
+75d1b4: 5b34 7088                              |0010: iput-object v4, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.responseHeaders:Ljava/util/List; // field@8870
+75d1b8: 6e10 75cc 0300                         |0012: invoke-virtual {v3}, Lcom/squareup/okhttp/internal/framed/FramedStream;.isOpen:()Z // method@cc75
+75d1be: 0a02                                   |0015: move-result v2
+75d1c0: 6e10 cfd1 0300                         |0016: invoke-virtual {v3}, Ljava/lang/Object;.notifyAll:()V // method@d1cf
+75d1c6: 2819                                   |0019: goto 0032 // +0019
+75d1c8: 6e10 88cc 0500                         |001a: invoke-virtual {v5}, Lcom/squareup/okhttp/internal/framed/HeadersMode;.failIfHeadersPresent:()Z // method@cc88
+75d1ce: 0a05                                   |001d: move-result v5
+75d1d0: 3805 0500                              |001e: if-eqz v5, 0023 // +0005
+75d1d4: 6201 1288                              |0020: sget-object v1, Lcom/squareup/okhttp/internal/framed/ErrorCode;.STREAM_IN_USE:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@8812
+75d1d8: 2810                                   |0022: goto 0032 // +0010
+75d1da: 2205 3a1b                              |0023: new-instance v5, Ljava/util/ArrayList; // type@1b3a
+75d1de: 7010 9fd4 0500                         |0025: invoke-direct {v5}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+75d1e4: 5430 7088                              |0028: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.responseHeaders:Ljava/util/List; // field@8870
+75d1e8: 7220 cbd5 0500                         |002a: invoke-interface {v5, v0}, Ljava/util/List;.addAll:(Ljava/util/Collection;)Z // method@d5cb
+75d1ee: 7220 cbd5 4500                         |002d: invoke-interface {v5, v4}, Ljava/util/List;.addAll:(Ljava/util/Collection;)Z // method@d5cb
+75d1f4: 5b35 7088                              |0030: iput-object v5, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.responseHeaders:Ljava/util/List; // field@8870
+75d1f8: 1e03                                   |0032: monitor-exit v3
+75d1fa: 3801 0600                              |0033: if-eqz v1, 0039 // +0006
+75d1fe: 6e20 6ccc 1300                         |0035: invoke-virtual {v3, v1}, Lcom/squareup/okhttp/internal/framed/FramedStream;.closeLater:(Lcom/squareup/okhttp/internal/framed/ErrorCode;)V // method@cc6c
+75d204: 280a                                   |0038: goto 0042 // +000a
+75d206: 3902 0900                              |0039: if-nez v2, 0042 // +0009
+75d20a: 5434 6b88                              |003b: iget-object v4, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75d20e: 5233 6d88                              |003d: iget v3, v3, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75d212: 6e20 35cc 3400                         |003f: invoke-virtual {v4, v3}, Lcom/squareup/okhttp/internal/framed/FramedConnection;.removeStream:(I)Lcom/squareup/okhttp/internal/framed/FramedStream; // method@cc35
+75d218: 0e00                                   |0042: return-void
+75d21a: 0d04                                   |0043: move-exception v4
+75d21c: 1e03                                   |0044: monitor-exit v3
+75d21e: 2704                                   |0045: throw v4
+      catches       : 2
+        0x0001 - 0x0033
+          <any> -> 0x0043
+        0x0044 - 0x0045
+          <any> -> 0x0043
+      positions     :
+        0x0000 line=257
+        0x0001 line=258
+        0x0007 line=259
+        0x000d line=260
+        0x0010 line=262
+        0x0012 line=263
+        0x0016 line=264
+        0x001a line=267
+        0x0020 line=268
+        0x0023 line=270
+        0x0028 line=271
+        0x002d line=272
+        0x0030 line=273
+        0x0032 line=276
+        0x0035 line=278
+        0x003b line=280
+        0x0044 line=276
+      locals        :
+        0x0000 - 0x0046 reg=3 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+        0x0000 - 0x0046 reg=4 (null) Ljava/util/List;
+        0x0000 - 0x0046 reg=5 (null) Lcom/squareup/okhttp/internal/framed/HeadersMode;
+
+    #16              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'receiveRstStream'
+      type          : '(Lcom/squareup/okhttp/internal/framed/ErrorCode;)V'
+      access        : 0x20000 (DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 15 16-bit code units
+75d234:                                        |[75d234] com.squareup.okhttp.internal.framed.FramedStream.receiveRstStream:(Lcom/squareup/okhttp/internal/framed/ErrorCode;)V
+75d244: 1d01                                   |0000: monitor-enter v1
+75d246: 5410 6c88                              |0001: iget-object v0, v1, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75d24a: 3900 0700                              |0003: if-nez v0, 000a // +0007
+75d24e: 5b12 6c88                              |0005: iput-object v2, v1, Lcom/squareup/okhttp/internal/framed/FramedStream;.errorCode:Lcom/squareup/okhttp/internal/framed/ErrorCode; // field@886c
+75d252: 6e10 cfd1 0100                         |0007: invoke-virtual {v1}, Ljava/lang/Object;.notifyAll:()V // method@d1cf
+75d258: 1e01                                   |000a: monitor-exit v1
+75d25a: 0e00                                   |000b: return-void
+75d25c: 0d02                                   |000c: move-exception v2
+75d25e: 1e01                                   |000d: monitor-exit v1
+75d260: 2702                                   |000e: throw v2
+      catches       : 2
+        0x0001 - 0x000a
+          <any> -> 0x000c
+        0x000d - 0x000e
+          <any> -> 0x000c
+      positions     :
+        0x0001 line=303
+        0x0005 line=304
+        0x0007 line=305
+        0x000a line=307
+      locals        :
+        0x0000 - 0x000f reg=1 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+        0x0000 - 0x000f reg=2 (null) Lcom/squareup/okhttp/internal/framed/ErrorCode;
+
+    #17              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'reply'
+      type          : '(Ljava/util/List;Z)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 4
+      insns size    : 55 16-bit code units
+75d278:                                        |[75d278] com.squareup.okhttp.internal.framed.FramedStream.reply:(Ljava/util/List;Z)V
+75d288: 1d02                                   |0000: monitor-enter v2
+75d28a: 3803 2c00                              |0001: if-eqz v3, 002d // +002c
+75d28e: 5420 7088                              |0003: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.responseHeaders:Ljava/util/List; // field@8870
+75d292: 3900 1e00                              |0005: if-nez v0, 0023 // +001e
+75d296: 5b23 7088                              |0007: iput-object v3, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.responseHeaders:Ljava/util/List; // field@8870
+75d29a: 3904 0900                              |0009: if-nez v4, 0012 // +0009
+75d29e: 5424 7188                              |000b: iget-object v4, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.sink:Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink; // field@8871
+75d2a2: 1210                                   |000d: const/4 v0, #int 1 // #1
+75d2a4: 7120 44cc 0400                         |000e: invoke-static {v4, v0}, Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;.access$202:(Lcom/squareup/okhttp/internal/framed/FramedStream$FramedDataSink;Z)Z // method@cc44
+75d2aa: 2802                                   |0011: goto 0013 // +0002
+75d2ac: 1200                                   |0012: const/4 v0, #int 0 // #0
+75d2ae: 1e02                                   |0013: monitor-exit v2
+75d2b0: 5424 6b88                              |0014: iget-object v4, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75d2b4: 5221 6d88                              |0016: iget v1, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.id:I // field@886d
+75d2b8: 6e40 3dcc 1430                         |0018: invoke-virtual {v4, v1, v0, v3}, Lcom/squareup/okhttp/internal/framed/FramedConnection;.writeSynReply:(IZLjava/util/List;)V // method@cc3d
+75d2be: 3800 0700                              |001b: if-eqz v0, 0022 // +0007
+75d2c2: 5422 6b88                              |001d: iget-object v2, v2, Lcom/squareup/okhttp/internal/framed/FramedStream;.connection:Lcom/squareup/okhttp/internal/framed/FramedConnection; // field@886b
+75d2c6: 6e10 24cc 0200                         |001f: invoke-virtual {v2}, Lcom/squareup/okhttp/internal/framed/FramedConnection;.flush:()V // method@cc24
+75d2cc: 0e00                                   |0022: return-void
+75d2ce: 2203 7b1a                              |0023: new-instance v3, Ljava/lang/IllegalStateException; // type@1a7b
+75d2d2: 1a04 d7ce                              |0025: const-string v4, "reply already sent" // string@ced7
+75d2d6: 7020 4cd1 4300                         |0027: invoke-direct {v3, v4}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+75d2dc: 2703                                   |002a: throw v3
+75d2de: 0d03                                   |002b: move-exception v3
+75d2e0: 2809                                   |002c: goto 0035 // +0009
+75d2e2: 2203 881a                              |002d: new-instance v3, Ljava/lang/NullPointerException; // type@1a88
+75d2e6: 1a04 d9cf                              |002f: const-string v4, "responseHeaders == null" // string@cfd9
+75d2ea: 7020 bdd1 4300                         |0031: invoke-direct {v3, v4}, Ljava/lang/NullPointerException;.<init>:(Ljava/lang/String;)V // method@d1bd
+75d2f0: 2703                                   |0034: throw v3
+75d2f2: 1e02                                   |0035: monitor-exit v2
+75d2f4: 2703                                   |0036: throw v3
+      catches       : 2
+        0x0003 - 0x0014
+          <any> -> 0x002b
+        0x0023 - 0x0036
+          <any> -> 0x002b
+      positions     :
+        0x0000 line=166
+        0x0003 line=170
+        0x0007 line=173
+        0x000b line=175
+        0x0013 line=178
+        0x0014 line=179
+        0x001d line=182
+        0x0023 line=171
+        0x002d line=168
+        0x0035 line=178
+      locals        :
+        0x0000 - 0x0037 reg=2 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+        0x0000 - 0x0037 reg=3 (null) Ljava/util/List;
+        0x0000 - 0x0037 reg=4 (null) Z
+
+    #18              : (in Lcom/squareup/okhttp/internal/framed/FramedStream;)
+      name          : 'writeTimeout'
+      type          : '()Lokio/Timeout;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+75d30c:                                        |[75d30c] com.squareup.okhttp.internal.framed.FramedStream.writeTimeout:()Lokio/Timeout;
+75d31c: 5400 7488                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/FramedStream;.writeTimeout:Lcom/squareup/okhttp/internal/framed/FramedStream$StreamTimeout; // field@8874
+75d320: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=191
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/squareup/okhttp/internal/framed/FramedStream;
+
+  source_file_idx   : 10525 (FramedStream.java)
+

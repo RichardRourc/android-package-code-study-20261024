@@ -1,0 +1,628 @@
+Class #1771            -
+  Class descriptor  : 'Landroidx/recyclerview/widget/ViewInfoStore;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'DEBUG'
+      type          : 'Z'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+    #0              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'mLayoutHolderMap'
+      type          : 'Landroidx/collection/ArrayMap;'
+      access        : 0x0010 (FINAL)
+    #1              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'mOldChangedHolders'
+      type          : 'Landroidx/collection/LongSparseArray;'
+      access        : 0x0010 (FINAL)
+  Direct methods    -
+    #0              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 18 16-bit code units
+56e894:                                        |[56e894] androidx.recyclerview.widget.ViewInfoStore.<init>:()V
+56e8a4: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+56e8aa: 2200 9704                              |0003: new-instance v0, Landroidx/collection/ArrayMap; // type@0497
+56e8ae: 7010 3c24 0000                         |0005: invoke-direct {v0}, Landroidx/collection/ArrayMap;.<init>:()V // method@243c
+56e8b4: 5b10 b837                              |0008: iput-object v0, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56e8b8: 2200 9d04                              |000a: new-instance v0, Landroidx/collection/LongSparseArray; // type@049d
+56e8bc: 7010 a624 0000                         |000c: invoke-direct {v0}, Landroidx/collection/LongSparseArray;.<init>:()V // method@24a6
+56e8c2: 5b10 b937                              |000f: iput-object v0, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mOldChangedHolders:Landroidx/collection/LongSparseArray; // field@37b9
+56e8c6: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+        0x0003 line=42
+        0x000a line=45
+      locals        :
+        0x0000 - 0x0012 reg=1 this Landroidx/recyclerview/widget/ViewInfoStore;
+
+    #1              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'popFromLayoutStep'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;I)Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 67 16-bit code units
+56e8c8:                                        |[56e8c8] androidx.recyclerview.widget.ViewInfoStore.popFromLayoutStep:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;I)Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;
+56e8d8: 5430 b837                              |0000: iget-object v0, v3, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56e8dc: 6e20 4624 4000                         |0002: invoke-virtual {v0, v4}, Landroidx/collection/ArrayMap;.indexOfKey:(Ljava/lang/Object;)I // method@2446
+56e8e2: 0a04                                   |0005: move-result v4
+56e8e4: 1200                                   |0006: const/4 v0, #int 0 // #0
+56e8e6: 3b04 0300                              |0007: if-gez v4, 000a // +0003
+56e8ea: 1100                                   |0009: return-object v0
+56e8ec: 5431 b837                              |000a: iget-object v1, v3, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56e8f0: 6e20 5324 4100                         |000c: invoke-virtual {v1, v4}, Landroidx/collection/ArrayMap;.valueAt:(I)Ljava/lang/Object; // method@2453
+56e8f6: 0c01                                   |000f: move-result-object v1
+56e8f8: 1f01 6209                              |0010: check-cast v1, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // type@0962
+56e8fc: 3801 3000                              |0012: if-eqz v1, 0042 // +0030
+56e900: 5212 b337                              |0014: iget v2, v1, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56e904: b552                                   |0016: and-int/2addr v2, v5
+56e906: 3802 2b00                              |0017: if-eqz v2, 0042 // +002b
+56e90a: 5210 b337                              |0019: iget v0, v1, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56e90e: 7c52                                   |001b: not-int v2, v5
+56e910: b520                                   |001c: and-int/2addr v0, v2
+56e912: 5910 b337                              |001d: iput v0, v1, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56e916: 1240                                   |001f: const/4 v0, #int 4 // #4
+56e918: 3305 0500                              |0020: if-ne v5, v0, 0025 // +0005
+56e91c: 5415 b537                              |0022: iget-object v5, v1, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.preInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b5
+56e920: 2807                                   |0024: goto 002b // +0007
+56e922: 1300 0800                              |0025: const/16 v0, #int 8 // #8
+56e926: 3305 1300                              |0027: if-ne v5, v0, 003a // +0013
+56e92a: 5415 b437                              |0029: iget-object v5, v1, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.postInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b4
+56e92e: 5210 b337                              |002b: iget v0, v1, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56e932: dd00 000c                              |002d: and-int/lit8 v0, v0, #int 12 // #0c
+56e936: 3900 0a00                              |002f: if-nez v0, 0039 // +000a
+56e93a: 5433 b837                              |0031: iget-object v3, v3, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56e93e: 6e20 4f24 4300                         |0033: invoke-virtual {v3, v4}, Landroidx/collection/ArrayMap;.removeAt:(I)Ljava/lang/Object; // method@244f
+56e944: 7110 c44e 0100                         |0036: invoke-static {v1}, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.recycle:(Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;)V // method@4ec4
+56e94a: 1105                                   |0039: return-object v5
+56e94c: 2203 7a1a                              |003a: new-instance v3, Ljava/lang/IllegalArgumentException; // type@1a7a
+56e950: 1a04 1657                              |003c: const-string v4, "Must provide flag PRE or POST" // string@5716
+56e954: 7020 47d1 4300                         |003e: invoke-direct {v3, v4}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+56e95a: 2703                                   |0041: throw v3
+56e95c: 1100                                   |0042: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=99
+        0x000a line=103
+        0x0014 line=104
+        0x0019 line=105
+        0x0022 line=108
+        0x0029 line=110
+        0x002b line=115
+        0x0031 line=116
+        0x0036 line=117
+        0x003a line=112
+      locals        :
+        0x0000 - 0x0043 reg=3 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x0043 reg=4 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+        0x0000 - 0x0043 reg=5 (null) I
+
+  Virtual methods   -
+    #0              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'addToAppearedInPreLayoutHolders'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 28 16-bit code units
+56e960:                                        |[56e960] androidx.recyclerview.widget.ViewInfoStore.addToAppearedInPreLayoutHolders:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V
+56e970: 5410 b837                              |0000: iget-object v0, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56e974: 6e20 4424 2000                         |0002: invoke-virtual {v0, v2}, Landroidx/collection/ArrayMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@2444
+56e97a: 0c00                                   |0005: move-result-object v0
+56e97c: 1f00 6209                              |0006: check-cast v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // type@0962
+56e980: 3900 0b00                              |0008: if-nez v0, 0013 // +000b
+56e984: 7100 c34e 0000                         |000a: invoke-static {}, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.obtain:()Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // method@4ec3
+56e98a: 0c00                                   |000d: move-result-object v0
+56e98c: 5411 b837                              |000e: iget-object v1, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56e990: 6e30 4b24 2100                         |0010: invoke-virtual {v1, v2, v0}, Landroidx/collection/ArrayMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@244b
+56e996: 5201 b337                              |0013: iget v1, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56e99a: de01 0102                              |0015: or-int/lit8 v1, v1, #int 2 // #02
+56e99e: 5901 b337                              |0017: iput v1, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56e9a2: 5b03 b537                              |0019: iput-object v3, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.preInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b5
+56e9a6: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=143
+        0x000a line=145
+        0x000e line=146
+        0x0013 line=148
+        0x0019 line=149
+      locals        :
+        0x0000 - 0x001c reg=1 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x001c reg=2 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+        0x0000 - 0x001c reg=3 (null) Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;
+
+    #1              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'addToDisappearedInLayout'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 26 16-bit code units
+56e9a8:                                        |[56e9a8] androidx.recyclerview.widget.ViewInfoStore.addToDisappearedInLayout:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+56e9b8: 5410 b837                              |0000: iget-object v0, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56e9bc: 6e20 4424 2000                         |0002: invoke-virtual {v0, v2}, Landroidx/collection/ArrayMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@2444
+56e9c2: 0c00                                   |0005: move-result-object v0
+56e9c4: 1f00 6209                              |0006: check-cast v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // type@0962
+56e9c8: 3900 0b00                              |0008: if-nez v0, 0013 // +000b
+56e9cc: 7100 c34e 0000                         |000a: invoke-static {}, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.obtain:()Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // method@4ec3
+56e9d2: 0c00                                   |000d: move-result-object v0
+56e9d4: 5411 b837                              |000e: iget-object v1, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56e9d8: 6e30 4b24 2100                         |0010: invoke-virtual {v1, v2, v0}, Landroidx/collection/ArrayMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@244b
+56e9de: 5201 b337                              |0013: iget v1, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56e9e2: de01 0101                              |0015: or-int/lit8 v1, v1, #int 1 // #01
+56e9e6: 5901 b337                              |0017: iput v1, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56e9ea: 0e00                                   |0019: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=196
+        0x000a line=198
+        0x000e line=199
+        0x0013 line=201
+      locals        :
+        0x0000 - 0x001a reg=1 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x001a reg=2 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+
+    #2              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'addToOldChangeHolders'
+      type          : '(JLandroidx/recyclerview/widget/RecyclerView$ViewHolder;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 4
+      insns size    : 6 16-bit code units
+56e9ec:                                        |[56e9ec] androidx.recyclerview.widget.ViewInfoStore.addToOldChangeHolders:(JLandroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+56e9fc: 5400 b937                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/ViewInfoStore;.mOldChangedHolders:Landroidx/collection/LongSparseArray; // field@37b9
+56ea00: 6e40 b624 1032                         |0002: invoke-virtual {v0, v1, v2, v3}, Landroidx/collection/LongSparseArray;.put:(JLjava/lang/Object;)V // method@24b6
+56ea06: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=130
+      locals        :
+        0x0000 - 0x0006 reg=0 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x0006 reg=1 (null) J
+        0x0000 - 0x0006 reg=3 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+
+    #3              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'addToPostLayout'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 28 16-bit code units
+56ea08:                                        |[56ea08] androidx.recyclerview.widget.ViewInfoStore.addToPostLayout:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V
+56ea18: 5410 b837                              |0000: iget-object v0, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56ea1c: 6e20 4424 2000                         |0002: invoke-virtual {v0, v2}, Landroidx/collection/ArrayMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@2444
+56ea22: 0c00                                   |0005: move-result-object v0
+56ea24: 1f00 6209                              |0006: check-cast v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // type@0962
+56ea28: 3900 0b00                              |0008: if-nez v0, 0013 // +000b
+56ea2c: 7100 c34e 0000                         |000a: invoke-static {}, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.obtain:()Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // method@4ec3
+56ea32: 0c00                                   |000d: move-result-object v0
+56ea34: 5411 b837                              |000e: iget-object v1, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56ea38: 6e30 4b24 2100                         |0010: invoke-virtual {v1, v2, v0}, Landroidx/collection/ArrayMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@244b
+56ea3e: 5b03 b437                              |0013: iput-object v3, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.postInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b4
+56ea42: 5201 b337                              |0015: iget v1, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ea46: de01 0108                              |0017: or-int/lit8 v1, v1, #int 8 // #08
+56ea4a: 5901 b337                              |0019: iput v1, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ea4e: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=180
+        0x000a line=182
+        0x000e line=183
+        0x0013 line=185
+        0x0015 line=186
+      locals        :
+        0x0000 - 0x001c reg=1 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x001c reg=2 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+        0x0000 - 0x001c reg=3 (null) Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;
+
+    #4              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'addToPreLayout'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 28 16-bit code units
+56ea50:                                        |[56ea50] androidx.recyclerview.widget.ViewInfoStore.addToPreLayout:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V
+56ea60: 5410 b837                              |0000: iget-object v0, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56ea64: 6e20 4424 2000                         |0002: invoke-virtual {v0, v2}, Landroidx/collection/ArrayMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@2444
+56ea6a: 0c00                                   |0005: move-result-object v0
+56ea6c: 1f00 6209                              |0006: check-cast v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // type@0962
+56ea70: 3900 0b00                              |0008: if-nez v0, 0013 // +000b
+56ea74: 7100 c34e 0000                         |000a: invoke-static {}, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.obtain:()Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // method@4ec3
+56ea7a: 0c00                                   |000d: move-result-object v0
+56ea7c: 5411 b837                              |000e: iget-object v1, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56ea80: 6e30 4b24 2100                         |0010: invoke-virtual {v1, v2, v0}, Landroidx/collection/ArrayMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@244b
+56ea86: 5b03 b537                              |0013: iput-object v3, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.preInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b5
+56ea8a: 5201 b337                              |0015: iget v1, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ea8e: de01 0104                              |0017: or-int/lit8 v1, v1, #int 4 // #04
+56ea92: 5901 b337                              |0019: iput v1, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ea96: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=62
+        0x000a line=64
+        0x000e line=65
+        0x0013 line=67
+        0x0015 line=68
+      locals        :
+        0x0000 - 0x001c reg=1 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x001c reg=2 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+        0x0000 - 0x001c reg=3 (null) Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;
+
+    #5              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'clear'
+      type          : '()V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 11 16-bit code units
+56ea98:                                        |[56ea98] androidx.recyclerview.widget.ViewInfoStore.clear:()V
+56eaa8: 5410 b837                              |0000: iget-object v0, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56eaac: 6e10 3f24 0000                         |0002: invoke-virtual {v0}, Landroidx/collection/ArrayMap;.clear:()V // method@243f
+56eab2: 5411 b937                              |0005: iget-object v1, v1, Landroidx/recyclerview/widget/ViewInfoStore;.mOldChangedHolders:Landroidx/collection/LongSparseArray; // field@37b9
+56eab6: 6e10 a924 0100                         |0007: invoke-virtual {v1}, Landroidx/collection/LongSparseArray;.clear:()V // method@24a9
+56eabc: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=52
+        0x0005 line=53
+      locals        :
+        0x0000 - 0x000b reg=1 this Landroidx/recyclerview/widget/ViewInfoStore;
+
+    #6              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'getFromOldChangeHolders'
+      type          : '(J)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 9 16-bit code units
+56eac0:                                        |[56eac0] androidx.recyclerview.widget.ViewInfoStore.getFromOldChangeHolders:(J)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+56ead0: 5400 b937                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/ViewInfoStore;.mOldChangedHolders:Landroidx/collection/LongSparseArray; // field@37b9
+56ead4: 6e30 b024 1002                         |0002: invoke-virtual {v0, v1, v2}, Landroidx/collection/LongSparseArray;.get:(J)Ljava/lang/Object; // method@24b0
+56eada: 0c00                                   |0005: move-result-object v0
+56eadc: 1f00 4209                              |0006: check-cast v0, Landroidx/recyclerview/widget/RecyclerView$ViewHolder; // type@0942
+56eae0: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=171
+      locals        :
+        0x0000 - 0x0009 reg=0 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x0009 reg=1 (null) J
+
+    #7              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'isDisappearing'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 19 16-bit code units
+56eae4:                                        |[56eae4] androidx.recyclerview.widget.ViewInfoStore.isDisappearing:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)Z
+56eaf4: 5400 b837                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56eaf8: 6e20 4424 1000                         |0002: invoke-virtual {v0, v1}, Landroidx/collection/ArrayMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@2444
+56eafe: 0c00                                   |0005: move-result-object v0
+56eb00: 1f00 6209                              |0006: check-cast v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // type@0962
+56eb04: 3800 0900                              |0008: if-eqz v0, 0011 // +0009
+56eb08: 5200 b337                              |000a: iget v0, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56eb0c: 1211                                   |000c: const/4 v1, #int 1 // #1
+56eb0e: b510                                   |000d: and-int/2addr v0, v1
+56eb10: 3800 0300                              |000e: if-eqz v0, 0011 // +0003
+56eb14: 2802                                   |0010: goto 0012 // +0002
+56eb16: 1201                                   |0011: const/4 v1, #int 0 // #0
+56eb18: 0f01                                   |0012: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=72
+        0x000a line=73
+      locals        :
+        0x0000 - 0x0013 reg=0 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x0013 reg=1 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+
+    #8              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'isInPreLayout'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 20 16-bit code units
+56eb1c:                                        |[56eb1c] androidx.recyclerview.widget.ViewInfoStore.isInPreLayout:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)Z
+56eb2c: 5400 b837                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56eb30: 6e20 4424 1000                         |0002: invoke-virtual {v0, v1}, Landroidx/collection/ArrayMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@2444
+56eb36: 0c00                                   |0005: move-result-object v0
+56eb38: 1f00 6209                              |0006: check-cast v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // type@0962
+56eb3c: 3800 0a00                              |0008: if-eqz v0, 0012 // +000a
+56eb40: 5200 b337                              |000a: iget v0, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56eb44: dd00 0004                              |000c: and-int/lit8 v0, v0, #int 4 // #04
+56eb48: 3800 0400                              |000e: if-eqz v0, 0012 // +0004
+56eb4c: 1210                                   |0010: const/4 v0, #int 1 // #1
+56eb4e: 2802                                   |0011: goto 0013 // +0002
+56eb50: 1200                                   |0012: const/4 v0, #int 0 // #0
+56eb52: 0f00                                   |0013: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=159
+        0x000a line=160
+      locals        :
+        0x0000 - 0x0014 reg=0 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x0014 reg=1 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+
+    #9              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'onDetach'
+      type          : '()V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 4 16-bit code units
+56eb54:                                        |[56eb54] androidx.recyclerview.widget.ViewInfoStore.onDetach:()V
+56eb64: 7100 c24e 0000                         |0000: invoke-static {}, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.drainCache:()V // method@4ec2
+56eb6a: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=271
+      locals        :
+        0x0000 - 0x0004 reg=0 this Landroidx/recyclerview/widget/ViewInfoStore;
+
+    #10              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'onViewDetached'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 4 16-bit code units
+56eb6c:                                        |[56eb6c] androidx.recyclerview.widget.ViewInfoStore.onViewDetached:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+56eb7c: 6e20 d94e 1000                         |0000: invoke-virtual {v0, v1}, Landroidx/recyclerview/widget/ViewInfoStore;.removeFromDisappearedInLayout:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V // method@4ed9
+56eb82: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=275
+      locals        :
+        0x0000 - 0x0004 reg=0 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x0004 reg=1 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+
+    #11              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'popFromPostLayout'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 7 16-bit code units
+56eb84:                                        |[56eb84] androidx.recyclerview.widget.ViewInfoStore.popFromPostLayout:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;
+56eb94: 1300 0800                              |0000: const/16 v0, #int 8 // #8
+56eb98: 7030 d54e 2100                         |0002: invoke-direct {v1, v2, v0}, Landroidx/recyclerview/widget/ViewInfoStore;.popFromLayoutStep:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;I)Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // method@4ed5
+56eb9e: 0c01                                   |0005: move-result-object v1
+56eba0: 1101                                   |0006: return-object v1
+      catches       : (none)
+      positions     :
+        0x0002 line=95
+      locals        :
+        0x0000 - 0x0007 reg=1 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x0007 reg=2 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+
+    #12              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'popFromPreLayout'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 6 16-bit code units
+56eba4:                                        |[56eba4] androidx.recyclerview.widget.ViewInfoStore.popFromPreLayout:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;
+56ebb4: 1240                                   |0000: const/4 v0, #int 4 // #4
+56ebb6: 7030 d54e 2100                         |0001: invoke-direct {v1, v2, v0}, Landroidx/recyclerview/widget/ViewInfoStore;.popFromLayoutStep:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;I)Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // method@4ed5
+56ebbc: 0c01                                   |0004: move-result-object v1
+56ebbe: 1101                                   |0005: return-object v1
+      catches       : (none)
+      positions     :
+        0x0001 line=84
+      locals        :
+        0x0000 - 0x0006 reg=1 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x0006 reg=2 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+
+    #13              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'process'
+      type          : '(Landroidx/recyclerview/widget/ViewInfoStore$ProcessCallback;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 4
+      insns size    : 124 16-bit code units
+56ebc0:                                        |[56ebc0] androidx.recyclerview.widget.ViewInfoStore.process:(Landroidx/recyclerview/widget/ViewInfoStore$ProcessCallback;)V
+56ebd0: 5450 b837                              |0000: iget-object v0, v5, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56ebd4: 6e10 5224 0000                         |0002: invoke-virtual {v0}, Landroidx/collection/ArrayMap;.size:()I // method@2452
+56ebda: 0a00                                   |0005: move-result v0
+56ebdc: d800 00ff                              |0006: add-int/lit8 v0, v0, #int -1 // #ff
+56ebe0: 3a00 7300                              |0008: if-ltz v0, 007b // +0073
+56ebe4: 5451 b837                              |000a: iget-object v1, v5, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56ebe8: 6e20 4924 0100                         |000c: invoke-virtual {v1, v0}, Landroidx/collection/ArrayMap;.keyAt:(I)Ljava/lang/Object; // method@2449
+56ebee: 0c01                                   |000f: move-result-object v1
+56ebf0: 1f01 4209                              |0010: check-cast v1, Landroidx/recyclerview/widget/RecyclerView$ViewHolder; // type@0942
+56ebf4: 5452 b837                              |0012: iget-object v2, v5, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56ebf8: 6e20 4f24 0200                         |0014: invoke-virtual {v2, v0}, Landroidx/collection/ArrayMap;.removeAt:(I)Ljava/lang/Object; // method@244f
+56ebfe: 0c02                                   |0017: move-result-object v2
+56ec00: 1f02 6209                              |0018: check-cast v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // type@0962
+56ec04: 5223 b337                              |001a: iget v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ec08: 1234                                   |001c: const/4 v4, #int 3 // #3
+56ec0a: b543                                   |001d: and-int/2addr v3, v4
+56ec0c: 3343 0600                              |001e: if-ne v3, v4, 0024 // +0006
+56ec10: 7220 c84e 1600                         |0020: invoke-interface {v6, v1}, Landroidx/recyclerview/widget/ViewInfoStore$ProcessCallback;.unused:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V // method@4ec8
+56ec16: 2852                                   |0023: goto 0075 // +0052
+56ec18: 5223 b337                              |0024: iget v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ec1c: dd03 0301                              |0026: and-int/lit8 v3, v3, #int 1 // #01
+56ec20: 3803 1200                              |0028: if-eqz v3, 003a // +0012
+56ec24: 5423 b537                              |002a: iget-object v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.preInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b5
+56ec28: 3903 0600                              |002c: if-nez v3, 0032 // +0006
+56ec2c: 7220 c84e 1600                         |002e: invoke-interface {v6, v1}, Landroidx/recyclerview/widget/ViewInfoStore$ProcessCallback;.unused:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V // method@4ec8
+56ec32: 2844                                   |0031: goto 0075 // +0044
+56ec34: 5423 b537                              |0032: iget-object v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.preInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b5
+56ec38: 5424 b437                              |0034: iget-object v4, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.postInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b4
+56ec3c: 7240 c64e 1643                         |0036: invoke-interface {v6, v1, v3, v4}, Landroidx/recyclerview/widget/ViewInfoStore$ProcessCallback;.processDisappeared:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V // method@4ec6
+56ec42: 283c                                   |0039: goto 0075 // +003c
+56ec44: 5223 b337                              |003a: iget v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ec48: 1304 0e00                              |003c: const/16 v4, #int 14 // #e
+56ec4c: b543                                   |003e: and-int/2addr v3, v4
+56ec4e: 3343 0a00                              |003f: if-ne v3, v4, 0049 // +000a
+56ec52: 5423 b537                              |0041: iget-object v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.preInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b5
+56ec56: 5424 b437                              |0043: iget-object v4, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.postInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b4
+56ec5a: 7240 c54e 1643                         |0045: invoke-interface {v6, v1, v3, v4}, Landroidx/recyclerview/widget/ViewInfoStore$ProcessCallback;.processAppeared:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V // method@4ec5
+56ec60: 282d                                   |0048: goto 0075 // +002d
+56ec62: 5223 b337                              |0049: iget v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ec66: 1304 0c00                              |004b: const/16 v4, #int 12 // #c
+56ec6a: b543                                   |004d: and-int/2addr v3, v4
+56ec6c: 3343 0a00                              |004e: if-ne v3, v4, 0058 // +000a
+56ec70: 5423 b537                              |0050: iget-object v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.preInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b5
+56ec74: 5424 b437                              |0052: iget-object v4, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.postInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b4
+56ec78: 7240 c74e 1643                         |0054: invoke-interface {v6, v1, v3, v4}, Landroidx/recyclerview/widget/ViewInfoStore$ProcessCallback;.processPersistent:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V // method@4ec7
+56ec7e: 281e                                   |0057: goto 0075 // +001e
+56ec80: 5223 b337                              |0058: iget v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ec84: dd03 0304                              |005a: and-int/lit8 v3, v3, #int 4 // #04
+56ec88: 3803 0900                              |005c: if-eqz v3, 0065 // +0009
+56ec8c: 5423 b537                              |005e: iget-object v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.preInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b5
+56ec90: 1204                                   |0060: const/4 v4, #int 0 // #0
+56ec92: 7240 c64e 1643                         |0061: invoke-interface {v6, v1, v3, v4}, Landroidx/recyclerview/widget/ViewInfoStore$ProcessCallback;.processDisappeared:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V // method@4ec6
+56ec98: 2811                                   |0064: goto 0075 // +0011
+56ec9a: 5223 b337                              |0065: iget v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ec9e: dd03 0308                              |0067: and-int/lit8 v3, v3, #int 8 // #08
+56eca2: 3803 0a00                              |0069: if-eqz v3, 0073 // +000a
+56eca6: 5423 b537                              |006b: iget-object v3, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.preInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b5
+56ecaa: 5424 b437                              |006d: iget-object v4, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.postInfo:Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo; // field@37b4
+56ecae: 7240 c54e 1643                         |006f: invoke-interface {v6, v1, v3, v4}, Landroidx/recyclerview/widget/ViewInfoStore$ProcessCallback;.processAppeared:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;Landroidx/recyclerview/widget/RecyclerView$ItemAnimator$ItemHolderInfo;)V // method@4ec5
+56ecb4: 2803                                   |0072: goto 0075 // +0003
+56ecb6: 5221 b337                              |0073: iget v1, v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ecba: 7110 c44e 0200                         |0075: invoke-static {v2}, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.recycle:(Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;)V // method@4ec4
+56ecc0: d800 00ff                              |0078: add-int/lit8 v0, v0, #int -1 // #ff
+56ecc4: 288e                                   |007a: goto 0008 // -0072
+56ecc6: 0e00                                   |007b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=217
+        0x000a line=218
+        0x0012 line=219
+        0x001a line=220
+        0x0020 line=222
+        0x0024 line=223
+        0x002a line=225
+        0x002e line=228
+        0x0032 line=230
+        0x003a line=232
+        0x0041 line=234
+        0x0049 line=235
+        0x0050 line=237
+        0x0058 line=238
+        0x005e line=240
+        0x0065 line=241
+        0x006b line=243
+        0x0073 line=244
+        0x0075 line=249
+      locals        :
+        0x0000 - 0x007c reg=5 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x007c reg=6 (null) Landroidx/recyclerview/widget/ViewInfoStore$ProcessCallback;
+
+    #14              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'removeFromDisappearedInLayout'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 18 16-bit code units
+56ecc8:                                        |[56ecc8] androidx.recyclerview.widget.ViewInfoStore.removeFromDisappearedInLayout:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+56ecd8: 5400 b837                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56ecdc: 6e20 4424 1000                         |0002: invoke-virtual {v0, v1}, Landroidx/collection/ArrayMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@2444
+56ece2: 0c00                                   |0005: move-result-object v0
+56ece4: 1f00 6209                              |0006: check-cast v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // type@0962
+56ece8: 3900 0300                              |0008: if-nez v0, 000b // +0003
+56ecec: 0e00                                   |000a: return-void
+56ecee: 5201 b337                              |000b: iget v1, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ecf2: dd01 01fe                              |000d: and-int/lit8 v1, v1, #int -2 // #fe
+56ecf6: 5901 b337                              |000f: iput v1, v0, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.flags:I // field@37b3
+56ecfa: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=209
+        0x000b line=213
+      locals        :
+        0x0000 - 0x0012 reg=0 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x0012 reg=1 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+
+    #15              : (in Landroidx/recyclerview/widget/ViewInfoStore;)
+      name          : 'removeViewHolder'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 41 16-bit code units
+56ecfc:                                        |[56ecfc] androidx.recyclerview.widget.ViewInfoStore.removeViewHolder:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+56ed0c: 5420 b937                              |0000: iget-object v0, v2, Landroidx/recyclerview/widget/ViewInfoStore;.mOldChangedHolders:Landroidx/collection/LongSparseArray; // field@37b9
+56ed10: 6e10 bf24 0000                         |0002: invoke-virtual {v0}, Landroidx/collection/LongSparseArray;.size:()I // method@24bf
+56ed16: 0a00                                   |0005: move-result v0
+56ed18: d800 00ff                              |0006: add-int/lit8 v0, v0, #int -1 // #ff
+56ed1c: 3a00 1300                              |0008: if-ltz v0, 001b // +0013
+56ed20: 5421 b937                              |000a: iget-object v1, v2, Landroidx/recyclerview/widget/ViewInfoStore;.mOldChangedHolders:Landroidx/collection/LongSparseArray; // field@37b9
+56ed24: 6e20 c124 0100                         |000c: invoke-virtual {v1, v0}, Landroidx/collection/LongSparseArray;.valueAt:(I)Ljava/lang/Object; // method@24c1
+56ed2a: 0c01                                   |000f: move-result-object v1
+56ed2c: 3313 0800                              |0010: if-ne v3, v1, 0018 // +0008
+56ed30: 5421 b937                              |0012: iget-object v1, v2, Landroidx/recyclerview/widget/ViewInfoStore;.mOldChangedHolders:Landroidx/collection/LongSparseArray; // field@37b9
+56ed34: 6e20 bb24 0100                         |0014: invoke-virtual {v1, v0}, Landroidx/collection/LongSparseArray;.removeAt:(I)V // method@24bb
+56ed3a: 2804                                   |0017: goto 001b // +0004
+56ed3c: d800 00ff                              |0018: add-int/lit8 v0, v0, #int -1 // #ff
+56ed40: 28ee                                   |001a: goto 0008 // -0012
+56ed42: 5422 b837                              |001b: iget-object v2, v2, Landroidx/recyclerview/widget/ViewInfoStore;.mLayoutHolderMap:Landroidx/collection/ArrayMap; // field@37b8
+56ed46: 6e20 4d24 3200                         |001d: invoke-virtual {v2, v3}, Landroidx/collection/ArrayMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@244d
+56ed4c: 0c02                                   |0020: move-result-object v2
+56ed4e: 1f02 6209                              |0021: check-cast v2, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord; // type@0962
+56ed52: 3802 0500                              |0023: if-eqz v2, 0028 // +0005
+56ed56: 7110 c44e 0200                         |0025: invoke-static {v2}, Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;.recycle:(Landroidx/recyclerview/widget/ViewInfoStore$InfoRecord;)V // method@4ec4
+56ed5c: 0e00                                   |0028: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=258
+        0x000a line=259
+        0x0012 line=260
+        0x001b line=264
+        0x0025 line=266
+      locals        :
+        0x0000 - 0x0029 reg=2 this Landroidx/recyclerview/widget/ViewInfoStore;
+        0x0000 - 0x0029 reg=3 (null) Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+
+  source_file_idx   : 28306 (ViewInfoStore.java)
+

@@ -1,0 +1,364 @@
+Class #75            -
+  Class descriptor  : 'Lokio/DeflaterSink;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lokio/Sink;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lokio/DeflaterSink;)
+      name          : 'closed'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lokio/DeflaterSink;)
+      name          : 'deflater'
+      type          : 'Ljava/util/zip/Deflater;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lokio/DeflaterSink;)
+      name          : 'sink'
+      type          : 'Lokio/BufferedSink;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lokio/DeflaterSink;)
+      name          : '<init>'
+      type          : '(Lokio/BufferedSink;Ljava/util/zip/Deflater;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 28 16-bit code units
+0315c4:                                        |[0315c4] okio.DeflaterSink.<init>:(Lokio/BufferedSink;Ljava/util/zip/Deflater;)V
+0315d4: 7010 3502 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@0235
+0315da: 3801 1100                              |0003: if-eqz v1, 0014 // +0011
+0315de: 3802 0700                              |0005: if-eqz v2, 000c // +0007
+0315e2: 5b01 fc00                              |0007: iput-object v1, v0, Lokio/DeflaterSink;.sink:Lokio/BufferedSink; // field@00fc
+0315e6: 5b02 fb00                              |0009: iput-object v2, v0, Lokio/DeflaterSink;.deflater:Ljava/util/zip/Deflater; // field@00fb
+0315ea: 0e00                                   |000b: return-void
+0315ec: 2200 af00                              |000c: new-instance v0, Ljava/lang/IllegalArgumentException; // type@00af
+0315f0: 1a01 e707                              |000e: const-string v1, "inflater == null" // string@07e7
+0315f4: 7020 1b02 1000                         |0010: invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+0315fa: 2700                                   |0013: throw v0
+0315fc: 2200 af00                              |0014: new-instance v0, Ljava/lang/IllegalArgumentException; // type@00af
+031600: 1a01 2d0a                              |0016: const-string v1, "source == null" // string@0a2d
+031604: 7020 1b02 1000                         |0018: invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+03160a: 2700                                   |001b: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=52
+        0x0007 line=55
+        0x0009 line=56
+        0x000c line=54
+        0x0014 line=53
+      locals        :
+        0x0000 - 0x001c reg=0 this Lokio/DeflaterSink;
+        0x0000 - 0x001c reg=1 (null) Lokio/BufferedSink;
+        0x0000 - 0x001c reg=2 (null) Ljava/util/zip/Deflater;
+
+    #1              : (in Lokio/DeflaterSink;)
+      name          : '<init>'
+      type          : '(Lokio/Sink;Ljava/util/zip/Deflater;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 8 16-bit code units
+03160c:                                        |[03160c] okio.DeflaterSink.<init>:(Lokio/Sink;Ljava/util/zip/Deflater;)V
+03161c: 7110 ab05 0100                         |0000: invoke-static {v1}, Lokio/Okio;.buffer:(Lokio/Sink;)Lokio/BufferedSink; // method@05ab
+031622: 0c01                                   |0003: move-result-object v1
+031624: 7030 6105 1002                         |0004: invoke-direct {v0, v1, v2}, Lokio/DeflaterSink;.<init>:(Lokio/BufferedSink;Ljava/util/zip/Deflater;)V // method@0561
+03162a: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=44
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lokio/DeflaterSink;
+        0x0000 - 0x0008 reg=1 (null) Lokio/Sink;
+        0x0000 - 0x0008 reg=2 (null) Ljava/util/zip/Deflater;
+
+    #2              : (in Lokio/DeflaterSink;)
+      name          : 'deflate'
+      type          : '(Z)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 5
+      insns size    : 86 16-bit code units
+03162c:                                        |[03162c] okio.DeflaterSink.deflate:(Z)V
+03163c: 5470 fc00                              |0000: iget-object v0, v7, Lokio/DeflaterSink;.sink:Lokio/BufferedSink; // field@00fc
+031640: 7210 fe04 0000                         |0002: invoke-interface {v0}, Lokio/BufferedSink;.buffer:()Lokio/Buffer; // method@04fe
+031646: 0c00                                   |0005: move-result-object v0
+031648: 1211                                   |0006: const/4 v1, #int 1 // #1
+03164a: 6e20 d604 1000                         |0007: invoke-virtual {v0, v1}, Lokio/Buffer;.writableSegment:(I)Lokio/Segment; // method@04d6
+031650: 0c01                                   |000a: move-result-object v1
+031652: 3808 1200                              |000b: if-eqz v8, 001d // +0012
+031656: 5472 fb00                              |000d: iget-object v2, v7, Lokio/DeflaterSink;.deflater:Ljava/util/zip/Deflater; // field@00fb
+03165a: 5413 2501                              |000f: iget-object v3, v1, Lokio/Segment;.data:[B // field@0125
+03165e: 5214 2601                              |0011: iget v4, v1, Lokio/Segment;.limit:I // field@0126
+031662: 5215 2601                              |0013: iget v5, v1, Lokio/Segment;.limit:I // field@0126
+031666: d155 0008                              |0015: rsub-int v5, v5, #int 2048 // #0800
+03166a: 1226                                   |0017: const/4 v6, #int 2 // #2
+03166c: 6e56 f402 3254                         |0018: invoke-virtual {v2, v3, v4, v5, v6}, Ljava/util/zip/Deflater;.deflate:([BIII)I // method@02f4
+031672: 0a02                                   |001b: move-result v2
+031674: 280f                                   |001c: goto 002b // +000f
+031676: 5472 fb00                              |001d: iget-object v2, v7, Lokio/DeflaterSink;.deflater:Ljava/util/zip/Deflater; // field@00fb
+03167a: 5413 2501                              |001f: iget-object v3, v1, Lokio/Segment;.data:[B // field@0125
+03167e: 5214 2601                              |0021: iget v4, v1, Lokio/Segment;.limit:I // field@0126
+031682: 5215 2601                              |0023: iget v5, v1, Lokio/Segment;.limit:I // field@0126
+031686: d155 0008                              |0025: rsub-int v5, v5, #int 2048 // #0800
+03168a: 6e40 f302 3254                         |0027: invoke-virtual {v2, v3, v4, v5}, Ljava/util/zip/Deflater;.deflate:([BII)I // method@02f3
+031690: 0a02                                   |002a: move-result v2
+031692: 3d02 1300                              |002b: if-lez v2, 003e // +0013
+031696: 5213 2601                              |002d: iget v3, v1, Lokio/Segment;.limit:I // field@0126
+03169a: b023                                   |002f: add-int/2addr v3, v2
+03169c: 5913 2601                              |0030: iput v3, v1, Lokio/Segment;.limit:I // field@0126
+0316a0: 5303 f300                              |0032: iget-wide v3, v0, Lokio/Buffer;.size:J // field@00f3
+0316a4: 8121                                   |0034: int-to-long v1, v2
+0316a6: bb13                                   |0035: add-long/2addr v3, v1
+0316a8: 5a03 f300                              |0036: iput-wide v3, v0, Lokio/Buffer;.size:J // field@00f3
+0316ac: 5471 fc00                              |0038: iget-object v1, v7, Lokio/DeflaterSink;.sink:Lokio/BufferedSink; // field@00fc
+0316b0: 7210 0105 0100                         |003a: invoke-interface {v1}, Lokio/BufferedSink;.emitCompleteSegments:()Lokio/BufferedSink; // method@0501
+0316b6: 28c9                                   |003d: goto 0006 // -0037
+0316b8: 5472 fb00                              |003e: iget-object v2, v7, Lokio/DeflaterSink;.deflater:Ljava/util/zip/Deflater; // field@00fb
+0316bc: 6e10 f802 0200                         |0040: invoke-virtual {v2}, Ljava/util/zip/Deflater;.needsInput:()Z // method@02f8
+0316c2: 0a02                                   |0043: move-result v2
+0316c4: 3802 c2ff                              |0044: if-eqz v2, 0006 // -003e
+0316c8: 5217 2901                              |0046: iget v7, v1, Lokio/Segment;.pos:I // field@0129
+0316cc: 5218 2601                              |0048: iget v8, v1, Lokio/Segment;.limit:I // field@0126
+0316d0: 3387 0b00                              |004a: if-ne v7, v8, 0055 // +000b
+0316d4: 6e10 1406 0100                         |004c: invoke-virtual {v1}, Lokio/Segment;.pop:()Lokio/Segment; // method@0614
+0316da: 0c07                                   |004f: move-result-object v7
+0316dc: 5b07 f200                              |0050: iput-object v7, v0, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+0316e0: 7110 1906 0100                         |0052: invoke-static {v1}, Lokio/SegmentPool;.recycle:(Lokio/Segment;)V // method@0619
+0316e6: 0e00                                   |0055: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=85
+        0x0007 line=87
+        0x000d line=93
+        0x0018 line=94
+        0x0027 line=95
+        0x002d line=98
+        0x0032 line=99
+        0x0038 line=100
+        0x003e line=101
+        0x0046 line=102
+        0x004c line=104
+        0x0052 line=105
+      locals        :
+        0x0000 - 0x0056 reg=7 this Lokio/DeflaterSink;
+        0x0000 - 0x0056 reg=8 (null) Z
+
+  Virtual methods   -
+    #0              : (in Lokio/DeflaterSink;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 40 16-bit code units
+0316e8:                                        |[0316e8] okio.DeflaterSink.close:()V
+0316f8: 5520 fa00                              |0000: iget-boolean v0, v2, Lokio/DeflaterSink;.closed:Z // field@00fa
+0316fc: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+031700: 0e00                                   |0004: return-void
+031702: 6e10 6505 0200                         |0005: invoke-virtual {v2}, Lokio/DeflaterSink;.finishDeflate:()V // method@0565
+031708: 1200                                   |0008: const/4 v0, #int 0 // #0
+03170a: 2802                                   |0009: goto 000b // +0002
+03170c: 0d00                                   |000a: move-exception v0
+03170e: 5421 fb00                              |000b: iget-object v1, v2, Lokio/DeflaterSink;.deflater:Ljava/util/zip/Deflater; // field@00fb
+031712: 6e10 f502 0100                         |000d: invoke-virtual {v1}, Ljava/util/zip/Deflater;.end:()V // method@02f5
+031718: 2805                                   |0010: goto 0015 // +0005
+03171a: 0d01                                   |0011: move-exception v1
+03171c: 3900 0300                              |0012: if-nez v0, 0015 // +0003
+031720: 0710                                   |0014: move-object v0, v1
+031722: 5421 fc00                              |0015: iget-object v1, v2, Lokio/DeflaterSink;.sink:Lokio/BufferedSink; // field@00fc
+031726: 7210 ff04 0100                         |0017: invoke-interface {v1}, Lokio/BufferedSink;.close:()V // method@04ff
+03172c: 2805                                   |001a: goto 001f // +0005
+03172e: 0d01                                   |001b: move-exception v1
+031730: 3900 0300                              |001c: if-nez v0, 001f // +0003
+031734: 0710                                   |001e: move-object v0, v1
+031736: 1211                                   |001f: const/4 v1, #int 1 // #1
+031738: 5c21 fa00                              |0020: iput-boolean v1, v2, Lokio/DeflaterSink;.closed:Z // field@00fa
+03173c: 3800 0500                              |0022: if-eqz v0, 0027 // +0005
+031740: 7110 5006 0000                         |0024: invoke-static {v0}, Lokio/Util;.sneakyRethrow:(Ljava/lang/Throwable;)V // method@0650
+031746: 0e00                                   |0027: return-void
+      catches       : 3
+        0x0005 - 0x0008
+          <any> -> 0x000a
+        0x000b - 0x0010
+          <any> -> 0x0011
+        0x0015 - 0x001a
+          <any> -> 0x001b
+      positions     :
+        0x0000 line=123
+        0x0005 line=129
+        0x000b line=135
+        0x0015 line=141
+        0x0020 line=145
+        0x0024 line=147
+      locals        :
+        0x0000 - 0x0028 reg=2 this Lokio/DeflaterSink;
+
+    #1              : (in Lokio/DeflaterSink;)
+      name          : 'finishDeflate'
+      type          : '()V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 10 16-bit code units
+031768:                                        |[031768] okio.DeflaterSink.finishDeflate:()V
+031778: 5410 fb00                              |0000: iget-object v0, v1, Lokio/DeflaterSink;.deflater:Ljava/util/zip/Deflater; // field@00fb
+03177c: 6e10 f602 0000                         |0002: invoke-virtual {v0}, Ljava/util/zip/Deflater;.finish:()V // method@02f6
+031782: 1200                                   |0005: const/4 v0, #int 0 // #0
+031784: 7020 6405 0100                         |0006: invoke-direct {v1, v0}, Lokio/DeflaterSink;.deflate:(Z)V // method@0564
+03178a: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=118
+        0x0006 line=119
+      locals        :
+        0x0000 - 0x000a reg=1 this Lokio/DeflaterSink;
+
+    #2              : (in Lokio/DeflaterSink;)
+      name          : 'flush'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 10 16-bit code units
+03178c:                                        |[03178c] okio.DeflaterSink.flush:()V
+03179c: 1210                                   |0000: const/4 v0, #int 1 // #1
+03179e: 7020 6405 0100                         |0001: invoke-direct {v1, v0}, Lokio/DeflaterSink;.deflate:(Z)V // method@0564
+0317a4: 5411 fc00                              |0004: iget-object v1, v1, Lokio/DeflaterSink;.sink:Lokio/BufferedSink; // field@00fc
+0317a8: 7210 0205 0100                         |0006: invoke-interface {v1}, Lokio/BufferedSink;.flush:()V // method@0502
+0317ae: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=113
+        0x0004 line=114
+      locals        :
+        0x0000 - 0x000a reg=1 this Lokio/DeflaterSink;
+
+    #3              : (in Lokio/DeflaterSink;)
+      name          : 'timeout'
+      type          : '()Lokio/Timeout;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+0317b0:                                        |[0317b0] okio.DeflaterSink.timeout:()Lokio/Timeout;
+0317c0: 5400 fc00                              |0000: iget-object v0, v0, Lokio/DeflaterSink;.sink:Lokio/BufferedSink; // field@00fc
+0317c4: 7210 0405 0000                         |0002: invoke-interface {v0}, Lokio/BufferedSink;.timeout:()Lokio/Timeout; // method@0504
+0317ca: 0c00                                   |0005: move-result-object v0
+0317cc: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=151
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lokio/DeflaterSink;
+
+    #4              : (in Lokio/DeflaterSink;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 24 16-bit code units
+0317d0:                                        |[0317d0] okio.DeflaterSink.toString:()Ljava/lang/String;
+0317e0: 2200 c600                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@00c6
+0317e4: 1a01 2b01                              |0002: const-string v1, "DeflaterSink(" // string@012b
+0317e8: 7020 5d02 1000                         |0004: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@025d
+0317ee: 5422 fc00                              |0007: iget-object v2, v2, Lokio/DeflaterSink;.sink:Lokio/BufferedSink; // field@00fc
+0317f2: 6e20 6202 2000                         |0009: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@0262
+0317f8: 0c02                                   |000c: move-result-object v2
+0317fa: 1a00 7100                              |000d: const-string v0, ")" // string@0071
+0317fe: 6e20 6302 0200                         |000f: invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@0263
+031804: 0c02                                   |0012: move-result-object v2
+031806: 6e10 6502 0200                         |0013: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@0265
+03180c: 0c02                                   |0016: move-result-object v2
+03180e: 1102                                   |0017: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=155
+      locals        :
+        0x0000 - 0x0018 reg=2 this Lokio/DeflaterSink;
+
+    #5              : (in Lokio/DeflaterSink;)
+      name          : 'write'
+      type          : '(Lokio/Buffer;J)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 6
+      insns size    : 69 16-bit code units
+031810:                                        |[031810] okio.DeflaterSink.write:(Lokio/Buffer;J)V
+031820: 5370 f300                              |0000: iget-wide v0, v7, Lokio/Buffer;.size:J // field@00f3
+031824: 1602 0000                              |0002: const-wide/16 v2, #int 0 // #0
+031828: 0484                                   |0004: move-wide v4, v8
+03182a: 7706 4c06 0000                         |0005: invoke-static/range {v0, v1, v2, v3, v4, v5}, Lokio/Util;.checkOffsetAndCount:(JJJ)V // method@064c
+031830: 1600 0000                              |0008: const-wide/16 v0, #int 0 // #0
+031834: 3100 0800                              |000a: cmp-long v0, v8, v0
+031838: 3d00 3800                              |000c: if-lez v0, 0044 // +0038
+03183c: 5470 f200                              |000e: iget-object v0, v7, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+031840: 5201 2601                              |0010: iget v1, v0, Lokio/Segment;.limit:I // field@0126
+031844: 5202 2901                              |0012: iget v2, v0, Lokio/Segment;.pos:I // field@0129
+031848: b121                                   |0014: sub-int/2addr v1, v2
+03184a: 8111                                   |0015: int-to-long v1, v1
+03184c: 7140 3002 9821                         |0016: invoke-static {v8, v9, v1, v2}, Ljava/lang/Math;.min:(JJ)J // method@0230
+031852: 0b01                                   |0019: move-result-wide v1
+031854: 8411                                   |001a: long-to-int v1, v1
+031856: 5462 fb00                              |001b: iget-object v2, v6, Lokio/DeflaterSink;.deflater:Ljava/util/zip/Deflater; // field@00fb
+03185a: 5403 2501                              |001d: iget-object v3, v0, Lokio/Segment;.data:[B // field@0125
+03185e: 5204 2901                              |001f: iget v4, v0, Lokio/Segment;.pos:I // field@0129
+031862: 6e40 f902 3214                         |0021: invoke-virtual {v2, v3, v4, v1}, Ljava/util/zip/Deflater;.setInput:([BII)V // method@02f9
+031868: 1202                                   |0024: const/4 v2, #int 0 // #0
+03186a: 7020 6405 2600                         |0025: invoke-direct {v6, v2}, Lokio/DeflaterSink;.deflate:(Z)V // method@0564
+031870: 5372 f300                              |0028: iget-wide v2, v7, Lokio/Buffer;.size:J // field@00f3
+031874: 8114                                   |002a: int-to-long v4, v1
+031876: bc42                                   |002b: sub-long/2addr v2, v4
+031878: 5a72 f300                              |002c: iput-wide v2, v7, Lokio/Buffer;.size:J // field@00f3
+03187c: 5202 2901                              |002e: iget v2, v0, Lokio/Segment;.pos:I // field@0129
+031880: b012                                   |0030: add-int/2addr v2, v1
+031882: 5902 2901                              |0031: iput v2, v0, Lokio/Segment;.pos:I // field@0129
+031886: 5201 2901                              |0033: iget v1, v0, Lokio/Segment;.pos:I // field@0129
+03188a: 5202 2601                              |0035: iget v2, v0, Lokio/Segment;.limit:I // field@0126
+03188e: 3321 0b00                              |0037: if-ne v1, v2, 0042 // +000b
+031892: 6e10 1406 0000                         |0039: invoke-virtual {v0}, Lokio/Segment;.pop:()Lokio/Segment; // method@0614
+031898: 0c01                                   |003c: move-result-object v1
+03189a: 5b71 f200                              |003d: iput-object v1, v7, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+03189e: 7110 1906 0000                         |003f: invoke-static {v0}, Lokio/SegmentPool;.recycle:(Lokio/Segment;)V // method@0619
+0318a4: bc48                                   |0042: sub-long/2addr v8, v4
+0318a6: 28c5                                   |0043: goto 0008 // -003b
+0318a8: 0e00                                   |0044: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=61
+        0x000e line=64
+        0x0010 line=65
+        0x001b line=66
+        0x0025 line=69
+        0x0028 line=72
+        0x002e line=73
+        0x0033 line=74
+        0x0039 line=75
+        0x003f line=76
+      locals        :
+        0x0000 - 0x0045 reg=6 this Lokio/DeflaterSink;
+        0x0000 - 0x0045 reg=7 (null) Lokio/Buffer;
+        0x0000 - 0x0045 reg=8 (null) J
+
+  source_file_idx   : 300 (DeflaterSink.java)
+

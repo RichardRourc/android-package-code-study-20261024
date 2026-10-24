@@ -1,0 +1,405 @@
+Class #3541            -
+  Class descriptor  : 'Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;'
+  Access flags      : 0x0401 (PUBLIC ABSTRACT)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'BACKOFF_LOG_BASE'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 10000
+    #1              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'ONE_SECOND'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1000
+    #2              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'THIRTY_SECONDS'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 30000
+    #3              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'TWENTY_FOUR_HOURS'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 86400000
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+66abec:                                        |[66abec] com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig.<init>:()V
+66abfc: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+66ac02: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=31
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;
+
+    #1              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'adjustedExponentialBackoff'
+      type          : '(IJ)J'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 4
+      insns size    : 47 16-bit code units
+66ac04:                                        |[66ac04] com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig.adjustedExponentialBackoff:(IJ)J
+66ac14: d807 07ff                              |0000: add-int/lit8 v7, v7, #int -1 // #ff
+66ac18: 1600 0100                              |0002: const-wide/16 v0, #int 1 // #1
+66ac1c: 3106 0800                              |0004: cmp-long v6, v8, v0
+66ac20: 3d06 0400                              |0006: if-lez v6, 000a // +0004
+66ac24: 0480                                   |0008: move-wide v0, v8
+66ac26: 2803                                   |0009: goto 000c // +0003
+66ac28: 1600 0200                              |000a: const-wide/16 v0, #int 2 // #2
+66ac2c: 1802 0000 0000 0088 c340               |000c: const-wide v2, #double 10000 // #40c3880000000000
+66ac36: 7120 96d1 3200                         |0011: invoke-static {v2, v3}, Ljava/lang/Math;.log:(D)D // method@d196
+66ac3c: 0b02                                   |0014: move-result-wide v2
+66ac3e: 8174                                   |0015: int-to-long v4, v7
+66ac40: bd40                                   |0016: mul-long/2addr v0, v4
+66ac42: 8600                                   |0017: long-to-double v0, v0
+66ac44: 7120 96d1 1000                         |0018: invoke-static {v0, v1}, Ljava/lang/Math;.log:(D)D // method@d196
+66ac4a: 0b00                                   |001b: move-result-wide v0
+66ac4c: ce02                                   |001c: div-double/2addr v2, v0
+66ac4e: 1900 f03f                              |001d: const-wide/high16 v0, #long 4607182418800017408 // #3ff0
+66ac52: 7140 99d1 1032                         |001f: invoke-static {v0, v1, v2, v3}, Ljava/lang/Math;.max:(DD)D // method@d199
+66ac58: 0b00                                   |0022: move-result-wide v0
+66ac5a: 1902 0840                              |0023: const-wide/high16 v2, #long 4613937818241073152 // #4008
+66ac5e: 8376                                   |0025: int-to-double v6, v7
+66ac60: 7140 a5d1 3276                         |0026: invoke-static {v2, v3, v6, v7}, Ljava/lang/Math;.pow:(DD)D // method@d1a5
+66ac66: 0b06                                   |0029: move-result-wide v6
+66ac68: 8688                                   |002a: long-to-double v8, v8
+66ac6a: cd86                                   |002b: mul-double/2addr v6, v8
+66ac6c: cd06                                   |002c: mul-double/2addr v6, v0
+66ac6e: 8b66                                   |002d: double-to-long v6, v6
+66ac70: 1006                                   |002e: return-wide v6
+      catches       : (none)
+      positions     :
+        0x0011 line=148
+        0x001f line=149
+        0x0026 line=151
+      locals        :
+        0x0000 - 0x002f reg=6 this Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;
+        0x0000 - 0x002f reg=7 (null) I
+        0x0000 - 0x002f reg=8 (null) J
+
+    #2              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'builder'
+      type          : '()Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 6 16-bit code units
+66ac74:                                        |[66ac74] com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig.builder:()Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder;
+66ac84: 2200 5310                              |0000: new-instance v0, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder; // type@1053
+66ac88: 7010 af93 0000                         |0002: invoke-direct {v0}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder;.<init>:()V // method@93af
+66ac8e: 1100                                   |0005: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=100
+      locals        :
+
+    #3              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'create'
+      type          : '(Lcom/google/android/datatransport/runtime/time/Clock;Ljava/util/Map;)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 6 16-bit code units
+66ac90:                                        |[66ac90] com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig.create:(Lcom/google/android/datatransport/runtime/time/Clock;Ljava/util/Map;)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;
+66aca0: 2200 4c10                              |0000: new-instance v0, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/AutoValue_SchedulerConfig; // type@104c
+66aca4: 7030 8f93 1002                         |0002: invoke-direct {v0, v1, v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/AutoValue_SchedulerConfig;.<init>:(Lcom/google/android/datatransport/runtime/time/Clock;Ljava/util/Map;)V // method@938f
+66acaa: 1100                                   |0005: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=104
+      locals        :
+        0x0000 - 0x0006 reg=1 (null) Lcom/google/android/datatransport/runtime/time/Clock;
+        0x0000 - 0x0006 reg=2 (null) Ljava/util/Map;
+
+    #4              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'getDefault'
+      type          : '(Lcom/google/android/datatransport/runtime/time/Clock;)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 8
+      ins           : 1
+      outs          : 3
+      insns size    : 107 16-bit code units
+66acac:                                        |[66acac] com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig.getDefault:(Lcom/google/android/datatransport/runtime/time/Clock;)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;
+66acbc: 7100 c393 0000                         |0000: invoke-static {}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;.builder:()Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder; // method@93c3
+66acc2: 0c00                                   |0003: move-result-object v0
+66acc4: 6201 5952                              |0004: sget-object v1, Lcom/google/android/datatransport/Priority;.DEFAULT:Lcom/google/android/datatransport/Priority; // field@5259
+66acc8: 7100 b993 0000                         |0006: invoke-static {}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue;.builder:()Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder; // method@93b9
+66acce: 0c02                                   |0009: move-result-object v2
+66acd0: 1603 3075                              |000a: const-wide/16 v3, #int 30000 // #7530
+66acd4: 6e30 b593 3204                         |000c: invoke-virtual {v2, v3, v4}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder;.setDelta:(J)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder; // method@93b5
+66acda: 0c02                                   |000f: move-result-object v2
+66acdc: 1703 005c 2605                         |0010: const-wide/32 v3, #float 7.82218e-36 // #05265c00
+66ace2: 6e30 b793 3204                         |0013: invoke-virtual {v2, v3, v4}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder;.setMaxAllowedDelay:(J)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder; // method@93b7
+66ace8: 0c02                                   |0016: move-result-object v2
+66acea: 6e10 b493 0200                         |0017: invoke-virtual {v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder;.build:()Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue; // method@93b4
+66acf0: 0c02                                   |001a: move-result-object v2
+66acf2: 6e30 b093 1002                         |001b: invoke-virtual {v0, v1, v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder;.addConfig:(Lcom/google/android/datatransport/Priority;Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue;)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder; // method@93b0
+66acf8: 0c00                                   |001e: move-result-object v0
+66acfa: 6201 5a52                              |001f: sget-object v1, Lcom/google/android/datatransport/Priority;.HIGHEST:Lcom/google/android/datatransport/Priority; // field@525a
+66acfe: 7100 b993 0000                         |0021: invoke-static {}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue;.builder:()Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder; // method@93b9
+66ad04: 0c02                                   |0024: move-result-object v2
+66ad06: 1605 e803                              |0025: const-wide/16 v5, #int 1000 // #3e8
+66ad0a: 6e30 b593 5206                         |0027: invoke-virtual {v2, v5, v6}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder;.setDelta:(J)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder; // method@93b5
+66ad10: 0c02                                   |002a: move-result-object v2
+66ad12: 6e30 b793 3204                         |002b: invoke-virtual {v2, v3, v4}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder;.setMaxAllowedDelay:(J)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder; // method@93b7
+66ad18: 0c02                                   |002e: move-result-object v2
+66ad1a: 6e10 b493 0200                         |002f: invoke-virtual {v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder;.build:()Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue; // method@93b4
+66ad20: 0c02                                   |0032: move-result-object v2
+66ad22: 6e30 b093 1002                         |0033: invoke-virtual {v0, v1, v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder;.addConfig:(Lcom/google/android/datatransport/Priority;Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue;)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder; // method@93b0
+66ad28: 0c00                                   |0036: move-result-object v0
+66ad2a: 6201 5b52                              |0037: sget-object v1, Lcom/google/android/datatransport/Priority;.VERY_LOW:Lcom/google/android/datatransport/Priority; // field@525b
+66ad2e: 7100 b993 0000                         |0039: invoke-static {}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue;.builder:()Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder; // method@93b9
+66ad34: 0c02                                   |003c: move-result-object v2
+66ad36: 6e30 b593 3204                         |003d: invoke-virtual {v2, v3, v4}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder;.setDelta:(J)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder; // method@93b5
+66ad3c: 0c02                                   |0040: move-result-object v2
+66ad3e: 6e30 b793 3204                         |0041: invoke-virtual {v2, v3, v4}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder;.setMaxAllowedDelay:(J)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder; // method@93b7
+66ad44: 0c02                                   |0044: move-result-object v2
+66ad46: 1223                                   |0045: const/4 v3, #int 2 // #2
+66ad48: 2333 4e20                              |0046: new-array v3, v3, [Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag; // type@204e
+66ad4c: 1204                                   |0048: const/4 v4, #int 0 // #0
+66ad4e: 6205 ef53                              |0049: sget-object v5, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag;.NETWORK_UNMETERED:Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag; // field@53ef
+66ad52: 4d05 0304                              |004b: aput-object v5, v3, v4
+66ad56: 1214                                   |004d: const/4 v4, #int 1 // #1
+66ad58: 6205 ee53                              |004e: sget-object v5, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag;.DEVICE_IDLE:Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag; // field@53ee
+66ad5c: 4d05 0304                              |0050: aput-object v5, v3, v4
+66ad60: 7110 cb93 0300                         |0052: invoke-static {v3}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;.immutableSetOf:([Ljava/lang/Object;)Ljava/util/Set; // method@93cb
+66ad66: 0c03                                   |0055: move-result-object v3
+66ad68: 6e20 b693 3200                         |0056: invoke-virtual {v2, v3}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder;.setFlags:(Ljava/util/Set;)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder; // method@93b6
+66ad6e: 0c02                                   |0059: move-result-object v2
+66ad70: 6e10 b493 0200                         |005a: invoke-virtual {v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue$Builder;.build:()Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue; // method@93b4
+66ad76: 0c02                                   |005d: move-result-object v2
+66ad78: 6e30 b093 1002                         |005e: invoke-virtual {v0, v1, v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder;.addConfig:(Lcom/google/android/datatransport/Priority;Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue;)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder; // method@93b0
+66ad7e: 0c00                                   |0061: move-result-object v0
+66ad80: 6e20 b293 7000                         |0062: invoke-virtual {v0, v7}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder;.setClock:(Lcom/google/android/datatransport/runtime/time/Clock;)Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder; // method@93b2
+66ad86: 0c07                                   |0065: move-result-object v7
+66ad88: 6e10 b193 0700                         |0066: invoke-virtual {v7}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Builder;.build:()Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig; // method@93b1
+66ad8e: 0c07                                   |0069: move-result-object v7
+66ad90: 1107                                   |006a: return-object v7
+      catches       : (none)
+      positions     :
+        0x0000 line=71
+        0x0006 line=74
+        0x000c line=75
+        0x0013 line=76
+        0x0017 line=77
+        0x001b line=72
+        0x0021 line=80
+        0x0027 line=81
+        0x002b line=82
+        0x002f line=83
+        0x0033 line=78
+        0x0039 line=86
+        0x003d line=87
+        0x0041 line=88
+        0x0052 line=89
+        0x005a line=90
+        0x005e line=84
+        0x0062 line=91
+        0x0066 line=92
+      locals        :
+        0x0000 - 0x006b reg=7 (null) Lcom/google/android/datatransport/runtime/time/Clock;
+
+    #5              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'immutableSetOf'
+      type          : '([Ljava/lang/Object;)Ljava/util/Set;'
+      access        : 0x008a (PRIVATE STATIC VARARGS)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 14 16-bit code units
+66ad94:                                        |[66ad94] com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig.immutableSetOf:([Ljava/lang/Object;)Ljava/util/Set;
+66ada4: 2200 4a1b                              |0000: new-instance v0, Ljava/util/HashSet; // type@1b4a
+66ada8: 7110 b9d4 0100                         |0002: invoke-static {v1}, Ljava/util/Arrays;.asList:([Ljava/lang/Object;)Ljava/util/List; // method@d4b9
+66adae: 0c01                                   |0005: move-result-object v1
+66adb0: 7020 93d5 1000                         |0006: invoke-direct {v0, v1}, Ljava/util/HashSet;.<init>:(Ljava/util/Collection;)V // method@d593
+66adb6: 7110 57d5 0000                         |0009: invoke-static {v0}, Ljava/util/Collections;.unmodifiableSet:(Ljava/util/Set;)Ljava/util/Set; // method@d557
+66adbc: 0c01                                   |000c: move-result-object v1
+66adbe: 1101                                   |000d: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=184
+      locals        :
+        0x0000 - 0x000e reg=1 (null) [Ljava/lang/Object;
+
+    #6              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'populateFlags'
+      type          : '(Landroid/app/job/JobInfo$Builder;Ljava/util/Set;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 2
+      insns size    : 40 16-bit code units
+66adc0:                                        |[66adc0] com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig.populateFlags:(Landroid/app/job/JobInfo$Builder;Ljava/util/Set;)V
+66add0: 6201 ef53                              |0000: sget-object v1, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag;.NETWORK_UNMETERED:Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag; // field@53ef
+66add4: 7220 2fd6 1300                         |0002: invoke-interface {v3, v1}, Ljava/util/Set;.contains:(Ljava/lang/Object;)Z // method@d62f
+66adda: 0a01                                   |0005: move-result v1
+66addc: 1210                                   |0006: const/4 v0, #int 1 // #1
+66adde: 3801 0700                              |0007: if-eqz v1, 000e // +0007
+66ade2: 1221                                   |0009: const/4 v1, #int 2 // #2
+66ade4: 6e20 ef01 1200                         |000a: invoke-virtual {v2, v1}, Landroid/app/job/JobInfo$Builder;.setRequiredNetworkType:(I)Landroid/app/job/JobInfo$Builder; // method@01ef
+66adea: 2804                                   |000d: goto 0011 // +0004
+66adec: 6e20 ef01 0200                         |000e: invoke-virtual {v2, v0}, Landroid/app/job/JobInfo$Builder;.setRequiredNetworkType:(I)Landroid/app/job/JobInfo$Builder; // method@01ef
+66adf2: 6201 ed53                              |0011: sget-object v1, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag;.DEVICE_CHARGING:Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag; // field@53ed
+66adf6: 7220 2fd6 1300                         |0013: invoke-interface {v3, v1}, Ljava/util/Set;.contains:(Ljava/lang/Object;)Z // method@d62f
+66adfc: 0a01                                   |0016: move-result v1
+66adfe: 3801 0500                              |0017: if-eqz v1, 001c // +0005
+66ae02: 6e20 f001 0200                         |0019: invoke-virtual {v2, v0}, Landroid/app/job/JobInfo$Builder;.setRequiresCharging:(Z)Landroid/app/job/JobInfo$Builder; // method@01f0
+66ae08: 6201 ee53                              |001c: sget-object v1, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag;.DEVICE_IDLE:Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$Flag; // field@53ee
+66ae0c: 7220 2fd6 1300                         |001e: invoke-interface {v3, v1}, Ljava/util/Set;.contains:(Ljava/lang/Object;)Z // method@d62f
+66ae12: 0a01                                   |0021: move-result v1
+66ae14: 3801 0500                              |0022: if-eqz v1, 0027 // +0005
+66ae18: 6e20 f101 0200                         |0024: invoke-virtual {v2, v0}, Landroid/app/job/JobInfo$Builder;.setRequiresDeviceIdle:(Z)Landroid/app/job/JobInfo$Builder; // method@01f1
+66ae1e: 0e00                                   |0027: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=165
+        0x000a line=166
+        0x000e line=168
+        0x0011 line=171
+        0x0019 line=172
+        0x001c line=174
+        0x0024 line=175
+      locals        :
+        0x0000 - 0x0028 reg=1 this Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;
+        0x0000 - 0x0028 reg=2 (null) Landroid/app/job/JobInfo$Builder;
+        0x0000 - 0x0028 reg=3 (null) Ljava/util/Set;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'configureJob'
+      type          : '(Landroid/app/job/JobInfo$Builder;Lcom/google/android/datatransport/Priority;JI)Landroid/app/job/JobInfo$Builder;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 6
+      outs          : 5
+      insns size    : 25 16-bit code units
+66ae20:                                        |[66ae20] com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig.configureJob:(Landroid/app/job/JobInfo$Builder;Lcom/google/android/datatransport/Priority;JI)Landroid/app/job/JobInfo$Builder;
+66ae30: 6e55 c993 2043                         |0000: invoke-virtual {v0, v2, v3, v4, v5}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;.getScheduleDelay:(Lcom/google/android/datatransport/Priority;JI)J // method@93c9
+66ae36: 0b03                                   |0003: move-result-wide v3
+66ae38: 6e30 ed01 3104                         |0004: invoke-virtual {v1, v3, v4}, Landroid/app/job/JobInfo$Builder;.setMinimumLatency:(J)Landroid/app/job/JobInfo$Builder; // method@01ed
+66ae3e: 6e10 ca93 0000                         |0007: invoke-virtual {v0}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;.getValues:()Ljava/util/Map; // method@93ca
+66ae44: 0c03                                   |000a: move-result-object v3
+66ae46: 7220 03d6 2300                         |000b: invoke-interface {v3, v2}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+66ae4c: 0c02                                   |000e: move-result-object v2
+66ae4e: 1f02 5510                              |000f: check-cast v2, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue; // type@1055
+66ae52: 6e10 bb93 0200                         |0011: invoke-virtual {v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue;.getFlags:()Ljava/util/Set; // method@93bb
+66ae58: 0c02                                   |0014: move-result-object v2
+66ae5a: 7030 cc93 1002                         |0015: invoke-direct {v0, v1, v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;.populateFlags:(Landroid/app/job/JobInfo$Builder;Ljava/util/Set;)V // method@93cc
+66ae60: 1101                                   |0018: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=157
+        0x0004 line=158
+        0x0007 line=159
+      locals        :
+        0x0000 - 0x0019 reg=0 this Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;
+        0x0000 - 0x0019 reg=1 (null) Landroid/app/job/JobInfo$Builder;
+        0x0000 - 0x0019 reg=2 (null) Lcom/google/android/datatransport/Priority;
+        0x0000 - 0x0019 reg=3 (null) J
+        0x0000 - 0x0019 reg=5 (null) I
+
+    #1              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'getClock'
+      type          : '()Lcom/google/android/datatransport/runtime/time/Clock;'
+      access        : 0x0400 (ABSTRACT)
+      code          : (none)
+
+    #2              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'getFlags'
+      type          : '(Lcom/google/android/datatransport/Priority;)Ljava/util/Set;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 15 16-bit code units
+66ae64:                                        |[66ae64] com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig.getFlags:(Lcom/google/android/datatransport/Priority;)Ljava/util/Set;
+66ae74: 6e10 ca93 0000                         |0000: invoke-virtual {v0}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;.getValues:()Ljava/util/Map; // method@93ca
+66ae7a: 0c00                                   |0003: move-result-object v0
+66ae7c: 7220 03d6 1000                         |0004: invoke-interface {v0, v1}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+66ae82: 0c00                                   |0007: move-result-object v0
+66ae84: 1f00 5510                              |0008: check-cast v0, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue; // type@1055
+66ae88: 6e10 bb93 0000                         |000a: invoke-virtual {v0}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue;.getFlags:()Ljava/util/Set; // method@93bb
+66ae8e: 0c00                                   |000d: move-result-object v0
+66ae90: 1100                                   |000e: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=180
+      locals        :
+        0x0000 - 0x000f reg=0 this Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;
+        0x0000 - 0x000f reg=1 (null) Lcom/google/android/datatransport/Priority;
+
+    #3              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'getScheduleDelay'
+      type          : '(Lcom/google/android/datatransport/Priority;JI)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 5
+      outs          : 4
+      insns size    : 40 16-bit code units
+66ae94:                                        |[66ae94] com.google.android.datatransport.runtime.scheduling.jobscheduling.SchedulerConfig.getScheduleDelay:(Lcom/google/android/datatransport/Priority;JI)J
+66aea4: 6e10 c693 0200                         |0000: invoke-virtual {v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;.getClock:()Lcom/google/android/datatransport/runtime/time/Clock; // method@93c6
+66aeaa: 0c00                                   |0003: move-result-object v0
+66aeac: 7210 c994 0000                         |0004: invoke-interface {v0}, Lcom/google/android/datatransport/runtime/time/Clock;.getTime:()J // method@94c9
+66aeb2: 0b00                                   |0007: move-result-wide v0
+66aeb4: bc04                                   |0008: sub-long/2addr v4, v0
+66aeb6: 6e10 ca93 0200                         |0009: invoke-virtual {v2}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;.getValues:()Ljava/util/Map; // method@93ca
+66aebc: 0c00                                   |000c: move-result-object v0
+66aebe: 7220 03d6 3000                         |000d: invoke-interface {v0, v3}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+66aec4: 0c03                                   |0010: move-result-object v3
+66aec6: 1f03 5510                              |0011: check-cast v3, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue; // type@1055
+66aeca: 6e10 ba93 0300                         |0013: invoke-virtual {v3}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue;.getDelta:()J // method@93ba
+66aed0: 0b00                                   |0016: move-result-wide v0
+66aed2: 7040 c293 6210                         |0017: invoke-direct {v2, v6, v0, v1}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;.adjustedExponentialBackoff:(IJ)J // method@93c2
+66aed8: 0b00                                   |001a: move-result-wide v0
+66aeda: 7140 9cd1 1054                         |001b: invoke-static {v0, v1, v4, v5}, Ljava/lang/Math;.max:(JJ)J // method@d19c
+66aee0: 0b04                                   |001e: move-result-wide v4
+66aee2: 6e10 bc93 0300                         |001f: invoke-virtual {v3}, Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig$ConfigValue;.getMaxAllowedDelay:()J // method@93bc
+66aee8: 0b02                                   |0022: move-result-wide v2
+66aeea: 7140 a0d1 5432                         |0023: invoke-static {v4, v5, v2, v3}, Ljava/lang/Math;.min:(JJ)J // method@d1a0
+66aef0: 0b02                                   |0026: move-result-wide v2
+66aef2: 1002                                   |0027: return-wide v2
+      catches       : (none)
+      positions     :
+        0x0000 line=137
+        0x0009 line=138
+        0x0013 line=140
+        0x001f line=141
+      locals        :
+        0x0000 - 0x0028 reg=2 this Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;
+        0x0000 - 0x0028 reg=3 (null) Lcom/google/android/datatransport/Priority;
+        0x0000 - 0x0028 reg=4 (null) J
+        0x0000 - 0x0028 reg=6 (null) I
+
+    #4              : (in Lcom/google/android/datatransport/runtime/scheduling/jobscheduling/SchedulerConfig;)
+      name          : 'getValues'
+      type          : '()Ljava/util/Map;'
+      access        : 0x0400 (ABSTRACT)
+      code          : (none)
+
+  source_file_idx   : 25028 (SchedulerConfig.java)
+

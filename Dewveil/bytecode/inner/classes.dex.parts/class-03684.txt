@@ -1,0 +1,157 @@
+Class #3684            -
+  Class descriptor  : 'Lcom/google/android/gms/common/BlockingServiceConnection;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Landroid/content/ServiceConnection;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/google/android/gms/common/BlockingServiceConnection;)
+      name          : 'zza'
+      type          : 'Z'
+      access        : 0x0000 ()
+    #1              : (in Lcom/google/android/gms/common/BlockingServiceConnection;)
+      name          : 'zzb'
+      type          : 'Ljava/util/concurrent/BlockingQueue;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/google/android/gms/common/BlockingServiceConnection;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 14 16-bit code units
+67219c:                                        |[67219c] com.google.android.gms.common.BlockingServiceConnection.<init>:()V
+6721ac: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+6721b2: 1200                                   |0003: const/4 v0, #int 0 // #0
+6721b4: 5c10 ea54                              |0004: iput-boolean v0, v1, Lcom/google/android/gms/common/BlockingServiceConnection;.zza:Z // field@54ea
+6721b8: 2200 821b                              |0006: new-instance v0, Ljava/util/concurrent/LinkedBlockingQueue; // type@1b82
+6721bc: 7010 c4d6 0000                         |0008: invoke-direct {v0}, Ljava/util/concurrent/LinkedBlockingQueue;.<init>:()V // method@d6c4
+6721c2: 5b10 eb54                              |000b: iput-object v0, v1, Lcom/google/android/gms/common/BlockingServiceConnection;.zzb:Ljava/util/concurrent/BlockingQueue; // field@54eb
+6721c6: 0e00                                   |000d: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x000e reg=1 this Lcom/google/android/gms/common/BlockingServiceConnection;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/android/gms/common/BlockingServiceConnection;)
+      name          : 'getService'
+      type          : '()Landroid/os/IBinder;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 29 16-bit code units
+6721c8:                                        |[6721c8] com.google.android.gms.common.BlockingServiceConnection.getService:()Landroid/os/IBinder;
+6721d8: 1a00 3519                              |0000: const-string v0, "BlockingServiceConnection.getService() called on main thread" // string@1935
+6721dc: 7110 a297 0000                         |0002: invoke-static {v0}, Lcom/google/android/gms/common/internal/Preconditions;.checkNotMainThread:(Ljava/lang/String;)V // method@97a2
+6721e2: 5510 ea54                              |0005: iget-boolean v0, v1, Lcom/google/android/gms/common/BlockingServiceConnection;.zza:Z // field@54ea
+6721e6: 3900 0e00                              |0007: if-nez v0, 0015 // +000e
+6721ea: 1210                                   |0009: const/4 v0, #int 1 // #1
+6721ec: 5c10 ea54                              |000a: iput-boolean v0, v1, Lcom/google/android/gms/common/BlockingServiceConnection;.zza:Z // field@54ea
+6721f0: 5411 eb54                              |000c: iget-object v1, v1, Lcom/google/android/gms/common/BlockingServiceConnection;.zzb:Ljava/util/concurrent/BlockingQueue; // field@54eb
+6721f4: 7210 85d6 0100                         |000e: invoke-interface {v1}, Ljava/util/concurrent/BlockingQueue;.take:()Ljava/lang/Object; // method@d685
+6721fa: 0c01                                   |0011: move-result-object v1
+6721fc: 1f01 3401                              |0012: check-cast v1, Landroid/os/IBinder; // type@0134
+672200: 1101                                   |0014: return-object v1
+672202: 2201 7b1a                              |0015: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+672206: 1a00 b71b                              |0017: const-string v0, "Cannot call get on this connection more than once" // string@1bb7
+67220a: 7020 4cd1 0100                         |0019: invoke-direct {v1, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+672210: 2701                                   |001c: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x000a line=2
+        0x000e line=3
+        0x0015 line=1
+        0x0019 line=2
+      locals        :
+        0x0000 - 0x001d reg=1 this Lcom/google/android/gms/common/BlockingServiceConnection;
+
+    #1              : (in Lcom/google/android/gms/common/BlockingServiceConnection;)
+      name          : 'getServiceWithTimeout'
+      type          : '(JLjava/util/concurrent/TimeUnit;)Landroid/os/IBinder;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 4
+      insns size    : 39 16-bit code units
+672214:                                        |[672214] com.google.android.gms.common.BlockingServiceConnection.getServiceWithTimeout:(JLjava/util/concurrent/TimeUnit;)Landroid/os/IBinder;
+672224: 1a00 3619                              |0000: const-string v0, "BlockingServiceConnection.getServiceWithTimeout() called on main thread" // string@1936
+672228: 7110 a297 0000                         |0002: invoke-static {v0}, Lcom/google/android/gms/common/internal/Preconditions;.checkNotMainThread:(Ljava/lang/String;)V // method@97a2
+67222e: 5510 ea54                              |0005: iget-boolean v0, v1, Lcom/google/android/gms/common/BlockingServiceConnection;.zza:Z // field@54ea
+672232: 3900 1800                              |0007: if-nez v0, 001f // +0018
+672236: 1210                                   |0009: const/4 v0, #int 1 // #1
+672238: 5c10 ea54                              |000a: iput-boolean v0, v1, Lcom/google/android/gms/common/BlockingServiceConnection;.zza:Z // field@54ea
+67223c: 5411 eb54                              |000c: iget-object v1, v1, Lcom/google/android/gms/common/BlockingServiceConnection;.zzb:Ljava/util/concurrent/BlockingQueue; // field@54eb
+672240: 7240 83d6 2143                         |000e: invoke-interface {v1, v2, v3, v4}, Ljava/util/concurrent/BlockingQueue;.poll:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; // method@d683
+672246: 0c01                                   |0011: move-result-object v1
+672248: 1f01 3401                              |0012: check-cast v1, Landroid/os/IBinder; // type@0134
+67224c: 3801 0300                              |0014: if-eqz v1, 0017 // +0003
+672250: 1101                                   |0016: return-object v1
+672252: 2201 8e1b                              |0017: new-instance v1, Ljava/util/concurrent/TimeoutException; // type@1b8e
+672256: 1a02 7d68                              |0019: const-string v2, "Timed out waiting for the service connection" // string@687d
+67225a: 7020 ebd6 2100                         |001b: invoke-direct {v1, v2}, Ljava/util/concurrent/TimeoutException;.<init>:(Ljava/lang/String;)V // method@d6eb
+672260: 2701                                   |001e: throw v1
+672262: 2201 7b1a                              |001f: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+672266: 1a02 b71b                              |0021: const-string v2, "Cannot call get on this connection more than once" // string@1bb7
+67226a: 7020 4cd1 2100                         |0023: invoke-direct {v1, v2}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+672270: 2701                                   |0026: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x000a line=2
+        0x000e line=3
+        0x0017 line=4
+        0x001f line=1
+        0x0023 line=2
+      locals        :
+        0x0000 - 0x0027 reg=1 this Lcom/google/android/gms/common/BlockingServiceConnection;
+        0x0000 - 0x0027 reg=2 (null) J
+        0x0000 - 0x0027 reg=4 (null) Ljava/util/concurrent/TimeUnit;
+
+    #2              : (in Lcom/google/android/gms/common/BlockingServiceConnection;)
+      name          : 'onServiceConnected'
+      type          : '(Landroid/content/ComponentName;Landroid/os/IBinder;)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 6 16-bit code units
+672274:                                        |[672274] com.google.android.gms.common.BlockingServiceConnection.onServiceConnected:(Landroid/content/ComponentName;Landroid/os/IBinder;)V
+672284: 5400 eb54                              |0000: iget-object v0, v0, Lcom/google/android/gms/common/BlockingServiceConnection;.zzb:Ljava/util/concurrent/BlockingQueue; // field@54eb
+672288: 7220 80d6 2000                         |0002: invoke-interface {v0, v2}, Ljava/util/concurrent/BlockingQueue;.add:(Ljava/lang/Object;)Z // method@d680
+67228e: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/google/android/gms/common/BlockingServiceConnection;
+        0x0000 - 0x0006 reg=1 (null) Landroid/content/ComponentName;
+        0x0000 - 0x0006 reg=2 (null) Landroid/os/IBinder;
+
+    #3              : (in Lcom/google/android/gms/common/BlockingServiceConnection;)
+      name          : 'onServiceDisconnected'
+      type          : '(Landroid/content/ComponentName;)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 1 16-bit code units
+672290:                                        |[672290] com.google.android.gms.common.BlockingServiceConnection.onServiceDisconnected:(Landroid/content/ComponentName;)V
+6722a0: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+  source_file_idx   : 34813 (com.google.android.gms:play-services-basement@@18.0.0)
+

@@ -1,0 +1,578 @@
+Class #5754            -
+  Class descriptor  : 'Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'AES_MODE'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "AES/GCM/NoPadding"
+    #1              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'KEYSTORE_ALIAS'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : null
+    #2              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'KEYSTORE_PROVIDER'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "AndroidKeyStore"
+    #3              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'RSA_MODE'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "RSA/ECB/PKCS1Padding"
+    #4              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'TAG'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "KeyStoreUtil"
+  Instance fields   -
+    #0              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'keyStore'
+      type          : 'Ljava/security/KeyStore;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'keyStoreSpUtil'
+      type          : 'Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 0
+      outs          : 3
+      insns size    : 32 16-bit code units
+74310c:                                        |[74310c] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.<clinit>:()V
+74311c: 2200 991a                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+743120: 7010 39d2 0000                         |0002: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+743126: 1a01 f00e                              |0005: const-string v1, "-" // string@0ef0
+74312a: 1a02 0000                              |0007: const-string v2, "" // string@0000
+74312e: 1a03 c590                              |0009: const-string v3, "du23u-3077548" // string@90c5
+743132: 6e30 1cd2 1302                         |000b: invoke-virtual {v3, v1, v2}, Ljava/lang/String;.replace:(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String; // method@d21c
+743138: 0c01                                   |000e: move-result-object v1
+74313a: 6e20 45d2 1000                         |000f: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+743140: 0c00                                   |0012: move-result-object v0
+743142: 1a01 e312                              |0013: const-string v1, "ALIAS" // string@12e3
+743146: 6e20 45d2 1000                         |0015: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74314c: 0c00                                   |0018: move-result-object v0
+74314e: 6e10 58d2 0000                         |0019: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+743154: 0c00                                   |001c: move-result-object v0
+743156: 6900 5f85                              |001d: sput-object v0, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.KEYSTORE_ALIAS:Ljava/lang/String; // field@855f
+74315a: 0e00                                   |001f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=37
+        0x0009 line=38
+      locals        :
+
+    #1              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : '<init>'
+      type          : '(Landroid/content/Context;Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 2
+      insns size    : 44 16-bit code units
+74315c:                                        |[74315c] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.<init>:(Landroid/content/Context;Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil;)V
+74316c: 7010 c8d1 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@d1c8
+743172: 5b24 6485                              |0003: iput-object v4, v2, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.keyStoreSpUtil:Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil; // field@8564
+743176: 1a00 2e15                              |0005: const-string v0, "AndroidKeyStore" // string@152e
+74317a: 7110 2cd4 0000                         |0007: invoke-static {v0}, Ljava/security/KeyStore;.getInstance:(Ljava/lang/String;)Ljava/security/KeyStore; // method@d42c
+743180: 0c00                                   |000a: move-result-object v0
+743182: 5b20 6385                              |000b: iput-object v0, v2, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.keyStore:Ljava/security/KeyStore; // field@8563
+743186: 1201                                   |000d: const/4 v1, #int 0 // #0
+743188: 6e20 2ed4 1000                         |000e: invoke-virtual {v0, v1}, Ljava/security/KeyStore;.load:(Ljava/security/KeyStore$LoadStoreParameter;)V // method@d42e
+74318e: 5420 6385                              |0011: iget-object v0, v2, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.keyStore:Ljava/security/KeyStore; // field@8563
+743192: 6201 5f85                              |0013: sget-object v1, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.KEYSTORE_ALIAS:Ljava/lang/String; // field@855f
+743196: 6e20 29d4 1000                         |0015: invoke-virtual {v0, v1}, Ljava/security/KeyStore;.containsAlias:(Ljava/lang/String;)Z // method@d429
+74319c: 0a00                                   |0018: move-result v0
+74319e: 3900 1200                              |0019: if-nez v0, 002b // +0012
+7431a2: 1a00 0000                              |001b: const-string v0, "" // string@0000
+7431a6: 6e20 7fc6 0400                         |001d: invoke-virtual {v4, v0}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil;.setIV:(Ljava/lang/String;)V // method@c67f
+7431ac: 7020 8ac6 3200                         |0020: invoke-direct {v2, v3}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.genKeyStoreKey:(Landroid/content/Context;)V // method@c68a
+7431b2: 7010 89c6 0200                         |0023: invoke-direct {v2}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.genAESKey:()V // method@c689
+7431b8: 2805                                   |0026: goto 002b // +0005
+7431ba: 0d02                                   |0027: move-exception v2
+7431bc: 6e10 30d1 0200                         |0028: invoke-virtual {v2}, Ljava/lang/Exception;.printStackTrace:()V // method@d130
+7431c2: 0e00                                   |002b: return-void
+      catches       : 1
+        0x0003 - 0x0026
+          Ljava/lang/Exception; -> 0x0027
+      positions     :
+        0x0000 line=43
+        0x0003 line=45
+        0x0005 line=46
+        0x000e line=47
+        0x0011 line=49
+        0x001b line=50
+        0x0020 line=51
+        0x0023 line=52
+        0x0028 line=55
+      locals        :
+        0x0000 - 0x002c reg=2 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+        0x0000 - 0x002c reg=3 (null) Landroid/content/Context;
+        0x0000 - 0x002c reg=4 (null) Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil;
+
+    #2              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'decryptAES'
+      type          : '(Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 42 16-bit code units
+7431d4:                                        |[7431d4] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.decryptAES:(Ljava/lang/String;)Ljava/lang/String;
+7431e4: 6e10 07d2 0400                         |0000: invoke-virtual {v4}, Ljava/lang/String;.getBytes:()[B // method@d207
+7431ea: 0c04                                   |0003: move-result-object v4
+7431ec: 1200                                   |0004: const/4 v0, #int 0 // #0
+7431ee: 7120 0108 0400                         |0005: invoke-static {v4, v0}, Landroid/util/Base64;.decode:([BI)[B // method@0801
+7431f4: 0c04                                   |0008: move-result-object v4
+7431f6: 1a00 de12                              |0009: const-string v0, "AES/GCM/NoPadding" // string@12de
+7431fa: 7110 75d7 0000                         |000b: invoke-static {v0}, Ljavax/crypto/Cipher;.getInstance:(Ljava/lang/String;)Ljavax/crypto/Cipher; // method@d775
+743200: 0c00                                   |000e: move-result-object v0
+743202: 7010 8dc6 0300                         |000f: invoke-direct {v3}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.getAESKey:()Ljavax/crypto/spec/SecretKeySpec; // method@c68d
+743208: 0c01                                   |0012: move-result-object v1
+74320a: 2202 c11b                              |0013: new-instance v2, Ljavax/crypto/spec/IvParameterSpec; // type@1bc1
+74320e: 7010 8ec6 0300                         |0015: invoke-direct {v3}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.getIV:()[B // method@c68e
+743214: 0c03                                   |0018: move-result-object v3
+743216: 7020 7cd7 3200                         |0019: invoke-direct {v2, v3}, Ljavax/crypto/spec/IvParameterSpec;.<init>:([B)V // method@d77c
+74321c: 1223                                   |001c: const/4 v3, #int 2 // #2
+74321e: 6e40 77d7 3021                         |001d: invoke-virtual {v0, v3, v1, v2}, Ljavax/crypto/Cipher;.init:(ILjava/security/Key;Ljava/security/spec/AlgorithmParameterSpec;)V // method@d777
+743224: 2203 971a                              |0020: new-instance v3, Ljava/lang/String; // type@1a97
+743228: 6e20 73d7 4000                         |0022: invoke-virtual {v0, v4}, Ljavax/crypto/Cipher;.doFinal:([B)[B // method@d773
+74322e: 0c04                                   |0025: move-result-object v4
+743230: 7020 efd1 4300                         |0026: invoke-direct {v3, v4}, Ljava/lang/String;.<init>:([B)V // method@d1ef
+743236: 1103                                   |0029: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=185
+        0x0009 line=188
+        0x000f line=189
+        0x0020 line=191
+      locals        :
+        0x0000 - 0x002a reg=3 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+        0x0000 - 0x002a reg=4 (null) Ljava/lang/String;
+
+    #3              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'decryptRSA'
+      type          : '(Ljava/lang/String;)[B'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 31 16-bit code units
+743238:                                        |[743238] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.decryptRSA:(Ljava/lang/String;)[B
+743248: 5422 6385                              |0000: iget-object v2, v2, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.keyStore:Ljava/security/KeyStore; // field@8563
+74324c: 6200 5f85                              |0002: sget-object v0, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.KEYSTORE_ALIAS:Ljava/lang/String; // field@855f
+743250: 1201                                   |0004: const/4 v1, #int 0 // #0
+743252: 6e30 2dd4 0201                         |0005: invoke-virtual {v2, v0, v1}, Ljava/security/KeyStore;.getKey:(Ljava/lang/String;[C)Ljava/security/Key; // method@d42d
+743258: 0c02                                   |0008: move-result-object v2
+74325a: 1f02 141b                              |0009: check-cast v2, Ljava/security/PrivateKey; // type@1b14
+74325e: 1a00 675d                              |000b: const-string v0, "RSA/ECB/PKCS1Padding" // string@5d67
+743262: 7110 75d7 0000                         |000d: invoke-static {v0}, Ljavax/crypto/Cipher;.getInstance:(Ljava/lang/String;)Ljavax/crypto/Cipher; // method@d775
+743268: 0c00                                   |0010: move-result-object v0
+74326a: 1221                                   |0011: const/4 v1, #int 2 // #2
+74326c: 6e30 76d7 1002                         |0012: invoke-virtual {v0, v1, v2}, Ljavax/crypto/Cipher;.init:(ILjava/security/Key;)V // method@d776
+743272: 1202                                   |0015: const/4 v2, #int 0 // #0
+743274: 7120 0008 2300                         |0016: invoke-static {v3, v2}, Landroid/util/Base64;.decode:(Ljava/lang/String;I)[B // method@0800
+74327a: 0c02                                   |0019: move-result-object v2
+74327c: 6e20 73d7 2000                         |001a: invoke-virtual {v0, v2}, Ljavax/crypto/Cipher;.doFinal:([B)[B // method@d773
+743282: 0c02                                   |001d: move-result-object v2
+743284: 1102                                   |001e: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=136
+        0x000b line=138
+        0x0012 line=139
+        0x0016 line=141
+        0x001a line=142
+      locals        :
+        0x0000 - 0x001f reg=2 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+        0x0000 - 0x001f reg=3 (null) Ljava/lang/String;
+
+    #4              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'encryptAES'
+      type          : '(Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 37 16-bit code units
+743288:                                        |[743288] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.encryptAES:(Ljava/lang/String;)Ljava/lang/String;
+743298: 1a00 de12                              |0000: const-string v0, "AES/GCM/NoPadding" // string@12de
+74329c: 7110 75d7 0000                         |0002: invoke-static {v0}, Ljavax/crypto/Cipher;.getInstance:(Ljava/lang/String;)Ljavax/crypto/Cipher; // method@d775
+7432a2: 0c00                                   |0005: move-result-object v0
+7432a4: 7010 8dc6 0300                         |0006: invoke-direct {v3}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.getAESKey:()Ljavax/crypto/spec/SecretKeySpec; // method@c68d
+7432aa: 0c01                                   |0009: move-result-object v1
+7432ac: 2202 c11b                              |000a: new-instance v2, Ljavax/crypto/spec/IvParameterSpec; // type@1bc1
+7432b0: 7010 8ec6 0300                         |000c: invoke-direct {v3}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.getIV:()[B // method@c68e
+7432b6: 0c03                                   |000f: move-result-object v3
+7432b8: 7020 7cd7 3200                         |0010: invoke-direct {v2, v3}, Ljavax/crypto/spec/IvParameterSpec;.<init>:([B)V // method@d77c
+7432be: 1213                                   |0013: const/4 v3, #int 1 // #1
+7432c0: 6e40 77d7 3021                         |0014: invoke-virtual {v0, v3, v1, v2}, Ljavax/crypto/Cipher;.init:(ILjava/security/Key;Ljava/security/spec/AlgorithmParameterSpec;)V // method@d777
+7432c6: 6e10 07d2 0400                         |0017: invoke-virtual {v4}, Ljava/lang/String;.getBytes:()[B // method@d207
+7432cc: 0c03                                   |001a: move-result-object v3
+7432ce: 6e20 73d7 3000                         |001b: invoke-virtual {v0, v3}, Ljavax/crypto/Cipher;.doFinal:([B)[B // method@d773
+7432d4: 0c03                                   |001e: move-result-object v3
+7432d6: 1204                                   |001f: const/4 v4, #int 0 // #0
+7432d8: 7120 0308 4300                         |0020: invoke-static {v3, v4}, Landroid/util/Base64;.encodeToString:([BI)Ljava/lang/String; // method@0803
+7432de: 0c03                                   |0023: move-result-object v3
+7432e0: 1103                                   |0024: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=172
+        0x0006 line=173
+        0x0017 line=176
+        0x0020 line=179
+      locals        :
+        0x0000 - 0x0025 reg=3 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+        0x0000 - 0x0025 reg=4 (null) Ljava/lang/String;
+
+    #5              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'encryptRSA'
+      type          : '([B)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 32 16-bit code units
+7432e4:                                        |[7432e4] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.encryptRSA:([B)Ljava/lang/String;
+7432f4: 5422 6385                              |0000: iget-object v2, v2, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.keyStore:Ljava/security/KeyStore; // field@8563
+7432f8: 6200 5f85                              |0002: sget-object v0, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.KEYSTORE_ALIAS:Ljava/lang/String; // field@855f
+7432fc: 6e20 2ad4 0200                         |0004: invoke-virtual {v2, v0}, Ljava/security/KeyStore;.getCertificate:(Ljava/lang/String;)Ljava/security/cert/Certificate; // method@d42a
+743302: 0c02                                   |0007: move-result-object v2
+743304: 6e10 3dd4 0200                         |0008: invoke-virtual {v2}, Ljava/security/cert/Certificate;.getPublicKey:()Ljava/security/PublicKey; // method@d43d
+74330a: 0c02                                   |000b: move-result-object v2
+74330c: 1a00 675d                              |000c: const-string v0, "RSA/ECB/PKCS1Padding" // string@5d67
+743310: 7110 75d7 0000                         |000e: invoke-static {v0}, Ljavax/crypto/Cipher;.getInstance:(Ljava/lang/String;)Ljavax/crypto/Cipher; // method@d775
+743316: 0c00                                   |0011: move-result-object v0
+743318: 1211                                   |0012: const/4 v1, #int 1 // #1
+74331a: 6e30 76d7 1002                         |0013: invoke-virtual {v0, v1, v2}, Ljavax/crypto/Cipher;.init:(ILjava/security/Key;)V // method@d776
+743320: 6e20 73d7 3000                         |0016: invoke-virtual {v0, v3}, Ljavax/crypto/Cipher;.doFinal:([B)[B // method@d773
+743326: 0c02                                   |0019: move-result-object v2
+743328: 1203                                   |001a: const/4 v3, #int 0 // #0
+74332a: 7120 0308 3200                         |001b: invoke-static {v2, v3}, Landroid/util/Base64;.encodeToString:([BI)Ljava/lang/String; // method@0803
+743330: 0c02                                   |001e: move-result-object v2
+743332: 1102                                   |001f: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=125
+        0x000c line=127
+        0x0013 line=128
+        0x0016 line=130
+        0x001b line=131
+      locals        :
+        0x0000 - 0x0020 reg=2 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+        0x0000 - 0x0020 reg=3 (null) [B
+
+    #6              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'genAESKey'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 38 16-bit code units
+743334:                                        |[743334] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.genAESKey:()V
+743344: 1300 1000                              |0000: const/16 v0, #int 16 // #10
+743348: 2300 7c1f                              |0002: new-array v0, v0, [B // type@1f7c
+74334c: 2201 181b                              |0004: new-instance v1, Ljava/security/SecureRandom; // type@1b18
+743350: 7010 37d4 0100                         |0006: invoke-direct {v1}, Ljava/security/SecureRandom;.<init>:()V // method@d437
+743356: 6e20 39d4 0100                         |0009: invoke-virtual {v1, v0}, Ljava/security/SecureRandom;.nextBytes:([B)V // method@d439
+74335c: 1302 0c00                              |000c: const/16 v2, #int 12 // #c
+743360: 6e20 38d4 2100                         |000e: invoke-virtual {v1, v2}, Ljava/security/SecureRandom;.generateSeed:(I)[B // method@d438
+743366: 0c01                                   |0011: move-result-object v1
+743368: 1202                                   |0012: const/4 v2, #int 0 // #0
+74336a: 7120 0308 2100                         |0013: invoke-static {v1, v2}, Landroid/util/Base64;.encodeToString:([BI)Ljava/lang/String; // method@0803
+743370: 0c01                                   |0016: move-result-object v1
+743372: 5432 6485                              |0017: iget-object v2, v3, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.keyStoreSpUtil:Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil; // field@8564
+743376: 6e20 7fc6 1200                         |0019: invoke-virtual {v2, v1}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil;.setIV:(Ljava/lang/String;)V // method@c67f
+74337c: 7020 88c6 0300                         |001c: invoke-direct {v3, v0}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.encryptRSA:([B)Ljava/lang/String; // method@c688
+743382: 0c00                                   |001f: move-result-object v0
+743384: 5433 6485                              |0020: iget-object v3, v3, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.keyStoreSpUtil:Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil; // field@8564
+743388: 6e20 7ec6 0300                         |0022: invoke-virtual {v3, v0}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil;.setAESKey:(Ljava/lang/String;)V // method@c67e
+74338e: 0e00                                   |0025: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=149
+        0x0004 line=150
+        0x0009 line=151
+        0x000e line=155
+        0x0013 line=156
+        0x0017 line=157
+        0x001c line=161
+        0x0020 line=162
+      locals        :
+        0x0000 - 0x0026 reg=3 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+
+    #7              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'genKeyStoreKey'
+      type          : '(Landroid/content/Context;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 4 16-bit code units
+743390:                                        |[743390] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.genKeyStoreKey:(Landroid/content/Context;)V
+7433a0: 7010 8bc6 0000                         |0000: invoke-direct {v0}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.generateRSAKey_AboveApi23:()V // method@c68b
+7433a6: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=61
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+        0x0000 - 0x0004 reg=1 (null) Landroid/content/Context;
+
+    #8              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'generateRSAKey_AboveApi23'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 3
+      insns size    : 54 16-bit code units
+7433a8:                                        |[7433a8] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.generateRSAKey_AboveApi23:()V
+7433b8: 1a05 665d                              |0000: const-string v5, "RSA" // string@5d66
+7433bc: 1a00 2e15                              |0002: const-string v0, "AndroidKeyStore" // string@152e
+7433c0: 7120 26d4 0500                         |0004: invoke-static {v5, v0}, Ljava/security/KeyPairGenerator;.getInstance:(Ljava/lang/String;Ljava/lang/String;)Ljava/security/KeyPairGenerator; // method@d426
+7433c6: 0c05                                   |0007: move-result-object v5
+7433c8: 2200 6401                              |0008: new-instance v0, Landroid/security/keystore/KeyGenParameterSpec$Builder; // type@0164
+7433cc: 6201 5f85                              |000a: sget-object v1, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.KEYSTORE_ALIAS:Ljava/lang/String; // field@855f
+7433d0: 1232                                   |000c: const/4 v2, #int 3 // #3
+7433d2: 7030 1807 1002                         |000d: invoke-direct {v0, v1, v2}, Landroid/security/keystore/KeyGenParameterSpec$Builder;.<init>:(Ljava/lang/String;I)V // method@0718
+7433d8: 1221                                   |0010: const/4 v1, #int 2 // #2
+7433da: 2311 b020                              |0011: new-array v1, v1, [Ljava/lang/String; // type@20b0
+7433de: 1a02 395f                              |0013: const-string v2, "SHA-256" // string@5f39
+7433e2: 1203                                   |0015: const/4 v3, #int 0 // #0
+7433e4: 4d02 0103                              |0016: aput-object v2, v1, v3
+7433e8: 1a02 3a5f                              |0018: const-string v2, "SHA-512" // string@5f3a
+7433ec: 1214                                   |001a: const/4 v4, #int 1 // #1
+7433ee: 4d02 0104                              |001b: aput-object v2, v1, v4
+7433f2: 6e20 1b07 1000                         |001d: invoke-virtual {v0, v1}, Landroid/security/keystore/KeyGenParameterSpec$Builder;.setDigests:([Ljava/lang/String;)Landroid/security/keystore/KeyGenParameterSpec$Builder; // method@071b
+7433f8: 0c00                                   |0020: move-result-object v0
+7433fa: 2341 b020                              |0021: new-array v1, v4, [Ljava/lang/String; // type@20b0
+7433fe: 1a02 cb5a                              |0023: const-string v2, "PKCS1Padding" // string@5acb
+743402: 4d02 0103                              |0025: aput-object v2, v1, v3
+743406: 6e20 1c07 1000                         |0027: invoke-virtual {v0, v1}, Landroid/security/keystore/KeyGenParameterSpec$Builder;.setEncryptionPaddings:([Ljava/lang/String;)Landroid/security/keystore/KeyGenParameterSpec$Builder; // method@071c
+74340c: 0c00                                   |002a: move-result-object v0
+74340e: 6e10 1907 0000                         |002b: invoke-virtual {v0}, Landroid/security/keystore/KeyGenParameterSpec$Builder;.build:()Landroid/security/keystore/KeyGenParameterSpec; // method@0719
+743414: 0c00                                   |002e: move-result-object v0
+743416: 6e20 27d4 0500                         |002f: invoke-virtual {v5, v0}, Ljava/security/KeyPairGenerator;.initialize:(Ljava/security/spec/AlgorithmParameterSpec;)V // method@d427
+74341c: 6e10 25d4 0500                         |0032: invoke-virtual {v5}, Ljava/security/KeyPairGenerator;.generateKeyPair:()Ljava/security/KeyPair; // method@d425
+743422: 0e00                                   |0035: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=69
+        0x0004 line=70
+        0x0008 line=73
+        0x001d line=75
+        0x0027 line=76
+        0x002b line=77
+        0x002f line=79
+        0x0032 line=80
+      locals        :
+        0x0000 - 0x0036 reg=5 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+
+    #9              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'generateRSAKey_BelowApi23'
+      type          : '(Landroid/content/Context;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 3
+      insns size    : 90 16-bit code units
+743424:                                        |[743424] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.generateRSAKey_BelowApi23:(Landroid/content/Context;)V
+743434: 7100 26d5 0000                         |0000: invoke-static {}, Ljava/util/Calendar;.getInstance:()Ljava/util/Calendar; // method@d526
+74343a: 0c05                                   |0003: move-result-object v5
+74343c: 7100 26d5 0000                         |0004: invoke-static {}, Ljava/util/Calendar;.getInstance:()Ljava/util/Calendar; // method@d526
+743442: 0c00                                   |0007: move-result-object v0
+743444: 1211                                   |0008: const/4 v1, #int 1 // #1
+743446: 1302 1e00                              |0009: const/16 v2, #int 30 // #1e
+74344a: 6e30 21d5 1002                         |000b: invoke-virtual {v0, v1, v2}, Ljava/util/Calendar;.add:(II)V // method@d521
+743450: 2201 6201                              |000e: new-instance v1, Landroid/security/KeyPairGeneratorSpec$Builder; // type@0162
+743454: 7020 1107 6100                         |0010: invoke-direct {v1, v6}, Landroid/security/KeyPairGeneratorSpec$Builder;.<init>:(Landroid/content/Context;)V // method@0711
+74345a: 6206 5f85                              |0013: sget-object v6, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.KEYSTORE_ALIAS:Ljava/lang/String; // field@855f
+74345e: 6e20 1307 6100                         |0015: invoke-virtual {v1, v6}, Landroid/security/KeyPairGeneratorSpec$Builder;.setAlias:(Ljava/lang/String;)Landroid/security/KeyPairGeneratorSpec$Builder; // method@0713
+743464: 0c01                                   |0018: move-result-object v1
+743466: 2202 d51b                              |0019: new-instance v2, Ljavax/security/auth/x500/X500Principal; // type@1bd5
+74346a: 2203 991a                              |001b: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+74346e: 1a04 571a                              |001d: const-string v4, "CN=" // string@1a57
+743472: 7020 3cd2 4300                         |001f: invoke-direct {v3, v4}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+743478: 6e20 45d2 6300                         |0022: invoke-virtual {v3, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74347e: 0c06                                   |0025: move-result-object v6
+743480: 6e10 58d2 0600                         |0026: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+743486: 0c06                                   |0029: move-result-object v6
+743488: 7020 95d7 6200                         |002a: invoke-direct {v2, v6}, Ljavax/security/auth/x500/X500Principal;.<init>:(Ljava/lang/String;)V // method@d795
+74348e: 6e20 1707 2100                         |002d: invoke-virtual {v1, v2}, Landroid/security/KeyPairGeneratorSpec$Builder;.setSubject:(Ljavax/security/auth/x500/X500Principal;)Landroid/security/KeyPairGeneratorSpec$Builder; // method@0717
+743494: 0c06                                   |0030: move-result-object v6
+743496: 6201 2f8a                              |0031: sget-object v1, Ljava/math/BigInteger;.TEN:Ljava/math/BigInteger; // field@8a2f
+74349a: 6e20 1507 1600                         |0033: invoke-virtual {v6, v1}, Landroid/security/KeyPairGeneratorSpec$Builder;.setSerialNumber:(Ljava/math/BigInteger;)Landroid/security/KeyPairGeneratorSpec$Builder; // method@0715
+7434a0: 0c06                                   |0036: move-result-object v6
+7434a2: 6e10 28d5 0500                         |0037: invoke-virtual {v5}, Ljava/util/Calendar;.getTime:()Ljava/util/Date; // method@d528
+7434a8: 0c05                                   |003a: move-result-object v5
+7434aa: 6e20 1607 5600                         |003b: invoke-virtual {v6, v5}, Landroid/security/KeyPairGeneratorSpec$Builder;.setStartDate:(Ljava/util/Date;)Landroid/security/KeyPairGeneratorSpec$Builder; // method@0716
+7434b0: 0c05                                   |003e: move-result-object v5
+7434b2: 6e10 28d5 0000                         |003f: invoke-virtual {v0}, Ljava/util/Calendar;.getTime:()Ljava/util/Date; // method@d528
+7434b8: 0c06                                   |0042: move-result-object v6
+7434ba: 6e20 1407 6500                         |0043: invoke-virtual {v5, v6}, Landroid/security/KeyPairGeneratorSpec$Builder;.setEndDate:(Ljava/util/Date;)Landroid/security/KeyPairGeneratorSpec$Builder; // method@0714
+7434c0: 0c05                                   |0046: move-result-object v5
+7434c2: 6e10 1207 0500                         |0047: invoke-virtual {v5}, Landroid/security/KeyPairGeneratorSpec$Builder;.build:()Landroid/security/KeyPairGeneratorSpec; // method@0712
+7434c8: 0c05                                   |004a: move-result-object v5
+7434ca: 1a06 665d                              |004b: const-string v6, "RSA" // string@5d66
+7434ce: 1a00 2e15                              |004d: const-string v0, "AndroidKeyStore" // string@152e
+7434d2: 7120 26d4 0600                         |004f: invoke-static {v6, v0}, Ljava/security/KeyPairGenerator;.getInstance:(Ljava/lang/String;Ljava/lang/String;)Ljava/security/KeyPairGenerator; // method@d426
+7434d8: 0c06                                   |0052: move-result-object v6
+7434da: 6e20 27d4 5600                         |0053: invoke-virtual {v6, v5}, Ljava/security/KeyPairGenerator;.initialize:(Ljava/security/spec/AlgorithmParameterSpec;)V // method@d427
+7434e0: 6e10 25d4 0600                         |0056: invoke-virtual {v6}, Ljava/security/KeyPairGenerator;.generateKeyPair:()Ljava/security/KeyPair; // method@d425
+7434e6: 0e00                                   |0059: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=85
+        0x0004 line=86
+        0x000b line=87
+        0x000e line=89
+        0x0015 line=90
+        0x002d line=91
+        0x0033 line=92
+        0x0037 line=93
+        0x003f line=94
+        0x0047 line=95
+        0x004b line=97
+        0x004f line=98
+        0x0053 line=100
+        0x0056 line=101
+      locals        :
+        0x0000 - 0x005a reg=5 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+        0x0000 - 0x005a reg=6 (null) Landroid/content/Context;
+
+    #10              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'getAESKey'
+      type          : '()Ljavax/crypto/spec/SecretKeySpec;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 18 16-bit code units
+7434e8:                                        |[7434e8] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.getAESKey:()Ljavax/crypto/spec/SecretKeySpec;
+7434f8: 5420 6485                              |0000: iget-object v0, v2, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.keyStoreSpUtil:Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil; // field@8564
+7434fc: 6e10 77c6 0000                         |0002: invoke-virtual {v0}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil;.getAESKey:()Ljava/lang/String; // method@c677
+743502: 0c00                                   |0005: move-result-object v0
+743504: 7020 85c6 0200                         |0006: invoke-direct {v2, v0}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.decryptRSA:(Ljava/lang/String;)[B // method@c685
+74350a: 0c02                                   |0009: move-result-object v2
+74350c: 2200 c21b                              |000a: new-instance v0, Ljavax/crypto/spec/SecretKeySpec; // type@1bc2
+743510: 1a01 de12                              |000c: const-string v1, "AES/GCM/NoPadding" // string@12de
+743514: 7030 7dd7 2001                         |000e: invoke-direct {v0, v2, v1}, Ljavax/crypto/spec/SecretKeySpec;.<init>:([BLjava/lang/String;)V // method@d77d
+74351a: 1100                                   |0011: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=203
+        0x0006 line=204
+        0x000a line=206
+      locals        :
+        0x0000 - 0x0012 reg=2 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+
+    #11              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'getIV'
+      type          : '()[B'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 12 16-bit code units
+74351c:                                        |[74351c] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.getIV:()[B
+74352c: 5411 6485                              |0000: iget-object v1, v1, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.keyStoreSpUtil:Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil; // field@8564
+743530: 6e10 79c6 0100                         |0002: invoke-virtual {v1}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreSpUtil;.getIV:()Ljava/lang/String; // method@c679
+743536: 0c01                                   |0005: move-result-object v1
+743538: 1200                                   |0006: const/4 v0, #int 0 // #0
+74353a: 7120 0008 0100                         |0007: invoke-static {v1, v0}, Landroid/util/Base64;.decode:(Ljava/lang/String;I)[B // method@0800
+743540: 0c01                                   |000a: move-result-object v1
+743542: 1101                                   |000b: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=196
+        0x0007 line=197
+      locals        :
+        0x0000 - 0x000c reg=1 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+
+  Virtual methods   -
+    #0              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'decrypt'
+      type          : '(Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 18 16-bit code units
+743544:                                        |[743544] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.decrypt:(Ljava/lang/String;)Ljava/lang/String;
+743554: 7020 84c6 1000                         |0000: invoke-direct {v0, v1}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.decryptAES:(Ljava/lang/String;)Ljava/lang/String; // method@c684
+74355a: 0c00                                   |0003: move-result-object v0
+74355c: 1100                                   |0004: return-object v0
+74355e: 0d00                                   |0005: move-exception v0
+743560: 6201 6285                              |0006: sget-object v1, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.TAG:Ljava/lang/String; // field@8562
+743564: 7110 2008 0000                         |0008: invoke-static {v0}, Landroid/util/Log;.getStackTraceString:(Ljava/lang/Throwable;)Ljava/lang/String; // method@0820
+74356a: 0c00                                   |000b: move-result-object v0
+74356c: 7120 1c08 0100                         |000c: invoke-static {v1, v0}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+743572: 1a00 0000                              |000f: const-string v0, "" // string@0000
+743576: 1100                                   |0011: return-object v0
+      catches       : 1
+        0x0000 - 0x0004
+          Ljava/lang/Exception; -> 0x0005
+      positions     :
+        0x0000 line=115
+        0x0006 line=118
+        0x000f line=119
+      locals        :
+        0x0000 - 0x0012 reg=0 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+        0x0000 - 0x0012 reg=1 (null) Ljava/lang/String;
+
+    #1              : (in Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;)
+      name          : 'encrypt'
+      type          : '(Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 18 16-bit code units
+743588:                                        |[743588] com.gpk17.gbrowser.Utils.cryptor.KeyStoreUtil.encrypt:(Ljava/lang/String;)Ljava/lang/String;
+743598: 7020 87c6 1000                         |0000: invoke-direct {v0, v1}, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.encryptAES:(Ljava/lang/String;)Ljava/lang/String; // method@c687
+74359e: 0c00                                   |0003: move-result-object v0
+7435a0: 1100                                   |0004: return-object v0
+7435a2: 0d00                                   |0005: move-exception v0
+7435a4: 6201 6285                              |0006: sget-object v1, Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;.TAG:Ljava/lang/String; // field@8562
+7435a8: 7110 2008 0000                         |0008: invoke-static {v0}, Landroid/util/Log;.getStackTraceString:(Ljava/lang/Throwable;)Ljava/lang/String; // method@0820
+7435ae: 0c00                                   |000b: move-result-object v0
+7435b0: 7120 1c08 0100                         |000c: invoke-static {v1, v0}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+7435b6: 1a00 0000                              |000f: const-string v0, "" // string@0000
+7435ba: 1100                                   |0011: return-object v0
+      catches       : 1
+        0x0000 - 0x0004
+          Ljava/lang/Exception; -> 0x0005
+      positions     :
+        0x0000 line=106
+        0x0006 line=109
+        0x000f line=110
+      locals        :
+        0x0000 - 0x0012 reg=0 this Lcom/gpk17/gbrowser/Utils/cryptor/KeyStoreUtil;
+        0x0000 - 0x0012 reg=1 (null) Ljava/lang/String;
+
+  source_file_idx   : 12258 (KeyStoreUtil.java)
+

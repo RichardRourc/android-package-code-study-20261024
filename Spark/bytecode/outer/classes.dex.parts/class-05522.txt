@@ -1,0 +1,1081 @@
+Class #5522            -
+  Class descriptor  : 'Lkotlinx/coroutines/selects/SelectBuilderImpl;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Lkotlinx/coroutines/internal/LockFreeLinkedListHead;'
+  Interfaces        -
+    #0              : 'Lkotlinx/coroutines/selects/SelectBuilder;'
+    #1              : 'Lkotlinx/coroutines/selects/SelectInstance;'
+    #2              : 'Lkotlin/coroutines/Continuation;'
+    #3              : 'Lkotlin/coroutines/jvm/internal/CoroutineStackFrame;'
+  Static fields     -
+    #0              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : '_result$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;'
+      access        : 0x101a (PRIVATE STATIC FINAL SYNTHETIC)
+    #1              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : '_state$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;'
+      access        : 0x1018 (STATIC FINAL SYNTHETIC)
+  Instance fields   -
+    #0              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : '_parentHandle'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #1              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : '_result'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #2              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : '_state'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x1040 (VOLATILE SYNTHETIC)
+    #3              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'uCont'
+      type          : 'Lkotlin/coroutines/Continuation;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 0
+      outs          : 3
+      insns size    : 23 16-bit code units
+3543c0:                                        |[3543c0] kotlinx.coroutines.selects.SelectBuilderImpl.<clinit>:()V
+3543d0: 1c00 7a11                              |0000: const-class v0, Ljava/lang/Object; // type@117a
+3543d4: 1a01 295f                              |0002: const-string v1, "_state" // string@5f29
+3543d8: 1c02 c019                              |0004: const-class v2, Lkotlinx/coroutines/selects/SelectBuilderImpl; // type@19c0
+3543dc: 7130 4276 0201                         |0006: invoke-static {v2, v0, v1}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // method@7642
+3543e2: 0c00                                   |0009: move-result-object v0
+3543e4: 6900 ec46                              |000a: sput-object v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._state$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ec
+3543e8: 1c00 7a11                              |000c: const-class v0, Ljava/lang/Object; // type@117a
+3543ec: 1a01 1e5f                              |000e: const-string v1, "_result" // string@5f1e
+3543f0: 7130 4276 0201                         |0010: invoke-static {v2, v0, v1}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // method@7642
+3543f6: 0c00                                   |0013: move-result-object v0
+3543f8: 6900 ea46                              |0014: sput-object v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ea
+3543fc: 0e00                                   |0016: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : '<init>'
+      type          : '(Lkotlin/coroutines/Continuation;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 21 16-bit code units
+354400:                                        |[354400] kotlinx.coroutines.selects.SelectBuilderImpl.<init>:(Lkotlin/coroutines/Continuation;)V
+354410: 7010 a4b1 0000                         |0000: invoke-direct {v0}, Lkotlinx/coroutines/internal/LockFreeLinkedListHead;.<init>:()V // method@b1a4
+354416: 5b01 ed46                              |0003: iput-object v1, v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;.uCont:Lkotlin/coroutines/Continuation; // field@46ed
+35441a: 7100 f0b3 0000                         |0005: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.getNOT_SELECTED:()Ljava/lang/Object; // method@b3f0
+354420: 0c01                                   |0008: move-result-object v1
+354422: 5b01 eb46                              |0009: iput-object v1, v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._state:Ljava/lang/Object; // field@46eb
+354426: 7100 edb3 0000                         |000b: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getUNDECIDED$p:()Ljava/lang/Object; // method@b3ed
+35442c: 0c01                                   |000e: move-result-object v1
+35442e: 5b01 e946                              |000f: iput-object v1, v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result:Ljava/lang/Object; // field@46e9
+354432: 1201                                   |0011: const/4 v1, #int 0 // #0
+354434: 5b01 e846                              |0012: iput-object v1, v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._parentHandle:Ljava/lang/Object; // field@46e8
+354438: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=237
+        0x0003 line=236
+        0x0005 line=246
+        0x000b line=249
+        0x0012 line=252
+      locals        :
+        0x0000 - 0x0015 reg=0 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x0015 reg=1 (null) Lkotlin/coroutines/Continuation;
+
+    #2              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'access$doAfterSelect'
+      type          : '(Lkotlinx/coroutines/selects/SelectBuilderImpl;)V'
+      access        : 0x1019 (PUBLIC STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+35443c:                                        |[35443c] kotlinx.coroutines.selects.SelectBuilderImpl.access$doAfterSelect:(Lkotlinx/coroutines/selects/SelectBuilderImpl;)V
+35444c: 7010 c9b3 0000                         |0000: invoke-direct {v0}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.doAfterSelect:()V // method@b3c9
+354452: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=234
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #3              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'doAfterSelect'
+      type          : '()V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 42 16-bit code units
+35449c:                                        |[35449c] kotlinx.coroutines.selects.SelectBuilderImpl.doAfterSelect:()V
+3544ac: 7010 ceb3 0300                         |0000: invoke-direct {v3}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.getParentHandle:()Lkotlinx/coroutines/DisposableHandle; // method@b3ce
+3544b2: 0c00                                   |0003: move-result-object v0
+3544b4: 3800 0500                              |0004: if-eqz v0, 0009 // +0005
+3544b8: 7210 68a4 0000                         |0006: invoke-interface {v0}, Lkotlinx/coroutines/DisposableHandle;.dispose:()V // method@a468
+3544be: 0730                                   |0009: move-object v0, v3
+3544c0: 1f00 7019                              |000a: check-cast v0, Lkotlinx/coroutines/internal/LockFreeLinkedListHead; // type@1970
+3544c4: 6e10 a6b1 0000                         |000c: invoke-virtual {v0}, Lkotlinx/coroutines/internal/LockFreeLinkedListHead;.getNext:()Ljava/lang/Object; // method@b1a6
+3544ca: 0c01                                   |000f: move-result-object v1
+3544cc: 1f01 7919                              |0010: check-cast v1, Lkotlinx/coroutines/internal/LockFreeLinkedListNode; // type@1979
+3544d0: 7120 cc93 0100                         |0012: invoke-static {v1, v0}, Lkotlin/jvm/internal/Intrinsics;.areEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z // method@93cc
+3544d6: 0a02                                   |0015: move-result v2
+3544d8: 3902 1300                              |0016: if-nez v2, 0029 // +0013
+3544dc: 2012 bc19                              |0018: instance-of v2, v1, Lkotlinx/coroutines/selects/SelectBuilderImpl$DisposeNode; // type@19bc
+3544e0: 3802 0a00                              |001a: if-eqz v2, 0024 // +000a
+3544e4: 0712                                   |001c: move-object v2, v1
+3544e6: 1f02 bc19                              |001d: check-cast v2, Lkotlinx/coroutines/selects/SelectBuilderImpl$DisposeNode; // type@19bc
+3544ea: 5422 e346                              |001f: iget-object v2, v2, Lkotlinx/coroutines/selects/SelectBuilderImpl$DisposeNode;.handle:Lkotlinx/coroutines/DisposableHandle; // field@46e3
+3544ee: 7210 68a4 0200                         |0021: invoke-interface {v2}, Lkotlinx/coroutines/DisposableHandle;.dispose:()V // method@a468
+3544f4: 6e10 fcb1 0100                         |0024: invoke-virtual {v1}, Lkotlinx/coroutines/internal/LockFreeLinkedListNode;.getNextNode:()Lkotlinx/coroutines/internal/LockFreeLinkedListNode; // method@b1fc
+3544fa: 0c01                                   |0027: move-result-object v1
+3544fc: 28ea                                   |0028: goto 0012 // -0016
+3544fe: 0e00                                   |0029: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=383
+        0x0009 line=384
+        0x000c line=706
+        0x0012 line=707
+        0x0018 line=708
+        0x001f line=385
+        0x0024 line=709
+      locals        :
+        0x0000 - 0x002a reg=3 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #4              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'doResume'
+      type          : '(Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 4
+      insns size    : 78 16-bit code units
+354500:                                        |[354500] kotlinx.coroutines.selects.SelectBuilderImpl.doResume:(Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
+354510: 7100 f4a3 0000                         |0000: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+354516: 0a00                                   |0003: move-result v0
+354518: 3800 0f00                              |0004: if-eqz v0, 0013 // +000f
+35451c: 6e10 d7b3 0300                         |0006: invoke-virtual {v3}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.isSelected:()Z // method@b3d7
+354522: 0a00                                   |0009: move-result v0
+354524: 3800 0300                              |000a: if-eqz v0, 000d // +0003
+354528: 2807                                   |000c: goto 0013 // +0007
+35452a: 2204 5311                              |000d: new-instance v4, Ljava/lang/AssertionError; // type@1153
+35452e: 7010 d570 0400                         |000f: invoke-direct {v4}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+354534: 2704                                   |0012: throw v4
+354536: 5430 e946                              |0013: iget-object v0, v3, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result:Ljava/lang/Object; // field@46e9
+35453a: 7100 edb3 0000                         |0015: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getUNDECIDED$p:()Ljava/lang/Object; // method@b3ed
+354540: 0c01                                   |0018: move-result-object v1
+354542: 3310 1300                              |0019: if-ne v0, v1, 002c // +0013
+354546: 7210 8792 0400                         |001b: invoke-interface {v4}, Lkotlin/jvm/functions/Function0;.invoke:()Ljava/lang/Object; // method@9287
+35454c: 0c00                                   |001e: move-result-object v0
+35454e: 6201 ea46                              |001f: sget-object v1, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ea
+354552: 7100 edb3 0000                         |0021: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getUNDECIDED$p:()Ljava/lang/Object; // method@b3ed
+354558: 0c02                                   |0024: move-result-object v2
+35455a: 7140 ec29 3102                         |0025: invoke-static {v1, v3, v2, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+354560: 0a00                                   |0028: move-result v0
+354562: 3800 eaff                              |0029: if-eqz v0, 0013 // -0016
+354566: 0e00                                   |002b: return-void
+354568: 7100 0e8f 0000                         |002c: invoke-static {}, Lkotlin/coroutines/intrinsics/IntrinsicsKt;.getCOROUTINE_SUSPENDED:()Ljava/lang/Object; // method@8f0e
+35456e: 0c01                                   |002f: move-result-object v1
+354570: 3310 1600                              |0030: if-ne v0, v1, 0046 // +0016
+354574: 6200 ea46                              |0032: sget-object v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ea
+354578: 7100 0e8f 0000                         |0034: invoke-static {}, Lkotlin/coroutines/intrinsics/IntrinsicsKt;.getCOROUTINE_SUSPENDED:()Ljava/lang/Object; // method@8f0e
+35457e: 0c01                                   |0037: move-result-object v1
+354580: 7100 ebb3 0000                         |0038: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getRESUMED$p:()Ljava/lang/Object; // method@b3eb
+354586: 0c02                                   |003b: move-result-object v2
+354588: 7140 ec29 3021                         |003c: invoke-static {v0, v3, v1, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+35458e: 0a00                                   |003f: move-result v0
+354590: 3800 d3ff                              |0040: if-eqz v0, 0013 // -002d
+354594: 7210 8792 0500                         |0042: invoke-interface {v5}, Lkotlin/jvm/functions/Function0;.invoke:()Ljava/lang/Object; // method@9287
+35459a: 0e00                                   |0045: return-void
+35459c: 2204 6a11                              |0046: new-instance v4, Ljava/lang/IllegalStateException; // type@116a
+3545a0: 1a05 ba1a                              |0048: const-string v5, "Already resumed" // string@1aba
+3545a4: 7020 7071 5400                         |004a: invoke-direct {v4, v5}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+3545aa: 2704                                   |004d: throw v4
+      catches       : (none)
+      positions     :
+        0x0000 line=278
+        0x0013 line=661
+        0x0015 line=281
+        0x001b line=282
+        0x001f line=283
+        0x002c line=285
+        0x0042 line=286
+        0x0046 line=289
+      locals        :
+        0x0000 - 0x004e reg=3 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x004e reg=4 (null) Lkotlin/jvm/functions/Function0;
+        0x0000 - 0x004e reg=5 (null) Lkotlin/jvm/functions/Function0;
+
+    #5              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'getParentHandle'
+      type          : '()Lkotlinx/coroutines/DisposableHandle;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 5 16-bit code units
+3543a4:                                        |[3543a4] kotlinx.coroutines.selects.SelectBuilderImpl.getParentHandle:()Lkotlinx/coroutines/DisposableHandle;
+3543b4: 5410 e846                              |0000: iget-object v0, v1, Lkotlinx/coroutines/selects/SelectBuilderImpl;._parentHandle:Ljava/lang/Object; // field@46e8
+3543b8: 1f00 e716                              |0002: check-cast v0, Lkotlinx/coroutines/DisposableHandle; // type@16e7
+3543bc: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=254
+      locals        :
+        0x0000 - 0x0005 reg=1 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #6              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'initCancellability'
+      type          : '()V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 8
+      ins           : 1
+      outs          : 6
+      insns size    : 49 16-bit code units
+35464c:                                        |[35464c] kotlinx.coroutines.selects.SelectBuilderImpl.initCancellability:()V
+35465c: 6e10 cdb3 0700                         |0000: invoke-virtual {v7}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.getContext:()Lkotlin/coroutines/CoroutineContext; // method@b3cd
+354662: 0c00                                   |0003: move-result-object v0
+354664: 6201 2840                              |0004: sget-object v1, Lkotlinx/coroutines/Job;.Key:Lkotlinx/coroutines/Job$Key; // field@4028
+354668: 1f01 f613                              |0006: check-cast v1, Lkotlin/coroutines/CoroutineContext$Key; // type@13f6
+35466c: 7220 e88e 1000                         |0008: invoke-interface {v0, v1}, Lkotlin/coroutines/CoroutineContext;.get:(Lkotlin/coroutines/CoroutineContext$Key;)Lkotlin/coroutines/CoroutineContext$Element; // method@8ee8
+354672: 0c00                                   |000b: move-result-object v0
+354674: 0701                                   |000c: move-object v1, v0
+354676: 1f01 0817                              |000d: check-cast v1, Lkotlinx/coroutines/Job; // type@1708
+35467a: 3901 0300                              |000f: if-nez v1, 0012 // +0003
+35467e: 281f                                   |0011: goto 0030 // +001f
+354680: 2200 be19                              |0012: new-instance v0, Lkotlinx/coroutines/selects/SelectBuilderImpl$SelectOnCancelling; // type@19be
+354684: 7020 beb3 7000                         |0014: invoke-direct {v0, v7}, Lkotlinx/coroutines/selects/SelectBuilderImpl$SelectOnCancelling;.<init>:(Lkotlinx/coroutines/selects/SelectBuilderImpl;)V // method@b3be
+35468a: 1f00 b516                              |0017: check-cast v0, Lkotlinx/coroutines/CompletionHandlerBase; // type@16b5
+35468e: 0704                                   |0019: move-object v4, v0
+354690: 1f04 ba14                              |001a: check-cast v4, Lkotlin/jvm/functions/Function1; // type@14ba
+354694: 1225                                   |001c: const/4 v5, #int 2 // #2
+354696: 1206                                   |001d: const/4 v6, #int 0 // #0
+354698: 1212                                   |001e: const/4 v2, #int 1 // #1
+35469a: 1203                                   |001f: const/4 v3, #int 0 // #0
+35469c: 7706 05a5 0100                         |0020: invoke-static/range {v1, v2, v3, v4, v5, v6}, Lkotlinx/coroutines/Job$DefaultImpls;.invokeOnCompletion$default:(Lkotlinx/coroutines/Job;ZZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lkotlinx/coroutines/DisposableHandle; // method@a505
+3546a2: 0c00                                   |0023: move-result-object v0
+3546a4: 7020 dcb3 0700                         |0024: invoke-direct {v7, v0}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.setParentHandle:(Lkotlinx/coroutines/DisposableHandle;)V // method@b3dc
+3546aa: 6e10 d7b3 0700                         |0027: invoke-virtual {v7}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.isSelected:()Z // method@b3d7
+3546b0: 0a01                                   |002a: move-result v1
+3546b2: 3801 0500                              |002b: if-eqz v1, 0030 // +0005
+3546b6: 7210 68a4 0000                         |002d: invoke-interface {v0}, Lkotlinx/coroutines/DisposableHandle;.dispose:()V // method@a468
+3546bc: 0e00                                   |0030: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=328
+        0x0012 line=330
+        0x0019 line=702
+        0x0020 line=329
+        0x0024 line=331
+        0x0027 line=333
+      locals        :
+        0x0000 - 0x0031 reg=7 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #7              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'setParentHandle'
+      type          : '(Lkotlinx/coroutines/DisposableHandle;)V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+3549bc:                                        |[3549bc] kotlinx.coroutines.selects.SelectBuilderImpl.setParentHandle:(Lkotlinx/coroutines/DisposableHandle;)V
+3549cc: 5b01 e846                              |0000: iput-object v1, v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._parentHandle:Ljava/lang/Object; // field@46e8
+3549d0: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=255
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x0003 reg=1 (null) Lkotlinx/coroutines/DisposableHandle;
+
+  Virtual methods   -
+    #0              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'disposeOnSelect'
+      type          : '(Lkotlinx/coroutines/DisposableHandle;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 27 16-bit code units
+354454:                                        |[354454] kotlinx.coroutines.selects.SelectBuilderImpl.disposeOnSelect:(Lkotlinx/coroutines/DisposableHandle;)V
+354464: 2200 bc19                              |0000: new-instance v0, Lkotlinx/coroutines/selects/SelectBuilderImpl$DisposeNode; // type@19bc
+354468: 7020 bab3 3000                         |0002: invoke-direct {v0, v3}, Lkotlinx/coroutines/selects/SelectBuilderImpl$DisposeNode;.<init>:(Lkotlinx/coroutines/DisposableHandle;)V // method@b3ba
+35446e: 6e10 d7b3 0200                         |0005: invoke-virtual {v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.isSelected:()Z // method@b3d7
+354474: 0a01                                   |0008: move-result v1
+354476: 3901 0e00                              |0009: if-nez v1, 0017 // +000e
+35447a: 1f00 7919                              |000b: check-cast v0, Lkotlinx/coroutines/internal/LockFreeLinkedListNode; // type@1979
+35447e: 6e20 c7b3 0200                         |000d: invoke-virtual {v2, v0}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.addLast:(Lkotlinx/coroutines/internal/LockFreeLinkedListNode;)V // method@b3c7
+354484: 6e10 d7b3 0200                         |0010: invoke-virtual {v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.isSelected:()Z // method@b3d7
+35448a: 0a00                                   |0013: move-result v0
+35448c: 3900 0300                              |0014: if-nez v0, 0017 // +0003
+354490: 0e00                                   |0016: return-void
+354492: 7210 68a4 0300                         |0017: invoke-interface {v3}, Lkotlinx/coroutines/DisposableHandle;.dispose:()V // method@a468
+354498: 0e00                                   |001a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=371
+        0x0005 line=373
+        0x000b line=374
+        0x0010 line=376
+        0x0017 line=379
+      locals        :
+        0x0000 - 0x001b reg=2 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x001b reg=3 (null) Lkotlinx/coroutines/DisposableHandle;
+
+    #1              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'getCallerFrame'
+      type          : '()Lkotlin/coroutines/jvm/internal/CoroutineStackFrame;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 11 16-bit code units
+35437c:                                        |[35437c] kotlinx.coroutines.selects.SelectBuilderImpl.getCallerFrame:()Lkotlin/coroutines/jvm/internal/CoroutineStackFrame;
+35438c: 5420 ed46                              |0000: iget-object v0, v2, Lkotlinx/coroutines/selects/SelectBuilderImpl;.uCont:Lkotlin/coroutines/Continuation; // field@46ed
+354390: 2001 0e14                              |0002: instance-of v1, v0, Lkotlin/coroutines/jvm/internal/CoroutineStackFrame; // type@140e
+354394: 3801 0500                              |0004: if-eqz v1, 0009 // +0005
+354398: 1f00 0e14                              |0006: check-cast v0, Lkotlin/coroutines/jvm/internal/CoroutineStackFrame; // type@140e
+35439c: 1100                                   |0008: return-object v0
+35439e: 1200                                   |0009: const/4 v0, #int 0 // #0
+3543a0: 1100                                   |000a: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=241
+      locals        :
+        0x0000 - 0x000b reg=2 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #2              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'getCompletion'
+      type          : '()Lkotlin/coroutines/Continuation;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 4 16-bit code units
+354344:                                        |[354344] kotlinx.coroutines.selects.SelectBuilderImpl.getCompletion:()Lkotlin/coroutines/Continuation;
+354354: 0710                                   |0000: move-object v0, v1
+354356: 1f00 ec13                              |0001: check-cast v0, Lkotlin/coroutines/Continuation; // type@13ec
+35435a: 1100                                   |0003: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=275
+      locals        :
+        0x0000 - 0x0004 reg=1 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #3              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'getContext'
+      type          : '()Lkotlin/coroutines/CoroutineContext;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+35435c:                                        |[35435c] kotlinx.coroutines.selects.SelectBuilderImpl.getContext:()Lkotlin/coroutines/CoroutineContext;
+35436c: 5410 ed46                              |0000: iget-object v0, v1, Lkotlinx/coroutines/selects/SelectBuilderImpl;.uCont:Lkotlin/coroutines/Continuation; // field@46ed
+354370: 7210 be8e 0000                         |0002: invoke-interface {v0}, Lkotlin/coroutines/Continuation;.getContext:()Lkotlin/coroutines/CoroutineContext; // method@8ebe
+354376: 0c00                                   |0005: move-result-object v0
+354378: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=273
+      locals        :
+        0x0000 - 0x0007 reg=1 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #4              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'getResult'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 64 16-bit code units
+354124:                                        |[354124] kotlinx.coroutines.selects.SelectBuilderImpl.getResult:()Ljava/lang/Object;
+354134: 6e10 d7b3 0300                         |0000: invoke-virtual {v3}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.isSelected:()Z // method@b3d7
+35413a: 0a00                                   |0003: move-result v0
+35413c: 3900 0500                              |0004: if-nez v0, 0009 // +0005
+354140: 7010 d2b3 0300                         |0006: invoke-direct {v3}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.initCancellability:()V // method@b3d2
+354146: 5430 e946                              |0009: iget-object v0, v3, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result:Ljava/lang/Object; // field@46e9
+35414a: 7100 edb3 0000                         |000b: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getUNDECIDED$p:()Ljava/lang/Object; // method@b3ed
+354150: 0c01                                   |000e: move-result-object v1
+354152: 3310 1900                              |000f: if-ne v0, v1, 0028 // +0019
+354156: 6200 ea46                              |0011: sget-object v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ea
+35415a: 7100 edb3 0000                         |0013: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getUNDECIDED$p:()Ljava/lang/Object; // method@b3ed
+354160: 0c01                                   |0016: move-result-object v1
+354162: 7100 0e8f 0000                         |0017: invoke-static {}, Lkotlin/coroutines/intrinsics/IntrinsicsKt;.getCOROUTINE_SUSPENDED:()Ljava/lang/Object; // method@8f0e
+354168: 0c02                                   |001a: move-result-object v2
+35416a: 7140 ec29 3021                         |001b: invoke-static {v0, v3, v1, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+354170: 0a00                                   |001e: move-result v0
+354172: 3800 0700                              |001f: if-eqz v0, 0026 // +0007
+354176: 7100 0e8f 0000                         |0021: invoke-static {}, Lkotlin/coroutines/intrinsics/IntrinsicsKt;.getCOROUTINE_SUSPENDED:()Ljava/lang/Object; // method@8f0e
+35417c: 0c00                                   |0024: move-result-object v0
+35417e: 1100                                   |0025: return-object v0
+354180: 5430 e946                              |0026: iget-object v0, v3, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result:Ljava/lang/Object; // field@46e9
+354184: 7100 ebb3 0000                         |0028: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getRESUMED$p:()Ljava/lang/Object; // method@b3eb
+35418a: 0c01                                   |002b: move-result-object v1
+35418c: 3210 0c00                              |002c: if-eq v0, v1, 0038 // +000c
+354190: 2001 b316                              |002e: instance-of v1, v0, Lkotlinx/coroutines/CompletedExceptionally; // type@16b3
+354194: 3901 0300                              |0030: if-nez v1, 0033 // +0003
+354198: 1100                                   |0032: return-object v0
+35419a: 1f00 b316                              |0033: check-cast v0, Lkotlinx/coroutines/CompletedExceptionally; // type@16b3
+35419e: 5400 b93f                              |0035: iget-object v0, v0, Lkotlinx/coroutines/CompletedExceptionally;.cause:Ljava/lang/Throwable; // field@3fb9
+3541a2: 2700                                   |0037: throw v0
+3541a4: 2200 6a11                              |0038: new-instance v0, Ljava/lang/IllegalStateException; // type@116a
+3541a8: 1a01 ba1a                              |003a: const-string v1, "Already resumed" // string@1aba
+3541ac: 7020 7071 1000                         |003c: invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+3541b2: 2700                                   |003f: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=314
+        0x0009 line=315
+        0x000b line=316
+        0x0011 line=317
+        0x0026 line=318
+        0x0028 line=321
+        0x002e line=322
+        0x0038 line=321
+      locals        :
+        0x0000 - 0x0040 reg=3 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #5              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'getStackTraceElement'
+      type          : '()Ljava/lang/StackTraceElement;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+3542d8:                                        |[3542d8] kotlinx.coroutines.selects.SelectBuilderImpl.getStackTraceElement:()Ljava/lang/StackTraceElement;
+3542e8: 1200                                   |0000: const/4 v0, #int 0 // #0
+3542ea: 1100                                   |0001: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #6              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'handleBuilderException'
+      type          : '(Ljava/lang/Throwable;)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 72 16-bit code units
+3545ac:                                        |[3545ac] kotlinx.coroutines.selects.SelectBuilderImpl.handleBuilderException:(Ljava/lang/Throwable;)V
+3545bc: 6e10 deb3 0200                         |0000: invoke-virtual {v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.trySelect:()Z // method@b3de
+3545c2: 0a00                                   |0003: move-result v0
+3545c4: 3800 1300                              |0004: if-eqz v0, 0017 // +0013
+3545c8: 0720                                   |0006: move-object v0, v2
+3545ca: 1f00 ec13                              |0007: check-cast v0, Lkotlin/coroutines/Continuation; // type@13ec
+3545ce: 6201 553a                              |0009: sget-object v1, Lkotlin/Result;.Companion:Lkotlin/Result$Companion; // field@3a55
+3545d2: 7110 e577 0300                         |000b: invoke-static {v3}, Lkotlin/ResultKt;.createFailure:(Ljava/lang/Throwable;)Ljava/lang/Object; // method@77e5
+3545d8: 0c03                                   |000e: move-result-object v3
+3545da: 7110 d777 0300                         |000f: invoke-static {v3}, Lkotlin/Result;.constructor-impl:(Ljava/lang/Object;)Ljava/lang/Object; // method@77d7
+3545e0: 0c03                                   |0012: move-result-object v3
+3545e2: 7220 bf8e 3000                         |0013: invoke-interface {v0, v3}, Lkotlin/coroutines/Continuation;.resumeWith:(Ljava/lang/Object;)V // method@8ebf
+3545e8: 0e00                                   |0016: return-void
+3545ea: 2030 4c12                              |0017: instance-of v0, v3, Ljava/util/concurrent/CancellationException; // type@124c
+3545ee: 3900 2e00                              |0019: if-nez v0, 0047 // +002e
+3545f2: 6e10 cfb3 0200                         |001b: invoke-virtual {v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.getResult:()Ljava/lang/Object; // method@b3cf
+3545f8: 0c00                                   |001e: move-result-object v0
+3545fa: 2001 b316                              |001f: instance-of v1, v0, Lkotlinx/coroutines/CompletedExceptionally; // type@16b3
+3545fe: 3801 1f00                              |0021: if-eqz v1, 0040 // +001f
+354602: 1f00 b316                              |0023: check-cast v0, Lkotlinx/coroutines/CompletedExceptionally; // type@16b3
+354606: 5400 b93f                              |0025: iget-object v0, v0, Lkotlinx/coroutines/CompletedExceptionally;.cause:Ljava/lang/Throwable; // field@3fb9
+35460a: 7100 f7a3 0000                         |0027: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getRECOVER_STACK_TRACES:()Z // method@a3f7
+354610: 0a01                                   |002a: move-result v1
+354612: 3901 0300                              |002b: if-nez v1, 002e // +0003
+354616: 2805                                   |002d: goto 0032 // +0005
+354618: 7110 98b2 0000                         |002e: invoke-static {v0}, Lkotlinx/coroutines/internal/StackTraceRecoveryKt;.unwrapImpl:(Ljava/lang/Throwable;)Ljava/lang/Throwable; // method@b298
+35461e: 0c00                                   |0031: move-result-object v0
+354620: 7100 f7a3 0000                         |0032: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getRECOVER_STACK_TRACES:()Z // method@a3f7
+354626: 0a01                                   |0035: move-result v1
+354628: 3901 0400                              |0036: if-nez v1, 003a // +0004
+35462c: 0731                                   |0038: move-object v1, v3
+35462e: 2805                                   |0039: goto 003e // +0005
+354630: 7110 98b2 0300                         |003a: invoke-static {v3}, Lkotlinx/coroutines/internal/StackTraceRecoveryKt;.unwrapImpl:(Ljava/lang/Throwable;)Ljava/lang/Throwable; // method@b298
+354636: 0c01                                   |003d: move-result-object v1
+354638: 3210 0900                              |003e: if-eq v0, v1, 0047 // +0009
+35463c: 6e10 cdb3 0200                         |0040: invoke-virtual {v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.getContext:()Lkotlin/coroutines/CoroutineContext; // method@b3cd
+354642: 0c00                                   |0043: move-result-object v0
+354644: 7120 bca3 3000                         |0044: invoke-static {v0, v3}, Lkotlinx/coroutines/CoroutineExceptionHandlerKt;.handleCoroutineException:(Lkotlin/coroutines/CoroutineContext;Ljava/lang/Throwable;)V // method@a3bc
+35464a: 0e00                                   |0047: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=346
+        0x0006 line=347
+        0x0017 line=348
+        0x001b line=355
+        0x001f line=356
+        0x0027 line=703
+        0x0040 line=357
+      locals        :
+        0x0000 - 0x0048 reg=2 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x0048 reg=3 (null) Ljava/lang/Throwable;
+
+    #7              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'invoke'
+      type          : '(Lkotlinx/coroutines/selects/SelectClause0;Lkotlin/jvm/functions/Function1;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 7 16-bit code units
+3546c0:                                        |[3546c0] kotlinx.coroutines.selects.SelectBuilderImpl.invoke:(Lkotlinx/coroutines/selects/SelectClause0;Lkotlin/jvm/functions/Function1;)V
+3546d0: 0710                                   |0000: move-object v0, v1
+3546d2: 1f00 c419                              |0001: check-cast v0, Lkotlinx/coroutines/selects/SelectInstance; // type@19c4
+3546d6: 7230 e0b3 0203                         |0003: invoke-interface {v2, v0, v3}, Lkotlinx/coroutines/selects/SelectClause0;.registerSelectClause0:(Lkotlinx/coroutines/selects/SelectInstance;Lkotlin/jvm/functions/Function1;)V // method@b3e0
+3546dc: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=628
+      locals        :
+        0x0000 - 0x0007 reg=1 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x0007 reg=2 (null) Lkotlinx/coroutines/selects/SelectClause0;
+        0x0000 - 0x0007 reg=3 (null) Lkotlin/jvm/functions/Function1;
+
+    #8              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'invoke'
+      type          : '(Lkotlinx/coroutines/selects/SelectClause1;Lkotlin/jvm/functions/Function2;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 7 16-bit code units
+3546e0:                                        |[3546e0] kotlinx.coroutines.selects.SelectBuilderImpl.invoke:(Lkotlinx/coroutines/selects/SelectClause1;Lkotlin/jvm/functions/Function2;)V
+3546f0: 0710                                   |0000: move-object v0, v1
+3546f2: 1f00 c419                              |0001: check-cast v0, Lkotlinx/coroutines/selects/SelectInstance; // type@19c4
+3546f6: 7230 e1b3 0203                         |0003: invoke-interface {v2, v0, v3}, Lkotlinx/coroutines/selects/SelectClause1;.registerSelectClause1:(Lkotlinx/coroutines/selects/SelectInstance;Lkotlin/jvm/functions/Function2;)V // method@b3e1
+3546fc: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=632
+      locals        :
+        0x0000 - 0x0007 reg=1 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x0007 reg=2 (null) Lkotlinx/coroutines/selects/SelectClause1;
+        0x0000 - 0x0007 reg=3 (null) Lkotlin/jvm/functions/Function2;
+
+    #9              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'invoke'
+      type          : '(Lkotlinx/coroutines/selects/SelectClause2;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 4
+      insns size    : 7 16-bit code units
+354700:                                        |[354700] kotlinx.coroutines.selects.SelectBuilderImpl.invoke:(Lkotlinx/coroutines/selects/SelectClause2;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)V
+354710: 0710                                   |0000: move-object v0, v1
+354712: 1f00 c419                              |0001: check-cast v0, Lkotlinx/coroutines/selects/SelectInstance; // type@19c4
+354716: 7240 e2b3 0243                         |0003: invoke-interface {v2, v0, v3, v4}, Lkotlinx/coroutines/selects/SelectClause2;.registerSelectClause2:(Lkotlinx/coroutines/selects/SelectInstance;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)V // method@b3e2
+35471c: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=636
+      locals        :
+        0x0000 - 0x0007 reg=1 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x0007 reg=2 (null) Lkotlinx/coroutines/selects/SelectClause2;
+        0x0000 - 0x0007 reg=3 (null) Ljava/lang/Object;
+        0x0000 - 0x0007 reg=4 (null) Lkotlin/jvm/functions/Function2;
+
+    #10              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'invoke'
+      type          : '(Lkotlinx/coroutines/selects/SelectClause2;Lkotlin/jvm/functions/Function2;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 4 16-bit code units
+354720:                                        |[354720] kotlinx.coroutines.selects.SelectBuilderImpl.invoke:(Lkotlinx/coroutines/selects/SelectClause2;Lkotlin/jvm/functions/Function2;)V
+354730: 7130 abb3 1002                         |0000: invoke-static {v0, v1, v2}, Lkotlinx/coroutines/selects/SelectBuilder$DefaultImpls;.invoke:(Lkotlinx/coroutines/selects/SelectBuilder;Lkotlinx/coroutines/selects/SelectClause2;Lkotlin/jvm/functions/Function2;)V // method@b3ab
+354736: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=234
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x0004 reg=1 (null) Lkotlinx/coroutines/selects/SelectClause2;
+        0x0000 - 0x0004 reg=2 (null) Lkotlin/jvm/functions/Function2;
+
+    #11              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'isSelected'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 22 16-bit code units
+354088:                                        |[354088] kotlinx.coroutines.selects.SelectBuilderImpl.isSelected:()Z
+354098: 5420 eb46                              |0000: iget-object v0, v2, Lkotlinx/coroutines/selects/SelectBuilderImpl;._state:Ljava/lang/Object; // field@46eb
+35409c: 7100 f0b3 0000                         |0002: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.getNOT_SELECTED:()Ljava/lang/Object; // method@b3f0
+3540a2: 0c01                                   |0005: move-result-object v1
+3540a4: 3310 0400                              |0006: if-ne v0, v1, 000a // +0004
+3540a8: 1200                                   |0008: const/4 v0, #int 0 // #0
+3540aa: 0f00                                   |0009: return v0
+3540ac: 2001 8819                              |000a: instance-of v1, v0, Lkotlinx/coroutines/internal/OpDescriptor; // type@1988
+3540b0: 3801 0800                              |000c: if-eqz v1, 0014 // +0008
+3540b4: 1f00 8819                              |000e: check-cast v0, Lkotlinx/coroutines/internal/OpDescriptor; // type@1988
+3540b8: 6e20 57b2 2000                         |0010: invoke-virtual {v0, v2}, Lkotlinx/coroutines/internal/OpDescriptor;.perform:(Ljava/lang/Object;)Ljava/lang/Object; // method@b257
+3540be: 28ed                                   |0013: goto 0000 // -0013
+3540c0: 1210                                   |0014: const/4 v0, #int 1 // #1
+3540c2: 0f00                                   |0015: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=705
+        0x0002 line=364
+        0x000a line=365
+      locals        :
+        0x0000 - 0x0016 reg=2 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #12              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'onTimeout'
+      type          : '(JLkotlin/jvm/functions/Function1;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 5
+      insns size    : 47 16-bit code units
+354738:                                        |[354738] kotlinx.coroutines.selects.SelectBuilderImpl.onTimeout:(JLkotlin/jvm/functions/Function1;)V
+354748: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+35474c: 3100 0300                              |0002: cmp-long v0, v3, v0
+354750: 3c00 1000                              |0004: if-gtz v0, 0014 // +0010
+354754: 6e10 deb3 0200                         |0006: invoke-virtual {v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.trySelect:()Z // method@b3de
+35475a: 0a03                                   |0009: move-result v3
+35475c: 3803 0900                              |000a: if-eqz v3, 0013 // +0009
+354760: 6e10 ccb3 0200                         |000c: invoke-virtual {v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.getCompletion:()Lkotlin/coroutines/Continuation; // method@b3cc
+354766: 0c03                                   |000f: move-result-object v3
+354768: 7120 f5b2 3500                         |0010: invoke-static {v5, v3}, Lkotlinx/coroutines/intrinsics/UndispatchedKt;.startCoroutineUnintercepted:(Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)V // method@b2f5
+35476e: 0e00                                   |0013: return-void
+354770: 2200 bf19                              |0014: new-instance v0, Lkotlinx/coroutines/selects/SelectBuilderImpl$onTimeout$$inlined$Runnable$1; // type@19bf
+354774: 7030 c2b3 2005                         |0016: invoke-direct {v0, v2, v5}, Lkotlinx/coroutines/selects/SelectBuilderImpl$onTimeout$$inlined$Runnable$1;.<init>:(Lkotlinx/coroutines/selects/SelectBuilderImpl;Lkotlin/jvm/functions/Function1;)V // method@b3c2
+35477a: 1f00 7e11                              |0019: check-cast v0, Ljava/lang/Runnable; // type@117e
+35477e: 6e10 cdb3 0200                         |001b: invoke-virtual {v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.getContext:()Lkotlin/coroutines/CoroutineContext; // method@b3cd
+354784: 0c05                                   |001e: move-result-object v5
+354786: 7110 39a4 0500                         |001f: invoke-static {v5}, Lkotlinx/coroutines/DelayKt;.getDelay:(Lkotlin/coroutines/CoroutineContext;)Lkotlinx/coroutines/Delay; // method@a439
+35478c: 0c05                                   |0022: move-result-object v5
+35478e: 6e10 cdb3 0200                         |0023: invoke-virtual {v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.getContext:()Lkotlin/coroutines/CoroutineContext; // method@b3cd
+354794: 0c01                                   |0026: move-result-object v1
+354796: 7251 32a4 3504                         |0027: invoke-interface {v5, v3, v4, v0, v1}, Lkotlinx/coroutines/Delay;.invokeOnTimeout:(JLjava/lang/Runnable;Lkotlin/coroutines/CoroutineContext;)Lkotlinx/coroutines/DisposableHandle; // method@a432
+35479c: 0c03                                   |002a: move-result-object v3
+35479e: 6e20 c8b3 3200                         |002b: invoke-virtual {v2, v3}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.disposeOnSelect:(Lkotlinx/coroutines/DisposableHandle;)V // method@b3c8
+3547a4: 0e00                                   |002e: return-void
+      catches       : (none)
+      positions     :
+        0x0006 line=641
+        0x000c line=642
+        0x0014 line=714
+        0x001b line=651
+      locals        :
+        0x0000 - 0x002f reg=2 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x002f reg=3 (null) J
+        0x0000 - 0x002f reg=5 (null) Lkotlin/jvm/functions/Function1;
+
+    #13              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'performAtomicTrySelect'
+      type          : '(Lkotlinx/coroutines/internal/AtomicDesc;)Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 11 16-bit code units
+3541b4:                                        |[3541b4] kotlinx.coroutines.selects.SelectBuilderImpl.performAtomicTrySelect:(Lkotlinx/coroutines/internal/AtomicDesc;)Ljava/lang/Object;
+3541c4: 2200 bb19                              |0000: new-instance v0, Lkotlinx/coroutines/selects/SelectBuilderImpl$AtomicSelectOp; // type@19bb
+3541c8: 7030 b1b3 1002                         |0002: invoke-direct {v0, v1, v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl$AtomicSelectOp;.<init>:(Lkotlinx/coroutines/selects/SelectBuilderImpl;Lkotlinx/coroutines/internal/AtomicDesc;)V // method@b3b1
+3541ce: 1202                                   |0005: const/4 v2, #int 0 // #0
+3541d0: 6e20 b5b3 2000                         |0006: invoke-virtual {v0, v2}, Lkotlinx/coroutines/selects/SelectBuilderImpl$AtomicSelectOp;.perform:(Ljava/lang/Object;)Ljava/lang/Object; // method@b3b5
+3541d6: 0c02                                   |0009: move-result-object v2
+3541d8: 1102                                   |000a: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=560
+      locals        :
+        0x0000 - 0x000b reg=1 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x000b reg=2 (null) Lkotlinx/coroutines/internal/AtomicDesc;
+
+    #14              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'resumeSelectWithException'
+      type          : '(Ljava/lang/Throwable;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 5
+      insns size    : 119 16-bit code units
+3547a8:                                        |[3547a8] kotlinx.coroutines.selects.SelectBuilderImpl.resumeSelectWithException:(Ljava/lang/Throwable;)V
+3547b8: 7100 f4a3 0000                         |0000: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+3547be: 0a00                                   |0003: move-result v0
+3547c0: 3800 0f00                              |0004: if-eqz v0, 0013 // +000f
+3547c4: 6e10 d7b3 0500                         |0006: invoke-virtual {v5}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.isSelected:()Z // method@b3d7
+3547ca: 0a00                                   |0009: move-result v0
+3547cc: 3800 0300                              |000a: if-eqz v0, 000d // +0003
+3547d0: 2807                                   |000c: goto 0013 // +0007
+3547d2: 2206 5311                              |000d: new-instance v6, Ljava/lang/AssertionError; // type@1153
+3547d6: 7010 d570 0600                         |000f: invoke-direct {v6}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+3547dc: 2706                                   |0012: throw v6
+3547de: 5450 e946                              |0013: iget-object v0, v5, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result:Ljava/lang/Object; // field@46e9
+3547e2: 7100 edb3 0000                         |0015: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getUNDECIDED$p:()Ljava/lang/Object; // method@b3ed
+3547e8: 0c01                                   |0018: move-result-object v1
+3547ea: 3310 2c00                              |0019: if-ne v0, v1, 0045 // +002c
+3547ee: 2200 b316                              |001b: new-instance v0, Lkotlinx/coroutines/CompletedExceptionally; // type@16b3
+3547f2: 5451 ed46                              |001d: iget-object v1, v5, Lkotlinx/coroutines/selects/SelectBuilderImpl;.uCont:Lkotlin/coroutines/Continuation; // field@46ed
+3547f6: 7100 f7a3 0000                         |001f: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getRECOVER_STACK_TRACES:()Z // method@a3f7
+3547fc: 0a02                                   |0022: move-result v2
+3547fe: 3802 0e00                              |0023: if-eqz v2, 0031 // +000e
+354802: 2012 0e14                              |0025: instance-of v2, v1, Lkotlin/coroutines/jvm/internal/CoroutineStackFrame; // type@140e
+354806: 3902 0300                              |0027: if-nez v2, 002a // +0003
+35480a: 2808                                   |0029: goto 0031 // +0008
+35480c: 1f01 0e14                              |002a: check-cast v1, Lkotlin/coroutines/jvm/internal/CoroutineStackFrame; // type@140e
+354810: 7120 86b2 1600                         |002c: invoke-static {v6, v1}, Lkotlinx/coroutines/internal/StackTraceRecoveryKt;.access$recoverFromStackFrame:(Ljava/lang/Throwable;Lkotlin/coroutines/jvm/internal/CoroutineStackFrame;)Ljava/lang/Throwable; // method@b286
+354816: 0c01                                   |002f: move-result-object v1
+354818: 2802                                   |0030: goto 0032 // +0002
+35481a: 0761                                   |0031: move-object v1, v6
+35481c: 1222                                   |0032: const/4 v2, #int 2 // #2
+35481e: 1203                                   |0033: const/4 v3, #int 0 // #0
+354820: 1204                                   |0034: const/4 v4, #int 0 // #0
+354822: 7053 6aa3 1024                         |0035: invoke-direct {v0, v1, v4, v2, v3}, Lkotlinx/coroutines/CompletedExceptionally;.<init>:(Ljava/lang/Throwable;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V // method@a36a
+354828: 6201 ea46                              |0038: sget-object v1, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ea
+35482c: 7100 edb3 0000                         |003a: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getUNDECIDED$p:()Ljava/lang/Object; // method@b3ed
+354832: 0c02                                   |003d: move-result-object v2
+354834: 7140 ec29 5102                         |003e: invoke-static {v1, v5, v2, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+35483a: 0a00                                   |0041: move-result v0
+35483c: 3800 d1ff                              |0042: if-eqz v0, 0013 // -002f
+354840: 0e00                                   |0044: return-void
+354842: 7100 0e8f 0000                         |0045: invoke-static {}, Lkotlin/coroutines/intrinsics/IntrinsicsKt;.getCOROUTINE_SUSPENDED:()Ljava/lang/Object; // method@8f0e
+354848: 0c01                                   |0048: move-result-object v1
+35484a: 3310 2600                              |0049: if-ne v0, v1, 006f // +0026
+35484e: 6200 ea46                              |004b: sget-object v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ea
+354852: 7100 0e8f 0000                         |004d: invoke-static {}, Lkotlin/coroutines/intrinsics/IntrinsicsKt;.getCOROUTINE_SUSPENDED:()Ljava/lang/Object; // method@8f0e
+354858: 0c01                                   |0050: move-result-object v1
+35485a: 7100 ebb3 0000                         |0051: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getRESUMED$p:()Ljava/lang/Object; // method@b3eb
+354860: 0c02                                   |0054: move-result-object v2
+354862: 7140 ec29 5021                         |0055: invoke-static {v0, v5, v1, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+354868: 0a00                                   |0058: move-result v0
+35486a: 3800 baff                              |0059: if-eqz v0, 0013 // -0046
+35486e: 5450 ed46                              |005b: iget-object v0, v5, Lkotlinx/coroutines/selects/SelectBuilderImpl;.uCont:Lkotlin/coroutines/Continuation; // field@46ed
+354872: 7110 0f8f 0000                         |005d: invoke-static {v0}, Lkotlin/coroutines/intrinsics/IntrinsicsKt;.intercepted:(Lkotlin/coroutines/Continuation;)Lkotlin/coroutines/Continuation; // method@8f0f
+354878: 0c00                                   |0060: move-result-object v0
+35487a: 6201 553a                              |0061: sget-object v1, Lkotlin/Result;.Companion:Lkotlin/Result$Companion; // field@3a55
+35487e: 7110 e577 0600                         |0063: invoke-static {v6}, Lkotlin/ResultKt;.createFailure:(Ljava/lang/Throwable;)Ljava/lang/Object; // method@77e5
+354884: 0c06                                   |0066: move-result-object v6
+354886: 7110 d777 0600                         |0067: invoke-static {v6}, Lkotlin/Result;.constructor-impl:(Ljava/lang/Object;)Ljava/lang/Object; // method@77d7
+35488c: 0c06                                   |006a: move-result-object v6
+35488e: 7220 bf8e 6000                         |006b: invoke-interface {v0, v6}, Lkotlin/coroutines/Continuation;.resumeWith:(Ljava/lang/Object;)V // method@8ebf
+354894: 0e00                                   |006e: return-void
+354896: 2206 6a11                              |006f: new-instance v6, Ljava/lang/IllegalStateException; // type@116a
+35489a: 1a00 ba1a                              |0071: const-string v0, "Already resumed" // string@1aba
+35489e: 7020 7071 0600                         |0073: invoke-direct {v6, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+3548a4: 2706                                   |0076: throw v6
+      catches       : (none)
+      positions     :
+        0x0000 line=683
+        0x0013 line=687
+        0x0015 line=689
+        0x001b line=307
+        0x001f line=691
+        0x002a line=692
+        0x0035 line=307
+        0x0038 line=693
+        0x0045 line=695
+        0x005b line=308
+        0x006f line=699
+      locals        :
+        0x0000 - 0x0077 reg=5 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x0077 reg=6 (null) Ljava/lang/Throwable;
+
+    #15              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'resumeWith'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 129 16-bit code units
+3548a8:                                        |[3548a8] kotlinx.coroutines.selects.SelectBuilderImpl.resumeWith:(Ljava/lang/Object;)V
+3548b8: 7100 f4a3 0000                         |0000: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+3548be: 0a00                                   |0003: move-result v0
+3548c0: 3800 0f00                              |0004: if-eqz v0, 0013 // +000f
+3548c4: 6e10 d7b3 0300                         |0006: invoke-virtual {v3}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.isSelected:()Z // method@b3d7
+3548ca: 0a00                                   |0009: move-result v0
+3548cc: 3800 0300                              |000a: if-eqz v0, 000d // +0003
+3548d0: 2807                                   |000c: goto 0013 // +0007
+3548d2: 2204 5311                              |000d: new-instance v4, Ljava/lang/AssertionError; // type@1153
+3548d6: 7010 d570 0400                         |000f: invoke-direct {v4}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+3548dc: 2704                                   |0012: throw v4
+3548de: 5430 e946                              |0013: iget-object v0, v3, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result:Ljava/lang/Object; // field@46e9
+3548e2: 7100 edb3 0000                         |0015: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getUNDECIDED$p:()Ljava/lang/Object; // method@b3ed
+3548e8: 0c01                                   |0018: move-result-object v1
+3548ea: 3310 1500                              |0019: if-ne v0, v1, 002e // +0015
+3548ee: 1210                                   |001b: const/4 v0, #int 1 // #1
+3548f0: 1201                                   |001c: const/4 v1, #int 0 // #0
+3548f2: 7140 80a3 1410                         |001d: invoke-static {v4, v1, v0, v1}, Lkotlinx/coroutines/CompletionStateKt;.toState$default:(Ljava/lang/Object;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/Object; // method@a380
+3548f8: 0c00                                   |0020: move-result-object v0
+3548fa: 6201 ea46                              |0021: sget-object v1, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ea
+3548fe: 7100 edb3 0000                         |0023: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getUNDECIDED$p:()Ljava/lang/Object; // method@b3ed
+354904: 0c02                                   |0026: move-result-object v2
+354906: 7140 ec29 3102                         |0027: invoke-static {v1, v3, v2, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+35490c: 0a00                                   |002a: move-result v0
+35490e: 3800 e8ff                              |002b: if-eqz v0, 0013 // -0018
+354912: 0e00                                   |002d: return-void
+354914: 7100 0e8f 0000                         |002e: invoke-static {}, Lkotlin/coroutines/intrinsics/IntrinsicsKt;.getCOROUTINE_SUSPENDED:()Ljava/lang/Object; // method@8f0e
+35491a: 0c01                                   |0031: move-result-object v1
+35491c: 3310 4700                              |0032: if-ne v0, v1, 0079 // +0047
+354920: 6200 ea46                              |0034: sget-object v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ea
+354924: 7100 0e8f 0000                         |0036: invoke-static {}, Lkotlin/coroutines/intrinsics/IntrinsicsKt;.getCOROUTINE_SUSPENDED:()Ljava/lang/Object; // method@8f0e
+35492a: 0c01                                   |0039: move-result-object v1
+35492c: 7100 ebb3 0000                         |003a: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.access$getRESUMED$p:()Ljava/lang/Object; // method@b3eb
+354932: 0c02                                   |003d: move-result-object v2
+354934: 7140 ec29 3021                         |003e: invoke-static {v0, v3, v1, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+35493a: 0a00                                   |0041: move-result v0
+35493c: 3800 d1ff                              |0042: if-eqz v0, 0013 // -002f
+354940: 7110 e077 0400                         |0044: invoke-static {v4}, Lkotlin/Result;.isFailure-impl:(Ljava/lang/Object;)Z // method@77e0
+354946: 0a00                                   |0047: move-result v0
+354948: 3800 2b00                              |0048: if-eqz v0, 0073 // +002b
+35494c: 5430 ed46                              |004a: iget-object v0, v3, Lkotlinx/coroutines/selects/SelectBuilderImpl;.uCont:Lkotlin/coroutines/Continuation; // field@46ed
+354950: 7110 db77 0400                         |004c: invoke-static {v4}, Lkotlin/Result;.exceptionOrNull-impl:(Ljava/lang/Object;)Ljava/lang/Throwable; // method@77db
+354956: 0c04                                   |004f: move-result-object v4
+354958: 7110 d293 0400                         |0050: invoke-static {v4}, Lkotlin/jvm/internal/Intrinsics;.checkNotNull:(Ljava/lang/Object;)V // method@93d2
+35495e: 6201 553a                              |0053: sget-object v1, Lkotlin/Result;.Companion:Lkotlin/Result$Companion; // field@3a55
+354962: 7100 f7a3 0000                         |0055: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getRECOVER_STACK_TRACES:()Z // method@a3f7
+354968: 0a01                                   |0058: move-result v1
+35496a: 3801 0e00                              |0059: if-eqz v1, 0067 // +000e
+35496e: 2001 0e14                              |005b: instance-of v1, v0, Lkotlin/coroutines/jvm/internal/CoroutineStackFrame; // type@140e
+354972: 3901 0300                              |005d: if-nez v1, 0060 // +0003
+354976: 2808                                   |005f: goto 0067 // +0008
+354978: 0701                                   |0060: move-object v1, v0
+35497a: 1f01 0e14                              |0061: check-cast v1, Lkotlin/coroutines/jvm/internal/CoroutineStackFrame; // type@140e
+35497e: 7120 86b2 1400                         |0063: invoke-static {v4, v1}, Lkotlinx/coroutines/internal/StackTraceRecoveryKt;.access$recoverFromStackFrame:(Ljava/lang/Throwable;Lkotlin/coroutines/jvm/internal/CoroutineStackFrame;)Ljava/lang/Throwable; // method@b286
+354984: 0c04                                   |0066: move-result-object v4
+354986: 7110 e577 0400                         |0067: invoke-static {v4}, Lkotlin/ResultKt;.createFailure:(Ljava/lang/Throwable;)Ljava/lang/Object; // method@77e5
+35498c: 0c04                                   |006a: move-result-object v4
+35498e: 7110 d777 0400                         |006b: invoke-static {v4}, Lkotlin/Result;.constructor-impl:(Ljava/lang/Object;)Ljava/lang/Object; // method@77d7
+354994: 0c04                                   |006e: move-result-object v4
+354996: 7220 bf8e 4000                         |006f: invoke-interface {v0, v4}, Lkotlin/coroutines/Continuation;.resumeWith:(Ljava/lang/Object;)V // method@8ebf
+35499c: 0e00                                   |0072: return-void
+35499e: 5430 ed46                              |0073: iget-object v0, v3, Lkotlinx/coroutines/selects/SelectBuilderImpl;.uCont:Lkotlin/coroutines/Continuation; // field@46ed
+3549a2: 7220 bf8e 4000                         |0075: invoke-interface {v0, v4}, Lkotlin/coroutines/Continuation;.resumeWith:(Ljava/lang/Object;)V // method@8ebf
+3549a8: 0e00                                   |0078: return-void
+3549aa: 2204 6a11                              |0079: new-instance v4, Ljava/lang/IllegalStateException; // type@116a
+3549ae: 1a00 ba1a                              |007b: const-string v0, "Already resumed" // string@1aba
+3549b2: 7020 7071 0400                         |007d: invoke-direct {v4, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+3549b8: 2704                                   |0080: throw v4
+      catches       : (none)
+      positions     :
+        0x0000 line=662
+        0x0013 line=666
+        0x0015 line=668
+        0x001d line=296
+        0x0021 line=670
+        0x002e line=672
+        0x0044 line=297
+        0x004a line=298
+        0x0053 line=674
+        0x0055 line=675
+        0x0060 line=676
+        0x0067 line=674
+        0x0073 line=300
+        0x0079 line=680
+      locals        :
+        0x0000 - 0x0081 reg=3 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x0081 reg=4 (null) Ljava/lang/Object;
+
+    #16              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 36 16-bit code units
+3542ec:                                        |[3542ec] kotlinx.coroutines.selects.SelectBuilderImpl.toString:()Ljava/lang/String;
+3542fc: 2200 8811                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1188
+354300: 1a01 d453                              |0002: const-string v1, "SelectInstance(state=" // string@53d4
+354304: 7020 4e72 1000                         |0004: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+35430a: 5421 eb46                              |0007: iget-object v1, v2, Lkotlinx/coroutines/selects/SelectBuilderImpl;._state:Ljava/lang/Object; // field@46eb
+35430e: 6e20 5672 1000                         |0009: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+354314: 0c00                                   |000c: move-result-object v0
+354316: 1a01 7915                              |000d: const-string v1, ", result=" // string@1579
+35431a: 6e20 5772 1000                         |000f: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+354320: 0c00                                   |0012: move-result-object v0
+354322: 5421 e946                              |0013: iget-object v1, v2, Lkotlinx/coroutines/selects/SelectBuilderImpl;._result:Ljava/lang/Object; // field@46e9
+354326: 6e20 5672 1000                         |0015: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+35432c: 0c00                                   |0018: move-result-object v0
+35432e: 1301 2900                              |0019: const/16 v1, #int 41 // #29
+354332: 6e20 4f72 1000                         |001b: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@724f
+354338: 0c00                                   |001e: move-result-object v0
+35433a: 6e10 6b72 0000                         |001f: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+354340: 0c00                                   |0022: move-result-object v0
+354342: 1100                                   |0023: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=562
+      locals        :
+        0x0000 - 0x0024 reg=2 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #17              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'trySelect'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 40 16-bit code units
+3540c4:                                        |[3540c4] kotlinx.coroutines.selects.SelectBuilderImpl.trySelect:()Z
+3540d4: 1200                                   |0000: const/4 v0, #int 0 // #0
+3540d6: 6e20 dfb3 0400                         |0001: invoke-virtual {v4, v0}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.trySelectOther:(Lkotlinx/coroutines/internal/LockFreeLinkedListNode$PrepareOp;)Ljava/lang/Object; // method@b3df
+3540dc: 0c00                                   |0004: move-result-object v0
+3540de: 6201 aa3f                              |0005: sget-object v1, Lkotlinx/coroutines/CancellableContinuationImplKt;.RESUME_TOKEN:Lkotlinx/coroutines/internal/Symbol; // field@3faa
+3540e2: 3310 0400                              |0007: if-ne v0, v1, 000b // +0004
+3540e6: 1210                                   |0009: const/4 v0, #int 1 // #1
+3540e8: 0f00                                   |000a: return v0
+3540ea: 3900 0400                              |000b: if-nez v0, 000f // +0004
+3540ee: 1200                                   |000d: const/4 v0, #int 0 // #0
+3540f0: 0f00                                   |000e: return v0
+3540f2: 2201 6a11                              |000f: new-instance v1, Ljava/lang/IllegalStateException; // type@116a
+3540f6: 2202 8811                              |0011: new-instance v2, Ljava/lang/StringBuilder; // type@1188
+3540fa: 1a03 6959                              |0013: const-string v3, "Unexpected trySelectIdempotent result " // string@5969
+3540fe: 7020 4e72 3200                         |0015: invoke-direct {v2, v3}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+354104: 6e20 5672 0200                         |0018: invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+35410a: 0c00                                   |001b: move-result-object v0
+35410c: 6e10 6b72 0000                         |001c: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+354112: 0c00                                   |001f: move-result-object v0
+354114: 6e10 e671 0000                         |0020: invoke-virtual {v0}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+35411a: 0c00                                   |0023: move-result-object v0
+35411c: 7020 7071 0100                         |0024: invoke-direct {v1, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+354122: 2701                                   |0027: throw v1
+      catches       : (none)
+      positions     :
+        0x0001 line=390
+        0x0005 line=392
+        0x000f line=393
+        0x0011 line=394
+      locals        :
+        0x0000 - 0x0028 reg=4 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+
+    #18              : (in Lkotlinx/coroutines/selects/SelectBuilderImpl;)
+      name          : 'trySelectOther'
+      type          : '(Lkotlinx/coroutines/internal/LockFreeLinkedListNode$PrepareOp;)Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 117 16-bit code units
+3541dc:                                        |[3541dc] kotlinx.coroutines.selects.SelectBuilderImpl.trySelectOther:(Lkotlinx/coroutines/internal/LockFreeLinkedListNode$PrepareOp;)Ljava/lang/Object;
+3541ec: 5430 eb46                              |0000: iget-object v0, v3, Lkotlinx/coroutines/selects/SelectBuilderImpl;._state:Ljava/lang/Object; // field@46eb
+3541f0: 7100 f0b3 0000                         |0002: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.getNOT_SELECTED:()Ljava/lang/Object; // method@b3f0
+3541f6: 0c01                                   |0005: move-result-object v1
+3541f8: 1202                                   |0006: const/4 v2, #int 0 // #0
+3541fa: 3310 2f00                              |0007: if-ne v0, v1, 0036 // +002f
+3541fe: 3904 0f00                              |0009: if-nez v4, 0018 // +000f
+354202: 6200 ec46                              |000b: sget-object v0, Lkotlinx/coroutines/selects/SelectBuilderImpl;._state$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ec
+354206: 7100 f0b3 0000                         |000d: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.getNOT_SELECTED:()Ljava/lang/Object; // method@b3f0
+35420c: 0c01                                   |0010: move-result-object v1
+35420e: 7140 ec29 3021                         |0011: invoke-static {v0, v3, v1, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+354214: 0a00                                   |0014: move-result v0
+354216: 3900 1b00                              |0015: if-nez v0, 0030 // +001b
+35421a: 28e9                                   |0017: goto 0000 // -0017
+35421c: 2200 bd19                              |0018: new-instance v0, Lkotlinx/coroutines/selects/SelectBuilderImpl$PairSelectOp; // type@19bd
+354220: 7020 bbb3 4000                         |001a: invoke-direct {v0, v4}, Lkotlinx/coroutines/selects/SelectBuilderImpl$PairSelectOp;.<init>:(Lkotlinx/coroutines/internal/LockFreeLinkedListNode$PrepareOp;)V // method@b3bb
+354226: 6201 ec46                              |001d: sget-object v1, Lkotlinx/coroutines/selects/SelectBuilderImpl;._state$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@46ec
+35422a: 7100 f0b3 0000                         |001f: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.getNOT_SELECTED:()Ljava/lang/Object; // method@b3f0
+354230: 0c02                                   |0022: move-result-object v2
+354232: 7140 ec29 3102                         |0023: invoke-static {v1, v3, v2, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+354238: 0a01                                   |0026: move-result v1
+35423a: 3801 d9ff                              |0027: if-eqz v1, 0000 // -0027
+35423e: 6e20 bdb3 3000                         |0029: invoke-virtual {v0, v3}, Lkotlinx/coroutines/selects/SelectBuilderImpl$PairSelectOp;.perform:(Ljava/lang/Object;)Ljava/lang/Object; // method@b3bd
+354244: 0c04                                   |002c: move-result-object v4
+354246: 3804 0300                              |002d: if-eqz v4, 0030 // +0003
+35424a: 1104                                   |002f: return-object v4
+35424c: 7010 c9b3 0300                         |0030: invoke-direct {v3}, Lkotlinx/coroutines/selects/SelectBuilderImpl;.doAfterSelect:()V // method@b3c9
+354252: 6204 aa3f                              |0033: sget-object v4, Lkotlinx/coroutines/CancellableContinuationImplKt;.RESUME_TOKEN:Lkotlinx/coroutines/internal/Symbol; // field@3faa
+354256: 1104                                   |0035: return-object v4
+354258: 2001 8819                              |0036: instance-of v1, v0, Lkotlinx/coroutines/internal/OpDescriptor; // type@1988
+35425c: 3801 3200                              |0038: if-eqz v1, 006a // +0032
+354260: 3804 2a00                              |003a: if-eqz v4, 0064 // +002a
+354264: 6e10 d7b1 0400                         |003c: invoke-virtual {v4}, Lkotlinx/coroutines/internal/LockFreeLinkedListNode$PrepareOp;.getAtomicOp:()Lkotlinx/coroutines/internal/AtomicOp; // method@b1d7
+35426a: 0c01                                   |003f: move-result-object v1
+35426c: 2012 bb19                              |0040: instance-of v2, v1, Lkotlinx/coroutines/selects/SelectBuilderImpl$AtomicSelectOp; // type@19bb
+354270: 3802 1600                              |0042: if-eqz v2, 0058 // +0016
+354274: 0712                                   |0044: move-object v2, v1
+354276: 1f02 bb19                              |0045: check-cast v2, Lkotlinx/coroutines/selects/SelectBuilderImpl$AtomicSelectOp; // type@19bb
+35427a: 5422 e146                              |0047: iget-object v2, v2, Lkotlinx/coroutines/selects/SelectBuilderImpl$AtomicSelectOp;.impl:Lkotlinx/coroutines/selects/SelectBuilderImpl; // field@46e1
+35427e: 3232 0300                              |0049: if-eq v2, v3, 004c // +0003
+354282: 280d                                   |004b: goto 0058 // +000d
+354284: 2204 6a11                              |004c: new-instance v4, Ljava/lang/IllegalStateException; // type@116a
+354288: 1a00 7e1f                              |004e: const-string v0, "Cannot use matching select clauses on the same object" // string@1f7e
+35428c: 6e10 e671 0000                         |0050: invoke-virtual {v0}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+354292: 0c00                                   |0053: move-result-object v0
+354294: 7020 7071 0400                         |0054: invoke-direct {v4, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+35429a: 2704                                   |0057: throw v4
+35429c: 0702                                   |0058: move-object v2, v0
+35429e: 1f02 8819                              |0059: check-cast v2, Lkotlinx/coroutines/internal/OpDescriptor; // type@1988
+3542a2: 6e20 13b1 2100                         |005b: invoke-virtual {v1, v2}, Lkotlinx/coroutines/internal/AtomicOp;.isEarlierThan:(Lkotlinx/coroutines/internal/OpDescriptor;)Z // method@b113
+3542a8: 0a01                                   |005e: move-result v1
+3542aa: 3801 0500                              |005f: if-eqz v1, 0064 // +0005
+3542ae: 6204 f245                              |0061: sget-object v4, Lkotlinx/coroutines/internal/AtomicKt;.RETRY_ATOMIC:Ljava/lang/Object; // field@45f2
+3542b2: 1104                                   |0063: return-object v4
+3542b4: 1f00 8819                              |0064: check-cast v0, Lkotlinx/coroutines/internal/OpDescriptor; // type@1988
+3542b8: 6e20 57b2 3000                         |0066: invoke-virtual {v0, v3}, Lkotlinx/coroutines/internal/OpDescriptor;.perform:(Ljava/lang/Object;)Ljava/lang/Object; // method@b257
+3542be: 2897                                   |0069: goto 0000 // -0069
+3542c0: 3904 0300                              |006a: if-nez v4, 006d // +0003
+3542c4: 1102                                   |006c: return-object v2
+3542c6: 5444 2646                              |006d: iget-object v4, v4, Lkotlinx/coroutines/internal/LockFreeLinkedListNode$PrepareOp;.desc:Lkotlinx/coroutines/internal/LockFreeLinkedListNode$AbstractAtomicDesc; // field@4626
+3542ca: 3340 0500                              |006f: if-ne v0, v4, 0074 // +0005
+3542ce: 6204 aa3f                              |0071: sget-object v4, Lkotlinx/coroutines/CancellableContinuationImplKt;.RESUME_TOKEN:Lkotlinx/coroutines/internal/Symbol; // field@3faa
+3542d2: 1104                                   |0073: return-object v4
+3542d4: 1102                                   |0074: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=713
+        0x0002 line=487
+        0x000b line=490
+        0x0018 line=493
+        0x001d line=494
+        0x0029 line=495
+        0x0030 line=498
+        0x0033 line=499
+        0x0036 line=501
+        0x003c line=504
+        0x0040 line=507
+        0x004e line=515
+        0x0058 line=518
+        0x0061 line=525
+        0x0064 line=530
+        0x006d line=534
+      locals        :
+        0x0000 - 0x0075 reg=3 this Lkotlinx/coroutines/selects/SelectBuilderImpl;
+        0x0000 - 0x0075 reg=4 (null) Lkotlinx/coroutines/internal/LockFreeLinkedListNode$PrepareOp;
+
+  source_file_idx   : 21459 (Select.kt)
+

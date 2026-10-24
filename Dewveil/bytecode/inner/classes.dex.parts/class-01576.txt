@@ -1,0 +1,1322 @@
+Class #1576            -
+  Class descriptor  : 'Landroidx/multidex/MultiDexExtractor;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/io/Closeable;'
+  Static fields     -
+    #0              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'BUFFER_SIZE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 16384
+    #1              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'DEX_PREFIX'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "classes"
+    #2              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'DEX_SUFFIX'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : ".dex"
+    #3              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'EXTRACTED_NAME_EXT'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : ".classes"
+    #4              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'EXTRACTED_SUFFIX'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : ".zip"
+    #5              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'KEY_CRC'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "crc"
+    #6              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'KEY_DEX_CRC'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "dex.crc."
+    #7              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'KEY_DEX_NUMBER'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "dex.number"
+    #8              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'KEY_DEX_TIME'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "dex.time."
+    #9              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'KEY_TIME_STAMP'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "timestamp"
+    #10              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'LOCK_FILENAME'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "MultiDex.lock"
+    #11              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'MAX_EXTRACT_ATTEMPTS'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 3
+    #12              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'NO_VALUE'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : -1
+    #13              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'PREFS_FILE'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "multidex.version"
+    #14              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'TAG'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "MultiDex"
+  Instance fields   -
+    #0              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'cacheLock'
+      type          : 'Ljava/nio/channels/FileLock;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'dexDir'
+      type          : 'Ljava/io/File;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'lockChannel'
+      type          : 'Ljava/nio/channels/FileChannel;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'lockRaf'
+      type          : 'Ljava/io/RandomAccessFile;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'sourceApk'
+      type          : 'Ljava/io/File;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'sourceCrc'
+      type          : 'J'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : '<init>'
+      type          : '(Ljava/io/File;Ljava/io/File;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 8
+      ins           : 3
+      outs          : 3
+      insns size    : 148 16-bit code units
+549894:                                        |[549894] androidx.multidex.MultiDexExtractor.<init>:(Ljava/io/File;Ljava/io/File;)V
+5498a4: 1a00 3319                              |0000: const-string v0, "Blocking on lock " // string@1933
+5498a8: 7010 c8d1 0500                         |0002: invoke-direct {v5}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5498ae: 2201 991a                              |0005: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+5498b2: 1a02 f056                              |0007: const-string v2, "MultiDexExtractor(" // string@56f0
+5498b6: 7020 3cd2 2100                         |0009: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5498bc: 6e10 e5cf 0600                         |000c: invoke-virtual {v6}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+5498c2: 0c02                                   |000f: move-result-object v2
+5498c4: 6e20 45d2 2100                         |0010: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5498ca: 0c01                                   |0013: move-result-object v1
+5498cc: 1a02 0a0e                              |0014: const-string v2, ", " // string@0e0a
+5498d0: 6e20 45d2 2100                         |0016: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5498d6: 0c01                                   |0019: move-result-object v1
+5498d8: 6e10 e5cf 0700                         |001a: invoke-virtual {v7}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+5498de: 0c02                                   |001d: move-result-object v2
+5498e0: 6e20 45d2 2100                         |001e: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5498e6: 0c01                                   |0021: move-result-object v1
+5498e8: 1a02 000d                              |0022: const-string v2, ")" // string@0d00
+5498ec: 6e20 45d2 2100                         |0024: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5498f2: 0c01                                   |0027: move-result-object v1
+5498f4: 6e10 58d2 0100                         |0028: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5498fa: 0c01                                   |002b: move-result-object v1
+5498fc: 1a02 e856                              |002c: const-string v2, "MultiDex" // string@56e8
+549900: 7120 2108 1200                         |002e: invoke-static {v2, v1}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+549906: 5b56 2f33                              |0031: iput-object v6, v5, Landroidx/multidex/MultiDexExtractor;.sourceApk:Ljava/io/File; // field@332f
+54990a: 5b57 2c33                              |0033: iput-object v7, v5, Landroidx/multidex/MultiDexExtractor;.dexDir:Ljava/io/File; // field@332c
+54990e: 7110 6f46 0600                         |0035: invoke-static {v6}, Landroidx/multidex/MultiDexExtractor;.getZipCrc:(Ljava/io/File;)J // method@466f
+549914: 0b03                                   |0038: move-result-wide v3
+549916: 5a53 3033                              |0039: iput-wide v3, v5, Landroidx/multidex/MultiDexExtractor;.sourceCrc:J // field@3330
+54991a: 2206 3d1a                              |003b: new-instance v6, Ljava/io/File; // type@1a3d
+54991e: 1a01 ed56                              |003d: const-string v1, "MultiDex.lock" // string@56ed
+549922: 7030 d8cf 7601                         |003f: invoke-direct {v6, v7, v1}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@cfd8
+549928: 2207 5a1a                              |0042: new-instance v7, Ljava/io/RandomAccessFile; // type@1a5a
+54992c: 1a01 d4d0                              |0044: const-string v1, "rw" // string@d0d4
+549930: 7030 74d0 6701                         |0046: invoke-direct {v7, v6, v1}, Ljava/io/RandomAccessFile;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@d074
+549936: 5b57 2e33                              |0049: iput-object v7, v5, Landroidx/multidex/MultiDexExtractor;.lockRaf:Ljava/io/RandomAccessFile; // field@332e
+54993a: 6e10 76d0 0700                         |004b: invoke-virtual {v7}, Ljava/io/RandomAccessFile;.getChannel:()Ljava/nio/channels/FileChannel; // method@d076
+549940: 0c07                                   |004e: move-result-object v7
+549942: 5b57 2d33                              |004f: iput-object v7, v5, Landroidx/multidex/MultiDexExtractor;.lockChannel:Ljava/nio/channels/FileChannel; // field@332d
+549946: 2201 991a                              |0051: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+54994a: 7020 3cd2 0100                         |0053: invoke-direct {v1, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+549950: 6e10 e5cf 0600                         |0056: invoke-virtual {v6}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+549956: 0c00                                   |0059: move-result-object v0
+549958: 6e20 45d2 0100                         |005a: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54995e: 0c00                                   |005d: move-result-object v0
+549960: 6e10 58d2 0000                         |005e: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549966: 0c00                                   |0061: move-result-object v0
+549968: 7120 2108 0200                         |0062: invoke-static {v2, v0}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+54996e: 6e10 c5d3 0700                         |0065: invoke-virtual {v7}, Ljava/nio/channels/FileChannel;.lock:()Ljava/nio/channels/FileLock; // method@d3c5
+549974: 0c07                                   |0068: move-result-object v7
+549976: 5b57 2b33                              |0069: iput-object v7, v5, Landroidx/multidex/MultiDexExtractor;.cacheLock:Ljava/nio/channels/FileLock; // field@332b
+54997a: 2207 991a                              |006b: new-instance v7, Ljava/lang/StringBuilder; // type@1a99
+54997e: 7010 39d2 0700                         |006d: invoke-direct {v7}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+549984: 6e10 e5cf 0600                         |0070: invoke-virtual {v6}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+54998a: 0c06                                   |0073: move-result-object v6
+54998c: 6e20 45d2 6700                         |0074: invoke-virtual {v7, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549992: 0c06                                   |0077: move-result-object v6
+549994: 1a07 2a04                              |0078: const-string v7, " locked" // string@042a
+549998: 6e20 45d2 7600                         |007a: invoke-virtual {v6, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54999e: 0c06                                   |007d: move-result-object v6
+5499a0: 6e10 58d2 0600                         |007e: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5499a6: 0c06                                   |0081: move-result-object v6
+5499a8: 7120 2108 6200                         |0082: invoke-static {v2, v6}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+5499ae: 0e00                                   |0085: return-void
+5499b0: 0d06                                   |0086: move-exception v6
+5499b2: 5457 2d33                              |0087: iget-object v7, v5, Landroidx/multidex/MultiDexExtractor;.lockChannel:Ljava/nio/channels/FileChannel; // field@332d
+5499b6: 7110 6b46 0700                         |0089: invoke-static {v7}, Landroidx/multidex/MultiDexExtractor;.closeQuietly:(Ljava/io/Closeable;)V // method@466b
+5499bc: 2706                                   |008c: throw v6
+5499be: 0d06                                   |008d: move-exception v6
+5499c0: 5455 2e33                              |008e: iget-object v5, v5, Landroidx/multidex/MultiDexExtractor;.lockRaf:Ljava/io/RandomAccessFile; // field@332e
+5499c4: 7110 6b46 0500                         |0090: invoke-static {v5}, Landroidx/multidex/MultiDexExtractor;.closeQuietly:(Ljava/io/Closeable;)V // method@466b
+5499ca: 2706                                   |0093: throw v6
+      catches       : 3
+        0x004b - 0x0051
+          Ljava/io/IOException; -> 0x008d
+          Ljava/lang/RuntimeException; -> 0x008d
+          Ljava/lang/Error; -> 0x008d
+        0x0051 - 0x006b
+          Ljava/io/IOException; -> 0x0086
+          Ljava/lang/RuntimeException; -> 0x0086
+          Ljava/lang/Error; -> 0x0086
+        0x006b - 0x008d
+          Ljava/io/IOException; -> 0x008d
+          Ljava/lang/RuntimeException; -> 0x008d
+          Ljava/lang/Error; -> 0x008d
+      positions     :
+        0x0002 line=94
+        0x0005 line=95
+        0x0031 line=96
+        0x0033 line=97
+        0x0035 line=98
+        0x003b line=99
+        0x0042 line=100
+        0x004b line=102
+        0x0051 line=104
+        0x0065 line=105
+        0x006b line=110
+        0x0087 line=107
+        0x008c line=108
+        0x008e line=112
+        0x0093 line=113
+      locals        :
+        0x0000 - 0x0094 reg=5 this Landroidx/multidex/MultiDexExtractor;
+        0x0000 - 0x0094 reg=6 (null) Ljava/io/File;
+        0x0000 - 0x0094 reg=7 (null) Ljava/io/File;
+
+    #1              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'clearDexDir'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 1
+      outs          : 3
+      insns size    : 143 16-bit code units
+549a00:                                        |[549a00] androidx.multidex.MultiDexExtractor.clearDexDir:()V
+549a10: 5470 2c33                              |0000: iget-object v0, v7, Landroidx/multidex/MultiDexExtractor;.dexDir:Ljava/io/File; // field@332c
+549a14: 2201 9f08                              |0002: new-instance v1, Landroidx/multidex/MultiDexExtractor$1; // type@089f
+549a18: 7020 5e46 7100                         |0004: invoke-direct {v1, v7}, Landroidx/multidex/MultiDexExtractor$1;.<init>:(Landroidx/multidex/MultiDexExtractor;)V // method@465e
+549a1e: 6e20 eccf 1000                         |0007: invoke-virtual {v0, v1}, Ljava/io/File;.listFiles:(Ljava/io/FileFilter;)[Ljava/io/File; // method@cfec
+549a24: 0c00                                   |000a: move-result-object v0
+549a26: 1a01 e856                              |000b: const-string v1, "MultiDex" // string@56e8
+549a2a: 3900 2100                              |000d: if-nez v0, 002e // +0021
+549a2e: 2200 991a                              |000f: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+549a32: 1a02 7827                              |0011: const-string v2, "Failed to list secondary dex dir content (" // string@2778
+549a36: 7020 3cd2 2000                         |0013: invoke-direct {v0, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+549a3c: 5477 2c33                              |0016: iget-object v7, v7, Landroidx/multidex/MultiDexExtractor;.dexDir:Ljava/io/File; // field@332c
+549a40: 6e10 e5cf 0700                         |0018: invoke-virtual {v7}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+549a46: 0c07                                   |001b: move-result-object v7
+549a48: 6e20 45d2 7000                         |001c: invoke-virtual {v0, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549a4e: 0c07                                   |001f: move-result-object v7
+549a50: 1a00 300d                              |0020: const-string v0, ")." // string@0d30
+549a54: 6e20 45d2 0700                         |0022: invoke-virtual {v7, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549a5a: 0c07                                   |0025: move-result-object v7
+549a5c: 6e10 58d2 0700                         |0026: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549a62: 0c07                                   |0029: move-result-object v7
+549a64: 7120 2708 7100                         |002a: invoke-static {v1, v7}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+549a6a: 0e00                                   |002d: return-void
+549a6c: 2107                                   |002e: array-length v7, v0
+549a6e: 1202                                   |002f: const/4 v2, #int 0 // #0
+549a70: 3572 5e00                              |0030: if-ge v2, v7, 008e // +005e
+549a74: 4603 0002                              |0032: aget-object v3, v0, v2
+549a78: 2204 991a                              |0034: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+549a7c: 1a05 6e69                              |0036: const-string v5, "Trying to delete old file " // string@696e
+549a80: 7020 3cd2 5400                         |0038: invoke-direct {v4, v5}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+549a86: 6e10 e5cf 0300                         |003b: invoke-virtual {v3}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+549a8c: 0c05                                   |003e: move-result-object v5
+549a8e: 6e20 45d2 5400                         |003f: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549a94: 0c04                                   |0042: move-result-object v4
+549a96: 1a05 7804                              |0043: const-string v5, " of size " // string@0478
+549a9a: 6e20 45d2 5400                         |0045: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549aa0: 0c04                                   |0048: move-result-object v4
+549aa2: 6e10 eacf 0300                         |0049: invoke-virtual {v3}, Ljava/io/File;.length:()J // method@cfea
+549aa8: 0b05                                   |004c: move-result-wide v5
+549aaa: 6e30 41d2 5406                         |004d: invoke-virtual {v4, v5, v6}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+549ab0: 0c04                                   |0050: move-result-object v4
+549ab2: 6e10 58d2 0400                         |0051: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549ab8: 0c04                                   |0054: move-result-object v4
+549aba: 7120 2108 4100                         |0055: invoke-static {v1, v4}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+549ac0: 6e10 decf 0300                         |0058: invoke-virtual {v3}, Ljava/io/File;.delete:()Z // method@cfde
+549ac6: 0a04                                   |005b: move-result v4
+549ac8: 3904 1900                              |005c: if-nez v4, 0075 // +0019
+549acc: 2204 991a                              |005e: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+549ad0: 1a05 2627                              |0060: const-string v5, "Failed to delete old file " // string@2726
+549ad4: 7020 3cd2 5400                         |0062: invoke-direct {v4, v5}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+549ada: 6e10 e5cf 0300                         |0065: invoke-virtual {v3}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+549ae0: 0c03                                   |0068: move-result-object v3
+549ae2: 6e20 45d2 3400                         |0069: invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549ae8: 0c03                                   |006c: move-result-object v3
+549aea: 6e10 58d2 0300                         |006d: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549af0: 0c03                                   |0070: move-result-object v3
+549af2: 7120 2708 3100                         |0071: invoke-static {v1, v3}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+549af8: 2817                                   |0074: goto 008b // +0017
+549afa: 2204 991a                              |0075: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+549afe: 1a05 3022                              |0077: const-string v5, "Deleted old file " // string@2230
+549b02: 7020 3cd2 5400                         |0079: invoke-direct {v4, v5}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+549b08: 6e10 e5cf 0300                         |007c: invoke-virtual {v3}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+549b0e: 0c03                                   |007f: move-result-object v3
+549b10: 6e20 45d2 3400                         |0080: invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549b16: 0c03                                   |0083: move-result-object v3
+549b18: 6e10 58d2 0300                         |0084: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549b1e: 0c03                                   |0087: move-result-object v3
+549b20: 7120 2108 3100                         |0088: invoke-static {v1, v3}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+549b26: d802 0201                              |008b: add-int/lit8 v2, v2, #int 1 // #01
+549b2a: 28a3                                   |008d: goto 0030 // -005d
+549b2c: 0e00                                   |008e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=354
+        0x000b line=360
+        0x000f line=361
+        0x002e line=364
+        0x0034 line=365
+        0x0049 line=366
+        0x0055 line=365
+        0x0058 line=367
+        0x005e line=368
+        0x0075 line=370
+      locals        :
+        0x0000 - 0x008f reg=7 this Landroidx/multidex/MultiDexExtractor;
+
+    #2              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'closeQuietly'
+      type          : '(Ljava/io/Closeable;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 13 16-bit code units
+549b30:                                        |[549b30] androidx.multidex.MultiDexExtractor.closeQuietly:(Ljava/io/Closeable;)V
+549b40: 7210 bfcf 0200                         |0000: invoke-interface {v2}, Ljava/io/Closeable;.close:()V // method@cfbf
+549b46: 2809                                   |0003: goto 000c // +0009
+549b48: 0d02                                   |0004: move-exception v2
+549b4a: 1a00 e856                              |0005: const-string v0, "MultiDex" // string@56e8
+549b4e: 1a01 1027                              |0007: const-string v1, "Failed to close resource" // string@2710
+549b52: 7130 2808 1002                         |0009: invoke-static {v0, v1, v2}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I // method@0828
+549b58: 0e00                                   |000c: return-void
+      catches       : 1
+        0x0000 - 0x0003
+          Ljava/io/IOException; -> 0x0004
+      positions     :
+        0x0000 line=422
+        0x0005 line=424
+      locals        :
+        0x0000 - 0x000d reg=2 (null) Ljava/io/Closeable;
+
+    #3              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'extract'
+      type          : '(Ljava/util/zip/ZipFile;Ljava/util/zip/ZipEntry;Ljava/io/File;Ljava/lang/String;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 9
+      ins           : 4
+      outs          : 4
+      insns size    : 267 16-bit code units
+549b6c:                                        |[549b6c] androidx.multidex.MultiDexExtractor.extract:(Ljava/util/zip/ZipFile;Ljava/util/zip/ZipEntry;Ljava/io/File;Ljava/lang/String;)V
+549b7c: 6e20 6cd7 6500                         |0000: invoke-virtual {v5, v6}, Ljava/util/zip/ZipFile;.getInputStream:(Ljava/util/zip/ZipEntry;)Ljava/io/InputStream; // method@d76c
+549b82: 0c05                                   |0003: move-result-object v5
+549b84: 2200 991a                              |0004: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+549b88: 1a01 5be1                              |0006: const-string v1, "tmp-" // string@e15b
+549b8c: 7020 3cd2 1000                         |0008: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+549b92: 6e20 45d2 8000                         |000b: invoke-virtual {v0, v8}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549b98: 0c08                                   |000e: move-result-object v8
+549b9a: 6e10 58d2 0800                         |000f: invoke-virtual {v8}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549ba0: 0c08                                   |0012: move-result-object v8
+549ba2: 1a00 0010                              |0013: const-string v0, ".zip" // string@1000
+549ba6: 6e10 e4cf 0700                         |0015: invoke-virtual {v7}, Ljava/io/File;.getParentFile:()Ljava/io/File; // method@cfe4
+549bac: 0c01                                   |0018: move-result-object v1
+549bae: 7130 ddcf 0801                         |0019: invoke-static {v8, v0, v1}, Ljava/io/File;.createTempFile:(Ljava/lang/String;Ljava/lang/String;Ljava/io/File;)Ljava/io/File; // method@cfdd
+549bb4: 0c08                                   |001c: move-result-object v8
+549bb6: 2200 991a                              |001d: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+549bba: 1a01 8925                              |001f: const-string v1, "Extracting " // string@2589
+549bbe: 7020 3cd2 1000                         |0021: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+549bc4: 6e10 e5cf 0800                         |0024: invoke-virtual {v8}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+549bca: 0c01                                   |0027: move-result-object v1
+549bcc: 6e20 45d2 1000                         |0028: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549bd2: 0c00                                   |002b: move-result-object v0
+549bd4: 6e10 58d2 0000                         |002c: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549bda: 0c00                                   |002f: move-result-object v0
+549bdc: 1a01 e856                              |0030: const-string v1, "MultiDex" // string@56e8
+549be0: 7120 2108 0100                         |0032: invoke-static {v1, v0}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+549be6: 2200 b31b                              |0035: new-instance v0, Ljava/util/zip/ZipOutputStream; // type@1bb3
+549bea: 2202 2f1a                              |0037: new-instance v2, Ljava/io/BufferedOutputStream; // type@1a2f
+549bee: 2203 421a                              |0039: new-instance v3, Ljava/io/FileOutputStream; // type@1a42
+549bf2: 7020 04d0 8300                         |003b: invoke-direct {v3, v8}, Ljava/io/FileOutputStream;.<init>:(Ljava/io/File;)V // method@d004
+549bf8: 7020 a7cf 3200                         |003e: invoke-direct {v2, v3}, Ljava/io/BufferedOutputStream;.<init>:(Ljava/io/OutputStream;)V // method@cfa7
+549bfe: 7020 6dd7 2000                         |0041: invoke-direct {v0, v2}, Ljava/util/zip/ZipOutputStream;.<init>:(Ljava/io/OutputStream;)V // method@d76d
+549c04: 2202 b01b                              |0044: new-instance v2, Ljava/util/zip/ZipEntry; // type@1bb0
+549c08: 1a03 4886                              |0046: const-string v3, "classes.dex" // string@8648
+549c0c: 7020 64d7 3200                         |0048: invoke-direct {v2, v3}, Ljava/util/zip/ZipEntry;.<init>:(Ljava/lang/String;)V // method@d764
+549c12: 6e10 65d7 0600                         |004b: invoke-virtual {v6}, Ljava/util/zip/ZipEntry;.getTime:()J // method@d765
+549c18: 0b03                                   |004e: move-result-wide v3
+549c1a: 6e30 66d7 3204                         |004f: invoke-virtual {v2, v3, v4}, Ljava/util/zip/ZipEntry;.setTime:(J)V // method@d766
+549c20: 6e20 70d7 2000                         |0052: invoke-virtual {v0, v2}, Ljava/util/zip/ZipOutputStream;.putNextEntry:(Ljava/util/zip/ZipEntry;)V // method@d770
+549c26: 1306 0040                              |0055: const/16 v6, #int 16384 // #4000
+549c2a: 2366 7c1f                              |0057: new-array v6, v6, [B // type@1f7c
+549c2e: 6e20 22d0 6500                         |0059: invoke-virtual {v5, v6}, Ljava/io/InputStream;.read:([B)I // method@d022
+549c34: 0a02                                   |005c: move-result v2
+549c36: 12f3                                   |005d: const/4 v3, #int -1 // #ff
+549c38: 3232 0b00                              |005e: if-eq v2, v3, 0069 // +000b
+549c3c: 1203                                   |0060: const/4 v3, #int 0 // #0
+549c3e: 6e40 71d7 6023                         |0061: invoke-virtual {v0, v6, v3, v2}, Ljava/util/zip/ZipOutputStream;.write:([BII)V // method@d771
+549c44: 6e20 22d0 6500                         |0064: invoke-virtual {v5, v6}, Ljava/io/InputStream;.read:([B)I // method@d022
+549c4a: 0a02                                   |0067: move-result v2
+549c4c: 28f5                                   |0068: goto 005d // -000b
+549c4e: 6e10 6fd7 0000                         |0069: invoke-virtual {v0}, Ljava/util/zip/ZipOutputStream;.closeEntry:()V // method@d76f
+549c54: 6e10 6ed7 0000                         |006c: invoke-virtual {v0}, Ljava/util/zip/ZipOutputStream;.close:()V // method@d76e
+549c5a: 6e10 f3cf 0800                         |006f: invoke-virtual {v8}, Ljava/io/File;.setReadOnly:()Z // method@cff3
+549c60: 0a06                                   |0072: move-result v6
+549c62: 3806 5a00                              |0073: if-eqz v6, 00cd // +005a
+549c66: 2206 991a                              |0075: new-instance v6, Ljava/lang/StringBuilder; // type@1a99
+549c6a: 7010 39d2 0600                         |0077: invoke-direct {v6}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+549c70: 1a00 055e                              |007a: const-string v0, "Renaming to " // string@5e05
+549c74: 6e20 45d2 0600                         |007c: invoke-virtual {v6, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549c7a: 0c06                                   |007f: move-result-object v6
+549c7c: 6e10 e5cf 0700                         |0080: invoke-virtual {v7}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+549c82: 0c00                                   |0083: move-result-object v0
+549c84: 6e20 45d2 0600                         |0084: invoke-virtual {v6, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549c8a: 0c06                                   |0087: move-result-object v6
+549c8c: 6e10 58d2 0600                         |0088: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549c92: 0c06                                   |008b: move-result-object v6
+549c94: 7120 2108 6100                         |008c: invoke-static {v1, v6}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+549c9a: 6e20 f1cf 7800                         |008f: invoke-virtual {v8, v7}, Ljava/io/File;.renameTo:(Ljava/io/File;)Z // method@cff1
+549ca0: 0a06                                   |0092: move-result v6
+549ca2: 3806 0900                              |0093: if-eqz v6, 009c // +0009
+549ca6: 7110 6b46 0500                         |0095: invoke-static {v5}, Landroidx/multidex/MultiDexExtractor;.closeQuietly:(Ljava/io/Closeable;)V // method@466b
+549cac: 6e10 decf 0800                         |0098: invoke-virtual {v8}, Ljava/io/File;.delete:()Z // method@cfde
+549cb2: 0e00                                   |009b: return-void
+549cb4: 2206 481a                              |009c: new-instance v6, Ljava/io/IOException; // type@1a48
+549cb8: 2200 991a                              |009e: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+549cbc: 7010 39d2 0000                         |00a0: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+549cc2: 1a01 b627                              |00a3: const-string v1, "Failed to rename \"" // string@27b6
+549cc6: 6e20 45d2 1000                         |00a5: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549ccc: 0c00                                   |00a8: move-result-object v0
+549cce: 6e10 e0cf 0800                         |00a9: invoke-virtual {v8}, Ljava/io/File;.getAbsolutePath:()Ljava/lang/String; // method@cfe0
+549cd4: 0c01                                   |00ac: move-result-object v1
+549cd6: 6e20 45d2 1000                         |00ad: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549cdc: 0c00                                   |00b0: move-result-object v0
+549cde: 1a01 1405                              |00b1: const-string v1, "\" to \"" // string@0514
+549ce2: 6e20 45d2 1000                         |00b3: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549ce8: 0c00                                   |00b6: move-result-object v0
+549cea: 6e10 e0cf 0700                         |00b7: invoke-virtual {v7}, Ljava/io/File;.getAbsolutePath:()Ljava/lang/String; // method@cfe0
+549cf0: 0c07                                   |00ba: move-result-object v7
+549cf2: 6e20 45d2 7000                         |00bb: invoke-virtual {v0, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549cf8: 0c07                                   |00be: move-result-object v7
+549cfa: 1a00 0c05                              |00bf: const-string v0, "\"" // string@050c
+549cfe: 6e20 45d2 0700                         |00c1: invoke-virtual {v7, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549d04: 0c07                                   |00c4: move-result-object v7
+549d06: 6e10 58d2 0700                         |00c5: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549d0c: 0c07                                   |00c8: move-result-object v7
+549d0e: 7020 14d0 7600                         |00c9: invoke-direct {v6, v7}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+549d14: 2706                                   |00cc: throw v6
+549d16: 2206 481a                              |00cd: new-instance v6, Ljava/io/IOException; // type@1a48
+549d1a: 2200 991a                              |00cf: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+549d1e: 7010 39d2 0000                         |00d1: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+549d24: 1a01 8a27                              |00d4: const-string v1, "Failed to mark readonly \"" // string@278a
+549d28: 6e20 45d2 1000                         |00d6: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549d2e: 0c00                                   |00d9: move-result-object v0
+549d30: 6e10 e0cf 0800                         |00da: invoke-virtual {v8}, Ljava/io/File;.getAbsolutePath:()Ljava/lang/String; // method@cfe0
+549d36: 0c01                                   |00dd: move-result-object v1
+549d38: 6e20 45d2 1000                         |00de: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549d3e: 0c00                                   |00e1: move-result-object v0
+549d40: 1a01 0f05                              |00e2: const-string v1, "\" (tmp of \"" // string@050f
+549d44: 6e20 45d2 1000                         |00e4: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549d4a: 0c00                                   |00e7: move-result-object v0
+549d4c: 6e10 e0cf 0700                         |00e8: invoke-virtual {v7}, Ljava/io/File;.getAbsolutePath:()Ljava/lang/String; // method@cfe0
+549d52: 0c07                                   |00eb: move-result-object v7
+549d54: 6e20 45d2 7000                         |00ec: invoke-virtual {v0, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549d5a: 0c07                                   |00ef: move-result-object v7
+549d5c: 1a00 1705                              |00f0: const-string v0, "\")" // string@0517
+549d60: 6e20 45d2 0700                         |00f2: invoke-virtual {v7, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549d66: 0c07                                   |00f5: move-result-object v7
+549d68: 6e10 58d2 0700                         |00f6: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549d6e: 0c07                                   |00f9: move-result-object v7
+549d70: 7020 14d0 7600                         |00fa: invoke-direct {v6, v7}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+549d76: 2706                                   |00fd: throw v6
+549d78: 0d06                                   |00fe: move-exception v6
+549d7a: 6e10 6ed7 0000                         |00ff: invoke-virtual {v0}, Ljava/util/zip/ZipOutputStream;.close:()V // method@d76e
+549d80: 2706                                   |0102: throw v6
+549d82: 0d06                                   |0103: move-exception v6
+549d84: 7110 6b46 0500                         |0104: invoke-static {v5}, Landroidx/multidex/MultiDexExtractor;.closeQuietly:(Ljava/io/Closeable;)V // method@466b
+549d8a: 6e10 decf 0800                         |0107: invoke-virtual {v8}, Ljava/io/File;.delete:()Z // method@cfde
+549d90: 2706                                   |010a: throw v6
+      catches       : 4
+        0x0035 - 0x0044
+          <any> -> 0x0103
+        0x0044 - 0x006c
+          <any> -> 0x00fe
+        0x006c - 0x0093
+          <any> -> 0x0103
+        0x009c - 0x0103
+          <any> -> 0x0103
+      positions     :
+        0x0000 line=378
+        0x0004 line=381
+        0x0015 line=382
+        0x0019 line=381
+        0x001d line=383
+        0x0035 line=385
+        0x0044 line=387
+        0x004b line=389
+        0x0052 line=390
+        0x0057 line=392
+        0x0059 line=393
+        0x0061 line=395
+        0x0064 line=396
+        0x0069 line=398
+        0x006c line=400
+        0x006f line=402
+        0x0075 line=406
+        0x008f line=407
+        0x0095 line=412
+        0x0098 line=413
+        0x009c line=408
+        0x00b7 line=409
+        0x00cd line=403
+        0x00e8 line=404
+        0x00ff line=400
+        0x0104 line=412
+        0x0107 line=413
+      locals        :
+        0x0000 - 0x010b reg=5 (null) Ljava/util/zip/ZipFile;
+        0x0000 - 0x010b reg=6 (null) Ljava/util/zip/ZipEntry;
+        0x0000 - 0x010b reg=7 (null) Ljava/io/File;
+        0x0000 - 0x010b reg=8 (null) Ljava/lang/String;
+
+    #4              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'getMultiDexPreferences'
+      type          : '(Landroid/content/Context;)Landroid/content/SharedPreferences;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 8 16-bit code units
+549dbc:                                        |[549dbc] androidx.multidex.MultiDexExtractor.getMultiDexPreferences:(Landroid/content/Context;)Landroid/content/SharedPreferences;
+549dcc: 1a00 17c2                              |0000: const-string v0, "multidex.version" // string@c217
+549dd0: 1241                                   |0002: const/4 v1, #int 4 // #4
+549dd2: 6e30 4802 0201                         |0003: invoke-virtual {v2, v0, v1}, Landroid/content/Context;.getSharedPreferences:(Ljava/lang/String;I)Landroid/content/SharedPreferences; // method@0248
+549dd8: 0c02                                   |0006: move-result-object v2
+549dda: 1102                                   |0007: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=344
+      locals        :
+        0x0000 - 0x0008 reg=2 (null) Landroid/content/Context;
+
+    #5              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'getTimeStamp'
+      type          : '(Ljava/io/File;)J'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 1
+      insns size    : 14 16-bit code units
+549ddc:                                        |[549ddc] androidx.multidex.MultiDexExtractor.getTimeStamp:(Ljava/io/File;)J
+549dec: 6e10 e9cf 0400                         |0000: invoke-virtual {v4}, Ljava/io/File;.lastModified:()J // method@cfe9
+549df2: 0b00                                   |0003: move-result-wide v0
+549df4: 1602 ffff                              |0004: const-wide/16 v2, #int -1 // #ffff
+549df8: 3104 0002                              |0006: cmp-long v4, v0, v2
+549dfc: 3904 0500                              |0008: if-nez v4, 000d // +0005
+549e00: 1602 0100                              |000a: const-wide/16 v2, #int 1 // #1
+549e04: bc20                                   |000c: sub-long/2addr v0, v2
+549e06: 1000                                   |000d: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0000 line=224
+      locals        :
+        0x0000 - 0x000e reg=4 (null) Ljava/io/File;
+
+    #6              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'getZipCrc'
+      type          : '(Ljava/io/File;)J'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 1
+      insns size    : 14 16-bit code units
+549e08:                                        |[549e08] androidx.multidex.MultiDexExtractor.getZipCrc:(Ljava/io/File;)J
+549e18: 7110 7a46 0400                         |0000: invoke-static {v4}, Landroidx/multidex/ZipUtil;.getZipCrc:(Ljava/io/File;)J // method@467a
+549e1e: 0b00                                   |0003: move-result-wide v0
+549e20: 1602 ffff                              |0004: const-wide/16 v2, #int -1 // #ffff
+549e24: 3104 0002                              |0006: cmp-long v4, v0, v2
+549e28: 3904 0500                              |0008: if-nez v4, 000d // +0005
+549e2c: 1602 0100                              |000a: const-wide/16 v2, #int 1 // #1
+549e30: bc20                                   |000c: sub-long/2addr v0, v2
+549e32: 1000                                   |000d: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0000 line=234
+      locals        :
+        0x0000 - 0x000e reg=4 (null) Ljava/io/File;
+
+    #7              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'isModified'
+      type          : '(Landroid/content/Context;Ljava/io/File;JLjava/lang/String;)Z'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 12
+      ins           : 5
+      outs          : 4
+      insns size    : 69 16-bit code units
+549e34:                                        |[549e34] androidx.multidex.MultiDexExtractor.isModified:(Landroid/content/Context;Ljava/io/File;JLjava/lang/String;)Z
+549e44: 7110 6d46 0700                         |0000: invoke-static {v7}, Landroidx/multidex/MultiDexExtractor;.getMultiDexPreferences:(Landroid/content/Context;)Landroid/content/SharedPreferences; // method@466d
+549e4a: 0c07                                   |0003: move-result-object v7
+549e4c: 2200 991a                              |0004: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+549e50: 7010 39d2 0000                         |0006: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+549e56: 6e20 45d2 b000                         |0009: invoke-virtual {v0, v11}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549e5c: 0c00                                   |000c: move-result-object v0
+549e5e: 1a01 27e1                              |000d: const-string v1, "timestamp" // string@e127
+549e62: 6e20 45d2 1000                         |000f: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549e68: 0c00                                   |0012: move-result-object v0
+549e6a: 6e10 58d2 0000                         |0013: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549e70: 0c00                                   |0016: move-result-object v0
+549e72: 1601 ffff                              |0017: const-wide/16 v1, #int -1 // #ffff
+549e76: 7240 bc02 0721                         |0019: invoke-interface {v7, v0, v1, v2}, Landroid/content/SharedPreferences;.getLong:(Ljava/lang/String;J)J // method@02bc
+549e7c: 0b03                                   |001c: move-result-wide v3
+549e7e: 7110 6e46 0800                         |001d: invoke-static {v8}, Landroidx/multidex/MultiDexExtractor;.getTimeStamp:(Ljava/io/File;)J // method@466e
+549e84: 0b05                                   |0020: move-result-wide v5
+549e86: 3108 0305                              |0021: cmp-long v8, v3, v5
+549e8a: 3908 2000                              |0023: if-nez v8, 0043 // +0020
+549e8e: 2208 991a                              |0025: new-instance v8, Ljava/lang/StringBuilder; // type@1a99
+549e92: 7010 39d2 0800                         |0027: invoke-direct {v8}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+549e98: 6e20 45d2 b800                         |002a: invoke-virtual {v8, v11}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549e9e: 0c08                                   |002d: move-result-object v8
+549ea0: 1a0b 148b                              |002e: const-string v11, "crc" // string@8b14
+549ea4: 6e20 45d2 b800                         |0030: invoke-virtual {v8, v11}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549eaa: 0c08                                   |0033: move-result-object v8
+549eac: 6e10 58d2 0800                         |0034: invoke-virtual {v8}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549eb2: 0c08                                   |0037: move-result-object v8
+549eb4: 7240 bc02 8721                         |0038: invoke-interface {v7, v8, v1, v2}, Landroid/content/SharedPreferences;.getLong:(Ljava/lang/String;J)J // method@02bc
+549eba: 0b07                                   |003b: move-result-wide v7
+549ebc: 3107 0709                              |003c: cmp-long v7, v7, v9
+549ec0: 3807 0300                              |003e: if-eqz v7, 0041 // +0003
+549ec4: 2803                                   |0040: goto 0043 // +0003
+549ec6: 1207                                   |0041: const/4 v7, #int 0 // #0
+549ec8: 2802                                   |0042: goto 0044 // +0002
+549eca: 1217                                   |0043: const/4 v7, #int 1 // #1
+549ecc: 0f07                                   |0044: return v7
+      catches       : (none)
+      positions     :
+        0x0000 line=218
+        0x0004 line=219
+        0x0038 line=220
+      locals        :
+        0x0000 - 0x0045 reg=7 (null) Landroid/content/Context;
+        0x0000 - 0x0045 reg=8 (null) Ljava/io/File;
+        0x0000 - 0x0045 reg=9 (null) J
+        0x0000 - 0x0045 reg=11 (null) Ljava/lang/String;
+
+    #8              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'loadExistingExtractions'
+      type          : '(Landroid/content/Context;Ljava/lang/String;)Ljava/util/List;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 18
+      ins           : 3
+      outs          : 4
+      insns size    : 302 16-bit code units
+549ed0:                                        |[549ed0] androidx.multidex.MultiDexExtractor.loadExistingExtractions:(Landroid/content/Context;Ljava/lang/String;)Ljava/util/List;
+549ee0: 07f0                                   |0000: move-object v0, v15
+549ee2: 0801 1100                              |0001: move-object/from16 v1, v17
+549ee6: 1a02 e856                              |0003: const-string v2, "MultiDex" // string@56e8
+549eea: 1a03 88b1                              |0005: const-string v3, "loading existing secondary dex files" // string@b188
+549eee: 7120 2108 3200                         |0007: invoke-static {v2, v3}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+549ef4: 2202 991a                              |000a: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+549ef8: 7010 39d2 0200                         |000c: invoke-direct {v2}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+549efe: 5403 2f33                              |000f: iget-object v3, v0, Landroidx/multidex/MultiDexExtractor;.sourceApk:Ljava/io/File; // field@332f
+549f02: 6e10 e3cf 0300                         |0011: invoke-virtual {v3}, Ljava/io/File;.getName:()Ljava/lang/String; // method@cfe3
+549f08: 0c03                                   |0014: move-result-object v3
+549f0a: 6e20 45d2 3200                         |0015: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549f10: 0c02                                   |0018: move-result-object v2
+549f12: 1a03 ee0f                              |0019: const-string v3, ".classes" // string@0fee
+549f16: 6e20 45d2 3200                         |001b: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549f1c: 0c02                                   |001e: move-result-object v2
+549f1e: 6e10 58d2 0200                         |001f: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549f24: 0c02                                   |0022: move-result-object v2
+549f26: 7701 6d46 1000                         |0023: invoke-static/range {v16}, Landroidx/multidex/MultiDexExtractor;.getMultiDexPreferences:(Landroid/content/Context;)Landroid/content/SharedPreferences; // method@466d
+549f2c: 0c03                                   |0026: move-result-object v3
+549f2e: 2204 991a                              |0027: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+549f32: 7010 39d2 0400                         |0029: invoke-direct {v4}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+549f38: 6e20 45d2 1400                         |002c: invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549f3e: 0c04                                   |002f: move-result-object v4
+549f40: 1a05 f68e                              |0030: const-string v5, "dex.number" // string@8ef6
+549f44: 6e20 45d2 5400                         |0032: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549f4a: 0c04                                   |0035: move-result-object v4
+549f4c: 6e10 58d2 0400                         |0036: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549f52: 0c04                                   |0039: move-result-object v4
+549f54: 1215                                   |003a: const/4 v5, #int 1 // #1
+549f56: 7230 bb02 4305                         |003b: invoke-interface {v3, v4, v5}, Landroid/content/SharedPreferences;.getInt:(Ljava/lang/String;I)I // method@02bb
+549f5c: 0a04                                   |003e: move-result v4
+549f5e: 2205 3a1b                              |003f: new-instance v5, Ljava/util/ArrayList; // type@1b3a
+549f62: d806 04ff                              |0041: add-int/lit8 v6, v4, #int -1 // #ff
+549f66: 7020 a0d4 6500                         |0043: invoke-direct {v5, v6}, Ljava/util/ArrayList;.<init>:(I)V // method@d4a0
+549f6c: 1226                                   |0046: const/4 v6, #int 2 // #2
+549f6e: 3646 e600                              |0047: if-gt v6, v4, 012d // +00e6
+549f72: 2207 991a                              |0049: new-instance v7, Ljava/lang/StringBuilder; // type@1a99
+549f76: 7010 39d2 0700                         |004b: invoke-direct {v7}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+549f7c: 6e20 45d2 2700                         |004e: invoke-virtual {v7, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549f82: 0c07                                   |0051: move-result-object v7
+549f84: 6e20 40d2 6700                         |0052: invoke-virtual {v7, v6}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+549f8a: 0c07                                   |0055: move-result-object v7
+549f8c: 1a08 0010                              |0056: const-string v8, ".zip" // string@1000
+549f90: 6e20 45d2 8700                         |0058: invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549f96: 0c07                                   |005b: move-result-object v7
+549f98: 6e10 58d2 0700                         |005c: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549f9e: 0c07                                   |005f: move-result-object v7
+549fa0: 2208 a008                              |0060: new-instance v8, Landroidx/multidex/MultiDexExtractor$ExtractedDex; // type@08a0
+549fa4: 5409 2c33                              |0062: iget-object v9, v0, Landroidx/multidex/MultiDexExtractor;.dexDir:Ljava/io/File; // field@332c
+549fa8: 7030 6046 9807                         |0064: invoke-direct {v8, v9, v7}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@4660
+549fae: 6e10 6546 0800                         |0067: invoke-virtual {v8}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.isFile:()Z // method@4665
+549fb4: 0a07                                   |006a: move-result v7
+549fb6: 3807 a300                              |006b: if-eqz v7, 010e // +00a3
+549fba: 7110 6f46 0800                         |006d: invoke-static {v8}, Landroidx/multidex/MultiDexExtractor;.getZipCrc:(Ljava/io/File;)J // method@466f
+549fc0: 0b09                                   |0070: move-result-wide v9
+549fc2: 5a89 1b33                              |0071: iput-wide v9, v8, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.crc:J // field@331b
+549fc6: 2207 991a                              |0073: new-instance v7, Ljava/lang/StringBuilder; // type@1a99
+549fca: 7010 39d2 0700                         |0075: invoke-direct {v7}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+549fd0: 6e20 45d2 1700                         |0078: invoke-virtual {v7, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549fd6: 0c07                                   |007b: move-result-object v7
+549fd8: 1a09 f58e                              |007c: const-string v9, "dex.crc." // string@8ef5
+549fdc: 6e20 45d2 9700                         |007e: invoke-virtual {v7, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+549fe2: 0c07                                   |0081: move-result-object v7
+549fe4: 6e20 40d2 6700                         |0082: invoke-virtual {v7, v6}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+549fea: 0c07                                   |0085: move-result-object v7
+549fec: 6e10 58d2 0700                         |0086: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+549ff2: 0c07                                   |0089: move-result-object v7
+549ff4: 1609 ffff                              |008a: const-wide/16 v9, #int -1 // #ffff
+549ff8: 7240 bc02 73a9                         |008c: invoke-interface {v3, v7, v9, v10}, Landroid/content/SharedPreferences;.getLong:(Ljava/lang/String;J)J // method@02bc
+549ffe: 0b0b                                   |008f: move-result-wide v11
+54a000: 2207 991a                              |0090: new-instance v7, Ljava/lang/StringBuilder; // type@1a99
+54a004: 7010 39d2 0700                         |0092: invoke-direct {v7}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a00a: 6e20 45d2 1700                         |0095: invoke-virtual {v7, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a010: 0c07                                   |0098: move-result-object v7
+54a012: 1a0d f78e                              |0099: const-string v13, "dex.time." // string@8ef7
+54a016: 6e20 45d2 d700                         |009b: invoke-virtual {v7, v13}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a01c: 0c07                                   |009e: move-result-object v7
+54a01e: 6e20 40d2 6700                         |009f: invoke-virtual {v7, v6}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+54a024: 0c07                                   |00a2: move-result-object v7
+54a026: 6e10 58d2 0700                         |00a3: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a02c: 0c07                                   |00a6: move-result-object v7
+54a02e: 7240 bc02 73a9                         |00a7: invoke-interface {v3, v7, v9, v10}, Landroid/content/SharedPreferences;.getLong:(Ljava/lang/String;J)J // method@02bc
+54a034: 0b09                                   |00aa: move-result-wide v9
+54a036: 6e10 6646 0800                         |00ab: invoke-virtual {v8}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.lastModified:()J // method@4666
+54a03c: 0b0d                                   |00ae: move-result-wide v13
+54a03e: 3107 090d                              |00af: cmp-long v7, v9, v13
+54a042: 3907 1400                              |00b1: if-nez v7, 00c5 // +0014
+54a046: 0727                                   |00b3: move-object v7, v2
+54a048: 0810 0300                              |00b4: move-object/from16 v16, v3
+54a04c: 5382 1b33                              |00b6: iget-wide v2, v8, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.crc:J // field@331b
+54a050: 3102 0b02                              |00b8: cmp-long v2, v11, v2
+54a054: 3902 0b00                              |00ba: if-nez v2, 00c5 // +000b
+54a058: 7220 c9d5 8500                         |00bc: invoke-interface {v5, v8}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+54a05e: d806 0601                              |00bf: add-int/lit8 v6, v6, #int 1 // #01
+54a062: 0803 1000                              |00c1: move-object/from16 v3, v16
+54a066: 0772                                   |00c3: move-object v2, v7
+54a068: 2883                                   |00c4: goto 0047 // -007d
+54a06a: 2200 481a                              |00c5: new-instance v0, Ljava/io/IOException; // type@1a48
+54a06e: 2202 991a                              |00c7: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+54a072: 1a03 c02d                              |00c9: const-string v3, "Invalid extracted dex: " // string@2dc0
+54a076: 7020 3cd2 3200                         |00cb: invoke-direct {v2, v3}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+54a07c: 6e20 44d2 8200                         |00ce: invoke-virtual {v2, v8}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+54a082: 0c02                                   |00d1: move-result-object v2
+54a084: 1a03 f902                              |00d2: const-string v3, " (key \"" // string@02f9
+54a088: 6e20 45d2 3200                         |00d4: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a08e: 0c02                                   |00d7: move-result-object v2
+54a090: 6e20 45d2 1200                         |00d8: invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a096: 0c01                                   |00db: move-result-object v1
+54a098: 1a02 1805                              |00dc: const-string v2, "\"), expected modification time: " // string@0518
+54a09c: 6e20 45d2 2100                         |00de: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a0a2: 0c01                                   |00e1: move-result-object v1
+54a0a4: 6e30 41d2 910a                         |00e2: invoke-virtual {v1, v9, v10}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+54a0aa: 0c01                                   |00e5: move-result-object v1
+54a0ac: 1a02 8d0e                              |00e6: const-string v2, ", modification time: " // string@0e8d
+54a0b0: 6e20 45d2 2100                         |00e8: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a0b6: 0c01                                   |00eb: move-result-object v1
+54a0b8: 6e30 41d2 d10e                         |00ec: invoke-virtual {v1, v13, v14}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+54a0be: 0c01                                   |00ef: move-result-object v1
+54a0c0: 1a02 450e                              |00f0: const-string v2, ", expected crc: " // string@0e45
+54a0c4: 6e20 45d2 2100                         |00f2: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a0ca: 0c01                                   |00f5: move-result-object v1
+54a0cc: 6e30 41d2 b10c                         |00f6: invoke-virtual {v1, v11, v12}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+54a0d2: 0c01                                   |00f9: move-result-object v1
+54a0d4: 1a02 4c0e                              |00fa: const-string v2, ", file crc: " // string@0e4c
+54a0d8: 6e20 45d2 2100                         |00fc: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a0de: 0c01                                   |00ff: move-result-object v1
+54a0e0: 5382 1b33                              |0100: iget-wide v2, v8, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.crc:J // field@331b
+54a0e4: 6e30 41d2 2103                         |0102: invoke-virtual {v1, v2, v3}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+54a0ea: 0c01                                   |0105: move-result-object v1
+54a0ec: 6e10 58d2 0100                         |0106: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a0f2: 0c01                                   |0109: move-result-object v1
+54a0f4: 7020 14d0 1000                         |010a: invoke-direct {v0, v1}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+54a0fa: 2700                                   |010d: throw v0
+54a0fc: 2200 481a                              |010e: new-instance v0, Ljava/io/IOException; // type@1a48
+54a100: 2201 991a                              |0110: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+54a104: 1a02 8856                              |0112: const-string v2, "Missing extracted secondary dex file '" // string@5688
+54a108: 7020 3cd2 2100                         |0114: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+54a10e: 6e10 6446 0800                         |0117: invoke-virtual {v8}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.getPath:()Ljava/lang/String; // method@4664
+54a114: 0c02                                   |011a: move-result-object v2
+54a116: 6e20 45d2 2100                         |011b: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a11c: 0c01                                   |011e: move-result-object v1
+54a11e: 1a02 8e06                              |011f: const-string v2, "'" // string@068e
+54a122: 6e20 45d2 2100                         |0121: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a128: 0c01                                   |0124: move-result-object v1
+54a12a: 6e10 58d2 0100                         |0125: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a130: 0c01                                   |0128: move-result-object v1
+54a132: 7020 14d0 1000                         |0129: invoke-direct {v0, v1}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+54a138: 2700                                   |012c: throw v0
+54a13a: 1105                                   |012d: return-object v5
+      catches       : (none)
+      positions     :
+        0x0003 line=176
+        0x000a line=178
+        0x0023 line=179
+        0x0027 line=180
+        0x003f line=181
+        0x0049 line=184
+        0x0060 line=185
+        0x0067 line=186
+        0x006d line=187
+        0x0073 line=188
+        0x0090 line=190
+        0x00ab line=192
+        0x00b6 line=193
+        0x00bc line=201
+        0x00c5 line=195
+        0x010e line=203
+        0x0117 line=204
+      locals        :
+        0x0000 - 0x012e reg=15 this Landroidx/multidex/MultiDexExtractor;
+        0x0000 - 0x012e reg=16 (null) Landroid/content/Context;
+        0x0000 - 0x012e reg=17 (null) Ljava/lang/String;
+
+    #9              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'performExtractions'
+      type          : '()Ljava/util/List;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 15
+      ins           : 1
+      outs          : 4
+      insns size    : 370 16-bit code units
+54a13c:                                        |[54a13c] androidx.multidex.MultiDexExtractor.performExtractions:()Ljava/util/List;
+54a14c: 1a00 1027                              |0000: const-string v0, "Failed to close resource" // string@2710
+54a150: 1a01 e856                              |0002: const-string v1, "MultiDex" // string@56e8
+54a154: 2202 991a                              |0004: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+54a158: 7010 39d2 0200                         |0006: invoke-direct {v2}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a15e: 54e3 2f33                              |0009: iget-object v3, v14, Landroidx/multidex/MultiDexExtractor;.sourceApk:Ljava/io/File; // field@332f
+54a162: 6e10 e3cf 0300                         |000b: invoke-virtual {v3}, Ljava/io/File;.getName:()Ljava/lang/String; // method@cfe3
+54a168: 0c03                                   |000e: move-result-object v3
+54a16a: 6e20 45d2 3200                         |000f: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a170: 0c02                                   |0012: move-result-object v2
+54a172: 1a03 ee0f                              |0013: const-string v3, ".classes" // string@0fee
+54a176: 6e20 45d2 3200                         |0015: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a17c: 0c02                                   |0018: move-result-object v2
+54a17e: 6e10 58d2 0200                         |0019: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a184: 0c02                                   |001c: move-result-object v2
+54a186: 7010 6946 0e00                         |001d: invoke-direct {v14}, Landroidx/multidex/MultiDexExtractor;.clearDexDir:()V // method@4669
+54a18c: 2203 3a1b                              |0020: new-instance v3, Ljava/util/ArrayList; // type@1b3a
+54a190: 7010 9fd4 0300                         |0022: invoke-direct {v3}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+54a196: 2204 b21b                              |0025: new-instance v4, Ljava/util/zip/ZipFile; // type@1bb2
+54a19a: 54e5 2f33                              |0027: iget-object v5, v14, Landroidx/multidex/MultiDexExtractor;.sourceApk:Ljava/io/File; // field@332f
+54a19e: 7020 68d7 5400                         |0029: invoke-direct {v4, v5}, Ljava/util/zip/ZipFile;.<init>:(Ljava/io/File;)V // method@d768
+54a1a4: 1a05 4986                              |002c: const-string v5, "classes2.dex" // string@8649
+54a1a8: 6e20 6bd7 5400                         |002e: invoke-virtual {v4, v5}, Ljava/util/zip/ZipFile;.getEntry:(Ljava/lang/String;)Ljava/util/zip/ZipEntry; // method@d76b
+54a1ae: 0c05                                   |0031: move-result-object v5
+54a1b0: 1226                                   |0032: const/4 v6, #int 2 // #2
+54a1b2: 3805 2c01                              |0033: if-eqz v5, 015f // +012c
+54a1b6: 2207 991a                              |0035: new-instance v7, Ljava/lang/StringBuilder; // type@1a99
+54a1ba: 7010 39d2 0700                         |0037: invoke-direct {v7}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a1c0: 6e20 45d2 2700                         |003a: invoke-virtual {v7, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a1c6: 0c07                                   |003d: move-result-object v7
+54a1c8: 6e20 40d2 6700                         |003e: invoke-virtual {v7, v6}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+54a1ce: 0c07                                   |0041: move-result-object v7
+54a1d0: 1a08 0010                              |0042: const-string v8, ".zip" // string@1000
+54a1d4: 6e20 45d2 8700                         |0044: invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a1da: 0c07                                   |0047: move-result-object v7
+54a1dc: 6e10 58d2 0700                         |0048: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a1e2: 0c07                                   |004b: move-result-object v7
+54a1e4: 2208 a008                              |004c: new-instance v8, Landroidx/multidex/MultiDexExtractor$ExtractedDex; // type@08a0
+54a1e8: 54e9 2c33                              |004e: iget-object v9, v14, Landroidx/multidex/MultiDexExtractor;.dexDir:Ljava/io/File; // field@332c
+54a1ec: 7030 6046 9807                         |0050: invoke-direct {v8, v9, v7}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@4660
+54a1f2: 7220 c9d5 8300                         |0053: invoke-interface {v3, v8}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+54a1f8: 2207 991a                              |0056: new-instance v7, Ljava/lang/StringBuilder; // type@1a99
+54a1fc: 7010 39d2 0700                         |0058: invoke-direct {v7}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a202: 1a09 8b25                              |005b: const-string v9, "Extraction is needed for file " // string@258b
+54a206: 6e20 45d2 9700                         |005d: invoke-virtual {v7, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a20c: 0c07                                   |0060: move-result-object v7
+54a20e: 6e20 44d2 8700                         |0061: invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+54a214: 0c07                                   |0064: move-result-object v7
+54a216: 6e10 58d2 0700                         |0065: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a21c: 0c07                                   |0068: move-result-object v7
+54a21e: 7120 2108 7100                         |0069: invoke-static {v1, v7}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+54a224: 1207                                   |006c: const/4 v7, #int 0 // #0
+54a226: 0179                                   |006d: move v9, v7
+54a228: 019a                                   |006e: move v10, v9
+54a22a: 123b                                   |006f: const/4 v11, #int 3 // #3
+54a22c: 35b9 9f00                              |0070: if-ge v9, v11, 010f // +009f
+54a230: 390a 9d00                              |0072: if-nez v10, 010f // +009d
+54a234: d809 0901                              |0074: add-int/lit8 v9, v9, #int 1 // #01
+54a238: 7140 6c46 5428                         |0076: invoke-static {v4, v5, v8, v2}, Landroidx/multidex/MultiDexExtractor;.extract:(Ljava/util/zip/ZipFile;Ljava/util/zip/ZipEntry;Ljava/io/File;Ljava/lang/String;)V // method@466c
+54a23e: 7110 6f46 0800                         |0079: invoke-static {v8}, Landroidx/multidex/MultiDexExtractor;.getZipCrc:(Ljava/io/File;)J // method@466f
+54a244: 0b0a                                   |007c: move-result-wide v10
+54a246: 5a8a 1b33                              |007d: iput-wide v10, v8, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.crc:J // field@331b
+54a24a: 121a                                   |007f: const/4 v10, #int 1 // #1
+54a24c: 281d                                   |0080: goto 009d // +001d
+54a24e: 0d0a                                   |0081: move-exception v10
+54a250: 220b 991a                              |0082: new-instance v11, Ljava/lang/StringBuilder; // type@1a99
+54a254: 7010 39d2 0b00                         |0084: invoke-direct {v11}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a25a: 1a0c af27                              |0087: const-string v12, "Failed to read crc from " // string@27af
+54a25e: 6e20 45d2 cb00                         |0089: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a264: 0c0b                                   |008c: move-result-object v11
+54a266: 6e10 6346 0800                         |008d: invoke-virtual {v8}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.getAbsolutePath:()Ljava/lang/String; // method@4663
+54a26c: 0c0c                                   |0090: move-result-object v12
+54a26e: 6e20 45d2 cb00                         |0091: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a274: 0c0b                                   |0094: move-result-object v11
+54a276: 6e10 58d2 0b00                         |0095: invoke-virtual {v11}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a27c: 0c0b                                   |0098: move-result-object v11
+54a27e: 7130 2808 b10a                         |0099: invoke-static {v1, v11, v10}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I // method@0828
+54a284: 017a                                   |009c: move v10, v7
+54a286: 220b 991a                              |009d: new-instance v11, Ljava/lang/StringBuilder; // type@1a99
+54a28a: 7010 39d2 0b00                         |009f: invoke-direct {v11}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a290: 1a0c 8a25                              |00a2: const-string v12, "Extraction " // string@258a
+54a294: 6e20 45d2 cb00                         |00a4: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a29a: 0c0b                                   |00a7: move-result-object v11
+54a29c: 380a 0500                              |00a8: if-eqz v10, 00ad // +0005
+54a2a0: 1a0c 2adf                              |00aa: const-string v12, "succeeded" // string@df2a
+54a2a4: 2803                                   |00ac: goto 00af // +0003
+54a2a6: 1a0c 5c93                              |00ad: const-string v12, "failed" // string@935c
+54a2aa: 6e20 45d2 cb00                         |00af: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a2b0: 0c0b                                   |00b2: move-result-object v11
+54a2b2: 1a0c ee02                              |00b3: const-string v12, " '" // string@02ee
+54a2b6: 6e20 45d2 cb00                         |00b5: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a2bc: 0c0b                                   |00b8: move-result-object v11
+54a2be: 6e10 6346 0800                         |00b9: invoke-virtual {v8}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.getAbsolutePath:()Ljava/lang/String; // method@4663
+54a2c4: 0c0c                                   |00bc: move-result-object v12
+54a2c6: 6e20 45d2 cb00                         |00bd: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a2cc: 0c0b                                   |00c0: move-result-object v11
+54a2ce: 1a0c b506                              |00c1: const-string v12, "': length " // string@06b5
+54a2d2: 6e20 45d2 cb00                         |00c3: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a2d8: 0c0b                                   |00c6: move-result-object v11
+54a2da: 6e10 6746 0800                         |00c7: invoke-virtual {v8}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.length:()J // method@4667
+54a2e0: 0b0c                                   |00ca: move-result-wide v12
+54a2e2: 6e30 41d2 cb0d                         |00cb: invoke-virtual {v11, v12, v13}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+54a2e8: 0c0b                                   |00ce: move-result-object v11
+54a2ea: 1a0c 0903                              |00cf: const-string v12, " - crc: " // string@0309
+54a2ee: 6e20 45d2 cb00                         |00d1: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a2f4: 0c0b                                   |00d4: move-result-object v11
+54a2f6: 538c 1b33                              |00d5: iget-wide v12, v8, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.crc:J // field@331b
+54a2fa: 6e30 41d2 cb0d                         |00d7: invoke-virtual {v11, v12, v13}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+54a300: 0c0b                                   |00da: move-result-object v11
+54a302: 6e10 58d2 0b00                         |00db: invoke-virtual {v11}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a308: 0c0b                                   |00de: move-result-object v11
+54a30a: 7120 2108 b100                         |00df: invoke-static {v1, v11}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+54a310: 390a 8dff                              |00e2: if-nez v10, 006f // -0073
+54a314: 6e10 6146 0800                         |00e4: invoke-virtual {v8}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.delete:()Z // method@4661
+54a31a: 6e10 6246 0800                         |00e7: invoke-virtual {v8}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.exists:()Z // method@4662
+54a320: 0a0b                                   |00ea: move-result v11
+54a322: 380b 84ff                              |00eb: if-eqz v11, 006f // -007c
+54a326: 220b 991a                              |00ed: new-instance v11, Ljava/lang/StringBuilder; // type@1a99
+54a32a: 7010 39d2 0b00                         |00ef: invoke-direct {v11}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a330: 1a0c 2527                              |00f2: const-string v12, "Failed to delete corrupted secondary dex '" // string@2725
+54a334: 6e20 45d2 cb00                         |00f4: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a33a: 0c0b                                   |00f7: move-result-object v11
+54a33c: 6e10 6446 0800                         |00f8: invoke-virtual {v8}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.getPath:()Ljava/lang/String; // method@4664
+54a342: 0c0c                                   |00fb: move-result-object v12
+54a344: 6e20 45d2 cb00                         |00fc: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a34a: 0c0b                                   |00ff: move-result-object v11
+54a34c: 1a0c 8e06                              |0100: const-string v12, "'" // string@068e
+54a350: 6e20 45d2 cb00                         |0102: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a356: 0c0b                                   |0105: move-result-object v11
+54a358: 6e10 58d2 0b00                         |0106: invoke-virtual {v11}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a35e: 0c0b                                   |0109: move-result-object v11
+54a360: 7120 2708 b100                         |010a: invoke-static {v1, v11}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+54a366: 2900 62ff                              |010d: goto/16 006f // -009e
+54a36a: 380a 2300                              |010f: if-eqz v10, 0132 // +0023
+54a36e: d806 0601                              |0111: add-int/lit8 v6, v6, #int 1 // #01
+54a372: 2205 991a                              |0113: new-instance v5, Ljava/lang/StringBuilder; // type@1a99
+54a376: 7010 39d2 0500                         |0115: invoke-direct {v5}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a37c: 1a07 4786                              |0118: const-string v7, "classes" // string@8647
+54a380: 6e20 45d2 7500                         |011a: invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a386: 0c05                                   |011d: move-result-object v5
+54a388: 6e20 40d2 6500                         |011e: invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+54a38e: 0c05                                   |0121: move-result-object v5
+54a390: 1a07 ef0f                              |0122: const-string v7, ".dex" // string@0fef
+54a394: 6e20 45d2 7500                         |0124: invoke-virtual {v5, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a39a: 0c05                                   |0127: move-result-object v5
+54a39c: 6e10 58d2 0500                         |0128: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a3a2: 0c05                                   |012b: move-result-object v5
+54a3a4: 6e20 6bd7 5400                         |012c: invoke-virtual {v4, v5}, Ljava/util/zip/ZipFile;.getEntry:(Ljava/lang/String;)Ljava/util/zip/ZipEntry; // method@d76b
+54a3aa: 0c05                                   |012f: move-result-object v5
+54a3ac: 2900 03ff                              |0130: goto/16 0033 // -00fd
+54a3b0: 220e 481a                              |0132: new-instance v14, Ljava/io/IOException; // type@1a48
+54a3b4: 2202 991a                              |0134: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+54a3b8: 7010 39d2 0200                         |0136: invoke-direct {v2}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a3be: 1a03 991f                              |0139: const-string v3, "Could not create zip file " // string@1f99
+54a3c2: 6e20 45d2 3200                         |013b: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a3c8: 0c02                                   |013e: move-result-object v2
+54a3ca: 6e10 6346 0800                         |013f: invoke-virtual {v8}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.getAbsolutePath:()Ljava/lang/String; // method@4663
+54a3d0: 0c03                                   |0142: move-result-object v3
+54a3d2: 6e20 45d2 3200                         |0143: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a3d8: 0c02                                   |0146: move-result-object v2
+54a3da: 1a03 d603                              |0147: const-string v3, " for secondary dex (" // string@03d6
+54a3de: 6e20 45d2 3200                         |0149: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a3e4: 0c02                                   |014c: move-result-object v2
+54a3e6: 6e20 40d2 6200                         |014d: invoke-virtual {v2, v6}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+54a3ec: 0c02                                   |0150: move-result-object v2
+54a3ee: 1a03 000d                              |0151: const-string v3, ")" // string@0d00
+54a3f2: 6e20 45d2 3200                         |0153: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a3f8: 0c02                                   |0156: move-result-object v2
+54a3fa: 6e10 58d2 0200                         |0157: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a400: 0c02                                   |015a: move-result-object v2
+54a402: 7020 14d0 2e00                         |015b: invoke-direct {v14, v2}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+54a408: 270e                                   |015e: throw v14
+54a40a: 6e10 6ad7 0400                         |015f: invoke-virtual {v4}, Ljava/util/zip/ZipFile;.close:()V // method@d76a
+54a410: 2805                                   |0162: goto 0167 // +0005
+54a412: 0d0e                                   |0163: move-exception v14
+54a414: 7130 2808 010e                         |0164: invoke-static {v1, v0, v14}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I // method@0828
+54a41a: 1103                                   |0167: return-object v3
+54a41c: 0d0e                                   |0168: move-exception v14
+54a41e: 6e10 6ad7 0400                         |0169: invoke-virtual {v4}, Ljava/util/zip/ZipFile;.close:()V // method@d76a
+54a424: 2805                                   |016c: goto 0171 // +0005
+54a426: 0d02                                   |016d: move-exception v2
+54a428: 7130 2808 0102                         |016e: invoke-static {v1, v0, v2}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I // method@0828
+54a42e: 270e                                   |0171: throw v14
+      catches       : 5
+        0x002c - 0x0079
+          <any> -> 0x0168
+        0x0079 - 0x007f
+          Ljava/io/IOException; -> 0x0081
+          <any> -> 0x0168
+        0x0082 - 0x015f
+          <any> -> 0x0168
+        0x015f - 0x0162
+          Ljava/io/IOException; -> 0x0163
+        0x0169 - 0x016c
+          Ljava/io/IOException; -> 0x016d
+      positions     :
+        0x0000 line=244
+        0x001d line=249
+        0x0020 line=251
+        0x0025 line=253
+        0x002c line=258
+        0x0035 line=260
+        0x004c line=261
+        0x0053 line=262
+        0x0056 line=264
+        0x0076 line=272
+        0x0079 line=276
+        0x0082 line=280
+        0x009d line=284
+        0x00b9 line=285
+        0x00c7 line=286
+        0x00df line=284
+        0x00e4 line=289
+        0x00e7 line=290
+        0x00ed line=291
+        0x00f8 line=292
+        0x010a line=291
+        0x0113 line=302
+        0x0132 line=297
+        0x013f line=298
+        0x015f line=306
+        0x0164 line=308
+        0x0169 line=306
+        0x016e line=308
+        0x0171 line=309
+      locals        :
+        0x0000 - 0x0172 reg=14 this Landroidx/multidex/MultiDexExtractor;
+
+    #10              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'putStoredApkInfo'
+      type          : '(Landroid/content/Context;Ljava/lang/String;JJLjava/util/List;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 9
+      ins           : 7
+      outs          : 4
+      insns size    : 162 16-bit code units
+54a470:                                        |[54a470] androidx.multidex.MultiDexExtractor.putStoredApkInfo:(Landroid/content/Context;Ljava/lang/String;JJLjava/util/List;)V
+54a480: 7110 6d46 0200                         |0000: invoke-static {v2}, Landroidx/multidex/MultiDexExtractor;.getMultiDexPreferences:(Landroid/content/Context;)Landroid/content/SharedPreferences; // method@466d
+54a486: 0c02                                   |0003: move-result-object v2
+54a488: 7210 b802 0200                         |0004: invoke-interface {v2}, Landroid/content/SharedPreferences;.edit:()Landroid/content/SharedPreferences$Editor; // method@02b8
+54a48e: 0c02                                   |0007: move-result-object v2
+54a490: 2200 991a                              |0008: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+54a494: 7010 39d2 0000                         |000a: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a49a: 6e20 45d2 3000                         |000d: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a4a0: 0c00                                   |0010: move-result-object v0
+54a4a2: 1a01 27e1                              |0011: const-string v1, "timestamp" // string@e127
+54a4a6: 6e20 45d2 1000                         |0013: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a4ac: 0c00                                   |0016: move-result-object v0
+54a4ae: 6e10 58d2 0000                         |0017: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a4b4: 0c00                                   |001a: move-result-object v0
+54a4b6: 7240 b402 0254                         |001b: invoke-interface {v2, v0, v4, v5}, Landroid/content/SharedPreferences$Editor;.putLong:(Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor; // method@02b4
+54a4bc: 2204 991a                              |001e: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+54a4c0: 7010 39d2 0400                         |0020: invoke-direct {v4}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a4c6: 6e20 45d2 3400                         |0023: invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a4cc: 0c04                                   |0026: move-result-object v4
+54a4ce: 1a05 148b                              |0027: const-string v5, "crc" // string@8b14
+54a4d2: 6e20 45d2 5400                         |0029: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a4d8: 0c04                                   |002c: move-result-object v4
+54a4da: 6e10 58d2 0400                         |002d: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a4e0: 0c04                                   |0030: move-result-object v4
+54a4e2: 7240 b402 4276                         |0031: invoke-interface {v2, v4, v6, v7}, Landroid/content/SharedPreferences$Editor;.putLong:(Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor; // method@02b4
+54a4e8: 2204 991a                              |0034: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+54a4ec: 7010 39d2 0400                         |0036: invoke-direct {v4}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a4f2: 6e20 45d2 3400                         |0039: invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a4f8: 0c04                                   |003c: move-result-object v4
+54a4fa: 1a05 f68e                              |003d: const-string v5, "dex.number" // string@8ef6
+54a4fe: 6e20 45d2 5400                         |003f: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a504: 0c04                                   |0042: move-result-object v4
+54a506: 6e10 58d2 0400                         |0043: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a50c: 0c04                                   |0046: move-result-object v4
+54a50e: 7210 dbd5 0800                         |0047: invoke-interface {v8}, Ljava/util/List;.size:()I // method@d5db
+54a514: 0a05                                   |004a: move-result v5
+54a516: d805 0501                              |004b: add-int/lit8 v5, v5, #int 1 // #01
+54a51a: 7230 b302 4205                         |004d: invoke-interface {v2, v4, v5}, Landroid/content/SharedPreferences$Editor;.putInt:(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor; // method@02b3
+54a520: 7210 d2d5 0800                         |0050: invoke-interface {v8}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@d5d2
+54a526: 0c04                                   |0053: move-result-object v4
+54a528: 1225                                   |0054: const/4 v5, #int 2 // #2
+54a52a: 7210 a0d5 0400                         |0055: invoke-interface {v4}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+54a530: 0a06                                   |0058: move-result v6
+54a532: 3806 4500                              |0059: if-eqz v6, 009e // +0045
+54a536: 7210 a1d5 0400                         |005b: invoke-interface {v4}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+54a53c: 0c06                                   |005e: move-result-object v6
+54a53e: 1f06 a008                              |005f: check-cast v6, Landroidx/multidex/MultiDexExtractor$ExtractedDex; // type@08a0
+54a542: 2207 991a                              |0061: new-instance v7, Ljava/lang/StringBuilder; // type@1a99
+54a546: 7010 39d2 0700                         |0063: invoke-direct {v7}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a54c: 6e20 45d2 3700                         |0066: invoke-virtual {v7, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a552: 0c07                                   |0069: move-result-object v7
+54a554: 1a08 f58e                              |006a: const-string v8, "dex.crc." // string@8ef5
+54a558: 6e20 45d2 8700                         |006c: invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a55e: 0c07                                   |006f: move-result-object v7
+54a560: 6e20 40d2 5700                         |0070: invoke-virtual {v7, v5}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+54a566: 0c07                                   |0073: move-result-object v7
+54a568: 6e10 58d2 0700                         |0074: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a56e: 0c07                                   |0077: move-result-object v7
+54a570: 5360 1b33                              |0078: iget-wide v0, v6, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.crc:J // field@331b
+54a574: 7240 b402 7210                         |007a: invoke-interface {v2, v7, v0, v1}, Landroid/content/SharedPreferences$Editor;.putLong:(Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor; // method@02b4
+54a57a: 2207 991a                              |007d: new-instance v7, Ljava/lang/StringBuilder; // type@1a99
+54a57e: 7010 39d2 0700                         |007f: invoke-direct {v7}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+54a584: 6e20 45d2 3700                         |0082: invoke-virtual {v7, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a58a: 0c07                                   |0085: move-result-object v7
+54a58c: 1a08 f78e                              |0086: const-string v8, "dex.time." // string@8ef7
+54a590: 6e20 45d2 8700                         |0088: invoke-virtual {v7, v8}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a596: 0c07                                   |008b: move-result-object v7
+54a598: 6e20 40d2 5700                         |008c: invoke-virtual {v7, v5}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+54a59e: 0c07                                   |008f: move-result-object v7
+54a5a0: 6e10 58d2 0700                         |0090: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a5a6: 0c07                                   |0093: move-result-object v7
+54a5a8: 6e10 6646 0600                         |0094: invoke-virtual {v6}, Landroidx/multidex/MultiDexExtractor$ExtractedDex;.lastModified:()J // method@4666
+54a5ae: 0b00                                   |0097: move-result-wide v0
+54a5b0: 7240 b402 7210                         |0098: invoke-interface {v2, v7, v0, v1}, Landroid/content/SharedPreferences$Editor;.putLong:(Ljava/lang/String;J)Landroid/content/SharedPreferences$Editor; // method@02b4
+54a5b6: d805 0501                              |009b: add-int/lit8 v5, v5, #int 1 // #01
+54a5ba: 28b8                                   |009d: goto 0055 // -0048
+54a5bc: 7210 b102 0200                         |009e: invoke-interface {v2}, Landroid/content/SharedPreferences$Editor;.commit:()Z // method@02b1
+54a5c2: 0e00                                   |00a1: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=321
+        0x0004 line=322
+        0x0008 line=323
+        0x001e line=324
+        0x0034 line=325
+        0x0050 line=328
+        0x0061 line=329
+        0x007d line=330
+        0x009e line=336
+      locals        :
+        0x0000 - 0x00a2 reg=2 (null) Landroid/content/Context;
+        0x0000 - 0x00a2 reg=3 (null) Ljava/lang/String;
+        0x0000 - 0x00a2 reg=4 (null) J
+        0x0000 - 0x00a2 reg=6 (null) J
+        0x0000 - 0x00a2 reg=8 (null) Ljava/util/List;
+
+  Virtual methods   -
+    #0              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 16 16-bit code units
+54a5c4:                                        |[54a5c4] androidx.multidex.MultiDexExtractor.close:()V
+54a5d4: 5410 2b33                              |0000: iget-object v0, v1, Landroidx/multidex/MultiDexExtractor;.cacheLock:Ljava/nio/channels/FileLock; // field@332b
+54a5d8: 6e10 cfd3 0000                         |0002: invoke-virtual {v0}, Ljava/nio/channels/FileLock;.release:()V // method@d3cf
+54a5de: 5410 2d33                              |0005: iget-object v0, v1, Landroidx/multidex/MultiDexExtractor;.lockChannel:Ljava/nio/channels/FileChannel; // field@332d
+54a5e2: 6e10 c2d3 0000                         |0007: invoke-virtual {v0}, Ljava/nio/channels/FileChannel;.close:()V // method@d3c2
+54a5e8: 5411 2e33                              |000a: iget-object v1, v1, Landroidx/multidex/MultiDexExtractor;.lockRaf:Ljava/io/RandomAccessFile; // field@332e
+54a5ec: 6e10 75d0 0100                         |000c: invoke-virtual {v1}, Ljava/io/RandomAccessFile;.close:()V // method@d075
+54a5f2: 0e00                                   |000f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=163
+        0x0005 line=164
+        0x000a line=165
+      locals        :
+        0x0000 - 0x0010 reg=1 this Landroidx/multidex/MultiDexExtractor;
+
+    #1              : (in Landroidx/multidex/MultiDexExtractor;)
+      name          : 'load'
+      type          : '(Landroid/content/Context;Ljava/lang/String;Z)Ljava/util/List;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 13
+      ins           : 4
+      outs          : 7
+      insns size    : 169 16-bit code units
+54a5f4:                                        |[54a5f4] androidx.multidex.MultiDexExtractor.load:(Landroid/content/Context;Ljava/lang/String;Z)Ljava/util/List;
+54a604: 2200 991a                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+54a608: 1a01 f256                              |0002: const-string v1, "MultiDexExtractor.load(" // string@56f2
+54a60c: 7020 3cd2 1000                         |0004: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+54a612: 5491 2f33                              |0007: iget-object v1, v9, Landroidx/multidex/MultiDexExtractor;.sourceApk:Ljava/io/File; // field@332f
+54a616: 6e10 e5cf 0100                         |0009: invoke-virtual {v1}, Ljava/io/File;.getPath:()Ljava/lang/String; // method@cfe5
+54a61c: 0c01                                   |000c: move-result-object v1
+54a61e: 6e20 45d2 1000                         |000d: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a624: 0c00                                   |0010: move-result-object v0
+54a626: 1a01 0a0e                              |0011: const-string v1, ", " // string@0e0a
+54a62a: 6e20 45d2 1000                         |0013: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a630: 0c00                                   |0016: move-result-object v0
+54a632: 6e20 47d2 c000                         |0017: invoke-virtual {v0, v12}, Ljava/lang/StringBuilder;.append:(Z)Ljava/lang/StringBuilder; // method@d247
+54a638: 0c00                                   |001a: move-result-object v0
+54a63a: 6e20 45d2 1000                         |001b: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a640: 0c00                                   |001e: move-result-object v0
+54a642: 6e20 45d2 b000                         |001f: invoke-virtual {v0, v11}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a648: 0c00                                   |0022: move-result-object v0
+54a64a: 1a01 000d                              |0023: const-string v1, ")" // string@0d00
+54a64e: 6e20 45d2 1000                         |0025: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a654: 0c00                                   |0028: move-result-object v0
+54a656: 6e10 58d2 0000                         |0029: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a65c: 0c00                                   |002c: move-result-object v0
+54a65e: 1a01 e856                              |002d: const-string v1, "MultiDex" // string@56e8
+54a662: 7120 2108 0100                         |002f: invoke-static {v1, v0}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+54a668: 5490 2b33                              |0032: iget-object v0, v9, Landroidx/multidex/MultiDexExtractor;.cacheLock:Ljava/nio/channels/FileLock; // field@332b
+54a66c: 6e10 ced3 0000                         |0034: invoke-virtual {v0}, Ljava/nio/channels/FileLock;.isValid:()Z // method@d3ce
+54a672: 0a00                                   |0037: move-result v0
+54a674: 3800 6900                              |0038: if-eqz v0, 00a1 // +0069
+54a678: 390c 2a00                              |003a: if-nez v12, 0064 // +002a
+54a67c: 5490 2f33                              |003c: iget-object v0, v9, Landroidx/multidex/MultiDexExtractor;.sourceApk:Ljava/io/File; // field@332f
+54a680: 5392 3033                              |003e: iget-wide v2, v9, Landroidx/multidex/MultiDexExtractor;.sourceCrc:J // field@3330
+54a684: 715b 7046 0a32                         |0040: invoke-static {v10, v0, v2, v3, v11}, Landroidx/multidex/MultiDexExtractor;.isModified:(Landroid/content/Context;Ljava/io/File;JLjava/lang/String;)Z // method@4670
+54a68a: 0a00                                   |0043: move-result v0
+54a68c: 3900 2000                              |0044: if-nez v0, 0064 // +0020
+54a690: 7030 7246 a90b                         |0046: invoke-direct {v9, v10, v11}, Landroidx/multidex/MultiDexExtractor;.loadExistingExtractions:(Landroid/content/Context;Ljava/lang/String;)Ljava/util/List; // method@4672
+54a696: 0c09                                   |0049: move-result-object v9
+54a698: 283a                                   |004a: goto 0084 // +003a
+54a69a: 0d0c                                   |004b: move-exception v12
+54a69c: 1a00 b427                              |004c: const-string v0, "Failed to reload existing extracted secondary dex files, falling back to fresh extraction" // string@27b4
+54a6a0: 7130 2808 010c                         |004e: invoke-static {v1, v0, v12}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I // method@0828
+54a6a6: 7010 7346 0900                         |0051: invoke-direct {v9}, Landroidx/multidex/MultiDexExtractor;.performExtractions:()Ljava/util/List; // method@4673
+54a6ac: 0c0c                                   |0054: move-result-object v12
+54a6ae: 5490 2f33                              |0055: iget-object v0, v9, Landroidx/multidex/MultiDexExtractor;.sourceApk:Ljava/io/File; // field@332f
+54a6b2: 7110 6e46 0000                         |0057: invoke-static {v0}, Landroidx/multidex/MultiDexExtractor;.getTimeStamp:(Ljava/io/File;)J // method@466e
+54a6b8: 0b04                                   |005a: move-result-wide v4
+54a6ba: 5396 3033                              |005b: iget-wide v6, v9, Landroidx/multidex/MultiDexExtractor;.sourceCrc:J // field@3330
+54a6be: 07a2                                   |005d: move-object v2, v10
+54a6c0: 07b3                                   |005e: move-object v3, v11
+54a6c2: 07c8                                   |005f: move-object v8, v12
+54a6c4: 7707 7446 0200                         |0060: invoke-static/range {v2, v3, v4, v5, v6, v7, v8}, Landroidx/multidex/MultiDexExtractor;.putStoredApkInfo:(Landroid/content/Context;Ljava/lang/String;JJLjava/util/List;)V // method@4674
+54a6ca: 2820                                   |0063: goto 0083 // +0020
+54a6cc: 380c 0800                              |0064: if-eqz v12, 006c // +0008
+54a6d0: 1a0c cf28                              |0066: const-string v12, "Forced extraction must be performed." // string@28cf
+54a6d4: 7120 2108 c100                         |0068: invoke-static {v1, v12}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+54a6da: 2806                                   |006b: goto 0071 // +0006
+54a6dc: 1a0c 5a22                              |006c: const-string v12, "Detected that extraction must be performed." // string@225a
+54a6e0: 7120 2108 c100                         |006e: invoke-static {v1, v12}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+54a6e6: 7010 7346 0900                         |0071: invoke-direct {v9}, Landroidx/multidex/MultiDexExtractor;.performExtractions:()Ljava/util/List; // method@4673
+54a6ec: 0c0c                                   |0074: move-result-object v12
+54a6ee: 5490 2f33                              |0075: iget-object v0, v9, Landroidx/multidex/MultiDexExtractor;.sourceApk:Ljava/io/File; // field@332f
+54a6f2: 7110 6e46 0000                         |0077: invoke-static {v0}, Landroidx/multidex/MultiDexExtractor;.getTimeStamp:(Ljava/io/File;)J // method@466e
+54a6f8: 0b04                                   |007a: move-result-wide v4
+54a6fa: 5396 3033                              |007b: iget-wide v6, v9, Landroidx/multidex/MultiDexExtractor;.sourceCrc:J // field@3330
+54a6fe: 07a2                                   |007d: move-object v2, v10
+54a700: 07b3                                   |007e: move-object v3, v11
+54a702: 07c8                                   |007f: move-object v8, v12
+54a704: 7707 7446 0200                         |0080: invoke-static/range {v2, v3, v4, v5, v6, v7, v8}, Landroidx/multidex/MultiDexExtractor;.putStoredApkInfo:(Landroid/content/Context;Ljava/lang/String;JJLjava/util/List;)V // method@4674
+54a70a: 07c9                                   |0083: move-object v9, v12
+54a70c: 220a 991a                              |0084: new-instance v10, Ljava/lang/StringBuilder; // type@1a99
+54a710: 1a0b 54b1                              |0086: const-string v11, "load found " // string@b154
+54a714: 7020 3cd2 ba00                         |0088: invoke-direct {v10, v11}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+54a71a: 7210 dbd5 0900                         |008b: invoke-interface {v9}, Ljava/util/List;.size:()I // method@d5db
+54a720: 0a0b                                   |008e: move-result v11
+54a722: 6e20 40d2 ba00                         |008f: invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+54a728: 0c0a                                   |0092: move-result-object v10
+54a72a: 1a0b ab04                              |0093: const-string v11, " secondary dex files" // string@04ab
+54a72e: 6e20 45d2 ba00                         |0095: invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+54a734: 0c0a                                   |0098: move-result-object v10
+54a736: 6e10 58d2 0a00                         |0099: invoke-virtual {v10}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a73c: 0c0a                                   |009c: move-result-object v10
+54a73e: 7120 2108 a100                         |009d: invoke-static {v1, v10}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+54a744: 1109                                   |00a0: return-object v9
+54a746: 2209 7b1a                              |00a1: new-instance v9, Ljava/lang/IllegalStateException; // type@1a7b
+54a74a: 1a0a ef56                              |00a3: const-string v10, "MultiDexExtractor was closed" // string@56ef
+54a74e: 7020 4cd1 a900                         |00a5: invoke-direct {v9, v10}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+54a754: 2709                                   |00a8: throw v9
+      catches       : 1
+        0x0046 - 0x004a
+          Ljava/io/IOException; -> 0x004b
+      positions     :
+        0x0000 line=128
+        0x0032 line=131
+        0x003c line=136
+        0x0046 line=138
+        0x004c line=140
+        0x0051 line=142
+        0x0055 line=143
+        0x0066 line=148
+        0x006c line=150
+        0x0071 line=152
+        0x0075 line=153
+        0x0084 line=157
+        0x00a1 line=132
+      locals        :
+        0x0000 - 0x00a9 reg=9 this Landroidx/multidex/MultiDexExtractor;
+        0x0000 - 0x00a9 reg=10 (null) Landroid/content/Context;
+        0x0000 - 0x00a9 reg=11 (null) Ljava/lang/String;
+        0x0000 - 0x00a9 reg=12 (null) Z
+
+  source_file_idx   : 22257 (MultiDexExtractor.java)
+

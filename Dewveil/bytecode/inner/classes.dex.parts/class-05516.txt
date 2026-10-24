@@ -1,0 +1,201 @@
+Class #5516            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/WakeLockHolder;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/google/firebase/messaging/WakeLockHolder;)
+      name          : 'WAKE_LOCK_ACQUIRE_TIMEOUT_MILLIS'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+    #1              : (in Lcom/google/firebase/messaging/WakeLockHolder;)
+      name          : 'syncObject'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+    #2              : (in Lcom/google/firebase/messaging/WakeLockHolder;)
+      name          : 'wakeLock'
+      type          : 'Lcom/google/android/gms/stats/WakeLock;'
+      access        : 0x000a (PRIVATE STATIC)
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/WakeLockHolder;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 0
+      outs          : 3
+      insns size    : 18 16-bit code units
+72c304:                                        |[72c304] com.google.firebase.messaging.WakeLockHolder.<clinit>:()V
+72c314: 6200 4a8a                              |0000: sget-object v0, Ljava/util/concurrent/TimeUnit;.MINUTES:Ljava/util/concurrent/TimeUnit; // field@8a4a
+72c318: 1601 0100                              |0002: const-wide/16 v1, #int 1 // #1
+72c31c: 6e30 e7d6 1002                         |0004: invoke-virtual {v0, v1, v2}, Ljava/util/concurrent/TimeUnit;.toMillis:(J)J // method@d6e7
+72c322: 0b00                                   |0007: move-result-wide v0
+72c324: 6800 0f74                              |0008: sput-wide v0, Lcom/google/firebase/messaging/WakeLockHolder;.WAKE_LOCK_ACQUIRE_TIMEOUT_MILLIS:J // field@740f
+72c328: 2200 8b1a                              |000a: new-instance v0, Ljava/lang/Object; // type@1a8b
+72c32c: 7010 c8d1 0000                         |000c: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+72c332: 6900 1074                              |000f: sput-object v0, Lcom/google/firebase/messaging/WakeLockHolder;.syncObject:Ljava/lang/Object; // field@7410
+72c336: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0004 line=1
+      locals        :
+
+    #1              : (in Lcom/google/firebase/messaging/WakeLockHolder;)
+      name          : 'checkAndInitWakeLock'
+      type          : '(Landroid/content/Context;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 18 16-bit code units
+72c338:                                        |[72c338] com.google.firebase.messaging.WakeLockHolder.checkAndInitWakeLock:(Landroid/content/Context;)V
+72c348: 6200 1174                              |0000: sget-object v0, Lcom/google/firebase/messaging/WakeLockHolder;.wakeLock:Lcom/google/android/gms/stats/WakeLock; // field@7411
+72c34c: 3900 0f00                              |0002: if-nez v0, 0011 // +000f
+72c350: 2200 4b15                              |0004: new-instance v0, Lcom/google/android/gms/stats/WakeLock; // type@154b
+72c354: 1a01 bae6                              |0006: const-string v1, "wake:com.google.firebase.iid.WakeLockHolder" // string@e6ba
+72c358: 1212                                   |0008: const/4 v2, #int 1 // #1
+72c35a: 7040 41ae 3012                         |0009: invoke-direct {v0, v3, v2, v1}, Lcom/google/android/gms/stats/WakeLock;.<init>:(Landroid/content/Context;ILjava/lang/String;)V // method@ae41
+72c360: 6900 1174                              |000c: sput-object v0, Lcom/google/firebase/messaging/WakeLockHolder;.wakeLock:Lcom/google/android/gms/stats/WakeLock; // field@7411
+72c364: 6e20 45ae 2000                         |000e: invoke-virtual {v0, v2}, Lcom/google/android/gms/stats/WakeLock;.setReferenceCounted:(Z)V // method@ae45
+72c36a: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0004 line=1
+        0x000e line=2
+      locals        :
+        0x0000 - 0x0012 reg=3 (null) Landroid/content/Context;
+
+    #2              : (in Lcom/google/firebase/messaging/WakeLockHolder;)
+      name          : 'completeWakefulIntent'
+      type          : '(Landroid/content/Intent;)V'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 27 16-bit code units
+72c36c:                                        |[72c36c] com.google.firebase.messaging.WakeLockHolder.completeWakefulIntent:(Landroid/content/Intent;)V
+72c37c: 6200 1074                              |0000: sget-object v0, Lcom/google/firebase/messaging/WakeLockHolder;.syncObject:Ljava/lang/Object; // field@7410
+72c380: 1d00                                   |0002: monitor-enter v0
+72c382: 6201 1174                              |0003: sget-object v1, Lcom/google/firebase/messaging/WakeLockHolder;.wakeLock:Lcom/google/android/gms/stats/WakeLock; // field@7411
+72c386: 3801 1100                              |0005: if-eqz v1, 0016 // +0011
+72c38a: 7110 4ac1 0200                         |0007: invoke-static {v2}, Lcom/google/firebase/messaging/WakeLockHolder;.isWakefulIntent:(Landroid/content/Intent;)Z // method@c14a
+72c390: 0a01                                   |000a: move-result v1
+72c392: 3801 0b00                              |000b: if-eqz v1, 0016 // +000b
+72c396: 1201                                   |000d: const/4 v1, #int 0 // #0
+72c398: 7120 4bc1 1200                         |000e: invoke-static {v2, v1}, Lcom/google/firebase/messaging/WakeLockHolder;.setAsWakefulIntent:(Landroid/content/Intent;Z)V // method@c14b
+72c39e: 6202 1174                              |0011: sget-object v2, Lcom/google/firebase/messaging/WakeLockHolder;.wakeLock:Lcom/google/android/gms/stats/WakeLock; // field@7411
+72c3a2: 6e10 44ae 0200                         |0013: invoke-virtual {v2}, Lcom/google/android/gms/stats/WakeLock;.release:()V // method@ae44
+72c3a8: 1e00                                   |0016: monitor-exit v0
+72c3aa: 0e00                                   |0017: return-void
+72c3ac: 0d02                                   |0018: move-exception v2
+72c3ae: 1e00                                   |0019: monitor-exit v0
+72c3b0: 2702                                   |001a: throw v2
+      catches       : 1
+        0x0003 - 0x001a
+          <any> -> 0x0018
+      positions     :
+        0x0002 line=1
+        0x0007 line=2
+        0x000e line=3
+        0x0013 line=4
+        0x0016 line=5
+      locals        :
+        0x0000 - 0x001b reg=2 (null) Landroid/content/Intent;
+
+    #3              : (in Lcom/google/firebase/messaging/WakeLockHolder;)
+      name          : 'isWakefulIntent'
+      type          : '(Landroid/content/Intent;)Z'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 8 16-bit code units
+72c3c0:                                        |[72c3c0] com.google.firebase.messaging.WakeLockHolder.isWakefulIntent:(Landroid/content/Intent;)Z
+72c3d0: 1a00 1f88                              |0000: const-string v0, "com.google.firebase.iid.WakeLockHolder.wakefulintent" // string@881f
+72c3d4: 1201                                   |0002: const/4 v1, #int 0 // #0
+72c3d6: 6e30 7a02 0201                         |0003: invoke-virtual {v2, v0, v1}, Landroid/content/Intent;.getBooleanExtra:(Ljava/lang/String;Z)Z // method@027a
+72c3dc: 0a02                                   |0006: move-result v2
+72c3de: 0f02                                   |0007: return v2
+      catches       : (none)
+      positions     :
+        0x0003 line=1
+      locals        :
+        0x0000 - 0x0008 reg=2 (null) Landroid/content/Intent;
+
+    #4              : (in Lcom/google/firebase/messaging/WakeLockHolder;)
+      name          : 'setAsWakefulIntent'
+      type          : '(Landroid/content/Intent;Z)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 6 16-bit code units
+72c3e0:                                        |[72c3e0] com.google.firebase.messaging.WakeLockHolder.setAsWakefulIntent:(Landroid/content/Intent;Z)V
+72c3f0: 1a00 1f88                              |0000: const-string v0, "com.google.firebase.iid.WakeLockHolder.wakefulintent" // string@881f
+72c3f4: 6e30 9502 0102                         |0002: invoke-virtual {v1, v0, v2}, Landroid/content/Intent;.putExtra:(Ljava/lang/String;Z)Landroid/content/Intent; // method@0295
+72c3fa: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+      locals        :
+        0x0000 - 0x0006 reg=1 (null) Landroid/content/Intent;
+        0x0000 - 0x0006 reg=2 (null) Z
+
+    #5              : (in Lcom/google/firebase/messaging/WakeLockHolder;)
+      name          : 'startWakefulService'
+      type          : '(Landroid/content/Context;Landroid/content/Intent;)Landroid/content/ComponentName;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 37 16-bit code units
+72c3fc:                                        |[72c3fc] com.google.firebase.messaging.WakeLockHolder.startWakefulService:(Landroid/content/Context;Landroid/content/Intent;)Landroid/content/ComponentName;
+72c40c: 6200 1074                              |0000: sget-object v0, Lcom/google/firebase/messaging/WakeLockHolder;.syncObject:Ljava/lang/Object; // field@7410
+72c410: 1d00                                   |0002: monitor-enter v0
+72c412: 7110 48c1 0300                         |0003: invoke-static {v3}, Lcom/google/firebase/messaging/WakeLockHolder;.checkAndInitWakeLock:(Landroid/content/Context;)V // method@c148
+72c418: 7110 4ac1 0400                         |0006: invoke-static {v4}, Lcom/google/firebase/messaging/WakeLockHolder;.isWakefulIntent:(Landroid/content/Intent;)Z // method@c14a
+72c41e: 0a01                                   |0009: move-result v1
+72c420: 1212                                   |000a: const/4 v2, #int 1 // #1
+72c422: 7120 4bc1 2400                         |000b: invoke-static {v4, v2}, Lcom/google/firebase/messaging/WakeLockHolder;.setAsWakefulIntent:(Landroid/content/Intent;Z)V // method@c14b
+72c428: 6e20 6102 4300                         |000e: invoke-virtual {v3, v4}, Landroid/content/Context;.startService:(Landroid/content/Intent;)Landroid/content/ComponentName; // method@0261
+72c42e: 0c03                                   |0011: move-result-object v3
+72c430: 3903 0500                              |0012: if-nez v3, 0017 // +0005
+72c434: 1e00                                   |0014: monitor-exit v0
+72c436: 1203                                   |0015: const/4 v3, #int 0 // #0
+72c438: 1103                                   |0016: return-object v3
+72c43a: 3901 0900                              |0017: if-nez v1, 0020 // +0009
+72c43e: 6204 1174                              |0019: sget-object v4, Lcom/google/firebase/messaging/WakeLockHolder;.wakeLock:Lcom/google/android/gms/stats/WakeLock; // field@7411
+72c442: 6101 0f74                              |001b: sget-wide v1, Lcom/google/firebase/messaging/WakeLockHolder;.WAKE_LOCK_ACQUIRE_TIMEOUT_MILLIS:J // field@740f
+72c446: 6e30 42ae 1402                         |001d: invoke-virtual {v4, v1, v2}, Lcom/google/android/gms/stats/WakeLock;.acquire:(J)V // method@ae42
+72c44c: 1e00                                   |0020: monitor-exit v0
+72c44e: 1103                                   |0021: return-object v3
+72c450: 0d03                                   |0022: move-exception v3
+72c452: 1e00                                   |0023: monitor-exit v0
+72c454: 2703                                   |0024: throw v3
+      catches       : 1
+        0x0003 - 0x0024
+          <any> -> 0x0022
+      positions     :
+        0x0002 line=1
+        0x0003 line=2
+        0x0006 line=3
+        0x000b line=4
+        0x000e line=5
+        0x0014 line=6
+        0x001d line=7
+        0x0020 line=8
+        0x0023 line=9
+      locals        :
+        0x0000 - 0x0025 reg=3 (null) Landroid/content/Context;
+        0x0000 - 0x0025 reg=4 (null) Landroid/content/Intent;
+
+  Virtual methods   -
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

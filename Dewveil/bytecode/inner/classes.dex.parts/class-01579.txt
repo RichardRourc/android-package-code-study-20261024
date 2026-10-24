@@ -1,0 +1,227 @@
+Class #1579            -
+  Class descriptor  : 'Landroidx/multidex/ZipUtil;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/multidex/ZipUtil;)
+      name          : 'BUFFER_SIZE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 16384
+    #1              : (in Landroidx/multidex/ZipUtil;)
+      name          : 'ENDHDR'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 22
+    #2              : (in Landroidx/multidex/ZipUtil;)
+      name          : 'ENDSIG'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 101010256
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Landroidx/multidex/ZipUtil;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+54a798:                                        |[54a798] androidx.multidex.ZipUtil.<init>:()V
+54a7a8: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+54a7ae: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=32
+      locals        :
+        0x0000 - 0x0004 reg=0 this Landroidx/multidex/ZipUtil;
+
+    #1              : (in Landroidx/multidex/ZipUtil;)
+      name          : 'computeCrcOfCentralDir'
+      type          : '(Ljava/io/RandomAccessFile;Landroidx/multidex/ZipUtil$CentralDirectory;)J'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 11
+      ins           : 2
+      outs          : 4
+      insns size    : 58 16-bit code units
+54a7b0:                                        |[54a7b0] androidx.multidex.ZipUtil.computeCrcOfCentralDir:(Ljava/io/RandomAccessFile;Landroidx/multidex/ZipUtil$CentralDirectory;)J
+54a7c0: 2200 aa1b                              |0000: new-instance v0, Ljava/util/zip/CRC32; // type@1baa
+54a7c4: 7010 57d7 0000                         |0002: invoke-direct {v0}, Ljava/util/zip/CRC32;.<init>:()V // method@d757
+54a7ca: 53a1 3233                              |0005: iget-wide v1, v10, Landroidx/multidex/ZipUtil$CentralDirectory;.size:J // field@3332
+54a7ce: 53a3 3133                              |0007: iget-wide v3, v10, Landroidx/multidex/ZipUtil$CentralDirectory;.offset:J // field@3331
+54a7d2: 6e30 7ad0 3904                         |0009: invoke-virtual {v9, v3, v4}, Ljava/io/RandomAccessFile;.seek:(J)V // method@d07a
+54a7d8: 1603 0040                              |000c: const-wide/16 v3, #int 16384 // #4000
+54a7dc: 7140 a0d1 4321                         |000e: invoke-static {v3, v4, v1, v2}, Ljava/lang/Math;.min:(JJ)J // method@d1a0
+54a7e2: 0b05                                   |0011: move-result-wide v5
+54a7e4: 845a                                   |0012: long-to-int v10, v5
+54a7e6: 1305 0040                              |0013: const/16 v5, #int 16384 // #4000
+54a7ea: 2355 7c1f                              |0015: new-array v5, v5, [B // type@1f7c
+54a7ee: 1206                                   |0017: const/4 v6, #int 0 // #0
+54a7f0: 6e40 78d0 59a6                         |0018: invoke-virtual {v9, v5, v6, v10}, Ljava/io/RandomAccessFile;.read:([BII)I // method@d078
+54a7f6: 0a0a                                   |001b: move-result v10
+54a7f8: 12f7                                   |001c: const/4 v7, #int -1 // #ff
+54a7fa: 327a 1800                              |001d: if-eq v10, v7, 0035 // +0018
+54a7fe: 6e40 59d7 50a6                         |001f: invoke-virtual {v0, v5, v6, v10}, Ljava/util/zip/CRC32;.update:([BII)V // method@d759
+54a804: 81a7                                   |0022: int-to-long v7, v10
+54a806: bc71                                   |0023: sub-long/2addr v1, v7
+54a808: 1607 0000                              |0024: const-wide/16 v7, #int 0 // #0
+54a80c: 310a 0107                              |0026: cmp-long v10, v1, v7
+54a810: 390a 0300                              |0028: if-nez v10, 002b // +0003
+54a814: 280b                                   |002a: goto 0035 // +000b
+54a816: 7140 a0d1 4321                         |002b: invoke-static {v3, v4, v1, v2}, Ljava/lang/Math;.min:(JJ)J // method@d1a0
+54a81c: 0b07                                   |002e: move-result-wide v7
+54a81e: 847a                                   |002f: long-to-int v10, v7
+54a820: 6e40 78d0 59a6                         |0030: invoke-virtual {v9, v5, v6, v10}, Ljava/io/RandomAccessFile;.read:([BII)I // method@d078
+54a826: 0a0a                                   |0033: move-result v10
+54a828: 28e8                                   |0034: goto 001c // -0018
+54a82a: 6e10 58d7 0000                         |0035: invoke-virtual {v0}, Ljava/util/zip/CRC32;.getValue:()J // method@d758
+54a830: 0b09                                   |0038: move-result-wide v9
+54a832: 1009                                   |0039: return-wide v9
+      catches       : (none)
+      positions     :
+        0x0000 line=108
+        0x0005 line=109
+        0x0007 line=110
+        0x000e line=111
+        0x0015 line=112
+        0x0018 line=113
+        0x001f line=115
+        0x002b line=120
+        0x0030 line=121
+        0x0035 line=123
+      locals        :
+        0x0000 - 0x003a reg=9 (null) Ljava/io/RandomAccessFile;
+        0x0000 - 0x003a reg=10 (null) Landroidx/multidex/ZipUtil$CentralDirectory;
+
+    #2              : (in Landroidx/multidex/ZipUtil;)
+      name          : 'findCentralDirectory'
+      type          : '(Ljava/io/RandomAccessFile;)Landroidx/multidex/ZipUtil$CentralDirectory;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 9
+      ins           : 1
+      outs          : 3
+      insns size    : 129 16-bit code units
+54a834:                                        |[54a834] androidx.multidex.ZipUtil.findCentralDirectory:(Ljava/io/RandomAccessFile;)Landroidx/multidex/ZipUtil$CentralDirectory;
+54a844: 6e10 77d0 0800                         |0000: invoke-virtual {v8}, Ljava/io/RandomAccessFile;.length:()J // method@d077
+54a84a: 0b00                                   |0003: move-result-wide v0
+54a84c: 1602 1600                              |0004: const-wide/16 v2, #int 22 // #16
+54a850: 9c02 0002                              |0006: sub-long v2, v0, v2
+54a854: 1604 0000                              |0008: const-wide/16 v4, #int 0 // #0
+54a858: 3106 0204                              |000a: cmp-long v6, v2, v4
+54a85c: 3a06 5c00                              |000c: if-ltz v6, 0068 // +005c
+54a860: 1706 1600 0100                         |000e: const-wide/32 v6, #float 9.18663e-41 // #00010016
+54a866: bc60                                   |0011: sub-long/2addr v0, v6
+54a868: 3106 0004                              |0012: cmp-long v6, v0, v4
+54a86c: 3b06 0300                              |0014: if-gez v6, 0017 // +0003
+54a870: 2802                                   |0016: goto 0018 // +0002
+54a872: 0404                                   |0017: move-wide v4, v0
+54a874: 1400 504b 0506                         |0018: const v0, #float 2.50699e-35 // #06054b50
+54a87a: 7110 62d1 0000                         |001b: invoke-static {v0}, Ljava/lang/Integer;.reverseBytes:(I)I // method@d162
+54a880: 0a00                                   |001e: move-result v0
+54a882: 6e30 7ad0 2803                         |001f: invoke-virtual {v8, v2, v3}, Ljava/io/RandomAccessFile;.seek:(J)V // method@d07a
+54a888: 6e10 79d0 0800                         |0022: invoke-virtual {v8}, Ljava/io/RandomAccessFile;.readInt:()I // method@d079
+54a88e: 0a01                                   |0025: move-result v1
+54a890: 3301 3200                              |0026: if-ne v1, v0, 0058 // +0032
+54a894: 1220                                   |0028: const/4 v0, #int 2 // #2
+54a896: 6e20 7bd0 0800                         |0029: invoke-virtual {v8, v0}, Ljava/io/RandomAccessFile;.skipBytes:(I)I // method@d07b
+54a89c: 6e20 7bd0 0800                         |002c: invoke-virtual {v8, v0}, Ljava/io/RandomAccessFile;.skipBytes:(I)I // method@d07b
+54a8a2: 6e20 7bd0 0800                         |002f: invoke-virtual {v8, v0}, Ljava/io/RandomAccessFile;.skipBytes:(I)I // method@d07b
+54a8a8: 6e20 7bd0 0800                         |0032: invoke-virtual {v8, v0}, Ljava/io/RandomAccessFile;.skipBytes:(I)I // method@d07b
+54a8ae: 2200 a308                              |0035: new-instance v0, Landroidx/multidex/ZipUtil$CentralDirectory; // type@08a3
+54a8b2: 7010 7646 0000                         |0037: invoke-direct {v0}, Landroidx/multidex/ZipUtil$CentralDirectory;.<init>:()V // method@4676
+54a8b8: 6e10 79d0 0800                         |003a: invoke-virtual {v8}, Ljava/io/RandomAccessFile;.readInt:()I // method@d079
+54a8be: 0a01                                   |003d: move-result v1
+54a8c0: 7110 62d1 0100                         |003e: invoke-static {v1}, Ljava/lang/Integer;.reverseBytes:(I)I // method@d162
+54a8c6: 0a01                                   |0041: move-result v1
+54a8c8: 8111                                   |0042: int-to-long v1, v1
+54a8ca: 1803 ffff ffff 0000 0000               |0043: const-wide v3, #double 2.122e-314 // #00000000ffffffff
+54a8d4: c031                                   |0048: and-long/2addr v1, v3
+54a8d6: 5a01 3233                              |0049: iput-wide v1, v0, Landroidx/multidex/ZipUtil$CentralDirectory;.size:J // field@3332
+54a8da: 6e10 79d0 0800                         |004b: invoke-virtual {v8}, Ljava/io/RandomAccessFile;.readInt:()I // method@d079
+54a8e0: 0a08                                   |004e: move-result v8
+54a8e2: 7110 62d1 0800                         |004f: invoke-static {v8}, Ljava/lang/Integer;.reverseBytes:(I)I // method@d162
+54a8e8: 0a08                                   |0052: move-result v8
+54a8ea: 8181                                   |0053: int-to-long v1, v8
+54a8ec: c031                                   |0054: and-long/2addr v1, v3
+54a8ee: 5a01 3133                              |0055: iput-wide v1, v0, Landroidx/multidex/ZipUtil$CentralDirectory;.offset:J // field@3331
+54a8f2: 1100                                   |0057: return-object v0
+54a8f4: 1606 0100                              |0058: const-wide/16 v6, #int 1 // #1
+54a8f8: bc62                                   |005a: sub-long/2addr v2, v6
+54a8fa: 3101 0204                              |005b: cmp-long v1, v2, v4
+54a8fe: 3a01 0300                              |005d: if-ltz v1, 0060 // +0003
+54a902: 28c0                                   |005f: goto 001f // -0040
+54a904: 2208 b11b                              |0060: new-instance v8, Ljava/util/zip/ZipException; // type@1bb1
+54a908: 1a00 7b24                              |0062: const-string v0, "End Of Central Directory signature not found" // string@247b
+54a90c: 7020 67d7 0800                         |0064: invoke-direct {v8, v0}, Ljava/util/zip/ZipException;.<init>:(Ljava/lang/String;)V // method@d767
+54a912: 2708                                   |0067: throw v8
+54a914: 2200 b11b                              |0068: new-instance v0, Ljava/util/zip/ZipException; // type@1bb1
+54a918: 2201 991a                              |006a: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+54a91c: 1a02 2f28                              |006c: const-string v2, "File too short to be a zip file: " // string@282f
+54a920: 7020 3cd2 2100                         |006e: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+54a926: 6e10 77d0 0800                         |0071: invoke-virtual {v8}, Ljava/io/RandomAccessFile;.length:()J // method@d077
+54a92c: 0b02                                   |0074: move-result-wide v2
+54a92e: 6e30 41d2 2103                         |0075: invoke-virtual {v1, v2, v3}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+54a934: 0c08                                   |0078: move-result-object v8
+54a936: 6e10 58d2 0800                         |0079: invoke-virtual {v8}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54a93c: 0c08                                   |007c: move-result-object v8
+54a93e: 7020 67d7 8000                         |007d: invoke-direct {v0, v8}, Ljava/util/zip/ZipException;.<init>:(Ljava/lang/String;)V // method@d767
+54a944: 2700                                   |0080: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=68
+        0x001b line=78
+        0x001f line=80
+        0x0022 line=81
+        0x0029 line=95
+        0x002c line=96
+        0x002f line=97
+        0x0032 line=98
+        0x0035 line=99
+        0x003a line=100
+        0x004b line=101
+        0x0060 line=87
+        0x0068 line=70
+      locals        :
+        0x0000 - 0x0081 reg=8 (null) Ljava/io/RandomAccessFile;
+
+    #3              : (in Landroidx/multidex/ZipUtil;)
+      name          : 'getZipCrc'
+      type          : '(Ljava/io/File;)J'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 3
+      insns size    : 24 16-bit code units
+54a948:                                        |[54a948] androidx.multidex.ZipUtil.getZipCrc:(Ljava/io/File;)J
+54a958: 2200 5a1a                              |0000: new-instance v0, Ljava/io/RandomAccessFile; // type@1a5a
+54a95c: 1a01 d9cb                              |0002: const-string v1, "r" // string@cbd9
+54a960: 7030 74d0 3001                         |0004: invoke-direct {v0, v3, v1}, Ljava/io/RandomAccessFile;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@d074
+54a966: 7110 7946 0000                         |0007: invoke-static {v0}, Landroidx/multidex/ZipUtil;.findCentralDirectory:(Ljava/io/RandomAccessFile;)Landroidx/multidex/ZipUtil$CentralDirectory; // method@4679
+54a96c: 0c03                                   |000a: move-result-object v3
+54a96e: 7120 7846 3000                         |000b: invoke-static {v0, v3}, Landroidx/multidex/ZipUtil;.computeCrcOfCentralDir:(Ljava/io/RandomAccessFile;Landroidx/multidex/ZipUtil$CentralDirectory;)J // method@4678
+54a974: 0b01                                   |000e: move-result-wide v1
+54a976: 6e10 75d0 0000                         |000f: invoke-virtual {v0}, Ljava/io/RandomAccessFile;.close:()V // method@d075
+54a97c: 1001                                   |0012: return-wide v1
+54a97e: 0d03                                   |0013: move-exception v3
+54a980: 6e10 75d0 0000                         |0014: invoke-virtual {v0}, Ljava/io/RandomAccessFile;.close:()V // method@d075
+54a986: 2703                                   |0017: throw v3
+      catches       : 1
+        0x0007 - 0x000f
+          <any> -> 0x0013
+      positions     :
+        0x0000 line=55
+        0x0007 line=57
+        0x000b line=59
+        0x000f line=61
+      locals        :
+        0x0000 - 0x0018 reg=3 (null) Ljava/io/File;
+
+  Virtual methods   -
+  source_file_idx   : 28861 (ZipUtil.java)
+

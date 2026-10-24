@@ -1,0 +1,847 @@
+Class #2622            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/databind/DatabindContext;'
+  Access flags      : 0x0401 (PUBLIC ABSTRACT)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'MAX_ERROR_STR_LEN'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 500
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+5e7568:                                        |[5e7568] com.fasterxml.jackson.databind.DatabindContext.<init>:()V
+5e7578: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5e757e: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=28
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/databind/DatabindContext;
+
+    #1              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : '_resolveAndValidateGeneric'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;I)Lcom/fasterxml/jackson/databind/JavaType;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 5
+      outs          : 4
+      insns size    : 69 16-bit code units
+5e7580:                                        |[5e7580] com.fasterxml.jackson.databind.DatabindContext._resolveAndValidateGeneric:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;I)Lcom/fasterxml/jackson/databind/JavaType;
+5e7590: 6e10 796c 0300                         |0000: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/DatabindContext;.getConfig:()Lcom/fasterxml/jackson/databind/cfg/MapperConfig; // method@6c79
+5e7596: 0c00                                   |0003: move-result-object v0
+5e7598: 1201                                   |0004: const/4 v1, #int 0 // #0
+5e759a: 6e30 24d2 1507                         |0005: invoke-virtual {v5, v1, v7}, Ljava/lang/String;.substring:(II)Ljava/lang/String; // method@d224
+5e75a0: 0c07                                   |0008: move-result-object v7
+5e75a2: 6e40 0882 0674                         |0009: invoke-virtual {v6, v0, v4, v7}, Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;.validateSubClassName:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity; // method@8208
+5e75a8: 0c07                                   |000c: move-result-object v7
+5e75aa: 6201 8d4e                              |000d: sget-object v1, Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity;.DENIED:Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity; // field@4e8d
+5e75ae: 3317 0900                              |000f: if-ne v7, v1, 0018 // +0009
+5e75b2: 6e40 706c 4365                         |0011: invoke-virtual {v3, v4, v5, v6}, Lcom/fasterxml/jackson/databind/DatabindContext;._throwSubtypeNameNotAllowed:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;)Ljava/lang/Object; // method@6c70
+5e75b8: 0c03                                   |0014: move-result-object v3
+5e75ba: 1f03 c20c                              |0015: check-cast v3, Lcom/fasterxml/jackson/databind/JavaType; // type@0cc2
+5e75be: 1103                                   |0017: return-object v3
+5e75c0: 6e10 7d6c 0300                         |0018: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/DatabindContext;.getTypeFactory:()Lcom/fasterxml/jackson/databind/type/TypeFactory; // method@6c7d
+5e75c6: 0c01                                   |001b: move-result-object v1
+5e75c8: 6e20 7b8d 5100                         |001c: invoke-virtual {v1, v5}, Lcom/fasterxml/jackson/databind/type/TypeFactory;.constructFromCanonical:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JavaType; // method@8d7b
+5e75ce: 0c01                                   |001f: move-result-object v1
+5e75d0: 6e10 a66d 0400                         |0020: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+5e75d6: 0c02                                   |0023: move-result-object v2
+5e75d8: 6e20 c16d 2100                         |0024: invoke-virtual {v1, v2}, Lcom/fasterxml/jackson/databind/JavaType;.isTypeOrSubTypeOf:(Ljava/lang/Class;)Z // method@6dc1
+5e75de: 0a02                                   |0027: move-result v2
+5e75e0: 3902 0900                              |0028: if-nez v2, 0031 // +0009
+5e75e4: 6e30 6e6c 4305                         |002a: invoke-virtual {v3, v4, v5}, Lcom/fasterxml/jackson/databind/DatabindContext;._throwNotASubtype:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Ljava/lang/Object; // method@6c6e
+5e75ea: 0c03                                   |002d: move-result-object v3
+5e75ec: 1f03 c20c                              |002e: check-cast v3, Lcom/fasterxml/jackson/databind/JavaType; // type@0cc2
+5e75f0: 1103                                   |0030: return-object v3
+5e75f2: 6202 8c4e                              |0031: sget-object v2, Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity;.ALLOWED:Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity; // field@4e8c
+5e75f6: 3227 1100                              |0033: if-eq v7, v2, 0044 // +0011
+5e75fa: 6e40 0982 0614                         |0035: invoke-virtual {v6, v0, v4, v1}, Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;.validateSubType:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity; // method@8209
+5e7600: 0c07                                   |0038: move-result-object v7
+5e7602: 6200 8c4e                              |0039: sget-object v0, Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity;.ALLOWED:Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity; // field@4e8c
+5e7606: 3207 0900                              |003b: if-eq v7, v0, 0044 // +0009
+5e760a: 6e40 6f6c 4365                         |003d: invoke-virtual {v3, v4, v5, v6}, Lcom/fasterxml/jackson/databind/DatabindContext;._throwSubtypeClassNotAllowed:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;)Ljava/lang/Object; // method@6c6f
+5e7610: 0c03                                   |0040: move-result-object v3
+5e7612: 1f03 c20c                              |0041: check-cast v3, Lcom/fasterxml/jackson/databind/JavaType; // type@0cc2
+5e7616: 1103                                   |0043: return-object v3
+5e7618: 1101                                   |0044: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=254
+        0x0005 line=258
+        0x000d line=259
+        0x0011 line=260
+        0x0018 line=262
+        0x0020 line=263
+        0x002a line=264
+        0x0031 line=267
+        0x0035 line=268
+        0x003d line=269
+      locals        :
+        0x0000 - 0x0045 reg=3 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x0045 reg=4 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x0045 reg=5 (null) Ljava/lang/String;
+        0x0000 - 0x0045 reg=6 (null) Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;
+        0x0000 - 0x0045 reg=7 (null) I
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : '_colonConcat'
+      type          : '(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 27 16-bit code units
+5e761c:                                        |[5e761c] com.fasterxml.jackson.databind.DatabindContext._colonConcat:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+5e762c: 3902 0300                              |0000: if-nez v2, 0003 // +0003
+5e7630: 1101                                   |0002: return-object v1
+5e7632: 2200 991a                              |0003: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+5e7636: 7010 39d2 0000                         |0005: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+5e763c: 6e20 45d2 1000                         |0008: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e7642: 0c00                                   |000b: move-result-object v0
+5e7644: 1a01 6b10                              |000c: const-string v1, ": " // string@106b
+5e7648: 6e20 45d2 1000                         |000e: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e764e: 0c00                                   |0011: move-result-object v0
+5e7650: 6e20 45d2 2000                         |0012: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e7656: 0c00                                   |0015: move-result-object v0
+5e7658: 6e10 58d2 0000                         |0016: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5e765e: 0c00                                   |0019: move-result-object v0
+5e7660: 1100                                   |001a: return-object v0
+      catches       : (none)
+      positions     :
+        0x0003 line=450
+      locals        :
+        0x0000 - 0x001b reg=0 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x001b reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x001b reg=2 (null) Ljava/lang/String;
+
+    #1              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : '_desc'
+      type          : '(Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 10 16-bit code units
+5e7664:                                        |[5e7664] com.fasterxml.jackson.databind.DatabindContext._desc:(Ljava/lang/String;)Ljava/lang/String;
+5e7674: 3901 0500                              |0000: if-nez v1, 0005 // +0005
+5e7678: 1a00 5772                              |0002: const-string v0, "[N/A]" // string@7257
+5e767c: 1100                                   |0004: return-object v0
+5e767e: 6e20 716c 1000                         |0005: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/databind/DatabindContext;._truncate:(Ljava/lang/String;)Ljava/lang/String; // method@6c71
+5e7684: 0c00                                   |0008: move-result-object v0
+5e7686: 1100                                   |0009: return-object v0
+      catches       : (none)
+      positions     :
+        0x0002 line=458
+        0x0005 line=461
+      locals        :
+        0x0000 - 0x000a reg=0 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x000a reg=1 (null) Ljava/lang/String;
+
+    #2              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : '_format'
+      type          : '(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;'
+      access        : 0x0094 (PROTECTED FINAL VARARGS)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 9 16-bit code units
+5e7688:                                        |[5e7688] com.fasterxml.jackson.databind.DatabindContext._format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+5e7698: 2120                                   |0000: array-length v0, v2
+5e769a: 3d00 0700                              |0001: if-lez v0, 0008 // +0007
+5e769e: 7120 05d2 2100                         |0003: invoke-static {v1, v2}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+5e76a4: 0c00                                   |0006: move-result-object v0
+5e76a6: 1100                                   |0007: return-object v0
+5e76a8: 1101                                   |0008: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=413
+        0x0003 line=414
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x0009 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0009 reg=2 (null) [Ljava/lang/Object;
+
+    #3              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : '_quotedString'
+      type          : '(Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 20 16-bit code units
+5e76ac:                                        |[5e76ac] com.fasterxml.jackson.databind.DatabindContext._quotedString:(Ljava/lang/String;)Ljava/lang/String;
+5e76bc: 3901 0500                              |0000: if-nez v1, 0005 // +0005
+5e76c0: 1a00 5772                              |0002: const-string v0, "[N/A]" // string@7257
+5e76c4: 1100                                   |0004: return-object v0
+5e76c6: 6e20 716c 1000                         |0005: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/databind/DatabindContext;._truncate:(Ljava/lang/String;)Ljava/lang/String; // method@6c71
+5e76cc: 0c00                                   |0008: move-result-object v0
+5e76ce: 2410 ad20 0000                         |0009: filled-new-array {v0}, [Ljava/lang/Object; // type@20ad
+5e76d4: 0c00                                   |000c: move-result-object v0
+5e76d6: 1a01 1505                              |000d: const-string v1, "\"%s\"" // string@0515
+5e76da: 7120 05d2 0100                         |000f: invoke-static {v1, v0}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+5e76e0: 0c00                                   |0012: move-result-object v0
+5e76e2: 1100                                   |0013: return-object v0
+      catches       : (none)
+      positions     :
+        0x0002 line=437
+        0x0005 line=440
+      locals        :
+        0x0000 - 0x0014 reg=0 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x0014 reg=1 (null) Ljava/lang/String;
+
+    #4              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : '_throwNotASubtype'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Ljava/lang/Object;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 4
+      insns size    : 7 16-bit code units
+5e76e4:                                        |[5e76e4] com.fasterxml.jackson.databind.DatabindContext._throwNotASubtype:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Ljava/lang/Object;
+5e76f4: 1a00 b858                              |0000: const-string v0, "Not a subtype" // string@58b8
+5e76f8: 6e40 7e6c 2103                         |0002: invoke-virtual {v1, v2, v3, v0}, Lcom/fasterxml/jackson/databind/DatabindContext;.invalidTypeIdException:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonMappingException; // method@6c7e
+5e76fe: 0c01                                   |0005: move-result-object v1
+5e7700: 2701                                   |0006: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=276
+      locals        :
+        0x0000 - 0x0007 reg=1 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x0007 reg=2 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x0007 reg=3 (null) Ljava/lang/String;
+
+    #5              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : '_throwSubtypeClassNotAllowed'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;)Ljava/lang/Object;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 4
+      insns size    : 30 16-bit code units
+5e7704:                                        |[5e7704] com.fasterxml.jackson.databind.DatabindContext._throwSubtypeClassNotAllowed:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;)Ljava/lang/Object;
+5e7714: 2200 991a                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+5e7718: 1a01 c41d                              |0002: const-string v1, "Configured `PolymorphicTypeValidator` (of type " // string@1dc4
+5e771c: 7020 3cd2 1000                         |0004: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5e7722: 7110 2b8e 0500                         |0007: invoke-static {v5}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.classNameOf:(Ljava/lang/Object;)Ljava/lang/String; // method@8e2b
+5e7728: 0c05                                   |000a: move-result-object v5
+5e772a: 6e20 45d2 5000                         |000b: invoke-virtual {v0, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e7730: 0c05                                   |000e: move-result-object v5
+5e7732: 1a00 0f0d                              |000f: const-string v0, ") denied resolution" // string@0d0f
+5e7736: 6e20 45d2 0500                         |0011: invoke-virtual {v5, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e773c: 0c05                                   |0014: move-result-object v5
+5e773e: 6e10 58d2 0500                         |0015: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5e7744: 0c05                                   |0018: move-result-object v5
+5e7746: 6e40 7e6c 3254                         |0019: invoke-virtual {v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/DatabindContext;.invalidTypeIdException:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonMappingException; // method@6c7e
+5e774c: 0c02                                   |001c: move-result-object v2
+5e774e: 2702                                   |001d: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=287
+        0x0007 line=288
+        0x0019 line=287
+      locals        :
+        0x0000 - 0x001e reg=2 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x001e reg=3 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x001e reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x001e reg=5 (null) Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;
+
+    #6              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : '_throwSubtypeNameNotAllowed'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;)Ljava/lang/Object;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 4
+      insns size    : 30 16-bit code units
+5e7750:                                        |[5e7750] com.fasterxml.jackson.databind.DatabindContext._throwSubtypeNameNotAllowed:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;)Ljava/lang/Object;
+5e7760: 2200 991a                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+5e7764: 1a01 c41d                              |0002: const-string v1, "Configured `PolymorphicTypeValidator` (of type " // string@1dc4
+5e7768: 7020 3cd2 1000                         |0004: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5e776e: 7110 2b8e 0500                         |0007: invoke-static {v5}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.classNameOf:(Ljava/lang/Object;)Ljava/lang/String; // method@8e2b
+5e7774: 0c05                                   |000a: move-result-object v5
+5e7776: 6e20 45d2 5000                         |000b: invoke-virtual {v0, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e777c: 0c05                                   |000e: move-result-object v5
+5e777e: 1a00 0f0d                              |000f: const-string v0, ") denied resolution" // string@0d0f
+5e7782: 6e20 45d2 0500                         |0011: invoke-virtual {v5, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e7788: 0c05                                   |0014: move-result-object v5
+5e778a: 6e10 58d2 0500                         |0015: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5e7790: 0c05                                   |0018: move-result-object v5
+5e7792: 6e40 7e6c 3254                         |0019: invoke-virtual {v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/DatabindContext;.invalidTypeIdException:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonMappingException; // method@6c7e
+5e7798: 0c02                                   |001c: move-result-object v2
+5e779a: 2702                                   |001d: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=281
+        0x0007 line=282
+        0x0019 line=281
+      locals        :
+        0x0000 - 0x001e reg=2 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x001e reg=3 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x001e reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x001e reg=5 (null) Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;
+
+    #7              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : '_truncate'
+      type          : '(Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x0014 (PROTECTED FINAL)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 52 16-bit code units
+5e779c:                                        |[5e779c] com.fasterxml.jackson.databind.DatabindContext._truncate:(Ljava/lang/String;)Ljava/lang/String;
+5e77ac: 3903 0500                              |0000: if-nez v3, 0005 // +0005
+5e77b0: 1a02 0000                              |0002: const-string v2, "" // string@0000
+5e77b4: 1102                                   |0004: return-object v2
+5e77b6: 6e10 16d2 0300                         |0005: invoke-virtual {v3}, Ljava/lang/String;.length:()I // method@d216
+5e77bc: 0a02                                   |0008: move-result v2
+5e77be: 1300 f401                              |0009: const/16 v0, #int 500 // #1f4
+5e77c2: 3602 0300                              |000b: if-gt v2, v0, 000e // +0003
+5e77c6: 1103                                   |000d: return-object v3
+5e77c8: 2202 991a                              |000e: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+5e77cc: 7010 39d2 0200                         |0010: invoke-direct {v2}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+5e77d2: 1201                                   |0013: const/4 v1, #int 0 // #0
+5e77d4: 6e30 24d2 1300                         |0014: invoke-virtual {v3, v1, v0}, Ljava/lang/String;.substring:(II)Ljava/lang/String; // method@d224
+5e77da: 0c01                                   |0017: move-result-object v1
+5e77dc: 6e20 45d2 1200                         |0018: invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e77e2: 0c02                                   |001b: move-result-object v2
+5e77e4: 1a01 db72                              |001c: const-string v1, "]...[" // string@72db
+5e77e8: 6e20 45d2 1200                         |001e: invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e77ee: 0c02                                   |0021: move-result-object v2
+5e77f0: 6e10 16d2 0300                         |0022: invoke-virtual {v3}, Ljava/lang/String;.length:()I // method@d216
+5e77f6: 0a01                                   |0025: move-result v1
+5e77f8: b101                                   |0026: sub-int/2addr v1, v0
+5e77fa: 6e20 23d2 1300                         |0027: invoke-virtual {v3, v1}, Ljava/lang/String;.substring:(I)Ljava/lang/String; // method@d223
+5e7800: 0c03                                   |002a: move-result-object v3
+5e7802: 6e20 45d2 3200                         |002b: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e7808: 0c02                                   |002e: move-result-object v2
+5e780a: 6e10 58d2 0200                         |002f: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5e7810: 0c02                                   |0032: move-result-object v2
+5e7812: 1102                                   |0033: return-object v2
+      catches       : (none)
+      positions     :
+        0x0002 line=424
+        0x0005 line=426
+        0x000e line=429
+      locals        :
+        0x0000 - 0x0034 reg=2 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x0034 reg=3 (null) Ljava/lang/String;
+
+    #8              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'canOverrideAccessModifiers'
+      type          : '()Z'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #9              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'constructSpecializedType'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/JavaType;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #10              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'constructType'
+      type          : '(Ljava/lang/reflect/Type;)Lcom/fasterxml/jackson/databind/JavaType;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 13 16-bit code units
+5e7814:                                        |[5e7814] com.fasterxml.jackson.databind.DatabindContext.constructType:(Ljava/lang/reflect/Type;)Lcom/fasterxml/jackson/databind/JavaType;
+5e7824: 3901 0400                              |0000: if-nez v1, 0004 // +0004
+5e7828: 1200                                   |0002: const/4 v0, #int 0 // #0
+5e782a: 1100                                   |0003: return-object v0
+5e782c: 6e10 7d6c 0000                         |0004: invoke-virtual {v0}, Lcom/fasterxml/jackson/databind/DatabindContext;.getTypeFactory:()Lcom/fasterxml/jackson/databind/type/TypeFactory; // method@6c7d
+5e7832: 0c00                                   |0007: move-result-object v0
+5e7834: 6e20 908d 1000                         |0008: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/databind/type/TypeFactory;.constructType:(Ljava/lang/reflect/Type;)Lcom/fasterxml/jackson/databind/JavaType; // method@8d90
+5e783a: 0c00                                   |000b: move-result-object v0
+5e783c: 1100                                   |000c: return-object v0
+      catches       : (none)
+      positions     :
+        0x0004 line=151
+      locals        :
+        0x0000 - 0x000d reg=0 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x000d reg=1 (null) Ljava/lang/reflect/Type;
+
+    #11              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'converterInstance'
+      type          : '(Lcom/fasterxml/jackson/databind/introspect/Annotated;Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/util/Converter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 4
+      insns size    : 132 16-bit code units
+5e7840:                                        |[5e7840] com.fasterxml.jackson.databind.DatabindContext.converterInstance:(Lcom/fasterxml/jackson/databind/introspect/Annotated;Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/util/Converter;
+5e7850: 1200                                   |0000: const/4 v0, #int 0 // #0
+5e7852: 3904 0300                              |0001: if-nez v4, 0004 // +0003
+5e7856: 1100                                   |0003: return-object v0
+5e7858: 2041 510f                              |0004: instance-of v1, v4, Lcom/fasterxml/jackson/databind/util/Converter; // type@0f51
+5e785c: 3801 0500                              |0006: if-eqz v1, 000b // +0005
+5e7860: 1f04 510f                              |0008: check-cast v4, Lcom/fasterxml/jackson/databind/util/Converter; // type@0f51
+5e7864: 1104                                   |000a: return-object v4
+5e7866: 2041 6b1a                              |000b: instance-of v1, v4, Ljava/lang/Class; // type@1a6b
+5e786a: 3801 5400                              |000d: if-eqz v1, 0061 // +0054
+5e786e: 1f04 6b1a                              |000f: check-cast v4, Ljava/lang/Class; // type@1a6b
+5e7872: 1c01 500f                              |0011: const-class v1, Lcom/fasterxml/jackson/databind/util/Converter$None; // type@0f50
+5e7876: 3214 4d00                              |0013: if-eq v4, v1, 0060 // +004d
+5e787a: 7110 4f8e 0400                         |0015: invoke-static {v4}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.isBogusClass:(Ljava/lang/Class;)Z // method@8e4f
+5e7880: 0a01                                   |0018: move-result v1
+5e7882: 3801 0300                              |0019: if-eqz v1, 001c // +0003
+5e7886: 2845                                   |001b: goto 0060 // +0045
+5e7888: 1c01 510f                              |001c: const-class v1, Lcom/fasterxml/jackson/databind/util/Converter; // type@0f51
+5e788c: 6e20 fbd0 4100                         |001e: invoke-virtual {v1, v4}, Ljava/lang/Class;.isAssignableFrom:(Ljava/lang/Class;)Z // method@d0fb
+5e7892: 0a01                                   |0021: move-result v1
+5e7894: 3801 1f00                              |0022: if-eqz v1, 0041 // +001f
+5e7898: 6e10 796c 0200                         |0024: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/DatabindContext;.getConfig:()Lcom/fasterxml/jackson/databind/cfg/MapperConfig; // method@6c79
+5e789e: 0c02                                   |0027: move-result-object v2
+5e78a0: 6e10 ad73 0200                         |0028: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.getHandlerInstantiator:()Lcom/fasterxml/jackson/databind/cfg/HandlerInstantiator; // method@73ad
+5e78a6: 0c01                                   |002b: move-result-object v1
+5e78a8: 3901 0300                              |002c: if-nez v1, 002f // +0003
+5e78ac: 2805                                   |002e: goto 0033 // +0005
+5e78ae: 6e40 2973 2143                         |002f: invoke-virtual {v1, v2, v3, v4}, Lcom/fasterxml/jackson/databind/cfg/HandlerInstantiator;.converterInstance:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/Annotated;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/util/Converter; // method@7329
+5e78b4: 0c00                                   |0032: move-result-object v0
+5e78b6: 3900 0d00                              |0033: if-nez v0, 0040 // +000d
+5e78ba: 6e10 8c73 0200                         |0035: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.canOverrideAccessModifiers:()Z // method@738c
+5e78c0: 0a02                                   |0038: move-result v2
+5e78c2: 7120 2f8e 2400                         |0039: invoke-static {v4, v2}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.createInstance:(Ljava/lang/Class;Z)Ljava/lang/Object; // method@8e2f
+5e78c8: 0c02                                   |003c: move-result-object v2
+5e78ca: 0720                                   |003d: move-object v0, v2
+5e78cc: 1f00 510f                              |003e: check-cast v0, Lcom/fasterxml/jackson/databind/util/Converter; // type@0f51
+5e78d0: 1100                                   |0040: return-object v0
+5e78d2: 2202 7b1a                              |0041: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+5e78d6: 2203 991a                              |0043: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+5e78da: 1a00 7115                              |0045: const-string v0, "AnnotationIntrospector returned Class " // string@1571
+5e78de: 7020 3cd2 0300                         |0047: invoke-direct {v3, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5e78e4: 6e10 f0d0 0400                         |004a: invoke-virtual {v4}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+5e78ea: 0c04                                   |004d: move-result-object v4
+5e78ec: 6e20 45d2 4300                         |004e: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e78f2: 0c03                                   |0051: move-result-object v3
+5e78f4: 1a04 b510                              |0052: const-string v4, "; expected Class<Converter>" // string@10b5
+5e78f8: 6e20 45d2 4300                         |0054: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e78fe: 0c03                                   |0057: move-result-object v3
+5e7900: 6e10 58d2 0300                         |0058: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5e7906: 0c03                                   |005b: move-result-object v3
+5e7908: 7020 4cd1 3200                         |005c: invoke-direct {v2, v3}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+5e790e: 2702                                   |005f: throw v2
+5e7910: 1100                                   |0060: return-object v0
+5e7912: 2202 7b1a                              |0061: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+5e7916: 2203 991a                              |0063: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+5e791a: 1a00 7215                              |0065: const-string v0, "AnnotationIntrospector returned Converter definition of type " // string@1572
+5e791e: 7020 3cd2 0300                         |0067: invoke-direct {v3, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5e7924: 6e10 ccd1 0400                         |006a: invoke-virtual {v4}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+5e792a: 0c04                                   |006d: move-result-object v4
+5e792c: 6e10 f0d0 0400                         |006e: invoke-virtual {v4}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+5e7932: 0c04                                   |0071: move-result-object v4
+5e7934: 6e20 45d2 4300                         |0072: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e793a: 0c03                                   |0075: move-result-object v3
+5e793c: 1a04 bb10                              |0076: const-string v4, "; expected type Converter or Class<Converter> instead" // string@10bb
+5e7940: 6e20 45d2 4300                         |0078: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e7946: 0c03                                   |007b: move-result-object v3
+5e7948: 6e10 58d2 0300                         |007c: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5e794e: 0c03                                   |007f: move-result-object v3
+5e7950: 7020 4cd1 3200                         |0080: invoke-direct {v2, v3}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+5e7956: 2702                                   |0083: throw v2
+      catches       : (none)
+      positions     :
+        0x0004 line=355
+        0x0008 line=356
+        0x000b line=358
+        0x000f line=362
+        0x0011 line=364
+        0x001c line=367
+        0x0024 line=371
+        0x0028 line=372
+        0x002f line=373
+        0x0035 line=376
+        0x0039 line=375
+        0x0041 line=368
+        0x004a line=369
+        0x0061 line=359
+        0x006a line=360
+      locals        :
+        0x0000 - 0x0084 reg=2 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x0084 reg=3 (null) Lcom/fasterxml/jackson/databind/introspect/Annotated;
+        0x0000 - 0x0084 reg=4 (null) Ljava/lang/Object;
+
+    #12              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'getActiveView'
+      type          : '()Ljava/lang/Class;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #13              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'getAnnotationIntrospector'
+      type          : '()Lcom/fasterxml/jackson/databind/AnnotationIntrospector;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #14              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'getAttribute'
+      type          : '(Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #15              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'getConfig'
+      type          : '()Lcom/fasterxml/jackson/databind/cfg/MapperConfig;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #16              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'getDefaultPropertyFormat'
+      type          : '(Ljava/lang/Class;)Lcom/fasterxml/jackson/annotation/JsonFormat$Value;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #17              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'getLocale'
+      type          : '()Ljava/util/Locale;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #18              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'getTimeZone'
+      type          : '()Ljava/util/TimeZone;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #19              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'getTypeFactory'
+      type          : '()Lcom/fasterxml/jackson/databind/type/TypeFactory;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #20              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'invalidTypeIdException'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonMappingException;'
+      access        : 0x0404 (PROTECTED ABSTRACT)
+      code          : (none)
+
+    #21              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'isEnabled'
+      type          : '(Lcom/fasterxml/jackson/databind/MapperFeature;)Z'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #22              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'objectIdGeneratorInstance'
+      type          : '(Lcom/fasterxml/jackson/databind/introspect/Annotated;Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;)Lcom/fasterxml/jackson/annotation/ObjectIdGenerator;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 4
+      insns size    : 42 16-bit code units
+5e7958:                                        |[5e7958] com.fasterxml.jackson.databind.DatabindContext.objectIdGeneratorInstance:(Lcom/fasterxml/jackson/databind/introspect/Annotated;Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;)Lcom/fasterxml/jackson/annotation/ObjectIdGenerator;
+5e7968: 6e10 3d80 0400                         |0000: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;.getGeneratorType:()Ljava/lang/Class; // method@803d
+5e796e: 0c00                                   |0003: move-result-object v0
+5e7970: 6e10 796c 0200                         |0004: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/DatabindContext;.getConfig:()Lcom/fasterxml/jackson/databind/cfg/MapperConfig; // method@6c79
+5e7976: 0c02                                   |0007: move-result-object v2
+5e7978: 6e10 ad73 0200                         |0008: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.getHandlerInstantiator:()Lcom/fasterxml/jackson/databind/cfg/HandlerInstantiator; // method@73ad
+5e797e: 0c01                                   |000b: move-result-object v1
+5e7980: 3901 0400                              |000c: if-nez v1, 0010 // +0004
+5e7984: 1203                                   |000e: const/4 v3, #int 0 // #0
+5e7986: 2805                                   |000f: goto 0014 // +0005
+5e7988: 6e40 2e73 2103                         |0010: invoke-virtual {v1, v2, v3, v0}, Lcom/fasterxml/jackson/databind/cfg/HandlerInstantiator;.objectIdGeneratorInstance:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/Annotated;Ljava/lang/Class;)Lcom/fasterxml/jackson/annotation/ObjectIdGenerator; // method@732e
+5e798e: 0c03                                   |0013: move-result-object v3
+5e7990: 3903 0d00                              |0014: if-nez v3, 0021 // +000d
+5e7994: 6e10 8c73 0200                         |0016: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.canOverrideAccessModifiers:()Z // method@738c
+5e799a: 0a02                                   |0019: move-result v2
+5e799c: 7120 2f8e 2000                         |001a: invoke-static {v0, v2}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.createInstance:(Ljava/lang/Class;Z)Ljava/lang/Object; // method@8e2f
+5e79a2: 0c02                                   |001d: move-result-object v2
+5e79a4: 0723                                   |001e: move-object v3, v2
+5e79a6: 1f03 250c                              |001f: check-cast v3, Lcom/fasterxml/jackson/annotation/ObjectIdGenerator; // type@0c25
+5e79aa: 6e10 4080 0400                         |0021: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;.getScope:()Ljava/lang/Class; // method@8040
+5e79b0: 0c02                                   |0024: move-result-object v2
+5e79b2: 6e20 3760 2300                         |0025: invoke-virtual {v3, v2}, Lcom/fasterxml/jackson/annotation/ObjectIdGenerator;.forScope:(Ljava/lang/Class;)Lcom/fasterxml/jackson/annotation/ObjectIdGenerator; // method@6037
+5e79b8: 0c02                                   |0028: move-result-object v2
+5e79ba: 1102                                   |0029: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=317
+        0x0004 line=318
+        0x0008 line=319
+        0x0010 line=320
+        0x0016 line=323
+        0x001a line=322
+        0x0021 line=325
+      locals        :
+        0x0000 - 0x002a reg=2 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x002a reg=3 (null) Lcom/fasterxml/jackson/databind/introspect/Annotated;
+        0x0000 - 0x002a reg=4 (null) Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;
+
+    #23              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'objectIdResolverInstance'
+      type          : '(Lcom/fasterxml/jackson/databind/introspect/Annotated;Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;)Lcom/fasterxml/jackson/annotation/ObjectIdResolver;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 4
+      insns size    : 34 16-bit code units
+5e79bc:                                        |[5e79bc] com.fasterxml.jackson.databind.DatabindContext.objectIdResolverInstance:(Lcom/fasterxml/jackson/databind/introspect/Annotated;Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;)Lcom/fasterxml/jackson/annotation/ObjectIdResolver;
+5e79cc: 6e10 3f80 0300                         |0000: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;.getResolverType:()Ljava/lang/Class; // method@803f
+5e79d2: 0c03                                   |0003: move-result-object v3
+5e79d4: 6e10 796c 0100                         |0004: invoke-virtual {v1}, Lcom/fasterxml/jackson/databind/DatabindContext;.getConfig:()Lcom/fasterxml/jackson/databind/cfg/MapperConfig; // method@6c79
+5e79da: 0c01                                   |0007: move-result-object v1
+5e79dc: 6e10 ad73 0100                         |0008: invoke-virtual {v1}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.getHandlerInstantiator:()Lcom/fasterxml/jackson/databind/cfg/HandlerInstantiator; // method@73ad
+5e79e2: 0c00                                   |000b: move-result-object v0
+5e79e4: 3900 0400                              |000c: if-nez v0, 0010 // +0004
+5e79e8: 1202                                   |000e: const/4 v2, #int 0 // #0
+5e79ea: 2805                                   |000f: goto 0014 // +0005
+5e79ec: 6e40 2f73 1032                         |0010: invoke-virtual {v0, v1, v2, v3}, Lcom/fasterxml/jackson/databind/cfg/HandlerInstantiator;.resolverIdGeneratorInstance:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/Annotated;Ljava/lang/Class;)Lcom/fasterxml/jackson/annotation/ObjectIdResolver; // method@732f
+5e79f2: 0c02                                   |0013: move-result-object v2
+5e79f4: 3902 0d00                              |0014: if-nez v2, 0021 // +000d
+5e79f8: 6e10 8c73 0100                         |0016: invoke-virtual {v1}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.canOverrideAccessModifiers:()Z // method@738c
+5e79fe: 0a01                                   |0019: move-result v1
+5e7a00: 7120 2f8e 1300                         |001a: invoke-static {v3, v1}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.createInstance:(Ljava/lang/Class;Z)Ljava/lang/Object; // method@8e2f
+5e7a06: 0c01                                   |001d: move-result-object v1
+5e7a08: 0712                                   |001e: move-object v2, v1
+5e7a0a: 1f02 2d0c                              |001f: check-cast v2, Lcom/fasterxml/jackson/annotation/ObjectIdResolver; // type@0c2d
+5e7a0e: 1102                                   |0021: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=330
+        0x0004 line=331
+        0x0008 line=332
+        0x0010 line=333
+        0x0016 line=335
+      locals        :
+        0x0000 - 0x0022 reg=1 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x0022 reg=2 (null) Lcom/fasterxml/jackson/databind/introspect/Annotated;
+        0x0000 - 0x0022 reg=3 (null) Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;
+
+    #24              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'reportBadDefinition'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Ljava/lang/Object;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #25              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'reportBadDefinition'
+      type          : '(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 9 16-bit code units
+5e7a10:                                        |[5e7a10] com.fasterxml.jackson.databind.DatabindContext.reportBadDefinition:(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object;
+5e7a20: 6e20 746c 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/databind/DatabindContext;.constructType:(Ljava/lang/reflect/Type;)Lcom/fasterxml/jackson/databind/JavaType; // method@6c74
+5e7a26: 0c01                                   |0003: move-result-object v1
+5e7a28: 6e30 826c 1002                         |0004: invoke-virtual {v0, v1, v2}, Lcom/fasterxml/jackson/databind/DatabindContext;.reportBadDefinition:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Ljava/lang/Object; // method@6c82
+5e7a2e: 0c00                                   |0007: move-result-object v0
+5e7a30: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=400
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x0009 reg=1 (null) Ljava/lang/Class;
+        0x0000 - 0x0009 reg=2 (null) Ljava/lang/String;
+
+    #26              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'resolveAndValidateSubType'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;)Lcom/fasterxml/jackson/databind/JavaType;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 4
+      outs          : 5
+      insns size    : 111 16-bit code units
+5e7a34:                                        |[5e7a34] com.fasterxml.jackson.databind.DatabindContext.resolveAndValidateSubType:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;)Lcom/fasterxml/jackson/databind/JavaType;
+5e7a44: 1300 3c00                              |0000: const/16 v0, #int 60 // #3c
+5e7a48: 6e20 0cd2 0600                         |0002: invoke-virtual {v6, v0}, Ljava/lang/String;.indexOf:(I)I // method@d20c
+5e7a4e: 0a00                                   |0005: move-result v0
+5e7a50: 3d00 0700                              |0006: if-lez v0, 000d // +0007
+5e7a54: 7050 6d6c 5476                         |0008: invoke-direct {v4, v5, v6, v7, v0}, Lcom/fasterxml/jackson/databind/DatabindContext;._resolveAndValidateGeneric:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;I)Lcom/fasterxml/jackson/databind/JavaType; // method@6c6d
+5e7a5a: 0c04                                   |000b: move-result-object v4
+5e7a5c: 1104                                   |000c: return-object v4
+5e7a5e: 6e10 796c 0400                         |000d: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/DatabindContext;.getConfig:()Lcom/fasterxml/jackson/databind/cfg/MapperConfig; // method@6c79
+5e7a64: 0c00                                   |0010: move-result-object v0
+5e7a66: 6e40 0882 0765                         |0011: invoke-virtual {v7, v0, v5, v6}, Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;.validateSubClassName:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity; // method@8208
+5e7a6c: 0c01                                   |0014: move-result-object v1
+5e7a6e: 6202 8d4e                              |0015: sget-object v2, Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity;.DENIED:Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity; // field@4e8d
+5e7a72: 3321 0900                              |0017: if-ne v1, v2, 0020 // +0009
+5e7a76: 6e40 706c 5476                         |0019: invoke-virtual {v4, v5, v6, v7}, Lcom/fasterxml/jackson/databind/DatabindContext;._throwSubtypeNameNotAllowed:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;)Ljava/lang/Object; // method@6c70
+5e7a7c: 0c04                                   |001c: move-result-object v4
+5e7a7e: 1f04 c20c                              |001d: check-cast v4, Lcom/fasterxml/jackson/databind/JavaType; // type@0cc2
+5e7a82: 1104                                   |001f: return-object v4
+5e7a84: 6e10 7d6c 0400                         |0020: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/DatabindContext;.getTypeFactory:()Lcom/fasterxml/jackson/databind/type/TypeFactory; // method@6c7d
+5e7a8a: 0c02                                   |0023: move-result-object v2
+5e7a8c: 6e20 958d 6200                         |0024: invoke-virtual {v2, v6}, Lcom/fasterxml/jackson/databind/type/TypeFactory;.findClass:(Ljava/lang/String;)Ljava/lang/Class; // method@8d95
+5e7a92: 0c02                                   |0027: move-result-object v2
+5e7a94: 6e20 c26d 2500                         |0028: invoke-virtual {v5, v2}, Lcom/fasterxml/jackson/databind/JavaType;.isTypeOrSuperTypeOf:(Ljava/lang/Class;)Z // method@6dc2
+5e7a9a: 0a03                                   |002b: move-result v3
+5e7a9c: 3903 0900                              |002c: if-nez v3, 0035 // +0009
+5e7aa0: 6e30 6e6c 5406                         |002e: invoke-virtual {v4, v5, v6}, Lcom/fasterxml/jackson/databind/DatabindContext;._throwNotASubtype:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Ljava/lang/Object; // method@6c6e
+5e7aa6: 0c04                                   |0031: move-result-object v4
+5e7aa8: 1f04 c20c                              |0032: check-cast v4, Lcom/fasterxml/jackson/databind/JavaType; // type@0cc2
+5e7aac: 1104                                   |0034: return-object v4
+5e7aae: 6e10 b373 0000                         |0035: invoke-virtual {v0}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.getTypeFactory:()Lcom/fasterxml/jackson/databind/type/TypeFactory; // method@73b3
+5e7ab4: 0c03                                   |0038: move-result-object v3
+5e7ab6: 6e30 8d8d 5302                         |0039: invoke-virtual {v3, v5, v2}, Lcom/fasterxml/jackson/databind/type/TypeFactory;.constructSpecializedType:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/JavaType; // method@8d8d
+5e7abc: 0c02                                   |003c: move-result-object v2
+5e7abe: 6203 8e4e                              |003d: sget-object v3, Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity;.INDETERMINATE:Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity; // field@4e8e
+5e7ac2: 3331 1100                              |003f: if-ne v1, v3, 0050 // +0011
+5e7ac6: 6e40 0982 0725                         |0041: invoke-virtual {v7, v0, v5, v2}, Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;.validateSubType:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity; // method@8209
+5e7acc: 0c00                                   |0044: move-result-object v0
+5e7ace: 6201 8c4e                              |0045: sget-object v1, Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity;.ALLOWED:Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator$Validity; // field@4e8c
+5e7ad2: 3210 0900                              |0047: if-eq v0, v1, 0050 // +0009
+5e7ad6: 6e40 6f6c 5476                         |0049: invoke-virtual {v4, v5, v6, v7}, Lcom/fasterxml/jackson/databind/DatabindContext;._throwSubtypeClassNotAllowed:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;)Ljava/lang/Object; // method@6c6f
+5e7adc: 0c04                                   |004c: move-result-object v4
+5e7ade: 1f04 c20c                              |004d: check-cast v4, Lcom/fasterxml/jackson/databind/JavaType; // type@0cc2
+5e7ae2: 1104                                   |004f: return-object v4
+5e7ae4: 1102                                   |0050: return-object v2
+5e7ae6: 0d07                                   |0051: move-exception v7
+5e7ae8: 6e10 ccd1 0700                         |0052: invoke-virtual {v7}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+5e7aee: 0c00                                   |0055: move-result-object v0
+5e7af0: 6e10 f0d0 0000                         |0056: invoke-virtual {v0}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+5e7af6: 0c00                                   |0059: move-result-object v0
+5e7af8: 7110 328e 0700                         |005a: invoke-static {v7}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.exceptionMessage:(Ljava/lang/Throwable;)Ljava/lang/String; // method@8e32
+5e7afe: 0c07                                   |005d: move-result-object v7
+5e7b00: 2420 ad20 7000                         |005e: filled-new-array {v0, v7}, [Ljava/lang/Object; // type@20ad
+5e7b06: 0c07                                   |0061: move-result-object v7
+5e7b08: 1a00 cdca                              |0062: const-string v0, "problem: (%s) %s" // string@cacd
+5e7b0c: 7120 05d2 7000                         |0064: invoke-static {v0, v7}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+5e7b12: 0c07                                   |0067: move-result-object v7
+5e7b14: 6e40 7e6c 5476                         |0068: invoke-virtual {v4, v5, v6, v7}, Lcom/fasterxml/jackson/databind/DatabindContext;.invalidTypeIdException:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonMappingException; // method@6c7e
+5e7b1a: 0c04                                   |006b: move-result-object v4
+5e7b1c: 2704                                   |006c: throw v4
+5e7b1e: 1204                                   |006d: const/4 v4, #int 0 // #0
+5e7b20: 1104                                   |006e: return-object v4
+      catches       : 1
+        0x0020 - 0x0028
+          Ljava/lang/ClassNotFoundException; -> 0x006d
+          Ljava/lang/Exception; -> 0x0051
+      positions     :
+        0x0002 line=216
+        0x0008 line=218
+        0x000d line=220
+        0x0011 line=221
+        0x0015 line=222
+        0x0019 line=223
+        0x0020 line=227
+        0x0028 line=236
+        0x002e line=237
+        0x0035 line=239
+        0x003d line=241
+        0x0041 line=242
+        0x0045 line=243
+        0x0049 line=244
+        0x0052 line=233
+        0x005a line=234
+        0x0062 line=231
+      locals        :
+        0x0000 - 0x006f reg=4 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x006f reg=5 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x006f reg=6 (null) Ljava/lang/String;
+        0x0000 - 0x006f reg=7 (null) Lcom/fasterxml/jackson/databind/jsontype/PolymorphicTypeValidator;
+
+    #27              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'resolveSubType'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JavaType;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 4
+      insns size    : 87 16-bit code units
+5e7b34:                                        |[5e7b34] com.fasterxml.jackson.databind.DatabindContext.resolveSubType:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JavaType;
+5e7b44: 1300 3c00                              |0000: const/16 v0, #int 60 // #3c
+5e7b48: 6e20 0cd2 0400                         |0002: invoke-virtual {v4, v0}, Ljava/lang/String;.indexOf:(I)I // method@d20c
+5e7b4e: 0a00                                   |0005: move-result v0
+5e7b50: 3d00 1500                              |0006: if-lez v0, 001b // +0015
+5e7b54: 6e10 7d6c 0200                         |0008: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/DatabindContext;.getTypeFactory:()Lcom/fasterxml/jackson/databind/type/TypeFactory; // method@6c7d
+5e7b5a: 0c00                                   |000b: move-result-object v0
+5e7b5c: 6e20 7b8d 4000                         |000c: invoke-virtual {v0, v4}, Lcom/fasterxml/jackson/databind/type/TypeFactory;.constructFromCanonical:(Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JavaType; // method@8d7b
+5e7b62: 0c00                                   |000f: move-result-object v0
+5e7b64: 6e10 a66d 0300                         |0010: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+5e7b6a: 0c01                                   |0013: move-result-object v1
+5e7b6c: 6e20 c16d 1000                         |0014: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/databind/JavaType;.isTypeOrSubTypeOf:(Ljava/lang/Class;)Z // method@6dc1
+5e7b72: 0a01                                   |0017: move-result v1
+5e7b74: 3801 1a00                              |0018: if-eqz v1, 0032 // +001a
+5e7b78: 1100                                   |001a: return-object v0
+5e7b7a: 6e10 7d6c 0200                         |001b: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/DatabindContext;.getTypeFactory:()Lcom/fasterxml/jackson/databind/type/TypeFactory; // method@6c7d
+5e7b80: 0c00                                   |001e: move-result-object v0
+5e7b82: 6e20 958d 4000                         |001f: invoke-virtual {v0, v4}, Lcom/fasterxml/jackson/databind/type/TypeFactory;.findClass:(Ljava/lang/String;)Ljava/lang/Class; // method@8d95
+5e7b88: 0c00                                   |0022: move-result-object v0
+5e7b8a: 6e20 c26d 0300                         |0023: invoke-virtual {v3, v0}, Lcom/fasterxml/jackson/databind/JavaType;.isTypeOrSuperTypeOf:(Ljava/lang/Class;)Z // method@6dc2
+5e7b90: 0a01                                   |0026: move-result v1
+5e7b92: 3801 0b00                              |0027: if-eqz v1, 0032 // +000b
+5e7b96: 6e10 7d6c 0200                         |0029: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/DatabindContext;.getTypeFactory:()Lcom/fasterxml/jackson/databind/type/TypeFactory; // method@6c7d
+5e7b9c: 0c02                                   |002c: move-result-object v2
+5e7b9e: 6e30 8d8d 3200                         |002d: invoke-virtual {v2, v3, v0}, Lcom/fasterxml/jackson/databind/type/TypeFactory;.constructSpecializedType:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/JavaType; // method@8d8d
+5e7ba4: 0c02                                   |0030: move-result-object v2
+5e7ba6: 1102                                   |0031: return-object v2
+5e7ba8: 1a00 b858                              |0032: const-string v0, "Not a subtype" // string@58b8
+5e7bac: 6e40 7e6c 3204                         |0034: invoke-virtual {v2, v3, v4, v0}, Lcom/fasterxml/jackson/databind/DatabindContext;.invalidTypeIdException:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonMappingException; // method@6c7e
+5e7bb2: 0c02                                   |0037: move-result-object v2
+5e7bb4: 2702                                   |0038: throw v2
+5e7bb6: 0d00                                   |0039: move-exception v0
+5e7bb8: 6e10 ccd1 0000                         |003a: invoke-virtual {v0}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+5e7bbe: 0c01                                   |003d: move-result-object v1
+5e7bc0: 6e10 f0d0 0100                         |003e: invoke-virtual {v1}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+5e7bc6: 0c01                                   |0041: move-result-object v1
+5e7bc8: 7110 328e 0000                         |0042: invoke-static {v0}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.exceptionMessage:(Ljava/lang/Throwable;)Ljava/lang/String; // method@8e32
+5e7bce: 0c00                                   |0045: move-result-object v0
+5e7bd0: 2420 ad20 0100                         |0046: filled-new-array {v1, v0}, [Ljava/lang/Object; // type@20ad
+5e7bd6: 0c00                                   |0049: move-result-object v0
+5e7bd8: 1a01 cdca                              |004a: const-string v1, "problem: (%s) %s" // string@cacd
+5e7bdc: 7120 05d2 0100                         |004c: invoke-static {v1, v0}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+5e7be2: 0c00                                   |004f: move-result-object v0
+5e7be4: 6e40 7e6c 3204                         |0050: invoke-virtual {v2, v3, v4, v0}, Lcom/fasterxml/jackson/databind/DatabindContext;.invalidTypeIdException:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/JsonMappingException; // method@6c7e
+5e7bea: 0c02                                   |0053: move-result-object v2
+5e7bec: 2702                                   |0054: throw v2
+5e7bee: 1202                                   |0055: const/4 v2, #int 0 // #0
+5e7bf0: 1102                                   |0056: return-object v2
+      catches       : 1
+        0x001b - 0x0023
+          Ljava/lang/ClassNotFoundException; -> 0x0055
+          Ljava/lang/Exception; -> 0x0039
+      positions     :
+        0x0002 line=177
+        0x0008 line=182
+        0x0010 line=183
+        0x001b line=189
+        0x0023 line=198
+        0x0029 line=199
+        0x0032 line=202
+        0x003a line=195
+        0x0042 line=196
+        0x004a line=193
+      locals        :
+        0x0000 - 0x0057 reg=2 this Lcom/fasterxml/jackson/databind/DatabindContext;
+        0x0000 - 0x0057 reg=3 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x0057 reg=4 (null) Ljava/lang/String;
+
+    #28              : (in Lcom/fasterxml/jackson/databind/DatabindContext;)
+      name          : 'setAttribute'
+      type          : '(Ljava/lang/Object;Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/DatabindContext;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+  source_file_idx   : 8657 (DatabindContext.java)
+

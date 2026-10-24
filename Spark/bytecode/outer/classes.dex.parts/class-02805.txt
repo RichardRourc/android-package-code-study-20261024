@@ -1,0 +1,904 @@
+Class #2805            -
+  Class descriptor  : 'Lcom/adjust/sdk/SdkClickHandler;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lcom/adjust/sdk/ISdkClickHandler;'
+  Static fields     -
+    #0              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'MILLISECONDS_TO_SECONDS_DIVISOR'
+      type          : 'D'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1000
+    #1              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'SCHEDULED_EXECUTOR_SOURCE'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "SdkClickHandler"
+    #2              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'SOURCE_INSTALL_REFERRER'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "install_referrer"
+    #3              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'SOURCE_REFTAG'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "reftag"
+  Instance fields   -
+    #0              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'activityHandlerWeakRef'
+      type          : 'Ljava/lang/ref/WeakReference;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'activityPackageSender'
+      type          : 'Lcom/adjust/sdk/network/IActivityPackageSender;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'backoffStrategy'
+      type          : 'Lcom/adjust/sdk/BackoffStrategy;'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'lastPackageRetryInMilli'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'logger'
+      type          : 'Lcom/adjust/sdk/ILogger;'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'packageQueue'
+      type          : 'Ljava/util/List;'
+      access        : 0x0002 (PRIVATE)
+    #6              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'paused'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #7              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'scheduler'
+      type          : 'Lcom/adjust/sdk/scheduler/ThreadScheduler;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : '<init>'
+      type          : '(Lcom/adjust/sdk/IActivityHandler;ZLcom/adjust/sdk/network/IActivityPackageSender;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 4
+      insns size    : 32 16-bit code units
+2083c4:                                        |[2083c4] com.adjust.sdk.SdkClickHandler.<init>:(Lcom/adjust/sdk/IActivityHandler;ZLcom/adjust/sdk/network/IActivityPackageSender;)V
+2083d4: 7010 df71 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@71df
+2083da: 1600 0000                              |0003: const-wide/16 v0, #int 0 // #0
+2083de: 5a20 1f2a                              |0005: iput-wide v0, v2, Lcom/adjust/sdk/SdkClickHandler;.lastPackageRetryInMilli:J // field@2a1f
+2083e2: 6e40 a45d 3254                         |0007: invoke-virtual {v2, v3, v4, v5}, Lcom/adjust/sdk/SdkClickHandler;.init:(Lcom/adjust/sdk/IActivityHandler;ZLcom/adjust/sdk/network/IActivityPackageSender;)V // method@5da4
+2083e8: 7100 f75a 0000                         |000a: invoke-static {}, Lcom/adjust/sdk/AdjustFactory;.getLogger:()Lcom/adjust/sdk/ILogger; // method@5af7
+2083ee: 0c03                                   |000d: move-result-object v3
+2083f0: 5b23 202a                              |000e: iput-object v3, v2, Lcom/adjust/sdk/SdkClickHandler;.logger:Lcom/adjust/sdk/ILogger; // field@2a20
+2083f4: 7100 fc5a 0000                         |0010: invoke-static {}, Lcom/adjust/sdk/AdjustFactory;.getSdkClickBackoffStrategy:()Lcom/adjust/sdk/BackoffStrategy; // method@5afc
+2083fa: 0c03                                   |0013: move-result-object v3
+2083fc: 5b23 1e2a                              |0014: iput-object v3, v2, Lcom/adjust/sdk/SdkClickHandler;.backoffStrategy:Lcom/adjust/sdk/BackoffStrategy; // field@2a1e
+208400: 2203 830d                              |0016: new-instance v3, Lcom/adjust/sdk/scheduler/SingleThreadCachedScheduler; // type@0d83
+208404: 1a04 b353                              |0018: const-string v4, "SdkClickHandler" // string@53b3
+208408: 7020 955e 4300                         |001a: invoke-direct {v3, v4}, Lcom/adjust/sdk/scheduler/SingleThreadCachedScheduler;.<init>:(Ljava/lang/String;)V // method@5e95
+20840e: 5b23 232a                              |001d: iput-object v3, v2, Lcom/adjust/sdk/SdkClickHandler;.scheduler:Lcom/adjust/sdk/scheduler/ThreadScheduler; // field@2a23
+208412: 0e00                                   |001f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0005 line=2
+        0x0007 line=14
+        0x000a line=16
+        0x0010 line=17
+        0x0016 line=18
+      locals        :
+        0x0000 - 0x0020 reg=2 this Lcom/adjust/sdk/SdkClickHandler;
+        0x0000 - 0x0020 reg=3 (null) Lcom/adjust/sdk/IActivityHandler;
+        0x0000 - 0x0020 reg=4 (null) Z
+        0x0000 - 0x0020 reg=5 (null) Lcom/adjust/sdk/network/IActivityPackageSender;
+
+    #1              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'access$000'
+      type          : '(Lcom/adjust/sdk/SdkClickHandler;)Ljava/util/List;'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+208300:                                        |[208300] com.adjust.sdk.SdkClickHandler.access$000:(Lcom/adjust/sdk/SdkClickHandler;)Ljava/util/List;
+208310: 5400 212a                              |0000: iget-object v0, v0, Lcom/adjust/sdk/SdkClickHandler;.packageQueue:Ljava/util/List; // field@2a21
+208314: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/adjust/sdk/SdkClickHandler;
+
+    #2              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'access$100'
+      type          : '(Lcom/adjust/sdk/SdkClickHandler;)Lcom/adjust/sdk/ILogger;'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+2082d0:                                        |[2082d0] com.adjust.sdk.SdkClickHandler.access$100:(Lcom/adjust/sdk/SdkClickHandler;)Lcom/adjust/sdk/ILogger;
+2082e0: 5400 202a                              |0000: iget-object v0, v0, Lcom/adjust/sdk/SdkClickHandler;.logger:Lcom/adjust/sdk/ILogger; // field@2a20
+2082e4: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/adjust/sdk/SdkClickHandler;
+
+    #3              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'access$200'
+      type          : '(Lcom/adjust/sdk/SdkClickHandler;)V'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+208414:                                        |[208414] com.adjust.sdk.SdkClickHandler.access$200:(Lcom/adjust/sdk/SdkClickHandler;)V
+208424: 7010 a95d 0000                         |0000: invoke-direct {v0}, Lcom/adjust/sdk/SdkClickHandler;.sendNextSdkClick:()V // method@5da9
+20842a: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/adjust/sdk/SdkClickHandler;
+
+    #4              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'access$300'
+      type          : '(Lcom/adjust/sdk/SdkClickHandler;)Ljava/lang/ref/WeakReference;'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+2082e8:                                        |[2082e8] com.adjust.sdk.SdkClickHandler.access$300:(Lcom/adjust/sdk/SdkClickHandler;)Ljava/lang/ref/WeakReference;
+2082f8: 5400 1c2a                              |0000: iget-object v0, v0, Lcom/adjust/sdk/SdkClickHandler;.activityHandlerWeakRef:Ljava/lang/ref/WeakReference; // field@2a1c
+2082fc: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/adjust/sdk/SdkClickHandler;
+
+    #5              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'access$400'
+      type          : '(Lcom/adjust/sdk/SdkClickHandler;)V'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+20842c:                                        |[20842c] com.adjust.sdk.SdkClickHandler.access$400:(Lcom/adjust/sdk/SdkClickHandler;)V
+20843c: 7010 aa5d 0000                         |0000: invoke-direct {v0}, Lcom/adjust/sdk/SdkClickHandler;.sendNextSdkClickI:()V // method@5daa
+208442: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/adjust/sdk/SdkClickHandler;
+
+    #6              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'access$500'
+      type          : '(Lcom/adjust/sdk/SdkClickHandler;Lcom/adjust/sdk/ActivityPackage;)V'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 4 16-bit code units
+208444:                                        |[208444] com.adjust.sdk.SdkClickHandler.access$500:(Lcom/adjust/sdk/SdkClickHandler;Lcom/adjust/sdk/ActivityPackage;)V
+208454: 7020 ae5d 1000                         |0000: invoke-direct {v0, v1}, Lcom/adjust/sdk/SdkClickHandler;.sendSdkClickI:(Lcom/adjust/sdk/ActivityPackage;)V // method@5dae
+20845a: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/adjust/sdk/SdkClickHandler;
+        0x0000 - 0x0004 reg=1 (null) Lcom/adjust/sdk/ActivityPackage;
+
+    #7              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'generateSendingParametersI'
+      type          : '()Ljava/util/Map;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 22 16-bit code units
+208318:                                        |[208318] com.adjust.sdk.SdkClickHandler.generateSendingParametersI:()Ljava/util/Map;
+208328: 2200 2112                              |0000: new-instance v0, Ljava/util/HashMap; // type@1221
+20832c: 7010 d474 0000                         |0002: invoke-direct {v0}, Ljava/util/HashMap;.<init>:()V // method@74d4
+208332: 5441 212a                              |0005: iget-object v1, v4, Lcom/adjust/sdk/SdkClickHandler;.packageQueue:Ljava/util/List; // field@2a21
+208336: 7210 1a75 0100                         |0007: invoke-interface {v1}, Ljava/util/List;.size:()I // method@751a
+20833c: 0a01                                   |000a: move-result v1
+20833e: d801 01ff                              |000b: add-int/lit8 v1, v1, #int -1 // #ff
+208342: 3d01 0800                              |000d: if-lez v1, 0015 // +0008
+208346: 8111                                   |000f: int-to-long v1, v1
+208348: 1a03 fa9e                              |0010: const-string v3, "queue_size" // string@9efa
+20834c: 7140 f55c 3021                         |0012: invoke-static {v0, v3, v1, v2}, Lcom/adjust/sdk/PackageBuilder;.addLong:(Ljava/util/Map;Ljava/lang/String;J)V // method@5cf5
+208352: 1100                                   |0015: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0005 line=3
+        0x0010 line=5
+      locals        :
+        0x0000 - 0x0016 reg=4 this Lcom/adjust/sdk/SdkClickHandler;
+
+    #8              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'logErrorMessageI'
+      type          : '(Lcom/adjust/sdk/ActivityPackage;Ljava/lang/String;Ljava/lang/Throwable;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 3
+      insns size    : 27 16-bit code units
+208498:                                        |[208498] com.adjust.sdk.SdkClickHandler.logErrorMessageI:(Lcom/adjust/sdk/ActivityPackage;Ljava/lang/String;Ljava/lang/Throwable;)V
+2084a8: 6e10 165a 0100                         |0000: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getFailureMessage:()Ljava/lang/String; // method@5a16
+2084ae: 0c01                                   |0003: move-result-object v1
+2084b0: 7120 255e 3200                         |0004: invoke-static {v2, v3}, Lcom/adjust/sdk/Util;.getReasonString:(Ljava/lang/String;Ljava/lang/Throwable;)Ljava/lang/String; // method@5e25
+2084b6: 0c02                                   |0007: move-result-object v2
+2084b8: 2420 ac1a 2100                         |0008: filled-new-array {v1, v2}, [Ljava/lang/Object; // type@1aac
+2084be: 0c01                                   |000b: move-result-object v1
+2084c0: 1a02 460a                              |000c: const-string v2, "%s. (%s)" // string@0a46
+2084c4: 7120 1a5e 1200                         |000e: invoke-static {v2, v1}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+2084ca: 0c01                                   |0011: move-result-object v1
+2084cc: 5402 202a                              |0012: iget-object v2, v0, Lcom/adjust/sdk/SdkClickHandler;.logger:Lcom/adjust/sdk/ILogger; // field@2a20
+2084d0: 1203                                   |0014: const/4 v3, #int 0 // #0
+2084d2: 2333 ac1a                              |0015: new-array v3, v3, [Ljava/lang/Object; // type@1aac
+2084d6: 7230 865c 1203                         |0017: invoke-interface {v2, v1, v3}, Lcom/adjust/sdk/ILogger;.error:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c86
+2084dc: 0e00                                   |001a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0004 line=2
+        0x0008 line=3
+        0x0012 line=5
+      locals        :
+        0x0000 - 0x001b reg=0 this Lcom/adjust/sdk/SdkClickHandler;
+        0x0000 - 0x001b reg=1 (null) Lcom/adjust/sdk/ActivityPackage;
+        0x0000 - 0x001b reg=2 (null) Ljava/lang/String;
+        0x0000 - 0x001b reg=3 (null) Ljava/lang/Throwable;
+
+    #9              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'retrySendingI'
+      type          : '(Lcom/adjust/sdk/ActivityPackage;Ljava/lang/Long;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 3
+      insns size    : 42 16-bit code units
+208518:                                        |[208518] com.adjust.sdk.SdkClickHandler.retrySendingI:(Lcom/adjust/sdk/ActivityPackage;Ljava/lang/Long;)V
+208528: 3806 1300                              |0000: if-eqz v6, 0013 // +0013
+20852c: 6e10 9271 0600                         |0002: invoke-virtual {v6}, Ljava/lang/Long;.longValue:()J // method@7192
+208532: 0b00                                   |0005: move-result-wide v0
+208534: 1602 0000                              |0006: const-wide/16 v2, #int 0 // #0
+208538: 3100 0002                              |0008: cmp-long v0, v0, v2
+20853c: 3d00 0900                              |000a: if-lez v0, 0013 // +0009
+208540: 6e10 9271 0600                         |000c: invoke-virtual {v6}, Ljava/lang/Long;.longValue:()J // method@7192
+208546: 0b00                                   |000f: move-result-wide v0
+208548: 5a40 1f2a                              |0010: iput-wide v0, v4, Lcom/adjust/sdk/SdkClickHandler;.lastPackageRetryInMilli:J // field@2a1f
+20854c: 2814                                   |0012: goto 0026 // +0014
+20854e: 6e10 275a 0500                         |0013: invoke-virtual {v5}, Lcom/adjust/sdk/ActivityPackage;.increaseRetries:()I // method@5a27
+208554: 0a06                                   |0016: move-result v6
+208556: 5440 202a                              |0017: iget-object v0, v4, Lcom/adjust/sdk/SdkClickHandler;.logger:Lcom/adjust/sdk/ILogger; // field@2a20
+20855a: 7110 8771 0600                         |0019: invoke-static {v6}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@7187
+208560: 0c06                                   |001c: move-result-object v6
+208562: 2410 ac1a 0600                         |001d: filled-new-array {v6}, [Ljava/lang/Object; // type@1aac
+208568: 0c06                                   |0020: move-result-object v6
+20856a: 1a01 bc4f                              |0021: const-string v1, "Retrying sdk_click package for the %d time" // string@4fbc
+20856e: 7230 865c 1006                         |0023: invoke-interface {v0, v1, v6}, Lcom/adjust/sdk/ILogger;.error:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c86
+208574: 6e20 ad5d 5400                         |0026: invoke-virtual {v4, v5}, Lcom/adjust/sdk/SdkClickHandler;.sendSdkClick:(Lcom/adjust/sdk/ActivityPackage;)V // method@5dad
+20857a: 0e00                                   |0029: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+        0x000c line=2
+        0x0013 line=4
+        0x0017 line=6
+        0x0026 line=9
+      locals        :
+        0x0000 - 0x002a reg=4 this Lcom/adjust/sdk/SdkClickHandler;
+        0x0000 - 0x002a reg=5 (null) Lcom/adjust/sdk/ActivityPackage;
+        0x0000 - 0x002a reg=6 (null) Ljava/lang/Long;
+
+    #10              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'sendNextSdkClick'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 11 16-bit code units
+20857c:                                        |[20857c] com.adjust.sdk.SdkClickHandler.sendNextSdkClick:()V
+20858c: 5420 232a                              |0000: iget-object v0, v2, Lcom/adjust/sdk/SdkClickHandler;.scheduler:Lcom/adjust/sdk/scheduler/ThreadScheduler; // field@2a23
+208590: 2201 5f0d                              |0002: new-instance v1, Lcom/adjust/sdk/SdkClickHandler$4; // type@0d5f
+208594: 7020 985d 2100                         |0004: invoke-direct {v1, v2}, Lcom/adjust/sdk/SdkClickHandler$4;.<init>:(Lcom/adjust/sdk/SdkClickHandler;)V // method@5d98
+20859a: 7220 a85e 1000                         |0007: invoke-interface {v0, v1}, Lcom/adjust/sdk/scheduler/ThreadExecutor;.submit:(Ljava/lang/Runnable;)V // method@5ea8
+2085a0: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x000b reg=2 this Lcom/adjust/sdk/SdkClickHandler;
+
+    #11              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'sendNextSdkClickI'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 4
+      insns size    : 76 16-bit code units
+2085a4:                                        |[2085a4] com.adjust.sdk.SdkClickHandler.sendNextSdkClickI:()V
+2085b4: 5450 1c2a                              |0000: iget-object v0, v5, Lcom/adjust/sdk/SdkClickHandler;.activityHandlerWeakRef:Ljava/lang/ref/WeakReference; // field@2a1c
+2085b8: 6e10 b072 0000                         |0002: invoke-virtual {v0}, Ljava/lang/ref/Reference;.get:()Ljava/lang/Object; // method@72b0
+2085be: 0c00                                   |0005: move-result-object v0
+2085c0: 1f00 260d                              |0006: check-cast v0, Lcom/adjust/sdk/IActivityHandler; // type@0d26
+2085c4: 7210 4c5c 0000                         |0008: invoke-interface {v0}, Lcom/adjust/sdk/IActivityHandler;.getActivityState:()Lcom/adjust/sdk/ActivityState; // method@5c4c
+2085ca: 0c01                                   |000b: move-result-object v1
+2085cc: 3901 0300                              |000c: if-nez v1, 000f // +0003
+2085d0: 2817                                   |000e: goto 0025 // +0017
+2085d2: 7210 4c5c 0000                         |000f: invoke-interface {v0}, Lcom/adjust/sdk/IActivityHandler;.getActivityState:()Lcom/adjust/sdk/ActivityState; // method@5c4c
+2085d8: 0c00                                   |0012: move-result-object v0
+2085da: 5500 e527                              |0013: iget-boolean v0, v0, Lcom/adjust/sdk/ActivityState;.isGdprForgotten:Z // field@27e5
+2085de: 3800 0300                              |0015: if-eqz v0, 0018 // +0003
+2085e2: 280e                                   |0017: goto 0025 // +000e
+2085e4: 5550 222a                              |0018: iget-boolean v0, v5, Lcom/adjust/sdk/SdkClickHandler;.paused:Z // field@2a22
+2085e8: 3800 0300                              |001a: if-eqz v0, 001d // +0003
+2085ec: 2809                                   |001c: goto 0025 // +0009
+2085ee: 5450 212a                              |001d: iget-object v0, v5, Lcom/adjust/sdk/SdkClickHandler;.packageQueue:Ljava/util/List; // field@2a21
+2085f2: 7210 1375 0000                         |001f: invoke-interface {v0}, Ljava/util/List;.isEmpty:()Z // method@7513
+2085f8: 0a00                                   |0022: move-result v0
+2085fa: 3800 0300                              |0023: if-eqz v0, 0026 // +0003
+2085fe: 0e00                                   |0025: return-void
+208600: 5450 212a                              |0026: iget-object v0, v5, Lcom/adjust/sdk/SdkClickHandler;.packageQueue:Ljava/util/List; // field@2a21
+208604: 1201                                   |0028: const/4 v1, #int 0 // #0
+208606: 7220 1775 1000                         |0029: invoke-interface {v0, v1}, Ljava/util/List;.remove:(I)Ljava/lang/Object; // method@7517
+20860c: 0c00                                   |002c: move-result-object v0
+20860e: 1f00 df0c                              |002d: check-cast v0, Lcom/adjust/sdk/ActivityPackage; // type@0cdf
+208612: 6e10 225a 0000                         |002f: invoke-virtual {v0}, Lcom/adjust/sdk/ActivityPackage;.getRetries:()I // method@5a22
+208618: 0a01                                   |0032: move-result v1
+20861a: 2202 600d                              |0033: new-instance v2, Lcom/adjust/sdk/SdkClickHandler$5; // type@0d60
+20861e: 7030 9a5d 5200                         |0035: invoke-direct {v2, v5, v0}, Lcom/adjust/sdk/SdkClickHandler$5;.<init>:(Lcom/adjust/sdk/SdkClickHandler;Lcom/adjust/sdk/ActivityPackage;)V // method@5d9a
+208624: 7020 b05d 1500                         |0038: invoke-direct {v5, v1}, Lcom/adjust/sdk/SdkClickHandler;.waitTime:(I)J // method@5db0
+20862a: 0b00                                   |003b: move-result-wide v0
+20862c: 1603 0000                              |003c: const-wide/16 v3, #int 0 // #0
+208630: 3103 0003                              |003e: cmp-long v3, v0, v3
+208634: 3d03 0800                              |0040: if-lez v3, 0048 // +0008
+208638: 5453 232a                              |0042: iget-object v3, v5, Lcom/adjust/sdk/SdkClickHandler;.scheduler:Lcom/adjust/sdk/scheduler/ThreadScheduler; // field@2a23
+20863c: 7240 ae5e 2310                         |0044: invoke-interface {v3, v2, v0, v1}, Lcom/adjust/sdk/scheduler/ThreadScheduler;.schedule:(Ljava/lang/Runnable;J)V // method@5eae
+208642: 0e00                                   |0047: return-void
+208644: 6e10 9b5d 0200                         |0048: invoke-virtual {v2}, Lcom/adjust/sdk/SdkClickHandler$5;.run:()V // method@5d9b
+20864a: 0e00                                   |004b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0008 line=2
+        0x000f line=5
+        0x0018 line=8
+        0x001d line=11
+        0x0026 line=15
+        0x002f line=16
+        0x0033 line=18
+        0x0038 line=26
+        0x0042 line=28
+        0x0048 line=30
+      locals        :
+        0x0000 - 0x004c reg=5 this Lcom/adjust/sdk/SdkClickHandler;
+
+    #12              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'sendSdkClickI'
+      type          : '(Lcom/adjust/sdk/ActivityPackage;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 29
+      ins           : 2
+      outs          : 4
+      insns size    : 376 16-bit code units
+2086c4:                                        |[2086c4] com.adjust.sdk.SdkClickHandler.sendSdkClickI:(Lcom/adjust/sdk/ActivityPackage;)V
+2086d4: 0800 1b00                              |0000: move-object/from16 v0, v27
+2086d8: 0801 1c00                              |0002: move-object/from16 v1, v28
+2086dc: 5402 1c2a                              |0004: iget-object v2, v0, Lcom/adjust/sdk/SdkClickHandler;.activityHandlerWeakRef:Ljava/lang/ref/WeakReference; // field@2a1c
+2086e0: 6e10 b072 0200                         |0006: invoke-virtual {v2}, Ljava/lang/ref/Reference;.get:()Ljava/lang/Object; // method@72b0
+2086e6: 0c02                                   |0009: move-result-object v2
+2086e8: 1f02 260d                              |000a: check-cast v2, Lcom/adjust/sdk/IActivityHandler; // type@0d26
+2086ec: 6e10 1e5a 0100                         |000c: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getParameters:()Ljava/util/Map; // method@5a1e
+2086f2: 0c03                                   |000f: move-result-object v3
+2086f4: 1a04 39ac                              |0010: const-string v4, "source" // string@ac39
+2086f8: 7220 3d75 4300                         |0012: invoke-interface {v3, v4}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@753d
+2086fe: 0c03                                   |0015: move-result-object v3
+208700: 1f03 8611                              |0016: check-cast v3, Ljava/lang/String; // type@1186
+208704: 3803 0c00                              |0018: if-eqz v3, 0024 // +000c
+208708: 1a06 56a0                              |001a: const-string v6, "reftag" // string@a056
+20870c: 6e20 1a72 6300                         |001c: invoke-virtual {v3, v6}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@721a
+208712: 0a06                                   |001f: move-result v6
+208714: 3806 0400                              |0020: if-eqz v6, 0024 // +0004
+208718: 1216                                   |0022: const/4 v6, #int 1 // #1
+20871a: 2802                                   |0023: goto 0025 // +0002
+20871c: 1206                                   |0024: const/4 v6, #int 0 // #0
+20871e: 6e10 1e5a 0100                         |0025: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getParameters:()Ljava/util/Map; // method@5a1e
+208724: 0c07                                   |0028: move-result-object v7
+208726: 1a08 479f                              |0029: const-string v8, "raw_referrer" // string@9f47
+20872a: 7220 3d75 8700                         |002b: invoke-interface {v7, v8}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@753d
+208730: 0c07                                   |002e: move-result-object v7
+208732: 1f07 8611                              |002f: check-cast v7, Ljava/lang/String; // type@1186
+208736: 3806 1600                              |0031: if-eqz v6, 0047 // +0016
+20873a: 7210 525c 0200                         |0033: invoke-interface {v2}, Lcom/adjust/sdk/IActivityHandler;.getContext:()Landroid/content/Context; // method@5c52
+208740: 0c08                                   |0036: move-result-object v8
+208742: 7110 be5d 0800                         |0037: invoke-static {v8}, Lcom/adjust/sdk/SharedPreferencesManager;.getDefaultInstance:(Landroid/content/Context;)Lcom/adjust/sdk/SharedPreferencesManager; // method@5dbe
+208748: 0c08                                   |003a: move-result-object v8
+20874a: 6e10 115a 0100                         |003b: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getClickTimeInMilliseconds:()J // method@5a11
+208750: 0b09                                   |003e: move-result-wide v9
+208752: 6e40 c65d 78a9                         |003f: invoke-virtual {v8, v7, v9, v10}, Lcom/adjust/sdk/SharedPreferencesManager;.getRawReferrer:(Ljava/lang/String;J)Lorg/json/JSONArray; // method@5dc6
+208758: 0c08                                   |0042: move-result-object v8
+20875a: 3908 0400                              |0043: if-nez v8, 0047 // +0004
+20875e: 2900 ab00                              |0045: goto/16 00f0 // +00ab
+208762: 3803 0c00                              |0047: if-eqz v3, 0053 // +000c
+208766: 1a08 e184                              |0049: const-string v8, "install_referrer" // string@84e1
+20876a: 6e20 1a72 8300                         |004b: invoke-virtual {v3, v8}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@721a
+208770: 0a08                                   |004e: move-result v8
+208772: 3808 0400                              |004f: if-eqz v8, 0053 // +0004
+208776: 1218                                   |0051: const/4 v8, #int 1 // #1
+208778: 2802                                   |0052: goto 0054 // +0002
+20877a: 1208                                   |0053: const/4 v8, #int 0 // #0
+20877c: 3808 4900                              |0054: if-eqz v8, 009d // +0049
+208780: 6e10 125a 0100                         |0056: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getClickTimeInSeconds:()J // method@5a12
+208786: 0b09                                   |0059: move-result-wide v9
+208788: 6e10 195a 0100                         |005a: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getInstallBeginTimeInSeconds:()J // method@5a19
+20878e: 0b0b                                   |005d: move-result-wide v11
+208790: 6e10 1e5a 0100                         |005e: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getParameters:()Ljava/util/Map; // method@5a1e
+208796: 0c0d                                   |0061: move-result-object v13
+208798: 1a0e 3fa0                              |0062: const-string v14, "referrer" // string@a03f
+20879c: 7220 3d75 ed00                         |0064: invoke-interface {v13, v14}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@753d
+2087a2: 0c0d                                   |0067: move-result-object v13
+2087a4: 1f0d 8611                              |0068: check-cast v13, Ljava/lang/String; // type@1186
+2087a8: 6e10 135a 0100                         |006a: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getClickTimeServerInSeconds:()J // method@5a13
+2087ae: 0b0e                                   |006d: move-result-wide v14
+2087b0: 6e10 1a5a 0100                         |006e: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getInstallBeginTimeServerInSeconds:()J // method@5a1a
+2087b6: 0b10                                   |0071: move-result-wide v16
+2087b8: 6e10 1b5a 0100                         |0072: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getInstallVersion:()Ljava/lang/String; // method@5a1b
+2087be: 0c12                                   |0075: move-result-object v18
+2087c0: 6e10 185a 0100                         |0076: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getGooglePlayInstant:()Ljava/lang/Boolean; // method@5a18
+2087c6: 0c13                                   |0079: move-result-object v19
+2087c8: 6e10 1c5a 0100                         |007a: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getIsClick:()Ljava/lang/Boolean; // method@5a1c
+2087ce: 0c14                                   |007d: move-result-object v20
+2087d0: 6e10 1e5a 0100                         |007e: invoke-virtual {v1}, Lcom/adjust/sdk/ActivityPackage;.getParameters:()Ljava/util/Map; // method@5a1e
+2087d6: 0c04                                   |0081: move-result-object v4
+2087d8: 1a05 46a0                              |0082: const-string v5, "referrer_api" // string@a046
+2087dc: 7220 3d75 5400                         |0084: invoke-interface {v4, v5}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@753d
+2087e2: 0c04                                   |0087: move-result-object v4
+2087e4: 1f04 8611                              |0088: check-cast v4, Ljava/lang/String; // type@1186
+2087e8: 0519 1000                              |008a: move-wide/from16 v25, v16
+2087ec: 0210 0600                              |008c: move/from16 v16, v6
+2087f0: 0505 1900                              |008e: move-wide/from16 v5, v25
+2087f4: 0211 0800                              |0090: move/from16 v17, v8
+2087f8: 0808 1200                              |0092: move-object/from16 v8, v18
+2087fc: 0812 0200                              |0094: move-object/from16 v18, v2
+208800: 0802 1300                              |0096: move-object/from16 v2, v19
+208804: 0813 0400                              |0098: move-object/from16 v19, v4
+208808: 0804 1400                              |009a: move-object/from16 v4, v20
+20880c: 2812                                   |009c: goto 00ae // +0012
+20880e: 1609 ffff                              |009d: const-wide/16 v9, #int -1 // #ffff
+208812: 120d                                   |009f: const/4 v13, #int 0 // #0
+208814: 0812 0200                              |00a0: move-object/from16 v18, v2
+208818: 0210 0600                              |00a2: move/from16 v16, v6
+20881c: 0211 0800                              |00a4: move/from16 v17, v8
+208820: 0495                                   |00a6: move-wide v5, v9
+208822: 045b                                   |00a7: move-wide v11, v5
+208824: 04be                                   |00a8: move-wide v14, v11
+208826: 07d2                                   |00a9: move-object v2, v13
+208828: 0724                                   |00aa: move-object v4, v2
+20882a: 0748                                   |00ab: move-object v8, v4
+20882c: 0813 0800                              |00ac: move-object/from16 v19, v8
+208830: 0814 0400                              |00ae: move-object/from16 v20, v4
+208834: 3803 0c00                              |00b0: if-eqz v3, 00bc // +000c
+208838: 1a04 e39d                              |00b2: const-string v4, "preinstall" // string@9de3
+20883c: 6e20 1a72 4300                         |00b4: invoke-virtual {v3, v4}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@721a
+208842: 0a04                                   |00b7: move-result v4
+208844: 3804 0400                              |00b8: if-eqz v4, 00bc // +0004
+208848: 1214                                   |00ba: const/4 v4, #int 1 // #1
+20884a: 2802                                   |00bb: goto 00bd // +0002
+20884c: 1204                                   |00bc: const/4 v4, #int 0 // #0
+20884e: 0216 0400                              |00bd: move/from16 v22, v4
+208852: 3803 0c00                              |00bf: if-eqz v3, 00cb // +000c
+208856: 1a04 f181                              |00c1: const-string v4, "google_lvl" // string@81f1
+20885a: 6e20 1a72 4300                         |00c3: invoke-virtual {v3, v4}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@721a
+208860: 0a03                                   |00c6: move-result v3
+208862: 3803 0400                              |00c7: if-eqz v3, 00cb // +0004
+208866: 1214                                   |00c9: const/4 v4, #int 1 // #1
+208868: 2802                                   |00ca: goto 00cc // +0002
+20886a: 1204                                   |00cb: const/4 v4, #int 0 // #0
+20886c: 7010 a35d 0000                         |00cc: invoke-direct {v0}, Lcom/adjust/sdk/SdkClickHandler;.generateSendingParametersI:()Ljava/util/Map; // method@5da3
+208872: 0c03                                   |00cf: move-result-object v3
+208874: 0215 0400                              |00d0: move/from16 v21, v4
+208878: 5404 1d2a                              |00d2: iget-object v4, v0, Lcom/adjust/sdk/SdkClickHandler;.activityPackageSender:Lcom/adjust/sdk/network/IActivityPackageSender; // field@2a1d
+20887c: 7230 6a5e 1403                         |00d4: invoke-interface {v4, v1, v3}, Lcom/adjust/sdk/network/IActivityPackageSender;.sendActivityPackageSync:(Lcom/adjust/sdk/ActivityPackage;Ljava/util/Map;)Lcom/adjust/sdk/ResponseData; // method@5e6a
+208882: 0c03                                   |00d7: move-result-object v3
+208884: 2034 620d                              |00d8: instance-of v4, v3, Lcom/adjust/sdk/SdkClickResponseData; // type@0d62
+208888: 3904 0300                              |00da: if-nez v4, 00dd // +0003
+20888c: 2814                                   |00dc: goto 00f0 // +0014
+20888e: 1f03 620d                              |00dd: check-cast v3, Lcom/adjust/sdk/SdkClickResponseData; // type@0d62
+208892: 5534 0e2a                              |00df: iget-boolean v4, v3, Lcom/adjust/sdk/ResponseData;.willRetry:Z // field@2a0e
+208896: 3804 0800                              |00e1: if-eqz v4, 00e9 // +0008
+20889a: 5432 082a                              |00e3: iget-object v2, v3, Lcom/adjust/sdk/ResponseData;.retryIn:Ljava/lang/Long; // field@2a08
+20889e: 7030 a85d 1002                         |00e5: invoke-direct {v0, v1, v2}, Lcom/adjust/sdk/SdkClickHandler;.retrySendingI:(Lcom/adjust/sdk/ActivityPackage;Ljava/lang/Long;)V // method@5da8
+2088a4: 0e00                                   |00e8: return-void
+2088a6: 0724                                   |00e9: move-object v4, v2
+2088a8: 1601 0000                              |00ea: const-wide/16 v1, #int 0 // #0
+2088ac: 5a01 1f2a                              |00ec: iput-wide v1, v0, Lcom/adjust/sdk/SdkClickHandler;.lastPackageRetryInMilli:J // field@2a1f
+2088b0: 3912 0300                              |00ee: if-nez v18, 00f1 // +0003
+2088b4: 0e00                                   |00f0: return-void
+2088b6: 5431 0d2a                              |00f1: iget-object v1, v3, Lcom/adjust/sdk/ResponseData;.trackingState:Lcom/adjust/sdk/TrackingState; // field@2a0d
+2088ba: 6202 4b2a                              |00f3: sget-object v2, Lcom/adjust/sdk/TrackingState;.OPTED_OUT:Lcom/adjust/sdk/TrackingState; // field@2a4b
+2088be: 3321 0600                              |00f5: if-ne v1, v2, 00fb // +0006
+2088c2: 7801 575c 1200                         |00f7: invoke-interface/range {v18}, Lcom/adjust/sdk/IActivityHandler;.gotOptOutResponse:()V // method@5c57
+2088c8: 0e00                                   |00fa: return-void
+2088ca: 3810 1500                              |00fb: if-eqz v16, 0110 // +0015
+2088ce: 7801 525c 1200                         |00fd: invoke-interface/range {v18}, Lcom/adjust/sdk/IActivityHandler;.getContext:()Landroid/content/Context; // method@5c52
+2088d4: 0c01                                   |0100: move-result-object v1
+2088d6: 7110 be5d 0100                         |0101: invoke-static {v1}, Lcom/adjust/sdk/SharedPreferencesManager;.getDefaultInstance:(Landroid/content/Context;)Lcom/adjust/sdk/SharedPreferencesManager; // method@5dbe
+2088dc: 0c01                                   |0104: move-result-object v1
+2088de: 0742                                   |0105: move-object v2, v4
+2088e0: 0517 0500                              |0106: move-wide/from16 v23, v5
+2088e4: 7401 115a 1c00                         |0108: invoke-virtual/range {v28}, Lcom/adjust/sdk/ActivityPackage;.getClickTimeInMilliseconds:()J // method@5a11
+2088ea: 0b04                                   |010b: move-result-wide v4
+2088ec: 6e40 cf5d 7154                         |010c: invoke-virtual {v1, v7, v4, v5}, Lcom/adjust/sdk/SharedPreferencesManager;.removeRawReferrer:(Ljava/lang/String;J)V // method@5dcf
+2088f2: 2804                                   |010f: goto 0113 // +0004
+2088f4: 0742                                   |0110: move-object v2, v4
+2088f6: 0517 0500                              |0111: move-wide/from16 v23, v5
+2088fa: 3811 1d00                              |0113: if-eqz v17, 0130 // +001d
+2088fe: 5a39 242a                              |0115: iput-wide v9, v3, Lcom/adjust/sdk/SdkClickResponseData;.clickTime:J // field@2a24
+208902: 5a3b 272a                              |0117: iput-wide v11, v3, Lcom/adjust/sdk/SdkClickResponseData;.installBegin:J // field@2a27
+208906: 5b3d 292a                              |0119: iput-object v13, v3, Lcom/adjust/sdk/SdkClickResponseData;.installReferrer:Ljava/lang/String; // field@2a29
+20890a: 5a3e 252a                              |011b: iput-wide v14, v3, Lcom/adjust/sdk/SdkClickResponseData;.clickTimeServer:J // field@2a25
+20890e: 0509 1700                              |011d: move-wide/from16 v9, v23
+208912: 5a39 282a                              |011f: iput-wide v9, v3, Lcom/adjust/sdk/SdkClickResponseData;.installBeginServer:J // field@2a28
+208916: 5b38 2a2a                              |0121: iput-object v8, v3, Lcom/adjust/sdk/SdkClickResponseData;.installVersion:Ljava/lang/String; // field@2a2a
+20891a: 5b32 262a                              |0123: iput-object v2, v3, Lcom/adjust/sdk/SdkClickResponseData;.googlePlayInstant:Ljava/lang/Boolean; // field@2a26
+20891e: 080d 1400                              |0125: move-object/from16 v13, v20
+208922: 5b3d 2b2a                              |0127: iput-object v13, v3, Lcom/adjust/sdk/SdkClickResponseData;.isClick:Ljava/lang/Boolean; // field@2a2b
+208926: 0804 1300                              |0129: move-object/from16 v4, v19
+20892a: 5b34 2d2a                              |012b: iput-object v4, v3, Lcom/adjust/sdk/SdkClickResponseData;.referrerApi:Ljava/lang/String; // field@2a2d
+20892e: 1211                                   |012d: const/4 v1, #int 1 // #1
+208930: 5c31 2c2a                              |012e: iput-boolean v1, v3, Lcom/adjust/sdk/SdkClickResponseData;.isInstallReferrer:Z // field@2a2c
+208934: 3816 3500                              |0130: if-eqz v22, 0165 // +0035
+208938: 7401 1e5a 1c00                         |0132: invoke-virtual/range {v28}, Lcom/adjust/sdk/ActivityPackage;.getParameters:()Ljava/util/Map; // method@5a1e
+20893e: 0c01                                   |0135: move-result-object v1
+208940: 1a02 1776                              |0136: const-string v2, "found_location" // string@7617
+208944: 7220 3d75 2100                         |0138: invoke-interface {v1, v2}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@753d
+20894a: 0c01                                   |013b: move-result-object v1
+20894c: 1f01 8611                              |013c: check-cast v1, Ljava/lang/String; // type@1186
+208950: 3801 2700                              |013e: if-eqz v1, 0165 // +0027
+208954: 6e10 2772 0100                         |0140: invoke-virtual {v1}, Ljava/lang/String;.isEmpty:()Z // method@7227
+20895a: 0a02                                   |0143: move-result v2
+20895c: 3902 2100                              |0144: if-nez v2, 0165 // +0021
+208960: 7801 525c 1200                         |0146: invoke-interface/range {v18}, Lcom/adjust/sdk/IActivityHandler;.getContext:()Landroid/content/Context; // method@5c52
+208966: 0c02                                   |0149: move-result-object v2
+208968: 7110 be5d 0200                         |014a: invoke-static {v2}, Lcom/adjust/sdk/SharedPreferencesManager;.getDefaultInstance:(Landroid/content/Context;)Lcom/adjust/sdk/SharedPreferencesManager; // method@5dbe
+20896e: 0c02                                   |014d: move-result-object v2
+208970: 1a04 dcad                              |014e: const-string v4, "system_installer_referrer" // string@addc
+208974: 6e20 1b72 1400                         |0150: invoke-virtual {v4, v1}, Ljava/lang/String;.equalsIgnoreCase:(Ljava/lang/String;)Z // method@721b
+20897a: 0a04                                   |0153: move-result v4
+20897c: 3804 0600                              |0154: if-eqz v4, 015a // +0006
+208980: 6e10 cd5d 0200                         |0156: invoke-virtual {v2}, Lcom/adjust/sdk/SharedPreferencesManager;.removePreinstallReferrer:()V // method@5dcd
+208986: 280c                                   |0159: goto 0165 // +000c
+208988: 6e10 c35d 0200                         |015a: invoke-virtual {v2}, Lcom/adjust/sdk/SharedPreferencesManager;.getPreinstallPayloadReadStatus:()J // method@5dc3
+20898e: 0b04                                   |015d: move-result-wide v4
+208990: 7130 535d 4105                         |015e: invoke-static {v1, v4, v5}, Lcom/adjust/sdk/PreinstallUtil;.markAsRead:(Ljava/lang/String;J)J // method@5d53
+208996: 0b04                                   |0161: move-result-wide v4
+208998: 6e30 dd5d 4205                         |0162: invoke-virtual {v2, v4, v5}, Lcom/adjust/sdk/SharedPreferencesManager;.setPreinstallPayloadReadStatus:(J)V // method@5ddd
+20899e: 3815 0d00                              |0165: if-eqz v21, 0172 // +000d
+2089a2: 7801 525c 1200                         |0167: invoke-interface/range {v18}, Lcom/adjust/sdk/IActivityHandler;.getContext:()Landroid/content/Context; // method@5c52
+2089a8: 0c01                                   |016a: move-result-object v1
+2089aa: 7110 be5d 0100                         |016b: invoke-static {v1}, Lcom/adjust/sdk/SharedPreferencesManager;.getDefaultInstance:(Landroid/content/Context;)Lcom/adjust/sdk/SharedPreferencesManager; // method@5dbe
+2089b0: 0c01                                   |016e: move-result-object v1
+2089b2: 6e10 dc5d 0100                         |016f: invoke-virtual {v1}, Lcom/adjust/sdk/SharedPreferencesManager;.setLicenseVerificationTracked:()V // method@5ddc
+2089b8: 0802 1200                              |0172: move-object/from16 v2, v18
+2089bc: 7220 4a5c 3200                         |0174: invoke-interface {v2, v3}, Lcom/adjust/sdk/IActivityHandler;.finishedTrackingActivity:(Lcom/adjust/sdk/ResponseData;)V // method@5c4a
+2089c2: 0e00                                   |0177: return-void
+      catches       : (none)
+      positions     :
+        0x0004 line=1
+        0x000c line=2
+        0x001a line=3
+        0x0025 line=4
+        0x0033 line=8
+        0x003b line=10
+        0x003f line=11
+        0x0049 line=20
+        0x0056 line=35
+        0x005a line=36
+        0x005e line=37
+        0x006a line=38
+        0x006e line=39
+        0x0072 line=40
+        0x0076 line=41
+        0x007a line=42
+        0x007e line=43
+        0x00b2 line=46
+        0x00c1 line=48
+        0x00cc line=50
+        0x00d2 line=52
+        0x00d8 line=56
+        0x00dd line=60
+        0x00df line=62
+        0x00e3 line=63
+        0x00ec line=67
+        0x00f1 line=73
+        0x00f7 line=74
+        0x00fd line=81
+        0x0101 line=82
+        0x0108 line=85
+        0x010c line=86
+        0x0115 line=93
+        0x0117 line=94
+        0x0119 line=95
+        0x011b line=96
+        0x011f line=97
+        0x0121 line=98
+        0x0123 line=99
+        0x0127 line=100
+        0x012b line=101
+        0x012e line=102
+        0x0132 line=106
+        0x0140 line=107
+        0x0146 line=110
+        0x014e line=112
+        0x0156 line=113
+        0x015a line=115
+        0x015e line=116
+        0x0162 line=117
+        0x0167 line=125
+        0x016f line=127
+        0x0174 line=130
+      locals        :
+        0x0000 - 0x0178 reg=27 this Lcom/adjust/sdk/SdkClickHandler;
+        0x0000 - 0x0178 reg=28 (null) Lcom/adjust/sdk/ActivityPackage;
+
+    #13              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'waitTime'
+      type          : '(I)J'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 3
+      insns size    : 47 16-bit code units
+208354:                                        |[208354] com.adjust.sdk.SdkClickHandler.waitTime:(I)J
+208364: 5360 1f2a                              |0000: iget-wide v0, v6, Lcom/adjust/sdk/SdkClickHandler;.lastPackageRetryInMilli:J // field@2a1f
+208368: 1602 0000                              |0002: const-wide/16 v2, #int 0 // #0
+20836c: 3104 0002                              |0004: cmp-long v4, v0, v2
+208370: 3d04 0300                              |0006: if-lez v4, 0009 // +0003
+208374: 1000                                   |0008: return-wide v0
+208376: 3d07 2500                              |0009: if-lez v7, 002e // +0025
+20837a: 5460 1e2a                              |000b: iget-object v0, v6, Lcom/adjust/sdk/SdkClickHandler;.backoffStrategy:Lcom/adjust/sdk/BackoffStrategy; // field@2a1e
+20837e: 7120 2b5e 0700                         |000d: invoke-static {v7, v0}, Lcom/adjust/sdk/Util;.getWaitingTime:(ILcom/adjust/sdk/BackoffStrategy;)J // method@5e2b
+208384: 0b00                                   |0010: move-result-wide v0
+208386: 8602                                   |0011: long-to-double v2, v0
+208388: 1804 0000 0000 0040 8f40               |0012: const-wide v4, #double 1000 // #408f400000000000
+208392: ce42                                   |0017: div-double/2addr v2, v4
+208394: 6204 542a                              |0018: sget-object v4, Lcom/adjust/sdk/Util;.SecondsDisplayFormat:Ljava/text/DecimalFormat; // field@2a54
+208398: 6e30 ff73 2403                         |001a: invoke-virtual {v4, v2, v3}, Ljava/text/NumberFormat;.format:(D)Ljava/lang/String; // method@73ff
+20839e: 0c02                                   |001d: move-result-object v2
+2083a0: 5463 202a                              |001e: iget-object v3, v6, Lcom/adjust/sdk/SdkClickHandler;.logger:Lcom/adjust/sdk/ILogger; // field@2a20
+2083a4: 7110 8771 0700                         |0020: invoke-static {v7}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@7187
+2083aa: 0c07                                   |0023: move-result-object v7
+2083ac: 2420 ac1a 7200                         |0024: filled-new-array {v2, v7}, [Ljava/lang/Object; // type@1aac
+2083b2: 0c07                                   |0027: move-result-object v7
+2083b4: 1a02 2d5c                              |0028: const-string v2, "Waiting for %s seconds before retrying sdk_click for the %d time" // string@5c2d
+2083b8: 7230 8b5c 2307                         |002a: invoke-interface {v3, v2, v7}, Lcom/adjust/sdk/ILogger;.verbose:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c8b
+2083be: 1000                                   |002d: return-wide v0
+2083c0: 1002                                   |002e: return-wide v2
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x000b line=6
+        0x0018 line=8
+        0x001e line=9
+      locals        :
+        0x0000 - 0x002f reg=6 this Lcom/adjust/sdk/SdkClickHandler;
+        0x0000 - 0x002f reg=7 (null) I
+
+  Virtual methods   -
+    #0              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'init'
+      type          : '(Lcom/adjust/sdk/IActivityHandler;ZLcom/adjust/sdk/network/IActivityPackageSender;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 2
+      insns size    : 21 16-bit code units
+20845c:                                        |[20845c] com.adjust.sdk.SdkClickHandler.init:(Lcom/adjust/sdk/IActivityHandler;ZLcom/adjust/sdk/network/IActivityPackageSender;)V
+20846c: df02 0201                              |0000: xor-int/lit8 v2, v2, #int 1 // #01
+208470: 5c02 222a                              |0002: iput-boolean v2, v0, Lcom/adjust/sdk/SdkClickHandler;.paused:Z // field@2a22
+208474: 2202 1412                              |0004: new-instance v2, Ljava/util/ArrayList; // type@1214
+208478: 7010 2874 0200                         |0006: invoke-direct {v2}, Ljava/util/ArrayList;.<init>:()V // method@7428
+20847e: 5b02 212a                              |0009: iput-object v2, v0, Lcom/adjust/sdk/SdkClickHandler;.packageQueue:Ljava/util/List; // field@2a21
+208482: 2202 a011                              |000b: new-instance v2, Ljava/lang/ref/WeakReference; // type@11a0
+208486: 7020 b372 1200                         |000d: invoke-direct {v2, v1}, Ljava/lang/ref/WeakReference;.<init>:(Ljava/lang/Object;)V // method@72b3
+20848c: 5b02 1c2a                              |0010: iput-object v2, v0, Lcom/adjust/sdk/SdkClickHandler;.activityHandlerWeakRef:Ljava/lang/ref/WeakReference; // field@2a1c
+208490: 5b03 1d2a                              |0012: iput-object v3, v0, Lcom/adjust/sdk/SdkClickHandler;.activityPackageSender:Lcom/adjust/sdk/network/IActivityPackageSender; // field@2a1d
+208494: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+        0x0004 line=2
+        0x000b line=3
+        0x0012 line=4
+      locals        :
+        0x0000 - 0x0015 reg=0 this Lcom/adjust/sdk/SdkClickHandler;
+        0x0000 - 0x0015 reg=1 (null) Lcom/adjust/sdk/IActivityHandler;
+        0x0000 - 0x0015 reg=2 (null) Z
+        0x0000 - 0x0015 reg=3 (null) Lcom/adjust/sdk/network/IActivityPackageSender;
+
+    #1              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'pauseSending'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 4 16-bit code units
+2084e0:                                        |[2084e0] com.adjust.sdk.SdkClickHandler.pauseSending:()V
+2084f0: 1210                                   |0000: const/4 v0, #int 1 // #1
+2084f2: 5c10 222a                              |0001: iput-boolean v0, v1, Lcom/adjust/sdk/SdkClickHandler;.paused:Z // field@2a22
+2084f6: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=1
+      locals        :
+        0x0000 - 0x0004 reg=1 this Lcom/adjust/sdk/SdkClickHandler;
+
+    #2              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'resumeSending'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+2084f8:                                        |[2084f8] com.adjust.sdk.SdkClickHandler.resumeSending:()V
+208508: 1200                                   |0000: const/4 v0, #int 0 // #0
+20850a: 5c10 222a                              |0001: iput-boolean v0, v1, Lcom/adjust/sdk/SdkClickHandler;.paused:Z // field@2a22
+20850e: 7010 a95d 0100                         |0003: invoke-direct {v1}, Lcom/adjust/sdk/SdkClickHandler;.sendNextSdkClick:()V // method@5da9
+208514: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=1
+        0x0003 line=3
+      locals        :
+        0x0000 - 0x0007 reg=1 this Lcom/adjust/sdk/SdkClickHandler;
+
+    #3              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'sendPreinstallPayload'
+      type          : '(Ljava/lang/String;Ljava/lang/String;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 4
+      insns size    : 11 16-bit code units
+20864c:                                        |[20864c] com.adjust.sdk.SdkClickHandler.sendPreinstallPayload:(Ljava/lang/String;Ljava/lang/String;)V
+20865c: 5420 232a                              |0000: iget-object v0, v2, Lcom/adjust/sdk/SdkClickHandler;.scheduler:Lcom/adjust/sdk/scheduler/ThreadScheduler; // field@2a23
+208660: 2201 5e0d                              |0002: new-instance v1, Lcom/adjust/sdk/SdkClickHandler$3; // type@0d5e
+208664: 7040 965d 2143                         |0004: invoke-direct {v1, v2, v3, v4}, Lcom/adjust/sdk/SdkClickHandler$3;.<init>:(Lcom/adjust/sdk/SdkClickHandler;Ljava/lang/String;Ljava/lang/String;)V // method@5d96
+20866a: 7220 a85e 1000                         |0007: invoke-interface {v0, v1}, Lcom/adjust/sdk/scheduler/ThreadExecutor;.submit:(Ljava/lang/Runnable;)V // method@5ea8
+208670: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x000b reg=2 this Lcom/adjust/sdk/SdkClickHandler;
+        0x0000 - 0x000b reg=3 (null) Ljava/lang/String;
+        0x0000 - 0x000b reg=4 (null) Ljava/lang/String;
+
+    #4              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'sendReftagReferrers'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 11 16-bit code units
+208674:                                        |[208674] com.adjust.sdk.SdkClickHandler.sendReftagReferrers:()V
+208684: 5420 232a                              |0000: iget-object v0, v2, Lcom/adjust/sdk/SdkClickHandler;.scheduler:Lcom/adjust/sdk/scheduler/ThreadScheduler; // field@2a23
+208688: 2201 5d0d                              |0002: new-instance v1, Lcom/adjust/sdk/SdkClickHandler$2; // type@0d5d
+20868c: 7020 945d 2100                         |0004: invoke-direct {v1, v2}, Lcom/adjust/sdk/SdkClickHandler$2;.<init>:(Lcom/adjust/sdk/SdkClickHandler;)V // method@5d94
+208692: 7220 a85e 1000                         |0007: invoke-interface {v0, v1}, Lcom/adjust/sdk/scheduler/ThreadExecutor;.submit:(Ljava/lang/Runnable;)V // method@5ea8
+208698: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x000b reg=2 this Lcom/adjust/sdk/SdkClickHandler;
+
+    #5              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'sendSdkClick'
+      type          : '(Lcom/adjust/sdk/ActivityPackage;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 11 16-bit code units
+20869c:                                        |[20869c] com.adjust.sdk.SdkClickHandler.sendSdkClick:(Lcom/adjust/sdk/ActivityPackage;)V
+2086ac: 5420 232a                              |0000: iget-object v0, v2, Lcom/adjust/sdk/SdkClickHandler;.scheduler:Lcom/adjust/sdk/scheduler/ThreadScheduler; // field@2a23
+2086b0: 2201 5c0d                              |0002: new-instance v1, Lcom/adjust/sdk/SdkClickHandler$1; // type@0d5c
+2086b4: 7030 925d 2103                         |0004: invoke-direct {v1, v2, v3}, Lcom/adjust/sdk/SdkClickHandler$1;.<init>:(Lcom/adjust/sdk/SdkClickHandler;Lcom/adjust/sdk/ActivityPackage;)V // method@5d92
+2086ba: 7220 a85e 1000                         |0007: invoke-interface {v0, v1}, Lcom/adjust/sdk/scheduler/ThreadExecutor;.submit:(Ljava/lang/Runnable;)V // method@5ea8
+2086c0: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x000b reg=2 this Lcom/adjust/sdk/SdkClickHandler;
+        0x0000 - 0x000b reg=3 (null) Lcom/adjust/sdk/ActivityPackage;
+
+    #6              : (in Lcom/adjust/sdk/SdkClickHandler;)
+      name          : 'teardown'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 3
+      insns size    : 41 16-bit code units
+2089c4:                                        |[2089c4] com.adjust.sdk.SdkClickHandler.teardown:()V
+2089d4: 5430 202a                              |0000: iget-object v0, v3, Lcom/adjust/sdk/SdkClickHandler;.logger:Lcom/adjust/sdk/ILogger; // field@2a20
+2089d8: 1201                                   |0002: const/4 v1, #int 0 // #0
+2089da: 2311 ac1a                              |0003: new-array v1, v1, [Ljava/lang/Object; // type@1aac
+2089de: 1a02 b453                              |0005: const-string v2, "SdkClickHandler teardown" // string@53b4
+2089e2: 7230 8b5c 2001                         |0007: invoke-interface {v0, v2, v1}, Lcom/adjust/sdk/ILogger;.verbose:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c8b
+2089e8: 5430 232a                              |000a: iget-object v0, v3, Lcom/adjust/sdk/SdkClickHandler;.scheduler:Lcom/adjust/sdk/scheduler/ThreadScheduler; // field@2a23
+2089ec: 3800 0500                              |000c: if-eqz v0, 0011 // +0005
+2089f0: 7210 a95e 0000                         |000e: invoke-interface {v0}, Lcom/adjust/sdk/scheduler/ThreadExecutor;.teardown:()V // method@5ea9
+2089f6: 5430 212a                              |0011: iget-object v0, v3, Lcom/adjust/sdk/SdkClickHandler;.packageQueue:Ljava/util/List; // field@2a21
+2089fa: 3800 0500                              |0013: if-eqz v0, 0018 // +0005
+2089fe: 7210 0e75 0000                         |0015: invoke-interface {v0}, Ljava/util/List;.clear:()V // method@750e
+208a04: 5430 1c2a                              |0018: iget-object v0, v3, Lcom/adjust/sdk/SdkClickHandler;.activityHandlerWeakRef:Ljava/lang/ref/WeakReference; // field@2a1c
+208a08: 3800 0500                              |001a: if-eqz v0, 001f // +0005
+208a0c: 6e10 af72 0000                         |001c: invoke-virtual {v0}, Ljava/lang/ref/Reference;.clear:()V // method@72af
+208a12: 1200                                   |001f: const/4 v0, #int 0 // #0
+208a14: 5b30 202a                              |0020: iput-object v0, v3, Lcom/adjust/sdk/SdkClickHandler;.logger:Lcom/adjust/sdk/ILogger; // field@2a20
+208a18: 5b30 212a                              |0022: iput-object v0, v3, Lcom/adjust/sdk/SdkClickHandler;.packageQueue:Ljava/util/List; // field@2a21
+208a1c: 5b30 1e2a                              |0024: iput-object v0, v3, Lcom/adjust/sdk/SdkClickHandler;.backoffStrategy:Lcom/adjust/sdk/BackoffStrategy; // field@2a1e
+208a20: 5b30 232a                              |0026: iput-object v0, v3, Lcom/adjust/sdk/SdkClickHandler;.scheduler:Lcom/adjust/sdk/scheduler/ThreadScheduler; // field@2a23
+208a24: 0e00                                   |0028: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x000a line=3
+        0x000e line=4
+        0x0011 line=7
+        0x0015 line=8
+        0x0018 line=11
+        0x001c line=12
+        0x0020 line=15
+        0x0022 line=16
+        0x0024 line=17
+        0x0026 line=18
+      locals        :
+        0x0000 - 0x0029 reg=3 this Lcom/adjust/sdk/SdkClickHandler;
+
+  source_file_idx   : 21628 (SourceFile)
+

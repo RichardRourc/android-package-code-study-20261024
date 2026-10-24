@@ -1,0 +1,90 @@
+Class #172            -
+  Class descriptor  : 'Lpl/droidsonroids/gif/InvalidationHandler;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Landroid/os/Handler;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lpl/droidsonroids/gif/InvalidationHandler;)
+      name          : 'MSG_TYPE_INVALIDATION'
+      type          : 'I'
+      access        : 0x0018 (STATIC FINAL)
+      value         : -1
+  Instance fields   -
+    #0              : (in Lpl/droidsonroids/gif/InvalidationHandler;)
+      name          : 'mDrawableRef'
+      type          : 'Ljava/lang/ref/WeakReference;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lpl/droidsonroids/gif/InvalidationHandler;)
+      name          : '<init>'
+      type          : '(Lpl/droidsonroids/gif/GifDrawable;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 15 16-bit code units
+03a2e4:                                        |[03a2e4] pl.droidsonroids.gif.InvalidationHandler.<init>:(Lpl/droidsonroids/gif/GifDrawable;)V
+03a2f4: 7100 7c00 0000                         |0000: invoke-static {}, Landroid/os/Looper;.getMainLooper:()Landroid/os/Looper; // method@007c
+03a2fa: 0c00                                   |0003: move-result-object v0
+03a2fc: 7020 7b00 0100                         |0004: invoke-direct {v1, v0}, Landroid/os/Handler;.<init>:(Landroid/os/Looper;)V // method@007b
+03a302: 2200 d800                              |0007: new-instance v0, Ljava/lang/ref/WeakReference; // type@00d8
+03a306: 7020 7702 2000                         |0009: invoke-direct {v0, v2}, Ljava/lang/ref/WeakReference;.<init>:(Ljava/lang/Object;)V // method@0277
+03a30c: 5b10 bb01                              |000c: iput-object v0, v1, Lpl/droidsonroids/gif/InvalidationHandler;.mDrawableRef:Ljava/lang/ref/WeakReference; // field@01bb
+03a310: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=16
+        0x0007 line=17
+      locals        :
+        0x0000 - 0x000f reg=1 this Lpl/droidsonroids/gif/InvalidationHandler;
+        0x0000 - 0x000f reg=2 (null) Lpl/droidsonroids/gif/GifDrawable;
+
+  Virtual methods   -
+    #0              : (in Lpl/droidsonroids/gif/InvalidationHandler;)
+      name          : 'handleMessage'
+      type          : '(Landroid/os/Message;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 45 16-bit code units
+03a314:                                        |[03a314] pl.droidsonroids.gif.InvalidationHandler.handleMessage:(Landroid/os/Message;)V
+03a324: 5422 bb01                              |0000: iget-object v2, v2, Lpl/droidsonroids/gif/InvalidationHandler;.mDrawableRef:Ljava/lang/ref/WeakReference; // field@01bb
+03a328: 6e10 7802 0200                         |0002: invoke-virtual {v2}, Ljava/lang/ref/WeakReference;.get:()Ljava/lang/Object; // method@0278
+03a32e: 0c02                                   |0005: move-result-object v2
+03a330: 1f02 9001                              |0006: check-cast v2, Lpl/droidsonroids/gif/GifDrawable; // type@0190
+03a334: 3902 0300                              |0008: if-nez v2, 000b // +0003
+03a338: 0e00                                   |000a: return-void
+03a33a: 5230 1800                              |000b: iget v0, v3, Landroid/os/Message;.what:I // field@0018
+03a33e: 12f1                                   |000d: const/4 v1, #int -1 // #ff
+03a340: 3310 0600                              |000e: if-ne v0, v1, 0014 // +0006
+03a344: 6e10 d306 0200                         |0010: invoke-virtual {v2}, Lpl/droidsonroids/gif/GifDrawable;.invalidateSelf:()V // method@06d3
+03a34a: 2819                                   |0013: goto 002c // +0019
+03a34c: 5422 6001                              |0014: iget-object v2, v2, Lpl/droidsonroids/gif/GifDrawable;.mListeners:Ljava/util/concurrent/ConcurrentLinkedQueue; // field@0160
+03a350: 6e10 d902 0200                         |0016: invoke-virtual {v2}, Ljava/util/concurrent/ConcurrentLinkedQueue;.iterator:()Ljava/util/Iterator; // method@02d9
+03a356: 0c02                                   |0019: move-result-object v2
+03a358: 7210 c102 0200                         |001a: invoke-interface {v2}, Ljava/util/Iterator;.hasNext:()Z // method@02c1
+03a35e: 0a00                                   |001d: move-result v0
+03a360: 3800 0e00                              |001e: if-eqz v0, 002c // +000e
+03a364: 7210 c202 0200                         |0020: invoke-interface {v2}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@02c2
+03a36a: 0c00                                   |0023: move-result-object v0
+03a36c: 1f00 8701                              |0024: check-cast v0, Lpl/droidsonroids/gif/AnimationListener; // type@0187
+03a370: 5231 1800                              |0026: iget v1, v3, Landroid/os/Message;.what:I // field@0018
+03a374: 7220 6906 1000                         |0028: invoke-interface {v0, v1}, Lpl/droidsonroids/gif/AnimationListener;.onAnimationCompleted:(I)V // method@0669
+03a37a: 28ef                                   |002b: goto 001a // -0011
+03a37c: 0e00                                   |002c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=22
+        0x000b line=26
+        0x0010 line=27
+        0x0014 line=29
+        0x0026 line=30
+      locals        :
+        0x0000 - 0x002d reg=2 this Lpl/droidsonroids/gif/InvalidationHandler;
+        0x0000 - 0x002d reg=3 (null) Landroid/os/Message;
+
+  source_file_idx   : 461 (InvalidationHandler.java)
+

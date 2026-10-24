@@ -1,0 +1,1570 @@
+Class #89            -
+  Class descriptor  : 'Lokio/RealBufferedSource;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lokio/BufferedSource;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lokio/RealBufferedSource;)
+      name          : 'buffer'
+      type          : 'Lokio/Buffer;'
+      access        : 0x0011 (PUBLIC FINAL)
+    #1              : (in Lokio/RealBufferedSource;)
+      name          : 'closed'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lokio/RealBufferedSource;)
+      name          : 'source'
+      type          : 'Lokio/Source;'
+      access        : 0x0011 (PUBLIC FINAL)
+  Direct methods    -
+    #0              : (in Lokio/RealBufferedSource;)
+      name          : '<init>'
+      type          : '(Lokio/Source;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 9 16-bit code units
+033794:                                        |[033794] okio.RealBufferedSource.<init>:(Lokio/Source;)V
+0337a4: 2200 4c01                              |0000: new-instance v0, Lokio/Buffer; // type@014c
+0337a8: 7010 9404 0000                         |0002: invoke-direct {v0}, Lokio/Buffer;.<init>:()V // method@0494
+0337ae: 7030 e405 2100                         |0005: invoke-direct {v1, v2, v0}, Lokio/RealBufferedSource;.<init>:(Lokio/Source;Lokio/Buffer;)V // method@05e4
+0337b4: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=37
+      locals        :
+        0x0000 - 0x0009 reg=1 this Lokio/RealBufferedSource;
+        0x0000 - 0x0009 reg=2 (null) Lokio/Source;
+
+    #1              : (in Lokio/RealBufferedSource;)
+      name          : '<init>'
+      type          : '(Lokio/Source;Lokio/Buffer;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 18 16-bit code units
+0337b8:                                        |[0337b8] okio.RealBufferedSource.<init>:(Lokio/Source;Lokio/Buffer;)V
+0337c8: 7010 3502 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@0235
+0337ce: 3801 0700                              |0003: if-eqz v1, 000a // +0007
+0337d2: 5b02 2101                              |0005: iput-object v2, v0, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+0337d6: 5b01 2301                              |0007: iput-object v1, v0, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+0337da: 0e00                                   |0009: return-void
+0337dc: 2200 af00                              |000a: new-instance v0, Ljava/lang/IllegalArgumentException; // type@00af
+0337e0: 1a01 2d0a                              |000c: const-string v1, "source == null" // string@0a2d
+0337e4: 7020 1b02 1000                         |000e: invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+0337ea: 2700                                   |0011: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=30
+        0x0005 line=32
+        0x0007 line=33
+        0x000a line=31
+      locals        :
+        0x0000 - 0x0012 reg=0 this Lokio/RealBufferedSource;
+        0x0000 - 0x0012 reg=1 (null) Lokio/Source;
+        0x0000 - 0x0012 reg=2 (null) Lokio/Buffer;
+
+    #2              : (in Lokio/RealBufferedSource;)
+      name          : 'access$000'
+      type          : '(Lokio/RealBufferedSource;)Z'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+0337ec:                                        |[0337ec] okio.RealBufferedSource.access$000:(Lokio/RealBufferedSource;)Z
+0337fc: 5500 2201                              |0000: iget-boolean v0, v0, Lokio/RealBufferedSource;.closed:Z // field@0122
+033800: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=25
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lokio/RealBufferedSource;
+
+    #3              : (in Lokio/RealBufferedSource;)
+      name          : 'rangeEquals'
+      type          : '(JLokio/ByteString;)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 4
+      insns size    : 24 16-bit code units
+033804:                                        |[033804] okio.RealBufferedSource.rangeEquals:(JLokio/ByteString;)Z
+033814: 6e10 5605 0500                         |0000: invoke-virtual {v5}, Lokio/ByteString;.size:()I // method@0556
+03381a: 0a00                                   |0003: move-result v0
+03381c: 8100                                   |0004: int-to-long v0, v0
+03381e: bb30                                   |0005: add-long/2addr v0, v3
+033820: 6e30 0b06 0201                         |0006: invoke-virtual {v2, v0, v1}, Lokio/RealBufferedSource;.request:(J)Z // method@060b
+033826: 0a00                                   |0009: move-result v0
+033828: 3800 0c00                              |000a: if-eqz v0, 0016 // +000c
+03382c: 5422 2101                              |000c: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033830: 6e40 ae04 3254                         |000e: invoke-virtual {v2, v3, v4, v5}, Lokio/Buffer;.rangeEquals:(JLokio/ByteString;)Z // method@04ae
+033836: 0a02                                   |0011: move-result v2
+033838: 3802 0400                              |0012: if-eqz v2, 0016 // +0004
+03383c: 1212                                   |0014: const/4 v2, #int 1 // #1
+03383e: 2802                                   |0015: goto 0017 // +0002
+033840: 1202                                   |0016: const/4 v2, #int 0 // #0
+033842: 0f02                                   |0017: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=352
+      locals        :
+        0x0000 - 0x0018 reg=2 this Lokio/RealBufferedSource;
+        0x0000 - 0x0018 reg=3 (null) J
+        0x0000 - 0x0018 reg=5 (null) Lokio/ByteString;
+
+  Virtual methods   -
+    #0              : (in Lokio/RealBufferedSource;)
+      name          : 'buffer'
+      type          : '()Lokio/Buffer;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+033844:                                        |[033844] okio.RealBufferedSource.buffer:()Lokio/Buffer;
+033854: 5400 2101                              |0000: iget-object v0, v0, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033858: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=41
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lokio/RealBufferedSource;
+
+    #1              : (in Lokio/RealBufferedSource;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 19 16-bit code units
+03385c:                                        |[03385c] okio.RealBufferedSource.close:()V
+03386c: 5510 2201                              |0000: iget-boolean v0, v1, Lokio/RealBufferedSource;.closed:Z // field@0122
+033870: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+033874: 0e00                                   |0004: return-void
+033876: 1210                                   |0005: const/4 v0, #int 1 // #1
+033878: 5c10 2201                              |0006: iput-boolean v0, v1, Lokio/RealBufferedSource;.closed:Z // field@0122
+03387c: 5410 2301                              |0008: iget-object v0, v1, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+033880: 7210 3706 0000                         |000a: invoke-interface {v0}, Lokio/Source;.close:()V // method@0637
+033886: 5411 2101                              |000d: iget-object v1, v1, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+03388a: 6e10 9604 0100                         |000f: invoke-virtual {v1}, Lokio/Buffer;.clear:()V // method@0496
+033890: 0e00                                   |0012: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=394
+        0x0006 line=395
+        0x0008 line=396
+        0x000d line=397
+      locals        :
+        0x0000 - 0x0013 reg=1 this Lokio/RealBufferedSource;
+
+    #2              : (in Lokio/RealBufferedSource;)
+      name          : 'exhausted'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 40 16-bit code units
+033894:                                        |[033894] okio.RealBufferedSource.exhausted:()Z
+0338a4: 5540 2201                              |0000: iget-boolean v0, v4, Lokio/RealBufferedSource;.closed:Z // field@0122
+0338a8: 3900 1e00                              |0002: if-nez v0, 0020 // +001e
+0338ac: 5440 2101                              |0004: iget-object v0, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+0338b0: 6e10 a204 0000                         |0006: invoke-virtual {v0}, Lokio/Buffer;.exhausted:()Z // method@04a2
+0338b6: 0a00                                   |0009: move-result v0
+0338b8: 3800 1400                              |000a: if-eqz v0, 001e // +0014
+0338bc: 5440 2301                              |000c: iget-object v0, v4, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+0338c0: 5444 2101                              |000e: iget-object v4, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+0338c4: 1601 0008                              |0010: const-wide/16 v1, #int 2048 // #800
+0338c8: 7240 3806 4021                         |0012: invoke-interface {v0, v4, v1, v2}, Lokio/Source;.read:(Lokio/Buffer;J)J // method@0638
+0338ce: 0b00                                   |0015: move-result-wide v0
+0338d0: 1602 ffff                              |0016: const-wide/16 v2, #int -1 // #ffff
+0338d4: 3104 0002                              |0018: cmp-long v4, v0, v2
+0338d8: 3904 0400                              |001a: if-nez v4, 001e // +0004
+0338dc: 1214                                   |001c: const/4 v4, #int 1 // #1
+0338de: 2802                                   |001d: goto 001f // +0002
+0338e0: 1204                                   |001e: const/4 v4, #int 0 // #0
+0338e2: 0f04                                   |001f: return v4
+0338e4: 2204 b000                              |0020: new-instance v4, Ljava/lang/IllegalStateException; // type@00b0
+0338e8: 1a00 dd05                              |0022: const-string v0, "closed" // string@05dd
+0338ec: 7020 1e02 0400                         |0024: invoke-direct {v4, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@021e
+0338f2: 2704                                   |0027: throw v4
+      catches       : (none)
+      positions     :
+        0x0000 line=59
+        0x0004 line=60
+        0x0020 line=59
+      locals        :
+        0x0000 - 0x0028 reg=4 this Lokio/RealBufferedSource;
+
+    #3              : (in Lokio/RealBufferedSource;)
+      name          : 'indexOf'
+      type          : '(B)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 7 16-bit code units
+0338f4:                                        |[0338f4] okio.RealBufferedSource.indexOf:(B)J
+033904: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+033908: 6e40 ea05 3210                         |0002: invoke-virtual {v2, v3, v0, v1}, Lokio/RealBufferedSource;.indexOf:(BJ)J // method@05ea
+03390e: 0b02                                   |0005: move-result-wide v2
+033910: 1002                                   |0006: return-wide v2
+      catches       : (none)
+      positions     :
+        0x0002 line=300
+      locals        :
+        0x0000 - 0x0007 reg=2 this Lokio/RealBufferedSource;
+        0x0000 - 0x0007 reg=3 (null) B
+
+    #4              : (in Lokio/RealBufferedSource;)
+      name          : 'indexOf'
+      type          : '(BJ)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 11
+      ins           : 4
+      outs          : 4
+      insns size    : 65 16-bit code units
+033914:                                        |[033914] okio.RealBufferedSource.indexOf:(BJ)J
+033924: 5570 2201                              |0000: iget-boolean v0, v7, Lokio/RealBufferedSource;.closed:Z // field@0122
+033928: 3900 3700                              |0002: if-nez v0, 0039 // +0037
+03392c: 5470 2101                              |0004: iget-object v0, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033930: 5300 f300                              |0006: iget-wide v0, v0, Lokio/Buffer;.size:J // field@00f3
+033934: 3100 0900                              |0008: cmp-long v0, v9, v0
+033938: 1601 0008                              |000a: const-wide/16 v1, #int 2048 // #800
+03393c: 1603 ffff                              |000c: const-wide/16 v3, #int -1 // #ffff
+033940: 3a00 0f00                              |000e: if-ltz v0, 001d // +000f
+033944: 5470 2301                              |0010: iget-object v0, v7, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+033948: 5475 2101                              |0012: iget-object v5, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+03394c: 7240 3806 5021                         |0014: invoke-interface {v0, v5, v1, v2}, Lokio/Source;.read:(Lokio/Buffer;J)J // method@0638
+033952: 0b00                                   |0017: move-result-wide v0
+033954: 3100 0003                              |0018: cmp-long v0, v0, v3
+033958: 3900 eaff                              |001a: if-nez v0, 0004 // -0016
+03395c: 1003                                   |001c: return-wide v3
+03395e: 5470 2101                              |001d: iget-object v0, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033962: 6e40 a704 80a9                         |001f: invoke-virtual {v0, v8, v9, v10}, Lokio/Buffer;.indexOf:(BJ)J // method@04a7
+033968: 0b09                                   |0022: move-result-wide v9
+03396a: 3100 0903                              |0023: cmp-long v0, v9, v3
+03396e: 3900 1300                              |0025: if-nez v0, 0038 // +0013
+033972: 5479 2101                              |0027: iget-object v9, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033976: 5399 f300                              |0029: iget-wide v9, v9, Lokio/Buffer;.size:J // field@00f3
+03397a: 5470 2301                              |002b: iget-object v0, v7, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+03397e: 5475 2101                              |002d: iget-object v5, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033982: 7240 3806 5021                         |002f: invoke-interface {v0, v5, v1, v2}, Lokio/Source;.read:(Lokio/Buffer;J)J // method@0638
+033988: 0b05                                   |0032: move-result-wide v5
+03398a: 3100 0503                              |0033: cmp-long v0, v5, v3
+03398e: 3900 e8ff                              |0035: if-nez v0, 001d // -0018
+033992: 1003                                   |0037: return-wide v3
+033994: 1009                                   |0038: return-wide v9
+033996: 2207 b000                              |0039: new-instance v7, Ljava/lang/IllegalStateException; // type@00b0
+03399a: 1a08 dd05                              |003b: const-string v8, "closed" // string@05dd
+03399e: 7020 1e02 8700                         |003d: invoke-direct {v7, v8}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@021e
+0339a4: 2707                                   |0040: throw v7
+      catches       : (none)
+      positions     :
+        0x0000 line=304
+        0x0004 line=305
+        0x0010 line=306
+        0x001d line=309
+        0x0027 line=310
+        0x002b line=311
+        0x0039 line=304
+      locals        :
+        0x0000 - 0x0041 reg=7 this Lokio/RealBufferedSource;
+        0x0000 - 0x0041 reg=8 (null) B
+        0x0000 - 0x0041 reg=9 (null) J
+
+    #5              : (in Lokio/RealBufferedSource;)
+      name          : 'indexOf'
+      type          : '(Lokio/ByteString;)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 7 16-bit code units
+0339a8:                                        |[0339a8] okio.RealBufferedSource.indexOf:(Lokio/ByteString;)J
+0339b8: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+0339bc: 6e40 ec05 3210                         |0002: invoke-virtual {v2, v3, v0, v1}, Lokio/RealBufferedSource;.indexOf:(Lokio/ByteString;J)J // method@05ec
+0339c2: 0b02                                   |0005: move-result-wide v2
+0339c4: 1002                                   |0006: return-wide v2
+      catches       : (none)
+      positions     :
+        0x0002 line=317
+      locals        :
+        0x0000 - 0x0007 reg=2 this Lokio/RealBufferedSource;
+        0x0000 - 0x0007 reg=3 (null) Lokio/ByteString;
+
+    #6              : (in Lokio/RealBufferedSource;)
+      name          : 'indexOf'
+      type          : '(Lokio/ByteString;J)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 4
+      insns size    : 41 16-bit code units
+0339c8:                                        |[0339c8] okio.RealBufferedSource.indexOf:(Lokio/ByteString;J)J
+0339d8: 6e10 5605 0400                         |0000: invoke-virtual {v4}, Lokio/ByteString;.size:()I // method@0556
+0339de: 0a00                                   |0003: move-result v0
+0339e0: 3800 1d00                              |0004: if-eqz v0, 0021 // +001d
+0339e4: 1200                                   |0006: const/4 v0, #int 0 // #0
+0339e6: 6e20 4b05 0400                         |0007: invoke-virtual {v4, v0}, Lokio/ByteString;.getByte:(I)B // method@054b
+0339ec: 0a00                                   |000a: move-result v0
+0339ee: 6e40 ea05 0365                         |000b: invoke-virtual {v3, v0, v5, v6}, Lokio/RealBufferedSource;.indexOf:(BJ)J // method@05ea
+0339f4: 0b05                                   |000e: move-result-wide v5
+0339f6: 1600 ffff                              |000f: const-wide/16 v0, #int -1 // #ffff
+0339fa: 3102 0500                              |0011: cmp-long v2, v5, v0
+0339fe: 3902 0300                              |0013: if-nez v2, 0016 // +0003
+033a02: 1000                                   |0015: return-wide v0
+033a04: 7040 f005 5346                         |0016: invoke-direct {v3, v5, v6, v4}, Lokio/RealBufferedSource;.rangeEquals:(JLokio/ByteString;)Z // method@05f0
+033a0a: 0a00                                   |0019: move-result v0
+033a0c: 3800 0300                              |001a: if-eqz v0, 001d // +0003
+033a10: 1005                                   |001c: return-wide v5
+033a12: 1600 0100                              |001d: const-wide/16 v0, #int 1 // #1
+033a16: bb05                                   |001f: add-long/2addr v5, v0
+033a18: 28e6                                   |0020: goto 0006 // -001a
+033a1a: 2203 af00                              |0021: new-instance v3, Ljava/lang/IllegalArgumentException; // type@00af
+033a1e: 1a04 a705                              |0023: const-string v4, "bytes is empty" // string@05a7
+033a22: 7020 1b02 4300                         |0025: invoke-direct {v3, v4}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+033a28: 2703                                   |0028: throw v3
+      catches       : (none)
+      positions     :
+        0x0000 line=321
+        0x0007 line=323
+        0x0016 line=327
+        0x0021 line=321
+      locals        :
+        0x0000 - 0x0029 reg=3 this Lokio/RealBufferedSource;
+        0x0000 - 0x0029 reg=4 (null) Lokio/ByteString;
+        0x0000 - 0x0029 reg=5 (null) J
+
+    #7              : (in Lokio/RealBufferedSource;)
+      name          : 'indexOfElement'
+      type          : '(Lokio/ByteString;)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 7 16-bit code units
+033a2c:                                        |[033a2c] okio.RealBufferedSource.indexOfElement:(Lokio/ByteString;)J
+033a3c: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+033a40: 6e40 ee05 3210                         |0002: invoke-virtual {v2, v3, v0, v1}, Lokio/RealBufferedSource;.indexOfElement:(Lokio/ByteString;J)J // method@05ee
+033a46: 0b02                                   |0005: move-result-wide v2
+033a48: 1002                                   |0006: return-wide v2
+      catches       : (none)
+      positions     :
+        0x0002 line=335
+      locals        :
+        0x0000 - 0x0007 reg=2 this Lokio/RealBufferedSource;
+        0x0000 - 0x0007 reg=3 (null) Lokio/ByteString;
+
+    #8              : (in Lokio/RealBufferedSource;)
+      name          : 'indexOfElement'
+      type          : '(Lokio/ByteString;J)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 11
+      ins           : 4
+      outs          : 4
+      insns size    : 65 16-bit code units
+033a4c:                                        |[033a4c] okio.RealBufferedSource.indexOfElement:(Lokio/ByteString;J)J
+033a5c: 5570 2201                              |0000: iget-boolean v0, v7, Lokio/RealBufferedSource;.closed:Z // field@0122
+033a60: 3900 3700                              |0002: if-nez v0, 0039 // +0037
+033a64: 5470 2101                              |0004: iget-object v0, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033a68: 5300 f300                              |0006: iget-wide v0, v0, Lokio/Buffer;.size:J // field@00f3
+033a6c: 3100 0900                              |0008: cmp-long v0, v9, v0
+033a70: 1601 0008                              |000a: const-wide/16 v1, #int 2048 // #800
+033a74: 1603 ffff                              |000c: const-wide/16 v3, #int -1 // #ffff
+033a78: 3a00 0f00                              |000e: if-ltz v0, 001d // +000f
+033a7c: 5470 2301                              |0010: iget-object v0, v7, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+033a80: 5475 2101                              |0012: iget-object v5, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033a84: 7240 3806 5021                         |0014: invoke-interface {v0, v5, v1, v2}, Lokio/Source;.read:(Lokio/Buffer;J)J // method@0638
+033a8a: 0b00                                   |0017: move-result-wide v0
+033a8c: 3100 0003                              |0018: cmp-long v0, v0, v3
+033a90: 3900 eaff                              |001a: if-nez v0, 0004 // -0016
+033a94: 1003                                   |001c: return-wide v3
+033a96: 5470 2101                              |001d: iget-object v0, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033a9a: 6e40 ab04 80a9                         |001f: invoke-virtual {v0, v8, v9, v10}, Lokio/Buffer;.indexOfElement:(Lokio/ByteString;J)J // method@04ab
+033aa0: 0b09                                   |0022: move-result-wide v9
+033aa2: 3100 0903                              |0023: cmp-long v0, v9, v3
+033aa6: 3900 1300                              |0025: if-nez v0, 0038 // +0013
+033aaa: 5479 2101                              |0027: iget-object v9, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033aae: 5399 f300                              |0029: iget-wide v9, v9, Lokio/Buffer;.size:J // field@00f3
+033ab2: 5470 2301                              |002b: iget-object v0, v7, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+033ab6: 5475 2101                              |002d: iget-object v5, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033aba: 7240 3806 5021                         |002f: invoke-interface {v0, v5, v1, v2}, Lokio/Source;.read:(Lokio/Buffer;J)J // method@0638
+033ac0: 0b05                                   |0032: move-result-wide v5
+033ac2: 3100 0503                              |0033: cmp-long v0, v5, v3
+033ac6: 3900 e8ff                              |0035: if-nez v0, 001d // -0018
+033aca: 1003                                   |0037: return-wide v3
+033acc: 1009                                   |0038: return-wide v9
+033ace: 2207 b000                              |0039: new-instance v7, Ljava/lang/IllegalStateException; // type@00b0
+033ad2: 1a08 dd05                              |003b: const-string v8, "closed" // string@05dd
+033ad6: 7020 1e02 8700                         |003d: invoke-direct {v7, v8}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@021e
+033adc: 2707                                   |0040: throw v7
+      catches       : (none)
+      positions     :
+        0x0000 line=339
+        0x0004 line=340
+        0x0010 line=341
+        0x001d line=344
+        0x0027 line=345
+        0x002b line=346
+        0x0039 line=339
+      locals        :
+        0x0000 - 0x0041 reg=7 this Lokio/RealBufferedSource;
+        0x0000 - 0x0041 reg=8 (null) Lokio/ByteString;
+        0x0000 - 0x0041 reg=9 (null) J
+
+    #9              : (in Lokio/RealBufferedSource;)
+      name          : 'inputStream'
+      type          : '()Ljava/io/InputStream;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 6 16-bit code units
+033ae0:                                        |[033ae0] okio.RealBufferedSource.inputStream:()Ljava/io/InputStream;
+033af0: 2200 5d01                              |0000: new-instance v0, Lokio/RealBufferedSource$1; // type@015d
+033af4: 7020 dd05 1000                         |0002: invoke-direct {v0, v1}, Lokio/RealBufferedSource$1;.<init>:(Lokio/RealBufferedSource;)V // method@05dd
+033afa: 1100                                   |0005: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=356
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lokio/RealBufferedSource;
+
+    #10              : (in Lokio/RealBufferedSource;)
+      name          : 'read'
+      type          : '([B)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 7 16-bit code units
+033afc:                                        |[033afc] okio.RealBufferedSource.read:([B)I
+033b0c: 1200                                   |0000: const/4 v0, #int 0 // #0
+033b0e: 2131                                   |0001: array-length v1, v3
+033b10: 6e40 f205 3210                         |0002: invoke-virtual {v2, v3, v0, v1}, Lokio/RealBufferedSource;.read:([BII)I // method@05f2
+033b16: 0a02                                   |0005: move-result v2
+033b18: 0f02                                   |0006: return v2
+      catches       : (none)
+      positions     :
+        0x0001 line=102
+      locals        :
+        0x0000 - 0x0007 reg=2 this Lokio/RealBufferedSource;
+        0x0000 - 0x0007 reg=3 (null) [B
+
+    #11              : (in Lokio/RealBufferedSource;)
+      name          : 'read'
+      type          : '([BII)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 13
+      ins           : 4
+      outs          : 6
+      insns size    : 52 16-bit code units
+033b1c:                                        |[033b1c] okio.RealBufferedSource.read:([BII)I
+033b2c: 21a0                                   |0000: array-length v0, v10
+033b2e: 8101                                   |0001: int-to-long v1, v0
+033b30: 81b3                                   |0002: int-to-long v3, v11
+033b32: 81c7                                   |0003: int-to-long v7, v12
+033b34: 0475                                   |0004: move-wide v5, v7
+033b36: 7706 4c06 0100                         |0005: invoke-static/range {v1, v2, v3, v4, v5, v6}, Lokio/Util;.checkOffsetAndCount:(JJJ)V // method@064c
+033b3c: 549c 2101                              |0008: iget-object v12, v9, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033b40: 53c0 f300                              |000a: iget-wide v0, v12, Lokio/Buffer;.size:J // field@00f3
+033b44: 1602 0000                              |000c: const-wide/16 v2, #int 0 // #0
+033b48: 310c 0002                              |000e: cmp-long v12, v0, v2
+033b4c: 390c 1400                              |0010: if-nez v12, 0024 // +0014
+033b50: 549c 2301                              |0012: iget-object v12, v9, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+033b54: 5490 2101                              |0014: iget-object v0, v9, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033b58: 1601 0008                              |0016: const-wide/16 v1, #int 2048 // #800
+033b5c: 7240 3806 0c21                         |0018: invoke-interface {v12, v0, v1, v2}, Lokio/Source;.read:(Lokio/Buffer;J)J // method@0638
+033b62: 0b00                                   |001b: move-result-wide v0
+033b64: 1602 ffff                              |001c: const-wide/16 v2, #int -1 // #ffff
+033b68: 310c 0002                              |001e: cmp-long v12, v0, v2
+033b6c: 390c 0400                              |0020: if-nez v12, 0024 // +0004
+033b70: 12f9                                   |0022: const/4 v9, #int -1 // #ff
+033b72: 0f09                                   |0023: return v9
+033b74: 549c 2101                              |0024: iget-object v12, v9, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033b78: 53c0 f300                              |0026: iget-wide v0, v12, Lokio/Buffer;.size:J // field@00f3
+033b7c: 7140 3002 8710                         |0028: invoke-static {v7, v8, v0, v1}, Ljava/lang/Math;.min:(JJ)J // method@0230
+033b82: 0b00                                   |002b: move-result-wide v0
+033b84: 840c                                   |002c: long-to-int v12, v0
+033b86: 5499 2101                              |002d: iget-object v9, v9, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033b8a: 6e40 b004 a9cb                         |002f: invoke-virtual {v9, v10, v11, v12}, Lokio/Buffer;.read:([BII)I // method@04b0
+033b90: 0a09                                   |0032: move-result v9
+033b92: 0f09                                   |0033: return v9
+      catches       : (none)
+      positions     :
+        0x0000 line=122
+        0x0008 line=124
+        0x0012 line=125
+        0x0024 line=129
+        0x002d line=130
+      locals        :
+        0x0000 - 0x0034 reg=9 this Lokio/RealBufferedSource;
+        0x0000 - 0x0034 reg=10 (null) [B
+        0x0000 - 0x0034 reg=11 (null) I
+        0x0000 - 0x0034 reg=12 (null) I
+
+    #12              : (in Lokio/RealBufferedSource;)
+      name          : 'read'
+      type          : '(Lokio/Buffer;J)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 4
+      outs          : 4
+      insns size    : 89 16-bit code units
+033b94:                                        |[033b94] okio.RealBufferedSource.read:(Lokio/Buffer;J)J
+033ba4: 3805 5100                              |0000: if-eqz v5, 0051 // +0051
+033ba8: 1600 0000                              |0002: const-wide/16 v0, #int 0 // #0
+033bac: 3102 0600                              |0004: cmp-long v2, v6, v0
+033bb0: 3a02 3600                              |0006: if-ltz v2, 003c // +0036
+033bb4: 5542 2201                              |0008: iget-boolean v2, v4, Lokio/RealBufferedSource;.closed:Z // field@0122
+033bb8: 3902 2a00                              |000a: if-nez v2, 0034 // +002a
+033bbc: 5442 2101                              |000c: iget-object v2, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033bc0: 5322 f300                              |000e: iget-wide v2, v2, Lokio/Buffer;.size:J // field@00f3
+033bc4: 3100 0200                              |0010: cmp-long v0, v2, v0
+033bc8: 3900 1300                              |0012: if-nez v0, 0025 // +0013
+033bcc: 5440 2301                              |0014: iget-object v0, v4, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+033bd0: 5441 2101                              |0016: iget-object v1, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033bd4: 1602 0008                              |0018: const-wide/16 v2, #int 2048 // #800
+033bd8: 7240 3806 1032                         |001a: invoke-interface {v0, v1, v2, v3}, Lokio/Source;.read:(Lokio/Buffer;J)J // method@0638
+033bde: 0b00                                   |001d: move-result-wide v0
+033be0: 1602 ffff                              |001e: const-wide/16 v2, #int -1 // #ffff
+033be4: 3100 0002                              |0020: cmp-long v0, v0, v2
+033be8: 3900 0300                              |0022: if-nez v0, 0025 // +0003
+033bec: 1002                                   |0024: return-wide v2
+033bee: 5440 2101                              |0025: iget-object v0, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033bf2: 5300 f300                              |0027: iget-wide v0, v0, Lokio/Buffer;.size:J // field@00f3
+033bf6: 7140 3002 7610                         |0029: invoke-static {v6, v7, v0, v1}, Ljava/lang/Math;.min:(JJ)J // method@0230
+033bfc: 0b06                                   |002c: move-result-wide v6
+033bfe: 5444 2101                              |002d: iget-object v4, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033c02: 6e40 b104 5476                         |002f: invoke-virtual {v4, v5, v6, v7}, Lokio/Buffer;.read:(Lokio/Buffer;J)J // method@04b1
+033c08: 0b04                                   |0032: move-result-wide v4
+033c0a: 1004                                   |0033: return-wide v4
+033c0c: 2204 b000                              |0034: new-instance v4, Ljava/lang/IllegalStateException; // type@00b0
+033c10: 1a05 dd05                              |0036: const-string v5, "closed" // string@05dd
+033c14: 7020 1e02 5400                         |0038: invoke-direct {v4, v5}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@021e
+033c1a: 2704                                   |003b: throw v4
+033c1c: 2204 af00                              |003c: new-instance v4, Ljava/lang/IllegalArgumentException; // type@00af
+033c20: 2205 c600                              |003e: new-instance v5, Ljava/lang/StringBuilder; // type@00c6
+033c24: 1a00 a305                              |0040: const-string v0, "byteCount < 0: " // string@05a3
+033c28: 7020 5d02 0500                         |0042: invoke-direct {v5, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@025d
+033c2e: 6e30 6002 6507                         |0045: invoke-virtual {v5, v6, v7}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@0260
+033c34: 0c05                                   |0048: move-result-object v5
+033c36: 6e10 6502 0500                         |0049: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@0265
+033c3c: 0c05                                   |004c: move-result-object v5
+033c3e: 7020 1b02 5400                         |004d: invoke-direct {v4, v5}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+033c44: 2704                                   |0050: throw v4
+033c46: 2204 af00                              |0051: new-instance v4, Ljava/lang/IllegalArgumentException; // type@00af
+033c4a: 1a05 1c0a                              |0053: const-string v5, "sink == null" // string@0a1c
+033c4e: 7020 1b02 5400                         |0055: invoke-direct {v4, v5}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+033c54: 2704                                   |0058: throw v4
+      catches       : (none)
+      positions     :
+        0x0008 line=47
+        0x000c line=49
+        0x0014 line=50
+        0x0025 line=54
+        0x002d line=55
+        0x0034 line=47
+        0x003c line=46
+        0x0051 line=45
+      locals        :
+        0x0000 - 0x0059 reg=4 this Lokio/RealBufferedSource;
+        0x0000 - 0x0059 reg=5 (null) Lokio/Buffer;
+        0x0000 - 0x0059 reg=6 (null) J
+
+    #13              : (in Lokio/RealBufferedSource;)
+      name          : 'readAll'
+      type          : '(Lokio/Sink;)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 10
+      ins           : 2
+      outs          : 4
+      insns size    : 73 16-bit code units
+033c58:                                        |[033c58] okio.RealBufferedSource.readAll:(Lokio/Sink;)J
+033c68: 3809 4100                              |0000: if-eqz v9, 0041 // +0041
+033c6c: 1600 0000                              |0002: const-wide/16 v0, #int 0 // #0
+033c70: 0402                                   |0004: move-wide v2, v0
+033c72: 5484 2301                              |0005: iget-object v4, v8, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+033c76: 5485 2101                              |0007: iget-object v5, v8, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033c7a: 1606 0008                              |0009: const-wide/16 v6, #int 2048 // #800
+033c7e: 7240 3806 5476                         |000b: invoke-interface {v4, v5, v6, v7}, Lokio/Source;.read:(Lokio/Buffer;J)J // method@0638
+033c84: 0b04                                   |000e: move-result-wide v4
+033c86: 1606 ffff                              |000f: const-wide/16 v6, #int -1 // #ffff
+033c8a: 3104 0406                              |0011: cmp-long v4, v4, v6
+033c8e: 3804 1300                              |0013: if-eqz v4, 0026 // +0013
+033c92: 5484 2101                              |0015: iget-object v4, v8, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033c96: 6e10 9a04 0400                         |0017: invoke-virtual {v4}, Lokio/Buffer;.completeSegmentByteCount:()J // method@049a
+033c9c: 0b04                                   |001a: move-result-wide v4
+033c9e: 3106 0400                              |001b: cmp-long v6, v4, v0
+033ca2: 3d06 e8ff                              |001d: if-lez v6, 0005 // -0018
+033ca6: bb42                                   |001f: add-long/2addr v2, v4
+033ca8: 5486 2101                              |0020: iget-object v6, v8, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033cac: 7240 3606 6954                         |0022: invoke-interface {v9, v6, v4, v5}, Lokio/Sink;.write:(Lokio/Buffer;J)V // method@0636
+033cb2: 28e0                                   |0025: goto 0005 // -0020
+033cb4: 5484 2101                              |0026: iget-object v4, v8, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033cb8: 6e10 d004 0400                         |0028: invoke-virtual {v4}, Lokio/Buffer;.size:()J // method@04d0
+033cbe: 0b04                                   |002b: move-result-wide v4
+033cc0: 3100 0400                              |002c: cmp-long v0, v4, v0
+033cc4: 3d00 1200                              |002e: if-lez v0, 0040 // +0012
+033cc8: 5480 2101                              |0030: iget-object v0, v8, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033ccc: 6e10 d004 0000                         |0032: invoke-virtual {v0}, Lokio/Buffer;.size:()J // method@04d0
+033cd2: 0b00                                   |0035: move-result-wide v0
+033cd4: bb02                                   |0036: add-long/2addr v2, v0
+033cd6: 5488 2101                              |0037: iget-object v8, v8, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033cda: 6e10 d004 0800                         |0039: invoke-virtual {v8}, Lokio/Buffer;.size:()J // method@04d0
+033ce0: 0b00                                   |003c: move-result-wide v0
+033ce2: 7240 3606 8910                         |003d: invoke-interface {v9, v8, v0, v1}, Lokio/Sink;.write:(Lokio/Buffer;J)V // method@0636
+033ce8: 1002                                   |0040: return-wide v2
+033cea: 2208 af00                              |0041: new-instance v8, Ljava/lang/IllegalArgumentException; // type@00af
+033cee: 1a09 1c0a                              |0043: const-string v9, "sink == null" // string@0a1c
+033cf2: 7020 1b02 9800                         |0045: invoke-direct {v8, v9}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+033cf8: 2708                                   |0048: throw v8
+      catches       : (none)
+      positions     :
+        0x0005 line=148
+        0x0015 line=149
+        0x0020 line=152
+        0x0026 line=155
+        0x0030 line=156
+        0x0037 line=157
+        0x0041 line=145
+      locals        :
+        0x0000 - 0x0049 reg=8 this Lokio/RealBufferedSource;
+        0x0000 - 0x0049 reg=9 (null) Lokio/Sink;
+
+    #14              : (in Lokio/RealBufferedSource;)
+      name          : 'readByte'
+      type          : '()B'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 12 16-bit code units
+033cfc:                                        |[033cfc] okio.RealBufferedSource.readByte:()B
+033d0c: 1600 0100                              |0000: const-wide/16 v0, #int 1 // #1
+033d10: 6e30 0c06 0201                         |0002: invoke-virtual {v2, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+033d16: 5422 2101                              |0005: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033d1a: 6e10 b304 0200                         |0007: invoke-virtual {v2}, Lokio/Buffer;.readByte:()B // method@04b3
+033d20: 0a02                                   |000a: move-result v2
+033d22: 0f02                                   |000b: return v2
+      catches       : (none)
+      positions     :
+        0x0002 line=77
+        0x0005 line=78
+      locals        :
+        0x0000 - 0x000c reg=2 this Lokio/RealBufferedSource;
+
+    #15              : (in Lokio/RealBufferedSource;)
+      name          : 'readByteArray'
+      type          : '()[B'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 14 16-bit code units
+033d24:                                        |[033d24] okio.RealBufferedSource.readByteArray:()[B
+033d34: 5420 2101                              |0000: iget-object v0, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033d38: 5421 2301                              |0002: iget-object v1, v2, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+033d3c: 6e20 df04 1000                         |0004: invoke-virtual {v0, v1}, Lokio/Buffer;.writeAll:(Lokio/Source;)J // method@04df
+033d42: 5422 2101                              |0007: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033d46: 6e10 b404 0200                         |0009: invoke-virtual {v2}, Lokio/Buffer;.readByteArray:()[B // method@04b4
+033d4c: 0c02                                   |000c: move-result-object v2
+033d4e: 1102                                   |000d: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=92
+        0x0007 line=93
+      locals        :
+        0x0000 - 0x000e reg=2 this Lokio/RealBufferedSource;
+
+    #16              : (in Lokio/RealBufferedSource;)
+      name          : 'readByteArray'
+      type          : '(J)[B'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 10 16-bit code units
+033d50:                                        |[033d50] okio.RealBufferedSource.readByteArray:(J)[B
+033d60: 6e30 0c06 1002                         |0000: invoke-virtual {v0, v1, v2}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+033d66: 5400 2101                              |0003: iget-object v0, v0, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033d6a: 6e30 b504 1002                         |0005: invoke-virtual {v0, v1, v2}, Lokio/Buffer;.readByteArray:(J)[B // method@04b5
+033d70: 0c00                                   |0008: move-result-object v0
+033d72: 1100                                   |0009: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=97
+        0x0003 line=98
+      locals        :
+        0x0000 - 0x000a reg=0 this Lokio/RealBufferedSource;
+        0x0000 - 0x000a reg=1 (null) J
+
+    #17              : (in Lokio/RealBufferedSource;)
+      name          : 'readByteString'
+      type          : '()Lokio/ByteString;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 14 16-bit code units
+033d74:                                        |[033d74] okio.RealBufferedSource.readByteString:()Lokio/ByteString;
+033d84: 5420 2101                              |0000: iget-object v0, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033d88: 5421 2301                              |0002: iget-object v1, v2, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+033d8c: 6e20 df04 1000                         |0004: invoke-virtual {v0, v1}, Lokio/Buffer;.writeAll:(Lokio/Source;)J // method@04df
+033d92: 5422 2101                              |0007: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033d96: 6e10 b604 0200                         |0009: invoke-virtual {v2}, Lokio/Buffer;.readByteString:()Lokio/ByteString; // method@04b6
+033d9c: 0c02                                   |000c: move-result-object v2
+033d9e: 1102                                   |000d: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=82
+        0x0007 line=83
+      locals        :
+        0x0000 - 0x000e reg=2 this Lokio/RealBufferedSource;
+
+    #18              : (in Lokio/RealBufferedSource;)
+      name          : 'readByteString'
+      type          : '(J)Lokio/ByteString;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 10 16-bit code units
+033da0:                                        |[033da0] okio.RealBufferedSource.readByteString:(J)Lokio/ByteString;
+033db0: 6e30 0c06 1002                         |0000: invoke-virtual {v0, v1, v2}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+033db6: 5400 2101                              |0003: iget-object v0, v0, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033dba: 6e30 b704 1002                         |0005: invoke-virtual {v0, v1, v2}, Lokio/Buffer;.readByteString:(J)Lokio/ByteString; // method@04b7
+033dc0: 0c00                                   |0008: move-result-object v0
+033dc2: 1100                                   |0009: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=87
+        0x0003 line=88
+      locals        :
+        0x0000 - 0x000a reg=0 this Lokio/RealBufferedSource;
+        0x0000 - 0x000a reg=1 (null) J
+
+    #19              : (in Lokio/RealBufferedSource;)
+      name          : 'readDecimalLong'
+      type          : '()J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 3
+      insns size    : 69 16-bit code units
+033dc4:                                        |[033dc4] okio.RealBufferedSource.readDecimalLong:()J
+033dd4: 1600 0100                              |0000: const-wide/16 v0, #int 1 // #1
+033dd8: 6e30 0c06 0501                         |0002: invoke-virtual {v5, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+033dde: 1200                                   |0005: const/4 v0, #int 0 // #0
+033de0: d801 0001                              |0006: add-int/lit8 v1, v0, #int 1 // #01
+033de4: 8112                                   |0008: int-to-long v2, v1
+033de6: 6e30 0b06 2503                         |0009: invoke-virtual {v5, v2, v3}, Lokio/RealBufferedSource;.request:(J)Z // method@060b
+033dec: 0a02                                   |000c: move-result v2
+033dee: 3802 3100                              |000d: if-eqz v2, 003e // +0031
+033df2: 5452 2101                              |000f: iget-object v2, v5, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033df6: 8103                                   |0011: int-to-long v3, v0
+033df8: 6e30 a404 3204                         |0012: invoke-virtual {v2, v3, v4}, Lokio/Buffer;.getByte:(J)B // method@04a4
+033dfe: 0a02                                   |0015: move-result v2
+033e00: 1303 3000                              |0016: const/16 v3, #int 48 // #30
+033e04: 3432 0600                              |0018: if-lt v2, v3, 001e // +0006
+033e08: 1303 3900                              |001a: const/16 v3, #int 57 // #39
+033e0c: 3732 0900                              |001c: if-le v2, v3, 0025 // +0009
+033e10: 3900 0900                              |001e: if-nez v0, 0027 // +0009
+033e14: 1303 2d00                              |0020: const/16 v3, #int 45 // #2d
+033e18: 3232 0300                              |0022: if-eq v2, v3, 0025 // +0003
+033e1c: 2803                                   |0024: goto 0027 // +0003
+033e1e: 0110                                   |0025: move v0, v1
+033e20: 28e0                                   |0026: goto 0006 // -0020
+033e22: 3800 0300                              |0027: if-eqz v0, 002a // +0003
+033e26: 2815                                   |0029: goto 003e // +0015
+033e28: 2205 bc00                              |002a: new-instance v5, Ljava/lang/NumberFormatException; // type@00bc
+033e2c: 7110 ec01 0200                         |002c: invoke-static {v2}, Ljava/lang/Byte;.valueOf:(B)Ljava/lang/Byte; // method@01ec
+033e32: 0c00                                   |002f: move-result-object v0
+033e34: 2410 cd01 0000                         |0030: filled-new-array {v0}, [Ljava/lang/Object; // type@01cd
+033e3a: 0c00                                   |0033: move-result-object v0
+033e3c: 1a01 3e01                              |0034: const-string v1, "Expected leading [0-9] or '-' character but was %#x" // string@013e
+033e40: 7120 4c02 0100                         |0036: invoke-static {v1, v0}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@024c
+033e46: 0c00                                   |0039: move-result-object v0
+033e48: 7020 3402 0500                         |003a: invoke-direct {v5, v0}, Ljava/lang/NumberFormatException;.<init>:(Ljava/lang/String;)V // method@0234
+033e4e: 2705                                   |003d: throw v5
+033e50: 5455 2101                              |003e: iget-object v5, v5, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033e54: 6e10 b804 0500                         |0040: invoke-virtual {v5}, Lokio/Buffer;.readDecimalLong:()J // method@04b8
+033e5a: 0b00                                   |0043: move-result-wide v0
+033e5c: 1000                                   |0044: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0002 line=252
+        0x0009 line=254
+        0x000f line=255
+        0x002a line=259
+        0x002c line=260
+        0x0034 line=259
+        0x003e line=266
+      locals        :
+        0x0000 - 0x0045 reg=5 this Lokio/RealBufferedSource;
+
+    #20              : (in Lokio/RealBufferedSource;)
+      name          : 'readFully'
+      type          : '(Lokio/Buffer;J)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 4
+      insns size    : 16 16-bit code units
+033e60:                                        |[033e60] okio.RealBufferedSource.readFully:(Lokio/Buffer;J)V
+033e70: 6e30 0c06 2003                         |0000: invoke-virtual {v0, v2, v3}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+033e76: 5400 2101                              |0003: iget-object v0, v0, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033e7a: 6e40 bc04 1032                         |0005: invoke-virtual {v0, v1, v2, v3}, Lokio/Buffer;.readFully:(Lokio/Buffer;J)V // method@04bc
+033e80: 0e00                                   |0008: return-void
+033e82: 0d02                                   |0009: move-exception v2
+033e84: 5400 2101                              |000a: iget-object v0, v0, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033e88: 6e20 df04 0100                         |000c: invoke-virtual {v1, v0}, Lokio/Buffer;.writeAll:(Lokio/Source;)J // method@04df
+033e8e: 2702                                   |000f: throw v2
+      catches       : 1
+        0x0000 - 0x0003
+          Ljava/io/EOFException; -> 0x0009
+      positions     :
+        0x0000 line=135
+        0x0003 line=141
+        0x000a line=138
+        0x000f line=139
+      locals        :
+        0x0000 - 0x0010 reg=0 this Lokio/RealBufferedSource;
+        0x0000 - 0x0010 reg=1 (null) Lokio/Buffer;
+        0x0000 - 0x0010 reg=2 (null) J
+
+    #21              : (in Lokio/RealBufferedSource;)
+      name          : 'readFully'
+      type          : '([B)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 4
+      insns size    : 44 16-bit code units
+033ea0:                                        |[033ea0] okio.RealBufferedSource.readFully:([B)V
+033eb0: 2170                                   |0000: array-length v0, v7
+033eb2: 8100                                   |0001: int-to-long v0, v0
+033eb4: 6e30 0c06 0601                         |0002: invoke-virtual {v6, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+033eba: 5466 2101                              |0005: iget-object v6, v6, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033ebe: 6e20 bd04 7600                         |0007: invoke-virtual {v6, v7}, Lokio/Buffer;.readFully:([B)V // method@04bd
+033ec4: 0e00                                   |000a: return-void
+033ec6: 0d00                                   |000b: move-exception v0
+033ec8: 1201                                   |000c: const/4 v1, #int 0 // #0
+033eca: 5462 2101                              |000d: iget-object v2, v6, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033ece: 5322 f300                              |000f: iget-wide v2, v2, Lokio/Buffer;.size:J // field@00f3
+033ed2: 1604 0000                              |0011: const-wide/16 v4, #int 0 // #0
+033ed6: 3102 0204                              |0013: cmp-long v2, v2, v4
+033eda: 3d02 1600                              |0015: if-lez v2, 002b // +0016
+033ede: 5462 2101                              |0017: iget-object v2, v6, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033ee2: 5323 f300                              |0019: iget-wide v3, v2, Lokio/Buffer;.size:J // field@00f3
+033ee6: 8433                                   |001b: long-to-int v3, v3
+033ee8: 6e40 b004 7231                         |001c: invoke-virtual {v2, v7, v1, v3}, Lokio/Buffer;.read:([BII)I // method@04b0
+033eee: 0a02                                   |001f: move-result v2
+033ef0: 12f3                                   |0020: const/4 v3, #int -1 // #ff
+033ef2: 3232 0400                              |0021: if-eq v2, v3, 0025 // +0004
+033ef6: b021                                   |0023: add-int/2addr v1, v2
+033ef8: 28e9                                   |0024: goto 000d // -0017
+033efa: 2206 9b00                              |0025: new-instance v6, Ljava/lang/AssertionError; // type@009b
+033efe: 7010 e701 0600                         |0027: invoke-direct {v6}, Ljava/lang/AssertionError;.<init>:()V // method@01e7
+033f04: 2706                                   |002a: throw v6
+033f06: 2700                                   |002b: throw v0
+      catches       : 1
+        0x0000 - 0x0005
+          Ljava/io/EOFException; -> 0x000b
+      positions     :
+        0x0000 line=107
+        0x0005 line=118
+        0x000d line=111
+        0x0017 line=112
+        0x0025 line=113
+        0x002b line=116
+      locals        :
+        0x0000 - 0x002c reg=6 this Lokio/RealBufferedSource;
+        0x0000 - 0x002c reg=7 (null) [B
+
+    #22              : (in Lokio/RealBufferedSource;)
+      name          : 'readHexadecimalUnsignedLong'
+      type          : '()J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 3
+      insns size    : 79 16-bit code units
+033f18:                                        |[033f18] okio.RealBufferedSource.readHexadecimalUnsignedLong:()J
+033f28: 1600 0100                              |0000: const-wide/16 v0, #int 1 // #1
+033f2c: 6e30 0c06 0501                         |0002: invoke-virtual {v5, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+033f32: 1200                                   |0005: const/4 v0, #int 0 // #0
+033f34: d801 0001                              |0006: add-int/lit8 v1, v0, #int 1 // #01
+033f38: 8112                                   |0008: int-to-long v2, v1
+033f3a: 6e30 0b06 2503                         |0009: invoke-virtual {v5, v2, v3}, Lokio/RealBufferedSource;.request:(J)Z // method@060b
+033f40: 0a02                                   |000c: move-result v2
+033f42: 3802 3b00                              |000d: if-eqz v2, 0048 // +003b
+033f46: 5452 2101                              |000f: iget-object v2, v5, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033f4a: 8103                                   |0011: int-to-long v3, v0
+033f4c: 6e30 a404 3204                         |0012: invoke-virtual {v2, v3, v4}, Lokio/Buffer;.getByte:(J)B // method@04a4
+033f52: 0a02                                   |0015: move-result v2
+033f54: 1303 3000                              |0016: const/16 v3, #int 48 // #30
+033f58: 3432 0600                              |0018: if-lt v2, v3, 001e // +0006
+033f5c: 1303 3900                              |001a: const/16 v3, #int 57 // #39
+033f60: 3732 1300                              |001c: if-le v2, v3, 002f // +0013
+033f64: 1303 6100                              |001e: const/16 v3, #int 97 // #61
+033f68: 3432 0600                              |0020: if-lt v2, v3, 0026 // +0006
+033f6c: 1303 6600                              |0022: const/16 v3, #int 102 // #66
+033f70: 3732 0b00                              |0024: if-le v2, v3, 002f // +000b
+033f74: 1303 4100                              |0026: const/16 v3, #int 65 // #41
+033f78: 3432 0900                              |0028: if-lt v2, v3, 0031 // +0009
+033f7c: 1303 4600                              |002a: const/16 v3, #int 70 // #46
+033f80: 3732 0300                              |002c: if-le v2, v3, 002f // +0003
+033f84: 2803                                   |002e: goto 0031 // +0003
+033f86: 0110                                   |002f: move v0, v1
+033f88: 28d6                                   |0030: goto 0006 // -002a
+033f8a: 3800 0300                              |0031: if-eqz v0, 0034 // +0003
+033f8e: 2815                                   |0033: goto 0048 // +0015
+033f90: 2205 bc00                              |0034: new-instance v5, Ljava/lang/NumberFormatException; // type@00bc
+033f94: 7110 ec01 0200                         |0036: invoke-static {v2}, Ljava/lang/Byte;.valueOf:(B)Ljava/lang/Byte; // method@01ec
+033f9a: 0c00                                   |0039: move-result-object v0
+033f9c: 2410 cd01 0000                         |003a: filled-new-array {v0}, [Ljava/lang/Object; // type@01cd
+033fa2: 0c00                                   |003d: move-result-object v0
+033fa4: 1a01 4001                              |003e: const-string v1, "Expected leading [0-9a-fA-F] character but was %#x" // string@0140
+033fa8: 7120 4c02 0100                         |0040: invoke-static {v1, v0}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@024c
+033fae: 0c00                                   |0043: move-result-object v0
+033fb0: 7020 3402 0500                         |0044: invoke-direct {v5, v0}, Ljava/lang/NumberFormatException;.<init>:(Ljava/lang/String;)V // method@0234
+033fb6: 2705                                   |0047: throw v5
+033fb8: 5455 2101                              |0048: iget-object v5, v5, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033fbc: 6e10 be04 0500                         |004a: invoke-virtual {v5}, Lokio/Buffer;.readHexadecimalUnsignedLong:()J // method@04be
+033fc2: 0b00                                   |004d: move-result-wide v0
+033fc4: 1000                                   |004e: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0002 line=270
+        0x0009 line=272
+        0x000f line=273
+        0x0034 line=277
+        0x0036 line=278
+        0x003e line=277
+        0x0048 line=284
+      locals        :
+        0x0000 - 0x004f reg=5 this Lokio/RealBufferedSource;
+
+    #23              : (in Lokio/RealBufferedSource;)
+      name          : 'readInt'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 12 16-bit code units
+033fc8:                                        |[033fc8] okio.RealBufferedSource.readInt:()I
+033fd8: 1600 0400                              |0000: const-wide/16 v0, #int 4 // #4
+033fdc: 6e30 0c06 0201                         |0002: invoke-virtual {v2, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+033fe2: 5422 2101                              |0005: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+033fe6: 6e10 bf04 0200                         |0007: invoke-virtual {v2}, Lokio/Buffer;.readInt:()I // method@04bf
+033fec: 0a02                                   |000a: move-result v2
+033fee: 0f02                                   |000b: return v2
+      catches       : (none)
+      positions     :
+        0x0002 line=232
+        0x0005 line=233
+      locals        :
+        0x0000 - 0x000c reg=2 this Lokio/RealBufferedSource;
+
+    #24              : (in Lokio/RealBufferedSource;)
+      name          : 'readIntLe'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 12 16-bit code units
+033ff0:                                        |[033ff0] okio.RealBufferedSource.readIntLe:()I
+034000: 1600 0400                              |0000: const-wide/16 v0, #int 4 // #4
+034004: 6e30 0c06 0201                         |0002: invoke-virtual {v2, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+03400a: 5422 2101                              |0005: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+03400e: 6e10 c004 0200                         |0007: invoke-virtual {v2}, Lokio/Buffer;.readIntLe:()I // method@04c0
+034014: 0a02                                   |000a: move-result v2
+034016: 0f02                                   |000b: return v2
+      catches       : (none)
+      positions     :
+        0x0002 line=237
+        0x0005 line=238
+      locals        :
+        0x0000 - 0x000c reg=2 this Lokio/RealBufferedSource;
+
+    #25              : (in Lokio/RealBufferedSource;)
+      name          : 'readLong'
+      type          : '()J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 12 16-bit code units
+034018:                                        |[034018] okio.RealBufferedSource.readLong:()J
+034028: 1600 0800                              |0000: const-wide/16 v0, #int 8 // #8
+03402c: 6e30 0c06 0201                         |0002: invoke-virtual {v2, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+034032: 5422 2101                              |0005: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034036: 6e10 c104 0200                         |0007: invoke-virtual {v2}, Lokio/Buffer;.readLong:()J // method@04c1
+03403c: 0b00                                   |000a: move-result-wide v0
+03403e: 1000                                   |000b: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0002 line=242
+        0x0005 line=243
+      locals        :
+        0x0000 - 0x000c reg=2 this Lokio/RealBufferedSource;
+
+    #26              : (in Lokio/RealBufferedSource;)
+      name          : 'readLongLe'
+      type          : '()J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 12 16-bit code units
+034040:                                        |[034040] okio.RealBufferedSource.readLongLe:()J
+034050: 1600 0800                              |0000: const-wide/16 v0, #int 8 // #8
+034054: 6e30 0c06 0201                         |0002: invoke-virtual {v2, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+03405a: 5422 2101                              |0005: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+03405e: 6e10 c204 0200                         |0007: invoke-virtual {v2}, Lokio/Buffer;.readLongLe:()J // method@04c2
+034064: 0b00                                   |000a: move-result-wide v0
+034066: 1000                                   |000b: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0002 line=247
+        0x0005 line=248
+      locals        :
+        0x0000 - 0x000c reg=2 this Lokio/RealBufferedSource;
+
+    #27              : (in Lokio/RealBufferedSource;)
+      name          : 'readShort'
+      type          : '()S'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 12 16-bit code units
+034068:                                        |[034068] okio.RealBufferedSource.readShort:()S
+034078: 1600 0200                              |0000: const-wide/16 v0, #int 2 // #2
+03407c: 6e30 0c06 0201                         |0002: invoke-virtual {v2, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+034082: 5422 2101                              |0005: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034086: 6e10 c304 0200                         |0007: invoke-virtual {v2}, Lokio/Buffer;.readShort:()S // method@04c3
+03408c: 0a02                                   |000a: move-result v2
+03408e: 0f02                                   |000b: return v2
+      catches       : (none)
+      positions     :
+        0x0002 line=222
+        0x0005 line=223
+      locals        :
+        0x0000 - 0x000c reg=2 this Lokio/RealBufferedSource;
+
+    #28              : (in Lokio/RealBufferedSource;)
+      name          : 'readShortLe'
+      type          : '()S'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 12 16-bit code units
+034090:                                        |[034090] okio.RealBufferedSource.readShortLe:()S
+0340a0: 1600 0200                              |0000: const-wide/16 v0, #int 2 // #2
+0340a4: 6e30 0c06 0201                         |0002: invoke-virtual {v2, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+0340aa: 5422 2101                              |0005: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+0340ae: 6e10 c404 0200                         |0007: invoke-virtual {v2}, Lokio/Buffer;.readShortLe:()S // method@04c4
+0340b4: 0a02                                   |000a: move-result v2
+0340b6: 0f02                                   |000b: return v2
+      catches       : (none)
+      positions     :
+        0x0002 line=227
+        0x0005 line=228
+      locals        :
+        0x0000 - 0x000c reg=2 this Lokio/RealBufferedSource;
+
+    #29              : (in Lokio/RealBufferedSource;)
+      name          : 'readString'
+      type          : '(JLjava/nio/charset/Charset;)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 4
+      insns size    : 20 16-bit code units
+0340b8:                                        |[0340b8] okio.RealBufferedSource.readString:(JLjava/nio/charset/Charset;)Ljava/lang/String;
+0340c8: 6e30 0c06 1002                         |0000: invoke-virtual {v0, v1, v2}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+0340ce: 3803 0900                              |0003: if-eqz v3, 000c // +0009
+0340d2: 5400 2101                              |0005: iget-object v0, v0, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+0340d6: 6e40 c504 1032                         |0007: invoke-virtual {v0, v1, v2, v3}, Lokio/Buffer;.readString:(JLjava/nio/charset/Charset;)Ljava/lang/String; // method@04c5
+0340dc: 0c00                                   |000a: move-result-object v0
+0340de: 1100                                   |000b: return-object v0
+0340e0: 2200 af00                              |000c: new-instance v0, Ljava/lang/IllegalArgumentException; // type@00af
+0340e4: 1a01 b705                              |000e: const-string v1, "charset == null" // string@05b7
+0340e8: 7020 1b02 1000                         |0010: invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+0340ee: 2700                                   |0013: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=180
+        0x0005 line=182
+        0x000c line=181
+      locals        :
+        0x0000 - 0x0014 reg=0 this Lokio/RealBufferedSource;
+        0x0000 - 0x0014 reg=1 (null) J
+        0x0000 - 0x0014 reg=3 (null) Ljava/nio/charset/Charset;
+
+    #30              : (in Lokio/RealBufferedSource;)
+      name          : 'readString'
+      type          : '(Ljava/nio/charset/Charset;)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 24 16-bit code units
+0340f0:                                        |[0340f0] okio.RealBufferedSource.readString:(Ljava/nio/charset/Charset;)Ljava/lang/String;
+034100: 3803 1000                              |0000: if-eqz v3, 0010 // +0010
+034104: 5420 2101                              |0002: iget-object v0, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034108: 5421 2301                              |0004: iget-object v1, v2, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+03410c: 6e20 df04 1000                         |0006: invoke-virtual {v0, v1}, Lokio/Buffer;.writeAll:(Lokio/Source;)J // method@04df
+034112: 5422 2101                              |0009: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034116: 6e20 c604 3200                         |000b: invoke-virtual {v2, v3}, Lokio/Buffer;.readString:(Ljava/nio/charset/Charset;)Ljava/lang/String; // method@04c6
+03411c: 0c02                                   |000e: move-result-object v2
+03411e: 1102                                   |000f: return-object v2
+034120: 2202 af00                              |0010: new-instance v2, Ljava/lang/IllegalArgumentException; // type@00af
+034124: 1a03 b705                              |0012: const-string v3, "charset == null" // string@05b7
+034128: 7020 1b02 3200                         |0014: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+03412e: 2702                                   |0017: throw v2
+      catches       : (none)
+      positions     :
+        0x0002 line=175
+        0x0009 line=176
+        0x0010 line=173
+      locals        :
+        0x0000 - 0x0018 reg=2 this Lokio/RealBufferedSource;
+        0x0000 - 0x0018 reg=3 (null) Ljava/nio/charset/Charset;
+
+    #31              : (in Lokio/RealBufferedSource;)
+      name          : 'readUtf8'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 14 16-bit code units
+034130:                                        |[034130] okio.RealBufferedSource.readUtf8:()Ljava/lang/String;
+034140: 5420 2101                              |0000: iget-object v0, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034144: 5421 2301                              |0002: iget-object v1, v2, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+034148: 6e20 df04 1000                         |0004: invoke-virtual {v0, v1}, Lokio/Buffer;.writeAll:(Lokio/Source;)J // method@04df
+03414e: 5422 2101                              |0007: iget-object v2, v2, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034152: 6e10 c704 0200                         |0009: invoke-virtual {v2}, Lokio/Buffer;.readUtf8:()Ljava/lang/String; // method@04c7
+034158: 0c02                                   |000c: move-result-object v2
+03415a: 1102                                   |000d: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=163
+        0x0007 line=164
+      locals        :
+        0x0000 - 0x000e reg=2 this Lokio/RealBufferedSource;
+
+    #32              : (in Lokio/RealBufferedSource;)
+      name          : 'readUtf8'
+      type          : '(J)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 10 16-bit code units
+03415c:                                        |[03415c] okio.RealBufferedSource.readUtf8:(J)Ljava/lang/String;
+03416c: 6e30 0c06 1002                         |0000: invoke-virtual {v0, v1, v2}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+034172: 5400 2101                              |0003: iget-object v0, v0, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034176: 6e30 c804 1002                         |0005: invoke-virtual {v0, v1, v2}, Lokio/Buffer;.readUtf8:(J)Ljava/lang/String; // method@04c8
+03417c: 0c00                                   |0008: move-result-object v0
+03417e: 1100                                   |0009: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=168
+        0x0003 line=169
+      locals        :
+        0x0000 - 0x000a reg=0 this Lokio/RealBufferedSource;
+        0x0000 - 0x000a reg=1 (null) J
+
+    #33              : (in Lokio/RealBufferedSource;)
+      name          : 'readUtf8CodePoint'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 3
+      insns size    : 55 16-bit code units
+034180:                                        |[034180] okio.RealBufferedSource.readUtf8CodePoint:()I
+034190: 1600 0100                              |0000: const-wide/16 v0, #int 1 // #1
+034194: 6e30 0c06 0301                         |0002: invoke-virtual {v3, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+03419a: 5430 2101                              |0005: iget-object v0, v3, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+03419e: 1601 0000                              |0007: const-wide/16 v1, #int 0 // #0
+0341a2: 6e30 a404 1002                         |0009: invoke-virtual {v0, v1, v2}, Lokio/Buffer;.getByte:(J)B // method@04a4
+0341a8: 0a00                                   |000c: move-result v0
+0341aa: d501 e000                              |000d: and-int/lit16 v1, v0, #int 224 // #00e0
+0341ae: 1302 c000                              |000f: const/16 v2, #int 192 // #c0
+0341b2: 3321 0800                              |0011: if-ne v1, v2, 0019 // +0008
+0341b6: 1600 0200                              |0013: const-wide/16 v0, #int 2 // #2
+0341ba: 6e30 0c06 0301                         |0015: invoke-virtual {v3, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+0341c0: 2818                                   |0018: goto 0030 // +0018
+0341c2: d501 f000                              |0019: and-int/lit16 v1, v0, #int 240 // #00f0
+0341c6: 1302 e000                              |001b: const/16 v2, #int 224 // #e0
+0341ca: 3321 0800                              |001d: if-ne v1, v2, 0025 // +0008
+0341ce: 1600 0300                              |001f: const-wide/16 v0, #int 3 // #3
+0341d2: 6e30 0c06 0301                         |0021: invoke-virtual {v3, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+0341d8: 280c                                   |0024: goto 0030 // +000c
+0341da: d500 f800                              |0025: and-int/lit16 v0, v0, #int 248 // #00f8
+0341de: 1301 f000                              |0027: const/16 v1, #int 240 // #f0
+0341e2: 3310 0700                              |0029: if-ne v0, v1, 0030 // +0007
+0341e6: 1600 0400                              |002b: const-wide/16 v0, #int 4 // #4
+0341ea: 6e30 0c06 0301                         |002d: invoke-virtual {v3, v0, v1}, Lokio/RealBufferedSource;.require:(J)V // method@060c
+0341f0: 5433 2101                              |0030: iget-object v3, v3, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+0341f4: 6e10 c904 0300                         |0032: invoke-virtual {v3}, Lokio/Buffer;.readUtf8CodePoint:()I // method@04c9
+0341fa: 0a03                                   |0035: move-result v3
+0341fc: 0f03                                   |0036: return v3
+      catches       : (none)
+      positions     :
+        0x0002 line=207
+        0x0005 line=209
+        0x0015 line=211
+        0x0021 line=213
+        0x002d line=215
+        0x0030 line=218
+      locals        :
+        0x0000 - 0x0037 reg=3 this Lokio/RealBufferedSource;
+
+    #34              : (in Lokio/RealBufferedSource;)
+      name          : 'readUtf8Line'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 3
+      insns size    : 40 16-bit code units
+034200:                                        |[034200] okio.RealBufferedSource.readUtf8Line:()Ljava/lang/String;
+034210: 1300 0a00                              |0000: const/16 v0, #int 10 // #a
+034214: 6e20 e905 0400                         |0002: invoke-virtual {v4, v0}, Lokio/RealBufferedSource;.indexOf:(B)J // method@05e9
+03421a: 0b00                                   |0005: move-result-wide v0
+03421c: 1602 ffff                              |0006: const-wide/16 v2, #int -1 // #ffff
+034220: 3102 0002                              |0008: cmp-long v2, v0, v2
+034224: 3902 1700                              |000a: if-nez v2, 0021 // +0017
+034228: 5440 2101                              |000c: iget-object v0, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+03422c: 5300 f300                              |000e: iget-wide v0, v0, Lokio/Buffer;.size:J // field@00f3
+034230: 1602 0000                              |0010: const-wide/16 v2, #int 0 // #0
+034234: 3100 0002                              |0012: cmp-long v0, v0, v2
+034238: 3800 0b00                              |0014: if-eqz v0, 001f // +000b
+03423c: 5440 2101                              |0016: iget-object v0, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034240: 5300 f300                              |0018: iget-wide v0, v0, Lokio/Buffer;.size:J // field@00f3
+034244: 6e30 0706 0401                         |001a: invoke-virtual {v4, v0, v1}, Lokio/RealBufferedSource;.readUtf8:(J)Ljava/lang/String; // method@0607
+03424a: 0c04                                   |001d: move-result-object v4
+03424c: 2802                                   |001e: goto 0020 // +0002
+03424e: 1204                                   |001f: const/4 v4, #int 0 // #0
+034250: 1104                                   |0020: return-object v4
+034252: 5444 2101                              |0021: iget-object v4, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034256: 6e30 cb04 0401                         |0023: invoke-virtual {v4, v0, v1}, Lokio/Buffer;.readUtf8Line:(J)Ljava/lang/String; // method@04cb
+03425c: 0c04                                   |0026: move-result-object v4
+03425e: 1104                                   |0027: return-object v4
+      catches       : (none)
+      positions     :
+        0x0002 line=186
+        0x000c line=189
+        0x0021 line=192
+      locals        :
+        0x0000 - 0x0028 reg=4 this Lokio/RealBufferedSource;
+
+    #35              : (in Lokio/RealBufferedSource;)
+      name          : 'readUtf8LineStrict'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 1
+      outs          : 6
+      insns size    : 93 16-bit code units
+034260:                                        |[034260] okio.RealBufferedSource.readUtf8LineStrict:()Ljava/lang/String;
+034270: 1300 0a00                              |0000: const/16 v0, #int 10 // #a
+034274: 6e20 e905 0700                         |0002: invoke-virtual {v7, v0}, Lokio/RealBufferedSource;.indexOf:(B)J // method@05e9
+03427a: 0b00                                   |0005: move-result-wide v0
+03427c: 1602 ffff                              |0006: const-wide/16 v2, #int -1 // #ffff
+034280: 3102 0002                              |0008: cmp-long v2, v0, v2
+034284: 3802 0900                              |000a: if-eqz v2, 0013 // +0009
+034288: 5477 2101                              |000c: iget-object v7, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+03428c: 6e30 cb04 0701                         |000e: invoke-virtual {v7, v0, v1}, Lokio/Buffer;.readUtf8Line:(J)Ljava/lang/String; // method@04cb
+034292: 0c07                                   |0011: move-result-object v7
+034294: 1107                                   |0012: return-object v7
+034296: 2206 4c01                              |0013: new-instance v6, Lokio/Buffer; // type@014c
+03429a: 7010 9404 0600                         |0015: invoke-direct {v6}, Lokio/Buffer;.<init>:()V // method@0494
+0342a0: 5470 2101                              |0018: iget-object v0, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+0342a4: 1601 2000                              |001a: const-wide/16 v1, #int 32 // #20
+0342a8: 6e10 d004 0000                         |001c: invoke-virtual {v0}, Lokio/Buffer;.size:()J // method@04d0
+0342ae: 0b03                                   |001f: move-result-wide v3
+0342b0: 7140 3002 2143                         |0020: invoke-static {v1, v2, v3, v4}, Ljava/lang/Math;.min:(JJ)J // method@0230
+0342b6: 0b04                                   |0023: move-result-wide v4
+0342b8: 1602 0000                              |0024: const-wide/16 v2, #int 0 // #0
+0342bc: 0761                                   |0026: move-object v1, v6
+0342be: 7406 9d04 0000                         |0027: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lokio/Buffer;.copyTo:(Lokio/Buffer;JJ)Lokio/Buffer; // method@049d
+0342c4: 2200 8800                              |002a: new-instance v0, Ljava/io/EOFException; // type@0088
+0342c8: 2201 c600                              |002c: new-instance v1, Ljava/lang/StringBuilder; // type@00c6
+0342cc: 1a02 4105                              |002e: const-string v2, "\\n not found: size=" // string@0541
+0342d0: 7020 5d02 2100                         |0030: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@025d
+0342d6: 5477 2101                              |0033: iget-object v7, v7, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+0342da: 6e10 d004 0700                         |0035: invoke-virtual {v7}, Lokio/Buffer;.size:()J // method@04d0
+0342e0: 0b02                                   |0038: move-result-wide v2
+0342e2: 6e30 6002 2103                         |0039: invoke-virtual {v1, v2, v3}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@0260
+0342e8: 0c07                                   |003c: move-result-object v7
+0342ea: 1a01 1a00                              |003d: const-string v1, " content=" // string@001a
+0342ee: 6e20 6302 1700                         |003f: invoke-virtual {v7, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@0263
+0342f4: 0c07                                   |0042: move-result-object v7
+0342f6: 6e10 b604 0600                         |0043: invoke-virtual {v6}, Lokio/Buffer;.readByteString:()Lokio/ByteString; // method@04b6
+0342fc: 0c01                                   |0046: move-result-object v1
+0342fe: 6e10 4d05 0100                         |0047: invoke-virtual {v1}, Lokio/ByteString;.hex:()Ljava/lang/String; // method@054d
+034304: 0c01                                   |004a: move-result-object v1
+034306: 6e20 6302 1700                         |004b: invoke-virtual {v7, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@0263
+03430c: 0c07                                   |004e: move-result-object v7
+03430e: 1a01 8c00                              |004f: const-string v1, "..." // string@008c
+034312: 6e20 6302 1700                         |0051: invoke-virtual {v7, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@0263
+034318: 0c07                                   |0054: move-result-object v7
+03431a: 6e10 6502 0700                         |0055: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@0265
+034320: 0c07                                   |0058: move-result-object v7
+034322: 7020 c501 7000                         |0059: invoke-direct {v0, v7}, Ljava/io/EOFException;.<init>:(Ljava/lang/String;)V // method@01c5
+034328: 2700                                   |005c: throw v0
+      catches       : (none)
+      positions     :
+        0x0002 line=196
+        0x000c line=203
+        0x0013 line=198
+        0x0018 line=199
+        0x002a line=200
+        0x0043 line=201
+      locals        :
+        0x0000 - 0x005d reg=7 this Lokio/RealBufferedSource;
+
+    #36              : (in Lokio/RealBufferedSource;)
+      name          : 'request'
+      type          : '(J)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 4
+      insns size    : 67 16-bit code units
+03432c:                                        |[03432c] okio.RealBufferedSource.request:(J)Z
+03433c: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+034340: 3100 0500                              |0002: cmp-long v0, v5, v0
+034344: 3a00 2a00                              |0004: if-ltz v0, 002e // +002a
+034348: 5540 2201                              |0006: iget-boolean v0, v4, Lokio/RealBufferedSource;.closed:Z // field@0122
+03434c: 3900 1e00                              |0008: if-nez v0, 0026 // +001e
+034350: 5440 2101                              |000a: iget-object v0, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034354: 5300 f300                              |000c: iget-wide v0, v0, Lokio/Buffer;.size:J // field@00f3
+034358: 3100 0005                              |000e: cmp-long v0, v0, v5
+03435c: 3b00 1400                              |0010: if-gez v0, 0024 // +0014
+034360: 5440 2301                              |0012: iget-object v0, v4, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+034364: 5441 2101                              |0014: iget-object v1, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034368: 1602 0008                              |0016: const-wide/16 v2, #int 2048 // #800
+03436c: 7240 3806 1032                         |0018: invoke-interface {v0, v1, v2, v3}, Lokio/Source;.read:(Lokio/Buffer;J)J // method@0638
+034372: 0b00                                   |001b: move-result-wide v0
+034374: 1602 ffff                              |001c: const-wide/16 v2, #int -1 // #ffff
+034378: 3100 0002                              |001e: cmp-long v0, v0, v2
+03437c: 3900 eaff                              |0020: if-nez v0, 000a // -0016
+034380: 1204                                   |0022: const/4 v4, #int 0 // #0
+034382: 0f04                                   |0023: return v4
+034384: 1214                                   |0024: const/4 v4, #int 1 // #1
+034386: 0f04                                   |0025: return v4
+034388: 2204 b000                              |0026: new-instance v4, Ljava/lang/IllegalStateException; // type@00b0
+03438c: 1a05 dd05                              |0028: const-string v5, "closed" // string@05dd
+034390: 7020 1e02 5400                         |002a: invoke-direct {v4, v5}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@021e
+034396: 2704                                   |002d: throw v4
+034398: 2204 af00                              |002e: new-instance v4, Ljava/lang/IllegalArgumentException; // type@00af
+03439c: 2200 c600                              |0030: new-instance v0, Ljava/lang/StringBuilder; // type@00c6
+0343a0: 1a01 a305                              |0032: const-string v1, "byteCount < 0: " // string@05a3
+0343a4: 7020 5d02 1000                         |0034: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@025d
+0343aa: 6e30 6002 5006                         |0037: invoke-virtual {v0, v5, v6}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@0260
+0343b0: 0c05                                   |003a: move-result-object v5
+0343b2: 6e10 6502 0500                         |003b: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@0265
+0343b8: 0c05                                   |003e: move-result-object v5
+0343ba: 7020 1b02 5400                         |003f: invoke-direct {v4, v5}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+0343c0: 2704                                   |0042: throw v4
+      catches       : (none)
+      positions     :
+        0x0006 line=69
+        0x000a line=70
+        0x0012 line=71
+        0x0026 line=69
+        0x002e line=68
+      locals        :
+        0x0000 - 0x0043 reg=4 this Lokio/RealBufferedSource;
+        0x0000 - 0x0043 reg=5 (null) J
+
+    #37              : (in Lokio/RealBufferedSource;)
+      name          : 'require'
+      type          : '(J)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 13 16-bit code units
+0343c4:                                        |[0343c4] okio.RealBufferedSource.require:(J)V
+0343d4: 6e30 0b06 1002                         |0000: invoke-virtual {v0, v1, v2}, Lokio/RealBufferedSource;.request:(J)Z // method@060b
+0343da: 0a00                                   |0003: move-result v0
+0343dc: 3800 0300                              |0004: if-eqz v0, 0007 // +0003
+0343e0: 0e00                                   |0006: return-void
+0343e2: 2200 8800                              |0007: new-instance v0, Ljava/io/EOFException; // type@0088
+0343e6: 7010 c401 0000                         |0009: invoke-direct {v0}, Ljava/io/EOFException;.<init>:()V // method@01c4
+0343ec: 2700                                   |000c: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=64
+      locals        :
+        0x0000 - 0x000d reg=0 this Lokio/RealBufferedSource;
+        0x0000 - 0x000d reg=1 (null) J
+
+    #38              : (in Lokio/RealBufferedSource;)
+      name          : 'skip'
+      type          : '(J)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 4
+      insns size    : 67 16-bit code units
+0343f0:                                        |[0343f0] okio.RealBufferedSource.skip:(J)V
+034400: 5540 2201                              |0000: iget-boolean v0, v4, Lokio/RealBufferedSource;.closed:Z // field@0122
+034404: 3900 3900                              |0002: if-nez v0, 003b // +0039
+034408: 1600 0000                              |0004: const-wide/16 v0, #int 0 // #0
+03440c: 3102 0500                              |0006: cmp-long v2, v5, v0
+034410: 3d02 3200                              |0008: if-lez v2, 003a // +0032
+034414: 5442 2101                              |000a: iget-object v2, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034418: 5322 f300                              |000c: iget-wide v2, v2, Lokio/Buffer;.size:J // field@00f3
+03441c: 3100 0200                              |000e: cmp-long v0, v2, v0
+034420: 3900 1900                              |0010: if-nez v0, 0029 // +0019
+034424: 5440 2301                              |0012: iget-object v0, v4, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+034428: 5441 2101                              |0014: iget-object v1, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+03442c: 1602 0008                              |0016: const-wide/16 v2, #int 2048 // #800
+034430: 7240 3806 1032                         |0018: invoke-interface {v0, v1, v2, v3}, Lokio/Source;.read:(Lokio/Buffer;J)J // method@0638
+034436: 0b00                                   |001b: move-result-wide v0
+034438: 1602 ffff                              |001c: const-wide/16 v2, #int -1 // #ffff
+03443c: 3100 0002                              |001e: cmp-long v0, v0, v2
+034440: 3800 0300                              |0020: if-eqz v0, 0023 // +0003
+034444: 2807                                   |0022: goto 0029 // +0007
+034446: 2204 8800                              |0023: new-instance v4, Ljava/io/EOFException; // type@0088
+03444a: 7010 c401 0400                         |0025: invoke-direct {v4}, Ljava/io/EOFException;.<init>:()V // method@01c4
+034450: 2704                                   |0028: throw v4
+034452: 5440 2101                              |0029: iget-object v0, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+034456: 6e10 d004 0000                         |002b: invoke-virtual {v0}, Lokio/Buffer;.size:()J // method@04d0
+03445c: 0b00                                   |002e: move-result-wide v0
+03445e: 7140 3002 6510                         |002f: invoke-static {v5, v6, v0, v1}, Ljava/lang/Math;.min:(JJ)J // method@0230
+034464: 0b00                                   |0032: move-result-wide v0
+034466: 5442 2101                              |0033: iget-object v2, v4, Lokio/RealBufferedSource;.buffer:Lokio/Buffer; // field@0121
+03446a: 6e30 d104 0201                         |0035: invoke-virtual {v2, v0, v1}, Lokio/Buffer;.skip:(J)V // method@04d1
+034470: bc05                                   |0038: sub-long/2addr v5, v0
+034472: 28cb                                   |0039: goto 0004 // -0035
+034474: 0e00                                   |003a: return-void
+034476: 2204 b000                              |003b: new-instance v4, Ljava/lang/IllegalStateException; // type@00b0
+03447a: 1a05 dd05                              |003d: const-string v5, "closed" // string@05dd
+03447e: 7020 1e02 5400                         |003f: invoke-direct {v4, v5}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@021e
+034484: 2704                                   |0042: throw v4
+      catches       : (none)
+      positions     :
+        0x0000 line=288
+        0x000a line=290
+        0x0023 line=291
+        0x0029 line=293
+        0x0033 line=294
+        0x003b line=288
+      locals        :
+        0x0000 - 0x0043 reg=4 this Lokio/RealBufferedSource;
+        0x0000 - 0x0043 reg=5 (null) J
+
+    #39              : (in Lokio/RealBufferedSource;)
+      name          : 'timeout'
+      type          : '()Lokio/Timeout;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+034488:                                        |[034488] okio.RealBufferedSource.timeout:()Lokio/Timeout;
+034498: 5400 2301                              |0000: iget-object v0, v0, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+03449c: 7210 3906 0000                         |0002: invoke-interface {v0}, Lokio/Source;.timeout:()Lokio/Timeout; // method@0639
+0344a2: 0c00                                   |0005: move-result-object v0
+0344a4: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=401
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lokio/RealBufferedSource;
+
+    #40              : (in Lokio/RealBufferedSource;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 24 16-bit code units
+0344a8:                                        |[0344a8] okio.RealBufferedSource.toString:()Ljava/lang/String;
+0344b8: 2200 c600                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@00c6
+0344bc: 1a01 9e05                              |0002: const-string v1, "buffer(" // string@059e
+0344c0: 7020 5d02 1000                         |0004: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@025d
+0344c6: 5422 2301                              |0007: iget-object v2, v2, Lokio/RealBufferedSource;.source:Lokio/Source; // field@0123
+0344ca: 6e20 6202 2000                         |0009: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@0262
+0344d0: 0c02                                   |000c: move-result-object v2
+0344d2: 1a00 7100                              |000d: const-string v0, ")" // string@0071
+0344d6: 6e20 6302 0200                         |000f: invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@0263
+0344dc: 0c02                                   |0012: move-result-object v2
+0344de: 6e10 6502 0200                         |0013: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@0265
+0344e4: 0c02                                   |0016: move-result-object v2
+0344e6: 1102                                   |0017: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=405
+      locals        :
+        0x0000 - 0x0018 reg=2 this Lokio/RealBufferedSource;
+
+  source_file_idx   : 1091 (RealBufferedSource.java)
+

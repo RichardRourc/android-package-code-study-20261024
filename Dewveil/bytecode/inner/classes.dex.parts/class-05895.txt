@@ -1,0 +1,2211 @@
+Class #5895            -
+  Class descriptor  : 'Lcom/squareup/okhttp/internal/DiskLruCache;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/io/Closeable;'
+  Static fields     -
+    #0              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : '$assertionsDisabled'
+      type          : 'Z'
+      access        : 0x1018 (STATIC FINAL SYNTHETIC)
+      value         : false
+    #1              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'ANY_SEQUENCE_NUMBER'
+      type          : 'J'
+      access        : 0x0018 (STATIC FINAL)
+      value         : -1
+    #2              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'CLEAN'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "CLEAN"
+    #3              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'DIRTY'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "DIRTY"
+    #4              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'JOURNAL_FILE'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "journal"
+    #5              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'JOURNAL_FILE_BACKUP'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "journal.bkp"
+    #6              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'JOURNAL_FILE_TEMP'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "journal.tmp"
+    #7              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'LEGAL_KEY_PATTERN'
+      type          : 'Ljava/util/regex/Pattern;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : null
+    #8              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'MAGIC'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "libcore.io.DiskLruCache"
+    #9              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'NULL_SINK'
+      type          : 'Lokio/Sink;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : null
+    #10              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'READ'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "READ"
+    #11              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'REMOVE'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "REMOVE"
+    #12              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'VERSION_1'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "1"
+  Instance fields   -
+    #0              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'appVersion'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'cleanupRunnable'
+      type          : 'Ljava/lang/Runnable;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'closed'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'directory'
+      type          : 'Ljava/io/File;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'executor'
+      type          : 'Ljava/util/concurrent/Executor;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'fileSystem'
+      type          : 'Lcom/squareup/okhttp/internal/io/FileSystem;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #6              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'hasJournalErrors'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #7              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'initialized'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #8              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'journalFile'
+      type          : 'Ljava/io/File;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #9              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'journalFileBackup'
+      type          : 'Ljava/io/File;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #10              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'journalFileTmp'
+      type          : 'Ljava/io/File;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #11              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'journalWriter'
+      type          : 'Lokio/BufferedSink;'
+      access        : 0x0002 (PRIVATE)
+    #12              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'lruEntries'
+      type          : 'Ljava/util/LinkedHashMap;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #13              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'maxSize'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+    #14              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'nextSequenceNumber'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+    #15              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'redundantOpCount'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #16              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'size'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+    #17              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'valueCount'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 16 16-bit code units
+757168:                                        |[757168] com.squareup.okhttp.internal.DiskLruCache.<clinit>:()V
+757178: 1a00 7d72                              |0000: const-string v0, "[a-z0-9_-]{1,120}" // string@727d
+75717c: 7110 47d7 0000                         |0002: invoke-static {v0}, Ljava/util/regex/Pattern;.compile:(Ljava/lang/String;)Ljava/util/regex/Pattern; // method@d747
+757182: 0c00                                   |0005: move-result-object v0
+757184: 6900 ca87                              |0006: sput-object v0, Lcom/squareup/okhttp/internal/DiskLruCache;.LEGAL_KEY_PATTERN:Ljava/util/regex/Pattern; // field@87ca
+757188: 2200 7919                              |0008: new-instance v0, Lcom/squareup/okhttp/internal/DiskLruCache$4; // type@1979
+75718c: 7010 eaca 0000                         |000a: invoke-direct {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$4;.<init>:()V // method@caea
+757192: 6900 cc87                              |000d: sput-object v0, Lcom/squareup/okhttp/internal/DiskLruCache;.NULL_SINK:Lokio/Sink; // field@87cc
+757196: 0e00                                   |000f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=95
+        0x0008 line=809
+      locals        :
+
+    #1              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : '<init>'
+      type          : '(Lcom/squareup/okhttp/internal/io/FileSystem;Ljava/io/File;IIJLjava/util/concurrent/Executor;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 14
+      ins           : 8
+      outs          : 4
+      insns size    : 67 16-bit code units
+757198:                                        |[757198] com.squareup.okhttp.internal.DiskLruCache.<init>:(Lcom/squareup/okhttp/internal/io/FileSystem;Ljava/io/File;IIJLjava/util/concurrent/Executor;)V
+7571a8: 7010 c8d1 0600                         |0000: invoke-direct {v6}, Ljava/lang/Object;.<init>:()V // method@d1c8
+7571ae: 1600 0000                              |0003: const-wide/16 v0, #int 0 // #0
+7571b2: 5a60 e087                              |0005: iput-wide v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.size:J // field@87e0
+7571b6: 2202 4e1b                              |0007: new-instance v2, Ljava/util/LinkedHashMap; // type@1b4e
+7571ba: 1503 403f                              |0009: const/high16 v3, #int 1061158912 // #3f40
+7571be: 1214                                   |000b: const/4 v4, #int 1 // #1
+7571c0: 1205                                   |000c: const/4 v5, #int 0 // #0
+7571c2: 7040 a5d5 5243                         |000d: invoke-direct {v2, v5, v3, v4}, Ljava/util/LinkedHashMap;.<init>:(IFZ)V // method@d5a5
+7571c8: 5b62 dc87                              |0010: iput-object v2, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+7571cc: 5a60 de87                              |0012: iput-wide v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.nextSequenceNumber:J // field@87de
+7571d0: 2200 7619                              |0014: new-instance v0, Lcom/squareup/okhttp/internal/DiskLruCache$1; // type@1976
+7571d4: 7020 e0ca 6000                         |0016: invoke-direct {v0, v6}, Lcom/squareup/okhttp/internal/DiskLruCache$1;.<init>:(Lcom/squareup/okhttp/internal/DiskLruCache;)V // method@cae0
+7571da: 5b60 d187                              |0019: iput-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.cleanupRunnable:Ljava/lang/Runnable; // field@87d1
+7571de: 5b67 d587                              |001b: iput-object v7, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7571e2: 5b68 d387                              |001d: iput-object v8, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.directory:Ljava/io/File; // field@87d3
+7571e6: 5969 d087                              |001f: iput v9, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.appVersion:I // field@87d0
+7571ea: 2207 3d1a                              |0021: new-instance v7, Ljava/io/File; // type@1a3d
+7571ee: 1a09 6fae                              |0023: const-string v9, "journal" // string@ae6f
+7571f2: 7030 d8cf 8709                         |0025: invoke-direct {v7, v8, v9}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@cfd8
+7571f8: 5b67 d887                              |0028: iput-object v7, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFile:Ljava/io/File; // field@87d8
+7571fc: 2207 3d1a                              |002a: new-instance v7, Ljava/io/File; // type@1a3d
+757200: 1a09 71ae                              |002c: const-string v9, "journal.tmp" // string@ae71
+757204: 7030 d8cf 8709                         |002e: invoke-direct {v7, v8, v9}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@cfd8
+75720a: 5b67 da87                              |0031: iput-object v7, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFileTmp:Ljava/io/File; // field@87da
+75720e: 2207 3d1a                              |0033: new-instance v7, Ljava/io/File; // type@1a3d
+757212: 1a09 70ae                              |0035: const-string v9, "journal.bkp" // string@ae70
+757216: 7030 d8cf 8709                         |0037: invoke-direct {v7, v8, v9}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@cfd8
+75721c: 5b67 d987                              |003a: iput-object v7, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFileBackup:Ljava/io/File; // field@87d9
+757220: 596a e187                              |003c: iput v10, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.valueCount:I // field@87e1
+757224: 5a6b dd87                              |003e: iput-wide v11, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.maxSize:J // field@87dd
+757228: 5b6d d487                              |0040: iput-object v13, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.executor:Ljava/util/concurrent/Executor; // field@87d4
+75722c: 0e00                                   |0042: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=188
+        0x0005 line=149
+        0x0007 line=151
+        0x0012 line=164
+        0x0014 line=168
+        0x001b line=189
+        0x001d line=190
+        0x001f line=191
+        0x0021 line=192
+        0x002a line=193
+        0x0033 line=194
+        0x003c line=195
+        0x003e line=196
+        0x0040 line=197
+      locals        :
+        0x0000 - 0x0043 reg=6 this Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0043 reg=7 (null) Lcom/squareup/okhttp/internal/io/FileSystem;
+        0x0000 - 0x0043 reg=8 (null) Ljava/io/File;
+        0x0000 - 0x0043 reg=9 (null) I
+        0x0000 - 0x0043 reg=10 (null) I
+        0x0000 - 0x0043 reg=11 (null) J
+        0x0000 - 0x0043 reg=13 (null) Ljava/util/concurrent/Executor;
+
+    #2              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$000'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;)Z'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+757230:                                        |[757230] com.squareup.okhttp.internal.DiskLruCache.access$000:(Lcom/squareup/okhttp/internal/DiskLruCache;)Z
+757240: 5500 d787                              |0000: iget-boolean v0, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.initialized:Z // field@87d7
+757244: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #3              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$100'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;)Z'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+757248:                                        |[757248] com.squareup.okhttp.internal.DiskLruCache.access$100:(Lcom/squareup/okhttp/internal/DiskLruCache;)Z
+757258: 5500 d287                              |0000: iget-boolean v0, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.closed:Z // field@87d2
+75725c: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #4              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$200'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+757260:                                        |[757260] com.squareup.okhttp.internal.DiskLruCache.access$200:(Lcom/squareup/okhttp/internal/DiskLruCache;)V
+757270: 7010 3ecb 0000                         |0000: invoke-direct {v0}, Lcom/squareup/okhttp/internal/DiskLruCache;.trimToSize:()V // method@cb3e
+757276: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #5              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$2000'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;)Ljava/util/LinkedHashMap;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+757278:                                        |[757278] com.squareup.okhttp.internal.DiskLruCache.access$2000:(Lcom/squareup/okhttp/internal/DiskLruCache;)Ljava/util/LinkedHashMap;
+757288: 5400 dc87                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+75728c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #6              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$2200'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;Ljava/lang/String;J)Lcom/squareup/okhttp/internal/DiskLruCache$Editor;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 4
+      insns size    : 5 16-bit code units
+757290:                                        |[757290] com.squareup.okhttp.internal.DiskLruCache.access$2200:(Lcom/squareup/okhttp/internal/DiskLruCache;Ljava/lang/String;J)Lcom/squareup/okhttp/internal/DiskLruCache$Editor;
+7572a0: 7040 2bcb 1032                         |0000: invoke-direct {v0, v1, v2, v3}, Lcom/squareup/okhttp/internal/DiskLruCache;.edit:(Ljava/lang/String;J)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb2b
+7572a6: 0c00                                   |0003: move-result-object v0
+7572a8: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0005 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0005 reg=2 (null) J
+
+    #7              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$2300'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;)I'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+7572ac:                                        |[7572ac] com.squareup.okhttp.internal.DiskLruCache.access$2300:(Lcom/squareup/okhttp/internal/DiskLruCache;)I
+7572bc: 5200 e187                              |0000: iget v0, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.valueCount:I // field@87e1
+7572c0: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #8              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$2400'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;)Lcom/squareup/okhttp/internal/io/FileSystem;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+7572c4:                                        |[7572c4] com.squareup.okhttp.internal.DiskLruCache.access$2400:(Lcom/squareup/okhttp/internal/DiskLruCache;)Lcom/squareup/okhttp/internal/io/FileSystem;
+7572d4: 5400 d587                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7572d8: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #9              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$2500'
+      type          : '()Lokio/Sink;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 0
+      insns size    : 3 16-bit code units
+7572dc:                                        |[7572dc] com.squareup.okhttp.internal.DiskLruCache.access$2500:()Lokio/Sink;
+7572ec: 6200 cc87                              |0000: sget-object v0, Lcom/squareup/okhttp/internal/DiskLruCache;.NULL_SINK:Lokio/Sink; // field@87cc
+7572f0: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+
+    #10              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$2600'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;Lcom/squareup/okhttp/internal/DiskLruCache$Editor;Z)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 4 16-bit code units
+7572f4:                                        |[7572f4] com.squareup.okhttp.internal.DiskLruCache.access$2600:(Lcom/squareup/okhttp/internal/DiskLruCache;Lcom/squareup/okhttp/internal/DiskLruCache$Editor;Z)V
+757304: 7030 27cb 1002                         |0000: invoke-direct {v0, v1, v2}, Lcom/squareup/okhttp/internal/DiskLruCache;.completeEdit:(Lcom/squareup/okhttp/internal/DiskLruCache$Editor;Z)V // method@cb27
+75730a: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0004 reg=1 (null) Lcom/squareup/okhttp/internal/DiskLruCache$Editor;
+        0x0000 - 0x0004 reg=2 (null) Z
+
+    #11              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$2700'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 5 16-bit code units
+75730c:                                        |[75730c] com.squareup.okhttp.internal.DiskLruCache.access$2700:(Lcom/squareup/okhttp/internal/DiskLruCache;Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z
+75731c: 7020 3acb 1000                         |0000: invoke-direct {v0, v1}, Lcom/squareup/okhttp/internal/DiskLruCache;.removeEntry:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z // method@cb3a
+757322: 0a00                                   |0003: move-result v0
+757324: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0005 reg=1 (null) Lcom/squareup/okhttp/internal/DiskLruCache$Entry;
+
+    #12              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$2800'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;)Ljava/io/File;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+757328:                                        |[757328] com.squareup.okhttp.internal.DiskLruCache.access$2800:(Lcom/squareup/okhttp/internal/DiskLruCache;)Ljava/io/File;
+757338: 5400 d387                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.directory:Ljava/io/File; // field@87d3
+75733c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #13              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$300'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;)Z'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+757340:                                        |[757340] com.squareup.okhttp.internal.DiskLruCache.access$300:(Lcom/squareup/okhttp/internal/DiskLruCache;)Z
+757350: 7010 33cb 0000                         |0000: invoke-direct {v0}, Lcom/squareup/okhttp/internal/DiskLruCache;.journalRebuildRequired:()Z // method@cb33
+757356: 0a00                                   |0003: move-result v0
+757358: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #14              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$400'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+75735c:                                        |[75735c] com.squareup.okhttp.internal.DiskLruCache.access$400:(Lcom/squareup/okhttp/internal/DiskLruCache;)V
+75736c: 7010 38cb 0000                         |0000: invoke-direct {v0}, Lcom/squareup/okhttp/internal/DiskLruCache;.rebuildJournal:()V // method@cb38
+757372: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #15              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$502'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;I)I'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+757374:                                        |[757374] com.squareup.okhttp.internal.DiskLruCache.access$502:(Lcom/squareup/okhttp/internal/DiskLruCache;I)I
+757384: 5901 df87                              |0000: iput v1, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.redundantOpCount:I // field@87df
+757388: 0f01                                   |0002: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0003 reg=1 (null) I
+
+    #16              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'access$602'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache;Z)Z'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+75738c:                                        |[75738c] com.squareup.okhttp.internal.DiskLruCache.access$602:(Lcom/squareup/okhttp/internal/DiskLruCache;Z)Z
+75739c: 5c01 d687                              |0000: iput-boolean v1, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.hasJournalErrors:Z // field@87d6
+7573a0: 0f01                                   |0002: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0003 reg=1 (null) Z
+
+    #17              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'checkNotClosed'
+      type          : '()V'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 20 16-bit code units
+7573a4:                                        |[7573a4] com.squareup.okhttp.internal.DiskLruCache.checkNotClosed:()V
+7573b4: 1d02                                   |0000: monitor-enter v2
+7573b6: 6e10 32cb 0200                         |0001: invoke-virtual {v2}, Lcom/squareup/okhttp/internal/DiskLruCache;.isClosed:()Z // method@cb32
+7573bc: 0a00                                   |0004: move-result v0
+7573be: 3900 0400                              |0005: if-nez v0, 0009 // +0004
+7573c2: 1e02                                   |0007: monitor-exit v2
+7573c4: 0e00                                   |0008: return-void
+7573c6: 2200 7b1a                              |0009: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+7573ca: 1a01 e983                              |000b: const-string v1, "cache is closed" // string@83e9
+7573ce: 7020 4cd1 1000                         |000d: invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+7573d4: 2700                                   |0010: throw v0
+7573d6: 0d00                                   |0011: move-exception v0
+7573d8: 1e02                                   |0012: monitor-exit v2
+7573da: 2700                                   |0013: throw v0
+      catches       : 2
+        0x0001 - 0x0005
+          <any> -> 0x0011
+        0x0009 - 0x0013
+          <any> -> 0x0011
+      positions     :
+        0x0001 line=629
+        0x0007 line=632
+        0x0009 line=630
+      locals        :
+        0x0000 - 0x0014 reg=2 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #18              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'completeEdit'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache$Editor;Z)V'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 12
+      ins           : 3
+      outs          : 3
+      insns size    : 285 16-bit code units
+7573f0:                                        |[7573f0] com.squareup.okhttp.internal.DiskLruCache.completeEdit:(Lcom/squareup/okhttp/internal/DiskLruCache$Editor;Z)V
+757400: 1d09                                   |0000: monitor-enter v9
+757402: 7110 f5ca 0a00                         |0001: invoke-static {v10}, Lcom/squareup/okhttp/internal/DiskLruCache$Editor;.access$1700:(Lcom/squareup/okhttp/internal/DiskLruCache$Editor;)Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // method@caf5
+757408: 0c00                                   |0004: move-result-object v0
+75740a: 7110 06cb 0000                         |0005: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$900:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb06
+757410: 0c01                                   |0008: move-result-object v1
+757412: 33a1 0b01                              |0009: if-ne v1, v10, 0114 // +010b
+757416: 1201                                   |000b: const/4 v1, #int 0 // #0
+757418: 380b 4700                              |000c: if-eqz v11, 0053 // +0047
+75741c: 7110 04cb 0000                         |000e: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$800:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z // method@cb04
+757422: 0a02                                   |0011: move-result v2
+757424: 3902 4100                              |0012: if-nez v2, 0053 // +0041
+757428: 0112                                   |0014: move v2, v1
+75742a: 5293 e187                              |0015: iget v3, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.valueCount:I // field@87e1
+75742e: 3532 3c00                              |0017: if-ge v2, v3, 0053 // +003c
+757432: 7110 f6ca 0a00                         |0019: invoke-static {v10}, Lcom/squareup/okhttp/internal/DiskLruCache$Editor;.access$1800:(Lcom/squareup/okhttp/internal/DiskLruCache$Editor;)[Z // method@caf6
+757438: 0c03                                   |001c: move-result-object v3
+75743a: 4703 0302                              |001d: aget-boolean v3, v3, v2
+75743e: 3803 1800                              |001f: if-eqz v3, 0037 // +0018
+757442: 5493 d587                              |0021: iget-object v3, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+757446: 7110 00cb 0000                         |0023: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1400:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[Ljava/io/File; // method@cb00
+75744c: 0c04                                   |0026: move-result-object v4
+75744e: 4604 0402                              |0027: aget-object v4, v4, v2
+757452: 7220 59ce 4300                         |0029: invoke-interface {v3, v4}, Lcom/squareup/okhttp/internal/io/FileSystem;.exists:(Ljava/io/File;)Z // method@ce59
+757458: 0a03                                   |002c: move-result v3
+75745a: 3903 0700                              |002d: if-nez v3, 0034 // +0007
+75745e: 6e10 f3ca 0a00                         |002f: invoke-virtual {v10}, Lcom/squareup/okhttp/internal/DiskLruCache$Editor;.abort:()V // method@caf3
+757464: 1e09                                   |0032: monitor-exit v9
+757466: 0e00                                   |0033: return-void
+757468: d802 0201                              |0034: add-int/lit8 v2, v2, #int 1 // #01
+75746c: 28df                                   |0036: goto 0015 // -0021
+75746e: 6e10 f3ca 0a00                         |0037: invoke-virtual {v10}, Lcom/squareup/okhttp/internal/DiskLruCache$Editor;.abort:()V // method@caf3
+757474: 220a 7b1a                              |003a: new-instance v10, Ljava/lang/IllegalStateException; // type@1a7b
+757478: 220b 991a                              |003c: new-instance v11, Ljava/lang/StringBuilder; // type@1a99
+75747c: 7010 39d2 0b00                         |003e: invoke-direct {v11}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+757482: 1a00 2658                              |0041: const-string v0, "Newly created entry didn't create value for index " // string@5826
+757486: 6e20 45d2 0b00                         |0043: invoke-virtual {v11, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+75748c: 0c0b                                   |0046: move-result-object v11
+75748e: 6e20 40d2 2b00                         |0047: invoke-virtual {v11, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+757494: 0c0b                                   |004a: move-result-object v11
+757496: 6e10 58d2 0b00                         |004b: invoke-virtual {v11}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+75749c: 0c0b                                   |004e: move-result-object v11
+75749e: 7020 4cd1 ba00                         |004f: invoke-direct {v10, v11}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+7574a4: 270a                                   |0052: throw v10
+7574a6: 529a e187                              |0053: iget v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.valueCount:I // field@87e1
+7574aa: 35a1 3e00                              |0055: if-ge v1, v10, 0093 // +003e
+7574ae: 7110 00cb 0000                         |0057: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1400:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[Ljava/io/File; // method@cb00
+7574b4: 0c0a                                   |005a: move-result-object v10
+7574b6: 460a 0a01                              |005b: aget-object v10, v10, v1
+7574ba: 380b 2e00                              |005d: if-eqz v11, 008b // +002e
+7574be: 5492 d587                              |005f: iget-object v2, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7574c2: 7220 59ce a200                         |0061: invoke-interface {v2, v10}, Lcom/squareup/okhttp/internal/io/FileSystem;.exists:(Ljava/io/File;)Z // method@ce59
+7574c8: 0a02                                   |0064: move-result v2
+7574ca: 3802 2b00                              |0065: if-eqz v2, 0090 // +002b
+7574ce: 7110 ffca 0000                         |0067: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1300:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[Ljava/io/File; // method@caff
+7574d4: 0c02                                   |006a: move-result-object v2
+7574d6: 4602 0201                              |006b: aget-object v2, v2, v1
+7574da: 5493 d587                              |006d: iget-object v3, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7574de: 7230 5ace a302                         |006f: invoke-interface {v3, v10, v2}, Lcom/squareup/okhttp/internal/io/FileSystem;.rename:(Ljava/io/File;Ljava/io/File;)V // method@ce5a
+7574e4: 7110 feca 0000                         |0072: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1200:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[J // method@cafe
+7574ea: 0c0a                                   |0075: move-result-object v10
+7574ec: 4503 0a01                              |0076: aget-wide v3, v10, v1
+7574f0: 549a d587                              |0078: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7574f4: 7220 5cce 2a00                         |007a: invoke-interface {v10, v2}, Lcom/squareup/okhttp/internal/io/FileSystem;.size:(Ljava/io/File;)J // method@ce5c
+7574fa: 0b05                                   |007d: move-result-wide v5
+7574fc: 7110 feca 0000                         |007e: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1200:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[J // method@cafe
+757502: 0c0a                                   |0081: move-result-object v10
+757504: 4c05 0a01                              |0082: aput-wide v5, v10, v1
+757508: 5397 e087                              |0084: iget-wide v7, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.size:J // field@87e0
+75750c: bc37                                   |0086: sub-long/2addr v7, v3
+75750e: bb57                                   |0087: add-long/2addr v7, v5
+757510: 5a97 e087                              |0088: iput-wide v7, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.size:J // field@87e0
+757514: 2806                                   |008a: goto 0090 // +0006
+757516: 5492 d587                              |008b: iget-object v2, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+75751a: 7220 57ce a200                         |008d: invoke-interface {v2, v10}, Lcom/squareup/okhttp/internal/io/FileSystem;.delete:(Ljava/io/File;)V // method@ce57
+757520: d801 0101                              |0090: add-int/lit8 v1, v1, #int 1 // #01
+757524: 28c1                                   |0092: goto 0053 // -003f
+757526: 529a df87                              |0093: iget v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.redundantOpCount:I // field@87df
+75752a: 1211                                   |0095: const/4 v1, #int 1 // #1
+75752c: b01a                                   |0096: add-int/2addr v10, v1
+75752e: 599a df87                              |0097: iput v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.redundantOpCount:I // field@87df
+757532: 120a                                   |0099: const/4 v10, #int 0 // #0
+757534: 7120 07cb a000                         |009a: invoke-static {v0, v10}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$902:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;Lcom/squareup/okhttp/internal/DiskLruCache$Editor;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb07
+75753a: 7110 04cb 0000                         |009d: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$800:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z // method@cb04
+757540: 0a0a                                   |00a0: move-result v10
+757542: b6ba                                   |00a1: or-int/2addr v10, v11
+757544: 1302 0a00                              |00a2: const/16 v2, #int 10 // #a
+757548: 1303 2000                              |00a4: const/16 v3, #int 32 // #20
+75754c: 380a 3000                              |00a6: if-eqz v10, 00d6 // +0030
+757550: 7120 05cb 1000                         |00a8: invoke-static {v0, v1}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$802:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;Z)Z // method@cb05
+757556: 549a db87                              |00ab: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+75755a: 1a01 301a                              |00ad: const-string v1, "CLEAN" // string@1a30
+75755e: 7220 4cfe 1a00                         |00af: invoke-interface {v10, v1}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757564: 0c0a                                   |00b2: move-result-object v10
+757566: 7220 47fe 3a00                         |00b3: invoke-interface {v10, v3}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+75756c: 549a db87                              |00b6: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+757570: 7110 01cb 0000                         |00b8: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1500:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Ljava/lang/String; // method@cb01
+757576: 0c01                                   |00bb: move-result-object v1
+757578: 7220 4cfe 1a00                         |00bc: invoke-interface {v10, v1}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+75757e: 549a db87                              |00bf: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+757582: 6e20 0bcb a000                         |00c1: invoke-virtual {v0, v10}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.writeLengths:(Lokio/BufferedSink;)V // method@cb0b
+757588: 549a db87                              |00c4: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+75758c: 7220 47fe 2a00                         |00c6: invoke-interface {v10, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757592: 380b 2f00                              |00c9: if-eqz v11, 00f8 // +002f
+757596: 539a de87                              |00cb: iget-wide v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.nextSequenceNumber:J // field@87de
+75759a: 1601 0100                              |00cd: const-wide/16 v1, #int 1 // #1
+75759e: bba1                                   |00cf: add-long/2addr v1, v10
+7575a0: 5a91 de87                              |00d0: iput-wide v1, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.nextSequenceNumber:J // field@87de
+7575a4: 7130 03cb a00b                         |00d2: invoke-static {v0, v10, v11}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1602:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;J)J // method@cb03
+7575aa: 2823                                   |00d5: goto 00f8 // +0023
+7575ac: 549a dc87                              |00d6: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+7575b0: 7110 01cb 0000                         |00d8: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1500:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Ljava/lang/String; // method@cb01
+7575b6: 0c0b                                   |00db: move-result-object v11
+7575b8: 6e20 afd5 ba00                         |00dc: invoke-virtual {v10, v11}, Ljava/util/LinkedHashMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5af
+7575be: 549a db87                              |00df: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+7575c2: 1a0b 0f5d                              |00e1: const-string v11, "REMOVE" // string@5d0f
+7575c6: 7220 4cfe ba00                         |00e3: invoke-interface {v10, v11}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+7575cc: 0c0a                                   |00e6: move-result-object v10
+7575ce: 7220 47fe 3a00                         |00e7: invoke-interface {v10, v3}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+7575d4: 549a db87                              |00ea: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+7575d8: 7110 01cb 0000                         |00ec: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1500:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Ljava/lang/String; // method@cb01
+7575de: 0c0b                                   |00ef: move-result-object v11
+7575e0: 7220 4cfe ba00                         |00f0: invoke-interface {v10, v11}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+7575e6: 549a db87                              |00f3: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+7575ea: 7220 47fe 2a00                         |00f5: invoke-interface {v10, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+7575f0: 549a db87                              |00f8: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+7575f4: 7210 40fe 0a00                         |00fa: invoke-interface {v10}, Lokio/BufferedSink;.flush:()V // method@fe40
+7575fa: 539a e087                              |00fd: iget-wide v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.size:J // field@87e0
+7575fe: 5390 dd87                              |00ff: iget-wide v0, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.maxSize:J // field@87dd
+757602: 310a 0a00                              |0101: cmp-long v10, v10, v0
+757606: 3c0a 0800                              |0103: if-gtz v10, 010b // +0008
+75760a: 7010 33cb 0900                         |0105: invoke-direct {v9}, Lcom/squareup/okhttp/internal/DiskLruCache;.journalRebuildRequired:()Z // method@cb33
+757610: 0a0a                                   |0108: move-result v10
+757612: 380a 0900                              |0109: if-eqz v10, 0112 // +0009
+757616: 549a d487                              |010b: iget-object v10, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.executor:Ljava/util/concurrent/Executor; // field@87d4
+75761a: 549b d187                              |010d: iget-object v11, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.cleanupRunnable:Ljava/lang/Runnable; // field@87d1
+75761e: 7220 acd6 ba00                         |010f: invoke-interface {v10, v11}, Ljava/util/concurrent/Executor;.execute:(Ljava/lang/Runnable;)V // method@d6ac
+757624: 1e09                                   |0112: monitor-exit v9
+757626: 0e00                                   |0113: return-void
+757628: 220a 7b1a                              |0114: new-instance v10, Ljava/lang/IllegalStateException; // type@1a7b
+75762c: 7010 4bd1 0a00                         |0116: invoke-direct {v10}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+757632: 270a                                   |0119: throw v10
+757634: 0d0a                                   |011a: move-exception v10
+757636: 1e09                                   |011b: monitor-exit v9
+757638: 270a                                   |011c: throw v10
+      catches       : 3
+        0x0001 - 0x0032
+          <any> -> 0x011a
+        0x0037 - 0x0112
+          <any> -> 0x011a
+        0x0114 - 0x011c
+          <any> -> 0x011a
+      positions     :
+        0x0001 line=515
+        0x0005 line=516
+        0x000e line=521
+        0x0015 line=522
+        0x0019 line=523
+        0x0021 line=527
+        0x002f line=528
+        0x0032 line=529
+        0x0037 line=524
+        0x003a line=525
+        0x0053 line=534
+        0x0057 line=535
+        0x005f line=537
+        0x0067 line=538
+        0x006d line=539
+        0x0072 line=540
+        0x0078 line=541
+        0x007e line=542
+        0x0084 line=543
+        0x008b line=546
+        0x0093 line=550
+        0x009a line=551
+        0x009d line=552
+        0x00a8 line=553
+        0x00ab line=554
+        0x00b6 line=555
+        0x00bf line=556
+        0x00c4 line=557
+        0x00cb line=559
+        0x00d6 line=562
+        0x00df line=563
+        0x00ea line=564
+        0x00f3 line=565
+        0x00f8 line=567
+        0x00fd line=569
+        0x010b line=570
+        0x0112 line=572
+        0x0114 line=517
+      locals        :
+        0x0000 - 0x011d reg=9 this Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x011d reg=10 (null) Lcom/squareup/okhttp/internal/DiskLruCache$Editor;
+        0x0000 - 0x011d reg=11 (null) Z
+
+    #19              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'create'
+      type          : '(Lcom/squareup/okhttp/internal/io/FileSystem;Ljava/io/File;IIJ)Lcom/squareup/okhttp/internal/DiskLruCache;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 16
+      ins           : 6
+      outs          : 8
+      insns size    : 61 16-bit code units
+757658:                                        |[757658] com.squareup.okhttp.internal.DiskLruCache.create:(Lcom/squareup/okhttp/internal/io/FileSystem;Ljava/io/File;IIJ)Lcom/squareup/okhttp/internal/DiskLruCache;
+757668: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+75766c: 3100 0e00                              |0002: cmp-long v0, v14, v0
+757670: 3d00 3100                              |0004: if-lez v0, 0035 // +0031
+757674: 3d0d 2700                              |0006: if-lez v13, 002d // +0027
+757678: 2200 8c1b                              |0008: new-instance v0, Ljava/util/concurrent/ThreadPoolExecutor; // type@1b8c
+75767c: 6206 4b8a                              |000a: sget-object v6, Ljava/util/concurrent/TimeUnit;.SECONDS:Ljava/util/concurrent/TimeUnit; // field@8a4b
+757680: 2207 821b                              |000c: new-instance v7, Ljava/util/concurrent/LinkedBlockingQueue; // type@1b82
+757684: 7010 c4d6 0700                         |000e: invoke-direct {v7}, Ljava/util/concurrent/LinkedBlockingQueue;.<init>:()V // method@d6c4
+75768a: 1a01 b359                              |0011: const-string v1, "OkHttp DiskLruCache" // string@59b3
+75768e: 1212                                   |0013: const/4 v2, #int 1 // #1
+757690: 7120 a9cb 2100                         |0014: invoke-static {v1, v2}, Lcom/squareup/okhttp/internal/Util;.threadFactory:(Ljava/lang/String;Z)Ljava/util/concurrent/ThreadFactory; // method@cba9
+757696: 0c08                                   |0017: move-result-object v8
+757698: 1202                                   |0018: const/4 v2, #int 0 // #0
+75769a: 1213                                   |0019: const/4 v3, #int 1 // #1
+75769c: 1604 3c00                              |001a: const-wide/16 v4, #int 60 // #3c
+7576a0: 0701                                   |001c: move-object v1, v0
+7576a2: 7608 e0d6 0100                         |001d: invoke-direct/range {v1, v2, v3, v4, v5, v6, v7, v8}, Ljava/util/concurrent/ThreadPoolExecutor;.<init>:(IIJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/BlockingQueue;Ljava/util/concurrent/ThreadFactory;)V // method@d6e0
+7576a8: 2209 7e19                              |0020: new-instance v9, Lcom/squareup/okhttp/internal/DiskLruCache; // type@197e
+7576ac: 0791                                   |0022: move-object v1, v9
+7576ae: 07a2                                   |0023: move-object v2, v10
+7576b0: 07b3                                   |0024: move-object v3, v11
+7576b2: 01c4                                   |0025: move v4, v12
+7576b4: 01d5                                   |0026: move v5, v13
+7576b6: 04e6                                   |0027: move-wide v6, v14
+7576b8: 0708                                   |0028: move-object v8, v0
+7576ba: 7608 15cb 0100                         |0029: invoke-direct/range {v1, v2, v3, v4, v5, v6, v7, v8}, Lcom/squareup/okhttp/internal/DiskLruCache;.<init>:(Lcom/squareup/okhttp/internal/io/FileSystem;Ljava/io/File;IIJLjava/util/concurrent/Executor;)V // method@cb15
+7576c0: 1109                                   |002c: return-object v9
+7576c2: 220a 7a1a                              |002d: new-instance v10, Ljava/lang/IllegalArgumentException; // type@1a7a
+7576c6: 1a0b 21e6                              |002f: const-string v11, "valueCount <= 0" // string@e621
+7576ca: 7020 47d1 ba00                         |0031: invoke-direct {v10, v11}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+7576d0: 270a                                   |0034: throw v10
+7576d2: 220a 7a1a                              |0035: new-instance v10, Ljava/lang/IllegalArgumentException; // type@1a7a
+7576d6: 1a0b d0bf                              |0037: const-string v11, "maxSize <= 0" // string@bfd0
+7576da: 7020 47d1 ba00                         |0039: invoke-direct {v10, v11}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+7576e0: 270a                                   |003c: throw v10
+      catches       : (none)
+      positions     :
+        0x0008 line=255
+        0x0014 line=256
+        0x0020 line=258
+        0x002d line=251
+        0x0035 line=248
+      locals        :
+        0x0000 - 0x003d reg=10 (null) Lcom/squareup/okhttp/internal/io/FileSystem;
+        0x0000 - 0x003d reg=11 (null) Ljava/io/File;
+        0x0000 - 0x003d reg=12 (null) I
+        0x0000 - 0x003d reg=13 (null) I
+        0x0000 - 0x003d reg=14 (null) J
+
+    #20              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'edit'
+      type          : '(Ljava/lang/String;J)Lcom/squareup/okhttp/internal/DiskLruCache$Editor;'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 9
+      ins           : 4
+      outs          : 4
+      insns size    : 106 16-bit code units
+7576e4:                                        |[7576e4] com.squareup.okhttp.internal.DiskLruCache.edit:(Ljava/lang/String;J)Lcom/squareup/okhttp/internal/DiskLruCache$Editor;
+7576f4: 1d05                                   |0000: monitor-enter v5
+7576f6: 6e10 31cb 0500                         |0001: invoke-virtual {v5}, Lcom/squareup/okhttp/internal/DiskLruCache;.initialize:()V // method@cb31
+7576fc: 7010 25cb 0500                         |0004: invoke-direct {v5}, Lcom/squareup/okhttp/internal/DiskLruCache;.checkNotClosed:()V // method@cb25
+757702: 7020 3fcb 6500                         |0007: invoke-direct {v5, v6}, Lcom/squareup/okhttp/internal/DiskLruCache;.validateKey:(Ljava/lang/String;)V // method@cb3f
+757708: 5450 dc87                              |000a: iget-object v0, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+75770c: 6e20 aad5 6000                         |000c: invoke-virtual {v0, v6}, Ljava/util/LinkedHashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5aa
+757712: 0c00                                   |000f: move-result-object v0
+757714: 1f00 7c19                              |0010: check-cast v0, Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@197c
+757718: 1601 ffff                              |0012: const-wide/16 v1, #int -1 // #ffff
+75771c: 3101 0701                              |0014: cmp-long v1, v7, v1
+757720: 1202                                   |0016: const/4 v2, #int 0 // #0
+757722: 3801 0e00                              |0017: if-eqz v1, 0025 // +000e
+757726: 3800 0a00                              |0019: if-eqz v0, 0023 // +000a
+75772a: 7110 02cb 0000                         |001b: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1600:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)J // method@cb02
+757730: 0b03                                   |001e: move-result-wide v3
+757732: 3107 0307                              |001f: cmp-long v7, v3, v7
+757736: 3807 0400                              |0021: if-eqz v7, 0025 // +0004
+75773a: 1e05                                   |0023: monitor-exit v5
+75773c: 1102                                   |0024: return-object v2
+75773e: 3800 0a00                              |0025: if-eqz v0, 002f // +000a
+757742: 7110 06cb 0000                         |0027: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$900:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb06
+757748: 0c07                                   |002a: move-result-object v7
+75774a: 3807 0400                              |002b: if-eqz v7, 002f // +0004
+75774e: 1e05                                   |002d: monitor-exit v5
+757750: 1102                                   |002e: return-object v2
+757752: 5457 db87                              |002f: iget-object v7, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+757756: 1a08 4521                              |0031: const-string v8, "DIRTY" // string@2145
+75775a: 7220 4cfe 8700                         |0033: invoke-interface {v7, v8}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757760: 0c07                                   |0036: move-result-object v7
+757762: 1308 2000                              |0037: const/16 v8, #int 32 // #20
+757766: 7220 47fe 8700                         |0039: invoke-interface {v7, v8}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+75776c: 0c07                                   |003c: move-result-object v7
+75776e: 7220 4cfe 6700                         |003d: invoke-interface {v7, v6}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757774: 0c07                                   |0040: move-result-object v7
+757776: 1308 0a00                              |0041: const/16 v8, #int 10 // #a
+75777a: 7220 47fe 8700                         |0043: invoke-interface {v7, v8}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757780: 5457 db87                              |0046: iget-object v7, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+757784: 7210 40fe 0700                         |0048: invoke-interface {v7}, Lokio/BufferedSink;.flush:()V // method@fe40
+75778a: 5557 d687                              |004b: iget-boolean v7, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.hasJournalErrors:Z // field@87d6
+75778e: 3807 0400                              |004d: if-eqz v7, 0051 // +0004
+757792: 1e05                                   |004f: monitor-exit v5
+757794: 1102                                   |0050: return-object v2
+757796: 3900 0c00                              |0051: if-nez v0, 005d // +000c
+75779a: 2200 7c19                              |0053: new-instance v0, Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@197c
+75779e: 7040 fcca 5026                         |0055: invoke-direct {v0, v5, v6, v2}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.<init>:(Lcom/squareup/okhttp/internal/DiskLruCache;Ljava/lang/String;Lcom/squareup/okhttp/internal/DiskLruCache$1;)V // method@cafc
+7577a4: 5457 dc87                              |0058: iget-object v7, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+7577a8: 6e30 add5 6700                         |005a: invoke-virtual {v7, v6, v0}, Ljava/util/LinkedHashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d5ad
+7577ae: 2206 7b19                              |005d: new-instance v6, Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // type@197b
+7577b2: 7040 f2ca 5620                         |005f: invoke-direct {v6, v5, v0, v2}, Lcom/squareup/okhttp/internal/DiskLruCache$Editor;.<init>:(Lcom/squareup/okhttp/internal/DiskLruCache;Lcom/squareup/okhttp/internal/DiskLruCache$Entry;Lcom/squareup/okhttp/internal/DiskLruCache$1;)V // method@caf2
+7577b8: 7120 07cb 6000                         |0062: invoke-static {v0, v6}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$902:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;Lcom/squareup/okhttp/internal/DiskLruCache$Editor;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb07
+7577be: 1e05                                   |0065: monitor-exit v5
+7577c0: 1106                                   |0066: return-object v6
+7577c2: 0d06                                   |0067: move-exception v6
+7577c4: 1e05                                   |0068: monitor-exit v5
+7577c6: 2706                                   |0069: throw v6
+      catches       : 5
+        0x0001 - 0x001f
+          <any> -> 0x0067
+        0x0027 - 0x002b
+          <any> -> 0x0067
+        0x002f - 0x004d
+          <any> -> 0x0067
+        0x0053 - 0x0065
+          <any> -> 0x0067
+        0x0068 - 0x0069
+          <any> -> 0x0067
+      positions     :
+        0x0001 line=450
+        0x0004 line=452
+        0x0007 line=453
+        0x000a line=454
+        0x001b line=456
+        0x0023 line=457
+        0x0027 line=459
+        0x002d line=460
+        0x002f line=464
+        0x0046 line=465
+        0x004b line=467
+        0x004f line=468
+        0x0053 line=472
+        0x0058 line=473
+        0x005d line=475
+        0x0062 line=476
+        0x0065 line=477
+      locals        :
+        0x0000 - 0x006a reg=5 this Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x006a reg=6 (null) Ljava/lang/String;
+        0x0000 - 0x006a reg=7 (null) J
+
+    #21              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'journalRebuildRequired'
+      type          : '()Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 18 16-bit code units
+7577f4:                                        |[7577f4] com.squareup.okhttp.internal.DiskLruCache.journalRebuildRequired:()Z
+757804: 5220 df87                              |0000: iget v0, v2, Lcom/squareup/okhttp/internal/DiskLruCache;.redundantOpCount:I // field@87df
+757808: 1301 d007                              |0002: const/16 v1, #int 2000 // #7d0
+75780c: 3410 0c00                              |0004: if-lt v0, v1, 0010 // +000c
+757810: 5422 dc87                              |0006: iget-object v2, v2, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+757814: 6e10 b0d5 0200                         |0008: invoke-virtual {v2}, Ljava/util/LinkedHashMap;.size:()I // method@d5b0
+75781a: 0a02                                   |000b: move-result v2
+75781c: 3420 0400                              |000c: if-lt v0, v2, 0010 // +0004
+757820: 1212                                   |000e: const/4 v2, #int 1 // #1
+757822: 2802                                   |000f: goto 0011 // +0002
+757824: 1202                                   |0010: const/4 v2, #int 0 // #0
+757826: 0f02                                   |0011: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=580
+        0x0008 line=581
+      locals        :
+        0x0000 - 0x0012 reg=2 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #22              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'newJournalWriter'
+      type          : '()Lokio/BufferedSink;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 18 16-bit code units
+757828:                                        |[757828] com.squareup.okhttp.internal.DiskLruCache.newJournalWriter:()Lokio/BufferedSink;
+757838: 5420 d587                              |0000: iget-object v0, v2, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+75783c: 5421 d887                              |0002: iget-object v1, v2, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFile:Ljava/io/File; // field@87d8
+757840: 7220 56ce 1000                         |0004: invoke-interface {v0, v1}, Lcom/squareup/okhttp/internal/io/FileSystem;.appendingSink:(Ljava/io/File;)Lokio/Sink; // method@ce56
+757846: 0c00                                   |0007: move-result-object v0
+757848: 2201 7719                              |0008: new-instance v1, Lcom/squareup/okhttp/internal/DiskLruCache$2; // type@1977
+75784c: 7030 e3ca 2100                         |000a: invoke-direct {v1, v2, v0}, Lcom/squareup/okhttp/internal/DiskLruCache$2;.<init>:(Lcom/squareup/okhttp/internal/DiskLruCache;Lokio/Sink;)V // method@cae3
+757852: 7110 79fe 0100                         |000d: invoke-static {v1}, Lokio/Okio;.buffer:(Lokio/Sink;)Lokio/BufferedSink; // method@fe79
+757858: 0c02                                   |0010: move-result-object v2
+75785a: 1102                                   |0011: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=301
+        0x0008 line=302
+        0x000d line=308
+      locals        :
+        0x0000 - 0x0012 reg=2 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #23              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'processJournal'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 9
+      ins           : 1
+      outs          : 2
+      insns size    : 92 16-bit code units
+75785c:                                        |[75785c] com.squareup.okhttp.internal.DiskLruCache.processJournal:()V
+75786c: 5480 d587                              |0000: iget-object v0, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+757870: 5481 da87                              |0002: iget-object v1, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFileTmp:Ljava/io/File; // field@87da
+757874: 7220 57ce 1000                         |0004: invoke-interface {v0, v1}, Lcom/squareup/okhttp/internal/io/FileSystem;.delete:(Ljava/io/File;)V // method@ce57
+75787a: 5480 dc87                              |0007: iget-object v0, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+75787e: 6e10 b1d5 0000                         |0009: invoke-virtual {v0}, Ljava/util/LinkedHashMap;.values:()Ljava/util/Collection; // method@d5b1
+757884: 0c00                                   |000c: move-result-object v0
+757886: 7210 37d5 0000                         |000d: invoke-interface {v0}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+75788c: 0c00                                   |0010: move-result-object v0
+75788e: 7210 a0d5 0000                         |0011: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+757894: 0a01                                   |0014: move-result v1
+757896: 3801 4600                              |0015: if-eqz v1, 005b // +0046
+75789a: 7210 a1d5 0000                         |0017: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+7578a0: 0c01                                   |001a: move-result-object v1
+7578a2: 1f01 7c19                              |001b: check-cast v1, Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@197c
+7578a6: 7110 06cb 0100                         |001d: invoke-static {v1}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$900:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb06
+7578ac: 0c02                                   |0020: move-result-object v2
+7578ae: 1203                                   |0021: const/4 v3, #int 0 // #0
+7578b0: 3902 1400                              |0022: if-nez v2, 0036 // +0014
+7578b4: 5282 e187                              |0024: iget v2, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.valueCount:I // field@87e1
+7578b8: 3523 ebff                              |0026: if-ge v3, v2, 0011 // -0015
+7578bc: 5384 e087                              |0028: iget-wide v4, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.size:J // field@87e0
+7578c0: 7110 feca 0100                         |002a: invoke-static {v1}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1200:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[J // method@cafe
+7578c6: 0c02                                   |002d: move-result-object v2
+7578c8: 4506 0203                              |002e: aget-wide v6, v2, v3
+7578cc: bb64                                   |0030: add-long/2addr v4, v6
+7578ce: 5a84 e087                              |0031: iput-wide v4, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.size:J // field@87e0
+7578d2: d803 0301                              |0033: add-int/lit8 v3, v3, #int 1 // #01
+7578d6: 28ef                                   |0035: goto 0024 // -0011
+7578d8: 1202                                   |0036: const/4 v2, #int 0 // #0
+7578da: 7120 07cb 2100                         |0037: invoke-static {v1, v2}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$902:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;Lcom/squareup/okhttp/internal/DiskLruCache$Editor;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb07
+7578e0: 5282 e187                              |003a: iget v2, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.valueCount:I // field@87e1
+7578e4: 3523 1b00                              |003c: if-ge v3, v2, 0057 // +001b
+7578e8: 5482 d587                              |003e: iget-object v2, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7578ec: 7110 ffca 0100                         |0040: invoke-static {v1}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1300:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[Ljava/io/File; // method@caff
+7578f2: 0c04                                   |0043: move-result-object v4
+7578f4: 4604 0403                              |0044: aget-object v4, v4, v3
+7578f8: 7220 57ce 4200                         |0046: invoke-interface {v2, v4}, Lcom/squareup/okhttp/internal/io/FileSystem;.delete:(Ljava/io/File;)V // method@ce57
+7578fe: 5482 d587                              |0049: iget-object v2, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+757902: 7110 00cb 0100                         |004b: invoke-static {v1}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1400:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[Ljava/io/File; // method@cb00
+757908: 0c04                                   |004e: move-result-object v4
+75790a: 4604 0403                              |004f: aget-object v4, v4, v3
+75790e: 7220 57ce 4200                         |0051: invoke-interface {v2, v4}, Lcom/squareup/okhttp/internal/io/FileSystem;.delete:(Ljava/io/File;)V // method@ce57
+757914: d803 0301                              |0054: add-int/lit8 v3, v3, #int 1 // #01
+757918: 28e4                                   |0056: goto 003a // -001c
+75791a: 7210 a2d5 0000                         |0057: invoke-interface {v0}, Ljava/util/Iterator;.remove:()V // method@d5a2
+757920: 28b7                                   |005a: goto 0011 // -0049
+757922: 0e00                                   |005b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=355
+        0x0007 line=356
+        0x0017 line=357
+        0x001d line=358
+        0x0024 line=359
+        0x0028 line=360
+        0x0037 line=363
+        0x003a line=364
+        0x003e line=365
+        0x0049 line=366
+        0x0057 line=368
+      locals        :
+        0x0000 - 0x005c reg=8 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #24              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'readJournal'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 1
+      outs          : 2
+      insns size    : 178 16-bit code units
+757924:                                        |[757924] com.squareup.okhttp.internal.DiskLruCache.readJournal:()V
+757934: 1a00 0a0e                              |0000: const-string v0, ", " // string@0e0a
+757938: 1a01 81e3                              |0002: const-string v1, "unexpected journal header: [" // string@e381
+75793c: 5492 d587                              |0004: iget-object v2, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+757940: 5493 d887                              |0006: iget-object v3, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFile:Ljava/io/File; // field@87d8
+757944: 7220 5dce 3200                         |0008: invoke-interface {v2, v3}, Lcom/squareup/okhttp/internal/io/FileSystem;.source:(Ljava/io/File;)Lokio/Source; // method@ce5d
+75794a: 0c02                                   |000b: move-result-object v2
+75794c: 7110 7afe 0200                         |000c: invoke-static {v2}, Lokio/Okio;.buffer:(Lokio/Source;)Lokio/BufferedSource; // method@fe7a
+757952: 0c02                                   |000f: move-result-object v2
+757954: 7210 5afe 0200                         |0010: invoke-interface {v2}, Lokio/BufferedSource;.readUtf8LineStrict:()Ljava/lang/String; // method@fe5a
+75795a: 0c03                                   |0013: move-result-object v3
+75795c: 7210 5afe 0200                         |0014: invoke-interface {v2}, Lokio/BufferedSource;.readUtf8LineStrict:()Ljava/lang/String; // method@fe5a
+757962: 0c04                                   |0017: move-result-object v4
+757964: 7210 5afe 0200                         |0018: invoke-interface {v2}, Lokio/BufferedSource;.readUtf8LineStrict:()Ljava/lang/String; // method@fe5a
+75796a: 0c05                                   |001b: move-result-object v5
+75796c: 7210 5afe 0200                         |001c: invoke-interface {v2}, Lokio/BufferedSource;.readUtf8LineStrict:()Ljava/lang/String; // method@fe5a
+757972: 0c06                                   |001f: move-result-object v6
+757974: 7210 5afe 0200                         |0020: invoke-interface {v2}, Lokio/BufferedSource;.readUtf8LineStrict:()Ljava/lang/String; // method@fe5a
+75797a: 0c07                                   |0023: move-result-object v7
+75797c: 1a08 f2b0                              |0024: const-string v8, "libcore.io.DiskLruCache" // string@b0f2
+757980: 6e20 03d2 3800                         |0026: invoke-virtual {v8, v3}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+757986: 0a08                                   |0029: move-result v8
+757988: 3808 5200                              |002a: if-eqz v8, 007c // +0052
+75798c: 1a08 3710                              |002c: const-string v8, "1" // string@1037
+757990: 6e20 03d2 4800                         |002e: invoke-virtual {v8, v4}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+757996: 0a08                                   |0031: move-result v8
+757998: 3808 4a00                              |0032: if-eqz v8, 007c // +004a
+75799c: 5298 d087                              |0034: iget v8, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.appVersion:I // field@87d0
+7579a0: 7110 69d1 0800                         |0036: invoke-static {v8}, Ljava/lang/Integer;.toString:(I)Ljava/lang/String; // method@d169
+7579a6: 0c08                                   |0039: move-result-object v8
+7579a8: 6e20 03d2 5800                         |003a: invoke-virtual {v8, v5}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+7579ae: 0a05                                   |003d: move-result v5
+7579b0: 3805 3e00                              |003e: if-eqz v5, 007c // +003e
+7579b4: 5295 e187                              |0040: iget v5, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.valueCount:I // field@87e1
+7579b8: 7110 69d1 0500                         |0042: invoke-static {v5}, Ljava/lang/Integer;.toString:(I)Ljava/lang/String; // method@d169
+7579be: 0c05                                   |0045: move-result-object v5
+7579c0: 6e20 03d2 6500                         |0046: invoke-virtual {v5, v6}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+7579c6: 0a05                                   |0049: move-result v5
+7579c8: 3805 3200                              |004a: if-eqz v5, 007c // +0032
+7579cc: 1a05 0000                              |004c: const-string v5, "" // string@0000
+7579d0: 6e20 03d2 7500                         |004e: invoke-virtual {v5, v7}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+7579d6: 0a05                                   |0051: move-result v5
+7579d8: 3805 2a00                              |0052: if-eqz v5, 007c // +002a
+7579dc: 1200                                   |0054: const/4 v0, #int 0 // #0
+7579de: 7210 5afe 0200                         |0055: invoke-interface {v2}, Lokio/BufferedSource;.readUtf8LineStrict:()Ljava/lang/String; // method@fe5a
+7579e4: 0c01                                   |0058: move-result-object v1
+7579e6: 7020 37cb 1900                         |0059: invoke-direct {v9, v1}, Lcom/squareup/okhttp/internal/DiskLruCache;.readJournalLine:(Ljava/lang/String;)V // method@cb37
+7579ec: d800 0001                              |005c: add-int/lit8 v0, v0, #int 1 // #01
+7579f0: 28f7                                   |005e: goto 0055 // -0009
+7579f2: 5491 dc87                              |005f: iget-object v1, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+7579f6: 6e10 b0d5 0100                         |0061: invoke-virtual {v1}, Ljava/util/LinkedHashMap;.size:()I // method@d5b0
+7579fc: 0a01                                   |0064: move-result v1
+7579fe: b110                                   |0065: sub-int/2addr v0, v1
+757a00: 5990 df87                              |0066: iput v0, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.redundantOpCount:I // field@87df
+757a04: 7210 4ffe 0200                         |0068: invoke-interface {v2}, Lokio/BufferedSource;.exhausted:()Z // method@fe4f
+757a0a: 0a00                                   |006b: move-result v0
+757a0c: 3900 0600                              |006c: if-nez v0, 0072 // +0006
+757a10: 7010 38cb 0900                         |006e: invoke-direct {v9}, Lcom/squareup/okhttp/internal/DiskLruCache;.rebuildJournal:()V // method@cb38
+757a16: 2807                                   |0071: goto 0078 // +0007
+757a18: 7010 34cb 0900                         |0072: invoke-direct {v9}, Lcom/squareup/okhttp/internal/DiskLruCache;.newJournalWriter:()Lokio/BufferedSink; // method@cb34
+757a1e: 0c00                                   |0075: move-result-object v0
+757a20: 5b90 db87                              |0076: iput-object v0, v9, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+757a24: 7110 97cb 0200                         |0078: invoke-static {v2}, Lcom/squareup/okhttp/internal/Util;.closeQuietly:(Ljava/io/Closeable;)V // method@cb97
+757a2a: 0e00                                   |007b: return-void
+757a2c: 2209 481a                              |007c: new-instance v9, Ljava/io/IOException; // type@1a48
+757a30: 2205 991a                              |007e: new-instance v5, Ljava/lang/StringBuilder; // type@1a99
+757a34: 7020 3cd2 1500                         |0080: invoke-direct {v5, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+757a3a: 6e20 45d2 3500                         |0083: invoke-virtual {v5, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757a40: 0c01                                   |0086: move-result-object v1
+757a42: 6e20 45d2 0100                         |0087: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757a48: 0c01                                   |008a: move-result-object v1
+757a4a: 6e20 45d2 4100                         |008b: invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757a50: 0c01                                   |008e: move-result-object v1
+757a52: 6e20 45d2 0100                         |008f: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757a58: 0c01                                   |0092: move-result-object v1
+757a5a: 6e20 45d2 6100                         |0093: invoke-virtual {v1, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757a60: 0c01                                   |0096: move-result-object v1
+757a62: 6e20 45d2 0100                         |0097: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757a68: 0c00                                   |009a: move-result-object v0
+757a6a: 6e20 45d2 7000                         |009b: invoke-virtual {v0, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757a70: 0c00                                   |009e: move-result-object v0
+757a72: 1a01 d072                              |009f: const-string v1, "]" // string@72d0
+757a76: 6e20 45d2 1000                         |00a1: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757a7c: 0c00                                   |00a4: move-result-object v0
+757a7e: 6e10 58d2 0000                         |00a5: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+757a84: 0c00                                   |00a8: move-result-object v0
+757a86: 7020 14d0 0900                         |00a9: invoke-direct {v9, v0}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+757a8c: 2709                                   |00ac: throw v9
+757a8e: 0d09                                   |00ad: move-exception v9
+757a90: 7110 97cb 0200                         |00ae: invoke-static {v2}, Lcom/squareup/okhttp/internal/Util;.closeQuietly:(Ljava/io/Closeable;)V // method@cb97
+757a96: 2709                                   |00b1: throw v9
+      catches       : 4
+        0x0010 - 0x0052
+          <any> -> 0x00ad
+        0x0055 - 0x005c
+          Ljava/io/EOFException; -> 0x005f
+          <any> -> 0x00ad
+        0x005f - 0x0078
+          <any> -> 0x00ad
+        0x007c - 0x00ad
+          <any> -> 0x00ad
+      positions     :
+        0x0000 line=262
+        0x0002 line=0
+        0x0004 line=262
+        0x0010 line=264
+        0x0014 line=265
+        0x0018 line=266
+        0x001c line=267
+        0x0020 line=268
+        0x0024 line=269
+        0x002e line=270
+        0x0036 line=271
+        0x0042 line=272
+        0x004e line=273
+        0x0055 line=281
+        0x005f line=287
+        0x0068 line=290
+        0x006e line=291
+        0x0072 line=293
+        0x0078 line=296
+        0x007c line=274
+        0x00ae line=296
+      locals        :
+        0x0000 - 0x00b2 reg=9 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #25              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'readJournalLine'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 2
+      outs          : 4
+      insns size    : 173 16-bit code units
+757ac4:                                        |[757ac4] com.squareup.okhttp.internal.DiskLruCache.readJournalLine:(Ljava/lang/String;)V
+757ad4: 1300 2000                              |0000: const/16 v0, #int 32 // #20
+757ad8: 6e20 0cd2 0900                         |0002: invoke-virtual {v9, v0}, Ljava/lang/String;.indexOf:(I)I // method@d20c
+757ade: 0a01                                   |0005: move-result v1
+757ae0: 1a02 82e3                              |0006: const-string v2, "unexpected journal line: " // string@e382
+757ae4: 12f3                                   |0008: const/4 v3, #int -1 // #ff
+757ae6: 3231 9100                              |0009: if-eq v1, v3, 009a // +0091
+757aea: d804 0101                              |000b: add-int/lit8 v4, v1, #int 1 // #01
+757aee: 6e30 0dd2 0904                         |000d: invoke-virtual {v9, v0, v4}, Ljava/lang/String;.indexOf:(II)I // method@d20d
+757af4: 0a00                                   |0010: move-result v0
+757af6: 3330 1700                              |0011: if-ne v0, v3, 0028 // +0017
+757afa: 6e20 23d2 4900                         |0013: invoke-virtual {v9, v4}, Ljava/lang/String;.substring:(I)Ljava/lang/String; // method@d223
+757b00: 0c04                                   |0016: move-result-object v4
+757b02: 1265                                   |0017: const/4 v5, #int 6 // #6
+757b04: 3351 1400                              |0018: if-ne v1, v5, 002c // +0014
+757b08: 1a05 0f5d                              |001a: const-string v5, "REMOVE" // string@5d0f
+757b0c: 6e20 20d2 5900                         |001c: invoke-virtual {v9, v5}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@d220
+757b12: 0a05                                   |001f: move-result v5
+757b14: 3805 0c00                              |0020: if-eqz v5, 002c // +000c
+757b18: 5488 dc87                              |0022: iget-object v8, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+757b1c: 6e20 afd5 4800                         |0024: invoke-virtual {v8, v4}, Ljava/util/LinkedHashMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5af
+757b22: 0e00                                   |0027: return-void
+757b24: 6e30 24d2 4900                         |0028: invoke-virtual {v9, v4, v0}, Ljava/lang/String;.substring:(II)Ljava/lang/String; // method@d224
+757b2a: 0c04                                   |002b: move-result-object v4
+757b2c: 5485 dc87                              |002c: iget-object v5, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+757b30: 6e20 aad5 4500                         |002e: invoke-virtual {v5, v4}, Ljava/util/LinkedHashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5aa
+757b36: 0c05                                   |0031: move-result-object v5
+757b38: 1f05 7c19                              |0032: check-cast v5, Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@197c
+757b3c: 1206                                   |0034: const/4 v6, #int 0 // #0
+757b3e: 3905 0c00                              |0035: if-nez v5, 0041 // +000c
+757b42: 2205 7c19                              |0037: new-instance v5, Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@197c
+757b46: 7040 fcca 8564                         |0039: invoke-direct {v5, v8, v4, v6}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.<init>:(Lcom/squareup/okhttp/internal/DiskLruCache;Ljava/lang/String;Lcom/squareup/okhttp/internal/DiskLruCache$1;)V // method@cafc
+757b4c: 5487 dc87                              |003c: iget-object v7, v8, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+757b50: 6e30 add5 4705                         |003e: invoke-virtual {v7, v4, v5}, Ljava/util/LinkedHashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d5ad
+757b56: 1254                                   |0041: const/4 v4, #int 5 // #5
+757b58: 3230 2200                              |0042: if-eq v0, v3, 0064 // +0022
+757b5c: 3341 2000                              |0044: if-ne v1, v4, 0064 // +0020
+757b60: 1a07 301a                              |0046: const-string v7, "CLEAN" // string@1a30
+757b64: 6e20 20d2 7900                         |0048: invoke-virtual {v9, v7}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@d220
+757b6a: 0a07                                   |004b: move-result v7
+757b6c: 3807 1800                              |004c: if-eqz v7, 0064 // +0018
+757b70: 1218                                   |004e: const/4 v8, #int 1 // #1
+757b72: b080                                   |004f: add-int/2addr v0, v8
+757b74: 6e20 23d2 0900                         |0050: invoke-virtual {v9, v0}, Ljava/lang/String;.substring:(I)Ljava/lang/String; // method@d223
+757b7a: 0c09                                   |0053: move-result-object v9
+757b7c: 1a00 bc02                              |0054: const-string v0, " " // string@02bc
+757b80: 6e20 1ed2 0900                         |0056: invoke-virtual {v9, v0}, Ljava/lang/String;.split:(Ljava/lang/String;)[Ljava/lang/String; // method@d21e
+757b86: 0c09                                   |0059: move-result-object v9
+757b88: 7120 05cb 8500                         |005a: invoke-static {v5, v8}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$802:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;Z)Z // method@cb05
+757b8e: 7120 07cb 6500                         |005d: invoke-static {v5, v6}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$902:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;Lcom/squareup/okhttp/internal/DiskLruCache$Editor;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb07
+757b94: 7120 fdca 9500                         |0060: invoke-static {v5, v9}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1000:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;[Ljava/lang/String;)V // method@cafd
+757b9a: 2823                                   |0063: goto 0086 // +0023
+757b9c: 3330 1500                              |0064: if-ne v0, v3, 0079 // +0015
+757ba0: 3341 1300                              |0066: if-ne v1, v4, 0079 // +0013
+757ba4: 1a04 4521                              |0068: const-string v4, "DIRTY" // string@2145
+757ba8: 6e20 20d2 4900                         |006a: invoke-virtual {v9, v4}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@d220
+757bae: 0a04                                   |006d: move-result v4
+757bb0: 3804 0b00                              |006e: if-eqz v4, 0079 // +000b
+757bb4: 2209 7b19                              |0070: new-instance v9, Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // type@197b
+757bb8: 7040 f2ca 8965                         |0072: invoke-direct {v9, v8, v5, v6}, Lcom/squareup/okhttp/internal/DiskLruCache$Editor;.<init>:(Lcom/squareup/okhttp/internal/DiskLruCache;Lcom/squareup/okhttp/internal/DiskLruCache$Entry;Lcom/squareup/okhttp/internal/DiskLruCache$1;)V // method@caf2
+757bbe: 7120 07cb 9500                         |0075: invoke-static {v5, v9}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$902:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;Lcom/squareup/okhttp/internal/DiskLruCache$Editor;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb07
+757bc4: 280e                                   |0078: goto 0086 // +000e
+757bc6: 3330 0e00                              |0079: if-ne v0, v3, 0087 // +000e
+757bca: 1248                                   |007b: const/4 v8, #int 4 // #4
+757bcc: 3381 0b00                              |007c: if-ne v1, v8, 0087 // +000b
+757bd0: 1a08 d75c                              |007e: const-string v8, "READ" // string@5cd7
+757bd4: 6e20 20d2 8900                         |0080: invoke-virtual {v9, v8}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@d220
+757bda: 0a08                                   |0083: move-result v8
+757bdc: 3808 0300                              |0084: if-eqz v8, 0087 // +0003
+757be0: 0e00                                   |0086: return-void
+757be2: 2208 481a                              |0087: new-instance v8, Ljava/io/IOException; // type@1a48
+757be6: 2200 991a                              |0089: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+757bea: 7020 3cd2 2000                         |008b: invoke-direct {v0, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+757bf0: 6e20 45d2 9000                         |008e: invoke-virtual {v0, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757bf6: 0c09                                   |0091: move-result-object v9
+757bf8: 6e10 58d2 0900                         |0092: invoke-virtual {v9}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+757bfe: 0c09                                   |0095: move-result-object v9
+757c00: 7020 14d0 9800                         |0096: invoke-direct {v8, v9}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+757c06: 2708                                   |0099: throw v8
+757c08: 2208 481a                              |009a: new-instance v8, Ljava/io/IOException; // type@1a48
+757c0c: 2200 991a                              |009c: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+757c10: 7020 3cd2 2000                         |009e: invoke-direct {v0, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+757c16: 6e20 45d2 9000                         |00a1: invoke-virtual {v0, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757c1c: 0c09                                   |00a4: move-result-object v9
+757c1e: 6e10 58d2 0900                         |00a5: invoke-virtual {v9}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+757c24: 0c09                                   |00a8: move-result-object v9
+757c26: 7020 14d0 9800                         |00a9: invoke-direct {v8, v9}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+757c2c: 2708                                   |00ac: throw v8
+      catches       : (none)
+      positions     :
+        0x0002 line=312
+        0x0006 line=313
+        0x000d line=318
+        0x0013 line=321
+        0x001a line=322
+        0x0022 line=323
+        0x0028 line=327
+        0x002c line=330
+        0x0037 line=332
+        0x003c line=333
+        0x0046 line=336
+        0x0050 line=337
+        0x005a line=338
+        0x005d line=339
+        0x0060 line=340
+        0x0068 line=341
+        0x0070 line=342
+        0x007e line=343
+        0x0087 line=346
+        0x009a line=314
+      locals        :
+        0x0000 - 0x00ad reg=8 this Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x00ad reg=9 (null) Ljava/lang/String;
+
+    #26              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'rebuildJournal'
+      type          : '()V'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 3
+      insns size    : 193 16-bit code units
+757c30:                                        |[757c30] com.squareup.okhttp.internal.DiskLruCache.rebuildJournal:()V
+757c40: 1d06                                   |0000: monitor-enter v6
+757c42: 5460 db87                              |0001: iget-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+757c46: 3800 0500                              |0003: if-eqz v0, 0008 // +0005
+757c4a: 7210 3dfe 0000                         |0005: invoke-interface {v0}, Lokio/BufferedSink;.close:()V // method@fe3d
+757c50: 5460 d587                              |0008: iget-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+757c54: 5461 da87                              |000a: iget-object v1, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFileTmp:Ljava/io/File; // field@87da
+757c58: 7220 5bce 1000                         |000c: invoke-interface {v0, v1}, Lcom/squareup/okhttp/internal/io/FileSystem;.sink:(Ljava/io/File;)Lokio/Sink; // method@ce5b
+757c5e: 0c00                                   |000f: move-result-object v0
+757c60: 7110 79fe 0000                         |0010: invoke-static {v0}, Lokio/Okio;.buffer:(Lokio/Sink;)Lokio/BufferedSink; // method@fe79
+757c66: 0c00                                   |0013: move-result-object v0
+757c68: 1a01 f2b0                              |0014: const-string v1, "libcore.io.DiskLruCache" // string@b0f2
+757c6c: 7220 4cfe 1000                         |0016: invoke-interface {v0, v1}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757c72: 0c01                                   |0019: move-result-object v1
+757c74: 1302 0a00                              |001a: const/16 v2, #int 10 // #a
+757c78: 7220 47fe 2100                         |001c: invoke-interface {v1, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757c7e: 1a01 3710                              |001f: const-string v1, "1" // string@1037
+757c82: 7220 4cfe 1000                         |0021: invoke-interface {v0, v1}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757c88: 0c01                                   |0024: move-result-object v1
+757c8a: 7220 47fe 2100                         |0025: invoke-interface {v1, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757c90: 5261 d087                              |0028: iget v1, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.appVersion:I // field@87d0
+757c94: 8113                                   |002a: int-to-long v3, v1
+757c96: 7230 48fe 3004                         |002b: invoke-interface {v0, v3, v4}, Lokio/BufferedSink;.writeDecimalLong:(J)Lokio/BufferedSink; // method@fe48
+757c9c: 0c01                                   |002e: move-result-object v1
+757c9e: 7220 47fe 2100                         |002f: invoke-interface {v1, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757ca4: 5261 e187                              |0032: iget v1, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.valueCount:I // field@87e1
+757ca8: 8113                                   |0034: int-to-long v3, v1
+757caa: 7230 48fe 3004                         |0035: invoke-interface {v0, v3, v4}, Lokio/BufferedSink;.writeDecimalLong:(J)Lokio/BufferedSink; // method@fe48
+757cb0: 0c01                                   |0038: move-result-object v1
+757cb2: 7220 47fe 2100                         |0039: invoke-interface {v1, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757cb8: 7220 47fe 2000                         |003c: invoke-interface {v0, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757cbe: 5461 dc87                              |003f: iget-object v1, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+757cc2: 6e10 b1d5 0100                         |0041: invoke-virtual {v1}, Ljava/util/LinkedHashMap;.values:()Ljava/util/Collection; // method@d5b1
+757cc8: 0c01                                   |0044: move-result-object v1
+757cca: 7210 37d5 0100                         |0045: invoke-interface {v1}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+757cd0: 0c01                                   |0048: move-result-object v1
+757cd2: 7210 a0d5 0100                         |0049: invoke-interface {v1}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+757cd8: 0a03                                   |004c: move-result v3
+757cda: 3803 3b00                              |004d: if-eqz v3, 0088 // +003b
+757cde: 7210 a1d5 0100                         |004f: invoke-interface {v1}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+757ce4: 0c03                                   |0052: move-result-object v3
+757ce6: 1f03 7c19                              |0053: check-cast v3, Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@197c
+757cea: 7110 06cb 0300                         |0055: invoke-static {v3}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$900:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb06
+757cf0: 0c04                                   |0058: move-result-object v4
+757cf2: 1305 2000                              |0059: const/16 v5, #int 32 // #20
+757cf6: 3804 1600                              |005b: if-eqz v4, 0071 // +0016
+757cfa: 1a04 4521                              |005d: const-string v4, "DIRTY" // string@2145
+757cfe: 7220 4cfe 4000                         |005f: invoke-interface {v0, v4}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757d04: 0c04                                   |0062: move-result-object v4
+757d06: 7220 47fe 5400                         |0063: invoke-interface {v4, v5}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757d0c: 7110 01cb 0300                         |0066: invoke-static {v3}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1500:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Ljava/lang/String; // method@cb01
+757d12: 0c03                                   |0069: move-result-object v3
+757d14: 7220 4cfe 3000                         |006a: invoke-interface {v0, v3}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757d1a: 7220 47fe 2000                         |006d: invoke-interface {v0, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757d20: 28d9                                   |0070: goto 0049 // -0027
+757d22: 1a04 301a                              |0071: const-string v4, "CLEAN" // string@1a30
+757d26: 7220 4cfe 4000                         |0073: invoke-interface {v0, v4}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757d2c: 0c04                                   |0076: move-result-object v4
+757d2e: 7220 47fe 5400                         |0077: invoke-interface {v4, v5}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757d34: 7110 01cb 0300                         |007a: invoke-static {v3}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1500:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Ljava/lang/String; // method@cb01
+757d3a: 0c04                                   |007d: move-result-object v4
+757d3c: 7220 4cfe 4000                         |007e: invoke-interface {v0, v4}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757d42: 6e20 0bcb 0300                         |0081: invoke-virtual {v3, v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.writeLengths:(Lokio/BufferedSink;)V // method@cb0b
+757d48: 7220 47fe 2000                         |0084: invoke-interface {v0, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757d4e: 28c2                                   |0087: goto 0049 // -003e
+757d50: 7210 3dfe 0000                         |0088: invoke-interface {v0}, Lokio/BufferedSink;.close:()V // method@fe3d
+757d56: 5460 d587                              |008b: iget-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+757d5a: 5461 d887                              |008d: iget-object v1, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFile:Ljava/io/File; // field@87d8
+757d5e: 7220 59ce 1000                         |008f: invoke-interface {v0, v1}, Lcom/squareup/okhttp/internal/io/FileSystem;.exists:(Ljava/io/File;)Z // method@ce59
+757d64: 0a00                                   |0092: move-result v0
+757d66: 3800 0b00                              |0093: if-eqz v0, 009e // +000b
+757d6a: 5460 d587                              |0095: iget-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+757d6e: 5461 d887                              |0097: iget-object v1, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFile:Ljava/io/File; // field@87d8
+757d72: 5462 d987                              |0099: iget-object v2, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFileBackup:Ljava/io/File; // field@87d9
+757d76: 7230 5ace 1002                         |009b: invoke-interface {v0, v1, v2}, Lcom/squareup/okhttp/internal/io/FileSystem;.rename:(Ljava/io/File;Ljava/io/File;)V // method@ce5a
+757d7c: 5460 d587                              |009e: iget-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+757d80: 5461 da87                              |00a0: iget-object v1, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFileTmp:Ljava/io/File; // field@87da
+757d84: 5462 d887                              |00a2: iget-object v2, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFile:Ljava/io/File; // field@87d8
+757d88: 7230 5ace 1002                         |00a4: invoke-interface {v0, v1, v2}, Lcom/squareup/okhttp/internal/io/FileSystem;.rename:(Ljava/io/File;Ljava/io/File;)V // method@ce5a
+757d8e: 5460 d587                              |00a7: iget-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+757d92: 5461 d987                              |00a9: iget-object v1, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFileBackup:Ljava/io/File; // field@87d9
+757d96: 7220 57ce 1000                         |00ab: invoke-interface {v0, v1}, Lcom/squareup/okhttp/internal/io/FileSystem;.delete:(Ljava/io/File;)V // method@ce57
+757d9c: 7010 34cb 0600                         |00ae: invoke-direct {v6}, Lcom/squareup/okhttp/internal/DiskLruCache;.newJournalWriter:()Lokio/BufferedSink; // method@cb34
+757da2: 0c00                                   |00b1: move-result-object v0
+757da4: 5b60 db87                              |00b2: iput-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+757da8: 1200                                   |00b4: const/4 v0, #int 0 // #0
+757daa: 5c60 d687                              |00b5: iput-boolean v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.hasJournalErrors:Z // field@87d6
+757dae: 1e06                                   |00b7: monitor-exit v6
+757db0: 0e00                                   |00b8: return-void
+757db2: 0d01                                   |00b9: move-exception v1
+757db4: 7210 3dfe 0000                         |00ba: invoke-interface {v0}, Lokio/BufferedSink;.close:()V // method@fe3d
+757dba: 2701                                   |00bd: throw v1
+757dbc: 0d00                                   |00be: move-exception v0
+757dbe: 1e06                                   |00bf: monitor-exit v6
+757dc0: 2700                                   |00c0: throw v0
+      catches       : 4
+        0x0001 - 0x0014
+          <any> -> 0x00be
+        0x0014 - 0x0087
+          <any> -> 0x00b9
+        0x0088 - 0x00b7
+          <any> -> 0x00be
+        0x00ba - 0x00c0
+          <any> -> 0x00be
+      positions     :
+        0x0001 line=378
+        0x0005 line=379
+        0x0008 line=382
+        0x0014 line=384
+        0x001f line=385
+        0x0028 line=386
+        0x0032 line=387
+        0x003c line=388
+        0x003f line=390
+        0x0055 line=391
+        0x005d line=392
+        0x0066 line=393
+        0x006d line=394
+        0x0071 line=396
+        0x007a line=397
+        0x0081 line=398
+        0x0084 line=399
+        0x0088 line=403
+        0x008b line=406
+        0x0095 line=407
+        0x009e line=409
+        0x00a7 line=410
+        0x00ae line=412
+        0x00b5 line=413
+        0x00b7 line=414
+        0x00ba line=403
+      locals        :
+        0x0000 - 0x00c1 reg=6 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #27              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'removeEntry'
+      type          : '(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 2
+      insns size    : 107 16-bit code units
+757dec:                                        |[757dec] com.squareup.okhttp.internal.DiskLruCache.removeEntry:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z
+757dfc: 7110 06cb 0700                         |0000: invoke-static {v7}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$900:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb06
+757e02: 0c00                                   |0003: move-result-object v0
+757e04: 1211                                   |0004: const/4 v1, #int 1 // #1
+757e06: 3800 0900                              |0005: if-eqz v0, 000e // +0009
+757e0a: 7110 06cb 0700                         |0007: invoke-static {v7}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$900:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb06
+757e10: 0c00                                   |000a: move-result-object v0
+757e12: 7120 f7ca 1000                         |000b: invoke-static {v0, v1}, Lcom/squareup/okhttp/internal/DiskLruCache$Editor;.access$1902:(Lcom/squareup/okhttp/internal/DiskLruCache$Editor;Z)Z // method@caf7
+757e18: 1200                                   |000e: const/4 v0, #int 0 // #0
+757e1a: 5262 e187                              |000f: iget v2, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.valueCount:I // field@87e1
+757e1e: 3520 2300                              |0011: if-ge v0, v2, 0034 // +0023
+757e22: 5462 d587                              |0013: iget-object v2, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+757e26: 7110 ffca 0700                         |0015: invoke-static {v7}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1300:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[Ljava/io/File; // method@caff
+757e2c: 0c03                                   |0018: move-result-object v3
+757e2e: 4603 0300                              |0019: aget-object v3, v3, v0
+757e32: 7220 57ce 3200                         |001b: invoke-interface {v2, v3}, Lcom/squareup/okhttp/internal/io/FileSystem;.delete:(Ljava/io/File;)V // method@ce57
+757e38: 5362 e087                              |001e: iget-wide v2, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.size:J // field@87e0
+757e3c: 7110 feca 0700                         |0020: invoke-static {v7}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1200:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[J // method@cafe
+757e42: 0c04                                   |0023: move-result-object v4
+757e44: 4504 0400                              |0024: aget-wide v4, v4, v0
+757e48: bc42                                   |0026: sub-long/2addr v2, v4
+757e4a: 5a62 e087                              |0027: iput-wide v2, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.size:J // field@87e0
+757e4e: 7110 feca 0700                         |0029: invoke-static {v7}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1200:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)[J // method@cafe
+757e54: 0c02                                   |002c: move-result-object v2
+757e56: 1603 0000                              |002d: const-wide/16 v3, #int 0 // #0
+757e5a: 4c03 0200                              |002f: aput-wide v3, v2, v0
+757e5e: d800 0001                              |0031: add-int/lit8 v0, v0, #int 1 // #01
+757e62: 28dc                                   |0033: goto 000f // -0024
+757e64: 5260 df87                              |0034: iget v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.redundantOpCount:I // field@87df
+757e68: b010                                   |0036: add-int/2addr v0, v1
+757e6a: 5960 df87                              |0037: iput v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.redundantOpCount:I // field@87df
+757e6e: 5460 db87                              |0039: iget-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+757e72: 1a02 0f5d                              |003b: const-string v2, "REMOVE" // string@5d0f
+757e76: 7220 4cfe 2000                         |003d: invoke-interface {v0, v2}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757e7c: 0c00                                   |0040: move-result-object v0
+757e7e: 1302 2000                              |0041: const/16 v2, #int 32 // #20
+757e82: 7220 47fe 2000                         |0043: invoke-interface {v0, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757e88: 0c00                                   |0046: move-result-object v0
+757e8a: 7110 01cb 0700                         |0047: invoke-static {v7}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1500:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Ljava/lang/String; // method@cb01
+757e90: 0c02                                   |004a: move-result-object v2
+757e92: 7220 4cfe 2000                         |004b: invoke-interface {v0, v2}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+757e98: 0c00                                   |004e: move-result-object v0
+757e9a: 1302 0a00                              |004f: const/16 v2, #int 10 // #a
+757e9e: 7220 47fe 2000                         |0051: invoke-interface {v0, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+757ea4: 5460 dc87                              |0054: iget-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+757ea8: 7110 01cb 0700                         |0056: invoke-static {v7}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$1500:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Ljava/lang/String; // method@cb01
+757eae: 0c07                                   |0059: move-result-object v7
+757eb0: 6e20 afd5 7000                         |005a: invoke-virtual {v0, v7}, Ljava/util/LinkedHashMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5af
+757eb6: 7010 33cb 0600                         |005d: invoke-direct {v6}, Lcom/squareup/okhttp/internal/DiskLruCache;.journalRebuildRequired:()Z // method@cb33
+757ebc: 0a07                                   |0060: move-result v7
+757ebe: 3807 0900                              |0061: if-eqz v7, 006a // +0009
+757ec2: 5467 d487                              |0063: iget-object v7, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.executor:Ljava/util/concurrent/Executor; // field@87d4
+757ec6: 5466 d187                              |0065: iget-object v6, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.cleanupRunnable:Ljava/lang/Runnable; // field@87d1
+757eca: 7220 acd6 6700                         |0067: invoke-interface {v7, v6}, Ljava/util/concurrent/Executor;.execute:(Ljava/lang/Runnable;)V // method@d6ac
+757ed0: 0f01                                   |006a: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=602
+        0x0007 line=603
+        0x000f line=606
+        0x0013 line=607
+        0x001e line=608
+        0x0029 line=609
+        0x0034 line=612
+        0x0039 line=613
+        0x0054 line=614
+        0x005d line=616
+        0x0063 line=617
+      locals        :
+        0x0000 - 0x006b reg=6 this Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x006b reg=7 (null) Lcom/squareup/okhttp/internal/DiskLruCache$Entry;
+
+    #28              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'trimToSize'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 29 16-bit code units
+757ed4:                                        |[757ed4] com.squareup.okhttp.internal.DiskLruCache.trimToSize:()V
+757ee4: 5340 e087                              |0000: iget-wide v0, v4, Lcom/squareup/okhttp/internal/DiskLruCache;.size:J // field@87e0
+757ee8: 5342 dd87                              |0002: iget-wide v2, v4, Lcom/squareup/okhttp/internal/DiskLruCache;.maxSize:J // field@87dd
+757eec: 3100 0002                              |0004: cmp-long v0, v0, v2
+757ef0: 3d00 1600                              |0006: if-lez v0, 001c // +0016
+757ef4: 5440 dc87                              |0008: iget-object v0, v4, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+757ef8: 6e10 b1d5 0000                         |000a: invoke-virtual {v0}, Ljava/util/LinkedHashMap;.values:()Ljava/util/Collection; // method@d5b1
+757efe: 0c00                                   |000d: move-result-object v0
+757f00: 7210 37d5 0000                         |000e: invoke-interface {v0}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+757f06: 0c00                                   |0011: move-result-object v0
+757f08: 7210 a1d5 0000                         |0012: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+757f0e: 0c00                                   |0015: move-result-object v0
+757f10: 1f00 7c19                              |0016: check-cast v0, Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@197c
+757f14: 7020 3acb 0400                         |0018: invoke-direct {v4, v0}, Lcom/squareup/okhttp/internal/DiskLruCache;.removeEntry:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z // method@cb3a
+757f1a: 28e5                                   |001b: goto 0000 // -001b
+757f1c: 0e00                                   |001c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=662
+        0x0008 line=663
+        0x0018 line=664
+      locals        :
+        0x0000 - 0x001d reg=4 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #29              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'validateKey'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 40 16-bit code units
+757f20:                                        |[757f20] com.squareup.okhttp.internal.DiskLruCache.validateKey:(Ljava/lang/String;)V
+757f30: 6202 ca87                              |0000: sget-object v2, Lcom/squareup/okhttp/internal/DiskLruCache;.LEGAL_KEY_PATTERN:Ljava/util/regex/Pattern; // field@87ca
+757f34: 6e20 4ad7 3200                         |0002: invoke-virtual {v2, v3}, Ljava/util/regex/Pattern;.matcher:(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher; // method@d74a
+757f3a: 0c02                                   |0005: move-result-object v2
+757f3c: 6e10 3cd7 0200                         |0006: invoke-virtual {v2}, Ljava/util/regex/Matcher;.matches:()Z // method@d73c
+757f42: 0a02                                   |0009: move-result v2
+757f44: 3802 0300                              |000a: if-eqz v2, 000d // +0003
+757f48: 0e00                                   |000c: return-void
+757f4a: 2202 7a1a                              |000d: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+757f4e: 2200 991a                              |000f: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+757f52: 1a01 abae                              |0011: const-string v1, "keys must match regex [a-z0-9_-]{1,120}: \"" // string@aeab
+757f56: 7020 3cd2 1000                         |0013: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+757f5c: 6e20 45d2 3000                         |0016: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757f62: 0c03                                   |0019: move-result-object v3
+757f64: 1a00 0c05                              |001a: const-string v0, "\"" // string@050c
+757f68: 6e20 45d2 0300                         |001c: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+757f6e: 0c03                                   |001f: move-result-object v3
+757f70: 6e10 58d2 0300                         |0020: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+757f76: 0c03                                   |0023: move-result-object v3
+757f78: 7020 47d1 3200                         |0024: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+757f7e: 2702                                   |0027: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=691
+        0x0006 line=692
+        0x000d line=693
+      locals        :
+        0x0000 - 0x0028 reg=2 this Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0028 reg=3 (null) Ljava/lang/String;
+
+  Virtual methods   -
+    #0              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 2
+      insns size    : 75 16-bit code units
+757f80:                                        |[757f80] com.squareup.okhttp.internal.DiskLruCache.close:()V
+757f90: 1d06                                   |0000: monitor-enter v6
+757f92: 5560 d787                              |0001: iget-boolean v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.initialized:Z // field@87d7
+757f96: 1211                                   |0003: const/4 v1, #int 1 // #1
+757f98: 3800 4000                              |0004: if-eqz v0, 0044 // +0040
+757f9c: 5560 d287                              |0006: iget-boolean v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.closed:Z // field@87d2
+757fa0: 3800 0300                              |0008: if-eqz v0, 000b // +0003
+757fa4: 283a                                   |000a: goto 0044 // +003a
+757fa6: 5460 dc87                              |000b: iget-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+757faa: 6e10 b1d5 0000                         |000d: invoke-virtual {v0}, Ljava/util/LinkedHashMap;.values:()Ljava/util/Collection; // method@d5b1
+757fb0: 0c00                                   |0010: move-result-object v0
+757fb2: 5462 dc87                              |0011: iget-object v2, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+757fb6: 6e10 b0d5 0200                         |0013: invoke-virtual {v2}, Ljava/util/LinkedHashMap;.size:()I // method@d5b0
+757fbc: 0a02                                   |0016: move-result v2
+757fbe: 2322 9520                              |0017: new-array v2, v2, [Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@2095
+757fc2: 7220 3dd5 2000                         |0019: invoke-interface {v0, v2}, Ljava/util/Collection;.toArray:([Ljava/lang/Object;)[Ljava/lang/Object; // method@d53d
+757fc8: 0c00                                   |001c: move-result-object v0
+757fca: 1f00 9520                              |001d: check-cast v0, [Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@2095
+757fce: 2102                                   |001f: array-length v2, v0
+757fd0: 1203                                   |0020: const/4 v3, #int 0 // #0
+757fd2: 3523 1400                              |0021: if-ge v3, v2, 0035 // +0014
+757fd6: 4604 0003                              |0023: aget-object v4, v0, v3
+757fda: 7110 06cb 0400                         |0025: invoke-static {v4}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$900:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb06
+757fe0: 0c05                                   |0028: move-result-object v5
+757fe2: 3805 0900                              |0029: if-eqz v5, 0032 // +0009
+757fe6: 7110 06cb 0400                         |002b: invoke-static {v4}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$900:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb06
+757fec: 0c04                                   |002e: move-result-object v4
+757fee: 6e10 f3ca 0400                         |002f: invoke-virtual {v4}, Lcom/squareup/okhttp/internal/DiskLruCache$Editor;.abort:()V // method@caf3
+757ff4: d803 0301                              |0032: add-int/lit8 v3, v3, #int 1 // #01
+757ff8: 28ed                                   |0034: goto 0021 // -0013
+757ffa: 7010 3ecb 0600                         |0035: invoke-direct {v6}, Lcom/squareup/okhttp/internal/DiskLruCache;.trimToSize:()V // method@cb3e
+758000: 5460 db87                              |0038: iget-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+758004: 7210 3dfe 0000                         |003a: invoke-interface {v0}, Lokio/BufferedSink;.close:()V // method@fe3d
+75800a: 1200                                   |003d: const/4 v0, #int 0 // #0
+75800c: 5b60 db87                              |003e: iput-object v0, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+758010: 5c61 d287                              |0040: iput-boolean v1, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.closed:Z // field@87d2
+758014: 1e06                                   |0042: monitor-exit v6
+758016: 0e00                                   |0043: return-void
+758018: 5c61 d287                              |0044: iput-boolean v1, v6, Lcom/squareup/okhttp/internal/DiskLruCache;.closed:Z // field@87d2
+75801c: 1e06                                   |0046: monitor-exit v6
+75801e: 0e00                                   |0047: return-void
+758020: 0d00                                   |0048: move-exception v0
+758022: 1e06                                   |0049: monitor-exit v6
+758024: 2700                                   |004a: throw v0
+      catches       : 3
+        0x0001 - 0x0042
+          <any> -> 0x0048
+        0x0044 - 0x0046
+          <any> -> 0x0048
+        0x0049 - 0x004a
+          <any> -> 0x0048
+      positions     :
+        0x0001 line=645
+        0x000b line=650
+        0x0025 line=651
+        0x002b line=652
+        0x0035 line=655
+        0x0038 line=656
+        0x003e line=657
+        0x0040 line=658
+        0x0042 line=659
+        0x0044 line=646
+        0x0046 line=647
+      locals        :
+        0x0000 - 0x004b reg=6 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #1              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'delete'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 11 16-bit code units
+758044:                                        |[758044] com.squareup.okhttp.internal.DiskLruCache.delete:()V
+758054: 6e10 26cb 0100                         |0000: invoke-virtual {v1}, Lcom/squareup/okhttp/internal/DiskLruCache;.close:()V // method@cb26
+75805a: 5410 d587                              |0003: iget-object v0, v1, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+75805e: 5411 d387                              |0005: iget-object v1, v1, Lcom/squareup/okhttp/internal/DiskLruCache;.directory:Ljava/io/File; // field@87d3
+758062: 7220 58ce 1000                         |0007: invoke-interface {v0, v1}, Lcom/squareup/okhttp/internal/io/FileSystem;.deleteContents:(Ljava/io/File;)V // method@ce58
+758068: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=674
+        0x0003 line=675
+      locals        :
+        0x0000 - 0x000b reg=1 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #2              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'edit'
+      type          : '(Ljava/lang/String;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 7 16-bit code units
+75806c:                                        |[75806c] com.squareup.okhttp.internal.DiskLruCache.edit:(Ljava/lang/String;)Lcom/squareup/okhttp/internal/DiskLruCache$Editor;
+75807c: 1600 ffff                              |0000: const-wide/16 v0, #int -1 // #ffff
+758080: 7040 2bcb 3210                         |0002: invoke-direct {v2, v3, v0, v1}, Lcom/squareup/okhttp/internal/DiskLruCache;.edit:(Ljava/lang/String;J)Lcom/squareup/okhttp/internal/DiskLruCache$Editor; // method@cb2b
+758086: 0c02                                   |0005: move-result-object v2
+758088: 1102                                   |0006: return-object v2
+      catches       : (none)
+      positions     :
+        0x0002 line=446
+      locals        :
+        0x0000 - 0x0007 reg=2 this Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0007 reg=3 (null) Ljava/lang/String;
+
+    #3              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'evictAll'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 41 16-bit code units
+75808c:                                        |[75808c] com.squareup.okhttp.internal.DiskLruCache.evictAll:()V
+75809c: 1d04                                   |0000: monitor-enter v4
+75809e: 6e10 31cb 0400                         |0001: invoke-virtual {v4}, Lcom/squareup/okhttp/internal/DiskLruCache;.initialize:()V // method@cb31
+7580a4: 5440 dc87                              |0004: iget-object v0, v4, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+7580a8: 6e10 b1d5 0000                         |0006: invoke-virtual {v0}, Ljava/util/LinkedHashMap;.values:()Ljava/util/Collection; // method@d5b1
+7580ae: 0c00                                   |0009: move-result-object v0
+7580b0: 5441 dc87                              |000a: iget-object v1, v4, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+7580b4: 6e10 b0d5 0100                         |000c: invoke-virtual {v1}, Ljava/util/LinkedHashMap;.size:()I // method@d5b0
+7580ba: 0a01                                   |000f: move-result v1
+7580bc: 2311 9520                              |0010: new-array v1, v1, [Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@2095
+7580c0: 7220 3dd5 1000                         |0012: invoke-interface {v0, v1}, Ljava/util/Collection;.toArray:([Ljava/lang/Object;)[Ljava/lang/Object; // method@d53d
+7580c6: 0c00                                   |0015: move-result-object v0
+7580c8: 1f00 9520                              |0016: check-cast v0, [Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@2095
+7580cc: 2101                                   |0018: array-length v1, v0
+7580ce: 1202                                   |0019: const/4 v2, #int 0 // #0
+7580d0: 3512 0a00                              |001a: if-ge v2, v1, 0024 // +000a
+7580d4: 4603 0002                              |001c: aget-object v3, v0, v2
+7580d8: 7020 3acb 3400                         |001e: invoke-direct {v4, v3}, Lcom/squareup/okhttp/internal/DiskLruCache;.removeEntry:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z // method@cb3a
+7580de: d802 0201                              |0021: add-int/lit8 v2, v2, #int 1 // #01
+7580e2: 28f7                                   |0023: goto 001a // -0009
+7580e4: 1e04                                   |0024: monitor-exit v4
+7580e6: 0e00                                   |0025: return-void
+7580e8: 0d00                                   |0026: move-exception v0
+7580ea: 1e04                                   |0027: monitor-exit v4
+7580ec: 2700                                   |0028: throw v0
+      catches       : 2
+        0x0001 - 0x0021
+          <any> -> 0x0026
+        0x0027 - 0x0028
+          <any> -> 0x0026
+      positions     :
+        0x0001 line=683
+        0x0004 line=685
+        0x001e line=686
+        0x0024 line=688
+      locals        :
+        0x0000 - 0x0029 reg=4 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #4              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'flush'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 23 16-bit code units
+758104:                                        |[758104] com.squareup.okhttp.internal.DiskLruCache.flush:()V
+758114: 1d01                                   |0000: monitor-enter v1
+758116: 5510 d787                              |0001: iget-boolean v0, v1, Lcom/squareup/okhttp/internal/DiskLruCache;.initialized:Z // field@87d7
+75811a: 3900 0400                              |0003: if-nez v0, 0007 // +0004
+75811e: 1e01                                   |0005: monitor-exit v1
+758120: 0e00                                   |0006: return-void
+758122: 7010 25cb 0100                         |0007: invoke-direct {v1}, Lcom/squareup/okhttp/internal/DiskLruCache;.checkNotClosed:()V // method@cb25
+758128: 7010 3ecb 0100                         |000a: invoke-direct {v1}, Lcom/squareup/okhttp/internal/DiskLruCache;.trimToSize:()V // method@cb3e
+75812e: 5410 db87                              |000d: iget-object v0, v1, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+758132: 7210 40fe 0000                         |000f: invoke-interface {v0}, Lokio/BufferedSink;.flush:()V // method@fe40
+758138: 1e01                                   |0012: monitor-exit v1
+75813a: 0e00                                   |0013: return-void
+75813c: 0d00                                   |0014: move-exception v0
+75813e: 1e01                                   |0015: monitor-exit v1
+758140: 2700                                   |0016: throw v0
+      catches       : 3
+        0x0001 - 0x0003
+          <any> -> 0x0014
+        0x0007 - 0x0012
+          <any> -> 0x0014
+        0x0015 - 0x0016
+          <any> -> 0x0014
+      positions     :
+        0x0001 line=636
+        0x0007 line=638
+        0x000a line=639
+        0x000d line=640
+        0x0012 line=641
+      locals        :
+        0x0000 - 0x0017 reg=1 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #5              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'get'
+      type          : '(Ljava/lang/String;)Lcom/squareup/okhttp/internal/DiskLruCache$Snapshot;'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 85 16-bit code units
+758160:                                        |[758160] com.squareup.okhttp.internal.DiskLruCache.get:(Ljava/lang/String;)Lcom/squareup/okhttp/internal/DiskLruCache$Snapshot;
+758170: 1d03                                   |0000: monitor-enter v3
+758172: 6e10 31cb 0300                         |0001: invoke-virtual {v3}, Lcom/squareup/okhttp/internal/DiskLruCache;.initialize:()V // method@cb31
+758178: 7010 25cb 0300                         |0004: invoke-direct {v3}, Lcom/squareup/okhttp/internal/DiskLruCache;.checkNotClosed:()V // method@cb25
+75817e: 7020 3fcb 4300                         |0007: invoke-direct {v3, v4}, Lcom/squareup/okhttp/internal/DiskLruCache;.validateKey:(Ljava/lang/String;)V // method@cb3f
+758184: 5430 dc87                              |000a: iget-object v0, v3, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+758188: 6e20 aad5 4000                         |000c: invoke-virtual {v0, v4}, Ljava/util/LinkedHashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5aa
+75818e: 0c00                                   |000f: move-result-object v0
+758190: 1f00 7c19                              |0010: check-cast v0, Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@197c
+758194: 1201                                   |0012: const/4 v1, #int 0 // #0
+758196: 3800 3d00                              |0013: if-eqz v0, 0050 // +003d
+75819a: 7110 04cb 0000                         |0015: invoke-static {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.access$800:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z // method@cb04
+7581a0: 0a02                                   |0018: move-result v2
+7581a2: 3902 0300                              |0019: if-nez v2, 001c // +0003
+7581a6: 2835                                   |001b: goto 0050 // +0035
+7581a8: 6e10 0acb 0000                         |001c: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/DiskLruCache$Entry;.snapshot:()Lcom/squareup/okhttp/internal/DiskLruCache$Snapshot; // method@cb0a
+7581ae: 0c00                                   |001f: move-result-object v0
+7581b0: 3900 0400                              |0020: if-nez v0, 0024 // +0004
+7581b4: 1e03                                   |0022: monitor-exit v3
+7581b6: 1101                                   |0023: return-object v1
+7581b8: 5231 df87                              |0024: iget v1, v3, Lcom/squareup/okhttp/internal/DiskLruCache;.redundantOpCount:I // field@87df
+7581bc: d801 0101                              |0026: add-int/lit8 v1, v1, #int 1 // #01
+7581c0: 5931 df87                              |0028: iput v1, v3, Lcom/squareup/okhttp/internal/DiskLruCache;.redundantOpCount:I // field@87df
+7581c4: 5431 db87                              |002a: iget-object v1, v3, Lcom/squareup/okhttp/internal/DiskLruCache;.journalWriter:Lokio/BufferedSink; // field@87db
+7581c8: 1a02 d75c                              |002c: const-string v2, "READ" // string@5cd7
+7581cc: 7220 4cfe 2100                         |002e: invoke-interface {v1, v2}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+7581d2: 0c01                                   |0031: move-result-object v1
+7581d4: 1302 2000                              |0032: const/16 v2, #int 32 // #20
+7581d8: 7220 47fe 2100                         |0034: invoke-interface {v1, v2}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+7581de: 0c01                                   |0037: move-result-object v1
+7581e0: 7220 4cfe 4100                         |0038: invoke-interface {v1, v4}, Lokio/BufferedSink;.writeUtf8:(Ljava/lang/String;)Lokio/BufferedSink; // method@fe4c
+7581e6: 0c04                                   |003b: move-result-object v4
+7581e8: 1301 0a00                              |003c: const/16 v1, #int 10 // #a
+7581ec: 7220 47fe 1400                         |003e: invoke-interface {v4, v1}, Lokio/BufferedSink;.writeByte:(I)Lokio/BufferedSink; // method@fe47
+7581f2: 7010 33cb 0300                         |0041: invoke-direct {v3}, Lcom/squareup/okhttp/internal/DiskLruCache;.journalRebuildRequired:()Z // method@cb33
+7581f8: 0a04                                   |0044: move-result v4
+7581fa: 3804 0900                              |0045: if-eqz v4, 004e // +0009
+7581fe: 5434 d487                              |0047: iget-object v4, v3, Lcom/squareup/okhttp/internal/DiskLruCache;.executor:Ljava/util/concurrent/Executor; // field@87d4
+758202: 5431 d187                              |0049: iget-object v1, v3, Lcom/squareup/okhttp/internal/DiskLruCache;.cleanupRunnable:Ljava/lang/Runnable; // field@87d1
+758206: 7220 acd6 1400                         |004b: invoke-interface {v4, v1}, Ljava/util/concurrent/Executor;.execute:(Ljava/lang/Runnable;)V // method@d6ac
+75820c: 1e03                                   |004e: monitor-exit v3
+75820e: 1100                                   |004f: return-object v0
+758210: 1e03                                   |0050: monitor-exit v3
+758212: 1101                                   |0051: return-object v1
+758214: 0d04                                   |0052: move-exception v4
+758216: 1e03                                   |0053: monitor-exit v3
+758218: 2704                                   |0054: throw v4
+      catches       : 3
+        0x0001 - 0x0020
+          <any> -> 0x0052
+        0x0024 - 0x004e
+          <any> -> 0x0052
+        0x0053 - 0x0054
+          <any> -> 0x0052
+      positions     :
+        0x0001 line=422
+        0x0004 line=424
+        0x0007 line=425
+        0x000a line=426
+        0x0015 line=427
+        0x001c line=429
+        0x0022 line=430
+        0x0024 line=432
+        0x002a line=433
+        0x0041 line=434
+        0x0047 line=435
+        0x004e line=438
+        0x0050 line=427
+      locals        :
+        0x0000 - 0x0055 reg=3 this Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0055 reg=4 (null) Ljava/lang/String;
+
+    #6              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'getDirectory'
+      type          : '()Ljava/io/File;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+758238:                                        |[758238] com.squareup.okhttp.internal.DiskLruCache.getDirectory:()Ljava/io/File;
+758248: 5400 d387                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.directory:Ljava/io/File; // field@87d3
+75824c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=482
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #7              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'getMaxSize'
+      type          : '()J'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+758250:                                        |[758250] com.squareup.okhttp.internal.DiskLruCache.getMaxSize:()J
+758260: 1d02                                   |0000: monitor-enter v2
+758262: 5320 dd87                              |0001: iget-wide v0, v2, Lcom/squareup/okhttp/internal/DiskLruCache;.maxSize:J // field@87dd
+758266: 1e02                                   |0003: monitor-exit v2
+758268: 1000                                   |0004: return-wide v0
+75826a: 0d00                                   |0005: move-exception v0
+75826c: 1e02                                   |0006: monitor-exit v2
+75826e: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=490
+      locals        :
+        0x0000 - 0x0008 reg=2 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #8              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'initialize'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 3
+      insns size    : 127 16-bit code units
+758284:                                        |[758284] com.squareup.okhttp.internal.DiskLruCache.initialize:()V
+758294: 1a00 8d22                              |0000: const-string v0, "DiskLruCache " // string@228d
+758298: 1d05                                   |0002: monitor-enter v5
+75829a: 5551 d787                              |0003: iget-boolean v1, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.initialized:Z // field@87d7
+75829e: 3801 0400                              |0005: if-eqz v1, 0009 // +0004
+7582a2: 1e05                                   |0007: monitor-exit v5
+7582a4: 0e00                                   |0008: return-void
+7582a6: 5451 d587                              |0009: iget-object v1, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7582aa: 5452 d987                              |000b: iget-object v2, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFileBackup:Ljava/io/File; // field@87d9
+7582ae: 7220 59ce 2100                         |000d: invoke-interface {v1, v2}, Lcom/squareup/okhttp/internal/io/FileSystem;.exists:(Ljava/io/File;)Z // method@ce59
+7582b4: 0a01                                   |0010: move-result v1
+7582b6: 3801 1d00                              |0011: if-eqz v1, 002e // +001d
+7582ba: 5451 d587                              |0013: iget-object v1, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7582be: 5452 d887                              |0015: iget-object v2, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFile:Ljava/io/File; // field@87d8
+7582c2: 7220 59ce 2100                         |0017: invoke-interface {v1, v2}, Lcom/squareup/okhttp/internal/io/FileSystem;.exists:(Ljava/io/File;)Z // method@ce59
+7582c8: 0a01                                   |001a: move-result v1
+7582ca: 3801 0a00                              |001b: if-eqz v1, 0025 // +000a
+7582ce: 5451 d587                              |001d: iget-object v1, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7582d2: 5452 d987                              |001f: iget-object v2, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFileBackup:Ljava/io/File; // field@87d9
+7582d6: 7220 57ce 2100                         |0021: invoke-interface {v1, v2}, Lcom/squareup/okhttp/internal/io/FileSystem;.delete:(Ljava/io/File;)V // method@ce57
+7582dc: 280a                                   |0024: goto 002e // +000a
+7582de: 5451 d587                              |0025: iget-object v1, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7582e2: 5452 d987                              |0027: iget-object v2, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFileBackup:Ljava/io/File; // field@87d9
+7582e6: 5453 d887                              |0029: iget-object v3, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFile:Ljava/io/File; // field@87d8
+7582ea: 7230 5ace 2103                         |002b: invoke-interface {v1, v2, v3}, Lcom/squareup/okhttp/internal/io/FileSystem;.rename:(Ljava/io/File;Ljava/io/File;)V // method@ce5a
+7582f0: 5451 d587                              |002e: iget-object v1, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.fileSystem:Lcom/squareup/okhttp/internal/io/FileSystem; // field@87d5
+7582f4: 5452 d887                              |0030: iget-object v2, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.journalFile:Ljava/io/File; // field@87d8
+7582f8: 7220 59ce 2100                         |0032: invoke-interface {v1, v2}, Lcom/squareup/okhttp/internal/io/FileSystem;.exists:(Ljava/io/File;)Z // method@ce59
+7582fe: 0a01                                   |0035: move-result v1
+758300: 1212                                   |0036: const/4 v2, #int 1 // #1
+758302: 3801 3d00                              |0037: if-eqz v1, 0074 // +003d
+758306: 7010 36cb 0500                         |0039: invoke-direct {v5}, Lcom/squareup/okhttp/internal/DiskLruCache;.readJournal:()V // method@cb36
+75830c: 7010 35cb 0500                         |003c: invoke-direct {v5}, Lcom/squareup/okhttp/internal/DiskLruCache;.processJournal:()V // method@cb35
+758312: 5c52 d787                              |003f: iput-boolean v2, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.initialized:Z // field@87d7
+758316: 1e05                                   |0041: monitor-exit v5
+758318: 0e00                                   |0042: return-void
+75831a: 0d01                                   |0043: move-exception v1
+75831c: 7100 82cb 0000                         |0044: invoke-static {}, Lcom/squareup/okhttp/internal/Platform;.get:()Lcom/squareup/okhttp/internal/Platform; // method@cb82
+758322: 0c03                                   |0047: move-result-object v3
+758324: 2204 991a                              |0048: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+758328: 7020 3cd2 0400                         |004a: invoke-direct {v4, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+75832e: 5450 d387                              |004d: iget-object v0, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.directory:Ljava/io/File; // field@87d3
+758332: 6e20 44d2 0400                         |004f: invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+758338: 0c00                                   |0052: move-result-object v0
+75833a: 1a04 0204                              |0053: const-string v4, " is corrupt: " // string@0402
+75833e: 6e20 45d2 4000                         |0055: invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+758344: 0c00                                   |0058: move-result-object v0
+758346: 6e10 18d0 0100                         |0059: invoke-virtual {v1}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+75834c: 0c01                                   |005c: move-result-object v1
+75834e: 6e20 45d2 1000                         |005d: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+758354: 0c00                                   |0060: move-result-object v0
+758356: 1a01 b00e                              |0061: const-string v1, ", removing" // string@0eb0
+75835a: 6e20 45d2 1000                         |0063: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+758360: 0c00                                   |0066: move-result-object v0
+758362: 6e10 58d2 0000                         |0067: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+758368: 0c00                                   |006a: move-result-object v0
+75836a: 6e20 86cb 0300                         |006b: invoke-virtual {v3, v0}, Lcom/squareup/okhttp/internal/Platform;.logW:(Ljava/lang/String;)V // method@cb86
+758370: 6e10 29cb 0500                         |006e: invoke-virtual {v5}, Lcom/squareup/okhttp/internal/DiskLruCache;.delete:()V // method@cb29
+758376: 1200                                   |0071: const/4 v0, #int 0 // #0
+758378: 5c50 d287                              |0072: iput-boolean v0, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.closed:Z // field@87d2
+75837c: 7010 38cb 0500                         |0074: invoke-direct {v5}, Lcom/squareup/okhttp/internal/DiskLruCache;.rebuildJournal:()V // method@cb38
+758382: 5c52 d787                              |0077: iput-boolean v2, v5, Lcom/squareup/okhttp/internal/DiskLruCache;.initialized:Z // field@87d7
+758386: 1e05                                   |0079: monitor-exit v5
+758388: 0e00                                   |007a: return-void
+75838a: 1e05                                   |007b: monitor-exit v5
+75838c: 2700                                   |007c: throw v0
+75838e: 0d00                                   |007d: move-exception v0
+758390: 28fd                                   |007e: goto 007b // -0003
+      catches       : 5
+        0x0003 - 0x0005
+          <any> -> 0x007d
+        0x0009 - 0x0036
+          <any> -> 0x007d
+        0x0039 - 0x0041
+          Ljava/io/IOException; -> 0x0043
+          <any> -> 0x007d
+        0x0044 - 0x0079
+          <any> -> 0x007d
+        0x007b - 0x007c
+          <any> -> 0x007d
+      positions     :
+        0x0003 line=203
+        0x0007 line=204
+        0x0009 line=208
+        0x0013 line=210
+        0x001d line=211
+        0x0025 line=213
+        0x002e line=218
+        0x0039 line=220
+        0x003c line=221
+        0x003f line=222
+        0x0041 line=223
+        0x0044 line=225
+        0x0059 line=226
+        0x006b line=225
+        0x006e line=227
+        0x0072 line=228
+        0x0074 line=232
+        0x0077 line=234
+        0x0079 line=235
+      locals        :
+        0x0000 - 0x007f reg=5 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #9              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'isClosed'
+      type          : '()Z'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+7583c4:                                        |[7583c4] com.squareup.okhttp.internal.DiskLruCache.isClosed:()Z
+7583d4: 1d01                                   |0000: monitor-enter v1
+7583d6: 5510 d287                              |0001: iget-boolean v0, v1, Lcom/squareup/okhttp/internal/DiskLruCache;.closed:Z // field@87d2
+7583da: 1e01                                   |0003: monitor-exit v1
+7583dc: 0f00                                   |0004: return v0
+7583de: 0d00                                   |0005: move-exception v0
+7583e0: 1e01                                   |0006: monitor-exit v1
+7583e2: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=625
+      locals        :
+        0x0000 - 0x0008 reg=1 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #10              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'remove'
+      type          : '(Ljava/lang/String;)Z'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 32 16-bit code units
+7583f8:                                        |[7583f8] com.squareup.okhttp.internal.DiskLruCache.remove:(Ljava/lang/String;)Z
+758408: 1d01                                   |0000: monitor-enter v1
+75840a: 6e10 31cb 0100                         |0001: invoke-virtual {v1}, Lcom/squareup/okhttp/internal/DiskLruCache;.initialize:()V // method@cb31
+758410: 7010 25cb 0100                         |0004: invoke-direct {v1}, Lcom/squareup/okhttp/internal/DiskLruCache;.checkNotClosed:()V // method@cb25
+758416: 7020 3fcb 2100                         |0007: invoke-direct {v1, v2}, Lcom/squareup/okhttp/internal/DiskLruCache;.validateKey:(Ljava/lang/String;)V // method@cb3f
+75841c: 5410 dc87                              |000a: iget-object v0, v1, Lcom/squareup/okhttp/internal/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@87dc
+758420: 6e20 aad5 2000                         |000c: invoke-virtual {v0, v2}, Ljava/util/LinkedHashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5aa
+758426: 0c02                                   |000f: move-result-object v2
+758428: 1f02 7c19                              |0010: check-cast v2, Lcom/squareup/okhttp/internal/DiskLruCache$Entry; // type@197c
+75842c: 3902 0500                              |0012: if-nez v2, 0017 // +0005
+758430: 1e01                                   |0014: monitor-exit v1
+758432: 1201                                   |0015: const/4 v1, #int 0 // #0
+758434: 0f01                                   |0016: return v1
+758436: 7020 3acb 2100                         |0017: invoke-direct {v1, v2}, Lcom/squareup/okhttp/internal/DiskLruCache;.removeEntry:(Lcom/squareup/okhttp/internal/DiskLruCache$Entry;)Z // method@cb3a
+75843c: 0a02                                   |001a: move-result v2
+75843e: 1e01                                   |001b: monitor-exit v1
+758440: 0f02                                   |001c: return v2
+758442: 0d02                                   |001d: move-exception v2
+758444: 1e01                                   |001e: monitor-exit v1
+758446: 2702                                   |001f: throw v2
+      catches       : 3
+        0x0001 - 0x0012
+          <any> -> 0x001d
+        0x0017 - 0x001b
+          <any> -> 0x001d
+        0x001e - 0x001f
+          <any> -> 0x001d
+      positions     :
+        0x0001 line=592
+        0x0004 line=594
+        0x0007 line=595
+        0x000a line=596
+        0x0014 line=597
+        0x0017 line=598
+      locals        :
+        0x0000 - 0x0020 reg=1 this Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0020 reg=2 (null) Ljava/lang/String;
+
+    #11              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'setMaxSize'
+      type          : '(J)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 19 16-bit code units
+758464:                                        |[758464] com.squareup.okhttp.internal.DiskLruCache.setMaxSize:(J)V
+758474: 1d00                                   |0000: monitor-enter v0
+758476: 5a01 dd87                              |0001: iput-wide v1, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.maxSize:J // field@87dd
+75847a: 5501 d787                              |0003: iget-boolean v1, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.initialized:Z // field@87d7
+75847e: 3801 0900                              |0005: if-eqz v1, 000e // +0009
+758482: 5401 d487                              |0007: iget-object v1, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.executor:Ljava/util/concurrent/Executor; // field@87d4
+758486: 5402 d187                              |0009: iget-object v2, v0, Lcom/squareup/okhttp/internal/DiskLruCache;.cleanupRunnable:Ljava/lang/Runnable; // field@87d1
+75848a: 7220 acd6 2100                         |000b: invoke-interface {v1, v2}, Ljava/util/concurrent/Executor;.execute:(Ljava/lang/Runnable;)V // method@d6ac
+758490: 1e00                                   |000e: monitor-exit v0
+758492: 0e00                                   |000f: return-void
+758494: 0d01                                   |0010: move-exception v1
+758496: 1e00                                   |0011: monitor-exit v0
+758498: 2701                                   |0012: throw v1
+      catches       : 2
+        0x0001 - 0x000e
+          <any> -> 0x0010
+        0x0011 - 0x0012
+          <any> -> 0x0010
+      positions     :
+        0x0001 line=498
+        0x0003 line=499
+        0x0007 line=500
+        0x000e line=502
+      locals        :
+        0x0000 - 0x0013 reg=0 this Lcom/squareup/okhttp/internal/DiskLruCache;
+        0x0000 - 0x0013 reg=1 (null) J
+
+    #12              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'size'
+      type          : '()J'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 11 16-bit code units
+7584b0:                                        |[7584b0] com.squareup.okhttp.internal.DiskLruCache.size:()J
+7584c0: 1d02                                   |0000: monitor-enter v2
+7584c2: 6e10 31cb 0200                         |0001: invoke-virtual {v2}, Lcom/squareup/okhttp/internal/DiskLruCache;.initialize:()V // method@cb31
+7584c8: 5320 e087                              |0004: iget-wide v0, v2, Lcom/squareup/okhttp/internal/DiskLruCache;.size:J // field@87e0
+7584cc: 1e02                                   |0006: monitor-exit v2
+7584ce: 1000                                   |0007: return-wide v0
+7584d0: 0d00                                   |0008: move-exception v0
+7584d2: 1e02                                   |0009: monitor-exit v2
+7584d4: 2700                                   |000a: throw v0
+      catches       : 2
+        0x0001 - 0x0006
+          <any> -> 0x0008
+        0x0009 - 0x000a
+          <any> -> 0x0008
+      positions     :
+        0x0001 line=510
+        0x0004 line=511
+      locals        :
+        0x0000 - 0x000b reg=2 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+    #13              : (in Lcom/squareup/okhttp/internal/DiskLruCache;)
+      name          : 'snapshots'
+      type          : '()Ljava/util/Iterator;'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 14 16-bit code units
+7584ec:                                        |[7584ec] com.squareup.okhttp.internal.DiskLruCache.snapshots:()Ljava/util/Iterator;
+7584fc: 1d01                                   |0000: monitor-enter v1
+7584fe: 6e10 31cb 0100                         |0001: invoke-virtual {v1}, Lcom/squareup/okhttp/internal/DiskLruCache;.initialize:()V // method@cb31
+758504: 2200 7819                              |0004: new-instance v0, Lcom/squareup/okhttp/internal/DiskLruCache$3; // type@1978
+758508: 7020 e5ca 1000                         |0006: invoke-direct {v0, v1}, Lcom/squareup/okhttp/internal/DiskLruCache$3;.<init>:(Lcom/squareup/okhttp/internal/DiskLruCache;)V // method@cae5
+75850e: 1e01                                   |0009: monitor-exit v1
+758510: 1100                                   |000a: return-object v0
+758512: 0d00                                   |000b: move-exception v0
+758514: 1e01                                   |000c: monitor-exit v1
+758516: 2700                                   |000d: throw v0
+      catches       : 2
+        0x0001 - 0x0009
+          <any> -> 0x000b
+        0x000c - 0x000d
+          <any> -> 0x000b
+      positions     :
+        0x0001 line=714
+        0x0004 line=715
+      locals        :
+        0x0000 - 0x000e reg=1 this Lcom/squareup/okhttp/internal/DiskLruCache;
+
+  source_file_idx   : 8846 (DiskLruCache.java)
+

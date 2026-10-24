@@ -1,0 +1,309 @@
+Class #2845            -
+  Class descriptor  : 'Lcom/adjust/sdk/scheduler/TimerCycle;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'command'
+      type          : 'Ljava/lang/Runnable;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'cycleDelay'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'initialDelay'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'isPaused'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'logger'
+      type          : 'Lcom/adjust/sdk/ILogger;'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'name'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+    #6              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'scheduler'
+      type          : 'Lcom/adjust/sdk/scheduler/FutureScheduler;'
+      access        : 0x0002 (PRIVATE)
+    #7              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'waitingTask'
+      type          : 'Ljava/util/concurrent/ScheduledFuture;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : '<init>'
+      type          : '(Ljava/lang/Runnable;JJLjava/lang/String;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 9
+      ins           : 7
+      outs          : 3
+      insns size    : 58 16-bit code units
+20d764:                                        |[20d764] com.adjust.sdk.scheduler.TimerCycle.<init>:(Ljava/lang/Runnable;JJLjava/lang/String;)V
+20d774: 7010 df71 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@71df
+20d77a: 2200 860d                              |0003: new-instance v0, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler; // type@0d86
+20d77e: 1211                                   |0005: const/4 v1, #int 1 // #1
+20d780: 7030 a35e 8001                         |0006: invoke-direct {v0, v8, v1}, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;.<init>:(Ljava/lang/String;Z)V // method@5ea3
+20d786: 5b20 9e2a                              |0009: iput-object v0, v2, Lcom/adjust/sdk/scheduler/TimerCycle;.scheduler:Lcom/adjust/sdk/scheduler/FutureScheduler; // field@2a9e
+20d78a: 5b28 9d2a                              |000b: iput-object v8, v2, Lcom/adjust/sdk/scheduler/TimerCycle;.name:Ljava/lang/String; // field@2a9d
+20d78e: 5b23 982a                              |000d: iput-object v3, v2, Lcom/adjust/sdk/scheduler/TimerCycle;.command:Ljava/lang/Runnable; // field@2a98
+20d792: 5a24 9a2a                              |000f: iput-wide v4, v2, Lcom/adjust/sdk/scheduler/TimerCycle;.initialDelay:J // field@2a9a
+20d796: 5a26 992a                              |0011: iput-wide v6, v2, Lcom/adjust/sdk/scheduler/TimerCycle;.cycleDelay:J // field@2a99
+20d79a: 5c21 9b2a                              |0013: iput-boolean v1, v2, Lcom/adjust/sdk/scheduler/TimerCycle;.isPaused:Z // field@2a9b
+20d79e: 7100 f75a 0000                         |0015: invoke-static {}, Lcom/adjust/sdk/AdjustFactory;.getLogger:()Lcom/adjust/sdk/ILogger; // method@5af7
+20d7a4: 0c03                                   |0018: move-result-object v3
+20d7a6: 5b23 9c2a                              |0019: iput-object v3, v2, Lcom/adjust/sdk/scheduler/TimerCycle;.logger:Lcom/adjust/sdk/ILogger; // field@2a9c
+20d7aa: 6203 542a                              |001b: sget-object v3, Lcom/adjust/sdk/Util;.SecondsDisplayFormat:Ljava/text/DecimalFormat; // field@2a54
+20d7ae: 8666                                   |001d: long-to-double v6, v6
+20d7b0: 1800 0000 0000 0040 8f40               |001e: const-wide v0, #double 1000 // #408f400000000000
+20d7ba: ce06                                   |0023: div-double/2addr v6, v0
+20d7bc: 6e30 ff73 6307                         |0024: invoke-virtual {v3, v6, v7}, Ljava/text/NumberFormat;.format:(D)Ljava/lang/String; // method@73ff
+20d7c2: 0c06                                   |0027: move-result-object v6
+20d7c4: 8644                                   |0028: long-to-double v4, v4
+20d7c6: ce04                                   |0029: div-double/2addr v4, v0
+20d7c8: 6e30 ff73 4305                         |002a: invoke-virtual {v3, v4, v5}, Ljava/text/NumberFormat;.format:(D)Ljava/lang/String; // method@73ff
+20d7ce: 0c03                                   |002d: move-result-object v3
+20d7d0: 5424 9c2a                              |002e: iget-object v4, v2, Lcom/adjust/sdk/scheduler/TimerCycle;.logger:Lcom/adjust/sdk/ILogger; // field@2a9c
+20d7d4: 2430 ac1a 3806                         |0030: filled-new-array {v8, v3, v6}, [Ljava/lang/Object; // type@1aac
+20d7da: 0c03                                   |0033: move-result-object v3
+20d7dc: 1a05 360a                              |0034: const-string v5, "%s configured to fire after %s seconds of starting and cycles every %s seconds" // string@0a36
+20d7e0: 7230 8b5c 5403                         |0036: invoke-interface {v4, v5, v3}, Lcom/adjust/sdk/ILogger;.verbose:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c8b
+20d7e6: 0e00                                   |0039: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0003 line=2
+        0x000b line=4
+        0x000d line=5
+        0x000f line=6
+        0x0011 line=7
+        0x0013 line=8
+        0x0015 line=9
+        0x001b line=11
+        0x002a line=13
+        0x002e line=15
+      locals        :
+        0x0000 - 0x003a reg=2 this Lcom/adjust/sdk/scheduler/TimerCycle;
+        0x0000 - 0x003a reg=3 (null) Ljava/lang/Runnable;
+        0x0000 - 0x003a reg=4 (null) J
+        0x0000 - 0x003a reg=6 (null) J
+        0x0000 - 0x003a reg=8 (null) Ljava/lang/String;
+
+    #1              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'access$000'
+      type          : '(Lcom/adjust/sdk/scheduler/TimerCycle;)Ljava/lang/String;'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+20d74c:                                        |[20d74c] com.adjust.sdk.scheduler.TimerCycle.access$000:(Lcom/adjust/sdk/scheduler/TimerCycle;)Ljava/lang/String;
+20d75c: 5400 9d2a                              |0000: iget-object v0, v0, Lcom/adjust/sdk/scheduler/TimerCycle;.name:Ljava/lang/String; // field@2a9d
+20d760: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/adjust/sdk/scheduler/TimerCycle;
+
+    #2              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'access$100'
+      type          : '(Lcom/adjust/sdk/scheduler/TimerCycle;)Lcom/adjust/sdk/ILogger;'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+20d71c:                                        |[20d71c] com.adjust.sdk.scheduler.TimerCycle.access$100:(Lcom/adjust/sdk/scheduler/TimerCycle;)Lcom/adjust/sdk/ILogger;
+20d72c: 5400 9c2a                              |0000: iget-object v0, v0, Lcom/adjust/sdk/scheduler/TimerCycle;.logger:Lcom/adjust/sdk/ILogger; // field@2a9c
+20d730: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/adjust/sdk/scheduler/TimerCycle;
+
+    #3              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'access$200'
+      type          : '(Lcom/adjust/sdk/scheduler/TimerCycle;)Ljava/lang/Runnable;'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+20d734:                                        |[20d734] com.adjust.sdk.scheduler.TimerCycle.access$200:(Lcom/adjust/sdk/scheduler/TimerCycle;)Ljava/lang/Runnable;
+20d744: 5400 982a                              |0000: iget-object v0, v0, Lcom/adjust/sdk/scheduler/TimerCycle;.command:Ljava/lang/Runnable; // field@2a98
+20d748: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/adjust/sdk/scheduler/TimerCycle;
+
+    #4              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'cancel'
+      type          : '(Z)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 11 16-bit code units
+20d7e8:                                        |[20d7e8] com.adjust.sdk.scheduler.TimerCycle.cancel:(Z)V
+20d7f8: 5410 9f2a                              |0000: iget-object v0, v1, Lcom/adjust/sdk/scheduler/TimerCycle;.waitingTask:Ljava/util/concurrent/ScheduledFuture; // field@2a9f
+20d7fc: 3800 0500                              |0002: if-eqz v0, 0007 // +0005
+20d800: 7220 e375 2000                         |0004: invoke-interface {v0, v2}, Ljava/util/concurrent/Future;.cancel:(Z)Z // method@75e3
+20d806: 1202                                   |0007: const/4 v2, #int 0 // #0
+20d808: 5b12 9f2a                              |0008: iput-object v2, v1, Lcom/adjust/sdk/scheduler/TimerCycle;.waitingTask:Ljava/util/concurrent/ScheduledFuture; // field@2a9f
+20d80c: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0004 line=2
+        0x0008 line=5
+      locals        :
+        0x0000 - 0x000b reg=1 this Lcom/adjust/sdk/scheduler/TimerCycle;
+        0x0000 - 0x000b reg=2 (null) Z
+
+  Virtual methods   -
+    #0              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'start'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 10
+      ins           : 1
+      outs          : 6
+      insns size    : 52 16-bit code units
+20d810:                                        |[20d810] com.adjust.sdk.scheduler.TimerCycle.start:()V
+20d820: 5590 9b2a                              |0000: iget-boolean v0, v9, Lcom/adjust/sdk/scheduler/TimerCycle;.isPaused:Z // field@2a9b
+20d824: 3900 1000                              |0002: if-nez v0, 0012 // +0010
+20d828: 5490 9c2a                              |0004: iget-object v0, v9, Lcom/adjust/sdk/scheduler/TimerCycle;.logger:Lcom/adjust/sdk/ILogger; // field@2a9c
+20d82c: 5491 9d2a                              |0006: iget-object v1, v9, Lcom/adjust/sdk/scheduler/TimerCycle;.name:Ljava/lang/String; // field@2a9d
+20d830: 2410 ac1a 0100                         |0008: filled-new-array {v1}, [Ljava/lang/Object; // type@1aac
+20d836: 0c01                                   |000b: move-result-object v1
+20d838: 1a02 3a0a                              |000c: const-string v2, "%s is already started" // string@0a3a
+20d83c: 7230 8b5c 2001                         |000e: invoke-interface {v0, v2, v1}, Lcom/adjust/sdk/ILogger;.verbose:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c8b
+20d842: 0e00                                   |0011: return-void
+20d844: 5490 9c2a                              |0012: iget-object v0, v9, Lcom/adjust/sdk/scheduler/TimerCycle;.logger:Lcom/adjust/sdk/ILogger; // field@2a9c
+20d848: 5491 9d2a                              |0014: iget-object v1, v9, Lcom/adjust/sdk/scheduler/TimerCycle;.name:Ljava/lang/String; // field@2a9d
+20d84c: 2410 ac1a 0100                         |0016: filled-new-array {v1}, [Ljava/lang/Object; // type@1aac
+20d852: 0c01                                   |0019: move-result-object v1
+20d854: 1a02 420a                              |001a: const-string v2, "%s starting" // string@0a42
+20d858: 7230 8b5c 2001                         |001c: invoke-interface {v0, v2, v1}, Lcom/adjust/sdk/ILogger;.verbose:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c8b
+20d85e: 5493 9e2a                              |001f: iget-object v3, v9, Lcom/adjust/sdk/scheduler/TimerCycle;.scheduler:Lcom/adjust/sdk/scheduler/FutureScheduler; // field@2a9e
+20d862: 2204 8b0d                              |0021: new-instance v4, Lcom/adjust/sdk/scheduler/TimerCycle$1; // type@0d8b
+20d866: 7020 af5e 9400                         |0023: invoke-direct {v4, v9}, Lcom/adjust/sdk/scheduler/TimerCycle$1;.<init>:(Lcom/adjust/sdk/scheduler/TimerCycle;)V // method@5eaf
+20d86c: 5395 9a2a                              |0026: iget-wide v5, v9, Lcom/adjust/sdk/scheduler/TimerCycle;.initialDelay:J // field@2a9a
+20d870: 5397 992a                              |0028: iget-wide v7, v9, Lcom/adjust/sdk/scheduler/TimerCycle;.cycleDelay:J // field@2a99
+20d874: 7806 8a5e 0300                         |002a: invoke-interface/range {v3, v4, v5, v6, v7, v8}, Lcom/adjust/sdk/scheduler/FutureScheduler;.scheduleFutureWithFixedDelay:(Ljava/lang/Runnable;JJ)Ljava/util/concurrent/ScheduledFuture; // method@5e8a
+20d87a: 0c00                                   |002d: move-result-object v0
+20d87c: 5b90 9f2a                              |002e: iput-object v0, v9, Lcom/adjust/sdk/scheduler/TimerCycle;.waitingTask:Ljava/util/concurrent/ScheduledFuture; // field@2a9f
+20d880: 1200                                   |0030: const/4 v0, #int 0 // #0
+20d882: 5c90 9b2a                              |0031: iput-boolean v0, v9, Lcom/adjust/sdk/scheduler/TimerCycle;.isPaused:Z // field@2a9b
+20d886: 0e00                                   |0033: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0004 line=2
+        0x0012 line=6
+        0x001f line=8
+        0x0031 line=16
+      locals        :
+        0x0000 - 0x0034 reg=9 this Lcom/adjust/sdk/scheduler/TimerCycle;
+
+    #1              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'suspend'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 3
+      insns size    : 66 16-bit code units
+20d888:                                        |[20d888] com.adjust.sdk.scheduler.TimerCycle.suspend:()V
+20d898: 5550 9b2a                              |0000: iget-boolean v0, v5, Lcom/adjust/sdk/scheduler/TimerCycle;.isPaused:Z // field@2a9b
+20d89c: 3800 1000                              |0002: if-eqz v0, 0012 // +0010
+20d8a0: 5450 9c2a                              |0004: iget-object v0, v5, Lcom/adjust/sdk/scheduler/TimerCycle;.logger:Lcom/adjust/sdk/ILogger; // field@2a9c
+20d8a4: 5451 9d2a                              |0006: iget-object v1, v5, Lcom/adjust/sdk/scheduler/TimerCycle;.name:Ljava/lang/String; // field@2a9d
+20d8a8: 2410 ac1a 0100                         |0008: filled-new-array {v1}, [Ljava/lang/Object; // type@1aac
+20d8ae: 0c01                                   |000b: move-result-object v1
+20d8b0: 1a02 3b0a                              |000c: const-string v2, "%s is already suspended" // string@0a3b
+20d8b4: 7230 8b5c 2001                         |000e: invoke-interface {v0, v2, v1}, Lcom/adjust/sdk/ILogger;.verbose:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c8b
+20d8ba: 0e00                                   |0011: return-void
+20d8bc: 5450 9f2a                              |0012: iget-object v0, v5, Lcom/adjust/sdk/scheduler/TimerCycle;.waitingTask:Ljava/util/concurrent/ScheduledFuture; // field@2a9f
+20d8c0: 6201 2a3a                              |0014: sget-object v1, Ljava/util/concurrent/TimeUnit;.MILLISECONDS:Ljava/util/concurrent/TimeUnit; // field@3a2a
+20d8c4: 7220 d075 1000                         |0016: invoke-interface {v0, v1}, Ljava/util/concurrent/Delayed;.getDelay:(Ljava/util/concurrent/TimeUnit;)J // method@75d0
+20d8ca: 0b00                                   |0019: move-result-wide v0
+20d8cc: 5a50 9a2a                              |001a: iput-wide v0, v5, Lcom/adjust/sdk/scheduler/TimerCycle;.initialDelay:J // field@2a9a
+20d8d0: 5450 9f2a                              |001c: iget-object v0, v5, Lcom/adjust/sdk/scheduler/TimerCycle;.waitingTask:Ljava/util/concurrent/ScheduledFuture; // field@2a9f
+20d8d4: 1201                                   |001e: const/4 v1, #int 0 // #0
+20d8d6: 7220 e375 1000                         |001f: invoke-interface {v0, v1}, Ljava/util/concurrent/Future;.cancel:(Z)Z // method@75e3
+20d8dc: 6200 542a                              |0022: sget-object v0, Lcom/adjust/sdk/Util;.SecondsDisplayFormat:Ljava/text/DecimalFormat; // field@2a54
+20d8e0: 5351 9a2a                              |0024: iget-wide v1, v5, Lcom/adjust/sdk/scheduler/TimerCycle;.initialDelay:J // field@2a9a
+20d8e4: 8611                                   |0026: long-to-double v1, v1
+20d8e6: 1803 0000 0000 0040 8f40               |0027: const-wide v3, #double 1000 // #408f400000000000
+20d8f0: ce31                                   |002c: div-double/2addr v1, v3
+20d8f2: 6e30 ff73 1002                         |002d: invoke-virtual {v0, v1, v2}, Ljava/text/NumberFormat;.format:(D)Ljava/lang/String; // method@73ff
+20d8f8: 0c00                                   |0030: move-result-object v0
+20d8fa: 5451 9c2a                              |0031: iget-object v1, v5, Lcom/adjust/sdk/scheduler/TimerCycle;.logger:Lcom/adjust/sdk/ILogger; // field@2a9c
+20d8fe: 5452 9d2a                              |0033: iget-object v2, v5, Lcom/adjust/sdk/scheduler/TimerCycle;.name:Ljava/lang/String; // field@2a9d
+20d902: 2420 ac1a 0200                         |0035: filled-new-array {v2, v0}, [Ljava/lang/Object; // type@1aac
+20d908: 0c00                                   |0038: move-result-object v0
+20d90a: 1a02 440a                              |0039: const-string v2, "%s suspended with %s seconds left" // string@0a44
+20d90e: 7230 8b5c 2100                         |003b: invoke-interface {v1, v2, v0}, Lcom/adjust/sdk/ILogger;.verbose:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c8b
+20d914: 1210                                   |003e: const/4 v0, #int 1 // #1
+20d916: 5c50 9b2a                              |003f: iput-boolean v0, v5, Lcom/adjust/sdk/scheduler/TimerCycle;.isPaused:Z // field@2a9b
+20d91a: 0e00                                   |0041: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0004 line=2
+        0x0012 line=7
+        0x001c line=10
+        0x0022 line=12
+        0x0031 line=14
+        0x003f line=16
+      locals        :
+        0x0000 - 0x0042 reg=5 this Lcom/adjust/sdk/scheduler/TimerCycle;
+
+    #2              : (in Lcom/adjust/sdk/scheduler/TimerCycle;)
+      name          : 'teardown'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 15 16-bit code units
+20d91c:                                        |[20d91c] com.adjust.sdk.scheduler.TimerCycle.teardown:()V
+20d92c: 1210                                   |0000: const/4 v0, #int 1 // #1
+20d92e: 7020 b55e 0100                         |0001: invoke-direct {v1, v0}, Lcom/adjust/sdk/scheduler/TimerCycle;.cancel:(Z)V // method@5eb5
+20d934: 5410 9e2a                              |0004: iget-object v0, v1, Lcom/adjust/sdk/scheduler/TimerCycle;.scheduler:Lcom/adjust/sdk/scheduler/FutureScheduler; // field@2a9e
+20d938: 3800 0500                              |0006: if-eqz v0, 000b // +0005
+20d93c: 7210 8c5e 0000                         |0008: invoke-interface {v0}, Lcom/adjust/sdk/scheduler/FutureScheduler;.teardown:()V // method@5e8c
+20d942: 1200                                   |000b: const/4 v0, #int 0 // #0
+20d944: 5b10 9e2a                              |000c: iput-object v0, v1, Lcom/adjust/sdk/scheduler/TimerCycle;.scheduler:Lcom/adjust/sdk/scheduler/FutureScheduler; // field@2a9e
+20d948: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=1
+        0x0004 line=3
+        0x0008 line=4
+        0x000c line=7
+      locals        :
+        0x0000 - 0x000f reg=1 this Lcom/adjust/sdk/scheduler/TimerCycle;
+
+  source_file_idx   : 21628 (SourceFile)
+

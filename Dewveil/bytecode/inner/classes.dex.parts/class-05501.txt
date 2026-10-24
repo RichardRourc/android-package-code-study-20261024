@@ -1,0 +1,161 @@
+Class #5501            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/RequestDeduplicator;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/messaging/RequestDeduplicator;)
+      name          : 'executor'
+      type          : 'Ljava/util/concurrent/Executor;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/google/firebase/messaging/RequestDeduplicator;)
+      name          : 'getTokenRequests'
+      type          : 'Ljava/util/Map;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/RequestDeduplicator;)
+      name          : '<init>'
+      type          : '(Ljava/util/concurrent/Executor;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 13 16-bit code units
+729c4c:                                        |[729c4c] com.google.firebase.messaging.RequestDeduplicator.<init>:(Ljava/util/concurrent/Executor;)V
+729c5c: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+729c62: 2200 9704                              |0003: new-instance v0, Landroidx/collection/ArrayMap; // type@0497
+729c66: 7010 3c24 0000                         |0005: invoke-direct {v0}, Landroidx/collection/ArrayMap;.<init>:()V // method@243c
+729c6c: 5b10 cd73                              |0008: iput-object v0, v1, Lcom/google/firebase/messaging/RequestDeduplicator;.getTokenRequests:Ljava/util/Map; // field@73cd
+729c70: 5b12 cc73                              |000a: iput-object v2, v1, Lcom/google/firebase/messaging/RequestDeduplicator;.executor:Ljava/util/concurrent/Executor; // field@73cc
+729c74: 0e00                                   |000c: return-void
+      catches       : (none)
+      positions     :
+        0x0003 line=1
+      locals        :
+        0x0000 - 0x000d reg=1 this Lcom/google/firebase/messaging/RequestDeduplicator;
+        0x0000 - 0x000d reg=2 (null) Ljava/util/concurrent/Executor;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/messaging/RequestDeduplicator;)
+      name          : 'getOrStartGetTokenRequest'
+      type          : '(Ljava/lang/String;Lcom/google/firebase/messaging/RequestDeduplicator$GetTokenRequest;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x20000 (DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 3
+      insns size    : 109 16-bit code units
+729c78:                                        |[729c78] com.google.firebase.messaging.RequestDeduplicator.getOrStartGetTokenRequest:(Ljava/lang/String;Lcom/google/firebase/messaging/RequestDeduplicator$GetTokenRequest;)Lcom/google/android/gms/tasks/Task;
+729c88: 1d03                                   |0000: monitor-enter v3
+729c8a: 5430 cd73                              |0001: iget-object v0, v3, Lcom/google/firebase/messaging/RequestDeduplicator;.getTokenRequests:Ljava/util/Map; // field@73cd
+729c8e: 7220 03d6 4000                         |0003: invoke-interface {v0, v4}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+729c94: 0c00                                   |0006: move-result-object v0
+729c96: 1f00 5e15                              |0007: check-cast v0, Lcom/google/android/gms/tasks/Task; // type@155e
+729c9a: 1231                                   |0009: const/4 v1, #int 3 // #3
+729c9c: 3800 2700                              |000a: if-eqz v0, 0031 // +0027
+729ca0: 1a05 6c28                              |000c: const-string v5, "FirebaseMessaging" // string@286c
+729ca4: 7120 2308 1500                         |000e: invoke-static {v5, v1}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+729caa: 0a05                                   |0011: move-result v5
+729cac: 3805 1d00                              |0012: if-eqz v5, 002f // +001d
+729cb0: 7110 30d2 0400                         |0014: invoke-static {v4}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+729cb6: 0c04                                   |0017: move-result-object v4
+729cb8: 1a05 912e                              |0018: const-string v5, "Joining ongoing request for: " // string@2e91
+729cbc: 6e10 16d2 0400                         |001a: invoke-virtual {v4}, Ljava/lang/String;.length:()I // method@d216
+729cc2: 0a01                                   |001d: move-result v1
+729cc4: 3801 0700                              |001e: if-eqz v1, 0025 // +0007
+729cc8: 6e20 fdd1 4500                         |0020: invoke-virtual {v5, v4}, Ljava/lang/String;.concat:(Ljava/lang/String;)Ljava/lang/String; // method@d1fd
+729cce: 0c04                                   |0023: move-result-object v4
+729cd0: 2806                                   |0024: goto 002a // +0006
+729cd2: 2204 971a                              |0025: new-instance v4, Ljava/lang/String; // type@1a97
+729cd6: 7020 ecd1 5400                         |0027: invoke-direct {v4, v5}, Ljava/lang/String;.<init>:(Ljava/lang/String;)V // method@d1ec
+729cdc: 1a05 6c28                              |002a: const-string v5, "FirebaseMessaging" // string@286c
+729ce0: 7120 1c08 4500                         |002c: invoke-static {v5, v4}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+729ce6: 1e03                                   |002f: monitor-exit v3
+729ce8: 1100                                   |0030: return-object v0
+729cea: 1a00 6c28                              |0031: const-string v0, "FirebaseMessaging" // string@286c
+729cee: 7120 2308 1000                         |0033: invoke-static {v0, v1}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+729cf4: 0a00                                   |0036: move-result v0
+729cf6: 3800 1d00                              |0037: if-eqz v0, 0054 // +001d
+729cfa: 7110 30d2 0400                         |0039: invoke-static {v4}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+729d00: 0c00                                   |003c: move-result-object v0
+729d02: 1a01 6455                              |003d: const-string v1, "Making new request for: " // string@5564
+729d06: 6e10 16d2 0000                         |003f: invoke-virtual {v0}, Ljava/lang/String;.length:()I // method@d216
+729d0c: 0a02                                   |0042: move-result v2
+729d0e: 3802 0700                              |0043: if-eqz v2, 004a // +0007
+729d12: 6e20 fdd1 0100                         |0045: invoke-virtual {v1, v0}, Ljava/lang/String;.concat:(Ljava/lang/String;)Ljava/lang/String; // method@d1fd
+729d18: 0c00                                   |0048: move-result-object v0
+729d1a: 2806                                   |0049: goto 004f // +0006
+729d1c: 2200 971a                              |004a: new-instance v0, Ljava/lang/String; // type@1a97
+729d20: 7020 ecd1 1000                         |004c: invoke-direct {v0, v1}, Ljava/lang/String;.<init>:(Ljava/lang/String;)V // method@d1ec
+729d26: 1a01 6c28                              |004f: const-string v1, "FirebaseMessaging" // string@286c
+729d2a: 7120 1c08 0100                         |0051: invoke-static {v1, v0}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+729d30: 7210 dac0 0500                         |0054: invoke-interface {v5}, Lcom/google/firebase/messaging/RequestDeduplicator$GetTokenRequest;.start:()Lcom/google/android/gms/tasks/Task; // method@c0da
+729d36: 0c05                                   |0057: move-result-object v5
+729d38: 5430 cc73                              |0058: iget-object v0, v3, Lcom/google/firebase/messaging/RequestDeduplicator;.executor:Ljava/util/concurrent/Executor; // field@73cc
+729d3c: 2201 f517                              |005a: new-instance v1, Lcom/google/firebase/messaging/RequestDeduplicator$$Lambda$0; // type@17f5
+729d40: 7030 d8c0 3104                         |005c: invoke-direct {v1, v3, v4}, Lcom/google/firebase/messaging/RequestDeduplicator$$Lambda$0;.<init>:(Lcom/google/firebase/messaging/RequestDeduplicator;Ljava/lang/String;)V // method@c0d8
+729d46: 6e30 76ae 0501                         |005f: invoke-virtual {v5, v0, v1}, Lcom/google/android/gms/tasks/Task;.continueWithTask:(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/Continuation;)Lcom/google/android/gms/tasks/Task; // method@ae76
+729d4c: 0c05                                   |0062: move-result-object v5
+729d4e: 5430 cd73                              |0063: iget-object v0, v3, Lcom/google/firebase/messaging/RequestDeduplicator;.getTokenRequests:Ljava/util/Map; // field@73cd
+729d52: 7230 06d6 4005                         |0065: invoke-interface {v0, v4, v5}, Ljava/util/Map;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d606
+729d58: 1e03                                   |0068: monitor-exit v3
+729d5a: 1105                                   |0069: return-object v5
+729d5c: 0d04                                   |006a: move-exception v4
+729d5e: 1e03                                   |006b: monitor-exit v3
+729d60: 2704                                   |006c: throw v4
+      catches       : 3
+        0x0001 - 0x002f
+          <any> -> 0x006a
+        0x0031 - 0x0068
+          <any> -> 0x006a
+        0x006b - 0x006c
+          <any> -> 0x006a
+      positions     :
+        0x0003 line=1
+        0x000e line=2
+        0x0014 line=3
+        0x0033 line=4
+        0x0039 line=5
+        0x004a line=8
+        0x004c line=5
+        0x0054 line=6
+        0x005f line=7
+        0x0065 line=8
+      locals        :
+        0x0000 - 0x006d reg=3 this Lcom/google/firebase/messaging/RequestDeduplicator;
+        0x0000 - 0x006d reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x006d reg=5 (null) Lcom/google/firebase/messaging/RequestDeduplicator$GetTokenRequest;
+
+    #1              : (in Lcom/google/firebase/messaging/RequestDeduplicator;)
+      name          : 'lambda$getOrStartGetTokenRequest$0$RequestDeduplicator'
+      type          : '(Ljava/lang/String;Lcom/google/android/gms/tasks/Task;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x1010 (FINAL SYNTHETIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 2
+      insns size    : 11 16-bit code units
+729d80:                                        |[729d80] com.google.firebase.messaging.RequestDeduplicator.lambda$getOrStartGetTokenRequest$0$RequestDeduplicator:(Ljava/lang/String;Lcom/google/android/gms/tasks/Task;)Lcom/google/android/gms/tasks/Task;
+729d90: 1d01                                   |0000: monitor-enter v1
+729d92: 5410 cd73                              |0001: iget-object v0, v1, Lcom/google/firebase/messaging/RequestDeduplicator;.getTokenRequests:Ljava/util/Map; // field@73cd
+729d96: 7220 09d6 2000                         |0003: invoke-interface {v0, v2}, Ljava/util/Map;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d609
+729d9c: 1e01                                   |0006: monitor-exit v1
+729d9e: 1103                                   |0007: return-object v3
+729da0: 0d02                                   |0008: move-exception v2
+729da2: 1e01                                   |0009: monitor-exit v1
+729da4: 2702                                   |000a: throw v2
+      catches       : 1
+        0x0001 - 0x000a
+          <any> -> 0x0008
+      positions     :
+        0x0003 line=1
+        0x0006 line=2
+      locals        :
+        0x0000 - 0x000b reg=1 this Lcom/google/firebase/messaging/RequestDeduplicator;
+        0x0000 - 0x000b reg=2 (null) Ljava/lang/String;
+        0x0000 - 0x000b reg=3 (null) Lcom/google/android/gms/tasks/Task;
+
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

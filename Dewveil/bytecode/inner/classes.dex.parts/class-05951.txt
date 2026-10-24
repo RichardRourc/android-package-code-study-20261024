@@ -1,0 +1,922 @@
+Class #5951            -
+  Class descriptor  : 'Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lcom/squareup/okhttp/internal/framed/FrameWriter;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'client'
+      type          : 'Z'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'closed'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'headerBlockBuffer'
+      type          : 'Lokio/Buffer;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'headerBlockOut'
+      type          : 'Lokio/BufferedSink;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'sink'
+      type          : 'Lokio/BufferedSink;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : '<init>'
+      type          : '(Lokio/BufferedSink;Z)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 36 16-bit code units
+7615b4:                                        |[7615b4] com.squareup.okhttp.internal.framed.Spdy3$Writer.<init>:(Lokio/BufferedSink;Z)V
+7615c4: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+7615ca: 5b12 e988                              |0003: iput-object v2, v1, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+7615ce: 5c13 e588                              |0005: iput-boolean v3, v1, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.client:Z // field@88e5
+7615d2: 2202 ac1b                              |0007: new-instance v2, Ljava/util/zip/Deflater; // type@1bac
+7615d6: 7010 5ad7 0200                         |0009: invoke-direct {v2}, Ljava/util/zip/Deflater;.<init>:()V // method@d75a
+7615dc: 6203 ea88                              |000c: sget-object v3, Lcom/squareup/okhttp/internal/framed/Spdy3;.DICTIONARY:[B // field@88ea
+7615e0: 6e20 5bd7 3200                         |000e: invoke-virtual {v2, v3}, Ljava/util/zip/Deflater;.setDictionary:([B)V // method@d75b
+7615e6: 2203 431f                              |0011: new-instance v3, Lokio/Buffer; // type@1f43
+7615ea: 7010 26fe 0300                         |0013: invoke-direct {v3}, Lokio/Buffer;.<init>:()V // method@fe26
+7615f0: 5b13 e788                              |0016: iput-object v3, v1, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockBuffer:Lokio/Buffer; // field@88e7
+7615f4: 2200 471f                              |0018: new-instance v0, Lokio/DeflaterSink; // type@1f47
+7615f8: 7030 6afe 3002                         |001a: invoke-direct {v0, v3, v2}, Lokio/DeflaterSink;.<init>:(Lokio/Sink;Ljava/util/zip/Deflater;)V // method@fe6a
+7615fe: 7110 79fe 0000                         |001d: invoke-static {v0}, Lokio/Okio;.buffer:(Lokio/Sink;)Lokio/BufferedSink; // method@fe79
+761604: 0c02                                   |0020: move-result-object v2
+761606: 5b12 e888                              |0021: iput-object v2, v1, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockOut:Lokio/BufferedSink; // field@88e8
+76160a: 0e00                                   |0023: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=294
+        0x0003 line=295
+        0x0005 line=296
+        0x0007 line=298
+        0x000c line=299
+        0x0011 line=300
+        0x0018 line=301
+      locals        :
+        0x0000 - 0x0024 reg=1 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x0024 reg=2 (null) Lokio/BufferedSink;
+        0x0000 - 0x0024 reg=3 (null) Z
+
+    #1              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'writeNameValueBlockToBuffer'
+      type          : '(Ljava/util/List;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 2
+      insns size    : 69 16-bit code units
+76160c:                                        |[76160c] com.squareup.okhttp.internal.framed.Spdy3$Writer.writeNameValueBlockToBuffer:(Ljava/util/List;)V
+76161c: 5450 e888                              |0000: iget-object v0, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockOut:Lokio/BufferedSink; // field@88e8
+761620: 7210 dbd5 0600                         |0002: invoke-interface {v6}, Ljava/util/List;.size:()I // method@d5db
+761626: 0a01                                   |0005: move-result v1
+761628: 7220 4afe 1000                         |0006: invoke-interface {v0, v1}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+76162e: 7210 dbd5 0600                         |0009: invoke-interface {v6}, Ljava/util/List;.size:()I // method@d5db
+761634: 0a00                                   |000c: move-result v0
+761636: 1201                                   |000d: const/4 v1, #int 0 // #0
+761638: 3501 3100                              |000e: if-ge v1, v0, 003f // +0031
+76163c: 7220 cfd5 1600                         |0010: invoke-interface {v6, v1}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+761642: 0c02                                   |0013: move-result-object v2
+761644: 1f02 a519                              |0014: check-cast v2, Lcom/squareup/okhttp/internal/framed/Header; // type@19a5
+761648: 5422 7d88                              |0016: iget-object v2, v2, Lcom/squareup/okhttp/internal/framed/Header;.name:Lokio/ByteString; // field@887d
+76164c: 5453 e888                              |0018: iget-object v3, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockOut:Lokio/BufferedSink; // field@88e8
+761650: 6e10 66fe 0200                         |001a: invoke-virtual {v2}, Lokio/ByteString;.size:()I // method@fe66
+761656: 0a04                                   |001d: move-result v4
+761658: 7220 4afe 4300                         |001e: invoke-interface {v3, v4}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+76165e: 5453 e888                              |0021: iget-object v3, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockOut:Lokio/BufferedSink; // field@88e8
+761662: 7220 42fe 2300                         |0023: invoke-interface {v3, v2}, Lokio/BufferedSink;.write:(Lokio/ByteString;)Lokio/BufferedSink; // method@fe42
+761668: 7220 cfd5 1600                         |0026: invoke-interface {v6, v1}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+76166e: 0c02                                   |0029: move-result-object v2
+761670: 1f02 a519                              |002a: check-cast v2, Lcom/squareup/okhttp/internal/framed/Header; // type@19a5
+761674: 5422 7e88                              |002c: iget-object v2, v2, Lcom/squareup/okhttp/internal/framed/Header;.value:Lokio/ByteString; // field@887e
+761678: 5453 e888                              |002e: iget-object v3, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockOut:Lokio/BufferedSink; // field@88e8
+76167c: 6e10 66fe 0200                         |0030: invoke-virtual {v2}, Lokio/ByteString;.size:()I // method@fe66
+761682: 0a04                                   |0033: move-result v4
+761684: 7220 4afe 4300                         |0034: invoke-interface {v3, v4}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+76168a: 5453 e888                              |0037: iget-object v3, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockOut:Lokio/BufferedSink; // field@88e8
+76168e: 7220 42fe 2300                         |0039: invoke-interface {v3, v2}, Lokio/BufferedSink;.write:(Lokio/ByteString;)Lokio/BufferedSink; // method@fe42
+761694: d801 0101                              |003c: add-int/lit8 v1, v1, #int 1 // #01
+761698: 28d0                                   |003e: goto 000e // -0030
+76169a: 5455 e888                              |003f: iget-object v5, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockOut:Lokio/BufferedSink; // field@88e8
+76169e: 7210 40fe 0500                         |0041: invoke-interface {v5}, Lokio/BufferedSink;.flush:()V // method@fe40
+7616a4: 0e00                                   |0044: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=409
+        0x0009 line=410
+        0x0010 line=411
+        0x0018 line=412
+        0x0021 line=413
+        0x0026 line=414
+        0x002e line=415
+        0x0037 line=416
+        0x003f line=418
+      locals        :
+        0x0000 - 0x0045 reg=5 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x0045 reg=6 (null) Ljava/util/List;
+
+  Virtual methods   -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'ackSettings'
+      type          : '(Lcom/squareup/okhttp/internal/framed/Settings;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 1 16-bit code units
+7616a8:                                        |[7616a8] com.squareup.okhttp.internal.framed.Spdy3$Writer.ackSettings:(Lcom/squareup/okhttp/internal/framed/Settings;)V
+7616b8: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 16 16-bit code units
+7616bc:                                        |[7616bc] com.squareup.okhttp.internal.framed.Spdy3$Writer.close:()V
+7616cc: 1d02                                   |0000: monitor-enter v2
+7616ce: 1210                                   |0001: const/4 v0, #int 1 // #1
+7616d0: 5c20 e688                              |0002: iput-boolean v0, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+7616d4: 5420 e988                              |0004: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+7616d8: 5421 e888                              |0006: iget-object v1, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockOut:Lokio/BufferedSink; // field@88e8
+7616dc: 7120 96cb 1000                         |0008: invoke-static {v0, v1}, Lcom/squareup/okhttp/internal/Util;.closeAll:(Ljava/io/Closeable;Ljava/io/Closeable;)V // method@cb96
+7616e2: 1e02                                   |000b: monitor-exit v2
+7616e4: 0e00                                   |000c: return-void
+7616e6: 0d00                                   |000d: move-exception v0
+7616e8: 1e02                                   |000e: monitor-exit v2
+7616ea: 2700                                   |000f: throw v0
+      catches       : 2
+        0x0002 - 0x000b
+          <any> -> 0x000d
+        0x000e - 0x000f
+          <any> -> 0x000d
+      positions     :
+        0x0002 line=487
+        0x0004 line=488
+        0x000b line=489
+      locals        :
+        0x0000 - 0x0010 reg=2 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+
+    #2              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'connectionPreface'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+761700:                                        |[761700] com.squareup.okhttp.internal.framed.Spdy3$Writer.connectionPreface:()V
+761710: 1d00                                   |0000: monitor-enter v0
+761712: 1e00                                   |0001: monitor-exit v0
+761714: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=316
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+
+    #3              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'data'
+      type          : '(ZILokio/Buffer;I)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 5
+      insns size    : 9 16-bit code units
+761718:                                        |[761718] com.squareup.okhttp.internal.framed.Spdy3$Writer.data:(ZILokio/Buffer;I)V
+761728: 1d00                                   |0000: monitor-enter v0
+76172a: 6e54 43cd 2031                         |0001: invoke-virtual {v0, v2, v1, v3, v4}, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sendDataFrame:(IILokio/Buffer;I)V // method@cd43
+761730: 1e00                                   |0004: monitor-exit v0
+761732: 0e00                                   |0005: return-void
+761734: 0d01                                   |0006: move-exception v1
+761736: 1e00                                   |0007: monitor-exit v0
+761738: 2701                                   |0008: throw v1
+      catches       : 2
+        0x0001 - 0x0004
+          <any> -> 0x0006
+        0x0007 - 0x0008
+          <any> -> 0x0006
+      positions     :
+        0x0001 line=392
+        0x0004 line=393
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x0009 reg=1 (null) Z
+        0x0000 - 0x0009 reg=2 (null) I
+        0x0000 - 0x0009 reg=3 (null) Lokio/Buffer;
+        0x0000 - 0x0009 reg=4 (null) I
+
+    #4              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'flush'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 23 16-bit code units
+761750:                                        |[761750] com.squareup.okhttp.internal.framed.Spdy3$Writer.flush:()V
+761760: 1d02                                   |0000: monitor-enter v2
+761762: 5520 e688                              |0001: iget-boolean v0, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+761766: 3900 0900                              |0003: if-nez v0, 000c // +0009
+76176a: 5420 e988                              |0005: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+76176e: 7210 40fe 0000                         |0007: invoke-interface {v0}, Lokio/BufferedSink;.flush:()V // method@fe40
+761774: 1e02                                   |000a: monitor-exit v2
+761776: 0e00                                   |000b: return-void
+761778: 2200 481a                              |000c: new-instance v0, Ljava/io/IOException; // type@1a48
+76177c: 1a01 f086                              |000e: const-string v1, "closed" // string@86f0
+761780: 7020 14d0 1000                         |0010: invoke-direct {v0, v1}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+761786: 2700                                   |0013: throw v0
+761788: 0d00                                   |0014: move-exception v0
+76178a: 1e02                                   |0015: monitor-exit v2
+76178c: 2700                                   |0016: throw v0
+      catches       : 2
+        0x0001 - 0x000a
+          <any> -> 0x0014
+        0x000c - 0x0016
+          <any> -> 0x0014
+      positions     :
+        0x0001 line=319
+        0x0005 line=320
+        0x000a line=321
+        0x000c line=319
+      locals        :
+        0x0000 - 0x0017 reg=2 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+
+    #5              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'goAway'
+      type          : '(ILcom/squareup/okhttp/internal/framed/ErrorCode;[B)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 2
+      insns size    : 63 16-bit code units
+7617a4:                                        |[7617a4] com.squareup.okhttp.internal.framed.Spdy3$Writer.goAway:(ILcom/squareup/okhttp/internal/framed/ErrorCode;[B)V
+7617b4: 1d01                                   |0000: monitor-enter v1
+7617b6: 5514 e688                              |0001: iget-boolean v4, v1, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+7617ba: 3904 3100                              |0003: if-nez v4, 0034 // +0031
+7617be: 5234 1588                              |0005: iget v4, v3, Lcom/squareup/okhttp/internal/framed/ErrorCode;.spdyGoAwayCode:I // field@8815
+7617c2: 12f0                                   |0007: const/4 v0, #int -1 // #ff
+7617c4: 3204 2400                              |0008: if-eq v4, v0, 002c // +0024
+7617c8: 5414 e988                              |000a: iget-object v4, v1, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+7617cc: 1400 0700 0380                         |000c: const v0, #float -2.75516e-40 // #80030007
+7617d2: 7220 4afe 0400                         |000f: invoke-interface {v4, v0}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+7617d8: 5414 e988                              |0012: iget-object v4, v1, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+7617dc: 1300 0800                              |0014: const/16 v0, #int 8 // #8
+7617e0: 7220 4afe 0400                         |0016: invoke-interface {v4, v0}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+7617e6: 5414 e988                              |0019: iget-object v4, v1, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+7617ea: 7220 4afe 2400                         |001b: invoke-interface {v4, v2}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+7617f0: 5412 e988                              |001e: iget-object v2, v1, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+7617f4: 5233 1588                              |0020: iget v3, v3, Lcom/squareup/okhttp/internal/framed/ErrorCode;.spdyGoAwayCode:I // field@8815
+7617f8: 7220 4afe 3200                         |0022: invoke-interface {v2, v3}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+7617fe: 5412 e988                              |0025: iget-object v2, v1, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761802: 7210 40fe 0200                         |0027: invoke-interface {v2}, Lokio/BufferedSink;.flush:()V // method@fe40
+761808: 1e01                                   |002a: monitor-exit v1
+76180a: 0e00                                   |002b: return-void
+76180c: 2202 7a1a                              |002c: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+761810: 1a03 2292                              |002e: const-string v3, "errorCode.spdyGoAwayCode == -1" // string@9222
+761814: 7020 47d1 3200                         |0030: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+76181a: 2702                                   |0033: throw v2
+76181c: 2202 481a                              |0034: new-instance v2, Ljava/io/IOException; // type@1a48
+761820: 1a03 f086                              |0036: const-string v3, "closed" // string@86f0
+761824: 7020 14d0 3200                         |0038: invoke-direct {v2, v3}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+76182a: 2702                                   |003b: throw v2
+76182c: 0d02                                   |003c: move-exception v2
+76182e: 1e01                                   |003d: monitor-exit v1
+761830: 2702                                   |003e: throw v2
+      catches       : 2
+        0x0001 - 0x002a
+          <any> -> 0x003c
+        0x002c - 0x003e
+          <any> -> 0x003c
+      positions     :
+        0x0001 line=455
+        0x0005 line=456
+        0x000a line=462
+        0x0012 line=463
+        0x0019 line=464
+        0x001e line=465
+        0x0025 line=466
+        0x002a line=467
+        0x002c line=457
+        0x0034 line=455
+      locals        :
+        0x0000 - 0x003f reg=1 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x003f reg=2 (null) I
+        0x0000 - 0x003f reg=3 (null) Lcom/squareup/okhttp/internal/framed/ErrorCode;
+        0x0000 - 0x003f reg=4 (null) [B
+
+    #6              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'headers'
+      type          : '(ILjava/util/List;)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 2
+      insns size    : 64 16-bit code units
+761848:                                        |[761848] com.squareup.okhttp.internal.framed.Spdy3$Writer.headers:(ILjava/util/List;)V
+761858: 1d04                                   |0000: monitor-enter v4
+76185a: 5540 e688                              |0001: iget-boolean v0, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+76185e: 3900 3200                              |0003: if-nez v0, 0035 // +0032
+761862: 7020 48cd 6400                         |0005: invoke-direct {v4, v6}, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.writeNameValueBlockToBuffer:(Ljava/util/List;)V // method@cd48
+761868: 5446 e788                              |0008: iget-object v6, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockBuffer:Lokio/Buffer; // field@88e7
+76186c: 6e10 2ffe 0600                         |000a: invoke-virtual {v6}, Lokio/Buffer;.size:()J // method@fe2f
+761872: 0b00                                   |000d: move-result-wide v0
+761874: 1602 0400                              |000e: const-wide/16 v2, #int 4 // #4
+761878: bb20                                   |0010: add-long/2addr v0, v2
+76187a: 8406                                   |0011: long-to-int v6, v0
+76187c: 5440 e988                              |0012: iget-object v0, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761880: 1401 0800 0380                         |0014: const v1, #float -2.75518e-40 // #80030008
+761886: 7220 4afe 1000                         |0017: invoke-interface {v0, v1}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+76188c: 5440 e988                              |001a: iget-object v0, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761890: 1401 ffff ff00                         |001c: const v1, #float 2.35099e-38 // #00ffffff
+761896: b516                                   |001f: and-int/2addr v6, v1
+761898: 7220 4afe 6000                         |0020: invoke-interface {v0, v6}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+76189e: 5446 e988                              |0023: iget-object v6, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+7618a2: 1400 ffff ff7f                         |0025: const v0, #float nan // #7fffffff
+7618a8: b505                                   |0028: and-int/2addr v5, v0
+7618aa: 7220 4afe 5600                         |0029: invoke-interface {v6, v5}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+7618b0: 5445 e988                              |002c: iget-object v5, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+7618b4: 5446 e788                              |002e: iget-object v6, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockBuffer:Lokio/Buffer; // field@88e7
+7618b8: 7220 46fe 6500                         |0030: invoke-interface {v5, v6}, Lokio/BufferedSink;.writeAll:(Lokio/Source;)J // method@fe46
+7618be: 1e04                                   |0033: monitor-exit v4
+7618c0: 0e00                                   |0034: return-void
+7618c2: 2205 481a                              |0035: new-instance v5, Ljava/io/IOException; // type@1a48
+7618c6: 1a06 f086                              |0037: const-string v6, "closed" // string@86f0
+7618ca: 7020 14d0 6500                         |0039: invoke-direct {v5, v6}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+7618d0: 2705                                   |003c: throw v5
+7618d2: 0d05                                   |003d: move-exception v5
+7618d4: 1e04                                   |003e: monitor-exit v4
+7618d6: 2705                                   |003f: throw v5
+      catches       : 2
+        0x0001 - 0x0033
+          <any> -> 0x003d
+        0x0035 - 0x003f
+          <any> -> 0x003d
+      positions     :
+        0x0001 line=359
+        0x0005 line=360
+        0x0008 line=363
+        0x0012 line=365
+        0x001a line=366
+        0x0023 line=367
+        0x002c line=368
+        0x0033 line=369
+        0x0035 line=359
+      locals        :
+        0x0000 - 0x0040 reg=4 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x0040 reg=5 (null) I
+        0x0000 - 0x0040 reg=6 (null) Ljava/util/List;
+
+    #7              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'maxDataLength'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+7618ec:                                        |[7618ec] com.squareup.okhttp.internal.framed.Spdy3$Writer.maxDataLength:()I
+7618fc: 1300 ff3f                              |0000: const/16 v0, #int 16383 // #3fff
+761900: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #8              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'ping'
+      type          : '(ZII)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 2
+      insns size    : 66 16-bit code units
+761904:                                        |[761904] com.squareup.okhttp.internal.framed.Spdy3$Writer.ping:(ZII)V
+761914: 1d03                                   |0000: monitor-enter v3
+761916: 5536 e688                              |0001: iget-boolean v6, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+76191a: 3906 3400                              |0003: if-nez v6, 0037 // +0034
+76191e: 5536 e588                              |0005: iget-boolean v6, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.client:Z // field@88e5
+761922: dd00 0501                              |0007: and-int/lit8 v0, v5, #int 1 // #01
+761926: 1201                                   |0009: const/4 v1, #int 0 // #0
+761928: 1212                                   |000a: const/4 v2, #int 1 // #1
+76192a: 3320 0400                              |000b: if-ne v0, v2, 000f // +0004
+76192e: 0120                                   |000d: move v0, v2
+761930: 2802                                   |000e: goto 0010 // +0002
+761932: 0110                                   |000f: move v0, v1
+761934: 3206 0300                              |0010: if-eq v6, v0, 0013 // +0003
+761938: 0121                                   |0012: move v1, v2
+76193a: 3314 1c00                              |0013: if-ne v4, v1, 002f // +001c
+76193e: 5434 e988                              |0015: iget-object v4, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761942: 1406 0600 0380                         |0017: const v6, #float -2.75515e-40 // #80030006
+761948: 7220 4afe 6400                         |001a: invoke-interface {v4, v6}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+76194e: 5434 e988                              |001d: iget-object v4, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761952: 1246                                   |001f: const/4 v6, #int 4 // #4
+761954: 7220 4afe 6400                         |0020: invoke-interface {v4, v6}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+76195a: 5434 e988                              |0023: iget-object v4, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+76195e: 7220 4afe 5400                         |0025: invoke-interface {v4, v5}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761964: 5434 e988                              |0028: iget-object v4, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761968: 7210 40fe 0400                         |002a: invoke-interface {v4}, Lokio/BufferedSink;.flush:()V // method@fe40
+76196e: 1e03                                   |002d: monitor-exit v3
+761970: 0e00                                   |002e: return-void
+761972: 2204 7a1a                              |002f: new-instance v4, Ljava/lang/IllegalArgumentException; // type@1a7a
+761976: 1a05 46c9                              |0031: const-string v5, "payload != reply" // string@c946
+76197a: 7020 47d1 5400                         |0033: invoke-direct {v4, v5}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+761980: 2704                                   |0036: throw v4
+761982: 2204 481a                              |0037: new-instance v4, Ljava/io/IOException; // type@1a48
+761986: 1a05 f086                              |0039: const-string v5, "closed" // string@86f0
+76198a: 7020 14d0 5400                         |003b: invoke-direct {v4, v5}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+761990: 2704                                   |003e: throw v4
+761992: 0d04                                   |003f: move-exception v4
+761994: 1e03                                   |0040: monitor-exit v3
+761996: 2704                                   |0041: throw v4
+      catches       : 2
+        0x0001 - 0x002d
+          <any> -> 0x003f
+        0x002f - 0x0041
+          <any> -> 0x003f
+      positions     :
+        0x0001 line=441
+        0x0005 line=442
+        0x0015 line=447
+        0x001d line=448
+        0x0023 line=449
+        0x0028 line=450
+        0x002d line=451
+        0x002f line=443
+        0x0037 line=441
+      locals        :
+        0x0000 - 0x0042 reg=3 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x0042 reg=4 (null) Z
+        0x0000 - 0x0042 reg=5 (null) I
+        0x0000 - 0x0042 reg=6 (null) I
+
+    #9              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'pushPromise'
+      type          : '(IILjava/util/List;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 0
+      insns size    : 1 16-bit code units
+7619ac:                                        |[7619ac] com.squareup.okhttp.internal.framed.Spdy3$Writer.pushPromise:(IILjava/util/List;)V
+7619bc: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #10              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'rstStream'
+      type          : '(ILcom/squareup/okhttp/internal/framed/ErrorCode;)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 2
+      insns size    : 65 16-bit code units
+7619c0:                                        |[7619c0] com.squareup.okhttp.internal.framed.Spdy3$Writer.rstStream:(ILcom/squareup/okhttp/internal/framed/ErrorCode;)V
+7619d0: 1d02                                   |0000: monitor-enter v2
+7619d2: 5520 e688                              |0001: iget-boolean v0, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+7619d6: 3900 3300                              |0003: if-nez v0, 0036 // +0033
+7619da: 5240 1688                              |0005: iget v0, v4, Lcom/squareup/okhttp/internal/framed/ErrorCode;.spdyRstCode:I // field@8816
+7619de: 12f1                                   |0007: const/4 v1, #int -1 // #ff
+7619e0: 3210 2800                              |0008: if-eq v0, v1, 0030 // +0028
+7619e4: 5420 e988                              |000a: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+7619e8: 1401 0300 0380                         |000c: const v1, #float -2.75511e-40 // #80030003
+7619ee: 7220 4afe 1000                         |000f: invoke-interface {v0, v1}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+7619f4: 5420 e988                              |0012: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+7619f8: 1301 0800                              |0014: const/16 v1, #int 8 // #8
+7619fc: 7220 4afe 1000                         |0016: invoke-interface {v0, v1}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761a02: 5420 e988                              |0019: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761a06: 1401 ffff ff7f                         |001b: const v1, #float nan // #7fffffff
+761a0c: b513                                   |001e: and-int/2addr v3, v1
+761a0e: 7220 4afe 3000                         |001f: invoke-interface {v0, v3}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761a14: 5423 e988                              |0022: iget-object v3, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761a18: 5244 1688                              |0024: iget v4, v4, Lcom/squareup/okhttp/internal/framed/ErrorCode;.spdyRstCode:I // field@8816
+761a1c: 7220 4afe 4300                         |0026: invoke-interface {v3, v4}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761a22: 5423 e988                              |0029: iget-object v3, v2, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761a26: 7210 40fe 0300                         |002b: invoke-interface {v3}, Lokio/BufferedSink;.flush:()V // method@fe40
+761a2c: 1e02                                   |002e: monitor-exit v2
+761a2e: 0e00                                   |002f: return-void
+761a30: 2203 7a1a                              |0030: new-instance v3, Ljava/lang/IllegalArgumentException; // type@1a7a
+761a34: 7010 46d1 0300                         |0032: invoke-direct {v3}, Ljava/lang/IllegalArgumentException;.<init>:()V // method@d146
+761a3a: 2703                                   |0035: throw v3
+761a3c: 2203 481a                              |0036: new-instance v3, Ljava/io/IOException; // type@1a48
+761a40: 1a04 f086                              |0038: const-string v4, "closed" // string@86f0
+761a44: 7020 14d0 4300                         |003a: invoke-direct {v3, v4}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+761a4a: 2703                                   |003d: throw v3
+761a4c: 0d03                                   |003e: move-exception v3
+761a4e: 1e02                                   |003f: monitor-exit v2
+761a50: 2703                                   |0040: throw v3
+      catches       : 2
+        0x0001 - 0x002e
+          <any> -> 0x003e
+        0x0030 - 0x0040
+          <any> -> 0x003e
+      positions     :
+        0x0001 line=373
+        0x0005 line=374
+        0x000a line=378
+        0x0012 line=379
+        0x0019 line=380
+        0x0022 line=381
+        0x0029 line=382
+        0x002e line=383
+        0x0030 line=374
+        0x0036 line=373
+      locals        :
+        0x0000 - 0x0041 reg=2 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x0041 reg=3 (null) I
+        0x0000 - 0x0041 reg=4 (null) Lcom/squareup/okhttp/internal/framed/ErrorCode;
+
+    #11              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'sendDataFrame'
+      type          : '(IILokio/Buffer;I)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 9
+      ins           : 5
+      outs          : 4
+      insns size    : 72 16-bit code units
+761a68:                                        |[761a68] com.squareup.okhttp.internal.framed.Spdy3$Writer.sendDataFrame:(IILokio/Buffer;I)V
+761a78: 5540 e688                              |0000: iget-boolean v0, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+761a7c: 3900 3e00                              |0002: if-nez v0, 0040 // +003e
+761a80: 8180                                   |0004: int-to-long v0, v8
+761a82: 1702 ffff ff00                         |0005: const-wide/32 v2, #float 2.35099e-38 // #00ffffff
+761a88: 3102 0002                              |0008: cmp-long v2, v0, v2
+761a8c: 3c02 2100                              |000a: if-gtz v2, 002b // +0021
+761a90: 5442 e988                              |000c: iget-object v2, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761a94: 1403 ffff ff7f                         |000e: const v3, #float nan // #7fffffff
+761a9a: b535                                   |0011: and-int/2addr v5, v3
+761a9c: 7220 4afe 5200                         |0012: invoke-interface {v2, v5}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761aa2: 5445 e988                              |0015: iget-object v5, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761aa6: d566 ff00                              |0017: and-int/lit16 v6, v6, #int 255 // #00ff
+761aaa: e006 0618                              |0019: shl-int/lit8 v6, v6, #int 24 // #18
+761aae: 1402 ffff ff00                         |001b: const v2, #float 2.35099e-38 // #00ffffff
+761ab4: b582                                   |001e: and-int/2addr v2, v8
+761ab6: b626                                   |001f: or-int/2addr v6, v2
+761ab8: 7220 4afe 6500                         |0020: invoke-interface {v5, v6}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761abe: 3d08 0700                              |0023: if-lez v8, 002a // +0007
+761ac2: 5444 e988                              |0025: iget-object v4, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761ac6: 7240 45fe 7410                         |0027: invoke-interface {v4, v7, v0, v1}, Lokio/BufferedSink;.write:(Lokio/Buffer;J)V // method@fe45
+761acc: 0e00                                   |002a: return-void
+761ace: 2204 7a1a                              |002b: new-instance v4, Ljava/lang/IllegalArgumentException; // type@1a7a
+761ad2: 2205 991a                              |002d: new-instance v5, Ljava/lang/StringBuilder; // type@1a99
+761ad6: 1a06 c626                              |002f: const-string v6, "FRAME_TOO_LARGE max size is 16Mib: " // string@26c6
+761ada: 7020 3cd2 6500                         |0031: invoke-direct {v5, v6}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+761ae0: 6e20 40d2 8500                         |0034: invoke-virtual {v5, v8}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+761ae6: 0c05                                   |0037: move-result-object v5
+761ae8: 6e10 58d2 0500                         |0038: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+761aee: 0c05                                   |003b: move-result-object v5
+761af0: 7020 47d1 5400                         |003c: invoke-direct {v4, v5}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+761af6: 2704                                   |003f: throw v4
+761af8: 2204 481a                              |0040: new-instance v4, Ljava/io/IOException; // type@1a48
+761afc: 1a05 f086                              |0042: const-string v5, "closed" // string@86f0
+761b00: 7020 14d0 5400                         |0044: invoke-direct {v4, v5}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+761b06: 2704                                   |0047: throw v4
+      catches       : (none)
+      positions     :
+        0x0000 line=397
+        0x000c line=401
+        0x0015 line=402
+        0x0025 line=404
+        0x002b line=399
+        0x0040 line=397
+      locals        :
+        0x0000 - 0x0048 reg=4 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x0048 reg=5 (null) I
+        0x0000 - 0x0048 reg=6 (null) I
+        0x0000 - 0x0048 reg=7 (null) Lokio/Buffer;
+        0x0000 - 0x0048 reg=8 (null) I
+
+    #12              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'settings'
+      type          : '(Lcom/squareup/okhttp/internal/framed/Settings;)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 2
+      insns size    : 93 16-bit code units
+761b08:                                        |[761b08] com.squareup.okhttp.internal.framed.Spdy3$Writer.settings:(Lcom/squareup/okhttp/internal/framed/Settings;)V
+761b18: 1d05                                   |0000: monitor-enter v5
+761b1a: 5550 e688                              |0001: iget-boolean v0, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+761b1e: 3900 4f00                              |0003: if-nez v0, 0052 // +004f
+761b22: 6e10 29cd 0600                         |0005: invoke-virtual {v6}, Lcom/squareup/okhttp/internal/framed/Settings;.size:()I // method@cd29
+761b28: 0a00                                   |0008: move-result v0
+761b2a: da01 0008                              |0009: mul-int/lit8 v1, v0, #int 8 // #08
+761b2e: d801 0104                              |000b: add-int/lit8 v1, v1, #int 4 // #04
+761b32: 5452 e988                              |000d: iget-object v2, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761b36: 1403 0400 0380                         |000f: const v3, #float -2.75512e-40 // #80030004
+761b3c: 7220 4afe 3200                         |0012: invoke-interface {v2, v3}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761b42: 5452 e988                              |0015: iget-object v2, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761b46: 1403 ffff ff00                         |0017: const v3, #float 2.35099e-38 // #00ffffff
+761b4c: b531                                   |001a: and-int/2addr v1, v3
+761b4e: 7220 4afe 1200                         |001b: invoke-interface {v2, v1}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761b54: 5451 e988                              |001e: iget-object v1, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761b58: 7220 4afe 0100                         |0020: invoke-interface {v1, v0}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761b5e: 1200                                   |0023: const/4 v0, #int 0 // #0
+761b60: 1301 0a00                              |0024: const/16 v1, #int 10 // #a
+761b64: 3610 2500                              |0026: if-gt v0, v1, 004b // +0025
+761b68: 6e20 25cd 0600                         |0028: invoke-virtual {v6, v0}, Lcom/squareup/okhttp/internal/framed/Settings;.isSet:(I)Z // method@cd25
+761b6e: 0a01                                   |002b: move-result v1
+761b70: 3901 0300                              |002c: if-nez v1, 002f // +0003
+761b74: 281a                                   |002e: goto 0048 // +001a
+761b76: 6e20 15cd 0600                         |002f: invoke-virtual {v6, v0}, Lcom/squareup/okhttp/internal/framed/Settings;.flags:(I)I // method@cd15
+761b7c: 0a01                                   |0032: move-result v1
+761b7e: 5452 e988                              |0033: iget-object v2, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761b82: d511 ff00                              |0035: and-int/lit16 v1, v1, #int 255 // #00ff
+761b86: e001 0118                              |0037: shl-int/lit8 v1, v1, #int 24 // #18
+761b8a: 9504 0003                              |0039: and-int v4, v0, v3
+761b8e: b641                                   |003b: or-int/2addr v1, v4
+761b90: 7220 4afe 1200                         |003c: invoke-interface {v2, v1}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761b96: 5451 e988                              |003f: iget-object v1, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761b9a: 6e20 16cd 0600                         |0041: invoke-virtual {v6, v0}, Lcom/squareup/okhttp/internal/framed/Settings;.get:(I)I // method@cd16
+761ba0: 0a02                                   |0044: move-result v2
+761ba2: 7220 4afe 2100                         |0045: invoke-interface {v1, v2}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761ba8: d800 0001                              |0048: add-int/lit8 v0, v0, #int 1 // #01
+761bac: 28da                                   |004a: goto 0024 // -0026
+761bae: 5456 e988                              |004b: iget-object v6, v5, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761bb2: 7210 40fe 0600                         |004d: invoke-interface {v6}, Lokio/BufferedSink;.flush:()V // method@fe40
+761bb8: 1e05                                   |0050: monitor-exit v5
+761bba: 0e00                                   |0051: return-void
+761bbc: 2206 481a                              |0052: new-instance v6, Ljava/io/IOException; // type@1a48
+761bc0: 1a00 f086                              |0054: const-string v0, "closed" // string@86f0
+761bc4: 7020 14d0 0600                         |0056: invoke-direct {v6, v0}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+761bca: 2706                                   |0059: throw v6
+761bcc: 0d06                                   |005a: move-exception v6
+761bce: 1e05                                   |005b: monitor-exit v5
+761bd0: 2706                                   |005c: throw v6
+      catches       : 2
+        0x0001 - 0x0050
+          <any> -> 0x005a
+        0x0052 - 0x005c
+          <any> -> 0x005a
+      positions     :
+        0x0001 line=422
+        0x0005 line=425
+        0x000d line=427
+        0x0015 line=428
+        0x001e line=429
+        0x0028 line=431
+        0x002f line=432
+        0x0033 line=433
+        0x003f line=434
+        0x004b line=436
+        0x0050 line=437
+        0x0052 line=422
+      locals        :
+        0x0000 - 0x005d reg=5 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x005d reg=6 (null) Lcom/squareup/okhttp/internal/framed/Settings;
+
+    #13              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'synReply'
+      type          : '(ZILjava/util/List;)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 8
+      ins           : 4
+      outs          : 2
+      insns size    : 74 16-bit code units
+761be8:                                        |[761be8] com.squareup.okhttp.internal.framed.Spdy3$Writer.synReply:(ZILjava/util/List;)V
+761bf8: 1d04                                   |0000: monitor-enter v4
+761bfa: 5540 e688                              |0001: iget-boolean v0, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+761bfe: 3900 3c00                              |0003: if-nez v0, 003f // +003c
+761c02: 7020 48cd 7400                         |0005: invoke-direct {v4, v7}, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.writeNameValueBlockToBuffer:(Ljava/util/List;)V // method@cd48
+761c08: 5447 e788                              |0008: iget-object v7, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockBuffer:Lokio/Buffer; // field@88e7
+761c0c: 6e10 2ffe 0700                         |000a: invoke-virtual {v7}, Lokio/Buffer;.size:()J // method@fe2f
+761c12: 0b00                                   |000d: move-result-wide v0
+761c14: 1602 0400                              |000e: const-wide/16 v2, #int 4 // #4
+761c18: bb20                                   |0010: add-long/2addr v0, v2
+761c1a: 8407                                   |0011: long-to-int v7, v0
+761c1c: 5440 e988                              |0012: iget-object v0, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761c20: 1401 0200 0380                         |0014: const v1, #float -2.75509e-40 // #80030002
+761c26: 7220 4afe 1000                         |0017: invoke-interface {v0, v1}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761c2c: 5440 e988                              |001a: iget-object v0, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761c30: d555 ff00                              |001c: and-int/lit16 v5, v5, #int 255 // #00ff
+761c34: e005 0518                              |001e: shl-int/lit8 v5, v5, #int 24 // #18
+761c38: 1401 ffff ff00                         |0020: const v1, #float 2.35099e-38 // #00ffffff
+761c3e: b517                                   |0023: and-int/2addr v7, v1
+761c40: b675                                   |0024: or-int/2addr v5, v7
+761c42: 7220 4afe 5000                         |0025: invoke-interface {v0, v5}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761c48: 5445 e988                              |0028: iget-object v5, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761c4c: 1407 ffff ff7f                         |002a: const v7, #float nan // #7fffffff
+761c52: b576                                   |002d: and-int/2addr v6, v7
+761c54: 7220 4afe 6500                         |002e: invoke-interface {v5, v6}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761c5a: 5445 e988                              |0031: iget-object v5, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761c5e: 5446 e788                              |0033: iget-object v6, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockBuffer:Lokio/Buffer; // field@88e7
+761c62: 7220 46fe 6500                         |0035: invoke-interface {v5, v6}, Lokio/BufferedSink;.writeAll:(Lokio/Source;)J // method@fe46
+761c68: 5445 e988                              |0038: iget-object v5, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761c6c: 7210 40fe 0500                         |003a: invoke-interface {v5}, Lokio/BufferedSink;.flush:()V // method@fe40
+761c72: 1e04                                   |003d: monitor-exit v4
+761c74: 0e00                                   |003e: return-void
+761c76: 2205 481a                              |003f: new-instance v5, Ljava/io/IOException; // type@1a48
+761c7a: 1a06 f086                              |0041: const-string v6, "closed" // string@86f0
+761c7e: 7020 14d0 6500                         |0043: invoke-direct {v5, v6}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+761c84: 2705                                   |0046: throw v5
+761c86: 0d05                                   |0047: move-exception v5
+761c88: 1e04                                   |0048: monitor-exit v4
+761c8a: 2705                                   |0049: throw v5
+      catches       : 2
+        0x0001 - 0x003d
+          <any> -> 0x0047
+        0x003f - 0x0049
+          <any> -> 0x0047
+      positions     :
+        0x0001 line=344
+        0x0005 line=345
+        0x0008 line=348
+        0x0012 line=350
+        0x001a line=351
+        0x0028 line=352
+        0x0031 line=353
+        0x0038 line=354
+        0x003d line=355
+        0x003f line=344
+      locals        :
+        0x0000 - 0x004a reg=4 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x004a reg=5 (null) Z
+        0x0000 - 0x004a reg=6 (null) I
+        0x0000 - 0x004a reg=7 (null) Ljava/util/List;
+
+    #14              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'synStream'
+      type          : '(ZZIILjava/util/List;)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 10
+      ins           : 6
+      outs          : 2
+      insns size    : 92 16-bit code units
+761ca0:                                        |[761ca0] com.squareup.okhttp.internal.framed.Spdy3$Writer.synStream:(ZZIILjava/util/List;)V
+761cb0: 1d04                                   |0000: monitor-enter v4
+761cb2: 5540 e688                              |0001: iget-boolean v0, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+761cb6: 3900 4e00                              |0003: if-nez v0, 0051 // +004e
+761cba: 7020 48cd 9400                         |0005: invoke-direct {v4, v9}, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.writeNameValueBlockToBuffer:(Ljava/util/List;)V // method@cd48
+761cc0: 5449 e788                              |0008: iget-object v9, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockBuffer:Lokio/Buffer; // field@88e7
+761cc4: 6e10 2ffe 0900                         |000a: invoke-virtual {v9}, Lokio/Buffer;.size:()J // method@fe2f
+761cca: 0b00                                   |000d: move-result-wide v0
+761ccc: 1602 0a00                              |000e: const-wide/16 v2, #int 10 // #a
+761cd0: bb20                                   |0010: add-long/2addr v0, v2
+761cd2: 8409                                   |0011: long-to-int v9, v0
+761cd4: 1200                                   |0012: const/4 v0, #int 0 // #0
+761cd6: 3806 0400                              |0013: if-eqz v6, 0017 // +0004
+761cda: 1226                                   |0015: const/4 v6, #int 2 // #2
+761cdc: 2802                                   |0016: goto 0018 // +0002
+761cde: 0106                                   |0017: move v6, v0
+761ce0: b665                                   |0018: or-int/2addr v5, v6
+761ce2: 5446 e988                              |0019: iget-object v6, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761ce6: 1401 0100 0380                         |001b: const v1, #float -2.75508e-40 // #80030001
+761cec: 7220 4afe 1600                         |001e: invoke-interface {v6, v1}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761cf2: 5446 e988                              |0021: iget-object v6, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761cf6: d555 ff00                              |0023: and-int/lit16 v5, v5, #int 255 // #00ff
+761cfa: e005 0518                              |0025: shl-int/lit8 v5, v5, #int 24 // #18
+761cfe: 1401 ffff ff00                         |0027: const v1, #float 2.35099e-38 // #00ffffff
+761d04: b519                                   |002a: and-int/2addr v9, v1
+761d06: b695                                   |002b: or-int/2addr v5, v9
+761d08: 7220 4afe 5600                         |002c: invoke-interface {v6, v5}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761d0e: 5445 e988                              |002f: iget-object v5, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761d12: 1406 ffff ff7f                         |0031: const v6, #float nan // #7fffffff
+761d18: b567                                   |0034: and-int/2addr v7, v6
+761d1a: 7220 4afe 7500                         |0035: invoke-interface {v5, v7}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761d20: 5445 e988                              |0038: iget-object v5, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761d24: b586                                   |003a: and-int/2addr v6, v8
+761d26: 7220 4afe 6500                         |003b: invoke-interface {v5, v6}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761d2c: 5445 e988                              |003e: iget-object v5, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761d30: 7220 4bfe 0500                         |0040: invoke-interface {v5, v0}, Lokio/BufferedSink;.writeShort:(I)Lokio/BufferedSink; // method@fe4b
+761d36: 5445 e988                              |0043: iget-object v5, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761d3a: 5446 e788                              |0045: iget-object v6, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.headerBlockBuffer:Lokio/Buffer; // field@88e7
+761d3e: 7220 46fe 6500                         |0047: invoke-interface {v5, v6}, Lokio/BufferedSink;.writeAll:(Lokio/Source;)J // method@fe46
+761d44: 5445 e988                              |004a: iget-object v5, v4, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761d48: 7210 40fe 0500                         |004c: invoke-interface {v5}, Lokio/BufferedSink;.flush:()V // method@fe40
+761d4e: 1e04                                   |004f: monitor-exit v4
+761d50: 0e00                                   |0050: return-void
+761d52: 2205 481a                              |0051: new-instance v5, Ljava/io/IOException; // type@1a48
+761d56: 1a06 f086                              |0053: const-string v6, "closed" // string@86f0
+761d5a: 7020 14d0 6500                         |0055: invoke-direct {v5, v6}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+761d60: 2705                                   |0058: throw v5
+761d62: 0d05                                   |0059: move-exception v5
+761d64: 1e04                                   |005a: monitor-exit v4
+761d66: 2705                                   |005b: throw v5
+      catches       : 2
+        0x0001 - 0x004f
+          <any> -> 0x0059
+        0x0051 - 0x005b
+          <any> -> 0x0059
+      positions     :
+        0x0001 line=326
+        0x0005 line=327
+        0x0008 line=328
+        0x0019 line=333
+        0x0021 line=334
+        0x002f line=335
+        0x0038 line=336
+        0x003e line=337
+        0x0043 line=338
+        0x004a line=339
+        0x004f line=340
+        0x0051 line=326
+      locals        :
+        0x0000 - 0x005c reg=4 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x005c reg=5 (null) Z
+        0x0000 - 0x005c reg=6 (null) Z
+        0x0000 - 0x005c reg=7 (null) I
+        0x0000 - 0x005c reg=8 (null) I
+        0x0000 - 0x005c reg=9 (null) Ljava/util/List;
+
+    #15              : (in Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;)
+      name          : 'windowUpdate'
+      type          : '(IJ)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 3
+      insns size    : 83 16-bit code units
+761d7c:                                        |[761d7c] com.squareup.okhttp.internal.framed.Spdy3$Writer.windowUpdate:(IJ)V
+761d8c: 1a00 0fe7                              |0000: const-string v0, "windowSizeIncrement must be between 1 and 0x7fffffff: " // string@e70f
+761d90: 1d03                                   |0002: monitor-enter v3
+761d92: 5531 e688                              |0003: iget-boolean v1, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.closed:Z // field@88e6
+761d96: 3901 4300                              |0005: if-nez v1, 0048 // +0043
+761d9a: 1601 0000                              |0007: const-wide/16 v1, #int 0 // #0
+761d9e: 3101 0501                              |0009: cmp-long v1, v5, v1
+761da2: 3801 2a00                              |000b: if-eqz v1, 0035 // +002a
+761da6: 1701 ffff ff7f                         |000d: const-wide/32 v1, #float nan // #7fffffff
+761dac: 3101 0501                              |0010: cmp-long v1, v5, v1
+761db0: 3c01 2300                              |0012: if-gtz v1, 0035 // +0023
+761db4: 5430 e988                              |0014: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761db8: 1401 0900 0380                         |0016: const v1, #float -2.75519e-40 // #80030009
+761dbe: 7220 4afe 1000                         |0019: invoke-interface {v0, v1}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761dc4: 5430 e988                              |001c: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761dc8: 1301 0800                              |001e: const/16 v1, #int 8 // #8
+761dcc: 7220 4afe 1000                         |0020: invoke-interface {v0, v1}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761dd2: 5430 e988                              |0023: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761dd6: 7220 4afe 4000                         |0025: invoke-interface {v0, v4}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761ddc: 5434 e988                              |0028: iget-object v4, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761de0: 8455                                   |002a: long-to-int v5, v5
+761de2: 7220 4afe 5400                         |002b: invoke-interface {v4, v5}, Lokio/BufferedSink;.writeInt:(I)Lokio/BufferedSink; // method@fe4a
+761de8: 5434 e988                              |002e: iget-object v4, v3, Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;.sink:Lokio/BufferedSink; // field@88e9
+761dec: 7210 40fe 0400                         |0030: invoke-interface {v4}, Lokio/BufferedSink;.flush:()V // method@fe40
+761df2: 1e03                                   |0033: monitor-exit v3
+761df4: 0e00                                   |0034: return-void
+761df6: 2204 7a1a                              |0035: new-instance v4, Ljava/lang/IllegalArgumentException; // type@1a7a
+761dfa: 2201 991a                              |0037: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+761dfe: 7020 3cd2 0100                         |0039: invoke-direct {v1, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+761e04: 6e30 41d2 5106                         |003c: invoke-virtual {v1, v5, v6}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+761e0a: 0c05                                   |003f: move-result-object v5
+761e0c: 6e10 58d2 0500                         |0040: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+761e12: 0c05                                   |0043: move-result-object v5
+761e14: 7020 47d1 5400                         |0044: invoke-direct {v4, v5}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+761e1a: 2704                                   |0047: throw v4
+761e1c: 2204 481a                              |0048: new-instance v4, Ljava/io/IOException; // type@1a48
+761e20: 1a05 f086                              |004a: const-string v5, "closed" // string@86f0
+761e24: 7020 14d0 5400                         |004c: invoke-direct {v4, v5}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+761e2a: 2704                                   |004f: throw v4
+761e2c: 0d04                                   |0050: move-exception v4
+761e2e: 1e03                                   |0051: monitor-exit v3
+761e30: 2704                                   |0052: throw v4
+      catches       : 2
+        0x0003 - 0x0033
+          <any> -> 0x0050
+        0x0035 - 0x0052
+          <any> -> 0x0050
+      positions     :
+        0x0003 line=471
+        0x0014 line=479
+        0x001c line=480
+        0x0023 line=481
+        0x0028 line=482
+        0x002e line=483
+        0x0033 line=484
+        0x0035 line=473
+        0x0048 line=471
+      locals        :
+        0x0000 - 0x0053 reg=3 this Lcom/squareup/okhttp/internal/framed/Spdy3$Writer;
+        0x0000 - 0x0053 reg=4 (null) I
+        0x0000 - 0x0053 reg=5 (null) J
+
+  source_file_idx   : 25366 (Spdy3.java)
+

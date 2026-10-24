@@ -1,0 +1,985 @@
+Class #758            -
+  Class descriptor  : 'Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'ALLOW_BINARY'
+      type          : 'Z'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : false
+    #1              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'UNSET_GONE_MARGIN'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : -1
+  Instance fields   -
+    #0              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'mDependents'
+      type          : 'Ljava/util/HashSet;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'mGoneMargin'
+      type          : 'I'
+      access        : 0x0000 ()
+    #2              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'mMargin'
+      type          : 'I'
+      access        : 0x0001 (PUBLIC)
+    #3              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'mOwner'
+      type          : 'Landroidx/constraintlayout/solver/widgets/ConstraintWidget;'
+      access        : 0x0011 (PUBLIC FINAL)
+    #4              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'mSolverVariable'
+      type          : 'Landroidx/constraintlayout/solver/SolverVariable;'
+      access        : 0x0000 ()
+    #5              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'mTarget'
+      type          : 'Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;'
+      access        : 0x0001 (PUBLIC)
+    #6              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'mType'
+      type          : 'Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;'
+      access        : 0x0011 (PUBLIC FINAL)
+  Direct methods    -
+    #0              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : '<init>'
+      type          : '(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 1
+      insns size    : 17 16-bit code units
+4d40a4:                                        |[4d40a4] androidx.constraintlayout.solver.widgets.ConstraintAnchor.<init>:(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;)V
+4d40b4: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+4d40ba: 1200                                   |0003: const/4 v0, #int 0 // #0
+4d40bc: 5b10 4c16                              |0004: iput-object v0, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d40c0: 1200                                   |0006: const/4 v0, #int 0 // #0
+4d40c2: 5910 4e16                              |0007: iput v0, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mMargin:I // field@164e
+4d40c6: 12f0                                   |0009: const/4 v0, #int -1 // #ff
+4d40c8: 5910 4d16                              |000a: iput v0, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mGoneMargin:I // field@164d
+4d40cc: 5b12 4f16                              |000c: iput-object v2, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mOwner:Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // field@164f
+4d40d0: 5b13 5216                              |000e: iput-object v3, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d40d4: 0e00                                   |0010: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=98
+        0x0004 line=34
+        0x0007 line=65
+        0x000a line=66
+        0x000c line=99
+        0x000e line=100
+      locals        :
+        0x0000 - 0x0011 reg=1 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0011 reg=2 (null) Landroidx/constraintlayout/solver/widgets/ConstraintWidget;
+        0x0000 - 0x0011 reg=3 (null) Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;
+
+    #1              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'isConnectionToMe'
+      type          : '(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;Ljava/util/HashSet;)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 9
+      ins           : 3
+      outs          : 3
+      insns size    : 67 16-bit code units
+4d40d8:                                        |[4d40d8] androidx.constraintlayout.solver.widgets.ConstraintAnchor.isConnectionToMe:(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;Ljava/util/HashSet;)Z
+4d40e8: 6e20 97d5 7800                         |0000: invoke-virtual {v8, v7}, Ljava/util/HashSet;.contains:(Ljava/lang/Object;)Z // method@d597
+4d40ee: 0a00                                   |0003: move-result v0
+4d40f0: 1201                                   |0004: const/4 v1, #int 0 // #0
+4d40f2: 3800 0300                              |0005: if-eqz v0, 0008 // +0003
+4d40f6: 0f01                                   |0007: return v1
+4d40f8: 6e20 94d5 7800                         |0008: invoke-virtual {v8, v7}, Ljava/util/HashSet;.add:(Ljava/lang/Object;)Z // method@d594
+4d40fe: 6e10 7e2b 0600                         |000b: invoke-virtual {v6}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getOwner:()Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // method@2b7e
+4d4104: 0c00                                   |000e: move-result-object v0
+4d4106: 1212                                   |000f: const/4 v2, #int 1 // #1
+4d4108: 3307 0300                              |0010: if-ne v7, v0, 0013 // +0003
+4d410c: 0f02                                   |0012: return v2
+4d410e: 6e10 a72b 0700                         |0013: invoke-virtual {v7}, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.getAnchors:()Ljava/util/ArrayList; // method@2ba7
+4d4114: 0c07                                   |0016: move-result-object v7
+4d4116: 6e10 b4d4 0700                         |0017: invoke-virtual {v7}, Ljava/util/ArrayList;.size:()I // method@d4b4
+4d411c: 0a00                                   |001a: move-result v0
+4d411e: 0113                                   |001b: move v3, v1
+4d4120: 3503 2600                              |001c: if-ge v3, v0, 0042 // +0026
+4d4124: 6e20 aad4 3700                         |001e: invoke-virtual {v7, v3}, Ljava/util/ArrayList;.get:(I)Ljava/lang/Object; // method@d4aa
+4d412a: 0c04                                   |0021: move-result-object v4
+4d412c: 1f04 4505                              |0022: check-cast v4, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // type@0545
+4d4130: 6e20 892b 6400                         |0024: invoke-virtual {v4, v6}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.isSimilarDimensionConnection:(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)Z // method@2b89
+4d4136: 0a05                                   |0027: move-result v5
+4d4138: 3805 1700                              |0028: if-eqz v5, 003f // +0017
+4d413c: 6e10 842b 0400                         |002a: invoke-virtual {v4}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.isConnected:()Z // method@2b84
+4d4142: 0a05                                   |002d: move-result v5
+4d4144: 3805 1100                              |002e: if-eqz v5, 003f // +0011
+4d4148: 6e10 802b 0400                         |0030: invoke-virtual {v4}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getTarget:()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // method@2b80
+4d414e: 0c04                                   |0033: move-result-object v4
+4d4150: 6e10 7e2b 0400                         |0034: invoke-virtual {v4}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getOwner:()Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // method@2b7e
+4d4156: 0c04                                   |0037: move-result-object v4
+4d4158: 7030 872b 4608                         |0038: invoke-direct {v6, v4, v8}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.isConnectionToMe:(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;Ljava/util/HashSet;)Z // method@2b87
+4d415e: 0a04                                   |003b: move-result v4
+4d4160: 3804 0300                              |003c: if-eqz v4, 003f // +0003
+4d4164: 0f02                                   |003e: return v2
+4d4166: d803 0301                              |003f: add-int/lit8 v3, v3, #int 1 // #01
+4d416a: 28db                                   |0041: goto 001c // -0025
+4d416c: 0f01                                   |0042: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=425
+        0x0008 line=428
+        0x000b line=430
+        0x0013 line=433
+        0x0017 line=434
+        0x001e line=435
+        0x0024 line=436
+        0x0030 line=437
+      locals        :
+        0x0000 - 0x0043 reg=6 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0043 reg=7 (null) Landroidx/constraintlayout/solver/widgets/ConstraintWidget;
+        0x0000 - 0x0043 reg=8 (null) Ljava/util/HashSet;
+
+  Virtual methods   -
+    #0              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'connect'
+      type          : '(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;I)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 5
+      insns size    : 7 16-bit code units
+4d4170:                                        |[4d4170] androidx.constraintlayout.solver.widgets.ConstraintAnchor.connect:(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;I)Z
+4d4180: 12f0                                   |0000: const/4 v0, #int -1 // #ff
+4d4182: 1201                                   |0001: const/4 v1, #int 0 // #0
+4d4184: 6e51 7a2b 3204                         |0002: invoke-virtual {v2, v3, v4, v0, v1}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.connect:(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;IIZ)Z // method@2b7a
+4d418a: 0a02                                   |0005: move-result v2
+4d418c: 0f02                                   |0006: return v2
+      catches       : (none)
+      positions     :
+        0x0002 line=207
+      locals        :
+        0x0000 - 0x0007 reg=2 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0007 reg=3 (null) Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0007 reg=4 (null) I
+
+    #1              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'connect'
+      type          : '(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;IIZ)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 5
+      outs          : 2
+      insns size    : 47 16-bit code units
+4d4190:                                        |[4d4190] androidx.constraintlayout.solver.widgets.ConstraintAnchor.connect:(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;IIZ)Z
+4d41a0: 1210                                   |0000: const/4 v0, #int 1 // #1
+4d41a2: 3903 0600                              |0001: if-nez v3, 0007 // +0006
+4d41a6: 6e10 8c2b 0200                         |0003: invoke-virtual {v2}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.reset:()V // method@2b8c
+4d41ac: 0f00                                   |0006: return v0
+4d41ae: 1201                                   |0007: const/4 v1, #int 0 // #0
+4d41b0: 3906 0900                              |0008: if-nez v6, 0011 // +0009
+4d41b4: 6e20 8a2b 3200                         |000a: invoke-virtual {v2, v3}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.isValidConnection:(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)Z // method@2b8a
+4d41ba: 0a06                                   |000d: move-result v6
+4d41bc: 3906 0300                              |000e: if-nez v6, 0011 // +0003
+4d41c0: 0f01                                   |0010: return v1
+4d41c2: 5b23 5116                              |0011: iput-object v3, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d41c6: 5436 4c16                              |0013: iget-object v6, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d41ca: 3906 0900                              |0015: if-nez v6, 001e // +0009
+4d41ce: 2206 4a1b                              |0017: new-instance v6, Ljava/util/HashSet; // type@1b4a
+4d41d2: 7010 90d5 0600                         |0019: invoke-direct {v6}, Ljava/util/HashSet;.<init>:()V // method@d590
+4d41d8: 5b36 4c16                              |001c: iput-object v6, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d41dc: 5423 5116                              |001e: iget-object v3, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d41e0: 5433 4c16                              |0020: iget-object v3, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d41e4: 6e20 94d5 2300                         |0022: invoke-virtual {v3, v2}, Ljava/util/HashSet;.add:(Ljava/lang/Object;)Z // method@d594
+4d41ea: 3d04 0500                              |0025: if-lez v4, 002a // +0005
+4d41ee: 5924 4e16                              |0027: iput v4, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mMargin:I // field@164e
+4d41f2: 2803                                   |0029: goto 002c // +0003
+4d41f4: 5921 4e16                              |002a: iput v1, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mMargin:I // field@164e
+4d41f8: 5925 4d16                              |002c: iput v5, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mGoneMargin:I // field@164d
+4d41fc: 0f00                                   |002e: return v0
+      catches       : (none)
+      positions     :
+        0x0003 line=179
+        0x000a line=182
+        0x0011 line=185
+        0x0013 line=186
+        0x0017 line=187
+        0x001e line=189
+        0x0027 line=191
+        0x002a line=193
+        0x002c line=195
+      locals        :
+        0x0000 - 0x002f reg=2 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x002f reg=3 (null) Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x002f reg=4 (null) I
+        0x0000 - 0x002f reg=5 (null) I
+        0x0000 - 0x002f reg=6 (null) Z
+
+    #2              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'copyFrom'
+      type          : '(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;Ljava/util/HashMap;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 2
+      insns size    : 70 16-bit code units
+4d4200:                                        |[4d4200] androidx.constraintlayout.solver.widgets.ConstraintAnchor.copyFrom:(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;Ljava/util/HashMap;)V
+4d4210: 5420 5116                              |0000: iget-object v0, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d4214: 3800 0900                              |0002: if-eqz v0, 000b // +0009
+4d4218: 5400 4c16                              |0004: iget-object v0, v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d421c: 3800 0500                              |0006: if-eqz v0, 000b // +0005
+4d4220: 6e20 9cd5 2000                         |0008: invoke-virtual {v0, v2}, Ljava/util/HashSet;.remove:(Ljava/lang/Object;)Z // method@d59c
+4d4226: 5430 5116                              |000b: iget-object v0, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d422a: 3800 1700                              |000d: if-eqz v0, 0024 // +0017
+4d422e: 6e10 812b 0000                         |000f: invoke-virtual {v0}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getType:()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // method@2b81
+4d4234: 0c00                                   |0012: move-result-object v0
+4d4236: 5431 5116                              |0013: iget-object v1, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d423a: 5411 4f16                              |0015: iget-object v1, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mOwner:Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // field@164f
+4d423e: 6e20 86d5 1400                         |0017: invoke-virtual {v4, v1}, Ljava/util/HashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d586
+4d4244: 0c04                                   |001a: move-result-object v4
+4d4246: 1f04 4805                              |001b: check-cast v4, Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // type@0548
+4d424a: 6e20 a62b 0400                         |001d: invoke-virtual {v4, v0}, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.getAnchor:(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;)Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // method@2ba6
+4d4250: 0c04                                   |0020: move-result-object v4
+4d4252: 5b24 5116                              |0021: iput-object v4, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d4256: 2804                                   |0023: goto 0027 // +0004
+4d4258: 1204                                   |0024: const/4 v4, #int 0 // #0
+4d425a: 5b24 5116                              |0025: iput-object v4, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d425e: 5424 5116                              |0027: iget-object v4, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d4262: 3804 1400                              |0029: if-eqz v4, 003d // +0014
+4d4266: 5440 4c16                              |002b: iget-object v0, v4, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d426a: 3900 0900                              |002d: if-nez v0, 0036 // +0009
+4d426e: 2200 4a1b                              |002f: new-instance v0, Ljava/util/HashSet; // type@1b4a
+4d4272: 7010 90d5 0000                         |0031: invoke-direct {v0}, Ljava/util/HashSet;.<init>:()V // method@d590
+4d4278: 5b40 4c16                              |0034: iput-object v0, v4, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d427c: 5424 5116                              |0036: iget-object v4, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d4280: 5444 4c16                              |0038: iget-object v4, v4, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d4284: 6e20 94d5 2400                         |003a: invoke-virtual {v4, v2}, Ljava/util/HashSet;.add:(Ljava/lang/Object;)Z // method@d594
+4d428a: 5234 4e16                              |003d: iget v4, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mMargin:I // field@164e
+4d428e: 5924 4e16                              |003f: iput v4, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mMargin:I // field@164e
+4d4292: 5233 4d16                              |0041: iget v3, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mGoneMargin:I // field@164d
+4d4296: 5923 4d16                              |0043: iput v3, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mGoneMargin:I // field@164d
+4d429a: 0e00                                   |0045: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=71
+        0x0004 line=72
+        0x0008 line=73
+        0x000b line=76
+        0x000f line=77
+        0x0013 line=78
+        0x001d line=79
+        0x0025 line=81
+        0x0027 line=83
+        0x002b line=84
+        0x002f line=85
+        0x0036 line=87
+        0x003d line=89
+        0x0041 line=90
+      locals        :
+        0x0000 - 0x0046 reg=2 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0046 reg=3 (null) Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0046 reg=4 (null) Ljava/util/HashMap;
+
+    #3              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'getMargin'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 1
+      insns size    : 35 16-bit code units
+4d429c:                                        |[4d429c] androidx.constraintlayout.solver.widgets.ConstraintAnchor.getMargin:()I
+4d42ac: 5430 4f16                              |0000: iget-object v0, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mOwner:Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // field@164f
+4d42b0: 6e10 cf2b 0000                         |0002: invoke-virtual {v0}, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.getVisibility:()I // method@2bcf
+4d42b6: 0a00                                   |0005: move-result v0
+4d42b8: 1301 0800                              |0006: const/16 v1, #int 8 // #8
+4d42bc: 3310 0400                              |0008: if-ne v0, v1, 000c // +0004
+4d42c0: 1203                                   |000a: const/4 v3, #int 0 // #0
+4d42c2: 0f03                                   |000b: return v3
+4d42c4: 5230 4d16                              |000c: iget v0, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mGoneMargin:I // field@164d
+4d42c8: 12f2                                   |000e: const/4 v2, #int -1 // #ff
+4d42ca: 3720 1100                              |000f: if-le v0, v2, 0020 // +0011
+4d42ce: 5430 5116                              |0011: iget-object v0, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d42d2: 3800 0d00                              |0013: if-eqz v0, 0020 // +000d
+4d42d6: 5400 4f16                              |0015: iget-object v0, v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mOwner:Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // field@164f
+4d42da: 6e10 cf2b 0000                         |0017: invoke-virtual {v0}, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.getVisibility:()I // method@2bcf
+4d42e0: 0a00                                   |001a: move-result v0
+4d42e2: 3310 0500                              |001b: if-ne v0, v1, 0020 // +0005
+4d42e6: 5233 4d16                              |001d: iget v3, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mGoneMargin:I // field@164d
+4d42ea: 0f03                                   |001f: return v3
+4d42ec: 5233 4e16                              |0020: iget v3, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mMargin:I // field@164e
+4d42f0: 0f03                                   |0022: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=137
+        0x000c line=140
+        0x0017 line=141
+        0x001d line=142
+        0x0020 line=144
+      locals        :
+        0x0000 - 0x0023 reg=3 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #4              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'getOpposite'
+      type          : '()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 70 16-bit code units
+4d42f4:                                        |[4d42f4] androidx.constraintlayout.solver.widgets.ConstraintAnchor.getOpposite:()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+4d4304: 6200 3f16                              |0000: sget-object v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$1;.$SwitchMap$androidx$constraintlayout$solver$widgets$ConstraintAnchor$Type:[I // field@163f
+4d4308: 5421 5216                              |0002: iget-object v1, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d430c: 6e10 742b 0100                         |0004: invoke-virtual {v1}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.ordinal:()I // method@2b74
+4d4312: 0a01                                   |0007: move-result v1
+4d4314: 4400 0001                              |0008: aget v0, v0, v1
+4d4318: 2b00 2600 0000                         |000a: packed-switch v0, 00000030 // +00000026
+4d431e: 2200 651a                              |000d: new-instance v0, Ljava/lang/AssertionError; // type@1a65
+4d4322: 5422 5216                              |000f: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d4326: 6e10 732b 0200                         |0011: invoke-virtual {v2}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.name:()Ljava/lang/String; // method@2b73
+4d432c: 0c02                                   |0014: move-result-object v2
+4d432e: 7020 96d0 2000                         |0015: invoke-direct {v0, v2}, Ljava/lang/AssertionError;.<init>:(Ljava/lang/Object;)V // method@d096
+4d4334: 2700                                   |0018: throw v0
+4d4336: 5422 4f16                              |0019: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mOwner:Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // field@164f
+4d433a: 5422 b516                              |001b: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.mTop:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@16b5
+4d433e: 1102                                   |001d: return-object v2
+4d4340: 5422 4f16                              |001e: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mOwner:Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // field@164f
+4d4344: 5422 7d16                              |0020: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.mBottom:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@167d
+4d4348: 1102                                   |0022: return-object v2
+4d434a: 5422 4f16                              |0023: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mOwner:Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // field@164f
+4d434e: 5422 9816                              |0025: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.mLeft:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1698
+4d4352: 1102                                   |0027: return-object v2
+4d4354: 5422 4f16                              |0028: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mOwner:Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // field@164f
+4d4358: 5422 b316                              |002a: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.mRight:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@16b3
+4d435c: 1102                                   |002c: return-object v2
+4d435e: 1202                                   |002d: const/4 v2, #int 0 // #0
+4d4360: 1102                                   |002e: return-object v2
+4d4362: 0000                                   |002f: nop // spacer
+4d4364: 0001 0900 0100 0000 2300 0000 1e00 ... |0030: packed-switch-data (22 units)
+      catches       : (none)
+      positions     :
+        0x0000 line=450
+        0x000d line=470
+        0x0019 line=461
+        0x001e line=458
+        0x0023 line=455
+        0x0028 line=452
+      locals        :
+        0x0000 - 0x0046 reg=2 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #5              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'getOwner'
+      type          : '()Landroidx/constraintlayout/solver/widgets/ConstraintWidget;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+4d4390:                                        |[4d4390] androidx.constraintlayout.solver.widgets.ConstraintAnchor.getOwner:()Landroidx/constraintlayout/solver/widgets/ConstraintWidget;
+4d43a0: 5400 4f16                              |0000: iget-object v0, v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mOwner:Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // field@164f
+4d43a4: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=124
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #6              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'getSolverVariable'
+      type          : '()Landroidx/constraintlayout/solver/SolverVariable;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+4d43a8:                                        |[4d43a8] androidx.constraintlayout.solver.widgets.ConstraintAnchor.getSolverVariable:()Landroidx/constraintlayout/solver/SolverVariable;
+4d43b8: 5400 5016                              |0000: iget-object v0, v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mSolverVariable:Landroidx/constraintlayout/solver/SolverVariable; // field@1650
+4d43bc: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=107
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #7              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'getTarget'
+      type          : '()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+4d43c0:                                        |[4d43c0] androidx.constraintlayout.solver.widgets.ConstraintAnchor.getTarget:()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+4d43d0: 5400 5116                              |0000: iget-object v0, v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d43d4: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=151
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #8              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'getType'
+      type          : '()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+4d43d8:                                        |[4d43d8] androidx.constraintlayout.solver.widgets.ConstraintAnchor.getType:()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;
+4d43e8: 5400 5216                              |0000: iget-object v0, v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d43ec: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=130
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #9              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'hasCenteredDependents'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 35 16-bit code units
+4d43f0:                                        |[4d43f0] androidx.constraintlayout.solver.widgets.ConstraintAnchor.hasCenteredDependents:()Z
+4d4400: 5422 4c16                              |0000: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d4404: 1200                                   |0002: const/4 v0, #int 0 // #0
+4d4406: 3902 0300                              |0003: if-nez v2, 0006 // +0003
+4d440a: 0f00                                   |0005: return v0
+4d440c: 6e10 9bd5 0200                         |0006: invoke-virtual {v2}, Ljava/util/HashSet;.iterator:()Ljava/util/Iterator; // method@d59b
+4d4412: 0c02                                   |0009: move-result-object v2
+4d4414: 7210 a0d5 0200                         |000a: invoke-interface {v2}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+4d441a: 0a01                                   |000d: move-result v1
+4d441c: 3801 1400                              |000e: if-eqz v1, 0022 // +0014
+4d4420: 7210 a1d5 0200                         |0010: invoke-interface {v2}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+4d4426: 0c01                                   |0013: move-result-object v1
+4d4428: 1f01 4505                              |0014: check-cast v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // type@0545
+4d442c: 6e10 7d2b 0100                         |0016: invoke-virtual {v1}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getOpposite:()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // method@2b7d
+4d4432: 0c01                                   |0019: move-result-object v1
+4d4434: 6e10 842b 0100                         |001a: invoke-virtual {v1}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.isConnected:()Z // method@2b84
+4d443a: 0a01                                   |001d: move-result v1
+4d443c: 3801 ecff                              |001e: if-eqz v1, 000a // -0014
+4d4440: 1212                                   |0020: const/4 v2, #int 1 // #1
+4d4442: 0f02                                   |0021: return v2
+4d4444: 0f00                                   |0022: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=43
+        0x0006 line=46
+        0x0016 line=47
+        0x001a line=48
+      locals        :
+        0x0000 - 0x0023 reg=2 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #10              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'hasDependents'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 14 16-bit code units
+4d4448:                                        |[4d4448] androidx.constraintlayout.solver.widgets.ConstraintAnchor.hasDependents:()Z
+4d4458: 5411 4c16                              |0000: iget-object v1, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d445c: 1200                                   |0002: const/4 v0, #int 0 // #0
+4d445e: 3901 0300                              |0003: if-nez v1, 0006 // +0003
+4d4462: 0f00                                   |0005: return v0
+4d4464: 6e10 9dd5 0100                         |0006: invoke-virtual {v1}, Ljava/util/HashSet;.size:()I // method@d59d
+4d446a: 0a01                                   |0009: move-result v1
+4d446c: 3d01 0300                              |000a: if-lez v1, 000d // +0003
+4d4470: 1210                                   |000c: const/4 v0, #int 1 // #1
+4d4472: 0f00                                   |000d: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=36
+        0x0006 line=39
+      locals        :
+        0x0000 - 0x000e reg=1 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #11              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'isConnected'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+4d4474:                                        |[4d4474] androidx.constraintlayout.solver.widgets.ConstraintAnchor.isConnected:()Z
+4d4484: 5400 5116                              |0000: iget-object v0, v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d4488: 3800 0400                              |0002: if-eqz v0, 0006 // +0004
+4d448c: 1210                                   |0004: const/4 v0, #int 1 // #1
+4d448e: 2802                                   |0005: goto 0007 // +0002
+4d4490: 1200                                   |0006: const/4 v0, #int 0 // #0
+4d4492: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=215
+      locals        :
+        0x0000 - 0x0008 reg=0 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #12              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'isConnectionAllowed'
+      type          : '(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 33 16-bit code units
+4d4494:                                        |[4d4494] androidx.constraintlayout.solver.widgets.ConstraintAnchor.isConnectionAllowed:(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;)Z
+4d44a4: 2200 4a1b                              |0000: new-instance v0, Ljava/util/HashSet; // type@1b4a
+4d44a8: 7010 90d5 0000                         |0002: invoke-direct {v0}, Ljava/util/HashSet;.<init>:()V // method@d590
+4d44ae: 7030 872b 3200                         |0005: invoke-direct {v2, v3, v0}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.isConnectionToMe:(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;Ljava/util/HashSet;)Z // method@2b87
+4d44b4: 0a00                                   |0008: move-result v0
+4d44b6: 1201                                   |0009: const/4 v1, #int 0 // #0
+4d44b8: 3800 0300                              |000a: if-eqz v0, 000d // +0003
+4d44bc: 0f01                                   |000c: return v1
+4d44be: 6e10 7e2b 0200                         |000d: invoke-virtual {v2}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getOwner:()Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // method@2b7e
+4d44c4: 0c02                                   |0010: move-result-object v2
+4d44c6: 6e10 c12b 0200                         |0011: invoke-virtual {v2}, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.getParent:()Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // method@2bc1
+4d44cc: 0c02                                   |0014: move-result-object v2
+4d44ce: 1210                                   |0015: const/4 v0, #int 1 // #1
+4d44d0: 3332 0300                              |0016: if-ne v2, v3, 0019 // +0003
+4d44d4: 0f00                                   |0018: return v0
+4d44d6: 6e10 c12b 0300                         |0019: invoke-virtual {v3}, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.getParent:()Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // method@2bc1
+4d44dc: 0c03                                   |001c: move-result-object v3
+4d44de: 3323 0300                              |001d: if-ne v3, v2, 0020 // +0003
+4d44e2: 0f00                                   |001f: return v0
+4d44e4: 0f01                                   |0020: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=403
+        0x0005 line=404
+        0x000d line=407
+        0x0019 line=411
+      locals        :
+        0x0000 - 0x0021 reg=2 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0021 reg=3 (null) Landroidx/constraintlayout/solver/widgets/ConstraintWidget;
+
+    #13              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'isConnectionAllowed'
+      type          : '(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 5 16-bit code units
+4d44e8:                                        |[4d44e8] androidx.constraintlayout.solver.widgets.ConstraintAnchor.isConnectionAllowed:(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)Z
+4d44f8: 6e20 852b 1000                         |0000: invoke-virtual {v0, v1}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.isConnectionAllowed:(Landroidx/constraintlayout/solver/widgets/ConstraintWidget;)Z // method@2b85
+4d44fe: 0a00                                   |0003: move-result v0
+4d4500: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=390
+      locals        :
+        0x0000 - 0x0005 reg=0 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0005 reg=1 (null) Landroidx/constraintlayout/solver/widgets/ConstraintWidget;
+        0x0000 - 0x0005 reg=2 (null) Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #14              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'isSideAnchor'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 52 16-bit code units
+4d4504:                                        |[4d4504] androidx.constraintlayout.solver.widgets.ConstraintAnchor.isSideAnchor:()Z
+4d4514: 6200 3f16                              |0000: sget-object v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$1;.$SwitchMap$androidx$constraintlayout$solver$widgets$ConstraintAnchor$Type:[I // field@163f
+4d4518: 5421 5216                              |0002: iget-object v1, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d451c: 6e10 742b 0100                         |0004: invoke-virtual {v1}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.ordinal:()I // method@2b74
+4d4522: 0a01                                   |0007: move-result v1
+4d4524: 4400 0001                              |0008: aget v0, v0, v1
+4d4528: 2b00 1400 0000                         |000a: packed-switch v0, 0000001e // +00000014
+4d452e: 2200 651a                              |000d: new-instance v0, Ljava/lang/AssertionError; // type@1a65
+4d4532: 5422 5216                              |000f: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d4536: 6e10 732b 0200                         |0011: invoke-virtual {v2}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.name:()Ljava/lang/String; // method@2b73
+4d453c: 0c02                                   |0014: move-result-object v2
+4d453e: 7020 96d0 2000                         |0015: invoke-direct {v0, v2}, Ljava/lang/AssertionError;.<init>:(Ljava/lang/Object;)V // method@d096
+4d4544: 2700                                   |0018: throw v0
+4d4546: 1212                                   |0019: const/4 v2, #int 1 // #1
+4d4548: 0f02                                   |001a: return v2
+4d454a: 1202                                   |001b: const/4 v2, #int 0 // #0
+4d454c: 0f02                                   |001c: return v2
+4d454e: 0000                                   |001d: nop // spacer
+4d4550: 0001 0900 0100 0000 1100 0000 0f00 ... |001e: packed-switch-data (22 units)
+      catches       : (none)
+      positions     :
+        0x0000 line=272
+        0x000d line=285
+      locals        :
+        0x0000 - 0x0034 reg=2 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #15              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'isSimilarDimensionConnection'
+      type          : '(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 100 16-bit code units
+4d457c:                                        |[4d457c] androidx.constraintlayout.solver.widgets.ConstraintAnchor.isSimilarDimensionConnection:(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)Z
+4d458c: 6e10 812b 0400                         |0000: invoke-virtual {v4}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getType:()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // method@2b81
+4d4592: 0c04                                   |0003: move-result-object v4
+4d4594: 5430 5216                              |0004: iget-object v0, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d4598: 1211                                   |0006: const/4 v1, #int 1 // #1
+4d459a: 3304 0300                              |0007: if-ne v4, v0, 000a // +0003
+4d459e: 0f01                                   |0009: return v1
+4d45a0: 6200 3f16                              |000a: sget-object v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$1;.$SwitchMap$androidx$constraintlayout$solver$widgets$ConstraintAnchor$Type:[I // field@163f
+4d45a4: 5432 5216                              |000c: iget-object v2, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d45a8: 6e10 742b 0200                         |000e: invoke-virtual {v2}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.ordinal:()I // method@2b74
+4d45ae: 0a02                                   |0011: move-result v2
+4d45b0: 4400 0002                              |0012: aget v0, v0, v2
+4d45b4: 1202                                   |0014: const/4 v2, #int 0 // #0
+4d45b6: 2b00 3900 0000                         |0015: packed-switch v0, 0000004e // +00000039
+4d45bc: 2204 651a                              |0018: new-instance v4, Ljava/lang/AssertionError; // type@1a65
+4d45c0: 5433 5216                              |001a: iget-object v3, v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d45c4: 6e10 732b 0300                         |001c: invoke-virtual {v3}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.name:()Ljava/lang/String; // method@2b73
+4d45ca: 0c03                                   |001f: move-result-object v3
+4d45cc: 7020 96d0 3400                         |0020: invoke-direct {v4, v3}, Ljava/lang/AssertionError;.<init>:(Ljava/lang/Object;)V // method@d096
+4d45d2: 2704                                   |0023: throw v4
+4d45d4: 0f02                                   |0024: return v2
+4d45d6: 6203 4916                              |0025: sget-object v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.TOP:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1649
+4d45da: 3234 1000                              |0027: if-eq v4, v3, 0037 // +0010
+4d45de: 6203 4216                              |0029: sget-object v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.BOTTOM:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1642
+4d45e2: 3234 0c00                              |002b: if-eq v4, v3, 0037 // +000c
+4d45e6: 6203 4516                              |002d: sget-object v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.CENTER_Y:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1645
+4d45ea: 3234 0800                              |002f: if-eq v4, v3, 0037 // +0008
+4d45ee: 6203 4116                              |0031: sget-object v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.BASELINE:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1641
+4d45f2: 3334 0300                              |0033: if-ne v4, v3, 0036 // +0003
+4d45f6: 2802                                   |0035: goto 0037 // +0002
+4d45f8: 0121                                   |0036: move v1, v2
+4d45fa: 0f01                                   |0037: return v1
+4d45fc: 6203 4616                              |0038: sget-object v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.LEFT:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1646
+4d4600: 3234 0c00                              |003a: if-eq v4, v3, 0046 // +000c
+4d4604: 6203 4816                              |003c: sget-object v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.RIGHT:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1648
+4d4608: 3234 0800                              |003e: if-eq v4, v3, 0046 // +0008
+4d460c: 6203 4416                              |0040: sget-object v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.CENTER_X:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1644
+4d4610: 3334 0300                              |0042: if-ne v4, v3, 0045 // +0003
+4d4614: 2802                                   |0044: goto 0046 // +0002
+4d4616: 0121                                   |0045: move v1, v2
+4d4618: 0f01                                   |0046: return v1
+4d461a: 6203 4116                              |0047: sget-object v3, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.BASELINE:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1641
+4d461e: 3234 0300                              |0049: if-eq v4, v3, 004c // +0003
+4d4622: 2802                                   |004b: goto 004d // +0002
+4d4624: 0121                                   |004c: move v1, v2
+4d4626: 0f01                                   |004d: return v1
+4d4628: 0001 0900 0100 0000 3200 0000 2300 ... |004e: packed-switch-data (22 units)
+      catches       : (none)
+      positions     :
+        0x0000 line=296
+        0x0004 line=297
+        0x000a line=300
+        0x0018 line=318
+        0x0025 line=313
+        0x0038 line=307
+        0x0047 line=302
+      locals        :
+        0x0000 - 0x0064 reg=3 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0064 reg=4 (null) Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #16              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'isValidConnection'
+      type          : '(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 2
+      insns size    : 160 16-bit code units
+4d4654:                                        |[4d4654] androidx.constraintlayout.solver.widgets.ConstraintAnchor.isValidConnection:(Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)Z
+4d4664: 1200                                   |0000: const/4 v0, #int 0 // #0
+4d4666: 3906 0300                              |0001: if-nez v6, 0004 // +0003
+4d466a: 0f00                                   |0003: return v0
+4d466c: 6e10 812b 0600                         |0004: invoke-virtual {v6}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getType:()Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // method@2b81
+4d4672: 0c01                                   |0007: move-result-object v1
+4d4674: 5452 5216                              |0008: iget-object v2, v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d4678: 1213                                   |000a: const/4 v3, #int 1 // #1
+4d467a: 3321 1c00                              |000b: if-ne v1, v2, 0027 // +001c
+4d467e: 6201 4116                              |000d: sget-object v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.BASELINE:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1641
+4d4682: 3312 1700                              |000f: if-ne v2, v1, 0026 // +0017
+4d4686: 6e10 7e2b 0600                         |0011: invoke-virtual {v6}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getOwner:()Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // method@2b7e
+4d468c: 0c06                                   |0014: move-result-object v6
+4d468e: 6e10 d32b 0600                         |0015: invoke-virtual {v6}, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.hasBaseline:()Z // method@2bd3
+4d4694: 0a06                                   |0018: move-result v6
+4d4696: 3806 0c00                              |0019: if-eqz v6, 0025 // +000c
+4d469a: 6e10 7e2b 0500                         |001b: invoke-virtual {v5}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getOwner:()Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // method@2b7e
+4d46a0: 0c05                                   |001e: move-result-object v5
+4d46a2: 6e10 d32b 0500                         |001f: invoke-virtual {v5}, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.hasBaseline:()Z // method@2bd3
+4d46a8: 0a05                                   |0022: move-result v5
+4d46aa: 3905 0300                              |0023: if-nez v5, 0026 // +0003
+4d46ae: 0f00                                   |0025: return v0
+4d46b0: 0f03                                   |0026: return v3
+4d46b2: 6202 3f16                              |0027: sget-object v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$1;.$SwitchMap$androidx$constraintlayout$solver$widgets$ConstraintAnchor$Type:[I // field@163f
+4d46b6: 5454 5216                              |0029: iget-object v4, v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d46ba: 6e10 742b 0400                         |002b: invoke-virtual {v4}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.ordinal:()I // method@2b74
+4d46c0: 0a04                                   |002e: move-result v4
+4d46c2: 4402 0204                              |002f: aget v2, v2, v4
+4d46c6: 2b02 5900 0000                         |0031: packed-switch v2, 0000008a // +00000059
+4d46cc: 2206 651a                              |0034: new-instance v6, Ljava/lang/AssertionError; // type@1a65
+4d46d0: 5455 5216                              |0036: iget-object v5, v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d46d4: 6e10 732b 0500                         |0038: invoke-virtual {v5}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.name:()Ljava/lang/String; // method@2b73
+4d46da: 0c05                                   |003b: move-result-object v5
+4d46dc: 7020 96d0 5600                         |003c: invoke-direct {v6, v5}, Ljava/lang/AssertionError;.<init>:(Ljava/lang/Object;)V // method@d096
+4d46e2: 2706                                   |003f: throw v6
+4d46e4: 0f00                                   |0040: return v0
+4d46e6: 6205 4916                              |0041: sget-object v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.TOP:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1649
+4d46ea: 3251 0900                              |0043: if-eq v1, v5, 004c // +0009
+4d46ee: 6205 4216                              |0045: sget-object v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.BOTTOM:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1642
+4d46f2: 3351 0300                              |0047: if-ne v1, v5, 004a // +0003
+4d46f6: 2803                                   |0049: goto 004c // +0003
+4d46f8: 0105                                   |004a: move v5, v0
+4d46fa: 2802                                   |004b: goto 004d // +0002
+4d46fc: 0135                                   |004c: move v5, v3
+4d46fe: 6e10 7e2b 0600                         |004d: invoke-virtual {v6}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getOwner:()Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // method@2b7e
+4d4704: 0c06                                   |0050: move-result-object v6
+4d4706: 2066 4d05                              |0051: instance-of v6, v6, Landroidx/constraintlayout/solver/widgets/Guideline; // type@054d
+4d470a: 3806 0a00                              |0053: if-eqz v6, 005d // +000a
+4d470e: 3905 0600                              |0055: if-nez v5, 005b // +0006
+4d4712: 6205 4516                              |0057: sget-object v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.CENTER_Y:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1645
+4d4716: 3351 0300                              |0059: if-ne v1, v5, 005c // +0003
+4d471a: 0130                                   |005b: move v0, v3
+4d471c: 0105                                   |005c: move v5, v0
+4d471e: 0f05                                   |005d: return v5
+4d4720: 6205 4616                              |005e: sget-object v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.LEFT:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1646
+4d4724: 3251 0900                              |0060: if-eq v1, v5, 0069 // +0009
+4d4728: 6205 4816                              |0062: sget-object v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.RIGHT:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1648
+4d472c: 3351 0300                              |0064: if-ne v1, v5, 0067 // +0003
+4d4730: 2803                                   |0066: goto 0069 // +0003
+4d4732: 0105                                   |0067: move v5, v0
+4d4734: 2802                                   |0068: goto 006a // +0002
+4d4736: 0135                                   |0069: move v5, v3
+4d4738: 6e10 7e2b 0600                         |006a: invoke-virtual {v6}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.getOwner:()Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // method@2b7e
+4d473e: 0c06                                   |006d: move-result-object v6
+4d4740: 2066 4d05                              |006e: instance-of v6, v6, Landroidx/constraintlayout/solver/widgets/Guideline; // type@054d
+4d4744: 3806 0a00                              |0070: if-eqz v6, 007a // +000a
+4d4748: 3905 0600                              |0072: if-nez v5, 0078 // +0006
+4d474c: 6205 4416                              |0074: sget-object v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.CENTER_X:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1644
+4d4750: 3351 0300                              |0076: if-ne v1, v5, 0079 // +0003
+4d4754: 0130                                   |0078: move v0, v3
+4d4756: 0105                                   |0079: move v5, v0
+4d4758: 0f05                                   |007a: return v5
+4d475a: 6205 4116                              |007b: sget-object v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.BASELINE:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1641
+4d475e: 3251 0b00                              |007d: if-eq v1, v5, 0088 // +000b
+4d4762: 6205 4416                              |007f: sget-object v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.CENTER_X:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1644
+4d4766: 3251 0700                              |0081: if-eq v1, v5, 0088 // +0007
+4d476a: 6205 4516                              |0083: sget-object v5, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.CENTER_Y:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1645
+4d476e: 3251 0300                              |0085: if-eq v1, v5, 0088 // +0003
+4d4772: 0130                                   |0087: move v0, v3
+4d4774: 0f00                                   |0088: return v0
+4d4776: 0000                                   |0089: nop // spacer
+4d4778: 0001 0900 0100 0000 4a00 0000 2d00 ... |008a: packed-switch-data (22 units)
+      catches       : (none)
+      positions     :
+        0x0004 line=227
+        0x0008 line=228
+        0x000d line=229
+        0x0011 line=230
+        0x0027 line=235
+        0x0034 line=263
+        0x0041 line=251
+        0x004d line=252
+        0x0057 line=253
+        0x005e line=243
+        0x006a line=244
+        0x0074 line=245
+        0x007b line=238
+      locals        :
+        0x0000 - 0x00a0 reg=5 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x00a0 reg=6 (null) Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #17              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'isVerticalAnchor'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 52 16-bit code units
+4d47a4:                                        |[4d47a4] androidx.constraintlayout.solver.widgets.ConstraintAnchor.isVerticalAnchor:()Z
+4d47b4: 6200 3f16                              |0000: sget-object v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$1;.$SwitchMap$androidx$constraintlayout$solver$widgets$ConstraintAnchor$Type:[I // field@163f
+4d47b8: 5421 5216                              |0002: iget-object v1, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d47bc: 6e10 742b 0100                         |0004: invoke-virtual {v1}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.ordinal:()I // method@2b74
+4d47c2: 0a01                                   |0007: move-result v1
+4d47c4: 4400 0001                              |0008: aget v0, v0, v1
+4d47c8: 2b00 1400 0000                         |000a: packed-switch v0, 0000001e // +00000014
+4d47ce: 2200 651a                              |000d: new-instance v0, Ljava/lang/AssertionError; // type@1a65
+4d47d2: 5422 5216                              |000f: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d47d6: 6e10 732b 0200                         |0011: invoke-virtual {v2}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.name:()Ljava/lang/String; // method@2b73
+4d47dc: 0c02                                   |0014: move-result-object v2
+4d47de: 7020 96d0 2000                         |0015: invoke-direct {v0, v2}, Ljava/lang/AssertionError;.<init>:(Ljava/lang/Object;)V // method@d096
+4d47e4: 2700                                   |0018: throw v0
+4d47e6: 1212                                   |0019: const/4 v2, #int 1 // #1
+4d47e8: 0f02                                   |001a: return v2
+4d47ea: 1202                                   |001b: const/4 v2, #int 0 // #0
+4d47ec: 0f02                                   |001c: return v2
+4d47ee: 0000                                   |001d: nop // spacer
+4d47f0: 0001 0900 0100 0000 1100 0000 1100 ... |001e: packed-switch-data (22 units)
+      catches       : (none)
+      positions     :
+        0x0000 line=347
+        0x000d line=360
+      locals        :
+        0x0000 - 0x0034 reg=2 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #18              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'reset'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 21 16-bit code units
+4d481c:                                        |[4d481c] androidx.constraintlayout.solver.widgets.ConstraintAnchor.reset:()V
+4d482c: 5410 5116                              |0000: iget-object v0, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d4830: 3800 0900                              |0002: if-eqz v0, 000b // +0009
+4d4834: 5400 4c16                              |0004: iget-object v0, v0, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mDependents:Ljava/util/HashSet; // field@164c
+4d4838: 3800 0500                              |0006: if-eqz v0, 000b // +0005
+4d483c: 6e20 9cd5 1000                         |0008: invoke-virtual {v0, v1}, Ljava/util/HashSet;.remove:(Ljava/lang/Object;)Z // method@d59c
+4d4842: 1200                                   |000b: const/4 v0, #int 0 // #0
+4d4844: 5b10 5116                              |000c: iput-object v0, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mTarget:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor; // field@1651
+4d4848: 1200                                   |000e: const/4 v0, #int 0 // #0
+4d484a: 5910 4e16                              |000f: iput v0, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mMargin:I // field@164e
+4d484e: 12f0                                   |0011: const/4 v0, #int -1 // #ff
+4d4850: 5910 4d16                              |0012: iput v0, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mGoneMargin:I // field@164d
+4d4854: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=157
+        0x0004 line=158
+        0x0008 line=159
+        0x000c line=162
+        0x000f line=163
+        0x0012 line=164
+      locals        :
+        0x0000 - 0x0015 reg=1 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+    #19              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'resetSolverVariable'
+      type          : '(Landroidx/constraintlayout/solver/Cache;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 19 16-bit code units
+4d4858:                                        |[4d4858] androidx.constraintlayout.solver.widgets.ConstraintAnchor.resetSolverVariable:(Landroidx/constraintlayout/solver/Cache;)V
+4d4868: 5423 5016                              |0000: iget-object v3, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mSolverVariable:Landroidx/constraintlayout/solver/SolverVariable; // field@1650
+4d486c: 3903 0d00                              |0002: if-nez v3, 000f // +000d
+4d4870: 2203 2605                              |0004: new-instance v3, Landroidx/constraintlayout/solver/SolverVariable; // type@0526
+4d4874: 6200 5115                              |0006: sget-object v0, Landroidx/constraintlayout/solver/SolverVariable$Type;.UNRESTRICTED:Landroidx/constraintlayout/solver/SolverVariable$Type; // field@1551
+4d4878: 1201                                   |0008: const/4 v1, #int 0 // #0
+4d487a: 7030 632a 0301                         |0009: invoke-direct {v3, v0, v1}, Landroidx/constraintlayout/solver/SolverVariable;.<init>:(Landroidx/constraintlayout/solver/SolverVariable$Type;Ljava/lang/String;)V // method@2a63
+4d4880: 5b23 5016                              |000c: iput-object v3, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mSolverVariable:Landroidx/constraintlayout/solver/SolverVariable; // field@1650
+4d4884: 2804                                   |000e: goto 0012 // +0004
+4d4886: 6e10 6b2a 0300                         |000f: invoke-virtual {v3}, Landroidx/constraintlayout/solver/SolverVariable;.reset:()V // method@2a6b
+4d488c: 0e00                                   |0012: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=113
+        0x0004 line=114
+        0x000f line=116
+      locals        :
+        0x0000 - 0x0013 reg=2 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0013 reg=3 (null) Landroidx/constraintlayout/solver/Cache;
+
+    #20              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'setGoneMargin'
+      type          : '(I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 9 16-bit code units
+4d4890:                                        |[4d4890] androidx.constraintlayout.solver.widgets.ConstraintAnchor.setGoneMargin:(I)V
+4d48a0: 6e10 842b 0100                         |0000: invoke-virtual {v1}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.isConnected:()Z // method@2b84
+4d48a6: 0a00                                   |0003: move-result v0
+4d48a8: 3800 0400                              |0004: if-eqz v0, 0008 // +0004
+4d48ac: 5912 4d16                              |0006: iput v2, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mGoneMargin:I // field@164d
+4d48b0: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=336
+        0x0006 line=337
+      locals        :
+        0x0000 - 0x0009 reg=1 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0009 reg=2 (null) I
+
+    #21              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'setMargin'
+      type          : '(I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 9 16-bit code units
+4d48b4:                                        |[4d48b4] androidx.constraintlayout.solver.widgets.ConstraintAnchor.setMargin:(I)V
+4d48c4: 6e10 842b 0100                         |0000: invoke-virtual {v1}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.isConnected:()Z // method@2b84
+4d48ca: 0a00                                   |0003: move-result v0
+4d48cc: 3800 0400                              |0004: if-eqz v0, 0008 // +0004
+4d48d0: 5912 4e16                              |0006: iput v2, v1, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mMargin:I // field@164e
+4d48d4: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=326
+        0x0006 line=327
+      locals        :
+        0x0000 - 0x0009 reg=1 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+        0x0000 - 0x0009 reg=2 (null) I
+
+    #22              : (in Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 36 16-bit code units
+4d48d8:                                        |[4d48d8] androidx.constraintlayout.solver.widgets.ConstraintAnchor.toString:()Ljava/lang/String;
+4d48e8: 2200 991a                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+4d48ec: 7010 39d2 0000                         |0002: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+4d48f2: 5421 4f16                              |0005: iget-object v1, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mOwner:Landroidx/constraintlayout/solver/widgets/ConstraintWidget; // field@164f
+4d48f6: 6e10 ad2b 0100                         |0007: invoke-virtual {v1}, Landroidx/constraintlayout/solver/widgets/ConstraintWidget;.getDebugName:()Ljava/lang/String; // method@2bad
+4d48fc: 0c01                                   |000a: move-result-object v1
+4d48fe: 6e20 45d2 1000                         |000b: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4d4904: 0c00                                   |000e: move-result-object v0
+4d4906: 1a01 6910                              |000f: const-string v1, ":" // string@1069
+4d490a: 6e20 45d2 1000                         |0011: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4d4910: 0c00                                   |0014: move-result-object v0
+4d4912: 5422 5216                              |0015: iget-object v2, v2, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;.mType:Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type; // field@1652
+4d4916: 6e10 752b 0200                         |0017: invoke-virtual {v2}, Landroidx/constraintlayout/solver/widgets/ConstraintAnchor$Type;.toString:()Ljava/lang/String; // method@2b75
+4d491c: 0c02                                   |001a: move-result-object v2
+4d491e: 6e20 45d2 2000                         |001b: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4d4924: 0c02                                   |001e: move-result-object v2
+4d4926: 6e10 58d2 0200                         |001f: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+4d492c: 0c02                                   |0022: move-result-object v2
+4d492e: 1102                                   |0023: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=370
+      locals        :
+        0x0000 - 0x0024 reg=2 this Landroidx/constraintlayout/solver/widgets/ConstraintAnchor;
+
+  source_file_idx   : 7662 (ConstraintAnchor.java)
+

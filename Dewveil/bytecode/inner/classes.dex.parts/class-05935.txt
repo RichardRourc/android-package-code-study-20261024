@@ -1,0 +1,225 @@
+Class #5935            -
+  Class descriptor  : 'Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lokio/Source;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : 'flags'
+      type          : 'B'
+      access        : 0x0000 ()
+    #1              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : 'left'
+      type          : 'I'
+      access        : 0x0000 ()
+    #2              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : 'length'
+      type          : 'I'
+      access        : 0x0000 ()
+    #3              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : 'padding'
+      type          : 'S'
+      access        : 0x0000 ()
+    #4              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : 'source'
+      type          : 'Lokio/BufferedSource;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : 'streamId'
+      type          : 'I'
+      access        : 0x0000 ()
+  Direct methods    -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : '<init>'
+      type          : '(Lokio/BufferedSource;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 6 16-bit code units
+75e52c:                                        |[75e52c] com.squareup.okhttp.internal.framed.Http2$ContinuationSource.<init>:(Lokio/BufferedSource;)V
+75e53c: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+75e542: 5b01 9788                              |0003: iput-object v1, v0, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.source:Lokio/BufferedSource; // field@8897
+75e546: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=602
+        0x0003 line=603
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;
+        0x0000 - 0x0006 reg=1 (null) Lokio/BufferedSource;
+
+    #1              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : 'readContinuationHeader'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 1
+      outs          : 5
+      insns size    : 106 16-bit code units
+75e548:                                        |[75e548] com.squareup.okhttp.internal.framed.Http2$ContinuationSource.readContinuationHeader:()V
+75e558: 5270 9888                              |0000: iget v0, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.streamId:I // field@8898
+75e55c: 5471 9788                              |0002: iget-object v1, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.source:Lokio/BufferedSource; // field@8897
+75e560: 7110 ddcc 0100                         |0004: invoke-static {v1}, Lcom/squareup/okhttp/internal/framed/Http2;.access$300:(Lokio/BufferedSource;)I // method@ccdd
+75e566: 0a01                                   |0007: move-result v1
+75e568: 5971 9488                              |0008: iput v1, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.left:I // field@8894
+75e56c: 5971 9588                              |000a: iput v1, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.length:I // field@8895
+75e570: 5471 9788                              |000c: iget-object v1, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.source:Lokio/BufferedSource; // field@8897
+75e574: 7210 52fe 0100                         |000e: invoke-interface {v1}, Lokio/BufferedSource;.readByte:()B // method@fe52
+75e57a: 0a01                                   |0011: move-result v1
+75e57c: d511 ff00                              |0012: and-int/lit16 v1, v1, #int 255 // #00ff
+75e580: 8d11                                   |0014: int-to-byte v1, v1
+75e582: 5472 9788                              |0015: iget-object v2, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.source:Lokio/BufferedSource; // field@8897
+75e586: 7210 52fe 0200                         |0017: invoke-interface {v2}, Lokio/BufferedSource;.readByte:()B // method@fe52
+75e58c: 0a02                                   |001a: move-result v2
+75e58e: d522 ff00                              |001b: and-int/lit16 v2, v2, #int 255 // #00ff
+75e592: 8d22                                   |001d: int-to-byte v2, v2
+75e594: 5d72 9388                              |001e: iput-byte v2, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.flags:B // field@8893
+75e598: 7100 dbcc 0000                         |0020: invoke-static {}, Lcom/squareup/okhttp/internal/framed/Http2;.access$100:()Ljava/util/logging/Logger; // method@ccdb
+75e59e: 0c02                                   |0023: move-result-object v2
+75e5a0: 6203 4c8a                              |0024: sget-object v3, Ljava/util/logging/Level;.FINE:Ljava/util/logging/Level; // field@8a4c
+75e5a4: 6e20 26d7 3200                         |0026: invoke-virtual {v2, v3}, Ljava/util/logging/Logger;.isLoggable:(Ljava/util/logging/Level;)Z // method@d726
+75e5aa: 0a02                                   |0029: move-result v2
+75e5ac: 3802 1400                              |002a: if-eqz v2, 003e // +0014
+75e5b0: 7100 dbcc 0000                         |002c: invoke-static {}, Lcom/squareup/okhttp/internal/framed/Http2;.access$100:()Ljava/util/logging/Logger; // method@ccdb
+75e5b6: 0c02                                   |002f: move-result-object v2
+75e5b8: 5273 9888                              |0030: iget v3, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.streamId:I // field@8898
+75e5bc: 5274 9588                              |0032: iget v4, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.length:I // field@8895
+75e5c0: 5675 9388                              |0034: iget-byte v5, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.flags:B // field@8893
+75e5c4: 1216                                   |0036: const/4 v6, #int 1 // #1
+75e5c6: 7155 b4cc 3614                         |0037: invoke-static {v6, v3, v4, v1, v5}, Lcom/squareup/okhttp/internal/framed/Http2$FrameLogger;.formatHeader:(ZIIBB)Ljava/lang/String; // method@ccb4
+75e5cc: 0c03                                   |003a: move-result-object v3
+75e5ce: 6e20 24d7 3200                         |003b: invoke-virtual {v2, v3}, Ljava/util/logging/Logger;.fine:(Ljava/lang/String;)V // method@d724
+75e5d4: 5472 9788                              |003e: iget-object v2, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.source:Lokio/BufferedSource; // field@8897
+75e5d8: 7210 58fe 0200                         |0040: invoke-interface {v2}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75e5de: 0a02                                   |0043: move-result v2
+75e5e0: 1403 ffff ff7f                         |0044: const v3, #float nan // #7fffffff
+75e5e6: b532                                   |0047: and-int/2addr v2, v3
+75e5e8: 5972 9888                              |0048: iput v2, v7, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.streamId:I // field@8898
+75e5ec: 1307 0900                              |004a: const/16 v7, #int 9 // #9
+75e5f0: 3371 0f00                              |004c: if-ne v1, v7, 005b // +000f
+75e5f4: 3302 0300                              |004e: if-ne v2, v0, 0051 // +0003
+75e5f8: 0e00                                   |0050: return-void
+75e5fa: 1207                                   |0051: const/4 v7, #int 0 // #0
+75e5fc: 2377 ad20                              |0052: new-array v7, v7, [Ljava/lang/Object; // type@20ad
+75e600: 1a00 7266                              |0054: const-string v0, "TYPE_CONTINUATION streamId changed" // string@6672
+75e604: 7120 dccc 7000                         |0056: invoke-static {v0, v7}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75e60a: 0c07                                   |0059: move-result-object v7
+75e60c: 2707                                   |005a: throw v7
+75e60e: 7110 a8d0 0100                         |005b: invoke-static {v1}, Ljava/lang/Byte;.valueOf:(B)Ljava/lang/Byte; // method@d0a8
+75e614: 0c07                                   |005e: move-result-object v7
+75e616: 2410 ad20 0700                         |005f: filled-new-array {v7}, [Ljava/lang/Object; // type@20ad
+75e61c: 0c07                                   |0062: move-result-object v7
+75e61e: 1a00 5306                              |0063: const-string v0, "%s != TYPE_CONTINUATION" // string@0653
+75e622: 7120 dccc 7000                         |0065: invoke-static {v0, v7}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75e628: 0c07                                   |0068: move-result-object v7
+75e62a: 2707                                   |0069: throw v7
+      catches       : (none)
+      positions     :
+        0x0000 line=629
+        0x0002 line=631
+        0x000c line=632
+        0x0015 line=633
+        0x0020 line=634
+        0x003e line=635
+        0x0052 line=637
+        0x005b line=636
+      locals        :
+        0x0000 - 0x006a reg=7 this Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;
+
+  Virtual methods   -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 1 16-bit code units
+75e62c:                                        |[75e62c] com.squareup.okhttp.internal.framed.Http2$ContinuationSource.close:()V
+75e63c: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : 'read'
+      type          : '(Lokio/Buffer;J)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 4
+      insns size    : 52 16-bit code units
+75e640:                                        |[75e640] com.squareup.okhttp.internal.framed.Http2$ContinuationSource.read:(Lokio/Buffer;J)J
+75e650: 5260 9488                              |0000: iget v0, v6, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.left:I // field@8894
+75e654: 1601 ffff                              |0002: const-wide/16 v1, #int -1 // #ffff
+75e658: 3900 1800                              |0004: if-nez v0, 001c // +0018
+75e65c: 5460 9788                              |0006: iget-object v0, v6, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.source:Lokio/BufferedSource; // field@8897
+75e660: 5863 9688                              |0008: iget-short v3, v6, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.padding:S // field@8896
+75e664: 8133                                   |000a: int-to-long v3, v3
+75e666: 7230 5cfe 3004                         |000b: invoke-interface {v0, v3, v4}, Lokio/BufferedSource;.skip:(J)V // method@fe5c
+75e66c: 1200                                   |000e: const/4 v0, #int 0 // #0
+75e66e: 5f60 9688                              |000f: iput-short v0, v6, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.padding:S // field@8896
+75e672: 5660 9388                              |0011: iget-byte v0, v6, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.flags:B // field@8893
+75e676: dd00 0004                              |0013: and-int/lit8 v0, v0, #int 4 // #04
+75e67a: 3800 0300                              |0015: if-eqz v0, 0018 // +0003
+75e67e: 1001                                   |0017: return-wide v1
+75e680: 7010 afcc 0600                         |0018: invoke-direct {v6}, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.readContinuationHeader:()V // method@ccaf
+75e686: 28e5                                   |001b: goto 0000 // -001b
+75e688: 5463 9788                              |001c: iget-object v3, v6, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.source:Lokio/BufferedSource; // field@8897
+75e68c: 8104                                   |001e: int-to-long v4, v0
+75e68e: 7140 a0d1 9854                         |001f: invoke-static {v8, v9, v4, v5}, Ljava/lang/Math;.min:(JJ)J // method@d1a0
+75e694: 0b08                                   |0022: move-result-wide v8
+75e696: 7240 51fe 7398                         |0023: invoke-interface {v3, v7, v8, v9}, Lokio/BufferedSource;.read:(Lokio/Buffer;J)J // method@fe51
+75e69c: 0b07                                   |0026: move-result-wide v7
+75e69e: 3109 0701                              |0027: cmp-long v9, v7, v1
+75e6a2: 3909 0300                              |0029: if-nez v9, 002c // +0003
+75e6a6: 1001                                   |002b: return-wide v1
+75e6a8: 5269 9488                              |002c: iget v9, v6, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.left:I // field@8894
+75e6ac: 8190                                   |002e: int-to-long v0, v9
+75e6ae: bc70                                   |002f: sub-long/2addr v0, v7
+75e6b0: 8409                                   |0030: long-to-int v9, v0
+75e6b2: 5969 9488                              |0031: iput v9, v6, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.left:I // field@8894
+75e6b6: 1007                                   |0033: return-wide v7
+      catches       : (none)
+      positions     :
+        0x0000 line=607
+        0x0006 line=608
+        0x000f line=609
+        0x0011 line=610
+        0x0018 line=611
+        0x001c line=615
+        0x002c line=617
+      locals        :
+        0x0000 - 0x0034 reg=6 this Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;
+        0x0000 - 0x0034 reg=7 (null) Lokio/Buffer;
+        0x0000 - 0x0034 reg=8 (null) J
+
+    #2              : (in Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;)
+      name          : 'timeout'
+      type          : '()Lokio/Timeout;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+75e6b8:                                        |[75e6b8] com.squareup.okhttp.internal.framed.Http2$ContinuationSource.timeout:()Lokio/Timeout;
+75e6c8: 5400 9788                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.source:Lokio/BufferedSource; // field@8897
+75e6cc: 7210 5dfe 0000                         |0002: invoke-interface {v0}, Lokio/BufferedSource;.timeout:()Lokio/Timeout; // method@fe5d
+75e6d2: 0c00                                   |0005: move-result-object v0
+75e6d4: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=622
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;
+
+  source_file_idx   : 10916 (Http2.java)
+

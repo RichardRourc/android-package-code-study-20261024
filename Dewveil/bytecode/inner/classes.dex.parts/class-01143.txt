@@ -1,0 +1,928 @@
+Class #1143            -
+  Class descriptor  : 'Landroidx/core/text/util/LinkifyCompat;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'COMPARATOR'
+      type          : 'Ljava/util/Comparator;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+    #1              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'EMPTY_STRING'
+      type          : '[Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 13 16-bit code units
+5165c0:                                        |[5165c0] androidx.core.text.util.LinkifyCompat.<clinit>:()V
+5165d0: 1200                                   |0000: const/4 v0, #int 0 // #0
+5165d2: 2300 b020                              |0001: new-array v0, v0, [Ljava/lang/String; // type@20b0
+5165d6: 6900 df29                              |0003: sput-object v0, Landroidx/core/text/util/LinkifyCompat;.EMPTY_STRING:[Ljava/lang/String; // field@29df
+5165da: 2200 d106                              |0005: new-instance v0, Landroidx/core/text/util/LinkifyCompat$1; // type@06d1
+5165de: 7010 5b38 0000                         |0007: invoke-direct {v0}, Landroidx/core/text/util/LinkifyCompat$1;.<init>:()V // method@385b
+5165e4: 6900 de29                              |000a: sput-object v0, Landroidx/core/text/util/LinkifyCompat;.COMPARATOR:Ljava/util/Comparator; // field@29de
+5165e8: 0e00                                   |000c: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=57
+        0x0005 line=59
+      locals        :
+
+    #1              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+5165ec:                                        |[5165ec] androidx.core.text.util.LinkifyCompat.<init>:()V
+5165fc: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+516602: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=542
+      locals        :
+        0x0000 - 0x0004 reg=0 this Landroidx/core/text/util/LinkifyCompat;
+
+    #2              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'addLinkMovementMethod'
+      type          : '(Landroid/widget/TextView;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 22 16-bit code units
+516604:                                        |[516604] androidx.core.text.util.LinkifyCompat.addLinkMovementMethod:(Landroid/widget/TextView;)V
+516614: 6e10 850f 0100                         |0000: invoke-virtual {v1}, Landroid/widget/TextView;.getMovementMethod:()Landroid/text/method/MovementMethod; // method@0f85
+51661a: 0c00                                   |0003: move-result-object v0
+51661c: 2000 9201                              |0004: instance-of v0, v0, Landroid/text/method/LinkMovementMethod; // type@0192
+516620: 3900 0f00                              |0006: if-nez v0, 0015 // +000f
+516624: 6e10 7f0f 0100                         |0008: invoke-virtual {v1}, Landroid/widget/TextView;.getLinksClickable:()Z // method@0f7f
+51662a: 0a00                                   |000b: move-result v0
+51662c: 3800 0900                              |000c: if-eqz v0, 0015 // +0009
+516630: 7100 cf07 0000                         |000e: invoke-static {}, Landroid/text/method/LinkMovementMethod;.getInstance:()Landroid/text/method/MovementMethod; // method@07cf
+516636: 0c00                                   |0011: move-result-object v0
+516638: 6e20 c60f 0100                         |0012: invoke-virtual {v1, v0}, Landroid/widget/TextView;.setMovementMethod:(Landroid/text/method/MovementMethod;)V // method@0fc6
+51663e: 0e00                                   |0015: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=380
+        0x0004 line=382
+        0x0008 line=383
+        0x000e line=384
+      locals        :
+        0x0000 - 0x0016 reg=1 (null) Landroid/widget/TextView;
+
+    #3              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'addLinks'
+      type          : '(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 10
+      ins           : 3
+      outs          : 6
+      insns size    : 20 16-bit code units
+516640:                                        |[516640] androidx.core.text.util.LinkifyCompat.addLinks:(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;)V
+516650: 7100 7038 0000                         |0000: invoke-static {}, Landroidx/core/text/util/LinkifyCompat;.shouldAddLinksFallbackToFramework:()Z // method@3870
+516656: 0a00                                   |0003: move-result v0
+516658: 3800 0600                              |0004: if-eqz v0, 000a // +0006
+51665c: 7130 dc07 8709                         |0006: invoke-static {v7, v8, v9}, Landroid/text/util/Linkify;.addLinks:(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;)V // method@07dc
+516662: 0e00                                   |0009: return-void
+516664: 1205                                   |000a: const/4 v5, #int 0 // #0
+516666: 1206                                   |000b: const/4 v6, #int 0 // #0
+516668: 1204                                   |000c: const/4 v4, #int 0 // #0
+51666a: 0771                                   |000d: move-object v1, v7
+51666c: 0782                                   |000e: move-object v2, v8
+51666e: 0793                                   |000f: move-object v3, v9
+516670: 7706 6438 0100                         |0010: invoke-static/range {v1, v2, v3, v4, v5, v6}, Landroidx/core/text/util/LinkifyCompat;.addLinks:(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V // method@3864
+516676: 0e00                                   |0013: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=207
+        0x0006 line=208
+        0x0010 line=211
+      locals        :
+        0x0000 - 0x0014 reg=7 (null) Landroid/widget/TextView;
+        0x0000 - 0x0014 reg=8 (null) Ljava/util/regex/Pattern;
+        0x0000 - 0x0014 reg=9 (null) Ljava/lang/String;
+
+    #4              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'addLinks'
+      type          : '(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 12
+      ins           : 5
+      outs          : 6
+      insns size    : 20 16-bit code units
+516678:                                        |[516678] androidx.core.text.util.LinkifyCompat.addLinks:(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V
+516688: 7100 7038 0000                         |0000: invoke-static {}, Landroidx/core/text/util/LinkifyCompat;.shouldAddLinksFallbackToFramework:()Z // method@3870
+51668e: 0a00                                   |0003: move-result v0
+516690: 3800 0600                              |0004: if-eqz v0, 000a // +0006
+516694: 715b dd07 87a9                         |0006: invoke-static {v7, v8, v9, v10, v11}, Landroid/text/util/Linkify;.addLinks:(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V // method@07dd
+51669a: 0e00                                   |0009: return-void
+51669c: 1204                                   |000a: const/4 v4, #int 0 // #0
+51669e: 0771                                   |000b: move-object v1, v7
+5166a0: 0782                                   |000c: move-object v2, v8
+5166a2: 0793                                   |000d: move-object v3, v9
+5166a4: 07a5                                   |000e: move-object v5, v10
+5166a6: 07b6                                   |000f: move-object v6, v11
+5166a8: 7706 6438 0100                         |0010: invoke-static/range {v1, v2, v3, v4, v5, v6}, Landroidx/core/text/util/LinkifyCompat;.addLinks:(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V // method@3864
+5166ae: 0e00                                   |0013: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=231
+        0x0006 line=232
+        0x0010 line=235
+      locals        :
+        0x0000 - 0x0014 reg=7 (null) Landroid/widget/TextView;
+        0x0000 - 0x0014 reg=8 (null) Ljava/util/regex/Pattern;
+        0x0000 - 0x0014 reg=9 (null) Ljava/lang/String;
+        0x0000 - 0x0014 reg=10 (null) Landroid/text/util/Linkify$MatchFilter;
+        0x0000 - 0x0014 reg=11 (null) Landroid/text/util/Linkify$TransformFilter;
+
+    #5              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'addLinks'
+      type          : '(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 13
+      ins           : 6
+      outs          : 6
+      insns size    : 37 16-bit code units
+5166b0:                                        |[5166b0] androidx.core.text.util.LinkifyCompat.addLinks:(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V
+5166c0: 7100 7038 0000                         |0000: invoke-static {}, Landroidx/core/text/util/LinkifyCompat;.shouldAddLinksFallbackToFramework:()Z // method@3870
+5166c6: 0a00                                   |0003: move-result v0
+5166c8: 3800 0600                              |0004: if-eqz v0, 000a // +0006
+5166cc: 7706 de07 0700                         |0006: invoke-static/range {v7, v8, v9, v10, v11, v12}, Landroid/text/util/Linkify;.addLinks:(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V // method@07de
+5166d2: 0e00                                   |0009: return-void
+5166d4: 6e10 8f0f 0700                         |000a: invoke-virtual {v7}, Landroid/widget/TextView;.getText:()Ljava/lang/CharSequence; // method@0f8f
+5166da: 0c00                                   |000d: move-result-object v0
+5166dc: 7110 8e07 0000                         |000e: invoke-static {v0}, Landroid/text/SpannableString;.valueOf:(Ljava/lang/CharSequence;)Landroid/text/SpannableString; // method@078e
+5166e2: 0c00                                   |0011: move-result-object v0
+5166e4: 0701                                   |0012: move-object v1, v0
+5166e6: 0782                                   |0013: move-object v2, v8
+5166e8: 0793                                   |0014: move-object v3, v9
+5166ea: 07a4                                   |0015: move-object v4, v10
+5166ec: 07b5                                   |0016: move-object v5, v11
+5166ee: 07c6                                   |0017: move-object v6, v12
+5166f0: 7706 6838 0100                         |0018: invoke-static/range {v1, v2, v3, v4, v5, v6}, Landroidx/core/text/util/LinkifyCompat;.addLinks:(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z // method@3868
+5166f6: 0a08                                   |001b: move-result v8
+5166f8: 3808 0800                              |001c: if-eqz v8, 0024 // +0008
+5166fc: 6e20 d10f 0700                         |001e: invoke-virtual {v7, v0}, Landroid/widget/TextView;.setText:(Ljava/lang/CharSequence;)V // method@0fd1
+516702: 7110 6138 0700                         |0021: invoke-static {v7}, Landroidx/core/text/util/LinkifyCompat;.addLinkMovementMethod:(Landroid/widget/TextView;)V // method@3861
+516708: 0e00                                   |0024: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=259
+        0x0006 line=260
+        0x000a line=263
+        0x0018 line=265
+        0x001e line=268
+        0x0021 line=269
+      locals        :
+        0x0000 - 0x0025 reg=7 (null) Landroid/widget/TextView;
+        0x0000 - 0x0025 reg=8 (null) Ljava/util/regex/Pattern;
+        0x0000 - 0x0025 reg=9 (null) Ljava/lang/String;
+        0x0000 - 0x0025 reg=10 (null) [Ljava/lang/String;
+        0x0000 - 0x0025 reg=11 (null) Landroid/text/util/Linkify$MatchFilter;
+        0x0000 - 0x0025 reg=12 (null) Landroid/text/util/Linkify$TransformFilter;
+
+    #6              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'addLinks'
+      type          : '(Landroid/text/Spannable;I)Z'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 12
+      ins           : 2
+      outs          : 6
+      insns size    : 150 16-bit code units
+51670c:                                        |[51670c] androidx.core.text.util.LinkifyCompat.addLinks:(Landroid/text/Spannable;I)Z
+51671c: 7100 7038 0000                         |0000: invoke-static {}, Landroidx/core/text/util/LinkifyCompat;.shouldAddLinksFallbackToFramework:()Z // method@3870
+516722: 0a00                                   |0003: move-result v0
+516724: 3800 0700                              |0004: if-eqz v0, 000b // +0007
+516728: 7120 df07 ba00                         |0006: invoke-static {v10, v11}, Landroid/text/util/Linkify;.addLinks:(Landroid/text/Spannable;I)Z // method@07df
+51672e: 0a0a                                   |0009: move-result v10
+516730: 0f0a                                   |000a: return v10
+516732: 1200                                   |000b: const/4 v0, #int 0 // #0
+516734: 390b 0300                              |000c: if-nez v11, 000f // +0003
+516738: 0f00                                   |000e: return v0
+51673a: 7210 8707 0a00                         |000f: invoke-interface {v10}, Landroid/text/Spannable;.length:()I // method@0787
+516740: 0a01                                   |0012: move-result v1
+516742: 1c02 9b01                              |0013: const-class v2, Landroid/text/style/URLSpan; // type@019b
+516746: 7240 8607 0a21                         |0015: invoke-interface {v10, v0, v1, v2}, Landroid/text/Spannable;.getSpans:(IILjava/lang/Class;)[Ljava/lang/Object; // method@0786
+51674c: 0c01                                   |0018: move-result-object v1
+51674e: 1f01 991f                              |0019: check-cast v1, [Landroid/text/style/URLSpan; // type@1f99
+516752: 2112                                   |001b: array-length v2, v1
+516754: 1213                                   |001c: const/4 v3, #int 1 // #1
+516756: b132                                   |001d: sub-int/2addr v2, v3
+516758: 3a02 0a00                              |001e: if-ltz v2, 0028 // +000a
+51675c: 4604 0102                              |0020: aget-object v4, v1, v2
+516760: 7220 8907 4a00                         |0022: invoke-interface {v10, v4}, Landroid/text/Spannable;.removeSpan:(Ljava/lang/Object;)V // method@0789
+516766: d802 02ff                              |0025: add-int/lit8 v2, v2, #int -1 // #ff
+51676a: 28f7                                   |0027: goto 001e // -0009
+51676c: dd01 0b04                              |0028: and-int/lit8 v1, v11, #int 4 // #04
+516770: 3801 0600                              |002a: if-eqz v1, 0030 // +0006
+516774: 1241                                   |002c: const/4 v1, #int 4 // #4
+516776: 7120 df07 1a00                         |002d: invoke-static {v10, v1}, Landroid/text/util/Linkify;.addLinks:(Landroid/text/Spannable;I)Z // method@07df
+51677c: 2201 3a1b                              |0030: new-instance v1, Ljava/util/ArrayList; // type@1b3a
+516780: 7010 9fd4 0100                         |0032: invoke-direct {v1}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+516786: dd02 0b01                              |0035: and-int/lit8 v2, v11, #int 1 // #01
+51678a: 3802 1c00                              |0037: if-eqz v2, 0053 // +001c
+51678e: 6206 e729                              |0039: sget-object v6, Landroidx/core/util/PatternsCompat;.AUTOLINK_WEB_URL:Ljava/util/regex/Pattern; // field@29e7
+516792: 1232                                   |003b: const/4 v2, #int 3 // #3
+516794: 2327 b020                              |003c: new-array v7, v2, [Ljava/lang/String; // type@20b0
+516798: 1a02 f0a7                              |003e: const-string v2, "http://" // string@a7f0
+51679c: 4d02 0700                              |0040: aput-object v2, v7, v0
+5167a0: 1a02 ffa7                              |0042: const-string v2, "https://" // string@a7ff
+5167a4: 4d02 0703                              |0044: aput-object v2, v7, v3
+5167a8: 1a02 9fd0                              |0046: const-string v2, "rtsp://" // string@d09f
+5167ac: 1224                                   |0048: const/4 v4, #int 2 // #2
+5167ae: 4d02 0704                              |0049: aput-object v2, v7, v4
+5167b2: 6208 0501                              |004b: sget-object v8, Landroid/text/util/Linkify;.sUrlMatchFilter:Landroid/text/util/Linkify$MatchFilter; // field@0105
+5167b6: 1209                                   |004d: const/4 v9, #int 0 // #0
+5167b8: 0714                                   |004e: move-object v4, v1
+5167ba: 07a5                                   |004f: move-object v5, v10
+5167bc: 7706 6c38 0400                         |0050: invoke-static/range {v4, v5, v6, v7, v8, v9}, Landroidx/core/text/util/LinkifyCompat;.gatherLinks:(Ljava/util/ArrayList;Landroid/text/Spannable;Ljava/util/regex/Pattern;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V // method@386c
+5167c2: dd02 0b02                              |0053: and-int/lit8 v2, v11, #int 2 // #02
+5167c6: 3802 1100                              |0055: if-eqz v2, 0066 // +0011
+5167ca: 6206 e629                              |0057: sget-object v6, Landroidx/core/util/PatternsCompat;.AUTOLINK_EMAIL_ADDRESS:Ljava/util/regex/Pattern; // field@29e6
+5167ce: 2337 b020                              |0059: new-array v7, v3, [Ljava/lang/String; // type@20b0
+5167d2: 1a02 3dbe                              |005b: const-string v2, "mailto:" // string@be3d
+5167d6: 4d02 0700                              |005d: aput-object v2, v7, v0
+5167da: 1208                                   |005f: const/4 v8, #int 0 // #0
+5167dc: 1209                                   |0060: const/4 v9, #int 0 // #0
+5167de: 0714                                   |0061: move-object v4, v1
+5167e0: 07a5                                   |0062: move-object v5, v10
+5167e2: 7706 6c38 0400                         |0063: invoke-static/range {v4, v5, v6, v7, v8, v9}, Landroidx/core/text/util/LinkifyCompat;.gatherLinks:(Ljava/util/ArrayList;Landroid/text/Spannable;Ljava/util/regex/Pattern;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V // method@386c
+5167e8: dd0b 0b08                              |0066: and-int/lit8 v11, v11, #int 8 // #08
+5167ec: 380b 0500                              |0068: if-eqz v11, 006d // +0005
+5167f0: 7120 6d38 a100                         |006a: invoke-static {v1, v10}, Landroidx/core/text/util/LinkifyCompat;.gatherMapLinks:(Ljava/util/ArrayList;Landroid/text/Spannable;)V // method@386d
+5167f6: 7120 6f38 a100                         |006d: invoke-static {v1, v10}, Landroidx/core/text/util/LinkifyCompat;.pruneOverlaps:(Ljava/util/ArrayList;Landroid/text/Spannable;)V // method@386f
+5167fc: 6e10 b4d4 0100                         |0070: invoke-virtual {v1}, Ljava/util/ArrayList;.size:()I // method@d4b4
+516802: 0a0b                                   |0073: move-result v11
+516804: 390b 0300                              |0074: if-nez v11, 0077 // +0003
+516808: 0f00                                   |0076: return v0
+51680a: 6e10 aed4 0100                         |0077: invoke-virtual {v1}, Ljava/util/ArrayList;.iterator:()Ljava/util/Iterator; // method@d4ae
+516810: 0c0b                                   |007a: move-result-object v11
+516812: 7210 a0d5 0b00                         |007b: invoke-interface {v11}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+516818: 0a00                                   |007e: move-result v0
+51681a: 3800 1600                              |007f: if-eqz v0, 0095 // +0016
+51681e: 7210 a1d5 0b00                         |0081: invoke-interface {v11}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+516824: 0c00                                   |0084: move-result-object v0
+516826: 1f00 d206                              |0085: check-cast v0, Landroidx/core/text/util/LinkifyCompat$LinkSpec; // type@06d2
+51682a: 5401 db29                              |0087: iget-object v1, v0, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.frameworkAddedSpan:Landroid/text/style/URLSpan; // field@29db
+51682e: 3901 f2ff                              |0089: if-nez v1, 007b // -000e
+516832: 5401 dd29                              |008b: iget-object v1, v0, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.url:Ljava/lang/String; // field@29dd
+516836: 5202 dc29                              |008d: iget v2, v0, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+51683a: 5200 da29                              |008f: iget v0, v0, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+51683e: 7140 6a38 21a0                         |0091: invoke-static {v1, v2, v0, v10}, Landroidx/core/text/util/LinkifyCompat;.applyLink:(Ljava/lang/String;IILandroid/text/Spannable;)V // method@386a
+516844: 28e7                                   |0094: goto 007b // -0019
+516846: 0f03                                   |0095: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=102
+        0x0006 line=103
+        0x000f line=109
+        0x001b line=111
+        0x0020 line=112
+        0x002d line=116
+        0x0030 line=119
+        0x0039 line=122
+        0x0057 line=128
+        0x006a line=134
+        0x006d line=137
+        0x0070 line=139
+        0x0077 line=143
+        0x0087 line=144
+        0x008b line=145
+      locals        :
+        0x0000 - 0x0096 reg=10 (null) Landroid/text/Spannable;
+        0x0000 - 0x0096 reg=11 (null) I
+
+    #7              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'addLinks'
+      type          : '(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;)Z'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 9
+      ins           : 3
+      outs          : 6
+      insns size    : 22 16-bit code units
+516848:                                        |[516848] androidx.core.text.util.LinkifyCompat.addLinks:(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;)Z
+516858: 7100 7038 0000                         |0000: invoke-static {}, Landroidx/core/text/util/LinkifyCompat;.shouldAddLinksFallbackToFramework:()Z // method@3870
+51685e: 0a00                                   |0003: move-result v0
+516860: 3800 0700                              |0004: if-eqz v0, 000b // +0007
+516864: 7130 e007 7608                         |0006: invoke-static {v6, v7, v8}, Landroid/text/util/Linkify;.addLinks:(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;)Z // method@07e0
+51686a: 0a06                                   |0009: move-result v6
+51686c: 0f06                                   |000a: return v6
+51686e: 1204                                   |000b: const/4 v4, #int 0 // #0
+516870: 1205                                   |000c: const/4 v5, #int 0 // #0
+516872: 1203                                   |000d: const/4 v3, #int 0 // #0
+516874: 0760                                   |000e: move-object v0, v6
+516876: 0771                                   |000f: move-object v1, v7
+516878: 0782                                   |0010: move-object v2, v8
+51687a: 7706 6838 0000                         |0011: invoke-static/range {v0, v1, v2, v3, v4, v5}, Landroidx/core/text/util/LinkifyCompat;.addLinks:(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z // method@3868
+516880: 0a06                                   |0014: move-result v6
+516882: 0f06                                   |0015: return v6
+      catches       : (none)
+      positions     :
+        0x0000 line=284
+        0x0006 line=285
+        0x0011 line=287
+      locals        :
+        0x0000 - 0x0016 reg=6 (null) Landroid/text/Spannable;
+        0x0000 - 0x0016 reg=7 (null) Ljava/util/regex/Pattern;
+        0x0000 - 0x0016 reg=8 (null) Ljava/lang/String;
+
+    #8              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'addLinks'
+      type          : '(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 11
+      ins           : 5
+      outs          : 6
+      insns size    : 22 16-bit code units
+516884:                                        |[516884] androidx.core.text.util.LinkifyCompat.addLinks:(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z
+516894: 7100 7038 0000                         |0000: invoke-static {}, Landroidx/core/text/util/LinkifyCompat;.shouldAddLinksFallbackToFramework:()Z // method@3870
+51689a: 0a00                                   |0003: move-result v0
+51689c: 3800 0700                              |0004: if-eqz v0, 000b // +0007
+5168a0: 715a e107 7698                         |0006: invoke-static {v6, v7, v8, v9, v10}, Landroid/text/util/Linkify;.addLinks:(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z // method@07e1
+5168a6: 0a06                                   |0009: move-result v6
+5168a8: 0f06                                   |000a: return v6
+5168aa: 1203                                   |000b: const/4 v3, #int 0 // #0
+5168ac: 0760                                   |000c: move-object v0, v6
+5168ae: 0771                                   |000d: move-object v1, v7
+5168b0: 0782                                   |000e: move-object v2, v8
+5168b2: 0794                                   |000f: move-object v4, v9
+5168b4: 07a5                                   |0010: move-object v5, v10
+5168b6: 7706 6838 0000                         |0011: invoke-static/range {v0, v1, v2, v3, v4, v5}, Landroidx/core/text/util/LinkifyCompat;.addLinks:(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z // method@3868
+5168bc: 0a06                                   |0014: move-result v6
+5168be: 0f06                                   |0015: return v6
+      catches       : (none)
+      positions     :
+        0x0000 line=308
+        0x0006 line=309
+        0x0011 line=311
+      locals        :
+        0x0000 - 0x0016 reg=6 (null) Landroid/text/Spannable;
+        0x0000 - 0x0016 reg=7 (null) Ljava/util/regex/Pattern;
+        0x0000 - 0x0016 reg=8 (null) Ljava/lang/String;
+        0x0000 - 0x0016 reg=9 (null) Landroid/text/util/Linkify$MatchFilter;
+        0x0000 - 0x0016 reg=10 (null) Landroid/text/util/Linkify$TransformFilter;
+
+    #9              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'addLinks'
+      type          : '(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 12
+      ins           : 6
+      outs          : 6
+      insns size    : 101 16-bit code units
+5168c0:                                        |[5168c0] androidx.core.text.util.LinkifyCompat.addLinks:(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z
+5168d0: 7100 7038 0000                         |0000: invoke-static {}, Landroidx/core/text/util/LinkifyCompat;.shouldAddLinksFallbackToFramework:()Z // method@3870
+5168d6: 0a00                                   |0003: move-result v0
+5168d8: 3800 0700                              |0004: if-eqz v0, 000b // +0007
+5168dc: 7706 e207 0600                         |0006: invoke-static/range {v6, v7, v8, v9, v10, v11}, Landroid/text/util/Linkify;.addLinks:(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z // method@07e2
+5168e2: 0a06                                   |0009: move-result v6
+5168e4: 0f06                                   |000a: return v6
+5168e6: 1a00 0000                              |000b: const-string v0, "" // string@0000
+5168ea: 3908 0300                              |000d: if-nez v8, 0010 // +0003
+5168ee: 0708                                   |000f: move-object v8, v0
+5168f0: 1211                                   |0010: const/4 v1, #int 1 // #1
+5168f2: 3809 0500                              |0011: if-eqz v9, 0016 // +0005
+5168f6: 2192                                   |0013: array-length v2, v9
+5168f8: 3512 0400                              |0014: if-ge v2, v1, 0018 // +0004
+5168fc: 6209 df29                              |0016: sget-object v9, Landroidx/core/text/util/LinkifyCompat;.EMPTY_STRING:[Ljava/lang/String; // field@29df
+516900: 2192                                   |0018: array-length v2, v9
+516902: b012                                   |0019: add-int/2addr v2, v1
+516904: 2322 b020                              |001a: new-array v2, v2, [Ljava/lang/String; // type@20b0
+516908: 6203 458a                              |001c: sget-object v3, Ljava/util/Locale;.ROOT:Ljava/util/Locale; // field@8a45
+51690c: 6e20 27d2 3800                         |001e: invoke-virtual {v8, v3}, Ljava/lang/String;.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String; // method@d227
+516912: 0c08                                   |0021: move-result-object v8
+516914: 1203                                   |0022: const/4 v3, #int 0 // #0
+516916: 4d08 0203                              |0023: aput-object v8, v2, v3
+51691a: 0138                                   |0025: move v8, v3
+51691c: 2194                                   |0026: array-length v4, v9
+51691e: 3548 1300                              |0027: if-ge v8, v4, 003a // +0013
+516922: 4604 0908                              |0029: aget-object v4, v9, v8
+516926: d808 0801                              |002b: add-int/lit8 v8, v8, #int 1 // #01
+51692a: 3904 0400                              |002d: if-nez v4, 0031 // +0004
+51692e: 0704                                   |002f: move-object v4, v0
+516930: 2807                                   |0030: goto 0037 // +0007
+516932: 6205 458a                              |0031: sget-object v5, Ljava/util/Locale;.ROOT:Ljava/util/Locale; // field@8a45
+516936: 6e20 27d2 5400                         |0033: invoke-virtual {v4, v5}, Ljava/lang/String;.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String; // method@d227
+51693c: 0c04                                   |0036: move-result-object v4
+51693e: 4d04 0208                              |0037: aput-object v4, v2, v8
+516942: 28ed                                   |0039: goto 0026 // -0013
+516944: 6e20 4ad7 6700                         |003a: invoke-virtual {v7, v6}, Ljava/util/regex/Pattern;.matcher:(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher; // method@d74a
+51694a: 0c07                                   |003d: move-result-object v7
+51694c: 0138                                   |003e: move v8, v3
+51694e: 6e10 37d7 0700                         |003f: invoke-virtual {v7}, Ljava/util/regex/Matcher;.find:()Z // method@d737
+516954: 0a09                                   |0042: move-result v9
+516956: 3809 2100                              |0043: if-eqz v9, 0064 // +0021
+51695a: 6e10 42d7 0700                         |0045: invoke-virtual {v7}, Ljava/util/regex/Matcher;.start:()I // method@d742
+516960: 0a09                                   |0048: move-result v9
+516962: 6e10 35d7 0700                         |0049: invoke-virtual {v7}, Ljava/util/regex/Matcher;.end:()I // method@d735
+516968: 0a00                                   |004c: move-result v0
+51696a: 380a 0700                              |004d: if-eqz v10, 0054 // +0007
+51696e: 7240 da07 6a09                         |004f: invoke-interface {v10, v6, v9, v0}, Landroid/text/util/Linkify$MatchFilter;.acceptMatch:(Ljava/lang/CharSequence;II)Z // method@07da
+516974: 0a04                                   |0052: move-result v4
+516976: 2802                                   |0053: goto 0055 // +0002
+516978: 0114                                   |0054: move v4, v1
+51697a: 3804 eaff                              |0055: if-eqz v4, 003f // -0016
+51697e: 6e20 3ad7 3700                         |0057: invoke-virtual {v7, v3}, Ljava/util/regex/Matcher;.group:(I)Ljava/lang/String; // method@d73a
+516984: 0c08                                   |005a: move-result-object v8
+516986: 7140 6e38 28b7                         |005b: invoke-static {v8, v2, v7, v11}, Landroidx/core/text/util/LinkifyCompat;.makeUrl:(Ljava/lang/String;[Ljava/lang/String;Ljava/util/regex/Matcher;Landroid/text/util/Linkify$TransformFilter;)Ljava/lang/String; // method@386e
+51698c: 0c08                                   |005e: move-result-object v8
+51698e: 7140 6a38 9860                         |005f: invoke-static {v8, v9, v0, v6}, Landroidx/core/text/util/LinkifyCompat;.applyLink:(Ljava/lang/String;IILandroid/text/Spannable;)V // method@386a
+516994: 0118                                   |0062: move v8, v1
+516996: 28dc                                   |0063: goto 003f // -0024
+516998: 0f08                                   |0064: return v8
+      catches       : (none)
+      positions     :
+        0x0000 line=335
+        0x0006 line=336
+        0x000b line=340
+        0x0013 line=341
+        0x0016 line=342
+        0x0018 line=345
+        0x001c line=346
+        0x0026 line=347
+        0x0029 line=348
+        0x0031 line=349
+        0x003a line=353
+        0x003f line=355
+        0x0045 line=356
+        0x0049 line=357
+        0x004f line=361
+        0x0057 line=365
+        0x005f line=367
+      locals        :
+        0x0000 - 0x0065 reg=6 (null) Landroid/text/Spannable;
+        0x0000 - 0x0065 reg=7 (null) Ljava/util/regex/Pattern;
+        0x0000 - 0x0065 reg=8 (null) Ljava/lang/String;
+        0x0000 - 0x0065 reg=9 (null) [Ljava/lang/String;
+        0x0000 - 0x0065 reg=10 (null) Landroid/text/util/Linkify$MatchFilter;
+        0x0000 - 0x0065 reg=11 (null) Landroid/text/util/Linkify$TransformFilter;
+
+    #10              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'addLinks'
+      type          : '(Landroid/widget/TextView;I)Z'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 2
+      insns size    : 55 16-bit code units
+51699c:                                        |[51699c] androidx.core.text.util.LinkifyCompat.addLinks:(Landroid/widget/TextView;I)Z
+5169ac: 7100 7038 0000                         |0000: invoke-static {}, Landroidx/core/text/util/LinkifyCompat;.shouldAddLinksFallbackToFramework:()Z // method@3870
+5169b2: 0a00                                   |0003: move-result v0
+5169b4: 3800 0700                              |0004: if-eqz v0, 000b // +0007
+5169b8: 7120 e307 5400                         |0006: invoke-static {v4, v5}, Landroid/text/util/Linkify;.addLinks:(Landroid/widget/TextView;I)Z // method@07e3
+5169be: 0a04                                   |0009: move-result v4
+5169c0: 0f04                                   |000a: return v4
+5169c2: 1200                                   |000b: const/4 v0, #int 0 // #0
+5169c4: 3905 0300                              |000c: if-nez v5, 000f // +0003
+5169c8: 0f00                                   |000e: return v0
+5169ca: 6e10 8f0f 0400                         |000f: invoke-virtual {v4}, Landroid/widget/TextView;.getText:()Ljava/lang/CharSequence; // method@0f8f
+5169d0: 0c01                                   |0012: move-result-object v1
+5169d2: 2012 8501                              |0013: instance-of v2, v1, Landroid/text/Spannable; // type@0185
+5169d6: 1213                                   |0015: const/4 v3, #int 1 // #1
+5169d8: 3802 0f00                              |0016: if-eqz v2, 0025 // +000f
+5169dc: 1f01 8501                              |0018: check-cast v1, Landroid/text/Spannable; // type@0185
+5169e0: 7120 6538 5100                         |001a: invoke-static {v1, v5}, Landroidx/core/text/util/LinkifyCompat;.addLinks:(Landroid/text/Spannable;I)Z // method@3865
+5169e6: 0a05                                   |001d: move-result v5
+5169e8: 3805 0600                              |001e: if-eqz v5, 0024 // +0006
+5169ec: 7110 6138 0400                         |0020: invoke-static {v4}, Landroidx/core/text/util/LinkifyCompat;.addLinkMovementMethod:(Landroid/widget/TextView;)V // method@3861
+5169f2: 0f03                                   |0023: return v3
+5169f4: 0f00                                   |0024: return v0
+5169f6: 7110 8e07 0100                         |0025: invoke-static {v1}, Landroid/text/SpannableString;.valueOf:(Ljava/lang/CharSequence;)Landroid/text/SpannableString; // method@078e
+5169fc: 0c01                                   |0028: move-result-object v1
+5169fe: 7120 6538 5100                         |0029: invoke-static {v1, v5}, Landroidx/core/text/util/LinkifyCompat;.addLinks:(Landroid/text/Spannable;I)Z // method@3865
+516a04: 0a05                                   |002c: move-result v5
+516a06: 3805 0900                              |002d: if-eqz v5, 0036 // +0009
+516a0a: 7110 6138 0400                         |002f: invoke-static {v4}, Landroidx/core/text/util/LinkifyCompat;.addLinkMovementMethod:(Landroid/widget/TextView;)V // method@3861
+516a10: 6e20 d10f 1400                         |0032: invoke-virtual {v4, v1}, Landroid/widget/TextView;.setText:(Ljava/lang/CharSequence;)V // method@0fd1
+516a16: 0f03                                   |0035: return v3
+516a18: 0f00                                   |0036: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=164
+        0x0006 line=165
+        0x000f line=171
+        0x0013 line=173
+        0x0018 line=174
+        0x0020 line=175
+        0x0025 line=181
+        0x0029 line=183
+        0x002f line=184
+        0x0032 line=185
+      locals        :
+        0x0000 - 0x0037 reg=4 (null) Landroid/widget/TextView;
+        0x0000 - 0x0037 reg=5 (null) I
+
+    #11              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'applyLink'
+      type          : '(Ljava/lang/String;IILandroid/text/Spannable;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 11 16-bit code units
+516a1c:                                        |[516a1c] androidx.core.text.util.LinkifyCompat.applyLink:(Ljava/lang/String;IILandroid/text/Spannable;)V
+516a2c: 2200 9b01                              |0000: new-instance v0, Landroid/text/style/URLSpan; // type@019b
+516a30: 7020 d907 1000                         |0002: invoke-direct {v0, v1}, Landroid/text/style/URLSpan;.<init>:(Ljava/lang/String;)V // method@07d9
+516a36: 1301 2100                              |0005: const/16 v1, #int 33 // #21
+516a3a: 7251 8a07 0432                         |0007: invoke-interface {v4, v0, v2, v3, v1}, Landroid/text/Spannable;.setSpan:(Ljava/lang/Object;III)V // method@078a
+516a40: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=440
+        0x0007 line=442
+      locals        :
+        0x0000 - 0x000b reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x000b reg=2 (null) I
+        0x0000 - 0x000b reg=3 (null) I
+        0x0000 - 0x000b reg=4 (null) Landroid/text/Spannable;
+
+    #12              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'findAddress'
+      type          : '(Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+516a44:                                        |[516a44] androidx.core.text.util.LinkifyCompat.findAddress:(Ljava/lang/String;)Ljava/lang/String;
+516a54: 7110 fd0c 0000                         |0000: invoke-static {v0}, Landroid/webkit/WebView;.findAddress:(Ljava/lang/String;)Ljava/lang/String; // method@0cfd
+516a5a: 0c00                                   |0003: move-result-object v0
+516a5c: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=488
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Ljava/lang/String;
+
+    #13              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'gatherLinks'
+      type          : '(Ljava/util/ArrayList;Landroid/text/Spannable;Ljava/util/regex/Pattern;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 10
+      ins           : 6
+      outs          : 4
+      insns size    : 51 16-bit code units
+516a60:                                        |[516a60] androidx.core.text.util.LinkifyCompat.gatherLinks:(Ljava/util/ArrayList;Landroid/text/Spannable;Ljava/util/regex/Pattern;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V
+516a70: 6e20 4ad7 5600                         |0000: invoke-virtual {v6, v5}, Ljava/util/regex/Pattern;.matcher:(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher; // method@d74a
+516a76: 0c06                                   |0003: move-result-object v6
+516a78: 6e10 37d7 0600                         |0004: invoke-virtual {v6}, Ljava/util/regex/Matcher;.find:()Z // method@d737
+516a7e: 0a00                                   |0007: move-result v0
+516a80: 3800 2a00                              |0008: if-eqz v0, 0032 // +002a
+516a84: 6e10 42d7 0600                         |000a: invoke-virtual {v6}, Ljava/util/regex/Matcher;.start:()I // method@d742
+516a8a: 0a00                                   |000d: move-result v0
+516a8c: 6e10 35d7 0600                         |000e: invoke-virtual {v6}, Ljava/util/regex/Matcher;.end:()I // method@d735
+516a92: 0a01                                   |0011: move-result v1
+516a94: 3808 0800                              |0012: if-eqz v8, 001a // +0008
+516a98: 7240 da07 5810                         |0014: invoke-interface {v8, v5, v0, v1}, Landroid/text/util/Linkify$MatchFilter;.acceptMatch:(Ljava/lang/CharSequence;II)Z // method@07da
+516a9e: 0a02                                   |0017: move-result v2
+516aa0: 3802 ecff                              |0018: if-eqz v2, 0004 // -0014
+516aa4: 2202 d206                              |001a: new-instance v2, Landroidx/core/text/util/LinkifyCompat$LinkSpec; // type@06d2
+516aa8: 7010 5e38 0200                         |001c: invoke-direct {v2}, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.<init>:()V // method@385e
+516aae: 1203                                   |001f: const/4 v3, #int 0 // #0
+516ab0: 6e20 3ad7 3600                         |0020: invoke-virtual {v6, v3}, Ljava/util/regex/Matcher;.group:(I)Ljava/lang/String; // method@d73a
+516ab6: 0c03                                   |0023: move-result-object v3
+516ab8: 7140 6e38 7396                         |0024: invoke-static {v3, v7, v6, v9}, Landroidx/core/text/util/LinkifyCompat;.makeUrl:(Ljava/lang/String;[Ljava/lang/String;Ljava/util/regex/Matcher;Landroid/text/util/Linkify$TransformFilter;)Ljava/lang/String; // method@386e
+516abe: 0c03                                   |0027: move-result-object v3
+516ac0: 5b23 dd29                              |0028: iput-object v3, v2, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.url:Ljava/lang/String; // field@29dd
+516ac4: 5920 dc29                              |002a: iput v0, v2, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+516ac8: 5921 da29                              |002c: iput v1, v2, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+516acc: 6e20 a3d4 2400                         |002e: invoke-virtual {v4, v2}, Ljava/util/ArrayList;.add:(Ljava/lang/Object;)Z // method@d4a3
+516ad2: 28d3                                   |0031: goto 0004 // -002d
+516ad4: 0e00                                   |0032: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=420
+        0x0004 line=422
+        0x000a line=423
+        0x000e line=424
+        0x0014 line=426
+        0x001a line=427
+        0x0020 line=428
+        0x0028 line=430
+        0x002a line=431
+        0x002c line=432
+        0x002e line=434
+      locals        :
+        0x0000 - 0x0033 reg=4 (null) Ljava/util/ArrayList;
+        0x0000 - 0x0033 reg=5 (null) Landroid/text/Spannable;
+        0x0000 - 0x0033 reg=6 (null) Ljava/util/regex/Pattern;
+        0x0000 - 0x0033 reg=7 (null) [Ljava/lang/String;
+        0x0000 - 0x0033 reg=8 (null) Landroid/text/util/Linkify$MatchFilter;
+        0x0000 - 0x0033 reg=9 (null) Landroid/text/util/Linkify$TransformFilter;
+
+    #14              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'gatherMapLinks'
+      type          : '(Ljava/util/ArrayList;Landroid/text/Spannable;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 2
+      insns size    : 70 16-bit code units
+516ad8:                                        |[516ad8] androidx.core.text.util.LinkifyCompat.gatherMapLinks:(Ljava/util/ArrayList;Landroid/text/Spannable;)V
+516ae8: 6e10 d0d1 0600                         |0000: invoke-virtual {v6}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@d1d0
+516aee: 0c06                                   |0003: move-result-object v6
+516af0: 1200                                   |0004: const/4 v0, #int 0 // #0
+516af2: 7110 6b38 0600                         |0005: invoke-static {v6}, Landroidx/core/text/util/LinkifyCompat;.findAddress:(Ljava/lang/String;)Ljava/lang/String; // method@386b
+516af8: 0c01                                   |0008: move-result-object v1
+516afa: 3801 3c00                              |0009: if-eqz v1, 0045 // +003c
+516afe: 6e20 0ed2 1600                         |000b: invoke-virtual {v6, v1}, Ljava/lang/String;.indexOf:(Ljava/lang/String;)I // method@d20e
+516b04: 0a02                                   |000e: move-result v2
+516b06: 3b02 0300                              |000f: if-gez v2, 0012 // +0003
+516b0a: 2834                                   |0011: goto 0045 // +0034
+516b0c: 2203 d206                              |0012: new-instance v3, Landroidx/core/text/util/LinkifyCompat$LinkSpec; // type@06d2
+516b10: 7010 5e38 0300                         |0014: invoke-direct {v3}, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.<init>:()V // method@385e
+516b16: 6e10 16d2 0100                         |0017: invoke-virtual {v1}, Ljava/lang/String;.length:()I // method@d216
+516b1c: 0a04                                   |001a: move-result v4
+516b1e: b024                                   |001b: add-int/2addr v4, v2
+516b20: b002                                   |001c: add-int/2addr v2, v0
+516b22: 5932 dc29                              |001d: iput v2, v3, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+516b26: b040                                   |001f: add-int/2addr v0, v4
+516b28: 5930 da29                              |0020: iput v0, v3, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+516b2c: 6e20 23d2 4600                         |0022: invoke-virtual {v6, v4}, Ljava/lang/String;.substring:(I)Ljava/lang/String; // method@d223
+516b32: 0c06                                   |0025: move-result-object v6
+516b34: 1a02 596a                              |0026: const-string v2, "UTF-8" // string@6a59
+516b38: 7120 97d3 2100                         |0028: invoke-static {v1, v2}, Ljava/net/URLEncoder;.encode:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; // method@d397
+516b3e: 0c01                                   |002b: move-result-object v1
+516b40: 2202 991a                              |002c: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+516b44: 7010 39d2 0200                         |002e: invoke-direct {v2}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+516b4a: 1a04 e997                              |0031: const-string v4, "geo:0,0?q=" // string@97e9
+516b4e: 6e20 45d2 4200                         |0033: invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+516b54: 0c02                                   |0036: move-result-object v2
+516b56: 6e20 45d2 1200                         |0037: invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+516b5c: 0c01                                   |003a: move-result-object v1
+516b5e: 6e10 58d2 0100                         |003b: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+516b64: 0c01                                   |003e: move-result-object v1
+516b66: 5b31 dd29                              |003f: iput-object v1, v3, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.url:Ljava/lang/String; // field@29dd
+516b6a: 6e20 a3d4 3500                         |0041: invoke-virtual {v5, v3}, Ljava/util/ArrayList;.add:(Ljava/lang/Object;)Z // method@d4a3
+516b70: 28c1                                   |0044: goto 0005 // -003f
+516b72: 0e00                                   |0045: return-void
+      catches       : 3
+        0x0005 - 0x0026
+          Ljava/lang/UnsupportedOperationException; -> 0x0045
+        0x0026 - 0x002c
+          Ljava/io/UnsupportedEncodingException; -> 0x0005
+          Ljava/lang/UnsupportedOperationException; -> 0x0045
+        0x002c - 0x0044
+          Ljava/lang/UnsupportedOperationException; -> 0x0045
+      positions     :
+        0x0000 line=446
+        0x0005 line=451
+        0x000b line=452
+        0x0012 line=458
+        0x0017 line=459
+        0x001d line=462
+        0x0020 line=463
+        0x0022 line=464
+        0x0026 line=470
+        0x002c line=475
+        0x0041 line=476
+      locals        :
+        0x0000 - 0x0046 reg=5 (null) Ljava/util/ArrayList;
+        0x0000 - 0x0046 reg=6 (null) Landroid/text/Spannable;
+
+    #15              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'makeUrl'
+      type          : '(Ljava/lang/String;[Ljava/lang/String;Ljava/util/regex/Matcher;Landroid/text/util/Linkify$TransformFilter;)Ljava/lang/String;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 6
+      insns size    : 103 16-bit code units
+516b98:                                        |[516b98] androidx.core.text.util.LinkifyCompat.makeUrl:(Ljava/lang/String;[Ljava/lang/String;Ljava/util/regex/Matcher;Landroid/text/util/Linkify$TransformFilter;)Ljava/lang/String;
+516ba8: 3809 0600                              |0000: if-eqz v9, 0006 // +0006
+516bac: 7230 db07 8906                         |0002: invoke-interface {v9, v8, v6}, Landroid/text/util/Linkify$TransformFilter;.transformUrl:(Ljava/util/regex/Matcher;Ljava/lang/String;)Ljava/lang/String; // method@07db
+516bb2: 0c06                                   |0005: move-result-object v6
+516bb4: 1208                                   |0006: const/4 v8, #int 0 // #0
+516bb6: 0189                                   |0007: move v9, v8
+516bb8: 2170                                   |0008: array-length v0, v7
+516bba: 3509 4400                              |0009: if-ge v9, v0, 004d // +0044
+516bbe: 4603 0709                              |000b: aget-object v3, v7, v9
+516bc2: 1204                                   |000d: const/4 v4, #int 0 // #0
+516bc4: 6e10 16d2 0300                         |000e: invoke-virtual {v3}, Ljava/lang/String;.length:()I // method@d216
+516bca: 0a05                                   |0011: move-result v5
+516bcc: 1211                                   |0012: const/4 v1, #int 1 // #1
+516bce: 1202                                   |0013: const/4 v2, #int 0 // #0
+516bd0: 0760                                   |0014: move-object v0, v6
+516bd2: 7406 1ad2 0000                         |0015: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/lang/String;.regionMatches:(ZILjava/lang/String;II)Z // method@d21a
+516bd8: 0a00                                   |0018: move-result v0
+516bda: 3800 3100                              |0019: if-eqz v0, 004a // +0031
+516bde: 4603 0709                              |001b: aget-object v3, v7, v9
+516be2: 1204                                   |001d: const/4 v4, #int 0 // #0
+516be4: 6e10 16d2 0300                         |001e: invoke-virtual {v3}, Ljava/lang/String;.length:()I // method@d216
+516bea: 0a05                                   |0021: move-result v5
+516bec: 1201                                   |0022: const/4 v1, #int 0 // #0
+516bee: 1202                                   |0023: const/4 v2, #int 0 // #0
+516bf0: 0760                                   |0024: move-object v0, v6
+516bf2: 7406 1ad2 0000                         |0025: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/lang/String;.regionMatches:(ZILjava/lang/String;II)Z // method@d21a
+516bf8: 0a00                                   |0028: move-result v0
+516bfa: 1211                                   |0029: const/4 v1, #int 1 // #1
+516bfc: 3900 2400                              |002a: if-nez v0, 004e // +0024
+516c00: 2200 991a                              |002c: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+516c04: 7010 39d2 0000                         |002e: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+516c0a: 4602 0709                              |0031: aget-object v2, v7, v9
+516c0e: 6e20 45d2 2000                         |0033: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+516c14: 0c00                                   |0036: move-result-object v0
+516c16: 4609 0709                              |0037: aget-object v9, v7, v9
+516c1a: 6e10 16d2 0900                         |0039: invoke-virtual {v9}, Ljava/lang/String;.length:()I // method@d216
+516c20: 0a09                                   |003c: move-result v9
+516c22: 6e20 23d2 9600                         |003d: invoke-virtual {v6, v9}, Ljava/lang/String;.substring:(I)Ljava/lang/String; // method@d223
+516c28: 0c06                                   |0040: move-result-object v6
+516c2a: 6e20 45d2 6000                         |0041: invoke-virtual {v0, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+516c30: 0c06                                   |0044: move-result-object v6
+516c32: 6e10 58d2 0600                         |0045: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+516c38: 0c06                                   |0048: move-result-object v6
+516c3a: 2805                                   |0049: goto 004e // +0005
+516c3c: d809 0901                              |004a: add-int/lit8 v9, v9, #int 1 // #01
+516c40: 28bc                                   |004c: goto 0008 // -0044
+516c42: 0181                                   |004d: move v1, v8
+516c44: 3901 1800                              |004e: if-nez v1, 0066 // +0018
+516c48: 2179                                   |0050: array-length v9, v7
+516c4a: 3d09 1500                              |0051: if-lez v9, 0066 // +0015
+516c4e: 2209 991a                              |0053: new-instance v9, Ljava/lang/StringBuilder; // type@1a99
+516c52: 7010 39d2 0900                         |0055: invoke-direct {v9}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+516c58: 4607 0708                              |0058: aget-object v7, v7, v8
+516c5c: 6e20 45d2 7900                         |005a: invoke-virtual {v9, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+516c62: 0c07                                   |005d: move-result-object v7
+516c64: 6e20 45d2 6700                         |005e: invoke-virtual {v7, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+516c6a: 0c06                                   |0061: move-result-object v6
+516c6c: 6e10 58d2 0600                         |0062: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+516c72: 0c06                                   |0065: move-result-object v6
+516c74: 1106                                   |0066: return-object v6
+      catches       : (none)
+      positions     :
+        0x0002 line=392
+        0x0008 line=397
+        0x000b line=398
+        0x001b line=402
+        0x002c line=403
+        0x0050 line=410
+        0x0053 line=411
+      locals        :
+        0x0000 - 0x0067 reg=6 (null) Ljava/lang/String;
+        0x0000 - 0x0067 reg=7 (null) [Ljava/lang/String;
+        0x0000 - 0x0067 reg=8 (null) Ljava/util/regex/Matcher;
+        0x0000 - 0x0067 reg=9 (null) Landroid/text/util/Linkify$TransformFilter;
+
+    #16              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'pruneOverlaps'
+      type          : '(Ljava/util/ArrayList;Landroid/text/Spannable;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 11
+      ins           : 2
+      outs          : 4
+      insns size    : 148 16-bit code units
+516c78:                                        |[516c78] androidx.core.text.util.LinkifyCompat.pruneOverlaps:(Ljava/util/ArrayList;Landroid/text/Spannable;)V
+516c88: 7210 8707 0a00                         |0000: invoke-interface {v10}, Landroid/text/Spannable;.length:()I // method@0787
+516c8e: 0a00                                   |0003: move-result v0
+516c90: 1c01 9b01                              |0004: const-class v1, Landroid/text/style/URLSpan; // type@019b
+516c94: 1202                                   |0006: const/4 v2, #int 0 // #0
+516c96: 7240 8607 2a10                         |0007: invoke-interface {v10, v2, v0, v1}, Landroid/text/Spannable;.getSpans:(IILjava/lang/Class;)[Ljava/lang/Object; // method@0786
+516c9c: 0c00                                   |000a: move-result-object v0
+516c9e: 1f00 991f                              |000b: check-cast v0, [Landroid/text/style/URLSpan; // type@1f99
+516ca2: 0121                                   |000d: move v1, v2
+516ca4: 2103                                   |000e: array-length v3, v0
+516ca6: 3531 2100                              |000f: if-ge v1, v3, 0030 // +0021
+516caa: 2203 d206                              |0011: new-instance v3, Landroidx/core/text/util/LinkifyCompat$LinkSpec; // type@06d2
+516cae: 7010 5e38 0300                         |0013: invoke-direct {v3}, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.<init>:()V // method@385e
+516cb4: 4604 0001                              |0016: aget-object v4, v0, v1
+516cb8: 5b34 db29                              |0018: iput-object v4, v3, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.frameworkAddedSpan:Landroid/text/style/URLSpan; // field@29db
+516cbc: 4604 0001                              |001a: aget-object v4, v0, v1
+516cc0: 7220 8507 4a00                         |001c: invoke-interface {v10, v4}, Landroid/text/Spannable;.getSpanStart:(Ljava/lang/Object;)I // method@0785
+516cc6: 0a04                                   |001f: move-result v4
+516cc8: 5934 dc29                              |0020: iput v4, v3, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+516ccc: 4604 0001                              |0022: aget-object v4, v0, v1
+516cd0: 7220 8307 4a00                         |0024: invoke-interface {v10, v4}, Landroid/text/Spannable;.getSpanEnd:(Ljava/lang/Object;)I // method@0783
+516cd6: 0a04                                   |0027: move-result v4
+516cd8: 5934 da29                              |0028: iput v4, v3, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+516cdc: 6e20 a3d4 3900                         |002a: invoke-virtual {v9, v3}, Ljava/util/ArrayList;.add:(Ljava/lang/Object;)Z // method@d4a3
+516ce2: d801 0101                              |002d: add-int/lit8 v1, v1, #int 1 // #01
+516ce6: 28df                                   |002f: goto 000e // -0021
+516ce8: 6200 de29                              |0030: sget-object v0, Landroidx/core/text/util/LinkifyCompat;.COMPARATOR:Ljava/util/Comparator; // field@29de
+516cec: 7120 4fd5 0900                         |0032: invoke-static {v9, v0}, Ljava/util/Collections;.sort:(Ljava/util/List;Ljava/util/Comparator;)V // method@d54f
+516cf2: 6e10 b4d4 0900                         |0035: invoke-virtual {v9}, Ljava/util/ArrayList;.size:()I // method@d4b4
+516cf8: 0a00                                   |0038: move-result v0
+516cfa: d801 00ff                              |0039: add-int/lit8 v1, v0, #int -1 // #ff
+516cfe: 3512 5800                              |003b: if-ge v2, v1, 0093 // +0058
+516d02: 6e20 aad4 2900                         |003d: invoke-virtual {v9, v2}, Ljava/util/ArrayList;.get:(I)Ljava/lang/Object; // method@d4aa
+516d08: 0c01                                   |0040: move-result-object v1
+516d0a: 1f01 d206                              |0041: check-cast v1, Landroidx/core/text/util/LinkifyCompat$LinkSpec; // type@06d2
+516d0e: d803 0201                              |0043: add-int/lit8 v3, v2, #int 1 // #01
+516d12: 6e20 aad4 3900                         |0045: invoke-virtual {v9, v3}, Ljava/util/ArrayList;.get:(I)Ljava/lang/Object; // method@d4aa
+516d18: 0c04                                   |0048: move-result-object v4
+516d1a: 1f04 d206                              |0049: check-cast v4, Landroidx/core/text/util/LinkifyCompat$LinkSpec; // type@06d2
+516d1e: 5215 dc29                              |004b: iget v5, v1, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+516d22: 5246 dc29                              |004d: iget v6, v4, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+516d26: 3665 4200                              |004f: if-gt v5, v6, 0091 // +0042
+516d2a: 5215 da29                              |0051: iget v5, v1, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+516d2e: 5246 dc29                              |0053: iget v6, v4, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+516d32: 3765 3c00                              |0055: if-le v5, v6, 0091 // +003c
+516d36: 5245 da29                              |0057: iget v5, v4, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+516d3a: 5216 da29                              |0059: iget v6, v1, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+516d3e: 12f7                                   |005b: const/4 v7, #int -1 // #ff
+516d40: 3665 0400                              |005c: if-gt v5, v6, 0060 // +0004
+516d44: 0131                                   |005e: move v1, v3
+516d46: 281d                                   |005f: goto 007c // +001d
+516d48: 5215 da29                              |0060: iget v5, v1, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+516d4c: 5216 dc29                              |0062: iget v6, v1, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+516d50: b165                                   |0064: sub-int/2addr v5, v6
+516d52: 5246 da29                              |0065: iget v6, v4, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+516d56: 5248 dc29                              |0067: iget v8, v4, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+516d5a: b186                                   |0069: sub-int/2addr v6, v8
+516d5c: 3765 0300                              |006a: if-le v5, v6, 006d // +0003
+516d60: 28f2                                   |006c: goto 005e // -000e
+516d62: 5215 da29                              |006d: iget v5, v1, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+516d66: 5211 dc29                              |006f: iget v1, v1, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+516d6a: b115                                   |0071: sub-int/2addr v5, v1
+516d6c: 5241 da29                              |0072: iget v1, v4, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.end:I // field@29da
+516d70: 5244 dc29                              |0074: iget v4, v4, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.start:I // field@29dc
+516d74: b141                                   |0076: sub-int/2addr v1, v4
+516d76: 3515 0400                              |0077: if-ge v5, v1, 007b // +0004
+516d7a: 0121                                   |0079: move v1, v2
+516d7c: 2802                                   |007a: goto 007c // +0002
+516d7e: 0171                                   |007b: move v1, v7
+516d80: 3271 1500                              |007c: if-eq v1, v7, 0091 // +0015
+516d84: 6e20 aad4 1900                         |007e: invoke-virtual {v9, v1}, Ljava/util/ArrayList;.get:(I)Ljava/lang/Object; // method@d4aa
+516d8a: 0c03                                   |0081: move-result-object v3
+516d8c: 1f03 d206                              |0082: check-cast v3, Landroidx/core/text/util/LinkifyCompat$LinkSpec; // type@06d2
+516d90: 5433 db29                              |0084: iget-object v3, v3, Landroidx/core/text/util/LinkifyCompat$LinkSpec;.frameworkAddedSpan:Landroid/text/style/URLSpan; // field@29db
+516d94: 3803 0500                              |0086: if-eqz v3, 008b // +0005
+516d98: 7220 8907 3a00                         |0088: invoke-interface {v10, v3}, Landroid/text/Spannable;.removeSpan:(Ljava/lang/Object;)V // method@0789
+516d9e: 6e20 b0d4 1900                         |008b: invoke-virtual {v9, v1}, Ljava/util/ArrayList;.remove:(I)Ljava/lang/Object; // method@d4b0
+516da4: d800 00ff                              |008e: add-int/lit8 v0, v0, #int -1 // #ff
+516da8: 28a9                                   |0090: goto 0039 // -0057
+516daa: 0132                                   |0091: move v2, v3
+516dac: 28a7                                   |0092: goto 0039 // -0059
+516dae: 0e00                                   |0093: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=495
+        0x000e line=496
+        0x0011 line=497
+        0x0016 line=498
+        0x001a line=499
+        0x0022 line=500
+        0x002a line=501
+        0x0030 line=504
+        0x0035 line=506
+        0x003d line=510
+        0x0045 line=511
+        0x004b line=514
+        0x0057 line=515
+        0x0060 line=517
+        0x006d line=519
+        0x007e line=524
+        0x0088 line=526
+        0x008b line=528
+      locals        :
+        0x0000 - 0x0094 reg=9 (null) Ljava/util/ArrayList;
+        0x0000 - 0x0094 reg=10 (null) Landroid/text/Spannable;
+
+    #17              : (in Landroidx/core/text/util/LinkifyCompat;)
+      name          : 'shouldAddLinksFallbackToFramework'
+      type          : '()Z'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 0
+      insns size    : 2 16-bit code units
+516db0:                                        |[516db0] androidx.core.text.util.LinkifyCompat.shouldAddLinksFallbackToFramework:()Z
+516dc0: 1210                                   |0000: const/4 v0, #int 1 // #1
+516dc2: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+  Virtual methods   -
+  source_file_idx   : 19813 (LinkifyCompat.java)
+

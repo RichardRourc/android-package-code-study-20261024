@@ -1,0 +1,626 @@
+Class #1657            -
+  Class descriptor  : 'Landroidx/recyclerview/widget/GapWorker;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/lang/Runnable;'
+  Static fields     -
+    #0              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'sGapWorker'
+      type          : 'Ljava/lang/ThreadLocal;'
+      access        : 0x0018 (STATIC FINAL)
+    #1              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'sTaskComparator'
+      type          : 'Ljava/util/Comparator;'
+      access        : 0x0008 (STATIC)
+  Instance fields   -
+    #0              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'mFrameIntervalNs'
+      type          : 'J'
+      access        : 0x0000 ()
+    #1              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'mPostTimeNs'
+      type          : 'J'
+      access        : 0x0000 ()
+    #2              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'mRecyclerViews'
+      type          : 'Ljava/util/ArrayList;'
+      access        : 0x0000 ()
+    #3              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'mTasks'
+      type          : 'Ljava/util/ArrayList;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 15 16-bit code units
+551af8:                                        |[551af8] androidx.recyclerview.widget.GapWorker.<clinit>:()V
+551b08: 2200 9e1a                              |0000: new-instance v0, Ljava/lang/ThreadLocal; // type@1a9e
+551b0c: 7010 80d2 0000                         |0002: invoke-direct {v0}, Ljava/lang/ThreadLocal;.<init>:()V // method@d280
+551b12: 6900 1235                              |0005: sput-object v0, Landroidx/recyclerview/widget/GapWorker;.sGapWorker:Ljava/lang/ThreadLocal; // field@3512
+551b16: 2200 e508                              |0007: new-instance v0, Landroidx/recyclerview/widget/GapWorker$1; // type@08e5
+551b1a: 7010 eb47 0000                         |0009: invoke-direct {v0}, Landroidx/recyclerview/widget/GapWorker$1;.<init>:()V // method@47eb
+551b20: 6900 1335                              |000c: sput-object v0, Landroidx/recyclerview/widget/GapWorker;.sTaskComparator:Ljava/util/Comparator; // field@3513
+551b24: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=31
+        0x0007 line=188
+      locals        :
+
+    #1              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 18 16-bit code units
+551b28:                                        |[551b28] androidx.recyclerview.widget.GapWorker.<init>:()V
+551b38: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+551b3e: 2200 3a1b                              |0003: new-instance v0, Ljava/util/ArrayList; // type@1b3a
+551b42: 7010 9fd4 0000                         |0005: invoke-direct {v0}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+551b48: 5b10 1035                              |0008: iput-object v0, v1, Landroidx/recyclerview/widget/GapWorker;.mRecyclerViews:Ljava/util/ArrayList; // field@3510
+551b4c: 2200 3a1b                              |000a: new-instance v0, Ljava/util/ArrayList; // type@1b3a
+551b50: 7010 9fd4 0000                         |000c: invoke-direct {v0}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+551b56: 5b10 1135                              |000f: iput-object v0, v1, Landroidx/recyclerview/widget/GapWorker;.mTasks:Ljava/util/ArrayList; // field@3511
+551b5a: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=29
+        0x0003 line=33
+        0x000a line=58
+      locals        :
+        0x0000 - 0x0012 reg=1 this Landroidx/recyclerview/widget/GapWorker;
+
+    #2              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'buildTaskList'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 12
+      ins           : 1
+      outs          : 3
+      insns size    : 152 16-bit code units
+551b5c:                                        |[551b5c] androidx.recyclerview.widget.GapWorker.buildTaskList:()V
+551b6c: 54b0 1035                              |0000: iget-object v0, v11, Landroidx/recyclerview/widget/GapWorker;.mRecyclerViews:Ljava/util/ArrayList; // field@3510
+551b70: 6e10 b4d4 0000                         |0002: invoke-virtual {v0}, Ljava/util/ArrayList;.size:()I // method@d4b4
+551b76: 0a00                                   |0005: move-result v0
+551b78: 1201                                   |0006: const/4 v1, #int 0 // #0
+551b7a: 0112                                   |0007: move v2, v1
+551b7c: 0123                                   |0008: move v3, v2
+551b7e: 3502 1d00                              |0009: if-ge v2, v0, 0026 // +001d
+551b82: 54b4 1035                              |000b: iget-object v4, v11, Landroidx/recyclerview/widget/GapWorker;.mRecyclerViews:Ljava/util/ArrayList; // field@3510
+551b86: 6e20 aad4 2400                         |000d: invoke-virtual {v4, v2}, Ljava/util/ArrayList;.get:(I)Ljava/lang/Object; // method@d4aa
+551b8c: 0c04                                   |0010: move-result-object v4
+551b8e: 1f04 4309                              |0011: check-cast v4, Landroidx/recyclerview/widget/RecyclerView; // type@0943
+551b92: 6e10 ae4c 0400                         |0013: invoke-virtual {v4}, Landroidx/recyclerview/widget/RecyclerView;.getWindowVisibility:()I // method@4cae
+551b98: 0a05                                   |0016: move-result v5
+551b9a: 3905 0c00                              |0017: if-nez v5, 0023 // +000c
+551b9e: 5445 0337                              |0019: iget-object v5, v4, Landroidx/recyclerview/widget/RecyclerView;.mPrefetchRegistry:Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl; // field@3703
+551ba2: 6e30 f147 4501                         |001b: invoke-virtual {v5, v4, v1}, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.collectPrefetchPositionsFromView:(Landroidx/recyclerview/widget/RecyclerView;Z)V // method@47f1
+551ba8: 5444 0337                              |001e: iget-object v4, v4, Landroidx/recyclerview/widget/RecyclerView;.mPrefetchRegistry:Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl; // field@3703
+551bac: 5244 0535                              |0020: iget v4, v4, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.mCount:I // field@3505
+551bb0: b043                                   |0022: add-int/2addr v3, v4
+551bb2: d802 0201                              |0023: add-int/lit8 v2, v2, #int 1 // #01
+551bb6: 28e4                                   |0025: goto 0009 // -001c
+551bb8: 54b2 1135                              |0026: iget-object v2, v11, Landroidx/recyclerview/widget/GapWorker;.mTasks:Ljava/util/ArrayList; // field@3511
+551bbc: 6e20 a8d4 3200                         |0028: invoke-virtual {v2, v3}, Ljava/util/ArrayList;.ensureCapacity:(I)V // method@d4a8
+551bc2: 0112                                   |002b: move v2, v1
+551bc4: 0123                                   |002c: move v3, v2
+551bc6: 3502 6300                              |002d: if-ge v2, v0, 0090 // +0063
+551bca: 54b4 1035                              |002f: iget-object v4, v11, Landroidx/recyclerview/widget/GapWorker;.mRecyclerViews:Ljava/util/ArrayList; // field@3510
+551bce: 6e20 aad4 2400                         |0031: invoke-virtual {v4, v2}, Ljava/util/ArrayList;.get:(I)Ljava/lang/Object; // method@d4aa
+551bd4: 0c04                                   |0034: move-result-object v4
+551bd6: 1f04 4309                              |0035: check-cast v4, Landroidx/recyclerview/widget/RecyclerView; // type@0943
+551bda: 6e10 ae4c 0400                         |0037: invoke-virtual {v4}, Landroidx/recyclerview/widget/RecyclerView;.getWindowVisibility:()I // method@4cae
+551be0: 0a05                                   |003a: move-result v5
+551be2: 3805 0300                              |003b: if-eqz v5, 003e // +0003
+551be6: 2850                                   |003d: goto 008d // +0050
+551be8: 5445 0337                              |003e: iget-object v5, v4, Landroidx/recyclerview/widget/RecyclerView;.mPrefetchRegistry:Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl; // field@3703
+551bec: 5256 0735                              |0040: iget v6, v5, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.mPrefetchDx:I // field@3507
+551bf0: 7110 87d1 0600                         |0042: invoke-static {v6}, Ljava/lang/Math;.abs:(I)I // method@d187
+551bf6: 0a06                                   |0045: move-result v6
+551bf8: 5257 0835                              |0046: iget v7, v5, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.mPrefetchDy:I // field@3508
+551bfc: 7110 87d1 0700                         |0048: invoke-static {v7}, Ljava/lang/Math;.abs:(I)I // method@d187
+551c02: 0a07                                   |004b: move-result v7
+551c04: b076                                   |004c: add-int/2addr v6, v7
+551c06: 0117                                   |004d: move v7, v1
+551c08: 5258 0535                              |004e: iget v8, v5, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.mCount:I // field@3505
+551c0c: da08 0802                              |0050: mul-int/lit8 v8, v8, #int 2 // #02
+551c10: 3587 3b00                              |0052: if-ge v7, v8, 008d // +003b
+551c14: 54b8 1135                              |0054: iget-object v8, v11, Landroidx/recyclerview/widget/GapWorker;.mTasks:Ljava/util/ArrayList; // field@3511
+551c18: 6e10 b4d4 0800                         |0056: invoke-virtual {v8}, Ljava/util/ArrayList;.size:()I // method@d4b4
+551c1e: 0a08                                   |0059: move-result v8
+551c20: 3483 0d00                              |005a: if-lt v3, v8, 0067 // +000d
+551c24: 2208 e708                              |005c: new-instance v8, Landroidx/recyclerview/widget/GapWorker$Task; // type@08e7
+551c28: 7010 f447 0800                         |005e: invoke-direct {v8}, Landroidx/recyclerview/widget/GapWorker$Task;.<init>:()V // method@47f4
+551c2e: 54b9 1135                              |0061: iget-object v9, v11, Landroidx/recyclerview/widget/GapWorker;.mTasks:Ljava/util/ArrayList; // field@3511
+551c32: 6e20 a3d4 8900                         |0063: invoke-virtual {v9, v8}, Ljava/util/ArrayList;.add:(Ljava/lang/Object;)Z // method@d4a3
+551c38: 2809                                   |0066: goto 006f // +0009
+551c3a: 54b8 1135                              |0067: iget-object v8, v11, Landroidx/recyclerview/widget/GapWorker;.mTasks:Ljava/util/ArrayList; // field@3511
+551c3e: 6e20 aad4 3800                         |0069: invoke-virtual {v8, v3}, Ljava/util/ArrayList;.get:(I)Ljava/lang/Object; // method@d4aa
+551c44: 0c08                                   |006c: move-result-object v8
+551c46: 1f08 e708                              |006d: check-cast v8, Landroidx/recyclerview/widget/GapWorker$Task; // type@08e7
+551c4a: 5459 0635                              |006f: iget-object v9, v5, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.mPrefetchArray:[I // field@3506
+551c4e: d80a 0701                              |0071: add-int/lit8 v10, v7, #int 1 // #01
+551c52: 4409 090a                              |0073: aget v9, v9, v10
+551c56: 3669 0400                              |0075: if-gt v9, v6, 0079 // +0004
+551c5a: 121a                                   |0077: const/4 v10, #int 1 // #1
+551c5c: 2802                                   |0078: goto 007a // +0002
+551c5e: 011a                                   |0079: move v10, v1
+551c60: 5c8a 0a35                              |007a: iput-boolean v10, v8, Landroidx/recyclerview/widget/GapWorker$Task;.immediate:Z // field@350a
+551c64: 5986 0d35                              |007c: iput v6, v8, Landroidx/recyclerview/widget/GapWorker$Task;.viewVelocity:I // field@350d
+551c68: 5989 0935                              |007e: iput v9, v8, Landroidx/recyclerview/widget/GapWorker$Task;.distanceToItem:I // field@3509
+551c6c: 5b84 0c35                              |0080: iput-object v4, v8, Landroidx/recyclerview/widget/GapWorker$Task;.view:Landroidx/recyclerview/widget/RecyclerView; // field@350c
+551c70: 5459 0635                              |0082: iget-object v9, v5, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.mPrefetchArray:[I // field@3506
+551c74: 4409 0907                              |0084: aget v9, v9, v7
+551c78: 5989 0b35                              |0086: iput v9, v8, Landroidx/recyclerview/widget/GapWorker$Task;.position:I // field@350b
+551c7c: d803 0301                              |0088: add-int/lit8 v3, v3, #int 1 // #01
+551c80: d807 0702                              |008a: add-int/lit8 v7, v7, #int 2 // #02
+551c84: 28c2                                   |008c: goto 004e // -003e
+551c86: d802 0201                              |008d: add-int/lit8 v2, v2, #int 1 // #01
+551c8a: 289e                                   |008f: goto 002d // -0062
+551c8c: 54bb 1135                              |0090: iget-object v11, v11, Landroidx/recyclerview/widget/GapWorker;.mTasks:Ljava/util/ArrayList; // field@3511
+551c90: 6200 1335                              |0092: sget-object v0, Landroidx/recyclerview/widget/GapWorker;.sTaskComparator:Ljava/util/Comparator; // field@3513
+551c94: 7120 4fd5 0b00                         |0094: invoke-static {v11, v0}, Ljava/util/Collections;.sort:(Ljava/util/List;Ljava/util/Comparator;)V // method@d54f
+551c9a: 0e00                                   |0097: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=215
+        0x000b line=218
+        0x0013 line=219
+        0x0019 line=220
+        0x001e line=221
+        0x0026 line=226
+        0x002f line=229
+        0x0037 line=230
+        0x003e line=235
+        0x0040 line=236
+        0x0048 line=237
+        0x004e line=238
+        0x0054 line=240
+        0x005c line=241
+        0x0061 line=242
+        0x0067 line=244
+        0x006f line=246
+        0x007a line=248
+        0x007c line=249
+        0x007e line=250
+        0x0080 line=251
+        0x0082 line=252
+        0x0090 line=259
+      locals        :
+        0x0000 - 0x0098 reg=11 this Landroidx/recyclerview/widget/GapWorker;
+
+    #3              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'flushTaskWithDeadline'
+      type          : '(Landroidx/recyclerview/widget/GapWorker$Task;J)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 5
+      insns size    : 49 16-bit code units
+551c9c:                                        |[551c9c] androidx.recyclerview.widget.GapWorker.flushTaskWithDeadline:(Landroidx/recyclerview/widget/GapWorker$Task;J)V
+551cac: 5540 0a35                              |0000: iget-boolean v0, v4, Landroidx/recyclerview/widget/GapWorker$Task;.immediate:Z // field@350a
+551cb0: 3800 0800                              |0002: if-eqz v0, 000a // +0008
+551cb4: 1800 ffff ffff ffff ff7f               |0004: const-wide v0, #double nan // #7fffffffffffffff
+551cbe: 2802                                   |0009: goto 000b // +0002
+551cc0: 0450                                   |000a: move-wide v0, v5
+551cc2: 5442 0c35                              |000b: iget-object v2, v4, Landroidx/recyclerview/widget/GapWorker$Task;.view:Landroidx/recyclerview/widget/RecyclerView; // field@350c
+551cc6: 5244 0b35                              |000d: iget v4, v4, Landroidx/recyclerview/widget/GapWorker$Task;.position:I // field@350b
+551cca: 7051 0048 2304                         |000f: invoke-direct {v3, v2, v4, v0, v1}, Landroidx/recyclerview/widget/GapWorker;.prefetchPositionWithDeadline:(Landroidx/recyclerview/widget/RecyclerView;IJ)Landroidx/recyclerview/widget/RecyclerView$ViewHolder; // method@4800
+551cd0: 0c04                                   |0012: move-result-object v4
+551cd2: 3804 1d00                              |0013: if-eqz v4, 0030 // +001d
+551cd6: 5440 a436                              |0015: iget-object v0, v4, Landroidx/recyclerview/widget/RecyclerView$ViewHolder;.mNestedRecyclerView:Ljava/lang/ref/WeakReference; // field@36a4
+551cda: 3800 1900                              |0017: if-eqz v0, 0030 // +0019
+551cde: 6e10 0b4c 0400                         |0019: invoke-virtual {v4}, Landroidx/recyclerview/widget/RecyclerView$ViewHolder;.isBound:()Z // method@4c0b
+551ce4: 0a00                                   |001c: move-result v0
+551ce6: 3800 1300                              |001d: if-eqz v0, 0030 // +0013
+551cea: 6e10 0c4c 0400                         |001f: invoke-virtual {v4}, Landroidx/recyclerview/widget/RecyclerView$ViewHolder;.isInvalid:()Z // method@4c0c
+551cf0: 0a00                                   |0022: move-result v0
+551cf2: 3900 0d00                              |0023: if-nez v0, 0030 // +000d
+551cf6: 5444 a436                              |0025: iget-object v4, v4, Landroidx/recyclerview/widget/RecyclerView$ViewHolder;.mNestedRecyclerView:Ljava/lang/ref/WeakReference; // field@36a4
+551cfa: 6e10 a0d2 0400                         |0027: invoke-virtual {v4}, Ljava/lang/ref/WeakReference;.get:()Ljava/lang/Object; // method@d2a0
+551d00: 0c04                                   |002a: move-result-object v4
+551d02: 1f04 4309                              |002b: check-cast v4, Landroidx/recyclerview/widget/RecyclerView; // type@0943
+551d06: 7040 ff47 4365                         |002d: invoke-direct {v3, v4, v5, v6}, Landroidx/recyclerview/widget/GapWorker;.prefetchInnerRecyclerViewWithDeadline:(Landroidx/recyclerview/widget/RecyclerView;J)V // method@47ff
+551d0c: 0e00                                   |0030: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=342
+        0x000b line=343
+        0x0015 line=345
+        0x0019 line=347
+        0x001f line=348
+        0x0025 line=349
+      locals        :
+        0x0000 - 0x0031 reg=3 this Landroidx/recyclerview/widget/GapWorker;
+        0x0000 - 0x0031 reg=4 (null) Landroidx/recyclerview/widget/GapWorker$Task;
+        0x0000 - 0x0031 reg=5 (null) J
+
+    #4              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'flushTasksWithDeadline'
+      type          : '(J)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 4
+      insns size    : 32 16-bit code units
+551d10:                                        |[551d10] androidx.recyclerview.widget.GapWorker.flushTasksWithDeadline:(J)V
+551d20: 1200                                   |0000: const/4 v0, #int 0 // #0
+551d22: 5431 1135                              |0001: iget-object v1, v3, Landroidx/recyclerview/widget/GapWorker;.mTasks:Ljava/util/ArrayList; // field@3511
+551d26: 6e10 b4d4 0100                         |0003: invoke-virtual {v1}, Ljava/util/ArrayList;.size:()I // method@d4b4
+551d2c: 0a01                                   |0006: move-result v1
+551d2e: 3510 1800                              |0007: if-ge v0, v1, 001f // +0018
+551d32: 5431 1135                              |0009: iget-object v1, v3, Landroidx/recyclerview/widget/GapWorker;.mTasks:Ljava/util/ArrayList; // field@3511
+551d36: 6e20 aad4 0100                         |000b: invoke-virtual {v1, v0}, Ljava/util/ArrayList;.get:(I)Ljava/lang/Object; // method@d4aa
+551d3c: 0c01                                   |000e: move-result-object v1
+551d3e: 1f01 e708                              |000f: check-cast v1, Landroidx/recyclerview/widget/GapWorker$Task; // type@08e7
+551d42: 5412 0c35                              |0011: iget-object v2, v1, Landroidx/recyclerview/widget/GapWorker$Task;.view:Landroidx/recyclerview/widget/RecyclerView; // field@350c
+551d46: 3902 0300                              |0013: if-nez v2, 0016 // +0003
+551d4a: 280a                                   |0015: goto 001f // +000a
+551d4c: 7040 fa47 1354                         |0016: invoke-direct {v3, v1, v4, v5}, Landroidx/recyclerview/widget/GapWorker;.flushTaskWithDeadline:(Landroidx/recyclerview/widget/GapWorker$Task;J)V // method@47fa
+551d52: 6e10 f547 0100                         |0019: invoke-virtual {v1}, Landroidx/recyclerview/widget/GapWorker$Task;.clear:()V // method@47f5
+551d58: d800 0001                              |001c: add-int/lit8 v0, v0, #int 1 // #01
+551d5c: 28e3                                   |001e: goto 0001 // -001d
+551d5e: 0e00                                   |001f: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=354
+        0x0009 line=355
+        0x0011 line=356
+        0x0016 line=359
+        0x0019 line=360
+      locals        :
+        0x0000 - 0x0020 reg=3 this Landroidx/recyclerview/widget/GapWorker;
+        0x0000 - 0x0020 reg=4 (null) J
+
+    #5              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'isPrefetchPositionAttached'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView;I)Z'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 2
+      insns size    : 36 16-bit code units
+551d60:                                        |[551d60] androidx.recyclerview.widget.GapWorker.isPrefetchPositionAttached:(Landroidx/recyclerview/widget/RecyclerView;I)Z
+551d70: 5450 db36                              |0000: iget-object v0, v5, Landroidx/recyclerview/widget/RecyclerView;.mChildHelper:Landroidx/recyclerview/widget/ChildHelper; // field@36db
+551d74: 6e10 4c47 0000                         |0002: invoke-virtual {v0}, Landroidx/recyclerview/widget/ChildHelper;.getUnfilteredChildCount:()I // method@474c
+551d7a: 0a00                                   |0005: move-result v0
+551d7c: 1201                                   |0006: const/4 v1, #int 0 // #0
+551d7e: 0112                                   |0007: move v2, v1
+551d80: 3502 1b00                              |0008: if-ge v2, v0, 0023 // +001b
+551d84: 5453 db36                              |000a: iget-object v3, v5, Landroidx/recyclerview/widget/RecyclerView;.mChildHelper:Landroidx/recyclerview/widget/ChildHelper; // field@36db
+551d88: 6e20 4b47 2300                         |000c: invoke-virtual {v3, v2}, Landroidx/recyclerview/widget/ChildHelper;.getUnfilteredChildAt:(I)Landroid/view/View; // method@474b
+551d8e: 0c03                                   |000f: move-result-object v3
+551d90: 7110 884c 0300                         |0010: invoke-static {v3}, Landroidx/recyclerview/widget/RecyclerView;.getChildViewHolderInt:(Landroid/view/View;)Landroidx/recyclerview/widget/RecyclerView$ViewHolder; // method@4c88
+551d96: 0c03                                   |0013: move-result-object v3
+551d98: 5234 a936                              |0014: iget v4, v3, Landroidx/recyclerview/widget/RecyclerView$ViewHolder;.mPosition:I // field@36a9
+551d9c: 3364 0a00                              |0016: if-ne v4, v6, 0020 // +000a
+551da0: 6e10 0c4c 0300                         |0018: invoke-virtual {v3}, Landroidx/recyclerview/widget/RecyclerView$ViewHolder;.isInvalid:()Z // method@4c0c
+551da6: 0a03                                   |001b: move-result v3
+551da8: 3903 0400                              |001c: if-nez v3, 0020 // +0004
+551dac: 1215                                   |001e: const/4 v5, #int 1 // #1
+551dae: 0f05                                   |001f: return v5
+551db0: d802 0201                              |0020: add-int/lit8 v2, v2, #int 1 // #01
+551db4: 28e6                                   |0022: goto 0008 // -001a
+551db6: 0f01                                   |0023: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=263
+        0x000a line=265
+        0x0010 line=266
+        0x0014 line=268
+      locals        :
+        0x0000 - 0x0024 reg=5 (null) Landroidx/recyclerview/widget/RecyclerView;
+        0x0000 - 0x0024 reg=6 (null) I
+
+    #6              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'prefetchInnerRecyclerViewWithDeadline'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView;J)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 5
+      insns size    : 67 16-bit code units
+551db8:                                        |[551db8] androidx.recyclerview.widget.GapWorker.prefetchInnerRecyclerViewWithDeadline:(Landroidx/recyclerview/widget/RecyclerView;J)V
+551dc8: 3904 0300                              |0000: if-nez v4, 0003 // +0003
+551dcc: 0e00                                   |0002: return-void
+551dce: 5540 dd36                              |0003: iget-boolean v0, v4, Landroidx/recyclerview/widget/RecyclerView;.mDataSetHasChangedAfterLayout:Z // field@36dd
+551dd2: 3800 0d00                              |0005: if-eqz v0, 0012 // +000d
+551dd6: 5440 db36                              |0007: iget-object v0, v4, Landroidx/recyclerview/widget/RecyclerView;.mChildHelper:Landroidx/recyclerview/widget/ChildHelper; // field@36db
+551dda: 6e10 4c47 0000                         |0009: invoke-virtual {v0}, Landroidx/recyclerview/widget/ChildHelper;.getUnfilteredChildCount:()I // method@474c
+551de0: 0a00                                   |000c: move-result v0
+551de2: 3800 0500                              |000d: if-eqz v0, 0012 // +0005
+551de6: 6e10 f24c 0400                         |000f: invoke-virtual {v4}, Landroidx/recyclerview/widget/RecyclerView;.removeAndRecycleViews:()V // method@4cf2
+551dec: 5440 0337                              |0012: iget-object v0, v4, Landroidx/recyclerview/widget/RecyclerView;.mPrefetchRegistry:Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl; // field@3703
+551df0: 1211                                   |0014: const/4 v1, #int 1 // #1
+551df2: 6e30 f147 4001                         |0015: invoke-virtual {v0, v4, v1}, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.collectPrefetchPositionsFromView:(Landroidx/recyclerview/widget/RecyclerView;Z)V // method@47f1
+551df8: 5201 0535                              |0018: iget v1, v0, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.mCount:I // field@3505
+551dfc: 3801 2800                              |001a: if-eqz v1, 0042 // +0028
+551e00: 1a01 715d                              |001c: const-string v1, "RV Nested Prefetch" // string@5d71
+551e04: 7110 7837 0100                         |001e: invoke-static {v1}, Landroidx/core/os/TraceCompat;.beginSection:(Ljava/lang/String;)V // method@3778
+551e0a: 5441 1237                              |0021: iget-object v1, v4, Landroidx/recyclerview/widget/RecyclerView;.mState:Landroidx/recyclerview/widget/RecyclerView$State; // field@3712
+551e0e: 5442 d636                              |0023: iget-object v2, v4, Landroidx/recyclerview/widget/RecyclerView;.mAdapter:Landroidx/recyclerview/widget/RecyclerView$Adapter; // field@36d6
+551e12: 6e20 e04b 2100                         |0025: invoke-virtual {v1, v2}, Landroidx/recyclerview/widget/RecyclerView$State;.prepareForNestedPrefetch:(Landroidx/recyclerview/widget/RecyclerView$Adapter;)V // method@4be0
+551e18: 1201                                   |0028: const/4 v1, #int 0 // #0
+551e1a: 5202 0535                              |0029: iget v2, v0, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.mCount:I // field@3505
+551e1e: da02 0202                              |002b: mul-int/lit8 v2, v2, #int 2 // #02
+551e22: 3521 0c00                              |002d: if-ge v1, v2, 0039 // +000c
+551e26: 5402 0635                              |002f: iget-object v2, v0, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.mPrefetchArray:[I // field@3506
+551e2a: 4402 0201                              |0031: aget v2, v2, v1
+551e2e: 7056 0048 4352                         |0033: invoke-direct {v3, v4, v2, v5, v6}, Landroidx/recyclerview/widget/GapWorker;.prefetchPositionWithDeadline:(Landroidx/recyclerview/widget/RecyclerView;IJ)Landroidx/recyclerview/widget/RecyclerView$ViewHolder; // method@4800
+551e34: d801 0102                              |0036: add-int/lit8 v1, v1, #int 2 // #02
+551e38: 28f1                                   |0038: goto 0029 // -000f
+551e3a: 7100 7a37 0000                         |0039: invoke-static {}, Landroidx/core/os/TraceCompat;.endSection:()V // method@377a
+551e40: 2806                                   |003c: goto 0042 // +0006
+551e42: 0d03                                   |003d: move-exception v3
+551e44: 7100 7a37 0000                         |003e: invoke-static {}, Landroidx/core/os/TraceCompat;.endSection:()V // method@377a
+551e4a: 2703                                   |0041: throw v3
+551e4c: 0e00                                   |0042: return-void
+      catches       : 1
+        0x001c - 0x0036
+          <any> -> 0x003d
+      positions     :
+        0x0003 line=314
+        0x0009 line=315
+        0x000f line=318
+        0x0012 line=322
+        0x0015 line=323
+        0x0018 line=325
+        0x001c line=327
+        0x0021 line=328
+        0x0029 line=329
+        0x002f line=332
+        0x0033 line=333
+        0x0039 line=336
+      locals        :
+        0x0000 - 0x0043 reg=3 this Landroidx/recyclerview/widget/GapWorker;
+        0x0000 - 0x0043 reg=4 (null) Landroidx/recyclerview/widget/RecyclerView;
+        0x0000 - 0x0043 reg=5 (null) J
+
+    #7              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'prefetchPositionWithDeadline'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView;IJ)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 5
+      outs          : 5
+      insns size    : 50 16-bit code units
+551e5c:                                        |[551e5c] androidx.recyclerview.widget.GapWorker.prefetchPositionWithDeadline:(Landroidx/recyclerview/widget/RecyclerView;IJ)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+551e6c: 7120 fc47 3200                         |0000: invoke-static {v2, v3}, Landroidx/recyclerview/widget/GapWorker;.isPrefetchPositionAttached:(Landroidx/recyclerview/widget/RecyclerView;I)Z // method@47fc
+551e72: 0a01                                   |0003: move-result v1
+551e74: 3801 0400                              |0004: if-eqz v1, 0008 // +0004
+551e78: 1201                                   |0006: const/4 v1, #int 0 // #0
+551e7a: 1101                                   |0007: return-object v1
+551e7c: 5421 0537                              |0008: iget-object v1, v2, Landroidx/recyclerview/widget/RecyclerView;.mRecycler:Landroidx/recyclerview/widget/RecyclerView$Recycler; // field@3705
+551e80: 1200                                   |000a: const/4 v0, #int 0 // #0
+551e82: 6e10 d74c 0200                         |000b: invoke-virtual {v2}, Landroidx/recyclerview/widget/RecyclerView;.onEnterLayoutOrScroll:()V // method@4cd7
+551e88: 6e55 924b 3140                         |000e: invoke-virtual {v1, v3, v0, v4, v5}, Landroidx/recyclerview/widget/RecyclerView$Recycler;.tryGetViewHolderForPositionByDeadline:(IZJ)Landroidx/recyclerview/widget/RecyclerView$ViewHolder; // method@4b92
+551e8e: 0c03                                   |0011: move-result-object v3
+551e90: 3803 1700                              |0012: if-eqz v3, 0029 // +0017
+551e94: 6e10 0b4c 0300                         |0014: invoke-virtual {v3}, Landroidx/recyclerview/widget/RecyclerView$ViewHolder;.isBound:()Z // method@4c0b
+551e9a: 0a04                                   |0017: move-result v4
+551e9c: 3804 0e00                              |0018: if-eqz v4, 0026 // +000e
+551ea0: 6e10 0c4c 0300                         |001a: invoke-virtual {v3}, Landroidx/recyclerview/widget/RecyclerView$ViewHolder;.isInvalid:()Z // method@4c0c
+551ea6: 0a04                                   |001d: move-result v4
+551ea8: 3904 0800                              |001e: if-nez v4, 0026 // +0008
+551eac: 5434 9e36                              |0020: iget-object v4, v3, Landroidx/recyclerview/widget/RecyclerView$ViewHolder;.itemView:Landroid/view/View; // field@369e
+551eb0: 6e20 8a4b 4100                         |0022: invoke-virtual {v1, v4}, Landroidx/recyclerview/widget/RecyclerView$Recycler;.recycleView:(Landroid/view/View;)V // method@4b8a
+551eb6: 2804                                   |0025: goto 0029 // +0004
+551eb8: 6e30 6e4b 3100                         |0026: invoke-virtual {v1, v3, v0}, Landroidx/recyclerview/widget/RecyclerView$Recycler;.addViewHolderToRecycledViewPool:(Landroidx/recyclerview/widget/RecyclerView$ViewHolder;Z)V // method@4b6e
+551ebe: 6e20 d94c 0200                         |0029: invoke-virtual {v2, v0}, Landroidx/recyclerview/widget/RecyclerView;.onExitLayoutOrScroll:(Z)V // method@4cd9
+551ec4: 1103                                   |002c: return-object v3
+551ec6: 0d01                                   |002d: move-exception v1
+551ec8: 6e20 d94c 0200                         |002e: invoke-virtual {v2, v0}, Landroidx/recyclerview/widget/RecyclerView;.onExitLayoutOrScroll:(Z)V // method@4cd9
+551ece: 2701                                   |0031: throw v1
+      catches       : 1
+        0x000b - 0x0029
+          <any> -> 0x002d
+      positions     :
+        0x0000 line=277
+        0x0008 line=282
+        0x000b line=285
+        0x000e line=286
+        0x0014 line=290
+        0x0020 line=293
+        0x0026 line=299
+        0x0029 line=303
+      locals        :
+        0x0000 - 0x0032 reg=1 this Landroidx/recyclerview/widget/GapWorker;
+        0x0000 - 0x0032 reg=2 (null) Landroidx/recyclerview/widget/RecyclerView;
+        0x0000 - 0x0032 reg=3 (null) I
+        0x0000 - 0x0032 reg=4 (null) J
+
+  Virtual methods   -
+    #0              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'add'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 6 16-bit code units
+551edc:                                        |[551edc] androidx.recyclerview.widget.GapWorker.add:(Landroidx/recyclerview/widget/RecyclerView;)V
+551eec: 5400 1035                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/GapWorker;.mRecyclerViews:Ljava/util/ArrayList; // field@3510
+551ef0: 6e20 a3d4 1000                         |0002: invoke-virtual {v0, v1}, Ljava/util/ArrayList;.add:(Ljava/lang/Object;)Z // method@d4a3
+551ef6: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=161
+      locals        :
+        0x0000 - 0x0006 reg=0 this Landroidx/recyclerview/widget/GapWorker;
+        0x0000 - 0x0006 reg=1 (null) Landroidx/recyclerview/widget/RecyclerView;
+
+    #1              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'postFromTraversal'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView;II)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 8
+      ins           : 4
+      outs          : 3
+      insns size    : 29 16-bit code units
+551ef8:                                        |[551ef8] androidx.recyclerview.widget.GapWorker.postFromTraversal:(Landroidx/recyclerview/widget/RecyclerView;II)V
+551f08: 6e10 c04c 0500                         |0000: invoke-virtual {v5}, Landroidx/recyclerview/widget/RecyclerView;.isAttachedToWindow:()Z // method@4cc0
+551f0e: 0a00                                   |0003: move-result v0
+551f10: 3800 1300                              |0004: if-eqz v0, 0017 // +0013
+551f14: 5340 0f35                              |0006: iget-wide v0, v4, Landroidx/recyclerview/widget/GapWorker;.mPostTimeNs:J // field@350f
+551f18: 1602 0000                              |0008: const-wide/16 v2, #int 0 // #0
+551f1c: 3100 0002                              |000a: cmp-long v0, v0, v2
+551f20: 3900 0b00                              |000c: if-nez v0, 0017 // +000b
+551f24: 6e10 9e4c 0500                         |000e: invoke-virtual {v5}, Landroidx/recyclerview/widget/RecyclerView;.getNanoTime:()J // method@4c9e
+551f2a: 0b00                                   |0011: move-result-wide v0
+551f2c: 5a40 0f35                              |0012: iput-wide v0, v4, Landroidx/recyclerview/widget/GapWorker;.mPostTimeNs:J // field@350f
+551f30: 6e20 e74c 4500                         |0014: invoke-virtual {v5, v4}, Landroidx/recyclerview/widget/RecyclerView;.post:(Ljava/lang/Runnable;)Z // method@4ce7
+551f36: 5454 0337                              |0017: iget-object v4, v5, Landroidx/recyclerview/widget/RecyclerView;.mPrefetchRegistry:Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl; // field@3703
+551f3a: 6e30 f347 6407                         |0019: invoke-virtual {v4, v6, v7}, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.setPrefetchVector:(II)V // method@47f3
+551f40: 0e00                                   |001c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=175
+        0x0006 line=179
+        0x000e line=180
+        0x0014 line=181
+        0x0017 line=185
+      locals        :
+        0x0000 - 0x001d reg=4 this Landroidx/recyclerview/widget/GapWorker;
+        0x0000 - 0x001d reg=5 (null) Landroidx/recyclerview/widget/RecyclerView;
+        0x0000 - 0x001d reg=6 (null) I
+        0x0000 - 0x001d reg=7 (null) I
+
+    #2              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'prefetch'
+      type          : '(J)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 7 16-bit code units
+551f44:                                        |[551f44] androidx.recyclerview.widget.GapWorker.prefetch:(J)V
+551f54: 7010 f947 0000                         |0000: invoke-direct {v0}, Landroidx/recyclerview/widget/GapWorker;.buildTaskList:()V // method@47f9
+551f5a: 7030 fb47 1002                         |0003: invoke-direct {v0, v1, v2}, Landroidx/recyclerview/widget/GapWorker;.flushTasksWithDeadline:(J)V // method@47fb
+551f60: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=365
+        0x0003 line=366
+      locals        :
+        0x0000 - 0x0007 reg=0 this Landroidx/recyclerview/widget/GapWorker;
+        0x0000 - 0x0007 reg=1 (null) J
+
+    #3              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'remove'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 6 16-bit code units
+551f64:                                        |[551f64] androidx.recyclerview.widget.GapWorker.remove:(Landroidx/recyclerview/widget/RecyclerView;)V
+551f74: 5400 1035                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/GapWorker;.mRecyclerViews:Ljava/util/ArrayList; // field@3510
+551f78: 6e20 b1d4 1000                         |0002: invoke-virtual {v0, v1}, Ljava/util/ArrayList;.remove:(Ljava/lang/Object;)Z // method@d4b1
+551f7e: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=165
+      locals        :
+        0x0000 - 0x0006 reg=0 this Landroidx/recyclerview/widget/GapWorker;
+        0x0000 - 0x0006 reg=1 (null) Landroidx/recyclerview/widget/RecyclerView;
+
+    #4              : (in Landroidx/recyclerview/widget/GapWorker;)
+      name          : 'run'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 1
+      outs          : 4
+      insns size    : 86 16-bit code units
+551f80:                                        |[551f80] androidx.recyclerview.widget.GapWorker.run:()V
+551f90: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+551f94: 1a02 755d                              |0002: const-string v2, "RV Prefetch" // string@5d75
+551f98: 7110 7837 0200                         |0004: invoke-static {v2}, Landroidx/core/os/TraceCompat;.beginSection:(Ljava/lang/String;)V // method@3778
+551f9e: 5482 1035                              |0007: iget-object v2, v8, Landroidx/recyclerview/widget/GapWorker;.mRecyclerViews:Ljava/util/ArrayList; // field@3510
+551fa2: 6e10 add4 0200                         |0009: invoke-virtual {v2}, Ljava/util/ArrayList;.isEmpty:()Z // method@d4ad
+551fa8: 0a02                                   |000c: move-result v2
+551faa: 3802 0800                              |000d: if-eqz v2, 0015 // +0008
+551fae: 5a80 0f35                              |000f: iput-wide v0, v8, Landroidx/recyclerview/widget/GapWorker;.mPostTimeNs:J // field@350f
+551fb2: 7100 7a37 0000                         |0011: invoke-static {}, Landroidx/core/os/TraceCompat;.endSection:()V // method@377a
+551fb8: 0e00                                   |0014: return-void
+551fba: 5482 1035                              |0015: iget-object v2, v8, Landroidx/recyclerview/widget/GapWorker;.mRecyclerViews:Ljava/util/ArrayList; // field@3510
+551fbe: 6e10 b4d4 0200                         |0017: invoke-virtual {v2}, Ljava/util/ArrayList;.size:()I // method@d4b4
+551fc4: 0a02                                   |001a: move-result v2
+551fc6: 1203                                   |001b: const/4 v3, #int 0 // #0
+551fc8: 0404                                   |001c: move-wide v4, v0
+551fca: 3523 1b00                              |001d: if-ge v3, v2, 0038 // +001b
+551fce: 5486 1035                              |001f: iget-object v6, v8, Landroidx/recyclerview/widget/GapWorker;.mRecyclerViews:Ljava/util/ArrayList; // field@3510
+551fd2: 6e20 aad4 3600                         |0021: invoke-virtual {v6, v3}, Ljava/util/ArrayList;.get:(I)Ljava/lang/Object; // method@d4aa
+551fd8: 0c06                                   |0024: move-result-object v6
+551fda: 1f06 4309                              |0025: check-cast v6, Landroidx/recyclerview/widget/RecyclerView; // type@0943
+551fde: 6e10 ae4c 0600                         |0027: invoke-virtual {v6}, Landroidx/recyclerview/widget/RecyclerView;.getWindowVisibility:()I // method@4cae
+551fe4: 0a07                                   |002a: move-result v7
+551fe6: 3907 0a00                              |002b: if-nez v7, 0035 // +000a
+551fea: 6e10 904c 0600                         |002d: invoke-virtual {v6}, Landroidx/recyclerview/widget/RecyclerView;.getDrawingTime:()J // method@4c90
+551ff0: 0b06                                   |0030: move-result-wide v6
+551ff2: 7140 9cd1 7654                         |0031: invoke-static {v6, v7, v4, v5}, Ljava/lang/Math;.max:(JJ)J // method@d19c
+551ff8: 0b04                                   |0034: move-result-wide v4
+551ffa: d803 0301                              |0035: add-int/lit8 v3, v3, #int 1 // #01
+551ffe: 28e6                                   |0037: goto 001d // -001a
+552000: 3102 0400                              |0038: cmp-long v2, v4, v0
+552004: 3902 0300                              |003a: if-nez v2, 003d // +0003
+552008: 28d3                                   |003c: goto 000f // -002d
+55200a: 6202 498a                              |003d: sget-object v2, Ljava/util/concurrent/TimeUnit;.MILLISECONDS:Ljava/util/concurrent/TimeUnit; // field@8a49
+55200e: 6e30 e8d6 4205                         |003f: invoke-virtual {v2, v4, v5}, Ljava/util/concurrent/TimeUnit;.toNanos:(J)J // method@d6e8
+552014: 0b02                                   |0042: move-result-wide v2
+552016: 5384 0e35                              |0043: iget-wide v4, v8, Landroidx/recyclerview/widget/GapWorker;.mFrameIntervalNs:J // field@350e
+55201a: bb42                                   |0045: add-long/2addr v2, v4
+55201c: 6e30 fe47 2803                         |0046: invoke-virtual {v8, v2, v3}, Landroidx/recyclerview/widget/GapWorker;.prefetch:(J)V // method@47fe
+552022: 5a80 0f35                              |0049: iput-wide v0, v8, Landroidx/recyclerview/widget/GapWorker;.mPostTimeNs:J // field@350f
+552026: 7100 7a37 0000                         |004b: invoke-static {}, Landroidx/core/os/TraceCompat;.endSection:()V // method@377a
+55202c: 0e00                                   |004e: return-void
+55202e: 0d02                                   |004f: move-exception v2
+552030: 5a80 0f35                              |0050: iput-wide v0, v8, Landroidx/recyclerview/widget/GapWorker;.mPostTimeNs:J // field@350f
+552034: 7100 7a37 0000                         |0052: invoke-static {}, Landroidx/core/os/TraceCompat;.endSection:()V // method@377a
+55203a: 2702                                   |0055: throw v2
+      catches       : 2
+        0x0002 - 0x000d
+          <any> -> 0x004f
+        0x0015 - 0x0049
+          <any> -> 0x004f
+      positions     :
+        0x0002 line=372
+        0x0007 line=374
+        0x000f line=401
+        0x0011 line=402
+        0x0015 line=381
+        0x001f line=384
+        0x0027 line=385
+        0x002d line=386
+        0x003d line=395
+        0x0046 line=397
+        0x0049 line=401
+        0x004b line=402
+        0x0050 line=401
+        0x0052 line=402
+      locals        :
+        0x0000 - 0x0056 reg=8 this Landroidx/recyclerview/widget/GapWorker;
+
+  source_file_idx   : 10619 (GapWorker.java)
+

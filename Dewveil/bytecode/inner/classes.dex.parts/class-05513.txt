@@ -1,0 +1,902 @@
+Class #5513            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/TopicsSubscriber;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'MAX_DELAY_SEC'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'context'
+      type          : 'Landroid/content/Context;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'firebaseInstallationsApi'
+      type          : 'Lcom/google/firebase/installations/FirebaseInstallationsApi;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'firebaseMessaging'
+      type          : 'Lcom/google/firebase/messaging/FirebaseMessaging;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'metadata'
+      type          : 'Lcom/google/firebase/messaging/Metadata;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'pendingOperations'
+      type          : 'Ljava/util/Map;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'rpc'
+      type          : 'Lcom/google/firebase/messaging/GmsRpc;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #6              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'store'
+      type          : 'Lcom/google/firebase/messaging/TopicsStore;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #7              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'syncExecutor'
+      type          : 'Ljava/util/concurrent/ScheduledExecutorService;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #8              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'syncScheduledOrRunning'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 0
+      outs          : 3
+      insns size    : 11 16-bit code units
+72b570:                                        |[72b570] com.google.firebase.messaging.TopicsSubscriber.<clinit>:()V
+72b580: 6200 488a                              |0000: sget-object v0, Ljava/util/concurrent/TimeUnit;.HOURS:Ljava/util/concurrent/TimeUnit; // field@8a48
+72b584: 1601 0800                              |0002: const-wide/16 v1, #int 8 // #8
+72b588: 6e30 e9d6 1002                         |0004: invoke-virtual {v0, v1, v2}, Ljava/util/concurrent/TimeUnit;.toSeconds:(J)J // method@d6e9
+72b58e: 0b00                                   |0007: move-result-wide v0
+72b590: 6800 fb73                              |0008: sput-wide v0, Lcom/google/firebase/messaging/TopicsSubscriber;.MAX_DELAY_SEC:J // field@73fb
+72b594: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0004 line=1
+      locals        :
+
+    #1              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : '<init>'
+      type          : '(Lcom/google/firebase/messaging/FirebaseMessaging;Lcom/google/firebase/installations/FirebaseInstallationsApi;Lcom/google/firebase/messaging/Metadata;Lcom/google/firebase/messaging/TopicsStore;Lcom/google/firebase/messaging/GmsRpc;Landroid/content/Context;Ljava/util/concurrent/ScheduledExecutorService;)V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 9
+      ins           : 8
+      outs          : 1
+      insns size    : 28 16-bit code units
+72b598:                                        |[72b598] com.google.firebase.messaging.TopicsSubscriber.<init>:(Lcom/google/firebase/messaging/FirebaseMessaging;Lcom/google/firebase/installations/FirebaseInstallationsApi;Lcom/google/firebase/messaging/Metadata;Lcom/google/firebase/messaging/TopicsStore;Lcom/google/firebase/messaging/GmsRpc;Landroid/content/Context;Ljava/util/concurrent/ScheduledExecutorService;)V
+72b5a8: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+72b5ae: 2200 9704                              |0003: new-instance v0, Landroidx/collection/ArrayMap; // type@0497
+72b5b2: 7010 3c24 0000                         |0005: invoke-direct {v0}, Landroidx/collection/ArrayMap;.<init>:()V // method@243c
+72b5b8: 5b10 0074                              |0008: iput-object v0, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.pendingOperations:Ljava/util/Map; // field@7400
+72b5bc: 1200                                   |000a: const/4 v0, #int 0 // #0
+72b5be: 5c10 0474                              |000b: iput-boolean v0, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.syncScheduledOrRunning:Z // field@7404
+72b5c2: 5b12 fe73                              |000d: iput-object v2, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73fe
+72b5c6: 5b13 fd73                              |000f: iput-object v3, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.firebaseInstallationsApi:Lcom/google/firebase/installations/FirebaseInstallationsApi; // field@73fd
+72b5ca: 5b14 ff73                              |0011: iput-object v4, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.metadata:Lcom/google/firebase/messaging/Metadata; // field@73ff
+72b5ce: 5b15 0274                              |0013: iput-object v5, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.store:Lcom/google/firebase/messaging/TopicsStore; // field@7402
+72b5d2: 5b16 0174                              |0015: iput-object v6, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.rpc:Lcom/google/firebase/messaging/GmsRpc; // field@7401
+72b5d6: 5b17 fc73                              |0017: iput-object v7, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.context:Landroid/content/Context; // field@73fc
+72b5da: 5b18 0374                              |0019: iput-object v8, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.syncExecutor:Ljava/util/concurrent/ScheduledExecutorService; // field@7403
+72b5de: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0003 line=1
+      locals        :
+        0x0000 - 0x001c reg=1 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x001c reg=2 (null) Lcom/google/firebase/messaging/FirebaseMessaging;
+        0x0000 - 0x001c reg=3 (null) Lcom/google/firebase/installations/FirebaseInstallationsApi;
+        0x0000 - 0x001c reg=4 (null) Lcom/google/firebase/messaging/Metadata;
+        0x0000 - 0x001c reg=5 (null) Lcom/google/firebase/messaging/TopicsStore;
+        0x0000 - 0x001c reg=6 (null) Lcom/google/firebase/messaging/GmsRpc;
+        0x0000 - 0x001c reg=7 (null) Landroid/content/Context;
+        0x0000 - 0x001c reg=8 (null) Ljava/util/concurrent/ScheduledExecutorService;
+
+    #2              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'addToPendingOperations'
+      type          : '(Lcom/google/firebase/messaging/TopicOperation;Lcom/google/android/gms/tasks/TaskCompletionSource;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 43 16-bit code units
+72b5e0:                                        |[72b5e0] com.google.firebase.messaging.TopicsSubscriber.addToPendingOperations:(Lcom/google/firebase/messaging/TopicOperation;Lcom/google/android/gms/tasks/TaskCompletionSource;)V
+72b5f0: 5420 0074                              |0000: iget-object v0, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.pendingOperations:Ljava/util/Map; // field@7400
+72b5f4: 1d00                                   |0002: monitor-enter v0
+72b5f6: 6e10 16c1 0300                         |0003: invoke-virtual {v3}, Lcom/google/firebase/messaging/TopicOperation;.serialize:()Ljava/lang/String; // method@c116
+72b5fc: 0c03                                   |0006: move-result-object v3
+72b5fe: 5421 0074                              |0007: iget-object v1, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.pendingOperations:Ljava/util/Map; // field@7400
+72b602: 7220 00d6 3100                         |0009: invoke-interface {v1, v3}, Ljava/util/Map;.containsKey:(Ljava/lang/Object;)Z // method@d600
+72b608: 0a01                                   |000c: move-result v1
+72b60a: 3801 0b00                              |000d: if-eqz v1, 0018 // +000b
+72b60e: 5422 0074                              |000f: iget-object v2, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.pendingOperations:Ljava/util/Map; // field@7400
+72b612: 7220 03d6 3200                         |0011: invoke-interface {v2, v3}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+72b618: 0c02                                   |0014: move-result-object v2
+72b61a: 1f02 391b                              |0015: check-cast v2, Ljava/util/ArrayDeque; // type@1b39
+72b61e: 280c                                   |0017: goto 0023 // +000c
+72b620: 2201 391b                              |0018: new-instance v1, Ljava/util/ArrayDeque; // type@1b39
+72b624: 7010 90d4 0100                         |001a: invoke-direct {v1}, Ljava/util/ArrayDeque;.<init>:()V // method@d490
+72b62a: 5422 0074                              |001d: iget-object v2, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.pendingOperations:Ljava/util/Map; // field@7400
+72b62e: 7230 06d6 3201                         |001f: invoke-interface {v2, v3, v1}, Ljava/util/Map;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d606
+72b634: 0712                                   |0022: move-object v2, v1
+72b636: 6e20 93d4 4200                         |0023: invoke-virtual {v2, v4}, Ljava/util/ArrayDeque;.add:(Ljava/lang/Object;)Z // method@d493
+72b63c: 1e00                                   |0026: monitor-exit v0
+72b63e: 0e00                                   |0027: return-void
+72b640: 0d02                                   |0028: move-exception v2
+72b642: 1e00                                   |0029: monitor-exit v0
+72b644: 2702                                   |002a: throw v2
+      catches       : 1
+        0x0003 - 0x002a
+          <any> -> 0x0028
+      positions     :
+        0x0002 line=1
+        0x0009 line=2
+        0x0011 line=3
+        0x0018 line=7
+        0x001a line=4
+        0x001f line=5
+        0x0023 line=6
+        0x0026 line=7
+      locals        :
+        0x0000 - 0x002b reg=2 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x002b reg=3 (null) Lcom/google/firebase/messaging/TopicOperation;
+        0x0000 - 0x002b reg=4 (null) Lcom/google/android/gms/tasks/TaskCompletionSource;
+
+    #3              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'awaitTask'
+      type          : '(Lcom/google/android/gms/tasks/Task;)Ljava/lang/Object;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 43 16-bit code units
+72b654:                                        |[72b654] com.google.firebase.messaging.TopicsSubscriber.awaitTask:(Lcom/google/android/gms/tasks/Task;)Ljava/lang/Object;
+72b664: 6200 4b8a                              |0000: sget-object v0, Ljava/util/concurrent/TimeUnit;.SECONDS:Ljava/util/concurrent/TimeUnit; // field@8a4b
+72b668: 1601 1e00                              |0002: const-wide/16 v1, #int 30 // #1e
+72b66c: 7140 8bae 1302                         |0004: invoke-static {v3, v1, v2, v0}, Lcom/google/android/gms/tasks/Tasks;.await:(Lcom/google/android/gms/tasks/Task;JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; // method@ae8b
+72b672: 0c03                                   |0007: move-result-object v3
+72b674: 1103                                   |0008: return-object v3
+72b676: 0d03                                   |0009: move-exception v3
+72b678: 2200 481a                              |000a: new-instance v0, Ljava/io/IOException; // type@1a48
+72b67c: 1a01 195f                              |000c: const-string v1, "SERVICE_NOT_AVAILABLE" // string@5f19
+72b680: 7030 15d0 1003                         |000e: invoke-direct {v0, v1, v3}, Ljava/io/IOException;.<init>:(Ljava/lang/String;Ljava/lang/Throwable;)V // method@d015
+72b686: 2700                                   |0011: throw v0
+72b688: 0d03                                   |0012: move-exception v3
+72b68a: 6e10 abd6 0300                         |0013: invoke-virtual {v3}, Ljava/util/concurrent/ExecutionException;.getCause:()Ljava/lang/Throwable; // method@d6ab
+72b690: 0c00                                   |0016: move-result-object v0
+72b692: 2001 481a                              |0017: instance-of v1, v0, Ljava/io/IOException; // type@1a48
+72b696: 3901 0f00                              |0019: if-nez v1, 0028 // +000f
+72b69a: 2001 901a                              |001b: instance-of v1, v0, Ljava/lang/RuntimeException; // type@1a90
+72b69e: 3801 0500                              |001d: if-eqz v1, 0022 // +0005
+72b6a2: 1f00 901a                              |001f: check-cast v0, Ljava/lang/RuntimeException; // type@1a90
+72b6a6: 2700                                   |0021: throw v0
+72b6a8: 2200 481a                              |0022: new-instance v0, Ljava/io/IOException; // type@1a48
+72b6ac: 7020 16d0 3000                         |0024: invoke-direct {v0, v3}, Ljava/io/IOException;.<init>:(Ljava/lang/Throwable;)V // method@d016
+72b6b2: 2700                                   |0027: throw v0
+72b6b4: 1f00 481a                              |0028: check-cast v0, Ljava/io/IOException; // type@1a48
+72b6b8: 2700                                   |002a: throw v0
+      catches       : 1
+        0x0000 - 0x0008
+          Ljava/util/concurrent/ExecutionException; -> 0x0012
+          Ljava/lang/InterruptedException; -> 0x0009
+          Ljava/util/concurrent/TimeoutException; -> 0x0009
+      positions     :
+        0x0004 line=1
+        0x000a line=5
+        0x000e line=2
+        0x0013 line=3
+        0x0017 line=4
+        0x001b line=6
+        0x001f line=7
+        0x0022 line=2
+        0x0024 line=8
+        0x0028 line=5
+      locals        :
+        0x0000 - 0x002b reg=3 (null) Lcom/google/android/gms/tasks/Task;
+
+    #4              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'blockingSubscribeToTopic'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 28 16-bit code units
+72b6d0:                                        |[72b6d0] com.google.firebase.messaging.TopicsSubscriber.blockingSubscribeToTopic:(Ljava/lang/String;)V
+72b6e0: 5420 fd73                              |0000: iget-object v0, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.firebaseInstallationsApi:Lcom/google/firebase/installations/FirebaseInstallationsApi; // field@73fd
+72b6e4: 7210 5bbe 0000                         |0002: invoke-interface {v0}, Lcom/google/firebase/installations/FirebaseInstallationsApi;.getId:()Lcom/google/android/gms/tasks/Task; // method@be5b
+72b6ea: 0c00                                   |0005: move-result-object v0
+72b6ec: 7110 24c1 0000                         |0006: invoke-static {v0}, Lcom/google/firebase/messaging/TopicsSubscriber;.awaitTask:(Lcom/google/android/gms/tasks/Task;)Ljava/lang/Object; // method@c124
+72b6f2: 0c00                                   |0009: move-result-object v0
+72b6f4: 1f00 971a                              |000a: check-cast v0, Ljava/lang/String; // type@1a97
+72b6f8: 5421 0174                              |000c: iget-object v1, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.rpc:Lcom/google/firebase/messaging/GmsRpc; // field@7401
+72b6fc: 5422 fe73                              |000e: iget-object v2, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73fe
+72b700: 6e10 fcbf 0200                         |0010: invoke-virtual {v2}, Lcom/google/firebase/messaging/FirebaseMessaging;.blockingGetToken:()Ljava/lang/String; // method@bffc
+72b706: 0c02                                   |0013: move-result-object v2
+72b708: 6e40 44c0 0132                         |0014: invoke-virtual {v1, v0, v2, v3}, Lcom/google/firebase/messaging/GmsRpc;.subscribeToTopic:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/tasks/Task; // method@c044
+72b70e: 0c02                                   |0017: move-result-object v2
+72b710: 7110 24c1 0200                         |0018: invoke-static {v2}, Lcom/google/firebase/messaging/TopicsSubscriber;.awaitTask:(Lcom/google/android/gms/tasks/Task;)Ljava/lang/Object; // method@c124
+72b716: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+        0x0010 line=2
+      locals        :
+        0x0000 - 0x001c reg=2 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x001c reg=3 (null) Ljava/lang/String;
+
+    #5              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'blockingUnsubscribeFromTopic'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 28 16-bit code units
+72b718:                                        |[72b718] com.google.firebase.messaging.TopicsSubscriber.blockingUnsubscribeFromTopic:(Ljava/lang/String;)V
+72b728: 5420 fd73                              |0000: iget-object v0, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.firebaseInstallationsApi:Lcom/google/firebase/installations/FirebaseInstallationsApi; // field@73fd
+72b72c: 7210 5bbe 0000                         |0002: invoke-interface {v0}, Lcom/google/firebase/installations/FirebaseInstallationsApi;.getId:()Lcom/google/android/gms/tasks/Task; // method@be5b
+72b732: 0c00                                   |0005: move-result-object v0
+72b734: 7110 24c1 0000                         |0006: invoke-static {v0}, Lcom/google/firebase/messaging/TopicsSubscriber;.awaitTask:(Lcom/google/android/gms/tasks/Task;)Ljava/lang/Object; // method@c124
+72b73a: 0c00                                   |0009: move-result-object v0
+72b73c: 1f00 971a                              |000a: check-cast v0, Ljava/lang/String; // type@1a97
+72b740: 5421 0174                              |000c: iget-object v1, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.rpc:Lcom/google/firebase/messaging/GmsRpc; // field@7401
+72b744: 5422 fe73                              |000e: iget-object v2, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.firebaseMessaging:Lcom/google/firebase/messaging/FirebaseMessaging; // field@73fe
+72b748: 6e10 fcbf 0200                         |0010: invoke-virtual {v2}, Lcom/google/firebase/messaging/FirebaseMessaging;.blockingGetToken:()Ljava/lang/String; // method@bffc
+72b74e: 0c02                                   |0013: move-result-object v2
+72b750: 6e40 45c0 0132                         |0014: invoke-virtual {v1, v0, v2, v3}, Lcom/google/firebase/messaging/GmsRpc;.unsubscribeFromTopic:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/google/android/gms/tasks/Task; // method@c045
+72b756: 0c02                                   |0017: move-result-object v2
+72b758: 7110 24c1 0200                         |0018: invoke-static {v2}, Lcom/google/firebase/messaging/TopicsSubscriber;.awaitTask:(Lcom/google/android/gms/tasks/Task;)Ljava/lang/Object; // method@c124
+72b75e: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+        0x0010 line=2
+      locals        :
+        0x0000 - 0x001c reg=2 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x001c reg=3 (null) Ljava/lang/String;
+
+    #6              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'createInstance'
+      type          : '(Lcom/google/firebase/messaging/FirebaseMessaging;Lcom/google/firebase/installations/FirebaseInstallationsApi;Lcom/google/firebase/messaging/Metadata;Lcom/google/firebase/messaging/GmsRpc;Landroid/content/Context;Ljava/util/concurrent/ScheduledExecutorService;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 14
+      ins           : 6
+      outs          : 7
+      insns size    : 17 16-bit code units
+72b760:                                        |[72b760] com.google.firebase.messaging.TopicsSubscriber.createInstance:(Lcom/google/firebase/messaging/FirebaseMessaging;Lcom/google/firebase/installations/FirebaseInstallationsApi;Lcom/google/firebase/messaging/Metadata;Lcom/google/firebase/messaging/GmsRpc;Landroid/content/Context;Ljava/util/concurrent/ScheduledExecutorService;)Lcom/google/android/gms/tasks/Task;
+72b770: 2207 0218                              |0000: new-instance v7, Lcom/google/firebase/messaging/TopicsSubscriber$$Lambda$0; // type@1802
+72b774: 0770                                   |0002: move-object v0, v7
+72b776: 07c1                                   |0003: move-object v1, v12
+72b778: 07d2                                   |0004: move-object v2, v13
+72b77a: 0783                                   |0005: move-object v3, v8
+72b77c: 0794                                   |0006: move-object v4, v9
+72b77e: 07a5                                   |0007: move-object v5, v10
+72b780: 07b6                                   |0008: move-object v6, v11
+72b782: 7607 1fc1 0000                         |0009: invoke-direct/range {v0, v1, v2, v3, v4, v5, v6}, Lcom/google/firebase/messaging/TopicsSubscriber$$Lambda$0;.<init>:(Landroid/content/Context;Ljava/util/concurrent/ScheduledExecutorService;Lcom/google/firebase/messaging/FirebaseMessaging;Lcom/google/firebase/installations/FirebaseInstallationsApi;Lcom/google/firebase/messaging/Metadata;Lcom/google/firebase/messaging/GmsRpc;)V // method@c11f
+72b788: 7120 8dae 7d00                         |000c: invoke-static {v13, v7}, Lcom/google/android/gms/tasks/Tasks;.call:(Ljava/util/concurrent/Executor;Ljava/util/concurrent/Callable;)Lcom/google/android/gms/tasks/Task; // method@ae8d
+72b78e: 0c08                                   |000f: move-result-object v8
+72b790: 1108                                   |0010: return-object v8
+      catches       : (none)
+      positions     :
+        0x0009 line=1
+      locals        :
+        0x0000 - 0x0011 reg=8 (null) Lcom/google/firebase/messaging/FirebaseMessaging;
+        0x0000 - 0x0011 reg=9 (null) Lcom/google/firebase/installations/FirebaseInstallationsApi;
+        0x0000 - 0x0011 reg=10 (null) Lcom/google/firebase/messaging/Metadata;
+        0x0000 - 0x0011 reg=11 (null) Lcom/google/firebase/messaging/GmsRpc;
+        0x0000 - 0x0011 reg=12 (null) Landroid/content/Context;
+        0x0000 - 0x0011 reg=13 (null) Ljava/util/concurrent/ScheduledExecutorService;
+
+    #7              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'isDebugLogEnabled'
+      type          : '()Z'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 2
+      insns size    : 8 16-bit code units
+72b794:                                        |[72b794] com.google.firebase.messaging.TopicsSubscriber.isDebugLogEnabled:()Z
+72b7a4: 1a00 6c28                              |0000: const-string v0, "FirebaseMessaging" // string@286c
+72b7a8: 1231                                   |0002: const/4 v1, #int 3 // #3
+72b7aa: 7120 2308 1000                         |0003: invoke-static {v0, v1}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+72b7b0: 0a00                                   |0006: move-result v0
+72b7b2: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0003 line=1
+      locals        :
+
+    #8              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'lambda$createInstance$0$TopicsSubscriber'
+      type          : '(Landroid/content/Context;Ljava/util/concurrent/ScheduledExecutorService;Lcom/google/firebase/messaging/FirebaseMessaging;Lcom/google/firebase/installations/FirebaseInstallationsApi;Lcom/google/firebase/messaging/Metadata;Lcom/google/firebase/messaging/GmsRpc;)Lcom/google/firebase/messaging/TopicsSubscriber;'
+      access        : 0x1018 (STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 15
+      ins           : 6
+      outs          : 8
+      insns size    : 17 16-bit code units
+72b7b4:                                        |[72b7b4] com.google.firebase.messaging.TopicsSubscriber.lambda$createInstance$0$TopicsSubscriber:(Landroid/content/Context;Ljava/util/concurrent/ScheduledExecutorService;Lcom/google/firebase/messaging/FirebaseMessaging;Lcom/google/firebase/installations/FirebaseInstallationsApi;Lcom/google/firebase/messaging/Metadata;Lcom/google/firebase/messaging/GmsRpc;)Lcom/google/firebase/messaging/TopicsSubscriber;
+72b7c4: 7120 1bc1 a900                         |0000: invoke-static {v9, v10}, Lcom/google/firebase/messaging/TopicsStore;.getInstance:(Landroid/content/Context;Ljava/util/concurrent/Executor;)Lcom/google/firebase/messaging/TopicsStore; // method@c11b
+72b7ca: 0c04                                   |0003: move-result-object v4
+72b7cc: 2208 0318                              |0004: new-instance v8, Lcom/google/firebase/messaging/TopicsSubscriber; // type@1803
+72b7d0: 0780                                   |0006: move-object v0, v8
+72b7d2: 07b1                                   |0007: move-object v1, v11
+72b7d4: 07c2                                   |0008: move-object v2, v12
+72b7d6: 07d3                                   |0009: move-object v3, v13
+72b7d8: 07e5                                   |000a: move-object v5, v14
+72b7da: 0796                                   |000b: move-object v6, v9
+72b7dc: 07a7                                   |000c: move-object v7, v10
+72b7de: 7608 22c1 0000                         |000d: invoke-direct/range {v0, v1, v2, v3, v4, v5, v6, v7}, Lcom/google/firebase/messaging/TopicsSubscriber;.<init>:(Lcom/google/firebase/messaging/FirebaseMessaging;Lcom/google/firebase/installations/FirebaseInstallationsApi;Lcom/google/firebase/messaging/Metadata;Lcom/google/firebase/messaging/TopicsStore;Lcom/google/firebase/messaging/GmsRpc;Landroid/content/Context;Ljava/util/concurrent/ScheduledExecutorService;)V // method@c122
+72b7e4: 1108                                   |0010: return-object v8
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x000d line=2
+      locals        :
+        0x0000 - 0x0011 reg=9 (null) Landroid/content/Context;
+        0x0000 - 0x0011 reg=10 (null) Ljava/util/concurrent/ScheduledExecutorService;
+        0x0000 - 0x0011 reg=11 (null) Lcom/google/firebase/messaging/FirebaseMessaging;
+        0x0000 - 0x0011 reg=12 (null) Lcom/google/firebase/installations/FirebaseInstallationsApi;
+        0x0000 - 0x0011 reg=13 (null) Lcom/google/firebase/messaging/Metadata;
+        0x0000 - 0x0011 reg=14 (null) Lcom/google/firebase/messaging/GmsRpc;
+
+    #9              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'markCompletePendingOperation'
+      type          : '(Lcom/google/firebase/messaging/TopicOperation;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 2
+      insns size    : 53 16-bit code units
+72b7e8:                                        |[72b7e8] com.google.firebase.messaging.TopicsSubscriber.markCompletePendingOperation:(Lcom/google/firebase/messaging/TopicOperation;)V
+72b7f8: 5440 0074                              |0000: iget-object v0, v4, Lcom/google/firebase/messaging/TopicsSubscriber;.pendingOperations:Ljava/util/Map; // field@7400
+72b7fc: 1d00                                   |0002: monitor-enter v0
+72b7fe: 6e10 16c1 0500                         |0003: invoke-virtual {v5}, Lcom/google/firebase/messaging/TopicOperation;.serialize:()Ljava/lang/String; // method@c116
+72b804: 0c05                                   |0006: move-result-object v5
+72b806: 5441 0074                              |0007: iget-object v1, v4, Lcom/google/firebase/messaging/TopicsSubscriber;.pendingOperations:Ljava/util/Map; // field@7400
+72b80a: 7220 00d6 5100                         |0009: invoke-interface {v1, v5}, Ljava/util/Map;.containsKey:(Ljava/lang/Object;)Z // method@d600
+72b810: 0a01                                   |000c: move-result v1
+72b812: 3901 0400                              |000d: if-nez v1, 0011 // +0004
+72b816: 1e00                                   |000f: monitor-exit v0
+72b818: 0e00                                   |0010: return-void
+72b81a: 5441 0074                              |0011: iget-object v1, v4, Lcom/google/firebase/messaging/TopicsSubscriber;.pendingOperations:Ljava/util/Map; // field@7400
+72b81e: 7220 03d6 5100                         |0013: invoke-interface {v1, v5}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+72b824: 0c01                                   |0016: move-result-object v1
+72b826: 1f01 391b                              |0017: check-cast v1, Ljava/util/ArrayDeque; // type@1b39
+72b82a: 6e10 99d4 0100                         |0019: invoke-virtual {v1}, Ljava/util/ArrayDeque;.poll:()Ljava/lang/Object; // method@d499
+72b830: 0c02                                   |001c: move-result-object v2
+72b832: 1f02 5f15                              |001d: check-cast v2, Lcom/google/android/gms/tasks/TaskCompletionSource; // type@155f
+72b836: 3802 0600                              |001f: if-eqz v2, 0025 // +0006
+72b83a: 1203                                   |0021: const/4 v3, #int 0 // #0
+72b83c: 6e20 83ae 3200                         |0022: invoke-virtual {v2, v3}, Lcom/google/android/gms/tasks/TaskCompletionSource;.setResult:(Ljava/lang/Object;)V // method@ae83
+72b842: 6e10 96d4 0100                         |0025: invoke-virtual {v1}, Ljava/util/ArrayDeque;.isEmpty:()Z // method@d496
+72b848: 0a01                                   |0028: move-result v1
+72b84a: 3801 0700                              |0029: if-eqz v1, 0030 // +0007
+72b84e: 5444 0074                              |002b: iget-object v4, v4, Lcom/google/firebase/messaging/TopicsSubscriber;.pendingOperations:Ljava/util/Map; // field@7400
+72b852: 7220 09d6 5400                         |002d: invoke-interface {v4, v5}, Ljava/util/Map;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d609
+72b858: 1e00                                   |0030: monitor-exit v0
+72b85a: 0e00                                   |0031: return-void
+72b85c: 0d04                                   |0032: move-exception v4
+72b85e: 1e00                                   |0033: monitor-exit v0
+72b860: 2704                                   |0034: throw v4
+      catches       : 1
+        0x0003 - 0x0034
+          <any> -> 0x0032
+      positions     :
+        0x0002 line=1
+        0x0009 line=2
+        0x000f line=3
+        0x0013 line=4
+        0x0019 line=5
+        0x0022 line=6
+        0x0025 line=7
+        0x002d line=8
+        0x0030 line=9
+      locals        :
+        0x0000 - 0x0035 reg=4 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x0035 reg=5 (null) Lcom/google/firebase/messaging/TopicOperation;
+
+    #10              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'startSync'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 12 16-bit code units
+72b870:                                        |[72b870] com.google.firebase.messaging.TopicsSubscriber.startSync:()V
+72b880: 6e10 2ac1 0200                         |0000: invoke-virtual {v2}, Lcom/google/firebase/messaging/TopicsSubscriber;.isSyncScheduledOrRunning:()Z // method@c12a
+72b886: 0a00                                   |0003: move-result v0
+72b888: 3900 0700                              |0004: if-nez v0, 000b // +0007
+72b88c: 1600 0000                              |0006: const-wide/16 v0, #int 0 // #0
+72b890: 6e30 35c1 0201                         |0008: invoke-virtual {v2, v0, v1}, Lcom/google/firebase/messaging/TopicsSubscriber;.syncWithDelaySecondsInternal:(J)V // method@c135
+72b896: 0e00                                   |000b: return-void
+      catches       : (none)
+      positions     :
+        0x0008 line=1
+      locals        :
+        0x0000 - 0x000c reg=2 this Lcom/google/firebase/messaging/TopicsSubscriber;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'hasPendingOperation'
+      type          : '()Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 12 16-bit code units
+72b898:                                        |[72b898] com.google.firebase.messaging.TopicsSubscriber.hasPendingOperation:()Z
+72b8a8: 5400 0274                              |0000: iget-object v0, v0, Lcom/google/firebase/messaging/TopicsSubscriber;.store:Lcom/google/firebase/messaging/TopicsStore; // field@7402
+72b8ac: 6e10 1cc1 0000                         |0002: invoke-virtual {v0}, Lcom/google/firebase/messaging/TopicsStore;.getNextTopicOperation:()Lcom/google/firebase/messaging/TopicOperation; // method@c11c
+72b8b2: 0c00                                   |0005: move-result-object v0
+72b8b4: 3800 0400                              |0006: if-eqz v0, 000a // +0004
+72b8b8: 1210                                   |0008: const/4 v0, #int 1 // #1
+72b8ba: 0f00                                   |0009: return v0
+72b8bc: 1200                                   |000a: const/4 v0, #int 0 // #0
+72b8be: 0f00                                   |000b: return v0
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+      locals        :
+        0x0000 - 0x000c reg=0 this Lcom/google/firebase/messaging/TopicsSubscriber;
+
+    #1              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'isSyncScheduledOrRunning'
+      type          : '()Z'
+      access        : 0x20000 (DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+72b8c0:                                        |[72b8c0] com.google.firebase.messaging.TopicsSubscriber.isSyncScheduledOrRunning:()Z
+72b8d0: 1d01                                   |0000: monitor-enter v1
+72b8d2: 5510 0474                              |0001: iget-boolean v0, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.syncScheduledOrRunning:Z // field@7404
+72b8d6: 1e01                                   |0003: monitor-exit v1
+72b8d8: 0f00                                   |0004: return v0
+72b8da: 0d00                                   |0005: move-exception v0
+72b8dc: 1e01                                   |0006: monitor-exit v1
+72b8de: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+      locals        :
+
+    #2              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'performTopicOperation'
+      type          : '(Lcom/google/firebase/messaging/TopicOperation;)Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 2
+      insns size    : 275 16-bit code units
+72b8f4:                                        |[72b8f4] com.google.firebase.messaging.TopicsSubscriber.performTopicOperation:(Lcom/google/firebase/messaging/TopicOperation;)Z
+72b904: 1a00 6c28                              |0000: const-string v0, "FirebaseMessaging" // string@286c
+72b908: 1201                                   |0002: const/4 v1, #int 0 // #0
+72b90a: 6e10 12c1 0700                         |0003: invoke-virtual {v7}, Lcom/google/firebase/messaging/TopicOperation;.getOperation:()Ljava/lang/String; // method@c112
+72b910: 0c02                                   |0006: move-result-object v2
+72b912: 6e10 0bd2 0200                         |0007: invoke-virtual {v2}, Ljava/lang/String;.hashCode:()I // method@d20b
+72b918: 0a03                                   |000a: move-result v3
+72b91a: 1304 5300                              |000b: const/16 v4, #int 83 // #53
+72b91e: 1215                                   |000d: const/4 v5, #int 1 // #1
+72b920: 3243 1100                              |000e: if-eq v3, v4, 001f // +0011
+72b924: 1304 5500                              |0010: const/16 v4, #int 85 // #55
+72b928: 3243 0300                              |0012: if-eq v3, v4, 0015 // +0003
+72b92c: 2815                                   |0014: goto 0029 // +0015
+72b92e: 1a03 bf69                              |0015: const-string v3, "U" // string@69bf
+72b932: 6e20 03d2 3200                         |0017: invoke-virtual {v2, v3}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+72b938: 0a02                                   |001a: move-result v2
+72b93a: 3802 0e00                              |001b: if-eqz v2, 0029 // +000e
+72b93e: 0152                                   |001d: move v2, v5
+72b940: 280c                                   |001e: goto 002a // +000c
+72b942: 1a03 a05e                              |001f: const-string v3, "S" // string@5ea0
+72b946: 6e20 03d2 3200                         |0021: invoke-virtual {v2, v3}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+72b94c: 0a02                                   |0024: move-result v2
+72b94e: 3802 0400                              |0025: if-eqz v2, 0029 // +0004
+72b952: 0112                                   |0027: move v2, v1
+72b954: 2802                                   |0028: goto 002a // +0002
+72b956: 12f2                                   |0029: const/4 v2, #int -1 // #ff
+72b958: 1a03 bd04                              |002a: const-string v3, " succeeded." // string@04bd
+72b95c: 3802 6500                              |002c: if-eqz v2, 0091 // +0065
+72b960: 3252 3000                              |002e: if-eq v2, v5, 005e // +0030
+72b964: 7100 29c1 0000                         |0030: invoke-static {}, Lcom/google/firebase/messaging/TopicsSubscriber;.isDebugLogEnabled:()Z // method@c129
+72b96a: 0a06                                   |0033: move-result v6
+72b96c: 3806 8f00                              |0034: if-eqz v6, 00c3 // +008f
+72b970: 7110 30d2 0700                         |0036: invoke-static {v7}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72b976: 0c06                                   |0039: move-result-object v6
+72b978: 7110 30d2 0600                         |003a: invoke-static {v6}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72b97e: 0c07                                   |003d: move-result-object v7
+72b980: 6e10 16d2 0700                         |003e: invoke-virtual {v7}, Ljava/lang/String;.length:()I // method@d216
+72b986: 0a07                                   |0041: move-result v7
+72b988: d807 0718                              |0042: add-int/lit8 v7, v7, #int 24 // #18
+72b98c: 2202 991a                              |0044: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+72b990: 7020 3ad2 7200                         |0046: invoke-direct {v2, v7}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+72b996: 1a07 036b                              |0049: const-string v7, "Unknown topic operation" // string@6b03
+72b99a: 6e20 45d2 7200                         |004b: invoke-virtual {v2, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72b9a0: 6e20 45d2 6200                         |004e: invoke-virtual {v2, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72b9a6: 1a06 c40f                              |0051: const-string v6, "." // string@0fc4
+72b9aa: 6e20 45d2 6200                         |0053: invoke-virtual {v2, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72b9b0: 6e10 58d2 0200                         |0056: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+72b9b6: 0c06                                   |0059: move-result-object v6
+72b9b8: 7120 1c08 6000                         |005a: invoke-static {v0, v6}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+72b9be: 2866                                   |005d: goto 00c3 // +0066
+72b9c0: 6e10 13c1 0700                         |005e: invoke-virtual {v7}, Lcom/google/firebase/messaging/TopicOperation;.getTopic:()Ljava/lang/String; // method@c113
+72b9c6: 0c02                                   |0061: move-result-object v2
+72b9c8: 7020 26c1 2600                         |0062: invoke-direct {v6, v2}, Lcom/google/firebase/messaging/TopicsSubscriber;.blockingUnsubscribeFromTopic:(Ljava/lang/String;)V // method@c126
+72b9ce: 7100 29c1 0000                         |0065: invoke-static {}, Lcom/google/firebase/messaging/TopicsSubscriber;.isDebugLogEnabled:()Z // method@c129
+72b9d4: 0a06                                   |0068: move-result v6
+72b9d6: 3806 5a00                              |0069: if-eqz v6, 00c3 // +005a
+72b9da: 6e10 13c1 0700                         |006b: invoke-virtual {v7}, Lcom/google/firebase/messaging/TopicOperation;.getTopic:()Ljava/lang/String; // method@c113
+72b9e0: 0c06                                   |006e: move-result-object v6
+72b9e2: 7110 30d2 0600                         |006f: invoke-static {v6}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72b9e8: 0c07                                   |0072: move-result-object v7
+72b9ea: 6e10 16d2 0700                         |0073: invoke-virtual {v7}, Ljava/lang/String;.length:()I // method@d216
+72b9f0: 0a07                                   |0076: move-result v7
+72b9f2: d807 0723                              |0077: add-int/lit8 v7, v7, #int 35 // #23
+72b9f6: 2202 991a                              |0079: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+72b9fa: 7020 3ad2 7200                         |007b: invoke-direct {v2, v7}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+72ba00: 1a07 326b                              |007e: const-string v7, "Unsubscribe from topic: " // string@6b32
+72ba04: 6e20 45d2 7200                         |0080: invoke-virtual {v2, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72ba0a: 6e20 45d2 6200                         |0083: invoke-virtual {v2, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72ba10: 6e20 45d2 3200                         |0086: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72ba16: 6e10 58d2 0200                         |0089: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+72ba1c: 0c06                                   |008c: move-result-object v6
+72ba1e: 7120 1c08 6000                         |008d: invoke-static {v0, v6}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+72ba24: 2833                                   |0090: goto 00c3 // +0033
+72ba26: 6e10 13c1 0700                         |0091: invoke-virtual {v7}, Lcom/google/firebase/messaging/TopicOperation;.getTopic:()Ljava/lang/String; // method@c113
+72ba2c: 0c02                                   |0094: move-result-object v2
+72ba2e: 7020 25c1 2600                         |0095: invoke-direct {v6, v2}, Lcom/google/firebase/messaging/TopicsSubscriber;.blockingSubscribeToTopic:(Ljava/lang/String;)V // method@c125
+72ba34: 7100 29c1 0000                         |0098: invoke-static {}, Lcom/google/firebase/messaging/TopicsSubscriber;.isDebugLogEnabled:()Z // method@c129
+72ba3a: 0a06                                   |009b: move-result v6
+72ba3c: 3806 2700                              |009c: if-eqz v6, 00c3 // +0027
+72ba40: 6e10 13c1 0700                         |009e: invoke-virtual {v7}, Lcom/google/firebase/messaging/TopicOperation;.getTopic:()Ljava/lang/String; // method@c113
+72ba46: 0c06                                   |00a1: move-result-object v6
+72ba48: 7110 30d2 0600                         |00a2: invoke-static {v6}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72ba4e: 0c07                                   |00a5: move-result-object v7
+72ba50: 6e10 16d2 0700                         |00a6: invoke-virtual {v7}, Ljava/lang/String;.length:()I // method@d216
+72ba56: 0a07                                   |00a9: move-result v7
+72ba58: d807 071f                              |00aa: add-int/lit8 v7, v7, #int 31 // #1f
+72ba5c: 2202 991a                              |00ac: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+72ba60: 7020 3ad2 7200                         |00ae: invoke-direct {v2, v7}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+72ba66: 1a07 cf63                              |00b1: const-string v7, "Subscribe to topic: " // string@63cf
+72ba6a: 6e20 45d2 7200                         |00b3: invoke-virtual {v2, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72ba70: 6e20 45d2 6200                         |00b6: invoke-virtual {v2, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72ba76: 6e20 45d2 3200                         |00b9: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72ba7c: 6e10 58d2 0200                         |00bc: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+72ba82: 0c06                                   |00bf: move-result-object v6
+72ba84: 7120 1c08 6000                         |00c0: invoke-static {v0, v6}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+72ba8a: 0f05                                   |00c3: return v5
+72ba8c: 0d06                                   |00c4: move-exception v6
+72ba8e: 1a07 195f                              |00c5: const-string v7, "SERVICE_NOT_AVAILABLE" // string@5f19
+72ba92: 6e10 18d0 0600                         |00c7: invoke-virtual {v6}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+72ba98: 0c02                                   |00ca: move-result-object v2
+72ba9a: 6e20 03d2 2700                         |00cb: invoke-virtual {v7, v2}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+72baa0: 0a07                                   |00ce: move-result v7
+72baa2: 3907 1c00                              |00cf: if-nez v7, 00eb // +001c
+72baa6: 1a07 e52b                              |00d1: const-string v7, "INTERNAL_SERVER_ERROR" // string@2be5
+72baaa: 6e10 18d0 0600                         |00d3: invoke-virtual {v6}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+72bab0: 0c02                                   |00d6: move-result-object v2
+72bab2: 6e20 03d2 2700                         |00d7: invoke-virtual {v7, v2}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+72bab8: 0a07                                   |00da: move-result v7
+72baba: 3807 0300                              |00db: if-eqz v7, 00de // +0003
+72babe: 280e                                   |00dd: goto 00eb // +000e
+72bac0: 6e10 18d0 0600                         |00de: invoke-virtual {v6}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+72bac6: 0c07                                   |00e1: move-result-object v7
+72bac8: 3907 0800                              |00e2: if-nez v7, 00ea // +0008
+72bacc: 1a06 0169                              |00e4: const-string v6, "Topic operation failed without exception message. Will retry Topic operation." // string@6901
+72bad0: 7120 1e08 6000                         |00e6: invoke-static {v0, v6}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@081e
+72bad6: 0f01                                   |00e9: return v1
+72bad8: 2706                                   |00ea: throw v6
+72bada: 6e10 18d0 0600                         |00eb: invoke-virtual {v6}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+72bae0: 0c06                                   |00ee: move-result-object v6
+72bae2: 7110 30d2 0600                         |00ef: invoke-static {v6}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72bae8: 0c07                                   |00f2: move-result-object v7
+72baea: 6e10 16d2 0700                         |00f3: invoke-virtual {v7}, Ljava/lang/String;.length:()I // method@d216
+72baf0: 0a07                                   |00f6: move-result v7
+72baf2: 2202 991a                              |00f7: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+72baf6: d807 0735                              |00f9: add-int/lit8 v7, v7, #int 53 // #35
+72bafa: 7020 3ad2 7200                         |00fb: invoke-direct {v2, v7}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+72bb00: 1a07 0269                              |00fe: const-string v7, "Topic operation failed: " // string@6902
+72bb04: 6e20 45d2 7200                         |0100: invoke-virtual {v2, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72bb0a: 6e20 45d2 6200                         |0103: invoke-virtual {v2, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72bb10: 1a06 db0f                              |0106: const-string v6, ". Will retry Topic operation." // string@0fdb
+72bb14: 6e20 45d2 6200                         |0108: invoke-virtual {v2, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72bb1a: 6e10 58d2 0200                         |010b: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+72bb20: 0c06                                   |010e: move-result-object v6
+72bb22: 7120 1e08 6000                         |010f: invoke-static {v0, v6}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@081e
+72bb28: 0f01                                   |0112: return v1
+      catches       : 2
+        0x0003 - 0x000b
+          Ljava/io/IOException; -> 0x00c4
+        0x0030 - 0x00c3
+          Ljava/io/IOException; -> 0x00c4
+      positions     :
+        0x0007 line=1
+        0x0015 line=7
+        0x0017 line=1
+        0x0030 line=8
+        0x0036 line=9
+        0x0062 line=2
+        0x0065 line=3
+        0x006f line=4
+        0x0095 line=5
+        0x0098 line=6
+        0x00a2 line=7
+        0x00c5 line=1
+        0x00c7 line=10
+        0x00d3 line=11
+        0x00de line=13
+        0x00e4 line=15
+        0x00e6 line=14
+        0x00ea line=15
+        0x00eb line=12
+      locals        :
+        0x0000 - 0x0113 reg=6 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x0113 reg=7 (null) Lcom/google/firebase/messaging/TopicOperation;
+
+    #3              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'scheduleSyncTaskWithDelaySeconds'
+      type          : '(Ljava/lang/Runnable;J)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 8 16-bit code units
+72bb44:                                        |[72bb44] com.google.firebase.messaging.TopicsSubscriber.scheduleSyncTaskWithDelaySeconds:(Ljava/lang/Runnable;J)V
+72bb54: 5411 0374                              |0000: iget-object v1, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.syncExecutor:Ljava/util/concurrent/ScheduledExecutorService; // field@7403
+72bb58: 6200 4b8a                              |0002: sget-object v0, Ljava/util/concurrent/TimeUnit;.SECONDS:Ljava/util/concurrent/TimeUnit; // field@8a4b
+72bb5c: 7250 ced6 2143                         |0004: invoke-interface {v1, v2, v3, v4, v0}, Ljava/util/concurrent/ScheduledExecutorService;.schedule:(Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture; // method@d6ce
+72bb62: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0004 line=1
+      locals        :
+        0x0000 - 0x0008 reg=1 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x0008 reg=2 (null) Ljava/lang/Runnable;
+        0x0000 - 0x0008 reg=3 (null) J
+
+    #4              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'scheduleTopicOperation'
+      type          : '(Lcom/google/firebase/messaging/TopicOperation;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 18 16-bit code units
+72bb64:                                        |[72bb64] com.google.firebase.messaging.TopicsSubscriber.scheduleTopicOperation:(Lcom/google/firebase/messaging/TopicOperation;)Lcom/google/android/gms/tasks/Task;
+72bb74: 5410 0274                              |0000: iget-object v0, v1, Lcom/google/firebase/messaging/TopicsSubscriber;.store:Lcom/google/firebase/messaging/TopicsStore; // field@7402
+72bb78: 6e20 1ac1 2000                         |0002: invoke-virtual {v0, v2}, Lcom/google/firebase/messaging/TopicsStore;.addTopicOperation:(Lcom/google/firebase/messaging/TopicOperation;)Z // method@c11a
+72bb7e: 2200 5f15                              |0005: new-instance v0, Lcom/google/android/gms/tasks/TaskCompletionSource; // type@155f
+72bb82: 7010 7fae 0000                         |0007: invoke-direct {v0}, Lcom/google/android/gms/tasks/TaskCompletionSource;.<init>:()V // method@ae7f
+72bb88: 7030 23c1 2100                         |000a: invoke-direct {v1, v2, v0}, Lcom/google/firebase/messaging/TopicsSubscriber;.addToPendingOperations:(Lcom/google/firebase/messaging/TopicOperation;Lcom/google/android/gms/tasks/TaskCompletionSource;)V // method@c123
+72bb8e: 6e10 81ae 0000                         |000d: invoke-virtual {v0}, Lcom/google/android/gms/tasks/TaskCompletionSource;.getTask:()Lcom/google/android/gms/tasks/Task; // method@ae81
+72bb94: 0c01                                   |0010: move-result-object v1
+72bb96: 1101                                   |0011: return-object v1
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+        0x0005 line=2
+        0x000a line=3
+        0x000d line=4
+      locals        :
+        0x0000 - 0x0012 reg=1 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x0012 reg=2 (null) Lcom/google/firebase/messaging/TopicOperation;
+
+    #5              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'setSyncScheduledOrRunning'
+      type          : '(Z)V'
+      access        : 0x20000 (DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 8 16-bit code units
+72bb98:                                        |[72bb98] com.google.firebase.messaging.TopicsSubscriber.setSyncScheduledOrRunning:(Z)V
+72bba8: 1d00                                   |0000: monitor-enter v0
+72bbaa: 5c01 0474                              |0001: iput-boolean v1, v0, Lcom/google/firebase/messaging/TopicsSubscriber;.syncScheduledOrRunning:Z // field@7404
+72bbae: 1e00                                   |0003: monitor-exit v0
+72bbb0: 0e00                                   |0004: return-void
+72bbb2: 0d01                                   |0005: move-exception v1
+72bbb4: 1e00                                   |0006: monitor-exit v0
+72bbb6: 2701                                   |0007: throw v1
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+      locals        :
+
+    #6              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'startTopicsSyncIfNecessary'
+      type          : '()V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 10 16-bit code units
+72bbcc:                                        |[72bbcc] com.google.firebase.messaging.TopicsSubscriber.startTopicsSyncIfNecessary:()V
+72bbdc: 6e10 28c1 0100                         |0000: invoke-virtual {v1}, Lcom/google/firebase/messaging/TopicsSubscriber;.hasPendingOperation:()Z // method@c128
+72bbe2: 0a00                                   |0003: move-result v0
+72bbe4: 3800 0500                              |0004: if-eqz v0, 0009 // +0005
+72bbe8: 7010 31c1 0100                         |0006: invoke-direct {v1}, Lcom/google/firebase/messaging/TopicsSubscriber;.startSync:()V // method@c131
+72bbee: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0006 line=2
+      locals        :
+        0x0000 - 0x000a reg=1 this Lcom/google/firebase/messaging/TopicsSubscriber;
+
+    #7              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'subscribeToTopic'
+      type          : '(Ljava/lang/String;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 12 16-bit code units
+72bbf0:                                        |[72bbf0] com.google.firebase.messaging.TopicsSubscriber.subscribeToTopic:(Ljava/lang/String;)Lcom/google/android/gms/tasks/Task;
+72bc00: 7110 17c1 0100                         |0000: invoke-static {v1}, Lcom/google/firebase/messaging/TopicOperation;.subscribe:(Ljava/lang/String;)Lcom/google/firebase/messaging/TopicOperation; // method@c117
+72bc06: 0c01                                   |0003: move-result-object v1
+72bc08: 6e20 2fc1 1000                         |0004: invoke-virtual {v0, v1}, Lcom/google/firebase/messaging/TopicsSubscriber;.scheduleTopicOperation:(Lcom/google/firebase/messaging/TopicOperation;)Lcom/google/android/gms/tasks/Task; // method@c12f
+72bc0e: 0c01                                   |0007: move-result-object v1
+72bc10: 6e10 32c1 0000                         |0008: invoke-virtual {v0}, Lcom/google/firebase/messaging/TopicsSubscriber;.startTopicsSyncIfNecessary:()V // method@c132
+72bc16: 1101                                   |000b: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0008 line=2
+      locals        :
+        0x0000 - 0x000c reg=0 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x000c reg=1 (null) Ljava/lang/String;
+
+    #8              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'syncTopics'
+      type          : '()Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 46 16-bit code units
+72bc18:                                        |[72bc18] com.google.firebase.messaging.TopicsSubscriber.syncTopics:()Z
+72bc28: 1d02                                   |0000: monitor-enter v2
+72bc2a: 5420 0274                              |0001: iget-object v0, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.store:Lcom/google/firebase/messaging/TopicsStore; // field@7402
+72bc2e: 6e10 1cc1 0000                         |0003: invoke-virtual {v0}, Lcom/google/firebase/messaging/TopicsStore;.getNextTopicOperation:()Lcom/google/firebase/messaging/TopicOperation; // method@c11c
+72bc34: 0c00                                   |0006: move-result-object v0
+72bc36: 3900 1200                              |0007: if-nez v0, 0019 // +0012
+72bc3a: 7100 29c1 0000                         |0009: invoke-static {}, Lcom/google/firebase/messaging/TopicsSubscriber;.isDebugLogEnabled:()Z // method@c129
+72bc40: 0a00                                   |000c: move-result v0
+72bc42: 3800 0900                              |000d: if-eqz v0, 0016 // +0009
+72bc46: 1a00 6c28                              |000f: const-string v0, "FirebaseMessaging" // string@286c
+72bc4a: 1a01 51e2                              |0011: const-string v1, "topic sync succeeded" // string@e251
+72bc4e: 7120 1c08 1000                         |0013: invoke-static {v0, v1}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+72bc54: 1e02                                   |0016: monitor-exit v2
+72bc56: 1212                                   |0017: const/4 v2, #int 1 // #1
+72bc58: 0f02                                   |0018: return v2
+72bc5a: 1e02                                   |0019: monitor-exit v2
+72bc5c: 6e20 2dc1 0200                         |001a: invoke-virtual {v2, v0}, Lcom/google/firebase/messaging/TopicsSubscriber;.performTopicOperation:(Lcom/google/firebase/messaging/TopicOperation;)Z // method@c12d
+72bc62: 0a01                                   |001d: move-result v1
+72bc64: 3901 0400                              |001e: if-nez v1, 0022 // +0004
+72bc68: 1202                                   |0020: const/4 v2, #int 0 // #0
+72bc6a: 0f02                                   |0021: return v2
+72bc6c: 5421 0274                              |0022: iget-object v1, v2, Lcom/google/firebase/messaging/TopicsSubscriber;.store:Lcom/google/firebase/messaging/TopicsStore; // field@7402
+72bc70: 6e20 1ec1 0100                         |0024: invoke-virtual {v1, v0}, Lcom/google/firebase/messaging/TopicsStore;.removeTopicOperation:(Lcom/google/firebase/messaging/TopicOperation;)Z // method@c11e
+72bc76: 7020 2cc1 0200                         |0027: invoke-direct {v2, v0}, Lcom/google/firebase/messaging/TopicsSubscriber;.markCompletePendingOperation:(Lcom/google/firebase/messaging/TopicOperation;)V // method@c12c
+72bc7c: 28d6                                   |002a: goto 0000 // -002a
+72bc7e: 0d00                                   |002b: move-exception v0
+72bc80: 1e02                                   |002c: monitor-exit v2
+72bc82: 2700                                   |002d: throw v0
+      catches       : 2
+        0x0001 - 0x001a
+          <any> -> 0x002b
+        0x002c - 0x002d
+          <any> -> 0x002b
+      positions     :
+        0x0003 line=1
+        0x0009 line=6
+        0x0013 line=7
+        0x0016 line=8
+        0x0019 line=2
+        0x001a line=3
+        0x0024 line=4
+        0x0027 line=5
+        0x002c line=2
+      locals        :
+        0x0000 - 0x002e reg=2 this Lcom/google/firebase/messaging/TopicsSubscriber;
+
+    #9              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'syncWithDelaySecondsInternal'
+      type          : '(J)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 13
+      ins           : 3
+      outs          : 6
+      insns size    : 33 16-bit code units
+72bc98:                                        |[72bc98] com.google.firebase.messaging.TopicsSubscriber.syncWithDelaySecondsInternal:(J)V
+72bca8: 1600 1e00                              |0000: const-wide/16 v0, #int 30 // #1e
+72bcac: 9b02 0b0b                              |0002: add-long v2, v11, v11
+72bcb0: 7140 9cd1 1032                         |0004: invoke-static {v0, v1, v2, v3}, Ljava/lang/Math;.max:(JJ)J // method@d19c
+72bcb6: 0b00                                   |0007: move-result-wide v0
+72bcb8: 6102 fb73                              |0008: sget-wide v2, Lcom/google/firebase/messaging/TopicsSubscriber;.MAX_DELAY_SEC:J // field@73fb
+72bcbc: 7140 a0d1 1032                         |000a: invoke-static {v0, v1, v2, v3}, Ljava/lang/Math;.min:(JJ)J // method@d1a0
+72bcc2: 0b08                                   |000d: move-result-wide v8
+72bcc4: 2200 0518                              |000e: new-instance v0, Lcom/google/firebase/messaging/TopicsSyncTask; // type@1805
+72bcc8: 54a6 fc73                              |0010: iget-object v6, v10, Lcom/google/firebase/messaging/TopicsSubscriber;.context:Landroid/content/Context; // field@73fc
+72bccc: 54a7 ff73                              |0012: iget-object v7, v10, Lcom/google/firebase/messaging/TopicsSubscriber;.metadata:Lcom/google/firebase/messaging/Metadata; // field@73ff
+72bcd0: 0704                                   |0014: move-object v4, v0
+72bcd2: 07a5                                   |0015: move-object v5, v10
+72bcd4: 7606 3bc1 0400                         |0016: invoke-direct/range {v4, v5, v6, v7, v8, v9}, Lcom/google/firebase/messaging/TopicsSyncTask;.<init>:(Lcom/google/firebase/messaging/TopicsSubscriber;Landroid/content/Context;Lcom/google/firebase/messaging/Metadata;J)V // method@c13b
+72bcda: 6e40 2ec1 0acb                         |0019: invoke-virtual {v10, v0, v11, v12}, Lcom/google/firebase/messaging/TopicsSubscriber;.scheduleSyncTaskWithDelaySeconds:(Ljava/lang/Runnable;J)V // method@c12e
+72bce0: 121b                                   |001c: const/4 v11, #int 1 // #1
+72bce2: 6e20 30c1 ba00                         |001d: invoke-virtual {v10, v11}, Lcom/google/firebase/messaging/TopicsSubscriber;.setSyncScheduledOrRunning:(Z)V // method@c130
+72bce8: 0e00                                   |0020: return-void
+      catches       : (none)
+      positions     :
+        0x0004 line=1
+        0x0016 line=2
+        0x0019 line=3
+        0x001d line=4
+      locals        :
+        0x0000 - 0x0021 reg=10 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x0021 reg=11 (null) J
+
+    #10              : (in Lcom/google/firebase/messaging/TopicsSubscriber;)
+      name          : 'unsubscribeFromTopic'
+      type          : '(Ljava/lang/String;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 12 16-bit code units
+72bcec:                                        |[72bcec] com.google.firebase.messaging.TopicsSubscriber.unsubscribeFromTopic:(Ljava/lang/String;)Lcom/google/android/gms/tasks/Task;
+72bcfc: 7110 18c1 0100                         |0000: invoke-static {v1}, Lcom/google/firebase/messaging/TopicOperation;.unsubscribe:(Ljava/lang/String;)Lcom/google/firebase/messaging/TopicOperation; // method@c118
+72bd02: 0c01                                   |0003: move-result-object v1
+72bd04: 6e20 2fc1 1000                         |0004: invoke-virtual {v0, v1}, Lcom/google/firebase/messaging/TopicsSubscriber;.scheduleTopicOperation:(Lcom/google/firebase/messaging/TopicOperation;)Lcom/google/android/gms/tasks/Task; // method@c12f
+72bd0a: 0c01                                   |0007: move-result-object v1
+72bd0c: 6e10 32c1 0000                         |0008: invoke-virtual {v0}, Lcom/google/firebase/messaging/TopicsSubscriber;.startTopicsSyncIfNecessary:()V // method@c132
+72bd12: 1101                                   |000b: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0008 line=2
+      locals        :
+        0x0000 - 0x000c reg=0 this Lcom/google/firebase/messaging/TopicsSubscriber;
+        0x0000 - 0x000c reg=1 (null) Ljava/lang/String;
+
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

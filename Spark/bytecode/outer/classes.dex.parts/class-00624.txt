@@ -1,0 +1,1481 @@
+Class #624            -
+  Class descriptor  : 'Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'DEFAULT_AUTO_SIZE_GRANULARITY_IN_PX'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1
+    #1              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'DEFAULT_AUTO_SIZE_MAX_TEXT_SIZE_IN_SP'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 112
+    #2              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'DEFAULT_AUTO_SIZE_MIN_TEXT_SIZE_IN_SP'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 12
+    #3              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'TAG'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "ACTVAutoSizeHelper"
+    #4              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'TEMP_RECTF'
+      type          : 'Landroid/graphics/RectF;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : null
+    #5              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'UNSET_AUTO_SIZE_UNIFORM_CONFIGURATION_VALUE'
+      type          : 'F'
+      access        : 0x0018 (STATIC FINAL)
+      value         : -1
+    #6              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'VERY_WIDE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1048576
+    #7              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'sTextViewMethodByNameCache'
+      type          : 'Ljava/util/concurrent/ConcurrentHashMap;'
+      access        : 0x000a (PRIVATE STATIC)
+  Instance fields   -
+    #0              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mAutoSizeMaxTextSizeInPx'
+      type          : 'F'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mAutoSizeMinTextSizeInPx'
+      type          : 'F'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mAutoSizeStepGranularityInPx'
+      type          : 'F'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mAutoSizeTextSizesInPx'
+      type          : '[I'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mAutoSizeTextType'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mContext'
+      type          : 'Landroid/content/Context;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #6              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mHasPresetAutoSizeValues'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #7              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mImpl'
+      type          : 'Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #8              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mNeedsAutoSizeText'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #9              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mTempTextPaint'
+      type          : 'Landroid/text/TextPaint;'
+      access        : 0x0002 (PRIVATE)
+    #10              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'mTextView'
+      type          : 'Landroid/widget/TextView;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 15 16-bit code units
+131c3c:                                        |[131c3c] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.<clinit>:()V
+131c4c: 2200 d000                              |0000: new-instance v0, Landroid/graphics/RectF; // type@00d0
+131c50: 7010 ef04 0000                         |0002: invoke-direct {v0}, Landroid/graphics/RectF;.<init>:()V // method@04ef
+131c56: 6900 510d                              |0005: sput-object v0, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.TEMP_RECTF:Landroid/graphics/RectF; // field@0d51
+131c5a: 2200 4d12                              |0007: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap; // type@124d
+131c5e: 7010 b375 0000                         |0009: invoke-direct {v0}, Ljava/util/concurrent/ConcurrentHashMap;.<init>:()V // method@75b3
+131c64: 6900 5f0d                              |000c: sput-object v0, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.sTextViewMethodByNameCache:Ljava/util/concurrent/ConcurrentHashMap; // field@0d5f
+131c68: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=64
+        0x0007 line=75
+      locals        :
+
+    #1              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : '<init>'
+      type          : '(Landroid/widget/TextView;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 1
+      insns size    : 52 16-bit code units
+131c6c:                                        |[131c6c] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.<init>:(Landroid/widget/TextView;)V
+131c7c: 7010 df71 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@71df
+131c82: 1200                                   |0003: const/4 v0, #int 0 // #0
+131c84: 5920 580d                              |0004: iput v0, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextType:I // field@0d58
+131c88: 5c20 5c0d                              |0006: iput-boolean v0, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mNeedsAutoSizeText:Z // field@0d5c
+131c8c: 1501 80bf                              |0008: const/high16 v1, #int -1082130432 // #bf80
+131c90: 5921 560d                              |000a: iput v1, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeStepGranularityInPx:F // field@0d56
+131c94: 5921 550d                              |000c: iput v1, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMinTextSizeInPx:F // field@0d55
+131c98: 5921 540d                              |000e: iput v1, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMaxTextSizeInPx:F // field@0d54
+131c9c: 2301 171a                              |0010: new-array v1, v0, [I // type@1a17
+131ca0: 5b21 570d                              |0012: iput-object v1, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+131ca4: 5c20 5a0d                              |0014: iput-boolean v0, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mHasPresetAutoSizeValues:Z // field@0d5a
+131ca8: 5b23 5e0d                              |0016: iput-object v3, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131cac: 6e10 8b10 0300                         |0018: invoke-virtual {v3}, Landroid/widget/TextView;.getContext:()Landroid/content/Context; // method@108b
+131cb2: 0c03                                   |001b: move-result-object v3
+131cb4: 5b23 590d                              |001c: iput-object v3, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mContext:Landroid/content/Context; // field@0d59
+131cb8: 6003 d600                              |001e: sget v3, Landroid/os/Build$VERSION;.SDK_INT:I // field@00d6
+131cbc: 1300 1d00                              |0020: const/16 v0, #int 29 // #1d
+131cc0: 3403 0a00                              |0022: if-lt v3, v0, 002c // +000a
+131cc4: 2203 b904                              |0024: new-instance v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl29; // type@04b9
+131cc8: 7010 e621 0300                         |0026: invoke-direct {v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl29;.<init>:()V // method@21e6
+131cce: 5b23 5b0d                              |0029: iput-object v3, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mImpl:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl; // field@0d5b
+131cd2: 0e00                                   |002b: return-void
+131cd4: 2203 b804                              |002c: new-instance v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl23; // type@04b8
+131cd8: 7010 e421 0300                         |002e: invoke-direct {v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl23;.<init>:()V // method@21e4
+131cde: 5b23 5b0d                              |0031: iput-object v3, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mImpl:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl; // field@0d5b
+131ce2: 0e00                                   |0033: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=147
+        0x0004 line=82
+        0x0006 line=84
+        0x000a line=86
+        0x000c line=88
+        0x000e line=90
+        0x0010 line=93
+        0x0014 line=97
+        0x0016 line=148
+        0x0018 line=149
+        0x001e line=150
+        0x0024 line=151
+        0x002c line=153
+      locals        :
+        0x0000 - 0x0034 reg=2 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x0034 reg=3 (null) Landroid/widget/TextView;
+
+    #2              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'cleanupAutoSizePresetSizes'
+      type          : '([I)[I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 2
+      insns size    : 71 16-bit code units
+131a78:                                        |[131a78] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.cleanupAutoSizePresetSizes:([I)[I
+131a88: 2170                                   |0000: array-length v0, v7
+131a8a: 3900 0300                              |0001: if-nez v0, 0004 // +0003
+131a8e: 282b                                   |0003: goto 002e // +002b
+131a90: 7110 8574 0700                         |0004: invoke-static {v7}, Ljava/util/Arrays;.sort:([I)V // method@7485
+131a96: 2201 1412                              |0007: new-instance v1, Ljava/util/ArrayList; // type@1214
+131a9a: 7010 2874 0100                         |0009: invoke-direct {v1}, Ljava/util/ArrayList;.<init>:()V // method@7428
+131aa0: 1202                                   |000c: const/4 v2, #int 0 // #0
+131aa2: 0123                                   |000d: move v3, v2
+131aa4: 3503 1a00                              |000e: if-ge v3, v0, 0028 // +001a
+131aa8: 4404 0703                              |0010: aget v4, v7, v3
+131aac: 3d04 1300                              |0012: if-lez v4, 0025 // +0013
+131ab0: 7110 8771 0400                         |0014: invoke-static {v4}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@7187
+131ab6: 0c05                                   |0017: move-result-object v5
+131ab8: 7120 b274 5100                         |0018: invoke-static {v1, v5}, Ljava/util/Collections;.binarySearch:(Ljava/util/List;Ljava/lang/Object;)I // method@74b2
+131abe: 0a05                                   |001b: move-result v5
+131ac0: 3b05 0900                              |001c: if-gez v5, 0025 // +0009
+131ac4: 7110 8771 0400                         |001e: invoke-static {v4}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@7187
+131aca: 0c04                                   |0021: move-result-object v4
+131acc: 7220 0c75 4100                         |0022: invoke-interface {v1, v4}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@750c
+131ad2: d803 0301                              |0025: add-int/lit8 v3, v3, #int 1 // #01
+131ad6: 28e7                                   |0027: goto 000e // -0019
+131ad8: 7210 1a75 0100                         |0028: invoke-interface {v1}, Ljava/util/List;.size:()I // method@751a
+131ade: 0a03                                   |002b: move-result v3
+131ae0: 3330 0300                              |002c: if-ne v0, v3, 002f // +0003
+131ae4: 1107                                   |002e: return-object v7
+131ae6: 7210 1a75 0100                         |002f: invoke-interface {v1}, Ljava/util/List;.size:()I // method@751a
+131aec: 0a07                                   |0032: move-result v7
+131aee: 2370 171a                              |0033: new-array v0, v7, [I // type@1a17
+131af2: 3572 1100                              |0035: if-ge v2, v7, 0046 // +0011
+131af6: 7220 1175 2100                         |0037: invoke-interface {v1, v2}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@7511
+131afc: 0c03                                   |003a: move-result-object v3
+131afe: 1f03 6d11                              |003b: check-cast v3, Ljava/lang/Integer; // type@116d
+131b02: 6e10 7b71 0300                         |003d: invoke-virtual {v3}, Ljava/lang/Integer;.intValue:()I // method@717b
+131b08: 0a03                                   |0040: move-result v3
+131b0a: 4b03 0002                              |0041: aput v3, v0, v2
+131b0e: d802 0201                              |0043: add-int/lit8 v2, v2, #int 1 // #01
+131b12: 28f0                                   |0045: goto 0035 // -0010
+131b14: 1100                                   |0046: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=497
+        0x0004 line=501
+        0x0007 line=503
+        0x0010 line=505
+        0x0014 line=508
+        0x001e line=509
+        0x0028 line=513
+        0x002f line=516
+        0x0033 line=517
+        0x0037 line=519
+      locals        :
+        0x0000 - 0x0047 reg=6 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x0047 reg=7 (null) [I
+
+    #3              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'clearAutoSizeConfiguration'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 18 16-bit code units
+131e00:                                        |[131e00] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.clearAutoSizeConfiguration:()V
+131e10: 1200                                   |0000: const/4 v0, #int 0 // #0
+131e12: 5920 580d                              |0001: iput v0, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextType:I // field@0d58
+131e16: 1501 80bf                              |0003: const/high16 v1, #int -1082130432 // #bf80
+131e1a: 5921 550d                              |0005: iput v1, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMinTextSizeInPx:F // field@0d55
+131e1e: 5921 540d                              |0007: iput v1, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMaxTextSizeInPx:F // field@0d54
+131e22: 5921 560d                              |0009: iput v1, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeStepGranularityInPx:F // field@0d56
+131e26: 2301 171a                              |000b: new-array v1, v0, [I // type@1a17
+131e2a: 5b21 570d                              |000d: iput-object v1, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+131e2e: 5c20 5c0d                              |000f: iput-boolean v0, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mNeedsAutoSizeText:Z // field@0d5c
+131e32: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=626
+        0x0005 line=627
+        0x0007 line=628
+        0x0009 line=629
+        0x000b line=630
+        0x000f line=631
+      locals        :
+        0x0000 - 0x0012 reg=2 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #4              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'findLargestTextSizeWhichFits'
+      type          : '(Landroid/graphics/RectF;)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 3
+      insns size    : 47 16-bit code units
+131990:                                        |[131990] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.findLargestTextSizeWhichFits:(Landroid/graphics/RectF;)I
+1319a0: 5450 570d                              |0000: iget-object v0, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+1319a4: 2100                                   |0002: array-length v0, v0
+1319a6: 3800 2400                              |0003: if-eqz v0, 0027 // +0024
+1319aa: 1211                                   |0005: const/4 v1, #int 1 // #1
+1319ac: b110                                   |0006: sub-int/2addr v0, v1
+1319ae: 1202                                   |0007: const/4 v2, #int 0 // #0
+1319b0: 3601 1a00                              |0008: if-gt v1, v0, 0022 // +001a
+1319b4: 9002 0100                              |000a: add-int v2, v1, v0
+1319b8: db02 0202                              |000c: div-int/lit8 v2, v2, #int 2 // #02
+1319bc: 5453 570d                              |000e: iget-object v3, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+1319c0: 4403 0302                              |0010: aget v3, v3, v2
+1319c4: 7030 0522 3506                         |0012: invoke-direct {v5, v3, v6}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.suggestedSizeFitsInSpace:(ILandroid/graphics/RectF;)Z // method@2205
+1319ca: 0a03                                   |0015: move-result v3
+1319cc: 3803 0800                              |0016: if-eqz v3, 001e // +0008
+1319d0: d802 0201                              |0018: add-int/lit8 v2, v2, #int 1 // #01
+1319d4: 0124                                   |001a: move v4, v2
+1319d6: 0112                                   |001b: move v2, v1
+1319d8: 0141                                   |001c: move v1, v4
+1319da: 28eb                                   |001d: goto 0008 // -0015
+1319dc: d802 02ff                              |001e: add-int/lit8 v2, v2, #int -1 // #ff
+1319e0: 0120                                   |0020: move v0, v2
+1319e2: 28e7                                   |0021: goto 0008 // -0019
+1319e4: 5456 570d                              |0022: iget-object v6, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+1319e8: 4406 0602                              |0024: aget v6, v6, v2
+1319ec: 0f06                                   |0026: return v6
+1319ee: 2206 6a11                              |0027: new-instance v6, Ljava/lang/IllegalStateException; // type@116a
+1319f2: 1a00 584b                              |0029: const-string v0, "No available text sizes to choose from." // string@4b58
+1319f6: 7020 7071 0600                         |002b: invoke-direct {v6, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+1319fc: 2706                                   |002e: throw v6
+      catches       : (none)
+      positions     :
+        0x0000 line=680
+        0x000c line=690
+        0x000e line=691
+        0x0022 line=700
+        0x0027 line=682
+      locals        :
+        0x0000 - 0x002f reg=5 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x002f reg=6 (null) Landroid/graphics/RectF;
+
+    #5              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'getTextViewMethod'
+      type          : '(Ljava/lang/String;)Ljava/lang/reflect/Method;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 3
+      insns size    : 60 16-bit code units
+131ba4:                                        |[131ba4] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.getTextViewMethod:(Ljava/lang/String;)Ljava/lang/reflect/Method;
+131bb4: 6200 5f0d                              |0000: sget-object v0, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.sTextViewMethodByNameCache:Ljava/util/concurrent/ConcurrentHashMap; // field@0d5f
+131bb8: 6e20 b675 3000                         |0002: invoke-virtual {v0, v3}, Ljava/util/concurrent/ConcurrentHashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@75b6
+131bbe: 0c00                                   |0005: move-result-object v0
+131bc0: 1f00 a911                              |0006: check-cast v0, Ljava/lang/reflect/Method; // type@11a9
+131bc4: 3900 1600                              |0008: if-nez v0, 001e // +0016
+131bc8: 1c00 a302                              |000a: const-class v0, Landroid/widget/TextView; // type@02a3
+131bcc: 1201                                   |000c: const/4 v1, #int 0 // #0
+131bce: 2311 a51a                              |000d: new-array v1, v1, [Ljava/lang/Class; // type@1aa5
+131bd2: 6e30 1771 3001                         |000f: invoke-virtual {v0, v3, v1}, Ljava/lang/Class;.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method; // method@7117
+131bd8: 0c00                                   |0012: move-result-object v0
+131bda: 3800 0b00                              |0013: if-eqz v0, 001e // +000b
+131bde: 1211                                   |0015: const/4 v1, #int 1 // #1
+131be0: 6e20 d772 1000                         |0016: invoke-virtual {v0, v1}, Ljava/lang/reflect/Method;.setAccessible:(Z)V // method@72d7
+131be6: 6201 5f0d                              |0019: sget-object v1, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.sTextViewMethodByNameCache:Ljava/util/concurrent/ConcurrentHashMap; // field@0d5f
+131bea: 6e30 b775 3100                         |001b: invoke-virtual {v1, v3, v0}, Ljava/util/concurrent/ConcurrentHashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@75b7
+131bf0: 1100                                   |001e: return-object v0
+131bf2: 0d00                                   |001f: move-exception v0
+131bf4: 2201 8811                              |0020: new-instance v1, Ljava/lang/StringBuilder; // type@1188
+131bf8: 1a02 3026                              |0022: const-string v2, "Failed to retrieve TextView#" // string@2630
+131bfc: 7020 4e72 2100                         |0024: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+131c02: 6e20 5772 3100                         |0027: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+131c08: 0c03                                   |002a: move-result-object v3
+131c0a: 1a01 700a                              |002b: const-string v1, "() method" // string@0a70
+131c0e: 6e20 5772 1300                         |002d: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+131c14: 0c03                                   |0030: move-result-object v3
+131c16: 6e10 6b72 0300                         |0031: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+131c1c: 0c03                                   |0034: move-result-object v3
+131c1e: 1a01 ee18                              |0035: const-string v1, "ACTVAutoSizeHelper" // string@18ee
+131c22: 7130 3509 3100                         |0037: invoke-static {v1, v3, v0}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I // method@0935
+131c28: 1203                                   |003a: const/4 v3, #int 0 // #0
+131c2a: 1103                                   |003b: return-object v3
+      catches       : 1
+        0x0000 - 0x001e
+          Ljava/lang/Exception; -> 0x001f
+      positions     :
+        0x0000 line=800
+        0x000a line=802
+        0x0016 line=804
+        0x0019 line=806
+        0x0020 line=812
+      locals        :
+        0x0000 - 0x003c reg=3 (null) Ljava/lang/String;
+
+    #6              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'invokeAndReturnWithDefault'
+      type          : '(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 3
+      insns size    : 42 16-bit code units
+131b30:                                        |[131b30] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.invokeAndReturnWithDefault:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;
+131b40: 1a00 1126                              |0000: const-string v0, "Failed to invoke TextView#" // string@2611
+131b44: 7110 f821 0400                         |0002: invoke-static {v4}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.getTextViewMethod:(Ljava/lang/String;)Ljava/lang/reflect/Method; // method@21f8
+131b4a: 0c01                                   |0005: move-result-object v1
+131b4c: 1202                                   |0006: const/4 v2, #int 0 // #0
+131b4e: 2322 ac1a                              |0007: new-array v2, v2, [Ljava/lang/Object; // type@1aac
+131b52: 6e30 d572 3102                         |0009: invoke-virtual {v1, v3, v2}, Ljava/lang/reflect/Method;.invoke:(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; // method@72d5
+131b58: 0c03                                   |000c: move-result-object v3
+131b5a: 1103                                   |000d: return-object v3
+131b5c: 0d03                                   |000e: move-exception v3
+131b5e: 2703                                   |000f: throw v3
+131b60: 0d03                                   |0010: move-exception v3
+131b62: 1a01 ee18                              |0011: const-string v1, "ACTVAutoSizeHelper" // string@18ee
+131b66: 2202 8811                              |0013: new-instance v2, Ljava/lang/StringBuilder; // type@1188
+131b6a: 7020 4e72 0200                         |0015: invoke-direct {v2, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+131b70: 6e20 5772 4200                         |0018: invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+131b76: 0c04                                   |001b: move-result-object v4
+131b78: 1a00 700a                              |001c: const-string v0, "() method" // string@0a70
+131b7c: 6e20 5772 0400                         |001e: invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+131b82: 0c04                                   |0021: move-result-object v4
+131b84: 6e10 6b72 0400                         |0022: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+131b8a: 0c04                                   |0025: move-result-object v4
+131b8c: 7130 3509 4103                         |0026: invoke-static {v1, v4, v3}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I // method@0935
+131b92: 1105                                   |0029: return-object v5
+      catches       : 1
+        0x0002 - 0x000d
+          Ljava/lang/Exception; -> 0x0010
+          <any> -> 0x000e
+      positions     :
+        0x0002 line=783
+        0x0007 line=784
+        0x000f line=792
+        0x0011 line=787
+      locals        :
+        0x0000 - 0x002a reg=3 (null) Ljava/lang/Object;
+        0x0000 - 0x002a reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x002a reg=5 (null) Ljava/lang/Object;
+
+    #7              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'setRawTextSize'
+      type          : '(F)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 83 16-bit code units
+1321e8:                                        |[1321e8] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.setRawTextSize:(F)V
+1321f8: 5430 5e0d                              |0000: iget-object v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+1321fc: 6e10 a610 0000                         |0002: invoke-virtual {v0}, Landroid/widget/TextView;.getPaint:()Landroid/text/TextPaint; // method@10a6
+132202: 0c00                                   |0005: move-result-object v0
+132204: 6e10 b708 0000                         |0006: invoke-virtual {v0}, Landroid/text/TextPaint;.getTextSize:()F // method@08b7
+13220a: 0a00                                   |0009: move-result v0
+13220c: 2d00 0400                              |000a: cmpl-float v0, v4, v0
+132210: 3800 4600                              |000c: if-eqz v0, 0052 // +0046
+132214: 5430 5e0d                              |000e: iget-object v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+132218: 6e10 a610 0000                         |0010: invoke-virtual {v0}, Landroid/widget/TextView;.getPaint:()Landroid/text/TextPaint; // method@10a6
+13221e: 0c00                                   |0013: move-result-object v0
+132220: 6e20 c108 4000                         |0014: invoke-virtual {v0, v4}, Landroid/text/TextPaint;.setTextSize:(F)V // method@08c1
+132226: 5434 5e0d                              |0017: iget-object v4, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+13222a: 6e10 bd10 0400                         |0019: invoke-virtual {v4}, Landroid/widget/TextView;.isInLayout:()Z // method@10bd
+132230: 0a04                                   |001c: move-result v4
+132232: 5430 5e0d                              |001d: iget-object v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+132236: 6e10 9410 0000                         |001f: invoke-virtual {v0}, Landroid/widget/TextView;.getLayout:()Landroid/text/Layout; // method@1094
+13223c: 0c00                                   |0022: move-result-object v0
+13223e: 3800 2f00                              |0023: if-eqz v0, 0052 // +002f
+132242: 1200                                   |0025: const/4 v0, #int 0 // #0
+132244: 5c30 5c0d                              |0026: iput-boolean v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mNeedsAutoSizeText:Z // field@0d5c
+132248: 1a01 df98                              |0028: const-string v1, "nullLayouts" // string@98df
+13224c: 7110 f821 0100                         |002a: invoke-static {v1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.getTextViewMethod:(Ljava/lang/String;)Ljava/lang/reflect/Method; // method@21f8
+132252: 0c01                                   |002d: move-result-object v1
+132254: 3801 1200                              |002e: if-eqz v1, 0040 // +0012
+132258: 5432 5e0d                              |0030: iget-object v2, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+13225c: 2300 ac1a                              |0032: new-array v0, v0, [Ljava/lang/Object; // type@1aac
+132260: 6e30 d572 2100                         |0034: invoke-virtual {v1, v2, v0}, Ljava/lang/reflect/Method;.invoke:(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; // method@72d5
+132266: 2809                                   |0037: goto 0040 // +0009
+132268: 0d00                                   |0038: move-exception v0
+13226a: 1a01 ee18                              |0039: const-string v1, "ACTVAutoSizeHelper" // string@18ee
+13226e: 1a02 1226                              |003b: const-string v2, "Failed to invoke TextView#nullLayouts() method" // string@2612
+132272: 7130 3509 2100                         |003d: invoke-static {v1, v2, v0}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I // method@0935
+132278: 3904 0800                              |0040: if-nez v4, 0048 // +0008
+13227c: 5434 5e0d                              |0042: iget-object v4, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+132280: 6e10 c710 0400                         |0044: invoke-virtual {v4}, Landroid/widget/TextView;.requestLayout:()V // method@10c7
+132286: 2806                                   |0047: goto 004d // +0006
+132288: 5434 5e0d                              |0048: iget-object v4, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+13228c: 6e10 7d10 0400                         |004a: invoke-virtual {v4}, Landroid/widget/TextView;.forceLayout:()V // method@107d
+132292: 5434 5e0d                              |004d: iget-object v4, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+132296: 6e10 b810 0400                         |004f: invoke-virtual {v4}, Landroid/widget/TextView;.invalidate:()V // method@10b8
+13229c: 0e00                                   |0052: return-void
+      catches       : 1
+        0x0028 - 0x0037
+          Ljava/lang/Exception; -> 0x0038
+      positions     :
+        0x0000 line=645
+        0x000e line=646
+        0x0017 line=648
+        0x001d line=650
+        0x0026 line=652
+        0x0028 line=656
+        0x0030 line=658
+        0x0039 line=661
+        0x0042 line=665
+        0x0048 line=667
+        0x004d line=670
+      locals        :
+        0x0000 - 0x0053 reg=3 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x0053 reg=4 (null) F
+
+    #8              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'setupAutoSizeText'
+      type          : '()Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 1
+      outs          : 2
+      insns size    : 70 16-bit code units
+1317b8:                                        |[1317b8] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.setupAutoSizeText:()Z
+1317c8: 7010 0622 0700                         |0000: invoke-direct {v7}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.supportsAutoSizeText:()Z // method@2206
+1317ce: 0a00                                   |0003: move-result v0
+1317d0: 1201                                   |0004: const/4 v1, #int 0 // #0
+1317d2: 3800 3c00                              |0005: if-eqz v0, 0041 // +003c
+1317d6: 5270 580d                              |0007: iget v0, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextType:I // field@0d58
+1317da: 1212                                   |0009: const/4 v2, #int 1 // #1
+1317dc: 3320 3700                              |000a: if-ne v0, v2, 0041 // +0037
+1317e0: 5570 5a0d                              |000c: iget-boolean v0, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mHasPresetAutoSizeValues:Z // field@0d5a
+1317e4: 3800 0700                              |000e: if-eqz v0, 0015 // +0007
+1317e8: 5470 570d                              |0010: iget-object v0, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+1317ec: 2100                                   |0012: array-length v0, v0
+1317ee: 3900 2b00                              |0013: if-nez v0, 003e // +002b
+1317f2: 5270 540d                              |0015: iget v0, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMaxTextSizeInPx:F // field@0d54
+1317f6: 5273 550d                              |0017: iget v3, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMinTextSizeInPx:F // field@0d55
+1317fa: c730                                   |0019: sub-float/2addr v0, v3
+1317fc: 5273 560d                              |001a: iget v3, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeStepGranularityInPx:F // field@0d56
+131800: c930                                   |001c: div-float/2addr v0, v3
+131802: 8903                                   |001d: float-to-double v3, v0
+131804: 7120 b071 4300                         |001e: invoke-static {v3, v4}, Ljava/lang/Math;.floor:(D)D // method@71b0
+13180a: 0b03                                   |0021: move-result-wide v3
+13180c: 8a30                                   |0022: double-to-int v0, v3
+13180e: b020                                   |0023: add-int/2addr v0, v2
+131810: 2303 171a                              |0024: new-array v3, v0, [I // type@1a17
+131814: 3501 1200                              |0026: if-ge v1, v0, 0038 // +0012
+131818: 5274 550d                              |0028: iget v4, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMinTextSizeInPx:F // field@0d55
+13181c: 8215                                   |002a: int-to-float v5, v1
+13181e: 5276 560d                              |002b: iget v6, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeStepGranularityInPx:F // field@0d56
+131822: c865                                   |002d: mul-float/2addr v5, v6
+131824: c654                                   |002e: add-float/2addr v4, v5
+131826: 7110 c471 0400                         |002f: invoke-static {v4}, Ljava/lang/Math;.round:(F)I // method@71c4
+13182c: 0a04                                   |0032: move-result v4
+13182e: 4b04 0301                              |0033: aput v4, v3, v1
+131832: d801 0101                              |0035: add-int/lit8 v1, v1, #int 1 // #01
+131836: 28ef                                   |0037: goto 0026 // -0011
+131838: 7020 ef21 3700                         |0038: invoke-direct {v7, v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.cleanupAutoSizePresetSizes:([I)[I // method@21ef
+13183e: 0c00                                   |003b: move-result-object v0
+131840: 5b70 570d                              |003c: iput-object v0, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+131844: 5c72 5c0d                              |003e: iput-boolean v2, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mNeedsAutoSizeText:Z // field@0d5c
+131848: 2803                                   |0040: goto 0043 // +0003
+13184a: 5c71 5c0d                              |0041: iput-boolean v1, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mNeedsAutoSizeText:Z // field@0d5c
+13184e: 5570 5c0d                              |0043: iget-boolean v0, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mNeedsAutoSizeText:Z // field@0d5c
+131852: 0f00                                   |0045: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=560
+        0x000c line=564
+        0x0015 line=566
+        0x0024 line=568
+        0x0028 line=570
+        0x0038 line=573
+        0x003e line=575
+        0x0041 line=577
+        0x0043 line=580
+      locals        :
+        0x0000 - 0x0046 reg=7 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #9              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'setupAutoSizeUniformPresetSizes'
+      type          : '(Landroid/content/res/TypedArray;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 3
+      insns size    : 31 16-bit code units
+1322f4:                                        |[1322f4] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.setupAutoSizeUniformPresetSizes:(Landroid/content/res/TypedArray;)V
+132304: 6e10 ea03 0500                         |0000: invoke-virtual {v5}, Landroid/content/res/TypedArray;.length:()I // method@03ea
+13230a: 0a00                                   |0003: move-result v0
+13230c: 2301 171a                              |0004: new-array v1, v0, [I // type@1a17
+132310: 3d00 1800                              |0006: if-lez v0, 001e // +0018
+132314: 1202                                   |0008: const/4 v2, #int 0 // #0
+132316: 3502 0c00                              |0009: if-ge v2, v0, 0015 // +000c
+13231a: 12f3                                   |000b: const/4 v3, #int -1 // #ff
+13231c: 6e30 d503 2503                         |000c: invoke-virtual {v5, v2, v3}, Landroid/content/res/TypedArray;.getDimensionPixelSize:(II)I // method@03d5
+132322: 0a03                                   |000f: move-result v3
+132324: 4b03 0102                              |0010: aput v3, v1, v2
+132328: d802 0201                              |0012: add-int/lit8 v2, v2, #int 1 // #01
+13232c: 28f5                                   |0014: goto 0009 // -000b
+13232e: 7020 ef21 1400                         |0015: invoke-direct {v4, v1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.cleanupAutoSizePresetSizes:([I)[I // method@21ef
+132334: 0c05                                   |0018: move-result-object v5
+132336: 5b45 570d                              |0019: iput-object v5, v4, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+13233a: 7010 0422 0400                         |001b: invoke-direct {v4}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.setupAutoSizeUniformPresetSizesConfiguration:()Z // method@2204
+132340: 0e00                                   |001e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=471
+        0x0004 line=472
+        0x000c line=476
+        0x0015 line=478
+        0x001b line=479
+      locals        :
+        0x0000 - 0x001f reg=4 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x001f reg=5 (null) Landroid/content/res/TypedArray;
+
+    #10              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'setupAutoSizeUniformPresetSizesConfiguration'
+      type          : '()Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 0
+      insns size    : 32 16-bit code units
+131854:                                        |[131854] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.setupAutoSizeUniformPresetSizesConfiguration:()Z
+131864: 5450 570d                              |0000: iget-object v0, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+131868: 2101                                   |0002: array-length v1, v0
+13186a: 1202                                   |0003: const/4 v2, #int 0 // #0
+13186c: 1213                                   |0004: const/4 v3, #int 1 // #1
+13186e: 3d01 0400                              |0005: if-lez v1, 0009 // +0004
+131872: 0134                                   |0007: move v4, v3
+131874: 2802                                   |0008: goto 000a // +0002
+131876: 0124                                   |0009: move v4, v2
+131878: 5c54 5a0d                              |000a: iput-boolean v4, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mHasPresetAutoSizeValues:Z // field@0d5a
+13187c: 3804 1300                              |000c: if-eqz v4, 001f // +0013
+131880: 5953 580d                              |000e: iput v3, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextType:I // field@0d58
+131884: 4402 0002                              |0010: aget v2, v0, v2
+131888: 8222                                   |0012: int-to-float v2, v2
+13188a: 5952 550d                              |0013: iput v2, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMinTextSizeInPx:F // field@0d55
+13188e: b131                                   |0015: sub-int/2addr v1, v3
+131890: 4400 0001                              |0016: aget v0, v0, v1
+131894: 8200                                   |0018: int-to-float v0, v0
+131896: 5950 540d                              |0019: iput v0, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMaxTextSizeInPx:F // field@0d54
+13189a: 1500 80bf                              |001b: const/high16 v0, #int -1082130432 // #bf80
+13189e: 5950 560d                              |001d: iput v0, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeStepGranularityInPx:F // field@0d56
+1318a2: 0f04                                   |001f: return v4
+      catches       : (none)
+      positions     :
+        0x0000 line=484
+        0x000a line=485
+        0x000e line=487
+        0x0010 line=488
+        0x0016 line=489
+        0x001d line=490
+      locals        :
+        0x0000 - 0x0020 reg=5 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #11              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'suggestedSizeFitsInSpace'
+      type          : '(ILandroid/graphics/RectF;)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 3
+      outs          : 5
+      insns size    : 94 16-bit code units
+1318a4:                                        |[1318a4] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.suggestedSizeFitsInSpace:(ILandroid/graphics/RectF;)Z
+1318b4: 5450 5e0d                              |0000: iget-object v0, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+1318b8: 6e10 ab10 0000                         |0002: invoke-virtual {v0}, Landroid/widget/TextView;.getText:()Ljava/lang/CharSequence; // method@10ab
+1318be: 0c00                                   |0005: move-result-object v0
+1318c0: 5451 5e0d                              |0006: iget-object v1, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+1318c4: 6e10 b610 0100                         |0008: invoke-virtual {v1}, Landroid/widget/TextView;.getTransformationMethod:()Landroid/text/method/TransformationMethod; // method@10b6
+1318ca: 0c01                                   |000b: move-result-object v1
+1318cc: 3801 0b00                              |000c: if-eqz v1, 0017 // +000b
+1318d0: 5452 5e0d                              |000e: iget-object v2, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+1318d4: 7230 eb08 0102                         |0010: invoke-interface {v1, v0, v2}, Landroid/text/method/TransformationMethod;.getTransformation:(Ljava/lang/CharSequence;Landroid/view/View;)Ljava/lang/CharSequence; // method@08eb
+1318da: 0c01                                   |0013: move-result-object v1
+1318dc: 3801 0300                              |0014: if-eqz v1, 0017 // +0003
+1318e0: 0710                                   |0016: move-object v0, v1
+1318e2: 5451 5e0d                              |0017: iget-object v1, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+1318e6: 6e10 9b10 0100                         |0019: invoke-virtual {v1}, Landroid/widget/TextView;.getMaxLines:()I // method@109b
+1318ec: 0a01                                   |001c: move-result v1
+1318ee: 6e20 f921 6500                         |001d: invoke-virtual {v5, v6}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.initTempTextPaint:(I)V // method@21f9
+1318f4: 5456 5e0d                              |0020: iget-object v6, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+1318f8: 1a02 237c                              |0022: const-string v2, "getLayoutAlignment" // string@7c23
+1318fc: 6203 0201                              |0024: sget-object v3, Landroid/text/Layout$Alignment;.ALIGN_NORMAL:Landroid/text/Layout$Alignment; // field@0102
+131900: 7130 fa21 2603                         |0026: invoke-static {v6, v2, v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.invokeAndReturnWithDefault:(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object; // method@21fa
+131906: 0c06                                   |0029: move-result-object v6
+131908: 1f06 9101                              |002a: check-cast v6, Landroid/text/Layout$Alignment; // type@0191
+13190c: 5272 bc00                              |002c: iget v2, v7, Landroid/graphics/RectF;.right:F // field@00bc
+131910: 7110 c471 0200                         |002e: invoke-static {v2}, Ljava/lang/Math;.round:(F)I // method@71c4
+131916: 0a02                                   |0031: move-result v2
+131918: 6e51 f121 0526                         |0032: invoke-virtual {v5, v0, v6, v2, v1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.createLayout:(Ljava/lang/CharSequence;Landroid/text/Layout$Alignment;II)Landroid/text/StaticLayout; // method@21f1
+13191e: 0c06                                   |0035: move-result-object v6
+131920: 12f2                                   |0036: const/4 v2, #int -1 // #ff
+131922: 1203                                   |0037: const/4 v3, #int 0 // #0
+131924: 1214                                   |0038: const/4 v4, #int 1 // #1
+131926: 3221 1800                              |0039: if-eq v1, v2, 0051 // +0018
+13192a: 6e10 a808 0600                         |003b: invoke-virtual {v6}, Landroid/text/StaticLayout;.getLineCount:()I // method@08a8
+131930: 0a02                                   |003e: move-result v2
+131932: 3612 1100                              |003f: if-gt v2, v1, 0050 // +0011
+131936: 6e10 a808 0600                         |0041: invoke-virtual {v6}, Landroid/text/StaticLayout;.getLineCount:()I // method@08a8
+13193c: 0a01                                   |0044: move-result v1
+13193e: b141                                   |0045: sub-int/2addr v1, v4
+131940: 6e20 a908 1600                         |0046: invoke-virtual {v6, v1}, Landroid/text/StaticLayout;.getLineEnd:(I)I // method@08a9
+131946: 0a01                                   |0049: move-result v1
+131948: 7210 e670 0000                         |004a: invoke-interface {v0}, Ljava/lang/CharSequence;.length:()I // method@70e6
+13194e: 0a00                                   |004d: move-result v0
+131950: 3201 0300                              |004e: if-eq v1, v0, 0051 // +0003
+131954: 0f03                                   |0050: return v3
+131956: 6e10 a708 0600                         |0051: invoke-virtual {v6}, Landroid/text/StaticLayout;.getHeight:()I // method@08a7
+13195c: 0a06                                   |0054: move-result v6
+13195e: 8266                                   |0055: int-to-float v6, v6
+131960: 5277 ba00                              |0056: iget v7, v7, Landroid/graphics/RectF;.bottom:F // field@00ba
+131964: 2d06 0607                              |0058: cmpl-float v6, v6, v7
+131968: 3d06 0300                              |005a: if-lez v6, 005d // +0003
+13196c: 0f03                                   |005c: return v3
+13196e: 0f04                                   |005d: return v4
+      catches       : (none)
+      positions     :
+        0x0000 line=741
+        0x0006 line=742
+        0x000e line=744
+        0x0017 line=750
+        0x001d line=751
+        0x0020 line=754
+        0x002c line=756
+        0x003b line=759
+        0x0041 line=760
+        0x0051 line=765
+      locals        :
+        0x0000 - 0x005e reg=5 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x005e reg=6 (null) I
+        0x0000 - 0x005e reg=7 (null) Landroid/graphics/RectF;
+
+    #12              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'supportsAutoSizeText'
+      type          : '()Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 7 16-bit code units
+131970:                                        |[131970] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.supportsAutoSizeText:()Z
+131980: 5410 5e0d                              |0000: iget-object v0, v1, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131984: 2000 8404                              |0002: instance-of v0, v0, Landroidx/appcompat/widget/AppCompatEditText; // type@0484
+131988: df00 0001                              |0004: xor-int/lit8 v0, v0, #int 1 // #01
+13198c: 0f00                                   |0006: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=833
+      locals        :
+        0x0000 - 0x0007 reg=1 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #13              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'validateAndSetAutoSizeTextTypeUniformConfiguration'
+      type          : '(FFF)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 2
+      insns size    : 115 16-bit code units
+132344:                                        |[132344] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.validateAndSetAutoSizeTextTypeUniformConfiguration:(FFF)V
+132354: 1200                                   |0000: const/4 v0, #int 0 // #0
+132356: 2e01 0400                              |0001: cmpg-float v1, v4, v0
+13235a: 1a02 d89e                              |0003: const-string v2, "px) is less or equal to (0px)" // string@9ed8
+13235e: 3d01 5500                              |0005: if-lez v1, 005a // +0055
+132362: 2e01 0504                              |0007: cmpg-float v1, v5, v4
+132366: 3d01 2c00                              |0009: if-lez v1, 0035 // +002c
+13236a: 2e00 0600                              |000b: cmpg-float v0, v6, v0
+13236e: 3d00 0f00                              |000d: if-lez v0, 001c // +000f
+132372: 1210                                   |000f: const/4 v0, #int 1 // #1
+132374: 5930 580d                              |0010: iput v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextType:I // field@0d58
+132378: 5934 550d                              |0012: iput v4, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMinTextSizeInPx:F // field@0d55
+13237c: 5935 540d                              |0014: iput v5, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMaxTextSizeInPx:F // field@0d54
+132380: 5936 560d                              |0016: iput v6, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeStepGranularityInPx:F // field@0d56
+132384: 1204                                   |0018: const/4 v4, #int 0 // #0
+132386: 5c34 5a0d                              |0019: iput-boolean v4, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mHasPresetAutoSizeValues:Z // field@0d5a
+13238a: 0e00                                   |001b: return-void
+13238c: 2204 6911                              |001c: new-instance v4, Ljava/lang/IllegalArgumentException; // type@1169
+132390: 2205 8811                              |001e: new-instance v5, Ljava/lang/StringBuilder; // type@1188
+132394: 1a00 a757                              |0020: const-string v0, "The auto-size step granularity (" // string@57a7
+132398: 7020 4e72 0500                         |0022: invoke-direct {v5, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+13239e: 6e20 5172 6500                         |0025: invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;.append:(F)Ljava/lang/StringBuilder; // method@7251
+1323a4: 0c05                                   |0028: move-result-object v5
+1323a6: 6e20 5772 2500                         |0029: invoke-virtual {v5, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+1323ac: 0c05                                   |002c: move-result-object v5
+1323ae: 6e10 6b72 0500                         |002d: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+1323b4: 0c05                                   |0030: move-result-object v5
+1323b6: 7020 6b71 5400                         |0031: invoke-direct {v4, v5}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+1323bc: 2704                                   |0034: throw v4
+1323be: 2206 6911                              |0035: new-instance v6, Ljava/lang/IllegalArgumentException; // type@1169
+1323c2: 2200 8811                              |0037: new-instance v0, Ljava/lang/StringBuilder; // type@1188
+1323c6: 1a01 254a                              |0039: const-string v1, "Maximum auto-size text size (" // string@4a25
+1323ca: 7020 4e72 1000                         |003b: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+1323d0: 6e20 5172 5000                         |003e: invoke-virtual {v0, v5}, Ljava/lang/StringBuilder;.append:(F)Ljava/lang/StringBuilder; // method@7251
+1323d6: 0c05                                   |0041: move-result-object v5
+1323d8: 1a00 d99e                              |0042: const-string v0, "px) is less or equal to minimum auto-size text size (" // string@9ed9
+1323dc: 6e20 5772 0500                         |0044: invoke-virtual {v5, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+1323e2: 0c05                                   |0047: move-result-object v5
+1323e4: 6e20 5172 4500                         |0048: invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;.append:(F)Ljava/lang/StringBuilder; // method@7251
+1323ea: 0c04                                   |004b: move-result-object v4
+1323ec: 1a05 d79e                              |004c: const-string v5, "px)" // string@9ed7
+1323f0: 6e20 5772 5400                         |004e: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+1323f6: 0c04                                   |0051: move-result-object v4
+1323f8: 6e10 6b72 0400                         |0052: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+1323fe: 0c04                                   |0055: move-result-object v4
+132400: 7020 6b71 4600                         |0056: invoke-direct {v6, v4}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+132406: 2706                                   |0059: throw v6
+132408: 2205 6911                              |005a: new-instance v5, Ljava/lang/IllegalArgumentException; // type@1169
+13240c: 2206 8811                              |005c: new-instance v6, Ljava/lang/StringBuilder; // type@1188
+132410: 1a00 914a                              |005e: const-string v0, "Minimum auto-size text size (" // string@4a91
+132414: 7020 4e72 0600                         |0060: invoke-direct {v6, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+13241a: 6e20 5172 4600                         |0063: invoke-virtual {v6, v4}, Ljava/lang/StringBuilder;.append:(F)Ljava/lang/StringBuilder; // method@7251
+132420: 0c04                                   |0066: move-result-object v4
+132422: 6e20 5772 2400                         |0067: invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+132428: 0c04                                   |006a: move-result-object v4
+13242a: 6e10 6b72 0400                         |006b: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+132430: 0c04                                   |006e: move-result-object v4
+132432: 7020 6b71 4500                         |006f: invoke-direct {v5, v4}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+132438: 2705                                   |0072: throw v5
+      catches       : (none)
+      positions     :
+        0x0003 line=535
+        0x0010 line=552
+        0x0012 line=553
+        0x0014 line=554
+        0x0016 line=555
+        0x0019 line=556
+        0x001c line=547
+        0x0035 line=541
+        0x005a line=536
+      locals        :
+        0x0000 - 0x0073 reg=3 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x0073 reg=4 (null) F
+        0x0000 - 0x0073 reg=5 (null) F
+        0x0000 - 0x0073 reg=6 (null) F
+
+  Virtual methods   -
+    #0              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'autoSizeText'
+      type          : '()V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 3
+      insns size    : 128 16-bit code units
+131ce4:                                        |[131ce4] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.autoSizeText:()V
+131cf4: 6e10 fb21 0300                         |0000: invoke-virtual {v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.isAutoSizeEnabled:()Z // method@21fb
+131cfa: 0a00                                   |0003: move-result v0
+131cfc: 3900 0400                              |0004: if-nez v0, 0008 // +0004
+131d00: 2900 7500                              |0006: goto/16 007b // +0075
+131d04: 5530 5c0d                              |0008: iget-boolean v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mNeedsAutoSizeText:Z // field@0d5c
+131d08: 3800 7200                              |000a: if-eqz v0, 007c // +0072
+131d0c: 5430 5e0d                              |000c: iget-object v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131d10: 6e10 9c10 0000                         |000e: invoke-virtual {v0}, Landroid/widget/TextView;.getMeasuredHeight:()I // method@109c
+131d16: 0a00                                   |0011: move-result v0
+131d18: 3d00 6900                              |0012: if-lez v0, 007b // +0069
+131d1c: 5430 5e0d                              |0014: iget-object v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131d20: 6e10 9e10 0000                         |0016: invoke-virtual {v0}, Landroid/widget/TextView;.getMeasuredWidth:()I // method@109e
+131d26: 0a00                                   |0019: move-result v0
+131d28: 3c00 0300                              |001a: if-gtz v0, 001d // +0003
+131d2c: 285f                                   |001c: goto 007b // +005f
+131d2e: 5430 5b0d                              |001d: iget-object v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mImpl:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl; // field@0d5b
+131d32: 5431 5e0d                              |001f: iget-object v1, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131d36: 6e20 eb21 1000                         |0021: invoke-virtual {v0, v1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl;.isHorizontallyScrollable:(Landroid/widget/TextView;)Z // method@21eb
+131d3c: 0a00                                   |0024: move-result v0
+131d3e: 3800 0500                              |0025: if-eqz v0, 002a // +0005
+131d42: 1500 1000                              |0027: const/high16 v0, #int 1048576 // #10
+131d46: 2815                                   |0029: goto 003e // +0015
+131d48: 5430 5e0d                              |002a: iget-object v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131d4c: 6e10 9e10 0000                         |002c: invoke-virtual {v0}, Landroid/widget/TextView;.getMeasuredWidth:()I // method@109e
+131d52: 0a00                                   |002f: move-result v0
+131d54: 5431 5e0d                              |0030: iget-object v1, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131d58: 6e10 b310 0100                         |0032: invoke-virtual {v1}, Landroid/widget/TextView;.getTotalPaddingLeft:()I // method@10b3
+131d5e: 0a01                                   |0035: move-result v1
+131d60: b110                                   |0036: sub-int/2addr v0, v1
+131d62: 5431 5e0d                              |0037: iget-object v1, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131d66: 6e10 b410 0100                         |0039: invoke-virtual {v1}, Landroid/widget/TextView;.getTotalPaddingRight:()I // method@10b4
+131d6c: 0a01                                   |003c: move-result v1
+131d6e: b110                                   |003d: sub-int/2addr v0, v1
+131d70: 5431 5e0d                              |003e: iget-object v1, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131d74: 6e10 9010 0100                         |0040: invoke-virtual {v1}, Landroid/widget/TextView;.getHeight:()I // method@1090
+131d7a: 0a01                                   |0043: move-result v1
+131d7c: 5432 5e0d                              |0044: iget-object v2, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131d80: 6e10 8910 0200                         |0046: invoke-virtual {v2}, Landroid/widget/TextView;.getCompoundPaddingBottom:()I // method@1089
+131d86: 0a02                                   |0049: move-result v2
+131d88: b121                                   |004a: sub-int/2addr v1, v2
+131d8a: 5432 5e0d                              |004b: iget-object v2, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131d8e: 6e10 8a10 0200                         |004d: invoke-virtual {v2}, Landroid/widget/TextView;.getCompoundPaddingTop:()I // method@108a
+131d94: 0a02                                   |0050: move-result v2
+131d96: b121                                   |0051: sub-int/2addr v1, v2
+131d98: 3d00 2900                              |0052: if-lez v0, 007b // +0029
+131d9c: 3c01 0300                              |0054: if-gtz v1, 0057 // +0003
+131da0: 2825                                   |0056: goto 007b // +0025
+131da2: 6202 510d                              |0057: sget-object v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.TEMP_RECTF:Landroid/graphics/RectF; // field@0d51
+131da6: 1d02                                   |0059: monitor-enter v2
+131da8: 6e10 f904 0200                         |005a: invoke-virtual {v2}, Landroid/graphics/RectF;.setEmpty:()V // method@04f9
+131dae: 8200                                   |005d: int-to-float v0, v0
+131db0: 5920 bc00                              |005e: iput v0, v2, Landroid/graphics/RectF;.right:F // field@00bc
+131db4: 8210                                   |0060: int-to-float v0, v1
+131db6: 5920 ba00                              |0061: iput v0, v2, Landroid/graphics/RectF;.bottom:F // field@00ba
+131dba: 7020 f221 2300                         |0063: invoke-direct {v3, v2}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.findLargestTextSizeWhichFits:(Landroid/graphics/RectF;)I // method@21f2
+131dc0: 0a00                                   |0066: move-result v0
+131dc2: 8200                                   |0067: int-to-float v0, v0
+131dc4: 5431 5e0d                              |0068: iget-object v1, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131dc8: 6e10 b210 0100                         |006a: invoke-virtual {v1}, Landroid/widget/TextView;.getTextSize:()F // method@10b2
+131dce: 0a01                                   |006d: move-result v1
+131dd0: 2d01 0001                              |006e: cmpl-float v1, v0, v1
+131dd4: 3801 0600                              |0070: if-eqz v1, 0076 // +0006
+131dd8: 1201                                   |0072: const/4 v1, #int 0 // #0
+131dda: 6e30 0122 1300                         |0073: invoke-virtual {v3, v1, v0}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.setTextSizeInternal:(IF)V // method@2201
+131de0: 1e02                                   |0076: monitor-exit v2
+131de2: 2805                                   |0077: goto 007c // +0005
+131de4: 0d00                                   |0078: move-exception v0
+131de6: 1e02                                   |0079: monitor-exit v2
+131de8: 2700                                   |007a: throw v0
+131dea: 0e00                                   |007b: return-void
+131dec: 1210                                   |007c: const/4 v0, #int 1 // #1
+131dee: 5c30 5c0d                              |007d: iput-boolean v0, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mNeedsAutoSizeText:Z // field@0d5c
+131df2: 0e00                                   |007f: return-void
+      catches       : 1
+        0x005a - 0x007a
+          <any> -> 0x0078
+      positions     :
+        0x0000 line=589
+        0x0008 line=593
+        0x000c line=594
+        0x001d line=598
+        0x002a line=602
+        0x002c line=601
+        0x0039 line=602
+        0x003e line=603
+        0x004d line=604
+        0x0057 line=610
+        0x005a line=611
+        0x005e line=612
+        0x0061 line=613
+        0x0063 line=614
+        0x0068 line=615
+        0x0073 line=616
+        0x0076 line=618
+        0x007d line=622
+      locals        :
+        0x0000 - 0x0080 reg=3 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #1              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'createLayout'
+      type          : '(Ljava/lang/CharSequence;Landroid/text/Layout$Alignment;II)Landroid/text/StaticLayout;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 12
+      ins           : 5
+      outs          : 7
+      insns size    : 15 16-bit code units
+13175c:                                        |[13175c] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.createLayout:(Ljava/lang/CharSequence;Landroid/text/Layout$Alignment;II)Landroid/text/StaticLayout;
+13176c: 5474 5e0d                              |0000: iget-object v4, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131770: 5475 5d0d                              |0002: iget-object v5, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTempTextPaint:Landroid/text/TextPaint; // field@0d5d
+131774: 5476 5b0d                              |0004: iget-object v6, v7, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mImpl:Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl; // field@0d5b
+131778: 0780                                   |0006: move-object v0, v8
+13177a: 0791                                   |0007: move-object v1, v9
+13177c: 01a2                                   |0008: move v2, v10
+13177e: 01b3                                   |0009: move v3, v11
+131780: 7707 e321 0000                         |000a: invoke-static/range {v0, v1, v2, v3, v4, v5, v6}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Api23Impl;.createStaticLayoutForMeasuring:(Ljava/lang/CharSequence;Landroid/text/Layout$Alignment;IILandroid/widget/TextView;Landroid/text/TextPaint;Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper$Impl;)Landroid/text/StaticLayout; // method@21e3
+131786: 0c08                                   |000d: move-result-object v8
+131788: 1108                                   |000e: return-object v8
+      catches       : (none)
+      positions     :
+        0x0000 line=723
+      locals        :
+        0x0000 - 0x000f reg=7 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x000f reg=8 (null) Ljava/lang/CharSequence;
+        0x0000 - 0x000f reg=9 (null) Landroid/text/Layout$Alignment;
+        0x0000 - 0x000f reg=10 (null) I
+        0x0000 - 0x000f reg=11 (null) I
+
+    #2              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'getAutoSizeMaxTextSize'
+      type          : '()I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+131a00:                                        |[131a00] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.getAutoSizeMaxTextSize:()I
+131a10: 5210 540d                              |0000: iget v0, v1, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMaxTextSizeInPx:F // field@0d54
+131a14: 7110 c471 0000                         |0002: invoke-static {v0}, Ljava/lang/Math;.round:(F)I // method@71c4
+131a1a: 0a00                                   |0005: move-result v0
+131a1c: 0f00                                   |0006: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=455
+      locals        :
+        0x0000 - 0x0007 reg=1 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #3              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'getAutoSizeMinTextSize'
+      type          : '()I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+131a20:                                        |[131a20] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.getAutoSizeMinTextSize:()I
+131a30: 5210 550d                              |0000: iget v0, v1, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeMinTextSizeInPx:F // field@0d55
+131a34: 7110 c471 0000                         |0002: invoke-static {v0}, Ljava/lang/Math;.round:(F)I // method@71c4
+131a3a: 0a00                                   |0005: move-result v0
+131a3c: 0f00                                   |0006: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=440
+      locals        :
+        0x0000 - 0x0007 reg=1 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #4              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'getAutoSizeStepGranularity'
+      type          : '()I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+131a40:                                        |[131a40] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.getAutoSizeStepGranularity:()I
+131a50: 5210 560d                              |0000: iget v0, v1, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeStepGranularityInPx:F // field@0d56
+131a54: 7110 c471 0000                         |0002: invoke-static {v0}, Ljava/lang/Math;.round:(F)I // method@71c4
+131a5a: 0a00                                   |0005: move-result v0
+131a5c: 0f00                                   |0006: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=425
+      locals        :
+        0x0000 - 0x0007 reg=1 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #5              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'getAutoSizeTextAvailableSizes'
+      type          : '()[I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+131b18:                                        |[131b18] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.getAutoSizeTextAvailableSizes:()[I
+131b28: 5410 570d                              |0000: iget-object v0, v1, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+131b2c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=467
+      locals        :
+        0x0000 - 0x0003 reg=1 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #6              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'getAutoSizeTextType'
+      type          : '()I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+131a60:                                        |[131a60] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.getAutoSizeTextType:()I
+131a70: 5210 580d                              |0000: iget v0, v1, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextType:I // field@0d58
+131a74: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=412
+      locals        :
+        0x0000 - 0x0003 reg=1 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #7              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'initTempTextPaint'
+      type          : '(I)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 33 16-bit code units
+131e34:                                        |[131e34] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.initTempTextPaint:(I)V
+131e44: 5420 5d0d                              |0000: iget-object v0, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTempTextPaint:Landroid/text/TextPaint; // field@0d5d
+131e48: 3900 0a00                              |0002: if-nez v0, 000c // +000a
+131e4c: 2200 a101                              |0004: new-instance v0, Landroid/text/TextPaint; // type@01a1
+131e50: 7010 aa08 0000                         |0006: invoke-direct {v0}, Landroid/text/TextPaint;.<init>:()V // method@08aa
+131e56: 5b20 5d0d                              |0009: iput-object v0, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTempTextPaint:Landroid/text/TextPaint; // field@0d5d
+131e5a: 2804                                   |000b: goto 000f // +0004
+131e5c: 6e10 bb08 0000                         |000c: invoke-virtual {v0}, Landroid/text/TextPaint;.reset:()V // method@08bb
+131e62: 5420 5d0d                              |000f: iget-object v0, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTempTextPaint:Landroid/text/TextPaint; // field@0d5d
+131e66: 5421 5e0d                              |0011: iget-object v1, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131e6a: 6e10 a610 0100                         |0013: invoke-virtual {v1}, Landroid/widget/TextView;.getPaint:()Landroid/text/TextPaint; // method@10a6
+131e70: 0c01                                   |0016: move-result-object v1
+131e72: 6e20 bd08 1000                         |0017: invoke-virtual {v0, v1}, Landroid/text/TextPaint;.set:(Landroid/text/TextPaint;)V // method@08bd
+131e78: 5420 5d0d                              |001a: iget-object v0, v2, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTempTextPaint:Landroid/text/TextPaint; // field@0d5d
+131e7c: 8233                                   |001c: int-to-float v3, v3
+131e7e: 6e20 c108 3000                         |001d: invoke-virtual {v0, v3}, Landroid/text/TextPaint;.setTextSize:(F)V // method@08c1
+131e84: 0e00                                   |0020: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=705
+        0x0004 line=706
+        0x000c line=708
+        0x000f line=710
+        0x001a line=711
+      locals        :
+        0x0000 - 0x0021 reg=2 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x0021 reg=3 (null) I
+
+    #8              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'isAutoSizeEnabled'
+      type          : '()Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 14 16-bit code units
+13178c:                                        |[13178c] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.isAutoSizeEnabled:()Z
+13179c: 7010 0622 0100                         |0000: invoke-direct {v1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.supportsAutoSizeText:()Z // method@2206
+1317a2: 0a00                                   |0003: move-result v0
+1317a4: 3800 0800                              |0004: if-eqz v0, 000c // +0008
+1317a8: 5210 580d                              |0006: iget v0, v1, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextType:I // field@0d58
+1317ac: 3800 0400                              |0008: if-eqz v0, 000c // +0004
+1317b0: 1210                                   |000a: const/4 v0, #int 1 // #1
+1317b2: 0f00                                   |000b: return v0
+1317b4: 1200                                   |000c: const/4 v0, #int 0 // #0
+1317b6: 0f00                                   |000d: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=824
+      locals        :
+        0x0000 - 0x000e reg=1 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+
+    #9              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'loadFromAttributes'
+      type          : '(Landroid/util/AttributeSet;I)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 13
+      ins           : 3
+      outs          : 7
+      insns size    : 184 16-bit code units
+131e88:                                        |[131e88] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.loadFromAttributes:(Landroid/util/AttributeSet;I)V
+131e98: 54a0 590d                              |0000: iget-object v0, v10, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mContext:Landroid/content/Context; // field@0d59
+131e9c: 6201 b806                              |0002: sget-object v1, Landroidx/appcompat/R$styleable;.AppCompatTextView:[I // field@06b8
+131ea0: 1202                                   |0004: const/4 v2, #int 0 // #0
+131ea2: 6e52 8b02 b0c1                         |0005: invoke-virtual {v0, v11, v1, v12, v2}, Landroid/content/Context;.obtainStyledAttributes:(Landroid/util/AttributeSet;[III)Landroid/content/res/TypedArray; // method@028b
+131ea8: 0c07                                   |0008: move-result-object v7
+131eaa: 54a3 5e0d                              |0009: iget-object v3, v10, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mTextView:Landroid/widget/TextView; // field@0d5e
+131eae: 6e10 8b10 0300                         |000b: invoke-virtual {v3}, Landroid/widget/TextView;.getContext:()Landroid/content/Context; // method@108b
+131eb4: 0c04                                   |000e: move-result-object v4
+131eb6: 6205 b806                              |000f: sget-object v5, Landroidx/appcompat/R$styleable;.AppCompatTextView:[I // field@06b8
+131eba: 1209                                   |0011: const/4 v9, #int 0 // #0
+131ebc: 07b6                                   |0012: move-object v6, v11
+131ebe: 01c8                                   |0013: move v8, v12
+131ec0: 7707 843e 0300                         |0014: invoke-static/range {v3, v4, v5, v6, v7, v8, v9}, Landroidx/core/view/ViewCompat;.saveAttributeDataForStyleable:(Landroid/view/View;Landroid/content/Context;[ILandroid/util/AttributeSet;Landroid/content/res/TypedArray;II)V // method@3e84
+131ec6: 600b be06                              |0017: sget v11, Landroidx/appcompat/R$styleable;.AppCompatTextView_autoSizeTextType:I // field@06be
+131eca: 6e20 e903 b700                         |0019: invoke-virtual {v7, v11}, Landroid/content/res/TypedArray;.hasValue:(I)Z // method@03e9
+131ed0: 0a0b                                   |001c: move-result v11
+131ed2: 380b 0a00                              |001d: if-eqz v11, 0027 // +000a
+131ed6: 600b be06                              |001f: sget v11, Landroidx/appcompat/R$styleable;.AppCompatTextView_autoSizeTextType:I // field@06be
+131eda: 6e30 dc03 b702                         |0021: invoke-virtual {v7, v11, v2}, Landroid/content/res/TypedArray;.getInt:(II)I // method@03dc
+131ee0: 0a0b                                   |0024: move-result v11
+131ee2: 59ab 580d                              |0025: iput v11, v10, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextType:I // field@0d58
+131ee6: 600b bd06                              |0027: sget v11, Landroidx/appcompat/R$styleable;.AppCompatTextView_autoSizeStepGranularity:I // field@06bd
+131eea: 6e20 e903 b700                         |0029: invoke-virtual {v7, v11}, Landroid/content/res/TypedArray;.hasValue:(I)Z // method@03e9
+131ef0: 0a0b                                   |002c: move-result v11
+131ef2: 150c 80bf                              |002d: const/high16 v12, #int -1082130432 // #bf80
+131ef6: 380b 0900                              |002f: if-eqz v11, 0038 // +0009
+131efa: 600b bd06                              |0031: sget v11, Landroidx/appcompat/R$styleable;.AppCompatTextView_autoSizeStepGranularity:I // field@06bd
+131efe: 6e30 d303 b70c                         |0033: invoke-virtual {v7, v11, v12}, Landroid/content/res/TypedArray;.getDimension:(IF)F // method@03d3
+131f04: 0a0b                                   |0036: move-result v11
+131f06: 2802                                   |0037: goto 0039 // +0002
+131f08: 01cb                                   |0038: move v11, v12
+131f0a: 6000 bb06                              |0039: sget v0, Landroidx/appcompat/R$styleable;.AppCompatTextView_autoSizeMinTextSize:I // field@06bb
+131f0e: 6e20 e903 0700                         |003b: invoke-virtual {v7, v0}, Landroid/content/res/TypedArray;.hasValue:(I)Z // method@03e9
+131f14: 0a00                                   |003e: move-result v0
+131f16: 3800 0900                              |003f: if-eqz v0, 0048 // +0009
+131f1a: 6000 bb06                              |0041: sget v0, Landroidx/appcompat/R$styleable;.AppCompatTextView_autoSizeMinTextSize:I // field@06bb
+131f1e: 6e30 d303 070c                         |0043: invoke-virtual {v7, v0, v12}, Landroid/content/res/TypedArray;.getDimension:(IF)F // method@03d3
+131f24: 0a00                                   |0046: move-result v0
+131f26: 2802                                   |0047: goto 0049 // +0002
+131f28: 01c0                                   |0048: move v0, v12
+131f2a: 6001 ba06                              |0049: sget v1, Landroidx/appcompat/R$styleable;.AppCompatTextView_autoSizeMaxTextSize:I // field@06ba
+131f2e: 6e20 e903 1700                         |004b: invoke-virtual {v7, v1}, Landroid/content/res/TypedArray;.hasValue:(I)Z // method@03e9
+131f34: 0a01                                   |004e: move-result v1
+131f36: 3801 0900                              |004f: if-eqz v1, 0058 // +0009
+131f3a: 6001 ba06                              |0051: sget v1, Landroidx/appcompat/R$styleable;.AppCompatTextView_autoSizeMaxTextSize:I // field@06ba
+131f3e: 6e30 d303 170c                         |0053: invoke-virtual {v7, v1, v12}, Landroid/content/res/TypedArray;.getDimension:(IF)F // method@03d3
+131f44: 0a01                                   |0056: move-result v1
+131f46: 2802                                   |0057: goto 0059 // +0002
+131f48: 01c1                                   |0058: move v1, v12
+131f4a: 6003 bc06                              |0059: sget v3, Landroidx/appcompat/R$styleable;.AppCompatTextView_autoSizePresetSizes:I // field@06bc
+131f4e: 6e20 e903 3700                         |005b: invoke-virtual {v7, v3}, Landroid/content/res/TypedArray;.hasValue:(I)Z // method@03e9
+131f54: 0a03                                   |005e: move-result v3
+131f56: 3803 1800                              |005f: if-eqz v3, 0077 // +0018
+131f5a: 6003 bc06                              |0061: sget v3, Landroidx/appcompat/R$styleable;.AppCompatTextView_autoSizePresetSizes:I // field@06bc
+131f5e: 6e30 e203 3702                         |0063: invoke-virtual {v7, v3, v2}, Landroid/content/res/TypedArray;.getResourceId:(II)I // method@03e2
+131f64: 0a03                                   |0066: move-result v3
+131f66: 3d03 1000                              |0067: if-lez v3, 0077 // +0010
+131f6a: 6e10 e303 0700                         |0069: invoke-virtual {v7}, Landroid/content/res/TypedArray;.getResources:()Landroid/content/res/Resources; // method@03e3
+131f70: 0c04                                   |006c: move-result-object v4
+131f72: 6e20 c803 3400                         |006d: invoke-virtual {v4, v3}, Landroid/content/res/Resources;.obtainTypedArray:(I)Landroid/content/res/TypedArray; // method@03c8
+131f78: 0c03                                   |0070: move-result-object v3
+131f7a: 7020 0322 3a00                         |0071: invoke-direct {v10, v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.setupAutoSizeUniformPresetSizes:(Landroid/content/res/TypedArray;)V // method@2203
+131f80: 6e10 ec03 0300                         |0074: invoke-virtual {v3}, Landroid/content/res/TypedArray;.recycle:()V // method@03ec
+131f86: 6e10 ec03 0700                         |0077: invoke-virtual {v7}, Landroid/content/res/TypedArray;.recycle:()V // method@03ec
+131f8c: 7010 0622 0a00                         |007a: invoke-direct {v10}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.supportsAutoSizeText:()Z // method@2206
+131f92: 0a03                                   |007d: move-result v3
+131f94: 3803 3700                              |007e: if-eqz v3, 00b5 // +0037
+131f98: 52a2 580d                              |0080: iget v2, v10, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextType:I // field@0d58
+131f9c: 1213                                   |0082: const/4 v3, #int 1 // #1
+131f9e: 3332 3100                              |0083: if-ne v2, v3, 00b4 // +0031
+131fa2: 55a2 5a0d                              |0085: iget-boolean v2, v10, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mHasPresetAutoSizeValues:Z // field@0d5a
+131fa6: 3902 2a00                              |0087: if-nez v2, 00b1 // +002a
+131faa: 54a2 590d                              |0089: iget-object v2, v10, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mContext:Landroid/content/Context; // field@0d59
+131fae: 6e10 7e02 0200                         |008b: invoke-virtual {v2}, Landroid/content/Context;.getResources:()Landroid/content/res/Resources; // method@027e
+131fb4: 0c02                                   |008e: move-result-object v2
+131fb6: 6e10 a903 0200                         |008f: invoke-virtual {v2}, Landroid/content/res/Resources;.getDisplayMetrics:()Landroid/util/DisplayMetrics; // method@03a9
+131fbc: 0c02                                   |0092: move-result-object v2
+131fbe: 2d03 000c                              |0093: cmpl-float v3, v0, v12
+131fc2: 1224                                   |0095: const/4 v4, #int 2 // #2
+131fc4: 3903 0800                              |0096: if-nez v3, 009e // +0008
+131fc8: 1500 4041                              |0098: const/high16 v0, #int 1094713344 // #4140
+131fcc: 7130 8609 0402                         |009a: invoke-static {v4, v0, v2}, Landroid/util/TypedValue;.applyDimension:(IFLandroid/util/DisplayMetrics;)F // method@0986
+131fd2: 0a00                                   |009d: move-result v0
+131fd4: 2d03 010c                              |009e: cmpl-float v3, v1, v12
+131fd8: 3903 0800                              |00a0: if-nez v3, 00a8 // +0008
+131fdc: 1501 e042                              |00a2: const/high16 v1, #int 1121976320 // #42e0
+131fe0: 7130 8609 1402                         |00a4: invoke-static {v4, v1, v2}, Landroid/util/TypedValue;.applyDimension:(IFLandroid/util/DisplayMetrics;)F // method@0986
+131fe6: 0a01                                   |00a7: move-result v1
+131fe8: 2d0c 0b0c                              |00a8: cmpl-float v12, v11, v12
+131fec: 390c 0400                              |00aa: if-nez v12, 00ae // +0004
+131ff0: 150b 803f                              |00ac: const/high16 v11, #int 1065353216 // #3f80
+131ff4: 7040 0722 0ab1                         |00ae: invoke-direct {v10, v0, v1, v11}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.validateAndSetAutoSizeTextTypeUniformConfiguration:(FFF)V // method@2207
+131ffa: 7010 0222 0a00                         |00b1: invoke-direct {v10}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.setupAutoSizeText:()Z // method@2202
+132000: 0e00                                   |00b4: return-void
+132002: 59a2 580d                              |00b5: iput v2, v10, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextType:I // field@0d58
+132006: 0e00                                   |00b7: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=164
+        0x0009 line=166
+        0x0017 line=169
+        0x001f line=170
+        0x0027 line=173
+        0x0031 line=174
+        0x0039 line=178
+        0x0041 line=179
+        0x0049 line=183
+        0x0051 line=184
+        0x0059 line=188
+        0x0061 line=189
+        0x0069 line=192
+        0x006d line=193
+        0x0071 line=194
+        0x0074 line=195
+        0x0077 line=198
+        0x007a line=200
+        0x0080 line=201
+        0x0085 line=205
+        0x0089 line=206
+        0x008b line=207
+        0x009a line=210
+        0x00a4 line=217
+        0x00ae line=228
+        0x00b1 line=233
+        0x00b5 line=236
+      locals        :
+        0x0000 - 0x00b8 reg=10 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x00b8 reg=11 (null) Landroid/util/AttributeSet;
+        0x0000 - 0x00b8 reg=12 (null) I
+
+    #10              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'setAutoSizeTextTypeUniformWithConfiguration'
+      type          : '(IIII)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 6
+      ins           : 5
+      outs          : 4
+      insns size    : 44 16-bit code units
+132008:                                        |[132008] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.setAutoSizeTextTypeUniformWithConfiguration:(IIII)V
+132018: 7010 0622 0100                         |0000: invoke-direct {v1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.supportsAutoSizeText:()Z // method@2206
+13201e: 0a00                                   |0003: move-result v0
+132020: 3800 2700                              |0004: if-eqz v0, 002b // +0027
+132024: 5410 590d                              |0006: iget-object v0, v1, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mContext:Landroid/content/Context; // field@0d59
+132028: 6e10 7e02 0000                         |0008: invoke-virtual {v0}, Landroid/content/Context;.getResources:()Landroid/content/res/Resources; // method@027e
+13202e: 0c00                                   |000b: move-result-object v0
+132030: 6e10 a903 0000                         |000c: invoke-virtual {v0}, Landroid/content/res/Resources;.getDisplayMetrics:()Landroid/util/DisplayMetrics; // method@03a9
+132036: 0c00                                   |000f: move-result-object v0
+132038: 8222                                   |0010: int-to-float v2, v2
+13203a: 7130 8609 2500                         |0011: invoke-static {v5, v2, v0}, Landroid/util/TypedValue;.applyDimension:(IFLandroid/util/DisplayMetrics;)F // method@0986
+132040: 0a02                                   |0014: move-result v2
+132042: 8233                                   |0015: int-to-float v3, v3
+132044: 7130 8609 3500                         |0016: invoke-static {v5, v3, v0}, Landroid/util/TypedValue;.applyDimension:(IFLandroid/util/DisplayMetrics;)F // method@0986
+13204a: 0a03                                   |0019: move-result v3
+13204c: 8244                                   |001a: int-to-float v4, v4
+13204e: 7130 8609 4500                         |001b: invoke-static {v5, v4, v0}, Landroid/util/TypedValue;.applyDimension:(IFLandroid/util/DisplayMetrics;)F // method@0986
+132054: 0a04                                   |001e: move-result v4
+132056: 7040 0722 2143                         |001f: invoke-direct {v1, v2, v3, v4}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.validateAndSetAutoSizeTextTypeUniformConfiguration:(FFF)V // method@2207
+13205c: 7010 0222 0100                         |0022: invoke-direct {v1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.setupAutoSizeText:()Z // method@2202
+132062: 0a02                                   |0025: move-result v2
+132064: 3802 0500                              |0026: if-eqz v2, 002b // +0005
+132068: 6e10 ee21 0100                         |0028: invoke-virtual {v1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.autoSizeText:()V // method@21ee
+13206e: 0e00                                   |002b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=321
+        0x0006 line=322
+        0x0011 line=323
+        0x0016 line=325
+        0x001b line=327
+        0x001f line=330
+        0x0022 line=333
+        0x0028 line=334
+      locals        :
+        0x0000 - 0x002c reg=1 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x002c reg=2 (null) I
+        0x0000 - 0x002c reg=3 (null) I
+        0x0000 - 0x002c reg=4 (null) I
+        0x0000 - 0x002c reg=5 (null) I
+
+    #11              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'setAutoSizeTextTypeUniformWithPresetSizes'
+      type          : '([II)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 8
+      ins           : 3
+      outs          : 3
+      insns size    : 97 16-bit code units
+132070:                                        |[132070] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.setAutoSizeTextTypeUniformWithPresetSizes:([II)V
+132080: 7010 0622 0500                         |0000: invoke-direct {v5}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.supportsAutoSizeText:()Z // method@2206
+132086: 0a00                                   |0003: move-result v0
+132088: 3800 5c00                              |0004: if-eqz v0, 0060 // +005c
+13208c: 2160                                   |0006: array-length v0, v6
+13208e: 1201                                   |0007: const/4 v1, #int 0 // #0
+132090: 3d00 4d00                              |0008: if-lez v0, 0055 // +004d
+132094: 2302 171a                              |000a: new-array v2, v0, [I // type@1a17
+132098: 3907 0700                              |000c: if-nez v7, 0013 // +0007
+13209c: 7120 4d74 0600                         |000e: invoke-static {v6, v0}, Ljava/util/Arrays;.copyOf:([II)[I // method@744d
+1320a2: 0c02                                   |0011: move-result-object v2
+1320a4: 281d                                   |0012: goto 002f // +001d
+1320a6: 5453 590d                              |0013: iget-object v3, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mContext:Landroid/content/Context; // field@0d59
+1320aa: 6e10 7e02 0300                         |0015: invoke-virtual {v3}, Landroid/content/Context;.getResources:()Landroid/content/res/Resources; // method@027e
+1320b0: 0c03                                   |0018: move-result-object v3
+1320b2: 6e10 a903 0300                         |0019: invoke-virtual {v3}, Landroid/content/res/Resources;.getDisplayMetrics:()Landroid/util/DisplayMetrics; // method@03a9
+1320b8: 0c03                                   |001c: move-result-object v3
+1320ba: 3501 1200                              |001d: if-ge v1, v0, 002f // +0012
+1320be: 4404 0601                              |001f: aget v4, v6, v1
+1320c2: 8244                                   |0021: int-to-float v4, v4
+1320c4: 7130 8609 4703                         |0022: invoke-static {v7, v4, v3}, Landroid/util/TypedValue;.applyDimension:(IFLandroid/util/DisplayMetrics;)F // method@0986
+1320ca: 0a04                                   |0025: move-result v4
+1320cc: 7110 c471 0400                         |0026: invoke-static {v4}, Ljava/lang/Math;.round:(F)I // method@71c4
+1320d2: 0a04                                   |0029: move-result v4
+1320d4: 4b04 0201                              |002a: aput v4, v2, v1
+1320d8: d801 0101                              |002c: add-int/lit8 v1, v1, #int 1 // #01
+1320dc: 28ef                                   |002e: goto 001d // -0011
+1320de: 7020 ef21 2500                         |002f: invoke-direct {v5, v2}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.cleanupAutoSizePresetSizes:([I)[I // method@21ef
+1320e4: 0c07                                   |0032: move-result-object v7
+1320e6: 5b57 570d                              |0033: iput-object v7, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mAutoSizeTextSizesInPx:[I // field@0d57
+1320ea: 7010 0422 0500                         |0035: invoke-direct {v5}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.setupAutoSizeUniformPresetSizesConfiguration:()Z // method@2204
+1320f0: 0a07                                   |0038: move-result v7
+1320f2: 3807 0300                              |0039: if-eqz v7, 003c // +0003
+1320f6: 281c                                   |003b: goto 0057 // +001c
+1320f8: 2207 6911                              |003c: new-instance v7, Ljava/lang/IllegalArgumentException; // type@1169
+1320fc: 2200 8811                              |003e: new-instance v0, Ljava/lang/StringBuilder; // type@1188
+132100: 1a01 924b                              |0040: const-string v1, "None of the preset sizes is valid: " // string@4b92
+132104: 7020 4e72 1000                         |0042: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+13210a: 7110 9374 0600                         |0045: invoke-static {v6}, Ljava/util/Arrays;.toString:([I)Ljava/lang/String; // method@7493
+132110: 0c06                                   |0048: move-result-object v6
+132112: 6e20 5772 6000                         |0049: invoke-virtual {v0, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+132118: 0c06                                   |004c: move-result-object v6
+13211a: 6e10 6b72 0600                         |004d: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+132120: 0c06                                   |0050: move-result-object v6
+132122: 7020 6b71 6700                         |0051: invoke-direct {v7, v6}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+132128: 2707                                   |0054: throw v7
+13212a: 5c51 5a0d                              |0055: iput-boolean v1, v5, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mHasPresetAutoSizeValues:Z // field@0d5a
+13212e: 7010 0222 0500                         |0057: invoke-direct {v5}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.setupAutoSizeText:()Z // method@2202
+132134: 0a06                                   |005a: move-result v6
+132136: 3806 0500                              |005b: if-eqz v6, 0060 // +0005
+13213a: 6e10 ee21 0500                         |005d: invoke-virtual {v5}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.autoSizeText:()V // method@21ee
+132140: 0e00                                   |0060: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=363
+        0x0006 line=364
+        0x000a line=366
+        0x000e line=369
+        0x0013 line=371
+        0x0015 line=372
+        0x001f line=375
+        0x002f line=380
+        0x0035 line=381
+        0x003c line=382
+        0x0045 line=383
+        0x0055 line=386
+        0x0057 line=389
+        0x005d line=390
+      locals        :
+        0x0000 - 0x0061 reg=5 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x0061 reg=6 (null) [I
+        0x0000 - 0x0061 reg=7 (null) I
+
+    #12              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'setAutoSizeTextTypeWithDefaults'
+      type          : '(I)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 74 16-bit code units
+132144:                                        |[132144] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.setAutoSizeTextTypeWithDefaults:(I)V
+132154: 7010 0622 0300                         |0000: invoke-direct {v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.supportsAutoSizeText:()Z // method@2206
+13215a: 0a00                                   |0003: move-result v0
+13215c: 3800 4500                              |0004: if-eqz v0, 0049 // +0045
+132160: 3804 4000                              |0006: if-eqz v4, 0046 // +0040
+132164: 1210                                   |0008: const/4 v0, #int 1 // #1
+132166: 3304 2800                              |0009: if-ne v4, v0, 0031 // +0028
+13216a: 5434 590d                              |000b: iget-object v4, v3, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mContext:Landroid/content/Context; // field@0d59
+13216e: 6e10 7e02 0400                         |000d: invoke-virtual {v4}, Landroid/content/Context;.getResources:()Landroid/content/res/Resources; // method@027e
+132174: 0c04                                   |0010: move-result-object v4
+132176: 6e10 a903 0400                         |0011: invoke-virtual {v4}, Landroid/content/res/Resources;.getDisplayMetrics:()Landroid/util/DisplayMetrics; // method@03a9
+13217c: 0c04                                   |0014: move-result-object v4
+13217e: 1500 4041                              |0015: const/high16 v0, #int 1094713344 // #4140
+132182: 1221                                   |0017: const/4 v1, #int 2 // #2
+132184: 7130 8609 0104                         |0018: invoke-static {v1, v0, v4}, Landroid/util/TypedValue;.applyDimension:(IFLandroid/util/DisplayMetrics;)F // method@0986
+13218a: 0a00                                   |001b: move-result v0
+13218c: 1502 e042                              |001c: const/high16 v2, #int 1121976320 // #42e0
+132190: 7130 8609 2104                         |001e: invoke-static {v1, v2, v4}, Landroid/util/TypedValue;.applyDimension:(IFLandroid/util/DisplayMetrics;)F // method@0986
+132196: 0a04                                   |0021: move-result v4
+132198: 1501 803f                              |0022: const/high16 v1, #int 1065353216 // #3f80
+13219c: 7040 0722 0314                         |0024: invoke-direct {v3, v0, v4, v1}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.validateAndSetAutoSizeTextTypeUniformConfiguration:(FFF)V // method@2207
+1321a2: 7010 0222 0300                         |0027: invoke-direct {v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.setupAutoSizeText:()Z // method@2202
+1321a8: 0a04                                   |002a: move-result v4
+1321aa: 3804 1e00                              |002b: if-eqz v4, 0049 // +001e
+1321ae: 6e10 ee21 0300                         |002d: invoke-virtual {v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.autoSizeText:()V // method@21ee
+1321b4: 0e00                                   |0030: return-void
+1321b6: 2200 6911                              |0031: new-instance v0, Ljava/lang/IllegalArgumentException; // type@1169
+1321ba: 2201 8811                              |0033: new-instance v1, Ljava/lang/StringBuilder; // type@1188
+1321be: 1a02 7459                              |0035: const-string v2, "Unknown auto-size text type: " // string@5974
+1321c2: 7020 4e72 2100                         |0037: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+1321c8: 6e20 5272 4100                         |003a: invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+1321ce: 0c04                                   |003d: move-result-object v4
+1321d0: 6e10 6b72 0400                         |003e: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+1321d6: 0c04                                   |0041: move-result-object v4
+1321d8: 7020 6b71 4000                         |0042: invoke-direct {v0, v4}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+1321de: 2700                                   |0045: throw v0
+1321e0: 7010 f021 0300                         |0046: invoke-direct {v3}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.clearAutoSizeConfiguration:()V // method@21f0
+1321e6: 0e00                                   |0049: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=255
+        0x000b line=261
+        0x000d line=262
+        0x0018 line=263
+        0x001e line=267
+        0x0024 line=272
+        0x0027 line=276
+        0x002d line=277
+        0x0031 line=281
+        0x0046 line=258
+      locals        :
+        0x0000 - 0x004a reg=3 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x004a reg=4 (null) I
+
+    #13              : (in Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;)
+      name          : 'setTextSizeInternal'
+      type          : '(IF)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 25 16-bit code units
+1322b0:                                        |[1322b0] androidx.appcompat.widget.AppCompatTextViewAutoSizeHelper.setTextSizeInternal:(IF)V
+1322c0: 5410 590d                              |0000: iget-object v0, v1, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.mContext:Landroid/content/Context; // field@0d59
+1322c4: 3900 0700                              |0002: if-nez v0, 0009 // +0007
+1322c8: 7100 be03 0000                         |0004: invoke-static {}, Landroid/content/res/Resources;.getSystem:()Landroid/content/res/Resources; // method@03be
+1322ce: 0c00                                   |0007: move-result-object v0
+1322d0: 2805                                   |0008: goto 000d // +0005
+1322d2: 6e10 7e02 0000                         |0009: invoke-virtual {v0}, Landroid/content/Context;.getResources:()Landroid/content/res/Resources; // method@027e
+1322d8: 0c00                                   |000c: move-result-object v0
+1322da: 6e10 a903 0000                         |000d: invoke-virtual {v0}, Landroid/content/res/Resources;.getDisplayMetrics:()Landroid/util/DisplayMetrics; // method@03a9
+1322e0: 0c00                                   |0010: move-result-object v0
+1322e2: 7130 8609 3200                         |0011: invoke-static {v2, v3, v0}, Landroid/util/TypedValue;.applyDimension:(IFLandroid/util/DisplayMetrics;)F // method@0986
+1322e8: 0a02                                   |0014: move-result v2
+1322ea: 7020 0022 2100                         |0015: invoke-direct {v1, v2}, Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;.setRawTextSize:(F)V // method@2200
+1322f0: 0e00                                   |0018: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=636
+        0x0004 line=637
+        0x0009 line=638
+        0x000d line=640
+      locals        :
+        0x0000 - 0x0019 reg=1 this Landroidx/appcompat/widget/AppCompatTextViewAutoSizeHelper;
+        0x0000 - 0x0019 reg=2 (null) I
+        0x0000 - 0x0019 reg=3 (null) F
+
+  source_file_idx   : 7023 (AppCompatTextViewAutoSizeHelper.java)
+

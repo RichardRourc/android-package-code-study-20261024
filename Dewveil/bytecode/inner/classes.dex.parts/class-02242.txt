@@ -1,0 +1,128 @@
+Class #2242            -
+  Class descriptor  : 'Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lcom/adjust/sdk/scheduler/FutureScheduler;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;)
+      name          : 'scheduledThreadPoolExecutor'
+      type          : 'Ljava/util/concurrent/ScheduledThreadPoolExecutor;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;)
+      name          : '<init>'
+      type          : '(Ljava/lang/String;Z)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 4
+      insns size    : 36 16-bit code units
+5a5904:                                        |[5a5904] com.adjust.sdk.scheduler.SingleThreadFutureScheduler.<init>:(Ljava/lang/String;Z)V
+5a5914: 7010 c8d1 0300                         |0000: invoke-direct {v3}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5a591a: 2200 881b                              |0003: new-instance v0, Ljava/util/concurrent/ScheduledThreadPoolExecutor; // type@1b88
+5a591e: 2201 400b                              |0005: new-instance v1, Lcom/adjust/sdk/scheduler/ThreadFactoryWrapper; // type@0b40
+5a5922: 7020 b35b 4100                         |0007: invoke-direct {v1, v4}, Lcom/adjust/sdk/scheduler/ThreadFactoryWrapper;.<init>:(Ljava/lang/String;)V // method@5bb3
+5a5928: 2202 3b0b                              |000a: new-instance v2, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler$a; // type@0b3b
+5a592c: 7020 a65b 4200                         |000c: invoke-direct {v2, v4}, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler$a;.<init>:(Ljava/lang/String;)V // method@5ba6
+5a5932: 1214                                   |000f: const/4 v4, #int 1 // #1
+5a5934: 7040 d3d6 4021                         |0010: invoke-direct {v0, v4, v1, v2}, Ljava/util/concurrent/ScheduledThreadPoolExecutor;.<init>:(ILjava/util/concurrent/ThreadFactory;Ljava/util/concurrent/RejectedExecutionHandler;)V // method@d6d3
+5a593a: 5b30 0a42                              |0013: iput-object v0, v3, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;.scheduledThreadPoolExecutor:Ljava/util/concurrent/ScheduledThreadPoolExecutor; // field@420a
+5a593e: 3905 0e00                              |0015: if-nez v5, 0023 // +000e
+5a5942: 6205 498a                              |0017: sget-object v5, Ljava/util/concurrent/TimeUnit;.MILLISECONDS:Ljava/util/concurrent/TimeUnit; // field@8a49
+5a5946: 1601 0a00                              |0019: const-wide/16 v1, #int 10 // #a
+5a594a: 6e40 e3d6 1052                         |001b: invoke-virtual {v0, v1, v2, v5}, Ljava/util/concurrent/ThreadPoolExecutor;.setKeepAliveTime:(JLjava/util/concurrent/TimeUnit;)V // method@d6e3
+5a5950: 5433 0a42                              |001e: iget-object v3, v3, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;.scheduledThreadPoolExecutor:Ljava/util/concurrent/ScheduledThreadPoolExecutor; // field@420a
+5a5954: 6e20 d4d6 4300                         |0020: invoke-virtual {v3, v4}, Ljava/util/concurrent/ScheduledThreadPoolExecutor;.allowCoreThreadTimeOut:(Z)V // method@d6d4
+5a595a: 0e00                                   |0023: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+  Virtual methods   -
+    #0              : (in Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;)
+      name          : 'scheduleFuture'
+      type          : '(Ljava/lang/Runnable;J)Ljava/util/concurrent/ScheduledFuture;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 14 16-bit code units
+5a595c:                                        |[5a595c] com.adjust.sdk.scheduler.SingleThreadFutureScheduler.scheduleFuture:(Ljava/lang/Runnable;J)Ljava/util/concurrent/ScheduledFuture;
+5a596c: 5411 0a42                              |0000: iget-object v1, v1, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;.scheduledThreadPoolExecutor:Ljava/util/concurrent/ScheduledThreadPoolExecutor; // field@420a
+5a5970: 2200 360b                              |0002: new-instance v0, Lcom/adjust/sdk/scheduler/RunnableWrapper; // type@0b36
+5a5974: 7020 945b 2000                         |0004: invoke-direct {v0, v2}, Lcom/adjust/sdk/scheduler/RunnableWrapper;.<init>:(Ljava/lang/Runnable;)V // method@5b94
+5a597a: 6202 498a                              |0007: sget-object v2, Ljava/util/concurrent/TimeUnit;.MILLISECONDS:Ljava/util/concurrent/TimeUnit; // field@8a49
+5a597e: 6e52 d5d6 0143                         |0009: invoke-virtual {v1, v0, v3, v4, v2}, Ljava/util/concurrent/ScheduledThreadPoolExecutor;.schedule:(Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture; // method@d6d5
+5a5984: 0c01                                   |000c: move-result-object v1
+5a5986: 1101                                   |000d: return-object v1
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;)
+      name          : 'scheduleFutureWithFixedDelay'
+      type          : '(Ljava/lang/Runnable;JJ)Ljava/util/concurrent/ScheduledFuture;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 13
+      ins           : 6
+      outs          : 7
+      insns size    : 16 16-bit code units
+5a5988:                                        |[5a5988] com.adjust.sdk.scheduler.SingleThreadFutureScheduler.scheduleFutureWithFixedDelay:(Ljava/lang/Runnable;JJ)Ljava/util/concurrent/ScheduledFuture;
+5a5998: 5470 0a42                              |0000: iget-object v0, v7, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;.scheduledThreadPoolExecutor:Ljava/util/concurrent/ScheduledThreadPoolExecutor; // field@420a
+5a599c: 2201 360b                              |0002: new-instance v1, Lcom/adjust/sdk/scheduler/RunnableWrapper; // type@0b36
+5a59a0: 7020 945b 8100                         |0004: invoke-direct {v1, v8}, Lcom/adjust/sdk/scheduler/RunnableWrapper;.<init>:(Ljava/lang/Runnable;)V // method@5b94
+5a59a6: 6206 498a                              |0007: sget-object v6, Ljava/util/concurrent/TimeUnit;.MILLISECONDS:Ljava/util/concurrent/TimeUnit; // field@8a49
+5a59aa: 0492                                   |0009: move-wide v2, v9
+5a59ac: 04b4                                   |000a: move-wide v4, v11
+5a59ae: 7407 d7d6 0000                         |000b: invoke-virtual/range {v0, v1, v2, v3, v4, v5, v6}, Ljava/util/concurrent/ScheduledThreadPoolExecutor;.scheduleWithFixedDelay:(Ljava/lang/Runnable;JJLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture; // method@d6d7
+5a59b4: 0c07                                   |000e: move-result-object v7
+5a59b6: 1107                                   |000f: return-object v7
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #2              : (in Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;)
+      name          : 'scheduleFutureWithReturn'
+      type          : '(Ljava/util/concurrent/Callable;J)Ljava/util/concurrent/ScheduledFuture;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 14 16-bit code units
+5a59b8:                                        |[5a59b8] com.adjust.sdk.scheduler.SingleThreadFutureScheduler.scheduleFutureWithReturn:(Ljava/util/concurrent/Callable;J)Ljava/util/concurrent/ScheduledFuture;
+5a59c8: 5411 0a42                              |0000: iget-object v1, v1, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;.scheduledThreadPoolExecutor:Ljava/util/concurrent/ScheduledThreadPoolExecutor; // field@420a
+5a59cc: 2200 3c0b                              |0002: new-instance v0, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler$b; // type@0b3c
+5a59d0: 7020 a85b 2000                         |0004: invoke-direct {v0, v2}, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler$b;.<init>:(Ljava/util/concurrent/Callable;)V // method@5ba8
+5a59d6: 6202 498a                              |0007: sget-object v2, Ljava/util/concurrent/TimeUnit;.MILLISECONDS:Ljava/util/concurrent/TimeUnit; // field@8a49
+5a59da: 6e52 d6d6 0143                         |0009: invoke-virtual {v1, v0, v3, v4, v2}, Ljava/util/concurrent/ScheduledThreadPoolExecutor;.schedule:(Ljava/util/concurrent/Callable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture; // method@d6d6
+5a59e0: 0c01                                   |000c: move-result-object v1
+5a59e2: 1101                                   |000d: return-object v1
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #3              : (in Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;)
+      name          : 'teardown'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 6 16-bit code units
+5a59e4:                                        |[5a59e4] com.adjust.sdk.scheduler.SingleThreadFutureScheduler.teardown:()V
+5a59f4: 5400 0a42                              |0000: iget-object v0, v0, Lcom/adjust/sdk/scheduler/SingleThreadFutureScheduler;.scheduledThreadPoolExecutor:Ljava/util/concurrent/ScheduledThreadPoolExecutor; // field@420a
+5a59f8: 6e10 d9d6 0000                         |0002: invoke-virtual {v0}, Ljava/util/concurrent/ScheduledThreadPoolExecutor;.shutdownNow:()Ljava/util/List; // method@d6d9
+5a59fe: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+  source_file_idx   : 25360 (SourceFile)
+

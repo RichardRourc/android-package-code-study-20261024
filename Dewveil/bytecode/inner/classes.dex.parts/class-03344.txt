@@ -1,0 +1,516 @@
+Class #3344            -
+  Class descriptor  : 'Lcom/getkeepsafe/relinker/elf/ElfParser;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/io/Closeable;'
+    #1              : 'Lcom/getkeepsafe/relinker/elf/Elf;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'MAGIC'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'channel'
+      type          : 'Ljava/nio/channels/FileChannel;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : '<init>'
+      type          : '(Ljava/io/File;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 36 16-bit code units
+66111c:                                        |[66111c] com.getkeepsafe.relinker.elf.ElfParser.<init>:(Ljava/io/File;)V
+66112c: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+661132: 1400 7f45 4c46                         |0003: const v0, #float 13073.4 // #464c457f
+661138: 5910 4052                              |0006: iput v0, v1, Lcom/getkeepsafe/relinker/elf/ElfParser;.MAGIC:I // field@5240
+66113c: 3802 1400                              |0008: if-eqz v2, 001c // +0014
+661140: 6e10 dfcf 0200                         |000a: invoke-virtual {v2}, Ljava/io/File;.exists:()Z // method@cfdf
+661146: 0a00                                   |000d: move-result v0
+661148: 3800 0e00                              |000e: if-eqz v0, 001c // +000e
+66114c: 2200 401a                              |0010: new-instance v0, Ljava/io/FileInputStream; // type@1a40
+661150: 7020 f9cf 2000                         |0012: invoke-direct {v0, v2}, Ljava/io/FileInputStream;.<init>:(Ljava/io/File;)V // method@cff9
+661156: 6e10 fecf 0000                         |0015: invoke-virtual {v0}, Ljava/io/FileInputStream;.getChannel:()Ljava/nio/channels/FileChannel; // method@cffe
+66115c: 0c02                                   |0018: move-result-object v2
+66115e: 5b12 4152                              |0019: iput-object v2, v1, Lcom/getkeepsafe/relinker/elf/ElfParser;.channel:Ljava/nio/channels/FileChannel; // field@5241
+661162: 0e00                                   |001b: return-void
+661164: 2201 7a1a                              |001c: new-instance v1, Ljava/lang/IllegalArgumentException; // type@1a7a
+661168: 1a02 2e28                              |001e: const-string v2, "File is null or does not exist" // string@282e
+66116c: 7020 47d1 2100                         |0020: invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+661172: 2701                                   |0023: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+        0x0006 line=32
+        0x000a line=36
+        0x0010 line=40
+        0x0015 line=41
+        0x001c line=37
+      locals        :
+        0x0000 - 0x0024 reg=1 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+        0x0000 - 0x0024 reg=2 (null) Ljava/io/File;
+
+    #1              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'offsetFromVma'
+      type          : '(Lcom/getkeepsafe/relinker/elf/Elf$Header;JJ)J'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 14
+      ins           : 6
+      outs          : 3
+      insns size    : 50 16-bit code units
+661174:                                        |[661174] com.getkeepsafe.relinker.elf.ElfParser.offsetFromVma:(Lcom/getkeepsafe/relinker/elf/Elf$Header;JJ)J
+661184: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+661188: 3108 000a                              |0002: cmp-long v8, v0, v10
+66118c: 3b08 2600                              |0004: if-gez v8, 002a // +0026
+661190: 6e30 7590 0901                         |0006: invoke-virtual {v9, v0, v1}, Lcom/getkeepsafe/relinker/elf/Elf$Header;.getProgramHeader:(J)Lcom/getkeepsafe/relinker/elf/Elf$ProgramHeader; // method@9075
+661196: 0c08                                   |0009: move-result-object v8
+661198: 5382 2952                              |000a: iget-wide v2, v8, Lcom/getkeepsafe/relinker/elf/Elf$ProgramHeader;.type:J // field@5229
+66119c: 1604 0100                              |000c: const-wide/16 v4, #int 1 // #1
+6611a0: 3102 0204                              |000e: cmp-long v2, v2, v4
+6611a4: 3902 1800                              |0010: if-nez v2, 0028 // +0018
+6611a8: 5382 2a52                              |0012: iget-wide v2, v8, Lcom/getkeepsafe/relinker/elf/Elf$ProgramHeader;.vaddr:J // field@522a
+6611ac: 3102 020c                              |0014: cmp-long v2, v2, v12
+6611b0: 3c02 1200                              |0016: if-gtz v2, 0028 // +0012
+6611b4: 5382 2a52                              |0018: iget-wide v2, v8, Lcom/getkeepsafe/relinker/elf/Elf$ProgramHeader;.vaddr:J // field@522a
+6611b8: 5386 2752                              |001a: iget-wide v6, v8, Lcom/getkeepsafe/relinker/elf/Elf$ProgramHeader;.memsz:J // field@5227
+6611bc: bb62                                   |001c: add-long/2addr v2, v6
+6611be: 3102 0c02                              |001d: cmp-long v2, v12, v2
+6611c2: 3c02 0900                              |001f: if-gtz v2, 0028 // +0009
+6611c6: 5389 2a52                              |0021: iget-wide v9, v8, Lcom/getkeepsafe/relinker/elf/Elf$ProgramHeader;.vaddr:J // field@522a
+6611ca: bc9c                                   |0023: sub-long/2addr v12, v9
+6611cc: 5388 2852                              |0024: iget-wide v8, v8, Lcom/getkeepsafe/relinker/elf/Elf$ProgramHeader;.offset:J // field@5228
+6611d0: bb8c                                   |0026: add-long/2addr v12, v8
+6611d2: 100c                                   |0027: return-wide v12
+6611d4: bb40                                   |0028: add-long/2addr v0, v4
+6611d6: 28d9                                   |0029: goto 0002 // -0027
+6611d8: 2208 7b1a                              |002a: new-instance v8, Ljava/lang/IllegalStateException; // type@1a7b
+6611dc: 1a09 c61f                              |002c: const-string v9, "Could not map vma to file offset!" // string@1fc6
+6611e0: 7020 4cd1 9800                         |002e: invoke-direct {v8, v9}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+6611e6: 2708                                   |0031: throw v8
+      catches       : (none)
+      positions     :
+        0x0006 line=131
+        0x000a line=132
+        0x0012 line=134
+        0x0021 line=136
+        0x002a line=141
+      locals        :
+        0x0000 - 0x0032 reg=8 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+        0x0000 - 0x0032 reg=9 (null) Lcom/getkeepsafe/relinker/elf/Elf$Header;
+        0x0000 - 0x0032 reg=10 (null) J
+        0x0000 - 0x0032 reg=12 (null) J
+
+  Virtual methods   -
+    #0              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 6 16-bit code units
+6611e8:                                        |[6611e8] com.getkeepsafe.relinker.elf.ElfParser.close:()V
+6611f8: 5400 4152                              |0000: iget-object v0, v0, Lcom/getkeepsafe/relinker/elf/ElfParser;.channel:Ljava/nio/channels/FileChannel; // field@5241
+6611fc: 6e10 c2d3 0000                         |0002: invoke-virtual {v0}, Ljava/nio/channels/FileChannel;.close:()V // method@d3c2
+661202: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=146
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+
+    #1              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'parseHeader'
+      type          : '()Lcom/getkeepsafe/relinker/elf/Elf$Header;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 4
+      insns size    : 80 16-bit code units
+661204:                                        |[661204] com.getkeepsafe.relinker.elf.ElfParser.parseHeader:()Lcom/getkeepsafe/relinker/elf/Elf$Header;
+661214: 5450 4152                              |0000: iget-object v0, v5, Lcom/getkeepsafe/relinker/elf/ElfParser;.channel:Ljava/nio/channels/FileChannel; // field@5241
+661218: 1601 0000                              |0002: const-wide/16 v1, #int 0 // #0
+66121c: 6e30 c7d3 1002                         |0004: invoke-virtual {v0, v1, v2}, Ljava/nio/channels/FileChannel;.position:(J)Ljava/nio/channels/FileChannel; // method@d3c7
+661222: 1300 0800                              |0007: const/16 v0, #int 8 // #8
+661226: 7110 9ad3 0000                         |0009: invoke-static {v0}, Ljava/nio/ByteBuffer;.allocate:(I)Ljava/nio/ByteBuffer; // method@d39a
+66122c: 0c00                                   |000c: move-result-object v0
+66122e: 6203 3b8a                              |000d: sget-object v3, Ljava/nio/ByteOrder;.LITTLE_ENDIAN:Ljava/nio/ByteOrder; // field@8a3b
+661232: 6e20 abd3 3000                         |000f: invoke-virtual {v0, v3}, Ljava/nio/ByteBuffer;.order:(Ljava/nio/ByteOrder;)Ljava/nio/ByteBuffer; // method@d3ab
+661238: 6e40 8b90 0521                         |0012: invoke-virtual {v5, v0, v1, v2}, Lcom/getkeepsafe/relinker/elf/ElfParser;.readWord:(Ljava/nio/ByteBuffer;J)J // method@908b
+66123e: 0b01                                   |0015: move-result-wide v1
+661240: 1703 7f45 4c46                         |0016: const-wide/32 v3, #float 13073.4 // #464c457f
+661246: 3101 0103                              |0019: cmp-long v1, v1, v3
+66124a: 3901 2d00                              |001b: if-nez v1, 0048 // +002d
+66124e: 1601 0400                              |001d: const-wide/16 v1, #int 4 // #4
+661252: 6e40 8790 0521                         |001f: invoke-virtual {v5, v0, v1, v2}, Lcom/getkeepsafe/relinker/elf/ElfParser;.readByte:(Ljava/nio/ByteBuffer;J)S // method@9087
+661258: 0a01                                   |0022: move-result v1
+66125a: 1602 0500                              |0023: const-wide/16 v2, #int 5 // #5
+66125e: 6e40 8790 0532                         |0025: invoke-virtual {v5, v0, v2, v3}, Lcom/getkeepsafe/relinker/elf/ElfParser;.readByte:(Ljava/nio/ByteBuffer;J)S // method@9087
+661264: 0a00                                   |0028: move-result v0
+661266: 1212                                   |0029: const/4 v2, #int 1 // #1
+661268: 1223                                   |002a: const/4 v3, #int 2 // #2
+66126a: 3330 0400                              |002b: if-ne v0, v3, 002f // +0004
+66126e: 0120                                   |002d: move v0, v2
+661270: 2802                                   |002e: goto 0030 // +0002
+661272: 1200                                   |002f: const/4 v0, #int 0 // #0
+661274: 3321 0800                              |0030: if-ne v1, v2, 0038 // +0008
+661278: 2201 8a0f                              |0032: new-instance v1, Lcom/getkeepsafe/relinker/elf/Elf32Header; // type@0f8a
+66127c: 7030 7990 0105                         |0034: invoke-direct {v1, v0, v5}, Lcom/getkeepsafe/relinker/elf/Elf32Header;.<init>:(ZLcom/getkeepsafe/relinker/elf/ElfParser;)V // method@9079
+661282: 1101                                   |0037: return-object v1
+661284: 3331 0800                              |0038: if-ne v1, v3, 0040 // +0008
+661288: 2201 8b0f                              |003a: new-instance v1, Lcom/getkeepsafe/relinker/elf/Elf64Header; // type@0f8b
+66128c: 7030 7d90 0105                         |003c: invoke-direct {v1, v0, v5}, Lcom/getkeepsafe/relinker/elf/Elf64Header;.<init>:(ZLcom/getkeepsafe/relinker/elf/ElfParser;)V // method@907d
+661292: 1101                                   |003f: return-object v1
+661294: 2205 7b1a                              |0040: new-instance v5, Ljava/lang/IllegalStateException; // type@1a7b
+661298: 1a00 aa2d                              |0042: const-string v0, "Invalid class type!" // string@2daa
+66129c: 7020 4cd1 0500                         |0044: invoke-direct {v5, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+6612a2: 2705                                   |0047: throw v5
+6612a4: 2205 7a1a                              |0048: new-instance v5, Ljava/lang/IllegalArgumentException; // type@1a7a
+6612a8: 1a00 962d                              |004a: const-string v0, "Invalid ELF Magic!" // string@2d96
+6612ac: 7020 47d1 0500                         |004c: invoke-direct {v5, v0}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+6612b2: 2705                                   |004f: throw v5
+      catches       : (none)
+      positions     :
+        0x0000 line=45
+        0x0009 line=48
+        0x000d line=49
+        0x0012 line=50
+        0x001f line=54
+        0x0025 line=55
+        0x0032 line=57
+        0x003a line=59
+        0x0040 line=62
+        0x0048 line=51
+      locals        :
+        0x0000 - 0x0050 reg=5 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+
+    #2              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'parseNeededDependencies'
+      type          : '()Ljava/util/List;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 22
+      ins           : 1
+      outs          : 6
+      insns size    : 188 16-bit code units
+6612b4:                                        |[6612b4] com.getkeepsafe.relinker.elf.ElfParser.parseNeededDependencies:()Ljava/util/List;
+6612c4: 0806 1500                              |0000: move-object/from16 v6, v21
+6612c8: 5460 4152                              |0002: iget-object v0, v6, Lcom/getkeepsafe/relinker/elf/ElfParser;.channel:Ljava/nio/channels/FileChannel; // field@5241
+6612cc: 1601 0000                              |0004: const-wide/16 v1, #int 0 // #0
+6612d0: 6e30 c7d3 1002                         |0006: invoke-virtual {v0, v1, v2}, Ljava/nio/channels/FileChannel;.position:(J)Ljava/nio/channels/FileChannel; // method@d3c7
+6612d6: 2207 3a1b                              |0009: new-instance v7, Ljava/util/ArrayList; // type@1b3a
+6612da: 7010 9fd4 0700                         |000b: invoke-direct {v7}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+6612e0: 7401 8490 1500                         |000e: invoke-virtual/range {v21}, Lcom/getkeepsafe/relinker/elf/ElfParser;.parseHeader:()Lcom/getkeepsafe/relinker/elf/Elf$Header; // method@9084
+6612e6: 0c03                                   |0011: move-result-object v3
+6612e8: 1300 0800                              |0012: const/16 v0, #int 8 // #8
+6612ec: 7110 9ad3 0000                         |0014: invoke-static {v0}, Ljava/nio/ByteBuffer;.allocate:(I)Ljava/nio/ByteBuffer; // method@d39a
+6612f2: 0c08                                   |0017: move-result-object v8
+6612f4: 5530 1c52                              |0018: iget-boolean v0, v3, Lcom/getkeepsafe/relinker/elf/Elf$Header;.bigEndian:Z // field@521c
+6612f8: 3800 0500                              |001a: if-eqz v0, 001f // +0005
+6612fc: 6200 3a8a                              |001c: sget-object v0, Ljava/nio/ByteOrder;.BIG_ENDIAN:Ljava/nio/ByteOrder; // field@8a3a
+661300: 2803                                   |001e: goto 0021 // +0003
+661302: 6200 3b8a                              |001f: sget-object v0, Ljava/nio/ByteOrder;.LITTLE_ENDIAN:Ljava/nio/ByteOrder; // field@8a3b
+661306: 6e20 abd3 0800                         |0021: invoke-virtual {v8, v0}, Ljava/nio/ByteBuffer;.order:(Ljava/nio/ByteOrder;)Ljava/nio/ByteBuffer; // method@d3ab
+66130c: 5230 1e52                              |0024: iget v0, v3, Lcom/getkeepsafe/relinker/elf/Elf$Header;.phnum:I // field@521e
+661310: 8104                                   |0026: int-to-long v4, v0
+661312: 1709 ffff 0000                         |0027: const-wide/32 v9, #float 9.18341e-41 // #0000ffff
+661318: 3100 0409                              |002a: cmp-long v0, v4, v9
+66131c: 1209                                   |002c: const/4 v9, #int 0 // #0
+66131e: 3900 0800                              |002d: if-nez v0, 0035 // +0008
+661322: 6e20 7690 9300                         |002f: invoke-virtual {v3, v9}, Lcom/getkeepsafe/relinker/elf/Elf$Header;.getSectionHeader:(I)Lcom/getkeepsafe/relinker/elf/Elf$SectionHeader; // method@9076
+661328: 0c00                                   |0032: move-result-object v0
+66132a: 5304 2b52                              |0033: iget-wide v4, v0, Lcom/getkeepsafe/relinker/elf/Elf$SectionHeader;.info:J // field@522b
+66132e: 041a                                   |0035: move-wide v10, v1
+661330: 3100 0a04                              |0036: cmp-long v0, v10, v4
+661334: 160c 0100                              |0038: const-wide/16 v12, #int 1 // #1
+661338: 3b00 1300                              |003a: if-gez v0, 004d // +0013
+66133c: 6e30 7590 a30b                         |003c: invoke-virtual {v3, v10, v11}, Lcom/getkeepsafe/relinker/elf/Elf$Header;.getProgramHeader:(J)Lcom/getkeepsafe/relinker/elf/Elf$ProgramHeader; // method@9075
+661342: 0c00                                   |003f: move-result-object v0
+661344: 530e 2952                              |0040: iget-wide v14, v0, Lcom/getkeepsafe/relinker/elf/Elf$ProgramHeader;.type:J // field@5229
+661348: 1610 0200                              |0042: const-wide/16 v16, #int 2 // #2
+66134c: 310e 0e10                              |0044: cmp-long v14, v14, v16
+661350: 390e 0500                              |0046: if-nez v14, 004b // +0005
+661354: 530a 2852                              |0048: iget-wide v10, v0, Lcom/getkeepsafe/relinker/elf/Elf$ProgramHeader;.offset:J // field@5228
+661358: 2804                                   |004a: goto 004e // +0004
+66135a: bbca                                   |004b: add-long/2addr v10, v12
+66135c: 28ea                                   |004c: goto 0036 // -0016
+66135e: 041a                                   |004d: move-wide v10, v1
+661360: 3100 0a01                              |004e: cmp-long v0, v10, v1
+661364: 3900 0700                              |0050: if-nez v0, 0057 // +0007
+661368: 7110 55d5 0700                         |0052: invoke-static {v7}, Ljava/util/Collections;.unmodifiableList:(Ljava/util/List;)Ljava/util/List; // method@d555
+66136e: 0c00                                   |0055: move-result-object v0
+661370: 1100                                   |0056: return-object v0
+661372: 220e 3a1b                              |0057: new-instance v14, Ljava/util/ArrayList; // type@1b3a
+661376: 7010 9fd4 0e00                         |0059: invoke-direct {v14}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+66137c: 041f                                   |005c: move-wide v15, v1
+66137e: 6e40 7490 a39b                         |005d: invoke-virtual {v3, v10, v11, v9}, Lcom/getkeepsafe/relinker/elf/Elf$Header;.getDynamicStructure:(JI)Lcom/getkeepsafe/relinker/elf/Elf$DynamicStructure; // method@9074
+661384: 0c00                                   |0060: move-result-object v0
+661386: 5301 1752                              |0061: iget-wide v1, v0, Lcom/getkeepsafe/relinker/elf/Elf$DynamicStructure;.tag:J // field@5217
+66138a: 3101 010c                              |0063: cmp-long v1, v1, v12
+66138e: 3901 0c00                              |0065: if-nez v1, 0071 // +000c
+661392: 5301 1852                              |0067: iget-wide v1, v0, Lcom/getkeepsafe/relinker/elf/Elf$DynamicStructure;.val:J // field@5218
+661396: 7120 82d1 2100                         |0069: invoke-static {v1, v2}, Ljava/lang/Long;.valueOf:(J)Ljava/lang/Long; // method@d182
+66139c: 0c01                                   |006c: move-result-object v1
+66139e: 7220 c9d5 1e00                         |006d: invoke-interface {v14, v1}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+6613a4: 280c                                   |0070: goto 007c // +000c
+6613a6: 5301 1752                              |0071: iget-wide v1, v0, Lcom/getkeepsafe/relinker/elf/Elf$DynamicStructure;.tag:J // field@5217
+6613aa: 1613 0500                              |0073: const-wide/16 v19, #int 5 // #5
+6613ae: 3101 0113                              |0075: cmp-long v1, v1, v19
+6613b2: 3901 0500                              |0077: if-nez v1, 007c // +0005
+6613b6: 5301 1852                              |0079: iget-wide v1, v0, Lcom/getkeepsafe/relinker/elf/Elf$DynamicStructure;.val:J // field@5218
+6613ba: 041f                                   |007b: move-wide v15, v1
+6613bc: d809 0901                              |007c: add-int/lit8 v9, v9, #int 1 // #01
+6613c0: 5300 1752                              |007e: iget-wide v0, v0, Lcom/getkeepsafe/relinker/elf/Elf$DynamicStructure;.tag:J // field@5217
+6613c4: 1611 0000                              |0080: const-wide/16 v17, #int 0 // #0
+6613c8: 3100 0011                              |0082: cmp-long v0, v0, v17
+6613cc: 3900 3500                              |0084: if-nez v0, 00b9 // +0035
+6613d0: 3100 0f11                              |0086: cmp-long v0, v15, v17
+6613d4: 3800 2900                              |0088: if-eqz v0, 00b1 // +0029
+6613d8: 0800 1500                              |008a: move-object/from16 v0, v21
+6613dc: 0731                                   |008c: move-object v1, v3
+6613de: 0442                                   |008d: move-wide v2, v4
+6613e0: 04f4                                   |008e: move-wide v4, v15
+6613e2: 7606 8390 0000                         |008f: invoke-direct/range {v0, v1, v2, v3, v4, v5}, Lcom/getkeepsafe/relinker/elf/ElfParser;.offsetFromVma:(Lcom/getkeepsafe/relinker/elf/Elf$Header;JJ)J // method@9083
+6613e8: 0b00                                   |0092: move-result-wide v0
+6613ea: 7210 d2d5 0e00                         |0093: invoke-interface {v14}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@d5d2
+6613f0: 0c02                                   |0096: move-result-object v2
+6613f2: 7210 a0d5 0200                         |0097: invoke-interface {v2}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+6613f8: 0a03                                   |009a: move-result v3
+6613fa: 3803 1500                              |009b: if-eqz v3, 00b0 // +0015
+6613fe: 7210 a1d5 0200                         |009d: invoke-interface {v2}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+661404: 0c03                                   |00a0: move-result-object v3
+661406: 1f03 821a                              |00a1: check-cast v3, Ljava/lang/Long; // type@1a82
+66140a: 6e10 76d1 0300                         |00a3: invoke-virtual {v3}, Ljava/lang/Long;.longValue:()J // method@d176
+661410: 0b03                                   |00a6: move-result-wide v3
+661412: bb03                                   |00a7: add-long/2addr v3, v0
+661414: 6e40 8a90 8643                         |00a8: invoke-virtual {v6, v8, v3, v4}, Lcom/getkeepsafe/relinker/elf/ElfParser;.readString:(Ljava/nio/ByteBuffer;J)Ljava/lang/String; // method@908a
+66141a: 0c03                                   |00ab: move-result-object v3
+66141c: 7220 c9d5 3700                         |00ac: invoke-interface {v7, v3}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+661422: 28e8                                   |00af: goto 0097 // -0018
+661424: 1107                                   |00b0: return-object v7
+661426: 2200 7b1a                              |00b1: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+66142a: 1a01 a063                              |00b3: const-string v1, "String table offset not found!" // string@63a0
+66142e: 7020 4cd1 1000                         |00b5: invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+661434: 2700                                   |00b8: throw v0
+661436: 0501 1100                              |00b9: move-wide/from16 v1, v17
+66143a: 28a2                                   |00bb: goto 005d // -005e
+      catches       : (none)
+      positions     :
+        0x0002 line=66
+        0x0009 line=67
+        0x000e line=68
+        0x0014 line=69
+        0x0018 line=70
+        0x0024 line=72
+        0x002f line=83
+        0x0033 line=84
+        0x003c line=89
+        0x0040 line=90
+        0x0048 line=91
+        0x0052 line=98
+        0x0057 line=102
+        0x005d line=106
+        0x0061 line=107
+        0x0067 line=108
+        0x0071 line=109
+        0x0079 line=110
+        0x007e line=113
+        0x008f line=120
+        0x0093 line=121
+        0x00a3 line=122
+        0x00b1 line=116
+      locals        :
+        0x0000 - 0x00bc reg=21 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+
+    #3              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'read'
+      type          : '(Ljava/nio/ByteBuffer;JI)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 11
+      ins           : 5
+      outs          : 4
+      insns size    : 38 16-bit code units
+66143c:                                        |[66143c] com.getkeepsafe.relinker.elf.ElfParser.read:(Ljava/nio/ByteBuffer;JI)V
+66144c: 1200                                   |0000: const/4 v0, #int 0 // #0
+66144e: 6e20 add3 0700                         |0001: invoke-virtual {v7, v0}, Ljava/nio/ByteBuffer;.position:(I)Ljava/nio/Buffer; // method@d3ad
+661454: 6e20 aad3 a700                         |0004: invoke-virtual {v7, v10}, Ljava/nio/ByteBuffer;.limit:(I)Ljava/nio/Buffer; // method@d3aa
+66145a: 1601 0000                              |0007: const-wide/16 v1, #int 0 // #0
+66145e: 81a3                                   |0009: int-to-long v3, v10
+661460: 3103 0103                              |000a: cmp-long v3, v1, v3
+661464: 3b03 1600                              |000c: if-gez v3, 0022 // +0016
+661468: 5463 4152                              |000e: iget-object v3, v6, Lcom/getkeepsafe/relinker/elf/ElfParser;.channel:Ljava/nio/channels/FileChannel; // field@5241
+66146c: 9b04 0801                              |0010: add-long v4, v8, v1
+661470: 6e40 c9d3 7354                         |0012: invoke-virtual {v3, v7, v4, v5}, Ljava/nio/channels/FileChannel;.read:(Ljava/nio/ByteBuffer;J)I // method@d3c9
+661476: 0a03                                   |0015: move-result v3
+661478: 12f4                                   |0016: const/4 v4, #int -1 // #ff
+66147a: 3243 0500                              |0017: if-eq v3, v4, 001c // +0005
+66147e: 8133                                   |0019: int-to-long v3, v3
+661480: bb31                                   |001a: add-long/2addr v1, v3
+661482: 28ee                                   |001b: goto 0009 // -0012
+661484: 2206 3b1a                              |001c: new-instance v6, Ljava/io/EOFException; // type@1a3b
+661488: 7010 d6cf 0600                         |001e: invoke-direct {v6}, Ljava/io/EOFException;.<init>:()V // method@cfd6
+66148e: 2706                                   |0021: throw v6
+661490: 6e20 add3 0700                         |0022: invoke-virtual {v7, v0}, Ljava/nio/ByteBuffer;.position:(I)Ljava/nio/Buffer; // method@d3ad
+661496: 0e00                                   |0025: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=180
+        0x0004 line=181
+        0x000e line=184
+        0x001c line=186
+        0x0022 line=191
+      locals        :
+        0x0000 - 0x0026 reg=6 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+        0x0000 - 0x0026 reg=7 (null) Ljava/nio/ByteBuffer;
+        0x0000 - 0x0026 reg=8 (null) J
+        0x0000 - 0x0026 reg=10 (null) I
+
+    #4              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'readByte'
+      type          : '(Ljava/nio/ByteBuffer;J)S'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 12 16-bit code units
+661498:                                        |[661498] com.getkeepsafe.relinker.elf.ElfParser.readByte:(Ljava/nio/ByteBuffer;J)S
+6614a8: 1210                                   |0000: const/4 v0, #int 1 // #1
+6614aa: 6e50 8690 2143                         |0001: invoke-virtual {v1, v2, v3, v4, v0}, Lcom/getkeepsafe/relinker/elf/ElfParser;.read:(Ljava/nio/ByteBuffer;JI)V // method@9086
+6614b0: 6e10 a1d3 0200                         |0004: invoke-virtual {v2}, Ljava/nio/ByteBuffer;.get:()B // method@d3a1
+6614b6: 0a01                                   |0007: move-result v1
+6614b8: d511 ff00                              |0008: and-int/lit16 v1, v1, #int 255 // #00ff
+6614bc: 8f11                                   |000a: int-to-short v1, v1
+6614be: 0f01                                   |000b: return v1
+      catches       : (none)
+      positions     :
+        0x0001 line=175
+        0x0004 line=176
+      locals        :
+        0x0000 - 0x000c reg=1 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+        0x0000 - 0x000c reg=2 (null) Ljava/nio/ByteBuffer;
+        0x0000 - 0x000c reg=3 (null) J
+
+    #5              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'readHalf'
+      type          : '(Ljava/nio/ByteBuffer;J)I'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 13 16-bit code units
+6614c0:                                        |[6614c0] com.getkeepsafe.relinker.elf.ElfParser.readHalf:(Ljava/nio/ByteBuffer;J)I
+6614d0: 1220                                   |0000: const/4 v0, #int 2 // #2
+6614d2: 6e50 8690 2143                         |0001: invoke-virtual {v1, v2, v3, v4, v0}, Lcom/getkeepsafe/relinker/elf/ElfParser;.read:(Ljava/nio/ByteBuffer;JI)V // method@9086
+6614d8: 6e10 a6d3 0200                         |0004: invoke-virtual {v2}, Ljava/nio/ByteBuffer;.getShort:()S // method@d3a6
+6614de: 0a01                                   |0007: move-result v1
+6614e0: 1402 ffff 0000                         |0008: const v2, #float 9.18341e-41 // #0000ffff
+6614e6: b521                                   |000b: and-int/2addr v1, v2
+6614e8: 0f01                                   |000c: return v1
+      catches       : (none)
+      positions     :
+        0x0001 line=170
+        0x0004 line=171
+      locals        :
+        0x0000 - 0x000d reg=1 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+        0x0000 - 0x000d reg=2 (null) Ljava/nio/ByteBuffer;
+        0x0000 - 0x000d reg=3 (null) J
+
+    #6              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'readLong'
+      type          : '(Ljava/nio/ByteBuffer;J)J'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 10 16-bit code units
+6614ec:                                        |[6614ec] com.getkeepsafe.relinker.elf.ElfParser.readLong:(Ljava/nio/ByteBuffer;J)J
+6614fc: 1300 0800                              |0000: const/16 v0, #int 8 // #8
+661500: 6e50 8690 2143                         |0002: invoke-virtual {v1, v2, v3, v4, v0}, Lcom/getkeepsafe/relinker/elf/ElfParser;.read:(Ljava/nio/ByteBuffer;JI)V // method@9086
+661506: 6e10 a5d3 0200                         |0005: invoke-virtual {v2}, Ljava/nio/ByteBuffer;.getLong:()J // method@d3a5
+66150c: 0b01                                   |0008: move-result-wide v1
+66150e: 1001                                   |0009: return-wide v1
+      catches       : (none)
+      positions     :
+        0x0002 line=160
+        0x0005 line=161
+      locals        :
+        0x0000 - 0x000a reg=1 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+        0x0000 - 0x000a reg=2 (null) Ljava/nio/ByteBuffer;
+        0x0000 - 0x000a reg=3 (null) J
+
+    #7              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'readString'
+      type          : '(Ljava/nio/ByteBuffer;J)Ljava/lang/String;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 4
+      insns size    : 25 16-bit code units
+661510:                                        |[661510] com.getkeepsafe.relinker.elf.ElfParser.readString:(Ljava/nio/ByteBuffer;J)Ljava/lang/String;
+661520: 2200 991a                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+661524: 7010 39d2 0000                         |0002: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+66152a: 1601 0100                              |0005: const-wide/16 v1, #int 1 // #1
+66152e: bb51                                   |0007: add-long/2addr v1, v5
+661530: 6e40 8790 4365                         |0008: invoke-virtual {v3, v4, v5, v6}, Lcom/getkeepsafe/relinker/elf/ElfParser;.readByte:(Ljava/nio/ByteBuffer;J)S // method@9087
+661536: 0a05                                   |000b: move-result v5
+661538: 3805 0800                              |000c: if-eqz v5, 0014 // +0008
+66153c: 8e55                                   |000e: int-to-char v5, v5
+66153e: 6e20 3dd2 5000                         |000f: invoke-virtual {v0, v5}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+661544: 0415                                   |0012: move-wide v5, v1
+661546: 28f2                                   |0013: goto 0005 // -000e
+661548: 6e10 58d2 0000                         |0014: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+66154e: 0c03                                   |0017: move-result-object v3
+661550: 1103                                   |0018: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=150
+        0x0008 line=152
+        0x000f line=153
+        0x0014 line=156
+      locals        :
+        0x0000 - 0x0019 reg=3 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+        0x0000 - 0x0019 reg=4 (null) Ljava/nio/ByteBuffer;
+        0x0000 - 0x0019 reg=5 (null) J
+
+    #8              : (in Lcom/getkeepsafe/relinker/elf/ElfParser;)
+      name          : 'readWord'
+      type          : '(Ljava/nio/ByteBuffer;J)J'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 16 16-bit code units
+661554:                                        |[661554] com.getkeepsafe.relinker.elf.ElfParser.readWord:(Ljava/nio/ByteBuffer;J)J
+661564: 1240                                   |0000: const/4 v0, #int 4 // #4
+661566: 6e50 8690 2143                         |0001: invoke-virtual {v1, v2, v3, v4, v0}, Lcom/getkeepsafe/relinker/elf/ElfParser;.read:(Ljava/nio/ByteBuffer;JI)V // method@9086
+66156c: 6e10 a4d3 0200                         |0004: invoke-virtual {v2}, Ljava/nio/ByteBuffer;.getInt:()I // method@d3a4
+661572: 0a01                                   |0007: move-result v1
+661574: 8111                                   |0008: int-to-long v1, v1
+661576: 1803 ffff ffff 0000 0000               |0009: const-wide v3, #double 2.122e-314 // #00000000ffffffff
+661580: c031                                   |000e: and-long/2addr v1, v3
+661582: 1001                                   |000f: return-wide v1
+      catches       : (none)
+      positions     :
+        0x0001 line=165
+        0x0004 line=166
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/getkeepsafe/relinker/elf/ElfParser;
+        0x0000 - 0x0010 reg=2 (null) Ljava/nio/ByteBuffer;
+        0x0000 - 0x0010 reg=3 (null) J
+
+  source_file_idx   : 9309 (ElfParser.java)
+

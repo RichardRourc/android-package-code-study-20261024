@@ -1,0 +1,331 @@
+Class #81            -
+  Class descriptor  : 'Lokio/InflaterSource;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lokio/Source;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lokio/InflaterSource;)
+      name          : 'bufferBytesHeldByInflater'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lokio/InflaterSource;)
+      name          : 'closed'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lokio/InflaterSource;)
+      name          : 'inflater'
+      type          : 'Ljava/util/zip/Inflater;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Lokio/InflaterSource;)
+      name          : 'source'
+      type          : 'Lokio/BufferedSource;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lokio/InflaterSource;)
+      name          : '<init>'
+      type          : '(Lokio/BufferedSource;Ljava/util/zip/Inflater;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 28 16-bit code units
+032368:                                        |[032368] okio.InflaterSource.<init>:(Lokio/BufferedSource;Ljava/util/zip/Inflater;)V
+032378: 7010 3502 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@0235
+03237e: 3801 1100                              |0003: if-eqz v1, 0014 // +0011
+032382: 3802 0700                              |0005: if-eqz v2, 000c // +0007
+032386: 5b01 1501                              |0007: iput-object v1, v0, Lokio/InflaterSource;.source:Lokio/BufferedSource; // field@0115
+03238a: 5b02 1401                              |0009: iput-object v2, v0, Lokio/InflaterSource;.inflater:Ljava/util/zip/Inflater; // field@0114
+03238e: 0e00                                   |000b: return-void
+032390: 2200 af00                              |000c: new-instance v0, Ljava/lang/IllegalArgumentException; // type@00af
+032394: 1a01 e707                              |000e: const-string v1, "inflater == null" // string@07e7
+032398: 7020 1b02 1000                         |0010: invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+03239e: 2700                                   |0013: throw v0
+0323a0: 2200 af00                              |0014: new-instance v0, Ljava/lang/IllegalArgumentException; // type@00af
+0323a4: 1a01 2d0a                              |0016: const-string v1, "source == null" // string@0a2d
+0323a8: 7020 1b02 1000                         |0018: invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+0323ae: 2700                                   |001b: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=48
+        0x0007 line=51
+        0x0009 line=52
+        0x000c line=50
+        0x0014 line=49
+      locals        :
+        0x0000 - 0x001c reg=0 this Lokio/InflaterSource;
+        0x0000 - 0x001c reg=1 (null) Lokio/BufferedSource;
+        0x0000 - 0x001c reg=2 (null) Ljava/util/zip/Inflater;
+
+    #1              : (in Lokio/InflaterSource;)
+      name          : '<init>'
+      type          : '(Lokio/Source;Ljava/util/zip/Inflater;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 8 16-bit code units
+0323b0:                                        |[0323b0] okio.InflaterSource.<init>:(Lokio/Source;Ljava/util/zip/Inflater;)V
+0323c0: 7110 ac05 0100                         |0000: invoke-static {v1}, Lokio/Okio;.buffer:(Lokio/Source;)Lokio/BufferedSource; // method@05ac
+0323c6: 0c01                                   |0003: move-result-object v1
+0323c8: 7030 9205 1002                         |0004: invoke-direct {v0, v1, v2}, Lokio/InflaterSource;.<init>:(Lokio/BufferedSource;Ljava/util/zip/Inflater;)V // method@0592
+0323ce: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=40
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lokio/InflaterSource;
+        0x0000 - 0x0008 reg=1 (null) Lokio/Source;
+        0x0000 - 0x0008 reg=2 (null) Ljava/util/zip/Inflater;
+
+    #2              : (in Lokio/InflaterSource;)
+      name          : 'releaseInflatedBytes'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 24 16-bit code units
+0323d0:                                        |[0323d0] okio.InflaterSource.releaseInflatedBytes:()V
+0323e0: 5220 1201                              |0000: iget v0, v2, Lokio/InflaterSource;.bufferBytesHeldByInflater:I // field@0112
+0323e4: 3900 0300                              |0002: if-nez v0, 0005 // +0003
+0323e8: 0e00                                   |0004: return-void
+0323ea: 5421 1401                              |0005: iget-object v1, v2, Lokio/InflaterSource;.inflater:Ljava/util/zip/Inflater; // field@0114
+0323ee: 6e10 fd02 0100                         |0007: invoke-virtual {v1}, Ljava/util/zip/Inflater;.getRemaining:()I // method@02fd
+0323f4: 0a01                                   |000a: move-result v1
+0323f6: b110                                   |000b: sub-int/2addr v0, v1
+0323f8: 5221 1201                              |000c: iget v1, v2, Lokio/InflaterSource;.bufferBytesHeldByInflater:I // field@0112
+0323fc: b101                                   |000e: sub-int/2addr v1, v0
+0323fe: 5921 1201                              |000f: iput v1, v2, Lokio/InflaterSource;.bufferBytesHeldByInflater:I // field@0112
+032402: 5422 1501                              |0011: iget-object v2, v2, Lokio/InflaterSource;.source:Lokio/BufferedSource; // field@0115
+032406: 8100                                   |0013: int-to-long v0, v0
+032408: 7230 3d05 0201                         |0014: invoke-interface {v2, v0, v1}, Lokio/BufferedSource;.skip:(J)V // method@053d
+03240e: 0e00                                   |0017: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=112
+        0x0005 line=113
+        0x000c line=114
+        0x0011 line=115
+      locals        :
+        0x0000 - 0x0018 reg=2 this Lokio/InflaterSource;
+
+  Virtual methods   -
+    #0              : (in Lokio/InflaterSource;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 19 16-bit code units
+032410:                                        |[032410] okio.InflaterSource.close:()V
+032420: 5510 1301                              |0000: iget-boolean v0, v1, Lokio/InflaterSource;.closed:Z // field@0113
+032424: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+032428: 0e00                                   |0004: return-void
+03242a: 5410 1401                              |0005: iget-object v0, v1, Lokio/InflaterSource;.inflater:Ljava/util/zip/Inflater; // field@0114
+03242e: 6e10 fb02 0000                         |0007: invoke-virtual {v0}, Ljava/util/zip/Inflater;.end:()V // method@02fb
+032434: 1210                                   |000a: const/4 v0, #int 1 // #1
+032436: 5c10 1301                              |000b: iput-boolean v0, v1, Lokio/InflaterSource;.closed:Z // field@0113
+03243a: 5411 1501                              |000d: iget-object v1, v1, Lokio/InflaterSource;.source:Lokio/BufferedSource; // field@0115
+03243e: 7210 1905 0100                         |000f: invoke-interface {v1}, Lokio/BufferedSource;.close:()V // method@0519
+032444: 0e00                                   |0012: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=123
+        0x0005 line=124
+        0x000b line=125
+        0x000d line=126
+      locals        :
+        0x0000 - 0x0013 reg=1 this Lokio/InflaterSource;
+
+    #1              : (in Lokio/InflaterSource;)
+      name          : 'read'
+      type          : '(Lokio/Buffer;J)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 4
+      outs          : 4
+      insns size    : 135 16-bit code units
+032448:                                        |[032448] okio.InflaterSource.read:(Lokio/Buffer;J)J
+032458: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+03245c: 3102 0600                              |0002: cmp-long v2, v6, v0
+032460: 3a02 6e00                              |0004: if-ltz v2, 0072 // +006e
+032464: 5546 1301                              |0006: iget-boolean v6, v4, Lokio/InflaterSource;.closed:Z // field@0113
+032468: 3906 6200                              |0008: if-nez v6, 006a // +0062
+03246c: 3902 0300                              |000a: if-nez v2, 000d // +0003
+032470: 1000                                   |000c: return-wide v0
+032472: 6e10 9605 0400                         |000d: invoke-virtual {v4}, Lokio/InflaterSource;.refill:()Z // method@0596
+032478: 0a06                                   |0010: move-result v6
+03247a: 1217                                   |0011: const/4 v7, #int 1 // #1
+03247c: 6e20 d604 7500                         |0012: invoke-virtual {v5, v7}, Lokio/Buffer;.writableSegment:(I)Lokio/Segment; // method@04d6
+032482: 0c07                                   |0015: move-result-object v7
+032484: 5440 1401                              |0016: iget-object v0, v4, Lokio/InflaterSource;.inflater:Ljava/util/zip/Inflater; // field@0114
+032488: 5471 2501                              |0018: iget-object v1, v7, Lokio/Segment;.data:[B // field@0125
+03248c: 5272 2601                              |001a: iget v2, v7, Lokio/Segment;.limit:I // field@0126
+032490: 5273 2601                              |001c: iget v3, v7, Lokio/Segment;.limit:I // field@0126
+032494: d133 0008                              |001e: rsub-int v3, v3, #int 2048 // #0800
+032498: 6e40 ff02 1032                         |0020: invoke-virtual {v0, v1, v2, v3}, Ljava/util/zip/Inflater;.inflate:([BII)I // method@02ff
+03249e: 0a00                                   |0023: move-result v0
+0324a0: 3d00 0e00                              |0024: if-lez v0, 0032 // +000e
+0324a4: 5274 2601                              |0026: iget v4, v7, Lokio/Segment;.limit:I // field@0126
+0324a8: b004                                   |0028: add-int/2addr v4, v0
+0324aa: 5974 2601                              |0029: iput v4, v7, Lokio/Segment;.limit:I // field@0126
+0324ae: 5356 f300                              |002b: iget-wide v6, v5, Lokio/Buffer;.size:J // field@00f3
+0324b2: 8100                                   |002d: int-to-long v0, v0
+0324b4: bb06                                   |002e: add-long/2addr v6, v0
+0324b6: 5a56 f300                              |002f: iput-wide v6, v5, Lokio/Buffer;.size:J // field@00f3
+0324ba: 1000                                   |0031: return-wide v0
+0324bc: 5440 1401                              |0032: iget-object v0, v4, Lokio/InflaterSource;.inflater:Ljava/util/zip/Inflater; // field@0114
+0324c0: 6e10 fc02 0000                         |0034: invoke-virtual {v0}, Ljava/util/zip/Inflater;.finished:()Z // method@02fc
+0324c6: 0a00                                   |0037: move-result v0
+0324c8: 3900 1600                              |0038: if-nez v0, 004e // +0016
+0324cc: 5440 1401                              |003a: iget-object v0, v4, Lokio/InflaterSource;.inflater:Ljava/util/zip/Inflater; // field@0114
+0324d0: 6e10 0003 0000                         |003c: invoke-virtual {v0}, Ljava/util/zip/Inflater;.needsDictionary:()Z // method@0300
+0324d6: 0a00                                   |003f: move-result v0
+0324d8: 3800 0300                              |0040: if-eqz v0, 0043 // +0003
+0324dc: 280c                                   |0042: goto 004e // +000c
+0324de: 3906 0300                              |0043: if-nez v6, 0046 // +0003
+0324e2: 28c8                                   |0045: goto 000d // -0038
+0324e4: 2204 8800                              |0046: new-instance v4, Ljava/io/EOFException; // type@0088
+0324e8: 1a05 2f0a                              |0048: const-string v5, "source exhausted prematurely" // string@0a2f
+0324ec: 7020 c501 5400                         |004a: invoke-direct {v4, v5}, Ljava/io/EOFException;.<init>:(Ljava/lang/String;)V // method@01c5
+0324f2: 2704                                   |004d: throw v4
+0324f4: 7010 9705 0400                         |004e: invoke-direct {v4}, Lokio/InflaterSource;.releaseInflatedBytes:()V // method@0597
+0324fa: 5274 2901                              |0051: iget v4, v7, Lokio/Segment;.pos:I // field@0129
+0324fe: 5276 2601                              |0053: iget v6, v7, Lokio/Segment;.limit:I // field@0126
+032502: 3364 0b00                              |0055: if-ne v4, v6, 0060 // +000b
+032506: 6e10 1406 0700                         |0057: invoke-virtual {v7}, Lokio/Segment;.pop:()Lokio/Segment; // method@0614
+03250c: 0c04                                   |005a: move-result-object v4
+03250e: 5b54 f200                              |005b: iput-object v4, v5, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+032512: 7110 1906 0700                         |005d: invoke-static {v7}, Lokio/SegmentPool;.recycle:(Lokio/Segment;)V // method@0619
+032518: 1604 ffff                              |0060: const-wide/16 v4, #int -1 // #ffff
+03251c: 1004                                   |0062: return-wide v4
+03251e: 0d04                                   |0063: move-exception v4
+032520: 2205 9000                              |0064: new-instance v5, Ljava/io/IOException; // type@0090
+032524: 7020 d601 4500                         |0066: invoke-direct {v5, v4}, Ljava/io/IOException;.<init>:(Ljava/lang/Throwable;)V // method@01d6
+03252a: 2705                                   |0069: throw v5
+03252c: 2204 b000                              |006a: new-instance v4, Ljava/lang/IllegalStateException; // type@00b0
+032530: 1a05 dd05                              |006c: const-string v5, "closed" // string@05dd
+032534: 7020 1e02 5400                         |006e: invoke-direct {v4, v5}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@021e
+03253a: 2704                                   |0071: throw v4
+03253c: 2204 af00                              |0072: new-instance v4, Ljava/lang/IllegalArgumentException; // type@00af
+032540: 2205 c600                              |0074: new-instance v5, Ljava/lang/StringBuilder; // type@00c6
+032544: 1a00 a305                              |0076: const-string v0, "byteCount < 0: " // string@05a3
+032548: 7020 5d02 0500                         |0078: invoke-direct {v5, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@025d
+03254e: 6e30 6002 6507                         |007b: invoke-virtual {v5, v6, v7}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@0260
+032554: 0c05                                   |007e: move-result-object v5
+032556: 6e10 6502 0500                         |007f: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@0265
+03255c: 0c05                                   |0082: move-result-object v5
+03255e: 7020 1b02 5400                         |0083: invoke-direct {v4, v5}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+032564: 2704                                   |0086: throw v4
+      catches       : 1
+        0x0012 - 0x0060
+          Ljava/util/zip/DataFormatException; -> 0x0063
+      positions     :
+        0x0006 line=58
+        0x000d line=62
+        0x0012 line=66
+        0x0016 line=67
+        0x0026 line=69
+        0x002b line=70
+        0x0032 line=73
+        0x0046 line=82
+        0x004e line=74
+        0x0051 line=75
+        0x0057 line=77
+        0x005d line=78
+        0x0064 line=84
+        0x006a line=58
+        0x0072 line=57
+      locals        :
+        0x0000 - 0x0087 reg=4 this Lokio/InflaterSource;
+        0x0000 - 0x0087 reg=5 (null) Lokio/Buffer;
+        0x0000 - 0x0087 reg=6 (null) J
+
+    #2              : (in Lokio/InflaterSource;)
+      name          : 'refill'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 66 16-bit code units
+032578:                                        |[032578] okio.InflaterSource.refill:()Z
+032588: 5440 1401                              |0000: iget-object v0, v4, Lokio/InflaterSource;.inflater:Ljava/util/zip/Inflater; // field@0114
+03258c: 6e10 0103 0000                         |0002: invoke-virtual {v0}, Ljava/util/zip/Inflater;.needsInput:()Z // method@0301
+032592: 0a00                                   |0005: move-result v0
+032594: 1201                                   |0006: const/4 v1, #int 0 // #0
+032596: 3900 0300                              |0007: if-nez v0, 000a // +0003
+03259a: 0f01                                   |0009: return v1
+03259c: 7010 9705 0400                         |000a: invoke-direct {v4}, Lokio/InflaterSource;.releaseInflatedBytes:()V // method@0597
+0325a2: 5440 1401                              |000d: iget-object v0, v4, Lokio/InflaterSource;.inflater:Ljava/util/zip/Inflater; // field@0114
+0325a6: 6e10 fd02 0000                         |000f: invoke-virtual {v0}, Ljava/util/zip/Inflater;.getRemaining:()I // method@02fd
+0325ac: 0a00                                   |0012: move-result v0
+0325ae: 3900 2700                              |0013: if-nez v0, 003a // +0027
+0325b2: 5440 1501                              |0015: iget-object v0, v4, Lokio/InflaterSource;.source:Lokio/BufferedSource; // field@0115
+0325b6: 7210 1a05 0000                         |0017: invoke-interface {v0}, Lokio/BufferedSource;.exhausted:()Z // method@051a
+0325bc: 0a00                                   |001a: move-result v0
+0325be: 3800 0400                              |001b: if-eqz v0, 001f // +0004
+0325c2: 1214                                   |001d: const/4 v4, #int 1 // #1
+0325c4: 0f04                                   |001e: return v4
+0325c6: 5440 1501                              |001f: iget-object v0, v4, Lokio/InflaterSource;.source:Lokio/BufferedSource; // field@0115
+0325ca: 7210 1805 0000                         |0021: invoke-interface {v0}, Lokio/BufferedSource;.buffer:()Lokio/Buffer; // method@0518
+0325d0: 0c00                                   |0024: move-result-object v0
+0325d2: 5400 f200                              |0025: iget-object v0, v0, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+0325d6: 5202 2601                              |0027: iget v2, v0, Lokio/Segment;.limit:I // field@0126
+0325da: 5203 2901                              |0029: iget v3, v0, Lokio/Segment;.pos:I // field@0129
+0325de: b132                                   |002b: sub-int/2addr v2, v3
+0325e0: 5942 1201                              |002c: iput v2, v4, Lokio/InflaterSource;.bufferBytesHeldByInflater:I // field@0112
+0325e4: 5442 1401                              |002e: iget-object v2, v4, Lokio/InflaterSource;.inflater:Ljava/util/zip/Inflater; // field@0114
+0325e8: 5403 2501                              |0030: iget-object v3, v0, Lokio/Segment;.data:[B // field@0125
+0325ec: 5200 2901                              |0032: iget v0, v0, Lokio/Segment;.pos:I // field@0129
+0325f0: 5244 1201                              |0034: iget v4, v4, Lokio/InflaterSource;.bufferBytesHeldByInflater:I // field@0112
+0325f4: 6e40 0203 3240                         |0036: invoke-virtual {v2, v3, v0, v4}, Ljava/util/zip/Inflater;.setInput:([BII)V // method@0302
+0325fa: 0f01                                   |0039: return v1
+0325fc: 2204 b000                              |003a: new-instance v4, Ljava/lang/IllegalStateException; // type@00b0
+032600: 1a00 cf00                              |003c: const-string v0, "?" // string@00cf
+032604: 7020 1e02 0400                         |003e: invoke-direct {v4, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@021e
+03260a: 2704                                   |0041: throw v4
+      catches       : (none)
+      positions     :
+        0x0000 line=95
+        0x000a line=97
+        0x000d line=98
+        0x0015 line=101
+        0x001f line=104
+        0x0027 line=105
+        0x002e line=106
+        0x003a line=98
+      locals        :
+        0x0000 - 0x0042 reg=4 this Lokio/InflaterSource;
+
+    #3              : (in Lokio/InflaterSource;)
+      name          : 'timeout'
+      type          : '()Lokio/Timeout;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+03260c:                                        |[03260c] okio.InflaterSource.timeout:()Lokio/Timeout;
+03261c: 5400 1501                              |0000: iget-object v0, v0, Lokio/InflaterSource;.source:Lokio/BufferedSource; // field@0115
+032620: 7210 3e05 0000                         |0002: invoke-interface {v0}, Lokio/BufferedSource;.timeout:()Lokio/Timeout; // method@053e
+032626: 0c00                                   |0005: move-result-object v0
+032628: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=119
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lokio/InflaterSource;
+
+  source_file_idx   : 446 (InflaterSource.java)
+

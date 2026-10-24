@@ -1,0 +1,1800 @@
+Class #5497            -
+  Class descriptor  : 'Lkotlinx/coroutines/scheduling/CoroutineScheduler;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/util/concurrent/Executor;'
+    #1              : 'Ljava/io/Closeable;'
+  Static fields     -
+    #0              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'BLOCKING_MASK'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 4398044413952
+    #1              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'BLOCKING_SHIFT'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 21
+    #2              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'CLAIMED'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 0
+    #3              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'CPU_PERMITS_MASK'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 9223367638808264704
+    #4              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'CPU_PERMITS_SHIFT'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 42
+    #5              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'CREATED_MASK'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 2097151
+    #6              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'Companion'
+      type          : 'Lkotlinx/coroutines/scheduling/CoroutineScheduler$Companion;'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : null
+    #7              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'MAX_SUPPORTED_POOL_SIZE'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 2097150
+    #8              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'MIN_SUPPORTED_POOL_SIZE'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 1
+    #9              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'NOT_IN_STACK'
+      type          : 'Lkotlinx/coroutines/internal/Symbol;'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : null
+    #10              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'PARKED'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : -1
+    #11              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'PARKED_INDEX_MASK'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 2097151
+    #12              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'PARKED_VERSION_INC'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 2097152
+    #13              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'PARKED_VERSION_MASK'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : -2097152
+    #14              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'TERMINATED'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1
+    #15              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : '_isTerminated$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;'
+      access        : 0x101a (PRIVATE STATIC FINAL SYNTHETIC)
+    #16              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'controlState$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;'
+      access        : 0x1018 (STATIC FINAL SYNTHETIC)
+    #17              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'parkedWorkersStack$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;'
+      access        : 0x101a (PRIVATE STATIC FINAL SYNTHETIC)
+  Instance fields   -
+    #0              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : '_isTerminated'
+      type          : 'I'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #1              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'controlState'
+      type          : 'J'
+      access        : 0x1040 (VOLATILE SYNTHETIC)
+    #2              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'corePoolSize'
+      type          : 'I'
+      access        : 0x0011 (PUBLIC FINAL)
+    #3              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'globalBlockingQueue'
+      type          : 'Lkotlinx/coroutines/scheduling/GlobalQueue;'
+      access        : 0x0011 (PUBLIC FINAL)
+    #4              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'globalCpuQueue'
+      type          : 'Lkotlinx/coroutines/scheduling/GlobalQueue;'
+      access        : 0x0011 (PUBLIC FINAL)
+    #5              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'idleWorkerKeepAliveNs'
+      type          : 'J'
+      access        : 0x0011 (PUBLIC FINAL)
+    #6              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'maxPoolSize'
+      type          : 'I'
+      access        : 0x0011 (PUBLIC FINAL)
+    #7              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'parkedWorkersStack'
+      type          : 'J'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #8              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'schedulerName'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0011 (PUBLIC FINAL)
+    #9              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'workers'
+      type          : 'Lkotlinx/coroutines/internal/ResizableAtomicArray;'
+      access        : 0x0011 (PUBLIC FINAL)
+  Direct methods    -
+    #0              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 2
+      insns size    : 44 16-bit code units
+3523cc:                                        |[3523cc] kotlinx.coroutines.scheduling.CoroutineScheduler.<clinit>:()V
+3523dc: 2200 a319                              |0000: new-instance v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Companion; // type@19a3
+3523e0: 1201                                   |0002: const/4 v1, #int 0 // #0
+3523e2: 7020 fcb2 1000                         |0003: invoke-direct {v0, v1}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Companion;.<init>:(Lkotlin/jvm/internal/DefaultConstructorMarker;)V // method@b2fc
+3523e8: 6900 9646                              |0006: sput-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.Companion:Lkotlinx/coroutines/scheduling/CoroutineScheduler$Companion; // field@4696
+3523ec: 2200 9019                              |0008: new-instance v0, Lkotlinx/coroutines/internal/Symbol; // type@1990
+3523f0: 1a01 0d4b                              |000a: const-string v1, "NOT_IN_STACK" // string@4b0d
+3523f4: 7020 99b2 1000                         |000c: invoke-direct {v0, v1}, Lkotlinx/coroutines/internal/Symbol;.<init>:(Ljava/lang/String;)V // method@b299
+3523fa: 6900 9946                              |000f: sput-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.NOT_IN_STACK:Lkotlinx/coroutines/internal/Symbol; // field@4699
+3523fe: 1a00 849c                              |0011: const-string v0, "parkedWorkersStack" // string@9c84
+352402: 1c01 a719                              |0013: const-class v1, Lkotlinx/coroutines/scheduling/CoroutineScheduler; // type@19a7
+352406: 7120 3076 0100                         |0015: invoke-static {v1, v0}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // method@7630
+35240c: 0c00                                   |0018: move-result-object v0
+35240e: 6900 a946                              |0019: sput-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStack$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a9
+352412: 1a00 5a6d                              |001b: const-string v0, "controlState" // string@6d5a
+352416: 7120 3076 0100                         |001d: invoke-static {v1, v0}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // method@7630
+35241c: 0c00                                   |0020: move-result-object v0
+35241e: 6900 a246                              |0021: sput-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a2
+352422: 1a00 0a5f                              |0023: const-string v0, "_isTerminated" // string@5f0a
+352426: 7120 2776 0100                         |0025: invoke-static {v1, v0}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // method@7627
+35242c: 0c00                                   |0028: move-result-object v0
+35242e: 6900 a046                              |0029: sput-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;._isTerminated$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46a0
+352432: 0e00                                   |002b: return-void
+      catches       : (none)
+      positions     :
+        0x0008 line=303
+      locals        :
+
+    #1              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : '<init>'
+      type          : '(IIJLjava/lang/String;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 8
+      ins           : 6
+      outs          : 3
+      insns size    : 188 16-bit code units
+352434:                                        |[352434] kotlinx.coroutines.scheduling.CoroutineScheduler.<init>:(IIJLjava/lang/String;)V
+352444: 7010 df71 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@71df
+35244a: 5923 a346                              |0003: iput v3, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.corePoolSize:I // field@46a3
+35244e: 5924 a746                              |0005: iput v4, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.maxPoolSize:I // field@46a7
+352452: 5a25 a646                              |0007: iput-wide v5, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.idleWorkerKeepAliveNs:J // field@46a6
+352456: 5b27 aa46                              |0009: iput-object v7, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.schedulerName:Ljava/lang/String; // field@46aa
+35245a: 1217                                   |000b: const/4 v7, #int 1 // #1
+35245c: 3473 9100                              |000c: if-lt v3, v7, 009d // +0091
+352460: 1a07 244a                              |000e: const-string v7, "Max pool size " // string@4a24
+352464: 3434 6c00                              |0010: if-lt v4, v3, 007c // +006c
+352468: 1400 feff 1f00                         |0012: const v0, #float 2.93873e-39 // #001ffffe
+35246e: 3604 4a00                              |0015: if-gt v4, v0, 005f // +004a
+352472: 1600 0000                              |0017: const-wide/16 v0, #int 0 // #0
+352476: 3104 0500                              |0019: cmp-long v4, v5, v0
+35247a: 3d04 2500                              |001b: if-lez v4, 0040 // +0025
+35247e: 2204 ac19                              |001d: new-instance v4, Lkotlinx/coroutines/scheduling/GlobalQueue; // type@19ac
+352482: 7010 68b3 0400                         |001f: invoke-direct {v4}, Lkotlinx/coroutines/scheduling/GlobalQueue;.<init>:()V // method@b368
+352488: 5b24 a546                              |0022: iput-object v4, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalCpuQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a5
+35248c: 2204 ac19                              |0024: new-instance v4, Lkotlinx/coroutines/scheduling/GlobalQueue; // type@19ac
+352490: 7010 68b3 0400                         |0026: invoke-direct {v4}, Lkotlinx/coroutines/scheduling/GlobalQueue;.<init>:()V // method@b368
+352496: 5b24 a446                              |0029: iput-object v4, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalBlockingQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a4
+35249a: 5a20 a846                              |002b: iput-wide v0, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStack:J // field@46a8
+35249e: 2204 8b19                              |002d: new-instance v4, Lkotlinx/coroutines/internal/ResizableAtomicArray; // type@198b
+3524a2: d805 0301                              |002f: add-int/lit8 v5, v3, #int 1 // #01
+3524a6: 7020 5cb2 5400                         |0031: invoke-direct {v4, v5}, Lkotlinx/coroutines/internal/ResizableAtomicArray;.<init>:(I)V // method@b25c
+3524ac: 5b24 ab46                              |0034: iput-object v4, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.workers:Lkotlinx/coroutines/internal/ResizableAtomicArray; // field@46ab
+3524b0: 8133                                   |0036: int-to-long v3, v3
+3524b2: 1305 2a00                              |0037: const/16 v5, #int 42 // #2a
+3524b6: c353                                   |0039: shl-long/2addr v3, v5
+3524b8: 5a23 a146                              |003a: iput-wide v3, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+3524bc: 1203                                   |003c: const/4 v3, #int 0 // #0
+3524be: 5923 9f46                              |003d: iput v3, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;._isTerminated:I // field@469f
+3524c2: 0e00                                   |003f: return-void
+3524c4: 2203 8811                              |0040: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+3524c8: 1a04 8d29                              |0042: const-string v4, "Idle worker keep alive time " // string@298d
+3524cc: 7020 4e72 4300                         |0044: invoke-direct {v3, v4}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+3524d2: 6e30 5372 5306                         |0047: invoke-virtual {v3, v5, v6}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@7253
+3524d8: 0c03                                   |004a: move-result-object v3
+3524da: 1a04 4207                              |004b: const-string v4, " must be positive" // string@0742
+3524de: 6e20 5772 4300                         |004d: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+3524e4: 0c03                                   |0050: move-result-object v3
+3524e6: 6e10 6b72 0300                         |0051: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+3524ec: 0c03                                   |0054: move-result-object v3
+3524ee: 2204 6911                              |0055: new-instance v4, Ljava/lang/IllegalArgumentException; // type@1169
+3524f2: 6e10 e671 0300                         |0057: invoke-virtual {v3}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+3524f8: 0c03                                   |005a: move-result-object v3
+3524fa: 7020 6b71 3400                         |005b: invoke-direct {v4, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+352500: 2704                                   |005e: throw v4
+352502: 2203 8811                              |005f: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+352506: 7020 4e72 7300                         |0061: invoke-direct {v3, v7}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+35250c: 6e20 5272 4300                         |0064: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+352512: 0c03                                   |0067: move-result-object v3
+352514: 1a04 8307                              |0068: const-string v4, " should not exceed maximal supported number of threads 2097150" // string@0783
+352518: 6e20 5772 4300                         |006a: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+35251e: 0c03                                   |006d: move-result-object v3
+352520: 6e10 6b72 0300                         |006e: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+352526: 0c03                                   |0071: move-result-object v3
+352528: 2204 6911                              |0072: new-instance v4, Ljava/lang/IllegalArgumentException; // type@1169
+35252c: 6e10 e671 0300                         |0074: invoke-virtual {v3}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+352532: 0c03                                   |0077: move-result-object v3
+352534: 7020 6b71 3400                         |0078: invoke-direct {v4, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+35253a: 2704                                   |007b: throw v4
+35253c: 2205 8811                              |007c: new-instance v5, Ljava/lang/StringBuilder; // type@1188
+352540: 7020 4e72 7500                         |007e: invoke-direct {v5, v7}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+352546: 6e20 5272 4500                         |0081: invoke-virtual {v5, v4}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+35254c: 0c04                                   |0084: move-result-object v4
+35254e: 1a05 8007                              |0085: const-string v5, " should be greater than or equals to core pool size " // string@0780
+352552: 6e20 5772 5400                         |0087: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+352558: 0c04                                   |008a: move-result-object v4
+35255a: 6e20 5272 3400                         |008b: invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+352560: 0c03                                   |008e: move-result-object v3
+352562: 6e10 6b72 0300                         |008f: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+352568: 0c03                                   |0092: move-result-object v3
+35256a: 2204 6911                              |0093: new-instance v4, Ljava/lang/IllegalArgumentException; // type@1169
+35256e: 6e10 e671 0300                         |0095: invoke-virtual {v3}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+352574: 0c03                                   |0098: move-result-object v3
+352576: 7020 6b71 3400                         |0099: invoke-direct {v4, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+35257c: 2704                                   |009c: throw v4
+35257e: 2204 8811                              |009d: new-instance v4, Ljava/lang/StringBuilder; // type@1188
+352582: 1a05 a920                              |009f: const-string v5, "Core pool size " // string@20a9
+352586: 7020 4e72 5400                         |00a1: invoke-direct {v4, v5}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+35258c: 6e20 5272 3400                         |00a4: invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+352592: 0c03                                   |00a7: move-result-object v3
+352594: 1a04 7f07                              |00a8: const-string v4, " should be at least 1" // string@077f
+352598: 6e20 5772 4300                         |00aa: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+35259e: 0c03                                   |00ad: move-result-object v3
+3525a0: 6e10 6b72 0300                         |00ae: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+3525a6: 0c03                                   |00b1: move-result-object v3
+3525a8: 2204 6911                              |00b2: new-instance v4, Ljava/lang/IllegalArgumentException; // type@1169
+3525ac: 6e10 e671 0300                         |00b4: invoke-virtual {v3}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+3525b2: 0c03                                   |00b7: move-result-object v3
+3525b4: 7020 6b71 3400                         |00b8: invoke-direct {v4, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+3525ba: 2704                                   |00bb: throw v4
+      catches       : (none)
+      positions     :
+        0x0000 line=90
+        0x0003 line=92
+        0x0005 line=93
+        0x0007 line=94
+        0x0009 line=95
+        0x000e line=101
+        0x001d line=113
+        0x0024 line=115
+        0x002b line=139
+        0x002d line=263
+        0x003a line=269
+        0x003d line=297
+        0x0040 line=108
+        0x0055 line=107
+        0x005f line=105
+        0x0072 line=104
+        0x007c line=102
+        0x0093 line=101
+        0x009d line=99
+        0x00b2 line=98
+      locals        :
+        0x0000 - 0x00bc reg=2 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x00bc reg=3 (null) I
+        0x0000 - 0x00bc reg=4 (null) I
+        0x0000 - 0x00bc reg=5 (null) J
+        0x0000 - 0x00bc reg=7 (null) Ljava/lang/String;
+
+    #2              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : '<init>'
+      type          : '(IIJLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V'
+      access        : 0x11001 (PUBLIC SYNTHETIC CONSTRUCTOR)
+      code          -
+      registers     : 14
+      ins           : 8
+      outs          : 6
+      insns size    : 21 16-bit code units
+3525bc:                                        |[3525bc] kotlinx.coroutines.scheduling.CoroutineScheduler.<init>:(IIJLjava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+3525cc: dd0d 0c04                              |0000: and-int/lit8 v13, v12, #int 4 // #04
+3525d0: 380d 0400                              |0002: if-eqz v13, 0006 // +0004
+3525d4: 6109 ca46                              |0004: sget-wide v9, Lkotlinx/coroutines/scheduling/TasksKt;.IDLE_WORKER_KEEP_ALIVE_NS:J // field@46ca
+3525d8: 0493                                   |0006: move-wide v3, v9
+3525da: dd09 0c08                              |0007: and-int/lit8 v9, v12, #int 8 // #08
+3525de: 3809 0400                              |0009: if-eqz v9, 000d // +0004
+3525e2: 1a0b 4e22                              |000b: const-string v11, "DefaultDispatcher" // string@224e
+3525e6: 0760                                   |000d: move-object v0, v6
+3525e8: 0171                                   |000e: move v1, v7
+3525ea: 0182                                   |000f: move v2, v8
+3525ec: 07b5                                   |0010: move-object v5, v11
+3525ee: 7606 24b3 0000                         |0011: invoke-direct/range {v0, v1, v2, v3, v4, v5}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.<init>:(IIJLjava/lang/String;)V // method@b324
+3525f4: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0004 line=94
+        0x000b line=95
+        0x0011 line=91
+      locals        :
+        0x0000 - 0x0015 reg=6 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x0015 reg=7 (null) I
+        0x0000 - 0x0015 reg=8 (null) I
+        0x0000 - 0x0015 reg=9 (null) J
+        0x0000 - 0x0015 reg=11 (null) Ljava/lang/String;
+        0x0000 - 0x0015 reg=12 (null) I
+        0x0000 - 0x0015 reg=13 (null) Lkotlin/jvm/internal/DefaultConstructorMarker;
+
+    #3              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'addToGlobalQueue'
+      type          : '(Lkotlinx/coroutines/scheduling/Task;)Z'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 23 16-bit code units
+351aa8:                                        |[351aa8] kotlinx.coroutines.scheduling.CoroutineScheduler.addToGlobalQueue:(Lkotlinx/coroutines/scheduling/Task;)Z
+351ab8: 5430 c246                              |0000: iget-object v0, v3, Lkotlinx/coroutines/scheduling/Task;.taskContext:Lkotlinx/coroutines/scheduling/TaskContext; // field@46c2
+351abc: 7210 8eb3 0000                         |0002: invoke-interface {v0}, Lkotlinx/coroutines/scheduling/TaskContext;.getTaskMode:()I // method@b38e
+351ac2: 0a00                                   |0005: move-result v0
+351ac4: 1211                                   |0006: const/4 v1, #int 1 // #1
+351ac6: 3310 0900                              |0007: if-ne v0, v1, 0010 // +0009
+351aca: 5420 a446                              |0009: iget-object v0, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalBlockingQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a4
+351ace: 6e20 69b3 3000                         |000b: invoke-virtual {v0, v3}, Lkotlinx/coroutines/scheduling/GlobalQueue;.addLast:(Ljava/lang/Object;)Z // method@b369
+351ad4: 0a03                                   |000e: move-result v3
+351ad6: 0f03                                   |000f: return v3
+351ad8: 5420 a546                              |0010: iget-object v0, v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalCpuQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a5
+351adc: 6e20 69b3 3000                         |0012: invoke-virtual {v0, v3}, Lkotlinx/coroutines/scheduling/GlobalQueue;.addLast:(Ljava/lang/Object;)Z // method@b369
+351ae2: 0a03                                   |0015: move-result v3
+351ae4: 0f03                                   |0016: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=982
+        0x0009 line=119
+        0x0010 line=121
+      locals        :
+        0x0000 - 0x0017 reg=2 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x0017 reg=3 (null) Lkotlinx/coroutines/scheduling/Task;
+
+    #4              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'blockingTasks'
+      type          : '(J)I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 0
+      insns size    : 11 16-bit code units
+351ce0:                                        |[351ce0] kotlinx.coroutines.scheduling.CoroutineScheduler.blockingTasks:(J)I
+351cf0: 1800 0000 e0ff ff03 0000               |0000: const-wide v0, #double 2.17292e-311 // #000003ffffe00000
+351cfa: c003                                   |0005: and-long/2addr v3, v0
+351cfc: 1300 1500                              |0006: const/16 v0, #int 21 // #15
+351d00: c403                                   |0008: shr-long/2addr v3, v0
+351d02: 8433                                   |0009: long-to-int v3, v3
+351d04: 0f03                                   |000a: return v3
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #5              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'createNewWorker'
+      type          : '()I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 9
+      ins           : 1
+      outs          : 3
+      insns size    : 119 16-bit code units
+351d08:                                        |[351d08] kotlinx.coroutines.scheduling.CoroutineScheduler.createNewWorker:()I
+351d18: 5480 ab46                              |0000: iget-object v0, v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.workers:Lkotlinx/coroutines/internal/ResizableAtomicArray; // field@46ab
+351d1c: 1d00                                   |0002: monitor-enter v0
+351d1e: 6e10 37b3 0800                         |0003: invoke-virtual {v8}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.isTerminated:()Z // method@b337
+351d24: 0a01                                   |0006: move-result v1
+351d26: 3801 0500                              |0007: if-eqz v1, 000c // +0005
+351d2a: 1e00                                   |0009: monitor-exit v0
+351d2c: 12f0                                   |000a: const/4 v0, #int -1 // #ff
+351d2e: 0f00                                   |000b: return v0
+351d30: 5381 a146                              |000c: iget-wide v1, v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+351d34: 1703 ffff 1f00                         |000e: const-wide/32 v3, #float 2.93873e-39 // #001fffff
+351d3a: a005 0103                              |0011: and-long v5, v1, v3
+351d3e: 8455                                   |0013: long-to-int v5, v5
+351d40: 1806 0000 e0ff ff03 0000               |0014: const-wide v6, #double 2.17292e-311 // #000003ffffe00000
+351d4a: c061                                   |0019: and-long/2addr v1, v6
+351d4c: 1306 1500                              |001a: const/16 v6, #int 21 // #15
+351d50: c461                                   |001c: shr-long/2addr v1, v6
+351d52: 8411                                   |001d: long-to-int v1, v1
+351d54: 9101 0501                              |001e: sub-int v1, v5, v1
+351d58: 1202                                   |0020: const/4 v2, #int 0 // #0
+351d5a: 7120 2e97 2100                         |0021: invoke-static {v1, v2}, Lkotlin/ranges/RangesKt;.coerceAtLeast:(II)I // method@972e
+351d60: 0a01                                   |0024: move-result v1
+351d62: 5286 a346                              |0025: iget v6, v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.corePoolSize:I // field@46a3
+351d66: 3461 0400                              |0027: if-lt v1, v6, 002b // +0004
+351d6a: 1e00                                   |0029: monitor-exit v0
+351d6c: 0f02                                   |002a: return v2
+351d6e: 5286 a746                              |002b: iget v6, v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.maxPoolSize:I // field@46a7
+351d72: 3465 0400                              |002d: if-lt v5, v6, 0031 // +0004
+351d76: 1e00                                   |002f: monitor-exit v0
+351d78: 0f02                                   |0030: return v2
+351d7a: 5385 a146                              |0031: iget-wide v5, v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+351d7e: c035                                   |0033: and-long/2addr v5, v3
+351d80: 8452                                   |0034: long-to-int v2, v5
+351d82: d802 0201                              |0035: add-int/lit8 v2, v2, #int 1 // #01
+351d86: 3d02 3100                              |0037: if-lez v2, 0068 // +0031
+351d8a: 5485 ab46                              |0039: iget-object v5, v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.workers:Lkotlinx/coroutines/internal/ResizableAtomicArray; // field@46ab
+351d8e: 6e20 5eb2 2500                         |003b: invoke-virtual {v5, v2}, Lkotlinx/coroutines/internal/ResizableAtomicArray;.get:(I)Ljava/lang/Object; // method@b25e
+351d94: 0c05                                   |003e: move-result-object v5
+351d96: 3905 2900                              |003f: if-nez v5, 0068 // +0029
+351d9a: 2205 a519                              |0041: new-instance v5, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker; // type@19a5
+351d9e: 7030 00b3 8502                         |0043: invoke-direct {v5, v8, v2}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.<init>:(Lkotlinx/coroutines/scheduling/CoroutineScheduler;I)V // method@b300
+351da4: 5486 ab46                              |0046: iget-object v6, v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.workers:Lkotlinx/coroutines/internal/ResizableAtomicArray; // field@46ab
+351da8: 6e30 5fb2 2605                         |0048: invoke-virtual {v6, v2, v5}, Lkotlinx/coroutines/internal/ResizableAtomicArray;.setSynchronized:(ILjava/lang/Object;)V // method@b25f
+351dae: 6206 a246                              |004b: sget-object v6, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a2
+351db2: 6e20 2f76 8600                         |004d: invoke-virtual {v6, v8}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.incrementAndGet:(Ljava/lang/Object;)J // method@762f
+351db8: 0b06                                   |0050: move-result-wide v6
+351dba: c063                                   |0051: and-long/2addr v3, v6
+351dbc: 8433                                   |0052: long-to-int v3, v3
+351dbe: 3332 0900                              |0053: if-ne v2, v3, 005c // +0009
+351dc2: 6e10 17b3 0500                         |0055: invoke-virtual {v5}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.start:()V // method@b317
+351dc8: d801 0101                              |0058: add-int/lit8 v1, v1, #int 1 // #01
+351dcc: 1e00                                   |005a: monitor-exit v0
+351dce: 0f01                                   |005b: return v1
+351dd0: 1a01 d925                              |005c: const-string v1, "Failed requirement." // string@25d9
+351dd4: 2202 6911                              |005e: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1169
+351dd8: 6e10 e671 0100                         |0060: invoke-virtual {v1}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+351dde: 0c01                                   |0063: move-result-object v1
+351de0: 7020 6b71 1200                         |0064: invoke-direct {v2, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+351de6: 2702                                   |0067: throw v2
+351de8: 1a01 d925                              |0068: const-string v1, "Failed requirement." // string@25d9
+351dec: 2202 6911                              |006a: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1169
+351df0: 6e10 e671 0100                         |006c: invoke-virtual {v1}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+351df6: 0c01                                   |006f: move-result-object v1
+351df8: 7020 6b71 1200                         |0070: invoke-direct {v2, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+351dfe: 2702                                   |0073: throw v2
+351e00: 0d01                                   |0074: move-exception v1
+351e02: 1e00                                   |0075: monitor-exit v0
+351e04: 2701                                   |0076: throw v1
+      catches       : 5
+        0x0003 - 0x0007
+          <any> -> 0x0074
+        0x000c - 0x0027
+          <any> -> 0x0074
+        0x002b - 0x002d
+          <any> -> 0x0074
+        0x0031 - 0x0058
+          <any> -> 0x0074
+        0x005c - 0x0074
+          <any> -> 0x0074
+      positions     :
+        0x0000 line=463
+        0x0002 line=1007
+        0x0003 line=465
+        0x000c line=466
+        0x0021 line=469
+        0x0025 line=471
+        0x002b line=472
+        0x0031 line=1010
+        0x0039 line=475
+        0x0041 line=481
+        0x0046 line=482
+        0x004b line=1011
+        0x0055 line=484
+        0x005a line=485
+        0x005c line=483
+        0x0068 line=475
+        0x0075 line=485
+      locals        :
+        0x0000 - 0x0077 reg=8 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #6              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'createdWorkers'
+      type          : '(J)I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 0
+      insns size    : 6 16-bit code units
+351e34:                                        |[351e34] kotlinx.coroutines.scheduling.CoroutineScheduler.createdWorkers:(J)I
+351e44: 1700 ffff 1f00                         |0000: const-wide/32 v0, #float 2.93873e-39 // #001fffff
+351e4a: c003                                   |0003: and-long/2addr v3, v0
+351e4c: 8433                                   |0004: long-to-int v3, v3
+351e4e: 0f03                                   |0005: return v3
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #7              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'currentWorker'
+      type          : '()Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 27 16-bit code units
+352224:                                        |[352224] kotlinx.coroutines.scheduling.CoroutineScheduler.currentWorker:()Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;
+352234: 7100 7b72 0000                         |0000: invoke-static {}, Ljava/lang/Thread;.currentThread:()Ljava/lang/Thread; // method@727b
+35223a: 0c00                                   |0003: move-result-object v0
+35223c: 2001 a519                              |0004: instance-of v1, v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker; // type@19a5
+352240: 1202                                   |0006: const/4 v2, #int 0 // #0
+352242: 3801 0500                              |0007: if-eqz v1, 000c // +0005
+352246: 1f00 a519                              |0009: check-cast v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker; // type@19a5
+35224a: 2802                                   |000b: goto 000d // +0002
+35224c: 0720                                   |000c: move-object v0, v2
+35224e: 3800 0d00                              |000d: if-eqz v0, 001a // +000d
+352252: 7110 01b3 0000                         |000f: invoke-static {v0}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.access$getThis$0$p:(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;)Lkotlinx/coroutines/scheduling/CoroutineScheduler; // method@b301
+352258: 0c01                                   |0012: move-result-object v1
+35225a: 7120 cc93 3100                         |0013: invoke-static {v1, v3}, Lkotlin/jvm/internal/Intrinsics;.areEqual:(Ljava/lang/Object;Ljava/lang/Object;)Z // method@93cc
+352260: 0a01                                   |0016: move-result v1
+352262: 3801 0300                              |0017: if-eqz v1, 001a // +0003
+352266: 1100                                   |0019: return-object v0
+352268: 1102                                   |001a: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=508
+        0x000f line=1014
+        0x0013 line=508
+      locals        :
+        0x0000 - 0x001b reg=3 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #8              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'decrementBlockingTasks'
+      type          : '()V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 9 16-bit code units
+352614:                                        |[352614] kotlinx.coroutines.scheduling.CoroutineScheduler.decrementBlockingTasks:()V
+352624: 6200 a246                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a2
+352628: 1701 0000 e0ff                         |0002: const-wide/32 v1, #float nan // #ffe00000
+35262e: 6e40 2b76 3021                         |0005: invoke-virtual {v0, v3, v1, v2}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.addAndGet:(Ljava/lang/Object;J)J // method@762b
+352634: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=284
+      locals        :
+        0x0000 - 0x0009 reg=3 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #9              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'decrementCreatedWorkers'
+      type          : '()I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 12 16-bit code units
+351e50:                                        |[351e50] kotlinx.coroutines.scheduling.CoroutineScheduler.decrementCreatedWorkers:()I
+351e60: 6200 a246                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a2
+351e64: 6e20 2d76 4000                         |0002: invoke-virtual {v0, v4}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.getAndDecrement:(Ljava/lang/Object;)J // method@762d
+351e6a: 0b00                                   |0005: move-result-wide v0
+351e6c: 1702 ffff 1f00                         |0006: const-wide/32 v2, #float 2.93873e-39 // #001fffff
+351e72: c020                                   |0009: and-long/2addr v0, v2
+351e74: 8400                                   |000a: long-to-int v0, v0
+351e76: 0f00                                   |000b: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=279
+      locals        :
+        0x0000 - 0x000c reg=4 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #10              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'dispatch$default'
+      type          : '(Lkotlinx/coroutines/scheduling/CoroutineScheduler;Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;ZILjava/lang/Object;)V'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 6
+      ins           : 6
+      outs          : 4
+      insns size    : 15 16-bit code units
+352638:                                        |[352638] kotlinx.coroutines.scheduling.CoroutineScheduler.dispatch$default:(Lkotlinx/coroutines/scheduling/CoroutineScheduler;Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;ZILjava/lang/Object;)V
+352648: dd05 0402                              |0000: and-int/lit8 v5, v4, #int 2 // #02
+35264c: 3805 0400                              |0002: if-eqz v5, 0006 // +0004
+352650: 6202 cc46                              |0004: sget-object v2, Lkotlinx/coroutines/scheduling/TasksKt;.NonBlockingContext:Lkotlinx/coroutines/scheduling/TaskContext; // field@46cc
+352654: dd04 0404                              |0006: and-int/lit8 v4, v4, #int 4 // #04
+352658: 3804 0300                              |0008: if-eqz v4, 000b // +0003
+35265c: 1203                                   |000a: const/4 v3, #int 0 // #0
+35265e: 6e40 30b3 1032                         |000b: invoke-virtual {v0, v1, v2, v3}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.dispatch:(Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;Z)V // method@b330
+352664: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0004 line=382
+      locals        :
+        0x0000 - 0x000f reg=0 (null) Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x000f reg=1 (null) Ljava/lang/Runnable;
+        0x0000 - 0x000f reg=2 (null) Lkotlinx/coroutines/scheduling/TaskContext;
+        0x0000 - 0x000f reg=3 (null) Z
+        0x0000 - 0x000f reg=4 (null) I
+        0x0000 - 0x000f reg=5 (null) Ljava/lang/Object;
+
+    #11              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'getAvailableCpuPermits'
+      type          : '()I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 0
+      insns size    : 13 16-bit code units
+351e78:                                        |[351e78] kotlinx.coroutines.scheduling.CoroutineScheduler.getAvailableCpuPermits:()I
+351e88: 5340 a146                              |0000: iget-wide v0, v4, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+351e8c: 1802 0000 0000 00fc ff7f               |0002: const-wide v2, #double nan // #7ffffc0000000000
+351e96: c020                                   |0007: and-long/2addr v0, v2
+351e98: 1302 2a00                              |0008: const/16 v2, #int 42 // #2a
+351e9c: c420                                   |000a: shr-long/2addr v0, v2
+351e9e: 8400                                   |000b: long-to-int v0, v0
+351ea0: 0f00                                   |000c: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=271
+      locals        :
+        0x0000 - 0x000d reg=4 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #12              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'getCreatedWorkers'
+      type          : '()I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+351ea4:                                        |[351ea4] kotlinx.coroutines.scheduling.CoroutineScheduler.getCreatedWorkers:()I
+351eb4: 5340 a146                              |0000: iget-wide v0, v4, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+351eb8: 1702 ffff 1f00                         |0002: const-wide/32 v2, #float 2.93873e-39 // #001fffff
+351ebe: c020                                   |0005: and-long/2addr v0, v2
+351ec0: 8400                                   |0006: long-to-int v0, v0
+351ec2: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=270
+      locals        :
+        0x0000 - 0x0008 reg=4 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #13              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'incrementBlockingTasks'
+      type          : '()J'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 10 16-bit code units
+352380:                                        |[352380] kotlinx.coroutines.scheduling.CoroutineScheduler.incrementBlockingTasks:()J
+352390: 6200 a246                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a2
+352394: 1701 0000 2000                         |0002: const-wide/32 v1, #float 2.93874e-39 // #00200000
+35239a: 6e40 2b76 3021                         |0005: invoke-virtual {v0, v3, v1, v2}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.addAndGet:(Ljava/lang/Object;J)J // method@762b
+3523a0: 0b00                                   |0008: move-result-wide v0
+3523a2: 1000                                   |0009: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0000 line=281
+      locals        :
+        0x0000 - 0x000a reg=3 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #14              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'incrementCreatedWorkers'
+      type          : '()I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 12 16-bit code units
+351ec4:                                        |[351ec4] kotlinx.coroutines.scheduling.CoroutineScheduler.incrementCreatedWorkers:()I
+351ed4: 6200 a246                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a2
+351ed8: 6e20 2f76 4000                         |0002: invoke-virtual {v0, v4}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.incrementAndGet:(Ljava/lang/Object;)J // method@762f
+351ede: 0b00                                   |0005: move-result-wide v0
+351ee0: 1702 ffff 1f00                         |0006: const-wide/32 v2, #float 2.93873e-39 // #001fffff
+351ee6: c020                                   |0009: and-long/2addr v0, v2
+351ee8: 8400                                   |000a: long-to-int v0, v0
+351eea: 0f00                                   |000b: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=278
+      locals        :
+        0x0000 - 0x000c reg=4 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #15              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'parkedWorkersStackNextIndex'
+      type          : '(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;)I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 28 16-bit code units
+351eec:                                        |[351eec] kotlinx.coroutines.scheduling.CoroutineScheduler.parkedWorkersStackNextIndex:(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;)I
+351efc: 6e10 08b3 0200                         |0000: invoke-virtual {v2}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.getNextParkedWorker:()Ljava/lang/Object; // method@b308
+351f02: 0c02                                   |0003: move-result-object v2
+351f04: 6200 9946                              |0004: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.NOT_IN_STACK:Lkotlinx/coroutines/internal/Symbol; // field@4699
+351f08: 3302 0400                              |0006: if-ne v2, v0, 000a // +0004
+351f0c: 12f2                                   |0008: const/4 v2, #int -1 // #ff
+351f0e: 0f02                                   |0009: return v2
+351f10: 3902 0400                              |000a: if-nez v2, 000e // +0004
+351f14: 1202                                   |000c: const/4 v2, #int 0 // #0
+351f16: 0f02                                   |000d: return v2
+351f18: 1f02 a519                              |000e: check-cast v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker; // type@19a5
+351f1c: 6e10 07b3 0200                         |0010: invoke-virtual {v2}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.getIndexInArray:()I // method@b307
+351f22: 0a00                                   |0013: move-result v0
+351f24: 3800 0300                              |0014: if-eqz v0, 0017 // +0003
+351f28: 0f00                                   |0016: return v0
+351f2a: 6e10 08b3 0200                         |0017: invoke-virtual {v2}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.getNextParkedWorker:()Ljava/lang/Object; // method@b308
+351f30: 0c02                                   |001a: move-result-object v2
+351f32: 28e9                                   |001b: goto 0004 // -0017
+      catches       : (none)
+      positions     :
+        0x0000 line=236
+        0x0004 line=239
+        0x000e line=242
+        0x0010 line=243
+        0x0017 line=246
+      locals        :
+        0x0000 - 0x001c reg=1 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x001c reg=2 (null) Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;
+
+    #16              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'parkedWorkersStackPop'
+      type          : '()Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 10
+      ins           : 1
+      outs          : 6
+      insns size    : 52 16-bit code units
+35226c:                                        |[35226c] kotlinx.coroutines.scheduling.CoroutineScheduler.parkedWorkersStackPop:()Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;
+35227c: 5392 a846                              |0000: iget-wide v2, v9, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStack:J // field@46a8
+352280: 1700 ffff 1f00                         |0002: const-wide/32 v0, #float 2.93873e-39 // #001fffff
+352286: c020                                   |0005: and-long/2addr v0, v2
+352288: 8400                                   |0006: long-to-int v0, v0
+35228a: 5491 ab46                              |0007: iget-object v1, v9, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.workers:Lkotlinx/coroutines/internal/ResizableAtomicArray; // field@46ab
+35228e: 6e20 5eb2 0100                         |0009: invoke-virtual {v1, v0}, Lkotlinx/coroutines/internal/ResizableAtomicArray;.get:(I)Ljava/lang/Object; // method@b25e
+352294: 0c00                                   |000c: move-result-object v0
+352296: 0706                                   |000d: move-object v6, v0
+352298: 1f06 a519                              |000e: check-cast v6, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker; // type@19a5
+35229c: 3906 0400                              |0010: if-nez v6, 0014 // +0004
+3522a0: 1200                                   |0012: const/4 v0, #int 0 // #0
+3522a2: 1100                                   |0013: return-object v0
+3522a4: 1700 0000 2000                         |0014: const-wide/32 v0, #float 2.93874e-39 // #00200000
+3522aa: bb20                                   |0017: add-long/2addr v0, v2
+3522ac: 1704 0000 e0ff                         |0018: const-wide/32 v4, #float nan // #ffe00000
+3522b2: c040                                   |001b: and-long/2addr v0, v4
+3522b4: 7020 38b3 6900                         |001c: invoke-direct {v9, v6}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStackNextIndex:(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;)I // method@b338
+3522ba: 0a04                                   |001f: move-result v4
+3522bc: 3a04 e0ff                              |0020: if-ltz v4, 0000 // -0020
+3522c0: 0407                                   |0022: move-wide v7, v0
+3522c2: 6200 a946                              |0023: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStack$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a9
+3522c6: 8144                                   |0025: int-to-long v4, v4
+3522c8: c174                                   |0026: or-long/2addr v4, v7
+3522ca: 0791                                   |0027: move-object v1, v9
+3522cc: 7406 2c76 0000                         |0028: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.compareAndSet:(Ljava/lang/Object;JJ)Z // method@762c
+3522d2: 0a00                                   |002b: move-result v0
+3522d4: 3800 d4ff                              |002c: if-eqz v0, 0000 // -002c
+3522d8: 6200 9946                              |002e: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.NOT_IN_STACK:Lkotlinx/coroutines/internal/Symbol; // field@4699
+3522dc: 6e20 16b3 0600                         |0030: invoke-virtual {v6, v0}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.setNextParkedWorker:(Ljava/lang/Object;)V // method@b316
+3522e2: 1106                                   |0033: return-object v6
+      catches       : (none)
+      positions     :
+        0x0000 line=989
+        0x0007 line=206
+        0x001c line=208
+        0x0023 line=215
+        0x002e line=222
+      locals        :
+        0x0000 - 0x0034 reg=9 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #17              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'releaseCpuPermit'
+      type          : '()J'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 12 16-bit code units
+3523a4:                                        |[3523a4] kotlinx.coroutines.scheduling.CoroutineScheduler.releaseCpuPermit:()J
+3523b4: 6200 a246                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a2
+3523b8: 1801 0000 0000 0004 0000               |0002: const-wide v1, #double 2.17292e-311 // #0000040000000000
+3523c2: 6e40 2b76 3021                         |0007: invoke-virtual {v0, v3, v1, v2}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.addAndGet:(Ljava/lang/Object;J)J // method@762b
+3523c8: 0b00                                   |000a: move-result-wide v0
+3523ca: 1000                                   |000b: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0000 line=294
+      locals        :
+        0x0000 - 0x000c reg=3 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #18              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'signalBlockingWork'
+      type          : '(Z)V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 30 16-bit code units
+3529a8:                                        |[3529a8] kotlinx.coroutines.scheduling.CoroutineScheduler.signalBlockingWork:(Z)V
+3529b8: 6200 a246                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a2
+3529bc: 1701 0000 2000                         |0002: const-wide/32 v1, #float 2.93874e-39 // #00200000
+3529c2: 6e40 2b76 3021                         |0005: invoke-virtual {v0, v3, v1, v2}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.addAndGet:(Ljava/lang/Object;J)J // method@762b
+3529c8: 0b00                                   |0008: move-result-wide v0
+3529ca: 3804 0300                              |0009: if-eqz v4, 000c // +0003
+3529ce: 280e                                   |000b: goto 0019 // +000e
+3529d0: 7010 46b3 0300                         |000c: invoke-direct {v3}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.tryUnpark:()Z // method@b346
+3529d6: 0a04                                   |000f: move-result v4
+3529d8: 3804 0300                              |0010: if-eqz v4, 0013 // +0003
+3529dc: 2807                                   |0012: goto 0019 // +0007
+3529de: 7030 44b3 0301                         |0013: invoke-direct {v3, v0, v1}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.tryCreateWorker:(J)Z // method@b344
+3529e4: 0a04                                   |0016: move-result v4
+3529e6: 3804 0300                              |0017: if-eqz v4, 001a // +0003
+3529ea: 0e00                                   |0019: return-void
+3529ec: 7010 46b3 0300                         |001a: invoke-direct {v3}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.tryUnpark:()Z // method@b346
+3529f2: 0e00                                   |001d: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1004
+        0x000c line=419
+        0x0013 line=420
+        0x001a line=421
+      locals        :
+        0x0000 - 0x001e reg=3 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x001e reg=4 (null) Z
+
+    #19              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'submitToLocalQueue'
+      type          : '(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;Lkotlinx/coroutines/scheduling/Task;Z)Lkotlinx/coroutines/scheduling/Task;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 3
+      insns size    : 35 16-bit code units
+352328:                                        |[352328] kotlinx.coroutines.scheduling.CoroutineScheduler.submitToLocalQueue:(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;Lkotlinx/coroutines/scheduling/Task;Z)Lkotlinx/coroutines/scheduling/Task;
+352338: 3903 0300                              |0000: if-nez v3, 0003 // +0003
+35233c: 2816                                   |0002: goto 0018 // +0016
+35233e: 5430 8546                              |0003: iget-object v0, v3, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.state:Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState; // field@4685
+352342: 6201 8f46                              |0005: sget-object v1, Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState;.TERMINATED:Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState; // field@468f
+352346: 3310 0300                              |0007: if-ne v0, v1, 000a // +0003
+35234a: 280f                                   |0009: goto 0018 // +000f
+35234c: 5440 c246                              |000a: iget-object v0, v4, Lkotlinx/coroutines/scheduling/Task;.taskContext:Lkotlinx/coroutines/scheduling/TaskContext; // field@46c2
+352350: 7210 8eb3 0000                         |000c: invoke-interface {v0}, Lkotlinx/coroutines/scheduling/TaskContext;.getTaskMode:()I // method@b38e
+352356: 0a00                                   |000f: move-result v0
+352358: 3900 0900                              |0010: if-nez v0, 0019 // +0009
+35235c: 5430 8546                              |0012: iget-object v0, v3, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.state:Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState; // field@4685
+352360: 6201 8b46                              |0014: sget-object v1, Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState;.BLOCKING:Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState; // field@468b
+352364: 3310 0300                              |0016: if-ne v0, v1, 0019 // +0003
+352368: 1104                                   |0018: return-object v4
+35236a: 1210                                   |0019: const/4 v0, #int 1 // #1
+35236c: 5c30 8146                              |001a: iput-boolean v0, v3, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.mayHaveLocalTasks:Z // field@4681
+352370: 5433 8046                              |001c: iget-object v3, v3, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.localQueue:Lkotlinx/coroutines/scheduling/WorkQueue; // field@4680
+352374: 6e30 9eb3 4305                         |001e: invoke-virtual {v3, v4, v5}, Lkotlinx/coroutines/scheduling/WorkQueue;.add:(Lkotlinx/coroutines/scheduling/Task;Z)Lkotlinx/coroutines/scheduling/Task; // method@b39e
+35237a: 0c03                                   |0021: move-result-object v3
+35237c: 1103                                   |0022: return-object v3
+      catches       : (none)
+      positions     :
+        0x0003 line=499
+        0x000a line=1013
+        0x0012 line=501
+        0x001a line=504
+        0x001c line=505
+      locals        :
+        0x0000 - 0x0023 reg=2 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x0023 reg=3 (null) Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;
+        0x0000 - 0x0023 reg=4 (null) Lkotlinx/coroutines/scheduling/Task;
+        0x0000 - 0x0023 reg=5 (null) Z
+
+    #20              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'tryAcquireCpuPermit'
+      type          : '()Z'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 6
+      insns size    : 34 16-bit code units
+351b94:                                        |[351b94] kotlinx.coroutines.scheduling.CoroutineScheduler.tryAcquireCpuPermit:()Z
+351ba4: 5362 a146                              |0000: iget-wide v2, v6, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+351ba8: 1800 0000 0000 00fc ff7f               |0002: const-wide v0, #double nan // #7ffffc0000000000
+351bb2: c020                                   |0007: and-long/2addr v0, v2
+351bb4: 1304 2a00                              |0008: const/16 v4, #int 42 // #2a
+351bb8: c440                                   |000a: shr-long/2addr v0, v4
+351bba: 8400                                   |000b: long-to-int v0, v0
+351bbc: 3900 0400                              |000c: if-nez v0, 0010 // +0004
+351bc0: 1200                                   |000e: const/4 v0, #int 0 // #0
+351bc2: 0f00                                   |000f: return v0
+351bc4: 1800 0000 0000 0004 0000               |0010: const-wide v0, #double 2.17292e-311 // #0000040000000000
+351bce: 9c04 0200                              |0015: sub-long v4, v2, v0
+351bd2: 6200 a246                              |0017: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a2
+351bd6: 0761                                   |0019: move-object v1, v6
+351bd8: 7406 2c76 0000                         |001a: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.compareAndSet:(Ljava/lang/Object;JJ)Z // method@762c
+351bde: 0a00                                   |001d: move-result v0
+351be0: 3800 e2ff                              |001e: if-eqz v0, 0000 // -001e
+351be4: 1210                                   |0020: const/4 v0, #int 1 // #1
+351be6: 0f00                                   |0021: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=994
+        0x0017 line=291
+      locals        :
+        0x0000 - 0x0022 reg=6 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #21              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'tryCreateWorker'
+      type          : '(J)Z'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 43 16-bit code units
+351c10:                                        |[351c10] kotlinx.coroutines.scheduling.CoroutineScheduler.tryCreateWorker:(J)Z
+351c20: 1700 ffff 1f00                         |0000: const-wide/32 v0, #float 2.93873e-39 // #001fffff
+351c26: c040                                   |0003: and-long/2addr v0, v4
+351c28: 8400                                   |0004: long-to-int v0, v0
+351c2a: 1801 0000 e0ff ff03 0000               |0005: const-wide v1, #double 2.17292e-311 // #000003ffffe00000
+351c34: c014                                   |000a: and-long/2addr v4, v1
+351c36: 1301 1500                              |000b: const/16 v1, #int 21 // #15
+351c3a: c414                                   |000d: shr-long/2addr v4, v1
+351c3c: 8444                                   |000e: long-to-int v4, v4
+351c3e: b140                                   |000f: sub-int/2addr v0, v4
+351c40: 1204                                   |0010: const/4 v4, #int 0 // #0
+351c42: 7120 2e97 4000                         |0011: invoke-static {v0, v4}, Lkotlin/ranges/RangesKt;.coerceAtLeast:(II)I // method@972e
+351c48: 0a05                                   |0014: move-result v5
+351c4a: 5230 a346                              |0015: iget v0, v3, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.corePoolSize:I // field@46a3
+351c4e: 3505 1300                              |0017: if-ge v5, v0, 002a // +0013
+351c52: 7010 2ab3 0300                         |0019: invoke-direct {v3}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.createNewWorker:()I // method@b32a
+351c58: 0a05                                   |001c: move-result v5
+351c5a: 1210                                   |001d: const/4 v0, #int 1 // #1
+351c5c: 3305 0900                              |001e: if-ne v5, v0, 0027 // +0009
+351c60: 5231 a346                              |0020: iget v1, v3, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.corePoolSize:I // field@46a3
+351c64: 3701 0500                              |0022: if-le v1, v0, 0027 // +0005
+351c68: 7010 2ab3 0300                         |0024: invoke-direct {v3}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.createNewWorker:()I // method@b32a
+351c6e: 3d05 0300                              |0027: if-lez v5, 002a // +0003
+351c72: 0f00                                   |0029: return v0
+351c74: 0f04                                   |002a: return v4
+      catches       : (none)
+      positions     :
+        0x0011 line=433
+        0x0015 line=438
+        0x0019 line=439
+        0x0020 line=442
+      locals        :
+        0x0000 - 0x002b reg=3 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x002b reg=4 (null) J
+
+    #22              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'tryCreateWorker$default'
+      type          : '(Lkotlinx/coroutines/scheduling/CoroutineScheduler;JILjava/lang/Object;)Z'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 3
+      insns size    : 11 16-bit code units
+351be8:                                        |[351be8] kotlinx.coroutines.scheduling.CoroutineScheduler.tryCreateWorker$default:(Lkotlinx/coroutines/scheduling/CoroutineScheduler;JILjava/lang/Object;)Z
+351bf8: dd03 0301                              |0000: and-int/lit8 v3, v3, #int 1 // #01
+351bfc: 3803 0400                              |0002: if-eqz v3, 0006 // +0004
+351c00: 5301 a146                              |0004: iget-wide v1, v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+351c04: 7030 44b3 1002                         |0006: invoke-direct {v0, v1, v2}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.tryCreateWorker:(J)Z // method@b344
+351c0a: 0a00                                   |0009: move-result v0
+351c0c: 0f00                                   |000a: return v0
+      catches       : (none)
+      positions     :
+        0x0004 line=430
+      locals        :
+        0x0000 - 0x000b reg=0 (null) Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x000b reg=1 (null) J
+        0x0000 - 0x000b reg=3 (null) I
+        0x0000 - 0x000b reg=4 (null) Ljava/lang/Object;
+
+    #23              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'tryUnpark'
+      type          : '()Z'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 24 16-bit code units
+351c78:                                        |[351c78] kotlinx.coroutines.scheduling.CoroutineScheduler.tryUnpark:()Z
+351c88: 7010 39b3 0400                         |0000: invoke-direct {v4}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStackPop:()Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker; // method@b339
+351c8e: 0c00                                   |0003: move-result-object v0
+351c90: 1201                                   |0004: const/4 v1, #int 0 // #0
+351c92: 3900 0300                              |0005: if-nez v0, 0008 // +0003
+351c96: 0f01                                   |0007: return v1
+351c98: 6202 8946                              |0008: sget-object v2, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.workerCtl$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@4689
+351c9c: 12f3                                   |000a: const/4 v3, #int -1 // #ff
+351c9e: 6e40 2276 0213                         |000b: invoke-virtual {v2, v0, v3, v1}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.compareAndSet:(Ljava/lang/Object;II)Z // method@7622
+351ca4: 0a01                                   |000e: move-result v1
+351ca6: 3801 f1ff                              |000f: if-eqz v1, 0000 // -000f
+351caa: 1f00 8c11                              |0011: check-cast v0, Ljava/lang/Thread; // type@118c
+351cae: 7110 4a76 0000                         |0013: invoke-static {v0}, Ljava/util/concurrent/locks/LockSupport;.unpark:(Ljava/lang/Thread;)V // method@764a
+351cb4: 1210                                   |0016: const/4 v0, #int 1 // #1
+351cb6: 0f00                                   |0017: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=450
+        0x0008 line=451
+        0x0011 line=452
+      locals        :
+        0x0000 - 0x0018 reg=4 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+  Virtual methods   -
+    #0              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'availableCpuPermits'
+      type          : '(J)I'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 0
+      insns size    : 11 16-bit code units
+351cb8:                                        |[351cb8] kotlinx.coroutines.scheduling.CoroutineScheduler.availableCpuPermits:(J)I
+351cc8: 1800 0000 0000 00fc ff7f               |0000: const-wide v0, #double nan // #7ffffc0000000000
+351cd2: c003                                   |0005: and-long/2addr v3, v0
+351cd4: 1300 2a00                              |0006: const/16 v0, #int 42 // #2a
+351cd8: c403                                   |0008: shr-long/2addr v3, v0
+351cda: 8433                                   |0009: long-to-int v3, v3
+351cdc: 0f03                                   |000a: return v3
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 6 16-bit code units
+3525f8:                                        |[3525f8] kotlinx.coroutines.scheduling.CoroutineScheduler.close:()V
+352608: 1600 1027                              |0000: const-wide/16 v0, #int 10000 // #2710
+35260c: 6e30 3eb3 0201                         |0002: invoke-virtual {v2, v0, v1}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.shutdown:(J)V // method@b33e
+352612: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=328
+      locals        :
+        0x0000 - 0x0006 reg=2 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #2              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'createTask'
+      type          : '(Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;)Lkotlinx/coroutines/scheduling/Task;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 5
+      insns size    : 25 16-bit code units
+3522e4:                                        |[3522e4] kotlinx.coroutines.scheduling.CoroutineScheduler.createTask:(Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;)Lkotlinx/coroutines/scheduling/Task;
+3522f4: 6200 d046                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/TasksKt;.schedulerTimeSource:Lkotlinx/coroutines/scheduling/SchedulerTimeSource; // field@46d0
+3522f8: 6e10 88b3 0000                         |0002: invoke-virtual {v0}, Lkotlinx/coroutines/scheduling/SchedulerTimeSource;.nanoTime:()J // method@b388
+3522fe: 0b00                                   |0005: move-result-wide v0
+352300: 2042 b119                              |0006: instance-of v2, v4, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+352304: 3802 0900                              |0008: if-eqz v2, 0011 // +0009
+352308: 1f04 b119                              |000a: check-cast v4, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+35230c: 5a40 c146                              |000c: iput-wide v0, v4, Lkotlinx/coroutines/scheduling/Task;.submissionTime:J // field@46c1
+352310: 5b45 c246                              |000e: iput-object v5, v4, Lkotlinx/coroutines/scheduling/Task;.taskContext:Lkotlinx/coroutines/scheduling/TaskContext; // field@46c2
+352314: 1104                                   |0010: return-object v4
+352316: 2202 b419                              |0011: new-instance v2, Lkotlinx/coroutines/scheduling/TaskImpl; // type@19b4
+35231a: 7055 92b3 4210                         |0013: invoke-direct {v2, v4, v0, v1, v5}, Lkotlinx/coroutines/scheduling/TaskImpl;.<init>:(Ljava/lang/Runnable;JLkotlinx/coroutines/scheduling/TaskContext;)V // method@b392
+352320: 1f02 b119                              |0016: check-cast v2, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+352324: 1102                                   |0018: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=406
+        0x0006 line=407
+        0x000a line=408
+        0x000e line=409
+        0x0011 line=412
+      locals        :
+        0x0000 - 0x0019 reg=3 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x0019 reg=4 (null) Ljava/lang/Runnable;
+        0x0000 - 0x0019 reg=5 (null) Lkotlinx/coroutines/scheduling/TaskContext;
+
+    #3              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'dispatch'
+      type          : '(Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;Z)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 4
+      insns size    : 83 16-bit code units
+352668:                                        |[352668] kotlinx.coroutines.scheduling.CoroutineScheduler.dispatch:(Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;Z)V
+352678: 7100 82a2 0000                         |0000: invoke-static {}, Lkotlinx/coroutines/AbstractTimeSourceKt;.getTimeSource:()Lkotlinx/coroutines/AbstractTimeSource; // method@a282
+35267e: 0c00                                   |0003: move-result-object v0
+352680: 3800 0500                              |0004: if-eqz v0, 0009 // +0005
+352684: 6e10 7ba2 0000                         |0006: invoke-virtual {v0}, Lkotlinx/coroutines/AbstractTimeSource;.trackTask:()V // method@a27b
+35268a: 6e30 2bb3 2103                         |0009: invoke-virtual {v1, v2, v3}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.createTask:(Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;)Lkotlinx/coroutines/scheduling/Task; // method@b32b
+352690: 0c02                                   |000c: move-result-object v2
+352692: 7010 2db3 0100                         |000d: invoke-direct {v1}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.currentWorker:()Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker; // method@b32d
+352698: 0c03                                   |0010: move-result-object v3
+35269a: 7040 41b3 3142                         |0011: invoke-direct {v1, v3, v2, v4}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.submitToLocalQueue:(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;Lkotlinx/coroutines/scheduling/Task;Z)Lkotlinx/coroutines/scheduling/Task; // method@b341
+3526a0: 0c00                                   |0014: move-result-object v0
+3526a2: 3800 2400                              |0015: if-eqz v0, 0039 // +0024
+3526a6: 7020 26b3 0100                         |0017: invoke-direct {v1, v0}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.addToGlobalQueue:(Lkotlinx/coroutines/scheduling/Task;)Z // method@b326
+3526ac: 0a00                                   |001a: move-result v0
+3526ae: 3800 0300                              |001b: if-eqz v0, 001e // +0003
+3526b2: 281c                                   |001d: goto 0039 // +001c
+3526b4: 2202 5e12                              |001e: new-instance v2, Ljava/util/concurrent/RejectedExecutionException; // type@125e
+3526b8: 2203 8811                              |0020: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+3526bc: 7010 4b72 0300                         |0022: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+3526c2: 5414 aa46                              |0025: iget-object v4, v1, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.schedulerName:Ljava/lang/String; // field@46aa
+3526c6: 6e20 5772 4300                         |0027: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+3526cc: 0c03                                   |002a: move-result-object v3
+3526ce: 1a04 aa07                              |002b: const-string v4, " was terminated" // string@07aa
+3526d2: 6e20 5772 4300                         |002d: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+3526d8: 0c03                                   |0030: move-result-object v3
+3526da: 6e10 6b72 0300                         |0031: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+3526e0: 0c03                                   |0034: move-result-object v3
+3526e2: 7020 f075 3200                         |0035: invoke-direct {v2, v3}, Ljava/util/concurrent/RejectedExecutionException;.<init>:(Ljava/lang/String;)V // method@75f0
+3526e8: 2702                                   |0038: throw v2
+3526ea: 3804 0600                              |0039: if-eqz v4, 003f // +0006
+3526ee: 3803 0400                              |003b: if-eqz v3, 003f // +0004
+3526f2: 1213                                   |003d: const/4 v3, #int 1 // #1
+3526f4: 2802                                   |003e: goto 0040 // +0002
+3526f6: 1203                                   |003f: const/4 v3, #int 0 // #0
+3526f8: 5422 c246                              |0040: iget-object v2, v2, Lkotlinx/coroutines/scheduling/Task;.taskContext:Lkotlinx/coroutines/scheduling/TaskContext; // field@46c2
+3526fc: 7210 8eb3 0200                         |0042: invoke-interface {v2}, Lkotlinx/coroutines/scheduling/TaskContext;.getTaskMode:()I // method@b38e
+352702: 0a02                                   |0045: move-result v2
+352704: 3902 0900                              |0046: if-nez v2, 004f // +0009
+352708: 3803 0300                              |0048: if-eqz v3, 004b // +0003
+35270c: 0e00                                   |004a: return-void
+35270e: 6e10 40b3 0100                         |004b: invoke-virtual {v1}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.signalCpuWork:()V // method@b340
+352714: 0e00                                   |004e: return-void
+352716: 7020 3fb3 3100                         |004f: invoke-direct {v1, v3}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.signalBlockingWork:(Z)V // method@b33f
+35271c: 0e00                                   |0052: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=383
+        0x0009 line=384
+        0x000d line=386
+        0x0011 line=387
+        0x0017 line=389
+        0x001e line=391
+        0x0040 line=1003
+        0x004b line=398
+        0x004f line=401
+      locals        :
+        0x0000 - 0x0053 reg=1 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x0053 reg=2 (null) Ljava/lang/Runnable;
+        0x0000 - 0x0053 reg=3 (null) Lkotlinx/coroutines/scheduling/TaskContext;
+        0x0000 - 0x0053 reg=4 (null) Z
+
+    #4              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'execute'
+      type          : '(Ljava/lang/Runnable;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 6
+      insns size    : 10 16-bit code units
+352720:                                        |[352720] kotlinx.coroutines.scheduling.CoroutineScheduler.execute:(Ljava/lang/Runnable;)V
+352730: 1264                                   |0000: const/4 v4, #int 6 // #6
+352732: 1205                                   |0001: const/4 v5, #int 0 // #0
+352734: 1202                                   |0002: const/4 v2, #int 0 // #0
+352736: 1203                                   |0003: const/4 v3, #int 0 // #0
+352738: 0760                                   |0004: move-object v0, v6
+35273a: 0771                                   |0005: move-object v1, v7
+35273c: 7706 31b3 0000                         |0006: invoke-static/range {v0, v1, v2, v3, v4, v5}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.dispatch$default:(Lkotlinx/coroutines/scheduling/CoroutineScheduler;Ljava/lang/Runnable;Lkotlinx/coroutines/scheduling/TaskContext;ZILjava/lang/Object;)V // method@b331
+352742: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+        0x0006 line=326
+      locals        :
+        0x0000 - 0x000a reg=6 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x000a reg=7 (null) Ljava/lang/Runnable;
+
+    #5              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'isTerminated'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+351ae8:                                        |[351ae8] kotlinx.coroutines.scheduling.CoroutineScheduler.isTerminated:()Z
+351af8: 5210 9f46                              |0000: iget v0, v1, Lkotlinx/coroutines/scheduling/CoroutineScheduler;._isTerminated:I // field@469f
+351afc: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=298
+      locals        :
+        0x0000 - 0x0003 reg=1 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #6              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'parkedWorkersStackPush'
+      type          : '(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;)Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 10
+      ins           : 2
+      outs          : 6
+      insns size    : 66 16-bit code units
+351b00:                                        |[351b00] kotlinx.coroutines.scheduling.CoroutineScheduler.parkedWorkersStackPush:(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;)Z
+351b10: 6e10 08b3 0900                         |0000: invoke-virtual {v9}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.getNextParkedWorker:()Ljava/lang/Object; // method@b308
+351b16: 0c00                                   |0003: move-result-object v0
+351b18: 6201 9946                              |0004: sget-object v1, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.NOT_IN_STACK:Lkotlinx/coroutines/internal/Symbol; // field@4699
+351b1c: 3210 0400                              |0006: if-eq v0, v1, 000a // +0004
+351b20: 1209                                   |0008: const/4 v9, #int 0 // #0
+351b22: 0f09                                   |0009: return v9
+351b24: 5382 a846                              |000a: iget-wide v2, v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStack:J // field@46a8
+351b28: 1700 ffff 1f00                         |000c: const-wide/32 v0, #float 2.93873e-39 // #001fffff
+351b2e: c020                                   |000f: and-long/2addr v0, v2
+351b30: 8400                                   |0010: long-to-int v0, v0
+351b32: 1704 0000 2000                         |0011: const-wide/32 v4, #float 2.93874e-39 // #00200000
+351b38: bb24                                   |0014: add-long/2addr v4, v2
+351b3a: 1706 0000 e0ff                         |0015: const-wide/32 v6, #float nan // #ffe00000
+351b40: c064                                   |0018: and-long/2addr v4, v6
+351b42: 6e10 07b3 0900                         |0019: invoke-virtual {v9}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.getIndexInArray:()I // method@b307
+351b48: 0a01                                   |001c: move-result v1
+351b4a: 7100 f4a3 0000                         |001d: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+351b50: 0a06                                   |0020: move-result v6
+351b52: 3806 0b00                              |0021: if-eqz v6, 002c // +000b
+351b56: 3801 0300                              |0023: if-eqz v1, 0026 // +0003
+351b5a: 2807                                   |0025: goto 002c // +0007
+351b5c: 2209 5311                              |0026: new-instance v9, Ljava/lang/AssertionError; // type@1153
+351b60: 7010 d570 0900                         |0028: invoke-direct {v9}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+351b66: 2709                                   |002b: throw v9
+351b68: 5486 ab46                              |002c: iget-object v6, v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.workers:Lkotlinx/coroutines/internal/ResizableAtomicArray; // field@46ab
+351b6c: 6e20 5eb2 0600                         |002e: invoke-virtual {v6, v0}, Lkotlinx/coroutines/internal/ResizableAtomicArray;.get:(I)Ljava/lang/Object; // method@b25e
+351b72: 0c00                                   |0031: move-result-object v0
+351b74: 6e20 16b3 0900                         |0032: invoke-virtual {v9, v0}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.setNextParkedWorker:(Ljava/lang/Object;)V // method@b316
+351b7a: 6200 a946                              |0035: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStack$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a9
+351b7e: 8116                                   |0037: int-to-long v6, v1
+351b80: c164                                   |0038: or-long/2addr v4, v6
+351b82: 0781                                   |0039: move-object v1, v8
+351b84: 7406 2c76 0000                         |003a: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.compareAndSet:(Ljava/lang/Object;JJ)Z // method@762c
+351b8a: 0a00                                   |003d: move-result v0
+351b8c: 3800 ccff                              |003e: if-eqz v0, 000a // -0034
+351b90: 1219                                   |0040: const/4 v9, #int 1 // #1
+351b92: 0f09                                   |0041: return v9
+      catches       : (none)
+      positions     :
+        0x0000 line=177
+        0x000a line=986
+        0x0019 line=185
+        0x001d line=186
+        0x002c line=187
+        0x0035 line=193
+      locals        :
+        0x0000 - 0x0042 reg=8 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x0042 reg=9 (null) Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;
+
+    #7              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'parkedWorkersStackTopUpdate'
+      type          : '(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;II)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 12
+      ins           : 4
+      outs          : 6
+      insns size    : 40 16-bit code units
+352744:                                        |[352744] kotlinx.coroutines.scheduling.CoroutineScheduler.parkedWorkersStackTopUpdate:(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;II)V
+352754: 5382 a846                              |0000: iget-wide v2, v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStack:J // field@46a8
+352758: 1700 ffff 1f00                         |0002: const-wide/32 v0, #float 2.93873e-39 // #001fffff
+35275e: c020                                   |0005: and-long/2addr v0, v2
+352760: 8400                                   |0006: long-to-int v0, v0
+352762: 1704 0000 2000                         |0007: const-wide/32 v4, #float 2.93874e-39 // #00200000
+352768: bb24                                   |000a: add-long/2addr v4, v2
+35276a: 1706 0000 e0ff                         |000b: const-wide/32 v6, #float nan // #ffe00000
+352770: c064                                   |000e: and-long/2addr v4, v6
+352772: 33a0 0a00                              |000f: if-ne v0, v10, 0019 // +000a
+352776: 390b 0700                              |0011: if-nez v11, 0018 // +0007
+35277a: 7020 38b3 9800                         |0013: invoke-direct {v8, v9}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStackNextIndex:(Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;)I // method@b338
+352780: 0a00                                   |0016: move-result v0
+352782: 2802                                   |0017: goto 0019 // +0002
+352784: 01b0                                   |0018: move v0, v11
+352786: 3a00 e7ff                              |0019: if-ltz v0, 0000 // -0019
+35278a: 0101                                   |001b: move v1, v0
+35278c: 6200 a946                              |001c: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStack$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@46a9
+352790: 8116                                   |001e: int-to-long v6, v1
+352792: c164                                   |001f: or-long/2addr v4, v6
+352794: 0781                                   |0020: move-object v1, v8
+352796: 7406 2c76 0000                         |0021: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.compareAndSet:(Ljava/lang/Object;JJ)Z // method@762c
+35279c: 0a00                                   |0024: move-result v0
+35279e: 3800 dbff                              |0025: if-eqz v0, 0000 // -0025
+3527a2: 0e00                                   |0027: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=984
+        0x0013 line=154
+        0x001c line=162
+      locals        :
+        0x0000 - 0x0028 reg=8 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x0028 reg=9 (null) Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;
+        0x0000 - 0x0028 reg=10 (null) I
+        0x0000 - 0x0028 reg=11 (null) I
+
+    #8              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'runSafely'
+      type          : '(Lkotlinx/coroutines/scheduling/Task;)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 46 16-bit code units
+3527a4:                                        |[3527a4] kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely:(Lkotlinx/coroutines/scheduling/Task;)V
+3527b4: 6e10 8cb3 0300                         |0000: invoke-virtual {v3}, Lkotlinx/coroutines/scheduling/Task;.run:()V // method@b38c
+3527ba: 7100 82a2 0000                         |0003: invoke-static {}, Lkotlinx/coroutines/AbstractTimeSourceKt;.getTimeSource:()Lkotlinx/coroutines/AbstractTimeSource; // method@a282
+3527c0: 0c03                                   |0006: move-result-object v3
+3527c2: 3803 1b00                              |0007: if-eqz v3, 0022 // +001b
+3527c6: 6e10 7ca2 0300                         |0009: invoke-virtual {v3}, Lkotlinx/coroutines/AbstractTimeSource;.unTrackTask:()V // method@a27c
+3527cc: 0e00                                   |000c: return-void
+3527ce: 0d03                                   |000d: move-exception v3
+3527d0: 7100 7b72 0000                         |000e: invoke-static {}, Ljava/lang/Thread;.currentThread:()Ljava/lang/Thread; // method@727b
+3527d6: 0c00                                   |0011: move-result-object v0
+3527d8: 6e10 8372 0000                         |0012: invoke-virtual {v0}, Ljava/lang/Thread;.getUncaughtExceptionHandler:()Ljava/lang/Thread$UncaughtExceptionHandler; // method@7283
+3527de: 0c01                                   |0015: move-result-object v1
+3527e0: 7230 7672 0103                         |0016: invoke-interface {v1, v0, v3}, Ljava/lang/Thread$UncaughtExceptionHandler;.uncaughtException:(Ljava/lang/Thread;Ljava/lang/Throwable;)V // method@7276
+3527e6: 7100 82a2 0000                         |0019: invoke-static {}, Lkotlinx/coroutines/AbstractTimeSourceKt;.getTimeSource:()Lkotlinx/coroutines/AbstractTimeSource; // method@a282
+3527ec: 0c03                                   |001c: move-result-object v3
+3527ee: 3803 0500                              |001d: if-eqz v3, 0022 // +0005
+3527f2: 6e10 7ca2 0300                         |001f: invoke-virtual {v3}, Lkotlinx/coroutines/AbstractTimeSource;.unTrackTask:()V // method@a27c
+3527f8: 0e00                                   |0022: return-void
+3527fa: 0d03                                   |0023: move-exception v3
+3527fc: 7100 82a2 0000                         |0024: invoke-static {}, Lkotlinx/coroutines/AbstractTimeSourceKt;.getTimeSource:()Lkotlinx/coroutines/AbstractTimeSource; // method@a282
+352802: 0c00                                   |0027: move-result-object v0
+352804: 3800 0500                              |0028: if-eqz v0, 002d // +0005
+352808: 6e10 7ca2 0000                         |002a: invoke-virtual {v0}, Lkotlinx/coroutines/AbstractTimeSource;.unTrackTask:()V // method@a27c
+35280e: 2703                                   |002d: throw v3
+      catches       : 2
+        0x0000 - 0x0003
+          <any> -> 0x000d
+        0x000e - 0x0019
+          <any> -> 0x0023
+      positions     :
+        0x0000 line=570
+        0x0003 line=575
+        0x000e line=572
+        0x0012 line=573
+        0x0019 line=575
+      locals        :
+        0x0000 - 0x002e reg=2 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x002e reg=3 (null) Lkotlinx/coroutines/scheduling/Task;
+
+    #9              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'shutdown'
+      type          : '(J)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 10
+      ins           : 3
+      outs          : 4
+      insns size    : 177 16-bit code units
+352828:                                        |[352828] kotlinx.coroutines.scheduling.CoroutineScheduler.shutdown:(J)V
+352838: 6200 a046                              |0000: sget-object v0, Lkotlinx/coroutines/scheduling/CoroutineScheduler;._isTerminated$FU:Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater; // field@46a0
+35283c: 1201                                   |0002: const/4 v1, #int 0 // #0
+35283e: 1212                                   |0003: const/4 v2, #int 1 // #1
+352840: 6e40 2276 7021                         |0004: invoke-virtual {v0, v7, v1, v2}, Ljava/util/concurrent/atomic/AtomicIntegerFieldUpdater;.compareAndSet:(Ljava/lang/Object;II)Z // method@7622
+352846: 0a00                                   |0007: move-result v0
+352848: 3900 0300                              |0008: if-nez v0, 000b // +0003
+35284c: 0e00                                   |000a: return-void
+35284e: 7010 2db3 0700                         |000b: invoke-direct {v7}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.currentWorker:()Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker; // method@b32d
+352854: 0c00                                   |000e: move-result-object v0
+352856: 5471 ab46                              |000f: iget-object v1, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.workers:Lkotlinx/coroutines/internal/ResizableAtomicArray; // field@46ab
+35285a: 1d01                                   |0011: monitor-enter v1
+35285c: 5373 a146                              |0012: iget-wide v3, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+352860: 1705 ffff 1f00                         |0014: const-wide/32 v5, #float 2.93873e-39 // #001fffff
+352866: c053                                   |0017: and-long/2addr v3, v5
+352868: 8433                                   |0018: long-to-int v3, v3
+35286a: 1e01                                   |0019: monitor-exit v1
+35286c: 3632 3f00                              |001a: if-gt v2, v3, 0059 // +003f
+352870: 0121                                   |001c: move v1, v2
+352872: 5474 ab46                              |001d: iget-object v4, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.workers:Lkotlinx/coroutines/internal/ResizableAtomicArray; // field@46ab
+352876: 6e20 5eb2 1400                         |001f: invoke-virtual {v4, v1}, Lkotlinx/coroutines/internal/ResizableAtomicArray;.get:(I)Ljava/lang/Object; // method@b25e
+35287c: 0c04                                   |0022: move-result-object v4
+35287e: 7110 d293 0400                         |0023: invoke-static {v4}, Lkotlin/jvm/internal/Intrinsics;.checkNotNull:(Ljava/lang/Object;)V // method@93d2
+352884: 1f04 a519                              |0026: check-cast v4, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker; // type@19a5
+352888: 3204 2c00                              |0028: if-eq v4, v0, 0054 // +002c
+35288c: 6e10 0cb3 0400                         |002a: invoke-virtual {v4}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.isAlive:()Z // method@b30c
+352892: 0a05                                   |002d: move-result v5
+352894: 3805 0c00                              |002e: if-eqz v5, 003a // +000c
+352898: 0745                                   |0030: move-object v5, v4
+35289a: 1f05 8c11                              |0031: check-cast v5, Ljava/lang/Thread; // type@118c
+35289e: 7110 4a76 0500                         |0033: invoke-static {v5}, Ljava/util/concurrent/locks/LockSupport;.unpark:(Ljava/lang/Thread;)V // method@764a
+3528a4: 6e30 0db3 8409                         |0036: invoke-virtual {v4, v8, v9}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.join:(J)V // method@b30d
+3528aa: 28f1                                   |0039: goto 002a // -000f
+3528ac: 5445 8546                              |003a: iget-object v5, v4, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.state:Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState; // field@4685
+3528b0: 7100 f4a3 0000                         |003c: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+3528b6: 0a06                                   |003f: move-result v6
+3528b8: 3806 0d00                              |0040: if-eqz v6, 004d // +000d
+3528bc: 6206 8f46                              |0042: sget-object v6, Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState;.TERMINATED:Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState; // field@468f
+3528c0: 3365 0300                              |0044: if-ne v5, v6, 0047 // +0003
+3528c4: 2807                                   |0046: goto 004d // +0007
+3528c6: 2208 5311                              |0047: new-instance v8, Ljava/lang/AssertionError; // type@1153
+3528ca: 7010 d570 0800                         |0049: invoke-direct {v8}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+3528d0: 2708                                   |004c: throw v8
+3528d2: 5444 8046                              |004d: iget-object v4, v4, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.localQueue:Lkotlinx/coroutines/scheduling/WorkQueue; // field@4680
+3528d6: 5475 a446                              |004f: iget-object v5, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalBlockingQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a4
+3528da: 6e20 a4b3 5400                         |0051: invoke-virtual {v4, v5}, Lkotlinx/coroutines/scheduling/WorkQueue;.offloadAllWorkTo:(Lkotlinx/coroutines/scheduling/GlobalQueue;)V // method@b3a4
+3528e0: 3231 0500                              |0054: if-eq v1, v3, 0059 // +0005
+3528e4: d801 0101                              |0056: add-int/lit8 v1, v1, #int 1 // #01
+3528e8: 28c5                                   |0058: goto 001d // -003b
+3528ea: 5478 a446                              |0059: iget-object v8, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalBlockingQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a4
+3528ee: 6e10 6ab3 0800                         |005b: invoke-virtual {v8}, Lkotlinx/coroutines/scheduling/GlobalQueue;.close:()V // method@b36a
+3528f4: 5478 a546                              |005e: iget-object v8, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalCpuQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a5
+3528f8: 6e10 6ab3 0800                         |0060: invoke-virtual {v8}, Lkotlinx/coroutines/scheduling/GlobalQueue;.close:()V // method@b36a
+3528fe: 3800 0800                              |0063: if-eqz v0, 006b // +0008
+352902: 6e20 06b3 2000                         |0065: invoke-virtual {v0, v2}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.findTask:(Z)Lkotlinx/coroutines/scheduling/Task; // method@b306
+352908: 0c08                                   |0068: move-result-object v8
+35290a: 3908 4100                              |0069: if-nez v8, 00aa // +0041
+35290e: 5478 a546                              |006b: iget-object v8, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalCpuQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a5
+352912: 6e10 6cb3 0800                         |006d: invoke-virtual {v8}, Lkotlinx/coroutines/scheduling/GlobalQueue;.removeFirstOrNull:()Ljava/lang/Object; // method@b36c
+352918: 0c08                                   |0070: move-result-object v8
+35291a: 1f08 b119                              |0071: check-cast v8, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+35291e: 3908 3700                              |0073: if-nez v8, 00aa // +0037
+352922: 5478 a446                              |0075: iget-object v8, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalBlockingQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a4
+352926: 6e10 6cb3 0800                         |0077: invoke-virtual {v8}, Lkotlinx/coroutines/scheduling/GlobalQueue;.removeFirstOrNull:()Ljava/lang/Object; // method@b36c
+35292c: 0c08                                   |007a: move-result-object v8
+35292e: 1f08 b119                              |007b: check-cast v8, Lkotlinx/coroutines/scheduling/Task; // type@19b1
+352932: 3908 2d00                              |007d: if-nez v8, 00aa // +002d
+352936: 3800 0700                              |007f: if-eqz v0, 0086 // +0007
+35293a: 6208 8f46                              |0081: sget-object v8, Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState;.TERMINATED:Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState; // field@468f
+35293e: 6e20 1ab3 8000                         |0083: invoke-virtual {v0, v8}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.tryReleaseCpu:(Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState;)Z // method@b31a
+352944: 7100 f4a3 0000                         |0086: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+35294a: 0a08                                   |0089: move-result v8
+35294c: 3808 1900                              |008a: if-eqz v8, 00a3 // +0019
+352950: 5378 a146                              |008c: iget-wide v8, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+352954: 1800 0000 0000 00fc ff7f               |008e: const-wide v0, #double nan // #7ffffc0000000000
+35295e: c008                                   |0093: and-long/2addr v8, v0
+352960: 1300 2a00                              |0094: const/16 v0, #int 42 // #2a
+352964: c408                                   |0096: shr-long/2addr v8, v0
+352966: 8488                                   |0097: long-to-int v8, v8
+352968: 5279 a346                              |0098: iget v9, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.corePoolSize:I // field@46a3
+35296c: 3398 0300                              |009a: if-ne v8, v9, 009d // +0003
+352970: 2807                                   |009c: goto 00a3 // +0007
+352972: 2208 5311                              |009d: new-instance v8, Ljava/lang/AssertionError; // type@1153
+352976: 7010 d570 0800                         |009f: invoke-direct {v8}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+35297c: 2708                                   |00a2: throw v8
+35297e: 1608 0000                              |00a3: const-wide/16 v8, #int 0 // #0
+352982: 5a78 a846                              |00a5: iput-wide v8, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.parkedWorkersStack:J // field@46a8
+352986: 5a78 a146                              |00a7: iput-wide v8, v7, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+35298a: 0e00                                   |00a9: return-void
+35298c: 6e20 3db3 8700                         |00aa: invoke-virtual {v7, v8}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.runSafely:(Lkotlinx/coroutines/scheduling/Task;)V // method@b33d
+352992: 28b6                                   |00ad: goto 0063 // -004a
+352994: 0d08                                   |00ae: move-exception v8
+352996: 1e01                                   |00af: monitor-exit v1
+352998: 2708                                   |00b0: throw v8
+      catches       : 1
+        0x0012 - 0x0014
+          <any> -> 0x00ae
+      positions     :
+        0x0000 line=333
+        0x000b line=335
+        0x000f line=337
+        0x0011 line=996
+        0x0012 line=997
+        0x0019 line=337
+        0x001d line=340
+        0x002a line=342
+        0x0030 line=343
+        0x0036 line=344
+        0x003a line=346
+        0x003c line=347
+        0x004d line=348
+        0x0059 line=352
+        0x005e line=353
+        0x0065 line=356
+        0x006b line=357
+        0x0075 line=358
+        0x0081 line=363
+        0x0086 line=365
+        0x008c line=998
+        0x0098 line=365
+        0x00a5 line=366
+        0x00a7 line=367
+        0x00aa line=360
+        0x00af line=337
+      locals        :
+        0x0000 - 0x00b1 reg=7 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+        0x0000 - 0x00b1 reg=8 (null) J
+
+    #10              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'signalCpuWork'
+      type          : '()V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 5
+      insns size    : 22 16-bit code units
+3529f4:                                        |[3529f4] kotlinx.coroutines.scheduling.CoroutineScheduler.signalCpuWork:()V
+352a04: 7010 46b3 0400                         |0000: invoke-direct {v4}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.tryUnpark:()Z // method@b346
+352a0a: 0a00                                   |0003: move-result v0
+352a0c: 3800 0300                              |0004: if-eqz v0, 0007 // +0003
+352a10: 280b                                   |0006: goto 0011 // +000b
+352a12: 1210                                   |0007: const/4 v0, #int 1 // #1
+352a14: 1201                                   |0008: const/4 v1, #int 0 // #0
+352a16: 1602 0000                              |0009: const-wide/16 v2, #int 0 // #0
+352a1a: 7151 45b3 2403                         |000b: invoke-static {v4, v2, v3, v0, v1}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.tryCreateWorker$default:(Lkotlinx/coroutines/scheduling/CoroutineScheduler;JILjava/lang/Object;)Z // method@b345
+352a20: 0a00                                   |000e: move-result v0
+352a22: 3800 0300                              |000f: if-eqz v0, 0012 // +0003
+352a26: 0e00                                   |0011: return-void
+352a28: 7010 46b3 0400                         |0012: invoke-direct {v4}, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.tryUnpark:()Z // method@b346
+352a2e: 0e00                                   |0015: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=425
+        0x000b line=426
+        0x0012 line=427
+      locals        :
+        0x0000 - 0x0016 reg=4 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+    #11              : (in Lkotlinx/coroutines/scheduling/CoroutineScheduler;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 13
+      ins           : 1
+      outs          : 2
+      insns size    : 368 16-bit code units
+351f34:                                        |[351f34] kotlinx.coroutines.scheduling.CoroutineScheduler.toString:()Ljava/lang/String;
+351f44: 2200 1412                              |0000: new-instance v0, Ljava/util/ArrayList; // type@1214
+351f48: 7010 2874 0000                         |0002: invoke-direct {v0}, Ljava/util/ArrayList;.<init>:()V // method@7428
+351f4e: 54c1 ab46                              |0005: iget-object v1, v12, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.workers:Lkotlinx/coroutines/internal/ResizableAtomicArray; // field@46ab
+351f52: 6e10 5db2 0100                         |0007: invoke-virtual {v1}, Lkotlinx/coroutines/internal/ResizableAtomicArray;.currentLength:()I // method@b25d
+351f58: 0a01                                   |000a: move-result v1
+351f5a: 1202                                   |000b: const/4 v2, #int 0 // #0
+351f5c: 1213                                   |000c: const/4 v3, #int 1 // #1
+351f5e: 0124                                   |000d: move v4, v2
+351f60: 0145                                   |000e: move v5, v4
+351f62: 0156                                   |000f: move v6, v5
+351f64: 0167                                   |0010: move v7, v6
+351f66: 0138                                   |0011: move v8, v3
+351f68: 3518 8c00                              |0012: if-ge v8, v1, 009e // +008c
+351f6c: 54c9 ab46                              |0014: iget-object v9, v12, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.workers:Lkotlinx/coroutines/internal/ResizableAtomicArray; // field@46ab
+351f70: 6e20 5eb2 8900                         |0016: invoke-virtual {v9, v8}, Lkotlinx/coroutines/internal/ResizableAtomicArray;.get:(I)Ljava/lang/Object; // method@b25e
+351f76: 0c09                                   |0019: move-result-object v9
+351f78: 1f09 a519                              |001a: check-cast v9, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker; // type@19a5
+351f7c: 3909 0400                              |001c: if-nez v9, 0020 // +0004
+351f80: 2900 7c00                              |001e: goto/16 009a // +007c
+351f84: 549a 8046                              |0020: iget-object v10, v9, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.localQueue:Lkotlinx/coroutines/scheduling/WorkQueue; // field@4680
+351f88: 6e10 a3b3 0a00                         |0022: invoke-virtual {v10}, Lkotlinx/coroutines/scheduling/WorkQueue;.getSize$kotlinx_coroutines_core:()I // method@b3a3
+351f8e: 0a0a                                   |0025: move-result v10
+351f90: 5499 8546                              |0026: iget-object v9, v9, Lkotlinx/coroutines/scheduling/CoroutineScheduler$Worker;.state:Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState; // field@4685
+351f94: 620b 7e46                              |0028: sget-object v11, Lkotlinx/coroutines/scheduling/CoroutineScheduler$WhenMappings;.$EnumSwitchMapping$0:[I // field@467e
+351f98: 6e10 20b3 0900                         |002a: invoke-virtual {v9}, Lkotlinx/coroutines/scheduling/CoroutineScheduler$WorkerState;.ordinal:()I // method@b320
+351f9e: 0a09                                   |002d: move-result v9
+351fa0: 4409 0b09                              |002e: aget v9, v11, v9
+351fa4: 3239 6800                              |0030: if-eq v9, v3, 0098 // +0068
+351fa8: 122b                                   |0032: const/4 v11, #int 2 // #2
+351faa: 32b9 4900                              |0033: if-eq v9, v11, 007c // +0049
+351fae: 123b                                   |0035: const/4 v11, #int 3 // #3
+351fb0: 32b9 2a00                              |0036: if-eq v9, v11, 0060 // +002a
+351fb4: 124b                                   |0038: const/4 v11, #int 4 // #4
+351fb6: 32b9 0900                              |0039: if-eq v9, v11, 0042 // +0009
+351fba: 125a                                   |003b: const/4 v10, #int 5 // #5
+351fbc: 32a9 0300                              |003c: if-eq v9, v10, 003f // +0003
+351fc0: 285c                                   |003e: goto 009a // +005c
+351fc2: d807 0701                              |003f: add-int/lit8 v7, v7, #int 1 // #01
+351fc6: 2859                                   |0041: goto 009a // +0059
+351fc8: d806 0601                              |0042: add-int/lit8 v6, v6, #int 1 // #01
+351fcc: 3d0a 5600                              |0044: if-lez v10, 009a // +0056
+351fd0: 0709                                   |0046: move-object v9, v0
+351fd2: 1f09 1812                              |0047: check-cast v9, Ljava/util/Collection; // type@1218
+351fd6: 220b 8811                              |0049: new-instance v11, Ljava/lang/StringBuilder; // type@1188
+351fda: 7010 4b72 0b00                         |004b: invoke-direct {v11}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+351fe0: 6e20 5272 ab00                         |004e: invoke-virtual {v11, v10}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+351fe6: 0c0a                                   |0051: move-result-object v10
+351fe8: 130b 6400                              |0052: const/16 v11, #int 100 // #64
+351fec: 6e20 4f72 ba00                         |0054: invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@724f
+351ff2: 0c0a                                   |0057: move-result-object v10
+351ff4: 6e10 6b72 0a00                         |0058: invoke-virtual {v10}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+351ffa: 0c0a                                   |005b: move-result-object v10
+351ffc: 7220 a474 a900                         |005c: invoke-interface {v9, v10}, Ljava/util/Collection;.add:(Ljava/lang/Object;)Z // method@74a4
+352002: 283b                                   |005f: goto 009a // +003b
+352004: d802 0201                              |0060: add-int/lit8 v2, v2, #int 1 // #01
+352008: 0709                                   |0062: move-object v9, v0
+35200a: 1f09 1812                              |0063: check-cast v9, Ljava/util/Collection; // type@1218
+35200e: 220b 8811                              |0065: new-instance v11, Ljava/lang/StringBuilder; // type@1188
+352012: 7010 4b72 0b00                         |0067: invoke-direct {v11}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+352018: 6e20 5272 ab00                         |006a: invoke-virtual {v11, v10}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+35201e: 0c0a                                   |006d: move-result-object v10
+352020: 130b 6300                              |006e: const/16 v11, #int 99 // #63
+352024: 6e20 4f72 ba00                         |0070: invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@724f
+35202a: 0c0a                                   |0073: move-result-object v10
+35202c: 6e10 6b72 0a00                         |0074: invoke-virtual {v10}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+352032: 0c0a                                   |0077: move-result-object v10
+352034: 7220 a474 a900                         |0078: invoke-interface {v9, v10}, Ljava/util/Collection;.add:(Ljava/lang/Object;)Z // method@74a4
+35203a: 281f                                   |007b: goto 009a // +001f
+35203c: d804 0401                              |007c: add-int/lit8 v4, v4, #int 1 // #01
+352040: 0709                                   |007e: move-object v9, v0
+352042: 1f09 1812                              |007f: check-cast v9, Ljava/util/Collection; // type@1218
+352046: 220b 8811                              |0081: new-instance v11, Ljava/lang/StringBuilder; // type@1188
+35204a: 7010 4b72 0b00                         |0083: invoke-direct {v11}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+352050: 6e20 5272 ab00                         |0086: invoke-virtual {v11, v10}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+352056: 0c0a                                   |0089: move-result-object v10
+352058: 130b 6200                              |008a: const/16 v11, #int 98 // #62
+35205c: 6e20 4f72 ba00                         |008c: invoke-virtual {v10, v11}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@724f
+352062: 0c0a                                   |008f: move-result-object v10
+352064: 6e10 6b72 0a00                         |0090: invoke-virtual {v10}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+35206a: 0c0a                                   |0093: move-result-object v10
+35206c: 7220 a474 a900                         |0094: invoke-interface {v9, v10}, Ljava/util/Collection;.add:(Ljava/lang/Object;)Z // method@74a4
+352072: 2803                                   |0097: goto 009a // +0003
+352074: d805 0501                              |0098: add-int/lit8 v5, v5, #int 1 // #01
+352078: d808 0801                              |009a: add-int/lit8 v8, v8, #int 1 // #01
+35207c: 2900 76ff                              |009c: goto/16 0012 // -008a
+352080: 53c8 a146                              |009e: iget-wide v8, v12, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.controlState:J // field@46a1
+352084: 2201 8811                              |00a0: new-instance v1, Ljava/lang/StringBuilder; // type@1188
+352088: 7010 4b72 0100                         |00a2: invoke-direct {v1}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+35208e: 54c3 aa46                              |00a5: iget-object v3, v12, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.schedulerName:Ljava/lang/String; // field@46aa
+352092: 6e20 5772 3100                         |00a7: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+352098: 0c03                                   |00aa: move-result-object v3
+35209a: 130a 4000                              |00ab: const/16 v10, #int 64 // #40
+35209e: 6e20 4f72 a300                         |00ad: invoke-virtual {v3, v10}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@724f
+3520a4: 0c03                                   |00b0: move-result-object v3
+3520a6: 7110 faa3 0c00                         |00b1: invoke-static {v12}, Lkotlinx/coroutines/DebugStringsKt;.getHexAddress:(Ljava/lang/Object;)Ljava/lang/String; // method@a3fa
+3520ac: 0c0a                                   |00b4: move-result-object v10
+3520ae: 6e20 5772 a300                         |00b5: invoke-virtual {v3, v10}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+3520b4: 0c03                                   |00b8: move-result-object v3
+3520b6: 1a0a 795e                              |00b9: const-string v10, "[Pool Size {core = " // string@5e79
+3520ba: 6e20 5772 a300                         |00bb: invoke-virtual {v3, v10}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+3520c0: 0c03                                   |00be: move-result-object v3
+3520c2: 52ca a346                              |00bf: iget v10, v12, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.corePoolSize:I // field@46a3
+3520c6: 6e20 5272 a300                         |00c1: invoke-virtual {v3, v10}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+3520cc: 0c03                                   |00c4: move-result-object v3
+3520ce: 1a0a 5e15                              |00c5: const-string v10, ", max = " // string@155e
+3520d2: 6e20 5772 a300                         |00c7: invoke-virtual {v3, v10}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+3520d8: 0c03                                   |00ca: move-result-object v3
+3520da: 52ca a746                              |00cb: iget v10, v12, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.maxPoolSize:I // field@46a7
+3520de: 6e20 5272 a300                         |00cd: invoke-virtual {v3, v10}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+3520e4: 0c03                                   |00d0: move-result-object v3
+3520e6: 1a0a c1b4                              |00d1: const-string v10, "}, Worker States {CPU = " // string@b4c1
+3520ea: 6e20 5772 a300                         |00d3: invoke-virtual {v3, v10}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+3520f0: 0c03                                   |00d6: move-result-object v3
+3520f2: 6e20 5272 2300                         |00d7: invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+3520f8: 0c02                                   |00da: move-result-object v2
+3520fa: 1a03 0c15                              |00db: const-string v3, ", blocking = " // string@150c
+3520fe: 6e20 5772 3200                         |00dd: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+352104: 0c02                                   |00e0: move-result-object v2
+352106: 6e20 5272 4200                         |00e1: invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+35210c: 0c02                                   |00e4: move-result-object v2
+35210e: 1a03 6d15                              |00e5: const-string v3, ", parked = " // string@156d
+352112: 6e20 5772 3200                         |00e7: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+352118: 0c02                                   |00ea: move-result-object v2
+35211a: 6e20 5272 5200                         |00eb: invoke-virtual {v2, v5}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+352120: 0c02                                   |00ee: move-result-object v2
+352122: 1a03 2b15                              |00ef: const-string v3, ", dormant = " // string@152b
+352126: 6e20 5772 3200                         |00f1: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+35212c: 0c02                                   |00f4: move-result-object v2
+35212e: 6e20 5272 6200                         |00f5: invoke-virtual {v2, v6}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+352134: 0c02                                   |00f8: move-result-object v2
+352136: 1a03 8b15                              |00f9: const-string v3, ", terminated = " // string@158b
+35213a: 6e20 5772 3200                         |00fb: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+352140: 0c02                                   |00fe: move-result-object v2
+352142: 6e20 5272 7200                         |00ff: invoke-virtual {v2, v7}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+352148: 0c02                                   |0102: move-result-object v2
+35214a: 1a03 c2b4                              |0103: const-string v3, "}, running workers queues = " // string@b4c2
+35214e: 6e20 5772 3200                         |0105: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+352154: 0c02                                   |0108: move-result-object v2
+352156: 6e20 5672 0200                         |0109: invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+35215c: 0c00                                   |010c: move-result-object v0
+35215e: 1a02 3e15                              |010d: const-string v2, ", global CPU queue size = " // string@153e
+352162: 6e20 5772 2000                         |010f: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+352168: 0c00                                   |0112: move-result-object v0
+35216a: 54c2 a546                              |0113: iget-object v2, v12, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalCpuQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a5
+35216e: 6e10 6bb3 0200                         |0115: invoke-virtual {v2}, Lkotlinx/coroutines/scheduling/GlobalQueue;.getSize:()I // method@b36b
+352174: 0a02                                   |0118: move-result v2
+352176: 6e20 5272 2000                         |0119: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+35217c: 0c00                                   |011c: move-result-object v0
+35217e: 1a02 3f15                              |011d: const-string v2, ", global blocking queue size = " // string@153f
+352182: 6e20 5772 2000                         |011f: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+352188: 0c00                                   |0122: move-result-object v0
+35218a: 54c2 a446                              |0123: iget-object v2, v12, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.globalBlockingQueue:Lkotlinx/coroutines/scheduling/GlobalQueue; // field@46a4
+35218e: 6e10 6bb3 0200                         |0125: invoke-virtual {v2}, Lkotlinx/coroutines/scheduling/GlobalQueue;.getSize:()I // method@b36b
+352194: 0a02                                   |0128: move-result v2
+352196: 6e20 5272 2000                         |0129: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+35219c: 1a00 0215                              |012c: const-string v0, ", Control State {created workers= " // string@1502
+3521a0: 6e20 5772 0100                         |012e: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+3521a6: 0c00                                   |0131: move-result-object v0
+3521a8: 1702 ffff 1f00                         |0132: const-wide/32 v2, #float 2.93873e-39 // #001fffff
+3521ae: c082                                   |0135: and-long/2addr v2, v8
+3521b0: 8422                                   |0136: long-to-int v2, v2
+3521b2: 6e20 5272 2000                         |0137: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+3521b8: 0c00                                   |013a: move-result-object v0
+3521ba: 1a02 0d15                              |013b: const-string v2, ", blocking tasks = " // string@150d
+3521be: 6e20 5772 2000                         |013d: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+3521c4: 0c00                                   |0140: move-result-object v0
+3521c6: 1802 0000 e0ff ff03 0000               |0141: const-wide v2, #double 2.17292e-311 // #000003ffffe00000
+3521d0: c082                                   |0146: and-long/2addr v2, v8
+3521d2: 1304 1500                              |0147: const/16 v4, #int 21 // #15
+3521d6: c442                                   |0149: shr-long/2addr v2, v4
+3521d8: 8422                                   |014a: long-to-int v2, v2
+3521da: 6e20 5272 2000                         |014b: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+3521e0: 0c00                                   |014e: move-result-object v0
+3521e2: 1a02 0115                              |014f: const-string v2, ", CPUs acquired = " // string@1501
+3521e6: 6e20 5772 2000                         |0151: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+3521ec: 0c00                                   |0154: move-result-object v0
+3521ee: 52c2 a346                              |0155: iget v2, v12, Lkotlinx/coroutines/scheduling/CoroutineScheduler;.corePoolSize:I // field@46a3
+3521f2: 1803 0000 0000 00fc ff7f               |0157: const-wide v3, #double nan // #7ffffc0000000000
+3521fc: c083                                   |015c: and-long/2addr v3, v8
+3521fe: 1305 2a00                              |015d: const/16 v5, #int 42 // #2a
+352202: c453                                   |015f: shr-long/2addr v3, v5
+352204: 8433                                   |0160: long-to-int v3, v3
+352206: b132                                   |0161: sub-int/2addr v2, v3
+352208: 6e20 5272 2000                         |0162: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+35220e: 0c00                                   |0165: move-result-object v0
+352210: 1a02 c5b4                              |0166: const-string v2, "}]" // string@b4c5
+352214: 6e20 5772 2000                         |0168: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+35221a: 6e10 6b72 0100                         |016b: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+352220: 0c00                                   |016e: move-result-object v0
+352222: 1100                                   |016f: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=526
+        0x0005 line=527
+        0x0014 line=528
+        0x0020 line=529
+        0x0026 line=530
+        0x0046 line=542
+        0x0062 line=538
+        0x007e line=534
+        0x009e line=547
+        0x00a0 line=548
+        0x00bf line=550
+        0x00c1 line=548
+        0x00c5 line=550
+        0x00c7 line=548
+        0x00cb line=551
+        0x00cd line=548
+        0x00d1 line=551
+        0x00d3 line=548
+        0x00db line=553
+        0x00dd line=548
+        0x00e5 line=554
+        0x00e7 line=548
+        0x00ef line=555
+        0x00f1 line=548
+        0x00f9 line=556
+        0x00fb line=548
+        0x0103 line=557
+        0x0105 line=548
+        0x010d line=558
+        0x010f line=548
+        0x0113 line=559
+        0x0119 line=548
+        0x011d line=559
+        0x011f line=548
+        0x0123 line=560
+        0x0129 line=548
+        0x012c line=560
+        0x012e line=548
+        0x013b line=562
+        0x013d line=548
+        0x014f line=563
+        0x0151 line=548
+        0x0155 line=564
+        0x0162 line=548
+        0x0166 line=565
+        0x0168 line=548
+      locals        :
+        0x0000 - 0x0170 reg=12 this Lkotlinx/coroutines/scheduling/CoroutineScheduler;
+
+  source_file_idx   : 8376 (CoroutineScheduler.kt)
+

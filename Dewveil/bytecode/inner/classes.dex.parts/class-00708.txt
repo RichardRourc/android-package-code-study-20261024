@@ -1,0 +1,1392 @@
+Class #708            -
+  Class descriptor  : 'Landroidx/constraintlayout/solver/ArrayLinkedVariables;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Landroidx/constraintlayout/solver/ArrayRow$ArrayRowVariables;'
+  Static fields     -
+    #0              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'DEBUG'
+      type          : 'Z'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : false
+    #1              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'FULL_NEW_CHECK'
+      type          : 'Z'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : false
+    #2              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'NONE'
+      type          : 'I'
+      access        : 0x0018 (STATIC FINAL)
+      value         : -1
+    #3              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'epsilon'
+      type          : 'F'
+      access        : 0x000a (PRIVATE STATIC)
+      value         : 0.001
+  Instance fields   -
+    #0              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'ROW_SIZE'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'candidate'
+      type          : 'Landroidx/constraintlayout/solver/SolverVariable;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'currentSize'
+      type          : 'I'
+      access        : 0x0000 ()
+    #3              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'mArrayIndices'
+      type          : '[I'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'mArrayNextIndices'
+      type          : '[I'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'mArrayValues'
+      type          : '[F'
+      access        : 0x0002 (PRIVATE)
+    #6              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'mCache'
+      type          : 'Landroidx/constraintlayout/solver/Cache;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #7              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'mDidFillOnce'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #8              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'mHead'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #9              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'mLast'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #10              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'mRow'
+      type          : 'Landroidx/constraintlayout/solver/ArrayRow;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 0
+      ins           : 0
+      outs          : 0
+      insns size    : 1 16-bit code units
+4ca594:                                        |[4ca594] androidx.constraintlayout.solver.ArrayLinkedVariables.<clinit>:()V
+4ca5a4: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : '<init>'
+      type          : '(Landroidx/constraintlayout/solver/ArrayRow;Landroidx/constraintlayout/solver/Cache;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 1
+      insns size    : 37 16-bit code units
+4ca5a8:                                        |[4ca5a8] androidx.constraintlayout.solver.ArrayLinkedVariables.<init>:(Landroidx/constraintlayout/solver/ArrayRow;Landroidx/constraintlayout/solver/Cache;)V
+4ca5b8: 7010 c8d1 0300                         |0000: invoke-direct {v3}, Ljava/lang/Object;.<init>:()V // method@d1c8
+4ca5be: 1200                                   |0003: const/4 v0, #int 0 // #0
+4ca5c0: 5930 de14                              |0004: iput v0, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca5c4: 1301 0800                              |0006: const/16 v1, #int 8 // #8
+4ca5c8: 5931 dc14                              |0008: iput v1, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.ROW_SIZE:I // field@14dc
+4ca5cc: 1202                                   |000a: const/4 v2, #int 0 // #0
+4ca5ce: 5b32 dd14                              |000b: iput-object v2, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.candidate:Landroidx/constraintlayout/solver/SolverVariable; // field@14dd
+4ca5d2: 2312 801f                              |000d: new-array v2, v1, [I // type@1f80
+4ca5d6: 5b32 e014                              |000f: iput-object v2, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca5da: 2312 801f                              |0011: new-array v2, v1, [I // type@1f80
+4ca5de: 5b32 e114                              |0013: iput-object v2, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca5e2: 2311 7f1f                              |0015: new-array v1, v1, [F // type@1f7f
+4ca5e6: 5b31 e214                              |0017: iput-object v1, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4ca5ea: 12f1                                   |0019: const/4 v1, #int -1 // #ff
+4ca5ec: 5931 e514                              |001a: iput v1, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca5f0: 5931 e614                              |001c: iput v1, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca5f4: 5c30 e414                              |001e: iput-boolean v0, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4ca5f8: 5b34 e714                              |0020: iput-object v4, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mRow:Landroidx/constraintlayout/solver/ArrayRow; // field@14e7
+4ca5fc: 5b35 e314                              |0022: iput-object v5, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mCache:Landroidx/constraintlayout/solver/Cache; // field@14e3
+4ca600: 0e00                                   |0024: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=101
+        0x0004 line=43
+        0x0008 line=48
+        0x000b line=50
+        0x000d line=53
+        0x0011 line=56
+        0x0015 line=59
+        0x001a line=62
+        0x001c line=78
+        0x001e line=81
+        0x0020 line=102
+        0x0022 line=103
+      locals        :
+        0x0000 - 0x0025 reg=3 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x0025 reg=4 (null) Landroidx/constraintlayout/solver/ArrayRow;
+        0x0000 - 0x0025 reg=5 (null) Landroidx/constraintlayout/solver/Cache;
+
+  Virtual methods   -
+    #0              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'add'
+      type          : '(Landroidx/constraintlayout/solver/SolverVariable;FZ)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 12
+      ins           : 4
+      outs          : 2
+      insns size    : 326 16-bit code units
+4ca604:                                        |[4ca604] androidx.constraintlayout.solver.ArrayLinkedVariables.add:(Landroidx/constraintlayout/solver/SolverVariable;FZ)V
+4ca614: 6000 df14                              |0000: sget v0, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.epsilon:F // field@14df
+4ca618: 7f01                                   |0002: neg-float v1, v0
+4ca61a: 2d01 0a01                              |0003: cmpl-float v1, v10, v1
+4ca61e: 3d01 0700                              |0005: if-lez v1, 000c // +0007
+4ca622: 2e00 0a00                              |0007: cmpg-float v0, v10, v0
+4ca626: 3b00 0300                              |0009: if-gez v0, 000c // +0003
+4ca62a: 0e00                                   |000b: return-void
+4ca62c: 5280 e514                              |000c: iget v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca630: 1201                                   |000e: const/4 v1, #int 0 // #0
+4ca632: 12f2                                   |000f: const/4 v2, #int -1 // #ff
+4ca634: 1213                                   |0010: const/4 v3, #int 1 // #1
+4ca636: 3320 3800                              |0011: if-ne v0, v2, 0049 // +0038
+4ca63a: 5981 e514                              |0013: iput v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca63e: 548b e214                              |0015: iget-object v11, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4ca642: 4b0a 0b01                              |0017: aput v10, v11, v1
+4ca646: 548a e014                              |0019: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca64a: 529b 6115                              |001b: iget v11, v9, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4ca64e: 4b0b 0a01                              |001d: aput v11, v10, v1
+4ca652: 548a e114                              |001f: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca656: 528b e514                              |0021: iget v11, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca65a: 4b02 0a0b                              |0023: aput v2, v10, v11
+4ca65e: 529a 7015                              |0025: iget v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4ca662: b03a                                   |0027: add-int/2addr v10, v3
+4ca664: 599a 7015                              |0028: iput v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4ca668: 548a e714                              |002a: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mRow:Landroidx/constraintlayout/solver/ArrayRow; // field@14e7
+4ca66c: 6e20 652a a900                         |002c: invoke-virtual {v9, v10}, Landroidx/constraintlayout/solver/SolverVariable;.addToRow:(Landroidx/constraintlayout/solver/ArrayRow;)V // method@2a65
+4ca672: 5289 de14                              |002f: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca676: b039                                   |0031: add-int/2addr v9, v3
+4ca678: 5989 de14                              |0032: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca67c: 5589 e414                              |0034: iget-boolean v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4ca680: 3909 1200                              |0036: if-nez v9, 0048 // +0012
+4ca684: 5289 e614                              |0038: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca688: b039                                   |003a: add-int/2addr v9, v3
+4ca68a: 5989 e614                              |003b: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca68e: 548a e014                              |003d: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca692: 21ab                                   |003f: array-length v11, v10
+4ca694: 34b9 0800                              |0040: if-lt v9, v11, 0048 // +0008
+4ca698: 5c83 e414                              |0042: iput-boolean v3, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4ca69c: 21a9                                   |0044: array-length v9, v10
+4ca69e: b139                                   |0045: sub-int/2addr v9, v3
+4ca6a0: 5989 e614                              |0046: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca6a4: 0e00                                   |0048: return-void
+4ca6a6: 0114                                   |0049: move v4, v1
+4ca6a8: 0125                                   |004a: move v5, v2
+4ca6aa: 3220 5f00                              |004b: if-eq v0, v2, 00aa // +005f
+4ca6ae: 5286 de14                              |004d: iget v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca6b2: 3564 5b00                              |004f: if-ge v4, v6, 00aa // +005b
+4ca6b6: 5486 e014                              |0051: iget-object v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca6ba: 4406 0600                              |0053: aget v6, v6, v0
+4ca6be: 5297 6115                              |0055: iget v7, v9, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4ca6c2: 3376 4300                              |0057: if-ne v6, v7, 009a // +0043
+4ca6c6: 5481 e214                              |0059: iget-object v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4ca6ca: 4402 0100                              |005b: aget v2, v1, v0
+4ca6ce: c6a2                                   |005d: add-float/2addr v2, v10
+4ca6d0: 600a df14                              |005e: sget v10, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.epsilon:F // field@14df
+4ca6d4: 7fa4                                   |0060: neg-float v4, v10
+4ca6d6: 2d04 0204                              |0061: cmpl-float v4, v2, v4
+4ca6da: 1206                                   |0063: const/4 v6, #int 0 // #0
+4ca6dc: 3d04 0700                              |0064: if-lez v4, 006b // +0007
+4ca6e0: 2e0a 020a                              |0066: cmpg-float v10, v2, v10
+4ca6e4: 3b0a 0300                              |0068: if-gez v10, 006b // +0003
+4ca6e8: 0162                                   |006a: move v2, v6
+4ca6ea: 4b02 0100                              |006b: aput v2, v1, v0
+4ca6ee: 2d0a 0206                              |006d: cmpl-float v10, v2, v6
+4ca6f2: 390a 2a00                              |006f: if-nez v10, 0099 // +002a
+4ca6f6: 528a e514                              |0071: iget v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca6fa: 33a0 0900                              |0073: if-ne v0, v10, 007c // +0009
+4ca6fe: 548a e114                              |0075: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca702: 440a 0a00                              |0077: aget v10, v10, v0
+4ca706: 598a e514                              |0079: iput v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca70a: 2807                                   |007b: goto 0082 // +0007
+4ca70c: 548a e114                              |007c: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca710: 4401 0a00                              |007e: aget v1, v10, v0
+4ca714: 4b01 0a05                              |0080: aput v1, v10, v5
+4ca718: 380b 0700                              |0082: if-eqz v11, 0089 // +0007
+4ca71c: 548a e714                              |0084: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mRow:Landroidx/constraintlayout/solver/ArrayRow; // field@14e7
+4ca720: 6e20 6a2a a900                         |0086: invoke-virtual {v9, v10}, Landroidx/constraintlayout/solver/SolverVariable;.removeFromRow:(Landroidx/constraintlayout/solver/ArrayRow;)V // method@2a6a
+4ca726: 558a e414                              |0089: iget-boolean v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4ca72a: 380a 0400                              |008b: if-eqz v10, 008f // +0004
+4ca72e: 5980 e614                              |008d: iput v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca732: 529a 7015                              |008f: iget v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4ca736: b13a                                   |0091: sub-int/2addr v10, v3
+4ca738: 599a 7015                              |0092: iput v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4ca73c: 5289 de14                              |0094: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca740: b139                                   |0096: sub-int/2addr v9, v3
+4ca742: 5989 de14                              |0097: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca746: 0e00                                   |0099: return-void
+4ca748: 5486 e014                              |009a: iget-object v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca74c: 4406 0600                              |009c: aget v6, v6, v0
+4ca750: 5297 6115                              |009e: iget v7, v9, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4ca754: 3576 0300                              |00a0: if-ge v6, v7, 00a3 // +0003
+4ca758: 0105                                   |00a2: move v5, v0
+4ca75a: 5486 e114                              |00a3: iget-object v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca75e: 4400 0600                              |00a5: aget v0, v6, v0
+4ca762: d804 0401                              |00a7: add-int/lit8 v4, v4, #int 1 // #01
+4ca766: 28a2                                   |00a9: goto 004b // -005e
+4ca768: 528b e614                              |00aa: iget v11, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca76c: d800 0b01                              |00ac: add-int/lit8 v0, v11, #int 1 // #01
+4ca770: 5584 e414                              |00ae: iget-boolean v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4ca774: 3804 0b00                              |00b0: if-eqz v4, 00bb // +000b
+4ca778: 5480 e014                              |00b2: iget-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca77c: 4404 000b                              |00b4: aget v4, v0, v11
+4ca780: 3324 0300                              |00b6: if-ne v4, v2, 00b9 // +0003
+4ca784: 2804                                   |00b8: goto 00bc // +0004
+4ca786: 210b                                   |00b9: array-length v11, v0
+4ca788: 2802                                   |00ba: goto 00bc // +0002
+4ca78a: 010b                                   |00bb: move v11, v0
+4ca78c: 5480 e014                              |00bc: iget-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca790: 2104                                   |00be: array-length v4, v0
+4ca792: 344b 1600                              |00bf: if-lt v11, v4, 00d5 // +0016
+4ca796: 5284 de14                              |00c1: iget v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca79a: 2100                                   |00c3: array-length v0, v0
+4ca79c: 3504 1100                              |00c4: if-ge v4, v0, 00d5 // +0011
+4ca7a0: 0110                                   |00c6: move v0, v1
+4ca7a2: 5484 e014                              |00c7: iget-object v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca7a6: 2146                                   |00c9: array-length v6, v4
+4ca7a8: 3560 0b00                              |00ca: if-ge v0, v6, 00d5 // +000b
+4ca7ac: 4404 0400                              |00cc: aget v4, v4, v0
+4ca7b0: 3324 0400                              |00ce: if-ne v4, v2, 00d2 // +0004
+4ca7b4: 010b                                   |00d0: move v11, v0
+4ca7b6: 2804                                   |00d1: goto 00d5 // +0004
+4ca7b8: d800 0001                              |00d2: add-int/lit8 v0, v0, #int 1 // #01
+4ca7bc: 28f3                                   |00d4: goto 00c7 // -000d
+4ca7be: 5480 e014                              |00d5: iget-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca7c2: 2104                                   |00d7: array-length v4, v0
+4ca7c4: 344b 2b00                              |00d8: if-lt v11, v4, 0103 // +002b
+4ca7c8: 210b                                   |00da: array-length v11, v0
+4ca7ca: 5280 dc14                              |00db: iget v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.ROW_SIZE:I // field@14dc
+4ca7ce: da00 0002                              |00dd: mul-int/lit8 v0, v0, #int 2 // #02
+4ca7d2: 5980 dc14                              |00df: iput v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.ROW_SIZE:I // field@14dc
+4ca7d6: 5c81 e414                              |00e1: iput-boolean v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4ca7da: d801 0bff                              |00e3: add-int/lit8 v1, v11, #int -1 // #ff
+4ca7de: 5981 e614                              |00e5: iput v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca7e2: 5481 e214                              |00e7: iget-object v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4ca7e6: 7120 c7d4 0100                         |00e9: invoke-static {v1, v0}, Ljava/util/Arrays;.copyOf:([FI)[F // method@d4c7
+4ca7ec: 0c00                                   |00ec: move-result-object v0
+4ca7ee: 5b80 e214                              |00ed: iput-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4ca7f2: 5480 e014                              |00ef: iget-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca7f6: 5281 dc14                              |00f1: iget v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.ROW_SIZE:I // field@14dc
+4ca7fa: 7120 c8d4 1000                         |00f3: invoke-static {v0, v1}, Ljava/util/Arrays;.copyOf:([II)[I // method@d4c8
+4ca800: 0c00                                   |00f6: move-result-object v0
+4ca802: 5b80 e014                              |00f7: iput-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca806: 5480 e114                              |00f9: iget-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca80a: 5281 dc14                              |00fb: iget v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.ROW_SIZE:I // field@14dc
+4ca80e: 7120 c8d4 1000                         |00fd: invoke-static {v0, v1}, Ljava/util/Arrays;.copyOf:([II)[I // method@d4c8
+4ca814: 0c00                                   |0100: move-result-object v0
+4ca816: 5b80 e114                              |0101: iput-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca81a: 5480 e014                              |0103: iget-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca81e: 5291 6115                              |0105: iget v1, v9, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4ca822: 4b01 000b                              |0107: aput v1, v0, v11
+4ca826: 5480 e214                              |0109: iget-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4ca82a: 4b0a 000b                              |010b: aput v10, v0, v11
+4ca82e: 3225 0b00                              |010d: if-eq v5, v2, 0118 // +000b
+4ca832: 548a e114                              |010f: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca836: 4400 0a05                              |0111: aget v0, v10, v5
+4ca83a: 4b00 0a0b                              |0113: aput v0, v10, v11
+4ca83e: 4b0b 0a05                              |0115: aput v11, v10, v5
+4ca842: 2809                                   |0117: goto 0120 // +0009
+4ca844: 548a e114                              |0118: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca848: 5280 e514                              |011a: iget v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca84c: 4b00 0a0b                              |011c: aput v0, v10, v11
+4ca850: 598b e514                              |011e: iput v11, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca854: 529a 7015                              |0120: iget v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4ca858: b03a                                   |0122: add-int/2addr v10, v3
+4ca85a: 599a 7015                              |0123: iput v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4ca85e: 548a e714                              |0125: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mRow:Landroidx/constraintlayout/solver/ArrayRow; // field@14e7
+4ca862: 6e20 652a a900                         |0127: invoke-virtual {v9, v10}, Landroidx/constraintlayout/solver/SolverVariable;.addToRow:(Landroidx/constraintlayout/solver/ArrayRow;)V // method@2a65
+4ca868: 5289 de14                              |012a: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca86c: b039                                   |012c: add-int/2addr v9, v3
+4ca86e: 5989 de14                              |012d: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca872: 5589 e414                              |012f: iget-boolean v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4ca876: 3909 0700                              |0131: if-nez v9, 0138 // +0007
+4ca87a: 5289 e614                              |0133: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca87e: b039                                   |0135: add-int/2addr v9, v3
+4ca880: 5989 e614                              |0136: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca884: 5289 e614                              |0138: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca888: 548a e014                              |013a: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca88c: 21ab                                   |013c: array-length v11, v10
+4ca88e: 34b9 0800                              |013d: if-lt v9, v11, 0145 // +0008
+4ca892: 5c83 e414                              |013f: iput-boolean v3, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4ca896: 21a9                                   |0141: array-length v9, v10
+4ca898: b139                                   |0142: sub-int/2addr v9, v3
+4ca89a: 5989 e614                              |0143: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca89e: 0e00                                   |0145: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=226
+        0x000c line=230
+        0x0013 line=231
+        0x0015 line=232
+        0x0019 line=233
+        0x001f line=234
+        0x0025 line=235
+        0x002a line=236
+        0x002f line=237
+        0x0034 line=238
+        0x0038 line=240
+        0x003d line=241
+        0x0042 line=242
+        0x0044 line=243
+        0x004d line=251
+        0x0051 line=252
+        0x0055 line=253
+        0x0059 line=254
+        0x005e line=255
+        0x006b line=258
+        0x0071 line=261
+        0x0075 line=262
+        0x007c line=264
+        0x0084 line=267
+        0x0089 line=269
+        0x008d line=271
+        0x008f line=273
+        0x0094 line=274
+        0x009a line=278
+        0x00a3 line=281
+        0x00aa line=287
+        0x00ae line=288
+        0x00b2 line=291
+        0x00b9 line=294
+        0x00bc line=297
+        0x00c1 line=298
+        0x00c7 line=300
+        0x00cc line=301
+        0x00d5 line=309
+        0x00da line=310
+        0x00db line=311
+        0x00e1 line=312
+        0x00e5 line=313
+        0x00e7 line=314
+        0x00ef line=315
+        0x00f9 line=316
+        0x0103 line=320
+        0x0109 line=321
+        0x010f line=323
+        0x0115 line=324
+        0x0118 line=326
+        0x011e line=327
+        0x0120 line=329
+        0x0125 line=330
+        0x012a line=331
+        0x012f line=332
+        0x0133 line=334
+        0x0138 line=336
+        0x013f line=337
+        0x0141 line=338
+      locals        :
+        0x0000 - 0x0146 reg=8 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x0146 reg=9 (null) Landroidx/constraintlayout/solver/SolverVariable;
+        0x0000 - 0x0146 reg=10 (null) F
+        0x0000 - 0x0146 reg=11 (null) Z
+
+    #1              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'clear'
+      type          : '()V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 2
+      insns size    : 44 16-bit code units
+4ca8a0:                                        |[4ca8a0] androidx.constraintlayout.solver.ArrayLinkedVariables.clear:()V
+4ca8b0: 5250 e514                              |0000: iget v0, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca8b4: 1201                                   |0002: const/4 v1, #int 0 // #0
+4ca8b6: 0112                                   |0003: move v2, v1
+4ca8b8: 12f3                                   |0004: const/4 v3, #int -1 // #ff
+4ca8ba: 3230 1e00                              |0005: if-eq v0, v3, 0023 // +001e
+4ca8be: 5254 de14                              |0007: iget v4, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca8c2: 3542 1a00                              |0009: if-ge v2, v4, 0023 // +001a
+4ca8c6: 5453 e314                              |000b: iget-object v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mCache:Landroidx/constraintlayout/solver/Cache; // field@14e3
+4ca8ca: 5433 f114                              |000d: iget-object v3, v3, Landroidx/constraintlayout/solver/Cache;.mIndexedVariables:[Landroidx/constraintlayout/solver/SolverVariable; // field@14f1
+4ca8ce: 5454 e014                              |000f: iget-object v4, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca8d2: 4404 0400                              |0011: aget v4, v4, v0
+4ca8d6: 4603 0304                              |0013: aget-object v3, v3, v4
+4ca8da: 3803 0700                              |0015: if-eqz v3, 001c // +0007
+4ca8de: 5454 e714                              |0017: iget-object v4, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mRow:Landroidx/constraintlayout/solver/ArrayRow; // field@14e7
+4ca8e2: 6e20 6a2a 4300                         |0019: invoke-virtual {v3, v4}, Landroidx/constraintlayout/solver/SolverVariable;.removeFromRow:(Landroidx/constraintlayout/solver/ArrayRow;)V // method@2a6a
+4ca8e8: 5453 e114                              |001c: iget-object v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca8ec: 4400 0300                              |001e: aget v0, v3, v0
+4ca8f0: d802 0201                              |0020: add-int/lit8 v2, v2, #int 1 // #01
+4ca8f4: 28e2                                   |0022: goto 0004 // -001e
+4ca8f6: 5953 e514                              |0023: iput v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca8fa: 5953 e614                              |0025: iput v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4ca8fe: 5c51 e414                              |0027: iput-boolean v1, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4ca902: 5951 de14                              |0029: iput v1, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca906: 0e00                                   |002b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=409
+        0x0007 line=411
+        0x000b line=412
+        0x0017 line=414
+        0x001c line=416
+        0x0023 line=419
+        0x0025 line=420
+        0x0027 line=421
+        0x0029 line=422
+      locals        :
+        0x0000 - 0x002c reg=5 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+
+    #2              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'contains'
+      type          : '(Landroidx/constraintlayout/solver/SolverVariable;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 0
+      insns size    : 32 16-bit code units
+4ca908:                                        |[4ca908] androidx.constraintlayout.solver.ArrayLinkedVariables.contains:(Landroidx/constraintlayout/solver/SolverVariable;)Z
+4ca918: 5260 e514                              |0000: iget v0, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4ca91c: 1201                                   |0002: const/4 v1, #int 0 // #0
+4ca91e: 12f2                                   |0003: const/4 v2, #int -1 // #ff
+4ca920: 3320 0300                              |0004: if-ne v0, v2, 0007 // +0003
+4ca924: 0f01                                   |0006: return v1
+4ca926: 0113                                   |0007: move v3, v1
+4ca928: 3220 1700                              |0008: if-eq v0, v2, 001f // +0017
+4ca92c: 5264 de14                              |000a: iget v4, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca930: 3543 1300                              |000c: if-ge v3, v4, 001f // +0013
+4ca934: 5464 e014                              |000e: iget-object v4, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4ca938: 4404 0400                              |0010: aget v4, v4, v0
+4ca93c: 5275 6115                              |0012: iget v5, v7, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4ca940: 3354 0400                              |0014: if-ne v4, v5, 0018 // +0004
+4ca944: 1216                                   |0016: const/4 v6, #int 1 // #1
+4ca946: 0f06                                   |0017: return v6
+4ca948: 5464 e114                              |0018: iget-object v4, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4ca94c: 4400 0400                              |001a: aget v0, v4, v0
+4ca950: d803 0301                              |001c: add-int/lit8 v3, v3, #int 1 // #01
+4ca954: 28ea                                   |001e: goto 0008 // -0016
+4ca956: 0f01                                   |001f: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=432
+        0x000a line=437
+        0x000e line=438
+        0x0018 line=441
+      locals        :
+        0x0000 - 0x0020 reg=6 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x0020 reg=7 (null) Landroidx/constraintlayout/solver/SolverVariable;
+
+    #3              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'display'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 2
+      insns size    : 68 16-bit code units
+4ca958:                                        |[4ca958] androidx.constraintlayout.solver.ArrayLinkedVariables.display:()V
+4ca968: 5250 de14                              |0000: iget v0, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4ca96c: 6201 1d8a                              |0002: sget-object v1, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@8a1d
+4ca970: 1a02 b8e9                              |0004: const-string v2, "{ " // string@e9b8
+4ca974: 6e20 5ad0 2100                         |0006: invoke-virtual {v1, v2}, Ljava/io/PrintStream;.print:(Ljava/lang/String;)V // method@d05a
+4ca97a: 1201                                   |0009: const/4 v1, #int 0 // #0
+4ca97c: 3501 3200                              |000a: if-ge v1, v0, 003c // +0032
+4ca980: 6e20 b929 1500                         |000c: invoke-virtual {v5, v1}, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.getVariable:(I)Landroidx/constraintlayout/solver/SolverVariable; // method@29b9
+4ca986: 0c02                                   |000f: move-result-object v2
+4ca988: 3902 0300                              |0010: if-nez v2, 0013 // +0003
+4ca98c: 2827                                   |0012: goto 0039 // +0027
+4ca98e: 6203 1d8a                              |0013: sget-object v3, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@8a1d
+4ca992: 2204 991a                              |0015: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+4ca996: 7010 39d2 0400                         |0017: invoke-direct {v4}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+4ca99c: 6e20 44d2 2400                         |001a: invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+4ca9a2: 0c02                                   |001d: move-result-object v2
+4ca9a4: 1a04 1803                              |001e: const-string v4, " = " // string@0318
+4ca9a8: 6e20 45d2 4200                         |0020: invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4ca9ae: 0c02                                   |0023: move-result-object v2
+4ca9b0: 6e20 ba29 1500                         |0024: invoke-virtual {v5, v1}, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.getVariableValue:(I)F // method@29ba
+4ca9b6: 0a04                                   |0027: move-result v4
+4ca9b8: 6e20 3fd2 4200                         |0028: invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;.append:(F)Ljava/lang/StringBuilder; // method@d23f
+4ca9be: 0c02                                   |002b: move-result-object v2
+4ca9c0: 1a04 bc02                              |002c: const-string v4, " " // string@02bc
+4ca9c4: 6e20 45d2 4200                         |002e: invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4ca9ca: 0c02                                   |0031: move-result-object v2
+4ca9cc: 6e10 58d2 0200                         |0032: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+4ca9d2: 0c02                                   |0035: move-result-object v2
+4ca9d4: 6e20 5ad0 2300                         |0036: invoke-virtual {v3, v2}, Ljava/io/PrintStream;.print:(Ljava/lang/String;)V // method@d05a
+4ca9da: d801 0101                              |0039: add-int/lit8 v1, v1, #int 1 // #01
+4ca9de: 28cf                                   |003b: goto 000a // -0031
+4ca9e0: 6205 1d8a                              |003c: sget-object v5, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@8a1d
+4ca9e4: 1a00 0a05                              |003e: const-string v0, " }" // string@050a
+4ca9e8: 6e20 64d0 0500                         |0040: invoke-virtual {v5, v0}, Ljava/io/PrintStream;.println:(Ljava/lang/String;)V // method@d064
+4ca9ee: 0e00                                   |0043: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=614
+        0x0002 line=615
+        0x000c line=617
+        0x0013 line=621
+        0x003c line=623
+      locals        :
+        0x0000 - 0x0044 reg=5 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+
+    #4              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'divideByAmount'
+      type          : '(F)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 0
+      insns size    : 25 16-bit code units
+4ca9f0:                                        |[4ca9f0] androidx.constraintlayout.solver.ArrayLinkedVariables.divideByAmount:(F)V
+4caa00: 5240 e514                              |0000: iget v0, v4, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4caa04: 1201                                   |0002: const/4 v1, #int 0 // #0
+4caa06: 12f2                                   |0003: const/4 v2, #int -1 // #ff
+4caa08: 3220 1400                              |0004: if-eq v0, v2, 0018 // +0014
+4caa0c: 5242 de14                              |0006: iget v2, v4, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4caa10: 3521 1000                              |0008: if-ge v1, v2, 0018 // +0010
+4caa14: 5442 e214                              |000a: iget-object v2, v4, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4caa18: 4403 0200                              |000c: aget v3, v2, v0
+4caa1c: c953                                   |000e: div-float/2addr v3, v5
+4caa1e: 4b03 0200                              |000f: aput v3, v2, v0
+4caa22: 5442 e114                              |0011: iget-object v2, v4, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4caa26: 4400 0200                              |0013: aget v0, v2, v0
+4caa2a: d801 0101                              |0015: add-int/lit8 v1, v1, #int 1 // #01
+4caa2e: 28ec                                   |0017: goto 0003 // -0014
+4caa30: 0e00                                   |0018: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=500
+        0x0006 line=502
+        0x000a line=503
+        0x0011 line=504
+      locals        :
+        0x0000 - 0x0019 reg=4 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x0019 reg=5 (null) F
+
+    #5              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'get'
+      type          : '(Landroidx/constraintlayout/solver/SolverVariable;)F'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 0
+      insns size    : 32 16-bit code units
+4caa34:                                        |[4caa34] androidx.constraintlayout.solver.ArrayLinkedVariables.get:(Landroidx/constraintlayout/solver/SolverVariable;)F
+4caa44: 5240 e514                              |0000: iget v0, v4, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4caa48: 1201                                   |0002: const/4 v1, #int 0 // #0
+4caa4a: 12f2                                   |0003: const/4 v2, #int -1 // #ff
+4caa4c: 3220 1a00                              |0004: if-eq v0, v2, 001e // +001a
+4caa50: 5242 de14                              |0006: iget v2, v4, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4caa54: 3521 1600                              |0008: if-ge v1, v2, 001e // +0016
+4caa58: 5442 e014                              |000a: iget-object v2, v4, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4caa5c: 4402 0200                              |000c: aget v2, v2, v0
+4caa60: 5253 6115                              |000e: iget v3, v5, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4caa64: 3332 0700                              |0010: if-ne v2, v3, 0017 // +0007
+4caa68: 5444 e214                              |0012: iget-object v4, v4, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4caa6c: 4404 0400                              |0014: aget v4, v4, v0
+4caa70: 0f04                                   |0016: return v4
+4caa72: 5442 e114                              |0017: iget-object v2, v4, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4caa76: 4400 0200                              |0019: aget v0, v2, v0
+4caa7a: d801 0101                              |001b: add-int/lit8 v1, v1, #int 1 // #01
+4caa7e: 28e6                                   |001d: goto 0003 // -001a
+4caa80: 1204                                   |001e: const/4 v4, #int 0 // #0
+4caa82: 0f04                                   |001f: return v4
+      catches       : (none)
+      positions     :
+        0x0000 line=593
+        0x0006 line=595
+        0x000a line=596
+        0x0012 line=597
+        0x0017 line=599
+      locals        :
+        0x0000 - 0x0020 reg=4 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x0020 reg=5 (null) Landroidx/constraintlayout/solver/SolverVariable;
+
+    #6              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'getCurrentSize'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+4caa84:                                        |[4caa84] androidx.constraintlayout.solver.ArrayLinkedVariables.getCurrentSize:()I
+4caa94: 5200 de14                              |0000: iget v0, v0, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4caa98: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=509
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+
+    #7              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'getHead'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+4caa9c:                                        |[4caa9c] androidx.constraintlayout.solver.ArrayLinkedVariables.getHead:()I
+4caaac: 5200 e514                              |0000: iget v0, v0, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4caab0: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=508
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+
+    #8              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'getId'
+      type          : '(I)I'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 5 16-bit code units
+4caab4:                                        |[4caab4] androidx.constraintlayout.solver.ArrayLinkedVariables.getId:(I)I
+4caac4: 5400 e014                              |0000: iget-object v0, v0, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4caac8: 4400 0001                              |0002: aget v0, v0, v1
+4caacc: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=512
+      locals        :
+        0x0000 - 0x0005 reg=0 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x0005 reg=1 (null) I
+
+    #9              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'getNextIndice'
+      type          : '(I)I'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 5 16-bit code units
+4caad0:                                        |[4caad0] androidx.constraintlayout.solver.ArrayLinkedVariables.getNextIndice:(I)I
+4caae0: 5400 e114                              |0000: iget-object v0, v0, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4caae4: 4400 0001                              |0002: aget v0, v0, v1
+4caae8: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=520
+      locals        :
+        0x0000 - 0x0005 reg=0 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x0005 reg=1 (null) I
+
+    #10              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'getPivotCandidate'
+      type          : '()Landroidx/constraintlayout/solver/SolverVariable;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 0
+      insns size    : 52 16-bit code units
+4caaec:                                        |[4caaec] androidx.constraintlayout.solver.ArrayLinkedVariables.getPivotCandidate:()Landroidx/constraintlayout/solver/SolverVariable;
+4caafc: 5460 dd14                              |0000: iget-object v0, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.candidate:Landroidx/constraintlayout/solver/SolverVariable; // field@14dd
+4cab00: 3900 3100                              |0002: if-nez v0, 0033 // +0031
+4cab04: 5260 e514                              |0004: iget v0, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4cab08: 1201                                   |0006: const/4 v1, #int 0 // #0
+4cab0a: 1202                                   |0007: const/4 v2, #int 0 // #0
+4cab0c: 12f3                                   |0008: const/4 v3, #int -1 // #ff
+4cab0e: 3230 2900                              |0009: if-eq v0, v3, 0032 // +0029
+4cab12: 5263 de14                              |000b: iget v3, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cab16: 3531 2500                              |000d: if-ge v1, v3, 0032 // +0025
+4cab1a: 5463 e214                              |000f: iget-object v3, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cab1e: 4403 0300                              |0011: aget v3, v3, v0
+4cab22: 1204                                   |0013: const/4 v4, #int 0 // #0
+4cab24: 2e03 0304                              |0014: cmpg-float v3, v3, v4
+4cab28: 3b03 1500                              |0016: if-gez v3, 002b // +0015
+4cab2c: 5463 e314                              |0018: iget-object v3, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mCache:Landroidx/constraintlayout/solver/Cache; // field@14e3
+4cab30: 5433 f114                              |001a: iget-object v3, v3, Landroidx/constraintlayout/solver/Cache;.mIndexedVariables:[Landroidx/constraintlayout/solver/SolverVariable; // field@14f1
+4cab34: 5464 e014                              |001c: iget-object v4, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cab38: 4404 0400                              |001e: aget v4, v4, v0
+4cab3c: 4603 0304                              |0020: aget-object v3, v3, v4
+4cab40: 3802 0800                              |0022: if-eqz v2, 002a // +0008
+4cab44: 5224 6915                              |0024: iget v4, v2, Landroidx/constraintlayout/solver/SolverVariable;.strength:I // field@1569
+4cab48: 5235 6915                              |0026: iget v5, v3, Landroidx/constraintlayout/solver/SolverVariable;.strength:I // field@1569
+4cab4c: 3554 0300                              |0028: if-ge v4, v5, 002b // +0003
+4cab50: 0732                                   |002a: move-object v2, v3
+4cab52: 5463 e114                              |002b: iget-object v3, v6, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cab56: 4400 0300                              |002d: aget v0, v3, v0
+4cab5a: d801 0101                              |002f: add-int/lit8 v1, v1, #int 1 // #01
+4cab5e: 28d7                                   |0031: goto 0008 // -0029
+4cab60: 1102                                   |0032: return-object v2
+4cab62: 1100                                   |0033: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=529
+        0x0004 line=531
+        0x000b line=534
+        0x000f line=535
+        0x0018 line=539
+        0x0024 line=540
+        0x002b line=544
+      locals        :
+        0x0000 - 0x0034 reg=6 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+
+    #11              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'getValue'
+      type          : '(I)F'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 5 16-bit code units
+4cab64:                                        |[4cab64] androidx.constraintlayout.solver.ArrayLinkedVariables.getValue:(I)F
+4cab74: 5400 e214                              |0000: iget-object v0, v0, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cab78: 4400 0001                              |0002: aget v0, v0, v1
+4cab7c: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=516
+      locals        :
+        0x0000 - 0x0005 reg=0 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x0005 reg=1 (null) I
+
+    #12              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'getVariable'
+      type          : '(I)Landroidx/constraintlayout/solver/SolverVariable;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 0
+      insns size    : 32 16-bit code units
+4cab80:                                        |[4cab80] androidx.constraintlayout.solver.ArrayLinkedVariables.getVariable:(I)Landroidx/constraintlayout/solver/SolverVariable;
+4cab90: 5230 e514                              |0000: iget v0, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4cab94: 1201                                   |0002: const/4 v1, #int 0 // #0
+4cab96: 12f2                                   |0003: const/4 v2, #int -1 // #ff
+4cab98: 3220 1a00                              |0004: if-eq v0, v2, 001e // +001a
+4cab9c: 5232 de14                              |0006: iget v2, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4caba0: 3521 1600                              |0008: if-ge v1, v2, 001e // +0016
+4caba4: 3341 0d00                              |000a: if-ne v1, v4, 0017 // +000d
+4caba8: 5434 e314                              |000c: iget-object v4, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mCache:Landroidx/constraintlayout/solver/Cache; // field@14e3
+4cabac: 5444 f114                              |000e: iget-object v4, v4, Landroidx/constraintlayout/solver/Cache;.mIndexedVariables:[Landroidx/constraintlayout/solver/SolverVariable; // field@14f1
+4cabb0: 5433 e014                              |0010: iget-object v3, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cabb4: 4403 0300                              |0012: aget v3, v3, v0
+4cabb8: 4603 0403                              |0014: aget-object v3, v4, v3
+4cabbc: 1103                                   |0016: return-object v3
+4cabbe: 5432 e114                              |0017: iget-object v2, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cabc2: 4400 0200                              |0019: aget v0, v2, v0
+4cabc6: d801 0101                              |001b: add-int/lit8 v1, v1, #int 1 // #01
+4cabca: 28e6                                   |001d: goto 0003 // -001a
+4cabcc: 1203                                   |001e: const/4 v3, #int 0 // #0
+4cabce: 1103                                   |001f: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=558
+        0x0006 line=560
+        0x000c line=562
+        0x0017 line=564
+      locals        :
+        0x0000 - 0x0020 reg=3 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x0020 reg=4 (null) I
+
+    #13              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'getVariableValue'
+      type          : '(I)F'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 0
+      insns size    : 26 16-bit code units
+4cabd0:                                        |[4cabd0] androidx.constraintlayout.solver.ArrayLinkedVariables.getVariableValue:(I)F
+4cabe0: 5230 e514                              |0000: iget v0, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4cabe4: 1201                                   |0002: const/4 v1, #int 0 // #0
+4cabe6: 12f2                                   |0003: const/4 v2, #int -1 // #ff
+4cabe8: 3220 1400                              |0004: if-eq v0, v2, 0018 // +0014
+4cabec: 5232 de14                              |0006: iget v2, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cabf0: 3521 1000                              |0008: if-ge v1, v2, 0018 // +0010
+4cabf4: 3341 0700                              |000a: if-ne v1, v4, 0011 // +0007
+4cabf8: 5433 e214                              |000c: iget-object v3, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cabfc: 4403 0300                              |000e: aget v3, v3, v0
+4cac00: 0f03                                   |0010: return v3
+4cac02: 5432 e114                              |0011: iget-object v2, v3, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cac06: 4400 0200                              |0013: aget v0, v2, v0
+4cac0a: d801 0101                              |0015: add-int/lit8 v1, v1, #int 1 // #01
+4cac0e: 28ec                                   |0017: goto 0003 // -0014
+4cac10: 1203                                   |0018: const/4 v3, #int 0 // #0
+4cac12: 0f03                                   |0019: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=576
+        0x0006 line=578
+        0x000c line=580
+        0x0011 line=582
+      locals        :
+        0x0000 - 0x001a reg=3 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x001a reg=4 (null) I
+
+    #14              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'hasAtLeastOnePositiveVariable'
+      type          : '()Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 0
+      insns size    : 30 16-bit code units
+4cac14:                                        |[4cac14] androidx.constraintlayout.solver.ArrayLinkedVariables.hasAtLeastOnePositiveVariable:()Z
+4cac24: 5250 e514                              |0000: iget v0, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4cac28: 1201                                   |0002: const/4 v1, #int 0 // #0
+4cac2a: 0112                                   |0003: move v2, v1
+4cac2c: 12f3                                   |0004: const/4 v3, #int -1 // #ff
+4cac2e: 3230 1800                              |0005: if-eq v0, v3, 001d // +0018
+4cac32: 5253 de14                              |0007: iget v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cac36: 3532 1400                              |0009: if-ge v2, v3, 001d // +0014
+4cac3a: 5453 e214                              |000b: iget-object v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cac3e: 4403 0300                              |000d: aget v3, v3, v0
+4cac42: 1204                                   |000f: const/4 v4, #int 0 // #0
+4cac44: 2d03 0304                              |0010: cmpl-float v3, v3, v4
+4cac48: 3d03 0400                              |0012: if-lez v3, 0016 // +0004
+4cac4c: 1215                                   |0014: const/4 v5, #int 1 // #1
+4cac4e: 0f05                                   |0015: return v5
+4cac50: 5453 e114                              |0016: iget-object v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cac54: 4400 0300                              |0018: aget v0, v3, v0
+4cac58: d802 0201                              |001a: add-int/lit8 v2, v2, #int 1 // #01
+4cac5c: 28e8                                   |001c: goto 0004 // -0018
+4cac5e: 0f01                                   |001d: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=470
+        0x0007 line=472
+        0x000b line=473
+        0x0016 line=476
+      locals        :
+        0x0000 - 0x001e reg=5 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+
+    #15              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'indexOf'
+      type          : '(Landroidx/constraintlayout/solver/SolverVariable;)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 0
+      insns size    : 30 16-bit code units
+4cac60:                                        |[4cac60] androidx.constraintlayout.solver.ArrayLinkedVariables.indexOf:(Landroidx/constraintlayout/solver/SolverVariable;)I
+4cac70: 5250 e514                              |0000: iget v0, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4cac74: 12f1                                   |0002: const/4 v1, #int -1 // #ff
+4cac76: 3310 0300                              |0003: if-ne v0, v1, 0006 // +0003
+4cac7a: 0f01                                   |0005: return v1
+4cac7c: 1202                                   |0006: const/4 v2, #int 0 // #0
+4cac7e: 3210 1600                              |0007: if-eq v0, v1, 001d // +0016
+4cac82: 5253 de14                              |0009: iget v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cac86: 3532 1200                              |000b: if-ge v2, v3, 001d // +0012
+4cac8a: 5453 e014                              |000d: iget-object v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cac8e: 4403 0300                              |000f: aget v3, v3, v0
+4cac92: 5264 6115                              |0011: iget v4, v6, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4cac96: 3343 0300                              |0013: if-ne v3, v4, 0016 // +0003
+4cac9a: 0f00                                   |0015: return v0
+4cac9c: 5453 e114                              |0016: iget-object v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4caca0: 4400 0300                              |0018: aget v0, v3, v0
+4caca4: d802 0201                              |001a: add-int/lit8 v2, v2, #int 1 // #01
+4caca8: 28eb                                   |001c: goto 0007 // -0015
+4cacaa: 0f01                                   |001d: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=448
+        0x0009 line=453
+        0x000d line=454
+        0x0016 line=457
+      locals        :
+        0x0000 - 0x001e reg=5 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x001e reg=6 (null) Landroidx/constraintlayout/solver/SolverVariable;
+
+    #16              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'invert'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 0
+      insns size    : 27 16-bit code units
+4cacac:                                        |[4cacac] androidx.constraintlayout.solver.ArrayLinkedVariables.invert:()V
+4cacbc: 5250 e514                              |0000: iget v0, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4cacc0: 1201                                   |0002: const/4 v1, #int 0 // #0
+4cacc2: 12f2                                   |0003: const/4 v2, #int -1 // #ff
+4cacc4: 3220 1600                              |0004: if-eq v0, v2, 001a // +0016
+4cacc8: 5252 de14                              |0006: iget v2, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4caccc: 3521 1200                              |0008: if-ge v1, v2, 001a // +0012
+4cacd0: 5452 e214                              |000a: iget-object v2, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cacd4: 4403 0200                              |000c: aget v3, v2, v0
+4cacd8: 1504 80bf                              |000e: const/high16 v4, #int -1082130432 // #bf80
+4cacdc: c843                                   |0010: mul-float/2addr v3, v4
+4cacde: 4b03 0200                              |0011: aput v3, v2, v0
+4cace2: 5452 e114                              |0013: iget-object v2, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cace6: 4400 0200                              |0015: aget v0, v2, v0
+4cacea: d801 0101                              |0017: add-int/lit8 v1, v1, #int 1 // #01
+4cacee: 28ea                                   |0019: goto 0003 // -0016
+4cacf0: 0e00                                   |001a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=485
+        0x0006 line=487
+        0x000a line=488
+        0x0013 line=489
+      locals        :
+        0x0000 - 0x001b reg=5 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+
+    #17              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'put'
+      type          : '(Landroidx/constraintlayout/solver/SolverVariable;F)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 11
+      ins           : 3
+      outs          : 3
+      insns size    : 268 16-bit code units
+4cacf4:                                        |[4cacf4] androidx.constraintlayout.solver.ArrayLinkedVariables.put:(Landroidx/constraintlayout/solver/SolverVariable;F)V
+4cad04: 1200                                   |0000: const/4 v0, #int 0 // #0
+4cad06: 2d00 0a00                              |0001: cmpl-float v0, v10, v0
+4cad0a: 1211                                   |0003: const/4 v1, #int 1 // #1
+4cad0c: 3900 0600                              |0004: if-nez v0, 000a // +0006
+4cad10: 6e30 bf29 9801                         |0006: invoke-virtual {v8, v9, v1}, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.remove:(Landroidx/constraintlayout/solver/SolverVariable;Z)F // method@29bf
+4cad16: 0e00                                   |0009: return-void
+4cad18: 5280 e514                              |000a: iget v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4cad1c: 1202                                   |000c: const/4 v2, #int 0 // #0
+4cad1e: 12f3                                   |000d: const/4 v3, #int -1 // #ff
+4cad20: 3330 3800                              |000e: if-ne v0, v3, 0046 // +0038
+4cad24: 5982 e514                              |0010: iput v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4cad28: 5480 e214                              |0012: iget-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cad2c: 4b0a 0002                              |0014: aput v10, v0, v2
+4cad30: 548a e014                              |0016: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cad34: 5290 6115                              |0018: iget v0, v9, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4cad38: 4b00 0a02                              |001a: aput v0, v10, v2
+4cad3c: 548a e114                              |001c: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cad40: 5280 e514                              |001e: iget v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4cad44: 4b03 0a00                              |0020: aput v3, v10, v0
+4cad48: 529a 7015                              |0022: iget v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4cad4c: b01a                                   |0024: add-int/2addr v10, v1
+4cad4e: 599a 7015                              |0025: iput v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4cad52: 548a e714                              |0027: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mRow:Landroidx/constraintlayout/solver/ArrayRow; // field@14e7
+4cad56: 6e20 652a a900                         |0029: invoke-virtual {v9, v10}, Landroidx/constraintlayout/solver/SolverVariable;.addToRow:(Landroidx/constraintlayout/solver/ArrayRow;)V // method@2a65
+4cad5c: 5289 de14                              |002c: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cad60: b019                                   |002e: add-int/2addr v9, v1
+4cad62: 5989 de14                              |002f: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cad66: 5589 e414                              |0031: iget-boolean v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4cad6a: 3909 1200                              |0033: if-nez v9, 0045 // +0012
+4cad6e: 5289 e614                              |0035: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4cad72: b019                                   |0037: add-int/2addr v9, v1
+4cad74: 5989 e614                              |0038: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4cad78: 548a e014                              |003a: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cad7c: 21a0                                   |003c: array-length v0, v10
+4cad7e: 3409 0800                              |003d: if-lt v9, v0, 0045 // +0008
+4cad82: 5c81 e414                              |003f: iput-boolean v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4cad86: 21a9                                   |0041: array-length v9, v10
+4cad88: b119                                   |0042: sub-int/2addr v9, v1
+4cad8a: 5989 e614                              |0043: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4cad8e: 0e00                                   |0045: return-void
+4cad90: 0124                                   |0046: move v4, v2
+4cad92: 0135                                   |0047: move v5, v3
+4cad94: 3230 2300                              |0048: if-eq v0, v3, 006b // +0023
+4cad98: 5286 de14                              |004a: iget v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cad9c: 3564 1f00                              |004c: if-ge v4, v6, 006b // +001f
+4cada0: 5486 e014                              |004e: iget-object v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cada4: 4406 0600                              |0050: aget v6, v6, v0
+4cada8: 5297 6115                              |0052: iget v7, v9, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4cadac: 3376 0700                              |0054: if-ne v6, v7, 005b // +0007
+4cadb0: 5488 e214                              |0056: iget-object v8, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cadb4: 4b0a 0800                              |0058: aput v10, v8, v0
+4cadb8: 0e00                                   |005a: return-void
+4cadba: 5486 e014                              |005b: iget-object v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cadbe: 4406 0600                              |005d: aget v6, v6, v0
+4cadc2: 5297 6115                              |005f: iget v7, v9, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4cadc6: 3576 0300                              |0061: if-ge v6, v7, 0064 // +0003
+4cadca: 0105                                   |0063: move v5, v0
+4cadcc: 5486 e114                              |0064: iget-object v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cadd0: 4400 0600                              |0066: aget v0, v6, v0
+4cadd4: d804 0401                              |0068: add-int/lit8 v4, v4, #int 1 // #01
+4cadd8: 28de                                   |006a: goto 0048 // -0022
+4cadda: 5280 e614                              |006b: iget v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4cadde: d804 0001                              |006d: add-int/lit8 v4, v0, #int 1 // #01
+4cade2: 5586 e414                              |006f: iget-boolean v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4cade6: 3806 0b00                              |0071: if-eqz v6, 007c // +000b
+4cadea: 5484 e014                              |0073: iget-object v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cadee: 4406 0400                              |0075: aget v6, v4, v0
+4cadf2: 3336 0300                              |0077: if-ne v6, v3, 007a // +0003
+4cadf6: 2804                                   |0079: goto 007d // +0004
+4cadf8: 2140                                   |007a: array-length v0, v4
+4cadfa: 2802                                   |007b: goto 007d // +0002
+4cadfc: 0140                                   |007c: move v0, v4
+4cadfe: 5484 e014                              |007d: iget-object v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cae02: 2146                                   |007f: array-length v6, v4
+4cae04: 3460 1600                              |0080: if-lt v0, v6, 0096 // +0016
+4cae08: 5286 de14                              |0082: iget v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cae0c: 2144                                   |0084: array-length v4, v4
+4cae0e: 3546 1100                              |0085: if-ge v6, v4, 0096 // +0011
+4cae12: 0124                                   |0087: move v4, v2
+4cae14: 5486 e014                              |0088: iget-object v6, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cae18: 2167                                   |008a: array-length v7, v6
+4cae1a: 3574 0b00                              |008b: if-ge v4, v7, 0096 // +000b
+4cae1e: 4406 0604                              |008d: aget v6, v6, v4
+4cae22: 3336 0400                              |008f: if-ne v6, v3, 0093 // +0004
+4cae26: 0140                                   |0091: move v0, v4
+4cae28: 2804                                   |0092: goto 0096 // +0004
+4cae2a: d804 0401                              |0093: add-int/lit8 v4, v4, #int 1 // #01
+4cae2e: 28f3                                   |0095: goto 0088 // -000d
+4cae30: 5484 e014                              |0096: iget-object v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cae34: 2146                                   |0098: array-length v6, v4
+4cae36: 3460 2b00                              |0099: if-lt v0, v6, 00c4 // +002b
+4cae3a: 2140                                   |009b: array-length v0, v4
+4cae3c: 5284 dc14                              |009c: iget v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.ROW_SIZE:I // field@14dc
+4cae40: da04 0402                              |009e: mul-int/lit8 v4, v4, #int 2 // #02
+4cae44: 5984 dc14                              |00a0: iput v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.ROW_SIZE:I // field@14dc
+4cae48: 5c82 e414                              |00a2: iput-boolean v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4cae4c: d802 00ff                              |00a4: add-int/lit8 v2, v0, #int -1 // #ff
+4cae50: 5982 e614                              |00a6: iput v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4cae54: 5482 e214                              |00a8: iget-object v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cae58: 7120 c7d4 4200                         |00aa: invoke-static {v2, v4}, Ljava/util/Arrays;.copyOf:([FI)[F // method@d4c7
+4cae5e: 0c02                                   |00ad: move-result-object v2
+4cae60: 5b82 e214                              |00ae: iput-object v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cae64: 5482 e014                              |00b0: iget-object v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cae68: 5284 dc14                              |00b2: iget v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.ROW_SIZE:I // field@14dc
+4cae6c: 7120 c8d4 4200                         |00b4: invoke-static {v2, v4}, Ljava/util/Arrays;.copyOf:([II)[I // method@d4c8
+4cae72: 0c02                                   |00b7: move-result-object v2
+4cae74: 5b82 e014                              |00b8: iput-object v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cae78: 5482 e114                              |00ba: iget-object v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cae7c: 5284 dc14                              |00bc: iget v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.ROW_SIZE:I // field@14dc
+4cae80: 7120 c8d4 4200                         |00be: invoke-static {v2, v4}, Ljava/util/Arrays;.copyOf:([II)[I // method@d4c8
+4cae86: 0c02                                   |00c1: move-result-object v2
+4cae88: 5b82 e114                              |00c2: iput-object v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cae8c: 5482 e014                              |00c4: iget-object v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cae90: 5294 6115                              |00c6: iget v4, v9, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4cae94: 4b04 0200                              |00c8: aput v4, v2, v0
+4cae98: 5482 e214                              |00ca: iget-object v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cae9c: 4b0a 0200                              |00cc: aput v10, v2, v0
+4caea0: 3235 0b00                              |00ce: if-eq v5, v3, 00d9 // +000b
+4caea4: 548a e114                              |00d0: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4caea8: 4402 0a05                              |00d2: aget v2, v10, v5
+4caeac: 4b02 0a00                              |00d4: aput v2, v10, v0
+4caeb0: 4b00 0a05                              |00d6: aput v0, v10, v5
+4caeb4: 2809                                   |00d8: goto 00e1 // +0009
+4caeb6: 548a e114                              |00d9: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4caeba: 5282 e514                              |00db: iget v2, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4caebe: 4b02 0a00                              |00dd: aput v2, v10, v0
+4caec2: 5980 e514                              |00df: iput v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4caec6: 529a 7015                              |00e1: iget v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4caeca: b01a                                   |00e3: add-int/2addr v10, v1
+4caecc: 599a 7015                              |00e4: iput v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4caed0: 548a e714                              |00e6: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mRow:Landroidx/constraintlayout/solver/ArrayRow; // field@14e7
+4caed4: 6e20 652a a900                         |00e8: invoke-virtual {v9, v10}, Landroidx/constraintlayout/solver/SolverVariable;.addToRow:(Landroidx/constraintlayout/solver/ArrayRow;)V // method@2a65
+4caeda: 5289 de14                              |00eb: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4caede: b019                                   |00ed: add-int/2addr v9, v1
+4caee0: 5989 de14                              |00ee: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4caee4: 558a e414                              |00f0: iget-boolean v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4caee8: 390a 0700                              |00f2: if-nez v10, 00f9 // +0007
+4caeec: 528a e614                              |00f4: iget v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4caef0: b01a                                   |00f6: add-int/2addr v10, v1
+4caef2: 598a e614                              |00f7: iput v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4caef6: 548a e014                              |00f9: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4caefa: 21a0                                   |00fb: array-length v0, v10
+4caefc: 3409 0400                              |00fc: if-lt v9, v0, 0100 // +0004
+4caf00: 5c81 e414                              |00fe: iput-boolean v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4caf04: 5289 e614                              |0100: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4caf08: 21a0                                   |0102: array-length v0, v10
+4caf0a: 3409 0800                              |0103: if-lt v9, v0, 010b // +0008
+4caf0e: 5c81 e414                              |0105: iput-boolean v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4caf12: 21a9                                   |0107: array-length v9, v10
+4caf14: b119                                   |0108: sub-int/2addr v9, v1
+4caf16: 5989 e614                              |0109: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4caf1a: 0e00                                   |010b: return-void
+      catches       : (none)
+      positions     :
+        0x0006 line=119
+        0x000a line=123
+        0x0010 line=124
+        0x0012 line=125
+        0x0016 line=126
+        0x001c line=127
+        0x0022 line=128
+        0x0027 line=129
+        0x002c line=130
+        0x0031 line=131
+        0x0035 line=133
+        0x003a line=134
+        0x003f line=135
+        0x0041 line=136
+        0x004a line=144
+        0x004e line=145
+        0x0056 line=146
+        0x005b line=149
+        0x0064 line=152
+        0x006b line=158
+        0x006f line=159
+        0x0073 line=162
+        0x007a line=165
+        0x007d line=168
+        0x0082 line=169
+        0x0088 line=171
+        0x008d line=172
+        0x0096 line=180
+        0x009b line=181
+        0x009c line=182
+        0x00a2 line=183
+        0x00a6 line=184
+        0x00a8 line=185
+        0x00b0 line=186
+        0x00ba line=187
+        0x00c4 line=191
+        0x00ca line=192
+        0x00d0 line=194
+        0x00d6 line=195
+        0x00d9 line=197
+        0x00df line=198
+        0x00e1 line=200
+        0x00e6 line=201
+        0x00eb line=202
+        0x00f0 line=203
+        0x00f4 line=205
+        0x00f9 line=207
+        0x00fe line=208
+        0x0100 line=210
+        0x0105 line=211
+        0x0107 line=212
+      locals        :
+        0x0000 - 0x010c reg=8 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x010c reg=9 (null) Landroidx/constraintlayout/solver/SolverVariable;
+        0x0000 - 0x010c reg=10 (null) F
+
+    #18              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'remove'
+      type          : '(Landroidx/constraintlayout/solver/SolverVariable;Z)F'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 11
+      ins           : 3
+      outs          : 2
+      insns size    : 92 16-bit code units
+4caf1c:                                        |[4caf1c] androidx.constraintlayout.solver.ArrayLinkedVariables.remove:(Landroidx/constraintlayout/solver/SolverVariable;Z)F
+4caf2c: 5480 dd14                              |0000: iget-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.candidate:Landroidx/constraintlayout/solver/SolverVariable; // field@14dd
+4caf30: 3390 0500                              |0002: if-ne v0, v9, 0007 // +0005
+4caf34: 1200                                   |0004: const/4 v0, #int 0 // #0
+4caf36: 5b80 dd14                              |0005: iput-object v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.candidate:Landroidx/constraintlayout/solver/SolverVariable; // field@14dd
+4caf3a: 5280 e514                              |0007: iget v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4caf3e: 1201                                   |0009: const/4 v1, #int 0 // #0
+4caf40: 12f2                                   |000a: const/4 v2, #int -1 // #ff
+4caf42: 3320 0300                              |000b: if-ne v0, v2, 000e // +0003
+4caf46: 0f01                                   |000d: return v1
+4caf48: 1203                                   |000e: const/4 v3, #int 0 // #0
+4caf4a: 0124                                   |000f: move v4, v2
+4caf4c: 3220 4b00                              |0010: if-eq v0, v2, 005b // +004b
+4caf50: 5285 de14                              |0012: iget v5, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4caf54: 3553 4700                              |0014: if-ge v3, v5, 005b // +0047
+4caf58: 5485 e014                              |0016: iget-object v5, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4caf5c: 4405 0500                              |0018: aget v5, v5, v0
+4caf60: 5296 6115                              |001a: iget v6, v9, Landroidx/constraintlayout/solver/SolverVariable;.id:I // field@1561
+4caf64: 3365 3500                              |001c: if-ne v5, v6, 0051 // +0035
+4caf68: 5281 e514                              |001e: iget v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4caf6c: 3310 0900                              |0020: if-ne v0, v1, 0029 // +0009
+4caf70: 5481 e114                              |0022: iget-object v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4caf74: 4401 0100                              |0024: aget v1, v1, v0
+4caf78: 5981 e514                              |0026: iput v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4caf7c: 2807                                   |0028: goto 002f // +0007
+4caf7e: 5481 e114                              |0029: iget-object v1, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4caf82: 4403 0100                              |002b: aget v3, v1, v0
+4caf86: 4b03 0104                              |002d: aput v3, v1, v4
+4caf8a: 380a 0700                              |002f: if-eqz v10, 0036 // +0007
+4caf8e: 548a e714                              |0031: iget-object v10, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mRow:Landroidx/constraintlayout/solver/ArrayRow; // field@14e7
+4caf92: 6e20 6a2a a900                         |0033: invoke-virtual {v9, v10}, Landroidx/constraintlayout/solver/SolverVariable;.removeFromRow:(Landroidx/constraintlayout/solver/ArrayRow;)V // method@2a6a
+4caf98: 529a 7015                              |0036: iget v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4caf9c: d80a 0aff                              |0038: add-int/lit8 v10, v10, #int -1 // #ff
+4cafa0: 599a 7015                              |003a: iput v10, v9, Landroidx/constraintlayout/solver/SolverVariable;.usageInRowCount:I // field@1570
+4cafa4: 5289 de14                              |003c: iget v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cafa8: d809 09ff                              |003e: add-int/lit8 v9, v9, #int -1 // #ff
+4cafac: 5989 de14                              |0040: iput v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cafb0: 5489 e014                              |0042: iget-object v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cafb4: 4b02 0900                              |0044: aput v2, v9, v0
+4cafb8: 5589 e414                              |0046: iget-boolean v9, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mDidFillOnce:Z // field@14e4
+4cafbc: 3809 0400                              |0048: if-eqz v9, 004c // +0004
+4cafc0: 5980 e614                              |004a: iput v0, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mLast:I // field@14e6
+4cafc4: 5488 e214                              |004c: iget-object v8, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cafc8: 4408 0800                              |004e: aget v8, v8, v0
+4cafcc: 0f08                                   |0050: return v8
+4cafce: 5484 e114                              |0051: iget-object v4, v8, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cafd2: 4404 0400                              |0053: aget v4, v4, v0
+4cafd6: d803 0301                              |0055: add-int/lit8 v3, v3, #int 1 // #01
+4cafda: 0147                                   |0057: move v7, v4
+4cafdc: 0104                                   |0058: move v4, v0
+4cafde: 0170                                   |0059: move v0, v7
+4cafe0: 28b6                                   |005a: goto 0010 // -004a
+4cafe2: 0f01                                   |005b: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=369
+        0x0005 line=370
+        0x0007 line=372
+        0x0012 line=378
+        0x0016 line=379
+        0x001a line=380
+        0x001e line=381
+        0x0022 line=382
+        0x0029 line=384
+        0x0031 line=388
+        0x0036 line=390
+        0x003c line=391
+        0x0042 line=392
+        0x0046 line=393
+        0x004a line=395
+        0x004c line=397
+        0x0051 line=400
+      locals        :
+        0x0000 - 0x005c reg=8 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x005c reg=9 (null) Landroidx/constraintlayout/solver/SolverVariable;
+        0x0000 - 0x005c reg=10 (null) Z
+
+    #19              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'sizeInBytes'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+4cafe4:                                        |[4cafe4] androidx.constraintlayout.solver.ArrayLinkedVariables.sizeInBytes:()I
+4caff4: 5400 e014                              |0000: iget-object v0, v0, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4caff8: 2100                                   |0002: array-length v0, v0
+4caffa: da00 000c                              |0003: mul-int/lit8 v0, v0, #int 12 // #0c
+4caffe: d800 0024                              |0005: add-int/lit8 v0, v0, #int 36 // #24
+4cb002: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=608
+      locals        :
+        0x0000 - 0x0008 reg=0 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+
+    #20              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 2
+      insns size    : 93 16-bit code units
+4cb004:                                        |[4cb004] androidx.constraintlayout.solver.ArrayLinkedVariables.toString:()Ljava/lang/String;
+4cb014: 5250 e514                              |0000: iget v0, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mHead:I // field@14e5
+4cb018: 1a01 0000                              |0002: const-string v1, "" // string@0000
+4cb01c: 1202                                   |0004: const/4 v2, #int 0 // #0
+4cb01e: 12f3                                   |0005: const/4 v3, #int -1 // #ff
+4cb020: 3230 5600                              |0006: if-eq v0, v3, 005c // +0056
+4cb024: 5253 de14                              |0008: iget v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.currentSize:I // field@14de
+4cb028: 3532 5200                              |000a: if-ge v2, v3, 005c // +0052
+4cb02c: 2203 991a                              |000c: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+4cb030: 7010 39d2 0300                         |000e: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+4cb036: 6e20 45d2 1300                         |0011: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4cb03c: 0c01                                   |0014: move-result-object v1
+4cb03e: 1a03 0e03                              |0015: const-string v3, " -> " // string@030e
+4cb042: 6e20 45d2 3100                         |0017: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4cb048: 0c01                                   |001a: move-result-object v1
+4cb04a: 6e10 58d2 0100                         |001b: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+4cb050: 0c01                                   |001e: move-result-object v1
+4cb052: 2203 991a                              |001f: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+4cb056: 7010 39d2 0300                         |0021: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+4cb05c: 6e20 45d2 1300                         |0024: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4cb062: 0c01                                   |0027: move-result-object v1
+4cb064: 5453 e214                              |0028: iget-object v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayValues:[F // field@14e2
+4cb068: 4403 0300                              |002a: aget v3, v3, v0
+4cb06c: 6e20 3fd2 3100                         |002c: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(F)Ljava/lang/StringBuilder; // method@d23f
+4cb072: 0c01                                   |002f: move-result-object v1
+4cb074: 1a03 1303                              |0030: const-string v3, " : " // string@0313
+4cb078: 6e20 45d2 3100                         |0032: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4cb07e: 0c01                                   |0035: move-result-object v1
+4cb080: 6e10 58d2 0100                         |0036: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+4cb086: 0c01                                   |0039: move-result-object v1
+4cb088: 2203 991a                              |003a: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+4cb08c: 7010 39d2 0300                         |003c: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+4cb092: 6e20 45d2 1300                         |003f: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4cb098: 0c01                                   |0042: move-result-object v1
+4cb09a: 5453 e314                              |0043: iget-object v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mCache:Landroidx/constraintlayout/solver/Cache; // field@14e3
+4cb09e: 5433 f114                              |0045: iget-object v3, v3, Landroidx/constraintlayout/solver/Cache;.mIndexedVariables:[Landroidx/constraintlayout/solver/SolverVariable; // field@14f1
+4cb0a2: 5454 e014                              |0047: iget-object v4, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayIndices:[I // field@14e0
+4cb0a6: 4404 0400                              |0049: aget v4, v4, v0
+4cb0aa: 4603 0304                              |004b: aget-object v3, v3, v4
+4cb0ae: 6e20 44d2 3100                         |004d: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+4cb0b4: 0c01                                   |0050: move-result-object v1
+4cb0b6: 6e10 58d2 0100                         |0051: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+4cb0bc: 0c01                                   |0054: move-result-object v1
+4cb0be: 5453 e114                              |0055: iget-object v3, v5, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.mArrayNextIndices:[I // field@14e1
+4cb0c2: 4400 0300                              |0057: aget v0, v3, v0
+4cb0c6: d802 0201                              |0059: add-int/lit8 v2, v2, #int 1 // #01
+4cb0ca: 28aa                                   |005b: goto 0005 // -0056
+4cb0cc: 1101                                   |005c: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=634
+        0x0002 line=635
+        0x0008 line=636
+        0x000c line=637
+        0x001f line=638
+        0x003a line=639
+        0x0055 line=640
+      locals        :
+        0x0000 - 0x005d reg=5 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+
+    #21              : (in Landroidx/constraintlayout/solver/ArrayLinkedVariables;)
+      name          : 'use'
+      type          : '(Landroidx/constraintlayout/solver/ArrayRow;Z)F'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 3
+      outs          : 4
+      insns size    : 36 16-bit code units
+4cb0d0:                                        |[4cb0d0] androidx.constraintlayout.solver.ArrayLinkedVariables.use:(Landroidx/constraintlayout/solver/ArrayRow;Z)F
+4cb0e0: 5460 ed14                              |0000: iget-object v0, v6, Landroidx/constraintlayout/solver/ArrayRow;.variable:Landroidx/constraintlayout/solver/SolverVariable; // field@14ed
+4cb0e4: 6e20 b229 0500                         |0002: invoke-virtual {v5, v0}, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.get:(Landroidx/constraintlayout/solver/SolverVariable;)F // method@29b2
+4cb0ea: 0a00                                   |0005: move-result v0
+4cb0ec: 5461 ed14                              |0006: iget-object v1, v6, Landroidx/constraintlayout/solver/ArrayRow;.variable:Landroidx/constraintlayout/solver/SolverVariable; // field@14ed
+4cb0f0: 6e30 bf29 1507                         |0008: invoke-virtual {v5, v1, v7}, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.remove:(Landroidx/constraintlayout/solver/SolverVariable;Z)F // method@29bf
+4cb0f6: 5466 ee14                              |000b: iget-object v6, v6, Landroidx/constraintlayout/solver/ArrayRow;.variables:Landroidx/constraintlayout/solver/ArrayRow$ArrayRowVariables; // field@14ee
+4cb0fa: 7210 c929 0600                         |000d: invoke-interface {v6}, Landroidx/constraintlayout/solver/ArrayRow$ArrayRowVariables;.getCurrentSize:()I // method@29c9
+4cb100: 0a01                                   |0010: move-result v1
+4cb102: 1202                                   |0011: const/4 v2, #int 0 // #0
+4cb104: 3512 1100                              |0012: if-ge v2, v1, 0023 // +0011
+4cb108: 7220 ca29 2600                         |0014: invoke-interface {v6, v2}, Landroidx/constraintlayout/solver/ArrayRow$ArrayRowVariables;.getVariable:(I)Landroidx/constraintlayout/solver/SolverVariable; // method@29ca
+4cb10e: 0c03                                   |0017: move-result-object v3
+4cb110: 7220 c829 3600                         |0018: invoke-interface {v6, v3}, Landroidx/constraintlayout/solver/ArrayRow$ArrayRowVariables;.get:(Landroidx/constraintlayout/solver/SolverVariable;)F // method@29c8
+4cb116: 0a04                                   |001b: move-result v4
+4cb118: c804                                   |001c: mul-float/2addr v4, v0
+4cb11a: 6e40 ad29 3574                         |001d: invoke-virtual {v5, v3, v4, v7}, Landroidx/constraintlayout/solver/ArrayLinkedVariables;.add:(Landroidx/constraintlayout/solver/SolverVariable;FZ)V // method@29ad
+4cb120: d802 0201                              |0020: add-int/lit8 v2, v2, #int 1 // #01
+4cb124: 28f0                                   |0022: goto 0012 // -0010
+4cb126: 0f00                                   |0023: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=349
+        0x0006 line=350
+        0x000b line=351
+        0x000d line=352
+        0x0014 line=354
+        0x0018 line=355
+        0x001d line=356
+      locals        :
+        0x0000 - 0x0024 reg=5 this Landroidx/constraintlayout/solver/ArrayLinkedVariables;
+        0x0000 - 0x0024 reg=6 (null) Landroidx/constraintlayout/solver/ArrayRow;
+        0x0000 - 0x0024 reg=7 (null) Z
+
+  source_file_idx   : 5824 (ArrayLinkedVariables.java)
+

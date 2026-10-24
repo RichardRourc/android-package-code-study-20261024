@@ -1,0 +1,775 @@
+Class #1743            -
+  Class descriptor  : 'Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/lang/Runnable;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'mEatRunOnAnimationRequest'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'mInterpolator'
+      type          : 'Landroid/view/animation/Interpolator;'
+      access        : 0x0000 ()
+    #2              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'mLastFlingX'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'mLastFlingY'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'mReSchedulePostAnimationCallback'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'mScroller'
+      type          : 'Landroid/widget/OverScroller;'
+      access        : 0x0000 ()
+    #6              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'this$0'
+      type          : 'Landroidx/recyclerview/widget/RecyclerView;'
+      access        : 0x1010 (FINAL SYNTHETIC)
+  Direct methods    -
+    #0              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : '<init>'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 28 16-bit code units
+56136c:                                        |[56136c] androidx.recyclerview.widget.RecyclerView$ViewFlinger.<init>:(Landroidx/recyclerview/widget/RecyclerView;)V
+56137c: 5b23 8d36                              |0000: iput-object v3, v2, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561380: 7010 c8d1 0200                         |0002: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@d1c8
+561386: 6200 1d37                              |0005: sget-object v0, Landroidx/recyclerview/widget/RecyclerView;.sQuinticInterpolator:Landroid/view/animation/Interpolator; // field@371d
+56138a: 5b20 8836                              |0007: iput-object v0, v2, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mInterpolator:Landroid/view/animation/Interpolator; // field@3688
+56138e: 1200                                   |0009: const/4 v0, #int 0 // #0
+561390: 5c20 8736                              |000a: iput-boolean v0, v2, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mEatRunOnAnimationRequest:Z // field@3687
+561394: 5c20 8b36                              |000c: iput-boolean v0, v2, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mReSchedulePostAnimationCallback:Z // field@368b
+561398: 2200 6f02                              |000e: new-instance v0, Landroid/widget/OverScroller; // type@026f
+56139c: 6e10 8b4c 0300                         |0010: invoke-virtual {v3}, Landroidx/recyclerview/widget/RecyclerView;.getContext:()Landroid/content/Context; // method@4c8b
+5613a2: 0c03                                   |0013: move-result-object v3
+5613a4: 6201 1d37                              |0014: sget-object v1, Landroidx/recyclerview/widget/RecyclerView;.sQuinticInterpolator:Landroid/view/animation/Interpolator; // field@371d
+5613a8: 7030 b00e 3001                         |0016: invoke-direct {v0, v3, v1}, Landroid/widget/OverScroller;.<init>:(Landroid/content/Context;Landroid/view/animation/Interpolator;)V // method@0eb0
+5613ae: 5b20 8c36                              |0019: iput-object v0, v2, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mScroller:Landroid/widget/OverScroller; // field@368c
+5613b2: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=5033
+        0x0005 line=5025
+        0x000a line=5028
+        0x000c line=5031
+        0x000e line=5034
+      locals        :
+        0x0000 - 0x001c reg=2 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+        0x0000 - 0x001c reg=3 (null) Landroidx/recyclerview/widget/RecyclerView;
+
+    #1              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'computeScrollDuration'
+      type          : '(IIII)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 9
+      ins           : 5
+      outs          : 2
+      insns size    : 99 16-bit code units
+5613b4:                                        |[5613b4] androidx.recyclerview.widget.RecyclerView$ViewFlinger.computeScrollDuration:(IIII)I
+5613c4: 7110 87d1 0500                         |0000: invoke-static {v5}, Ljava/lang/Math;.abs:(I)I // method@d187
+5613ca: 0a00                                   |0003: move-result v0
+5613cc: 7110 87d1 0600                         |0004: invoke-static {v6}, Ljava/lang/Math;.abs:(I)I // method@d187
+5613d2: 0a01                                   |0007: move-result v1
+5613d4: 3710 0400                              |0008: if-le v0, v1, 000c // +0004
+5613d8: 1212                                   |000a: const/4 v2, #int 1 // #1
+5613da: 2802                                   |000b: goto 000d // +0002
+5613dc: 1202                                   |000c: const/4 v2, #int 0 // #0
+5613de: b277                                   |000d: mul-int/2addr v7, v7
+5613e0: b288                                   |000e: mul-int/2addr v8, v8
+5613e2: b087                                   |000f: add-int/2addr v7, v8
+5613e4: 8377                                   |0010: int-to-double v7, v7
+5613e6: 7120 aed1 8700                         |0011: invoke-static {v7, v8}, Ljava/lang/Math;.sqrt:(D)D // method@d1ae
+5613ec: 0b07                                   |0014: move-result-wide v7
+5613ee: 8a77                                   |0015: double-to-int v7, v7
+5613f0: b255                                   |0016: mul-int/2addr v5, v5
+5613f2: b266                                   |0017: mul-int/2addr v6, v6
+5613f4: b065                                   |0018: add-int/2addr v5, v6
+5613f6: 8355                                   |0019: int-to-double v5, v5
+5613f8: 7120 aed1 6500                         |001a: invoke-static {v5, v6}, Ljava/lang/Math;.sqrt:(D)D // method@d1ae
+5613fe: 0b05                                   |001d: move-result-wide v5
+561400: 8a55                                   |001e: double-to-int v5, v5
+561402: 5446 8d36                              |001f: iget-object v6, v4, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561406: 3802 0700                              |0021: if-eqz v2, 0028 // +0007
+56140a: 6e10 ad4c 0600                         |0023: invoke-virtual {v6}, Landroidx/recyclerview/widget/RecyclerView;.getWidth:()I // method@4cad
+561410: 0a06                                   |0026: move-result v6
+561412: 2805                                   |0027: goto 002c // +0005
+561414: 6e10 944c 0600                         |0028: invoke-virtual {v6}, Landroidx/recyclerview/widget/RecyclerView;.getHeight:()I // method@4c94
+56141a: 0a06                                   |002b: move-result v6
+56141c: db08 0602                              |002c: div-int/lit8 v8, v6, #int 2 // #02
+561420: 8255                                   |002e: int-to-float v5, v5
+561422: 1503 803f                              |002f: const/high16 v3, #int 1065353216 // #3f80
+561426: c835                                   |0031: mul-float/2addr v5, v3
+561428: 8266                                   |0032: int-to-float v6, v6
+56142a: c965                                   |0033: div-float/2addr v5, v6
+56142c: 7120 9ed1 5300                         |0034: invoke-static {v3, v5}, Ljava/lang/Math;.min:(FF)F // method@d19e
+561432: 0a05                                   |0037: move-result v5
+561434: 8288                                   |0038: int-to-float v8, v8
+561436: 7020 ec4b 5400                         |0039: invoke-direct {v4, v5}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.distanceInfluenceForSnapDuration:(F)F // method@4bec
+56143c: 0a04                                   |003c: move-result v4
+56143e: c884                                   |003d: mul-float/2addr v4, v8
+561440: c648                                   |003e: add-float/2addr v8, v4
+561442: 3d07 1200                              |003f: if-lez v7, 0051 // +0012
+561446: 8274                                   |0041: int-to-float v4, v7
+561448: c948                                   |0042: div-float/2addr v8, v4
+56144a: 7110 86d1 0800                         |0043: invoke-static {v8}, Ljava/lang/Math;.abs:(F)F // method@d186
+561450: 0a04                                   |0046: move-result v4
+561452: 1505 7a44                              |0047: const/high16 v5, #int 1148846080 // #447a
+561456: c854                                   |0049: mul-float/2addr v4, v5
+561458: 7110 a8d1 0400                         |004a: invoke-static {v4}, Ljava/lang/Math;.round:(F)I // method@d1a8
+56145e: 0a04                                   |004d: move-result v4
+561460: da04 0404                              |004e: mul-int/lit8 v4, v4, #int 4 // #04
+561464: 280c                                   |0050: goto 005c // +000c
+561466: 3802 0300                              |0051: if-eqz v2, 0054 // +0003
+56146a: 2802                                   |0053: goto 0055 // +0002
+56146c: 0110                                   |0054: move v0, v1
+56146e: 8204                                   |0055: int-to-float v4, v0
+561470: c964                                   |0056: div-float/2addr v4, v6
+561472: c634                                   |0057: add-float/2addr v4, v3
+561474: 1505 9643                              |0058: const/high16 v5, #int 1133903872 // #4396
+561478: c854                                   |005a: mul-float/2addr v4, v5
+56147a: 8744                                   |005b: float-to-int v4, v4
+56147c: 1305 d007                              |005c: const/16 v5, #int 2000 // #7d0
+561480: 7120 9fd1 5400                         |005e: invoke-static {v4, v5}, Ljava/lang/Math;.min:(II)I // method@d19f
+561486: 0a04                                   |0061: move-result v4
+561488: 0f04                                   |0062: return v4
+      catches       : (none)
+      positions     :
+        0x0000 line=5202
+        0x0004 line=5203
+        0x0011 line=5205
+        0x001a line=5206
+        0x001f line=5207
+        0x002c line=5208
+        0x0034 line=5209
+        0x0039 line=5211
+        0x0043 line=5215
+        0x005e line=5220
+      locals        :
+        0x0000 - 0x0063 reg=4 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+        0x0000 - 0x0063 reg=5 (null) I
+        0x0000 - 0x0063 reg=6 (null) I
+        0x0000 - 0x0063 reg=7 (null) I
+        0x0000 - 0x0063 reg=8 (null) I
+
+    #2              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'disableRunOnAnimationRequests'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 7 16-bit code units
+56148c:                                        |[56148c] androidx.recyclerview.widget.RecyclerView$ViewFlinger.disableRunOnAnimationRequests:()V
+56149c: 1200                                   |0000: const/4 v0, #int 0 // #0
+56149e: 5c10 8b36                              |0001: iput-boolean v0, v1, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mReSchedulePostAnimationCallback:Z // field@368b
+5614a2: 1210                                   |0003: const/4 v0, #int 1 // #1
+5614a4: 5c10 8736                              |0004: iput-boolean v0, v1, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mEatRunOnAnimationRequest:Z // field@3687
+5614a8: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=5159
+        0x0004 line=5160
+      locals        :
+        0x0000 - 0x0007 reg=1 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+
+    #3              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'distanceInfluenceForSnapDuration'
+      type          : '(F)F'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 14 16-bit code units
+5614ac:                                        |[5614ac] androidx.recyclerview.widget.RecyclerView$ViewFlinger.distanceInfluenceForSnapDuration:(F)F
+5614bc: 1500 003f                              |0000: const/high16 v0, #int 1056964608 // #3f00
+5614c0: c701                                   |0002: sub-float/2addr v1, v0
+5614c2: 1400 3b46 f13e                         |0003: const v0, #float 0.471239 // #3ef1463b
+5614c8: c801                                   |0006: mul-float/2addr v1, v0
+5614ca: 8910                                   |0007: float-to-double v0, v1
+5614cc: 7120 acd1 1000                         |0008: invoke-static {v0, v1}, Ljava/lang/Math;.sin:(D)D // method@d1ac
+5614d2: 0b00                                   |000b: move-result-wide v0
+5614d4: 8c00                                   |000c: double-to-float v0, v0
+5614d6: 0f00                                   |000d: return v0
+      catches       : (none)
+      positions     :
+        0x0008 line=5198
+      locals        :
+        0x0000 - 0x000e reg=0 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+        0x0000 - 0x000e reg=1 (null) F
+
+    #4              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'enableRunOnAnimationRequests'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 11 16-bit code units
+5614d8:                                        |[5614d8] androidx.recyclerview.widget.RecyclerView$ViewFlinger.enableRunOnAnimationRequests:()V
+5614e8: 1200                                   |0000: const/4 v0, #int 0 // #0
+5614ea: 5c10 8736                              |0001: iput-boolean v0, v1, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mEatRunOnAnimationRequest:Z // field@3687
+5614ee: 5510 8b36                              |0003: iget-boolean v0, v1, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mReSchedulePostAnimationCallback:Z // field@368b
+5614f2: 3800 0500                              |0005: if-eqz v0, 000a // +0005
+5614f6: 6e10 ef4b 0100                         |0007: invoke-virtual {v1}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.postOnAnimation:()V // method@4bef
+5614fc: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=5164
+        0x0003 line=5165
+        0x0007 line=5166
+      locals        :
+        0x0000 - 0x000b reg=1 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+
+  Virtual methods   -
+    #0              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'fling'
+      type          : '(II)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 13
+      ins           : 3
+      outs          : 9
+      insns size    : 34 16-bit code units
+561500:                                        |[561500] androidx.recyclerview.widget.RecyclerView$ViewFlinger.fling:(II)V
+561510: 54a0 8d36                              |0000: iget-object v0, v10, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561514: 1221                                   |0002: const/4 v1, #int 2 // #2
+561516: 6e20 244d 1000                         |0003: invoke-virtual {v0, v1}, Landroidx/recyclerview/widget/RecyclerView;.setScrollState:(I)V // method@4d24
+56151c: 1200                                   |0006: const/4 v0, #int 0 // #0
+56151e: 59a0 8a36                              |0007: iput v0, v10, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mLastFlingY:I // field@368a
+561522: 59a0 8936                              |0009: iput v0, v10, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mLastFlingX:I // field@3689
+561526: 54a1 8c36                              |000b: iget-object v1, v10, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mScroller:Landroid/widget/OverScroller; // field@368c
+56152a: 1508 0080                              |000d: const/high16 v8, #int -2147483648 // #8000
+56152e: 1409 ffff ff7f                         |000f: const v9, #float nan // #7fffffff
+561534: 1202                                   |0012: const/4 v2, #int 0 // #0
+561536: 1203                                   |0013: const/4 v3, #int 0 // #0
+561538: 1506 0080                              |0014: const/high16 v6, #int -2147483648 // #8000
+56153c: 1407 ffff ff7f                         |0016: const v7, #float nan // #7fffffff
+561542: 01b4                                   |0019: move v4, v11
+561544: 01c5                                   |001a: move v5, v12
+561546: 7409 b30e 0100                         |001b: invoke-virtual/range {v1, v2, v3, v4, v5, v6, v7, v8, v9}, Landroid/widget/OverScroller;.fling:(IIIIIIII)V // method@0eb3
+56154c: 6e10 ef4b 0a00                         |001e: invoke-virtual {v10}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.postOnAnimation:()V // method@4bef
+561552: 0e00                                   |0021: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=5180
+        0x0007 line=5181
+        0x000b line=5182
+        0x001e line=5184
+      locals        :
+        0x0000 - 0x0022 reg=10 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+        0x0000 - 0x0022 reg=11 (null) I
+        0x0000 - 0x0022 reg=12 (null) I
+
+    #1              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'postOnAnimation'
+      type          : '()V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 19 16-bit code units
+561554:                                        |[561554] androidx.recyclerview.widget.RecyclerView$ViewFlinger.postOnAnimation:()V
+561564: 5510 8736                              |0000: iget-boolean v0, v1, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mEatRunOnAnimationRequest:Z // field@3687
+561568: 3800 0600                              |0002: if-eqz v0, 0008 // +0006
+56156c: 1210                                   |0004: const/4 v0, #int 1 // #1
+56156e: 5c10 8b36                              |0005: iput-boolean v0, v1, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mReSchedulePostAnimationCallback:Z // field@368b
+561572: 280b                                   |0007: goto 0012 // +000b
+561574: 5410 8d36                              |0008: iget-object v0, v1, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561578: 6e20 f44c 1000                         |000a: invoke-virtual {v0, v1}, Landroidx/recyclerview/widget/RecyclerView;.removeCallbacks:(Ljava/lang/Runnable;)Z // method@4cf4
+56157e: 5410 8d36                              |000d: iget-object v0, v1, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561582: 7120 743a 1000                         |000f: invoke-static {v0, v1}, Landroidx/core/view/ViewCompat;.postOnAnimation:(Landroid/view/View;Ljava/lang/Runnable;)V // method@3a74
+561588: 0e00                                   |0012: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=5171
+        0x0005 line=5172
+        0x0008 line=5174
+        0x000d line=5175
+      locals        :
+        0x0000 - 0x0013 reg=1 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+
+    #2              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'run'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 23
+      ins           : 1
+      outs          : 7
+      insns size    : 430 16-bit code units
+56158c:                                        |[56158c] androidx.recyclerview.widget.RecyclerView$ViewFlinger.run:()V
+56159c: 0800 1600                              |0000: move-object/from16 v0, v22
+5615a0: 5401 8d36                              |0002: iget-object v1, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5615a4: 5411 f336                              |0004: iget-object v1, v1, Landroidx/recyclerview/widget/RecyclerView;.mLayout:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@36f3
+5615a8: 3901 0600                              |0006: if-nez v1, 000c // +0006
+5615ac: 7401 f64b 1600                         |0008: invoke-virtual/range {v22}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.stop:()V // method@4bf6
+5615b2: 0e00                                   |000b: return-void
+5615b4: 7601 eb4b 1600                         |000c: invoke-direct/range {v22}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.disableRunOnAnimationRequests:()V // method@4beb
+5615ba: 5401 8d36                              |000f: iget-object v1, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5615be: 6e10 494c 0100                         |0011: invoke-virtual {v1}, Landroidx/recyclerview/widget/RecyclerView;.consumePendingUpdateOperations:()V // method@4c49
+5615c4: 5401 8c36                              |0014: iget-object v1, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mScroller:Landroid/widget/OverScroller; // field@368c
+5615c8: 5402 8d36                              |0016: iget-object v2, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5615cc: 5422 f336                              |0018: iget-object v2, v2, Landroidx/recyclerview/widget/RecyclerView;.mLayout:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@36f3
+5615d0: 5422 4036                              |001a: iget-object v2, v2, Landroidx/recyclerview/widget/RecyclerView$LayoutManager;.mSmoothScroller:Landroidx/recyclerview/widget/RecyclerView$SmoothScroller; // field@3640
+5615d4: 6e10 b20e 0100                         |001c: invoke-virtual {v1}, Landroid/widget/OverScroller;.computeScrollOffset:()Z // method@0eb2
+5615da: 0a03                                   |001f: move-result v3
+5615dc: 1204                                   |0020: const/4 v4, #int 0 // #0
+5615de: 3803 7601                              |0021: if-eqz v3, 0197 // +0176
+5615e2: 5403 8d36                              |0023: iget-object v3, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5615e6: 5433 0a37                              |0025: iget-object v3, v3, Landroidx/recyclerview/widget/RecyclerView;.mScrollConsumed:[I // field@370a
+5615ea: 6e10 b60e 0100                         |0027: invoke-virtual {v1}, Landroid/widget/OverScroller;.getCurrX:()I // method@0eb6
+5615f0: 0a0b                                   |002a: move-result v11
+5615f2: 6e10 b70e 0100                         |002b: invoke-virtual {v1}, Landroid/widget/OverScroller;.getCurrY:()I // method@0eb7
+5615f8: 0a0c                                   |002e: move-result v12
+5615fa: 5205 8936                              |002f: iget v5, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mLastFlingX:I // field@3689
+5615fe: 910d 0b05                              |0031: sub-int v13, v11, v5
+561602: 5205 8a36                              |0033: iget v5, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mLastFlingY:I // field@368a
+561606: 910e 0c05                              |0035: sub-int v14, v12, v5
+56160a: 590b 8936                              |0037: iput v11, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mLastFlingX:I // field@3689
+56160e: 590c 8a36                              |0039: iput v12, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mLastFlingY:I // field@368a
+561612: 5405 8d36                              |003b: iget-object v5, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561616: 1209                                   |003d: const/4 v9, #int 0 // #0
+561618: 121a                                   |003e: const/4 v10, #int 1 // #1
+56161a: 01d6                                   |003f: move v6, v13
+56161c: 01e7                                   |0040: move v7, v14
+56161e: 0738                                   |0041: move-object v8, v3
+561620: 7406 594c 0500                         |0042: invoke-virtual/range {v5, v6, v7, v8, v9, v10}, Landroidx/recyclerview/widget/RecyclerView;.dispatchNestedPreScroll:(II[I[II)Z // method@4c59
+561626: 0a05                                   |0045: move-result v5
+561628: 1216                                   |0046: const/4 v6, #int 1 // #1
+56162a: 3805 0800                              |0047: if-eqz v5, 004f // +0008
+56162e: 4405 0304                              |0049: aget v5, v3, v4
+561632: b15d                                   |004b: sub-int/2addr v13, v5
+561634: 4403 0306                              |004c: aget v3, v3, v6
+561638: b13e                                   |004e: sub-int/2addr v14, v3
+56163a: 5403 8d36                              |004f: iget-object v3, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+56163e: 5433 d636                              |0051: iget-object v3, v3, Landroidx/recyclerview/widget/RecyclerView;.mAdapter:Landroidx/recyclerview/widget/RecyclerView$Adapter; // field@36d6
+561642: 3803 4f00                              |0053: if-eqz v3, 00a2 // +004f
+561646: 5403 8d36                              |0055: iget-object v3, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+56164a: 5435 1037                              |0057: iget-object v5, v3, Landroidx/recyclerview/widget/RecyclerView;.mScrollStepConsumed:[I // field@3710
+56164e: 6e40 094d d35e                         |0059: invoke-virtual {v3, v13, v14, v5}, Landroidx/recyclerview/widget/RecyclerView;.scrollStep:(II[I)V // method@4d09
+561654: 5403 8d36                              |005c: iget-object v3, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561658: 5433 1037                              |005e: iget-object v3, v3, Landroidx/recyclerview/widget/RecyclerView;.mScrollStepConsumed:[I // field@3710
+56165c: 4403 0304                              |0060: aget v3, v3, v4
+561660: 5405 8d36                              |0062: iget-object v5, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561664: 5455 1037                              |0064: iget-object v5, v5, Landroidx/recyclerview/widget/RecyclerView;.mScrollStepConsumed:[I // field@3710
+561668: 4405 0506                              |0066: aget v5, v5, v6
+56166c: 9107 0d03                              |0068: sub-int v7, v13, v3
+561670: 9108 0e05                              |006a: sub-int v8, v14, v5
+561674: 3802 3a00                              |006c: if-eqz v2, 00a6 // +003a
+561678: 6e10 c94b 0200                         |006e: invoke-virtual {v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.isPendingInitialRun:()Z // method@4bc9
+56167e: 0a09                                   |0071: move-result v9
+561680: 3909 3400                              |0072: if-nez v9, 00a6 // +0034
+561684: 6e10 ca4b 0200                         |0074: invoke-virtual {v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.isRunning:()Z // method@4bca
+56168a: 0a09                                   |0077: move-result v9
+56168c: 3809 2e00                              |0078: if-eqz v9, 00a6 // +002e
+561690: 5409 8d36                              |007a: iget-object v9, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561694: 5499 1237                              |007c: iget-object v9, v9, Landroidx/recyclerview/widget/RecyclerView;.mState:Landroidx/recyclerview/widget/RecyclerView$State; // field@3712
+561698: 6e10 d94b 0900                         |007e: invoke-virtual {v9}, Landroidx/recyclerview/widget/RecyclerView$State;.getItemCount:()I // method@4bd9
+56169e: 0a09                                   |0081: move-result v9
+5616a0: 3909 0600                              |0082: if-nez v9, 0088 // +0006
+5616a4: 6e10 d44b 0200                         |0084: invoke-virtual {v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.stop:()V // method@4bd4
+5616aa: 281f                                   |0087: goto 00a6 // +001f
+5616ac: 6e10 c74b 0200                         |0088: invoke-virtual {v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.getTargetPosition:()I // method@4bc7
+5616b2: 0a0a                                   |008b: move-result v10
+5616b4: 349a 0e00                              |008c: if-lt v10, v9, 009a // +000e
+5616b8: b169                                   |008e: sub-int/2addr v9, v6
+5616ba: 6e20 d24b 9200                         |008f: invoke-virtual {v2, v9}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.setTargetPosition:(I)V // method@4bd2
+5616c0: 9109 0d07                              |0092: sub-int v9, v13, v7
+5616c4: 910a 0e08                              |0094: sub-int v10, v14, v8
+5616c8: 6e30 cc4b 920a                         |0096: invoke-virtual {v2, v9, v10}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.onAnimation:(II)V // method@4bcc
+5616ce: 280d                                   |0099: goto 00a6 // +000d
+5616d0: 9109 0d07                              |009a: sub-int v9, v13, v7
+5616d4: 910a 0e08                              |009c: sub-int v10, v14, v8
+5616d8: 6e30 cc4b 920a                         |009e: invoke-virtual {v2, v9, v10}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.onAnimation:(II)V // method@4bcc
+5616de: 2805                                   |00a1: goto 00a6 // +0005
+5616e0: 0143                                   |00a2: move v3, v4
+5616e2: 0135                                   |00a3: move v5, v3
+5616e4: 0157                                   |00a4: move v7, v5
+5616e6: 0178                                   |00a5: move v8, v7
+5616e8: 5409 8d36                              |00a6: iget-object v9, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5616ec: 5499 ee36                              |00a8: iget-object v9, v9, Landroidx/recyclerview/widget/RecyclerView;.mItemDecorations:Ljava/util/ArrayList; // field@36ee
+5616f0: 6e10 add4 0900                         |00aa: invoke-virtual {v9}, Ljava/util/ArrayList;.isEmpty:()Z // method@d4ad
+5616f6: 0a09                                   |00ad: move-result v9
+5616f8: 3909 0700                              |00ae: if-nez v9, 00b5 // +0007
+5616fc: 5409 8d36                              |00b0: iget-object v9, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561700: 6e10 bb4c 0900                         |00b2: invoke-virtual {v9}, Landroidx/recyclerview/widget/RecyclerView;.invalidate:()V // method@4cbb
+561706: 5409 8d36                              |00b5: iget-object v9, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+56170a: 6e10 a04c 0900                         |00b7: invoke-virtual {v9}, Landroidx/recyclerview/widget/RecyclerView;.getOverScrollMode:()I // method@4ca0
+561710: 0a09                                   |00ba: move-result v9
+561712: 122a                                   |00bb: const/4 v10, #int 2 // #2
+561714: 32a9 0700                              |00bc: if-eq v9, v10, 00c3 // +0007
+561718: 5409 8d36                              |00be: iget-object v9, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+56171c: 6e30 484c d90e                         |00c0: invoke-virtual {v9, v13, v14}, Landroidx/recyclerview/widget/RecyclerView;.considerReleasingGlowsOnScroll:(II)V // method@4c48
+561722: 540f 8d36                              |00c3: iget-object v15, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561726: 1314 0000                              |00c5: const/16 v20, #int 0 // #0
+56172a: 1315 0100                              |00c7: const/16 v21, #int 1 // #1
+56172e: 0210 0300                              |00c9: move/from16 v16, v3
+561732: 0211 0500                              |00cb: move/from16 v17, v5
+561736: 0212 0700                              |00cd: move/from16 v18, v7
+56173a: 0213 0800                              |00cf: move/from16 v19, v8
+56173e: 7407 5b4c 0f00                         |00d1: invoke-virtual/range {v15, v16, v17, v18, v19, v20, v21}, Landroidx/recyclerview/widget/RecyclerView;.dispatchNestedScroll:(IIII[II)Z // method@4c5b
+561744: 0a09                                   |00d4: move-result v9
+561746: 3909 4400                              |00d5: if-nez v9, 0119 // +0044
+56174a: 3907 0400                              |00d7: if-nez v7, 00db // +0004
+56174e: 3808 4000                              |00d9: if-eqz v8, 0119 // +0040
+561752: 6e10 b50e 0100                         |00db: invoke-virtual {v1}, Landroid/widget/OverScroller;.getCurrVelocity:()F // method@0eb5
+561758: 0a09                                   |00de: move-result v9
+56175a: 8799                                   |00df: float-to-int v9, v9
+56175c: 32b7 0a00                              |00e0: if-eq v7, v11, 00ea // +000a
+561760: 3b07 0400                              |00e2: if-gez v7, 00e6 // +0004
+561764: 7b9f                                   |00e4: neg-int v15, v9
+561766: 2806                                   |00e5: goto 00eb // +0006
+561768: 3d07 0400                              |00e6: if-lez v7, 00ea // +0004
+56176c: 019f                                   |00e8: move v15, v9
+56176e: 2802                                   |00e9: goto 00eb // +0002
+561770: 014f                                   |00ea: move v15, v4
+561772: 32c8 0900                              |00eb: if-eq v8, v12, 00f4 // +0009
+561776: 3b08 0400                              |00ed: if-gez v8, 00f1 // +0004
+56177a: 7b99                                   |00ef: neg-int v9, v9
+56177c: 2805                                   |00f0: goto 00f5 // +0005
+56177e: 3d08 0300                              |00f1: if-lez v8, 00f4 // +0003
+561782: 2802                                   |00f3: goto 00f5 // +0002
+561784: 0149                                   |00f4: move v9, v4
+561786: 5404 8d36                              |00f5: iget-object v4, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+56178a: 6e10 a04c 0400                         |00f7: invoke-virtual {v4}, Landroidx/recyclerview/widget/RecyclerView;.getOverScrollMode:()I // method@4ca0
+561790: 0a04                                   |00fa: move-result v4
+561792: 32a4 0700                              |00fb: if-eq v4, v10, 0102 // +0007
+561796: 5404 8d36                              |00fd: iget-object v4, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+56179a: 6e30 254c f409                         |00ff: invoke-virtual {v4, v15, v9}, Landroidx/recyclerview/widget/RecyclerView;.absorbGlows:(II)V // method@4c25
+5617a0: 390f 0a00                              |0102: if-nez v15, 010c // +000a
+5617a4: 32b7 0800                              |0104: if-eq v7, v11, 010c // +0008
+5617a8: 6e10 b80e 0100                         |0106: invoke-virtual {v1}, Landroid/widget/OverScroller;.getFinalX:()I // method@0eb8
+5617ae: 0a04                                   |0109: move-result v4
+5617b0: 3904 0f00                              |010a: if-nez v4, 0119 // +000f
+5617b4: 3909 0a00                              |010c: if-nez v9, 0116 // +000a
+5617b8: 32c8 0800                              |010e: if-eq v8, v12, 0116 // +0008
+5617bc: 6e10 b90e 0100                         |0110: invoke-virtual {v1}, Landroid/widget/OverScroller;.getFinalY:()I // method@0eb9
+5617c2: 0a04                                   |0113: move-result v4
+5617c4: 3904 0500                              |0114: if-nez v4, 0119 // +0005
+5617c8: 6e10 b10e 0100                         |0116: invoke-virtual {v1}, Landroid/widget/OverScroller;.abortAnimation:()V // method@0eb1
+5617ce: 3903 0400                              |0119: if-nez v3, 011d // +0004
+5617d2: 3805 0700                              |011b: if-eqz v5, 0122 // +0007
+5617d6: 5404 8d36                              |011d: iget-object v4, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5617da: 6e30 5f4c 3405                         |011f: invoke-virtual {v4, v3, v5}, Landroidx/recyclerview/widget/RecyclerView;.dispatchOnScrolled:(II)V // method@4c5f
+5617e0: 5404 8d36                              |0122: iget-object v4, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5617e4: 7110 284c 0400                         |0124: invoke-static {v4}, Landroidx/recyclerview/widget/RecyclerView;.access$200:(Landroidx/recyclerview/widget/RecyclerView;)Z // method@4c28
+5617ea: 0a04                                   |0127: move-result v4
+5617ec: 3904 0700                              |0128: if-nez v4, 012f // +0007
+5617f0: 5404 8d36                              |012a: iget-object v4, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5617f4: 6e10 bb4c 0400                         |012c: invoke-virtual {v4}, Landroidx/recyclerview/widget/RecyclerView;.invalidate:()V // method@4cbb
+5617fa: 380e 1000                              |012f: if-eqz v14, 013f // +0010
+5617fe: 5404 8d36                              |0131: iget-object v4, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561802: 5444 f336                              |0133: iget-object v4, v4, Landroidx/recyclerview/widget/RecyclerView;.mLayout:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@36f3
+561806: 6e10 ae4a 0400                         |0135: invoke-virtual {v4}, Landroidx/recyclerview/widget/RecyclerView$LayoutManager;.canScrollVertically:()Z // method@4aae
+56180c: 0a04                                   |0138: move-result v4
+56180e: 3804 0600                              |0139: if-eqz v4, 013f // +0006
+561812: 33e5 0400                              |013b: if-ne v5, v14, 013f // +0004
+561816: 0164                                   |013d: move v4, v6
+561818: 2802                                   |013e: goto 0140 // +0002
+56181a: 1204                                   |013f: const/4 v4, #int 0 // #0
+56181c: 380d 1000                              |0140: if-eqz v13, 0150 // +0010
+561820: 5405 8d36                              |0142: iget-object v5, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561824: 5455 f336                              |0144: iget-object v5, v5, Landroidx/recyclerview/widget/RecyclerView;.mLayout:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@36f3
+561828: 6e10 ad4a 0500                         |0146: invoke-virtual {v5}, Landroidx/recyclerview/widget/RecyclerView$LayoutManager;.canScrollHorizontally:()Z // method@4aad
+56182e: 0a05                                   |0149: move-result v5
+561830: 3805 0600                              |014a: if-eqz v5, 0150 // +0006
+561834: 33d3 0400                              |014c: if-ne v3, v13, 0150 // +0004
+561838: 0163                                   |014e: move v3, v6
+56183a: 2802                                   |014f: goto 0151 // +0002
+56183c: 1203                                   |0150: const/4 v3, #int 0 // #0
+56183e: 390d 0400                              |0151: if-nez v13, 0155 // +0004
+561842: 380e 0900                              |0153: if-eqz v14, 015c // +0009
+561846: 3903 0700                              |0155: if-nez v3, 015c // +0007
+56184a: 3804 0300                              |0157: if-eqz v4, 015a // +0003
+56184e: 2803                                   |0159: goto 015c // +0003
+561850: 1203                                   |015a: const/4 v3, #int 0 // #0
+561852: 2802                                   |015b: goto 015d // +0002
+561854: 0163                                   |015c: move v3, v6
+561856: 6e10 ba0e 0100                         |015d: invoke-virtual {v1}, Landroid/widget/OverScroller;.isFinished:()Z // method@0eba
+56185c: 0a01                                   |0160: move-result v1
+56185e: 3901 2000                              |0161: if-nez v1, 0181 // +0020
+561862: 3903 0b00                              |0163: if-nez v3, 016e // +000b
+561866: 5401 8d36                              |0165: iget-object v1, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+56186a: 6e20 b34c 6100                         |0167: invoke-virtual {v1, v6}, Landroidx/recyclerview/widget/RecyclerView;.hasNestedScrollingParent:(I)Z // method@4cb3
+561870: 0a01                                   |016a: move-result v1
+561872: 3901 0300                              |016b: if-nez v1, 016e // +0003
+561876: 2814                                   |016d: goto 0181 // +0014
+561878: 7401 ef4b 1600                         |016e: invoke-virtual/range {v22}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.postOnAnimation:()V // method@4bef
+56187e: 5401 8d36                              |0171: iget-object v1, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561882: 5411 e436                              |0173: iget-object v1, v1, Landroidx/recyclerview/widget/RecyclerView;.mGapWorker:Landroidx/recyclerview/widget/GapWorker; // field@36e4
+561886: 3801 2200                              |0175: if-eqz v1, 0197 // +0022
+56188a: 5401 8d36                              |0177: iget-object v1, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+56188e: 5411 e436                              |0179: iget-object v1, v1, Landroidx/recyclerview/widget/RecyclerView;.mGapWorker:Landroidx/recyclerview/widget/GapWorker; // field@36e4
+561892: 5403 8d36                              |017b: iget-object v3, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561896: 6e40 fd47 31ed                         |017d: invoke-virtual {v1, v3, v13, v14}, Landroidx/recyclerview/widget/GapWorker;.postFromTraversal:(Landroidx/recyclerview/widget/RecyclerView;II)V // method@47fd
+56189c: 2817                                   |0180: goto 0197 // +0017
+56189e: 5401 8d36                              |0181: iget-object v1, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5618a2: 1203                                   |0183: const/4 v3, #int 0 // #0
+5618a4: 6e20 244d 3100                         |0184: invoke-virtual {v1, v3}, Landroidx/recyclerview/widget/RecyclerView;.setScrollState:(I)V // method@4d24
+5618aa: 6301 b136                              |0187: sget-boolean v1, Landroidx/recyclerview/widget/RecyclerView;.ALLOW_THREAD_GAP_WORK:Z // field@36b1
+5618ae: 3801 0900                              |0189: if-eqz v1, 0192 // +0009
+5618b2: 5401 8d36                              |018b: iget-object v1, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5618b6: 5411 0337                              |018d: iget-object v1, v1, Landroidx/recyclerview/widget/RecyclerView;.mPrefetchRegistry:Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl; // field@3703
+5618ba: 6e10 f047 0100                         |018f: invoke-virtual {v1}, Landroidx/recyclerview/widget/GapWorker$LayoutPrefetchRegistryImpl;.clearPrefetchPositions:()V // method@47f0
+5618c0: 5401 8d36                              |0192: iget-object v1, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5618c4: 6e20 314d 6100                         |0194: invoke-virtual {v1, v6}, Landroidx/recyclerview/widget/RecyclerView;.stopNestedScroll:(I)V // method@4d31
+5618ca: 3802 1300                              |0197: if-eqz v2, 01aa // +0013
+5618ce: 6e10 c94b 0200                         |0199: invoke-virtual {v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.isPendingInitialRun:()Z // method@4bc9
+5618d4: 0a01                                   |019c: move-result v1
+5618d6: 3801 0600                              |019d: if-eqz v1, 01a3 // +0006
+5618da: 1201                                   |019f: const/4 v1, #int 0 // #0
+5618dc: 6e30 cc4b 1201                         |01a0: invoke-virtual {v2, v1, v1}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.onAnimation:(II)V // method@4bcc
+5618e2: 5501 8b36                              |01a3: iget-boolean v1, v0, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mReSchedulePostAnimationCallback:Z // field@368b
+5618e6: 3901 0500                              |01a5: if-nez v1, 01aa // +0005
+5618ea: 6e10 d44b 0200                         |01a7: invoke-virtual {v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.stop:()V // method@4bd4
+5618f0: 7601 ed4b 1600                         |01aa: invoke-direct/range {v22}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.enableRunOnAnimationRequests:()V // method@4bed
+5618f6: 0e00                                   |01ad: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=5039
+        0x0008 line=5040
+        0x000c line=5043
+        0x000f line=5044
+        0x0014 line=5047
+        0x0016 line=5048
+        0x001c line=5049
+        0x0023 line=5050
+        0x0027 line=5051
+        0x002b line=5052
+        0x002f line=5053
+        0x0033 line=5054
+        0x0037 line=5057
+        0x0039 line=5058
+        0x003b line=5061
+        0x0049 line=5062
+        0x004c line=5063
+        0x004f line=5066
+        0x0055 line=5067
+        0x005c line=5068
+        0x0062 line=5069
+        0x006e line=5073
+        0x0074 line=5074
+        0x007a line=5075
+        0x0084 line=5077
+        0x0088 line=5078
+        0x008f line=5079
+        0x0096 line=5080
+        0x009e line=5082
+        0x00a6 line=5086
+        0x00b0 line=5087
+        0x00b5 line=5089
+        0x00be line=5090
+        0x00c3 line=5093
+        0x00db line=5096
+        0x00f5 line=5108
+        0x00fd line=5109
+        0x0106 line=5111
+        0x0110 line=5112
+        0x0116 line=5113
+        0x011d line=5117
+        0x0122 line=5120
+        0x012a line=5121
+        0x0131 line=5124
+        0x0142 line=5126
+        0x015d line=5131
+        0x0167 line=5132
+        0x016e line=5140
+        0x0171 line=5141
+        0x0177 line=5142
+        0x0181 line=5134
+        0x0187 line=5135
+        0x018b line=5136
+        0x0192 line=5138
+        0x0199 line=5148
+        0x01a0 line=5149
+        0x01a3 line=5151
+        0x01a7 line=5152
+        0x01aa line=5155
+      locals        :
+        0x0000 - 0x01ae reg=22 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+
+    #3              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'smoothScrollBy'
+      type          : '(II)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 5
+      insns size    : 5 16-bit code units
+5618f8:                                        |[5618f8] androidx.recyclerview.widget.RecyclerView$ViewFlinger.smoothScrollBy:(II)V
+561908: 1200                                   |0000: const/4 v0, #int 0 // #0
+56190a: 6e50 f34b 2103                         |0001: invoke-virtual {v1, v2, v3, v0, v0}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.smoothScrollBy:(IIII)V // method@4bf3
+561910: 0e00                                   |0004: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=5188
+      locals        :
+        0x0000 - 0x0005 reg=1 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+        0x0000 - 0x0005 reg=2 (null) I
+        0x0000 - 0x0005 reg=3 (null) I
+
+    #4              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'smoothScrollBy'
+      type          : '(III)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 6 16-bit code units
+561914:                                        |[561914] androidx.recyclerview.widget.RecyclerView$ViewFlinger.smoothScrollBy:(III)V
+561924: 6200 1d37                              |0000: sget-object v0, Landroidx/recyclerview/widget/RecyclerView;.sQuinticInterpolator:Landroid/view/animation/Interpolator; // field@371d
+561928: 6e50 f44b 2143                         |0002: invoke-virtual {v1, v2, v3, v4, v0}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.smoothScrollBy:(IIILandroid/view/animation/Interpolator;)V // method@4bf4
+56192e: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=5224
+      locals        :
+        0x0000 - 0x0006 reg=1 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+        0x0000 - 0x0006 reg=2 (null) I
+        0x0000 - 0x0006 reg=3 (null) I
+        0x0000 - 0x0006 reg=4 (null) I
+
+    #5              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'smoothScrollBy'
+      type          : '(IIII)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 5
+      insns size    : 8 16-bit code units
+561930:                                        |[561930] androidx.recyclerview.widget.RecyclerView$ViewFlinger.smoothScrollBy:(IIII)V
+561940: 7054 ea4b 1032                         |0000: invoke-direct {v0, v1, v2, v3, v4}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.computeScrollDuration:(IIII)I // method@4bea
+561946: 0a03                                   |0003: move-result v3
+561948: 6e40 f24b 1032                         |0004: invoke-virtual {v0, v1, v2, v3}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.smoothScrollBy:(III)V // method@4bf2
+56194e: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=5192
+      locals        :
+        0x0000 - 0x0008 reg=0 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+        0x0000 - 0x0008 reg=1 (null) I
+        0x0000 - 0x0008 reg=2 (null) I
+        0x0000 - 0x0008 reg=3 (null) I
+        0x0000 - 0x0008 reg=4 (null) I
+
+    #6              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'smoothScrollBy'
+      type          : '(IIILandroid/view/animation/Interpolator;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 11
+      ins           : 5
+      outs          : 6
+      insns size    : 44 16-bit code units
+561950:                                        |[561950] androidx.recyclerview.widget.RecyclerView$ViewFlinger.smoothScrollBy:(IIILandroid/view/animation/Interpolator;)V
+561960: 5460 8836                              |0000: iget-object v0, v6, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mInterpolator:Landroid/view/animation/Interpolator; // field@3688
+561964: 32a0 1100                              |0002: if-eq v0, v10, 0013 // +0011
+561968: 5b6a 8836                              |0004: iput-object v10, v6, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mInterpolator:Landroid/view/animation/Interpolator; // field@3688
+56196c: 2200 6f02                              |0006: new-instance v0, Landroid/widget/OverScroller; // type@026f
+561970: 5461 8d36                              |0008: iget-object v1, v6, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+561974: 6e10 8b4c 0100                         |000a: invoke-virtual {v1}, Landroidx/recyclerview/widget/RecyclerView;.getContext:()Landroid/content/Context; // method@4c8b
+56197a: 0c01                                   |000d: move-result-object v1
+56197c: 7030 b00e 100a                         |000e: invoke-direct {v0, v1, v10}, Landroid/widget/OverScroller;.<init>:(Landroid/content/Context;Landroid/view/animation/Interpolator;)V // method@0eb0
+561982: 5b60 8c36                              |0011: iput-object v0, v6, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mScroller:Landroid/widget/OverScroller; // field@368c
+561986: 546a 8d36                              |0013: iget-object v10, v6, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+56198a: 1220                                   |0015: const/4 v0, #int 2 // #2
+56198c: 6e20 244d 0a00                         |0016: invoke-virtual {v10, v0}, Landroidx/recyclerview/widget/RecyclerView;.setScrollState:(I)V // method@4d24
+561992: 120a                                   |0019: const/4 v10, #int 0 // #0
+561994: 596a 8a36                              |001a: iput v10, v6, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mLastFlingY:I // field@368a
+561998: 596a 8936                              |001c: iput v10, v6, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mLastFlingX:I // field@3689
+56199c: 5460 8c36                              |001e: iget-object v0, v6, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mScroller:Landroid/widget/OverScroller; // field@368c
+5619a0: 1201                                   |0020: const/4 v1, #int 0 // #0
+5619a2: 1202                                   |0021: const/4 v2, #int 0 // #0
+5619a4: 0173                                   |0022: move v3, v7
+5619a6: 0184                                   |0023: move v4, v8
+5619a8: 0195                                   |0024: move v5, v9
+5619aa: 7406 c00e 0000                         |0025: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Landroid/widget/OverScroller;.startScroll:(IIIII)V // method@0ec0
+5619b0: 6e10 ef4b 0600                         |0028: invoke-virtual {v6}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.postOnAnimation:()V // method@4bef
+5619b6: 0e00                                   |002b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=5233
+        0x0004 line=5234
+        0x0006 line=5235
+        0x0013 line=5237
+        0x001a line=5238
+        0x001e line=5239
+        0x0028 line=5246
+      locals        :
+        0x0000 - 0x002c reg=6 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+        0x0000 - 0x002c reg=7 (null) I
+        0x0000 - 0x002c reg=8 (null) I
+        0x0000 - 0x002c reg=9 (null) I
+        0x0000 - 0x002c reg=10 (null) Landroid/view/animation/Interpolator;
+
+    #7              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'smoothScrollBy'
+      type          : '(IILandroid/view/animation/Interpolator;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 13 16-bit code units
+5619b8:                                        |[5619b8] androidx.recyclerview.widget.RecyclerView$ViewFlinger.smoothScrollBy:(IILandroid/view/animation/Interpolator;)V
+5619c8: 1200                                   |0000: const/4 v0, #int 0 // #0
+5619ca: 7050 ea4b 2103                         |0001: invoke-direct {v1, v2, v3, v0, v0}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.computeScrollDuration:(IIII)I // method@4bea
+5619d0: 0a00                                   |0004: move-result v0
+5619d2: 3904 0400                              |0005: if-nez v4, 0009 // +0004
+5619d6: 6204 1d37                              |0007: sget-object v4, Landroidx/recyclerview/widget/RecyclerView;.sQuinticInterpolator:Landroid/view/animation/Interpolator; // field@371d
+5619da: 6e54 f44b 2103                         |0009: invoke-virtual {v1, v2, v3, v0, v4}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.smoothScrollBy:(IIILandroid/view/animation/Interpolator;)V // method@4bf4
+5619e0: 0e00                                   |000c: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=5228
+      locals        :
+        0x0000 - 0x000d reg=1 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+        0x0000 - 0x000d reg=2 (null) I
+        0x0000 - 0x000d reg=3 (null) I
+        0x0000 - 0x000d reg=4 (null) Landroid/view/animation/Interpolator;
+
+    #8              : (in Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;)
+      name          : 'stop'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 11 16-bit code units
+5619e4:                                        |[5619e4] androidx.recyclerview.widget.RecyclerView$ViewFlinger.stop:()V
+5619f4: 5410 8d36                              |0000: iget-object v0, v1, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.this$0:Landroidx/recyclerview/widget/RecyclerView; // field@368d
+5619f8: 6e20 f44c 1000                         |0002: invoke-virtual {v0, v1}, Landroidx/recyclerview/widget/RecyclerView;.removeCallbacks:(Ljava/lang/Runnable;)Z // method@4cf4
+5619fe: 5411 8c36                              |0005: iget-object v1, v1, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.mScroller:Landroid/widget/OverScroller; // field@368c
+561a02: 6e10 b10e 0100                         |0007: invoke-virtual {v1}, Landroid/widget/OverScroller;.abortAnimation:()V // method@0eb1
+561a08: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=5250
+        0x0005 line=5251
+      locals        :
+        0x0000 - 0x000b reg=1 this Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;
+
+  source_file_idx   : 24004 (RecyclerView.java)
+

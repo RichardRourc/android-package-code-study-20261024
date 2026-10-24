@@ -1,0 +1,150 @@
+Class #91            -
+  Class descriptor  : 'Lokio/SegmentPool;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lokio/SegmentPool;)
+      name          : 'MAX_SIZE'
+      type          : 'J'
+      access        : 0x0018 (STATIC FINAL)
+      value         : 65536
+    #1              : (in Lokio/SegmentPool;)
+      name          : 'byteCount'
+      type          : 'J'
+      access        : 0x0008 (STATIC)
+    #2              : (in Lokio/SegmentPool;)
+      name          : 'next'
+      type          : 'Lokio/Segment;'
+      access        : 0x0008 (STATIC)
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Lokio/SegmentPool;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+034750:                                        |[034750] okio.SegmentPool.<init>:()V
+034760: 7010 3502 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@0235
+034766: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=33
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lokio/SegmentPool;
+
+    #1              : (in Lokio/SegmentPool;)
+      name          : 'recycle'
+      type          : '(Lokio/Segment;)V'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 10
+      ins           : 1
+      outs          : 1
+      insns size    : 56 16-bit code units
+034768:                                        |[034768] okio.SegmentPool.recycle:(Lokio/Segment;)V
+034778: 5490 2701                              |0000: iget-object v0, v9, Lokio/Segment;.next:Lokio/Segment; // field@0127
+03477c: 3900 3000                              |0002: if-nez v0, 0032 // +0030
+034780: 5490 2a01                              |0004: iget-object v0, v9, Lokio/Segment;.prev:Lokio/Segment; // field@012a
+034784: 3900 2c00                              |0006: if-nez v0, 0032 // +002c
+034788: 5590 2b01                              |0008: iget-boolean v0, v9, Lokio/Segment;.shared:Z // field@012b
+03478c: 3800 0300                              |000a: if-eqz v0, 000d // +0003
+034790: 0e00                                   |000c: return-void
+034792: 1c00 6001                              |000d: const-class v0, Lokio/SegmentPool; // type@0160
+034796: 1d00                                   |000f: monitor-enter v0
+034798: 6101 2d01                              |0010: sget-wide v1, Lokio/SegmentPool;.byteCount:J // field@012d
+03479c: 1603 0008                              |0012: const-wide/16 v3, #int 2048 // #800
+0347a0: 9b05 0103                              |0014: add-long v5, v1, v3
+0347a4: 1707 0000 0100                         |0016: const-wide/32 v7, #float 9.18355e-41 // #00010000
+0347aa: 3105 0507                              |0019: cmp-long v5, v5, v7
+0347ae: 3d05 0400                              |001b: if-lez v5, 001f // +0004
+0347b2: 1e00                                   |001d: monitor-exit v0
+0347b4: 0e00                                   |001e: return-void
+0347b6: bb31                                   |001f: add-long/2addr v1, v3
+0347b8: 6801 2d01                              |0020: sput-wide v1, Lokio/SegmentPool;.byteCount:J // field@012d
+0347bc: 6201 2e01                              |0022: sget-object v1, Lokio/SegmentPool;.next:Lokio/Segment; // field@012e
+0347c0: 5b91 2701                              |0024: iput-object v1, v9, Lokio/Segment;.next:Lokio/Segment; // field@0127
+0347c4: 1201                                   |0026: const/4 v1, #int 0 // #0
+0347c6: 5991 2601                              |0027: iput v1, v9, Lokio/Segment;.limit:I // field@0126
+0347ca: 5991 2901                              |0029: iput v1, v9, Lokio/Segment;.pos:I // field@0129
+0347ce: 6909 2e01                              |002b: sput-object v9, Lokio/SegmentPool;.next:Lokio/Segment; // field@012e
+0347d2: 1e00                                   |002d: monitor-exit v0
+0347d4: 0e00                                   |002e: return-void
+0347d6: 0d09                                   |002f: move-exception v9
+0347d8: 1e00                                   |0030: monitor-exit v0
+0347da: 2709                                   |0031: throw v9
+0347dc: 2209 af00                              |0032: new-instance v9, Ljava/lang/IllegalArgumentException; // type@00af
+0347e0: 7010 1a02 0900                         |0034: invoke-direct {v9}, Ljava/lang/IllegalArgumentException;.<init>:()V // method@021a
+0347e6: 2709                                   |0037: throw v9
+      catches       : 1
+        0x0010 - 0x0031
+          <any> -> 0x002f
+      positions     :
+        0x0000 line=50
+        0x0008 line=51
+        0x000d line=52
+        0x0010 line=53
+        0x0020 line=54
+        0x0022 line=55
+        0x0027 line=56
+        0x002b line=57
+        0x002d line=58
+        0x0032 line=50
+      locals        :
+        0x0000 - 0x0038 reg=9 (null) Lokio/Segment;
+
+    #2              : (in Lokio/SegmentPool;)
+      name          : 'take'
+      type          : '()Lokio/Segment;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 6
+      ins           : 0
+      outs          : 1
+      insns size    : 33 16-bit code units
+0347f4:                                        |[0347f4] okio.SegmentPool.take:()Lokio/Segment;
+034804: 1c00 6001                              |0000: const-class v0, Lokio/SegmentPool; // type@0160
+034808: 1d00                                   |0002: monitor-enter v0
+03480a: 6201 2e01                              |0003: sget-object v1, Lokio/SegmentPool;.next:Lokio/Segment; // field@012e
+03480e: 3801 1200                              |0005: if-eqz v1, 0017 // +0012
+034812: 5412 2701                              |0007: iget-object v2, v1, Lokio/Segment;.next:Lokio/Segment; // field@0127
+034816: 6902 2e01                              |0009: sput-object v2, Lokio/SegmentPool;.next:Lokio/Segment; // field@012e
+03481a: 1202                                   |000b: const/4 v2, #int 0 // #0
+03481c: 5b12 2701                              |000c: iput-object v2, v1, Lokio/Segment;.next:Lokio/Segment; // field@0127
+034820: 6102 2d01                              |000e: sget-wide v2, Lokio/SegmentPool;.byteCount:J // field@012d
+034824: 1604 0008                              |0010: const-wide/16 v4, #int 2048 // #800
+034828: bc42                                   |0012: sub-long/2addr v2, v4
+03482a: 6802 2d01                              |0013: sput-wide v2, Lokio/SegmentPool;.byteCount:J // field@012d
+03482e: 1e00                                   |0015: monitor-exit v0
+034830: 1101                                   |0016: return-object v1
+034832: 1e00                                   |0017: monitor-exit v0
+034834: 2200 5f01                              |0018: new-instance v0, Lokio/Segment; // type@015f
+034838: 7010 1006 0000                         |001a: invoke-direct {v0}, Lokio/Segment;.<init>:()V // method@0610
+03483e: 1100                                   |001d: return-object v0
+034840: 0d01                                   |001e: move-exception v1
+034842: 1e00                                   |001f: monitor-exit v0
+034844: 2701                                   |0020: throw v1
+      catches       : 2
+        0x0003 - 0x0018
+          <any> -> 0x001e
+        0x001f - 0x0020
+          <any> -> 0x001e
+      positions     :
+        0x0000 line=37
+        0x0003 line=38
+        0x0007 line=40
+        0x000c line=41
+        0x000e line=42
+        0x0015 line=43
+        0x0017 line=45
+        0x0018 line=46
+        0x001f line=45
+      locals        :
+
+  Virtual methods   -
+  source_file_idx   : 1126 (SegmentPool.java)
+

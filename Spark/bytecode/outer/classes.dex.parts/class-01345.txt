@@ -1,0 +1,298 @@
+Class #1345            -
+  Class descriptor  : 'Landroidx/core/os/CancellationSignal;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Landroidx/core/os/CancellationSignal;)
+      name          : 'mCancelInProgress'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Landroidx/core/os/CancellationSignal;)
+      name          : 'mCancellationSignalObj'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Landroidx/core/os/CancellationSignal;)
+      name          : 'mIsCanceled'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Landroidx/core/os/CancellationSignal;)
+      name          : 'mOnCancelListener'
+      type          : 'Landroidx/core/os/CancellationSignal$OnCancelListener;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Landroidx/core/os/CancellationSignal;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+17de38:                                        |[17de38] androidx.core.os.CancellationSignal.<init>:()V
+17de48: 7010 df71 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@71df
+17de4e: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=42
+      locals        :
+        0x0000 - 0x0004 reg=0 this Landroidx/core/os/CancellationSignal;
+
+    #1              : (in Landroidx/core/os/CancellationSignal;)
+      name          : 'waitForCancelFinishedLocked'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+17dfa0:                                        |[17dfa0] androidx.core.os.CancellationSignal.waitForCancelFinishedLocked:()V
+17dfb0: 5510 6b16                              |0000: iget-boolean v0, v1, Landroidx/core/os/CancellationSignal;.mCancelInProgress:Z // field@166b
+17dfb4: 3800 0600                              |0002: if-eqz v0, 0008 // +0006
+17dfb8: 6e10 e771 0100                         |0004: invoke-virtual {v1}, Ljava/lang/Object;.wait:()V // method@71e7
+17dfbe: 28f9                                   |0007: goto 0000 // -0007
+17dfc0: 0e00                                   |0008: return-void
+      catches       : 1
+        0x0004 - 0x0007
+          Ljava/lang/InterruptedException; -> 0x0000
+      positions     :
+        0x0000 line=155
+        0x0004 line=157
+      locals        :
+        0x0000 - 0x0009 reg=1 this Landroidx/core/os/CancellationSignal;
+
+  Virtual methods   -
+    #0              : (in Landroidx/core/os/CancellationSignal;)
+      name          : 'cancel'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 1
+      insns size    : 59 16-bit code units
+17de50:                                        |[17de50] androidx.core.os.CancellationSignal.cancel:()V
+17de60: 1d03                                   |0000: monitor-enter v3
+17de62: 5530 6d16                              |0001: iget-boolean v0, v3, Landroidx/core/os/CancellationSignal;.mIsCanceled:Z // field@166d
+17de66: 3800 0400                              |0003: if-eqz v0, 0007 // +0004
+17de6a: 1e03                                   |0005: monitor-exit v3
+17de6c: 0e00                                   |0006: return-void
+17de6e: 1210                                   |0007: const/4 v0, #int 1 // #1
+17de70: 5c30 6d16                              |0008: iput-boolean v0, v3, Landroidx/core/os/CancellationSignal;.mIsCanceled:Z // field@166d
+17de74: 5c30 6b16                              |000a: iput-boolean v0, v3, Landroidx/core/os/CancellationSignal;.mCancelInProgress:Z // field@166b
+17de78: 5430 6e16                              |000c: iget-object v0, v3, Landroidx/core/os/CancellationSignal;.mOnCancelListener:Landroidx/core/os/CancellationSignal$OnCancelListener; // field@166e
+17de7c: 5431 6c16                              |000e: iget-object v1, v3, Landroidx/core/os/CancellationSignal;.mCancellationSignalObj:Ljava/lang/Object; // field@166c
+17de80: 1e03                                   |0010: monitor-exit v3
+17de82: 1202                                   |0011: const/4 v2, #int 0 // #0
+17de84: 3800 0800                              |0012: if-eqz v0, 001a // +0008
+17de88: 7210 9037 0000                         |0014: invoke-interface {v0}, Landroidx/core/os/CancellationSignal$OnCancelListener;.onCancel:()V // method@3790
+17de8e: 2803                                   |0017: goto 001a // +0003
+17de90: 0d00                                   |0018: move-exception v0
+17de92: 2809                                   |0019: goto 0022 // +0009
+17de94: 3801 1300                              |001a: if-eqz v1, 002d // +0013
+17de98: 1f01 3c01                              |001c: check-cast v1, Landroid/os/CancellationSignal; // type@013c
+17de9c: 6e10 e106 0100                         |001e: invoke-virtual {v1}, Landroid/os/CancellationSignal;.cancel:()V // method@06e1
+17dea2: 280c                                   |0021: goto 002d // +000c
+17dea4: 1d03                                   |0022: monitor-enter v3
+17dea6: 5c32 6b16                              |0023: iput-boolean v2, v3, Landroidx/core/os/CancellationSignal;.mCancelInProgress:Z // field@166b
+17deaa: 6e10 e571 0300                         |0025: invoke-virtual {v3}, Ljava/lang/Object;.notifyAll:()V // method@71e5
+17deb0: 1e03                                   |0028: monitor-exit v3
+17deb2: 2700                                   |0029: throw v0
+17deb4: 0d00                                   |002a: move-exception v0
+17deb6: 1e03                                   |002b: monitor-exit v3
+17deb8: 2700                                   |002c: throw v0
+17deba: 1d03                                   |002d: monitor-enter v3
+17debc: 5c32 6b16                              |002e: iput-boolean v2, v3, Landroidx/core/os/CancellationSignal;.mCancelInProgress:Z // field@166b
+17dec0: 6e10 e571 0300                         |0030: invoke-virtual {v3}, Ljava/lang/Object;.notifyAll:()V // method@71e5
+17dec6: 1e03                                   |0033: monitor-exit v3
+17dec8: 0e00                                   |0034: return-void
+17deca: 0d00                                   |0035: move-exception v0
+17decc: 1e03                                   |0036: monitor-exit v3
+17dece: 2700                                   |0037: throw v0
+17ded0: 0d00                                   |0038: move-exception v0
+17ded2: 1e03                                   |0039: monitor-exit v3
+17ded4: 2700                                   |003a: throw v0
+      catches       : 6
+        0x0001 - 0x0011
+          <any> -> 0x0038
+        0x0014 - 0x0021
+          <any> -> 0x0018
+        0x0023 - 0x0029
+          <any> -> 0x002a
+        0x002b - 0x002c
+          <any> -> 0x002a
+        0x002e - 0x0037
+          <any> -> 0x0035
+        0x0039 - 0x003a
+          <any> -> 0x0038
+      positions     :
+        0x0000 line=74
+        0x0001 line=75
+        0x0005 line=76
+        0x0008 line=78
+        0x000a line=79
+        0x000c line=80
+        0x000e line=81
+        0x0010 line=82
+        0x0014 line=86
+        0x001c line=89
+        0x0022 line=92
+        0x0023 line=93
+        0x0025 line=94
+        0x0028 line=95
+        0x0029 line=96
+        0x002b line=95
+        0x002d line=92
+        0x002e line=93
+        0x0030 line=94
+        0x0033 line=95
+        0x0039 line=82
+      locals        :
+        0x0000 - 0x003b reg=3 this Landroidx/core/os/CancellationSignal;
+
+    #1              : (in Landroidx/core/os/CancellationSignal;)
+      name          : 'getCancellationSignalObject'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 29 16-bit code units
+17dde0:                                        |[17dde0] androidx.core.os.CancellationSignal.getCancellationSignalObject:()Ljava/lang/Object;
+17ddf0: 1d02                                   |0000: monitor-enter v2
+17ddf2: 5420 6c16                              |0001: iget-object v0, v2, Landroidx/core/os/CancellationSignal;.mCancellationSignalObj:Ljava/lang/Object; // field@166c
+17ddf6: 3900 1300                              |0003: if-nez v0, 0016 // +0013
+17ddfa: 2200 3c01                              |0005: new-instance v0, Landroid/os/CancellationSignal; // type@013c
+17ddfe: 7010 e006 0000                         |0007: invoke-direct {v0}, Landroid/os/CancellationSignal;.<init>:()V // method@06e0
+17de04: 5b20 6c16                              |000a: iput-object v0, v2, Landroidx/core/os/CancellationSignal;.mCancellationSignalObj:Ljava/lang/Object; // field@166c
+17de08: 5521 6d16                              |000c: iget-boolean v1, v2, Landroidx/core/os/CancellationSignal;.mIsCanceled:Z // field@166d
+17de0c: 3801 0800                              |000e: if-eqz v1, 0016 // +0008
+17de10: 0701                                   |0010: move-object v1, v0
+17de12: 1f01 3c01                              |0011: check-cast v1, Landroid/os/CancellationSignal; // type@013c
+17de16: 6e10 e106 0000                         |0013: invoke-virtual {v0}, Landroid/os/CancellationSignal;.cancel:()V // method@06e1
+17de1c: 5420 6c16                              |0016: iget-object v0, v2, Landroidx/core/os/CancellationSignal;.mCancellationSignalObj:Ljava/lang/Object; // field@166c
+17de20: 1e02                                   |0018: monitor-exit v2
+17de22: 1100                                   |0019: return-object v0
+17de24: 0d00                                   |001a: move-exception v0
+17de26: 1e02                                   |001b: monitor-exit v2
+17de28: 2700                                   |001c: throw v0
+      catches       : 1
+        0x0001 - 0x001c
+          <any> -> 0x001a
+      positions     :
+        0x0000 line=143
+        0x0001 line=144
+        0x0005 line=145
+        0x000c line=146
+        0x0010 line=147
+        0x0016 line=150
+        0x001b line=151
+      locals        :
+        0x0000 - 0x001d reg=2 this Landroidx/core/os/CancellationSignal;
+
+    #2              : (in Landroidx/core/os/CancellationSignal;)
+      name          : 'isCanceled'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+17ddb4:                                        |[17ddb4] androidx.core.os.CancellationSignal.isCanceled:()Z
+17ddc4: 1d01                                   |0000: monitor-enter v1
+17ddc6: 5510 6d16                              |0001: iget-boolean v0, v1, Landroidx/core/os/CancellationSignal;.mIsCanceled:Z // field@166d
+17ddca: 1e01                                   |0003: monitor-exit v1
+17ddcc: 0f00                                   |0004: return v0
+17ddce: 0d00                                   |0005: move-exception v0
+17ddd0: 1e01                                   |0006: monitor-exit v1
+17ddd2: 2700                                   |0007: throw v0
+      catches       : 1
+        0x0001 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0000 line=51
+        0x0001 line=52
+        0x0006 line=53
+      locals        :
+        0x0000 - 0x0008 reg=1 this Landroidx/core/os/CancellationSignal;
+
+    #3              : (in Landroidx/core/os/CancellationSignal;)
+      name          : 'setOnCancelListener'
+      type          : '(Landroidx/core/os/CancellationSignal$OnCancelListener;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 29 16-bit code units
+17df14:                                        |[17df14] androidx.core.os.CancellationSignal.setOnCancelListener:(Landroidx/core/os/CancellationSignal$OnCancelListener;)V
+17df24: 1d01                                   |0000: monitor-enter v1
+17df26: 7010 9737 0100                         |0001: invoke-direct {v1}, Landroidx/core/os/CancellationSignal;.waitForCancelFinishedLocked:()V // method@3797
+17df2c: 5410 6e16                              |0004: iget-object v0, v1, Landroidx/core/os/CancellationSignal;.mOnCancelListener:Landroidx/core/os/CancellationSignal$OnCancelListener; // field@166e
+17df30: 3320 0400                              |0006: if-ne v0, v2, 000a // +0004
+17df34: 1e01                                   |0008: monitor-exit v1
+17df36: 0e00                                   |0009: return-void
+17df38: 5b12 6e16                              |000a: iput-object v2, v1, Landroidx/core/os/CancellationSignal;.mOnCancelListener:Landroidx/core/os/CancellationSignal$OnCancelListener; // field@166e
+17df3c: 5510 6d16                              |000c: iget-boolean v0, v1, Landroidx/core/os/CancellationSignal;.mIsCanceled:Z // field@166d
+17df40: 3800 0a00                              |000e: if-eqz v0, 0018 // +000a
+17df44: 3902 0300                              |0010: if-nez v2, 0013 // +0003
+17df48: 2806                                   |0012: goto 0018 // +0006
+17df4a: 1e01                                   |0013: monitor-exit v1
+17df4c: 7210 9037 0200                         |0014: invoke-interface {v2}, Landroidx/core/os/CancellationSignal$OnCancelListener;.onCancel:()V // method@3790
+17df52: 0e00                                   |0017: return-void
+17df54: 1e01                                   |0018: monitor-exit v1
+17df56: 0e00                                   |0019: return-void
+17df58: 0d02                                   |001a: move-exception v2
+17df5a: 1e01                                   |001b: monitor-exit v1
+17df5c: 2702                                   |001c: throw v2
+      catches       : 2
+        0x0001 - 0x0014
+          <any> -> 0x001a
+        0x0018 - 0x001c
+          <any> -> 0x001a
+      positions     :
+        0x0000 line=116
+        0x0001 line=117
+        0x0004 line=119
+        0x0008 line=120
+        0x000a line=122
+        0x000c line=123
+        0x0013 line=126
+        0x0014 line=127
+        0x0018 line=124
+        0x001b line=126
+      locals        :
+        0x0000 - 0x001d reg=1 this Landroidx/core/os/CancellationSignal;
+        0x0000 - 0x001d reg=2 (null) Landroidx/core/os/CancellationSignal$OnCancelListener;
+
+    #4              : (in Landroidx/core/os/CancellationSignal;)
+      name          : 'throwIfCanceled'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 13 16-bit code units
+17df74:                                        |[17df74] androidx.core.os.CancellationSignal.throwIfCanceled:()V
+17df84: 6e10 9437 0100                         |0000: invoke-virtual {v1}, Landroidx/core/os/CancellationSignal;.isCanceled:()Z // method@3794
+17df8a: 0a00                                   |0003: move-result v0
+17df8c: 3900 0300                              |0004: if-nez v0, 0007 // +0003
+17df90: 0e00                                   |0006: return-void
+17df92: 2200 b207                              |0007: new-instance v0, Landroidx/core/os/OperationCanceledException; // type@07b2
+17df96: 7010 0b38 0000                         |0009: invoke-direct {v0}, Landroidx/core/os/OperationCanceledException;.<init>:()V // method@380b
+17df9c: 2700                                   |000c: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=62
+        0x0007 line=63
+      locals        :
+        0x0000 - 0x000d reg=1 this Landroidx/core/os/CancellationSignal;
+
+  source_file_idx   : 8001 (CancellationSignal.java)
+

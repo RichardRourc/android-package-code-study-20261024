@@ -1,0 +1,127 @@
+// Ghidra pseudocode. Not original C/C++ source.
+// Program: libsummitden.so
+// Executable SHA256: b85ed734818451c37b81675640c83cc17609fd83ad5e4b1b14a7c18f7d6e0fa0
+// Entry: 00143804; body: [[00143804, 00143c27]]
+
+void FUN_00143804(long *param_1,undefined8 param_2,undefined8 param_3,undefined8 param_4,
+                 long param_5)
+
+{
+  int iVar1;
+  long lVar2;
+  int iVar3;
+  long lVar4;
+  undefined8 uVar5;
+  int iVar6;
+  long lVar7;
+  long lVar8;
+  long unaff_x26;
+  undefined8 unaff_x27;
+  undefined8 local_98 [5];
+  undefined8 local_70;
+  long local_68;
+  
+  lVar2 = tpidr_el0;
+  local_68 = *(long *)(lVar2 + 0x28);
+  lVar7 = *param_1;
+  lVar8 = 0x4caa9eb;
+  local_70 = param_2;
+  local_98[0] = (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc37196)])();
+  lVar4 = (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc3712b)])(&local_70,local_98);
+  lVar7 = lVar7 + lVar4;
+  iVar1 = 0xb692757;
+  if (param_5 < 1) {
+    iVar1 = 0x4caa9eb;
+  }
+  iVar3 = 0x2b9eb119;
+  do {
+    while( true ) {
+      while( true ) {
+        while (iVar6 = iVar3, 0x19a11def < iVar6) {
+          if (iVar6 < 0x49f650b8) {
+            if (iVar6 == 0x19a11df0) {
+              (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc3712c)])
+                        (param_1,lVar7,lVar8,lVar7 + param_5);
+              (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc3713a)])
+                        (param_3,unaff_x27,lVar7);
+              iVar3 = 0x49f650b8;
+            }
+            else {
+              iVar3 = iVar6;
+              if (iVar6 == 0x2b9eb119) {
+                iVar3 = iVar1;
+              }
+            }
+          }
+          else {
+            iVar3 = 0x695ccea;
+            if (iVar6 != 0x49f650b8) {
+              if (iVar6 == 0x6181838f) {
+                lVar4 = (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc3719d)])(param_1);
+                uVar5 = (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc37121)])
+                                  (param_1,lVar4 + param_5);
+                (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc371b6)])
+                          (local_98,uVar5,lVar7 - *param_1,param_1 + 2);
+                (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc3701b)])
+                          (local_98,param_3,param_5);
+                lVar7 = (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc37123)])
+                                  (param_1,local_98,lVar7);
+                (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc371a8)])(local_98);
+                iVar3 = 0x4b8ed73;
+              }
+              else {
+                iVar3 = iVar6;
+                if (iVar6 == 0x6f2f3347) {
+                  (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc3712c)])
+                            (param_1,lVar7,lVar8,lVar7 + param_5);
+                  (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc37018)])
+                            (param_3,param_5,lVar7);
+                  iVar3 = 0x695ccea;
+                }
+              }
+            }
+          }
+        }
+        if (iVar6 < 0x695ccea) break;
+        iVar3 = 0x4b8ed73;
+        if (iVar6 != 0x695ccea) {
+          if (iVar6 == 0xa98bced) {
+            unaff_x27 = (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc37019)])
+                                  (param_3,unaff_x26);
+            (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc37105)])
+                      (param_1,unaff_x27,param_4,param_5 - unaff_x26);
+            iVar3 = 0x19a11df0;
+            if (unaff_x26 < 1) {
+              iVar3 = 0x49f650b8;
+            }
+          }
+          else {
+            iVar3 = iVar6;
+            if (iVar6 == 0xb692757) {
+              iVar3 = 0x6181838f;
+              if (param_5 <= param_1[2] - param_1[1]) {
+                iVar3 = -0x3ae4e52a;
+              }
+            }
+          }
+        }
+      }
+      if (iVar6 != -0x3ae4e52a) break;
+      lVar8 = param_1[1];
+      unaff_x26 = lVar8 - lVar7;
+      iVar3 = 0xa98bced;
+      if (param_5 <= unaff_x26) {
+        iVar3 = 0x6f2f3347;
+      }
+    }
+    iVar3 = 0x4caa9eb;
+  } while ((iVar6 == 0x4b8ed73) || (iVar3 = iVar6, iVar6 != 0x4caa9eb));
+  (*(code *)(&PTR_FUN_001faed0)[(int)(DAT_001fbb18 ^ 0xdcc371ac)])(param_1,lVar7);
+  if (*(long *)(lVar2 + 0x28) != local_68) {
+                    /* WARNING: Subroutine does not return */
+    __stack_chk_fail();
+  }
+  return;
+}
+
+

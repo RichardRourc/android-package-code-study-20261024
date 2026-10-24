@@ -1,0 +1,746 @@
+Class #5847            -
+  Class descriptor  : 'Lcom/squareup/okhttp/ConnectionPool;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : '$assertionsDisabled'
+      type          : 'Z'
+      access        : 0x1018 (STATIC FINAL SYNTHETIC)
+      value         : false
+    #1              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'DEFAULT_KEEP_ALIVE_DURATION_MS'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 300000
+    #2              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'systemDefault'
+      type          : 'Lcom/squareup/okhttp/ConnectionPool;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+    #0              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'cleanupRunnable'
+      type          : 'Ljava/lang/Runnable;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'connections'
+      type          : 'Ljava/util/Deque;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'executor'
+      type          : 'Ljava/util/concurrent/Executor;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'keepAliveDurationNs'
+      type          : 'J'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'maxIdleConnections'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'routeDatabase'
+      type          : 'Lcom/squareup/okhttp/internal/RouteDatabase;'
+      access        : 0x0010 (FINAL)
+  Direct methods    -
+    #0              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 0
+      outs          : 4
+      insns size    : 68 16-bit code units
+74e908:                                        |[74e908] com.squareup.okhttp.ConnectionPool.<clinit>:()V
+74e918: 1a00 e9a7                              |0000: const-string v0, "http.keepAlive" // string@a7e9
+74e91c: 7110 5dd2 0000                         |0002: invoke-static {v0}, Ljava/lang/System;.getProperty:(Ljava/lang/String;)Ljava/lang/String; // method@d25d
+74e922: 0c00                                   |0005: move-result-object v0
+74e924: 1a01 eaa7                              |0006: const-string v1, "http.keepAliveDuration" // string@a7ea
+74e928: 7110 5dd2 0100                         |0008: invoke-static {v1}, Ljava/lang/System;.getProperty:(Ljava/lang/String;)Ljava/lang/String; // method@d25d
+74e92e: 0c01                                   |000b: move-result-object v1
+74e930: 1a02 eba7                              |000c: const-string v2, "http.maxConnections" // string@a7eb
+74e934: 7110 5dd2 0200                         |000e: invoke-static {v2}, Ljava/lang/System;.getProperty:(Ljava/lang/String;)Ljava/lang/String; // method@d25d
+74e93a: 0c02                                   |0011: move-result-object v2
+74e93c: 3801 0700                              |0012: if-eqz v1, 0019 // +0007
+74e940: 7110 7ad1 0100                         |0014: invoke-static {v1}, Ljava/lang/Long;.parseLong:(Ljava/lang/String;)J // method@d17a
+74e946: 0b03                                   |0017: move-result-wide v3
+74e948: 2804                                   |0018: goto 001c // +0004
+74e94a: 1703 e093 0400                         |0019: const-wide/32 v3, #float 4.2039e-40 // #000493e0
+74e950: 3800 1100                              |001c: if-eqz v0, 002d // +0011
+74e954: 7110 9fd0 0000                         |001e: invoke-static {v0}, Ljava/lang/Boolean;.parseBoolean:(Ljava/lang/String;)Z // method@d09f
+74e95a: 0a00                                   |0021: move-result v0
+74e95c: 3900 0b00                              |0022: if-nez v0, 002d // +000b
+74e960: 2200 4e19                              |0024: new-instance v0, Lcom/squareup/okhttp/ConnectionPool; // type@194e
+74e964: 1201                                   |0026: const/4 v1, #int 0 // #0
+74e966: 7040 fcc8 1043                         |0027: invoke-direct {v0, v1, v3, v4}, Lcom/squareup/okhttp/ConnectionPool;.<init>:(IJ)V // method@c8fc
+74e96c: 6900 f686                              |002a: sput-object v0, Lcom/squareup/okhttp/ConnectionPool;.systemDefault:Lcom/squareup/okhttp/ConnectionPool; // field@86f6
+74e970: 2817                                   |002c: goto 0043 // +0017
+74e972: 3802 0e00                              |002d: if-eqz v2, 003b // +000e
+74e976: 2200 4e19                              |002f: new-instance v0, Lcom/squareup/okhttp/ConnectionPool; // type@194e
+74e97a: 7110 60d1 0200                         |0031: invoke-static {v2}, Ljava/lang/Integer;.parseInt:(Ljava/lang/String;)I // method@d160
+74e980: 0a01                                   |0034: move-result v1
+74e982: 7040 fcc8 1043                         |0035: invoke-direct {v0, v1, v3, v4}, Lcom/squareup/okhttp/ConnectionPool;.<init>:(IJ)V // method@c8fc
+74e988: 6900 f686                              |0038: sput-object v0, Lcom/squareup/okhttp/ConnectionPool;.systemDefault:Lcom/squareup/okhttp/ConnectionPool; // field@86f6
+74e98c: 2809                                   |003a: goto 0043 // +0009
+74e98e: 2200 4e19                              |003b: new-instance v0, Lcom/squareup/okhttp/ConnectionPool; // type@194e
+74e992: 1251                                   |003d: const/4 v1, #int 5 // #5
+74e994: 7040 fcc8 1043                         |003e: invoke-direct {v0, v1, v3, v4}, Lcom/squareup/okhttp/ConnectionPool;.<init>:(IJ)V // method@c8fc
+74e99a: 6900 f686                              |0041: sput-object v0, Lcom/squareup/okhttp/ConnectionPool;.systemDefault:Lcom/squareup/okhttp/ConnectionPool; // field@86f6
+74e99e: 0e00                                   |0043: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=64
+        0x0006 line=65
+        0x000c line=66
+        0x0014 line=68
+        0x001e line=70
+        0x0024 line=71
+        0x002f line=73
+        0x003b line=75
+      locals        :
+
+    #1              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : '<init>'
+      type          : '(IJ)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 6 16-bit code units
+74e9a0:                                        |[74e9a0] com.squareup.okhttp.ConnectionPool.<init>:(IJ)V
+74e9b0: 6200 498a                              |0000: sget-object v0, Ljava/util/concurrent/TimeUnit;.MILLISECONDS:Ljava/util/concurrent/TimeUnit; // field@8a49
+74e9b4: 7050 fdc8 2143                         |0002: invoke-direct {v1, v2, v3, v4, v0}, Lcom/squareup/okhttp/ConnectionPool;.<init>:(IJLjava/util/concurrent/TimeUnit;)V // method@c8fd
+74e9ba: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=114
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lcom/squareup/okhttp/ConnectionPool;
+        0x0000 - 0x0006 reg=2 (null) I
+        0x0000 - 0x0006 reg=3 (null) J
+
+    #2              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : '<init>'
+      type          : '(IJLjava/util/concurrent/TimeUnit;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 14
+      ins           : 5
+      outs          : 8
+      insns size    : 86 16-bit code units
+74e9bc:                                        |[74e9bc] com.squareup.okhttp.ConnectionPool.<init>:(IJLjava/util/concurrent/TimeUnit;)V
+74e9cc: 7010 c8d1 0900                         |0000: invoke-direct {v9}, Ljava/lang/Object;.<init>:()V // method@d1c8
+74e9d2: 2208 8c1b                              |0003: new-instance v8, Ljava/util/concurrent/ThreadPoolExecutor; // type@1b8c
+74e9d6: 6205 4b8a                              |0005: sget-object v5, Ljava/util/concurrent/TimeUnit;.SECONDS:Ljava/util/concurrent/TimeUnit; // field@8a4b
+74e9da: 2206 821b                              |0007: new-instance v6, Ljava/util/concurrent/LinkedBlockingQueue; // type@1b82
+74e9de: 7010 c4d6 0600                         |0009: invoke-direct {v6}, Ljava/util/concurrent/LinkedBlockingQueue;.<init>:()V // method@d6c4
+74e9e4: 1a00 b259                              |000c: const-string v0, "OkHttp ConnectionPool" // string@59b2
+74e9e8: 1211                                   |000e: const/4 v1, #int 1 // #1
+74e9ea: 7120 a9cb 1000                         |000f: invoke-static {v0, v1}, Lcom/squareup/okhttp/internal/Util;.threadFactory:(Ljava/lang/String;Z)Ljava/util/concurrent/ThreadFactory; // method@cba9
+74e9f0: 0c07                                   |0012: move-result-object v7
+74e9f2: 1201                                   |0013: const/4 v1, #int 0 // #0
+74e9f4: 1212                                   |0014: const/4 v2, #int 1 // #1
+74e9f6: 1603 3c00                              |0015: const-wide/16 v3, #int 60 // #3c
+74e9fa: 0780                                   |0017: move-object v0, v8
+74e9fc: 7608 e0d6 0000                         |0018: invoke-direct/range {v0, v1, v2, v3, v4, v5, v6, v7}, Ljava/util/concurrent/ThreadPoolExecutor;.<init>:(IIJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/BlockingQueue;Ljava/util/concurrent/ThreadFactory;)V // method@d6e0
+74ea02: 5b98 f286                              |001b: iput-object v8, v9, Lcom/squareup/okhttp/ConnectionPool;.executor:Ljava/util/concurrent/Executor; // field@86f2
+74ea06: 2200 4d19                              |001d: new-instance v0, Lcom/squareup/okhttp/ConnectionPool$1; // type@194d
+74ea0a: 7020 f9c8 9000                         |001f: invoke-direct {v0, v9}, Lcom/squareup/okhttp/ConnectionPool$1;.<init>:(Lcom/squareup/okhttp/ConnectionPool;)V // method@c8f9
+74ea10: 5b90 f086                              |0022: iput-object v0, v9, Lcom/squareup/okhttp/ConnectionPool;.cleanupRunnable:Ljava/lang/Runnable; // field@86f0
+74ea14: 2200 391b                              |0024: new-instance v0, Ljava/util/ArrayDeque; // type@1b39
+74ea18: 7010 90d4 0000                         |0026: invoke-direct {v0}, Ljava/util/ArrayDeque;.<init>:()V // method@d490
+74ea1e: 5b90 f186                              |0029: iput-object v0, v9, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74ea22: 2200 8919                              |002b: new-instance v0, Lcom/squareup/okhttp/internal/RouteDatabase; // type@1989
+74ea26: 7010 8ccb 0000                         |002d: invoke-direct {v0}, Lcom/squareup/okhttp/internal/RouteDatabase;.<init>:()V // method@cb8c
+74ea2c: 5b90 f586                              |0030: iput-object v0, v9, Lcom/squareup/okhttp/ConnectionPool;.routeDatabase:Lcom/squareup/okhttp/internal/RouteDatabase; // field@86f5
+74ea30: 599a f486                              |0032: iput v10, v9, Lcom/squareup/okhttp/ConnectionPool;.maxIdleConnections:I // field@86f4
+74ea34: 6e30 e8d6 bd0c                         |0034: invoke-virtual {v13, v11, v12}, Ljava/util/concurrent/TimeUnit;.toNanos:(J)J // method@d6e8
+74ea3a: 0b00                                   |0037: move-result-wide v0
+74ea3c: 5a90 f386                              |0038: iput-wide v0, v9, Lcom/squareup/okhttp/ConnectionPool;.keepAliveDurationNs:J // field@86f3
+74ea40: 1609 0000                              |003a: const-wide/16 v9, #int 0 // #0
+74ea44: 3109 0b09                              |003c: cmp-long v9, v11, v9
+74ea48: 3d09 0300                              |003e: if-lez v9, 0041 // +0003
+74ea4c: 0e00                                   |0040: return-void
+74ea4e: 2209 7a1a                              |0041: new-instance v9, Ljava/lang/IllegalArgumentException; // type@1a7a
+74ea52: 220a 991a                              |0043: new-instance v10, Ljava/lang/StringBuilder; // type@1a99
+74ea56: 1a0d 89ae                              |0045: const-string v13, "keepAliveDuration <= 0: " // string@ae89
+74ea5a: 7020 3cd2 da00                         |0047: invoke-direct {v10, v13}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+74ea60: 6e30 41d2 ba0c                         |004a: invoke-virtual {v10, v11, v12}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+74ea66: 0c0a                                   |004d: move-result-object v10
+74ea68: 6e10 58d2 0a00                         |004e: invoke-virtual {v10}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+74ea6e: 0c0a                                   |0051: move-result-object v10
+74ea70: 7020 47d1 a900                         |0052: invoke-direct {v9, v10}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+74ea76: 2709                                   |0055: throw v9
+      catches       : (none)
+      positions     :
+        0x0000 line=117
+        0x0003 line=84
+        0x000f line=86
+        0x001d line=91
+        0x0024 line=110
+        0x002b line=111
+        0x0032 line=118
+        0x0034 line=119
+        0x0041 line=123
+      locals        :
+        0x0000 - 0x0056 reg=9 this Lcom/squareup/okhttp/ConnectionPool;
+        0x0000 - 0x0056 reg=10 (null) I
+        0x0000 - 0x0056 reg=11 (null) J
+        0x0000 - 0x0056 reg=13 (null) Ljava/util/concurrent/TimeUnit;
+
+    #3              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'getDefault'
+      type          : '()Lcom/squareup/okhttp/ConnectionPool;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 0
+      insns size    : 3 16-bit code units
+74ea78:                                        |[74ea78] com.squareup.okhttp.ConnectionPool.getDefault:()Lcom/squareup/okhttp/ConnectionPool;
+74ea88: 6200 f686                              |0000: sget-object v0, Lcom/squareup/okhttp/ConnectionPool;.systemDefault:Lcom/squareup/okhttp/ConnectionPool; // field@86f6
+74ea8c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=128
+      locals        :
+
+    #4              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'pruneAndGetAllocationCount'
+      type          : '(Lcom/squareup/okhttp/internal/io/RealConnection;J)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 2
+      insns size    : 86 16-bit code units
+74ea90:                                        |[74ea90] com.squareup.okhttp.ConnectionPool.pruneAndGetAllocationCount:(Lcom/squareup/okhttp/internal/io/RealConnection;J)I
+74eaa0: 5470 7e89                              |0000: iget-object v0, v7, Lcom/squareup/okhttp/internal/io/RealConnection;.allocations:Ljava/util/List; // field@897e
+74eaa4: 1201                                   |0002: const/4 v1, #int 0 // #0
+74eaa6: 0112                                   |0003: move v2, v1
+74eaa8: 7210 dbd5 0000                         |0004: invoke-interface {v0}, Ljava/util/List;.size:()I // method@d5db
+74eaae: 0a03                                   |0007: move-result v3
+74eab0: 3532 4900                              |0008: if-ge v2, v3, 0051 // +0049
+74eab4: 7220 cfd5 2000                         |000a: invoke-interface {v0, v2}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+74eaba: 0c03                                   |000d: move-result-object v3
+74eabc: 1f03 ac1a                              |000e: check-cast v3, Ljava/lang/ref/Reference; // type@1aac
+74eac0: 6e10 97d2 0300                         |0010: invoke-virtual {v3}, Ljava/lang/ref/Reference;.get:()Ljava/lang/Object; // method@d297
+74eac6: 0c03                                   |0013: move-result-object v3
+74eac8: 3803 0500                              |0014: if-eqz v3, 0019 // +0005
+74eacc: d802 0201                              |0016: add-int/lit8 v2, v2, #int 1 // #01
+74ead0: 28ec                                   |0018: goto 0004 // -0014
+74ead2: 6203 e487                              |0019: sget-object v3, Lcom/squareup/okhttp/internal/Internal;.logger:Ljava/util/logging/Logger; // field@87e4
+74ead6: 2204 991a                              |001b: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+74eada: 1a05 3d12                              |001d: const-string v5, "A connection to " // string@123d
+74eade: 7020 3cd2 5400                         |001f: invoke-direct {v4, v5}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+74eae4: 6e10 68ce 0700                         |0022: invoke-virtual {v7}, Lcom/squareup/okhttp/internal/io/RealConnection;.getRoute:()Lcom/squareup/okhttp/Route; // method@ce68
+74eaea: 0c05                                   |0025: move-result-object v5
+74eaec: 6e10 d1ca 0500                         |0026: invoke-virtual {v5}, Lcom/squareup/okhttp/Route;.getAddress:()Lcom/squareup/okhttp/Address; // method@cad1
+74eaf2: 0c05                                   |0029: move-result-object v5
+74eaf4: 6e10 5fc8 0500                         |002a: invoke-virtual {v5}, Lcom/squareup/okhttp/Address;.url:()Lcom/squareup/okhttp/HttpUrl; // method@c85f
+74eafa: 0c05                                   |002d: move-result-object v5
+74eafc: 6e20 44d2 5400                         |002e: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+74eb02: 0c04                                   |0031: move-result-object v4
+74eb04: 1a05 ef04                              |0032: const-string v5, " was leaked. Did you forget to close a response body?" // string@04ef
+74eb08: 6e20 45d2 5400                         |0034: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74eb0e: 0c04                                   |0037: move-result-object v4
+74eb10: 6e10 58d2 0400                         |0038: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+74eb16: 0c04                                   |003b: move-result-object v4
+74eb18: 6e20 2bd7 4300                         |003c: invoke-virtual {v3, v4}, Ljava/util/logging/Logger;.warning:(Ljava/lang/String;)V // method@d72b
+74eb1e: 7220 d6d5 2000                         |003f: invoke-interface {v0, v2}, Ljava/util/List;.remove:(I)Ljava/lang/Object; // method@d5d6
+74eb24: 1213                                   |0042: const/4 v3, #int 1 // #1
+74eb26: 5c73 8489                              |0043: iput-boolean v3, v7, Lcom/squareup/okhttp/internal/io/RealConnection;.noNewStreams:Z // field@8984
+74eb2a: 7210 d1d5 0000                         |0045: invoke-interface {v0}, Ljava/util/List;.isEmpty:()Z // method@d5d1
+74eb30: 0a03                                   |0048: move-result v3
+74eb32: 3803 bbff                              |0049: if-eqz v3, 0004 // -0045
+74eb36: 5362 f386                              |004b: iget-wide v2, v6, Lcom/squareup/okhttp/ConnectionPool;.keepAliveDurationNs:J // field@86f3
+74eb3a: bc28                                   |004d: sub-long/2addr v8, v2
+74eb3c: 5a78 8189                              |004e: iput-wide v8, v7, Lcom/squareup/okhttp/internal/io/RealConnection;.idleAtNanos:J // field@8981
+74eb40: 0f01                                   |0050: return v1
+74eb42: 7210 dbd5 0000                         |0051: invoke-interface {v0}, Ljava/util/List;.size:()I // method@d5db
+74eb48: 0a06                                   |0054: move-result v6
+74eb4a: 0f06                                   |0055: return v6
+      catches       : (none)
+      positions     :
+        0x0000 line=295
+        0x0004 line=296
+        0x000a line=297
+        0x0010 line=299
+        0x0019 line=305
+        0x003f line=307
+        0x0043 line=308
+        0x0045 line=311
+        0x004b line=312
+        0x0051 line=317
+      locals        :
+        0x0000 - 0x0056 reg=6 this Lcom/squareup/okhttp/ConnectionPool;
+        0x0000 - 0x0056 reg=7 (null) Lcom/squareup/okhttp/internal/io/RealConnection;
+        0x0000 - 0x0056 reg=8 (null) J
+
+  Virtual methods   -
+    #0              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'cleanup'
+      type          : '(J)J'
+      access        : 0x0000 ()
+      code          -
+      registers     : 13
+      ins           : 3
+      outs          : 4
+      insns size    : 91 16-bit code units
+74eb4c:                                        |[74eb4c] com.squareup.okhttp.ConnectionPool.cleanup:(J)J
+74eb5c: 1d0a                                   |0000: monitor-enter v10
+74eb5e: 54a0 f186                              |0001: iget-object v0, v10, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74eb62: 7210 61d5 0000                         |0003: invoke-interface {v0}, Ljava/util/Deque;.iterator:()Ljava/util/Iterator; // method@d561
+74eb68: 0c00                                   |0006: move-result-object v0
+74eb6a: 1201                                   |0007: const/4 v1, #int 0 // #0
+74eb6c: 1202                                   |0008: const/4 v2, #int 0 // #0
+74eb6e: 1903 0080                              |0009: const-wide/high16 v3, #long -9223372036854775808 // #8000
+74eb72: 0434                                   |000b: move-wide v4, v3
+74eb74: 0723                                   |000c: move-object v3, v2
+74eb76: 0112                                   |000d: move v2, v1
+74eb78: 7210 a0d5 0000                         |000e: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+74eb7e: 0a06                                   |0011: move-result v6
+74eb80: 3806 1e00                              |0012: if-eqz v6, 0030 // +001e
+74eb84: 7210 a1d5 0000                         |0014: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+74eb8a: 0c06                                   |0017: move-result-object v6
+74eb8c: 1f06 e019                              |0018: check-cast v6, Lcom/squareup/okhttp/internal/io/RealConnection; // type@19e0
+74eb90: 7040 08c9 6acb                         |001a: invoke-direct {v10, v6, v11, v12}, Lcom/squareup/okhttp/ConnectionPool;.pruneAndGetAllocationCount:(Lcom/squareup/okhttp/internal/io/RealConnection;J)I // method@c908
+74eb96: 0a07                                   |001d: move-result v7
+74eb98: 3d07 0500                              |001e: if-lez v7, 0023 // +0005
+74eb9c: d802 0201                              |0020: add-int/lit8 v2, v2, #int 1 // #01
+74eba0: 28ec                                   |0022: goto 000e // -0014
+74eba2: d801 0101                              |0023: add-int/lit8 v1, v1, #int 1 // #01
+74eba6: 5367 8189                              |0025: iget-wide v7, v6, Lcom/squareup/okhttp/internal/io/RealConnection;.idleAtNanos:J // field@8981
+74ebaa: 9c07 0b07                              |0027: sub-long v7, v11, v7
+74ebae: 3109 0704                              |0029: cmp-long v9, v7, v4
+74ebb2: 3d09 e3ff                              |002b: if-lez v9, 000e // -001d
+74ebb6: 0763                                   |002d: move-object v3, v6
+74ebb8: 0474                                   |002e: move-wide v4, v7
+74ebba: 28df                                   |002f: goto 000e // -0021
+74ebbc: 53ab f386                              |0030: iget-wide v11, v10, Lcom/squareup/okhttp/ConnectionPool;.keepAliveDurationNs:J // field@86f3
+74ebc0: 3100 040b                              |0032: cmp-long v0, v4, v11
+74ebc4: 3b00 1400                              |0034: if-gez v0, 0048 // +0014
+74ebc8: 52a0 f486                              |0036: iget v0, v10, Lcom/squareup/okhttp/ConnectionPool;.maxIdleConnections:I // field@86f4
+74ebcc: 3701 0300                              |0038: if-le v1, v0, 003b // +0003
+74ebd0: 280e                                   |003a: goto 0048 // +000e
+74ebd2: 3d01 0500                              |003b: if-lez v1, 0040 // +0005
+74ebd6: bc4b                                   |003d: sub-long/2addr v11, v4
+74ebd8: 1e0a                                   |003e: monitor-exit v10
+74ebda: 100b                                   |003f: return-wide v11
+74ebdc: 3d02 0400                              |0040: if-lez v2, 0044 // +0004
+74ebe0: 1e0a                                   |0042: monitor-exit v10
+74ebe2: 100b                                   |0043: return-wide v11
+74ebe4: 1e0a                                   |0044: monitor-exit v10
+74ebe6: 160a ffff                              |0045: const-wide/16 v10, #int -1 // #ffff
+74ebea: 100a                                   |0047: return-wide v10
+74ebec: 54ab f186                              |0048: iget-object v11, v10, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74ebf0: 7220 62d5 3b00                         |004a: invoke-interface {v11, v3}, Ljava/util/Deque;.remove:(Ljava/lang/Object;)Z // method@d562
+74ebf6: 1e0a                                   |004d: monitor-exit v10
+74ebf8: 6e10 69ce 0300                         |004e: invoke-virtual {v3}, Lcom/squareup/okhttp/internal/io/RealConnection;.getSocket:()Ljava/net/Socket; // method@ce69
+74ebfe: 0c0a                                   |0051: move-result-object v10
+74ec00: 7110 99cb 0a00                         |0052: invoke-static {v10}, Lcom/squareup/okhttp/internal/Util;.closeQuietly:(Ljava/net/Socket;)V // method@cb99
+74ec06: 160a 0000                              |0055: const-wide/16 v10, #int 0 // #0
+74ec0a: 100a                                   |0057: return-wide v10
+74ec0c: 0d0b                                   |0058: move-exception v11
+74ec0e: 1e0a                                   |0059: monitor-exit v10
+74ec10: 270b                                   |005a: throw v11
+      catches       : 2
+        0x0001 - 0x004e
+          <any> -> 0x0058
+        0x0059 - 0x005a
+          <any> -> 0x0058
+      positions     :
+        0x0000 line=242
+        0x0001 line=243
+        0x0014 line=244
+        0x001a line=247
+        0x0025 line=255
+        0x0030 line=262
+        0x003e line=270
+        0x0042 line=274
+        0x0044 line=278
+        0x0048 line=266
+        0x004d line=280
+        0x004e line=282
+        0x0059 line=280
+      locals        :
+        0x0000 - 0x005b reg=10 this Lcom/squareup/okhttp/ConnectionPool;
+        0x0000 - 0x005b reg=11 (null) J
+
+    #1              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'connectionBecameIdle'
+      type          : '(Lcom/squareup/okhttp/internal/io/RealConnection;)Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 21 16-bit code units
+74ec28:                                        |[74ec28] com.squareup.okhttp.ConnectionPool.connectionBecameIdle:(Lcom/squareup/okhttp/internal/io/RealConnection;)Z
+74ec38: 5520 8489                              |0000: iget-boolean v0, v2, Lcom/squareup/okhttp/internal/io/RealConnection;.noNewStreams:Z // field@8984
+74ec3c: 3900 0c00                              |0002: if-nez v0, 000e // +000c
+74ec40: 5210 f486                              |0004: iget v0, v1, Lcom/squareup/okhttp/ConnectionPool;.maxIdleConnections:I // field@86f4
+74ec44: 3900 0300                              |0006: if-nez v0, 0009 // +0003
+74ec48: 2806                                   |0008: goto 000e // +0006
+74ec4a: 6e10 cfd1 0100                         |0009: invoke-virtual {v1}, Ljava/lang/Object;.notifyAll:()V // method@d1cf
+74ec50: 1201                                   |000c: const/4 v1, #int 0 // #0
+74ec52: 0f01                                   |000d: return v1
+74ec54: 5411 f186                              |000e: iget-object v1, v1, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74ec58: 7220 62d5 2100                         |0010: invoke-interface {v1, v2}, Ljava/util/Deque;.remove:(Ljava/lang/Object;)Z // method@d562
+74ec5e: 1211                                   |0013: const/4 v1, #int 1 // #1
+74ec60: 0f01                                   |0014: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=200
+        0x0009 line=204
+        0x000e line=201
+      locals        :
+        0x0000 - 0x0015 reg=1 this Lcom/squareup/okhttp/ConnectionPool;
+        0x0000 - 0x0015 reg=2 (null) Lcom/squareup/okhttp/internal/io/RealConnection;
+
+    #2              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'evictAll'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 71 16-bit code units
+74ec64:                                        |[74ec64] com.squareup.okhttp.ConnectionPool.evictAll:()V
+74ec74: 2200 3a1b                              |0000: new-instance v0, Ljava/util/ArrayList; // type@1b3a
+74ec78: 7010 9fd4 0000                         |0002: invoke-direct {v0}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+74ec7e: 1d04                                   |0005: monitor-enter v4
+74ec80: 5441 f186                              |0006: iget-object v1, v4, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74ec84: 7210 61d5 0100                         |0008: invoke-interface {v1}, Ljava/util/Deque;.iterator:()Ljava/util/Iterator; // method@d561
+74ec8a: 0c01                                   |000b: move-result-object v1
+74ec8c: 7210 a0d5 0100                         |000c: invoke-interface {v1}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+74ec92: 0a02                                   |000f: move-result v2
+74ec94: 3802 1a00                              |0010: if-eqz v2, 002a // +001a
+74ec98: 7210 a1d5 0100                         |0012: invoke-interface {v1}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+74ec9e: 0c02                                   |0015: move-result-object v2
+74eca0: 1f02 e019                              |0016: check-cast v2, Lcom/squareup/okhttp/internal/io/RealConnection; // type@19e0
+74eca4: 5423 7e89                              |0018: iget-object v3, v2, Lcom/squareup/okhttp/internal/io/RealConnection;.allocations:Ljava/util/List; // field@897e
+74eca8: 7210 d1d5 0300                         |001a: invoke-interface {v3}, Ljava/util/List;.isEmpty:()Z // method@d5d1
+74ecae: 0a03                                   |001d: move-result v3
+74ecb0: 3803 eeff                              |001e: if-eqz v3, 000c // -0012
+74ecb4: 1213                                   |0020: const/4 v3, #int 1 // #1
+74ecb6: 5c23 8489                              |0021: iput-boolean v3, v2, Lcom/squareup/okhttp/internal/io/RealConnection;.noNewStreams:Z // field@8984
+74ecba: 7220 c9d5 2000                         |0023: invoke-interface {v0, v2}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+74ecc0: 7210 a2d5 0100                         |0026: invoke-interface {v1}, Ljava/util/Iterator;.remove:()V // method@d5a2
+74ecc6: 28e3                                   |0029: goto 000c // -001d
+74ecc8: 1e04                                   |002a: monitor-exit v4
+74ecca: 7210 d2d5 0000                         |002b: invoke-interface {v0}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@d5d2
+74ecd0: 0c04                                   |002e: move-result-object v4
+74ecd2: 7210 a0d5 0400                         |002f: invoke-interface {v4}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+74ecd8: 0a00                                   |0032: move-result v0
+74ecda: 3800 1000                              |0033: if-eqz v0, 0043 // +0010
+74ecde: 7210 a1d5 0400                         |0035: invoke-interface {v4}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+74ece4: 0c00                                   |0038: move-result-object v0
+74ece6: 1f00 e019                              |0039: check-cast v0, Lcom/squareup/okhttp/internal/io/RealConnection; // type@19e0
+74ecea: 6e10 69ce 0000                         |003b: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/io/RealConnection;.getSocket:()Ljava/net/Socket; // method@ce69
+74ecf0: 0c00                                   |003e: move-result-object v0
+74ecf2: 7110 99cb 0000                         |003f: invoke-static {v0}, Lcom/squareup/okhttp/internal/Util;.closeQuietly:(Ljava/net/Socket;)V // method@cb99
+74ecf8: 28ed                                   |0042: goto 002f // -0013
+74ecfa: 0e00                                   |0043: return-void
+74ecfc: 0d00                                   |0044: move-exception v0
+74ecfe: 1e04                                   |0045: monitor-exit v4
+74ed00: 2700                                   |0046: throw v0
+      catches       : 2
+        0x0006 - 0x002b
+          <any> -> 0x0044
+        0x0045 - 0x0046
+          <any> -> 0x0044
+      positions     :
+        0x0000 line=211
+        0x0005 line=212
+        0x0006 line=213
+        0x0012 line=214
+        0x0018 line=215
+        0x0021 line=216
+        0x0023 line=217
+        0x0026 line=218
+        0x002a line=221
+        0x002b line=223
+        0x003b line=224
+        0x0045 line=221
+      locals        :
+        0x0000 - 0x0047 reg=4 this Lcom/squareup/okhttp/ConnectionPool;
+
+    #3              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'get'
+      type          : '(Lcom/squareup/okhttp/Address;Lcom/squareup/okhttp/internal/http/StreamAllocation;)Lcom/squareup/okhttp/internal/io/RealConnection;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 52 16-bit code units
+74ed18:                                        |[74ed18] com.squareup.okhttp.ConnectionPool.get:(Lcom/squareup/okhttp/Address;Lcom/squareup/okhttp/internal/http/StreamAllocation;)Lcom/squareup/okhttp/internal/io/RealConnection;
+74ed28: 5433 f186                              |0000: iget-object v3, v3, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74ed2c: 7210 61d5 0300                         |0002: invoke-interface {v3}, Ljava/util/Deque;.iterator:()Ljava/util/Iterator; // method@d561
+74ed32: 0c03                                   |0005: move-result-object v3
+74ed34: 7210 a0d5 0300                         |0006: invoke-interface {v3}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+74ed3a: 0a00                                   |0009: move-result v0
+74ed3c: 3800 2800                              |000a: if-eqz v0, 0032 // +0028
+74ed40: 7210 a1d5 0300                         |000c: invoke-interface {v3}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+74ed46: 0c00                                   |000f: move-result-object v0
+74ed48: 1f00 e019                              |0010: check-cast v0, Lcom/squareup/okhttp/internal/io/RealConnection; // type@19e0
+74ed4c: 5401 7e89                              |0012: iget-object v1, v0, Lcom/squareup/okhttp/internal/io/RealConnection;.allocations:Ljava/util/List; // field@897e
+74ed50: 7210 dbd5 0100                         |0014: invoke-interface {v1}, Ljava/util/List;.size:()I // method@d5db
+74ed56: 0a01                                   |0017: move-result v1
+74ed58: 6e10 5fce 0000                         |0018: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/io/RealConnection;.allocationLimit:()I // method@ce5f
+74ed5e: 0a02                                   |001b: move-result v2
+74ed60: 3521 eaff                              |001c: if-ge v1, v2, 0006 // -0016
+74ed64: 6e10 68ce 0000                         |001e: invoke-virtual {v0}, Lcom/squareup/okhttp/internal/io/RealConnection;.getRoute:()Lcom/squareup/okhttp/Route; // method@ce68
+74ed6a: 0c01                                   |0021: move-result-object v1
+74ed6c: 5411 9c87                              |0022: iget-object v1, v1, Lcom/squareup/okhttp/Route;.address:Lcom/squareup/okhttp/Address; // field@879c
+74ed70: 6e20 51c8 1400                         |0024: invoke-virtual {v4, v1}, Lcom/squareup/okhttp/Address;.equals:(Ljava/lang/Object;)Z // method@c851
+74ed76: 0a01                                   |0027: move-result v1
+74ed78: 3801 deff                              |0028: if-eqz v1, 0006 // -0022
+74ed7c: 5501 8489                              |002a: iget-boolean v1, v0, Lcom/squareup/okhttp/internal/io/RealConnection;.noNewStreams:Z // field@8984
+74ed80: 3901 daff                              |002c: if-nez v1, 0006 // -0026
+74ed84: 6e20 38ce 0500                         |002e: invoke-virtual {v5, v0}, Lcom/squareup/okhttp/internal/http/StreamAllocation;.acquire:(Lcom/squareup/okhttp/internal/io/RealConnection;)V // method@ce38
+74ed8a: 1100                                   |0031: return-object v0
+74ed8c: 1203                                   |0032: const/4 v3, #int 0 // #0
+74ed8e: 1103                                   |0033: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=173
+        0x0012 line=176
+        0x001e line=177
+        0x002e line=179
+      locals        :
+        0x0000 - 0x0034 reg=3 this Lcom/squareup/okhttp/ConnectionPool;
+        0x0000 - 0x0034 reg=4 (null) Lcom/squareup/okhttp/Address;
+        0x0000 - 0x0034 reg=5 (null) Lcom/squareup/okhttp/internal/http/StreamAllocation;
+
+    #4              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'getConnectionCount'
+      type          : '()I'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 12 16-bit code units
+74ed90:                                        |[74ed90] com.squareup.okhttp.ConnectionPool.getConnectionCount:()I
+74eda0: 1d01                                   |0000: monitor-enter v1
+74eda2: 5410 f186                              |0001: iget-object v0, v1, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74eda6: 7210 64d5 0000                         |0003: invoke-interface {v0}, Ljava/util/Deque;.size:()I // method@d564
+74edac: 0a00                                   |0006: move-result v0
+74edae: 1e01                                   |0007: monitor-exit v1
+74edb0: 0f00                                   |0008: return v0
+74edb2: 0d00                                   |0009: move-exception v0
+74edb4: 1e01                                   |000a: monitor-exit v1
+74edb6: 2700                                   |000b: throw v0
+      catches       : 2
+        0x0001 - 0x0007
+          <any> -> 0x0009
+        0x000a - 0x000b
+          <any> -> 0x0009
+      positions     :
+        0x0001 line=147
+      locals        :
+        0x0000 - 0x000c reg=1 this Lcom/squareup/okhttp/ConnectionPool;
+
+    #5              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'getHttpConnectionCount'
+      type          : '()I'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 17 16-bit code units
+74edcc:                                        |[74edcc] com.squareup.okhttp.ConnectionPool.getHttpConnectionCount:()I
+74eddc: 1d02                                   |0000: monitor-enter v2
+74edde: 5420 f186                              |0001: iget-object v0, v2, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74ede2: 7210 64d5 0000                         |0003: invoke-interface {v0}, Ljava/util/Deque;.size:()I // method@d564
+74ede8: 0a00                                   |0006: move-result v0
+74edea: 6e10 06c9 0200                         |0007: invoke-virtual {v2}, Lcom/squareup/okhttp/ConnectionPool;.getMultiplexedConnectionCount:()I // method@c906
+74edf0: 0a01                                   |000a: move-result v1
+74edf2: b110                                   |000b: sub-int/2addr v0, v1
+74edf4: 1e02                                   |000c: monitor-exit v2
+74edf6: 0f00                                   |000d: return v0
+74edf8: 0d00                                   |000e: move-exception v0
+74edfa: 1e02                                   |000f: monitor-exit v2
+74edfc: 2700                                   |0010: throw v0
+      catches       : 2
+        0x0001 - 0x000b
+          <any> -> 0x000e
+        0x000f - 0x0010
+          <any> -> 0x000e
+      positions     :
+        0x0001 line=167
+      locals        :
+        0x0000 - 0x0011 reg=2 this Lcom/squareup/okhttp/ConnectionPool;
+
+    #6              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'getIdleConnectionCount'
+      type          : '()I'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 1
+      insns size    : 36 16-bit code units
+74ee14:                                        |[74ee14] com.squareup.okhttp.ConnectionPool.getIdleConnectionCount:()I
+74ee24: 1d03                                   |0000: monitor-enter v3
+74ee26: 5430 f186                              |0001: iget-object v0, v3, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74ee2a: 7210 61d5 0000                         |0003: invoke-interface {v0}, Ljava/util/Deque;.iterator:()Ljava/util/Iterator; // method@d561
+74ee30: 0c00                                   |0006: move-result-object v0
+74ee32: 1201                                   |0007: const/4 v1, #int 0 // #0
+74ee34: 7210 a0d5 0000                         |0008: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+74ee3a: 0a02                                   |000b: move-result v2
+74ee3c: 3802 1300                              |000c: if-eqz v2, 001f // +0013
+74ee40: 7210 a1d5 0000                         |000e: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+74ee46: 0c02                                   |0011: move-result-object v2
+74ee48: 1f02 e019                              |0012: check-cast v2, Lcom/squareup/okhttp/internal/io/RealConnection; // type@19e0
+74ee4c: 5422 7e89                              |0014: iget-object v2, v2, Lcom/squareup/okhttp/internal/io/RealConnection;.allocations:Ljava/util/List; // field@897e
+74ee50: 7210 d1d5 0200                         |0016: invoke-interface {v2}, Ljava/util/List;.isEmpty:()Z // method@d5d1
+74ee56: 0a02                                   |0019: move-result v2
+74ee58: 3802 eeff                              |001a: if-eqz v2, 0008 // -0012
+74ee5c: d801 0101                              |001c: add-int/lit8 v1, v1, #int 1 // #01
+74ee60: 28ea                                   |001e: goto 0008 // -0016
+74ee62: 1e03                                   |001f: monitor-exit v3
+74ee64: 0f01                                   |0020: return v1
+74ee66: 0d00                                   |0021: move-exception v0
+74ee68: 1e03                                   |0022: monitor-exit v3
+74ee6a: 2700                                   |0023: throw v0
+      catches       : 2
+        0x0001 - 0x001a
+          <any> -> 0x0021
+        0x0022 - 0x0023
+          <any> -> 0x0021
+      positions     :
+        0x0001 line=134
+        0x0014 line=135
+        0x001f line=137
+      locals        :
+        0x0000 - 0x0024 reg=3 this Lcom/squareup/okhttp/ConnectionPool;
+
+    #7              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'getMultiplexedConnectionCount'
+      type          : '()I'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 1
+      insns size    : 34 16-bit code units
+74ee80:                                        |[74ee80] com.squareup.okhttp.ConnectionPool.getMultiplexedConnectionCount:()I
+74ee90: 1d03                                   |0000: monitor-enter v3
+74ee92: 5430 f186                              |0001: iget-object v0, v3, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74ee96: 7210 61d5 0000                         |0003: invoke-interface {v0}, Ljava/util/Deque;.iterator:()Ljava/util/Iterator; // method@d561
+74ee9c: 0c00                                   |0006: move-result-object v0
+74ee9e: 1201                                   |0007: const/4 v1, #int 0 // #0
+74eea0: 7210 a0d5 0000                         |0008: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+74eea6: 0a02                                   |000b: move-result v2
+74eea8: 3802 1100                              |000c: if-eqz v2, 001d // +0011
+74eeac: 7210 a1d5 0000                         |000e: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+74eeb2: 0c02                                   |0011: move-result-object v2
+74eeb4: 1f02 e019                              |0012: check-cast v2, Lcom/squareup/okhttp/internal/io/RealConnection; // type@19e0
+74eeb8: 6e10 6cce 0200                         |0014: invoke-virtual {v2}, Lcom/squareup/okhttp/internal/io/RealConnection;.isMultiplexed:()Z // method@ce6c
+74eebe: 0a02                                   |0017: move-result v2
+74eec0: 3802 f0ff                              |0018: if-eqz v2, 0008 // -0010
+74eec4: d801 0101                              |001a: add-int/lit8 v1, v1, #int 1 // #01
+74eec8: 28ec                                   |001c: goto 0008 // -0014
+74eeca: 1e03                                   |001d: monitor-exit v3
+74eecc: 0f01                                   |001e: return v1
+74eece: 0d00                                   |001f: move-exception v0
+74eed0: 1e03                                   |0020: monitor-exit v3
+74eed2: 2700                                   |0021: throw v0
+      catches       : 2
+        0x0001 - 0x0018
+          <any> -> 0x001f
+        0x0020 - 0x0021
+          <any> -> 0x001f
+      positions     :
+        0x0001 line=159
+        0x0014 line=160
+        0x001d line=162
+      locals        :
+        0x0000 - 0x0022 reg=3 this Lcom/squareup/okhttp/ConnectionPool;
+
+    #8              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'getSpdyConnectionCount'
+      type          : '()I'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 10 16-bit code units
+74eee8:                                        |[74eee8] com.squareup.okhttp.ConnectionPool.getSpdyConnectionCount:()I
+74eef8: 1d01                                   |0000: monitor-enter v1
+74eefa: 6e10 06c9 0100                         |0001: invoke-virtual {v1}, Lcom/squareup/okhttp/ConnectionPool;.getMultiplexedConnectionCount:()I // method@c906
+74ef00: 0a00                                   |0004: move-result v0
+74ef02: 1e01                                   |0005: monitor-exit v1
+74ef04: 0f00                                   |0006: return v0
+74ef06: 0d00                                   |0007: move-exception v0
+74ef08: 1e01                                   |0008: monitor-exit v1
+74ef0a: 2700                                   |0009: throw v0
+      catches       : 2
+        0x0001 - 0x0005
+          <any> -> 0x0007
+        0x0008 - 0x0009
+          <any> -> 0x0007
+      positions     :
+        0x0001 line=153
+      locals        :
+        0x0000 - 0x000a reg=1 this Lcom/squareup/okhttp/ConnectionPool;
+
+    #9              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'put'
+      type          : '(Lcom/squareup/okhttp/internal/io/RealConnection;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 21 16-bit code units
+74ef20:                                        |[74ef20] com.squareup.okhttp.ConnectionPool.put:(Lcom/squareup/okhttp/internal/io/RealConnection;)V
+74ef30: 5420 f186                              |0000: iget-object v0, v2, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74ef34: 7210 60d5 0000                         |0002: invoke-interface {v0}, Ljava/util/Deque;.isEmpty:()Z // method@d560
+74ef3a: 0a00                                   |0005: move-result v0
+74ef3c: 3800 0900                              |0006: if-eqz v0, 000f // +0009
+74ef40: 5420 f286                              |0008: iget-object v0, v2, Lcom/squareup/okhttp/ConnectionPool;.executor:Ljava/util/concurrent/Executor; // field@86f2
+74ef44: 5421 f086                              |000a: iget-object v1, v2, Lcom/squareup/okhttp/ConnectionPool;.cleanupRunnable:Ljava/lang/Runnable; // field@86f0
+74ef48: 7220 acd6 1000                         |000c: invoke-interface {v0, v1}, Ljava/util/concurrent/Executor;.execute:(Ljava/lang/Runnable;)V // method@d6ac
+74ef4e: 5422 f186                              |000f: iget-object v2, v2, Lcom/squareup/okhttp/ConnectionPool;.connections:Ljava/util/Deque; // field@86f1
+74ef52: 7220 5fd5 3200                         |0011: invoke-interface {v2, v3}, Ljava/util/Deque;.add:(Ljava/lang/Object;)Z // method@d55f
+74ef58: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=188
+        0x0008 line=189
+        0x000f line=191
+      locals        :
+        0x0000 - 0x0015 reg=2 this Lcom/squareup/okhttp/ConnectionPool;
+        0x0000 - 0x0015 reg=3 (null) Lcom/squareup/okhttp/internal/io/RealConnection;
+
+    #10              : (in Lcom/squareup/okhttp/ConnectionPool;)
+      name          : 'setCleanupRunnableForTest'
+      type          : '(Ljava/lang/Runnable;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+74ef5c:                                        |[74ef5c] com.squareup.okhttp.ConnectionPool.setCleanupRunnableForTest:(Ljava/lang/Runnable;)V
+74ef6c: 5b01 f086                              |0000: iput-object v1, v0, Lcom/squareup/okhttp/ConnectionPool;.cleanupRunnable:Ljava/lang/Runnable; // field@86f0
+74ef70: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=321
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/squareup/okhttp/ConnectionPool;
+        0x0000 - 0x0003 reg=1 (null) Ljava/lang/Runnable;
+
+  source_file_idx   : 7640 (ConnectionPool.java)
+

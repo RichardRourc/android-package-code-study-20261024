@@ -1,0 +1,126 @@
+Class #84            -
+  Class descriptor  : 'Lokio/Okio$3;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Lokio/AsyncTimeout;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lokio/Okio$3;)
+      name          : 'val$socket'
+      type          : 'Ljava/net/Socket;'
+      access        : 0x1010 (FINAL SYNTHETIC)
+  Direct methods    -
+    #0              : (in Lokio/Okio$3;)
+      name          : '<init>'
+      type          : '(Ljava/net/Socket;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 6 16-bit code units
+0328b8:                                        |[0328b8] okio.Okio$3.<init>:(Ljava/net/Socket;)V
+0328c8: 5b01 1a01                              |0000: iput-object v1, v0, Lokio/Okio$3;.val$socket:Ljava/net/Socket; // field@011a
+0328cc: 7010 7004 0000                         |0002: invoke-direct {v0}, Lokio/AsyncTimeout;.<init>:()V // method@0470
+0328d2: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=205
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lokio/Okio$3;
+        0x0000 - 0x0006 reg=1 (null) Ljava/net/Socket;
+
+  Virtual methods   -
+    #0              : (in Lokio/Okio$3;)
+      name          : 'newTimeoutException'
+      type          : '(Ljava/io/IOException;)Ljava/io/IOException;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 13 16-bit code units
+0328d4:                                        |[0328d4] okio.Okio$3.newTimeoutException:(Ljava/io/IOException;)Ljava/io/IOException;
+0328e4: 2201 e800                              |0000: new-instance v1, Ljava/net/SocketTimeoutException; // type@00e8
+0328e8: 1a00 6c0a                              |0002: const-string v0, "timeout" // string@0a6c
+0328ec: 7020 a002 0100                         |0004: invoke-direct {v1, v0}, Ljava/net/SocketTimeoutException;.<init>:(Ljava/lang/String;)V // method@02a0
+0328f2: 3802 0500                              |0007: if-eqz v2, 000c // +0005
+0328f6: 6e20 dd01 2100                         |0009: invoke-virtual {v1, v2}, Ljava/io/InterruptedIOException;.initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable; // method@01dd
+0328fc: 1101                                   |000c: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=207
+        0x0009 line=209
+      locals        :
+        0x0000 - 0x000d reg=1 this Lokio/Okio$3;
+        0x0000 - 0x000d reg=2 (null) Ljava/io/IOException;
+
+    #1              : (in Lokio/Okio$3;)
+      name          : 'timedOut'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 4
+      insns size    : 85 16-bit code units
+032900:                                        |[032900] okio.Okio$3.timedOut:()V
+032910: 1a00 5801                              |0000: const-string v0, "Failed to close timed out socket " // string@0158
+032914: 5451 1a01                              |0002: iget-object v1, v5, Lokio/Okio$3;.val$socket:Ljava/net/Socket; // field@011a
+032918: 6e10 9c02 0100                         |0004: invoke-virtual {v1}, Ljava/net/Socket;.close:()V // method@029c
+03291e: 284d                                   |0007: goto 0054 // +004d
+032920: 0d01                                   |0008: move-exception v1
+032922: 6e10 e901 0100                         |0009: invoke-virtual {v1}, Ljava/lang/AssertionError;.getCause:()Ljava/lang/Throwable; // method@01e9
+032928: 0c02                                   |000c: move-result-object v2
+03292a: 3802 2d00                              |000d: if-eqz v2, 003a // +002d
+03292e: 6e10 ea01 0100                         |000f: invoke-virtual {v1}, Ljava/lang/AssertionError;.getMessage:()Ljava/lang/String; // method@01ea
+032934: 0c02                                   |0012: move-result-object v2
+032936: 3802 2700                              |0013: if-eqz v2, 003a // +0027
+03293a: 6e10 ea01 0100                         |0015: invoke-virtual {v1}, Ljava/lang/AssertionError;.getMessage:()Ljava/lang/String; // method@01ea
+032940: 0c02                                   |0018: move-result-object v2
+032942: 1a03 a407                              |0019: const-string v3, "getsockname failed" // string@07a4
+032946: 6e20 4802 3200                         |001b: invoke-virtual {v2, v3}, Ljava/lang/String;.contains:(Ljava/lang/CharSequence;)Z // method@0248
+03294c: 0a02                                   |001e: move-result v2
+03294e: 3802 1b00                              |001f: if-eqz v2, 003a // +001b
+032952: 7100 a905 0000                         |0021: invoke-static {}, Lokio/Okio;.access$000:()Ljava/util/logging/Logger; // method@05a9
+032958: 0c02                                   |0024: move-result-object v2
+03295a: 6203 ae00                              |0025: sget-object v3, Ljava/util/logging/Level;.WARNING:Ljava/util/logging/Level; // field@00ae
+03295e: 2204 c600                              |0027: new-instance v4, Ljava/lang/StringBuilder; // type@00c6
+032962: 7020 5d02 0400                         |0029: invoke-direct {v4, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@025d
+032968: 5455 1a01                              |002c: iget-object v5, v5, Lokio/Okio$3;.val$socket:Ljava/net/Socket; // field@011a
+03296c: 6e20 6202 5400                         |002e: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@0262
+032972: 0c05                                   |0031: move-result-object v5
+032974: 6e10 6502 0500                         |0032: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@0265
+03297a: 0c05                                   |0035: move-result-object v5
+03297c: 6e40 ec02 3215                         |0036: invoke-virtual {v2, v3, v5, v1}, Ljava/util/logging/Logger;.log:(Ljava/util/logging/Level;Ljava/lang/String;Ljava/lang/Throwable;)V // method@02ec
+032982: 281b                                   |0039: goto 0054 // +001b
+032984: 2701                                   |003a: throw v1
+032986: 0d01                                   |003b: move-exception v1
+032988: 7100 a905 0000                         |003c: invoke-static {}, Lokio/Okio;.access$000:()Ljava/util/logging/Logger; // method@05a9
+03298e: 0c02                                   |003f: move-result-object v2
+032990: 6203 ae00                              |0040: sget-object v3, Ljava/util/logging/Level;.WARNING:Ljava/util/logging/Level; // field@00ae
+032994: 2204 c600                              |0042: new-instance v4, Ljava/lang/StringBuilder; // type@00c6
+032998: 7020 5d02 0400                         |0044: invoke-direct {v4, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@025d
+03299e: 5455 1a01                              |0047: iget-object v5, v5, Lokio/Okio$3;.val$socket:Ljava/net/Socket; // field@011a
+0329a2: 6e20 6202 5400                         |0049: invoke-virtual {v4, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@0262
+0329a8: 0c05                                   |004c: move-result-object v5
+0329aa: 6e10 6502 0500                         |004d: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@0265
+0329b0: 0c05                                   |0050: move-result-object v5
+0329b2: 6e40 ec02 3215                         |0051: invoke-virtual {v2, v3, v5, v1}, Ljava/util/logging/Logger;.log:(Ljava/util/logging/Level;Ljava/lang/String;Ljava/lang/Throwable;)V // method@02ec
+0329b8: 0e00                                   |0054: return-void
+      catches       : 1
+        0x0002 - 0x0007
+          Ljava/lang/Exception; -> 0x003b
+          Ljava/lang/AssertionError; -> 0x0008
+      positions     :
+        0x0000 line=216
+        0x0009 line=220
+        0x0015 line=221
+        0x0021 line=224
+        0x003a line=226
+        0x003c line=218
+      locals        :
+        0x0000 - 0x0055 reg=5 this Lokio/Okio$3;
+
+  source_file_idx   : 1065 (Okio.java)
+

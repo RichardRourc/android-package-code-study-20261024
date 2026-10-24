@@ -1,0 +1,1601 @@
+Class #805            -
+  Class descriptor  : 'Landroidx/concurrent/futures/AbstractResolvableFuture;'
+  Access flags      : 0x0401 (PUBLIC ABSTRACT)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lcom/google/common/util/concurrent/ListenableFuture;'
+  Static fields     -
+    #0              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'ATOMIC_HELPER'
+      type          : 'Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : null
+    #1              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'GENERATE_CANCELLATION_CAUSES'
+      type          : 'Z'
+      access        : 0x0018 (STATIC FINAL)
+      value         : false
+    #2              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'NULL'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : null
+    #3              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'SPIN_THRESHOLD_NANOS'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1000
+    #4              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'log'
+      type          : 'Ljava/util/logging/Logger;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+    #0              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'listeners'
+      type          : 'Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;'
+      access        : 0x0040 (VOLATILE)
+    #1              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'value'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0040 (VOLATILE)
+    #2              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'waiters'
+      type          : 'Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;'
+      access        : 0x0040 (VOLATILE)
+  Direct methods    -
+    #0              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 8
+      ins           : 0
+      outs          : 6
+      insns size    : 106 16-bit code units
+14e010:                                        |[14e010] androidx.concurrent.futures.AbstractResolvableFuture.<clinit>:()V
+14e020: 1a00 3982                              |0000: const-string v0, "guava.concurrent.generate_cancellation_cause" // string@8239
+14e024: 1a01 2474                              |0002: const-string v1, "false" // string@7424
+14e028: 7120 7172 1000                         |0004: invoke-static {v0, v1}, Ljava/lang/System;.getProperty:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; // method@7271
+14e02e: 0c00                                   |0007: move-result-object v0
+14e030: 7110 db70 0000                         |0008: invoke-static {v0}, Ljava/lang/Boolean;.parseBoolean:(Ljava/lang/String;)Z // method@70db
+14e036: 0a00                                   |000b: move-result v0
+14e038: 6a00 3a10                              |000c: sput-boolean v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.GENERATE_CANCELLATION_CAUSES:Z // field@103a
+14e03c: 1c00 7605                              |000e: const-class v0, Landroidx/concurrent/futures/AbstractResolvableFuture; // type@0576
+14e040: 6e10 2371 0000                         |0010: invoke-virtual {v0}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@7123
+14e046: 0c01                                   |0013: move-result-object v1
+14e048: 7110 6076 0100                         |0014: invoke-static {v1}, Ljava/util/logging/Logger;.getLogger:(Ljava/lang/String;)Ljava/util/logging/Logger; // method@7660
+14e04e: 0c01                                   |0017: move-result-object v1
+14e050: 6901 3e10                              |0018: sput-object v1, Landroidx/concurrent/futures/AbstractResolvableFuture;.log:Ljava/util/logging/Logger; // field@103e
+14e054: 2202 7205                              |001a: new-instance v2, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper; // type@0572
+14e058: 1c01 7505                              |001c: const-class v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // type@0575
+14e05c: 1c03 8c11                              |001e: const-class v3, Ljava/lang/Thread; // type@118c
+14e060: 1a04 9dae                              |0020: const-string v4, "thread" // string@ae9d
+14e064: 7130 4276 3104                         |0022: invoke-static {v1, v3, v4}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // method@7642
+14e06a: 0c03                                   |0025: move-result-object v3
+14e06c: 1c01 7505                              |0026: const-class v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // type@0575
+14e070: 1c04 7505                              |0028: const-class v4, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // type@0575
+14e074: 1a05 d697                              |002a: const-string v5, "next" // string@97d6
+14e078: 7130 4276 4105                         |002c: invoke-static {v1, v4, v5}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // method@7642
+14e07e: 0c04                                   |002f: move-result-object v4
+14e080: 1c01 7505                              |0030: const-class v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // type@0575
+14e084: 1a05 15b3                              |0032: const-string v5, "waiters" // string@b315
+14e088: 7130 4276 1005                         |0034: invoke-static {v0, v1, v5}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // method@7642
+14e08e: 0c05                                   |0037: move-result-object v5
+14e090: 1c01 7005                              |0038: const-class v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // type@0570
+14e094: 1a06 388c                              |003a: const-string v6, "listeners" // string@8c38
+14e098: 7130 4276 1006                         |003c: invoke-static {v0, v1, v6}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // method@7642
+14e09e: 0c06                                   |003f: move-result-object v6
+14e0a0: 1c01 7a11                              |0040: const-class v1, Ljava/lang/Object; // type@117a
+14e0a4: 1a07 97b2                              |0042: const-string v7, "value" // string@b297
+14e0a8: 7130 4276 1007                         |0044: invoke-static {v0, v1, v7}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // method@7642
+14e0ae: 0c07                                   |0047: move-result-object v7
+14e0b0: 7606 ed29 0200                         |0048: invoke-direct/range {v2, v3, v4, v5, v6, v7}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper;.<init>:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;)V // method@29ed
+14e0b6: 1200                                   |004b: const/4 v0, #int 0 // #0
+14e0b8: 2807                                   |004c: goto 0053 // +0007
+14e0ba: 0d00                                   |004d: move-exception v0
+14e0bc: 2202 7405                              |004e: new-instance v2, Landroidx/concurrent/futures/AbstractResolvableFuture$SynchronizedHelper; // type@0574
+14e0c0: 7010 f529 0200                         |0050: invoke-direct {v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$SynchronizedHelper;.<init>:()V // method@29f5
+14e0c6: 6902 3910                              |0053: sput-object v2, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14e0ca: 1c01 7312                              |0055: const-class v1, Ljava/util/concurrent/locks/LockSupport; // type@1273
+14e0ce: 3800 0b00                              |0057: if-eqz v0, 0062 // +000b
+14e0d2: 6201 3e10                              |0059: sget-object v1, Landroidx/concurrent/futures/AbstractResolvableFuture;.log:Ljava/util/logging/Logger; // field@103e
+14e0d6: 6202 2e3a                              |005b: sget-object v2, Ljava/util/logging/Level;.SEVERE:Ljava/util/logging/Level; // field@3a2e
+14e0da: 1a03 8353                              |005d: const-string v3, "SafeAtomicHelper is broken!" // string@5383
+14e0de: 6e40 6176 2103                         |005f: invoke-virtual {v1, v2, v3, v0}, Ljava/util/logging/Logger;.log:(Ljava/util/logging/Level;Ljava/lang/String;Ljava/lang/Throwable;)V // method@7661
+14e0e4: 2200 7a11                              |0062: new-instance v0, Ljava/lang/Object; // type@117a
+14e0e8: 7010 df71 0000                         |0064: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@71df
+14e0ee: 6900 3b10                              |0067: sput-object v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.NULL:Ljava/lang/Object; // field@103b
+14e0f2: 0e00                                   |0069: return-void
+      catches       : 1
+        0x001a - 0x004b
+          <any> -> 0x004d
+      positions     :
+        0x0000 line=64
+        0x0004 line=66
+        0x0008 line=65
+        0x000e line=69
+        0x001a line=85
+        0x0022 line=87
+        0x002c line=88
+        0x0034 line=89
+        0x003c line=90
+        0x0044 line=94
+        0x004e line=101
+        0x0053 line=104
+        0x0055 line=109
+        0x0059 line=114
+        0x0062 line=217
+      locals        :
+
+    #1              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+14e100:                                        |[14e100] androidx.concurrent.futures.AbstractResolvableFuture.<init>:()V
+14e110: 7010 df71 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@71df
+14e116: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=317
+      locals        :
+        0x0000 - 0x0004 reg=0 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+
+    #2              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'addDoneString'
+      type          : '(Ljava/lang/StringBuilder;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 70 16-bit code units
+14e118:                                        |[14e118] androidx.concurrent.futures.AbstractResolvableFuture.addDoneString:(Ljava/lang/StringBuilder;)V
+14e128: 1a00 b95e                              |0000: const-string v0, "]" // string@5eb9
+14e12c: 7110 0f2a 0300                         |0002: invoke-static {v3}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getUninterruptibly:(Ljava/util/concurrent/Future;)Ljava/lang/Object; // method@2a0f
+14e132: 0c01                                   |0005: move-result-object v1
+14e134: 1a02 5c53                              |0006: const-string v2, "SUCCESS, result=[" // string@535c
+14e138: 6e20 5772 2400                         |0008: invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14e13e: 0c02                                   |000b: move-result-object v2
+14e140: 7020 1b2a 1300                         |000c: invoke-direct {v3, v1}, Landroidx/concurrent/futures/AbstractResolvableFuture;.userObjectToString:(Ljava/lang/Object;)Ljava/lang/String; // method@2a1b
+14e146: 0c01                                   |000f: move-result-object v1
+14e148: 6e20 5772 1200                         |0010: invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14e14e: 0c01                                   |0013: move-result-object v1
+14e150: 6e20 5772 0100                         |0014: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14e156: 0e00                                   |0017: return-void
+14e158: 0d00                                   |0018: move-exception v0
+14e15a: 1a01 ec58                              |0019: const-string v1, "UNKNOWN, cause=[" // string@58ec
+14e15e: 6e20 5772 1400                         |001b: invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14e164: 0c04                                   |001e: move-result-object v4
+14e166: 6e10 e371 0000                         |001f: invoke-virtual {v0}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+14e16c: 0c00                                   |0022: move-result-object v0
+14e16e: 6e20 5672 0400                         |0023: invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+14e174: 0c04                                   |0026: move-result-object v4
+14e176: 1a00 9007                              |0027: const-string v0, " thrown from get()]" // string@0790
+14e17a: 6e20 5772 0400                         |0029: invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14e180: 2819                                   |002c: goto 0045 // +0019
+14e182: 1a00 0d1e                              |002d: const-string v0, "CANCELLED" // string@1e0d
+14e186: 6e20 5772 0400                         |002f: invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14e18c: 2813                                   |0032: goto 0045 // +0013
+14e18e: 0d01                                   |0033: move-exception v1
+14e190: 1a02 f724                              |0034: const-string v2, "FAILURE, cause=[" // string@24f7
+14e194: 6e20 5772 2400                         |0036: invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14e19a: 0c04                                   |0039: move-result-object v4
+14e19c: 6e10 d275 0100                         |003a: invoke-virtual {v1}, Ljava/util/concurrent/ExecutionException;.getCause:()Ljava/lang/Throwable; // method@75d2
+14e1a2: 0c01                                   |003d: move-result-object v1
+14e1a4: 6e20 5672 1400                         |003e: invoke-virtual {v4, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+14e1aa: 0c04                                   |0041: move-result-object v4
+14e1ac: 6e20 5772 0400                         |0042: invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14e1b2: 0e00                                   |0045: return-void
+      catches       : 1
+        0x0002 - 0x0017
+          Ljava/util/concurrent/ExecutionException; -> 0x0033
+          Ljava/util/concurrent/CancellationException; -> 0x002d
+          Ljava/lang/RuntimeException; -> 0x0018
+      positions     :
+        0x0000 line=1026
+        0x0006 line=1027
+        0x0019 line=1033
+        0x002d line=1031
+        0x0034 line=1029
+      locals        :
+        0x0000 - 0x0046 reg=3 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x0046 reg=4 (null) Ljava/lang/StringBuilder;
+
+    #3              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'cancellationExceptionWithCause'
+      type          : '(Ljava/lang/String;Ljava/lang/Throwable;)Ljava/util/concurrent/CancellationException;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 9 16-bit code units
+14dfec:                                        |[14dfec] androidx.concurrent.futures.AbstractResolvableFuture.cancellationExceptionWithCause:(Ljava/lang/String;Ljava/lang/Throwable;)Ljava/util/concurrent/CancellationException;
+14dffc: 2200 4c12                              |0000: new-instance v0, Ljava/util/concurrent/CancellationException; // type@124c
+14e000: 7020 af75 1000                         |0002: invoke-direct {v0, v1}, Ljava/util/concurrent/CancellationException;.<init>:(Ljava/lang/String;)V // method@75af
+14e006: 6e20 b175 2000                         |0005: invoke-virtual {v0, v2}, Ljava/util/concurrent/CancellationException;.initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable; // method@75b1
+14e00c: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1195
+        0x0005 line=1196
+      locals        :
+        0x0000 - 0x0009 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0009 reg=2 (null) Ljava/lang/Throwable;
+
+    #4              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'checkNotNull'
+      type          : '(Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+14d7d4:                                        |[14d7d4] androidx.concurrent.futures.AbstractResolvableFuture.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object;
+14d7e4: 6e10 e371 0000                         |0000: invoke-virtual {v0}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+14d7ea: 1100                                   |0003: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1204
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Ljava/lang/Object;
+
+    #5              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'clearListeners'
+      type          : '(Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;)Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 4
+      insns size    : 25 16-bit code units
+14d4f8:                                        |[14d4f8] androidx.concurrent.futures.AbstractResolvableFuture.clearListeners:(Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;)Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;
+14d508: 5440 3d10                              |0000: iget-object v0, v4, Landroidx/concurrent/futures/AbstractResolvableFuture;.listeners:Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // field@103d
+14d50c: 6201 3910                              |0002: sget-object v1, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14d510: 6202 2b10                              |0004: sget-object v2, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;.TOMBSTONE:Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // field@102b
+14d514: 6e40 df29 4120                         |0006: invoke-virtual {v1, v4, v0, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casListeners:(Landroidx/concurrent/futures/AbstractResolvableFuture;Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;)Z // method@29df
+14d51a: 0a01                                   |0009: move-result v1
+14d51c: 3801 f6ff                              |000a: if-eqz v1, 0000 // -000a
+14d520: 0703                                   |000c: move-object v3, v0
+14d522: 0750                                   |000d: move-object v0, v5
+14d524: 0735                                   |000e: move-object v5, v3
+14d526: 3805 0900                              |000f: if-eqz v5, 0018 // +0009
+14d52a: 5451 2d10                              |0011: iget-object v1, v5, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;.next:Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // field@102d
+14d52e: 5b50 2d10                              |0013: iput-object v0, v5, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;.next:Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // field@102d
+14d532: 0750                                   |0015: move-object v0, v5
+14d534: 0715                                   |0016: move-object v5, v1
+14d536: 28f8                                   |0017: goto 000f // -0008
+14d538: 1100                                   |0018: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=963
+        0x0002 line=964
+        0x0011 line=968
+        0x0013 line=969
+      locals        :
+        0x0000 - 0x0019 reg=4 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x0019 reg=5 (null) Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;
+
+    #6              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'complete'
+      type          : '(Landroidx/concurrent/futures/AbstractResolvableFuture;)V'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 52 16-bit code units
+14e238:                                        |[14e238] androidx.concurrent.futures.AbstractResolvableFuture.complete:(Landroidx/concurrent/futures/AbstractResolvableFuture;)V
+14e248: 1200                                   |0000: const/4 v0, #int 0 // #0
+14e24a: 7010 152a 0400                         |0001: invoke-direct {v4}, Landroidx/concurrent/futures/AbstractResolvableFuture;.releaseWaiters:()V // method@2a15
+14e250: 6e10 042a 0400                         |0004: invoke-virtual {v4}, Landroidx/concurrent/futures/AbstractResolvableFuture;.afterDone:()V // method@2a04
+14e256: 7020 082a 0400                         |0007: invoke-direct {v4, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture;.clearListeners:(Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;)Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // method@2a08
+14e25c: 0c04                                   |000a: move-result-object v4
+14e25e: 3804 2800                              |000b: if-eqz v4, 0033 // +0028
+14e262: 5440 2d10                              |000d: iget-object v0, v4, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;.next:Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // field@102d
+14e266: 5441 2e10                              |000f: iget-object v1, v4, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;.task:Ljava/lang/Runnable; // field@102e
+14e26a: 2012 7305                              |0011: instance-of v2, v1, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14e26e: 3802 1900                              |0013: if-eqz v2, 002c // +0019
+14e272: 1f01 7305                              |0015: check-cast v1, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14e276: 5414 3510                              |0017: iget-object v4, v1, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture;.owner:Landroidx/concurrent/futures/AbstractResolvableFuture; // field@1035
+14e27a: 5442 3f10                              |0019: iget-object v2, v4, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14e27e: 3312 1600                              |001b: if-ne v2, v1, 0031 // +0016
+14e282: 5412 3410                              |001d: iget-object v2, v1, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture;.future:Lcom/google/common/util/concurrent/ListenableFuture; // field@1034
+14e286: 7110 0e2a 0200                         |001f: invoke-static {v2}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getFutureValue:(Lcom/google/common/util/concurrent/ListenableFuture;)Ljava/lang/Object; // method@2a0e
+14e28c: 0c02                                   |0022: move-result-object v2
+14e28e: 6203 3910                              |0023: sget-object v3, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14e292: 6e40 e029 4321                         |0025: invoke-virtual {v3, v4, v1, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casValue:(Landroidx/concurrent/futures/AbstractResolvableFuture;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29e0
+14e298: 0a01                                   |0028: move-result v1
+14e29a: 3801 0800                              |0029: if-eqz v1, 0031 // +0008
+14e29e: 28d6                                   |002b: goto 0001 // -002a
+14e2a0: 5444 2c10                              |002c: iget-object v4, v4, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;.executor:Ljava/util/concurrent/Executor; // field@102c
+14e2a4: 7120 0a2a 4100                         |002e: invoke-static {v1, v4}, Landroidx/concurrent/futures/AbstractResolvableFuture;.executeListener:(Ljava/lang/Runnable;Ljava/util/concurrent/Executor;)V // method@2a0a
+14e2aa: 0704                                   |0031: move-object v4, v0
+14e2ac: 28d9                                   |0032: goto 000b // -0027
+14e2ae: 0e00                                   |0033: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=874
+        0x0004 line=880
+        0x0007 line=882
+        0x000d line=886
+        0x000f line=887
+        0x0011 line=888
+        0x0015 line=889
+        0x0017 line=896
+        0x0019 line=897
+        0x001d line=898
+        0x0023 line=899
+        0x002c line=905
+      locals        :
+        0x0000 - 0x0034 reg=4 (null) Landroidx/concurrent/futures/AbstractResolvableFuture;
+
+    #7              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'executeListener'
+      type          : '(Ljava/lang/Runnable;Ljava/util/concurrent/Executor;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 4
+      insns size    : 38 16-bit code units
+14e2b0:                                        |[14e2b0] androidx.concurrent.futures.AbstractResolvableFuture.executeListener:(Ljava/lang/Runnable;Ljava/util/concurrent/Executor;)V
+14e2c0: 7220 d375 5600                         |0000: invoke-interface {v6, v5}, Ljava/util/concurrent/Executor;.execute:(Ljava/lang/Runnable;)V // method@75d3
+14e2c6: 0e00                                   |0003: return-void
+14e2c8: 0d00                                   |0004: move-exception v0
+14e2ca: 6201 3e10                              |0005: sget-object v1, Landroidx/concurrent/futures/AbstractResolvableFuture;.log:Ljava/util/logging/Logger; // field@103e
+14e2ce: 6202 2e3a                              |0007: sget-object v2, Ljava/util/logging/Level;.SEVERE:Ljava/util/logging/Level; // field@3a2e
+14e2d2: 2203 8811                              |0009: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+14e2d6: 1a04 de4f                              |000b: const-string v4, "RuntimeException while executing runnable " // string@4fde
+14e2da: 7020 4e72 4300                         |000d: invoke-direct {v3, v4}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+14e2e0: 6e20 5672 5300                         |0010: invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+14e2e6: 0c05                                   |0013: move-result-object v5
+14e2e8: 1a03 b207                              |0014: const-string v3, " with executor " // string@07b2
+14e2ec: 6e20 5772 3500                         |0016: invoke-virtual {v5, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14e2f2: 0c05                                   |0019: move-result-object v5
+14e2f4: 6e20 5672 6500                         |001a: invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+14e2fa: 0c05                                   |001d: move-result-object v5
+14e2fc: 6e10 6b72 0500                         |001e: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14e302: 0c05                                   |0021: move-result-object v5
+14e304: 6e40 6176 2105                         |0022: invoke-virtual {v1, v2, v5, v0}, Ljava/util/logging/Logger;.log:(Ljava/util/logging/Level;Ljava/lang/String;Ljava/lang/Throwable;)V // method@7661
+14e30a: 0e00                                   |0025: return-void
+      catches       : 1
+        0x0000 - 0x0003
+          Ljava/lang/RuntimeException; -> 0x0004
+      positions     :
+        0x0000 line=1056
+        0x0005 line=1061
+      locals        :
+        0x0000 - 0x0026 reg=5 (null) Ljava/lang/Runnable;
+        0x0000 - 0x0026 reg=6 (null) Ljava/util/concurrent/Executor;
+
+    #8              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'getDoneValue'
+      type          : '(Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 35 16-bit code units
+14dc6c:                                        |[14dc6c] androidx.concurrent.futures.AbstractResolvableFuture.getDoneValue:(Ljava/lang/Object;)Ljava/lang/Object;
+14dc7c: 2020 6d05                              |0000: instance-of v0, v2, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14dc80: 3900 1600                              |0002: if-nez v0, 0018 // +0016
+14dc84: 2020 6f05                              |0004: instance-of v0, v2, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure; // type@056f
+14dc88: 3900 0800                              |0006: if-nez v0, 000e // +0008
+14dc8c: 6200 3b10                              |0008: sget-object v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.NULL:Ljava/lang/Object; // field@103b
+14dc90: 3302 0300                              |000a: if-ne v2, v0, 000d // +0003
+14dc94: 1202                                   |000c: const/4 v2, #int 0 // #0
+14dc96: 1102                                   |000d: return-object v2
+14dc98: 2200 5512                              |000e: new-instance v0, Ljava/util/concurrent/ExecutionException; // type@1255
+14dc9c: 1f02 6f05                              |0010: check-cast v2, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure; // type@056f
+14dca0: 5422 2a10                              |0012: iget-object v2, v2, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure;.exception:Ljava/lang/Throwable; // field@102a
+14dca4: 7020 d175 2000                         |0014: invoke-direct {v0, v2}, Ljava/util/concurrent/ExecutionException;.<init>:(Ljava/lang/Throwable;)V // method@75d1
+14dcaa: 2700                                   |0017: throw v0
+14dcac: 1f02 6d05                              |0018: check-cast v2, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14dcb0: 5422 2710                              |001a: iget-object v2, v2, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.cause:Ljava/lang/Throwable; // field@1027
+14dcb4: 1a00 3d57                              |001c: const-string v0, "Task was cancelled." // string@573d
+14dcb8: 7120 062a 2000                         |001e: invoke-static {v0, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture;.cancellationExceptionWithCause:(Ljava/lang/String;Ljava/lang/Throwable;)Ljava/util/concurrent/CancellationException; // method@2a06
+14dcbe: 0c02                                   |0021: move-result-object v2
+14dcc0: 2702                                   |0022: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=513
+        0x0004 line=517
+        0x0008 line=519
+        0x000e line=518
+        0x0018 line=514
+      locals        :
+        0x0000 - 0x0023 reg=1 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x0023 reg=2 (null) Ljava/lang/Object;
+
+    #9              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'getFutureValue'
+      type          : '(Lcom/google/common/util/concurrent/ListenableFuture;)Ljava/lang/Object;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 3
+      insns size    : 112 16-bit code units
+14dcc4:                                        |[14dcc4] androidx.concurrent.futures.AbstractResolvableFuture.getFutureValue:(Lcom/google/common/util/concurrent/ListenableFuture;)Ljava/lang/Object;
+14dcd4: 2050 7605                              |0000: instance-of v0, v5, Landroidx/concurrent/futures/AbstractResolvableFuture; // type@0576
+14dcd8: 1201                                   |0002: const/4 v1, #int 0 // #0
+14dcda: 3800 2000                              |0003: if-eqz v0, 0023 // +0020
+14dcde: 1f05 7605                              |0005: check-cast v5, Landroidx/concurrent/futures/AbstractResolvableFuture; // type@0576
+14dce2: 5455 3f10                              |0007: iget-object v5, v5, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14dce6: 2050 6d05                              |0009: instance-of v0, v5, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14dcea: 3800 1700                              |000b: if-eqz v0, 0022 // +0017
+14dcee: 0750                                   |000d: move-object v0, v5
+14dcf0: 1f00 6d05                              |000e: check-cast v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14dcf4: 5502 2810                              |0010: iget-boolean v2, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.wasInterrupted:Z // field@1028
+14dcf8: 3802 1000                              |0012: if-eqz v2, 0022 // +0010
+14dcfc: 5405 2710                              |0014: iget-object v5, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.cause:Ljava/lang/Throwable; // field@1027
+14dd00: 3805 0a00                              |0016: if-eqz v5, 0020 // +000a
+14dd04: 2205 6d05                              |0018: new-instance v5, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14dd08: 5400 2710                              |001a: iget-object v0, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.cause:Ljava/lang/Throwable; // field@1027
+14dd0c: 7030 e529 1500                         |001c: invoke-direct {v5, v1, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.<init>:(ZLjava/lang/Throwable;)V // method@29e5
+14dd12: 1105                                   |001f: return-object v5
+14dd14: 6205 2510                              |0020: sget-object v5, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.CAUSELESS_CANCELLED:Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // field@1025
+14dd18: 1105                                   |0022: return-object v5
+14dd1a: 7210 d46e 0500                         |0023: invoke-interface {v5}, Lcom/google/common/util/concurrent/ListenableFuture;.isCancelled:()Z // method@6ed4
+14dd20: 0a00                                   |0026: move-result v0
+14dd22: 6302 3a10                              |0027: sget-boolean v2, Landroidx/concurrent/futures/AbstractResolvableFuture;.GENERATE_CANCELLATION_CAUSES:Z // field@103a
+14dd26: df02 0201                              |0029: xor-int/lit8 v2, v2, #int 1 // #01
+14dd2a: b502                                   |002b: and-int/2addr v2, v0
+14dd2c: 3802 0500                              |002c: if-eqz v2, 0031 // +0005
+14dd30: 6205 2510                              |002e: sget-object v5, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.CAUSELESS_CANCELLED:Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // field@1025
+14dd34: 1105                                   |0030: return-object v5
+14dd36: 7110 0f2a 0500                         |0031: invoke-static {v5}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getUninterruptibly:(Ljava/util/concurrent/Future;)Ljava/lang/Object; // method@2a0f
+14dd3c: 0c02                                   |0034: move-result-object v2
+14dd3e: 3902 0500                              |0035: if-nez v2, 003a // +0005
+14dd42: 6205 3b10                              |0037: sget-object v5, Landroidx/concurrent/futures/AbstractResolvableFuture;.NULL:Ljava/lang/Object; // field@103b
+14dd46: 1105                                   |0039: return-object v5
+14dd48: 1102                                   |003a: return-object v2
+14dd4a: 0d05                                   |003b: move-exception v5
+14dd4c: 2200 6f05                              |003c: new-instance v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure; // type@056f
+14dd50: 7020 e929 5000                         |003e: invoke-direct {v0, v5}, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure;.<init>:(Ljava/lang/Throwable;)V // method@29e9
+14dd56: 1100                                   |0041: return-object v0
+14dd58: 0d02                                   |0042: move-exception v2
+14dd5a: 3900 1c00                              |0043: if-nez v0, 005f // +001c
+14dd5e: 2200 6f05                              |0045: new-instance v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure; // type@056f
+14dd62: 2201 6911                              |0047: new-instance v1, Ljava/lang/IllegalArgumentException; // type@1169
+14dd66: 2203 8811                              |0049: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+14dd6a: 1a04 b576                              |004b: const-string v4, "get() threw CancellationException, despite reporting isCancelled() == false: " // string@76b5
+14dd6e: 7020 4e72 4300                         |004d: invoke-direct {v3, v4}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+14dd74: 6e20 5672 5300                         |0050: invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+14dd7a: 0c05                                   |0053: move-result-object v5
+14dd7c: 6e10 6b72 0500                         |0054: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14dd82: 0c05                                   |0057: move-result-object v5
+14dd84: 7030 6c71 5102                         |0058: invoke-direct {v1, v5, v2}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;Ljava/lang/Throwable;)V // method@716c
+14dd8a: 7020 e929 1000                         |005b: invoke-direct {v0, v1}, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure;.<init>:(Ljava/lang/Throwable;)V // method@29e9
+14dd90: 1100                                   |005e: return-object v0
+14dd92: 2205 6d05                              |005f: new-instance v5, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14dd96: 7030 e529 1502                         |0061: invoke-direct {v5, v1, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.<init>:(ZLjava/lang/Throwable;)V // method@29e5
+14dd9c: 1105                                   |0064: return-object v5
+14dd9e: 0d05                                   |0065: move-exception v5
+14dda0: 2200 6f05                              |0066: new-instance v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure; // type@056f
+14dda4: 6e10 d275 0500                         |0068: invoke-virtual {v5}, Ljava/util/concurrent/ExecutionException;.getCause:()Ljava/lang/Throwable; // method@75d2
+14ddaa: 0c05                                   |006b: move-result-object v5
+14ddac: 7020 e929 5000                         |006c: invoke-direct {v0, v5}, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure;.<init>:(Ljava/lang/Throwable;)V // method@29e9
+14ddb2: 1100                                   |006f: return-object v0
+      catches       : 1
+        0x0031 - 0x0039
+          Ljava/util/concurrent/ExecutionException; -> 0x0065
+          Ljava/util/concurrent/CancellationException; -> 0x0042
+          <any> -> 0x003b
+      positions     :
+        0x0000 line=800
+        0x0005 line=806
+        0x0009 line=807
+        0x000d line=811
+        0x0010 line=812
+        0x0014 line=813
+        0x0020 line=814
+        0x0023 line=819
+        0x0027 line=821
+        0x002e line=822
+        0x0031 line=826
+        0x0037 line=827
+        0x003c line=841
+        0x0045 line=832
+        0x005f line=839
+        0x0066 line=829
+      locals        :
+        0x0000 - 0x0070 reg=5 (null) Lcom/google/common/util/concurrent/ListenableFuture;
+
+    #10              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'getUninterruptibly'
+      type          : '(Ljava/util/concurrent/Future;)Ljava/lang/Object;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 28 16-bit code units
+14ddc8:                                        |[14ddc8] androidx.concurrent.futures.AbstractResolvableFuture.getUninterruptibly:(Ljava/util/concurrent/Future;)Ljava/lang/Object;
+14ddd8: 1200                                   |0000: const/4 v0, #int 0 // #0
+14ddda: 7210 e475 0100                         |0001: invoke-interface {v1}, Ljava/util/concurrent/Future;.get:()Ljava/lang/Object; // method@75e4
+14dde0: 0c01                                   |0004: move-result-object v1
+14dde2: 3800 0900                              |0005: if-eqz v0, 000e // +0009
+14dde6: 7100 7b72 0000                         |0007: invoke-static {}, Ljava/lang/Thread;.currentThread:()Ljava/lang/Thread; // method@727b
+14ddec: 0c00                                   |000a: move-result-object v0
+14ddee: 6e10 8472 0000                         |000b: invoke-virtual {v0}, Ljava/lang/Thread;.interrupt:()V // method@7284
+14ddf4: 1101                                   |000e: return-object v1
+14ddf6: 0d01                                   |000f: move-exception v1
+14ddf8: 3800 0900                              |0010: if-eqz v0, 0019 // +0009
+14ddfc: 7100 7b72 0000                         |0012: invoke-static {}, Ljava/lang/Thread;.currentThread:()Ljava/lang/Thread; // method@727b
+14de02: 0c00                                   |0015: move-result-object v0
+14de04: 6e10 8472 0000                         |0016: invoke-virtual {v0}, Ljava/lang/Thread;.interrupt:()V // method@7284
+14de0a: 2701                                   |0019: throw v1
+14de0c: 1210                                   |001a: const/4 v0, #int 1 // #1
+14de0e: 28e6                                   |001b: goto 0001 // -001a
+      catches       : 1
+        0x0001 - 0x0005
+          Ljava/lang/InterruptedException; -> 0x001a
+          <any> -> 0x000f
+      positions     :
+        0x0001 line=856
+        0x0007 line=863
+        0x0019 line=865
+      locals        :
+        0x0000 - 0x001c reg=1 (null) Ljava/util/concurrent/Future;
+
+    #11              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'releaseWaiters'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 21 16-bit code units
+14e368:                                        |[14e368] androidx.concurrent.futures.AbstractResolvableFuture.releaseWaiters:()V
+14e378: 5430 4010                              |0000: iget-object v0, v3, Landroidx/concurrent/futures/AbstractResolvableFuture;.waiters:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1040
+14e37c: 6201 3910                              |0002: sget-object v1, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14e380: 6202 3610                              |0004: sget-object v2, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.TOMBSTONE:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1036
+14e384: 6e40 e129 3120                         |0006: invoke-virtual {v1, v3, v0, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casWaiters:(Landroidx/concurrent/futures/AbstractResolvableFuture;Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)Z // method@29e1
+14e38a: 0a01                                   |0009: move-result v1
+14e38c: 3801 f6ff                              |000a: if-eqz v1, 0000 // -000a
+14e390: 3800 0800                              |000c: if-eqz v0, 0014 // +0008
+14e394: 6e10 ff29 0000                         |000e: invoke-virtual {v0}, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.unpark:()V // method@29ff
+14e39a: 5400 3710                              |0011: iget-object v0, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.next:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1037
+14e39e: 28f9                                   |0013: goto 000c // -0007
+14e3a0: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=942
+        0x0002 line=943
+        0x000e line=946
+        0x0011 line=945
+      locals        :
+        0x0000 - 0x0015 reg=3 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+
+    #12              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'removeWaiter'
+      type          : '(Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 4
+      insns size    : 42 16-bit code units
+14e3a4:                                        |[14e3a4] androidx.concurrent.futures.AbstractResolvableFuture.removeWaiter:(Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)V
+14e3b4: 1200                                   |0000: const/4 v0, #int 0 // #0
+14e3b6: 5b50 3810                              |0001: iput-object v0, v5, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.thread:Ljava/lang/Thread; // field@1038
+14e3ba: 5445 4010                              |0003: iget-object v5, v4, Landroidx/concurrent/futures/AbstractResolvableFuture;.waiters:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1040
+14e3be: 6201 3610                              |0005: sget-object v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.TOMBSTONE:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1036
+14e3c2: 3315 0300                              |0007: if-ne v5, v1, 000a // +0003
+14e3c6: 2820                                   |0009: goto 0029 // +0020
+14e3c8: 0701                                   |000a: move-object v1, v0
+14e3ca: 3805 1e00                              |000b: if-eqz v5, 0029 // +001e
+14e3ce: 5452 3710                              |000d: iget-object v2, v5, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.next:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1037
+14e3d2: 5453 3810                              |000f: iget-object v3, v5, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.thread:Ljava/lang/Thread; // field@1038
+14e3d6: 3803 0400                              |0011: if-eqz v3, 0015 // +0004
+14e3da: 0751                                   |0013: move-object v1, v5
+14e3dc: 2813                                   |0014: goto 0027 // +0013
+14e3de: 3801 0900                              |0015: if-eqz v1, 001e // +0009
+14e3e2: 5b12 3710                              |0017: iput-object v2, v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.next:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1037
+14e3e6: 5415 3810                              |0019: iget-object v5, v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.thread:Ljava/lang/Thread; // field@1038
+14e3ea: 3905 0c00                              |001b: if-nez v5, 0027 // +000c
+14e3ee: 28e6                                   |001d: goto 0003 // -001a
+14e3f0: 6203 3910                              |001e: sget-object v3, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14e3f4: 6e40 e129 4325                         |0020: invoke-virtual {v3, v4, v5, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casWaiters:(Landroidx/concurrent/futures/AbstractResolvableFuture;Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)Z // method@29e1
+14e3fa: 0a05                                   |0023: move-result v5
+14e3fc: 3905 0300                              |0024: if-nez v5, 0027 // +0003
+14e400: 28dd                                   |0026: goto 0003 // -0023
+14e402: 0725                                   |0027: move-object v5, v2
+14e404: 28e3                                   |0028: goto 000b // -001d
+14e406: 0e00                                   |0029: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=171
+        0x0003 line=175
+        0x0005 line=176
+        0x000d line=181
+        0x000f line=182
+        0x0017 line=185
+        0x0019 line=186
+        0x001e line=190
+      locals        :
+        0x0000 - 0x002a reg=4 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x002a reg=5 (null) Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;
+
+    #13              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'userObjectToString'
+      type          : '(Ljava/lang/Object;)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 10 16-bit code units
+14dfc8:                                        |[14dfc8] androidx.concurrent.futures.AbstractResolvableFuture.userObjectToString:(Ljava/lang/Object;)Ljava/lang/String;
+14dfd8: 3301 0500                              |0000: if-ne v1, v0, 0005 // +0005
+14dfdc: 1a01 81ae                              |0002: const-string v1, "this future" // string@ae81
+14dfe0: 1101                                   |0004: return-object v1
+14dfe2: 7110 4772 0100                         |0005: invoke-static {v1}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@7247
+14dfe8: 0c01                                   |0008: move-result-object v1
+14dfea: 1101                                   |0009: return-object v1
+      catches       : (none)
+      positions     :
+        0x0002 line=1045
+        0x0005 line=1047
+      locals        :
+        0x0000 - 0x000a reg=0 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x000a reg=1 (null) Ljava/lang/Object;
+
+  Virtual methods   -
+    #0              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'addListener'
+      type          : '(Ljava/lang/Runnable;Ljava/util/concurrent/Executor;)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 4
+      insns size    : 38 16-bit code units
+14e1c8:                                        |[14e1c8] androidx.concurrent.futures.AbstractResolvableFuture.addListener:(Ljava/lang/Runnable;Ljava/util/concurrent/Executor;)V
+14e1d8: 7110 072a 0400                         |0000: invoke-static {v4}, Landroidx/concurrent/futures/AbstractResolvableFuture;.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a07
+14e1de: 7110 072a 0500                         |0003: invoke-static {v5}, Landroidx/concurrent/futures/AbstractResolvableFuture;.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a07
+14e1e4: 5430 3d10                              |0006: iget-object v0, v3, Landroidx/concurrent/futures/AbstractResolvableFuture;.listeners:Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // field@103d
+14e1e8: 6201 2b10                              |0008: sget-object v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;.TOMBSTONE:Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // field@102b
+14e1ec: 3210 1800                              |000a: if-eq v0, v1, 0022 // +0018
+14e1f0: 2201 7005                              |000c: new-instance v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // type@0570
+14e1f4: 7030 eb29 4105                         |000e: invoke-direct {v1, v4, v5}, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;.<init>:(Ljava/lang/Runnable;Ljava/util/concurrent/Executor;)V // method@29eb
+14e1fa: 5b10 2d10                              |0011: iput-object v0, v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;.next:Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // field@102d
+14e1fe: 6202 3910                              |0013: sget-object v2, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14e202: 6e40 df29 3210                         |0015: invoke-virtual {v2, v3, v0, v1}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casListeners:(Landroidx/concurrent/futures/AbstractResolvableFuture;Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;)Z // method@29df
+14e208: 0a00                                   |0018: move-result v0
+14e20a: 3800 0300                              |0019: if-eqz v0, 001c // +0003
+14e20e: 0e00                                   |001b: return-void
+14e210: 5430 3d10                              |001c: iget-object v0, v3, Landroidx/concurrent/futures/AbstractResolvableFuture;.listeners:Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // field@103d
+14e214: 6202 2b10                              |001e: sget-object v2, Landroidx/concurrent/futures/AbstractResolvableFuture$Listener;.TOMBSTONE:Landroidx/concurrent/futures/AbstractResolvableFuture$Listener; // field@102b
+14e218: 3320 f1ff                              |0020: if-ne v0, v2, 0011 // -000f
+14e21c: 7120 0a2a 5400                         |0022: invoke-static {v4, v5}, Landroidx/concurrent/futures/AbstractResolvableFuture;.executeListener:(Ljava/lang/Runnable;Ljava/util/concurrent/Executor;)V // method@2a0a
+14e222: 0e00                                   |0025: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=653
+        0x0003 line=654
+        0x0006 line=655
+        0x0008 line=656
+        0x000c line=657
+        0x0011 line=659
+        0x0013 line=660
+        0x001c line=663
+        0x001e line=664
+        0x0022 line=668
+      locals        :
+        0x0000 - 0x0026 reg=3 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x0026 reg=4 (null) Ljava/lang/Runnable;
+        0x0000 - 0x0026 reg=5 (null) Ljava/util/concurrent/Executor;
+
+    #1              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'afterDone'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 1 16-bit code units
+14e224:                                        |[14e224] androidx.concurrent.futures.AbstractResolvableFuture.afterDone:()V
+14e234: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #2              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'cancel'
+      type          : '(Z)Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 4
+      insns size    : 97 16-bit code units
+14d53c:                                        |[14d53c] androidx.concurrent.futures.AbstractResolvableFuture.cancel:(Z)Z
+14d54c: 5470 3f10                              |0000: iget-object v0, v7, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d550: 1211                                   |0002: const/4 v1, #int 1 // #1
+14d552: 1202                                   |0003: const/4 v2, #int 0 // #0
+14d554: 3900 0400                              |0004: if-nez v0, 0008 // +0004
+14d558: 0113                                   |0006: move v3, v1
+14d55a: 2802                                   |0007: goto 0009 // +0002
+14d55c: 0123                                   |0008: move v3, v2
+14d55e: 2004 7305                              |0009: instance-of v4, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d562: b643                                   |000b: or-int/2addr v3, v4
+14d564: 3803 5400                              |000c: if-eqz v3, 0060 // +0054
+14d568: 6303 3a10                              |000e: sget-boolean v3, Landroidx/concurrent/futures/AbstractResolvableFuture;.GENERATE_CANCELLATION_CAUSES:Z // field@103a
+14d56c: 3803 0f00                              |0010: if-eqz v3, 001f // +000f
+14d570: 2203 6d05                              |0012: new-instance v3, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14d574: 2204 4c12                              |0014: new-instance v4, Ljava/util/concurrent/CancellationException; // type@124c
+14d578: 1a05 2f27                              |0016: const-string v5, "Future.cancel() was called." // string@272f
+14d57c: 7020 af75 5400                         |0018: invoke-direct {v4, v5}, Ljava/util/concurrent/CancellationException;.<init>:(Ljava/lang/String;)V // method@75af
+14d582: 7030 e529 8304                         |001b: invoke-direct {v3, v8, v4}, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.<init>:(ZLjava/lang/Throwable;)V // method@29e5
+14d588: 2808                                   |001e: goto 0026 // +0008
+14d58a: 3808 0500                              |001f: if-eqz v8, 0024 // +0005
+14d58e: 6203 2610                              |0021: sget-object v3, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.CAUSELESS_INTERRUPTED:Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // field@1026
+14d592: 2803                                   |0023: goto 0026 // +0003
+14d594: 6203 2510                              |0024: sget-object v3, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.CAUSELESS_CANCELLED:Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // field@1025
+14d598: 0774                                   |0026: move-object v4, v7
+14d59a: 0125                                   |0027: move v5, v2
+14d59c: 6206 3910                              |0028: sget-object v6, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14d5a0: 6e40 e029 4630                         |002a: invoke-virtual {v6, v4, v0, v3}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casValue:(Landroidx/concurrent/futures/AbstractResolvableFuture;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29e0
+14d5a6: 0a06                                   |002d: move-result v6
+14d5a8: 3806 2b00                              |002e: if-eqz v6, 0059 // +002b
+14d5ac: 3808 0500                              |0030: if-eqz v8, 0035 // +0005
+14d5b0: 6e10 102a 0400                         |0032: invoke-virtual {v4}, Landroidx/concurrent/futures/AbstractResolvableFuture;.interruptTask:()V // method@2a10
+14d5b6: 7110 092a 0400                         |0035: invoke-static {v4}, Landroidx/concurrent/futures/AbstractResolvableFuture;.complete:(Landroidx/concurrent/futures/AbstractResolvableFuture;)V // method@2a09
+14d5bc: 2004 7305                              |0038: instance-of v4, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d5c0: 3804 1e00                              |003a: if-eqz v4, 0058 // +001e
+14d5c4: 1f00 7305                              |003c: check-cast v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d5c8: 5400 3410                              |003e: iget-object v0, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture;.future:Lcom/google/common/util/concurrent/ListenableFuture; // field@1034
+14d5cc: 2004 7605                              |0040: instance-of v4, v0, Landroidx/concurrent/futures/AbstractResolvableFuture; // type@0576
+14d5d0: 3804 1300                              |0042: if-eqz v4, 0055 // +0013
+14d5d4: 0704                                   |0044: move-object v4, v0
+14d5d6: 1f04 7605                              |0045: check-cast v4, Landroidx/concurrent/futures/AbstractResolvableFuture; // type@0576
+14d5da: 5440 3f10                              |0047: iget-object v0, v4, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d5de: 3900 0400                              |0049: if-nez v0, 004d // +0004
+14d5e2: 0115                                   |004b: move v5, v1
+14d5e4: 2802                                   |004c: goto 004e // +0002
+14d5e6: 0125                                   |004d: move v5, v2
+14d5e8: 2006 7305                              |004e: instance-of v6, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d5ec: b665                                   |0050: or-int/2addr v5, v6
+14d5ee: 3805 0700                              |0051: if-eqz v5, 0058 // +0007
+14d5f2: 0115                                   |0053: move v5, v1
+14d5f4: 28d4                                   |0054: goto 0028 // -002c
+14d5f6: 7220 d36e 8000                         |0055: invoke-interface {v0, v8}, Lcom/google/common/util/concurrent/ListenableFuture;.cancel:(Z)Z // method@6ed3
+14d5fc: 0f01                                   |0058: return v1
+14d5fe: 5440 3f10                              |0059: iget-object v0, v4, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d602: 2006 7305                              |005b: instance-of v6, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d606: 3906 cbff                              |005d: if-nez v6, 0028 // -0035
+14d60a: 0f05                                   |005f: return v5
+14d60c: 0f02                                   |0060: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=555
+        0x0009 line=557
+        0x000e line=561
+        0x0012 line=562
+        0x0021 line=566
+        0x0024 line=567
+        0x0028 line=570
+        0x0032 line=575
+        0x0035 line=577
+        0x0038 line=578
+        0x003c line=582
+        0x0040 line=583
+        0x0044 line=592
+        0x0047 line=594
+        0x004e line=595
+        0x0055 line=601
+        0x0059 line=607
+        0x005b line=608
+      locals        :
+        0x0000 - 0x0061 reg=7 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x0061 reg=8 (null) Z
+
+    #3              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'get'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 4
+      insns size    : 103 16-bit code units
+14d7ec:                                        |[14d7ec] androidx.concurrent.futures.AbstractResolvableFuture.get:()Ljava/lang/Object;
+14d7fc: 7100 8572 0000                         |0000: invoke-static {}, Ljava/lang/Thread;.interrupted:()Z // method@7285
+14d802: 0a00                                   |0003: move-result v0
+14d804: 3900 5d00                              |0004: if-nez v0, 0061 // +005d
+14d808: 5460 3f10                              |0006: iget-object v0, v6, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d80c: 1201                                   |0008: const/4 v1, #int 0 // #0
+14d80e: 1212                                   |0009: const/4 v2, #int 1 // #1
+14d810: 3800 0400                              |000a: if-eqz v0, 000e // +0004
+14d814: 0123                                   |000c: move v3, v2
+14d816: 2802                                   |000d: goto 000f // +0002
+14d818: 0113                                   |000e: move v3, v1
+14d81a: 2004 7305                              |000f: instance-of v4, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d81e: b724                                   |0011: xor-int/2addr v4, v2
+14d820: b543                                   |0012: and-int/2addr v3, v4
+14d822: 3803 0700                              |0013: if-eqz v3, 001a // +0007
+14d826: 7020 0d2a 0600                         |0015: invoke-direct {v6, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getDoneValue:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a0d
+14d82c: 0c00                                   |0018: move-result-object v0
+14d82e: 1100                                   |0019: return-object v0
+14d830: 5460 4010                              |001a: iget-object v0, v6, Landroidx/concurrent/futures/AbstractResolvableFuture;.waiters:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1040
+14d834: 6203 3610                              |001c: sget-object v3, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.TOMBSTONE:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1036
+14d838: 3230 3c00                              |001e: if-eq v0, v3, 005a // +003c
+14d83c: 2203 7505                              |0020: new-instance v3, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // type@0575
+14d840: 7010 fc29 0300                         |0022: invoke-direct {v3}, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.<init>:()V // method@29fc
+14d846: 6e20 fe29 0300                         |0025: invoke-virtual {v3, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.setNext:(Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)V // method@29fe
+14d84c: 6204 3910                              |0028: sget-object v4, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14d850: 6e40 e129 6430                         |002a: invoke-virtual {v4, v6, v0, v3}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casWaiters:(Landroidx/concurrent/futures/AbstractResolvableFuture;Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)Z // method@29e1
+14d856: 0a00                                   |002d: move-result v0
+14d858: 3800 2600                              |002e: if-eqz v0, 0054 // +0026
+14d85c: 7110 4776 0600                         |0030: invoke-static {v6}, Ljava/util/concurrent/locks/LockSupport;.park:(Ljava/lang/Object;)V // method@7647
+14d862: 7100 8572 0000                         |0033: invoke-static {}, Ljava/lang/Thread;.interrupted:()Z // method@7285
+14d868: 0a00                                   |0036: move-result v0
+14d86a: 3900 1400                              |0037: if-nez v0, 004b // +0014
+14d86e: 5460 3f10                              |0039: iget-object v0, v6, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d872: 3800 0400                              |003b: if-eqz v0, 003f // +0004
+14d876: 0124                                   |003d: move v4, v2
+14d878: 2802                                   |003e: goto 0040 // +0002
+14d87a: 0114                                   |003f: move v4, v1
+14d87c: 2005 7305                              |0040: instance-of v5, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d880: b725                                   |0042: xor-int/2addr v5, v2
+14d882: b554                                   |0043: and-int/2addr v4, v5
+14d884: 3804 ecff                              |0044: if-eqz v4, 0030 // -0014
+14d888: 7020 0d2a 0600                         |0046: invoke-direct {v6, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getDoneValue:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a0d
+14d88e: 0c00                                   |0049: move-result-object v0
+14d890: 1100                                   |004a: return-object v0
+14d892: 7020 162a 3600                         |004b: invoke-direct {v6, v3}, Landroidx/concurrent/futures/AbstractResolvableFuture;.removeWaiter:(Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)V // method@2a16
+14d898: 2200 6e11                              |004e: new-instance v0, Ljava/lang/InterruptedException; // type@116e
+14d89c: 7010 8871 0000                         |0050: invoke-direct {v0}, Ljava/lang/InterruptedException;.<init>:()V // method@7188
+14d8a2: 2700                                   |0053: throw v0
+14d8a4: 5460 4010                              |0054: iget-object v0, v6, Landroidx/concurrent/futures/AbstractResolvableFuture;.waiters:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1040
+14d8a8: 6204 3610                              |0056: sget-object v4, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.TOMBSTONE:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1036
+14d8ac: 3340 cdff                              |0058: if-ne v0, v4, 0025 // -0033
+14d8b0: 5460 3f10                              |005a: iget-object v0, v6, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d8b4: 7020 0d2a 0600                         |005c: invoke-direct {v6, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getDoneValue:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a0d
+14d8ba: 0c00                                   |005f: move-result-object v0
+14d8bc: 1100                                   |0060: return-object v0
+14d8be: 2200 6e11                              |0061: new-instance v0, Ljava/lang/InterruptedException; // type@116e
+14d8c2: 7010 8871 0000                         |0063: invoke-direct {v0}, Ljava/lang/InterruptedException;.<init>:()V // method@7188
+14d8c8: 2700                                   |0066: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=470
+        0x0006 line=473
+        0x000f line=474
+        0x0015 line=475
+        0x001a line=477
+        0x001c line=478
+        0x0020 line=479
+        0x0025 line=481
+        0x0028 line=482
+        0x0030 line=485
+        0x0033 line=488
+        0x0039 line=495
+        0x0040 line=496
+        0x0046 line=497
+        0x004b line=489
+        0x004e line=490
+        0x0054 line=501
+        0x0056 line=502
+        0x005a line=506
+        0x0061 line=471
+      locals        :
+        0x0000 - 0x0067 reg=6 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+
+    #4              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'get'
+      type          : '(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 23
+      ins           : 4
+      outs          : 4
+      insns size    : 456 16-bit code units
+14d8cc:                                        |[14d8cc] androidx.concurrent.futures.AbstractResolvableFuture.get:(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;
+14d8dc: 0800 1300                              |0000: move-object/from16 v0, v19
+14d8e0: 0501 1400                              |0002: move-wide/from16 v1, v20
+14d8e4: 0803 1600                              |0004: move-object/from16 v3, v22
+14d8e8: 6e30 0e76 1302                         |0006: invoke-virtual {v3, v1, v2}, Ljava/util/concurrent/TimeUnit;.toNanos:(J)J // method@760e
+14d8ee: 0b04                                   |0009: move-result-wide v4
+14d8f0: 7100 8572 0000                         |000a: invoke-static {}, Ljava/lang/Thread;.interrupted:()Z // method@7285
+14d8f6: 0a06                                   |000d: move-result v6
+14d8f8: 3906 b401                              |000e: if-nez v6, 01c2 // +01b4
+14d8fc: 5406 3f10                              |0010: iget-object v6, v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d900: 1218                                   |0012: const/4 v8, #int 1 // #1
+14d902: 3806 0400                              |0013: if-eqz v6, 0017 // +0004
+14d906: 0189                                   |0015: move v9, v8
+14d908: 2802                                   |0016: goto 0018 // +0002
+14d90a: 1209                                   |0017: const/4 v9, #int 0 // #0
+14d90c: 206a 7305                              |0018: instance-of v10, v6, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d910: b78a                                   |001a: xor-int/2addr v10, v8
+14d912: b5a9                                   |001b: and-int/2addr v9, v10
+14d914: 3809 0700                              |001c: if-eqz v9, 0023 // +0007
+14d918: 7020 0d2a 6000                         |001e: invoke-direct {v0, v6}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getDoneValue:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a0d
+14d91e: 0c01                                   |0021: move-result-object v1
+14d920: 1101                                   |0022: return-object v1
+14d922: 1609 0000                              |0023: const-wide/16 v9, #int 0 // #0
+14d926: 3106 0409                              |0025: cmp-long v6, v4, v9
+14d92a: 3d06 0800                              |0027: if-lez v6, 002f // +0008
+14d92e: 7100 7472 0000                         |0029: invoke-static {}, Ljava/lang/System;.nanoTime:()J // method@7274
+14d934: 0b0b                                   |002c: move-result-wide v11
+14d936: bb4b                                   |002d: add-long/2addr v11, v4
+14d938: 2802                                   |002e: goto 0030 // +0002
+14d93a: 049b                                   |002f: move-wide v11, v9
+14d93c: 160d e803                              |0030: const-wide/16 v13, #int 1000 // #3e8
+14d940: 3106 040d                              |0032: cmp-long v6, v4, v13
+14d944: 3a06 5700                              |0034: if-ltz v6, 008b // +0057
+14d948: 5406 4010                              |0036: iget-object v6, v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.waiters:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1040
+14d94c: 620f 3610                              |0038: sget-object v15, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.TOMBSTONE:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1036
+14d950: 32f6 4a00                              |003a: if-eq v6, v15, 0084 // +004a
+14d954: 220f 7505                              |003c: new-instance v15, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // type@0575
+14d958: 7010 fc29 0f00                         |003e: invoke-direct {v15}, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.<init>:()V // method@29fc
+14d95e: 6e20 fe29 6f00                         |0041: invoke-virtual {v15, v6}, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.setNext:(Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)V // method@29fe
+14d964: 6207 3910                              |0044: sget-object v7, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14d968: 6e40 e129 07f6                         |0046: invoke-virtual {v7, v0, v6, v15}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casWaiters:(Landroidx/concurrent/futures/AbstractResolvableFuture;Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)Z // method@29e1
+14d96e: 0a06                                   |0049: move-result v6
+14d970: 3806 3400                              |004a: if-eqz v6, 007e // +0034
+14d974: 7130 4976 4005                         |004c: invoke-static {v0, v4, v5}, Ljava/util/concurrent/locks/LockSupport;.parkNanos:(Ljava/lang/Object;J)V // method@7649
+14d97a: 7100 8572 0000                         |004f: invoke-static {}, Ljava/lang/Thread;.interrupted:()Z // method@7285
+14d980: 0a04                                   |0052: move-result v4
+14d982: 3904 2200                              |0053: if-nez v4, 0075 // +0022
+14d986: 5404 3f10                              |0055: iget-object v4, v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d98a: 3804 0400                              |0057: if-eqz v4, 005b // +0004
+14d98e: 0185                                   |0059: move v5, v8
+14d990: 2802                                   |005a: goto 005c // +0002
+14d992: 1205                                   |005b: const/4 v5, #int 0 // #0
+14d994: 2046 7305                              |005c: instance-of v6, v4, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d998: b786                                   |005e: xor-int/2addr v6, v8
+14d99a: b565                                   |005f: and-int/2addr v5, v6
+14d99c: 3805 0700                              |0060: if-eqz v5, 0067 // +0007
+14d9a0: 7020 0d2a 4000                         |0062: invoke-direct {v0, v4}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getDoneValue:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a0d
+14d9a6: 0c01                                   |0065: move-result-object v1
+14d9a8: 1101                                   |0066: return-object v1
+14d9aa: 7100 7472 0000                         |0067: invoke-static {}, Ljava/lang/System;.nanoTime:()J // method@7274
+14d9b0: 0b04                                   |006a: move-result-wide v4
+14d9b2: 9c04 0b04                              |006b: sub-long v4, v11, v4
+14d9b6: 3106 040d                              |006d: cmp-long v6, v4, v13
+14d9ba: 3b06 ddff                              |006f: if-gez v6, 004c // -0023
+14d9be: 7020 162a f000                         |0071: invoke-direct {v0, v15}, Landroidx/concurrent/futures/AbstractResolvableFuture;.removeWaiter:(Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)V // method@2a16
+14d9c4: 2817                                   |0074: goto 008b // +0017
+14d9c6: 7020 162a f000                         |0075: invoke-direct {v0, v15}, Landroidx/concurrent/futures/AbstractResolvableFuture;.removeWaiter:(Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;)V // method@2a16
+14d9cc: 2201 6e11                              |0078: new-instance v1, Ljava/lang/InterruptedException; // type@116e
+14d9d0: 7010 8871 0100                         |007a: invoke-direct {v1}, Ljava/lang/InterruptedException;.<init>:()V // method@7188
+14d9d6: 2701                                   |007d: throw v1
+14d9d8: 5406 4010                              |007e: iget-object v6, v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.waiters:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1040
+14d9dc: 6207 3610                              |0080: sget-object v7, Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter;.TOMBSTONE:Landroidx/concurrent/futures/AbstractResolvableFuture$Waiter; // field@1036
+14d9e0: 3376 bfff                              |0082: if-ne v6, v7, 0041 // -0041
+14d9e4: 5401 3f10                              |0084: iget-object v1, v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d9e8: 7020 0d2a 1000                         |0086: invoke-direct {v0, v1}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getDoneValue:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a0d
+14d9ee: 0c01                                   |0089: move-result-object v1
+14d9f0: 1101                                   |008a: return-object v1
+14d9f2: 3106 0409                              |008b: cmp-long v6, v4, v9
+14d9f6: 3d06 2700                              |008d: if-lez v6, 00b4 // +0027
+14d9fa: 5404 3f10                              |008f: iget-object v4, v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d9fe: 3804 0400                              |0091: if-eqz v4, 0095 // +0004
+14da02: 0185                                   |0093: move v5, v8
+14da04: 2802                                   |0094: goto 0096 // +0002
+14da06: 1205                                   |0095: const/4 v5, #int 0 // #0
+14da08: 2046 7305                              |0096: instance-of v6, v4, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14da0c: b786                                   |0098: xor-int/2addr v6, v8
+14da0e: b565                                   |0099: and-int/2addr v5, v6
+14da10: 3805 0700                              |009a: if-eqz v5, 00a1 // +0007
+14da14: 7020 0d2a 4000                         |009c: invoke-direct {v0, v4}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getDoneValue:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a0d
+14da1a: 0c01                                   |009f: move-result-object v1
+14da1c: 1101                                   |00a0: return-object v1
+14da1e: 7100 8572 0000                         |00a1: invoke-static {}, Ljava/lang/Thread;.interrupted:()Z // method@7285
+14da24: 0a04                                   |00a4: move-result v4
+14da26: 3904 0900                              |00a5: if-nez v4, 00ae // +0009
+14da2a: 7100 7472 0000                         |00a7: invoke-static {}, Ljava/lang/System;.nanoTime:()J // method@7274
+14da30: 0b04                                   |00aa: move-result-wide v4
+14da32: 9c04 0b04                              |00ab: sub-long v4, v11, v4
+14da36: 28de                                   |00ad: goto 008b // -0022
+14da38: 2201 6e11                              |00ae: new-instance v1, Ljava/lang/InterruptedException; // type@116e
+14da3c: 7010 8871 0100                         |00b0: invoke-direct {v1}, Ljava/lang/InterruptedException;.<init>:()V // method@7188
+14da42: 2701                                   |00b3: throw v1
+14da44: 6e10 1a2a 0000                         |00b4: invoke-virtual {v0}, Landroidx/concurrent/futures/AbstractResolvableFuture;.toString:()Ljava/lang/String; // method@2a1a
+14da4a: 0c06                                   |00b7: move-result-object v6
+14da4c: 6e10 1076 0300                         |00b8: invoke-virtual {v3}, Ljava/util/concurrent/TimeUnit;.toString:()Ljava/lang/String; // method@7610
+14da52: 0c07                                   |00bb: move-result-object v7
+14da54: 620b 253a                              |00bc: sget-object v11, Ljava/util/Locale;.ROOT:Ljava/util/Locale; // field@3a25
+14da58: 6e20 3e72 b700                         |00be: invoke-virtual {v7, v11}, Ljava/lang/String;.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String; // method@723e
+14da5e: 0c07                                   |00c1: move-result-object v7
+14da60: 220b 8811                              |00c2: new-instance v11, Ljava/lang/StringBuilder; // type@1188
+14da64: 1a0c 285c                              |00c4: const-string v12, "Waited " // string@5c28
+14da68: 7020 4e72 cb00                         |00c6: invoke-direct {v11, v12}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+14da6e: 6e30 5372 1b02                         |00c9: invoke-virtual {v11, v1, v2}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@7253
+14da74: 0c01                                   |00cc: move-result-object v1
+14da76: 1a02 2606                              |00cd: const-string v2, " " // string@0626
+14da7a: 6e20 5772 2100                         |00cf: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14da80: 0c01                                   |00d2: move-result-object v1
+14da82: 6e10 1076 0300                         |00d3: invoke-virtual {v3}, Ljava/util/concurrent/TimeUnit;.toString:()Ljava/lang/String; // method@7610
+14da88: 0c0b                                   |00d6: move-result-object v11
+14da8a: 620c 253a                              |00d7: sget-object v12, Ljava/util/Locale;.ROOT:Ljava/util/Locale; // field@3a25
+14da8e: 6e20 3e72 cb00                         |00d9: invoke-virtual {v11, v12}, Ljava/lang/String;.toLowerCase:(Ljava/util/Locale;)Ljava/lang/String; // method@723e
+14da94: 0c0b                                   |00dc: move-result-object v11
+14da96: 6e20 5772 b100                         |00dd: invoke-virtual {v1, v11}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14da9c: 0c01                                   |00e0: move-result-object v1
+14da9e: 6e10 6b72 0100                         |00e1: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14daa4: 0c01                                   |00e4: move-result-object v1
+14daa6: 9b0b 040d                              |00e5: add-long v11, v4, v13
+14daaa: 310b 0b09                              |00e7: cmp-long v11, v11, v9
+14daae: 3b0b 9d00                              |00e9: if-gez v11, 0186 // +009d
+14dab2: 220b 8811                              |00eb: new-instance v11, Ljava/lang/StringBuilder; // type@1188
+14dab6: 7010 4b72 0b00                         |00ed: invoke-direct {v11}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+14dabc: 6e20 5772 1b00                         |00f0: invoke-virtual {v11, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dac2: 0c01                                   |00f3: move-result-object v1
+14dac4: 1a0b 4506                              |00f4: const-string v11, " (plus " // string@0645
+14dac8: 6e20 5772 b100                         |00f6: invoke-virtual {v1, v11}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dace: 0c01                                   |00f9: move-result-object v1
+14dad0: 6e10 6b72 0100                         |00fa: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14dad6: 0c01                                   |00fd: move-result-object v1
+14dad8: 7d44                                   |00fe: neg-long v4, v4
+14dada: 620b 2c3a                              |00ff: sget-object v11, Ljava/util/concurrent/TimeUnit;.NANOSECONDS:Ljava/util/concurrent/TimeUnit; // field@3a2c
+14dade: 6e40 0b76 43b5                         |0101: invoke-virtual {v3, v4, v5, v11}, Ljava/util/concurrent/TimeUnit;.convert:(JLjava/util/concurrent/TimeUnit;)J // method@760b
+14dae4: 0b0b                                   |0104: move-result-wide v11
+14dae6: 6e30 0e76 b30c                         |0105: invoke-virtual {v3, v11, v12}, Ljava/util/concurrent/TimeUnit;.toNanos:(J)J // method@760e
+14daec: 0b11                                   |0108: move-result-wide v17
+14daee: 9c04 0411                              |0109: sub-long v4, v4, v17
+14daf2: 3103 0b09                              |010b: cmp-long v3, v11, v9
+14daf6: 3803 0a00                              |010d: if-eqz v3, 0117 // +000a
+14dafa: 3109 040d                              |010f: cmp-long v9, v4, v13
+14dafe: 3d09 0300                              |0111: if-lez v9, 0114 // +0003
+14db02: 2804                                   |0113: goto 0117 // +0004
+14db04: 1310 0000                              |0114: const/16 v16, #int 0 // #0
+14db08: 2803                                   |0116: goto 0119 // +0003
+14db0a: 0210 0800                              |0117: move/from16 v16, v8
+14db0e: 3d03 4100                              |0119: if-lez v3, 015a // +0041
+14db12: 2203 8811                              |011b: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+14db16: 7010 4b72 0300                         |011d: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+14db1c: 6e20 5772 1300                         |0120: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14db22: 0c01                                   |0123: move-result-object v1
+14db24: 6e30 5372 b10c                         |0124: invoke-virtual {v1, v11, v12}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@7253
+14db2a: 0c01                                   |0127: move-result-object v1
+14db2c: 6e20 5772 2100                         |0128: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14db32: 0c01                                   |012b: move-result-object v1
+14db34: 6e20 5772 7100                         |012c: invoke-virtual {v1, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14db3a: 0c01                                   |012f: move-result-object v1
+14db3c: 6e10 6b72 0100                         |0130: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14db42: 0c01                                   |0133: move-result-object v1
+14db44: 3810 1500                              |0134: if-eqz v16, 0149 // +0015
+14db48: 2203 8811                              |0136: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+14db4c: 7010 4b72 0300                         |0138: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+14db52: 6e20 5772 1300                         |013b: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14db58: 0c01                                   |013e: move-result-object v1
+14db5a: 1a03 f714                              |013f: const-string v3, "," // string@14f7
+14db5e: 6e20 5772 3100                         |0141: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14db64: 0c01                                   |0144: move-result-object v1
+14db66: 6e10 6b72 0100                         |0145: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14db6c: 0c01                                   |0148: move-result-object v1
+14db6e: 2203 8811                              |0149: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+14db72: 7010 4b72 0300                         |014b: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+14db78: 6e20 5772 1300                         |014e: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14db7e: 0c01                                   |0151: move-result-object v1
+14db80: 6e20 5772 2100                         |0152: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14db86: 0c01                                   |0155: move-result-object v1
+14db88: 6e10 6b72 0100                         |0156: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14db8e: 0c01                                   |0159: move-result-object v1
+14db90: 3810 1900                              |015a: if-eqz v16, 0173 // +0019
+14db94: 2202 8811                              |015c: new-instance v2, Ljava/lang/StringBuilder; // type@1188
+14db98: 7010 4b72 0200                         |015e: invoke-direct {v2}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+14db9e: 6e20 5772 1200                         |0161: invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dba4: 0c01                                   |0164: move-result-object v1
+14dba6: 6e30 5372 4105                         |0165: invoke-virtual {v1, v4, v5}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@7253
+14dbac: 0c01                                   |0168: move-result-object v1
+14dbae: 1a02 4b07                              |0169: const-string v2, " nanoseconds " // string@074b
+14dbb2: 6e20 5772 2100                         |016b: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dbb8: 0c01                                   |016e: move-result-object v1
+14dbba: 6e10 6b72 0100                         |016f: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14dbc0: 0c01                                   |0172: move-result-object v1
+14dbc2: 2202 8811                              |0173: new-instance v2, Ljava/lang/StringBuilder; // type@1188
+14dbc6: 7010 4b72 0200                         |0175: invoke-direct {v2}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+14dbcc: 6e20 5772 1200                         |0178: invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dbd2: 0c01                                   |017b: move-result-object v1
+14dbd4: 1a02 1c70                              |017c: const-string v2, "delay)" // string@701c
+14dbd8: 6e20 5772 2100                         |017e: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dbde: 0c01                                   |0181: move-result-object v1
+14dbe0: 6e10 6b72 0100                         |0182: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14dbe6: 0c01                                   |0185: move-result-object v1
+14dbe8: 6e10 122a 0000                         |0186: invoke-virtual {v0}, Landroidx/concurrent/futures/AbstractResolvableFuture;.isDone:()Z // method@2a12
+14dbee: 0a02                                   |0189: move-result v2
+14dbf0: 3802 1b00                              |018a: if-eqz v2, 01a5 // +001b
+14dbf4: 2202 6812                              |018c: new-instance v2, Ljava/util/concurrent/TimeoutException; // type@1268
+14dbf8: 2203 8811                              |018e: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+14dbfc: 7010 4b72 0300                         |0190: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+14dc02: 6e20 5772 1300                         |0193: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dc08: 0c01                                   |0196: move-result-object v1
+14dc0a: 1a03 8006                              |0197: const-string v3, " but future completed as timeout expired" // string@0680
+14dc0e: 6e20 5772 3100                         |0199: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dc14: 0c01                                   |019c: move-result-object v1
+14dc16: 6e10 6b72 0100                         |019d: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14dc1c: 0c01                                   |01a0: move-result-object v1
+14dc1e: 7020 1376 1200                         |01a1: invoke-direct {v2, v1}, Ljava/util/concurrent/TimeoutException;.<init>:(Ljava/lang/String;)V // method@7613
+14dc24: 2702                                   |01a4: throw v2
+14dc26: 2202 6812                              |01a5: new-instance v2, Ljava/util/concurrent/TimeoutException; // type@1268
+14dc2a: 2203 8811                              |01a7: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+14dc2e: 7010 4b72 0300                         |01a9: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+14dc34: 6e20 5772 1300                         |01ac: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dc3a: 0c01                                   |01af: move-result-object v1
+14dc3c: 1a03 bb06                              |01b0: const-string v3, " for " // string@06bb
+14dc40: 6e20 5772 3100                         |01b2: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dc46: 0c01                                   |01b5: move-result-object v1
+14dc48: 6e20 5772 6100                         |01b6: invoke-virtual {v1, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dc4e: 0c01                                   |01b9: move-result-object v1
+14dc50: 6e10 6b72 0100                         |01ba: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14dc56: 0c01                                   |01bd: move-result-object v1
+14dc58: 7020 1376 1200                         |01be: invoke-direct {v2, v1}, Ljava/util/concurrent/TimeoutException;.<init>:(Ljava/lang/String;)V // method@7613
+14dc5e: 2702                                   |01c1: throw v2
+14dc60: 2201 6e11                              |01c2: new-instance v1, Ljava/lang/InterruptedException; // type@116e
+14dc64: 7010 8871 0100                         |01c4: invoke-direct {v1}, Ljava/lang/InterruptedException;.<init>:()V // method@7188
+14dc6a: 2701                                   |01c7: throw v1
+      catches       : (none)
+      positions     :
+        0x0006 line=359
+        0x000a line=361
+        0x0010 line=364
+        0x0018 line=365
+        0x001e line=366
+        0x0029 line=369
+        0x0036 line=372
+        0x0038 line=373
+        0x003c line=374
+        0x0041 line=376
+        0x0044 line=377
+        0x004c line=379
+        0x004f line=382
+        0x0055 line=389
+        0x005c line=390
+        0x0062 line=391
+        0x0067 line=395
+        0x0071 line=399
+        0x0075 line=383
+        0x0078 line=384
+        0x007e line=404
+        0x0080 line=405
+        0x0084 line=409
+        0x008f line=414
+        0x0096 line=415
+        0x009c line=416
+        0x00a1 line=418
+        0x00a7 line=421
+        0x00ae line=419
+        0x00b4 line=424
+        0x00b8 line=425
+        0x00c2 line=426
+        0x00eb line=431
+        0x00ff line=433
+        0x0105 line=434
+        0x011b line=438
+        0x0136 line=440
+        0x0149 line=442
+        0x015c line=445
+        0x0173 line=448
+        0x0186 line=453
+        0x018c line=454
+        0x01a5 line=456
+        0x01c2 line=362
+      locals        :
+        0x0000 - 0x01c8 reg=19 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x01c8 reg=20 (null) J
+        0x0000 - 0x01c8 reg=22 (null) Ljava/util/concurrent/TimeUnit;
+
+    #5              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'interruptTask'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 1 16-bit code units
+14e31c:                                        |[14e31c] androidx.concurrent.futures.AbstractResolvableFuture.interruptTask:()V
+14e32c: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #6              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'isCancelled'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 5 16-bit code units
+14d610:                                        |[14d610] androidx.concurrent.futures.AbstractResolvableFuture.isCancelled:()Z
+14d620: 5410 3f10                              |0000: iget-object v0, v1, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d624: 2000 6d05                              |0002: instance-of v0, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14d628: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=536
+        0x0002 line=537
+      locals        :
+        0x0000 - 0x0005 reg=1 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+
+    #7              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'isDone'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 0
+      insns size    : 13 16-bit code units
+14d62c:                                        |[14d62c] androidx.concurrent.futures.AbstractResolvableFuture.isDone:()Z
+14d63c: 5430 3f10                              |0000: iget-object v0, v3, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d640: 1211                                   |0002: const/4 v1, #int 1 // #1
+14d642: 3800 0400                              |0003: if-eqz v0, 0007 // +0004
+14d646: 0112                                   |0005: move v2, v1
+14d648: 2802                                   |0006: goto 0008 // +0002
+14d64a: 1202                                   |0007: const/4 v2, #int 0 // #0
+14d64c: 2000 7305                              |0008: instance-of v0, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d650: b710                                   |000a: xor-int/2addr v0, v1
+14d652: b520                                   |000b: and-int/2addr v0, v2
+14d654: 0f00                                   |000c: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=530
+        0x0008 line=531
+      locals        :
+        0x0000 - 0x000d reg=3 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+
+    #8              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'maybePropagateCancellationTo'
+      type          : '(Ljava/util/concurrent/Future;)V'
+      access        : 0x0010 (FINAL)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 20 16-bit code units
+14e330:                                        |[14e330] androidx.concurrent.futures.AbstractResolvableFuture.maybePropagateCancellationTo:(Ljava/util/concurrent/Future;)V
+14e340: 3803 0400                              |0000: if-eqz v3, 0004 // +0004
+14e344: 1210                                   |0002: const/4 v0, #int 1 // #1
+14e346: 2802                                   |0003: goto 0005 // +0002
+14e348: 1200                                   |0004: const/4 v0, #int 0 // #0
+14e34a: 6e10 112a 0200                         |0005: invoke-virtual {v2}, Landroidx/concurrent/futures/AbstractResolvableFuture;.isCancelled:()Z // method@2a11
+14e350: 0a01                                   |0008: move-result v1
+14e352: b510                                   |0009: and-int/2addr v0, v1
+14e354: 3800 0900                              |000a: if-eqz v0, 0013 // +0009
+14e358: 6e10 1c2a 0200                         |000c: invoke-virtual {v2}, Landroidx/concurrent/futures/AbstractResolvableFuture;.wasInterrupted:()Z // method@2a1c
+14e35e: 0a00                                   |000f: move-result v0
+14e360: 7220 e375 0300                         |0010: invoke-interface {v3, v0}, Ljava/util/concurrent/Future;.cancel:(Z)Z // method@75e3
+14e366: 0e00                                   |0013: return-void
+      catches       : (none)
+      positions     :
+        0x0005 line=933
+        0x000c line=934
+      locals        :
+        0x0000 - 0x0014 reg=2 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x0014 reg=3 (null) Ljava/util/concurrent/Future;
+
+    #9              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'pendingToString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 3
+      insns size    : 73 16-bit code units
+14de20:                                        |[14de20] androidx.concurrent.futures.AbstractResolvableFuture.pendingToString:()Ljava/lang/String;
+14de30: 5430 3f10                              |0000: iget-object v0, v3, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14de34: 2001 7305                              |0002: instance-of v1, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14de38: 3801 2000                              |0004: if-eqz v1, 0024 // +0020
+14de3c: 2201 8811                              |0006: new-instance v1, Ljava/lang/StringBuilder; // type@1188
+14de40: 1a02 52a7                              |0008: const-string v2, "setFuture=[" // string@a752
+14de44: 7020 4e72 2100                         |000a: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+14de4a: 1f00 7305                              |000d: check-cast v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14de4e: 5400 3410                              |000f: iget-object v0, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture;.future:Lcom/google/common/util/concurrent/ListenableFuture; // field@1034
+14de52: 7020 1b2a 0300                         |0011: invoke-direct {v3, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture;.userObjectToString:(Ljava/lang/Object;)Ljava/lang/String; // method@2a1b
+14de58: 0c00                                   |0014: move-result-object v0
+14de5a: 6e20 5772 0100                         |0015: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14de60: 0c00                                   |0018: move-result-object v0
+14de62: 1a01 b95e                              |0019: const-string v1, "]" // string@5eb9
+14de66: 6e20 5772 1000                         |001b: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14de6c: 0c00                                   |001e: move-result-object v0
+14de6e: 6e10 6b72 0000                         |001f: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14de74: 0c00                                   |0022: move-result-object v0
+14de76: 1100                                   |0023: return-object v0
+14de78: 2030 6112                              |0024: instance-of v0, v3, Ljava/util/concurrent/ScheduledFuture; // type@1261
+14de7c: 3800 2100                              |0026: if-eqz v0, 0047 // +0021
+14de80: 2200 8811                              |0028: new-instance v0, Ljava/lang/StringBuilder; // type@1188
+14de84: 1a01 b0a0                              |002a: const-string v1, "remaining delay=[" // string@a0b0
+14de88: 7020 4e72 1000                         |002c: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+14de8e: 0731                                   |002f: move-object v1, v3
+14de90: 1f01 6112                              |0030: check-cast v1, Ljava/util/concurrent/ScheduledFuture; // type@1261
+14de94: 6202 2a3a                              |0032: sget-object v2, Ljava/util/concurrent/TimeUnit;.MILLISECONDS:Ljava/util/concurrent/TimeUnit; // field@3a2a
+14de98: 7220 f275 2100                         |0034: invoke-interface {v1, v2}, Ljava/util/concurrent/ScheduledFuture;.getDelay:(Ljava/util/concurrent/TimeUnit;)J // method@75f2
+14de9e: 0b01                                   |0037: move-result-wide v1
+14dea0: 6e30 5372 1002                         |0038: invoke-virtual {v0, v1, v2}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@7253
+14dea6: 0c00                                   |003b: move-result-object v0
+14dea8: 1a01 3c07                              |003c: const-string v1, " ms]" // string@073c
+14deac: 6e20 5772 1000                         |003e: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14deb2: 0c00                                   |0041: move-result-object v0
+14deb4: 6e10 6b72 0000                         |0042: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14deba: 0c00                                   |0045: move-result-object v0
+14debc: 1100                                   |0046: return-object v0
+14debe: 1200                                   |0047: const/4 v0, #int 0 // #0
+14dec0: 1100                                   |0048: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1013
+        0x0002 line=1014
+        0x0006 line=1015
+        0x0024 line=1016
+        0x0028 line=1017
+        0x0034 line=1018
+      locals        :
+        0x0000 - 0x0049 reg=3 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+
+    #10              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'set'
+      type          : '(Ljava/lang/Object;)Z'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 20 16-bit code units
+14d658:                                        |[14d658] androidx.concurrent.futures.AbstractResolvableFuture.set:(Ljava/lang/Object;)Z
+14d668: 3903 0400                              |0000: if-nez v3, 0004 // +0004
+14d66c: 6203 3b10                              |0002: sget-object v3, Landroidx/concurrent/futures/AbstractResolvableFuture;.NULL:Ljava/lang/Object; // field@103b
+14d670: 6200 3910                              |0004: sget-object v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14d674: 1201                                   |0006: const/4 v1, #int 0 // #0
+14d676: 6e40 e029 2031                         |0007: invoke-virtual {v0, v2, v1, v3}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casValue:(Landroidx/concurrent/futures/AbstractResolvableFuture;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29e0
+14d67c: 0a03                                   |000a: move-result v3
+14d67e: 3803 0700                              |000b: if-eqz v3, 0012 // +0007
+14d682: 7110 092a 0200                         |000d: invoke-static {v2}, Landroidx/concurrent/futures/AbstractResolvableFuture;.complete:(Landroidx/concurrent/futures/AbstractResolvableFuture;)V // method@2a09
+14d688: 1213                                   |0010: const/4 v3, #int 1 // #1
+14d68a: 0f03                                   |0011: return v3
+14d68c: 1203                                   |0012: const/4 v3, #int 0 // #0
+14d68e: 0f03                                   |0013: return v3
+      catches       : (none)
+      positions     :
+        0x0002 line=685
+        0x0004 line=686
+        0x000d line=687
+      locals        :
+        0x0000 - 0x0014 reg=2 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x0014 reg=3 (null) Ljava/lang/Object;
+
+    #11              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'setException'
+      type          : '(Ljava/lang/Throwable;)Z'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 27 16-bit code units
+14d690:                                        |[14d690] androidx.concurrent.futures.AbstractResolvableFuture.setException:(Ljava/lang/Throwable;)Z
+14d6a0: 2200 6f05                              |0000: new-instance v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure; // type@056f
+14d6a4: 7110 072a 0300                         |0002: invoke-static {v3}, Landroidx/concurrent/futures/AbstractResolvableFuture;.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a07
+14d6aa: 0c03                                   |0005: move-result-object v3
+14d6ac: 1f03 8f11                              |0006: check-cast v3, Ljava/lang/Throwable; // type@118f
+14d6b0: 7020 e929 3000                         |0008: invoke-direct {v0, v3}, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure;.<init>:(Ljava/lang/Throwable;)V // method@29e9
+14d6b6: 6203 3910                              |000b: sget-object v3, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14d6ba: 1201                                   |000d: const/4 v1, #int 0 // #0
+14d6bc: 6e40 e029 2301                         |000e: invoke-virtual {v3, v2, v1, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casValue:(Landroidx/concurrent/futures/AbstractResolvableFuture;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29e0
+14d6c2: 0a03                                   |0011: move-result v3
+14d6c4: 3803 0700                              |0012: if-eqz v3, 0019 // +0007
+14d6c8: 7110 092a 0200                         |0014: invoke-static {v2}, Landroidx/concurrent/futures/AbstractResolvableFuture;.complete:(Landroidx/concurrent/futures/AbstractResolvableFuture;)V // method@2a09
+14d6ce: 1213                                   |0017: const/4 v3, #int 1 // #1
+14d6d0: 0f03                                   |0018: return v3
+14d6d2: 1203                                   |0019: const/4 v3, #int 0 // #0
+14d6d4: 0f03                                   |001a: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=710
+        0x000b line=711
+        0x0014 line=712
+      locals        :
+        0x0000 - 0x001b reg=2 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x001b reg=3 (null) Ljava/lang/Throwable;
+
+    #12              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'setFuture'
+      type          : '(Lcom/google/common/util/concurrent/ListenableFuture;)Z'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 4
+      insns size    : 81 16-bit code units
+14d6d8:                                        |[14d6d8] androidx.concurrent.futures.AbstractResolvableFuture.setFuture:(Lcom/google/common/util/concurrent/ListenableFuture;)Z
+14d6e8: 7110 072a 0600                         |0000: invoke-static {v6}, Landroidx/concurrent/futures/AbstractResolvableFuture;.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object; // method@2a07
+14d6ee: 5450 3f10                              |0003: iget-object v0, v5, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d6f2: 1201                                   |0005: const/4 v1, #int 0 // #0
+14d6f4: 3900 3f00                              |0006: if-nez v0, 0045 // +003f
+14d6f8: 7210 d56e 0600                         |0008: invoke-interface {v6}, Lcom/google/common/util/concurrent/ListenableFuture;.isDone:()Z // method@6ed5
+14d6fe: 0a00                                   |000b: move-result v0
+14d700: 1212                                   |000c: const/4 v2, #int 1 // #1
+14d702: 1203                                   |000d: const/4 v3, #int 0 // #0
+14d704: 3800 1300                              |000e: if-eqz v0, 0021 // +0013
+14d708: 7110 0e2a 0600                         |0010: invoke-static {v6}, Landroidx/concurrent/futures/AbstractResolvableFuture;.getFutureValue:(Lcom/google/common/util/concurrent/ListenableFuture;)Ljava/lang/Object; // method@2a0e
+14d70e: 0c06                                   |0013: move-result-object v6
+14d710: 6200 3910                              |0014: sget-object v0, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14d714: 6e40 e029 5063                         |0016: invoke-virtual {v0, v5, v3, v6}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casValue:(Landroidx/concurrent/futures/AbstractResolvableFuture;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29e0
+14d71a: 0a06                                   |0019: move-result v6
+14d71c: 3806 0600                              |001a: if-eqz v6, 0020 // +0006
+14d720: 7110 092a 0500                         |001c: invoke-static {v5}, Landroidx/concurrent/futures/AbstractResolvableFuture;.complete:(Landroidx/concurrent/futures/AbstractResolvableFuture;)V // method@2a09
+14d726: 0f02                                   |001f: return v2
+14d728: 0f01                                   |0020: return v1
+14d72a: 2200 7305                              |0021: new-instance v0, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture; // type@0573
+14d72e: 7030 f329 5006                         |0023: invoke-direct {v0, v5, v6}, Landroidx/concurrent/futures/AbstractResolvableFuture$SetFuture;.<init>:(Landroidx/concurrent/futures/AbstractResolvableFuture;Lcom/google/common/util/concurrent/ListenableFuture;)V // method@29f3
+14d734: 6204 3910                              |0026: sget-object v4, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14d738: 6e40 e029 5403                         |0028: invoke-virtual {v4, v5, v3, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casValue:(Landroidx/concurrent/futures/AbstractResolvableFuture;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29e0
+14d73e: 0a03                                   |002b: move-result v3
+14d740: 3803 1700                              |002c: if-eqz v3, 0043 // +0017
+14d744: 6201 4910                              |002e: sget-object v1, Landroidx/concurrent/futures/DirectExecutor;.INSTANCE:Landroidx/concurrent/futures/DirectExecutor; // field@1049
+14d748: 7230 d26e 0601                         |0030: invoke-interface {v6, v0, v1}, Lcom/google/common/util/concurrent/ListenableFuture;.addListener:(Ljava/lang/Runnable;Ljava/util/concurrent/Executor;)V // method@6ed2
+14d74e: 280f                                   |0033: goto 0042 // +000f
+14d750: 0d06                                   |0034: move-exception v6
+14d752: 2201 6f05                              |0035: new-instance v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure; // type@056f
+14d756: 7020 e929 6100                         |0037: invoke-direct {v1, v6}, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure;.<init>:(Ljava/lang/Throwable;)V // method@29e9
+14d75c: 2803                                   |003a: goto 003d // +0003
+14d75e: 6201 2910                              |003b: sget-object v1, Landroidx/concurrent/futures/AbstractResolvableFuture$Failure;.FALLBACK_INSTANCE:Landroidx/concurrent/futures/AbstractResolvableFuture$Failure; // field@1029
+14d762: 6206 3910                              |003d: sget-object v6, Landroidx/concurrent/futures/AbstractResolvableFuture;.ATOMIC_HELPER:Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper; // field@1039
+14d766: 6e40 e029 5610                         |003f: invoke-virtual {v6, v5, v0, v1}, Landroidx/concurrent/futures/AbstractResolvableFuture$AtomicHelper;.casValue:(Landroidx/concurrent/futures/AbstractResolvableFuture;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29e0
+14d76c: 0f02                                   |0042: return v2
+14d76e: 5450 3f10                              |0043: iget-object v0, v5, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d772: 2002 6d05                              |0045: instance-of v2, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14d776: 3802 0900                              |0047: if-eqz v2, 0050 // +0009
+14d77a: 1f00 6d05                              |0049: check-cast v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14d77e: 5500 2810                              |004b: iget-boolean v0, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.wasInterrupted:Z // field@1028
+14d782: 7220 d36e 0600                         |004d: invoke-interface {v6, v0}, Lcom/google/common/util/concurrent/ListenableFuture;.cancel:(Z)Z // method@6ed3
+14d788: 0f01                                   |0050: return v1
+      catches       : 2
+        0x002e - 0x0033
+          <any> -> 0x0034
+        0x0035 - 0x003a
+          <any> -> 0x003b
+      positions     :
+        0x0000 line=746
+        0x0003 line=747
+        0x0008 line=749
+        0x0010 line=750
+        0x0014 line=751
+        0x001c line=752
+        0x0021 line=757
+        0x0026 line=758
+        0x002e line=763
+        0x0035 line=771
+        0x003b line=773
+        0x003d line=777
+        0x0043 line=781
+        0x0045 line=785
+        0x0049 line=787
+      locals        :
+        0x0000 - 0x0051 reg=5 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+        0x0000 - 0x0051 reg=6 (null) Lcom/google/common/util/concurrent/ListenableFuture;
+
+    #13              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 2
+      insns size    : 114 16-bit code units
+14dec4:                                        |[14dec4] androidx.concurrent.futures.AbstractResolvableFuture.toString:()Ljava/lang/String;
+14ded4: 2200 8811                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1188
+14ded8: 7010 4b72 0000                         |0002: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@724b
+14dede: 6f10 e671 0500                         |0005: invoke-super {v5}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+14dee4: 0c01                                   |0008: move-result-object v1
+14dee6: 6e20 5772 1000                         |0009: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14deec: 0c00                                   |000c: move-result-object v0
+14deee: 1a01 a05e                              |000d: const-string v1, "[status=" // string@5ea0
+14def2: 6e20 5772 1000                         |000f: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14def8: 0c00                                   |0012: move-result-object v0
+14defa: 6e10 112a 0500                         |0013: invoke-virtual {v5}, Landroidx/concurrent/futures/AbstractResolvableFuture;.isCancelled:()Z // method@2a11
+14df00: 0a01                                   |0016: move-result v1
+14df02: 1a02 b95e                              |0017: const-string v2, "]" // string@5eb9
+14df06: 3801 0800                              |0019: if-eqz v1, 0021 // +0008
+14df0a: 1a01 0d1e                              |001b: const-string v1, "CANCELLED" // string@1e0d
+14df0e: 6e20 5772 1000                         |001d: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14df14: 2849                                   |0020: goto 0069 // +0049
+14df16: 6e10 122a 0500                         |0021: invoke-virtual {v5}, Landroidx/concurrent/futures/AbstractResolvableFuture;.isDone:()Z // method@2a12
+14df1c: 0a01                                   |0024: move-result v1
+14df1e: 3801 0600                              |0025: if-eqz v1, 002b // +0006
+14df22: 7020 022a 0500                         |0027: invoke-direct {v5, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture;.addDoneString:(Ljava/lang/StringBuilder;)V // method@2a02
+14df28: 283f                                   |002a: goto 0069 // +003f
+14df2a: 6e10 142a 0500                         |002b: invoke-virtual {v5}, Landroidx/concurrent/futures/AbstractResolvableFuture;.pendingToString:()Ljava/lang/String; // method@2a14
+14df30: 0c01                                   |002e: move-result-object v1
+14df32: 2815                                   |002f: goto 0044 // +0015
+14df34: 0d01                                   |0030: move-exception v1
+14df36: 2203 8811                              |0031: new-instance v3, Ljava/lang/StringBuilder; // type@1188
+14df3a: 1a04 9e24                              |0033: const-string v4, "Exception thrown from implementation: " // string@249e
+14df3e: 7020 4e72 4300                         |0035: invoke-direct {v3, v4}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+14df44: 6e10 e371 0100                         |0038: invoke-virtual {v1}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+14df4a: 0c01                                   |003b: move-result-object v1
+14df4c: 6e20 5672 1300                         |003c: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+14df52: 0c01                                   |003f: move-result-object v1
+14df54: 6e10 6b72 0100                         |0040: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14df5a: 0c01                                   |0043: move-result-object v1
+14df5c: 3801 1600                              |0044: if-eqz v1, 005a // +0016
+14df60: 6e10 2772 0100                         |0046: invoke-virtual {v1}, Ljava/lang/String;.isEmpty:()Z // method@7227
+14df66: 0a03                                   |0049: move-result v3
+14df68: 3903 1000                              |004a: if-nez v3, 005a // +0010
+14df6c: 1a03 c74c                              |004c: const-string v3, "PENDING, info=[" // string@4cc7
+14df70: 6e20 5772 3000                         |004e: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14df76: 0c03                                   |0051: move-result-object v3
+14df78: 6e20 5772 1300                         |0052: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14df7e: 0c01                                   |0055: move-result-object v1
+14df80: 6e20 5772 2100                         |0056: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14df86: 2810                                   |0059: goto 0069 // +0010
+14df88: 6e10 122a 0500                         |005a: invoke-virtual {v5}, Landroidx/concurrent/futures/AbstractResolvableFuture;.isDone:()Z // method@2a12
+14df8e: 0a01                                   |005d: move-result v1
+14df90: 3801 0600                              |005e: if-eqz v1, 0064 // +0006
+14df94: 7020 022a 0500                         |0060: invoke-direct {v5, v0}, Landroidx/concurrent/futures/AbstractResolvableFuture;.addDoneString:(Ljava/lang/StringBuilder;)V // method@2a02
+14df9a: 2806                                   |0063: goto 0069 // +0006
+14df9c: 1a01 c64c                              |0064: const-string v1, "PENDING" // string@4cc6
+14dfa0: 6e20 5772 1000                         |0066: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dfa6: 6e20 5772 2000                         |0069: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14dfac: 0c00                                   |006c: move-result-object v0
+14dfae: 6e10 6b72 0000                         |006d: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+14dfb4: 0c00                                   |0070: move-result-object v0
+14dfb6: 1100                                   |0071: return-object v0
+      catches       : 1
+        0x002b - 0x002f
+          Ljava/lang/RuntimeException; -> 0x0030
+      positions     :
+        0x0000 line=978
+        0x0013 line=979
+        0x001b line=980
+        0x0021 line=981
+        0x0027 line=982
+        0x002b line=986
+        0x0031 line=990
+        0x0046 line=994
+        0x004c line=995
+        0x005a line=996
+        0x0060 line=997
+        0x0064 line=999
+        0x0069 line=1002
+      locals        :
+        0x0000 - 0x0072 reg=5 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+
+    #14              : (in Landroidx/concurrent/futures/AbstractResolvableFuture;)
+      name          : 'wasInterrupted'
+      type          : '()Z'
+      access        : 0x0014 (PROTECTED FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 16 16-bit code units
+14d7a4:                                        |[14d7a4] androidx.concurrent.futures.AbstractResolvableFuture.wasInterrupted:()Z
+14d7b4: 5420 3f10                              |0000: iget-object v0, v2, Landroidx/concurrent/futures/AbstractResolvableFuture;.value:Ljava/lang/Object; // field@103f
+14d7b8: 2001 6d05                              |0002: instance-of v1, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14d7bc: 3801 0a00                              |0004: if-eqz v1, 000e // +000a
+14d7c0: 1f00 6d05                              |0006: check-cast v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation; // type@056d
+14d7c4: 5500 2810                              |0008: iget-boolean v0, v0, Landroidx/concurrent/futures/AbstractResolvableFuture$Cancellation;.wasInterrupted:Z // field@1028
+14d7c8: 3800 0400                              |000a: if-eqz v0, 000e // +0004
+14d7cc: 1210                                   |000c: const/4 v0, #int 1 // #1
+14d7ce: 0f00                                   |000d: return v0
+14d7d0: 1200                                   |000e: const/4 v0, #int 0 // #0
+14d7d2: 0f00                                   |000f: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=642
+        0x0002 line=643
+      locals        :
+        0x0000 - 0x0010 reg=2 this Landroidx/concurrent/futures/AbstractResolvableFuture;
+
+  source_file_idx   : 6613 (AbstractResolvableFuture.java)
+

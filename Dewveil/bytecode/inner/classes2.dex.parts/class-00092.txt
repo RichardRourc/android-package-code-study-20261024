@@ -1,0 +1,846 @@
+Class #92            -
+  Class descriptor  : 'Lokio/SegmentedByteString;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Lokio/ByteString;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lokio/SegmentedByteString;)
+      name          : 'directory'
+      type          : '[I'
+      access        : 0x0090 (FINAL TRANSIENT)
+    #1              : (in Lokio/SegmentedByteString;)
+      name          : 'segments'
+      type          : '[[B'
+      access        : 0x0090 (FINAL TRANSIENT)
+  Direct methods    -
+    #0              : (in Lokio/SegmentedByteString;)
+      name          : '<init>'
+      type          : '(Lokio/Buffer;I)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 10
+      ins           : 3
+      outs          : 6
+      insns size    : 91 16-bit code units
+03485c:                                        |[03485c] okio.SegmentedByteString.<init>:(Lokio/Buffer;I)V
+03486c: 1200                                   |0000: const/4 v0, #int 0 // #0
+03486e: 7020 4005 0700                         |0001: invoke-direct {v7, v0}, Lokio/ByteString;.<init>:([B)V // method@0540
+034874: 5381 f300                              |0004: iget-wide v1, v8, Lokio/Buffer;.size:J // field@00f3
+034878: 1603 0000                              |0006: const-wide/16 v3, #int 0 // #0
+03487c: 8195                                   |0008: int-to-long v5, v9
+03487e: 7706 4c06 0100                         |0009: invoke-static/range {v1, v2, v3, v4, v5, v6}, Lokio/Util;.checkOffsetAndCount:(JJJ)V // method@064c
+034884: 5480 f200                              |000c: iget-object v0, v8, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+034888: 1201                                   |000e: const/4 v1, #int 0 // #0
+03488a: 0112                                   |000f: move v2, v1
+03488c: 0123                                   |0010: move v3, v2
+03488e: 3592 1b00                              |0011: if-ge v2, v9, 002c // +001b
+034892: 5204 2601                              |0013: iget v4, v0, Lokio/Segment;.limit:I // field@0126
+034896: 5205 2901                              |0015: iget v5, v0, Lokio/Segment;.pos:I // field@0129
+03489a: 3254 0d00                              |0017: if-eq v4, v5, 0024 // +000d
+03489e: 5204 2601                              |0019: iget v4, v0, Lokio/Segment;.limit:I // field@0126
+0348a2: 5205 2901                              |001b: iget v5, v0, Lokio/Segment;.pos:I // field@0129
+0348a6: b154                                   |001d: sub-int/2addr v4, v5
+0348a8: b042                                   |001e: add-int/2addr v2, v4
+0348aa: d803 0301                              |001f: add-int/lit8 v3, v3, #int 1 // #01
+0348ae: 5400 2701                              |0021: iget-object v0, v0, Lokio/Segment;.next:Lokio/Segment; // field@0127
+0348b2: 28ee                                   |0023: goto 0011 // -0012
+0348b4: 2207 9b00                              |0024: new-instance v7, Ljava/lang/AssertionError; // type@009b
+0348b8: 1a08 ad09                              |0026: const-string v8, "s.limit == s.pos" // string@09ad
+0348bc: 7020 e801 8700                         |0028: invoke-direct {v7, v8}, Ljava/lang/AssertionError;.<init>:(Ljava/lang/Object;)V // method@01e8
+0348c2: 2707                                   |002b: throw v7
+0348c4: 2330 da01                              |002c: new-array v0, v3, [[B // type@01da
+0348c8: 5b70 3101                              |002e: iput-object v0, v7, Lokio/SegmentedByteString;.segments:[[B // field@0131
+0348cc: da03 0302                              |0030: mul-int/lit8 v3, v3, #int 2 // #02
+0348d0: 2330 c701                              |0032: new-array v0, v3, [I // type@01c7
+0348d4: 5b70 2f01                              |0034: iput-object v0, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+0348d8: 5488 f200                              |0036: iget-object v8, v8, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+0348dc: 0110                                   |0038: move v0, v1
+0348de: 3591 2100                              |0039: if-ge v1, v9, 005a // +0021
+0348e2: 5472 3101                              |003b: iget-object v2, v7, Lokio/SegmentedByteString;.segments:[[B // field@0131
+0348e6: 5483 2501                              |003d: iget-object v3, v8, Lokio/Segment;.data:[B // field@0125
+0348ea: 4d03 0200                              |003f: aput-object v3, v2, v0
+0348ee: 5282 2601                              |0041: iget v2, v8, Lokio/Segment;.limit:I // field@0126
+0348f2: 5283 2901                              |0043: iget v3, v8, Lokio/Segment;.pos:I // field@0129
+0348f6: b132                                   |0045: sub-int/2addr v2, v3
+0348f8: b021                                   |0046: add-int/2addr v1, v2
+0348fa: 5472 2f01                              |0047: iget-object v2, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+0348fe: 4b01 0200                              |0049: aput v1, v2, v0
+034902: 5473 3101                              |004b: iget-object v3, v7, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034906: 2133                                   |004d: array-length v3, v3
+034908: b003                                   |004e: add-int/2addr v3, v0
+03490a: 5284 2901                              |004f: iget v4, v8, Lokio/Segment;.pos:I // field@0129
+03490e: 4b04 0203                              |0051: aput v4, v2, v3
+034912: 1212                                   |0053: const/4 v2, #int 1 // #1
+034914: 5c82 2b01                              |0054: iput-boolean v2, v8, Lokio/Segment;.shared:Z // field@012b
+034918: b020                                   |0056: add-int/2addr v0, v2
+03491a: 5488 2701                              |0057: iget-object v8, v8, Lokio/Segment;.next:Lokio/Segment; // field@0127
+03491e: 28e0                                   |0059: goto 0039 // -0020
+034920: 0e00                                   |005a: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=55
+        0x0004 line=56
+        0x000c line=61
+        0x0013 line=62
+        0x0019 line=65
+        0x0021 line=61
+        0x0024 line=63
+        0x002c line=70
+        0x0032 line=71
+        0x0036 line=74
+        0x003b line=75
+        0x0041 line=76
+        0x0047 line=77
+        0x004b line=78
+        0x0054 line=79
+        0x0057 line=74
+      locals        :
+        0x0000 - 0x005b reg=7 this Lokio/SegmentedByteString;
+        0x0000 - 0x005b reg=8 (null) Lokio/Buffer;
+        0x0000 - 0x005b reg=9 (null) I
+
+    #1              : (in Lokio/SegmentedByteString;)
+      name          : 'segment'
+      type          : '(I)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 17 16-bit code units
+034924:                                        |[034924] okio.SegmentedByteString.segment:(I)I
+034934: 5420 2f01                              |0000: iget-object v0, v2, Lokio/SegmentedByteString;.directory:[I // field@012f
+034938: 5422 3101                              |0002: iget-object v2, v2, Lokio/SegmentedByteString;.segments:[[B // field@0131
+03493c: 2122                                   |0004: array-length v2, v2
+03493e: d803 0301                              |0005: add-int/lit8 v3, v3, #int 1 // #01
+034942: 1201                                   |0007: const/4 v1, #int 0 // #0
+034944: 7140 b502 1032                         |0008: invoke-static {v0, v1, v2, v3}, Ljava/util/Arrays;.binarySearch:([IIII)I // method@02b5
+03494a: 0a02                                   |000b: move-result v2
+03494c: 3a02 0300                              |000c: if-ltz v2, 000f // +0003
+034950: 2802                                   |000e: goto 0010 // +0002
+034952: 7c22                                   |000f: not-int v2, v2
+034954: 0f02                                   |0010: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=135
+      locals        :
+        0x0000 - 0x0011 reg=2 this Lokio/SegmentedByteString;
+        0x0000 - 0x0011 reg=3 (null) I
+
+    #2              : (in Lokio/SegmentedByteString;)
+      name          : 'toByteString'
+      type          : '()Lokio/ByteString;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 10 16-bit code units
+034958:                                        |[034958] okio.SegmentedByteString.toByteString:()Lokio/ByteString;
+034968: 2200 4f01                              |0000: new-instance v0, Lokio/ByteString; // type@014f
+03496c: 6e10 2c06 0100                         |0002: invoke-virtual {v1}, Lokio/SegmentedByteString;.toByteArray:()[B // method@062c
+034972: 0c01                                   |0005: move-result-object v1
+034974: 7020 4005 1000                         |0006: invoke-direct {v0, v1}, Lokio/ByteString;.<init>:([B)V // method@0540
+03497a: 1100                                   |0009: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=221
+      locals        :
+        0x0000 - 0x000a reg=1 this Lokio/SegmentedByteString;
+
+    #3              : (in Lokio/SegmentedByteString;)
+      name          : 'writeReplace'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+03497c:                                        |[03497c] okio.SegmentedByteString.writeReplace:()Ljava/lang/Object;
+03498c: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+034992: 0c00                                   |0003: move-result-object v0
+034994: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=256
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lokio/SegmentedByteString;
+
+  Virtual methods   -
+    #0              : (in Lokio/SegmentedByteString;)
+      name          : 'base64'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+034998:                                        |[034998] okio.SegmentedByteString.base64:()Ljava/lang/String;
+0349a8: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+0349ae: 0c00                                   |0003: move-result-object v0
+0349b0: 6e10 4105 0000                         |0004: invoke-virtual {v0}, Lokio/ByteString;.base64:()Ljava/lang/String; // method@0541
+0349b6: 0c00                                   |0007: move-result-object v0
+0349b8: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=89
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+
+    #1              : (in Lokio/SegmentedByteString;)
+      name          : 'base64Url'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+0349bc:                                        |[0349bc] okio.SegmentedByteString.base64Url:()Ljava/lang/String;
+0349cc: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+0349d2: 0c00                                   |0003: move-result-object v0
+0349d4: 6e10 4205 0000                         |0004: invoke-virtual {v0}, Lokio/ByteString;.base64Url:()Ljava/lang/String; // method@0542
+0349da: 0c00                                   |0007: move-result-object v0
+0349dc: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=113
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+
+    #2              : (in Lokio/SegmentedByteString;)
+      name          : 'equals'
+      type          : '(Ljava/lang/Object;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 5
+      insns size    : 34 16-bit code units
+0349e0:                                        |[0349e0] okio.SegmentedByteString.equals:(Ljava/lang/Object;)Z
+0349f0: 1210                                   |0000: const/4 v0, #int 1 // #1
+0349f2: 3345 0300                              |0001: if-ne v5, v4, 0004 // +0003
+0349f6: 0f00                                   |0003: return v0
+0349f8: 2051 4f01                              |0004: instance-of v1, v5, Lokio/ByteString; // type@014f
+0349fc: 1202                                   |0006: const/4 v2, #int 0 // #0
+0349fe: 3801 1900                              |0007: if-eqz v1, 0020 // +0019
+034a02: 1f05 4f01                              |0009: check-cast v5, Lokio/ByteString; // type@014f
+034a06: 6e10 5605 0500                         |000b: invoke-virtual {v5}, Lokio/ByteString;.size:()I // method@0556
+034a0c: 0a01                                   |000e: move-result v1
+034a0e: 6e10 2706 0400                         |000f: invoke-virtual {v4}, Lokio/SegmentedByteString;.size:()I // method@0627
+034a14: 0a03                                   |0012: move-result v3
+034a16: 3331 0d00                              |0013: if-ne v1, v3, 0020 // +000d
+034a1a: 6e10 2706 0400                         |0015: invoke-virtual {v4}, Lokio/SegmentedByteString;.size:()I // method@0627
+034a20: 0a01                                   |0018: move-result v1
+034a22: 6e51 2306 2425                         |0019: invoke-virtual {v4, v2, v5, v2, v1}, Lokio/SegmentedByteString;.rangeEquals:(ILokio/ByteString;II)Z // method@0623
+034a28: 0a04                                   |001c: move-result v4
+034a2a: 3804 0300                              |001d: if-eqz v4, 0020 // +0003
+034a2e: 2802                                   |001f: goto 0021 // +0002
+034a30: 0120                                   |0020: move v0, v2
+034a32: 0f00                                   |0021: return v0
+      catches       : (none)
+      positions     :
+        0x0004 line=226
+        0x000b line=227
+        0x0015 line=228
+      locals        :
+        0x0000 - 0x0022 reg=4 this Lokio/SegmentedByteString;
+        0x0000 - 0x0022 reg=5 (null) Ljava/lang/Object;
+
+    #3              : (in Lokio/SegmentedByteString;)
+      name          : 'getByte'
+      type          : '(I)B'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 6
+      insns size    : 45 16-bit code units
+034a34:                                        |[034a34] okio.SegmentedByteString.getByte:(I)B
+034a44: 5470 2f01                              |0000: iget-object v0, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+034a48: 5471 3101                              |0002: iget-object v1, v7, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034a4c: 2111                                   |0004: array-length v1, v1
+034a4e: d801 01ff                              |0005: add-int/lit8 v1, v1, #int -1 // #ff
+034a52: 4400 0001                              |0007: aget v0, v0, v1
+034a56: 8101                                   |0009: int-to-long v1, v0
+034a58: 8183                                   |000a: int-to-long v3, v8
+034a5a: 1605 0100                              |000b: const-wide/16 v5, #int 1 // #1
+034a5e: 7706 4c06 0100                         |000d: invoke-static/range {v1, v2, v3, v4, v5, v6}, Lokio/Util;.checkOffsetAndCount:(JJJ)V // method@064c
+034a64: 7020 2506 8700                         |0010: invoke-direct {v7, v8}, Lokio/SegmentedByteString;.segment:(I)I // method@0625
+034a6a: 0a00                                   |0013: move-result v0
+034a6c: 3900 0400                              |0014: if-nez v0, 0018 // +0004
+034a70: 1201                                   |0016: const/4 v1, #int 0 // #0
+034a72: 2807                                   |0017: goto 001e // +0007
+034a74: 5471 2f01                              |0018: iget-object v1, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+034a78: d802 00ff                              |001a: add-int/lit8 v2, v0, #int -1 // #ff
+034a7c: 4401 0102                              |001c: aget v1, v1, v2
+034a80: 5472 2f01                              |001e: iget-object v2, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+034a84: 5477 3101                              |0020: iget-object v7, v7, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034a88: 2173                                   |0022: array-length v3, v7
+034a8a: b003                                   |0023: add-int/2addr v3, v0
+034a8c: 4402 0203                              |0024: aget v2, v2, v3
+034a90: 4607 0700                              |0026: aget-object v7, v7, v0
+034a94: b118                                   |0028: sub-int/2addr v8, v1
+034a96: b028                                   |0029: add-int/2addr v8, v2
+034a98: 4807 0708                              |002a: aget-byte v7, v7, v8
+034a9c: 0f07                                   |002c: return v7
+      catches       : (none)
+      positions     :
+        0x0000 line=125
+        0x0010 line=126
+        0x0018 line=127
+        0x001e line=128
+        0x0026 line=129
+      locals        :
+        0x0000 - 0x002d reg=7 this Lokio/SegmentedByteString;
+        0x0000 - 0x002d reg=8 (null) I
+
+    #4              : (in Lokio/SegmentedByteString;)
+      name          : 'hashCode'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 1
+      outs          : 0
+      insns size    : 46 16-bit code units
+034aa0:                                        |[034aa0] okio.SegmentedByteString.hashCode:()I
+034ab0: 5280 3001                              |0000: iget v0, v8, Lokio/SegmentedByteString;.hashCode:I // field@0130
+034ab4: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+034ab8: 0f00                                   |0004: return v0
+034aba: 5480 3101                              |0005: iget-object v0, v8, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034abe: 2100                                   |0007: array-length v0, v0
+034ac0: 1201                                   |0008: const/4 v1, #int 0 // #0
+034ac2: 1212                                   |0009: const/4 v2, #int 1 // #1
+034ac4: 0123                                   |000a: move v3, v2
+034ac6: 0112                                   |000b: move v2, v1
+034ac8: 3501 1f00                              |000c: if-ge v1, v0, 002b // +001f
+034acc: 5484 3101                              |000e: iget-object v4, v8, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034ad0: 4604 0401                              |0010: aget-object v4, v4, v1
+034ad4: 5485 2f01                              |0012: iget-object v5, v8, Lokio/SegmentedByteString;.directory:[I // field@012f
+034ad8: 9006 0001                              |0014: add-int v6, v0, v1
+034adc: 4406 0506                              |0016: aget v6, v5, v6
+034ae0: 4405 0501                              |0018: aget v5, v5, v1
+034ae4: 9102 0502                              |001a: sub-int v2, v5, v2
+034ae8: b062                                   |001c: add-int/2addr v2, v6
+034aea: 3526 0a00                              |001d: if-ge v6, v2, 0027 // +000a
+034aee: da03 031f                              |001f: mul-int/lit8 v3, v3, #int 31 // #1f
+034af2: 4807 0406                              |0021: aget-byte v7, v4, v6
+034af6: b073                                   |0023: add-int/2addr v3, v7
+034af8: d806 0601                              |0024: add-int/lit8 v6, v6, #int 1 // #01
+034afc: 28f7                                   |0026: goto 001d // -0009
+034afe: d801 0101                              |0027: add-int/lit8 v1, v1, #int 1 // #01
+034b02: 0152                                   |0029: move v2, v5
+034b04: 28e2                                   |002a: goto 000c // -001e
+034b06: 5983 3001                              |002b: iput v3, v8, Lokio/SegmentedByteString;.hashCode:I // field@0130
+034b0a: 0f03                                   |002d: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=232
+        0x0005 line=238
+        0x000e line=239
+        0x0012 line=240
+        0x0018 line=241
+        0x0021 line=244
+        0x002b line=248
+      locals        :
+        0x0000 - 0x002e reg=8 this Lokio/SegmentedByteString;
+
+    #5              : (in Lokio/SegmentedByteString;)
+      name          : 'hex'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+034b0c:                                        |[034b0c] okio.SegmentedByteString.hex:()Ljava/lang/String;
+034b1c: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+034b22: 0c00                                   |0003: move-result-object v0
+034b24: 6e10 4d05 0000                         |0004: invoke-virtual {v0}, Lokio/ByteString;.hex:()Ljava/lang/String; // method@054d
+034b2a: 0c00                                   |0007: move-result-object v0
+034b2c: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=93
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+
+    #6              : (in Lokio/SegmentedByteString;)
+      name          : 'md5'
+      type          : '()Lokio/ByteString;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+034b30:                                        |[034b30] okio.SegmentedByteString.md5:()Lokio/ByteString;
+034b40: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+034b46: 0c00                                   |0003: move-result-object v0
+034b48: 6e10 4e05 0000                         |0004: invoke-virtual {v0}, Lokio/ByteString;.md5:()Lokio/ByteString; // method@054e
+034b4e: 0c00                                   |0007: move-result-object v0
+034b50: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=105
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+
+    #7              : (in Lokio/SegmentedByteString;)
+      name          : 'rangeEquals'
+      type          : '(ILokio/ByteString;II)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 12
+      ins           : 5
+      outs          : 5
+      insns size    : 64 16-bit code units
+034b54:                                        |[034b54] okio.SegmentedByteString.rangeEquals:(ILokio/ByteString;II)Z
+034b64: 6e10 2706 0700                         |0000: invoke-virtual {v7}, Lokio/SegmentedByteString;.size:()I // method@0627
+034b6a: 0a00                                   |0003: move-result v0
+034b6c: b1b0                                   |0004: sub-int/2addr v0, v11
+034b6e: 1201                                   |0005: const/4 v1, #int 0 // #0
+034b70: 3708 0300                              |0006: if-le v8, v0, 0009 // +0003
+034b74: 0f01                                   |0008: return v1
+034b76: 7020 2506 8700                         |0009: invoke-direct {v7, v8}, Lokio/SegmentedByteString;.segment:(I)I // method@0625
+034b7c: 0a00                                   |000c: move-result v0
+034b7e: 3d0b 3100                              |000d: if-lez v11, 003e // +0031
+034b82: 3900 0400                              |000f: if-nez v0, 0013 // +0004
+034b86: 0112                                   |0011: move v2, v1
+034b88: 2807                                   |0012: goto 0019 // +0007
+034b8a: 5472 2f01                              |0013: iget-object v2, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+034b8e: d803 00ff                              |0015: add-int/lit8 v3, v0, #int -1 // #ff
+034b92: 4402 0203                              |0017: aget v2, v2, v3
+034b96: 5473 2f01                              |0019: iget-object v3, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+034b9a: 4403 0300                              |001b: aget v3, v3, v0
+034b9e: b123                                   |001d: sub-int/2addr v3, v2
+034ba0: b023                                   |001e: add-int/2addr v3, v2
+034ba2: b183                                   |001f: sub-int/2addr v3, v8
+034ba4: 7120 2f02 3b00                         |0020: invoke-static {v11, v3}, Ljava/lang/Math;.min:(II)I // method@022f
+034baa: 0a03                                   |0023: move-result v3
+034bac: 5474 2f01                              |0024: iget-object v4, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+034bb0: 5475 3101                              |0026: iget-object v5, v7, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034bb4: 2156                                   |0028: array-length v6, v5
+034bb6: b006                                   |0029: add-int/2addr v6, v0
+034bb8: 4404 0406                              |002a: aget v4, v4, v6
+034bbc: 9102 0802                              |002c: sub-int v2, v8, v2
+034bc0: b042                                   |002e: add-int/2addr v2, v4
+034bc2: 4604 0500                              |002f: aget-object v4, v5, v0
+034bc6: 6e53 5205 a924                         |0031: invoke-virtual {v9, v10, v4, v2, v3}, Lokio/ByteString;.rangeEquals:(I[BII)Z // method@0552
+034bcc: 0a02                                   |0034: move-result v2
+034bce: 3902 0300                              |0035: if-nez v2, 0038 // +0003
+034bd2: 0f01                                   |0037: return v1
+034bd4: b038                                   |0038: add-int/2addr v8, v3
+034bd6: b03a                                   |0039: add-int/2addr v10, v3
+034bd8: b13b                                   |003a: sub-int/2addr v11, v3
+034bda: d800 0001                              |003b: add-int/lit8 v0, v0, #int 1 // #01
+034bde: 28d0                                   |003d: goto 000d // -0030
+034be0: 1217                                   |003e: const/4 v7, #int 1 // #1
+034be2: 0f07                                   |003f: return v7
+      catches       : (none)
+      positions     :
+        0x0000 line=186
+        0x0009 line=188
+        0x0013 line=189
+        0x0019 line=190
+        0x0020 line=191
+        0x0024 line=192
+        0x002f line=194
+      locals        :
+        0x0000 - 0x0040 reg=7 this Lokio/SegmentedByteString;
+        0x0000 - 0x0040 reg=8 (null) I
+        0x0000 - 0x0040 reg=9 (null) Lokio/ByteString;
+        0x0000 - 0x0040 reg=10 (null) I
+        0x0000 - 0x0040 reg=11 (null) I
+
+    #8              : (in Lokio/SegmentedByteString;)
+      name          : 'rangeEquals'
+      type          : '(I[BII)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 12
+      ins           : 5
+      outs          : 5
+      insns size    : 69 16-bit code units
+034be4:                                        |[034be4] okio.SegmentedByteString.rangeEquals:(I[BII)Z
+034bf4: 6e10 2706 0700                         |0000: invoke-virtual {v7}, Lokio/SegmentedByteString;.size:()I // method@0627
+034bfa: 0a00                                   |0003: move-result v0
+034bfc: b1b0                                   |0004: sub-int/2addr v0, v11
+034bfe: 1201                                   |0005: const/4 v1, #int 0 // #0
+034c00: 3608 3e00                              |0006: if-gt v8, v0, 0044 // +003e
+034c04: 2190                                   |0008: array-length v0, v9
+034c06: b1b0                                   |0009: sub-int/2addr v0, v11
+034c08: 370a 0300                              |000a: if-le v10, v0, 000d // +0003
+034c0c: 2838                                   |000c: goto 0044 // +0038
+034c0e: 7020 2506 8700                         |000d: invoke-direct {v7, v8}, Lokio/SegmentedByteString;.segment:(I)I // method@0625
+034c14: 0a00                                   |0010: move-result v0
+034c16: 3d0b 3100                              |0011: if-lez v11, 0042 // +0031
+034c1a: 3900 0400                              |0013: if-nez v0, 0017 // +0004
+034c1e: 0112                                   |0015: move v2, v1
+034c20: 2807                                   |0016: goto 001d // +0007
+034c22: 5472 2f01                              |0017: iget-object v2, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+034c26: d803 00ff                              |0019: add-int/lit8 v3, v0, #int -1 // #ff
+034c2a: 4402 0203                              |001b: aget v2, v2, v3
+034c2e: 5473 2f01                              |001d: iget-object v3, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+034c32: 4403 0300                              |001f: aget v3, v3, v0
+034c36: b123                                   |0021: sub-int/2addr v3, v2
+034c38: b023                                   |0022: add-int/2addr v3, v2
+034c3a: b183                                   |0023: sub-int/2addr v3, v8
+034c3c: 7120 2f02 3b00                         |0024: invoke-static {v11, v3}, Ljava/lang/Math;.min:(II)I // method@022f
+034c42: 0a03                                   |0027: move-result v3
+034c44: 5474 2f01                              |0028: iget-object v4, v7, Lokio/SegmentedByteString;.directory:[I // field@012f
+034c48: 5475 3101                              |002a: iget-object v5, v7, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034c4c: 2156                                   |002c: array-length v6, v5
+034c4e: b006                                   |002d: add-int/2addr v6, v0
+034c50: 4404 0406                              |002e: aget v4, v4, v6
+034c54: 9102 0802                              |0030: sub-int v2, v8, v2
+034c58: b042                                   |0032: add-int/2addr v2, v4
+034c5a: 4604 0500                              |0033: aget-object v4, v5, v0
+034c5e: 7153 4b06 24a9                         |0035: invoke-static {v4, v2, v9, v10, v3}, Lokio/Util;.arrayRangeEquals:([BI[BII)Z // method@064b
+034c64: 0a02                                   |0038: move-result v2
+034c66: 3902 0300                              |0039: if-nez v2, 003c // +0003
+034c6a: 0f01                                   |003b: return v1
+034c6c: b038                                   |003c: add-int/2addr v8, v3
+034c6e: b03a                                   |003d: add-int/2addr v10, v3
+034c70: b13b                                   |003e: sub-int/2addr v11, v3
+034c72: d800 0001                              |003f: add-int/lit8 v0, v0, #int 1 // #01
+034c76: 28d0                                   |0041: goto 0011 // -0030
+034c78: 1217                                   |0042: const/4 v7, #int 1 // #1
+034c7a: 0f07                                   |0043: return v7
+034c7c: 0f01                                   |0044: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=203
+        0x000d line=205
+        0x0017 line=206
+        0x001d line=207
+        0x0024 line=208
+        0x0028 line=209
+        0x0033 line=211
+      locals        :
+        0x0000 - 0x0045 reg=7 this Lokio/SegmentedByteString;
+        0x0000 - 0x0045 reg=8 (null) I
+        0x0000 - 0x0045 reg=9 (null) [B
+        0x0000 - 0x0045 reg=10 (null) I
+        0x0000 - 0x0045 reg=11 (null) I
+
+    #9              : (in Lokio/SegmentedByteString;)
+      name          : 'sha256'
+      type          : '()Lokio/ByteString;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+034c80:                                        |[034c80] okio.SegmentedByteString.sha256:()Lokio/ByteString;
+034c90: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+034c96: 0c00                                   |0003: move-result-object v0
+034c98: 6e10 5505 0000                         |0004: invoke-virtual {v0}, Lokio/ByteString;.sha256:()Lokio/ByteString; // method@0555
+034c9e: 0c00                                   |0007: move-result-object v0
+034ca0: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=109
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+
+    #10              : (in Lokio/SegmentedByteString;)
+      name          : 'size'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 10 16-bit code units
+034ca4:                                        |[034ca4] okio.SegmentedByteString.size:()I
+034cb4: 5410 2f01                              |0000: iget-object v0, v1, Lokio/SegmentedByteString;.directory:[I // field@012f
+034cb8: 5411 3101                              |0002: iget-object v1, v1, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034cbc: 2111                                   |0004: array-length v1, v1
+034cbe: d801 01ff                              |0005: add-int/lit8 v1, v1, #int -1 // #ff
+034cc2: 4401 0001                              |0007: aget v1, v0, v1
+034cc6: 0f01                                   |0009: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=140
+      locals        :
+        0x0000 - 0x000a reg=1 this Lokio/SegmentedByteString;
+
+    #11              : (in Lokio/SegmentedByteString;)
+      name          : 'substring'
+      type          : '(I)Lokio/ByteString;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 9 16-bit code units
+034cc8:                                        |[034cc8] okio.SegmentedByteString.substring:(I)Lokio/ByteString;
+034cd8: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+034cde: 0c00                                   |0003: move-result-object v0
+034ce0: 6e20 5705 1000                         |0004: invoke-virtual {v0, v1}, Lokio/ByteString;.substring:(I)Lokio/ByteString; // method@0557
+034ce6: 0c00                                   |0007: move-result-object v0
+034ce8: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=117
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+        0x0000 - 0x0009 reg=1 (null) I
+
+    #12              : (in Lokio/SegmentedByteString;)
+      name          : 'substring'
+      type          : '(II)Lokio/ByteString;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 9 16-bit code units
+034cec:                                        |[034cec] okio.SegmentedByteString.substring:(II)Lokio/ByteString;
+034cfc: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+034d02: 0c00                                   |0003: move-result-object v0
+034d04: 6e30 5805 1002                         |0004: invoke-virtual {v0, v1, v2}, Lokio/ByteString;.substring:(II)Lokio/ByteString; // method@0558
+034d0a: 0c00                                   |0007: move-result-object v0
+034d0c: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=121
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+        0x0000 - 0x0009 reg=1 (null) I
+        0x0000 - 0x0009 reg=2 (null) I
+
+    #13              : (in Lokio/SegmentedByteString;)
+      name          : 'toAsciiLowercase'
+      type          : '()Lokio/ByteString;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+034d10:                                        |[034d10] okio.SegmentedByteString.toAsciiLowercase:()Lokio/ByteString;
+034d20: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+034d26: 0c00                                   |0003: move-result-object v0
+034d28: 6e10 5905 0000                         |0004: invoke-virtual {v0}, Lokio/ByteString;.toAsciiLowercase:()Lokio/ByteString; // method@0559
+034d2e: 0c00                                   |0007: move-result-object v0
+034d30: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=97
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+
+    #14              : (in Lokio/SegmentedByteString;)
+      name          : 'toAsciiUppercase'
+      type          : '()Lokio/ByteString;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+034d34:                                        |[034d34] okio.SegmentedByteString.toAsciiUppercase:()Lokio/ByteString;
+034d44: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+034d4a: 0c00                                   |0003: move-result-object v0
+034d4c: 6e10 5a05 0000                         |0004: invoke-virtual {v0}, Lokio/ByteString;.toAsciiUppercase:()Lokio/ByteString; // method@055a
+034d52: 0c00                                   |0007: move-result-object v0
+034d54: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=101
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+
+    #15              : (in Lokio/SegmentedByteString;)
+      name          : 'toByteArray'
+      type          : '()[B'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 1
+      outs          : 5
+      insns size    : 38 16-bit code units
+034d58:                                        |[034d58] okio.SegmentedByteString.toByteArray:()[B
+034d68: 5480 2f01                              |0000: iget-object v0, v8, Lokio/SegmentedByteString;.directory:[I // field@012f
+034d6c: 5481 3101                              |0002: iget-object v1, v8, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034d70: 2112                                   |0004: array-length v2, v1
+034d72: d802 02ff                              |0005: add-int/lit8 v2, v2, #int -1 // #ff
+034d76: 4400 0002                              |0007: aget v0, v0, v2
+034d7a: 2300 c501                              |0009: new-array v0, v0, [B // type@01c5
+034d7e: 2111                                   |000b: array-length v1, v1
+034d80: 1202                                   |000c: const/4 v2, #int 0 // #0
+034d82: 0123                                   |000d: move v3, v2
+034d84: 3512 1700                              |000e: if-ge v2, v1, 0025 // +0017
+034d88: 5484 2f01                              |0010: iget-object v4, v8, Lokio/SegmentedByteString;.directory:[I // field@012f
+034d8c: 9005 0102                              |0012: add-int v5, v1, v2
+034d90: 4405 0405                              |0014: aget v5, v4, v5
+034d94: 4404 0402                              |0016: aget v4, v4, v2
+034d98: 5486 3101                              |0018: iget-object v6, v8, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034d9c: 4606 0602                              |001a: aget-object v6, v6, v2
+034da0: 9107 0403                              |001c: sub-int v7, v4, v3
+034da4: 7157 6602 5630                         |001e: invoke-static {v6, v5, v0, v3, v7}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@0266
+034daa: d802 0201                              |0021: add-int/lit8 v2, v2, #int 1 // #01
+034dae: 0143                                   |0023: move v3, v4
+034db0: 28ea                                   |0024: goto 000e // -0016
+034db2: 1100                                   |0025: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=144
+        0x000b line=146
+        0x0010 line=147
+        0x0016 line=148
+        0x0018 line=149
+      locals        :
+        0x0000 - 0x0026 reg=8 this Lokio/SegmentedByteString;
+
+    #16              : (in Lokio/SegmentedByteString;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+034db4:                                        |[034db4] okio.SegmentedByteString.toString:()Ljava/lang/String;
+034dc4: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+034dca: 0c00                                   |0003: move-result-object v0
+034dcc: 6e10 5c05 0000                         |0004: invoke-virtual {v0}, Lokio/ByteString;.toString:()Ljava/lang/String; // method@055c
+034dd2: 0c00                                   |0007: move-result-object v0
+034dd4: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=252
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+
+    #17              : (in Lokio/SegmentedByteString;)
+      name          : 'utf8'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+034dd8:                                        |[034dd8] okio.SegmentedByteString.utf8:()Ljava/lang/String;
+034de8: 7010 2d06 0000                         |0000: invoke-direct {v0}, Lokio/SegmentedByteString;.toByteString:()Lokio/ByteString; // method@062d
+034dee: 0c00                                   |0003: move-result-object v0
+034df0: 6e10 5d05 0000                         |0004: invoke-virtual {v0}, Lokio/ByteString;.utf8:()Ljava/lang/String; // method@055d
+034df6: 0c00                                   |0007: move-result-object v0
+034df8: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=85
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lokio/SegmentedByteString;
+
+    #18              : (in Lokio/SegmentedByteString;)
+      name          : 'write'
+      type          : '(Ljava/io/OutputStream;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 4
+      insns size    : 39 16-bit code units
+034dfc:                                        |[034dfc] okio.SegmentedByteString.write:(Ljava/io/OutputStream;)V
+034e0c: 3807 1f00                              |0000: if-eqz v7, 001f // +001f
+034e10: 5460 3101                              |0002: iget-object v0, v6, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034e14: 2100                                   |0004: array-length v0, v0
+034e16: 1201                                   |0005: const/4 v1, #int 0 // #0
+034e18: 0112                                   |0006: move v2, v1
+034e1a: 3501 1700                              |0007: if-ge v1, v0, 001e // +0017
+034e1e: 5463 2f01                              |0009: iget-object v3, v6, Lokio/SegmentedByteString;.directory:[I // field@012f
+034e22: 9004 0001                              |000b: add-int v4, v0, v1
+034e26: 4404 0304                              |000d: aget v4, v3, v4
+034e2a: 4403 0301                              |000f: aget v3, v3, v1
+034e2e: 5465 3101                              |0011: iget-object v5, v6, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034e32: 4605 0501                              |0013: aget-object v5, v5, v1
+034e36: 9102 0302                              |0015: sub-int v2, v3, v2
+034e3a: 6e40 e501 5724                         |0017: invoke-virtual {v7, v5, v4, v2}, Ljava/io/OutputStream;.write:([BII)V // method@01e5
+034e40: d801 0101                              |001a: add-int/lit8 v1, v1, #int 1 // #01
+034e44: 0132                                   |001c: move v2, v3
+034e46: 28ea                                   |001d: goto 0007 // -0016
+034e48: 0e00                                   |001e: return-void
+034e4a: 2206 af00                              |001f: new-instance v6, Ljava/lang/IllegalArgumentException; // type@00af
+034e4e: 1a07 2509                              |0021: const-string v7, "out == null" // string@0925
+034e52: 7020 1b02 7600                         |0023: invoke-direct {v6, v7}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+034e58: 2706                                   |0026: throw v6
+      catches       : (none)
+      positions     :
+        0x0002 line=159
+        0x0009 line=160
+        0x000f line=161
+        0x0011 line=162
+        0x001f line=157
+      locals        :
+        0x0000 - 0x0027 reg=6 this Lokio/SegmentedByteString;
+        0x0000 - 0x0027 reg=7 (null) Ljava/io/OutputStream;
+
+    #19              : (in Lokio/SegmentedByteString;)
+      name          : 'write'
+      type          : '(Lokio/Buffer;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 10
+      ins           : 2
+      outs          : 4
+      insns size    : 56 16-bit code units
+034e5c:                                        |[034e5c] okio.SegmentedByteString.write:(Lokio/Buffer;)V
+034e6c: 5480 3101                              |0000: iget-object v0, v8, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034e70: 2100                                   |0002: array-length v0, v0
+034e72: 1201                                   |0003: const/4 v1, #int 0 // #0
+034e74: 0112                                   |0004: move v2, v1
+034e76: 3501 2c00                              |0005: if-ge v1, v0, 0031 // +002c
+034e7a: 5483 2f01                              |0007: iget-object v3, v8, Lokio/SegmentedByteString;.directory:[I // field@012f
+034e7e: 9004 0001                              |0009: add-int v4, v0, v1
+034e82: 4404 0304                              |000b: aget v4, v3, v4
+034e86: 4403 0301                              |000d: aget v3, v3, v1
+034e8a: 2205 5f01                              |000f: new-instance v5, Lokio/Segment; // type@015f
+034e8e: 5486 3101                              |0011: iget-object v6, v8, Lokio/SegmentedByteString;.segments:[[B // field@0131
+034e92: 4606 0601                              |0013: aget-object v6, v6, v1
+034e96: 9007 0403                              |0015: add-int v7, v4, v3
+034e9a: b127                                   |0017: sub-int/2addr v7, v2
+034e9c: 7040 1206 6574                         |0018: invoke-direct {v5, v6, v4, v7}, Lokio/Segment;.<init>:([BII)V // method@0612
+034ea2: 5492 f200                              |001b: iget-object v2, v9, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+034ea6: 3902 0900                              |001d: if-nez v2, 0026 // +0009
+034eaa: 5b55 2a01                              |001f: iput-object v5, v5, Lokio/Segment;.prev:Lokio/Segment; // field@012a
+034eae: 5b55 2701                              |0021: iput-object v5, v5, Lokio/Segment;.next:Lokio/Segment; // field@0127
+034eb2: 5b95 f200                              |0023: iput-object v5, v9, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+034eb6: 2808                                   |0025: goto 002d // +0008
+034eb8: 5492 f200                              |0026: iget-object v2, v9, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+034ebc: 5422 2a01                              |0028: iget-object v2, v2, Lokio/Segment;.prev:Lokio/Segment; // field@012a
+034ec0: 6e20 1506 5200                         |002a: invoke-virtual {v2, v5}, Lokio/Segment;.push:(Lokio/Segment;)Lokio/Segment; // method@0615
+034ec6: d801 0101                              |002d: add-int/lit8 v1, v1, #int 1 // #01
+034eca: 0132                                   |002f: move v2, v3
+034ecc: 28d5                                   |0030: goto 0005 // -002b
+034ece: 5390 f300                              |0031: iget-wide v0, v9, Lokio/Buffer;.size:J // field@00f3
+034ed2: 8122                                   |0033: int-to-long v2, v2
+034ed4: bb20                                   |0034: add-long/2addr v0, v2
+034ed6: 5a90 f300                              |0035: iput-wide v0, v9, Lokio/Buffer;.size:J // field@00f3
+034eda: 0e00                                   |0037: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=169
+        0x0007 line=170
+        0x000d line=171
+        0x000f line=172
+        0x001b line=174
+        0x001f line=175
+        0x0026 line=177
+        0x0031 line=181
+      locals        :
+        0x0000 - 0x0038 reg=8 this Lokio/SegmentedByteString;
+        0x0000 - 0x0038 reg=9 (null) Lokio/Buffer;
+
+  source_file_idx   : 1127 (SegmentedByteString.java)
+

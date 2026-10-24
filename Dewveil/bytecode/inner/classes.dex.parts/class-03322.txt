@@ -1,0 +1,421 @@
+Class #3322            -
+  Class descriptor  : 'Lcom/getkeepsafe/relinker/ApkLibraryInstaller;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lcom/getkeepsafe/relinker/ReLinker$LibraryInstaller;'
+  Static fields     -
+    #0              : (in Lcom/getkeepsafe/relinker/ApkLibraryInstaller;)
+      name          : 'COPY_BUFFER_SIZE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 4096
+    #1              : (in Lcom/getkeepsafe/relinker/ApkLibraryInstaller;)
+      name          : 'MAX_TRIES'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 5
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Lcom/getkeepsafe/relinker/ApkLibraryInstaller;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+660140:                                        |[660140] com.getkeepsafe.relinker.ApkLibraryInstaller.<init>:()V
+660150: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+660156: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=32
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/getkeepsafe/relinker/ApkLibraryInstaller;
+
+    #1              : (in Lcom/getkeepsafe/relinker/ApkLibraryInstaller;)
+      name          : 'closeSilently'
+      type          : '(Ljava/io/Closeable;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 6 16-bit code units
+660158:                                        |[660158] com.getkeepsafe.relinker.ApkLibraryInstaller.closeSilently:(Ljava/io/Closeable;)V
+660168: 3801 0500                              |0000: if-eqz v1, 0005 // +0005
+66016c: 7210 bfcf 0100                         |0002: invoke-interface {v1}, Ljava/io/Closeable;.close:()V // method@cfbf
+660172: 0e00                                   |0005: return-void
+      catches       : 1
+        0x0002 - 0x0005
+          Ljava/io/IOException; -> 0x0005
+      positions     :
+        0x0002 line=212
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/getkeepsafe/relinker/ApkLibraryInstaller;
+        0x0000 - 0x0006 reg=1 (null) Ljava/io/Closeable;
+
+    #2              : (in Lcom/getkeepsafe/relinker/ApkLibraryInstaller;)
+      name          : 'copy'
+      type          : '(Ljava/io/InputStream;Ljava/io/OutputStream;)J'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 4
+      insns size    : 24 16-bit code units
+660184:                                        |[660184] com.getkeepsafe.relinker.ApkLibraryInstaller.copy:(Ljava/io/InputStream;Ljava/io/OutputStream;)J
+660194: 1304 0010                              |0000: const/16 v4, #int 4096 // #1000
+660198: 2344 7c1f                              |0002: new-array v4, v4, [B // type@1f7c
+66019c: 1600 0000                              |0004: const-wide/16 v0, #int 0 // #0
+6601a0: 6e20 22d0 4500                         |0006: invoke-virtual {v5, v4}, Ljava/io/InputStream;.read:([B)I // method@d022
+6601a6: 0a02                                   |0009: move-result v2
+6601a8: 12f3                                   |000a: const/4 v3, #int -1 // #ff
+6601aa: 3332 0600                              |000b: if-ne v2, v3, 0011 // +0006
+6601ae: 6e10 4cd0 0600                         |000d: invoke-virtual {v6}, Ljava/io/OutputStream;.flush:()V // method@d04c
+6601b4: 1000                                   |0010: return-wide v0
+6601b6: 1203                                   |0011: const/4 v3, #int 0 // #0
+6601b8: 6e40 4fd0 4623                         |0012: invoke-virtual {v6, v4, v3, v2}, Ljava/io/OutputStream;.write:([BII)V // method@d04f
+6601be: 8122                                   |0015: int-to-long v2, v2
+6601c0: bb20                                   |0016: add-long/2addr v0, v2
+6601c2: 28ef                                   |0017: goto 0006 // -0011
+      catches       : (none)
+      positions     :
+        0x0002 line=192
+        0x0006 line=194
+        0x000d line=201
+        0x0012 line=198
+      locals        :
+        0x0000 - 0x0018 reg=4 this Lcom/getkeepsafe/relinker/ApkLibraryInstaller;
+        0x0000 - 0x0018 reg=5 (null) Ljava/io/InputStream;
+        0x0000 - 0x0018 reg=6 (null) Ljava/io/OutputStream;
+
+    #3              : (in Lcom/getkeepsafe/relinker/ApkLibraryInstaller;)
+      name          : 'findAPKWithLibrary'
+      type          : '(Landroid/content/Context;[Ljava/lang/String;Ljava/lang/String;Lcom/getkeepsafe/relinker/ReLinkerInstance;)Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 21
+      ins           : 5
+      outs          : 3
+      insns size    : 129 16-bit code units
+6601c4:                                        |[6601c4] com.getkeepsafe.relinker.ApkLibraryInstaller.findAPKWithLibrary:(Landroid/content/Context;[Ljava/lang/String;Ljava/lang/String;Lcom/getkeepsafe/relinker/ReLinkerInstance;)Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;
+6601d4: 0800 1200                              |0000: move-object/from16 v0, v18
+6601d8: 7602 3f90 1000                         |0002: invoke-direct/range {v16, v17}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.sourceDirectories:(Landroid/content/Context;)[Ljava/lang/String; // method@903f
+6601de: 0c01                                   |0005: move-result-object v1
+6601e0: 2112                                   |0006: array-length v2, v1
+6601e2: 1203                                   |0007: const/4 v3, #int 0 // #0
+6601e4: 0736                                   |0008: move-object v6, v3
+6601e6: 1205                                   |0009: const/4 v5, #int 0 // #0
+6601e8: 3525 7600                              |000a: if-ge v5, v2, 0080 // +0076
+6601ec: 4607 0105                              |000c: aget-object v7, v1, v5
+6601f0: 1208                                   |000e: const/4 v8, #int 0 // #0
+6601f2: d809 0801                              |000f: add-int/lit8 v9, v8, #int 1 // #01
+6601f6: 125a                                   |0011: const/4 v10, #int 5 // #5
+6601f8: 35a8 1100                              |0012: if-ge v8, v10, 0023 // +0011
+6601fc: 2208 b21b                              |0014: new-instance v8, Ljava/util/zip/ZipFile; // type@1bb2
+660200: 220b 3d1a                              |0016: new-instance v11, Ljava/io/File; // type@1a3d
+660204: 7020 d9cf 7b00                         |0018: invoke-direct {v11, v7}, Ljava/io/File;.<init>:(Ljava/lang/String;)V // method@cfd9
+66020a: 121c                                   |001b: const/4 v12, #int 1 // #1
+66020c: 7030 69d7 b80c                         |001c: invoke-direct {v8, v11, v12}, Ljava/util/zip/ZipFile;.<init>:(Ljava/io/File;I)V // method@d769
+660212: 0786                                   |001f: move-object v6, v8
+660214: 2803                                   |0020: goto 0023 // +0003
+660216: 0198                                   |0021: move v8, v9
+660218: 28ed                                   |0022: goto 000f // -0013
+66021a: 3906 0700                              |0023: if-nez v6, 002a // +0007
+66021e: 080d 1300                              |0025: move-object/from16 v13, v19
+660222: 0804 1400                              |0027: move-object/from16 v4, v20
+660226: 2854                                   |0029: goto 007d // +0054
+660228: 1208                                   |002a: const/4 v8, #int 0 // #0
+66022a: d809 0801                              |002b: add-int/lit8 v9, v8, #int 1 // #01
+66022e: 35a8 4900                              |002d: if-ge v8, v10, 0076 // +0049
+660232: 2108                                   |002f: array-length v8, v0
+660234: 120b                                   |0030: const/4 v11, #int 0 // #0
+660236: 358b 3f00                              |0031: if-ge v11, v8, 0070 // +003f
+66023a: 460c 000b                              |0033: aget-object v12, v0, v11
+66023e: 220d 991a                              |0035: new-instance v13, Ljava/lang/StringBuilder; // type@1a99
+660242: 1a0e f1b0                              |0037: const-string v14, "lib" // string@b0f1
+660246: 7020 3cd2 ed00                         |0039: invoke-direct {v13, v14}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+66024c: 650e 0f8a                              |003c: sget-char v14, Ljava/io/File;.separatorChar:C // field@8a0f
+660250: 6e20 3dd2 ed00                         |003e: invoke-virtual {v13, v14}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+660256: 0c0d                                   |0041: move-result-object v13
+660258: 6e20 45d2 cd00                         |0042: invoke-virtual {v13, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+66025e: 0c0c                                   |0045: move-result-object v12
+660260: 650d 0f8a                              |0046: sget-char v13, Ljava/io/File;.separatorChar:C // field@8a0f
+660264: 6e20 3dd2 dc00                         |0048: invoke-virtual {v12, v13}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+66026a: 0c0c                                   |004b: move-result-object v12
+66026c: 080d 1300                              |004c: move-object/from16 v13, v19
+660270: 6e20 45d2 dc00                         |004e: invoke-virtual {v12, v13}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+660276: 0c0c                                   |0051: move-result-object v12
+660278: 6e10 58d2 0c00                         |0052: invoke-virtual {v12}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+66027e: 0c0c                                   |0055: move-result-object v12
+660280: 1a0e d953                              |0056: const-string v14, "Looking for %s in APK %s..." // string@53d9
+660284: 2420 ad20 7c00                         |0058: filled-new-array {v12, v7}, [Ljava/lang/Object; // type@20ad
+66028a: 0c0f                                   |005b: move-result-object v15
+66028c: 0804 1400                              |005c: move-object/from16 v4, v20
+660290: 6e30 6690 e40f                         |005e: invoke-virtual {v4, v14, v15}, Lcom/getkeepsafe/relinker/ReLinkerInstance;.log:(Ljava/lang/String;[Ljava/lang/Object;)V // method@9066
+660296: 6e20 6bd7 c600                         |0061: invoke-virtual {v6, v12}, Ljava/util/zip/ZipFile;.getEntry:(Ljava/lang/String;)Ljava/util/zip/ZipEntry; // method@d76b
+66029c: 0c0c                                   |0064: move-result-object v12
+66029e: 380c 0800                              |0065: if-eqz v12, 006d // +0008
+6602a2: 2200 750f                              |0067: new-instance v0, Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry; // type@0f75
+6602a6: 7030 3990 600c                         |0069: invoke-direct {v0, v6, v12}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;.<init>:(Ljava/util/zip/ZipFile;Ljava/util/zip/ZipEntry;)V // method@9039
+6602ac: 1100                                   |006c: return-object v0
+6602ae: d80b 0b01                              |006d: add-int/lit8 v11, v11, #int 1 // #01
+6602b2: 28c2                                   |006f: goto 0031 // -003e
+6602b4: 080d 1300                              |0070: move-object/from16 v13, v19
+6602b8: 0804 1400                              |0072: move-object/from16 v4, v20
+6602bc: 0198                                   |0074: move v8, v9
+6602be: 28b6                                   |0075: goto 002b // -004a
+6602c0: 080d 1300                              |0076: move-object/from16 v13, v19
+6602c4: 0804 1400                              |0078: move-object/from16 v4, v20
+6602c8: 6e10 6ad7 0600                         |007a: invoke-virtual {v6}, Ljava/util/zip/ZipFile;.close:()V // method@d76a
+6602ce: d805 0501                              |007d: add-int/lit8 v5, v5, #int 1 // #01
+6602d2: 288b                                   |007f: goto 000a // -0075
+6602d4: 1103                                   |0080: return-object v3
+      catches       : 2
+        0x0014 - 0x001f
+          Ljava/io/IOException; -> 0x0021
+        0x007a - 0x007d
+          Ljava/io/IOException; -> 0x007d
+      positions     :
+        0x0002 line=67
+        0x0014 line=71
+        0x002f line=86
+        0x0035 line=87
+        0x0056 line=90
+        0x0061 line=92
+        0x0067 line=95
+        0x007a line=101
+      locals        :
+        0x0000 - 0x0081 reg=16 this Lcom/getkeepsafe/relinker/ApkLibraryInstaller;
+        0x0000 - 0x0081 reg=17 (null) Landroid/content/Context;
+        0x0000 - 0x0081 reg=18 (null) [Ljava/lang/String;
+        0x0000 - 0x0081 reg=19 (null) Ljava/lang/String;
+        0x0000 - 0x0081 reg=20 (null) Lcom/getkeepsafe/relinker/ReLinkerInstance;
+
+    #4              : (in Lcom/getkeepsafe/relinker/ApkLibraryInstaller;)
+      name          : 'sourceDirectories'
+      type          : '(Landroid/content/Context;)[Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 5
+      insns size    : 41 16-bit code units
+6602f4:                                        |[6602f4] com.getkeepsafe.relinker.ApkLibraryInstaller.sourceDirectories:(Landroid/content/Context;)[Ljava/lang/String;
+660304: 6e10 3102 0400                         |0000: invoke-virtual {v4}, Landroid/content/Context;.getApplicationInfo:()Landroid/content/pm/ApplicationInfo; // method@0231
+66030a: 0c03                                   |0003: move-result-object v3
+66030c: 5434 3200                              |0004: iget-object v4, v3, Landroid/content/pm/ApplicationInfo;.splitSourceDirs:[Ljava/lang/String; // field@0032
+660310: 1200                                   |0006: const/4 v0, #int 0 // #0
+660312: 1211                                   |0007: const/4 v1, #int 1 // #1
+660314: 3804 1a00                              |0008: if-eqz v4, 0022 // +001a
+660318: 5434 3200                              |000a: iget-object v4, v3, Landroid/content/pm/ApplicationInfo;.splitSourceDirs:[Ljava/lang/String; // field@0032
+66031c: 2144                                   |000c: array-length v4, v4
+66031e: 3804 1500                              |000d: if-eqz v4, 0022 // +0015
+660322: 5434 3200                              |000f: iget-object v4, v3, Landroid/content/pm/ApplicationInfo;.splitSourceDirs:[Ljava/lang/String; // field@0032
+660326: 2144                                   |0011: array-length v4, v4
+660328: b014                                   |0012: add-int/2addr v4, v1
+66032a: 2344 b020                              |0013: new-array v4, v4, [Ljava/lang/String; // type@20b0
+66032e: 5432 3100                              |0015: iget-object v2, v3, Landroid/content/pm/ApplicationInfo;.sourceDir:Ljava/lang/String; // field@0031
+660332: 4d02 0400                              |0017: aput-object v2, v4, v0
+660336: 5432 3200                              |0019: iget-object v2, v3, Landroid/content/pm/ApplicationInfo;.splitSourceDirs:[Ljava/lang/String; // field@0032
+66033a: 5433 3200                              |001b: iget-object v3, v3, Landroid/content/pm/ApplicationInfo;.splitSourceDirs:[Ljava/lang/String; // field@0032
+66033e: 2133                                   |001d: array-length v3, v3
+660340: 7153 5ad2 0214                         |001e: invoke-static {v2, v0, v4, v1, v3}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+660346: 1104                                   |0021: return-object v4
+660348: 2314 b020                              |0022: new-array v4, v1, [Ljava/lang/String; // type@20b0
+66034c: 5433 3100                              |0024: iget-object v3, v3, Landroid/content/pm/ApplicationInfo;.sourceDir:Ljava/lang/String; // field@0031
+660350: 4d03 0400                              |0026: aput-object v3, v4, v0
+660354: 1104                                   |0028: return-object v4
+      catches       : (none)
+      positions     :
+        0x0000 line=37
+        0x0004 line=39
+        0x000f line=42
+        0x0015 line=43
+        0x0019 line=44
+        0x0022 line=47
+      locals        :
+        0x0000 - 0x0029 reg=3 this Lcom/getkeepsafe/relinker/ApkLibraryInstaller;
+        0x0000 - 0x0029 reg=4 (null) Landroid/content/Context;
+
+  Virtual methods   -
+    #0              : (in Lcom/getkeepsafe/relinker/ApkLibraryInstaller;)
+      name          : 'installLibrary'
+      type          : '(Landroid/content/Context;[Ljava/lang/String;Ljava/lang/String;Ljava/io/File;Lcom/getkeepsafe/relinker/ReLinkerInstance;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 14
+      ins           : 6
+      outs          : 5
+      insns size    : 176 16-bit code units
+660358:                                        |[660358] com.getkeepsafe.relinker.ApkLibraryInstaller.installLibrary:(Landroid/content/Context;[Ljava/lang/String;Ljava/lang/String;Ljava/io/File;Lcom/getkeepsafe/relinker/ReLinkerInstance;)V
+660368: 1200                                   |0000: const/4 v0, #int 0 // #0
+66036a: 705d 3d90 98ba                         |0001: invoke-direct {v8, v9, v10, v11, v13}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.findAPKWithLibrary:(Landroid/content/Context;[Ljava/lang/String;Ljava/lang/String;Lcom/getkeepsafe/relinker/ReLinkerInstance;)Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry; // method@903d
+660370: 0c09                                   |0004: move-result-object v9
+660372: 3809 9500                              |0005: if-eqz v9, 009a // +0095
+660376: 120a                                   |0007: const/4 v10, #int 0 // #0
+660378: 01a1                                   |0008: move v1, v10
+66037a: d802 0101                              |0009: add-int/lit8 v2, v1, #int 1 // #01
+66037e: 1253                                   |000b: const/4 v3, #int 5 // #5
+660380: 3531 7d00                              |000c: if-ge v1, v3, 0089 // +007d
+660384: 1a01 dc28                              |000e: const-string v1, "Found %s! Extracting..." // string@28dc
+660388: 2410 ad20 0b00                         |0010: filled-new-array {v11}, [Ljava/lang/Object; // type@20ad
+66038e: 0c03                                   |0013: move-result-object v3
+660390: 6e30 6690 1d03                         |0014: invoke-virtual {v13, v1, v3}, Lcom/getkeepsafe/relinker/ReLinkerInstance;.log:(Ljava/lang/String;[Ljava/lang/Object;)V // method@9066
+660396: 6e10 dfcf 0c00                         |0017: invoke-virtual {v12}, Ljava/io/File;.exists:()Z // method@cfdf
+66039c: 0a01                                   |001a: move-result v1
+66039e: 3901 0a00                              |001b: if-nez v1, 0025 // +000a
+6603a2: 6e10 dccf 0c00                         |001d: invoke-virtual {v12}, Ljava/io/File;.createNewFile:()Z // method@cfdc
+6603a8: 0a01                                   |0020: move-result v1
+6603aa: 3901 0400                              |0021: if-nez v1, 0025 // +0004
+6603ae: 2900 6400                              |0023: goto/16 0087 // +0064
+6603b2: 5491 f951                              |0025: iget-object v1, v9, Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;.zipFile:Ljava/util/zip/ZipFile; // field@51f9
+6603b6: 5493 f851                              |0027: iget-object v3, v9, Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;.zipEntry:Ljava/util/zip/ZipEntry; // field@51f8
+6603ba: 6e20 6cd7 3100                         |0029: invoke-virtual {v1, v3}, Ljava/util/zip/ZipFile;.getInputStream:(Ljava/util/zip/ZipEntry;)Ljava/io/InputStream; // method@d76c
+6603c0: 0c01                                   |002c: move-result-object v1
+6603c2: 2203 421a                              |002d: new-instance v3, Ljava/io/FileOutputStream; // type@1a42
+6603c6: 7020 04d0 c300                         |002f: invoke-direct {v3, v12}, Ljava/io/FileOutputStream;.<init>:(Ljava/io/File;)V // method@d004
+6603cc: 7030 3c90 1803                         |0032: invoke-direct {v8, v1, v3}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.copy:(Ljava/io/InputStream;Ljava/io/OutputStream;)J // method@903c
+6603d2: 0b04                                   |0035: move-result-wide v4
+6603d4: 6e10 09d0 0300                         |0036: invoke-virtual {v3}, Ljava/io/FileOutputStream;.getFD:()Ljava/io/FileDescriptor; // method@d009
+6603da: 0c06                                   |0039: move-result-object v6
+6603dc: 6e10 f8cf 0600                         |003a: invoke-virtual {v6}, Ljava/io/FileDescriptor;.sync:()V // method@cff8
+6603e2: 6e10 eacf 0c00                         |003d: invoke-virtual {v12}, Ljava/io/File;.length:()J // method@cfea
+6603e8: 0b06                                   |0040: move-result-wide v6
+6603ea: 3104 0406                              |0041: cmp-long v4, v4, v6
+6603ee: 3804 0900                              |0043: if-eqz v4, 004c // +0009
+6603f2: 7020 3b90 1800                         |0045: invoke-direct {v8, v1}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.closeSilently:(Ljava/io/Closeable;)V // method@903b
+6603f8: 7020 3b90 3800                         |0048: invoke-direct {v8, v3}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.closeSilently:(Ljava/io/Closeable;)V // method@903b
+6603fe: 283c                                   |004b: goto 0087 // +003c
+660400: 7020 3b90 1800                         |004c: invoke-direct {v8, v1}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.closeSilently:(Ljava/io/Closeable;)V // method@903b
+660406: 7020 3b90 3800                         |004f: invoke-direct {v8, v3}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.closeSilently:(Ljava/io/Closeable;)V // method@903b
+66040c: 1218                                   |0052: const/4 v8, #int 1 // #1
+66040e: 6e30 f4cf 8c0a                         |0053: invoke-virtual {v12, v8, v10}, Ljava/io/File;.setReadable:(ZZ)Z // method@cff4
+660414: 6e30 f2cf 8c0a                         |0056: invoke-virtual {v12, v8, v10}, Ljava/io/File;.setExecutable:(ZZ)Z // method@cff2
+66041a: 6e20 f5cf 8c00                         |0059: invoke-virtual {v12, v8}, Ljava/io/File;.setWritable:(Z)Z // method@cff5
+660420: 3809 0b00                              |005c: if-eqz v9, 0067 // +000b
+660424: 5498 f951                              |005e: iget-object v8, v9, Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;.zipFile:Ljava/util/zip/ZipFile; // field@51f9
+660428: 3808 0700                              |0060: if-eqz v8, 0067 // +0007
+66042c: 5498 f951                              |0062: iget-object v8, v9, Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;.zipFile:Ljava/util/zip/ZipFile; // field@51f9
+660430: 6e10 6ad7 0800                         |0064: invoke-virtual {v8}, Ljava/util/zip/ZipFile;.close:()V // method@d76a
+660436: 0e00                                   |0067: return-void
+660438: 0d0a                                   |0068: move-exception v10
+66043a: 2803                                   |0069: goto 006c // +0003
+66043c: 0d0a                                   |006a: move-exception v10
+66043e: 0703                                   |006b: move-object v3, v0
+660440: 0710                                   |006c: move-object v0, v1
+660442: 2807                                   |006d: goto 0074 // +0007
+660444: 0703                                   |006e: move-object v3, v0
+660446: 280e                                   |006f: goto 007d // +000e
+660448: 0703                                   |0070: move-object v3, v0
+66044a: 2812                                   |0071: goto 0083 // +0012
+66044c: 0d0a                                   |0072: move-exception v10
+66044e: 0703                                   |0073: move-object v3, v0
+660450: 7020 3b90 0800                         |0074: invoke-direct {v8, v0}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.closeSilently:(Ljava/io/Closeable;)V // method@903b
+660456: 7020 3b90 3800                         |0077: invoke-direct {v8, v3}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.closeSilently:(Ljava/io/Closeable;)V // method@903b
+66045c: 270a                                   |007a: throw v10
+66045e: 0701                                   |007b: move-object v1, v0
+660460: 0713                                   |007c: move-object v3, v1
+660462: 7020 3b90 1800                         |007d: invoke-direct {v8, v1}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.closeSilently:(Ljava/io/Closeable;)V // method@903b
+660468: 28c8                                   |0080: goto 0048 // -0038
+66046a: 0701                                   |0081: move-object v1, v0
+66046c: 0713                                   |0082: move-object v3, v1
+66046e: 7020 3b90 1800                         |0083: invoke-direct {v8, v1}, Lcom/getkeepsafe/relinker/ApkLibraryInstaller;.closeSilently:(Ljava/io/Closeable;)V // method@903b
+660474: 28c2                                   |0086: goto 0048 // -003e
+660476: 0121                                   |0087: move v1, v2
+660478: 2881                                   |0088: goto 0009 // -007f
+66047a: 1a08 b625                              |0089: const-string v8, "FATAL! Couldn't extract the library from the APK!" // string@25b6
+66047e: 6e20 6590 8d00                         |008b: invoke-virtual {v13, v8}, Lcom/getkeepsafe/relinker/ReLinkerInstance;.log:(Ljava/lang/String;)V // method@9065
+660484: 3809 0b00                              |008e: if-eqz v9, 0099 // +000b
+660488: 5498 f951                              |0090: iget-object v8, v9, Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;.zipFile:Ljava/util/zip/ZipFile; // field@51f9
+66048c: 3808 0700                              |0092: if-eqz v8, 0099 // +0007
+660490: 5498 f951                              |0094: iget-object v8, v9, Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;.zipFile:Ljava/util/zip/ZipFile; // field@51f9
+660494: 6e10 6ad7 0800                         |0096: invoke-virtual {v8}, Ljava/util/zip/ZipFile;.close:()V // method@d76a
+66049a: 0e00                                   |0099: return-void
+66049c: 2208 780f                              |009a: new-instance v8, Lcom/getkeepsafe/relinker/MissingLibraryException; // type@0f78
+6604a0: 7020 4190 b800                         |009c: invoke-direct {v8, v11}, Lcom/getkeepsafe/relinker/MissingLibraryException;.<init>:(Ljava/lang/String;)V // method@9041
+6604a6: 2708                                   |009f: throw v8
+6604a8: 0d08                                   |00a0: move-exception v8
+6604aa: 0790                                   |00a1: move-object v0, v9
+6604ac: 2802                                   |00a2: goto 00a4 // +0002
+6604ae: 0d08                                   |00a3: move-exception v8
+6604b0: 3800 0b00                              |00a4: if-eqz v0, 00af // +000b
+6604b4: 5409 f951                              |00a6: iget-object v9, v0, Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;.zipFile:Ljava/util/zip/ZipFile; // field@51f9
+6604b8: 3809 0700                              |00a8: if-eqz v9, 00af // +0007
+6604bc: 5409 f951                              |00aa: iget-object v9, v0, Lcom/getkeepsafe/relinker/ApkLibraryInstaller$ZipFileInZipEntry;.zipFile:Ljava/util/zip/ZipFile; // field@51f9
+6604c0: 6e10 6ad7 0900                         |00ac: invoke-virtual {v9}, Ljava/util/zip/ZipFile;.close:()V // method@d76a
+6604c6: 2708                                   |00af: throw v8
+      catches       : 12
+        0x0001 - 0x0005
+          <any> -> 0x00a3
+        0x000e - 0x0017
+          <any> -> 0x00a0
+        0x0017 - 0x0021
+          Ljava/io/IOException; -> 0x0087
+          <any> -> 0x00a0
+        0x0025 - 0x002d
+          Ljava/io/FileNotFoundException; -> 0x0081
+          Ljava/io/IOException; -> 0x007b
+          <any> -> 0x0072
+        0x002d - 0x0032
+          Ljava/io/FileNotFoundException; -> 0x0070
+          Ljava/io/IOException; -> 0x006e
+          <any> -> 0x006a
+        0x0032 - 0x0041
+          Ljava/io/FileNotFoundException; -> 0x0083
+          Ljava/io/IOException; -> 0x007d
+          <any> -> 0x0068
+        0x0045 - 0x005c
+          <any> -> 0x00a0
+        0x005e - 0x0067
+          Ljava/io/IOException; -> 0x0067
+        0x0074 - 0x008e
+          <any> -> 0x00a0
+        0x0090 - 0x0099
+          Ljava/io/IOException; -> 0x0099
+        0x009a - 0x00a0
+          <any> -> 0x00a0
+        0x00a6 - 0x00af
+          Ljava/io/IOException; -> 0x00af
+      positions     :
+        0x0001 line=125
+        0x000e line=133
+        0x0017 line=135
+        0x0025 line=146
+        0x002d line=147
+        0x0032 line=148
+        0x0036 line=149
+        0x003d line=150
+        0x0045 line=161
+        0x0048 line=162
+        0x004c line=161
+        0x004f line=162
+        0x0053 line=166
+        0x0056 line=167
+        0x0059 line=168
+        0x005e line=175
+        0x0062 line=176
+        0x0074 line=161
+        0x0077 line=162
+        0x007a line=163
+        0x007d line=161
+        0x0089 line=172
+        0x0090 line=175
+        0x0094 line=176
+        0x009a line=128
+        0x00a6 line=175
+        0x00aa line=176
+        0x00af line=179
+      locals        :
+        0x0000 - 0x00b0 reg=8 this Lcom/getkeepsafe/relinker/ApkLibraryInstaller;
+        0x0000 - 0x00b0 reg=9 (null) Landroid/content/Context;
+        0x0000 - 0x00b0 reg=10 (null) [Ljava/lang/String;
+        0x0000 - 0x00b0 reg=11 (null) Ljava/lang/String;
+        0x0000 - 0x00b0 reg=12 (null) Ljava/io/File;
+        0x0000 - 0x00b0 reg=13 (null) Lcom/getkeepsafe/relinker/ReLinkerInstance;
+
+  source_file_idx   : 5511 (ApkLibraryInstaller.java)
+

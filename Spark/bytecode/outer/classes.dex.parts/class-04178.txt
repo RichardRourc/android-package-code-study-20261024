@@ -1,0 +1,528 @@
+Class #4178            -
+  Class descriptor  : 'Lkotlin/io/encoding/DecodeInputStream;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/io/InputStream;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'base64'
+      type          : 'Lkotlin/io/encoding/Base64;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'byteBuffer'
+      type          : '[B'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'byteBufferEndIndex'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'byteBufferStartIndex'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'input'
+      type          : 'Ljava/io/InputStream;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'isClosed'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #6              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'isEOF'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #7              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'singleByteBuffer'
+      type          : '[B'
+      access        : 0x0012 (PRIVATE FINAL)
+    #8              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'symbolBuffer'
+      type          : '[B'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : '<init>'
+      type          : '(Ljava/io/InputStream;Lkotlin/io/encoding/Base64;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 2
+      insns size    : 33 16-bit code units
+2dbcdc:                                        |[2dbcdc] kotlin.io.encoding.DecodeInputStream.<init>:(Ljava/io/InputStream;Lkotlin/io/encoding/Base64;)V
+2dbcec: 1a00 a084                              |0000: const-string v0, "input" // string@84a0
+2dbcf0: 7120 d593 0200                         |0002: invoke-static {v2, v0}, Lkotlin/jvm/internal/Intrinsics;.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V // method@93d5
+2dbcf6: 1a00 8967                              |0005: const-string v0, "base64" // string@6789
+2dbcfa: 7120 d593 0300                         |0007: invoke-static {v3, v0}, Lkotlin/jvm/internal/Intrinsics;.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V // method@93d5
+2dbd00: 7010 7970 0100                         |000a: invoke-direct {v1}, Ljava/io/InputStream;.<init>:()V // method@7079
+2dbd06: 5b12 2d3c                              |000d: iput-object v2, v1, Lkotlin/io/encoding/DecodeInputStream;.input:Ljava/io/InputStream; // field@3c2d
+2dbd0a: 5b13 293c                              |000f: iput-object v3, v1, Lkotlin/io/encoding/DecodeInputStream;.base64:Lkotlin/io/encoding/Base64; // field@3c29
+2dbd0e: 1212                                   |0011: const/4 v2, #int 1 // #1
+2dbd10: 2322 131a                              |0012: new-array v2, v2, [B // type@1a13
+2dbd14: 5b12 303c                              |0014: iput-object v2, v1, Lkotlin/io/encoding/DecodeInputStream;.singleByteBuffer:[B // field@3c30
+2dbd18: 1302 0004                              |0016: const/16 v2, #int 1024 // #400
+2dbd1c: 2323 131a                              |0018: new-array v3, v2, [B // type@1a13
+2dbd20: 5b13 313c                              |001a: iput-object v3, v1, Lkotlin/io/encoding/DecodeInputStream;.symbolBuffer:[B // field@3c31
+2dbd24: 2322 131a                              |001c: new-array v2, v2, [B // type@1a13
+2dbd28: 5b12 2a3c                              |001e: iput-object v2, v1, Lkotlin/io/encoding/DecodeInputStream;.byteBuffer:[B // field@3c2a
+2dbd2c: 0e00                                   |0020: return-void
+      catches       : (none)
+      positions     :
+        0x000a line=77
+        0x000d line=75
+        0x000f line=76
+        0x0012 line=80
+        0x0018 line=82
+        0x001c line=84
+      locals        :
+        0x0000 - 0x0021 reg=1 this Lkotlin/io/encoding/DecodeInputStream;
+        0x0000 - 0x0021 reg=2 (null) Ljava/io/InputStream;
+        0x0000 - 0x0021 reg=3 (null) Lkotlin/io/encoding/Base64;
+
+    #1              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'copyByteBufferInto'
+      type          : '([BII)V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 5
+      insns size    : 18 16-bit code units
+2dbd5c:                                        |[2dbd5c] kotlin.io.encoding.DecodeInputStream.copyByteBufferInto:([BII)V
+2dbd6c: 5430 2a3c                              |0000: iget-object v0, v3, Lkotlin/io/encoding/DecodeInputStream;.byteBuffer:[B // field@3c2a
+2dbd70: 5231 2c3c                              |0002: iget v1, v3, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dbd74: 9002 0106                              |0004: add-int v2, v1, v6
+2dbd78: 7152 6e7b 4015                         |0006: invoke-static {v0, v4, v5, v1, v2}, Lkotlin/collections/ArraysKt;.copyInto:([B[BIII)[B // method@7b6e
+2dbd7e: 5234 2c3c                              |0009: iget v4, v3, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dbd82: b064                                   |000b: add-int/2addr v4, v6
+2dbd84: 5934 2c3c                              |000c: iput v4, v3, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dbd88: 7010 3191 0300                         |000e: invoke-direct {v3}, Lkotlin/io/encoding/DecodeInputStream;.resetByteBufferIfEmpty:()V // method@9131
+2dbd8e: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=183
+        0x0002 line=186
+        0x0006 line=183
+        0x0009 line=189
+        0x000e line=190
+      locals        :
+        0x0000 - 0x0012 reg=3 this Lkotlin/io/encoding/DecodeInputStream;
+        0x0000 - 0x0012 reg=4 (null) [B
+        0x0000 - 0x0012 reg=5 (null) I
+        0x0000 - 0x0012 reg=6 (null) I
+
+    #2              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'decodeSymbolBufferInto'
+      type          : '([BIII)I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 11
+      ins           : 5
+      outs          : 6
+      insns size    : 33 16-bit code units
+2db9e8:                                        |[2db9e8] kotlin.io.encoding.DecodeInputStream.decodeSymbolBufferInto:([BIII)I
+2db9f8: 5263 2b3c                              |0000: iget v3, v6, Lkotlin/io/encoding/DecodeInputStream;.byteBufferEndIndex:I // field@3c2b
+2db9fc: 5460 293c                              |0002: iget-object v0, v6, Lkotlin/io/encoding/DecodeInputStream;.base64:Lkotlin/io/encoding/Base64; // field@3c29
+2dba00: 5461 313c                              |0004: iget-object v1, v6, Lkotlin/io/encoding/DecodeInputStream;.symbolBuffer:[B // field@3c31
+2dba04: 5462 2a3c                              |0006: iget-object v2, v6, Lkotlin/io/encoding/DecodeInputStream;.byteBuffer:[B // field@3c2a
+2dba08: 1204                                   |0008: const/4 v4, #int 0 // #0
+2dba0a: 01a5                                   |0009: move v5, v10
+2dba0c: 7406 0691 0000                         |000a: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lkotlin/io/encoding/Base64;.decodeIntoByteArray:([B[BIII)I // method@9106
+2dba12: 0a0a                                   |000d: move-result v10
+2dba14: b0a3                                   |000e: add-int/2addr v3, v10
+2dba16: 5963 2b3c                              |000f: iput v3, v6, Lkotlin/io/encoding/DecodeInputStream;.byteBufferEndIndex:I // field@3c2b
+2dba1a: 7010 2c91 0600                         |0011: invoke-direct {v6}, Lkotlin/io/encoding/DecodeInputStream;.getByteBufferLength:()I // method@912c
+2dba20: 0a0a                                   |0014: move-result v10
+2dba22: b189                                   |0015: sub-int/2addr v9, v8
+2dba24: 7120 bb71 9a00                         |0016: invoke-static {v10, v9}, Ljava/lang/Math;.min:(II)I // method@71bb
+2dba2a: 0a09                                   |0019: move-result v9
+2dba2c: 7040 2a91 7698                         |001a: invoke-direct {v6, v7, v8, v9}, Lkotlin/io/encoding/DecodeInputStream;.copyByteBufferInto:([BII)V // method@912a
+2dba32: 7010 3291 0600                         |001d: invoke-direct {v6}, Lkotlin/io/encoding/DecodeInputStream;.shiftByteBufferToStartIfNeeded:()V // method@9132
+2dba38: 0f09                                   |0020: return v9
+      catches       : (none)
+      positions     :
+        0x0000 line=168
+        0x0004 line=169
+        0x0006 line=170
+        0x000a line=168
+        0x0011 line=176
+        0x001a line=177
+        0x001d line=178
+      locals        :
+        0x0000 - 0x0021 reg=6 this Lkotlin/io/encoding/DecodeInputStream;
+        0x0000 - 0x0021 reg=7 (null) [B
+        0x0000 - 0x0021 reg=8 (null) I
+        0x0000 - 0x0021 reg=9 (null) I
+        0x0000 - 0x0021 reg=10 (null) I
+
+    #3              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'getByteBufferLength'
+      type          : '()I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 6 16-bit code units
+2dba3c:                                        |[2dba3c] kotlin.io.encoding.DecodeInputStream.getByteBufferLength:()I
+2dba4c: 5220 2b3c                              |0000: iget v0, v2, Lkotlin/io/encoding/DecodeInputStream;.byteBufferEndIndex:I // field@3c2b
+2dba50: 5221 2c3c                              |0002: iget v1, v2, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dba54: b110                                   |0004: sub-int/2addr v0, v1
+2dba56: 0f00                                   |0005: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0006 reg=2 this Lkotlin/io/encoding/DecodeInputStream;
+
+    #4              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'handlePaddingSymbol'
+      type          : '(I)I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 1
+      insns size    : 29 16-bit code units
+2dba58:                                        |[2dba58] kotlin.io.encoding.DecodeInputStream.handlePaddingSymbol:(I)I
+2dba68: 5440 313c                              |0000: iget-object v0, v4, Lkotlin/io/encoding/DecodeInputStream;.symbolBuffer:[B // field@3c31
+2dba6c: 1301 3d00                              |0002: const/16 v1, #int 61 // #3d
+2dba70: 4f01 0005                              |0004: aput-byte v1, v0, v5
+2dba74: dd00 0503                              |0006: and-int/lit8 v0, v5, #int 3 // #03
+2dba78: 1221                                   |0008: const/4 v1, #int 2 // #2
+2dba7a: 3310 1100                              |0009: if-ne v0, v1, 001a // +0011
+2dba7e: 7010 3091 0400                         |000b: invoke-direct {v4}, Lkotlin/io/encoding/DecodeInputStream;.readNextSymbol:()I // method@9130
+2dba84: 0a00                                   |000e: move-result v0
+2dba86: 3a00 0900                              |000f: if-ltz v0, 0018 // +0009
+2dba8a: 5442 313c                              |0011: iget-object v2, v4, Lkotlin/io/encoding/DecodeInputStream;.symbolBuffer:[B // field@3c31
+2dba8e: d803 0501                              |0013: add-int/lit8 v3, v5, #int 1 // #01
+2dba92: 8d00                                   |0015: int-to-byte v0, v0
+2dba94: 4f00 0203                              |0016: aput-byte v0, v2, v3
+2dba98: b015                                   |0018: add-int/2addr v5, v1
+2dba9a: 0f05                                   |0019: return v5
+2dba9c: d805 0501                              |001a: add-int/lit8 v5, v5, #int 1 // #01
+2dbaa0: 0f05                                   |001c: return v5
+      catches       : (none)
+      positions     :
+        0x0000 line=212
+        0x000b line=216
+        0x0011 line=218
+      locals        :
+        0x0000 - 0x001d reg=4 this Lkotlin/io/encoding/DecodeInputStream;
+        0x0000 - 0x001d reg=5 (null) I
+
+    #5              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'readNextSymbol'
+      type          : '()I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 31 16-bit code units
+2dbc8c:                                        |[2dbc8c] kotlin.io.encoding.DecodeInputStream.readNextSymbol:()I
+2dbc9c: 5420 293c                              |0000: iget-object v0, v2, Lkotlin/io/encoding/DecodeInputStream;.base64:Lkotlin/io/encoding/Base64; // field@3c29
+2dbca0: 6e10 1791 0000                         |0002: invoke-virtual {v0}, Lkotlin/io/encoding/Base64;.isMimeScheme$kotlin_stdlib:()Z // method@9117
+2dbca6: 0a00                                   |0005: move-result v0
+2dbca8: 3900 0900                              |0006: if-nez v0, 000f // +0009
+2dbcac: 5420 2d3c                              |0008: iget-object v0, v2, Lkotlin/io/encoding/DecodeInputStream;.input:Ljava/io/InputStream; // field@3c2d
+2dbcb0: 6e10 7c70 0000                         |000a: invoke-virtual {v0}, Ljava/io/InputStream;.read:()I // method@707c
+2dbcb6: 0a00                                   |000d: move-result v0
+2dbcb8: 0f00                                   |000e: return v0
+2dbcba: 5420 2d3c                              |000f: iget-object v0, v2, Lkotlin/io/encoding/DecodeInputStream;.input:Ljava/io/InputStream; // field@3c2d
+2dbcbe: 6e10 7c70 0000                         |0011: invoke-virtual {v0}, Ljava/io/InputStream;.read:()I // method@707c
+2dbcc4: 0a00                                   |0014: move-result v0
+2dbcc6: 12f1                                   |0015: const/4 v1, #int -1 // #ff
+2dbcc8: 3210 0800                              |0016: if-eq v0, v1, 001e // +0008
+2dbccc: 7110 2791 0000                         |0018: invoke-static {v0}, Lkotlin/io/encoding/Base64Kt;.isInMimeAlphabet:(I)Z // method@9127
+2dbcd2: 0a01                                   |001b: move-result v1
+2dbcd4: 3801 f3ff                              |001c: if-eqz v1, 000f // -000d
+2dbcd8: 0f00                                   |001e: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=228
+        0x0008 line=229
+        0x000f line=234
+        0x0018 line=235
+      locals        :
+        0x0000 - 0x001f reg=2 this Lkotlin/io/encoding/DecodeInputStream;
+
+    #6              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'resetByteBufferIfEmpty'
+      type          : '()V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 12 16-bit code units
+2dbd90:                                        |[2dbd90] kotlin.io.encoding.DecodeInputStream.resetByteBufferIfEmpty:()V
+2dbda0: 5220 2c3c                              |0000: iget v0, v2, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dbda4: 5221 2b3c                              |0002: iget v1, v2, Lkotlin/io/encoding/DecodeInputStream;.byteBufferEndIndex:I // field@3c2b
+2dbda8: 3310 0700                              |0004: if-ne v0, v1, 000b // +0007
+2dbdac: 1200                                   |0006: const/4 v0, #int 0 // #0
+2dbdae: 5920 2c3c                              |0007: iput v0, v2, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dbdb2: 5920 2b3c                              |0009: iput v0, v2, Lkotlin/io/encoding/DecodeInputStream;.byteBufferEndIndex:I // field@3c2b
+2dbdb6: 0e00                                   |000b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=194
+        0x0007 line=195
+        0x0009 line=196
+      locals        :
+        0x0000 - 0x000c reg=2 this Lkotlin/io/encoding/DecodeInputStream;
+
+    #7              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'shiftByteBufferToStartIfNeeded'
+      type          : '()V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 5
+      insns size    : 31 16-bit code units
+2dbdb8:                                        |[2dbdb8] kotlin.io.encoding.DecodeInputStream.shiftByteBufferToStartIfNeeded:()V
+2dbdc8: 5440 2a3c                              |0000: iget-object v0, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBuffer:[B // field@3c2a
+2dbdcc: 2101                                   |0002: array-length v1, v0
+2dbdce: 5242 2b3c                              |0003: iget v2, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBufferEndIndex:I // field@3c2b
+2dbdd2: b121                                   |0005: sub-int/2addr v1, v2
+2dbdd4: 5443 313c                              |0006: iget-object v3, v4, Lkotlin/io/encoding/DecodeInputStream;.symbolBuffer:[B // field@3c31
+2dbdd8: 2133                                   |0008: array-length v3, v3
+2dbdda: db03 0304                              |0009: div-int/lit8 v3, v3, #int 4 // #04
+2dbdde: da03 0303                              |000b: mul-int/lit8 v3, v3, #int 3 // #03
+2dbde2: 3713 1100                              |000d: if-le v3, v1, 001e // +0011
+2dbde6: 5241 2c3c                              |000f: iget v1, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dbdea: 1203                                   |0011: const/4 v3, #int 0 // #0
+2dbdec: 7152 6e7b 0013                         |0012: invoke-static {v0, v0, v3, v1, v2}, Lkotlin/collections/ArraysKt;.copyInto:([B[BIII)[B // method@7b6e
+2dbdf2: 5240 2b3c                              |0015: iget v0, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBufferEndIndex:I // field@3c2b
+2dbdf6: 5241 2c3c                              |0017: iget v1, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dbdfa: b110                                   |0019: sub-int/2addr v0, v1
+2dbdfc: 5940 2b3c                              |001a: iput v0, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBufferEndIndex:I // field@3c2b
+2dbe00: 5943 2c3c                              |001c: iput v3, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dbe04: 0e00                                   |001e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=202
+        0x0006 line=203
+        0x000f line=205
+        0x0015 line=206
+        0x001c line=207
+      locals        :
+        0x0000 - 0x001f reg=4 this Lkotlin/io/encoding/DecodeInputStream;
+
+  Virtual methods   -
+    #0              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 13 16-bit code units
+2dbd30:                                        |[2dbd30] kotlin.io.encoding.DecodeInputStream.close:()V
+2dbd40: 5510 2e3c                              |0000: iget-boolean v0, v1, Lkotlin/io/encoding/DecodeInputStream;.isClosed:Z // field@3c2e
+2dbd44: 3900 0a00                              |0002: if-nez v0, 000c // +000a
+2dbd48: 1210                                   |0004: const/4 v0, #int 1 // #1
+2dbd4a: 5c10 2e3c                              |0005: iput-boolean v0, v1, Lkotlin/io/encoding/DecodeInputStream;.isClosed:Z // field@3c2e
+2dbd4e: 5410 2d3c                              |0007: iget-object v0, v1, Lkotlin/io/encoding/DecodeInputStream;.input:Ljava/io/InputStream; // field@3c2d
+2dbd52: 6e10 7b70 0000                         |0009: invoke-virtual {v0}, Ljava/io/InputStream;.close:()V // method@707b
+2dbd58: 0e00                                   |000c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=159
+        0x0005 line=160
+        0x0007 line=161
+      locals        :
+        0x0000 - 0x000d reg=1 this Lkotlin/io/encoding/DecodeInputStream;
+
+    #1              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'read'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 52 16-bit code units
+2dbaa4:                                        |[2dbaa4] kotlin.io.encoding.DecodeInputStream.read:()I
+2dbab4: 5240 2c3c                              |0000: iget v0, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dbab8: 5241 2b3c                              |0002: iget v1, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBufferEndIndex:I // field@3c2b
+2dbabc: 1212                                   |0004: const/4 v2, #int 1 // #1
+2dbabe: 3510 0f00                              |0005: if-ge v0, v1, 0014 // +000f
+2dbac2: 5441 2a3c                              |0007: iget-object v1, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBuffer:[B // field@3c2a
+2dbac6: 4801 0100                              |0009: aget-byte v1, v1, v0
+2dbaca: d511 ff00                              |000b: and-int/lit16 v1, v1, #int 255 // #00ff
+2dbace: b020                                   |000d: add-int/2addr v0, v2
+2dbad0: 5940 2c3c                              |000e: iput v0, v4, Lkotlin/io/encoding/DecodeInputStream;.byteBufferStartIndex:I // field@3c2c
+2dbad4: 7010 3191 0400                         |0010: invoke-direct {v4}, Lkotlin/io/encoding/DecodeInputStream;.resetByteBufferIfEmpty:()V // method@9131
+2dbada: 0f01                                   |0013: return v1
+2dbadc: 5440 303c                              |0014: iget-object v0, v4, Lkotlin/io/encoding/DecodeInputStream;.singleByteBuffer:[B // field@3c30
+2dbae0: 1201                                   |0016: const/4 v1, #int 0 // #0
+2dbae2: 6e40 2f91 0421                         |0017: invoke-virtual {v4, v0, v1, v2}, Lkotlin/io/encoding/DecodeInputStream;.read:([BII)I // method@912f
+2dbae8: 0a00                                   |001a: move-result v0
+2dbaea: 12f3                                   |001b: const/4 v3, #int -1 // #ff
+2dbaec: 3230 1700                              |001c: if-eq v0, v3, 0033 // +0017
+2dbaf0: 3320 0900                              |001e: if-ne v0, v2, 0027 // +0009
+2dbaf4: 5440 303c                              |0020: iget-object v0, v4, Lkotlin/io/encoding/DecodeInputStream;.singleByteBuffer:[B // field@3c30
+2dbaf8: 4800 0001                              |0022: aget-byte v0, v0, v1
+2dbafc: d500 ff00                              |0024: and-int/lit16 v0, v0, #int 255 // #00ff
+2dbb00: 0f00                                   |0026: return v0
+2dbb02: 2200 6a11                              |0027: new-instance v0, Ljava/lang/IllegalStateException; // type@116a
+2dbb06: 1a01 8659                              |0029: const-string v1, "Unreachable" // string@5986
+2dbb0a: 6e10 e671 0100                         |002b: invoke-virtual {v1}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+2dbb10: 0c01                                   |002e: move-result-object v1
+2dbb12: 7020 7071 1000                         |002f: invoke-direct {v0, v1}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+2dbb18: 2700                                   |0032: throw v0
+2dbb1a: 0f03                                   |0033: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=91
+        0x0007 line=92
+        0x000e line=93
+        0x0010 line=94
+        0x0014 line=97
+        0x0020 line=99
+        0x0029 line=100
+      locals        :
+        0x0000 - 0x0034 reg=4 this Lkotlin/io/encoding/DecodeInputStream;
+
+    #2              : (in Lkotlin/io/encoding/DecodeInputStream;)
+      name          : 'read'
+      type          : '([BII)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 13
+      ins           : 4
+      outs          : 5
+      insns size    : 176 16-bit code units
+2dbb1c:                                        |[2dbb1c] kotlin.io.encoding.DecodeInputStream.read:([BII)I
+2dbb2c: 1a00 7770                              |0000: const-string v0, "destination" // string@7077
+2dbb30: 7120 d593 0a00                         |0002: invoke-static {v10, v0}, Lkotlin/jvm/internal/Intrinsics;.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V // method@93d5
+2dbb36: 3a0b 8100                              |0005: if-ltz v11, 0086 // +0081
+2dbb3a: 3a0c 7f00                              |0007: if-ltz v12, 0086 // +007f
+2dbb3e: 9000 0b0c                              |0009: add-int v0, v11, v12
+2dbb42: 21a1                                   |000b: array-length v1, v10
+2dbb44: 3610 7a00                              |000c: if-gt v0, v1, 0086 // +007a
+2dbb48: 5591 2e3c                              |000e: iget-boolean v1, v9, Lkotlin/io/encoding/DecodeInputStream;.isClosed:Z // field@3c2e
+2dbb4c: 3901 6e00                              |0010: if-nez v1, 007e // +006e
+2dbb50: 5591 2f3c                              |0012: iget-boolean v1, v9, Lkotlin/io/encoding/DecodeInputStream;.isEOF:Z // field@3c2f
+2dbb54: 12f2                                   |0014: const/4 v2, #int -1 // #ff
+2dbb56: 3801 0300                              |0015: if-eqz v1, 0018 // +0003
+2dbb5a: 0f02                                   |0017: return v2
+2dbb5c: 1201                                   |0018: const/4 v1, #int 0 // #0
+2dbb5e: 390c 0300                              |0019: if-nez v12, 001c // +0003
+2dbb62: 0f01                                   |001b: return v1
+2dbb64: 7010 2c91 0900                         |001c: invoke-direct {v9}, Lkotlin/io/encoding/DecodeInputStream;.getByteBufferLength:()I // method@912c
+2dbb6a: 0a03                                   |001f: move-result v3
+2dbb6c: 34c3 0600                              |0020: if-lt v3, v12, 0026 // +0006
+2dbb70: 7040 2a91 a9cb                         |0022: invoke-direct {v9, v10, v11, v12}, Lkotlin/io/encoding/DecodeInputStream;.copyByteBufferInto:([BII)V // method@912a
+2dbb76: 0f0c                                   |0025: return v12
+2dbb78: 7010 2c91 0900                         |0026: invoke-direct {v9}, Lkotlin/io/encoding/DecodeInputStream;.getByteBufferLength:()I // method@912c
+2dbb7e: 0a03                                   |0029: move-result v3
+2dbb80: b13c                                   |002a: sub-int/2addr v12, v3
+2dbb82: d80c 0c02                              |002b: add-int/lit8 v12, v12, #int 2 // #02
+2dbb86: db0c 0c03                              |002d: div-int/lit8 v12, v12, #int 3 // #03
+2dbb8a: da0c 0c04                              |002f: mul-int/lit8 v12, v12, #int 4 // #04
+2dbb8e: 01b3                                   |0031: move v3, v11
+2dbb90: 5594 2f3c                              |0032: iget-boolean v4, v9, Lkotlin/io/encoding/DecodeInputStream;.isEOF:Z // field@3c2f
+2dbb94: 3904 4300                              |0034: if-nez v4, 0077 // +0043
+2dbb98: 3d0c 4100                              |0036: if-lez v12, 0077 // +0041
+2dbb9c: 5494 313c                              |0038: iget-object v4, v9, Lkotlin/io/encoding/DecodeInputStream;.symbolBuffer:[B // field@3c31
+2dbba0: 2144                                   |003a: array-length v4, v4
+2dbba2: 7120 bb71 c400                         |003b: invoke-static {v4, v12}, Ljava/lang/Math;.min:(II)I // method@71bb
+2dbba8: 0a04                                   |003e: move-result v4
+2dbbaa: 0115                                   |003f: move v5, v1
+2dbbac: 5596 2f3c                              |0040: iget-boolean v6, v9, Lkotlin/io/encoding/DecodeInputStream;.isEOF:Z // field@3c2f
+2dbbb0: 3906 2100                              |0042: if-nez v6, 0063 // +0021
+2dbbb4: 3545 1f00                              |0044: if-ge v5, v4, 0063 // +001f
+2dbbb8: 7010 3091 0900                         |0046: invoke-direct {v9}, Lkotlin/io/encoding/DecodeInputStream;.readNextSymbol:()I // method@9130
+2dbbbe: 0a06                                   |0049: move-result v6
+2dbbc0: 1217                                   |004a: const/4 v7, #int 1 // #1
+2dbbc2: 3226 1500                              |004b: if-eq v6, v2, 0060 // +0015
+2dbbc6: 1308 3d00                              |004d: const/16 v8, #int 61 // #3d
+2dbbca: 3286 0a00                              |004f: if-eq v6, v8, 0059 // +000a
+2dbbce: 5497 313c                              |0051: iget-object v7, v9, Lkotlin/io/encoding/DecodeInputStream;.symbolBuffer:[B // field@3c31
+2dbbd2: 8d66                                   |0053: int-to-byte v6, v6
+2dbbd4: 4f06 0705                              |0054: aput-byte v6, v7, v5
+2dbbd8: d805 0501                              |0056: add-int/lit8 v5, v5, #int 1 // #01
+2dbbdc: 28e8                                   |0058: goto 0040 // -0018
+2dbbde: 7020 2d91 5900                         |0059: invoke-direct {v9, v5}, Lkotlin/io/encoding/DecodeInputStream;.handlePaddingSymbol:(I)I // method@912d
+2dbbe4: 0a05                                   |005c: move-result v5
+2dbbe6: 5c97 2f3c                              |005d: iput-boolean v7, v9, Lkotlin/io/encoding/DecodeInputStream;.isEOF:Z // field@3c2f
+2dbbea: 28e1                                   |005f: goto 0040 // -001f
+2dbbec: 5c97 2f3c                              |0060: iput-boolean v7, v9, Lkotlin/io/encoding/DecodeInputStream;.isEOF:Z // field@3c2f
+2dbbf0: 28de                                   |0062: goto 0040 // -0022
+2dbbf2: 3906 0d00                              |0063: if-nez v6, 0070 // +000d
+2dbbf6: 3345 0300                              |0065: if-ne v5, v4, 0068 // +0003
+2dbbfa: 2809                                   |0067: goto 0070 // +0009
+2dbbfc: 220a 6a11                              |0068: new-instance v10, Ljava/lang/IllegalStateException; // type@116a
+2dbc00: 1a0b af1f                              |006a: const-string v11, "Check failed." // string@1faf
+2dbc04: 7020 7071 ba00                         |006c: invoke-direct {v10, v11}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+2dbc0a: 270a                                   |006f: throw v10
+2dbc0c: b15c                                   |0070: sub-int/2addr v12, v5
+2dbc0e: 7055 2b91 a903                         |0071: invoke-direct {v9, v10, v3, v0, v5}, Lkotlin/io/encoding/DecodeInputStream;.decodeSymbolBufferInto:([BIII)I // method@912b
+2dbc14: 0a04                                   |0074: move-result v4
+2dbc16: b043                                   |0075: add-int/2addr v3, v4
+2dbc18: 28bc                                   |0076: goto 0032 // -0044
+2dbc1a: 33b3 0500                              |0077: if-ne v3, v11, 007c // +0005
+2dbc1e: 3804 0300                              |0079: if-eqz v4, 007c // +0003
+2dbc22: 0f02                                   |007b: return v2
+2dbc24: b1b3                                   |007c: sub-int/2addr v3, v11
+2dbc26: 0f03                                   |007d: return v3
+2dbc28: 220a 3611                              |007e: new-instance v10, Ljava/io/IOException; // type@1136
+2dbc2c: 1a0b b257                              |0080: const-string v11, "The input stream is closed." // string@57b2
+2dbc30: 7020 7570 ba00                         |0082: invoke-direct {v10, v11}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@7075
+2dbc36: 270a                                   |0085: throw v10
+2dbc38: 2200 6b11                              |0086: new-instance v0, Ljava/lang/IndexOutOfBoundsException; // type@116b
+2dbc3c: 2201 8811                              |0088: new-instance v1, Ljava/lang/StringBuilder; // type@1188
+2dbc40: 1a02 2c99                              |008a: const-string v2, "offset: " // string@992c
+2dbc44: 7020 4e72 2100                         |008c: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+2dbc4a: 6e20 5272 b100                         |008f: invoke-virtual {v1, v11}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+2dbc50: 0c0b                                   |0092: move-result-object v11
+2dbc52: 1a01 5715                              |0093: const-string v1, ", length: " // string@1557
+2dbc56: 6e20 5772 1b00                         |0095: invoke-virtual {v11, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+2dbc5c: 0c0b                                   |0098: move-result-object v11
+2dbc5e: 6e20 5272 cb00                         |0099: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+2dbc64: 0c0b                                   |009c: move-result-object v11
+2dbc66: 1a0c 1115                              |009d: const-string v12, ", buffer size: " // string@1511
+2dbc6a: 6e20 5772 cb00                         |009f: invoke-virtual {v11, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+2dbc70: 0c0b                                   |00a2: move-result-object v11
+2dbc72: 21aa                                   |00a3: array-length v10, v10
+2dbc74: 6e20 5272 ab00                         |00a4: invoke-virtual {v11, v10}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+2dbc7a: 0c0a                                   |00a7: move-result-object v10
+2dbc7c: 6e10 6b72 0a00                         |00a8: invoke-virtual {v10}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+2dbc82: 0c0a                                   |00ab: move-result-object v10
+2dbc84: 7020 7471 a000                         |00ac: invoke-direct {v0, v10}, Ljava/lang/IndexOutOfBoundsException;.<init>:(Ljava/lang/String;)V // method@7174
+2dbc8a: 2700                                   |00af: throw v0
+      catches       : (none)
+      positions     :
+        0x000b line=105
+        0x000e line=108
+        0x0012 line=111
+        0x001c line=118
+        0x0022 line=119
+        0x0026 line=123
+        0x002d line=124
+        0x0032 line=129
+        0x0038 line=131
+        0x0040 line=133
+        0x0046 line=134
+        0x0051 line=142
+        0x0059 line=138
+        0x005d line=139
+        0x0060 line=136
+        0x0068 line=148
+        0x0071 line=152
+        0x007e line=109
+        0x0086 line=106
+      locals        :
+        0x0000 - 0x00b0 reg=9 this Lkotlin/io/encoding/DecodeInputStream;
+        0x0000 - 0x00b0 reg=10 (null) [B
+        0x0000 - 0x00b0 reg=11 (null) I
+        0x0000 - 0x00b0 reg=12 (null) I
+
+  source_file_idx   : 7424 (Base64IOStream.kt)
+

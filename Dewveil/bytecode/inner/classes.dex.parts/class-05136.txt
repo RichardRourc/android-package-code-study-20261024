@@ -1,0 +1,640 @@
+Class #5136            -
+  Class descriptor  : 'Lcom/google/android/material/snackbar/SnackbarManager;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'LONG_DURATION_MS'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 2750
+    #1              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'MSG_TIMEOUT'
+      type          : 'I'
+      access        : 0x0018 (STATIC FINAL)
+      value         : 0
+    #2              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'SHORT_DURATION_MS'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1500
+    #3              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'snackbarManager'
+      type          : 'Lcom/google/android/material/snackbar/SnackbarManager;'
+      access        : 0x000a (PRIVATE STATIC)
+  Instance fields   -
+    #0              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'currentSnackbar'
+      type          : 'Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'handler'
+      type          : 'Landroid/os/Handler;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'lock'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'nextSnackbar'
+      type          : 'Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 3
+      insns size    : 27 16-bit code units
+70e060:                                        |[70e060] com.google.android.material.snackbar.SnackbarManager.<init>:()V
+70e070: 7010 c8d1 0300                         |0000: invoke-direct {v3}, Ljava/lang/Object;.<init>:()V // method@d1c8
+70e076: 2200 8b1a                              |0003: new-instance v0, Ljava/lang/Object; // type@1a8b
+70e07a: 7010 c8d1 0000                         |0005: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+70e080: 5b30 2b6d                              |0008: iput-object v0, v3, Lcom/google/android/material/snackbar/SnackbarManager;.lock:Ljava/lang/Object; // field@6d2b
+70e084: 2200 3201                              |000a: new-instance v0, Landroid/os/Handler; // type@0132
+70e088: 7100 5906 0000                         |000c: invoke-static {}, Landroid/os/Looper;.getMainLooper:()Landroid/os/Looper; // method@0659
+70e08e: 0c01                                   |000f: move-result-object v1
+70e090: 2202 8316                              |0010: new-instance v2, Lcom/google/android/material/snackbar/SnackbarManager$1; // type@1683
+70e094: 7020 2bb9 3200                         |0012: invoke-direct {v2, v3}, Lcom/google/android/material/snackbar/SnackbarManager$1;.<init>:(Lcom/google/android/material/snackbar/SnackbarManager;)V // method@b92b
+70e09a: 7030 2806 1002                         |0015: invoke-direct {v0, v1, v2}, Landroid/os/Handler;.<init>:(Landroid/os/Looper;Landroid/os/Handler$Callback;)V // method@0628
+70e0a0: 5b30 2a6d                              |0018: iput-object v0, v3, Lcom/google/android/material/snackbar/SnackbarManager;.handler:Landroid/os/Handler; // field@6d2a
+70e0a4: 0e00                                   |001a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=47
+        0x0003 line=48
+        0x000a line=49
+        0x000c line=51
+      locals        :
+        0x0000 - 0x001b reg=3 this Lcom/google/android/material/snackbar/SnackbarManager;
+
+    #1              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'cancelSnackbarLocked'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;I)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 2
+      insns size    : 22 16-bit code units
+70e0a8:                                        |[70e0a8] com.google.android.material.snackbar.SnackbarManager.cancelSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;I)Z
+70e0b8: 5420 236d                              |0000: iget-object v0, v2, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.callback:Ljava/lang/ref/WeakReference; // field@6d23
+70e0bc: 6e10 a0d2 0000                         |0002: invoke-virtual {v0}, Ljava/lang/ref/WeakReference;.get:()Ljava/lang/Object; // method@d2a0
+70e0c2: 0c00                                   |0005: move-result-object v0
+70e0c4: 1f00 8416                              |0006: check-cast v0, Lcom/google/android/material/snackbar/SnackbarManager$Callback; // type@1684
+70e0c8: 3800 0c00                              |0008: if-eqz v0, 0014 // +000c
+70e0cc: 5411 2a6d                              |000a: iget-object v1, v1, Lcom/google/android/material/snackbar/SnackbarManager;.handler:Landroid/os/Handler; // field@6d2a
+70e0d0: 6e20 3b06 2100                         |000c: invoke-virtual {v1, v2}, Landroid/os/Handler;.removeCallbacksAndMessages:(Ljava/lang/Object;)V // method@063b
+70e0d6: 7220 2db9 3000                         |000f: invoke-interface {v0, v3}, Lcom/google/android/material/snackbar/SnackbarManager$Callback;.dismiss:(I)V // method@b92d
+70e0dc: 1211                                   |0012: const/4 v1, #int 1 // #1
+70e0de: 0f01                                   |0013: return v1
+70e0e0: 1201                                   |0014: const/4 v1, #int 0 // #0
+70e0e2: 0f01                                   |0015: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=202
+        0x000a line=205
+        0x000f line=206
+      locals        :
+        0x0000 - 0x0016 reg=1 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x0016 reg=2 (null) Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;
+        0x0000 - 0x0016 reg=3 (null) I
+
+    #2              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'getInstance'
+      type          : '()Lcom/google/android/material/snackbar/SnackbarManager;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 14 16-bit code units
+70e0e4:                                        |[70e0e4] com.google.android.material.snackbar.SnackbarManager.getInstance:()Lcom/google/android/material/snackbar/SnackbarManager;
+70e0f4: 6200 2d6d                              |0000: sget-object v0, Lcom/google/android/material/snackbar/SnackbarManager;.snackbarManager:Lcom/google/android/material/snackbar/SnackbarManager; // field@6d2d
+70e0f8: 3900 0900                              |0002: if-nez v0, 000b // +0009
+70e0fc: 2200 8616                              |0004: new-instance v0, Lcom/google/android/material/snackbar/SnackbarManager; // type@1686
+70e100: 7010 31b9 0000                         |0006: invoke-direct {v0}, Lcom/google/android/material/snackbar/SnackbarManager;.<init>:()V // method@b931
+70e106: 6900 2d6d                              |0009: sput-object v0, Lcom/google/android/material/snackbar/SnackbarManager;.snackbarManager:Lcom/google/android/material/snackbar/SnackbarManager; // field@6d2d
+70e10a: 6200 2d6d                              |000b: sget-object v0, Lcom/google/android/material/snackbar/SnackbarManager;.snackbarManager:Lcom/google/android/material/snackbar/SnackbarManager; // field@6d2d
+70e10e: 1100                                   |000d: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=35
+        0x0004 line=36
+        0x000b line=38
+      locals        :
+
+    #3              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'isCurrentSnackbarLocked'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 14 16-bit code units
+70e110:                                        |[70e110] com.google.android.material.snackbar.SnackbarManager.isCurrentSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z
+70e120: 5400 296d                              |0000: iget-object v0, v0, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e124: 3800 0a00                              |0002: if-eqz v0, 000c // +000a
+70e128: 6e20 30b9 1000                         |0004: invoke-virtual {v0, v1}, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.isSnackbar:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b930
+70e12e: 0a00                                   |0007: move-result v0
+70e130: 3800 0400                              |0008: if-eqz v0, 000c // +0004
+70e134: 1210                                   |000a: const/4 v0, #int 1 // #1
+70e136: 2802                                   |000b: goto 000d // +0002
+70e138: 1200                                   |000c: const/4 v0, #int 0 // #0
+70e13a: 0f00                                   |000d: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=213
+      locals        :
+        0x0000 - 0x000e reg=0 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x000e reg=1 (null) Lcom/google/android/material/snackbar/SnackbarManager$Callback;
+
+    #4              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'isNextSnackbarLocked'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 14 16-bit code units
+70e13c:                                        |[70e13c] com.google.android.material.snackbar.SnackbarManager.isNextSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z
+70e14c: 5400 2c6d                              |0000: iget-object v0, v0, Lcom/google/android/material/snackbar/SnackbarManager;.nextSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d2c
+70e150: 3800 0a00                              |0002: if-eqz v0, 000c // +000a
+70e154: 6e20 30b9 1000                         |0004: invoke-virtual {v0, v1}, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.isSnackbar:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b930
+70e15a: 0a00                                   |0007: move-result v0
+70e15c: 3800 0400                              |0008: if-eqz v0, 000c // +0004
+70e160: 1210                                   |000a: const/4 v0, #int 1 // #1
+70e162: 2802                                   |000b: goto 000d // +0002
+70e164: 1200                                   |000c: const/4 v0, #int 0 // #0
+70e166: 0f00                                   |000d: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=217
+      locals        :
+        0x0000 - 0x000e reg=0 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x000e reg=1 (null) Lcom/google/android/material/snackbar/SnackbarManager$Callback;
+
+    #5              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'scheduleTimeoutLocked'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 40 16-bit code units
+70e168:                                        |[70e168] com.google.android.material.snackbar.SnackbarManager.scheduleTimeoutLocked:(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;)V
+70e178: 5230 246d                              |0000: iget v0, v3, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.duration:I // field@6d24
+70e17c: 12e1                                   |0002: const/4 v1, #int -2 // #fe
+70e17e: 3310 0300                              |0003: if-ne v0, v1, 0006 // +0003
+70e182: 0e00                                   |0005: return-void
+70e184: 5230 246d                              |0006: iget v0, v3, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.duration:I // field@6d24
+70e188: 3d00 0500                              |0008: if-lez v0, 000d // +0005
+70e18c: 5230 246d                              |000a: iget v0, v3, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.duration:I // field@6d24
+70e190: 280b                                   |000c: goto 0017 // +000b
+70e192: 5230 246d                              |000d: iget v0, v3, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.duration:I // field@6d24
+70e196: 12f1                                   |000f: const/4 v1, #int -1 // #ff
+70e198: 3310 0500                              |0010: if-ne v0, v1, 0015 // +0005
+70e19c: 1300 dc05                              |0012: const/16 v0, #int 1500 // #5dc
+70e1a0: 2803                                   |0014: goto 0017 // +0003
+70e1a2: 1300 be0a                              |0015: const/16 v0, #int 2750 // #abe
+70e1a6: 5421 2a6d                              |0017: iget-object v1, v2, Lcom/google/android/material/snackbar/SnackbarManager;.handler:Landroid/os/Handler; // field@6d2a
+70e1aa: 6e20 3b06 3100                         |0019: invoke-virtual {v1, v3}, Landroid/os/Handler;.removeCallbacksAndMessages:(Ljava/lang/Object;)V // method@063b
+70e1b0: 5422 2a6d                              |001c: iget-object v2, v2, Lcom/google/android/material/snackbar/SnackbarManager;.handler:Landroid/os/Handler; // field@6d2a
+70e1b4: 1201                                   |001e: const/4 v1, #int 0 // #0
+70e1b6: 7130 5f06 1203                         |001f: invoke-static {v2, v1, v3}, Landroid/os/Message;.obtain:(Landroid/os/Handler;ILjava/lang/Object;)Landroid/os/Message; // method@065f
+70e1bc: 0c03                                   |0022: move-result-object v3
+70e1be: 8100                                   |0023: int-to-long v0, v0
+70e1c0: 6e40 4206 3210                         |0024: invoke-virtual {v2, v3, v0, v1}, Landroid/os/Handler;.sendMessageDelayed:(Landroid/os/Message;J)Z // method@0642
+70e1c6: 0e00                                   |0027: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=221
+        0x0006 line=227
+        0x000a line=228
+        0x000d line=229
+        0x0017 line=232
+        0x001c line=233
+      locals        :
+        0x0000 - 0x0028 reg=2 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x0028 reg=3 (null) Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;
+
+    #6              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'showNextSnackbarLocked'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 26 16-bit code units
+70e1c8:                                        |[70e1c8] com.google.android.material.snackbar.SnackbarManager.showNextSnackbarLocked:()V
+70e1d8: 5420 2c6d                              |0000: iget-object v0, v2, Lcom/google/android/material/snackbar/SnackbarManager;.nextSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d2c
+70e1dc: 3800 1700                              |0002: if-eqz v0, 0019 // +0017
+70e1e0: 5b20 296d                              |0004: iput-object v0, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e1e4: 1201                                   |0006: const/4 v1, #int 0 // #0
+70e1e6: 5b21 2c6d                              |0007: iput-object v1, v2, Lcom/google/android/material/snackbar/SnackbarManager;.nextSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d2c
+70e1ea: 5400 236d                              |0009: iget-object v0, v0, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.callback:Ljava/lang/ref/WeakReference; // field@6d23
+70e1ee: 6e10 a0d2 0000                         |000b: invoke-virtual {v0}, Ljava/lang/ref/WeakReference;.get:()Ljava/lang/Object; // method@d2a0
+70e1f4: 0c00                                   |000e: move-result-object v0
+70e1f6: 1f00 8416                              |000f: check-cast v0, Lcom/google/android/material/snackbar/SnackbarManager$Callback; // type@1684
+70e1fa: 3800 0600                              |0011: if-eqz v0, 0017 // +0006
+70e1fe: 7210 2eb9 0000                         |0013: invoke-interface {v0}, Lcom/google/android/material/snackbar/SnackbarManager$Callback;.show:()V // method@b92e
+70e204: 2803                                   |0016: goto 0019 // +0003
+70e206: 5b21 296d                              |0017: iput-object v1, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e20a: 0e00                                   |0019: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=187
+        0x0004 line=188
+        0x0007 line=189
+        0x0009 line=191
+        0x0013 line=193
+        0x0017 line=196
+      locals        :
+        0x0000 - 0x001a reg=2 this Lcom/google/android/material/snackbar/SnackbarManager;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'dismiss'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$Callback;I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 31 16-bit code units
+70e20c:                                        |[70e20c] com.google.android.material.snackbar.SnackbarManager.dismiss:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;I)V
+70e21c: 5420 2b6d                              |0000: iget-object v0, v2, Lcom/google/android/material/snackbar/SnackbarManager;.lock:Ljava/lang/Object; // field@6d2b
+70e220: 1d00                                   |0002: monitor-enter v0
+70e222: 7020 38b9 3200                         |0003: invoke-direct {v2, v3}, Lcom/google/android/material/snackbar/SnackbarManager;.isCurrentSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b938
+70e228: 0a01                                   |0006: move-result v1
+70e22a: 3801 0800                              |0007: if-eqz v1, 000f // +0008
+70e22e: 5423 296d                              |0009: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e232: 7030 32b9 3204                         |000b: invoke-direct {v2, v3, v4}, Lcom/google/android/material/snackbar/SnackbarManager;.cancelSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;I)Z // method@b932
+70e238: 280c                                   |000e: goto 001a // +000c
+70e23a: 7020 39b9 3200                         |000f: invoke-direct {v2, v3}, Lcom/google/android/material/snackbar/SnackbarManager;.isNextSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b939
+70e240: 0a03                                   |0012: move-result v3
+70e242: 3803 0700                              |0013: if-eqz v3, 001a // +0007
+70e246: 5423 2c6d                              |0015: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.nextSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d2c
+70e24a: 7030 32b9 3204                         |0017: invoke-direct {v2, v3, v4}, Lcom/google/android/material/snackbar/SnackbarManager;.cancelSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;I)Z // method@b932
+70e250: 1e00                                   |001a: monitor-exit v0
+70e252: 0e00                                   |001b: return-void
+70e254: 0d02                                   |001c: move-exception v2
+70e256: 1e00                                   |001d: monitor-exit v0
+70e258: 2702                                   |001e: throw v2
+      catches       : 1
+        0x0003 - 0x001e
+          <any> -> 0x001c
+      positions     :
+        0x0000 line=104
+        0x0003 line=105
+        0x0009 line=106
+        0x000f line=107
+        0x0015 line=108
+        0x001a line=110
+      locals        :
+        0x0000 - 0x001f reg=2 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x001f reg=3 (null) Lcom/google/android/material/snackbar/SnackbarManager$Callback;
+        0x0000 - 0x001f reg=4 (null) I
+
+    #1              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'handleTimeout'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 20 16-bit code units
+70e268:                                        |[70e268] com.google.android.material.snackbar.SnackbarManager.handleTimeout:(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;)V
+70e278: 5420 2b6d                              |0000: iget-object v0, v2, Lcom/google/android/material/snackbar/SnackbarManager;.lock:Ljava/lang/Object; // field@6d2b
+70e27c: 1d00                                   |0002: monitor-enter v0
+70e27e: 5421 296d                              |0003: iget-object v1, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e282: 3231 0600                              |0005: if-eq v1, v3, 000b // +0006
+70e286: 5421 2c6d                              |0007: iget-object v1, v2, Lcom/google/android/material/snackbar/SnackbarManager;.nextSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d2c
+70e28a: 3331 0600                              |0009: if-ne v1, v3, 000f // +0006
+70e28e: 1221                                   |000b: const/4 v1, #int 2 // #2
+70e290: 7030 32b9 3201                         |000c: invoke-direct {v2, v3, v1}, Lcom/google/android/material/snackbar/SnackbarManager;.cancelSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;I)Z // method@b932
+70e296: 1e00                                   |000f: monitor-exit v0
+70e298: 0e00                                   |0010: return-void
+70e29a: 0d02                                   |0011: move-exception v2
+70e29c: 1e00                                   |0012: monitor-exit v0
+70e29e: 2702                                   |0013: throw v2
+      catches       : 1
+        0x0003 - 0x0013
+          <any> -> 0x0011
+      positions     :
+        0x0000 line=237
+        0x0003 line=238
+        0x000c line=239
+        0x000f line=241
+      locals        :
+        0x0000 - 0x0014 reg=2 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x0014 reg=3 (null) Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;
+
+    #2              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'isCurrent'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 12 16-bit code units
+70e2ac:                                        |[70e2ac] com.google.android.material.snackbar.SnackbarManager.isCurrent:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z
+70e2bc: 5410 2b6d                              |0000: iget-object v0, v1, Lcom/google/android/material/snackbar/SnackbarManager;.lock:Ljava/lang/Object; // field@6d2b
+70e2c0: 1d00                                   |0002: monitor-enter v0
+70e2c2: 7020 38b9 2100                         |0003: invoke-direct {v1, v2}, Lcom/google/android/material/snackbar/SnackbarManager;.isCurrentSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b938
+70e2c8: 0a01                                   |0006: move-result v1
+70e2ca: 1e00                                   |0007: monitor-exit v0
+70e2cc: 0f01                                   |0008: return v1
+70e2ce: 0d01                                   |0009: move-exception v1
+70e2d0: 1e00                                   |000a: monitor-exit v0
+70e2d2: 2701                                   |000b: throw v1
+      catches       : 1
+        0x0003 - 0x000b
+          <any> -> 0x0009
+      positions     :
+        0x0000 line=160
+        0x0003 line=161
+        0x000a line=162
+      locals        :
+        0x0000 - 0x000c reg=1 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x000c reg=2 (null) Lcom/google/android/material/snackbar/SnackbarManager$Callback;
+
+    #3              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'isCurrentOrNext'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 24 16-bit code units
+70e2e0:                                        |[70e2e0] com.google.android.material.snackbar.SnackbarManager.isCurrentOrNext:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z
+70e2f0: 5420 2b6d                              |0000: iget-object v0, v2, Lcom/google/android/material/snackbar/SnackbarManager;.lock:Ljava/lang/Object; // field@6d2b
+70e2f4: 1d00                                   |0002: monitor-enter v0
+70e2f6: 7020 38b9 3200                         |0003: invoke-direct {v2, v3}, Lcom/google/android/material/snackbar/SnackbarManager;.isCurrentSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b938
+70e2fc: 0a01                                   |0006: move-result v1
+70e2fe: 3901 0b00                              |0007: if-nez v1, 0012 // +000b
+70e302: 7020 39b9 3200                         |0009: invoke-direct {v2, v3}, Lcom/google/android/material/snackbar/SnackbarManager;.isNextSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b939
+70e308: 0a02                                   |000c: move-result v2
+70e30a: 3802 0300                              |000d: if-eqz v2, 0010 // +0003
+70e30e: 2803                                   |000f: goto 0012 // +0003
+70e310: 1202                                   |0010: const/4 v2, #int 0 // #0
+70e312: 2802                                   |0011: goto 0013 // +0002
+70e314: 1212                                   |0012: const/4 v2, #int 1 // #1
+70e316: 1e00                                   |0013: monitor-exit v0
+70e318: 0f02                                   |0014: return v2
+70e31a: 0d02                                   |0015: move-exception v2
+70e31c: 1e00                                   |0016: monitor-exit v0
+70e31e: 2702                                   |0017: throw v2
+      catches       : 1
+        0x0003 - 0x0017
+          <any> -> 0x0015
+      positions     :
+        0x0000 line=166
+        0x0003 line=167
+        0x0016 line=168
+      locals        :
+        0x0000 - 0x0018 reg=2 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x0018 reg=3 (null) Lcom/google/android/material/snackbar/SnackbarManager$Callback;
+
+    #4              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'onDismissed'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 24 16-bit code units
+70e32c:                                        |[70e32c] com.google.android.material.snackbar.SnackbarManager.onDismissed:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)V
+70e33c: 5410 2b6d                              |0000: iget-object v0, v1, Lcom/google/android/material/snackbar/SnackbarManager;.lock:Ljava/lang/Object; // field@6d2b
+70e340: 1d00                                   |0002: monitor-enter v0
+70e342: 7020 38b9 2100                         |0003: invoke-direct {v1, v2}, Lcom/google/android/material/snackbar/SnackbarManager;.isCurrentSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b938
+70e348: 0a02                                   |0006: move-result v2
+70e34a: 3802 0c00                              |0007: if-eqz v2, 0013 // +000c
+70e34e: 1202                                   |0009: const/4 v2, #int 0 // #0
+70e350: 5b12 296d                              |000a: iput-object v2, v1, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e354: 5412 2c6d                              |000c: iget-object v2, v1, Lcom/google/android/material/snackbar/SnackbarManager;.nextSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d2c
+70e358: 3802 0500                              |000e: if-eqz v2, 0013 // +0005
+70e35c: 7010 40b9 0100                         |0010: invoke-direct {v1}, Lcom/google/android/material/snackbar/SnackbarManager;.showNextSnackbarLocked:()V // method@b940
+70e362: 1e00                                   |0013: monitor-exit v0
+70e364: 0e00                                   |0014: return-void
+70e366: 0d01                                   |0015: move-exception v1
+70e368: 1e00                                   |0016: monitor-exit v0
+70e36a: 2701                                   |0017: throw v1
+      catches       : 1
+        0x0003 - 0x0017
+          <any> -> 0x0015
+      positions     :
+        0x0000 line=118
+        0x0003 line=119
+        0x000a line=121
+        0x000c line=122
+        0x0010 line=123
+        0x0013 line=126
+      locals        :
+        0x0000 - 0x0018 reg=1 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x0018 reg=2 (null) Lcom/google/android/material/snackbar/SnackbarManager$Callback;
+
+    #5              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'onShown'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 19 16-bit code units
+70e378:                                        |[70e378] com.google.android.material.snackbar.SnackbarManager.onShown:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)V
+70e388: 5410 2b6d                              |0000: iget-object v0, v1, Lcom/google/android/material/snackbar/SnackbarManager;.lock:Ljava/lang/Object; // field@6d2b
+70e38c: 1d00                                   |0002: monitor-enter v0
+70e38e: 7020 38b9 2100                         |0003: invoke-direct {v1, v2}, Lcom/google/android/material/snackbar/SnackbarManager;.isCurrentSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b938
+70e394: 0a02                                   |0006: move-result v2
+70e396: 3802 0700                              |0007: if-eqz v2, 000e // +0007
+70e39a: 5412 296d                              |0009: iget-object v2, v1, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e39e: 7020 3eb9 2100                         |000b: invoke-direct {v1, v2}, Lcom/google/android/material/snackbar/SnackbarManager;.scheduleTimeoutLocked:(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;)V // method@b93e
+70e3a4: 1e00                                   |000e: monitor-exit v0
+70e3a6: 0e00                                   |000f: return-void
+70e3a8: 0d01                                   |0010: move-exception v1
+70e3aa: 1e00                                   |0011: monitor-exit v0
+70e3ac: 2701                                   |0012: throw v1
+      catches       : 1
+        0x0003 - 0x0012
+          <any> -> 0x0010
+      positions     :
+        0x0000 line=134
+        0x0003 line=135
+        0x0009 line=136
+        0x000e line=138
+      locals        :
+        0x0000 - 0x0013 reg=1 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x0013 reg=2 (null) Lcom/google/android/material/snackbar/SnackbarManager$Callback;
+
+    #6              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'pauseTimeout'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 32 16-bit code units
+70e3bc:                                        |[70e3bc] com.google.android.material.snackbar.SnackbarManager.pauseTimeout:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)V
+70e3cc: 5420 2b6d                              |0000: iget-object v0, v2, Lcom/google/android/material/snackbar/SnackbarManager;.lock:Ljava/lang/Object; // field@6d2b
+70e3d0: 1d00                                   |0002: monitor-enter v0
+70e3d2: 7020 38b9 3200                         |0003: invoke-direct {v2, v3}, Lcom/google/android/material/snackbar/SnackbarManager;.isCurrentSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b938
+70e3d8: 0a03                                   |0006: move-result v3
+70e3da: 3803 1400                              |0007: if-eqz v3, 001b // +0014
+70e3de: 5423 296d                              |0009: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e3e2: 5533 256d                              |000b: iget-boolean v3, v3, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.paused:Z // field@6d25
+70e3e6: 3903 0e00                              |000d: if-nez v3, 001b // +000e
+70e3ea: 5423 296d                              |000f: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e3ee: 1211                                   |0011: const/4 v1, #int 1 // #1
+70e3f0: 5c31 256d                              |0012: iput-boolean v1, v3, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.paused:Z // field@6d25
+70e3f4: 5423 2a6d                              |0014: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.handler:Landroid/os/Handler; // field@6d2a
+70e3f8: 5422 296d                              |0016: iget-object v2, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e3fc: 6e20 3b06 2300                         |0018: invoke-virtual {v3, v2}, Landroid/os/Handler;.removeCallbacksAndMessages:(Ljava/lang/Object;)V // method@063b
+70e402: 1e00                                   |001b: monitor-exit v0
+70e404: 0e00                                   |001c: return-void
+70e406: 0d02                                   |001d: move-exception v2
+70e408: 1e00                                   |001e: monitor-exit v0
+70e40a: 2702                                   |001f: throw v2
+      catches       : 1
+        0x0003 - 0x001f
+          <any> -> 0x001d
+      positions     :
+        0x0000 line=142
+        0x0003 line=143
+        0x000f line=144
+        0x0014 line=145
+        0x001b line=147
+      locals        :
+        0x0000 - 0x0020 reg=2 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x0020 reg=3 (null) Lcom/google/android/material/snackbar/SnackbarManager$Callback;
+
+    #7              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'restoreTimeoutIfPaused'
+      type          : '(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 30 16-bit code units
+70e418:                                        |[70e418] com.google.android.material.snackbar.SnackbarManager.restoreTimeoutIfPaused:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)V
+70e428: 5420 2b6d                              |0000: iget-object v0, v2, Lcom/google/android/material/snackbar/SnackbarManager;.lock:Ljava/lang/Object; // field@6d2b
+70e42c: 1d00                                   |0002: monitor-enter v0
+70e42e: 7020 38b9 3200                         |0003: invoke-direct {v2, v3}, Lcom/google/android/material/snackbar/SnackbarManager;.isCurrentSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b938
+70e434: 0a03                                   |0006: move-result v3
+70e436: 3803 1200                              |0007: if-eqz v3, 0019 // +0012
+70e43a: 5423 296d                              |0009: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e43e: 5533 256d                              |000b: iget-boolean v3, v3, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.paused:Z // field@6d25
+70e442: 3803 0c00                              |000d: if-eqz v3, 0019 // +000c
+70e446: 5423 296d                              |000f: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e44a: 1201                                   |0011: const/4 v1, #int 0 // #0
+70e44c: 5c31 256d                              |0012: iput-boolean v1, v3, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.paused:Z // field@6d25
+70e450: 5423 296d                              |0014: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e454: 7020 3eb9 3200                         |0016: invoke-direct {v2, v3}, Lcom/google/android/material/snackbar/SnackbarManager;.scheduleTimeoutLocked:(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;)V // method@b93e
+70e45a: 1e00                                   |0019: monitor-exit v0
+70e45c: 0e00                                   |001a: return-void
+70e45e: 0d02                                   |001b: move-exception v2
+70e460: 1e00                                   |001c: monitor-exit v0
+70e462: 2702                                   |001d: throw v2
+      catches       : 1
+        0x0003 - 0x001d
+          <any> -> 0x001b
+      positions     :
+        0x0000 line=151
+        0x0003 line=152
+        0x000f line=153
+        0x0014 line=154
+        0x0019 line=156
+      locals        :
+        0x0000 - 0x001e reg=2 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x001e reg=3 (null) Lcom/google/android/material/snackbar/SnackbarManager$Callback;
+
+    #8              : (in Lcom/google/android/material/snackbar/SnackbarManager;)
+      name          : 'show'
+      type          : '(ILcom/google/android/material/snackbar/SnackbarManager$Callback;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 69 16-bit code units
+70e470:                                        |[70e470] com.google.android.material.snackbar.SnackbarManager.show:(ILcom/google/android/material/snackbar/SnackbarManager$Callback;)V
+70e480: 5420 2b6d                              |0000: iget-object v0, v2, Lcom/google/android/material/snackbar/SnackbarManager;.lock:Ljava/lang/Object; // field@6d2b
+70e484: 1d00                                   |0002: monitor-enter v0
+70e486: 7020 38b9 4200                         |0003: invoke-direct {v2, v4}, Lcom/google/android/material/snackbar/SnackbarManager;.isCurrentSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b938
+70e48c: 0a01                                   |0006: move-result v1
+70e48e: 3801 1400                              |0007: if-eqz v1, 001b // +0014
+70e492: 5424 296d                              |0009: iget-object v4, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e496: 5943 246d                              |000b: iput v3, v4, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.duration:I // field@6d24
+70e49a: 5423 2a6d                              |000d: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.handler:Landroid/os/Handler; // field@6d2a
+70e49e: 5424 296d                              |000f: iget-object v4, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e4a2: 6e20 3b06 4300                         |0011: invoke-virtual {v3, v4}, Landroid/os/Handler;.removeCallbacksAndMessages:(Ljava/lang/Object;)V // method@063b
+70e4a8: 5423 296d                              |0014: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e4ac: 7020 3eb9 3200                         |0016: invoke-direct {v2, v3}, Lcom/google/android/material/snackbar/SnackbarManager;.scheduleTimeoutLocked:(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;)V // method@b93e
+70e4b2: 1e00                                   |0019: monitor-exit v0
+70e4b4: 0e00                                   |001a: return-void
+70e4b6: 7020 39b9 4200                         |001b: invoke-direct {v2, v4}, Lcom/google/android/material/snackbar/SnackbarManager;.isNextSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$Callback;)Z // method@b939
+70e4bc: 0a01                                   |001e: move-result v1
+70e4be: 3801 0700                              |001f: if-eqz v1, 0026 // +0007
+70e4c2: 5424 2c6d                              |0021: iget-object v4, v2, Lcom/google/android/material/snackbar/SnackbarManager;.nextSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d2c
+70e4c6: 5943 246d                              |0023: iput v3, v4, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.duration:I // field@6d24
+70e4ca: 2808                                   |0025: goto 002d // +0008
+70e4cc: 2201 8516                              |0026: new-instance v1, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // type@1685
+70e4d0: 7030 2fb9 3104                         |0028: invoke-direct {v1, v3, v4}, Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;.<init>:(ILcom/google/android/material/snackbar/SnackbarManager$Callback;)V // method@b92f
+70e4d6: 5b21 2c6d                              |002b: iput-object v1, v2, Lcom/google/android/material/snackbar/SnackbarManager;.nextSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d2c
+70e4da: 5423 296d                              |002d: iget-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e4de: 3803 0b00                              |002f: if-eqz v3, 003a // +000b
+70e4e2: 1244                                   |0031: const/4 v4, #int 4 // #4
+70e4e4: 7030 32b9 3204                         |0032: invoke-direct {v2, v3, v4}, Lcom/google/android/material/snackbar/SnackbarManager;.cancelSnackbarLocked:(Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord;I)Z // method@b932
+70e4ea: 0a03                                   |0035: move-result v3
+70e4ec: 3803 0400                              |0036: if-eqz v3, 003a // +0004
+70e4f0: 1e00                                   |0038: monitor-exit v0
+70e4f2: 0e00                                   |0039: return-void
+70e4f4: 1203                                   |003a: const/4 v3, #int 0 // #0
+70e4f6: 5b23 296d                              |003b: iput-object v3, v2, Lcom/google/android/material/snackbar/SnackbarManager;.currentSnackbar:Lcom/google/android/material/snackbar/SnackbarManager$SnackbarRecord; // field@6d29
+70e4fa: 7010 40b9 0200                         |003d: invoke-direct {v2}, Lcom/google/android/material/snackbar/SnackbarManager;.showNextSnackbarLocked:()V // method@b940
+70e500: 1e00                                   |0040: monitor-exit v0
+70e502: 0e00                                   |0041: return-void
+70e504: 0d02                                   |0042: move-exception v2
+70e506: 1e00                                   |0043: monitor-exit v0
+70e508: 2702                                   |0044: throw v2
+      catches       : 1
+        0x0003 - 0x0044
+          <any> -> 0x0042
+      positions     :
+        0x0000 line=72
+        0x0003 line=73
+        0x0009 line=75
+        0x000d line=79
+        0x0014 line=80
+        0x0019 line=81
+        0x001b line=82
+        0x0021 line=84
+        0x0026 line=87
+        0x002d line=90
+        0x0032 line=91
+        0x0038 line=93
+        0x003b line=96
+        0x003d line=98
+        0x0040 line=100
+      locals        :
+        0x0000 - 0x0045 reg=2 this Lcom/google/android/material/snackbar/SnackbarManager;
+        0x0000 - 0x0045 reg=3 (null) I
+        0x0000 - 0x0045 reg=4 (null) Lcom/google/android/material/snackbar/SnackbarManager$Callback;
+
+  source_file_idx   : 25341 (SnackbarManager.java)
+

@@ -1,0 +1,1371 @@
+Class #782            -
+  Class descriptor  : 'Landroidx/collection/ArraySet;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/util/Collection;'
+    #1              : 'Ljava/util/Set;'
+  Static fields     -
+    #0              : (in Landroidx/collection/ArraySet;)
+      name          : 'BASE_SIZE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 4
+    #1              : (in Landroidx/collection/ArraySet;)
+      name          : 'CACHE_SIZE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 10
+    #2              : (in Landroidx/collection/ArraySet;)
+      name          : 'DEBUG'
+      type          : 'Z'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : false
+    #3              : (in Landroidx/collection/ArraySet;)
+      name          : 'INT'
+      type          : '[I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : null
+    #4              : (in Landroidx/collection/ArraySet;)
+      name          : 'OBJECT'
+      type          : '[Ljava/lang/Object;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : null
+    #5              : (in Landroidx/collection/ArraySet;)
+      name          : 'TAG'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "ArraySet"
+    #6              : (in Landroidx/collection/ArraySet;)
+      name          : 'sBaseCache'
+      type          : '[Ljava/lang/Object;'
+      access        : 0x000a (PRIVATE STATIC)
+    #7              : (in Landroidx/collection/ArraySet;)
+      name          : 'sBaseCacheSize'
+      type          : 'I'
+      access        : 0x000a (PRIVATE STATIC)
+    #8              : (in Landroidx/collection/ArraySet;)
+      name          : 'sTwiceBaseCache'
+      type          : '[Ljava/lang/Object;'
+      access        : 0x000a (PRIVATE STATIC)
+    #9              : (in Landroidx/collection/ArraySet;)
+      name          : 'sTwiceBaseCacheSize'
+      type          : 'I'
+      access        : 0x000a (PRIVATE STATIC)
+  Instance fields   -
+    #0              : (in Landroidx/collection/ArraySet;)
+      name          : 'mArray'
+      type          : '[Ljava/lang/Object;'
+      access        : 0x0000 ()
+    #1              : (in Landroidx/collection/ArraySet;)
+      name          : 'mCollections'
+      type          : 'Landroidx/collection/MapCollections;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Landroidx/collection/ArraySet;)
+      name          : 'mHashes'
+      type          : '[I'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Landroidx/collection/ArraySet;)
+      name          : 'mSize'
+      type          : 'I'
+      access        : 0x0000 ()
+  Direct methods    -
+    #0              : (in Landroidx/collection/ArraySet;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 0
+      insns size    : 10 16-bit code units
+149374:                                        |[149374] androidx.collection.ArraySet.<clinit>:()V
+149384: 1200                                   |0000: const/4 v0, #int 0 // #0
+149386: 2301 171a                              |0001: new-array v1, v0, [I // type@1a17
+14938a: 6901 e20f                              |0003: sput-object v1, Landroidx/collection/ArraySet;.INT:[I // field@0fe2
+14938e: 2300 ac1a                              |0005: new-array v0, v0, [Ljava/lang/Object; // type@1aac
+149392: 6900 e30f                              |0007: sput-object v0, Landroidx/collection/ArraySet;.OBJECT:[Ljava/lang/Object; // field@0fe3
+149396: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=50
+        0x0005 line=51
+      locals        :
+
+    #1              : (in Landroidx/collection/ArraySet;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 5 16-bit code units
+149398:                                        |[149398] androidx.collection.ArraySet.<init>:()V
+1493a8: 1200                                   |0000: const/4 v0, #int 0 // #0
+1493aa: 7020 d928 0100                         |0001: invoke-direct {v1, v0}, Landroidx/collection/ArraySet;.<init>:(I)V // method@28d9
+1493b0: 0e00                                   |0004: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=240
+      locals        :
+        0x0000 - 0x0005 reg=1 this Landroidx/collection/ArraySet;
+
+    #2              : (in Landroidx/collection/ArraySet;)
+      name          : '<init>'
+      type          : '(I)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 21 16-bit code units
+1493d8:                                        |[1493d8] androidx.collection.ArraySet.<init>:(I)V
+1493e8: 7010 df71 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@71df
+1493ee: 3901 0b00                              |0003: if-nez v1, 000e // +000b
+1493f2: 6201 e20f                              |0005: sget-object v1, Landroidx/collection/ArraySet;.INT:[I // field@0fe2
+1493f6: 5b01 e70f                              |0007: iput-object v1, v0, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+1493fa: 6201 e30f                              |0009: sget-object v1, Landroidx/collection/ArraySet;.OBJECT:[Ljava/lang/Object; // field@0fe3
+1493fe: 5b01 e50f                              |000b: iput-object v1, v0, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+149402: 2804                                   |000d: goto 0011 // +0004
+149404: 7020 df28 1000                         |000e: invoke-direct {v0, v1}, Landroidx/collection/ArraySet;.allocArrays:(I)V // method@28df
+14940a: 1201                                   |0011: const/4 v1, #int 0 // #0
+14940c: 5901 e80f                              |0012: iput v1, v0, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149410: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=247
+        0x0005 line=249
+        0x0009 line=250
+        0x000e line=252
+        0x0012 line=254
+      locals        :
+        0x0000 - 0x0015 reg=0 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0015 reg=1 (null) I
+
+    #3              : (in Landroidx/collection/ArraySet;)
+      name          : '<init>'
+      type          : '(Landroidx/collection/ArraySet;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 9 16-bit code units
+1493b4:                                        |[1493b4] androidx.collection.ArraySet.<init>:(Landroidx/collection/ArraySet;)V
+1493c4: 7010 d828 0000                         |0000: invoke-direct {v0}, Landroidx/collection/ArraySet;.<init>:()V // method@28d8
+1493ca: 3801 0500                              |0003: if-eqz v1, 0008 // +0005
+1493ce: 6e20 dd28 1000                         |0005: invoke-virtual {v0, v1}, Landroidx/collection/ArraySet;.addAll:(Landroidx/collection/ArraySet;)V // method@28dd
+1493d4: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=261
+        0x0005 line=263
+      locals        :
+        0x0000 - 0x0009 reg=0 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0009 reg=1 (null) Landroidx/collection/ArraySet;
+
+    #4              : (in Landroidx/collection/ArraySet;)
+      name          : '<init>'
+      type          : '(Ljava/util/Collection;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 9 16-bit code units
+149414:                                        |[149414] androidx.collection.ArraySet.<init>:(Ljava/util/Collection;)V
+149424: 7010 d828 0000                         |0000: invoke-direct {v0}, Landroidx/collection/ArraySet;.<init>:()V // method@28d8
+14942a: 3801 0500                              |0003: if-eqz v1, 0008 // +0005
+14942e: 6e20 de28 1000                         |0005: invoke-virtual {v0, v1}, Landroidx/collection/ArraySet;.addAll:(Ljava/util/Collection;)Z // method@28de
+149434: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=271
+        0x0005 line=273
+      locals        :
+        0x0000 - 0x0009 reg=0 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0009 reg=1 (null) Ljava/util/Collection;
+
+    #5              : (in Landroidx/collection/ArraySet;)
+      name          : 'allocArrays'
+      type          : '(I)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 0
+      insns size    : 101 16-bit code units
+1494a4:                                        |[1494a4] androidx.collection.ArraySet.allocArrays:(I)V
+1494b4: 1300 0800                              |0000: const/16 v0, #int 8 // #8
+1494b8: 1201                                   |0002: const/4 v1, #int 0 // #0
+1494ba: 1202                                   |0003: const/4 v2, #int 0 // #0
+1494bc: 1213                                   |0004: const/4 v3, #int 1 // #1
+1494be: 3306 2b00                              |0005: if-ne v6, v0, 0030 // +002b
+1494c2: 1c00 5d05                              |0007: const-class v0, Landroidx/collection/ArraySet; // type@055d
+1494c6: 1d00                                   |0009: monitor-enter v0
+1494c8: 6204 eb0f                              |000a: sget-object v4, Landroidx/collection/ArraySet;.sTwiceBaseCache:[Ljava/lang/Object; // field@0feb
+1494cc: 3804 1f00                              |000c: if-eqz v4, 002b // +001f
+1494d0: 5b54 e50f                              |000e: iput-object v4, v5, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+1494d4: 4606 0402                              |0010: aget-object v6, v4, v2
+1494d8: 1f06 ac1a                              |0012: check-cast v6, [Ljava/lang/Object; // type@1aac
+1494dc: 1f06 ac1a                              |0014: check-cast v6, [Ljava/lang/Object; // type@1aac
+1494e0: 6906 eb0f                              |0016: sput-object v6, Landroidx/collection/ArraySet;.sTwiceBaseCache:[Ljava/lang/Object; // field@0feb
+1494e4: 4606 0403                              |0018: aget-object v6, v4, v3
+1494e8: 1f06 171a                              |001a: check-cast v6, [I // type@1a17
+1494ec: 1f06 171a                              |001c: check-cast v6, [I // type@1a17
+1494f0: 5b56 e70f                              |001e: iput-object v6, v5, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+1494f4: 4d01 0403                              |0020: aput-object v1, v4, v3
+1494f8: 4d01 0402                              |0022: aput-object v1, v4, v2
+1494fc: 6006 ec0f                              |0024: sget v6, Landroidx/collection/ArraySet;.sTwiceBaseCacheSize:I // field@0fec
+149500: b136                                   |0026: sub-int/2addr v6, v3
+149502: 6706 ec0f                              |0027: sput v6, Landroidx/collection/ArraySet;.sTwiceBaseCacheSize:I // field@0fec
+149506: 1e00                                   |0029: monitor-exit v0
+149508: 0e00                                   |002a: return-void
+14950a: 1e00                                   |002b: monitor-exit v0
+14950c: 2830                                   |002c: goto 005c // +0030
+14950e: 0d06                                   |002d: move-exception v6
+149510: 1e00                                   |002e: monitor-exit v0
+149512: 2706                                   |002f: throw v6
+149514: 1240                                   |0030: const/4 v0, #int 4 // #4
+149516: 3306 2b00                              |0031: if-ne v6, v0, 005c // +002b
+14951a: 1c00 5d05                              |0033: const-class v0, Landroidx/collection/ArraySet; // type@055d
+14951e: 1d00                                   |0035: monitor-enter v0
+149520: 6204 e90f                              |0036: sget-object v4, Landroidx/collection/ArraySet;.sBaseCache:[Ljava/lang/Object; // field@0fe9
+149524: 3804 1f00                              |0038: if-eqz v4, 0057 // +001f
+149528: 5b54 e50f                              |003a: iput-object v4, v5, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+14952c: 4606 0402                              |003c: aget-object v6, v4, v2
+149530: 1f06 ac1a                              |003e: check-cast v6, [Ljava/lang/Object; // type@1aac
+149534: 1f06 ac1a                              |0040: check-cast v6, [Ljava/lang/Object; // type@1aac
+149538: 6906 e90f                              |0042: sput-object v6, Landroidx/collection/ArraySet;.sBaseCache:[Ljava/lang/Object; // field@0fe9
+14953c: 4606 0403                              |0044: aget-object v6, v4, v3
+149540: 1f06 171a                              |0046: check-cast v6, [I // type@1a17
+149544: 1f06 171a                              |0048: check-cast v6, [I // type@1a17
+149548: 5b56 e70f                              |004a: iput-object v6, v5, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+14954c: 4d01 0403                              |004c: aput-object v1, v4, v3
+149550: 4d01 0402                              |004e: aput-object v1, v4, v2
+149554: 6006 ea0f                              |0050: sget v6, Landroidx/collection/ArraySet;.sBaseCacheSize:I // field@0fea
+149558: b136                                   |0052: sub-int/2addr v6, v3
+14955a: 6706 ea0f                              |0053: sput v6, Landroidx/collection/ArraySet;.sBaseCacheSize:I // field@0fea
+14955e: 1e00                                   |0055: monitor-exit v0
+149560: 0e00                                   |0056: return-void
+149562: 1e00                                   |0057: monitor-exit v0
+149564: 2804                                   |0058: goto 005c // +0004
+149566: 0d06                                   |0059: move-exception v6
+149568: 1e00                                   |005a: monitor-exit v0
+14956a: 2706                                   |005b: throw v6
+14956c: 2360 171a                              |005c: new-array v0, v6, [I // type@1a17
+149570: 5b50 e70f                              |005e: iput-object v0, v5, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+149574: 2366 ac1a                              |0060: new-array v6, v6, [Ljava/lang/Object; // type@1aac
+149578: 5b56 e50f                              |0062: iput-object v6, v5, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+14957c: 0e00                                   |0064: return-void
+      catches       : 2
+        0x000a - 0x002f
+          <any> -> 0x002d
+        0x0036 - 0x005b
+          <any> -> 0x0059
+      positions     :
+        0x0007 line=161
+        0x000a line=162
+        0x000e line=164
+        0x0010 line=165
+        0x0018 line=166
+        0x0020 line=167
+        0x0024 line=168
+        0x0029 line=173
+        0x002b line=175
+        0x0033 line=177
+        0x0036 line=178
+        0x003a line=180
+        0x003c line=181
+        0x0044 line=182
+        0x004c line=183
+        0x0050 line=184
+        0x0055 line=189
+        0x0057 line=191
+        0x005c line=194
+        0x0060 line=195
+      locals        :
+        0x0000 - 0x0065 reg=5 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0065 reg=6 (null) I
+
+    #6              : (in Landroidx/collection/ArraySet;)
+      name          : 'freeArrays'
+      type          : '([I[Ljava/lang/Object;I)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 10
+      ins           : 3
+      outs          : 0
+      insns size    : 82 16-bit code units
+14962c:                                        |[14962c] androidx.collection.ArraySet.freeArrays:([I[Ljava/lang/Object;I)V
+14963c: 2170                                   |0000: array-length v0, v7
+14963e: 1301 0800                              |0001: const/16 v1, #int 8 // #8
+149642: 1202                                   |0003: const/4 v2, #int 0 // #0
+149644: 1223                                   |0004: const/4 v3, #int 2 // #2
+149646: 1204                                   |0005: const/4 v4, #int 0 // #0
+149648: 1305 0a00                              |0006: const/16 v5, #int 10 // #a
+14964c: 1216                                   |0008: const/4 v6, #int 1 // #1
+14964e: 3310 2300                              |0009: if-ne v0, v1, 002c // +0023
+149652: 1c00 5d05                              |000b: const-class v0, Landroidx/collection/ArraySet; // type@055d
+149656: 1d00                                   |000d: monitor-enter v0
+149658: 6001 ec0f                              |000e: sget v1, Landroidx/collection/ArraySet;.sTwiceBaseCacheSize:I // field@0fec
+14965c: 3551 1700                              |0010: if-ge v1, v5, 0027 // +0017
+149660: 6201 eb0f                              |0012: sget-object v1, Landroidx/collection/ArraySet;.sTwiceBaseCache:[Ljava/lang/Object; // field@0feb
+149664: 4d01 0804                              |0014: aput-object v1, v8, v4
+149668: 4d07 0806                              |0016: aput-object v7, v8, v6
+14966c: b169                                   |0018: sub-int/2addr v9, v6
+14966e: 3439 0700                              |0019: if-lt v9, v3, 0020 // +0007
+149672: 4d02 0809                              |001b: aput-object v2, v8, v9
+149676: d809 09ff                              |001d: add-int/lit8 v9, v9, #int -1 // #ff
+14967a: 28fa                                   |001f: goto 0019 // -0006
+14967c: 6908 eb0f                              |0020: sput-object v8, Landroidx/collection/ArraySet;.sTwiceBaseCache:[Ljava/lang/Object; // field@0feb
+149680: 6007 ec0f                              |0022: sget v7, Landroidx/collection/ArraySet;.sTwiceBaseCacheSize:I // field@0fec
+149684: b067                                   |0024: add-int/2addr v7, v6
+149686: 6707 ec0f                              |0025: sput v7, Landroidx/collection/ArraySet;.sTwiceBaseCacheSize:I // field@0fec
+14968a: 1e00                                   |0027: monitor-exit v0
+14968c: 0e00                                   |0028: return-void
+14968e: 0d07                                   |0029: move-exception v7
+149690: 1e00                                   |002a: monitor-exit v0
+149692: 2707                                   |002b: throw v7
+149694: 2170                                   |002c: array-length v0, v7
+149696: 1241                                   |002d: const/4 v1, #int 4 // #4
+149698: 3310 2300                              |002e: if-ne v0, v1, 0051 // +0023
+14969c: 1c00 5d05                              |0030: const-class v0, Landroidx/collection/ArraySet; // type@055d
+1496a0: 1d00                                   |0032: monitor-enter v0
+1496a2: 6001 ea0f                              |0033: sget v1, Landroidx/collection/ArraySet;.sBaseCacheSize:I // field@0fea
+1496a6: 3551 1700                              |0035: if-ge v1, v5, 004c // +0017
+1496aa: 6201 e90f                              |0037: sget-object v1, Landroidx/collection/ArraySet;.sBaseCache:[Ljava/lang/Object; // field@0fe9
+1496ae: 4d01 0804                              |0039: aput-object v1, v8, v4
+1496b2: 4d07 0806                              |003b: aput-object v7, v8, v6
+1496b6: b169                                   |003d: sub-int/2addr v9, v6
+1496b8: 3439 0700                              |003e: if-lt v9, v3, 0045 // +0007
+1496bc: 4d02 0809                              |0040: aput-object v2, v8, v9
+1496c0: d809 09ff                              |0042: add-int/lit8 v9, v9, #int -1 // #ff
+1496c4: 28fa                                   |0044: goto 003e // -0006
+1496c6: 6908 e90f                              |0045: sput-object v8, Landroidx/collection/ArraySet;.sBaseCache:[Ljava/lang/Object; // field@0fe9
+1496ca: 6007 ea0f                              |0047: sget v7, Landroidx/collection/ArraySet;.sBaseCacheSize:I // field@0fea
+1496ce: b067                                   |0049: add-int/2addr v7, v6
+1496d0: 6707 ea0f                              |004a: sput v7, Landroidx/collection/ArraySet;.sBaseCacheSize:I // field@0fea
+1496d4: 1e00                                   |004c: monitor-exit v0
+1496d6: 0e00                                   |004d: return-void
+1496d8: 0d07                                   |004e: move-exception v7
+1496da: 1e00                                   |004f: monitor-exit v0
+1496dc: 2707                                   |0050: throw v7
+1496de: 0e00                                   |0051: return-void
+      catches       : 2
+        0x000e - 0x002b
+          <any> -> 0x0029
+        0x0033 - 0x0050
+          <any> -> 0x004e
+      positions     :
+        0x0000 line=200
+        0x000b line=201
+        0x000e line=202
+        0x0012 line=203
+        0x0016 line=204
+        0x001b line=206
+        0x0020 line=208
+        0x0022 line=209
+        0x0027 line=215
+        0x002c line=216
+        0x0030 line=217
+        0x0033 line=218
+        0x0037 line=219
+        0x003b line=220
+        0x0040 line=222
+        0x0045 line=224
+        0x0047 line=225
+        0x004c line=231
+      locals        :
+        0x0000 - 0x0052 reg=7 (null) [I
+        0x0000 - 0x0052 reg=8 (null) [Ljava/lang/Object;
+        0x0000 - 0x0052 reg=9 (null) I
+
+    #7              : (in Landroidx/collection/ArraySet;)
+      name          : 'getCollection'
+      type          : '()Landroidx/collection/MapCollections;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 14 16-bit code units
+148c28:                                        |[148c28] androidx.collection.ArraySet.getCollection:()Landroidx/collection/MapCollections;
+148c38: 5410 e60f                              |0000: iget-object v0, v1, Landroidx/collection/ArraySet;.mCollections:Landroidx/collection/MapCollections; // field@0fe6
+148c3c: 3900 0900                              |0002: if-nez v0, 000b // +0009
+148c40: 2200 5c05                              |0004: new-instance v0, Landroidx/collection/ArraySet$1; // type@055c
+148c44: 7020 cd28 1000                         |0006: invoke-direct {v0, v1}, Landroidx/collection/ArraySet$1;.<init>:(Landroidx/collection/ArraySet;)V // method@28cd
+148c4a: 5b10 e60f                              |0009: iput-object v0, v1, Landroidx/collection/ArraySet;.mCollections:Landroidx/collection/MapCollections; // field@0fe6
+148c4e: 5410 e60f                              |000b: iget-object v0, v1, Landroidx/collection/ArraySet;.mCollections:Landroidx/collection/MapCollections; // field@0fe6
+148c52: 1100                                   |000d: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=634
+        0x0004 line=635
+        0x000b line=682
+      locals        :
+        0x0000 - 0x000e reg=1 this Landroidx/collection/ArraySet;
+
+    #8              : (in Landroidx/collection/ArraySet;)
+      name          : 'indexOf'
+      type          : '(Ljava/lang/Object;I)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 3
+      insns size    : 76 16-bit code units
+148fd0:                                        |[148fd0] androidx.collection.ArraySet.indexOf:(Ljava/lang/Object;I)I
+148fe0: 5240 e80f                              |0000: iget v0, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148fe4: 3900 0400                              |0002: if-nez v0, 0006 // +0004
+148fe8: 12f5                                   |0004: const/4 v5, #int -1 // #ff
+148fea: 0f05                                   |0005: return v5
+148fec: 5441 e70f                              |0006: iget-object v1, v4, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+148ff0: 7130 1729 0106                         |0008: invoke-static {v1, v0, v6}, Landroidx/collection/ContainerHelpers;.binarySearch:([III)I // method@2917
+148ff6: 0a01                                   |000b: move-result v1
+148ff8: 3b01 0300                              |000c: if-gez v1, 000f // +0003
+148ffc: 280b                                   |000e: goto 0019 // +000b
+148ffe: 5442 e50f                              |000f: iget-object v2, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+149002: 4602 0201                              |0011: aget-object v2, v2, v1
+149006: 6e20 e171 2500                         |0013: invoke-virtual {v5, v2}, Ljava/lang/Object;.equals:(Ljava/lang/Object;)Z // method@71e1
+14900c: 0a02                                   |0016: move-result v2
+14900e: 3802 0300                              |0017: if-eqz v2, 001a // +0003
+149012: 0f01                                   |0019: return v1
+149014: d802 0101                              |001a: add-int/lit8 v2, v1, #int 1 // #01
+149018: 3502 1600                              |001c: if-ge v2, v0, 0032 // +0016
+14901c: 5443 e70f                              |001e: iget-object v3, v4, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+149020: 4403 0302                              |0020: aget v3, v3, v2
+149024: 3363 1000                              |0022: if-ne v3, v6, 0032 // +0010
+149028: 5443 e50f                              |0024: iget-object v3, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+14902c: 4603 0302                              |0026: aget-object v3, v3, v2
+149030: 6e20 e171 3500                         |0028: invoke-virtual {v5, v3}, Ljava/lang/Object;.equals:(Ljava/lang/Object;)Z // method@71e1
+149036: 0a03                                   |002b: move-result v3
+149038: 3803 0300                              |002c: if-eqz v3, 002f // +0003
+14903c: 0f02                                   |002e: return v2
+14903e: d802 0201                              |002f: add-int/lit8 v2, v2, #int 1 // #01
+149042: 28eb                                   |0031: goto 001c // -0015
+149044: d801 01ff                              |0032: add-int/lit8 v1, v1, #int -1 // #ff
+149048: 3a01 1600                              |0034: if-ltz v1, 004a // +0016
+14904c: 5440 e70f                              |0036: iget-object v0, v4, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+149050: 4400 0001                              |0038: aget v0, v0, v1
+149054: 3360 1000                              |003a: if-ne v0, v6, 004a // +0010
+149058: 5440 e50f                              |003c: iget-object v0, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+14905c: 4600 0001                              |003e: aget-object v0, v0, v1
+149060: 6e20 e171 0500                         |0040: invoke-virtual {v5, v0}, Ljava/lang/Object;.equals:(Ljava/lang/Object;)Z // method@71e1
+149066: 0a00                                   |0043: move-result v0
+149068: 3800 0300                              |0044: if-eqz v0, 0047 // +0003
+14906c: 0f01                                   |0046: return v1
+14906e: d801 01ff                              |0047: add-int/lit8 v1, v1, #int -1 // #ff
+149072: 28eb                                   |0049: goto 0034 // -0015
+149074: 7c25                                   |004a: not-int v5, v2
+149076: 0f05                                   |004b: return v5
+      catches       : (none)
+      positions     :
+        0x0000 line=83
+        0x0006 line=90
+        0x000f line=98
+        0x001e line=104
+        0x0024 line=105
+        0x0036 line=109
+        0x003c line=110
+      locals        :
+        0x0000 - 0x004c reg=4 this Landroidx/collection/ArraySet;
+        0x0000 - 0x004c reg=5 (null) Ljava/lang/Object;
+        0x0000 - 0x004c reg=6 (null) I
+
+    #9              : (in Landroidx/collection/ArraySet;)
+      name          : 'indexOfNull'
+      type          : '()I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 3
+      insns size    : 65 16-bit code units
+149078:                                        |[149078] androidx.collection.ArraySet.indexOfNull:()I
+149088: 5240 e80f                              |0000: iget v0, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+14908c: 3900 0400                              |0002: if-nez v0, 0006 // +0004
+149090: 12f0                                   |0004: const/4 v0, #int -1 // #ff
+149092: 0f00                                   |0005: return v0
+149094: 5441 e70f                              |0006: iget-object v1, v4, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+149098: 1202                                   |0008: const/4 v2, #int 0 // #0
+14909a: 7130 1729 0102                         |0009: invoke-static {v1, v0, v2}, Landroidx/collection/ContainerHelpers;.binarySearch:([III)I // method@2917
+1490a0: 0a01                                   |000c: move-result v1
+1490a2: 3b01 0300                              |000d: if-gez v1, 0010 // +0003
+1490a6: 2807                                   |000f: goto 0016 // +0007
+1490a8: 5442 e50f                              |0010: iget-object v2, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+1490ac: 4602 0201                              |0012: aget-object v2, v2, v1
+1490b0: 3902 0300                              |0014: if-nez v2, 0017 // +0003
+1490b4: 0f01                                   |0016: return v1
+1490b6: d802 0101                              |0017: add-int/lit8 v2, v1, #int 1 // #01
+1490ba: 3502 1200                              |0019: if-ge v2, v0, 002b // +0012
+1490be: 5443 e70f                              |001b: iget-object v3, v4, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+1490c2: 4403 0302                              |001d: aget v3, v3, v2
+1490c6: 3903 0c00                              |001f: if-nez v3, 002b // +000c
+1490ca: 5443 e50f                              |0021: iget-object v3, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+1490ce: 4603 0302                              |0023: aget-object v3, v3, v2
+1490d2: 3903 0300                              |0025: if-nez v3, 0028 // +0003
+1490d6: 0f02                                   |0027: return v2
+1490d8: d802 0201                              |0028: add-int/lit8 v2, v2, #int 1 // #01
+1490dc: 28ef                                   |002a: goto 0019 // -0011
+1490de: d801 01ff                              |002b: add-int/lit8 v1, v1, #int -1 // #ff
+1490e2: 3a01 1200                              |002d: if-ltz v1, 003f // +0012
+1490e6: 5440 e70f                              |002f: iget-object v0, v4, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+1490ea: 4400 0001                              |0031: aget v0, v0, v1
+1490ee: 3900 0c00                              |0033: if-nez v0, 003f // +000c
+1490f2: 5440 e50f                              |0035: iget-object v0, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+1490f6: 4600 0001                              |0037: aget-object v0, v0, v1
+1490fa: 3900 0300                              |0039: if-nez v0, 003c // +0003
+1490fe: 0f01                                   |003b: return v1
+149100: d801 01ff                              |003c: add-int/lit8 v1, v1, #int -1 // #ff
+149104: 28ef                                   |003e: goto 002d // -0011
+149106: 7c20                                   |003f: not-int v0, v2
+149108: 0f00                                   |0040: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=121
+        0x0006 line=128
+        0x0010 line=136
+        0x001b line=142
+        0x0021 line=143
+        0x002f line=147
+        0x0035 line=148
+      locals        :
+        0x0000 - 0x0041 reg=4 this Landroidx/collection/ArraySet;
+
+  Virtual methods   -
+    #0              : (in Landroidx/collection/ArraySet;)
+      name          : 'add'
+      type          : '(Ljava/lang/Object;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 10
+      ins           : 2
+      outs          : 5
+      insns size    : 104 16-bit code units
+148c54:                                        |[148c54] androidx.collection.ArraySet.add:(Ljava/lang/Object;)Z
+148c64: 1200                                   |0000: const/4 v0, #int 0 // #0
+148c66: 3909 0800                              |0001: if-nez v9, 0009 // +0008
+148c6a: 7010 ea28 0800                         |0003: invoke-direct {v8}, Landroidx/collection/ArraySet;.indexOfNull:()I // method@28ea
+148c70: 0a01                                   |0006: move-result v1
+148c72: 0102                                   |0007: move v2, v0
+148c74: 280c                                   |0008: goto 0014 // +000c
+148c76: 6e10 e471 0900                         |0009: invoke-virtual {v9}, Ljava/lang/Object;.hashCode:()I // method@71e4
+148c7c: 0a01                                   |000c: move-result v1
+148c7e: 7030 e928 9801                         |000d: invoke-direct {v8, v9, v1}, Landroidx/collection/ArraySet;.indexOf:(Ljava/lang/Object;I)I // method@28e9
+148c84: 0a02                                   |0010: move-result v2
+148c86: 0127                                   |0011: move v7, v2
+148c88: 0112                                   |0012: move v2, v1
+148c8a: 0171                                   |0013: move v1, v7
+148c8c: 3a01 0300                              |0014: if-ltz v1, 0017 // +0003
+148c90: 0f00                                   |0016: return v0
+148c92: 7c11                                   |0017: not-int v1, v1
+148c94: 5283 e80f                              |0018: iget v3, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148c98: 5484 e70f                              |001a: iget-object v4, v8, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+148c9c: 2145                                   |001c: array-length v5, v4
+148c9e: 3453 2800                              |001d: if-lt v3, v5, 0045 // +0028
+148ca2: 1305 0800                              |001f: const/16 v5, #int 8 // #8
+148ca6: 3453 0600                              |0021: if-lt v3, v5, 0027 // +0006
+148caa: e105 0301                              |0023: shr-int/lit8 v5, v3, #int 1 // #01
+148cae: b035                                   |0025: add-int/2addr v5, v3
+148cb0: 2806                                   |0026: goto 002c // +0006
+148cb2: 1246                                   |0027: const/4 v6, #int 4 // #4
+148cb4: 3463 0300                              |0028: if-lt v3, v6, 002b // +0003
+148cb8: 2802                                   |002a: goto 002c // +0002
+148cba: 0165                                   |002b: move v5, v6
+148cbc: 5483 e50f                              |002c: iget-object v3, v8, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+148cc0: 7020 df28 5800                         |002e: invoke-direct {v8, v5}, Landroidx/collection/ArraySet;.allocArrays:(I)V // method@28df
+148cc6: 5485 e70f                              |0031: iget-object v5, v8, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+148cca: 2156                                   |0033: array-length v6, v5
+148ccc: 3d06 0c00                              |0034: if-lez v6, 0040 // +000c
+148cd0: 2146                                   |0036: array-length v6, v4
+148cd2: 7156 6d72 0405                         |0037: invoke-static {v4, v0, v5, v0, v6}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+148cd8: 5485 e50f                              |003a: iget-object v5, v8, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+148cdc: 2136                                   |003c: array-length v6, v3
+148cde: 7156 6d72 0305                         |003d: invoke-static {v3, v0, v5, v0, v6}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+148ce4: 5280 e80f                              |0040: iget v0, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148ce8: 7130 e528 3400                         |0042: invoke-static {v4, v3, v0}, Landroidx/collection/ArraySet;.freeArrays:([I[Ljava/lang/Object;I)V // method@28e5
+148cee: 5280 e80f                              |0045: iget v0, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148cf2: 3501 1200                              |0047: if-ge v1, v0, 0059 // +0012
+148cf6: 5483 e70f                              |0049: iget-object v3, v8, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+148cfa: d804 0101                              |004b: add-int/lit8 v4, v1, #int 1 // #01
+148cfe: b110                                   |004d: sub-int/2addr v0, v1
+148d00: 7150 6d72 1343                         |004e: invoke-static {v3, v1, v3, v4, v0}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+148d06: 5480 e50f                              |0051: iget-object v0, v8, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+148d0a: 5283 e80f                              |0053: iget v3, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148d0e: b113                                   |0055: sub-int/2addr v3, v1
+148d10: 7153 6d72 1040                         |0056: invoke-static {v0, v1, v0, v4, v3}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+148d16: 5480 e70f                              |0059: iget-object v0, v8, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+148d1a: 4b02 0001                              |005b: aput v2, v0, v1
+148d1e: 5480 e50f                              |005d: iget-object v0, v8, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+148d22: 4d09 0001                              |005f: aput-object v9, v0, v1
+148d26: 5289 e80f                              |0061: iget v9, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148d2a: 1210                                   |0063: const/4 v0, #int 1 // #1
+148d2c: b009                                   |0064: add-int/2addr v9, v0
+148d2e: 5989 e80f                              |0065: iput v9, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148d32: 0f00                                   |0067: return v0
+      catches       : (none)
+      positions     :
+        0x0003 line=361
+        0x0009 line=363
+        0x000d line=364
+        0x0018 line=371
+        0x002c line=378
+        0x002e line=379
+        0x0031 line=381
+        0x0036 line=383
+        0x003a line=384
+        0x0040 line=387
+        0x0045 line=390
+        0x0049 line=395
+        0x0051 line=396
+        0x0059 line=399
+        0x005d line=400
+        0x0061 line=401
+      locals        :
+        0x0000 - 0x0068 reg=8 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0068 reg=9 (null) Ljava/lang/Object;
+
+    #1              : (in Landroidx/collection/ArraySet;)
+      name          : 'addAll'
+      type          : '(Landroidx/collection/ArraySet;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 5
+      insns size    : 45 16-bit code units
+149438:                                        |[149438] androidx.collection.ArraySet.addAll:(Landroidx/collection/ArraySet;)V
+149448: 5250 e80f                              |0000: iget v0, v5, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+14944c: 5241 e80f                              |0002: iget v1, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149450: b001                                   |0004: add-int/2addr v1, v0
+149452: 6e20 e328 1400                         |0005: invoke-virtual {v4, v1}, Landroidx/collection/ArraySet;.ensureCapacity:(I)V // method@28e3
+149458: 5241 e80f                              |0008: iget v1, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+14945c: 1202                                   |000a: const/4 v2, #int 0 // #0
+14945e: 3901 1500                              |000b: if-nez v1, 0020 // +0015
+149462: 3d00 1f00                              |000d: if-lez v0, 002c // +001f
+149466: 5451 e70f                              |000f: iget-object v1, v5, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+14946a: 5443 e70f                              |0011: iget-object v3, v4, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+14946e: 7150 6d72 2123                         |0013: invoke-static {v1, v2, v3, v2, v0}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+149474: 5455 e50f                              |0016: iget-object v5, v5, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+149478: 5441 e50f                              |0018: iget-object v1, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+14947c: 7150 6d72 2521                         |001a: invoke-static {v5, v2, v1, v2, v0}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+149482: 5940 e80f                              |001d: iput v0, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149486: 0e00                                   |001f: return-void
+149488: 3502 0c00                              |0020: if-ge v2, v0, 002c // +000c
+14948c: 6e20 f628 2500                         |0022: invoke-virtual {v5, v2}, Landroidx/collection/ArraySet;.valueAt:(I)Ljava/lang/Object; // method@28f6
+149492: 0c01                                   |0025: move-result-object v1
+149494: 6e20 dc28 1400                         |0026: invoke-virtual {v4, v1}, Landroidx/collection/ArraySet;.add:(Ljava/lang/Object;)Z // method@28dc
+14949a: d802 0201                              |0029: add-int/lit8 v2, v2, #int 1 // #01
+14949e: 28f5                                   |002b: goto 0020 // -000b
+1494a0: 0e00                                   |002c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=410
+        0x0002 line=411
+        0x0008 line=412
+        0x000f line=414
+        0x0016 line=415
+        0x001d line=416
+        0x0022 line=420
+      locals        :
+        0x0000 - 0x002d reg=4 this Landroidx/collection/ArraySet;
+        0x0000 - 0x002d reg=5 (null) Landroidx/collection/ArraySet;
+
+    #2              : (in Landroidx/collection/ArraySet;)
+      name          : 'addAll'
+      type          : '(Ljava/util/Collection;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 32 16-bit code units
+148d34:                                        |[148d34] androidx.collection.ArraySet.addAll:(Ljava/util/Collection;)Z
+148d44: 5220 e80f                              |0000: iget v0, v2, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148d48: 7210 ae74 0300                         |0002: invoke-interface {v3}, Ljava/util/Collection;.size:()I // method@74ae
+148d4e: 0a01                                   |0005: move-result v1
+148d50: b010                                   |0006: add-int/2addr v0, v1
+148d52: 6e20 e328 0200                         |0007: invoke-virtual {v2, v0}, Landroidx/collection/ArraySet;.ensureCapacity:(I)V // method@28e3
+148d58: 7210 aa74 0300                         |000a: invoke-interface {v3}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@74aa
+148d5e: 0c03                                   |000d: move-result-object v3
+148d60: 1200                                   |000e: const/4 v0, #int 0 // #0
+148d62: 7210 f274 0300                         |000f: invoke-interface {v3}, Ljava/util/Iterator;.hasNext:()Z // method@74f2
+148d68: 0a01                                   |0012: move-result v1
+148d6a: 3801 0c00                              |0013: if-eqz v1, 001f // +000c
+148d6e: 7210 f374 0300                         |0015: invoke-interface {v3}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@74f3
+148d74: 0c01                                   |0018: move-result-object v1
+148d76: 6e20 dc28 1200                         |0019: invoke-virtual {v2, v1}, Landroidx/collection/ArraySet;.add:(Ljava/lang/Object;)Z // method@28dc
+148d7c: 0a01                                   |001c: move-result v1
+148d7e: b610                                   |001d: or-int/2addr v0, v1
+148d80: 28f1                                   |001e: goto 000f // -000f
+148d82: 0f00                                   |001f: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=719
+        0x000a line=721
+        0x0019 line=722
+      locals        :
+        0x0000 - 0x0020 reg=2 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0020 reg=3 (null) Ljava/util/Collection;
+
+    #3              : (in Landroidx/collection/ArraySet;)
+      name          : 'clear'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 3
+      insns size    : 23 16-bit code units
+149598:                                        |[149598] androidx.collection.ArraySet.clear:()V
+1495a8: 5230 e80f                              |0000: iget v0, v3, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+1495ac: 3800 1400                              |0002: if-eqz v0, 0016 // +0014
+1495b0: 5431 e70f                              |0004: iget-object v1, v3, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+1495b4: 5432 e50f                              |0006: iget-object v2, v3, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+1495b8: 7130 e528 2100                         |0008: invoke-static {v1, v2, v0}, Landroidx/collection/ArraySet;.freeArrays:([I[Ljava/lang/Object;I)V // method@28e5
+1495be: 6200 e20f                              |000b: sget-object v0, Landroidx/collection/ArraySet;.INT:[I // field@0fe2
+1495c2: 5b30 e70f                              |000d: iput-object v0, v3, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+1495c6: 6200 e30f                              |000f: sget-object v0, Landroidx/collection/ArraySet;.OBJECT:[Ljava/lang/Object; // field@0fe3
+1495ca: 5b30 e50f                              |0011: iput-object v0, v3, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+1495ce: 1200                                   |0013: const/4 v0, #int 0 // #0
+1495d0: 5930 e80f                              |0014: iput v0, v3, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+1495d4: 0e00                                   |0016: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=282
+        0x0004 line=283
+        0x000b line=284
+        0x000f line=285
+        0x0014 line=286
+      locals        :
+        0x0000 - 0x0017 reg=3 this Landroidx/collection/ArraySet;
+
+    #4              : (in Landroidx/collection/ArraySet;)
+      name          : 'contains'
+      type          : '(Ljava/lang/Object;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 10 16-bit code units
+148d84:                                        |[148d84] androidx.collection.ArraySet.contains:(Ljava/lang/Object;)Z
+148d94: 6e20 e828 1000                         |0000: invoke-virtual {v0, v1}, Landroidx/collection/ArraySet;.indexOf:(Ljava/lang/Object;)I // method@28e8
+148d9a: 0a01                                   |0003: move-result v1
+148d9c: 3a01 0400                              |0004: if-ltz v1, 0008 // +0004
+148da0: 1211                                   |0006: const/4 v1, #int 1 // #1
+148da2: 0f01                                   |0007: return v1
+148da4: 1201                                   |0008: const/4 v1, #int 0 // #0
+148da6: 0f01                                   |0009: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=315
+      locals        :
+        0x0000 - 0x000a reg=0 this Landroidx/collection/ArraySet;
+        0x0000 - 0x000a reg=1 (null) Ljava/lang/Object;
+
+    #5              : (in Landroidx/collection/ArraySet;)
+      name          : 'containsAll'
+      type          : '(Ljava/util/Collection;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 24 16-bit code units
+148da8:                                        |[148da8] androidx.collection.ArraySet.containsAll:(Ljava/util/Collection;)Z
+148db8: 7210 aa74 0200                         |0000: invoke-interface {v2}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@74aa
+148dbe: 0c02                                   |0003: move-result-object v2
+148dc0: 7210 f274 0200                         |0004: invoke-interface {v2}, Ljava/util/Iterator;.hasNext:()Z // method@74f2
+148dc6: 0a00                                   |0007: move-result v0
+148dc8: 3800 0e00                              |0008: if-eqz v0, 0016 // +000e
+148dcc: 7210 f374 0200                         |000a: invoke-interface {v2}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@74f3
+148dd2: 0c00                                   |000d: move-result-object v0
+148dd4: 6e20 e128 0100                         |000e: invoke-virtual {v1, v0}, Landroidx/collection/ArraySet;.contains:(Ljava/lang/Object;)Z // method@28e1
+148dda: 0a00                                   |0011: move-result v0
+148ddc: 3900 f2ff                              |0012: if-nez v0, 0004 // -000e
+148de0: 1202                                   |0014: const/4 v2, #int 0 // #0
+148de2: 0f02                                   |0015: return v2
+148de4: 1212                                   |0016: const/4 v2, #int 1 // #1
+148de6: 0f02                                   |0017: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=705
+        0x000e line=706
+      locals        :
+        0x0000 - 0x0018 reg=1 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0018 reg=2 (null) Ljava/util/Collection;
+
+    #6              : (in Landroidx/collection/ArraySet;)
+      name          : 'ensureCapacity'
+      type          : '(I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 5
+      insns size    : 33 16-bit code units
+1495d8:                                        |[1495d8] androidx.collection.ArraySet.ensureCapacity:(I)V
+1495e8: 5440 e70f                              |0000: iget-object v0, v4, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+1495ec: 2101                                   |0002: array-length v1, v0
+1495ee: 3551 1d00                              |0003: if-ge v1, v5, 0020 // +001d
+1495f2: 5441 e50f                              |0005: iget-object v1, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+1495f6: 7020 df28 5400                         |0007: invoke-direct {v4, v5}, Landroidx/collection/ArraySet;.allocArrays:(I)V // method@28df
+1495fc: 5245 e80f                              |000a: iget v5, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149600: 3d05 0f00                              |000c: if-lez v5, 001b // +000f
+149604: 5442 e70f                              |000e: iget-object v2, v4, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+149608: 1203                                   |0010: const/4 v3, #int 0 // #0
+14960a: 7155 6d72 3032                         |0011: invoke-static {v0, v3, v2, v3, v5}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+149610: 5445 e50f                              |0014: iget-object v5, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+149614: 5242 e80f                              |0016: iget v2, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149618: 7152 6d72 3135                         |0018: invoke-static {v1, v3, v5, v3, v2}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+14961e: 5245 e80f                              |001b: iget v5, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149622: 7130 e528 1005                         |001d: invoke-static {v0, v1, v5}, Landroidx/collection/ArraySet;.freeArrays:([I[Ljava/lang/Object;I)V // method@28e5
+149628: 0e00                                   |0020: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=295
+        0x0005 line=297
+        0x0007 line=298
+        0x000a line=299
+        0x000e line=300
+        0x0014 line=301
+        0x001b line=303
+      locals        :
+        0x0000 - 0x0021 reg=4 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0021 reg=5 (null) I
+
+    #7              : (in Landroidx/collection/ArraySet;)
+      name          : 'equals'
+      type          : '(Ljava/lang/Object;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 2
+      insns size    : 43 16-bit code units
+148de8:                                        |[148de8] androidx.collection.ArraySet.equals:(Ljava/lang/Object;)Z
+148df8: 1210                                   |0000: const/4 v0, #int 1 // #1
+148dfa: 3354 0300                              |0001: if-ne v4, v5, 0004 // +0003
+148dfe: 0f00                                   |0003: return v0
+148e00: 2051 3d12                              |0004: instance-of v1, v5, Ljava/util/Set; // type@123d
+148e04: 1202                                   |0006: const/4 v2, #int 0 // #0
+148e06: 3801 2300                              |0007: if-eqz v1, 002a // +0023
+148e0a: 1f05 3d12                              |0009: check-cast v5, Ljava/util/Set; // type@123d
+148e0e: 6e10 f228 0400                         |000b: invoke-virtual {v4}, Landroidx/collection/ArraySet;.size:()I // method@28f2
+148e14: 0a01                                   |000e: move-result v1
+148e16: 7210 8075 0500                         |000f: invoke-interface {v5}, Ljava/util/Set;.size:()I // method@7580
+148e1c: 0a03                                   |0012: move-result v3
+148e1e: 3231 0300                              |0013: if-eq v1, v3, 0016 // +0003
+148e22: 0f02                                   |0015: return v2
+148e24: 0121                                   |0016: move v1, v2
+148e26: 5243 e80f                              |0017: iget v3, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148e2a: 3531 1000                              |0019: if-ge v1, v3, 0029 // +0010
+148e2e: 6e20 f628 1400                         |001b: invoke-virtual {v4, v1}, Landroidx/collection/ArraySet;.valueAt:(I)Ljava/lang/Object; // method@28f6
+148e34: 0c03                                   |001e: move-result-object v3
+148e36: 7220 7a75 3500                         |001f: invoke-interface {v5, v3}, Ljava/util/Set;.contains:(Ljava/lang/Object;)Z // method@757a
+148e3c: 0a03                                   |0022: move-result v3
+148e3e: 3903 0300                              |0023: if-nez v3, 0026 // +0003
+148e42: 0f02                                   |0025: return v2
+148e44: d801 0101                              |0026: add-int/lit8 v1, v1, #int 1 // #01
+148e48: 28ef                                   |0028: goto 0017 // -0011
+148e4a: 0f00                                   |0029: return v0
+148e4c: 0f02                                   |002a: return v2
+      catches       : 1
+        0x0017 - 0x0023
+          Ljava/lang/NullPointerException; -> 0x002a
+          Ljava/lang/ClassCastException; -> 0x002a
+      positions     :
+        0x0004 line=562
+        0x0009 line=563
+        0x000b line=564
+        0x0017 line=569
+        0x001b line=570
+        0x001f line=571
+      locals        :
+        0x0000 - 0x002b reg=4 this Landroidx/collection/ArraySet;
+        0x0000 - 0x002b reg=5 (null) Ljava/lang/Object;
+
+    #8              : (in Landroidx/collection/ArraySet;)
+      name          : 'hashCode'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 0
+      insns size    : 15 16-bit code units
+148f70:                                        |[148f70] androidx.collection.ArraySet.hashCode:()I
+148f80: 5450 e70f                              |0000: iget-object v0, v5, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+148f84: 5251 e80f                              |0002: iget v1, v5, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148f88: 1202                                   |0004: const/4 v2, #int 0 // #0
+148f8a: 0123                                   |0005: move v3, v2
+148f8c: 3512 0800                              |0006: if-ge v2, v1, 000e // +0008
+148f90: 4404 0002                              |0008: aget v4, v0, v2
+148f94: b043                                   |000a: add-int/2addr v3, v4
+148f96: d802 0201                              |000b: add-int/lit8 v2, v2, #int 1 // #01
+148f9a: 28f9                                   |000d: goto 0006 // -0007
+148f9c: 0f03                                   |000e: return v3
+      catches       : (none)
+      positions     :
+        0x0000 line=590
+        0x0002 line=592
+        0x0008 line=593
+      locals        :
+        0x0000 - 0x000f reg=5 this Landroidx/collection/ArraySet;
+
+    #9              : (in Landroidx/collection/ArraySet;)
+      name          : 'indexOf'
+      type          : '(Ljava/lang/Object;)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 16 16-bit code units
+148fa0:                                        |[148fa0] androidx.collection.ArraySet.indexOf:(Ljava/lang/Object;)I
+148fb0: 3902 0700                              |0000: if-nez v2, 0007 // +0007
+148fb4: 7010 ea28 0100                         |0002: invoke-direct {v1}, Landroidx/collection/ArraySet;.indexOfNull:()I // method@28ea
+148fba: 0a02                                   |0005: move-result v2
+148fbc: 0f02                                   |0006: return v2
+148fbe: 6e10 e471 0200                         |0007: invoke-virtual {v2}, Ljava/lang/Object;.hashCode:()I // method@71e4
+148fc4: 0a00                                   |000a: move-result v0
+148fc6: 7030 e928 2100                         |000b: invoke-direct {v1, v2, v0}, Landroidx/collection/ArraySet;.indexOf:(Ljava/lang/Object;I)I // method@28e9
+148fcc: 0a02                                   |000e: move-result v2
+148fce: 0f02                                   |000f: return v2
+      catches       : (none)
+      positions     :
+        0x0002 line=325
+      locals        :
+        0x0000 - 0x0010 reg=1 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0010 reg=2 (null) Ljava/lang/Object;
+
+    #10              : (in Landroidx/collection/ArraySet;)
+      name          : 'isEmpty'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+148e60:                                        |[148e60] androidx.collection.ArraySet.isEmpty:()Z
+148e70: 5210 e80f                              |0000: iget v0, v1, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148e74: 3c00 0400                              |0002: if-gtz v0, 0006 // +0004
+148e78: 1210                                   |0004: const/4 v0, #int 1 // #1
+148e7a: 0f00                                   |0005: return v0
+148e7c: 1200                                   |0006: const/4 v0, #int 0 // #0
+148e7e: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=343
+      locals        :
+        0x0000 - 0x0008 reg=1 this Landroidx/collection/ArraySet;
+
+    #11              : (in Landroidx/collection/ArraySet;)
+      name          : 'iterator'
+      type          : '()Ljava/util/Iterator;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 13 16-bit code units
+149348:                                        |[149348] androidx.collection.ArraySet.iterator:()Ljava/util/Iterator;
+149358: 7010 e628 0100                         |0000: invoke-direct {v1}, Landroidx/collection/ArraySet;.getCollection:()Landroidx/collection/MapCollections; // method@28e6
+14935e: 0c00                                   |0003: move-result-object v0
+149360: 6e10 9929 0000                         |0004: invoke-virtual {v0}, Landroidx/collection/MapCollections;.getKeySet:()Ljava/util/Set; // method@2999
+149366: 0c00                                   |0007: move-result-object v0
+149368: 7210 7d75 0000                         |0008: invoke-interface {v0}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@757d
+14936e: 0c00                                   |000b: move-result-object v0
+149370: 1100                                   |000c: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=694
+      locals        :
+        0x0000 - 0x000d reg=1 this Landroidx/collection/ArraySet;
+
+    #12              : (in Landroidx/collection/ArraySet;)
+      name          : 'remove'
+      type          : '(Ljava/lang/Object;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 13 16-bit code units
+148e80:                                        |[148e80] androidx.collection.ArraySet.remove:(Ljava/lang/Object;)Z
+148e90: 6e20 e828 1000                         |0000: invoke-virtual {v0, v1}, Landroidx/collection/ArraySet;.indexOf:(Ljava/lang/Object;)I // method@28e8
+148e96: 0a01                                   |0003: move-result v1
+148e98: 3a01 0700                              |0004: if-ltz v1, 000b // +0007
+148e9c: 6e20 f028 1000                         |0006: invoke-virtual {v0, v1}, Landroidx/collection/ArraySet;.removeAt:(I)Ljava/lang/Object; // method@28f0
+148ea2: 1211                                   |0009: const/4 v1, #int 1 // #1
+148ea4: 0f01                                   |000a: return v1
+148ea6: 1201                                   |000b: const/4 v1, #int 0 // #0
+148ea8: 0f01                                   |000c: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=433
+        0x0006 line=435
+      locals        :
+        0x0000 - 0x000d reg=0 this Landroidx/collection/ArraySet;
+        0x0000 - 0x000d reg=1 (null) Ljava/lang/Object;
+
+    #13              : (in Landroidx/collection/ArraySet;)
+      name          : 'removeAll'
+      type          : '(Landroidx/collection/ArraySet;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 2
+      insns size    : 25 16-bit code units
+148eac:                                        |[148eac] androidx.collection.ArraySet.removeAll:(Landroidx/collection/ArraySet;)Z
+148ebc: 5260 e80f                              |0000: iget v0, v6, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148ec0: 5251 e80f                              |0002: iget v1, v5, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148ec4: 1202                                   |0004: const/4 v2, #int 0 // #0
+148ec6: 0123                                   |0005: move v3, v2
+148ec8: 3503 0c00                              |0006: if-ge v3, v0, 0012 // +000c
+148ecc: 6e20 f628 3600                         |0008: invoke-virtual {v6, v3}, Landroidx/collection/ArraySet;.valueAt:(I)Ljava/lang/Object; // method@28f6
+148ed2: 0c04                                   |000b: move-result-object v4
+148ed4: 6e20 ed28 4500                         |000c: invoke-virtual {v5, v4}, Landroidx/collection/ArraySet;.remove:(Ljava/lang/Object;)Z // method@28ed
+148eda: d803 0301                              |000f: add-int/lit8 v3, v3, #int 1 // #01
+148ede: 28f5                                   |0011: goto 0006 // -000b
+148ee0: 5256 e80f                              |0012: iget v6, v5, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148ee4: 3261 0400                              |0014: if-eq v1, v6, 0018 // +0004
+148ee8: 1216                                   |0016: const/4 v6, #int 1 // #1
+148eea: 0f06                                   |0017: return v6
+148eec: 0f02                                   |0018: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=506
+        0x0002 line=510
+        0x0008 line=512
+        0x0012 line=514
+      locals        :
+        0x0000 - 0x0019 reg=5 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0019 reg=6 (null) Landroidx/collection/ArraySet;
+
+    #14              : (in Landroidx/collection/ArraySet;)
+      name          : 'removeAll'
+      type          : '(Ljava/util/Collection;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 22 16-bit code units
+148ef0:                                        |[148ef0] androidx.collection.ArraySet.removeAll:(Ljava/util/Collection;)Z
+148f00: 7210 aa74 0300                         |0000: invoke-interface {v3}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@74aa
+148f06: 0c03                                   |0003: move-result-object v3
+148f08: 1200                                   |0004: const/4 v0, #int 0 // #0
+148f0a: 7210 f274 0300                         |0005: invoke-interface {v3}, Ljava/util/Iterator;.hasNext:()Z // method@74f2
+148f10: 0a01                                   |0008: move-result v1
+148f12: 3801 0c00                              |0009: if-eqz v1, 0015 // +000c
+148f16: 7210 f374 0300                         |000b: invoke-interface {v3}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@74f3
+148f1c: 0c01                                   |000e: move-result-object v1
+148f1e: 6e20 ed28 1200                         |000f: invoke-virtual {v2, v1}, Landroidx/collection/ArraySet;.remove:(Ljava/lang/Object;)Z // method@28ed
+148f24: 0a01                                   |0012: move-result v1
+148f26: b610                                   |0013: or-int/2addr v0, v1
+148f28: 28f1                                   |0014: goto 0005 // -000f
+148f2a: 0f00                                   |0015: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=735
+        0x000f line=736
+      locals        :
+        0x0000 - 0x0016 reg=2 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0016 reg=3 (null) Ljava/util/Collection;
+
+    #15              : (in Landroidx/collection/ArraySet;)
+      name          : 'removeAt'
+      type          : '(I)Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 10
+      ins           : 2
+      outs          : 5
+      insns size    : 112 16-bit code units
+149124:                                        |[149124] androidx.collection.ArraySet.removeAt:(I)Ljava/lang/Object;
+149134: 5480 e50f                              |0000: iget-object v0, v8, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+149138: 4601 0009                              |0002: aget-object v1, v0, v9
+14913c: 5282 e80f                              |0004: iget v2, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149140: 1203                                   |0006: const/4 v3, #int 0 // #0
+149142: 1214                                   |0007: const/4 v4, #int 1 // #1
+149144: 3642 1200                              |0008: if-gt v2, v4, 001a // +0012
+149148: 5489 e70f                              |000a: iget-object v9, v8, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+14914c: 7130 e528 0902                         |000c: invoke-static {v9, v0, v2}, Landroidx/collection/ArraySet;.freeArrays:([I[Ljava/lang/Object;I)V // method@28e5
+149152: 6209 e20f                              |000f: sget-object v9, Landroidx/collection/ArraySet;.INT:[I // field@0fe2
+149156: 5b89 e70f                              |0011: iput-object v9, v8, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+14915a: 6209 e30f                              |0013: sget-object v9, Landroidx/collection/ArraySet;.OBJECT:[Ljava/lang/Object; // field@0fe3
+14915e: 5b89 e50f                              |0015: iput-object v9, v8, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+149162: 5983 e80f                              |0017: iput v3, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149166: 1101                                   |0019: return-object v1
+149168: 5485 e70f                              |001a: iget-object v5, v8, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+14916c: 2156                                   |001c: array-length v6, v5
+14916e: 1307 0800                              |001d: const/16 v7, #int 8 // #8
+149172: 3776 3600                              |001f: if-le v6, v7, 0055 // +0036
+149176: 2156                                   |0021: array-length v6, v5
+149178: db06 0603                              |0022: div-int/lit8 v6, v6, #int 3 // #03
+14917c: 3562 3100                              |0024: if-ge v2, v6, 0055 // +0031
+149180: 3772 0600                              |0026: if-le v2, v7, 002c // +0006
+149184: e106 0201                              |0028: shr-int/lit8 v6, v2, #int 1 // #01
+149188: 9007 0206                              |002a: add-int v7, v2, v6
+14918c: 7020 df28 7800                         |002c: invoke-direct {v8, v7}, Landroidx/collection/ArraySet;.allocArrays:(I)V // method@28df
+149192: 5282 e80f                              |002f: iget v2, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149196: b142                                   |0031: sub-int/2addr v2, v4
+149198: 5982 e80f                              |0032: iput v2, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+14919c: 3d09 0c00                              |0034: if-lez v9, 0040 // +000c
+1491a0: 5482 e70f                              |0036: iget-object v2, v8, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+1491a4: 7159 6d72 3532                         |0038: invoke-static {v5, v3, v2, v3, v9}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+1491aa: 5482 e50f                              |003b: iget-object v2, v8, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+1491ae: 7159 6d72 3032                         |003d: invoke-static {v0, v3, v2, v3, v9}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+1491b4: 5282 e80f                              |0040: iget v2, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+1491b8: 3529 1200                              |0042: if-ge v9, v2, 0054 // +0012
+1491bc: d803 0901                              |0044: add-int/lit8 v3, v9, #int 1 // #01
+1491c0: 5484 e70f                              |0046: iget-object v4, v8, Landroidx/collection/ArraySet;.mHashes:[I // field@0fe7
+1491c4: b192                                   |0048: sub-int/2addr v2, v9
+1491c6: 7152 6d72 3594                         |0049: invoke-static {v5, v3, v4, v9, v2}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+1491cc: 5482 e50f                              |004c: iget-object v2, v8, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+1491d0: 5284 e80f                              |004e: iget v4, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+1491d4: b194                                   |0050: sub-int/2addr v4, v9
+1491d6: 7154 6d72 3092                         |0051: invoke-static {v0, v3, v2, v9, v4}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+1491dc: 1101                                   |0054: return-object v1
+1491de: b142                                   |0055: sub-int/2addr v2, v4
+1491e0: 5982 e80f                              |0056: iput v2, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+1491e4: 3529 1000                              |0058: if-ge v9, v2, 0068 // +0010
+1491e8: d800 0901                              |005a: add-int/lit8 v0, v9, #int 1 // #01
+1491ec: b192                                   |005c: sub-int/2addr v2, v9
+1491ee: 7152 6d72 0595                         |005d: invoke-static {v5, v0, v5, v9, v2}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+1491f4: 5482 e50f                              |0060: iget-object v2, v8, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+1491f8: 5283 e80f                              |0062: iget v3, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+1491fc: b193                                   |0064: sub-int/2addr v3, v9
+1491fe: 7153 6d72 0292                         |0065: invoke-static {v2, v0, v2, v9, v3}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+149204: 5489 e50f                              |0068: iget-object v9, v8, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+149208: 5280 e80f                              |006a: iget v0, v8, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+14920c: 1202                                   |006c: const/4 v2, #int 0 // #0
+14920e: 4d02 0900                              |006d: aput-object v2, v9, v0
+149212: 1101                                   |006f: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=447
+        0x0004 line=448
+        0x000a line=451
+        0x000f line=452
+        0x0013 line=453
+        0x0017 line=454
+        0x001a line=456
+        0x002c line=466
+        0x002f line=468
+        0x0036 line=471
+        0x003b line=472
+        0x0040 line=474
+        0x0046 line=479
+        0x004c line=480
+        0x0056 line=483
+        0x005d line=488
+        0x0060 line=489
+        0x0068 line=491
+      locals        :
+        0x0000 - 0x0070 reg=8 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0070 reg=9 (null) I
+
+    #16              : (in Landroidx/collection/ArraySet;)
+      name          : 'retainAll'
+      type          : '(Ljava/util/Collection;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 2
+      insns size    : 25 16-bit code units
+148f2c:                                        |[148f2c] androidx.collection.ArraySet.retainAll:(Ljava/util/Collection;)Z
+148f3c: 5240 e80f                              |0000: iget v0, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+148f40: 1211                                   |0002: const/4 v1, #int 1 // #1
+148f42: b110                                   |0003: sub-int/2addr v0, v1
+148f44: 1202                                   |0004: const/4 v2, #int 0 // #0
+148f46: 3a00 1300                              |0005: if-ltz v0, 0018 // +0013
+148f4a: 5443 e50f                              |0007: iget-object v3, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+148f4e: 4603 0300                              |0009: aget-object v3, v3, v0
+148f52: 7220 a774 3500                         |000b: invoke-interface {v5, v3}, Ljava/util/Collection;.contains:(Ljava/lang/Object;)Z // method@74a7
+148f58: 0a03                                   |000e: move-result v3
+148f5a: 3903 0600                              |000f: if-nez v3, 0015 // +0006
+148f5e: 6e20 f028 0400                         |0011: invoke-virtual {v4, v0}, Landroidx/collection/ArraySet;.removeAt:(I)Ljava/lang/Object; // method@28f0
+148f64: 0112                                   |0014: move v2, v1
+148f66: d800 00ff                              |0015: add-int/lit8 v0, v0, #int -1 // #ff
+148f6a: 28ee                                   |0017: goto 0005 // -0012
+148f6c: 0f02                                   |0018: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=750
+        0x0007 line=751
+        0x0011 line=752
+      locals        :
+        0x0000 - 0x0019 reg=4 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0019 reg=5 (null) Ljava/util/Collection;
+
+    #17              : (in Landroidx/collection/ArraySet;)
+      name          : 'size'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+14910c:                                        |[14910c] androidx.collection.ArraySet.size:()I
+14911c: 5210 e80f                              |0000: iget v0, v1, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149120: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=522
+      locals        :
+        0x0000 - 0x0003 reg=1 this Landroidx/collection/ArraySet;
+
+    #18              : (in Landroidx/collection/ArraySet;)
+      name          : 'toArray'
+      type          : '()[Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 5
+      insns size    : 11 16-bit code units
+149230:                                        |[149230] androidx.collection.ArraySet.toArray:()[Ljava/lang/Object;
+149240: 5240 e80f                              |0000: iget v0, v4, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149244: 2301 ac1a                              |0002: new-array v1, v0, [Ljava/lang/Object; // type@1aac
+149248: 5442 e50f                              |0004: iget-object v2, v4, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+14924c: 1203                                   |0006: const/4 v3, #int 0 // #0
+14924e: 7150 6d72 3231                         |0007: invoke-static {v2, v3, v1, v3, v0}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+149254: 1101                                   |000a: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=528
+        0x0004 line=529
+      locals        :
+        0x0000 - 0x000b reg=4 this Landroidx/collection/ArraySet;
+
+    #19              : (in Landroidx/collection/ArraySet;)
+      name          : 'toArray'
+      type          : '([Ljava/lang/Object;)[Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 5
+      insns size    : 40 16-bit code units
+149258:                                        |[149258] androidx.collection.ArraySet.toArray:([Ljava/lang/Object;)[Ljava/lang/Object;
+149268: 2140                                   |0000: array-length v0, v4
+14926a: 5231 e80f                              |0001: iget v1, v3, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+14926e: 3510 1400                              |0003: if-ge v0, v1, 0017 // +0014
+149272: 6e10 e371 0400                         |0005: invoke-virtual {v4}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+149278: 0c04                                   |0008: move-result-object v4
+14927a: 6e10 1171 0400                         |0009: invoke-virtual {v4}, Ljava/lang/Class;.getComponentType:()Ljava/lang/Class; // method@7111
+149280: 0c04                                   |000c: move-result-object v4
+149282: 5230 e80f                              |000d: iget v0, v3, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+149286: 7120 b972 0400                         |000f: invoke-static {v4, v0}, Ljava/lang/reflect/Array;.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object; // method@72b9
+14928c: 0c04                                   |0012: move-result-object v4
+14928e: 1f04 ac1a                              |0013: check-cast v4, [Ljava/lang/Object; // type@1aac
+149292: 1f04 ac1a                              |0015: check-cast v4, [Ljava/lang/Object; // type@1aac
+149296: 5430 e50f                              |0017: iget-object v0, v3, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+14929a: 5231 e80f                              |0019: iget v1, v3, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+14929e: 1202                                   |001b: const/4 v2, #int 0 // #0
+1492a0: 7151 6d72 2024                         |001c: invoke-static {v0, v2, v4, v2, v1}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@726d
+1492a6: 2140                                   |001f: array-length v0, v4
+1492a8: 5231 e80f                              |0020: iget v1, v3, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+1492ac: 3710 0500                              |0022: if-le v0, v1, 0027 // +0005
+1492b0: 1200                                   |0024: const/4 v0, #int 0 // #0
+1492b2: 4d00 0401                              |0025: aput-object v0, v4, v1
+1492b6: 1104                                   |0027: return-object v4
+      catches       : (none)
+      positions     :
+        0x0000 line=536
+        0x0005 line=538
+        0x0017 line=541
+        0x001f line=542
+        0x0025 line=543
+      locals        :
+        0x0000 - 0x0028 reg=3 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0028 reg=4 (null) [Ljava/lang/Object;
+
+    #20              : (in Landroidx/collection/ArraySet;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 63 16-bit code units
+1492b8:                                        |[1492b8] androidx.collection.ArraySet.toString:()Ljava/lang/String;
+1492c8: 6e10 eb28 0300                         |0000: invoke-virtual {v3}, Landroidx/collection/ArraySet;.isEmpty:()Z // method@28eb
+1492ce: 0a00                                   |0003: move-result v0
+1492d0: 3800 0500                              |0004: if-eqz v0, 0009 // +0005
+1492d4: 1a00 b9b4                              |0006: const-string v0, "{}" // string@b4b9
+1492d8: 1100                                   |0008: return-object v0
+1492da: 2200 8811                              |0009: new-instance v0, Ljava/lang/StringBuilder; // type@1188
+1492de: 5231 e80f                              |000b: iget v1, v3, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+1492e2: da01 010e                              |000d: mul-int/lit8 v1, v1, #int 14 // #0e
+1492e6: 7020 4c72 1000                         |000f: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(I)V // method@724c
+1492ec: 1301 7b00                              |0012: const/16 v1, #int 123 // #7b
+1492f0: 6e20 4f72 1000                         |0014: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@724f
+1492f6: 1201                                   |0017: const/4 v1, #int 0 // #0
+1492f8: 5232 e80f                              |0018: iget v2, v3, Landroidx/collection/ArraySet;.mSize:I // field@0fe8
+1492fc: 3521 1b00                              |001a: if-ge v1, v2, 0035 // +001b
+149300: 3d01 0700                              |001c: if-lez v1, 0023 // +0007
+149304: 1a02 ff14                              |001e: const-string v2, ", " // string@14ff
+149308: 6e20 5772 2000                         |0020: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14930e: 6e20 f628 1300                         |0023: invoke-virtual {v3, v1}, Landroidx/collection/ArraySet;.valueAt:(I)Ljava/lang/Object; // method@28f6
+149314: 0c02                                   |0026: move-result-object v2
+149316: 3232 0600                              |0027: if-eq v2, v3, 002d // +0006
+14931a: 6e20 5672 2000                         |0029: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@7256
+149320: 2806                                   |002c: goto 0032 // +0006
+149322: 1a02 0014                              |002d: const-string v2, "(this Set)" // string@1400
+149326: 6e20 5772 2000                         |002f: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+14932c: d801 0101                              |0032: add-int/lit8 v1, v1, #int 1 // #01
+149330: 28e4                                   |0034: goto 0018 // -001c
+149332: 1301 7d00                              |0035: const/16 v1, #int 125 // #7d
+149336: 6e20 4f72 1000                         |0037: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@724f
+14933c: 6e10 6b72 0000                         |003a: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+149342: 0c00                                   |003d: move-result-object v0
+149344: 1100                                   |003e: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=607
+        0x0006 line=608
+        0x0009 line=611
+        0x0014 line=612
+        0x0018 line=613
+        0x001e line=615
+        0x0023 line=617
+        0x0029 line=619
+        0x002d line=621
+        0x0037 line=624
+        0x003a line=625
+      locals        :
+        0x0000 - 0x003f reg=3 this Landroidx/collection/ArraySet;
+
+    #21              : (in Landroidx/collection/ArraySet;)
+      name          : 'valueAt'
+      type          : '(I)Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 0
+      insns size    : 5 16-bit code units
+149214:                                        |[149214] androidx.collection.ArraySet.valueAt:(I)Ljava/lang/Object;
+149224: 5410 e50f                              |0000: iget-object v0, v1, Landroidx/collection/ArraySet;.mArray:[Ljava/lang/Object; // field@0fe5
+149228: 4602 0002                              |0002: aget-object v2, v0, v2
+14922c: 1102                                   |0004: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=335
+      locals        :
+        0x0000 - 0x0005 reg=1 this Landroidx/collection/ArraySet;
+        0x0000 - 0x0005 reg=2 (null) I
+
+  source_file_idx   : 7241 (ArraySet.java)
+

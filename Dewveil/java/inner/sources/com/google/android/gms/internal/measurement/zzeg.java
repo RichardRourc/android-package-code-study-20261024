@@ -1,0 +1,47 @@
+package com.google.android.gms.internal.measurement;
+
+/* JADX INFO: compiled from: com.google.android.gms:play-services-measurement@@20.1.1 */
+/* JADX INFO: loaded from: classes.dex */
+public final class zzeg extends zzjv implements zzlh {
+    private zzeg() {
+        super(zzeh.zza);
+    }
+
+    public final int zza() {
+        return ((zzeh) this.zza).zzb();
+    }
+
+    public final int zzb() {
+        return ((zzeh) this.zza).zzc();
+    }
+
+    public final zzeg zzc(int i, zzei zzeiVar) {
+        if (this.zzb) {
+            zzaC();
+            this.zzb = false;
+        }
+        zzeh.zzj((zzeh) this.zza, i, (zzej) zzeiVar.zzay());
+        return this;
+    }
+
+    public final zzeg zzd(int i, zzer zzerVar) {
+        if (this.zzb) {
+            zzaC();
+            this.zzb = false;
+        }
+        zzeh.zzi((zzeh) this.zza, i, (zzes) zzerVar.zzay());
+        return this;
+    }
+
+    public final zzej zze(int i) {
+        return ((zzeh) this.zza).zze(i);
+    }
+
+    public final zzes zzf(int i) {
+        return ((zzeh) this.zza).zzf(i);
+    }
+
+    /* synthetic */ zzeg(zzef zzefVar) {
+        super(zzeh.zza);
+    }
+}

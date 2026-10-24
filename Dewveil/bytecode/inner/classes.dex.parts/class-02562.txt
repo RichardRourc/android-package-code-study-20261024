@@ -1,0 +1,886 @@
+Class #2562            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/core/io/UTF8Writer;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/io/Writer;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'SURR1_FIRST'
+      type          : 'I'
+      access        : 0x0018 (STATIC FINAL)
+      value         : 55296
+    #1              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'SURR1_LAST'
+      type          : 'I'
+      access        : 0x0018 (STATIC FINAL)
+      value         : 56319
+    #2              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'SURR2_FIRST'
+      type          : 'I'
+      access        : 0x0018 (STATIC FINAL)
+      value         : 56320
+    #3              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'SURR2_LAST'
+      type          : 'I'
+      access        : 0x0018 (STATIC FINAL)
+      value         : 57343
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : '_context'
+      type          : 'Lcom/fasterxml/jackson/core/io/IOContext;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : '_out'
+      type          : 'Ljava/io/OutputStream;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : '_outBuffer'
+      type          : '[B'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : '_outBufferEnd'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : '_outPtr'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : '_surrogate'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/core/io/IOContext;Ljava/io/OutputStream;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 1
+      insns size    : 22 16-bit code units
+5c76b8:                                        |[5c76b8] com.fasterxml.jackson.core.io.UTF8Writer.<init>:(Lcom/fasterxml/jackson/core/io/IOContext;Ljava/io/OutputStream;)V
+5c76c8: 7010 84d0 0000                         |0000: invoke-direct {v0}, Ljava/io/Writer;.<init>:()V // method@d084
+5c76ce: 5b01 3646                              |0003: iput-object v1, v0, Lcom/fasterxml/jackson/core/io/UTF8Writer;._context:Lcom/fasterxml/jackson/core/io/IOContext; // field@4636
+5c76d2: 5b02 3746                              |0005: iput-object v2, v0, Lcom/fasterxml/jackson/core/io/UTF8Writer;._out:Ljava/io/OutputStream; // field@4637
+5c76d6: 6e10 a565 0100                         |0007: invoke-virtual {v1}, Lcom/fasterxml/jackson/core/io/IOContext;.allocWriteEncodingBuffer:()[B // method@65a5
+5c76dc: 0c01                                   |000a: move-result-object v1
+5c76de: 5b01 3846                              |000b: iput-object v1, v0, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c76e2: 2111                                   |000d: array-length v1, v1
+5c76e4: d801 01fc                              |000e: add-int/lit8 v1, v1, #int -4 // #fc
+5c76e8: 5901 3946                              |0010: iput v1, v0, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBufferEnd:I // field@4639
+5c76ec: 1201                                   |0012: const/4 v1, #int 0 // #0
+5c76ee: 5901 3a46                              |0013: iput v1, v0, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c76f2: 0e00                                   |0015: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=30
+        0x0003 line=31
+        0x0005 line=32
+        0x0007 line=34
+        0x000d line=39
+        0x0013 line=40
+      locals        :
+        0x0000 - 0x0016 reg=0 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+        0x0000 - 0x0016 reg=1 (null) Lcom/fasterxml/jackson/core/io/IOContext;
+        0x0000 - 0x0016 reg=2 (null) Ljava/io/OutputStream;
+
+    #1              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'illegalSurrogate'
+      type          : '(I)V'
+      access        : 0x000c (PROTECTED STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 10 16-bit code units
+5c76f4:                                        |[5c76f4] com.fasterxml.jackson.core.io.UTF8Writer.illegalSurrogate:(I)V
+5c7704: 2200 481a                              |0000: new-instance v0, Ljava/io/IOException; // type@1a48
+5c7708: 7110 3966 0100                         |0002: invoke-static {v1}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.illegalSurrogateDesc:(I)Ljava/lang/String; // method@6639
+5c770e: 0c01                                   |0005: move-result-object v1
+5c7710: 7020 14d0 1000                         |0006: invoke-direct {v0, v1}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+5c7716: 2700                                   |0009: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=375
+      locals        :
+        0x0000 - 0x000a reg=1 (null) I
+
+    #2              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'illegalSurrogateDesc'
+      type          : '(I)Ljava/lang/String;'
+      access        : 0x000c (PROTECTED STATIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 115 16-bit code units
+5c7718:                                        |[5c7718] com.fasterxml.jackson.core.io.UTF8Writer.illegalSurrogateDesc:(I)Ljava/lang/String;
+5c7728: 1400 ffff 1000                         |0000: const v0, #float 1.5612e-39 // #0010ffff
+5c772e: 1a01 8e2c                              |0003: const-string v1, "Illegal character point (0x" // string@2c8e
+5c7732: 3703 1a00                              |0005: if-le v3, v0, 001f // +001a
+5c7736: 2200 991a                              |0007: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+5c773a: 7020 3cd2 1000                         |0009: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5c7740: 7110 67d1 0300                         |000c: invoke-static {v3}, Ljava/lang/Integer;.toHexString:(I)Ljava/lang/String; // method@d167
+5c7746: 0c03                                   |000f: move-result-object v3
+5c7748: 6e20 45d2 3000                         |0010: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c774e: 0c03                                   |0013: move-result-object v3
+5c7750: 1a00 280d                              |0014: const-string v0, ") to output; max is 0x10FFFF as per RFC 4627" // string@0d28
+5c7754: 6e20 45d2 0300                         |0016: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c775a: 0c03                                   |0019: move-result-object v3
+5c775c: 6e10 58d2 0300                         |001a: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5c7762: 0c03                                   |001d: move-result-object v3
+5c7764: 1103                                   |001e: return-object v3
+5c7766: 1400 00d8 0000                         |001f: const v0, #float 7.74862e-41 // #0000d800
+5c776c: 3403 3900                              |0022: if-lt v3, v0, 005b // +0039
+5c7770: 1400 ffdb 0000                         |0024: const v0, #float 7.89197e-41 // #0000dbff
+5c7776: 1a01 000d                              |0027: const-string v1, ")" // string@0d00
+5c777a: 3603 1a00                              |0029: if-gt v3, v0, 0043 // +001a
+5c777e: 2200 991a                              |002b: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+5c7782: 1a02 0d6b                              |002d: const-string v2, "Unmatched first part of surrogate pair (0x" // string@6b0d
+5c7786: 7020 3cd2 2000                         |002f: invoke-direct {v0, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5c778c: 7110 67d1 0300                         |0032: invoke-static {v3}, Ljava/lang/Integer;.toHexString:(I)Ljava/lang/String; // method@d167
+5c7792: 0c03                                   |0035: move-result-object v3
+5c7794: 6e20 45d2 3000                         |0036: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c779a: 0c03                                   |0039: move-result-object v3
+5c779c: 6e20 45d2 1300                         |003a: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c77a2: 0c03                                   |003d: move-result-object v3
+5c77a4: 6e10 58d2 0300                         |003e: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5c77aa: 0c03                                   |0041: move-result-object v3
+5c77ac: 1103                                   |0042: return-object v3
+5c77ae: 2200 991a                              |0043: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+5c77b2: 1a02 0e6b                              |0045: const-string v2, "Unmatched second part of surrogate pair (0x" // string@6b0e
+5c77b6: 7020 3cd2 2000                         |0047: invoke-direct {v0, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5c77bc: 7110 67d1 0300                         |004a: invoke-static {v3}, Ljava/lang/Integer;.toHexString:(I)Ljava/lang/String; // method@d167
+5c77c2: 0c03                                   |004d: move-result-object v3
+5c77c4: 6e20 45d2 3000                         |004e: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c77ca: 0c03                                   |0051: move-result-object v3
+5c77cc: 6e20 45d2 1300                         |0052: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c77d2: 0c03                                   |0055: move-result-object v3
+5c77d4: 6e10 58d2 0300                         |0056: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5c77da: 0c03                                   |0059: move-result-object v3
+5c77dc: 1103                                   |005a: return-object v3
+5c77de: 2200 991a                              |005b: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+5c77e2: 7020 3cd2 1000                         |005d: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5c77e8: 7110 67d1 0300                         |0060: invoke-static {v3}, Ljava/lang/Integer;.toHexString:(I)Ljava/lang/String; // method@d167
+5c77ee: 0c03                                   |0063: move-result-object v3
+5c77f0: 6e20 45d2 3000                         |0064: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c77f6: 0c03                                   |0067: move-result-object v3
+5c77f8: 1a00 270d                              |0068: const-string v0, ") to output" // string@0d27
+5c77fc: 6e20 45d2 0300                         |006a: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c7802: 0c03                                   |006d: move-result-object v3
+5c7804: 6e10 58d2 0300                         |006e: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5c780a: 0c03                                   |0071: move-result-object v3
+5c780c: 1103                                   |0072: return-object v3
+      catches       : (none)
+      positions     :
+        0x0003 line=380
+        0x0007 line=381
+        0x0027 line=384
+        0x002b line=385
+        0x0043 line=387
+        0x005b line=390
+      locals        :
+        0x0000 - 0x0073 reg=3 (null) I
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'append'
+      type          : '(C)Ljava/io/Writer;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 4 16-bit code units
+5c7810:                                        |[5c7810] com.fasterxml.jackson.core.io.UTF8Writer.append:(C)Ljava/io/Writer;
+5c7820: 6e20 3a66 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.write:(I)V // method@663a
+5c7826: 1100                                   |0003: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=47
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+        0x0000 - 0x0004 reg=1 (null) C
+
+    #1              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'append'
+      type          : '(C)Ljava/lang/Appendable;'
+      access        : 0x1041 (PUBLIC BRIDGE SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 5 16-bit code units
+5c7828:                                        |[5c7828] com.fasterxml.jackson.core.io.UTF8Writer.append:(C)Ljava/lang/Appendable;
+5c7838: 6e20 3366 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.append:(C)Ljava/io/Writer; // method@6633
+5c783e: 0c00                                   |0003: move-result-object v0
+5c7840: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=5
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+        0x0000 - 0x0005 reg=1 (null) C
+
+    #2              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 45 16-bit code units
+5c7844:                                        |[5c7844] com.fasterxml.jackson.core.io.UTF8Writer.close:()V
+5c7854: 5440 3746                              |0000: iget-object v0, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._out:Ljava/io/OutputStream; // field@4637
+5c7858: 3800 2a00                              |0002: if-eqz v0, 002c // +002a
+5c785c: 5241 3a46                              |0004: iget v1, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7860: 1202                                   |0006: const/4 v2, #int 0 // #0
+5c7862: 3d01 0900                              |0007: if-lez v1, 0010 // +0009
+5c7866: 5443 3846                              |0009: iget-object v3, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c786a: 6e40 4fd0 3012                         |000b: invoke-virtual {v0, v3, v2, v1}, Ljava/io/OutputStream;.write:([BII)V // method@d04f
+5c7870: 5942 3a46                              |000e: iput v2, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7874: 5440 3746                              |0010: iget-object v0, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._out:Ljava/io/OutputStream; // field@4637
+5c7878: 1201                                   |0012: const/4 v1, #int 0 // #0
+5c787a: 5b41 3746                              |0013: iput-object v1, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._out:Ljava/io/OutputStream; // field@4637
+5c787e: 5443 3846                              |0015: iget-object v3, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c7882: 3803 0900                              |0017: if-eqz v3, 0020 // +0009
+5c7886: 5b41 3846                              |0019: iput-object v1, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c788a: 5441 3646                              |001b: iget-object v1, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._context:Lcom/fasterxml/jackson/core/io/IOContext; // field@4636
+5c788e: 6e20 b165 3100                         |001d: invoke-virtual {v1, v3}, Lcom/fasterxml/jackson/core/io/IOContext;.releaseWriteEncodingBuffer:([B)V // method@65b1
+5c7894: 6e10 4bd0 0000                         |0020: invoke-virtual {v0}, Ljava/io/OutputStream;.close:()V // method@d04b
+5c789a: 5240 3b46                              |0023: iget v0, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._surrogate:I // field@463b
+5c789e: 5942 3b46                              |0025: iput v2, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._surrogate:I // field@463b
+5c78a2: 3d00 0500                              |0027: if-lez v0, 002c // +0005
+5c78a6: 7110 3866 0000                         |0029: invoke-static {v0}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.illegalSurrogate:(I)V // method@6638
+5c78ac: 0e00                                   |002c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=55
+        0x0004 line=56
+        0x0009 line=57
+        0x000e line=58
+        0x0010 line=60
+        0x0013 line=61
+        0x0015 line=63
+        0x0019 line=65
+        0x001b line=66
+        0x0020 line=69
+        0x0023 line=73
+        0x0025 line=74
+        0x0029 line=76
+      locals        :
+        0x0000 - 0x002d reg=4 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+
+    #3              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'convertSurrogate'
+      type          : '(I)I'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 72 16-bit code units
+5c78b0:                                        |[5c78b0] com.fasterxml.jackson.core.io.UTF8Writer.convertSurrogate:(I)I
+5c78c0: 5230 3b46                              |0000: iget v0, v3, Lcom/fasterxml/jackson/core/io/UTF8Writer;._surrogate:I // field@463b
+5c78c4: 1201                                   |0002: const/4 v1, #int 0 // #0
+5c78c6: 5931 3b46                              |0003: iput v1, v3, Lcom/fasterxml/jackson/core/io/UTF8Writer;._surrogate:I // field@463b
+5c78ca: 1403 00dc 0000                         |0005: const v3, #float 7.89211e-41 // #0000dc00
+5c78d0: 3434 1300                              |0008: if-lt v4, v3, 001b // +0013
+5c78d4: 1401 ffdf 0000                         |000a: const v1, #float 8.03547e-41 // #0000dfff
+5c78da: 3614 0e00                              |000d: if-gt v4, v1, 001b // +000e
+5c78de: 1401 00d8 0000                         |000f: const v1, #float 7.74862e-41 // #0000d800
+5c78e4: b110                                   |0012: sub-int/2addr v0, v1
+5c78e6: e000 000a                              |0013: shl-int/lit8 v0, v0, #int 10 // #0a
+5c78ea: 1501 0100                              |0015: const/high16 v1, #int 65536 // #1
+5c78ee: b010                                   |0017: add-int/2addr v0, v1
+5c78f0: b134                                   |0018: sub-int/2addr v4, v3
+5c78f2: b040                                   |0019: add-int/2addr v0, v4
+5c78f4: 0f00                                   |001a: return v0
+5c78f6: 2203 481a                              |001b: new-instance v3, Ljava/io/IOException; // type@1a48
+5c78fa: 2201 991a                              |001d: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+5c78fe: 1a02 7319                              |001f: const-string v2, "Broken surrogate pair: first char 0x" // string@1973
+5c7902: 7020 3cd2 2100                         |0021: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5c7908: 7110 67d1 0000                         |0024: invoke-static {v0}, Ljava/lang/Integer;.toHexString:(I)Ljava/lang/String; // method@d167
+5c790e: 0c00                                   |0027: move-result-object v0
+5c7910: 6e20 45d2 0100                         |0028: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c7916: 0c00                                   |002b: move-result-object v0
+5c7918: 1a01 b50e                              |002c: const-string v1, ", second 0x" // string@0eb5
+5c791c: 6e20 45d2 1000                         |002e: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c7922: 0c00                                   |0031: move-result-object v0
+5c7924: 7110 67d1 0400                         |0032: invoke-static {v4}, Ljava/lang/Integer;.toHexString:(I)Ljava/lang/String; // method@d167
+5c792a: 0c04                                   |0035: move-result-object v4
+5c792c: 6e20 45d2 4000                         |0036: invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c7932: 0c04                                   |0039: move-result-object v4
+5c7934: 1a00 c510                              |003a: const-string v0, "; illegal combination" // string@10c5
+5c7938: 6e20 45d2 0400                         |003c: invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c793e: 0c04                                   |003f: move-result-object v4
+5c7940: 6e10 58d2 0400                         |0040: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5c7946: 0c04                                   |0043: move-result-object v4
+5c7948: 7020 14d0 4300                         |0044: invoke-direct {v3, v4}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+5c794e: 2703                                   |0047: throw v3
+      catches       : (none)
+      positions     :
+        0x0000 line=364
+        0x0003 line=365
+        0x001b line=369
+      locals        :
+        0x0000 - 0x0048 reg=3 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+        0x0000 - 0x0048 reg=4 (null) I
+
+    #4              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'flush'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 22 16-bit code units
+5c7950:                                        |[5c7950] com.fasterxml.jackson.core.io.UTF8Writer.flush:()V
+5c7960: 5440 3746                              |0000: iget-object v0, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._out:Ljava/io/OutputStream; // field@4637
+5c7964: 3800 1300                              |0002: if-eqz v0, 0015 // +0013
+5c7968: 5241 3a46                              |0004: iget v1, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c796c: 3d01 0a00                              |0006: if-lez v1, 0010 // +000a
+5c7970: 5442 3846                              |0008: iget-object v2, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c7974: 1203                                   |000a: const/4 v3, #int 0 // #0
+5c7976: 6e40 4fd0 2013                         |000b: invoke-virtual {v0, v2, v3, v1}, Ljava/io/OutputStream;.write:([BII)V // method@d04f
+5c797c: 5943 3a46                              |000e: iput v3, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7980: 5444 3746                              |0010: iget-object v4, v4, Lcom/fasterxml/jackson/core/io/UTF8Writer;._out:Ljava/io/OutputStream; // field@4637
+5c7984: 6e10 4cd0 0400                         |0012: invoke-virtual {v4}, Ljava/io/OutputStream;.flush:()V // method@d04c
+5c798a: 0e00                                   |0015: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=85
+        0x0004 line=86
+        0x0008 line=87
+        0x000e line=88
+        0x0010 line=90
+      locals        :
+        0x0000 - 0x0016 reg=4 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+
+    #5              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'write'
+      type          : '(I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 4
+      insns size    : 173 16-bit code units
+5c798c:                                        |[5c798c] com.fasterxml.jackson.core.io.UTF8Writer.write:(I)V
+5c799c: 5260 3b46                              |0000: iget v0, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._surrogate:I // field@463b
+5c79a0: 3d00 0700                              |0002: if-lez v0, 0009 // +0007
+5c79a4: 6e20 3666 7600                         |0004: invoke-virtual {v6, v7}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.convertSurrogate:(I)I // method@6636
+5c79aa: 0a07                                   |0007: move-result v7
+5c79ac: 2816                                   |0008: goto 001e // +0016
+5c79ae: 1400 00d8 0000                         |0009: const v0, #float 7.74862e-41 // #0000d800
+5c79b4: 3407 1200                              |000c: if-lt v7, v0, 001e // +0012
+5c79b8: 1400 ffdf 0000                         |000e: const v0, #float 8.03547e-41 // #0000dfff
+5c79be: 3607 0d00                              |0011: if-gt v7, v0, 001e // +000d
+5c79c2: 1400 ffdb 0000                         |0013: const v0, #float 7.89197e-41 // #0000dbff
+5c79c8: 3707 0500                              |0016: if-le v7, v0, 001b // +0005
+5c79cc: 7110 3866 0700                         |0018: invoke-static {v7}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.illegalSurrogate:(I)V // method@6638
+5c79d2: 5967 3b46                              |001b: iput v7, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._surrogate:I // field@463b
+5c79d6: 0e00                                   |001d: return-void
+5c79d8: 5260 3a46                              |001e: iget v0, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c79dc: 5261 3946                              |0020: iget v1, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBufferEnd:I // field@4639
+5c79e0: 3410 0c00                              |0022: if-lt v0, v1, 002e // +000c
+5c79e4: 5461 3746                              |0024: iget-object v1, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._out:Ljava/io/OutputStream; // field@4637
+5c79e8: 5462 3846                              |0026: iget-object v2, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c79ec: 1203                                   |0028: const/4 v3, #int 0 // #0
+5c79ee: 6e40 4fd0 2103                         |0029: invoke-virtual {v1, v2, v3, v0}, Ljava/io/OutputStream;.write:([BII)V // method@d04f
+5c79f4: 5963 3a46                              |002c: iput v3, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c79f8: 1300 8000                              |002e: const/16 v0, #int 128 // #80
+5c79fc: 3507 0e00                              |0030: if-ge v7, v0, 003e // +000e
+5c7a00: 5460 3846                              |0032: iget-object v0, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c7a04: 5261 3a46                              |0034: iget v1, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7a08: d802 0101                              |0036: add-int/lit8 v2, v1, #int 1 // #01
+5c7a0c: 5962 3a46                              |0038: iput v2, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7a10: 8d76                                   |003a: int-to-byte v6, v7
+5c7a12: 4f06 0001                              |003b: aput-byte v6, v0, v1
+5c7a16: 286f                                   |003d: goto 00ac // +006f
+5c7a18: 5261 3a46                              |003e: iget v1, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7a1c: 1302 0008                              |0040: const/16 v2, #int 2048 // #800
+5c7a20: 3527 1600                              |0042: if-ge v7, v2, 0058 // +0016
+5c7a24: 5462 3846                              |0044: iget-object v2, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c7a28: d803 0101                              |0046: add-int/lit8 v3, v1, #int 1 // #01
+5c7a2c: e104 0706                              |0048: shr-int/lit8 v4, v7, #int 6 // #06
+5c7a30: d644 c000                              |004a: or-int/lit16 v4, v4, #int 192 // #00c0
+5c7a34: 8d44                                   |004c: int-to-byte v4, v4
+5c7a36: 4f04 0201                              |004d: aput-byte v4, v2, v1
+5c7a3a: d801 0102                              |004f: add-int/lit8 v1, v1, #int 2 // #02
+5c7a3e: dd07 073f                              |0051: and-int/lit8 v7, v7, #int 63 // #3f
+5c7a42: b607                                   |0053: or-int/2addr v7, v0
+5c7a44: 8d77                                   |0054: int-to-byte v7, v7
+5c7a46: 4f07 0203                              |0055: aput-byte v7, v2, v3
+5c7a4a: 2853                                   |0057: goto 00aa // +0053
+5c7a4c: 1402 ffff 0000                         |0058: const v2, #float 9.18341e-41 // #0000ffff
+5c7a52: 3627 2000                              |005b: if-gt v7, v2, 007b // +0020
+5c7a56: 5462 3846                              |005d: iget-object v2, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c7a5a: d803 0101                              |005f: add-int/lit8 v3, v1, #int 1 // #01
+5c7a5e: e104 070c                              |0061: shr-int/lit8 v4, v7, #int 12 // #0c
+5c7a62: d644 e000                              |0063: or-int/lit16 v4, v4, #int 224 // #00e0
+5c7a66: 8d44                                   |0065: int-to-byte v4, v4
+5c7a68: 4f04 0201                              |0066: aput-byte v4, v2, v1
+5c7a6c: d804 0102                              |0068: add-int/lit8 v4, v1, #int 2 // #02
+5c7a70: e105 0706                              |006a: shr-int/lit8 v5, v7, #int 6 // #06
+5c7a74: dd05 053f                              |006c: and-int/lit8 v5, v5, #int 63 // #3f
+5c7a78: b605                                   |006e: or-int/2addr v5, v0
+5c7a7a: 8d55                                   |006f: int-to-byte v5, v5
+5c7a7c: 4f05 0203                              |0070: aput-byte v5, v2, v3
+5c7a80: d801 0103                              |0072: add-int/lit8 v1, v1, #int 3 // #03
+5c7a84: dd07 073f                              |0074: and-int/lit8 v7, v7, #int 63 // #3f
+5c7a88: b607                                   |0076: or-int/2addr v7, v0
+5c7a8a: 8d77                                   |0077: int-to-byte v7, v7
+5c7a8c: 4f07 0204                              |0078: aput-byte v7, v2, v4
+5c7a90: 2830                                   |007a: goto 00aa // +0030
+5c7a92: 1402 ffff 1000                         |007b: const v2, #float 1.5612e-39 // #0010ffff
+5c7a98: 3727 0500                              |007e: if-le v7, v2, 0083 // +0005
+5c7a9c: 7110 3866 0700                         |0080: invoke-static {v7}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.illegalSurrogate:(I)V // method@6638
+5c7aa2: 5462 3846                              |0083: iget-object v2, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c7aa6: d803 0101                              |0085: add-int/lit8 v3, v1, #int 1 // #01
+5c7aaa: e104 0712                              |0087: shr-int/lit8 v4, v7, #int 18 // #12
+5c7aae: d644 f000                              |0089: or-int/lit16 v4, v4, #int 240 // #00f0
+5c7ab2: 8d44                                   |008b: int-to-byte v4, v4
+5c7ab4: 4f04 0201                              |008c: aput-byte v4, v2, v1
+5c7ab8: d804 0102                              |008e: add-int/lit8 v4, v1, #int 2 // #02
+5c7abc: e105 070c                              |0090: shr-int/lit8 v5, v7, #int 12 // #0c
+5c7ac0: dd05 053f                              |0092: and-int/lit8 v5, v5, #int 63 // #3f
+5c7ac4: b605                                   |0094: or-int/2addr v5, v0
+5c7ac6: 8d55                                   |0095: int-to-byte v5, v5
+5c7ac8: 4f05 0203                              |0096: aput-byte v5, v2, v3
+5c7acc: d803 0103                              |0098: add-int/lit8 v3, v1, #int 3 // #03
+5c7ad0: e105 0706                              |009a: shr-int/lit8 v5, v7, #int 6 // #06
+5c7ad4: dd05 053f                              |009c: and-int/lit8 v5, v5, #int 63 // #3f
+5c7ad8: b605                                   |009e: or-int/2addr v5, v0
+5c7ada: 8d55                                   |009f: int-to-byte v5, v5
+5c7adc: 4f05 0204                              |00a0: aput-byte v5, v2, v4
+5c7ae0: d801 0104                              |00a2: add-int/lit8 v1, v1, #int 4 // #04
+5c7ae4: dd07 073f                              |00a4: and-int/lit8 v7, v7, #int 63 // #3f
+5c7ae8: b607                                   |00a6: or-int/2addr v7, v0
+5c7aea: 8d77                                   |00a7: int-to-byte v7, v7
+5c7aec: 4f07 0203                              |00a8: aput-byte v7, v2, v3
+5c7af0: 5961 3a46                              |00aa: iput v1, v6, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7af4: 0e00                                   |00ac: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=202
+        0x0004 line=203
+        0x0018 line=208
+        0x001b line=211
+        0x001e line=215
+        0x0024 line=216
+        0x002c line=217
+        0x0032 line=221
+        0x003e line=223
+        0x0044 line=225
+        0x0055 line=226
+        0x005d line=228
+        0x0070 line=229
+        0x0078 line=230
+        0x0080 line=233
+        0x0083 line=235
+        0x0096 line=236
+        0x00a0 line=237
+        0x00a8 line=238
+        0x00aa line=240
+      locals        :
+        0x0000 - 0x00ad reg=6 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+        0x0000 - 0x00ad reg=7 (null) I
+
+    #6              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'write'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 9 16-bit code units
+5c7af8:                                        |[5c7af8] com.fasterxml.jackson.core.io.UTF8Writer.write:(Ljava/lang/String;)V
+5c7b08: 1200                                   |0000: const/4 v0, #int 0 // #0
+5c7b0a: 6e10 16d2 0300                         |0001: invoke-virtual {v3}, Ljava/lang/String;.length:()I // method@d216
+5c7b10: 0a01                                   |0004: move-result v1
+5c7b12: 6e40 3c66 3210                         |0005: invoke-virtual {v2, v3, v0, v1}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.write:(Ljava/lang/String;II)V // method@663c
+5c7b18: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=247
+      locals        :
+        0x0000 - 0x0009 reg=2 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+        0x0000 - 0x0009 reg=3 (null) Ljava/lang/String;
+
+    #7              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'write'
+      type          : '(Ljava/lang/String;II)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 12
+      ins           : 4
+      outs          : 4
+      insns size    : 236 16-bit code units
+5c7b1c:                                        |[5c7b1c] com.fasterxml.jackson.core.io.UTF8Writer.write:(Ljava/lang/String;II)V
+5c7b2c: 1220                                   |0000: const/4 v0, #int 2 // #2
+5c7b2e: 350b 0d00                              |0001: if-ge v11, v0, 000e // +000d
+5c7b32: 1210                                   |0003: const/4 v0, #int 1 // #1
+5c7b34: 330b 0900                              |0004: if-ne v11, v0, 000d // +0009
+5c7b38: 6e20 f7d1 a900                         |0006: invoke-virtual {v9, v10}, Ljava/lang/String;.charAt:(I)C // method@d1f7
+5c7b3e: 0a09                                   |0009: move-result v9
+5c7b40: 6e20 3a66 9800                         |000a: invoke-virtual {v8, v9}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.write:(I)V // method@663a
+5c7b46: 0e00                                   |000d: return-void
+5c7b48: 5280 3b46                              |000e: iget v0, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._surrogate:I // field@463b
+5c7b4c: 3d00 1200                              |0010: if-lez v0, 0022 // +0012
+5c7b50: d800 0a01                              |0012: add-int/lit8 v0, v10, #int 1 // #01
+5c7b54: 6e20 f7d1 a900                         |0014: invoke-virtual {v9, v10}, Ljava/lang/String;.charAt:(I)C // method@d1f7
+5c7b5a: 0a0a                                   |0017: move-result v10
+5c7b5c: d80b 0bff                              |0018: add-int/lit8 v11, v11, #int -1 // #ff
+5c7b60: 6e20 3666 a800                         |001a: invoke-virtual {v8, v10}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.convertSurrogate:(I)I // method@6636
+5c7b66: 0a0a                                   |001d: move-result v10
+5c7b68: 6e20 3a66 a800                         |001e: invoke-virtual {v8, v10}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.write:(I)V // method@663a
+5c7b6e: 010a                                   |0021: move v10, v0
+5c7b70: 5280 3a46                              |0022: iget v0, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7b74: 5481 3846                              |0024: iget-object v1, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c7b78: 5282 3946                              |0026: iget v2, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBufferEnd:I // field@4639
+5c7b7c: b0ab                                   |0028: add-int/2addr v11, v10
+5c7b7e: 35ba c000                              |0029: if-ge v10, v11, 00e9 // +00c0
+5c7b82: 3420 0900                              |002b: if-lt v0, v2, 0034 // +0009
+5c7b86: 5483 3746                              |002d: iget-object v3, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._out:Ljava/io/OutputStream; // field@4637
+5c7b8a: 1204                                   |002f: const/4 v4, #int 0 // #0
+5c7b8c: 6e40 4fd0 1304                         |0030: invoke-virtual {v3, v1, v4, v0}, Ljava/io/OutputStream;.write:([BII)V // method@d04f
+5c7b92: 0140                                   |0033: move v0, v4
+5c7b94: d803 0a01                              |0034: add-int/lit8 v3, v10, #int 1 // #01
+5c7b98: 6e20 f7d1 a900                         |0036: invoke-virtual {v9, v10}, Ljava/lang/String;.charAt:(I)C // method@d1f7
+5c7b9e: 0a0a                                   |0039: move-result v10
+5c7ba0: 1304 8000                              |003a: const/16 v4, #int 128 // #80
+5c7ba4: 354a 2400                              |003c: if-ge v10, v4, 0060 // +0024
+5c7ba8: d805 0001                              |003e: add-int/lit8 v5, v0, #int 1 // #01
+5c7bac: 8daa                                   |0040: int-to-byte v10, v10
+5c7bae: 4f0a 0100                              |0041: aput-byte v10, v1, v0
+5c7bb2: 910a 0b03                              |0043: sub-int v10, v11, v3
+5c7bb6: 9100 0205                              |0045: sub-int v0, v2, v5
+5c7bba: 370a 0300                              |0047: if-le v10, v0, 004a // +0003
+5c7bbe: 010a                                   |0049: move v10, v0
+5c7bc0: 9006 0a03                              |004a: add-int v6, v10, v3
+5c7bc4: 013a                                   |004c: move v10, v3
+5c7bc6: 0150                                   |004d: move v0, v5
+5c7bc8: 346a 0300                              |004e: if-lt v10, v6, 0051 // +0003
+5c7bcc: 28d9                                   |0050: goto 0029 // -0027
+5c7bce: d803 0a01                              |0051: add-int/lit8 v3, v10, #int 1 // #01
+5c7bd2: 6e20 f7d1 a900                         |0053: invoke-virtual {v9, v10}, Ljava/lang/String;.charAt:(I)C // method@d1f7
+5c7bd8: 0a0a                                   |0056: move-result v10
+5c7bda: 344a 0300                              |0057: if-lt v10, v4, 005a // +0003
+5c7bde: 2807                                   |0059: goto 0060 // +0007
+5c7be0: d805 0001                              |005a: add-int/lit8 v5, v0, #int 1 // #01
+5c7be4: 8daa                                   |005c: int-to-byte v10, v10
+5c7be6: 4f0a 0100                              |005d: aput-byte v10, v1, v0
+5c7bea: 28ed                                   |005f: goto 004c // -0013
+5c7bec: 1305 0008                              |0060: const/16 v5, #int 2048 // #800
+5c7bf0: 355a 1400                              |0062: if-ge v10, v5, 0076 // +0014
+5c7bf4: d805 0001                              |0064: add-int/lit8 v5, v0, #int 1 // #01
+5c7bf8: e106 0a06                              |0066: shr-int/lit8 v6, v10, #int 6 // #06
+5c7bfc: d666 c000                              |0068: or-int/lit16 v6, v6, #int 192 // #00c0
+5c7c00: 8d66                                   |006a: int-to-byte v6, v6
+5c7c02: 4f06 0100                              |006b: aput-byte v6, v1, v0
+5c7c06: d800 0002                              |006d: add-int/lit8 v0, v0, #int 2 // #02
+5c7c0a: dd0a 0a3f                              |006f: and-int/lit8 v10, v10, #int 63 // #3f
+5c7c0e: b64a                                   |0071: or-int/2addr v10, v4
+5c7c10: 8daa                                   |0072: int-to-byte v10, v10
+5c7c12: 4f0a 0105                              |0073: aput-byte v10, v1, v5
+5c7c16: 2871                                   |0075: goto 00e6 // +0071
+5c7c18: 1405 00d8 0000                         |0076: const v5, #float 7.74862e-41 // #0000d800
+5c7c1e: 345a 5200                              |0079: if-lt v10, v5, 00cb // +0052
+5c7c22: 1405 ffdf 0000                         |007b: const v5, #float 8.03547e-41 // #0000dfff
+5c7c28: 375a 0300                              |007e: if-le v10, v5, 0081 // +0003
+5c7c2c: 284b                                   |0080: goto 00cb // +004b
+5c7c2e: 1405 ffdb 0000                         |0081: const v5, #float 7.89197e-41 // #0000dbff
+5c7c34: 375a 0700                              |0084: if-le v10, v5, 008b // +0007
+5c7c38: 5980 3a46                              |0086: iput v0, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7c3c: 7110 3866 0a00                         |0088: invoke-static {v10}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.illegalSurrogate:(I)V // method@6638
+5c7c42: 598a 3b46                              |008b: iput v10, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._surrogate:I // field@463b
+5c7c46: 34b3 0300                              |008d: if-lt v3, v11, 0090 // +0003
+5c7c4a: 285a                                   |008f: goto 00e9 // +005a
+5c7c4c: d80a 0301                              |0090: add-int/lit8 v10, v3, #int 1 // #01
+5c7c50: 6e20 f7d1 3900                         |0092: invoke-virtual {v9, v3}, Ljava/lang/String;.charAt:(I)C // method@d1f7
+5c7c56: 0a03                                   |0095: move-result v3
+5c7c58: 6e20 3666 3800                         |0096: invoke-virtual {v8, v3}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.convertSurrogate:(I)I // method@6636
+5c7c5e: 0a03                                   |0099: move-result v3
+5c7c60: 1405 ffff 1000                         |009a: const v5, #float 1.5612e-39 // #0010ffff
+5c7c66: 3753 0700                              |009d: if-le v3, v5, 00a4 // +0007
+5c7c6a: 5980 3a46                              |009f: iput v0, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7c6e: 7110 3866 0300                         |00a1: invoke-static {v3}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.illegalSurrogate:(I)V // method@6638
+5c7c74: d805 0001                              |00a4: add-int/lit8 v5, v0, #int 1 // #01
+5c7c78: e106 0312                              |00a6: shr-int/lit8 v6, v3, #int 18 // #12
+5c7c7c: d666 f000                              |00a8: or-int/lit16 v6, v6, #int 240 // #00f0
+5c7c80: 8d66                                   |00aa: int-to-byte v6, v6
+5c7c82: 4f06 0100                              |00ab: aput-byte v6, v1, v0
+5c7c86: d806 0002                              |00ad: add-int/lit8 v6, v0, #int 2 // #02
+5c7c8a: e107 030c                              |00af: shr-int/lit8 v7, v3, #int 12 // #0c
+5c7c8e: dd07 073f                              |00b1: and-int/lit8 v7, v7, #int 63 // #3f
+5c7c92: b647                                   |00b3: or-int/2addr v7, v4
+5c7c94: 8d77                                   |00b4: int-to-byte v7, v7
+5c7c96: 4f07 0105                              |00b5: aput-byte v7, v1, v5
+5c7c9a: d805 0003                              |00b7: add-int/lit8 v5, v0, #int 3 // #03
+5c7c9e: e107 0306                              |00b9: shr-int/lit8 v7, v3, #int 6 // #06
+5c7ca2: dd07 073f                              |00bb: and-int/lit8 v7, v7, #int 63 // #3f
+5c7ca6: b647                                   |00bd: or-int/2addr v7, v4
+5c7ca8: 8d77                                   |00be: int-to-byte v7, v7
+5c7caa: 4f07 0106                              |00bf: aput-byte v7, v1, v6
+5c7cae: d800 0004                              |00c1: add-int/lit8 v0, v0, #int 4 // #04
+5c7cb2: dd03 033f                              |00c3: and-int/lit8 v3, v3, #int 63 // #3f
+5c7cb6: b643                                   |00c5: or-int/2addr v3, v4
+5c7cb8: 8d33                                   |00c6: int-to-byte v3, v3
+5c7cba: 4f03 0105                              |00c7: aput-byte v3, v1, v5
+5c7cbe: 2900 60ff                              |00c9: goto/16 0029 // -00a0
+5c7cc2: d805 0001                              |00cb: add-int/lit8 v5, v0, #int 1 // #01
+5c7cc6: e106 0a0c                              |00cd: shr-int/lit8 v6, v10, #int 12 // #0c
+5c7cca: d666 e000                              |00cf: or-int/lit16 v6, v6, #int 224 // #00e0
+5c7cce: 8d66                                   |00d1: int-to-byte v6, v6
+5c7cd0: 4f06 0100                              |00d2: aput-byte v6, v1, v0
+5c7cd4: d806 0002                              |00d4: add-int/lit8 v6, v0, #int 2 // #02
+5c7cd8: e107 0a06                              |00d6: shr-int/lit8 v7, v10, #int 6 // #06
+5c7cdc: dd07 073f                              |00d8: and-int/lit8 v7, v7, #int 63 // #3f
+5c7ce0: b647                                   |00da: or-int/2addr v7, v4
+5c7ce2: 8d77                                   |00db: int-to-byte v7, v7
+5c7ce4: 4f07 0105                              |00dc: aput-byte v7, v1, v5
+5c7ce8: d800 0003                              |00de: add-int/lit8 v0, v0, #int 3 // #03
+5c7cec: dd0a 0a3f                              |00e0: and-int/lit8 v10, v10, #int 63 // #3f
+5c7cf0: b64a                                   |00e2: or-int/2addr v10, v4
+5c7cf2: 8daa                                   |00e3: int-to-byte v10, v10
+5c7cf4: 4f0a 0106                              |00e4: aput-byte v10, v1, v6
+5c7cf8: 013a                                   |00e6: move v10, v3
+5c7cfa: 2900 42ff                              |00e7: goto/16 0029 // -00be
+5c7cfe: 5980 3a46                              |00e9: iput v0, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7d02: 0e00                                   |00eb: return-void
+      catches       : (none)
+      positions     :
+        0x0006 line=255
+        0x000e line=261
+        0x0014 line=262
+        0x001a line=264
+        0x0022 line=268
+        0x0024 line=269
+        0x0026 line=270
+        0x002d line=281
+        0x0036 line=285
+        0x0041 line=288
+        0x0053 line=302
+        0x005d line=306
+        0x006b line=312
+        0x0073 line=313
+        0x0086 line=324
+        0x0088 line=325
+        0x008b line=327
+        0x0092 line=332
+        0x009f line=334
+        0x00a1 line=335
+        0x00ab line=337
+        0x00b5 line=338
+        0x00bf line=339
+        0x00c7 line=340
+        0x00d2 line=317
+        0x00dc line=318
+        0x00e4 line=319
+        0x00e9 line=343
+      locals        :
+        0x0000 - 0x00ec reg=8 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+        0x0000 - 0x00ec reg=9 (null) Ljava/lang/String;
+        0x0000 - 0x00ec reg=10 (null) I
+        0x0000 - 0x00ec reg=11 (null) I
+
+    #8              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'write'
+      type          : '([C)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 6 16-bit code units
+5c7d04:                                        |[5c7d04] com.fasterxml.jackson.core.io.UTF8Writer.write:([C)V
+5c7d14: 1200                                   |0000: const/4 v0, #int 0 // #0
+5c7d16: 2131                                   |0001: array-length v1, v3
+5c7d18: 6e40 3e66 3210                         |0002: invoke-virtual {v2, v3, v0, v1}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.write:([CII)V // method@663e
+5c7d1e: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=98
+      locals        :
+        0x0000 - 0x0006 reg=2 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+        0x0000 - 0x0006 reg=3 (null) [C
+
+    #9              : (in Lcom/fasterxml/jackson/core/io/UTF8Writer;)
+      name          : 'write'
+      type          : '([CII)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 12
+      ins           : 4
+      outs          : 4
+      insns size    : 226 16-bit code units
+5c7d20:                                        |[5c7d20] com.fasterxml.jackson.core.io.UTF8Writer.write:([CII)V
+5c7d30: 1220                                   |0000: const/4 v0, #int 2 // #2
+5c7d32: 350b 0b00                              |0001: if-ge v11, v0, 000c // +000b
+5c7d36: 1210                                   |0003: const/4 v0, #int 1 // #1
+5c7d38: 330b 0700                              |0004: if-ne v11, v0, 000b // +0007
+5c7d3c: 4909 090a                              |0006: aget-char v9, v9, v10
+5c7d40: 6e20 3a66 9800                         |0008: invoke-virtual {v8, v9}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.write:(I)V // method@663a
+5c7d46: 0e00                                   |000b: return-void
+5c7d48: 5280 3b46                              |000c: iget v0, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._surrogate:I // field@463b
+5c7d4c: 3d00 1000                              |000e: if-lez v0, 001e // +0010
+5c7d50: d800 0a01                              |0010: add-int/lit8 v0, v10, #int 1 // #01
+5c7d54: 490a 090a                              |0012: aget-char v10, v9, v10
+5c7d58: d80b 0bff                              |0014: add-int/lit8 v11, v11, #int -1 // #ff
+5c7d5c: 6e20 3666 a800                         |0016: invoke-virtual {v8, v10}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.convertSurrogate:(I)I // method@6636
+5c7d62: 0a0a                                   |0019: move-result v10
+5c7d64: 6e20 3a66 a800                         |001a: invoke-virtual {v8, v10}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.write:(I)V // method@663a
+5c7d6a: 010a                                   |001d: move v10, v0
+5c7d6c: 5280 3a46                              |001e: iget v0, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7d70: 5481 3846                              |0020: iget-object v1, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBuffer:[B // field@4638
+5c7d74: 5282 3946                              |0022: iget v2, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outBufferEnd:I // field@4639
+5c7d78: b0ab                                   |0024: add-int/2addr v11, v10
+5c7d7a: 35ba ba00                              |0025: if-ge v10, v11, 00df // +00ba
+5c7d7e: 3420 0900                              |0027: if-lt v0, v2, 0030 // +0009
+5c7d82: 5483 3746                              |0029: iget-object v3, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._out:Ljava/io/OutputStream; // field@4637
+5c7d86: 1204                                   |002b: const/4 v4, #int 0 // #0
+5c7d88: 6e40 4fd0 1304                         |002c: invoke-virtual {v3, v1, v4, v0}, Ljava/io/OutputStream;.write:([BII)V // method@d04f
+5c7d8e: 0140                                   |002f: move v0, v4
+5c7d90: d803 0a01                              |0030: add-int/lit8 v3, v10, #int 1 // #01
+5c7d94: 490a 090a                              |0032: aget-char v10, v9, v10
+5c7d98: 1304 8000                              |0034: const/16 v4, #int 128 // #80
+5c7d9c: 354a 2200                              |0036: if-ge v10, v4, 0058 // +0022
+5c7da0: d805 0001                              |0038: add-int/lit8 v5, v0, #int 1 // #01
+5c7da4: 8daa                                   |003a: int-to-byte v10, v10
+5c7da6: 4f0a 0100                              |003b: aput-byte v10, v1, v0
+5c7daa: 910a 0b03                              |003d: sub-int v10, v11, v3
+5c7dae: 9100 0205                              |003f: sub-int v0, v2, v5
+5c7db2: 370a 0300                              |0041: if-le v10, v0, 0044 // +0003
+5c7db6: 010a                                   |0043: move v10, v0
+5c7db8: 9006 0a03                              |0044: add-int v6, v10, v3
+5c7dbc: 013a                                   |0046: move v10, v3
+5c7dbe: 0150                                   |0047: move v0, v5
+5c7dc0: 346a 0300                              |0048: if-lt v10, v6, 004b // +0003
+5c7dc4: 28db                                   |004a: goto 0025 // -0025
+5c7dc6: d803 0a01                              |004b: add-int/lit8 v3, v10, #int 1 // #01
+5c7dca: 490a 090a                              |004d: aget-char v10, v9, v10
+5c7dce: 344a 0300                              |004f: if-lt v10, v4, 0052 // +0003
+5c7dd2: 2807                                   |0051: goto 0058 // +0007
+5c7dd4: d805 0001                              |0052: add-int/lit8 v5, v0, #int 1 // #01
+5c7dd8: 8daa                                   |0054: int-to-byte v10, v10
+5c7dda: 4f0a 0100                              |0055: aput-byte v10, v1, v0
+5c7dde: 28ef                                   |0057: goto 0046 // -0011
+5c7de0: 1305 0008                              |0058: const/16 v5, #int 2048 // #800
+5c7de4: 355a 1400                              |005a: if-ge v10, v5, 006e // +0014
+5c7de8: d805 0001                              |005c: add-int/lit8 v5, v0, #int 1 // #01
+5c7dec: e106 0a06                              |005e: shr-int/lit8 v6, v10, #int 6 // #06
+5c7df0: d666 c000                              |0060: or-int/lit16 v6, v6, #int 192 // #00c0
+5c7df4: 8d66                                   |0062: int-to-byte v6, v6
+5c7df6: 4f06 0100                              |0063: aput-byte v6, v1, v0
+5c7dfa: d800 0002                              |0065: add-int/lit8 v0, v0, #int 2 // #02
+5c7dfe: dd0a 0a3f                              |0067: and-int/lit8 v10, v10, #int 63 // #3f
+5c7e02: b64a                                   |0069: or-int/2addr v10, v4
+5c7e04: 8daa                                   |006a: int-to-byte v10, v10
+5c7e06: 4f0a 0105                              |006b: aput-byte v10, v1, v5
+5c7e0a: 286f                                   |006d: goto 00dc // +006f
+5c7e0c: 1405 00d8 0000                         |006e: const v5, #float 7.74862e-41 // #0000d800
+5c7e12: 345a 5000                              |0071: if-lt v10, v5, 00c1 // +0050
+5c7e16: 1405 ffdf 0000                         |0073: const v5, #float 8.03547e-41 // #0000dfff
+5c7e1c: 375a 0300                              |0076: if-le v10, v5, 0079 // +0003
+5c7e20: 2849                                   |0078: goto 00c1 // +0049
+5c7e22: 1405 ffdb 0000                         |0079: const v5, #float 7.89197e-41 // #0000dbff
+5c7e28: 375a 0700                              |007c: if-le v10, v5, 0083 // +0007
+5c7e2c: 5980 3a46                              |007e: iput v0, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7e30: 7110 3866 0a00                         |0080: invoke-static {v10}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.illegalSurrogate:(I)V // method@6638
+5c7e36: 598a 3b46                              |0083: iput v10, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._surrogate:I // field@463b
+5c7e3a: 34b3 0300                              |0085: if-lt v3, v11, 0088 // +0003
+5c7e3e: 2858                                   |0087: goto 00df // +0058
+5c7e40: d80a 0301                              |0088: add-int/lit8 v10, v3, #int 1 // #01
+5c7e44: 4903 0903                              |008a: aget-char v3, v9, v3
+5c7e48: 6e20 3666 3800                         |008c: invoke-virtual {v8, v3}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.convertSurrogate:(I)I // method@6636
+5c7e4e: 0a03                                   |008f: move-result v3
+5c7e50: 1405 ffff 1000                         |0090: const v5, #float 1.5612e-39 // #0010ffff
+5c7e56: 3753 0700                              |0093: if-le v3, v5, 009a // +0007
+5c7e5a: 5980 3a46                              |0095: iput v0, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7e5e: 7110 3866 0300                         |0097: invoke-static {v3}, Lcom/fasterxml/jackson/core/io/UTF8Writer;.illegalSurrogate:(I)V // method@6638
+5c7e64: d805 0001                              |009a: add-int/lit8 v5, v0, #int 1 // #01
+5c7e68: e106 0312                              |009c: shr-int/lit8 v6, v3, #int 18 // #12
+5c7e6c: d666 f000                              |009e: or-int/lit16 v6, v6, #int 240 // #00f0
+5c7e70: 8d66                                   |00a0: int-to-byte v6, v6
+5c7e72: 4f06 0100                              |00a1: aput-byte v6, v1, v0
+5c7e76: d806 0002                              |00a3: add-int/lit8 v6, v0, #int 2 // #02
+5c7e7a: e107 030c                              |00a5: shr-int/lit8 v7, v3, #int 12 // #0c
+5c7e7e: dd07 073f                              |00a7: and-int/lit8 v7, v7, #int 63 // #3f
+5c7e82: b647                                   |00a9: or-int/2addr v7, v4
+5c7e84: 8d77                                   |00aa: int-to-byte v7, v7
+5c7e86: 4f07 0105                              |00ab: aput-byte v7, v1, v5
+5c7e8a: d805 0003                              |00ad: add-int/lit8 v5, v0, #int 3 // #03
+5c7e8e: e107 0306                              |00af: shr-int/lit8 v7, v3, #int 6 // #06
+5c7e92: dd07 073f                              |00b1: and-int/lit8 v7, v7, #int 63 // #3f
+5c7e96: b647                                   |00b3: or-int/2addr v7, v4
+5c7e98: 8d77                                   |00b4: int-to-byte v7, v7
+5c7e9a: 4f07 0106                              |00b5: aput-byte v7, v1, v6
+5c7e9e: d800 0004                              |00b7: add-int/lit8 v0, v0, #int 4 // #04
+5c7ea2: dd03 033f                              |00b9: and-int/lit8 v3, v3, #int 63 // #3f
+5c7ea6: b643                                   |00bb: or-int/2addr v3, v4
+5c7ea8: 8d33                                   |00bc: int-to-byte v3, v3
+5c7eaa: 4f03 0105                              |00bd: aput-byte v3, v1, v5
+5c7eae: 2900 66ff                              |00bf: goto/16 0025 // -009a
+5c7eb2: d805 0001                              |00c1: add-int/lit8 v5, v0, #int 1 // #01
+5c7eb6: e106 0a0c                              |00c3: shr-int/lit8 v6, v10, #int 12 // #0c
+5c7eba: d666 e000                              |00c5: or-int/lit16 v6, v6, #int 224 // #00e0
+5c7ebe: 8d66                                   |00c7: int-to-byte v6, v6
+5c7ec0: 4f06 0100                              |00c8: aput-byte v6, v1, v0
+5c7ec4: d806 0002                              |00ca: add-int/lit8 v6, v0, #int 2 // #02
+5c7ec8: e107 0a06                              |00cc: shr-int/lit8 v7, v10, #int 6 // #06
+5c7ecc: dd07 073f                              |00ce: and-int/lit8 v7, v7, #int 63 // #3f
+5c7ed0: b647                                   |00d0: or-int/2addr v7, v4
+5c7ed2: 8d77                                   |00d1: int-to-byte v7, v7
+5c7ed4: 4f07 0105                              |00d2: aput-byte v7, v1, v5
+5c7ed8: d800 0003                              |00d4: add-int/lit8 v0, v0, #int 3 // #03
+5c7edc: dd0a 0a3f                              |00d6: and-int/lit8 v10, v10, #int 63 // #3f
+5c7ee0: b64a                                   |00d8: or-int/2addr v10, v4
+5c7ee2: 8daa                                   |00d9: int-to-byte v10, v10
+5c7ee4: 4f0a 0106                              |00da: aput-byte v10, v1, v6
+5c7ee8: 013a                                   |00dc: move v10, v3
+5c7eea: 2900 48ff                              |00dd: goto/16 0025 // -00b8
+5c7eee: 5980 3a46                              |00df: iput v0, v8, Lcom/fasterxml/jackson/core/io/UTF8Writer;._outPtr:I // field@463a
+5c7ef2: 0e00                                   |00e1: return-void
+      catches       : (none)
+      positions     :
+        0x0006 line=107
+        0x000c line=113
+        0x0012 line=114
+        0x0016 line=116
+        0x001e line=120
+        0x0020 line=121
+        0x0022 line=122
+        0x0029 line=133
+        0x0032 line=137
+        0x003b line=140
+        0x004d line=154
+        0x0055 line=158
+        0x0063 line=164
+        0x006b line=165
+        0x007e line=176
+        0x0080 line=177
+        0x0083 line=179
+        0x008a line=184
+        0x0095 line=186
+        0x0097 line=187
+        0x00a1 line=189
+        0x00ab line=190
+        0x00b5 line=191
+        0x00bd line=192
+        0x00c8 line=169
+        0x00d2 line=170
+        0x00da line=171
+        0x00df line=195
+      locals        :
+        0x0000 - 0x00e2 reg=8 this Lcom/fasterxml/jackson/core/io/UTF8Writer;
+        0x0000 - 0x00e2 reg=9 (null) [C
+        0x0000 - 0x00e2 reg=10 (null) I
+        0x0000 - 0x00e2 reg=11 (null) I
+
+  source_file_idx   : 27237 (UTF8Writer.java)
+

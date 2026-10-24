@@ -1,0 +1,219 @@
+Class #5290            -
+  Class descriptor  : 'Lcom/google/firebase/components/LazySet;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lcom/google/firebase/inject/Provider;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/components/LazySet;)
+      name          : 'actualSet'
+      type          : 'Ljava/util/Set;'
+      access        : 0x0042 (PRIVATE VOLATILE)
+    #1              : (in Lcom/google/firebase/components/LazySet;)
+      name          : 'providers'
+      type          : 'Ljava/util/Set;'
+      access        : 0x0042 (PRIVATE VOLATILE)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/components/LazySet;)
+      name          : '<init>'
+      type          : '(Ljava/util/Collection;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 23 16-bit code units
+71bfe0:                                        |[71bfe0] com.google.firebase.components.LazySet.<init>:(Ljava/util/Collection;)V
+71bff0: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+71bff6: 1200                                   |0003: const/4 v0, #int 0 // #0
+71bff8: 5b10 fc6f                              |0004: iput-object v0, v1, Lcom/google/firebase/components/LazySet;.actualSet:Ljava/util/Set; // field@6ffc
+71bffc: 2200 741b                              |0006: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap; // type@1b74
+71c000: 7010 8bd6 0000                         |0008: invoke-direct {v0}, Ljava/util/concurrent/ConcurrentHashMap;.<init>:()V // method@d68b
+71c006: 7110 47d5 0000                         |000b: invoke-static {v0}, Ljava/util/Collections;.newSetFromMap:(Ljava/util/Map;)Ljava/util/Set; // method@d547
+71c00c: 0c00                                   |000e: move-result-object v0
+71c00e: 5b10 fd6f                              |000f: iput-object v0, v1, Lcom/google/firebase/components/LazySet;.providers:Ljava/util/Set; // field@6ffd
+71c012: 5411 fd6f                              |0011: iget-object v1, v1, Lcom/google/firebase/components/LazySet;.providers:Ljava/util/Set; // field@6ffd
+71c016: 7220 2dd6 2100                         |0013: invoke-interface {v1, v2}, Ljava/util/Set;.addAll:(Ljava/util/Collection;)Z // method@d62d
+71c01c: 0e00                                   |0016: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=36
+        0x0004 line=34
+        0x0006 line=37
+        0x0011 line=38
+      locals        :
+        0x0000 - 0x0017 reg=1 this Lcom/google/firebase/components/LazySet;
+        0x0000 - 0x0017 reg=2 (null) Ljava/util/Collection;
+
+    #1              : (in Lcom/google/firebase/components/LazySet;)
+      name          : 'fromCollection'
+      type          : '(Ljava/util/Collection;)Lcom/google/firebase/components/LazySet;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 8 16-bit code units
+71c020:                                        |[71c020] com.google.firebase.components.LazySet.fromCollection:(Ljava/util/Collection;)Lcom/google/firebase/components/LazySet;
+71c030: 1f01 621b                              |0000: check-cast v1, Ljava/util/Set; // type@1b62
+71c034: 2200 1a17                              |0002: new-instance v0, Lcom/google/firebase/components/LazySet; // type@171a
+71c038: 7020 fcbc 1000                         |0004: invoke-direct {v0, v1}, Lcom/google/firebase/components/LazySet;.<init>:(Ljava/util/Collection;)V // method@bcfc
+71c03e: 1100                                   |0007: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=43
+        0x0002 line=44
+      locals        :
+        0x0000 - 0x0008 reg=1 (null) Ljava/util/Collection;
+
+    #2              : (in Lcom/google/firebase/components/LazySet;)
+      name          : 'updateSet'
+      type          : '()V'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 37 16-bit code units
+71c040:                                        |[71c040] com.google.firebase.components.LazySet.updateSet:()V
+71c050: 1d03                                   |0000: monitor-enter v3
+71c052: 5430 fd6f                              |0001: iget-object v0, v3, Lcom/google/firebase/components/LazySet;.providers:Ljava/util/Set; // field@6ffd
+71c056: 7210 32d6 0000                         |0003: invoke-interface {v0}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+71c05c: 0c00                                   |0006: move-result-object v0
+71c05e: 7210 a0d5 0000                         |0007: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71c064: 0a01                                   |000a: move-result v1
+71c066: 3801 1200                              |000b: if-eqz v1, 001d // +0012
+71c06a: 7210 a1d5 0000                         |000d: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71c070: 0c01                                   |0010: move-result-object v1
+71c072: 1f01 6917                              |0011: check-cast v1, Lcom/google/firebase/inject/Provider; // type@1769
+71c076: 5432 fc6f                              |0013: iget-object v2, v3, Lcom/google/firebase/components/LazySet;.actualSet:Ljava/util/Set; // field@6ffc
+71c07a: 7210 10be 0100                         |0015: invoke-interface {v1}, Lcom/google/firebase/inject/Provider;.get:()Ljava/lang/Object; // method@be10
+71c080: 0c01                                   |0018: move-result-object v1
+71c082: 7220 2cd6 1200                         |0019: invoke-interface {v2, v1}, Ljava/util/Set;.add:(Ljava/lang/Object;)Z // method@d62c
+71c088: 28eb                                   |001c: goto 0007 // -0015
+71c08a: 1200                                   |001d: const/4 v0, #int 0 // #0
+71c08c: 5b30 fd6f                              |001e: iput-object v0, v3, Lcom/google/firebase/components/LazySet;.providers:Ljava/util/Set; // field@6ffd
+71c090: 1e03                                   |0020: monitor-exit v3
+71c092: 0e00                                   |0021: return-void
+71c094: 0d00                                   |0022: move-exception v0
+71c096: 1e03                                   |0023: monitor-exit v3
+71c098: 2700                                   |0024: throw v0
+      catches       : 2
+        0x0001 - 0x0020
+          <any> -> 0x0022
+        0x0023 - 0x0024
+          <any> -> 0x0022
+      positions     :
+        0x0001 line=69
+        0x0013 line=70
+        0x001e line=72
+        0x0020 line=73
+      locals        :
+        0x0000 - 0x0025 reg=3 this Lcom/google/firebase/components/LazySet;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/components/LazySet;)
+      name          : 'add'
+      type          : '(Lcom/google/firebase/inject/Provider;)V'
+      access        : 0x20000 (DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 25 16-bit code units
+71c0b0:                                        |[71c0b0] com.google.firebase.components.LazySet.add:(Lcom/google/firebase/inject/Provider;)V
+71c0c0: 1d01                                   |0000: monitor-enter v1
+71c0c2: 5410 fc6f                              |0001: iget-object v0, v1, Lcom/google/firebase/components/LazySet;.actualSet:Ljava/util/Set; // field@6ffc
+71c0c6: 3900 0800                              |0003: if-nez v0, 000b // +0008
+71c0ca: 5410 fd6f                              |0005: iget-object v0, v1, Lcom/google/firebase/components/LazySet;.providers:Ljava/util/Set; // field@6ffd
+71c0ce: 7220 2cd6 2000                         |0007: invoke-interface {v0, v2}, Ljava/util/Set;.add:(Ljava/lang/Object;)Z // method@d62c
+71c0d4: 280a                                   |000a: goto 0014 // +000a
+71c0d6: 5410 fc6f                              |000b: iget-object v0, v1, Lcom/google/firebase/components/LazySet;.actualSet:Ljava/util/Set; // field@6ffc
+71c0da: 7210 10be 0200                         |000d: invoke-interface {v2}, Lcom/google/firebase/inject/Provider;.get:()Ljava/lang/Object; // method@be10
+71c0e0: 0c02                                   |0010: move-result-object v2
+71c0e2: 7220 2cd6 2000                         |0011: invoke-interface {v0, v2}, Ljava/util/Set;.add:(Ljava/lang/Object;)Z // method@d62c
+71c0e8: 1e01                                   |0014: monitor-exit v1
+71c0ea: 0e00                                   |0015: return-void
+71c0ec: 0d02                                   |0016: move-exception v2
+71c0ee: 1e01                                   |0017: monitor-exit v1
+71c0f0: 2702                                   |0018: throw v2
+      catches       : 2
+        0x0001 - 0x0014
+          <any> -> 0x0016
+        0x0017 - 0x0018
+          <any> -> 0x0016
+      positions     :
+        0x0001 line=61
+        0x0005 line=62
+        0x000b line=64
+        0x0014 line=66
+      locals        :
+        0x0000 - 0x0019 reg=1 this Lcom/google/firebase/components/LazySet;
+        0x0000 - 0x0019 reg=2 (null) Lcom/google/firebase/inject/Provider;
+
+    #1              : (in Lcom/google/firebase/components/LazySet;)
+      name          : 'get'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x1041 (PUBLIC BRIDGE SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+71c108:                                        |[71c108] com.google.firebase.components.LazySet.get:()Ljava/lang/Object;
+71c118: 6e10 00bd 0000                         |0000: invoke-virtual {v0}, Lcom/google/firebase/components/LazySet;.get:()Ljava/util/Set; // method@bd00
+71c11e: 0c00                                   |0003: move-result-object v0
+71c120: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=31
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lcom/google/firebase/components/LazySet;
+
+    #2              : (in Lcom/google/firebase/components/LazySet;)
+      name          : 'get'
+      type          : '()Ljava/util/Set;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 35 16-bit code units
+71c124:                                        |[71c124] com.google.firebase.components.LazySet.get:()Ljava/util/Set;
+71c134: 5410 fc6f                              |0000: iget-object v0, v1, Lcom/google/firebase/components/LazySet;.actualSet:Ljava/util/Set; // field@6ffc
+71c138: 3900 1a00                              |0002: if-nez v0, 001c // +001a
+71c13c: 1d01                                   |0004: monitor-enter v1
+71c13e: 5410 fc6f                              |0005: iget-object v0, v1, Lcom/google/firebase/components/LazySet;.actualSet:Ljava/util/Set; // field@6ffc
+71c142: 3900 1000                              |0007: if-nez v0, 0017 // +0010
+71c146: 2200 741b                              |0009: new-instance v0, Ljava/util/concurrent/ConcurrentHashMap; // type@1b74
+71c14a: 7010 8bd6 0000                         |000b: invoke-direct {v0}, Ljava/util/concurrent/ConcurrentHashMap;.<init>:()V // method@d68b
+71c150: 7110 47d5 0000                         |000e: invoke-static {v0}, Ljava/util/Collections;.newSetFromMap:(Ljava/util/Map;)Ljava/util/Set; // method@d547
+71c156: 0c00                                   |0011: move-result-object v0
+71c158: 5b10 fc6f                              |0012: iput-object v0, v1, Lcom/google/firebase/components/LazySet;.actualSet:Ljava/util/Set; // field@6ffc
+71c15c: 7010 01bd 0100                         |0014: invoke-direct {v1}, Lcom/google/firebase/components/LazySet;.updateSet:()V // method@bd01
+71c162: 1e01                                   |0017: monitor-exit v1
+71c164: 2804                                   |0018: goto 001c // +0004
+71c166: 0d00                                   |0019: move-exception v0
+71c168: 1e01                                   |001a: monitor-exit v1
+71c16a: 2700                                   |001b: throw v0
+71c16c: 5411 fc6f                              |001c: iget-object v1, v1, Lcom/google/firebase/components/LazySet;.actualSet:Ljava/util/Set; // field@6ffc
+71c170: 7110 57d5 0100                         |001e: invoke-static {v1}, Ljava/util/Collections;.unmodifiableSet:(Ljava/util/Set;)Ljava/util/Set; // method@d557
+71c176: 0c01                                   |0021: move-result-object v1
+71c178: 1101                                   |0022: return-object v1
+      catches       : 1
+        0x0005 - 0x001b
+          <any> -> 0x0019
+      positions     :
+        0x0000 line=49
+        0x0004 line=50
+        0x0005 line=51
+        0x0009 line=52
+        0x0014 line=53
+        0x0017 line=55
+        0x001c line=57
+      locals        :
+        0x0000 - 0x0023 reg=1 this Lcom/google/firebase/components/LazySet;
+
+  source_file_idx   : 15656 (LazySet.java)
+

@@ -1,0 +1,2536 @@
+Class #2503            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/core/JsonGenerator;'
+  Access flags      : 0x0401 (PUBLIC ABSTRACT)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/io/Closeable;'
+    #1              : 'Ljava/io/Flushable;'
+    #2              : 'Lcom/fasterxml/jackson/core/Versioned;'
+  Static fields     -
+    #0              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'DEFAULT_BINARY_WRITE_CAPABILITIES'
+      type          : 'Lcom/fasterxml/jackson/core/util/JacksonFeatureSet;'
+      access        : 0x001c (PROTECTED STATIC FINAL)
+    #1              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'DEFAULT_TEXTUAL_WRITE_CAPABILITIES'
+      type          : 'Lcom/fasterxml/jackson/core/util/JacksonFeatureSet;'
+      access        : 0x001c (PROTECTED STATIC FINAL)
+    #2              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'DEFAULT_WRITE_CAPABILITIES'
+      type          : 'Lcom/fasterxml/jackson/core/util/JacksonFeatureSet;'
+      access        : 0x001c (PROTECTED STATIC FINAL)
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : '_cfgPrettyPrinter'
+      type          : 'Lcom/fasterxml/jackson/core/PrettyPrinter;'
+      access        : 0x0004 (PROTECTED)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 2
+      insns size    : 27 16-bit code units
+5b89f8:                                        |[5b89f8] com.fasterxml.jackson.core.JsonGenerator.<clinit>:()V
+5b8a08: 7100 1b63 0000                         |0000: invoke-static {}, Lcom/fasterxml/jackson/core/StreamWriteCapability;.values:()[Lcom/fasterxml/jackson/core/StreamWriteCapability; // method@631b
+5b8a0e: 0c00                                   |0003: move-result-object v0
+5b8a10: 7110 866a 0000                         |0004: invoke-static {v0}, Lcom/fasterxml/jackson/core/util/JacksonFeatureSet;.fromDefaults:([Lcom/fasterxml/jackson/core/util/JacksonFeature;)Lcom/fasterxml/jackson/core/util/JacksonFeatureSet; // method@6a86
+5b8a16: 0c00                                   |0007: move-result-object v0
+5b8a18: 6900 9a44                              |0008: sput-object v0, Lcom/fasterxml/jackson/core/JsonGenerator;.DEFAULT_WRITE_CAPABILITIES:Lcom/fasterxml/jackson/core/util/JacksonFeatureSet; // field@449a
+5b8a1c: 6201 1245                              |000a: sget-object v1, Lcom/fasterxml/jackson/core/StreamWriteCapability;.CAN_WRITE_FORMATTED_NUMBERS:Lcom/fasterxml/jackson/core/StreamWriteCapability; // field@4512
+5b8a20: 6e20 886a 1000                         |000c: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/util/JacksonFeatureSet;.with:(Lcom/fasterxml/jackson/core/util/JacksonFeature;)Lcom/fasterxml/jackson/core/util/JacksonFeatureSet; // method@6a88
+5b8a26: 0c01                                   |000f: move-result-object v1
+5b8a28: 6901 9944                              |0010: sput-object v1, Lcom/fasterxml/jackson/core/JsonGenerator;.DEFAULT_TEXTUAL_WRITE_CAPABILITIES:Lcom/fasterxml/jackson/core/util/JacksonFeatureSet; // field@4499
+5b8a2c: 6201 1145                              |0012: sget-object v1, Lcom/fasterxml/jackson/core/StreamWriteCapability;.CAN_WRITE_BINARY_NATIVELY:Lcom/fasterxml/jackson/core/StreamWriteCapability; // field@4511
+5b8a30: 6e20 886a 1000                         |0014: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/util/JacksonFeatureSet;.with:(Lcom/fasterxml/jackson/core/util/JacksonFeature;)Lcom/fasterxml/jackson/core/util/JacksonFeatureSet; // method@6a88
+5b8a36: 0c00                                   |0017: move-result-object v0
+5b8a38: 6900 9844                              |0018: sput-object v0, Lcom/fasterxml/jackson/core/JsonGenerator;.DEFAULT_BINARY_WRITE_CAPABILITIES:Lcom/fasterxml/jackson/core/util/JacksonFeatureSet; // field@4498
+5b8a3c: 0e00                                   |001a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=41
+        0x000a line=49
+        0x000c line=50
+        0x0012 line=58
+        0x0014 line=59
+      locals        :
+
+    #1              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+5b8a40:                                        |[5b8a40] com.fasterxml.jackson.core.JsonGenerator.<init>:()V
+5b8a50: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5b8a56: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=297
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : '_copyCurrentContents'
+      type          : '(Lcom/fasterxml/jackson/core/JsonParser;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 4
+      insns size    : 226 16-bit code units
+5b8a58:                                        |[5b8a58] com.fasterxml.jackson.core.JsonGenerator._copyCurrentContents:(Lcom/fasterxml/jackson/core/JsonParser;)V
+5b8a68: 1210                                   |0000: const/4 v0, #int 1 // #1
+5b8a6a: 0101                                   |0001: move v1, v0
+5b8a6c: 6e10 6c62 0600                         |0002: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.nextToken:()Lcom/fasterxml/jackson/core/JsonToken; // method@626c
+5b8a72: 0c02                                   |0005: move-result-object v2
+5b8a74: 3802 bf00                              |0006: if-eqz v2, 00c5 // +00bf
+5b8a78: 6e10 cb62 0200                         |0008: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonToken;.id:()I // method@62cb
+5b8a7e: 0a03                                   |000b: move-result v3
+5b8a80: 2b03 ba00 0000                         |000c: packed-switch v3, 000000c6 // +000000ba
+5b8a86: 2205 7b1a                              |000f: new-instance v5, Ljava/lang/IllegalStateException; // type@1a7b
+5b8a8a: 2206 991a                              |0011: new-instance v6, Ljava/lang/StringBuilder; // type@1a99
+5b8a8e: 1a00 7d2d                              |0013: const-string v0, "Internal error: unknown current token, " // string@2d7d
+5b8a92: 7020 3cd2 0600                         |0015: invoke-direct {v6, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5b8a98: 6e20 44d2 2600                         |0018: invoke-virtual {v6, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+5b8a9e: 0c06                                   |001b: move-result-object v6
+5b8aa0: 6e10 58d2 0600                         |001c: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5b8aa6: 0c06                                   |001f: move-result-object v6
+5b8aa8: 7020 4cd1 6500                         |0020: invoke-direct {v5, v6}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+5b8aae: 2705                                   |0023: throw v5
+5b8ab0: 6e10 3962 0600                         |0024: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getEmbeddedObject:()Ljava/lang/Object; // method@6239
+5b8ab6: 0c02                                   |0027: move-result-object v2
+5b8ab8: 6e20 be61 2500                         |0028: invoke-virtual {v5, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeObject:(Ljava/lang/Object;)V // method@61be
+5b8abe: 28d7                                   |002b: goto 0002 // -0029
+5b8ac0: 6e10 ac61 0500                         |002c: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNull:()V // method@61ac
+5b8ac6: 28d3                                   |002f: goto 0002 // -002d
+5b8ac8: 1202                                   |0030: const/4 v2, #int 0 // #0
+5b8aca: 6e20 a461 2500                         |0031: invoke-virtual {v5, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBoolean:(Z)V // method@61a4
+5b8ad0: 28ce                                   |0034: goto 0002 // -0032
+5b8ad2: 6e20 a461 0500                         |0035: invoke-virtual {v5, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBoolean:(Z)V // method@61a4
+5b8ad8: 28ca                                   |0038: goto 0002 // -0036
+5b8ada: 6e10 4262 0600                         |0039: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getNumberType:()Lcom/fasterxml/jackson/core/JsonParser$NumberType; // method@6242
+5b8ae0: 0c02                                   |003c: move-result-object v2
+5b8ae2: 6203 bb44                              |003d: sget-object v3, Lcom/fasterxml/jackson/core/JsonParser$NumberType;.BIG_DECIMAL:Lcom/fasterxml/jackson/core/JsonParser$NumberType; // field@44bb
+5b8ae6: 3332 0a00                              |003f: if-ne v2, v3, 0049 // +000a
+5b8aea: 6e10 3762 0600                         |0041: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getDecimalValue:()Ljava/math/BigDecimal; // method@6237
+5b8af0: 0c02                                   |0044: move-result-object v2
+5b8af2: 6e20 b361 2500                         |0045: invoke-virtual {v5, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(Ljava/math/BigDecimal;)V // method@61b3
+5b8af8: 28ba                                   |0048: goto 0002 // -0046
+5b8afa: 6203 be44                              |0049: sget-object v3, Lcom/fasterxml/jackson/core/JsonParser$NumberType;.FLOAT:Lcom/fasterxml/jackson/core/JsonParser$NumberType; // field@44be
+5b8afe: 3332 0a00                              |004b: if-ne v2, v3, 0055 // +000a
+5b8b02: 6e10 3b62 0600                         |004d: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getFloatValue:()F // method@623b
+5b8b08: 0a02                                   |0050: move-result v2
+5b8b0a: 6e20 af61 2500                         |0051: invoke-virtual {v5, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(F)V // method@61af
+5b8b10: 28ae                                   |0054: goto 0002 // -0052
+5b8b12: 6e10 3862 0600                         |0055: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getDoubleValue:()D // method@6238
+5b8b18: 0b02                                   |0058: move-result-wide v2
+5b8b1a: 6e30 ae61 2503                         |0059: invoke-virtual {v5, v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(D)V // method@61ae
+5b8b20: 28a6                                   |005c: goto 0002 // -005a
+5b8b22: 6e10 4262 0600                         |005d: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getNumberType:()Lcom/fasterxml/jackson/core/JsonParser$NumberType; // method@6242
+5b8b28: 0c02                                   |0060: move-result-object v2
+5b8b2a: 6203 bf44                              |0061: sget-object v3, Lcom/fasterxml/jackson/core/JsonParser$NumberType;.INT:Lcom/fasterxml/jackson/core/JsonParser$NumberType; // field@44bf
+5b8b2e: 3332 0a00                              |0063: if-ne v2, v3, 006d // +000a
+5b8b32: 6e10 3e62 0600                         |0065: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getIntValue:()I // method@623e
+5b8b38: 0a02                                   |0068: move-result v2
+5b8b3a: 6e20 b061 2500                         |0069: invoke-virtual {v5, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(I)V // method@61b0
+5b8b40: 2896                                   |006c: goto 0002 // -006a
+5b8b42: 6203 bc44                              |006d: sget-object v3, Lcom/fasterxml/jackson/core/JsonParser$NumberType;.BIG_INTEGER:Lcom/fasterxml/jackson/core/JsonParser$NumberType; // field@44bc
+5b8b46: 3332 0a00                              |006f: if-ne v2, v3, 0079 // +000a
+5b8b4a: 6e10 2c62 0600                         |0071: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getBigIntegerValue:()Ljava/math/BigInteger; // method@622c
+5b8b50: 0c02                                   |0074: move-result-object v2
+5b8b52: 6e20 b461 2500                         |0075: invoke-virtual {v5, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(Ljava/math/BigInteger;)V // method@61b4
+5b8b58: 288a                                   |0078: goto 0002 // -0076
+5b8b5a: 6e10 4062 0600                         |0079: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getLongValue:()J // method@6240
+5b8b60: 0b02                                   |007c: move-result-wide v2
+5b8b62: 6e30 b161 2503                         |007d: invoke-virtual {v5, v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(J)V // method@61b1
+5b8b68: 2882                                   |0080: goto 0002 // -007e
+5b8b6a: 6e10 5c62 0600                         |0081: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.hasTextCharacters:()Z // method@625c
+5b8b70: 0a02                                   |0084: move-result v2
+5b8b72: 3802 1300                              |0085: if-eqz v2, 0098 // +0013
+5b8b76: 6e10 4c62 0600                         |0087: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getTextCharacters:()[C // method@624c
+5b8b7c: 0c02                                   |008a: move-result-object v2
+5b8b7e: 6e10 4e62 0600                         |008b: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getTextOffset:()I // method@624e
+5b8b84: 0a03                                   |008e: move-result v3
+5b8b86: 6e10 4d62 0600                         |008f: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getTextLength:()I // method@624d
+5b8b8c: 0a04                                   |0092: move-result v4
+5b8b8e: 6e40 da61 2543                         |0093: invoke-virtual {v5, v2, v3, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeString:([CII)V // method@61da
+5b8b94: 2900 6cff                              |0096: goto/16 0002 // -0094
+5b8b98: 6e10 4b62 0600                         |0098: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getText:()Ljava/lang/String; // method@624b
+5b8b9e: 0c02                                   |009b: move-result-object v2
+5b8ba0: 6e20 d961 2500                         |009c: invoke-virtual {v5, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeString:(Ljava/lang/String;)V // method@61d9
+5b8ba6: 2900 63ff                              |009f: goto/16 0002 // -009d
+5b8baa: 6e10 3362 0600                         |00a1: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonParser;.getCurrentName:()Ljava/lang/String; // method@6233
+5b8bb0: 0c02                                   |00a4: move-result-object v2
+5b8bb2: 6e20 ab61 2500                         |00a5: invoke-virtual {v5, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b8bb8: 2900 5aff                              |00a8: goto/16 0002 // -00a6
+5b8bbc: 6e10 a761 0500                         |00aa: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndArray:()V // method@61a7
+5b8bc2: d801 01ff                              |00ad: add-int/lit8 v1, v1, #int -1 // #ff
+5b8bc6: 3901 53ff                              |00af: if-nez v1, 0002 // -00ad
+5b8bca: 0e00                                   |00b1: return-void
+5b8bcc: 6e10 d061 0500                         |00b2: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:()V // method@61d0
+5b8bd2: 280c                                   |00b5: goto 00c1 // +000c
+5b8bd4: 6e10 a861 0500                         |00b6: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndObject:()V // method@61a8
+5b8bda: d801 01ff                              |00b9: add-int/lit8 v1, v1, #int -1 // #ff
+5b8bde: 3901 47ff                              |00bb: if-nez v1, 0002 // -00b9
+5b8be2: 0e00                                   |00bd: return-void
+5b8be4: 6e10 d461 0500                         |00be: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:()V // method@61d4
+5b8bea: d801 0101                              |00c1: add-int/lit8 v1, v1, #int 1 // #01
+5b8bee: 2900 3fff                              |00c3: goto/16 0002 // -00c1
+5b8bf2: 0e00                                   |00c5: return-void
+5b8bf4: 0001 0c00 0100 0000 b200 0000 aa00 ... |00c6: packed-switch-data (28 units)
+      catches       : (none)
+      positions     :
+        0x0002 line=2566
+        0x0008 line=2567
+        0x000f line=2639
+        0x0024 line=2636
+        0x002c line=2633
+        0x0031 line=2630
+        0x0035 line=2627
+        0x0039 line=2616
+        0x003d line=2617
+        0x0041 line=2618
+        0x0049 line=2619
+        0x004d line=2620
+        0x0055 line=2622
+        0x005d line=2604
+        0x0061 line=2605
+        0x0065 line=2606
+        0x006d line=2607
+        0x0071 line=2608
+        0x0079 line=2610
+        0x0081 line=2596
+        0x0087 line=2597
+        0x0098 line=2599
+        0x00a1 line=2569
+        0x00aa line=2583
+        0x00b2 line=2573
+        0x00b6 line=2589
+        0x00be line=2578
+      locals        :
+        0x0000 - 0x00e2 reg=5 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x00e2 reg=6 (null) Lcom/fasterxml/jackson/core/JsonParser;
+
+    #1              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : '_reportError'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 6 16-bit code units
+5b8c2c:                                        |[5b8c2c] com.fasterxml.jackson.core.JsonGenerator._reportError:(Ljava/lang/String;)V
+5b8c3c: 2200 3b0c                              |0000: new-instance v0, Lcom/fasterxml/jackson/core/JsonGenerationException; // type@0c3b
+5b8c40: 7030 5461 2001                         |0002: invoke-direct {v0, v2, v1}, Lcom/fasterxml/jackson/core/JsonGenerationException;.<init>:(Ljava/lang/String;Lcom/fasterxml/jackson/core/JsonGenerator;)V // method@6154
+5b8c46: 2700                                   |0005: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=2710
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0006 reg=2 (null) Ljava/lang/String;
+
+    #2              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : '_reportUnsupportedOperation'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 29 16-bit code units
+5b8c48:                                        |[5b8c48] com.fasterxml.jackson.core.JsonGenerator._reportUnsupportedOperation:()V
+5b8c58: 2200 a21a                              |0000: new-instance v0, Ljava/lang/UnsupportedOperationException; // type@1aa2
+5b8c5c: 2201 991a                              |0002: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+5b8c60: 1a02 165a                              |0004: const-string v2, "Operation not supported by generator of type " // string@5a16
+5b8c64: 7020 3cd2 2100                         |0006: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5b8c6a: 6e10 ccd1 0300                         |0009: invoke-virtual {v3}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+5b8c70: 0c03                                   |000c: move-result-object v3
+5b8c72: 6e10 f0d0 0300                         |000d: invoke-virtual {v3}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+5b8c78: 0c03                                   |0010: move-result-object v3
+5b8c7a: 6e20 45d2 3100                         |0011: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5b8c80: 0c03                                   |0014: move-result-object v3
+5b8c82: 6e10 58d2 0300                         |0015: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5b8c88: 0c03                                   |0018: move-result-object v3
+5b8c8a: 7020 94d2 3000                         |0019: invoke-direct {v0, v3}, Ljava/lang/UnsupportedOperationException;.<init>:(Ljava/lang/String;)V // method@d294
+5b8c90: 2700                                   |001c: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=2716
+      locals        :
+        0x0000 - 0x001d reg=3 this Lcom/fasterxml/jackson/core/JsonGenerator;
+
+    #3              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : '_throwInternal'
+      type          : '()V'
+      access        : 0x0014 (PROTECTED FINAL)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 4 16-bit code units
+5b8c94:                                        |[5b8c94] com.fasterxml.jackson.core.JsonGenerator._throwInternal:()V
+5b8ca4: 7100 9b6b 0000                         |0000: invoke-static {}, Lcom/fasterxml/jackson/core/util/VersionUtil;.throwInternal:()V // method@6b9b
+5b8caa: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2713
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+
+    #4              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : '_verifyOffsets'
+      type          : '(III)V'
+      access        : 0x0014 (PROTECTED FINAL)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 2
+      insns size    : 35 16-bit code units
+5b8cac:                                        |[5b8cac] com.fasterxml.jackson.core.JsonGenerator._verifyOffsets:(III)V
+5b8cbc: 3a02 0700                              |0000: if-ltz v2, 0007 // +0007
+5b8cc0: 9000 0203                              |0002: add-int v0, v2, v3
+5b8cc4: 3610 0300                              |0004: if-gt v0, v1, 0007 // +0003
+5b8cc8: 0e00                                   |0006: return-void
+5b8cca: 2200 7a1a                              |0007: new-instance v0, Ljava/lang/IllegalArgumentException; // type@1a7a
+5b8cce: 7110 6bd1 0200                         |0009: invoke-static {v2}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5b8cd4: 0c02                                   |000c: move-result-object v2
+5b8cd6: 7110 6bd1 0300                         |000d: invoke-static {v3}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5b8cdc: 0c03                                   |0010: move-result-object v3
+5b8cde: 7110 6bd1 0100                         |0011: invoke-static {v1}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5b8ce4: 0c01                                   |0014: move-result-object v1
+5b8ce6: 2430 ad20 3201                         |0015: filled-new-array {v2, v3, v1}, [Ljava/lang/Object; // type@20ad
+5b8cec: 0c01                                   |0018: move-result-object v1
+5b8cee: 1a02 2aaa                              |0019: const-string v2, "invalid argument(s) (offset=%d, length=%d) for input array of %d element" // string@aa2a
+5b8cf2: 7120 05d2 1200                         |001b: invoke-static {v2, v1}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+5b8cf8: 0c01                                   |001e: move-result-object v1
+5b8cfa: 7020 47d1 1000                         |001f: invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+5b8d00: 2700                                   |0022: throw v0
+      catches       : (none)
+      positions     :
+        0x0007 line=2723
+        0x0009 line=2725
+        0x0019 line=2723
+      locals        :
+        0x0000 - 0x0023 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0023 reg=1 (null) I
+        0x0000 - 0x0023 reg=2 (null) I
+        0x0000 - 0x0023 reg=3 (null) I
+
+    #5              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : '_writeSimpleObject'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 219 16-bit code units
+5b8d04:                                        |[5b8d04] com.fasterxml.jackson.core.JsonGenerator._writeSimpleObject:(Ljava/lang/Object;)V
+5b8d14: 3903 0600                              |0000: if-nez v3, 0006 // +0006
+5b8d18: 6e10 ac61 0200                         |0002: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNull:()V // method@61ac
+5b8d1e: 0e00                                   |0005: return-void
+5b8d20: 2030 971a                              |0006: instance-of v0, v3, Ljava/lang/String; // type@1a97
+5b8d24: 3800 0800                              |0008: if-eqz v0, 0010 // +0008
+5b8d28: 1f03 971a                              |000a: check-cast v3, Ljava/lang/String; // type@1a97
+5b8d2c: 6e20 d961 3200                         |000c: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeString:(Ljava/lang/String;)V // method@61d9
+5b8d32: 0e00                                   |000f: return-void
+5b8d34: 2030 891a                              |0010: instance-of v0, v3, Ljava/lang/Number; // type@1a89
+5b8d38: 3800 7e00                              |0012: if-eqz v0, 0090 // +007e
+5b8d3c: 0730                                   |0014: move-object v0, v3
+5b8d3e: 1f00 891a                              |0015: check-cast v0, Ljava/lang/Number; // type@1a89
+5b8d42: 2001 7f1a                              |0017: instance-of v1, v0, Ljava/lang/Integer; // type@1a7f
+5b8d46: 3801 0a00                              |0019: if-eqz v1, 0023 // +000a
+5b8d4a: 6e10 c2d1 0000                         |001b: invoke-virtual {v0}, Ljava/lang/Number;.intValue:()I // method@d1c2
+5b8d50: 0a03                                   |001e: move-result v3
+5b8d52: 6e20 b061 3200                         |001f: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(I)V // method@61b0
+5b8d58: 0e00                                   |0022: return-void
+5b8d5a: 2001 821a                              |0023: instance-of v1, v0, Ljava/lang/Long; // type@1a82
+5b8d5e: 3801 0a00                              |0025: if-eqz v1, 002f // +000a
+5b8d62: 6e10 c3d1 0000                         |0027: invoke-virtual {v0}, Ljava/lang/Number;.longValue:()J // method@d1c3
+5b8d68: 0b00                                   |002a: move-result-wide v0
+5b8d6a: 6e30 b161 0201                         |002b: invoke-virtual {v2, v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(J)V // method@61b1
+5b8d70: 0e00                                   |002e: return-void
+5b8d72: 2001 731a                              |002f: instance-of v1, v0, Ljava/lang/Double; // type@1a73
+5b8d76: 3801 0a00                              |0031: if-eqz v1, 003b // +000a
+5b8d7a: 6e10 c0d1 0000                         |0033: invoke-virtual {v0}, Ljava/lang/Number;.doubleValue:()D // method@d1c0
+5b8d80: 0b00                                   |0036: move-result-wide v0
+5b8d82: 6e30 ae61 0201                         |0037: invoke-virtual {v2, v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(D)V // method@61ae
+5b8d88: 0e00                                   |003a: return-void
+5b8d8a: 2001 781a                              |003b: instance-of v1, v0, Ljava/lang/Float; // type@1a78
+5b8d8e: 3801 0a00                              |003d: if-eqz v1, 0047 // +000a
+5b8d92: 6e10 c1d1 0000                         |003f: invoke-virtual {v0}, Ljava/lang/Number;.floatValue:()F // method@d1c1
+5b8d98: 0a03                                   |0042: move-result v3
+5b8d9a: 6e20 af61 3200                         |0043: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(F)V // method@61af
+5b8da0: 0e00                                   |0046: return-void
+5b8da2: 2001 941a                              |0047: instance-of v1, v0, Ljava/lang/Short; // type@1a94
+5b8da6: 3801 0a00                              |0049: if-eqz v1, 0053 // +000a
+5b8daa: 6e10 c4d1 0000                         |004b: invoke-virtual {v0}, Ljava/lang/Number;.shortValue:()S // method@d1c4
+5b8db0: 0a03                                   |004e: move-result v3
+5b8db2: 6e20 b561 3200                         |004f: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(S)V // method@61b5
+5b8db8: 0e00                                   |0052: return-void
+5b8dba: 2001 681a                              |0053: instance-of v1, v0, Ljava/lang/Byte; // type@1a68
+5b8dbe: 3801 0b00                              |0055: if-eqz v1, 0060 // +000b
+5b8dc2: 6e10 bfd1 0000                         |0057: invoke-virtual {v0}, Ljava/lang/Number;.byteValue:()B // method@d1bf
+5b8dc8: 0a03                                   |005a: move-result v3
+5b8dca: 8f33                                   |005b: int-to-short v3, v3
+5b8dcc: 6e20 b561 3200                         |005c: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(S)V // method@61b5
+5b8dd2: 0e00                                   |005f: return-void
+5b8dd4: 2001 c21a                              |0060: instance-of v1, v0, Ljava/math/BigInteger; // type@1ac2
+5b8dd8: 3801 0800                              |0062: if-eqz v1, 006a // +0008
+5b8ddc: 1f00 c21a                              |0064: check-cast v0, Ljava/math/BigInteger; // type@1ac2
+5b8de0: 6e20 b461 0200                         |0066: invoke-virtual {v2, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(Ljava/math/BigInteger;)V // method@61b4
+5b8de6: 0e00                                   |0069: return-void
+5b8de8: 2001 c11a                              |006a: instance-of v1, v0, Ljava/math/BigDecimal; // type@1ac1
+5b8dec: 3801 0800                              |006c: if-eqz v1, 0074 // +0008
+5b8df0: 1f00 c11a                              |006e: check-cast v0, Ljava/math/BigDecimal; // type@1ac1
+5b8df4: 6e20 b361 0200                         |0070: invoke-virtual {v2, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(Ljava/math/BigDecimal;)V // method@61b3
+5b8dfa: 0e00                                   |0073: return-void
+5b8dfc: 2001 901b                              |0074: instance-of v1, v0, Ljava/util/concurrent/atomic/AtomicInteger; // type@1b90
+5b8e00: 3801 0c00                              |0076: if-eqz v1, 0082 // +000c
+5b8e04: 1f00 901b                              |0078: check-cast v0, Ljava/util/concurrent/atomic/AtomicInteger; // type@1b90
+5b8e08: 6e10 f5d6 0000                         |007a: invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicInteger;.get:()I // method@d6f5
+5b8e0e: 0a03                                   |007d: move-result v3
+5b8e10: 6e20 b061 3200                         |007e: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(I)V // method@61b0
+5b8e16: 0e00                                   |0081: return-void
+5b8e18: 2001 921b                              |0082: instance-of v1, v0, Ljava/util/concurrent/atomic/AtomicLong; // type@1b92
+5b8e1c: 3801 3400                              |0084: if-eqz v1, 00b8 // +0034
+5b8e20: 1f00 921b                              |0086: check-cast v0, Ljava/util/concurrent/atomic/AtomicLong; // type@1b92
+5b8e24: 6e10 00d7 0000                         |0088: invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicLong;.get:()J // method@d700
+5b8e2a: 0b00                                   |008b: move-result-wide v0
+5b8e2c: 6e30 b161 0201                         |008c: invoke-virtual {v2, v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(J)V // method@61b1
+5b8e32: 0e00                                   |008f: return-void
+5b8e34: 2030 7c1f                              |0090: instance-of v0, v3, [B // type@1f7c
+5b8e38: 3800 0a00                              |0092: if-eqz v0, 009c // +000a
+5b8e3c: 1f03 7c1f                              |0094: check-cast v3, [B // type@1f7c
+5b8e40: 1f03 7c1f                              |0096: check-cast v3, [B // type@1f7c
+5b8e44: 6e20 a161 3200                         |0098: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBinary:([B)V // method@61a1
+5b8e4a: 0e00                                   |009b: return-void
+5b8e4c: 2030 671a                              |009c: instance-of v0, v3, Ljava/lang/Boolean; // type@1a67
+5b8e50: 3800 0c00                              |009e: if-eqz v0, 00aa // +000c
+5b8e54: 1f03 671a                              |00a0: check-cast v3, Ljava/lang/Boolean; // type@1a67
+5b8e58: 6e10 9bd0 0300                         |00a2: invoke-virtual {v3}, Ljava/lang/Boolean;.booleanValue:()Z // method@d09b
+5b8e5e: 0a03                                   |00a5: move-result v3
+5b8e60: 6e20 a461 3200                         |00a6: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBoolean:(Z)V // method@61a4
+5b8e66: 0e00                                   |00a9: return-void
+5b8e68: 2030 8f1b                              |00aa: instance-of v0, v3, Ljava/util/concurrent/atomic/AtomicBoolean; // type@1b8f
+5b8e6c: 3800 0c00                              |00ac: if-eqz v0, 00b8 // +000c
+5b8e70: 1f03 8f1b                              |00ae: check-cast v3, Ljava/util/concurrent/atomic/AtomicBoolean; // type@1b8f
+5b8e74: 6e10 efd6 0300                         |00b0: invoke-virtual {v3}, Ljava/util/concurrent/atomic/AtomicBoolean;.get:()Z // method@d6ef
+5b8e7a: 0a03                                   |00b3: move-result v3
+5b8e7c: 6e20 a461 3200                         |00b4: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBoolean:(Z)V // method@61a4
+5b8e82: 0e00                                   |00b7: return-void
+5b8e84: 2202 7b1a                              |00b8: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+5b8e88: 2200 991a                              |00ba: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+5b8e8c: 1a01 3658                              |00bc: const-string v1, "No ObjectCodec defined for the generator, can only serialize simple wrapper types (type passed " // string@5836
+5b8e90: 7020 3cd2 1000                         |00be: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5b8e96: 6e10 ccd1 0300                         |00c1: invoke-virtual {v3}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+5b8e9c: 0c03                                   |00c4: move-result-object v3
+5b8e9e: 6e10 f0d0 0300                         |00c5: invoke-virtual {v3}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+5b8ea4: 0c03                                   |00c8: move-result-object v3
+5b8ea6: 6e20 45d2 3000                         |00c9: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5b8eac: 0c03                                   |00cc: move-result-object v3
+5b8eae: 1a00 000d                              |00cd: const-string v0, ")" // string@0d00
+5b8eb2: 6e20 45d2 0300                         |00cf: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5b8eb8: 0c03                                   |00d2: move-result-object v3
+5b8eba: 6e10 58d2 0300                         |00d3: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5b8ec0: 0c03                                   |00d6: move-result-object v3
+5b8ec2: 7020 4cd1 3200                         |00d7: invoke-direct {v2, v3}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+5b8ec8: 2702                                   |00da: throw v2
+      catches       : (none)
+      positions     :
+        0x0002 line=2745
+        0x0006 line=2748
+        0x000a line=2749
+        0x0010 line=2752
+        0x0014 line=2753
+        0x0017 line=2754
+        0x001b line=2755
+        0x0023 line=2757
+        0x0027 line=2758
+        0x002f line=2760
+        0x0033 line=2761
+        0x003b line=2763
+        0x003f line=2764
+        0x0047 line=2766
+        0x004b line=2767
+        0x0053 line=2769
+        0x0057 line=2770
+        0x0060 line=2772
+        0x0064 line=2773
+        0x006a line=2775
+        0x006e line=2776
+        0x0074 line=2780
+        0x0078 line=2781
+        0x0082 line=2783
+        0x0086 line=2784
+        0x0090 line=2787
+        0x0094 line=2788
+        0x009c line=2790
+        0x00a0 line=2791
+        0x00aa line=2793
+        0x00ae line=2794
+        0x00b8 line=2797
+        0x00c1 line=2798
+      locals        :
+        0x0000 - 0x00db reg=2 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x00db reg=3 (null) Ljava/lang/Object;
+
+    #6              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'assignCurrentValue'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 4 16-bit code units
+5b8ecc:                                        |[5b8ecc] com.fasterxml.jackson.core.JsonGenerator.assignCurrentValue:(Ljava/lang/Object;)V
+5b8edc: 6e20 9161 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.setCurrentValue:(Ljava/lang/Object;)V // method@6191
+5b8ee2: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=395
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0004 reg=1 (null) Ljava/lang/Object;
+
+    #7              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'canOmitFields'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b8ee4:                                        |[5b8ee4] com.fasterxml.jackson.core.JsonGenerator.canOmitFields:()Z
+5b8ef4: 1210                                   |0000: const/4 v0, #int 1 // #1
+5b8ef6: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #8              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'canUseSchema'
+      type          : '(Lcom/fasterxml/jackson/core/FormatSchema;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b8ef8:                                        |[5b8ef8] com.fasterxml.jackson.core.JsonGenerator.canUseSchema:(Lcom/fasterxml/jackson/core/FormatSchema;)Z
+5b8f08: 1200                                   |0000: const/4 v0, #int 0 // #0
+5b8f0a: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #9              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'canWriteBinaryNatively'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b8f0c:                                        |[5b8f0c] com.fasterxml.jackson.core.JsonGenerator.canWriteBinaryNatively:()Z
+5b8f1c: 1200                                   |0000: const/4 v0, #int 0 // #0
+5b8f1e: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #10              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'canWriteFormattedNumbers'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b8f20:                                        |[5b8f20] com.fasterxml.jackson.core.JsonGenerator.canWriteFormattedNumbers:()Z
+5b8f30: 1200                                   |0000: const/4 v0, #int 0 // #0
+5b8f32: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #11              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'canWriteObjectId'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b8f34:                                        |[5b8f34] com.fasterxml.jackson.core.JsonGenerator.canWriteObjectId:()Z
+5b8f44: 1200                                   |0000: const/4 v0, #int 0 // #0
+5b8f46: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #12              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'canWriteTypeId'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b8f48:                                        |[5b8f48] com.fasterxml.jackson.core.JsonGenerator.canWriteTypeId:()Z
+5b8f58: 1200                                   |0000: const/4 v0, #int 0 // #0
+5b8f5a: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #13              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #14              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'configure'
+      type          : '(Lcom/fasterxml/jackson/core/JsonGenerator$Feature;Z)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 10 16-bit code units
+5b8f5c:                                        |[5b8f5c] com.fasterxml.jackson.core.JsonGenerator.configure:(Lcom/fasterxml/jackson/core/JsonGenerator$Feature;Z)Lcom/fasterxml/jackson/core/JsonGenerator;
+5b8f6c: 3802 0600                              |0000: if-eqz v2, 0006 // +0006
+5b8f70: 6e20 7c61 1000                         |0002: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.enable:(Lcom/fasterxml/jackson/core/JsonGenerator$Feature;)Lcom/fasterxml/jackson/core/JsonGenerator; // method@617c
+5b8f76: 2804                                   |0005: goto 0009 // +0004
+5b8f78: 6e20 7b61 1000                         |0006: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.disable:(Lcom/fasterxml/jackson/core/JsonGenerator$Feature;)Lcom/fasterxml/jackson/core/JsonGenerator; // method@617b
+5b8f7e: 1100                                   |0009: return-object v0
+      catches       : (none)
+      positions     :
+        0x0002 line=460
+      locals        :
+        0x0000 - 0x000a reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x000a reg=1 (null) Lcom/fasterxml/jackson/core/JsonGenerator$Feature;
+        0x0000 - 0x000a reg=2 (null) Z
+
+    #15              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'copyCurrentEvent'
+      type          : '(Lcom/fasterxml/jackson/core/JsonParser;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 228 16-bit code units
+5b8f80:                                        |[5b8f80] com.fasterxml.jackson.core.JsonGenerator.copyCurrentEvent:(Lcom/fasterxml/jackson/core/JsonParser;)V
+5b8f90: 6e10 2562 0300                         |0000: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.currentToken:()Lcom/fasterxml/jackson/core/JsonToken; // method@6225
+5b8f96: 0c00                                   |0003: move-result-object v0
+5b8f98: 3900 0400                              |0004: if-nez v0, 0008 // +0004
+5b8f9c: 12f1                                   |0006: const/4 v1, #int -1 // #ff
+5b8f9e: 2805                                   |0007: goto 000c // +0005
+5b8fa0: 6e10 cb62 0000                         |0008: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonToken;.id:()I // method@62cb
+5b8fa6: 0a01                                   |000b: move-result v1
+5b8fa8: 2b01 b800 0000                         |000c: packed-switch v1, 000000c4 // +000000b8
+5b8fae: 2202 7b1a                              |000f: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+5b8fb2: 2203 991a                              |0011: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+5b8fb6: 1a01 7d2d                              |0013: const-string v1, "Internal error: unknown current token, " // string@2d7d
+5b8fba: 7020 3cd2 1300                         |0015: invoke-direct {v3, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5b8fc0: 6e20 44d2 0300                         |0018: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+5b8fc6: 0c03                                   |001b: move-result-object v3
+5b8fc8: 6e10 58d2 0300                         |001c: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5b8fce: 0c03                                   |001f: move-result-object v3
+5b8fd0: 7020 4cd1 3200                         |0020: invoke-direct {v2, v3}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+5b8fd6: 2702                                   |0023: throw v2
+5b8fd8: 6e10 3962 0300                         |0024: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getEmbeddedObject:()Ljava/lang/Object; // method@6239
+5b8fde: 0c03                                   |0027: move-result-object v3
+5b8fe0: 6e20 be61 3200                         |0028: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeObject:(Ljava/lang/Object;)V // method@61be
+5b8fe6: 2900 9800                              |002b: goto/16 00c3 // +0098
+5b8fea: 6e10 ac61 0200                         |002d: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNull:()V // method@61ac
+5b8ff0: 2900 9300                              |0030: goto/16 00c3 // +0093
+5b8ff4: 1203                                   |0032: const/4 v3, #int 0 // #0
+5b8ff6: 6e20 a461 3200                         |0033: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBoolean:(Z)V // method@61a4
+5b8ffc: 2900 8d00                              |0036: goto/16 00c3 // +008d
+5b9000: 1213                                   |0038: const/4 v3, #int 1 // #1
+5b9002: 6e20 a461 3200                         |0039: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBoolean:(Z)V // method@61a4
+5b9008: 2900 8700                              |003c: goto/16 00c3 // +0087
+5b900c: 6e10 4262 0300                         |003e: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getNumberType:()Lcom/fasterxml/jackson/core/JsonParser$NumberType; // method@6242
+5b9012: 0c00                                   |0041: move-result-object v0
+5b9014: 6201 bb44                              |0042: sget-object v1, Lcom/fasterxml/jackson/core/JsonParser$NumberType;.BIG_DECIMAL:Lcom/fasterxml/jackson/core/JsonParser$NumberType; // field@44bb
+5b9018: 3310 0b00                              |0044: if-ne v0, v1, 004f // +000b
+5b901c: 6e10 3762 0300                         |0046: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getDecimalValue:()Ljava/math/BigDecimal; // method@6237
+5b9022: 0c03                                   |0049: move-result-object v3
+5b9024: 6e20 b361 3200                         |004a: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(Ljava/math/BigDecimal;)V // method@61b3
+5b902a: 2900 7600                              |004d: goto/16 00c3 // +0076
+5b902e: 6201 be44                              |004f: sget-object v1, Lcom/fasterxml/jackson/core/JsonParser$NumberType;.FLOAT:Lcom/fasterxml/jackson/core/JsonParser$NumberType; // field@44be
+5b9032: 3310 0b00                              |0051: if-ne v0, v1, 005c // +000b
+5b9036: 6e10 3b62 0300                         |0053: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getFloatValue:()F // method@623b
+5b903c: 0a03                                   |0056: move-result v3
+5b903e: 6e20 af61 3200                         |0057: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(F)V // method@61af
+5b9044: 2900 6900                              |005a: goto/16 00c3 // +0069
+5b9048: 6e10 3862 0300                         |005c: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getDoubleValue:()D // method@6238
+5b904e: 0b00                                   |005f: move-result-wide v0
+5b9050: 6e30 ae61 0201                         |0060: invoke-virtual {v2, v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(D)V // method@61ae
+5b9056: 2860                                   |0063: goto 00c3 // +0060
+5b9058: 6e10 4262 0300                         |0064: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getNumberType:()Lcom/fasterxml/jackson/core/JsonParser$NumberType; // method@6242
+5b905e: 0c00                                   |0067: move-result-object v0
+5b9060: 6201 bf44                              |0068: sget-object v1, Lcom/fasterxml/jackson/core/JsonParser$NumberType;.INT:Lcom/fasterxml/jackson/core/JsonParser$NumberType; // field@44bf
+5b9064: 3310 0a00                              |006a: if-ne v0, v1, 0074 // +000a
+5b9068: 6e10 3e62 0300                         |006c: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getIntValue:()I // method@623e
+5b906e: 0a03                                   |006f: move-result v3
+5b9070: 6e20 b061 3200                         |0070: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(I)V // method@61b0
+5b9076: 2850                                   |0073: goto 00c3 // +0050
+5b9078: 6201 bc44                              |0074: sget-object v1, Lcom/fasterxml/jackson/core/JsonParser$NumberType;.BIG_INTEGER:Lcom/fasterxml/jackson/core/JsonParser$NumberType; // field@44bc
+5b907c: 3310 0a00                              |0076: if-ne v0, v1, 0080 // +000a
+5b9080: 6e10 2c62 0300                         |0078: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getBigIntegerValue:()Ljava/math/BigInteger; // method@622c
+5b9086: 0c03                                   |007b: move-result-object v3
+5b9088: 6e20 b461 3200                         |007c: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(Ljava/math/BigInteger;)V // method@61b4
+5b908e: 2844                                   |007f: goto 00c3 // +0044
+5b9090: 6e10 4062 0300                         |0080: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getLongValue:()J // method@6240
+5b9096: 0b00                                   |0083: move-result-wide v0
+5b9098: 6e30 b161 0201                         |0084: invoke-virtual {v2, v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(J)V // method@61b1
+5b909e: 283c                                   |0087: goto 00c3 // +003c
+5b90a0: 6e10 5c62 0300                         |0088: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.hasTextCharacters:()Z // method@625c
+5b90a6: 0a00                                   |008b: move-result v0
+5b90a8: 3800 1200                              |008c: if-eqz v0, 009e // +0012
+5b90ac: 6e10 4c62 0300                         |008e: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getTextCharacters:()[C // method@624c
+5b90b2: 0c00                                   |0091: move-result-object v0
+5b90b4: 6e10 4e62 0300                         |0092: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getTextOffset:()I // method@624e
+5b90ba: 0a01                                   |0095: move-result v1
+5b90bc: 6e10 4d62 0300                         |0096: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getTextLength:()I // method@624d
+5b90c2: 0a03                                   |0099: move-result v3
+5b90c4: 6e40 da61 0231                         |009a: invoke-virtual {v2, v0, v1, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeString:([CII)V // method@61da
+5b90ca: 2826                                   |009d: goto 00c3 // +0026
+5b90cc: 6e10 4b62 0300                         |009e: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getText:()Ljava/lang/String; // method@624b
+5b90d2: 0c03                                   |00a1: move-result-object v3
+5b90d4: 6e20 d961 3200                         |00a2: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeString:(Ljava/lang/String;)V // method@61d9
+5b90da: 281e                                   |00a5: goto 00c3 // +001e
+5b90dc: 6e10 3362 0300                         |00a6: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonParser;.getCurrentName:()Ljava/lang/String; // method@6233
+5b90e2: 0c03                                   |00a9: move-result-object v3
+5b90e4: 6e20 ab61 3200                         |00aa: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b90ea: 2816                                   |00ad: goto 00c3 // +0016
+5b90ec: 6e10 a761 0200                         |00ae: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndArray:()V // method@61a7
+5b90f2: 2812                                   |00b1: goto 00c3 // +0012
+5b90f4: 6e10 d061 0200                         |00b2: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:()V // method@61d0
+5b90fa: 280e                                   |00b5: goto 00c3 // +000e
+5b90fc: 6e10 a861 0200                         |00b6: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndObject:()V // method@61a8
+5b9102: 280a                                   |00b9: goto 00c3 // +000a
+5b9104: 6e10 d461 0200                         |00ba: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:()V // method@61d4
+5b910a: 2806                                   |00bd: goto 00c3 // +0006
+5b910c: 1a03 4758                              |00be: const-string v3, "No current event to copy" // string@5847
+5b9110: 6e20 6a61 3200                         |00c0: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;._reportError:(Ljava/lang/String;)V // method@616a
+5b9116: 0e00                                   |00c3: return-void
+5b9118: 0001 0e00 ffff ffff b200 0000 0300 ... |00c4: packed-switch-data (32 units)
+      catches       : (none)
+      positions     :
+        0x0000 line=2429
+        0x0008 line=2430
+        0x000f line=2494
+        0x0024 line=2491
+        0x002d line=2488
+        0x0033 line=2485
+        0x0039 line=2482
+        0x003e line=2471
+        0x0042 line=2472
+        0x0046 line=2473
+        0x004f line=2474
+        0x0053 line=2475
+        0x005c line=2477
+        0x0064 line=2459
+        0x0068 line=2460
+        0x006c line=2461
+        0x0074 line=2462
+        0x0078 line=2463
+        0x0080 line=2465
+        0x0088 line=2451
+        0x008e line=2452
+        0x009e line=2454
+        0x00a6 line=2448
+        0x00ae line=2445
+        0x00b2 line=2442
+        0x00b6 line=2439
+        0x00ba line=2436
+        0x00be line=2433
+      locals        :
+        0x0000 - 0x00e4 reg=2 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x00e4 reg=3 (null) Lcom/fasterxml/jackson/core/JsonParser;
+
+    #16              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'copyCurrentStructure'
+      type          : '(Lcom/fasterxml/jackson/core/JsonParser;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 59 16-bit code units
+5b9158:                                        |[5b9158] com.fasterxml.jackson.core.JsonGenerator.copyCurrentStructure:(Lcom/fasterxml/jackson/core/JsonParser;)V
+5b9168: 6e10 2562 0400                         |0000: invoke-virtual {v4}, Lcom/fasterxml/jackson/core/JsonParser;.currentToken:()Lcom/fasterxml/jackson/core/JsonToken; // method@6225
+5b916e: 0c00                                   |0003: move-result-object v0
+5b9170: 12f1                                   |0004: const/4 v1, #int -1 // #ff
+5b9172: 3900 0400                              |0005: if-nez v0, 0009 // +0004
+5b9176: 0110                                   |0007: move v0, v1
+5b9178: 2805                                   |0008: goto 000d // +0005
+5b917a: 6e10 cb62 0000                         |0009: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonToken;.id:()I // method@62cb
+5b9180: 0a00                                   |000c: move-result v0
+5b9182: 1252                                   |000d: const/4 v2, #int 5 // #5
+5b9184: 3320 1500                              |000e: if-ne v0, v2, 0023 // +0015
+5b9188: 6e10 3362 0400                         |0010: invoke-virtual {v4}, Lcom/fasterxml/jackson/core/JsonParser;.getCurrentName:()Ljava/lang/String; // method@6233
+5b918e: 0c00                                   |0013: move-result-object v0
+5b9190: 6e20 ab61 0300                         |0014: invoke-virtual {v3, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b9196: 6e10 6c62 0400                         |0017: invoke-virtual {v4}, Lcom/fasterxml/jackson/core/JsonParser;.nextToken:()Lcom/fasterxml/jackson/core/JsonToken; // method@626c
+5b919c: 0c00                                   |001a: move-result-object v0
+5b919e: 3900 0300                              |001b: if-nez v0, 001e // +0003
+5b91a2: 2805                                   |001d: goto 0022 // +0005
+5b91a4: 6e10 cb62 0000                         |001e: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonToken;.id:()I // method@62cb
+5b91aa: 0a01                                   |0021: move-result v1
+5b91ac: 0110                                   |0022: move v0, v1
+5b91ae: 1211                                   |0023: const/4 v1, #int 1 // #1
+5b91b0: 3210 1000                              |0024: if-eq v0, v1, 0034 // +0010
+5b91b4: 1231                                   |0026: const/4 v1, #int 3 // #3
+5b91b6: 3210 0600                              |0027: if-eq v0, v1, 002d // +0006
+5b91ba: 6e20 7861 4300                         |0029: invoke-virtual {v3, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;.copyCurrentEvent:(Lcom/fasterxml/jackson/core/JsonParser;)V // method@6178
+5b91c0: 0e00                                   |002c: return-void
+5b91c2: 6e10 d061 0300                         |002d: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:()V // method@61d0
+5b91c8: 6e20 6961 4300                         |0030: invoke-virtual {v3, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;._copyCurrentContents:(Lcom/fasterxml/jackson/core/JsonParser;)V // method@6169
+5b91ce: 0e00                                   |0033: return-void
+5b91d0: 6e10 d461 0300                         |0034: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:()V // method@61d4
+5b91d6: 6e20 6961 4300                         |0037: invoke-virtual {v3, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;._copyCurrentContents:(Lcom/fasterxml/jackson/core/JsonParser;)V // method@6169
+5b91dc: 0e00                                   |003a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2535
+        0x0009 line=2537
+        0x0010 line=2539
+        0x0017 line=2540
+        0x001e line=2541
+        0x0029 line=2555
+        0x002d line=2550
+        0x0030 line=2551
+        0x0034 line=2546
+        0x0037 line=2547
+      locals        :
+        0x0000 - 0x003b reg=3 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x003b reg=4 (null) Lcom/fasterxml/jackson/core/JsonParser;
+
+    #17              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'currentValue'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+5b91e0:                                        |[5b91e0] com.fasterxml.jackson.core.JsonGenerator.currentValue:()Ljava/lang/Object;
+5b91f0: 6e10 8061 0000                         |0000: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.getCurrentValue:()Ljava/lang/Object; // method@6180
+5b91f6: 0c00                                   |0003: move-result-object v0
+5b91f8: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=380
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+
+    #18              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'disable'
+      type          : '(Lcom/fasterxml/jackson/core/JsonGenerator$Feature;)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #19              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'enable'
+      type          : '(Lcom/fasterxml/jackson/core/JsonGenerator$Feature;)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #20              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'flush'
+      type          : '()V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #21              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getCharacterEscapes'
+      type          : '()Lcom/fasterxml/jackson/core/io/CharacterEscapes;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b91fc:                                        |[5b91fc] com.fasterxml.jackson.core.JsonGenerator.getCharacterEscapes:()Lcom/fasterxml/jackson/core/io/CharacterEscapes;
+5b920c: 1200                                   |0000: const/4 v0, #int 0 // #0
+5b920e: 1100                                   |0001: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #22              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getCodec'
+      type          : '()Lcom/fasterxml/jackson/core/ObjectCodec;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #23              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getCurrentValue'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 13 16-bit code units
+5b9210:                                        |[5b9210] com.fasterxml.jackson.core.JsonGenerator.getCurrentValue:()Ljava/lang/Object;
+5b9220: 6e10 8561 0000                         |0000: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.getOutputContext:()Lcom/fasterxml/jackson/core/JsonStreamContext; // method@6185
+5b9226: 0c00                                   |0003: move-result-object v0
+5b9228: 3900 0400                              |0004: if-nez v0, 0008 // +0004
+5b922c: 1200                                   |0006: const/4 v0, #int 0 // #0
+5b922e: 2805                                   |0007: goto 000c // +0005
+5b9230: 6e10 b562 0000                         |0008: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonStreamContext;.getCurrentValue:()Ljava/lang/Object; // method@62b5
+5b9236: 0c00                                   |000b: move-result-object v0
+5b9238: 1100                                   |000c: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=406
+        0x0008 line=407
+      locals        :
+        0x0000 - 0x000d reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+
+    #24              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getFeatureMask'
+      type          : '()I'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #25              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getFormatFeatures'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b923c:                                        |[5b923c] com.fasterxml.jackson.core.JsonGenerator.getFormatFeatures:()I
+5b924c: 1200                                   |0000: const/4 v0, #int 0 // #0
+5b924e: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #26              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getHighestEscapedChar'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b9250:                                        |[5b9250] com.fasterxml.jackson.core.JsonGenerator.getHighestEscapedChar:()I
+5b9260: 1200                                   |0000: const/4 v0, #int 0 // #0
+5b9262: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #27              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getOutputBuffered'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b9264:                                        |[5b9264] com.fasterxml.jackson.core.JsonGenerator.getOutputBuffered:()I
+5b9274: 12f0                                   |0000: const/4 v0, #int -1 // #ff
+5b9276: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #28              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getOutputContext'
+      type          : '()Lcom/fasterxml/jackson/core/JsonStreamContext;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #29              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getOutputTarget'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b9278:                                        |[5b9278] com.fasterxml.jackson.core.JsonGenerator.getOutputTarget:()Ljava/lang/Object;
+5b9288: 1200                                   |0000: const/4 v0, #int 0 // #0
+5b928a: 1100                                   |0001: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #30              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getPrettyPrinter'
+      type          : '()Lcom/fasterxml/jackson/core/PrettyPrinter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+5b928c:                                        |[5b928c] com.fasterxml.jackson.core.JsonGenerator.getPrettyPrinter:()Lcom/fasterxml/jackson/core/PrettyPrinter;
+5b929c: 5400 9b44                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/core/JsonGenerator;._cfgPrettyPrinter:Lcom/fasterxml/jackson/core/PrettyPrinter; // field@449b
+5b92a0: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=636
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+
+    #31              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getSchema'
+      type          : '()Lcom/fasterxml/jackson/core/FormatSchema;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5b92a4:                                        |[5b92a4] com.fasterxml.jackson.core.JsonGenerator.getSchema:()Lcom/fasterxml/jackson/core/FormatSchema;
+5b92b4: 1200                                   |0000: const/4 v0, #int 0 // #0
+5b92b6: 1100                                   |0001: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #32              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'getWriteCapabilities'
+      type          : '()Lcom/fasterxml/jackson/core/util/JacksonFeatureSet;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+5b92b8:                                        |[5b92b8] com.fasterxml.jackson.core.JsonGenerator.getWriteCapabilities:()Lcom/fasterxml/jackson/core/util/JacksonFeatureSet;
+5b92c8: 6200 9a44                              |0000: sget-object v0, Lcom/fasterxml/jackson/core/JsonGenerator;.DEFAULT_WRITE_CAPABILITIES:Lcom/fasterxml/jackson/core/util/JacksonFeatureSet; // field@449a
+5b92cc: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=864
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+
+    #33              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'isClosed'
+      type          : '()Z'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #34              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'isEnabled'
+      type          : '(Lcom/fasterxml/jackson/core/JsonGenerator$Feature;)Z'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #35              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'isEnabled'
+      type          : '(Lcom/fasterxml/jackson/core/StreamWriteFeature;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 9 16-bit code units
+5b92d0:                                        |[5b92d0] com.fasterxml.jackson.core.JsonGenerator.isEnabled:(Lcom/fasterxml/jackson/core/StreamWriteFeature;)Z
+5b92e0: 6e10 2263 0100                         |0000: invoke-virtual {v1}, Lcom/fasterxml/jackson/core/StreamWriteFeature;.mappedFeature:()Lcom/fasterxml/jackson/core/JsonGenerator$Feature; // method@6322
+5b92e6: 0c01                                   |0003: move-result-object v1
+5b92e8: 6e20 8b61 1000                         |0004: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.isEnabled:(Lcom/fasterxml/jackson/core/JsonGenerator$Feature;)Z // method@618b
+5b92ee: 0a00                                   |0007: move-result v0
+5b92f0: 0f00                                   |0008: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=485
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0009 reg=1 (null) Lcom/fasterxml/jackson/core/StreamWriteFeature;
+
+    #36              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'overrideFormatFeatures'
+      type          : '(II)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 0
+      insns size    : 1 16-bit code units
+5b92f4:                                        |[5b92f4] com.fasterxml.jackson.core.JsonGenerator.overrideFormatFeatures:(II)Lcom/fasterxml/jackson/core/JsonGenerator;
+5b9304: 1100                                   |0000: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #37              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'overrideStdFeatures'
+      type          : '(II)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 2
+      insns size    : 13 16-bit code units
+5b9308:                                        |[5b9308] com.fasterxml.jackson.core.JsonGenerator.overrideStdFeatures:(II)Lcom/fasterxml/jackson/core/JsonGenerator;
+5b9318: 6e10 8161 0200                         |0000: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.getFeatureMask:()I // method@6181
+5b931e: 0a00                                   |0003: move-result v0
+5b9320: 7c41                                   |0004: not-int v1, v4
+5b9322: b510                                   |0005: and-int/2addr v0, v1
+5b9324: b543                                   |0006: and-int/2addr v3, v4
+5b9326: b603                                   |0007: or-int/2addr v3, v0
+5b9328: 6e20 9261 3200                         |0008: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.setFeatureMask:(I)Lcom/fasterxml/jackson/core/JsonGenerator; // method@6192
+5b932e: 0c02                                   |000b: move-result-object v2
+5b9330: 1102                                   |000c: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=531
+        0x0008 line=533
+      locals        :
+        0x0000 - 0x000d reg=2 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x000d reg=3 (null) I
+        0x0000 - 0x000d reg=4 (null) I
+
+    #38              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'setCharacterEscapes'
+      type          : '(Lcom/fasterxml/jackson/core/io/CharacterEscapes;)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 1 16-bit code units
+5b9334:                                        |[5b9334] com.fasterxml.jackson.core.JsonGenerator.setCharacterEscapes:(Lcom/fasterxml/jackson/core/io/CharacterEscapes;)Lcom/fasterxml/jackson/core/JsonGenerator;
+5b9344: 1100                                   |0000: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #39              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'setCodec'
+      type          : '(Lcom/fasterxml/jackson/core/ObjectCodec;)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #40              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'setCurrentValue'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 10 16-bit code units
+5b9348:                                        |[5b9348] com.fasterxml.jackson.core.JsonGenerator.setCurrentValue:(Ljava/lang/Object;)V
+5b9358: 6e10 8561 0000                         |0000: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.getOutputContext:()Lcom/fasterxml/jackson/core/JsonStreamContext; // method@6185
+5b935e: 0c00                                   |0003: move-result-object v0
+5b9360: 3800 0500                              |0004: if-eqz v0, 0009 // +0005
+5b9364: 6e20 c262 1000                         |0006: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonStreamContext;.setCurrentValue:(Ljava/lang/Object;)V // method@62c2
+5b936a: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=418
+        0x0006 line=420
+      locals        :
+        0x0000 - 0x000a reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x000a reg=1 (null) Ljava/lang/Object;
+
+    #41              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'setFeatureMask'
+      type          : '(I)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #42              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'setHighestNonEscapedChar'
+      type          : '(I)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 1 16-bit code units
+5b936c:                                        |[5b936c] com.fasterxml.jackson.core.JsonGenerator.setHighestNonEscapedChar:(I)Lcom/fasterxml/jackson/core/JsonGenerator;
+5b937c: 1100                                   |0000: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #43              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'setPrettyPrinter'
+      type          : '(Lcom/fasterxml/jackson/core/PrettyPrinter;)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+5b9380:                                        |[5b9380] com.fasterxml.jackson.core.JsonGenerator.setPrettyPrinter:(Lcom/fasterxml/jackson/core/PrettyPrinter;)Lcom/fasterxml/jackson/core/JsonGenerator;
+5b9390: 5b01 9b44                              |0000: iput-object v1, v0, Lcom/fasterxml/jackson/core/JsonGenerator;._cfgPrettyPrinter:Lcom/fasterxml/jackson/core/PrettyPrinter; // field@449b
+5b9394: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=625
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0003 reg=1 (null) Lcom/fasterxml/jackson/core/PrettyPrinter;
+
+    #44              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'setRootValueSeparator'
+      type          : '(Lcom/fasterxml/jackson/core/SerializableString;)Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 6 16-bit code units
+5b9398:                                        |[5b9398] com.fasterxml.jackson.core.JsonGenerator.setRootValueSeparator:(Lcom/fasterxml/jackson/core/SerializableString;)Lcom/fasterxml/jackson/core/JsonGenerator;
+5b93a8: 2200 a21a                              |0000: new-instance v0, Ljava/lang/UnsupportedOperationException; // type@1aa2
+5b93ac: 7010 93d2 0000                         |0002: invoke-direct {v0}, Ljava/lang/UnsupportedOperationException;.<init>:()V // method@d293
+5b93b2: 2700                                   |0005: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=719
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0006 reg=1 (null) Lcom/fasterxml/jackson/core/SerializableString;
+
+    #45              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'setSchema'
+      type          : '(Lcom/fasterxml/jackson/core/FormatSchema;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 28 16-bit code units
+5b93b4:                                        |[5b93b4] com.fasterxml.jackson.core.JsonGenerator.setSchema:(Lcom/fasterxml/jackson/core/FormatSchema;)V
+5b93c4: 2200 a21a                              |0000: new-instance v0, Ljava/lang/UnsupportedOperationException; // type@1aa2
+5b93c8: 6e10 ccd1 0100                         |0002: invoke-virtual {v1}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+5b93ce: 0c01                                   |0005: move-result-object v1
+5b93d0: 6e10 f0d0 0100                         |0006: invoke-virtual {v1}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+5b93d6: 0c01                                   |0009: move-result-object v1
+5b93d8: 7210 b260 0200                         |000a: invoke-interface {v2}, Lcom/fasterxml/jackson/core/FormatSchema;.getSchemaType:()Ljava/lang/String; // method@60b2
+5b93de: 0c02                                   |000d: move-result-object v2
+5b93e0: 2420 ad20 2100                         |000e: filled-new-array {v1, v2}, [Ljava/lang/Object; // type@20ad
+5b93e6: 0c01                                   |0011: move-result-object v1
+5b93e8: 1a02 8429                              |0012: const-string v2, "Generator of type %s does not support schema of type '%s'" // string@2984
+5b93ec: 7120 05d2 1200                         |0014: invoke-static {v2, v1}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+5b93f2: 0c01                                   |0017: move-result-object v1
+5b93f4: 7020 94d2 1000                         |0018: invoke-direct {v0, v1}, Ljava/lang/UnsupportedOperationException;.<init>:(Ljava/lang/String;)V // method@d294
+5b93fa: 2700                                   |001b: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=592
+        0x0002 line=594
+        0x0012 line=592
+      locals        :
+        0x0000 - 0x001c reg=1 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x001c reg=2 (null) Lcom/fasterxml/jackson/core/FormatSchema;
+
+    #46              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'useDefaultPrettyPrinter'
+      type          : '()Lcom/fasterxml/jackson/core/JsonGenerator;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #47              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'version'
+      type          : '()Lcom/fasterxml/jackson/core/Version;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #48              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeArray'
+      type          : '([DII)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 4
+      insns size    : 32 16-bit code units
+5b93fc:                                        |[5b93fc] com.fasterxml.jackson.core.JsonGenerator.writeArray:([DII)V
+5b940c: 3803 1800                              |0000: if-eqz v3, 0018 // +0018
+5b9410: 2130                                   |0002: array-length v0, v3
+5b9412: 6e40 6d61 0254                         |0003: invoke-virtual {v2, v0, v4, v5}, Lcom/fasterxml/jackson/core/JsonGenerator;._verifyOffsets:(III)V // method@616d
+5b9418: 6e30 d361 3205                         |0006: invoke-virtual {v2, v3, v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:(Ljava/lang/Object;I)V // method@61d3
+5b941e: b045                                   |0009: add-int/2addr v5, v4
+5b9420: 3554 0a00                              |000a: if-ge v4, v5, 0014 // +000a
+5b9424: 4500 0304                              |000c: aget-wide v0, v3, v4
+5b9428: 6e30 ae61 0201                         |000e: invoke-virtual {v2, v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(D)V // method@61ae
+5b942e: d804 0401                              |0011: add-int/lit8 v4, v4, #int 1 // #01
+5b9432: 28f7                                   |0013: goto 000a // -0009
+5b9434: 6e10 a761 0200                         |0014: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndArray:()V // method@61a7
+5b943a: 0e00                                   |0017: return-void
+5b943c: 2202 7a1a                              |0018: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+5b9440: 1a03 39c4                              |001a: const-string v3, "null array" // string@c439
+5b9444: 7020 47d1 3200                         |001c: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+5b944a: 2702                                   |001f: throw v2
+      catches       : (none)
+      positions     :
+        0x0002 line=1183
+        0x0006 line=1184
+        0x000c line=1186
+        0x0014 line=1188
+        0x0018 line=1181
+      locals        :
+        0x0000 - 0x0020 reg=2 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0020 reg=3 (null) [D
+        0x0000 - 0x0020 reg=4 (null) I
+        0x0000 - 0x0020 reg=5 (null) I
+
+    #49              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeArray'
+      type          : '([III)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 4
+      insns size    : 32 16-bit code units
+5b944c:                                        |[5b944c] com.fasterxml.jackson.core.JsonGenerator.writeArray:([III)V
+5b945c: 3802 1800                              |0000: if-eqz v2, 0018 // +0018
+5b9460: 2120                                   |0002: array-length v0, v2
+5b9462: 6e40 6d61 0143                         |0003: invoke-virtual {v1, v0, v3, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;._verifyOffsets:(III)V // method@616d
+5b9468: 6e30 d361 2104                         |0006: invoke-virtual {v1, v2, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:(Ljava/lang/Object;I)V // method@61d3
+5b946e: b034                                   |0009: add-int/2addr v4, v3
+5b9470: 3543 0a00                              |000a: if-ge v3, v4, 0014 // +000a
+5b9474: 4400 0203                              |000c: aget v0, v2, v3
+5b9478: 6e20 b061 0100                         |000e: invoke-virtual {v1, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(I)V // method@61b0
+5b947e: d803 0301                              |0011: add-int/lit8 v3, v3, #int 1 // #01
+5b9482: 28f7                                   |0013: goto 000a // -0009
+5b9484: 6e10 a761 0100                         |0014: invoke-virtual {v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndArray:()V // method@61a7
+5b948a: 0e00                                   |0017: return-void
+5b948c: 2201 7a1a                              |0018: new-instance v1, Ljava/lang/IllegalArgumentException; // type@1a7a
+5b9490: 1a02 39c4                              |001a: const-string v2, "null array" // string@c439
+5b9494: 7020 47d1 2100                         |001c: invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+5b949a: 2701                                   |001f: throw v1
+      catches       : (none)
+      positions     :
+        0x0002 line=1129
+        0x0006 line=1130
+        0x000c line=1132
+        0x0014 line=1134
+        0x0018 line=1127
+      locals        :
+        0x0000 - 0x0020 reg=1 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0020 reg=2 (null) [I
+        0x0000 - 0x0020 reg=3 (null) I
+        0x0000 - 0x0020 reg=4 (null) I
+
+    #50              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeArray'
+      type          : '([JII)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 4
+      insns size    : 32 16-bit code units
+5b949c:                                        |[5b949c] com.fasterxml.jackson.core.JsonGenerator.writeArray:([JII)V
+5b94ac: 3803 1800                              |0000: if-eqz v3, 0018 // +0018
+5b94b0: 2130                                   |0002: array-length v0, v3
+5b94b2: 6e40 6d61 0254                         |0003: invoke-virtual {v2, v0, v4, v5}, Lcom/fasterxml/jackson/core/JsonGenerator;._verifyOffsets:(III)V // method@616d
+5b94b8: 6e30 d361 3205                         |0006: invoke-virtual {v2, v3, v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:(Ljava/lang/Object;I)V // method@61d3
+5b94be: b045                                   |0009: add-int/2addr v5, v4
+5b94c0: 3554 0a00                              |000a: if-ge v4, v5, 0014 // +000a
+5b94c4: 4500 0304                              |000c: aget-wide v0, v3, v4
+5b94c8: 6e30 b161 0201                         |000e: invoke-virtual {v2, v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(J)V // method@61b1
+5b94ce: d804 0401                              |0011: add-int/lit8 v4, v4, #int 1 // #01
+5b94d2: 28f7                                   |0013: goto 000a // -0009
+5b94d4: 6e10 a761 0200                         |0014: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndArray:()V // method@61a7
+5b94da: 0e00                                   |0017: return-void
+5b94dc: 2202 7a1a                              |0018: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+5b94e0: 1a03 39c4                              |001a: const-string v3, "null array" // string@c439
+5b94e4: 7020 47d1 3200                         |001c: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+5b94ea: 2702                                   |001f: throw v2
+      catches       : (none)
+      positions     :
+        0x0002 line=1156
+        0x0006 line=1157
+        0x000c line=1159
+        0x0014 line=1161
+        0x0018 line=1154
+      locals        :
+        0x0000 - 0x0020 reg=2 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0020 reg=3 (null) [J
+        0x0000 - 0x0020 reg=4 (null) I
+        0x0000 - 0x0020 reg=5 (null) I
+
+    #51              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeArray'
+      type          : '([Ljava/lang/String;II)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 4
+      insns size    : 32 16-bit code units
+5b94ec:                                        |[5b94ec] com.fasterxml.jackson.core.JsonGenerator.writeArray:([Ljava/lang/String;II)V
+5b94fc: 3802 1800                              |0000: if-eqz v2, 0018 // +0018
+5b9500: 2120                                   |0002: array-length v0, v2
+5b9502: 6e40 6d61 0143                         |0003: invoke-virtual {v1, v0, v3, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;._verifyOffsets:(III)V // method@616d
+5b9508: 6e30 d361 2104                         |0006: invoke-virtual {v1, v2, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:(Ljava/lang/Object;I)V // method@61d3
+5b950e: b034                                   |0009: add-int/2addr v4, v3
+5b9510: 3543 0a00                              |000a: if-ge v3, v4, 0014 // +000a
+5b9514: 4600 0203                              |000c: aget-object v0, v2, v3
+5b9518: 6e20 d961 0100                         |000e: invoke-virtual {v1, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeString:(Ljava/lang/String;)V // method@61d9
+5b951e: d803 0301                              |0011: add-int/lit8 v3, v3, #int 1 // #01
+5b9522: 28f7                                   |0013: goto 000a // -0009
+5b9524: 6e10 a761 0100                         |0014: invoke-virtual {v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndArray:()V // method@61a7
+5b952a: 0e00                                   |0017: return-void
+5b952c: 2201 7a1a                              |0018: new-instance v1, Ljava/lang/IllegalArgumentException; // type@1a7a
+5b9530: 1a02 39c4                              |001a: const-string v2, "null array" // string@c439
+5b9534: 7020 47d1 2100                         |001c: invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+5b953a: 2701                                   |001f: throw v1
+      catches       : (none)
+      positions     :
+        0x0002 line=1210
+        0x0006 line=1211
+        0x000c line=1213
+        0x0014 line=1215
+        0x0018 line=1208
+      locals        :
+        0x0000 - 0x0020 reg=1 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0020 reg=2 (null) [Ljava/lang/String;
+        0x0000 - 0x0020 reg=3 (null) I
+        0x0000 - 0x0020 reg=4 (null) I
+
+    #52              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeArrayFieldStart'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b953c:                                        |[5b953c] com.fasterxml.jackson.core.JsonGenerator.writeArrayFieldStart:(Ljava/lang/String;)V
+5b954c: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b9552: 6e10 d061 0000                         |0003: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:()V // method@61d0
+5b9558: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2324
+        0x0003 line=2325
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+
+    #53              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeBinary'
+      type          : '(Lcom/fasterxml/jackson/core/Base64Variant;Ljava/io/InputStream;I)I'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #54              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeBinary'
+      type          : '(Ljava/io/InputStream;I)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 4
+      insns size    : 9 16-bit code units
+5b955c:                                        |[5b955c] com.fasterxml.jackson.core.JsonGenerator.writeBinary:(Ljava/io/InputStream;I)I
+5b956c: 7100 ad60 0000                         |0000: invoke-static {}, Lcom/fasterxml/jackson/core/Base64Variants;.getDefaultVariant:()Lcom/fasterxml/jackson/core/Base64Variant; // method@60ad
+5b9572: 0c00                                   |0003: move-result-object v0
+5b9574: 6e40 9e61 0132                         |0004: invoke-virtual {v1, v0, v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBinary:(Lcom/fasterxml/jackson/core/Base64Variant;Ljava/io/InputStream;I)I // method@619e
+5b957a: 0a01                                   |0007: move-result v1
+5b957c: 0f01                                   |0008: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=1580
+      locals        :
+        0x0000 - 0x0009 reg=1 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0009 reg=2 (null) Ljava/io/InputStream;
+        0x0000 - 0x0009 reg=3 (null) I
+
+    #55              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeBinary'
+      type          : '(Lcom/fasterxml/jackson/core/Base64Variant;[BII)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #56              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeBinary'
+      type          : '([B)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 5
+      insns size    : 10 16-bit code units
+5b9580:                                        |[5b9580] com.fasterxml.jackson.core.JsonGenerator.writeBinary:([B)V
+5b9590: 7100 ad60 0000                         |0000: invoke-static {}, Lcom/fasterxml/jackson/core/Base64Variants;.getDefaultVariant:()Lcom/fasterxml/jackson/core/Base64Variant; // method@60ad
+5b9596: 0c00                                   |0003: move-result-object v0
+5b9598: 1201                                   |0004: const/4 v1, #int 0 // #0
+5b959a: 2142                                   |0005: array-length v2, v4
+5b959c: 6e52 a061 0314                         |0006: invoke-virtual {v3, v0, v4, v1, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBinary:(Lcom/fasterxml/jackson/core/Base64Variant;[BII)V // method@61a0
+5b95a2: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1557
+      locals        :
+        0x0000 - 0x000a reg=3 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x000a reg=4 (null) [B
+
+    #57              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeBinary'
+      type          : '([BII)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 8 16-bit code units
+5b95a4:                                        |[5b95a4] com.fasterxml.jackson.core.JsonGenerator.writeBinary:([BII)V
+5b95b4: 7100 ad60 0000                         |0000: invoke-static {}, Lcom/fasterxml/jackson/core/Base64Variants;.getDefaultVariant:()Lcom/fasterxml/jackson/core/Base64Variant; // method@60ad
+5b95ba: 0c00                                   |0003: move-result-object v0
+5b95bc: 6e54 a061 0132                         |0004: invoke-virtual {v1, v0, v2, v3, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBinary:(Lcom/fasterxml/jackson/core/Base64Variant;[BII)V // method@61a0
+5b95c2: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1542
+      locals        :
+        0x0000 - 0x0008 reg=1 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0008 reg=2 (null) [B
+        0x0000 - 0x0008 reg=3 (null) I
+        0x0000 - 0x0008 reg=4 (null) I
+
+    #58              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeBinaryField'
+      type          : '(Ljava/lang/String;[B)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b95c4:                                        |[5b95c4] com.fasterxml.jackson.core.JsonGenerator.writeBinaryField:(Ljava/lang/String;[B)V
+5b95d4: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b95da: 6e20 a161 2000                         |0003: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBinary:([B)V // method@61a1
+5b95e0: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2107
+        0x0003 line=2108
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) [B
+
+    #59              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeBoolean'
+      type          : '(Z)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #60              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeBooleanField'
+      type          : '(Ljava/lang/String;Z)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b95e4:                                        |[5b95e4] com.fasterxml.jackson.core.JsonGenerator.writeBooleanField:(Ljava/lang/String;Z)V
+5b95f4: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b95fa: 6e20 a461 2000                         |0003: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBoolean:(Z)V // method@61a4
+5b9600: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2126
+        0x0003 line=2127
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) Z
+
+    #61              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeEmbeddedObject'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 47 16-bit code units
+5b9604:                                        |[5b9604] com.fasterxml.jackson.core.JsonGenerator.writeEmbeddedObject:(Ljava/lang/Object;)V
+5b9614: 3904 0600                              |0000: if-nez v4, 0006 // +0006
+5b9618: 6e10 ac61 0300                         |0002: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNull:()V // method@61ac
+5b961e: 0e00                                   |0005: return-void
+5b9620: 2040 7c1f                              |0006: instance-of v0, v4, [B // type@1f7c
+5b9624: 3800 0a00                              |0008: if-eqz v0, 0012 // +000a
+5b9628: 1f04 7c1f                              |000a: check-cast v4, [B // type@1f7c
+5b962c: 1f04 7c1f                              |000c: check-cast v4, [B // type@1f7c
+5b9630: 6e20 a161 4300                         |000e: invoke-virtual {v3, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeBinary:([B)V // method@61a1
+5b9636: 0e00                                   |0011: return-void
+5b9638: 2200 3b0c                              |0012: new-instance v0, Lcom/fasterxml/jackson/core/JsonGenerationException; // type@0c3b
+5b963c: 2201 991a                              |0014: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+5b9640: 1a02 6958                              |0016: const-string v2, "No native support for writing embedded objects of type " // string@5869
+5b9644: 7020 3cd2 2100                         |0018: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5b964a: 6e10 ccd1 0400                         |001b: invoke-virtual {v4}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+5b9650: 0c04                                   |001e: move-result-object v4
+5b9652: 6e10 f0d0 0400                         |001f: invoke-virtual {v4}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+5b9658: 0c04                                   |0022: move-result-object v4
+5b965a: 6e20 45d2 4100                         |0023: invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5b9660: 0c04                                   |0026: move-result-object v4
+5b9662: 6e10 58d2 0400                         |0027: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5b9668: 0c04                                   |002a: move-result-object v4
+5b966a: 7030 5461 4003                         |002b: invoke-direct {v0, v4, v3}, Lcom/fasterxml/jackson/core/JsonGenerationException;.<init>:(Ljava/lang/String;Lcom/fasterxml/jackson/core/JsonGenerator;)V // method@6154
+5b9670: 2700                                   |002e: throw v0
+      catches       : (none)
+      positions     :
+        0x0002 line=1809
+        0x0006 line=1812
+        0x000a line=1813
+        0x0012 line=1816
+        0x001b line=1817
+      locals        :
+        0x0000 - 0x002f reg=3 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x002f reg=4 (null) Ljava/lang/Object;
+
+    #62              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeEndArray'
+      type          : '()V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #63              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeEndObject'
+      type          : '()V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #64              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeFieldId'
+      type          : '(J)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 8 16-bit code units
+5b9674:                                        |[5b9674] com.fasterxml.jackson.core.JsonGenerator.writeFieldId:(J)V
+5b9684: 7120 80d1 2100                         |0000: invoke-static {v1, v2}, Ljava/lang/Long;.toString:(J)Ljava/lang/String; // method@d180
+5b968a: 0c01                                   |0003: move-result-object v1
+5b968c: 6e20 ab61 1000                         |0004: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b9692: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1101
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0008 reg=1 (null) J
+
+    #65              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeFieldName'
+      type          : '(Lcom/fasterxml/jackson/core/SerializableString;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #66              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeFieldName'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #67              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNull'
+      type          : '()V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #68              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNullField'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b9694:                                        |[5b9694] com.fasterxml.jackson.core.JsonGenerator.writeNullField:(Ljava/lang/String;)V
+5b96a4: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b96aa: 6e10 ac61 0000                         |0003: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNull:()V // method@61ac
+5b96b0: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2144
+        0x0003 line=2145
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+
+    #69              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumber'
+      type          : '(D)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #70              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumber'
+      type          : '(F)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #71              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumber'
+      type          : '(I)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #72              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumber'
+      type          : '(J)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #73              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumber'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #74              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumber'
+      type          : '(Ljava/math/BigDecimal;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #75              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumber'
+      type          : '(Ljava/math/BigInteger;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #76              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumber'
+      type          : '(S)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 4 16-bit code units
+5b96b4:                                        |[5b96b4] com.fasterxml.jackson.core.JsonGenerator.writeNumber:(S)V
+5b96c4: 6e20 b061 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(I)V // method@61b0
+5b96ca: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1628
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0004 reg=1 (null) S
+
+    #77              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumber'
+      type          : '([CII)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 4
+      insns size    : 9 16-bit code units
+5b96cc:                                        |[5b96cc] com.fasterxml.jackson.core.JsonGenerator.writeNumber:([CII)V
+5b96dc: 2200 971a                              |0000: new-instance v0, Ljava/lang/String; // type@1a97
+5b96e0: 7040 f5d1 2043                         |0002: invoke-direct {v0, v2, v3, v4}, Ljava/lang/String;.<init>:([CII)V // method@d1f5
+5b96e6: 6e20 b261 0100                         |0005: invoke-virtual {v1, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(Ljava/lang/String;)V // method@61b2
+5b96ec: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1755
+      locals        :
+        0x0000 - 0x0009 reg=1 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0009 reg=2 (null) [C
+        0x0000 - 0x0009 reg=3 (null) I
+        0x0000 - 0x0009 reg=4 (null) I
+
+    #78              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumberField'
+      type          : '(Ljava/lang/String;D)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 3
+      insns size    : 7 16-bit code units
+5b96f0:                                        |[5b96f0] com.fasterxml.jackson.core.JsonGenerator.writeNumberField:(Ljava/lang/String;D)V
+5b9700: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b9706: 6e30 ae61 2003                         |0003: invoke-virtual {v0, v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(D)V // method@61ae
+5b970c: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2281
+        0x0003 line=2282
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) D
+
+    #79              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumberField'
+      type          : '(Ljava/lang/String;F)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b9710:                                        |[5b9710] com.fasterxml.jackson.core.JsonGenerator.writeNumberField:(Ljava/lang/String;F)V
+5b9720: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b9726: 6e20 af61 2000                         |0003: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(F)V // method@61af
+5b972c: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2262
+        0x0003 line=2263
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) F
+
+    #80              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumberField'
+      type          : '(Ljava/lang/String;I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b9730:                                        |[5b9730] com.fasterxml.jackson.core.JsonGenerator.writeNumberField:(Ljava/lang/String;I)V
+5b9740: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b9746: 6e20 b061 2000                         |0003: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(I)V // method@61b0
+5b974c: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2203
+        0x0003 line=2204
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) I
+
+    #81              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumberField'
+      type          : '(Ljava/lang/String;J)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 3
+      insns size    : 7 16-bit code units
+5b9750:                                        |[5b9750] com.fasterxml.jackson.core.JsonGenerator.writeNumberField:(Ljava/lang/String;J)V
+5b9760: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b9766: 6e30 b161 2003                         |0003: invoke-virtual {v0, v2, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(J)V // method@61b1
+5b976c: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2222
+        0x0003 line=2223
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) J
+
+    #82              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumberField'
+      type          : '(Ljava/lang/String;Ljava/math/BigDecimal;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b9770:                                        |[5b9770] com.fasterxml.jackson.core.JsonGenerator.writeNumberField:(Ljava/lang/String;Ljava/math/BigDecimal;)V
+5b9780: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b9786: 6e20 b361 2000                         |0003: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(Ljava/math/BigDecimal;)V // method@61b3
+5b978c: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2301
+        0x0003 line=2302
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) Ljava/math/BigDecimal;
+
+    #83              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumberField'
+      type          : '(Ljava/lang/String;Ljava/math/BigInteger;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b9790:                                        |[5b9790] com.fasterxml.jackson.core.JsonGenerator.writeNumberField:(Ljava/lang/String;Ljava/math/BigInteger;)V
+5b97a0: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b97a6: 6e20 b461 2000                         |0003: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(Ljava/math/BigInteger;)V // method@61b4
+5b97ac: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2243
+        0x0003 line=2244
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) Ljava/math/BigInteger;
+
+    #84              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeNumberField'
+      type          : '(Ljava/lang/String;S)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b97b0:                                        |[5b97b0] com.fasterxml.jackson.core.JsonGenerator.writeNumberField:(Ljava/lang/String;S)V
+5b97c0: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b97c6: 6e20 b561 2000                         |0003: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeNumber:(S)V // method@61b5
+5b97cc: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2184
+        0x0003 line=2185
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) S
+
+    #85              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeObject'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #86              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeObjectField'
+      type          : '(Ljava/lang/String;Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b97d0:                                        |[5b97d0] com.fasterxml.jackson.core.JsonGenerator.writeObjectField:(Ljava/lang/String;Ljava/lang/Object;)V
+5b97e0: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b97e6: 6e20 be61 2000                         |0003: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeObject:(Ljava/lang/Object;)V // method@61be
+5b97ec: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2384
+        0x0003 line=2385
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) Ljava/lang/Object;
+
+    #87              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeObjectFieldStart'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b97f0:                                        |[5b97f0] com.fasterxml.jackson.core.JsonGenerator.writeObjectFieldStart:(Ljava/lang/String;)V
+5b9800: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b9806: 6e10 d461 0000                         |0003: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:()V // method@61d4
+5b980c: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2347
+        0x0003 line=2348
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+
+    #88              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeObjectId'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 8 16-bit code units
+5b9810:                                        |[5b9810] com.fasterxml.jackson.core.JsonGenerator.writeObjectId:(Ljava/lang/Object;)V
+5b9820: 2202 3b0c                              |0000: new-instance v2, Lcom/fasterxml/jackson/core/JsonGenerationException; // type@0c3b
+5b9824: 1a00 6758                              |0002: const-string v0, "No native support for writing Object Ids" // string@5867
+5b9828: 7030 5461 0201                         |0004: invoke-direct {v2, v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerationException;.<init>:(Ljava/lang/String;Lcom/fasterxml/jackson/core/JsonGenerator;)V // method@6154
+5b982e: 2702                                   |0007: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=1846
+      locals        :
+        0x0000 - 0x0008 reg=1 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0008 reg=2 (null) Ljava/lang/Object;
+
+    #89              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeObjectRef'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 8 16-bit code units
+5b9830:                                        |[5b9830] com.fasterxml.jackson.core.JsonGenerator.writeObjectRef:(Ljava/lang/Object;)V
+5b9840: 2202 3b0c                              |0000: new-instance v2, Lcom/fasterxml/jackson/core/JsonGenerationException; // type@0c3b
+5b9844: 1a00 6758                              |0002: const-string v0, "No native support for writing Object Ids" // string@5867
+5b9848: 7030 5461 0201                         |0004: invoke-direct {v2, v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerationException;.<init>:(Ljava/lang/String;Lcom/fasterxml/jackson/core/JsonGenerator;)V // method@6154
+5b984e: 2702                                   |0007: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=1866
+      locals        :
+        0x0000 - 0x0008 reg=1 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0008 reg=2 (null) Ljava/lang/Object;
+
+    #90              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeOmittedField'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 1 16-bit code units
+5b9850:                                        |[5b9850] com.fasterxml.jackson.core.JsonGenerator.writeOmittedField:(Ljava/lang/String;)V
+5b9860: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #91              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writePOJO'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 4 16-bit code units
+5b9864:                                        |[5b9864] com.fasterxml.jackson.core.JsonGenerator.writePOJO:(Ljava/lang/Object;)V
+5b9874: 6e20 be61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeObject:(Ljava/lang/Object;)V // method@61be
+5b987a: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2052
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0004 reg=1 (null) Ljava/lang/Object;
+
+    #92              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writePOJOField'
+      type          : '(Ljava/lang/String;Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 4 16-bit code units
+5b987c:                                        |[5b987c] com.fasterxml.jackson.core.JsonGenerator.writePOJOField:(Ljava/lang/String;Ljava/lang/Object;)V
+5b988c: 6e30 bf61 1002                         |0000: invoke-virtual {v0, v1, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeObjectField:(Ljava/lang/String;Ljava/lang/Object;)V // method@61bf
+5b9892: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2370
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0004 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0004 reg=2 (null) Ljava/lang/Object;
+
+    #93              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeRaw'
+      type          : '(C)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #94              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeRaw'
+      type          : '(Lcom/fasterxml/jackson/core/SerializableString;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 8 16-bit code units
+5b9894:                                        |[5b9894] com.fasterxml.jackson.core.JsonGenerator.writeRaw:(Lcom/fasterxml/jackson/core/SerializableString;)V
+5b98a4: 7210 fe62 0100                         |0000: invoke-interface {v1}, Lcom/fasterxml/jackson/core/SerializableString;.getValue:()Ljava/lang/String; // method@62fe
+5b98aa: 0c01                                   |0003: move-result-object v1
+5b98ac: 6e20 c861 1000                         |0004: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeRaw:(Ljava/lang/String;)V // method@61c8
+5b98b2: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1461
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0008 reg=1 (null) Lcom/fasterxml/jackson/core/SerializableString;
+
+    #95              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeRaw'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #96              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeRaw'
+      type          : '(Ljava/lang/String;II)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #97              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeRaw'
+      type          : '([CII)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #98              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeRawUTF8String'
+      type          : '([BII)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #99              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeRawValue'
+      type          : '(Lcom/fasterxml/jackson/core/SerializableString;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 8 16-bit code units
+5b98b4:                                        |[5b98b4] com.fasterxml.jackson.core.JsonGenerator.writeRawValue:(Lcom/fasterxml/jackson/core/SerializableString;)V
+5b98c4: 7210 fe62 0100                         |0000: invoke-interface {v1}, Lcom/fasterxml/jackson/core/SerializableString;.getValue:()Ljava/lang/String; // method@62fe
+5b98ca: 0c01                                   |0003: move-result-object v1
+5b98cc: 6e20 cd61 1000                         |0004: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeRawValue:(Ljava/lang/String;)V // method@61cd
+5b98d2: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1496
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0008 reg=1 (null) Lcom/fasterxml/jackson/core/SerializableString;
+
+    #100              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeRawValue'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #101              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeRawValue'
+      type          : '(Ljava/lang/String;II)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #102              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeRawValue'
+      type          : '([CII)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #103              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeStartArray'
+      type          : '()V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #104              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeStartArray'
+      type          : '(I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 4 16-bit code units
+5b98d4:                                        |[5b98d4] com.fasterxml.jackson.core.JsonGenerator.writeStartArray:(I)V
+5b98e4: 6e10 d061 0000                         |0000: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:()V // method@61d0
+5b98ea: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=910
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0004 reg=1 (null) I
+
+    #105              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeStartArray'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b98ec:                                        |[5b98ec] com.fasterxml.jackson.core.JsonGenerator.writeStartArray:(Ljava/lang/Object;)V
+5b98fc: 6e10 d061 0000                         |0000: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:()V // method@61d0
+5b9902: 6e20 9161 1000                         |0003: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.setCurrentValue:(Ljava/lang/Object;)V // method@6191
+5b9908: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=927
+        0x0003 line=928
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/Object;
+
+    #106              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeStartArray'
+      type          : '(Ljava/lang/Object;I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b990c:                                        |[5b990c] com.fasterxml.jackson.core.JsonGenerator.writeStartArray:(Ljava/lang/Object;I)V
+5b991c: 6e20 d161 2000                         |0000: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:(I)V // method@61d1
+5b9922: 6e20 9161 1000                         |0003: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.setCurrentValue:(Ljava/lang/Object;)V // method@6191
+5b9928: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=950
+        0x0003 line=951
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/Object;
+        0x0000 - 0x0007 reg=2 (null) I
+
+    #107              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeStartObject'
+      type          : '()V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #108              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeStartObject'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b992c:                                        |[5b992c] com.fasterxml.jackson.core.JsonGenerator.writeStartObject:(Ljava/lang/Object;)V
+5b993c: 6e10 d461 0000                         |0000: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:()V // method@61d4
+5b9942: 6e20 9161 1000                         |0003: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.setCurrentValue:(Ljava/lang/Object;)V // method@6191
+5b9948: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1001
+        0x0003 line=1002
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/Object;
+
+    #109              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeStartObject'
+      type          : '(Ljava/lang/Object;I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b994c:                                        |[5b994c] com.fasterxml.jackson.core.JsonGenerator.writeStartObject:(Ljava/lang/Object;I)V
+5b995c: 6e10 d461 0000                         |0000: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:()V // method@61d4
+5b9962: 6e20 9161 1000                         |0003: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.setCurrentValue:(Ljava/lang/Object;)V // method@6191
+5b9968: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1032
+        0x0003 line=1033
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/Object;
+        0x0000 - 0x0007 reg=2 (null) I
+
+    #110              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeString'
+      type          : '(Lcom/fasterxml/jackson/core/SerializableString;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #111              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeString'
+      type          : '(Ljava/io/Reader;I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 1
+      insns size    : 4 16-bit code units
+5b996c:                                        |[5b996c] com.fasterxml.jackson.core.JsonGenerator.writeString:(Ljava/io/Reader;I)V
+5b997c: 6e10 6b61 0000                         |0000: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/JsonGenerator;._reportUnsupportedOperation:()V // method@616b
+5b9982: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1263
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0004 reg=1 (null) Ljava/io/Reader;
+        0x0000 - 0x0004 reg=2 (null) I
+
+    #112              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeString'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #113              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeString'
+      type          : '([CII)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #114              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeStringField'
+      type          : '(Ljava/lang/String;Ljava/lang/String;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 7 16-bit code units
+5b9984:                                        |[5b9984] com.fasterxml.jackson.core.JsonGenerator.writeStringField:(Ljava/lang/String;Ljava/lang/String;)V
+5b9994: 6e20 ab61 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b999a: 6e20 d961 2000                         |0003: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeString:(Ljava/lang/String;)V // method@61d9
+5b99a0: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=2163
+        0x0003 line=2164
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0007 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0007 reg=2 (null) Ljava/lang/String;
+
+    #115              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeTree'
+      type          : '(Lcom/fasterxml/jackson/core/TreeNode;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #116              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeTypeId'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 8 16-bit code units
+5b99a4:                                        |[5b99a4] com.fasterxml.jackson.core.JsonGenerator.writeTypeId:(Ljava/lang/Object;)V
+5b99b4: 2202 3b0c                              |0000: new-instance v2, Lcom/fasterxml/jackson/core/JsonGenerationException; // type@0c3b
+5b99b8: 1a00 6858                              |0002: const-string v0, "No native support for writing Type Ids" // string@5868
+5b99bc: 7030 5461 0201                         |0004: invoke-direct {v2, v0, v1}, Lcom/fasterxml/jackson/core/JsonGenerationException;.<init>:(Ljava/lang/String;Lcom/fasterxml/jackson/core/JsonGenerator;)V // method@6154
+5b99c2: 2702                                   |0007: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=1888
+      locals        :
+        0x0000 - 0x0008 reg=1 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0008 reg=2 (null) Ljava/lang/Object;
+
+    #117              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeTypePrefix'
+      type          : '(Lcom/fasterxml/jackson/core/type/WritableTypeId;)Lcom/fasterxml/jackson/core/type/WritableTypeId;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 3
+      insns size    : 109 16-bit code units
+5b99c4:                                        |[5b99c4] com.fasterxml.jackson.core.JsonGenerator.writeTypePrefix:(Lcom/fasterxml/jackson/core/type/WritableTypeId;)Lcom/fasterxml/jackson/core/type/WritableTypeId;
+5b99d4: 5460 0048                              |0000: iget-object v0, v6, Lcom/fasterxml/jackson/core/type/WritableTypeId;.id:Ljava/lang/Object; // field@4800
+5b99d8: 5461 0248                              |0002: iget-object v1, v6, Lcom/fasterxml/jackson/core/type/WritableTypeId;.valueShape:Lcom/fasterxml/jackson/core/JsonToken; // field@4802
+5b99dc: 6e10 7561 0500                         |0004: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.canWriteTypeId:()Z // method@6175
+5b99e2: 0a02                                   |0007: move-result v2
+5b99e4: 3802 0900                              |0008: if-eqz v2, 0011 // +0009
+5b99e8: 1202                                   |000a: const/4 v2, #int 0 // #0
+5b99ea: 5c62 0348                              |000b: iput-boolean v2, v6, Lcom/fasterxml/jackson/core/type/WritableTypeId;.wrapperWritten:Z // field@4803
+5b99ee: 6e20 dd61 0500                         |000d: invoke-virtual {v5, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeTypeId:(Ljava/lang/Object;)V // method@61dd
+5b99f4: 284b                                   |0010: goto 005b // +004b
+5b99f6: 2002 971a                              |0011: instance-of v2, v0, Ljava/lang/String; // type@1a97
+5b99fa: 3802 0500                              |0013: if-eqz v2, 0018 // +0005
+5b99fe: 1f00 971a                              |0015: check-cast v0, Ljava/lang/String; // type@1a97
+5b9a02: 2805                                   |0017: goto 001c // +0005
+5b9a04: 7110 30d2 0000                         |0018: invoke-static {v0}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+5b9a0a: 0c00                                   |001b: move-result-object v0
+5b9a0c: 1212                                   |001c: const/4 v2, #int 1 // #1
+5b9a0e: 5c62 0348                              |001d: iput-boolean v2, v6, Lcom/fasterxml/jackson/core/type/WritableTypeId;.wrapperWritten:Z // field@4803
+5b9a12: 5463 0148                              |001f: iget-object v3, v6, Lcom/fasterxml/jackson/core/type/WritableTypeId;.include:Lcom/fasterxml/jackson/core/type/WritableTypeId$Inclusion; // field@4801
+5b9a16: 6204 dc44                              |0021: sget-object v4, Lcom/fasterxml/jackson/core/JsonToken;.START_OBJECT:Lcom/fasterxml/jackson/core/JsonToken; // field@44dc
+5b9a1a: 3241 0c00                              |0023: if-eq v1, v4, 002f // +000c
+5b9a1e: 6e10 116a 0300                         |0025: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/type/WritableTypeId$Inclusion;.requiresObjectContext:()Z // method@6a11
+5b9a24: 0a04                                   |0028: move-result v4
+5b9a26: 3804 0600                              |0029: if-eqz v4, 002f // +0006
+5b9a2a: 6203 fa47                              |002b: sget-object v3, Lcom/fasterxml/jackson/core/type/WritableTypeId$Inclusion;.WRAPPER_ARRAY:Lcom/fasterxml/jackson/core/type/WritableTypeId$Inclusion; // field@47fa
+5b9a2e: 5b63 0148                              |002d: iput-object v3, v6, Lcom/fasterxml/jackson/core/type/WritableTypeId;.include:Lcom/fasterxml/jackson/core/type/WritableTypeId$Inclusion; // field@4801
+5b9a32: 6204 8a44                              |002f: sget-object v4, Lcom/fasterxml/jackson/core/JsonGenerator$1;.$SwitchMap$com$fasterxml$jackson$core$type$WritableTypeId$Inclusion:[I // field@448a
+5b9a36: 6e10 106a 0300                         |0031: invoke-virtual {v3}, Lcom/fasterxml/jackson/core/type/WritableTypeId$Inclusion;.ordinal:()I // method@6a10
+5b9a3c: 0a03                                   |0034: move-result v3
+5b9a3e: 4403 0403                              |0035: aget v3, v4, v3
+5b9a42: 3223 2400                              |0037: if-eq v3, v2, 005b // +0024
+5b9a46: 1222                                   |0039: const/4 v2, #int 2 // #2
+5b9a48: 3223 2100                              |003a: if-eq v3, v2, 005b // +0021
+5b9a4c: 1232                                   |003c: const/4 v2, #int 3 // #3
+5b9a4e: 3223 1300                              |003d: if-eq v3, v2, 0050 // +0013
+5b9a52: 1242                                   |003f: const/4 v2, #int 4 // #4
+5b9a54: 3223 0900                              |0040: if-eq v3, v2, 0049 // +0009
+5b9a58: 6e10 d061 0500                         |0042: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:()V // method@61d0
+5b9a5e: 6e20 d961 0500                         |0045: invoke-virtual {v5, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeString:(Ljava/lang/String;)V // method@61d9
+5b9a64: 2813                                   |0048: goto 005b // +0013
+5b9a66: 6e10 d461 0500                         |0049: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:()V // method@61d4
+5b9a6c: 6e20 ab61 0500                         |004c: invoke-virtual {v5, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5b9a72: 280c                                   |004f: goto 005b // +000c
+5b9a74: 5461 fe47                              |0050: iget-object v1, v6, Lcom/fasterxml/jackson/core/type/WritableTypeId;.forValue:Ljava/lang/Object; // field@47fe
+5b9a78: 6e20 d561 1500                         |0052: invoke-virtual {v5, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:(Ljava/lang/Object;)V // method@61d5
+5b9a7e: 5461 fc47                              |0055: iget-object v1, v6, Lcom/fasterxml/jackson/core/type/WritableTypeId;.asProperty:Ljava/lang/String; // field@47fc
+5b9a82: 6e30 db61 1500                         |0057: invoke-virtual {v5, v1, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStringField:(Ljava/lang/String;Ljava/lang/String;)V // method@61db
+5b9a88: 1106                                   |005a: return-object v6
+5b9a8a: 6200 dc44                              |005b: sget-object v0, Lcom/fasterxml/jackson/core/JsonToken;.START_OBJECT:Lcom/fasterxml/jackson/core/JsonToken; // field@44dc
+5b9a8e: 3301 0800                              |005d: if-ne v1, v0, 0065 // +0008
+5b9a92: 5460 fe47                              |005f: iget-object v0, v6, Lcom/fasterxml/jackson/core/type/WritableTypeId;.forValue:Ljava/lang/Object; // field@47fe
+5b9a96: 6e20 d561 0500                         |0061: invoke-virtual {v5, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:(Ljava/lang/Object;)V // method@61d5
+5b9a9c: 2808                                   |0064: goto 006c // +0008
+5b9a9e: 6200 db44                              |0065: sget-object v0, Lcom/fasterxml/jackson/core/JsonToken;.START_ARRAY:Lcom/fasterxml/jackson/core/JsonToken; // field@44db
+5b9aa2: 3301 0500                              |0067: if-ne v1, v0, 006c // +0005
+5b9aa6: 6e10 d061 0500                         |0069: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:()V // method@61d0
+5b9aac: 1106                                   |006c: return-object v6
+      catches       : (none)
+      positions     :
+        0x0000 line=1917
+        0x0002 line=1919
+        0x0004 line=1920
+        0x000b line=1921
+        0x000d line=1923
+        0x0011 line=1927
+        0x001d line=1928
+        0x001f line=1930
+        0x0021 line=1932
+        0x0025 line=1933
+        0x002b line=1934
+        0x002f line=1937
+        0x0042 line=1960
+        0x0045 line=1961
+        0x0049 line=1955
+        0x004c line=1956
+        0x0050 line=1949
+        0x0055 line=1950
+        0x005b line=1965
+        0x005f line=1966
+        0x0065 line=1967
+        0x0069 line=1969
+      locals        :
+        0x0000 - 0x006d reg=5 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x006d reg=6 (null) Lcom/fasterxml/jackson/core/type/WritableTypeId;
+
+    #118              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeTypeSuffix'
+      type          : '(Lcom/fasterxml/jackson/core/type/WritableTypeId;)Lcom/fasterxml/jackson/core/type/WritableTypeId;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 70 16-bit code units
+5b9ab0:                                        |[5b9ab0] com.fasterxml.jackson.core.JsonGenerator.writeTypeSuffix:(Lcom/fasterxml/jackson/core/type/WritableTypeId;)Lcom/fasterxml/jackson/core/type/WritableTypeId;
+5b9ac0: 5430 0248                              |0000: iget-object v0, v3, Lcom/fasterxml/jackson/core/type/WritableTypeId;.valueShape:Lcom/fasterxml/jackson/core/JsonToken; // field@4802
+5b9ac4: 6201 dc44                              |0002: sget-object v1, Lcom/fasterxml/jackson/core/JsonToken;.START_OBJECT:Lcom/fasterxml/jackson/core/JsonToken; // field@44dc
+5b9ac8: 3310 0600                              |0004: if-ne v0, v1, 000a // +0006
+5b9acc: 6e10 a861 0200                         |0006: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndObject:()V // method@61a8
+5b9ad2: 2808                                   |0009: goto 0011 // +0008
+5b9ad4: 6201 db44                              |000a: sget-object v1, Lcom/fasterxml/jackson/core/JsonToken;.START_ARRAY:Lcom/fasterxml/jackson/core/JsonToken; // field@44db
+5b9ad8: 3310 0500                              |000c: if-ne v0, v1, 0011 // +0005
+5b9adc: 6e10 a761 0200                         |000e: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndArray:()V // method@61a7
+5b9ae2: 5530 0348                              |0011: iget-boolean v0, v3, Lcom/fasterxml/jackson/core/type/WritableTypeId;.wrapperWritten:Z // field@4803
+5b9ae6: 3800 3200                              |0013: if-eqz v0, 0045 // +0032
+5b9aea: 6200 8a44                              |0015: sget-object v0, Lcom/fasterxml/jackson/core/JsonGenerator$1;.$SwitchMap$com$fasterxml$jackson$core$type$WritableTypeId$Inclusion:[I // field@448a
+5b9aee: 5431 0148                              |0017: iget-object v1, v3, Lcom/fasterxml/jackson/core/type/WritableTypeId;.include:Lcom/fasterxml/jackson/core/type/WritableTypeId$Inclusion; // field@4801
+5b9af2: 6e10 106a 0100                         |0019: invoke-virtual {v1}, Lcom/fasterxml/jackson/core/type/WritableTypeId$Inclusion;.ordinal:()I // method@6a10
+5b9af8: 0a01                                   |001c: move-result v1
+5b9afa: 4400 0001                              |001d: aget v0, v0, v1
+5b9afe: 1211                                   |001f: const/4 v1, #int 1 // #1
+5b9b00: 3210 1300                              |0020: if-eq v0, v1, 0033 // +0013
+5b9b04: 1221                                   |0022: const/4 v1, #int 2 // #2
+5b9b06: 3210 2200                              |0023: if-eq v0, v1, 0045 // +0022
+5b9b0a: 1231                                   |0025: const/4 v1, #int 3 // #3
+5b9b0c: 3210 1f00                              |0026: if-eq v0, v1, 0045 // +001f
+5b9b10: 1251                                   |0028: const/4 v1, #int 5 // #5
+5b9b12: 3210 0600                              |0029: if-eq v0, v1, 002f // +0006
+5b9b16: 6e10 a861 0200                         |002b: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndObject:()V // method@61a8
+5b9b1c: 2817                                   |002e: goto 0045 // +0017
+5b9b1e: 6e10 a761 0200                         |002f: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndArray:()V // method@61a7
+5b9b24: 2813                                   |0032: goto 0045 // +0013
+5b9b26: 5430 0048                              |0033: iget-object v0, v3, Lcom/fasterxml/jackson/core/type/WritableTypeId;.id:Ljava/lang/Object; // field@4800
+5b9b2a: 2001 971a                              |0035: instance-of v1, v0, Ljava/lang/String; // type@1a97
+5b9b2e: 3801 0500                              |0037: if-eqz v1, 003c // +0005
+5b9b32: 1f00 971a                              |0039: check-cast v0, Ljava/lang/String; // type@1a97
+5b9b36: 2805                                   |003b: goto 0040 // +0005
+5b9b38: 7110 30d2 0000                         |003c: invoke-static {v0}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+5b9b3e: 0c00                                   |003f: move-result-object v0
+5b9b40: 5431 fc47                              |0040: iget-object v1, v3, Lcom/fasterxml/jackson/core/type/WritableTypeId;.asProperty:Ljava/lang/String; // field@47fc
+5b9b44: 6e30 db61 1200                         |0042: invoke-virtual {v2, v1, v0}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStringField:(Ljava/lang/String;Ljava/lang/String;)V // method@61db
+5b9b4a: 1103                                   |0045: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=1993
+        0x0002 line=1995
+        0x0006 line=1996
+        0x000a line=1997
+        0x000e line=1998
+        0x0011 line=2001
+        0x0015 line=2002
+        0x002b line=2020
+        0x002f line=2004
+        0x0033 line=2009
+        0x0035 line=2010
+        0x0040 line=2011
+      locals        :
+        0x0000 - 0x0046 reg=2 this Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0046 reg=3 (null) Lcom/fasterxml/jackson/core/type/WritableTypeId;
+
+    #119              : (in Lcom/fasterxml/jackson/core/JsonGenerator;)
+      name          : 'writeUTF8String'
+      type          : '([BII)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+  source_file_idx   : 11957 (JsonGenerator.java)
+

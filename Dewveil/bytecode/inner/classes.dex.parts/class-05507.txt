@@ -1,0 +1,340 @@
+Class #5507            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/Store;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/messaging/Store;)
+      name          : 'context'
+      type          : 'Landroid/content/Context;'
+      access        : 0x0010 (FINAL)
+    #1              : (in Lcom/google/firebase/messaging/Store;)
+      name          : 'store'
+      type          : 'Landroid/content/SharedPreferences;'
+      access        : 0x0010 (FINAL)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/Store;)
+      name          : '<init>'
+      type          : '(Landroid/content/Context;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 20 16-bit code units
+72a8d0:                                        |[72a8d0] com.google.firebase.messaging.Store.<init>:(Landroid/content/Context;)V
+72a8e0: 7010 c8d1 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@d1c8
+72a8e6: 5b23 e673                              |0003: iput-object v3, v2, Lcom/google/firebase/messaging/Store;.context:Landroid/content/Context; // field@73e6
+72a8ea: 1a00 c587                              |0005: const-string v0, "com.google.android.gms.appid" // string@87c5
+72a8ee: 1201                                   |0007: const/4 v1, #int 0 // #0
+72a8f0: 6e30 4802 0301                         |0008: invoke-virtual {v3, v0, v1}, Landroid/content/Context;.getSharedPreferences:(Ljava/lang/String;I)Landroid/content/SharedPreferences; // method@0248
+72a8f6: 0c03                                   |000b: move-result-object v3
+72a8f8: 5b23 e773                              |000c: iput-object v3, v2, Lcom/google/firebase/messaging/Store;.store:Landroid/content/SharedPreferences; // field@73e7
+72a8fc: 1a03 c687                              |000e: const-string v3, "com.google.android.gms.appid-no-backup" // string@87c6
+72a900: 7020 fdc0 3200                         |0010: invoke-direct {v2, v3}, Lcom/google/firebase/messaging/Store;.checkForRestore:(Ljava/lang/String;)V // method@c0fd
+72a906: 0e00                                   |0013: return-void
+      catches       : (none)
+      positions     :
+        0x0008 line=1
+        0x0010 line=2
+      locals        :
+        0x0000 - 0x0014 reg=2 this Lcom/google/firebase/messaging/Store;
+        0x0000 - 0x0014 reg=3 (null) Landroid/content/Context;
+
+    #1              : (in Lcom/google/firebase/messaging/Store;)
+      name          : 'checkForRestore'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 81 16-bit code units
+72a908:                                        |[72a908] com.google.firebase.messaging.Store.checkForRestore:(Ljava/lang/String;)V
+72a918: 1a04 6c28                              |0000: const-string v4, "FirebaseMessaging" // string@286c
+72a91c: 5430 e673                              |0002: iget-object v0, v3, Lcom/google/firebase/messaging/Store;.context:Landroid/content/Context; // field@73e6
+72a920: 7110 1934 0000                         |0004: invoke-static {v0}, Landroidx/core/content/ContextCompat;.getNoBackupFilesDir:(Landroid/content/Context;)Ljava/io/File; // method@3419
+72a926: 0c00                                   |0007: move-result-object v0
+72a928: 2201 3d1a                              |0008: new-instance v1, Ljava/io/File; // type@1a3d
+72a92c: 1a02 c687                              |000a: const-string v2, "com.google.android.gms.appid-no-backup" // string@87c6
+72a930: 7030 d8cf 0102                         |000c: invoke-direct {v1, v0, v2}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@cfd8
+72a936: 6e10 dfcf 0100                         |000f: invoke-virtual {v1}, Ljava/io/File;.exists:()Z // method@cfdf
+72a93c: 0a00                                   |0012: move-result v0
+72a93e: 3800 0300                              |0013: if-eqz v0, 0016 // +0003
+72a942: 0e00                                   |0015: return-void
+72a944: 6e10 dccf 0100                         |0016: invoke-virtual {v1}, Ljava/io/File;.createNewFile:()Z // method@cfdc
+72a94a: 0a00                                   |0019: move-result v0
+72a94c: 3800 3600                              |001a: if-eqz v0, 0050 // +0036
+72a950: 6e10 02c1 0300                         |001c: invoke-virtual {v3}, Lcom/google/firebase/messaging/Store;.isEmpty:()Z // method@c102
+72a956: 0a00                                   |001f: move-result v0
+72a958: 3900 3000                              |0020: if-nez v0, 0050 // +0030
+72a95c: 1a00 9a15                              |0022: const-string v0, "App restored, clearing state" // string@159a
+72a960: 7120 2108 0400                         |0024: invoke-static {v4, v0}, Landroid/util/Log;.i:(Ljava/lang/String;Ljava/lang/String;)I // method@0821
+72a966: 6e10 ffc0 0300                         |0027: invoke-virtual {v3}, Lcom/google/firebase/messaging/Store;.deleteAll:()V // method@c0ff
+72a96c: 0e00                                   |002a: return-void
+72a96e: 0d03                                   |002b: move-exception v3
+72a970: 1230                                   |002c: const/4 v0, #int 3 // #3
+72a972: 7120 2308 0400                         |002d: invoke-static {v4, v0}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+72a978: 0a00                                   |0030: move-result v0
+72a97a: 3800 1f00                              |0031: if-eqz v0, 0050 // +001f
+72a97e: 6e10 18d0 0300                         |0033: invoke-virtual {v3}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+72a984: 0c03                                   |0036: move-result-object v3
+72a986: 7110 30d2 0300                         |0037: invoke-static {v3}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72a98c: 0c03                                   |003a: move-result-object v3
+72a98e: 6e10 16d2 0300                         |003b: invoke-virtual {v3}, Ljava/lang/String;.length:()I // method@d216
+72a994: 0a00                                   |003e: move-result v0
+72a996: 1a01 9d24                              |003f: const-string v1, "Error creating file in no backup dir: " // string@249d
+72a99a: 3800 0700                              |0041: if-eqz v0, 0048 // +0007
+72a99e: 6e20 fdd1 3100                         |0043: invoke-virtual {v1, v3}, Ljava/lang/String;.concat:(Ljava/lang/String;)Ljava/lang/String; // method@d1fd
+72a9a4: 0c03                                   |0046: move-result-object v3
+72a9a6: 2806                                   |0047: goto 004d // +0006
+72a9a8: 2203 971a                              |0048: new-instance v3, Ljava/lang/String; // type@1a97
+72a9ac: 7020 ecd1 1300                         |004a: invoke-direct {v3, v1}, Ljava/lang/String;.<init>:(Ljava/lang/String;)V // method@d1ec
+72a9b2: 7120 1c08 3400                         |004d: invoke-static {v4, v3}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+72a9b8: 0e00                                   |0050: return-void
+      catches       : 1
+        0x0016 - 0x002a
+          Ljava/io/IOException; -> 0x002b
+      positions     :
+        0x0004 line=1
+        0x000c line=2
+        0x000f line=3
+        0x0016 line=4
+        0x001c line=5
+        0x0024 line=6
+        0x0027 line=7
+        0x002d line=8
+        0x0033 line=9
+      locals        :
+        0x0000 - 0x0051 reg=3 this Lcom/google/firebase/messaging/Store;
+        0x0000 - 0x0051 reg=4 (null) Ljava/lang/String;
+
+    #2              : (in Lcom/google/firebase/messaging/Store;)
+      name          : 'createTokenKey'
+      type          : '(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 2
+      insns size    : 45 16-bit code units
+72a9cc:                                        |[72a9cc] com.google.firebase.messaging.Store.createTokenKey:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+72a9dc: 7110 30d2 0300                         |0000: invoke-static {v3}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72a9e2: 0c02                                   |0003: move-result-object v2
+72a9e4: 6e10 16d2 0200                         |0004: invoke-virtual {v2}, Ljava/lang/String;.length:()I // method@d216
+72a9ea: 0a02                                   |0007: move-result v2
+72a9ec: 7110 30d2 0400                         |0008: invoke-static {v4}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+72a9f2: 0c00                                   |000b: move-result-object v0
+72a9f4: 6e10 16d2 0000                         |000c: invoke-virtual {v0}, Ljava/lang/String;.length:()I // method@d216
+72a9fa: 0a00                                   |000f: move-result v0
+72a9fc: 2201 991a                              |0010: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+72aa00: d802 0205                              |0012: add-int/lit8 v2, v2, #int 5 // #05
+72aa04: b002                                   |0014: add-int/2addr v2, v0
+72aa06: 7020 3ad2 2100                         |0015: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+72aa0c: 6e20 45d2 3100                         |0018: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72aa12: 1a02 cee9                              |001b: const-string v2, "|T|" // string@e9ce
+72aa16: 6e20 45d2 2100                         |001d: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72aa1c: 6e20 45d2 4100                         |0020: invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72aa22: 1a02 bee9                              |0023: const-string v2, "|*" // string@e9be
+72aa26: 6e20 45d2 2100                         |0025: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72aa2c: 6e10 58d2 0100                         |0028: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+72aa32: 0c02                                   |002b: move-result-object v2
+72aa34: 1102                                   |002c: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x002d reg=2 this Lcom/google/firebase/messaging/Store;
+        0x0000 - 0x002d reg=3 (null) Ljava/lang/String;
+        0x0000 - 0x002d reg=4 (null) Ljava/lang/String;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/messaging/Store;)
+      name          : 'deleteAll'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 19 16-bit code units
+72aa38:                                        |[72aa38] com.google.firebase.messaging.Store.deleteAll:()V
+72aa48: 1d01                                   |0000: monitor-enter v1
+72aa4a: 5410 e773                              |0001: iget-object v0, v1, Lcom/google/firebase/messaging/Store;.store:Landroid/content/SharedPreferences; // field@73e7
+72aa4e: 7210 b802 0000                         |0003: invoke-interface {v0}, Landroid/content/SharedPreferences;.edit:()Landroid/content/SharedPreferences$Editor; // method@02b8
+72aa54: 0c00                                   |0006: move-result-object v0
+72aa56: 7210 b002 0000                         |0007: invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;.clear:()Landroid/content/SharedPreferences$Editor; // method@02b0
+72aa5c: 0c00                                   |000a: move-result-object v0
+72aa5e: 7210 b102 0000                         |000b: invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;.commit:()Z // method@02b1
+72aa64: 1e01                                   |000e: monitor-exit v1
+72aa66: 0e00                                   |000f: return-void
+72aa68: 0d00                                   |0010: move-exception v0
+72aa6a: 1e01                                   |0011: monitor-exit v1
+72aa6c: 2700                                   |0012: throw v0
+      catches       : 2
+        0x0001 - 0x000e
+          <any> -> 0x0010
+        0x0011 - 0x0012
+          <any> -> 0x0010
+      positions     :
+        0x0003 line=1
+      locals        :
+        0x0000 - 0x0013 reg=1 this Lcom/google/firebase/messaging/Store;
+
+    #1              : (in Lcom/google/firebase/messaging/Store;)
+      name          : 'deleteToken'
+      type          : '(Ljava/lang/String;Ljava/lang/String;)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 22 16-bit code units
+72aa84:                                        |[72aa84] com.google.firebase.messaging.Store.deleteToken:(Ljava/lang/String;Ljava/lang/String;)V
+72aa94: 1d00                                   |0000: monitor-enter v0
+72aa96: 7030 fec0 1002                         |0001: invoke-direct {v0, v1, v2}, Lcom/google/firebase/messaging/Store;.createTokenKey:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; // method@c0fe
+72aa9c: 0c01                                   |0004: move-result-object v1
+72aa9e: 5402 e773                              |0005: iget-object v2, v0, Lcom/google/firebase/messaging/Store;.store:Landroid/content/SharedPreferences; // field@73e7
+72aaa2: 7210 b802 0200                         |0007: invoke-interface {v2}, Landroid/content/SharedPreferences;.edit:()Landroid/content/SharedPreferences$Editor; // method@02b8
+72aaa8: 0c02                                   |000a: move-result-object v2
+72aaaa: 7220 b602 1200                         |000b: invoke-interface {v2, v1}, Landroid/content/SharedPreferences$Editor;.remove:(Ljava/lang/String;)Landroid/content/SharedPreferences$Editor; // method@02b6
+72aab0: 7210 b102 0200                         |000e: invoke-interface {v2}, Landroid/content/SharedPreferences$Editor;.commit:()Z // method@02b1
+72aab6: 1e00                                   |0011: monitor-exit v0
+72aab8: 0e00                                   |0012: return-void
+72aaba: 0d01                                   |0013: move-exception v1
+72aabc: 1e00                                   |0014: monitor-exit v0
+72aabe: 2701                                   |0015: throw v1
+      catches       : 2
+        0x0001 - 0x0011
+          <any> -> 0x0013
+        0x0014 - 0x0015
+          <any> -> 0x0013
+      positions     :
+        0x0001 line=1
+        0x0007 line=2
+        0x000b line=3
+        0x000e line=4
+      locals        :
+        0x0000 - 0x0016 reg=0 this Lcom/google/firebase/messaging/Store;
+        0x0000 - 0x0016 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0016 reg=2 (null) Ljava/lang/String;
+
+    #2              : (in Lcom/google/firebase/messaging/Store;)
+      name          : 'getToken'
+      type          : '(Ljava/lang/String;Ljava/lang/String;)Lcom/google/firebase/messaging/Store$Token;'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 21 16-bit code units
+72aad4:                                        |[72aad4] com.google.firebase.messaging.Store.getToken:(Ljava/lang/String;Ljava/lang/String;)Lcom/google/firebase/messaging/Store$Token;
+72aae4: 1d01                                   |0000: monitor-enter v1
+72aae6: 5410 e773                              |0001: iget-object v0, v1, Lcom/google/firebase/messaging/Store;.store:Landroid/content/SharedPreferences; // field@73e7
+72aaea: 7030 fec0 2103                         |0003: invoke-direct {v1, v2, v3}, Lcom/google/firebase/messaging/Store;.createTokenKey:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; // method@c0fe
+72aaf0: 0c02                                   |0006: move-result-object v2
+72aaf2: 1203                                   |0007: const/4 v3, #int 0 // #0
+72aaf4: 7230 bd02 2003                         |0008: invoke-interface {v0, v2, v3}, Landroid/content/SharedPreferences;.getString:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; // method@02bd
+72aafa: 0c02                                   |000b: move-result-object v2
+72aafc: 7110 fbc0 0200                         |000c: invoke-static {v2}, Lcom/google/firebase/messaging/Store$Token;.parse:(Ljava/lang/String;)Lcom/google/firebase/messaging/Store$Token; // method@c0fb
+72ab02: 0c02                                   |000f: move-result-object v2
+72ab04: 1e01                                   |0010: monitor-exit v1
+72ab06: 1102                                   |0011: return-object v2
+72ab08: 0d02                                   |0012: move-exception v2
+72ab0a: 1e01                                   |0013: monitor-exit v1
+72ab0c: 2702                                   |0014: throw v2
+      catches       : 2
+        0x0001 - 0x0010
+          <any> -> 0x0012
+        0x0013 - 0x0014
+          <any> -> 0x0012
+      positions     :
+        0x0003 line=1
+      locals        :
+        0x0000 - 0x0015 reg=1 this Lcom/google/firebase/messaging/Store;
+        0x0000 - 0x0015 reg=2 (null) Ljava/lang/String;
+        0x0000 - 0x0015 reg=3 (null) Ljava/lang/String;
+
+    #3              : (in Lcom/google/firebase/messaging/Store;)
+      name          : 'isEmpty'
+      type          : '()Z'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 16 16-bit code units
+72ab24:                                        |[72ab24] com.google.firebase.messaging.Store.isEmpty:()Z
+72ab34: 1d01                                   |0000: monitor-enter v1
+72ab36: 5410 e773                              |0001: iget-object v0, v1, Lcom/google/firebase/messaging/Store;.store:Landroid/content/SharedPreferences; // field@73e7
+72ab3a: 7210 b902 0000                         |0003: invoke-interface {v0}, Landroid/content/SharedPreferences;.getAll:()Ljava/util/Map; // method@02b9
+72ab40: 0c00                                   |0006: move-result-object v0
+72ab42: 7210 04d6 0000                         |0007: invoke-interface {v0}, Ljava/util/Map;.isEmpty:()Z // method@d604
+72ab48: 0a00                                   |000a: move-result v0
+72ab4a: 1e01                                   |000b: monitor-exit v1
+72ab4c: 0f00                                   |000c: return v0
+72ab4e: 0d00                                   |000d: move-exception v0
+72ab50: 1e01                                   |000e: monitor-exit v1
+72ab52: 2700                                   |000f: throw v0
+      catches       : 2
+        0x0001 - 0x000b
+          <any> -> 0x000d
+        0x000e - 0x000f
+          <any> -> 0x000d
+      positions     :
+        0x0003 line=1
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/google/firebase/messaging/Store;
+
+    #4              : (in Lcom/google/firebase/messaging/Store;)
+      name          : 'saveToken'
+      type          : '(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 7
+      ins           : 5
+      outs          : 4
+      insns size    : 34 16-bit code units
+72ab68:                                        |[72ab68] com.google.firebase.messaging.Store.saveToken:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+72ab78: 1d02                                   |0000: monitor-enter v2
+72ab7a: 7100 5bd2 0000                         |0001: invoke-static {}, Ljava/lang/System;.currentTimeMillis:()J // method@d25b
+72ab80: 0b00                                   |0004: move-result-wide v0
+72ab82: 7140 f9c0 6510                         |0005: invoke-static {v5, v6, v0, v1}, Lcom/google/firebase/messaging/Store$Token;.encode:(Ljava/lang/String;Ljava/lang/String;J)Ljava/lang/String; // method@c0f9
+72ab88: 0c05                                   |0008: move-result-object v5
+72ab8a: 3905 0400                              |0009: if-nez v5, 000d // +0004
+72ab8e: 1e02                                   |000b: monitor-exit v2
+72ab90: 0e00                                   |000c: return-void
+72ab92: 5426 e773                              |000d: iget-object v6, v2, Lcom/google/firebase/messaging/Store;.store:Landroid/content/SharedPreferences; // field@73e7
+72ab96: 7210 b802 0600                         |000f: invoke-interface {v6}, Landroid/content/SharedPreferences;.edit:()Landroid/content/SharedPreferences$Editor; // method@02b8
+72ab9c: 0c06                                   |0012: move-result-object v6
+72ab9e: 7030 fec0 3204                         |0013: invoke-direct {v2, v3, v4}, Lcom/google/firebase/messaging/Store;.createTokenKey:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; // method@c0fe
+72aba4: 0c03                                   |0016: move-result-object v3
+72aba6: 7230 b502 3605                         |0017: invoke-interface {v6, v3, v5}, Landroid/content/SharedPreferences$Editor;.putString:(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor; // method@02b5
+72abac: 7210 b102 0600                         |001a: invoke-interface {v6}, Landroid/content/SharedPreferences$Editor;.commit:()Z // method@02b1
+72abb2: 1e02                                   |001d: monitor-exit v2
+72abb4: 0e00                                   |001e: return-void
+72abb6: 0d03                                   |001f: move-exception v3
+72abb8: 1e02                                   |0020: monitor-exit v2
+72abba: 2703                                   |0021: throw v3
+      catches       : 3
+        0x0001 - 0x0009
+          <any> -> 0x001f
+        0x000d - 0x001d
+          <any> -> 0x001f
+        0x0020 - 0x0021
+          <any> -> 0x001f
+      positions     :
+        0x0001 line=1
+        0x000f line=2
+        0x0013 line=3
+        0x001a line=4
+      locals        :
+        0x0000 - 0x0022 reg=2 this Lcom/google/firebase/messaging/Store;
+        0x0000 - 0x0022 reg=3 (null) Ljava/lang/String;
+        0x0000 - 0x0022 reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x0022 reg=5 (null) Ljava/lang/String;
+        0x0000 - 0x0022 reg=6 (null) Ljava/lang/String;
+
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

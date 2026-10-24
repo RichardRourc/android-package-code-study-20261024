@@ -1,0 +1,351 @@
+Class #5287            -
+  Class descriptor  : 'Lcom/google/firebase/components/EventBus;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lcom/google/firebase/events/Subscriber;'
+    #1              : 'Lcom/google/firebase/events/Publisher;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/components/EventBus;)
+      name          : 'defaultExecutor'
+      type          : 'Ljava/util/concurrent/Executor;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/google/firebase/components/EventBus;)
+      name          : 'handlerMap'
+      type          : 'Ljava/util/Map;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/google/firebase/components/EventBus;)
+      name          : 'pendingEvents'
+      type          : 'Ljava/util/Queue;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/components/EventBus;)
+      name          : '<init>'
+      type          : '(Ljava/util/concurrent/Executor;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 20 16-bit code units
+71bbf8:                                        |[71bbf8] com.google.firebase.components.EventBus.<init>:(Ljava/util/concurrent/Executor;)V
+71bc08: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+71bc0e: 2200 491b                              |0003: new-instance v0, Ljava/util/HashMap; // type@1b49
+71bc12: 7010 7ed5 0000                         |0005: invoke-direct {v0}, Ljava/util/HashMap;.<init>:()V // method@d57e
+71bc18: 5b10 f76f                              |0008: iput-object v0, v1, Lcom/google/firebase/components/EventBus;.handlerMap:Ljava/util/Map; // field@6ff7
+71bc1c: 2200 391b                              |000a: new-instance v0, Ljava/util/ArrayDeque; // type@1b39
+71bc20: 7010 90d4 0000                         |000c: invoke-direct {v0}, Ljava/util/ArrayDeque;.<init>:()V // method@d490
+71bc26: 5b10 f86f                              |000f: iput-object v0, v1, Lcom/google/firebase/components/EventBus;.pendingEvents:Ljava/util/Queue; // field@6ff8
+71bc2a: 5b12 f66f                              |0011: iput-object v2, v1, Lcom/google/firebase/components/EventBus;.defaultExecutor:Ljava/util/concurrent/Executor; // field@6ff6
+71bc2e: 0e00                                   |0013: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=51
+        0x0003 line=41
+        0x000a line=52
+        0x0011 line=53
+      locals        :
+        0x0000 - 0x0014 reg=1 this Lcom/google/firebase/components/EventBus;
+        0x0000 - 0x0014 reg=2 (null) Ljava/util/concurrent/Executor;
+
+    #1              : (in Lcom/google/firebase/components/EventBus;)
+      name          : 'getHandlers'
+      type          : '(Lcom/google/firebase/events/Event;)Ljava/util/Set;'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 29 16-bit code units
+71bc30:                                        |[71bc30] com.google.firebase.components.EventBus.getHandlers:(Lcom/google/firebase/events/Event;)Ljava/util/Set;
+71bc40: 1d01                                   |0000: monitor-enter v1
+71bc42: 5410 f76f                              |0001: iget-object v0, v1, Lcom/google/firebase/components/EventBus;.handlerMap:Ljava/util/Map; // field@6ff7
+71bc46: 6e10 b2bd 0200                         |0003: invoke-virtual {v2}, Lcom/google/firebase/events/Event;.getType:()Ljava/lang/Class; // method@bdb2
+71bc4c: 0c02                                   |0006: move-result-object v2
+71bc4e: 7220 03d6 2000                         |0007: invoke-interface {v0, v2}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+71bc54: 0c02                                   |000a: move-result-object v2
+71bc56: 1f02 561b                              |000b: check-cast v2, Ljava/util/Map; // type@1b56
+71bc5a: 3902 0700                              |000d: if-nez v2, 0014 // +0007
+71bc5e: 7100 44d5 0000                         |000f: invoke-static {}, Ljava/util/Collections;.emptySet:()Ljava/util/Set; // method@d544
+71bc64: 0c02                                   |0012: move-result-object v2
+71bc66: 2805                                   |0013: goto 0018 // +0005
+71bc68: 7210 02d6 0200                         |0014: invoke-interface {v2}, Ljava/util/Map;.entrySet:()Ljava/util/Set; // method@d602
+71bc6e: 0c02                                   |0017: move-result-object v2
+71bc70: 1e01                                   |0018: monitor-exit v1
+71bc72: 1102                                   |0019: return-object v2
+71bc74: 0d02                                   |001a: move-exception v2
+71bc76: 1e01                                   |001b: monitor-exit v1
+71bc78: 2702                                   |001c: throw v2
+      catches       : 2
+        0x0001 - 0x0018
+          <any> -> 0x001a
+        0x001b - 0x001c
+          <any> -> 0x001a
+      positions     :
+        0x0001 line=76
+        0x000f line=77
+      locals        :
+        0x0000 - 0x001d reg=1 this Lcom/google/firebase/components/EventBus;
+        0x0000 - 0x001d reg=2 (null) Lcom/google/firebase/events/Event;
+
+    #2              : (in Lcom/google/firebase/components/EventBus;)
+      name          : 'lambda$publish$0'
+      type          : '(Ljava/util/Map$Entry;Lcom/google/firebase/events/Event;)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 10 16-bit code units
+71bc90:                                        |[71bc90] com.google.firebase.components.EventBus.lambda$publish$0:(Ljava/util/Map$Entry;Lcom/google/firebase/events/Event;)V
+71bca0: 7210 fcd5 0000                         |0000: invoke-interface {v0}, Ljava/util/Map$Entry;.getKey:()Ljava/lang/Object; // method@d5fc
+71bca6: 0c00                                   |0003: move-result-object v0
+71bca8: 1f00 4e17                              |0004: check-cast v0, Lcom/google/firebase/events/EventHandler; // type@174e
+71bcac: 7220 b4bd 1000                         |0006: invoke-interface {v0, v1}, Lcom/google/firebase/events/EventHandler;.handle:(Lcom/google/firebase/events/Event;)V // method@bdb4
+71bcb2: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=71
+      locals        :
+        0x0000 - 0x000a reg=0 (null) Ljava/util/Map$Entry;
+        0x0000 - 0x000a reg=1 (null) Lcom/google/firebase/events/Event;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/components/EventBus;)
+      name          : 'enablePublishingAndFlushPending'
+      type          : '()V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 37 16-bit code units
+71bcb4:                                        |[71bcb4] com.google.firebase.components.EventBus.enablePublishingAndFlushPending:()V
+71bcc4: 1d02                                   |0000: monitor-enter v2
+71bcc6: 5420 f86f                              |0001: iget-object v0, v2, Lcom/google/firebase/components/EventBus;.pendingEvents:Ljava/util/Queue; // field@6ff8
+71bcca: 1201                                   |0003: const/4 v1, #int 0 // #0
+71bccc: 3800 0500                              |0004: if-eqz v0, 0009 // +0005
+71bcd0: 5b21 f86f                              |0006: iput-object v1, v2, Lcom/google/firebase/components/EventBus;.pendingEvents:Ljava/util/Queue; // field@6ff8
+71bcd4: 2802                                   |0008: goto 000a // +0002
+71bcd6: 0710                                   |0009: move-object v0, v1
+71bcd8: 1e02                                   |000a: monitor-exit v2
+71bcda: 3800 1600                              |000b: if-eqz v0, 0021 // +0016
+71bcde: 7210 1bd6 0000                         |000d: invoke-interface {v0}, Ljava/util/Queue;.iterator:()Ljava/util/Iterator; // method@d61b
+71bce4: 0c00                                   |0010: move-result-object v0
+71bce6: 7210 a0d5 0000                         |0011: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71bcec: 0a01                                   |0014: move-result v1
+71bcee: 3801 0c00                              |0015: if-eqz v1, 0021 // +000c
+71bcf2: 7210 a1d5 0000                         |0017: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71bcf8: 0c01                                   |001a: move-result-object v1
+71bcfa: 1f01 4d17                              |001b: check-cast v1, Lcom/google/firebase/events/Event; // type@174d
+71bcfe: 6e20 f1bc 1200                         |001d: invoke-virtual {v2, v1}, Lcom/google/firebase/components/EventBus;.publish:(Lcom/google/firebase/events/Event;)V // method@bcf1
+71bd04: 28f1                                   |0020: goto 0011 // -000f
+71bd06: 0e00                                   |0021: return-void
+71bd08: 0d00                                   |0022: move-exception v0
+71bd0a: 1e02                                   |0023: monitor-exit v2
+71bd0c: 2700                                   |0024: throw v0
+      catches       : 2
+        0x0001 - 0x000b
+          <any> -> 0x0022
+        0x0023 - 0x0024
+          <any> -> 0x0022
+      positions     :
+        0x0000 line=122
+        0x0001 line=123
+        0x0006 line=125
+        0x000a line=127
+        0x000d line=129
+        0x001d line=130
+        0x0023 line=127
+      locals        :
+        0x0000 - 0x0025 reg=2 this Lcom/google/firebase/components/EventBus;
+
+    #1              : (in Lcom/google/firebase/components/EventBus;)
+      name          : 'publish'
+      type          : '(Lcom/google/firebase/events/Event;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 53 16-bit code units
+71bd24:                                        |[71bd24] com.google.firebase.components.EventBus.publish:(Lcom/google/firebase/events/Event;)V
+71bd34: 7110 15bd 0400                         |0000: invoke-static {v4}, Lcom/google/firebase/components/Preconditions;.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object; // method@bd15
+71bd3a: 1d03                                   |0003: monitor-enter v3
+71bd3c: 5430 f86f                              |0004: iget-object v0, v3, Lcom/google/firebase/components/EventBus;.pendingEvents:Ljava/util/Queue; // field@6ff8
+71bd40: 3800 0700                              |0006: if-eqz v0, 000d // +0007
+71bd44: 7220 17d6 4000                         |0008: invoke-interface {v0, v4}, Ljava/util/Queue;.add:(Ljava/lang/Object;)Z // method@d617
+71bd4a: 1e03                                   |000b: monitor-exit v3
+71bd4c: 0e00                                   |000c: return-void
+71bd4e: 1e03                                   |000d: monitor-exit v3
+71bd50: 7020 efbc 4300                         |000e: invoke-direct {v3, v4}, Lcom/google/firebase/components/EventBus;.getHandlers:(Lcom/google/firebase/events/Event;)Ljava/util/Set; // method@bcef
+71bd56: 0c03                                   |0011: move-result-object v3
+71bd58: 7210 32d6 0300                         |0012: invoke-interface {v3}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+71bd5e: 0c03                                   |0015: move-result-object v3
+71bd60: 7210 a0d5 0300                         |0016: invoke-interface {v3}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71bd66: 0a00                                   |0019: move-result v0
+71bd68: 3800 1700                              |001a: if-eqz v0, 0031 // +0017
+71bd6c: 7210 a1d5 0300                         |001c: invoke-interface {v3}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71bd72: 0c00                                   |001f: move-result-object v0
+71bd74: 1f00 551b                              |0020: check-cast v0, Ljava/util/Map$Entry; // type@1b55
+71bd78: 7210 fdd5 0000                         |0022: invoke-interface {v0}, Ljava/util/Map$Entry;.getValue:()Ljava/lang/Object; // method@d5fd
+71bd7e: 0c01                                   |0025: move-result-object v1
+71bd80: 1f01 7d1b                              |0026: check-cast v1, Ljava/util/concurrent/Executor; // type@1b7d
+71bd84: 2202 1617                              |0028: new-instance v2, Lcom/google/firebase/components/EventBus$$ExternalSyntheticLambda0; // type@1716
+71bd88: 7030 ebbc 0204                         |002a: invoke-direct {v2, v0, v4}, Lcom/google/firebase/components/EventBus$$ExternalSyntheticLambda0;.<init>:(Ljava/util/Map$Entry;Lcom/google/firebase/events/Event;)V // method@bceb
+71bd8e: 7220 acd6 2100                         |002d: invoke-interface {v1, v2}, Ljava/util/concurrent/Executor;.execute:(Ljava/lang/Runnable;)V // method@d6ac
+71bd94: 28e6                                   |0030: goto 0016 // -001a
+71bd96: 0e00                                   |0031: return-void
+71bd98: 0d04                                   |0032: move-exception v4
+71bd9a: 1e03                                   |0033: monitor-exit v3
+71bd9c: 2704                                   |0034: throw v4
+      catches       : 2
+        0x0004 - 0x000e
+          <any> -> 0x0032
+        0x0033 - 0x0034
+          <any> -> 0x0032
+      positions     :
+        0x0000 line=58
+        0x0003 line=60
+        0x0004 line=61
+        0x0008 line=62
+        0x000b line=63
+        0x000d line=65
+        0x000e line=67
+        0x0022 line=71
+        0x0033 line=65
+      locals        :
+        0x0000 - 0x0035 reg=3 this Lcom/google/firebase/components/EventBus;
+        0x0000 - 0x0035 reg=4 (null) Lcom/google/firebase/events/Event;
+
+    #2              : (in Lcom/google/firebase/components/EventBus;)
+      name          : 'subscribe'
+      type          : '(Ljava/lang/Class;Lcom/google/firebase/events/EventHandler;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 4
+      insns size    : 6 16-bit code units
+71bdb4:                                        |[71bdb4] com.google.firebase.components.EventBus.subscribe:(Ljava/lang/Class;Lcom/google/firebase/events/EventHandler;)V
+71bdc4: 5410 f66f                              |0000: iget-object v0, v1, Lcom/google/firebase/components/EventBus;.defaultExecutor:Ljava/util/concurrent/Executor; // field@6ff6
+71bdc8: 6e40 f3bc 2130                         |0002: invoke-virtual {v1, v2, v0, v3}, Lcom/google/firebase/components/EventBus;.subscribe:(Ljava/lang/Class;Ljava/util/concurrent/Executor;Lcom/google/firebase/events/EventHandler;)V // method@bcf3
+71bdce: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=97
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lcom/google/firebase/components/EventBus;
+        0x0000 - 0x0006 reg=2 (null) Ljava/lang/Class;
+        0x0000 - 0x0006 reg=3 (null) Lcom/google/firebase/events/EventHandler;
+
+    #3              : (in Lcom/google/firebase/components/EventBus;)
+      name          : 'subscribe'
+      type          : '(Ljava/lang/Class;Ljava/util/concurrent/Executor;Lcom/google/firebase/events/EventHandler;)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 3
+      insns size    : 44 16-bit code units
+71bdd0:                                        |[71bdd0] com.google.firebase.components.EventBus.subscribe:(Ljava/lang/Class;Ljava/util/concurrent/Executor;Lcom/google/firebase/events/EventHandler;)V
+71bde0: 1d02                                   |0000: monitor-enter v2
+71bde2: 7110 15bd 0300                         |0001: invoke-static {v3}, Lcom/google/firebase/components/Preconditions;.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object; // method@bd15
+71bde8: 7110 15bd 0500                         |0004: invoke-static {v5}, Lcom/google/firebase/components/Preconditions;.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object; // method@bd15
+71bdee: 7110 15bd 0400                         |0007: invoke-static {v4}, Lcom/google/firebase/components/Preconditions;.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object; // method@bd15
+71bdf4: 5420 f76f                              |000a: iget-object v0, v2, Lcom/google/firebase/components/EventBus;.handlerMap:Ljava/util/Map; // field@6ff7
+71bdf8: 7220 00d6 3000                         |000c: invoke-interface {v0, v3}, Ljava/util/Map;.containsKey:(Ljava/lang/Object;)Z // method@d600
+71bdfe: 0a00                                   |000f: move-result v0
+71be00: 3900 0c00                              |0010: if-nez v0, 001c // +000c
+71be04: 5420 f76f                              |0012: iget-object v0, v2, Lcom/google/firebase/components/EventBus;.handlerMap:Ljava/util/Map; // field@6ff7
+71be08: 2201 741b                              |0014: new-instance v1, Ljava/util/concurrent/ConcurrentHashMap; // type@1b74
+71be0c: 7010 8bd6 0100                         |0016: invoke-direct {v1}, Ljava/util/concurrent/ConcurrentHashMap;.<init>:()V // method@d68b
+71be12: 7230 06d6 3001                         |0019: invoke-interface {v0, v3, v1}, Ljava/util/Map;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d606
+71be18: 5420 f76f                              |001c: iget-object v0, v2, Lcom/google/firebase/components/EventBus;.handlerMap:Ljava/util/Map; // field@6ff7
+71be1c: 7220 03d6 3000                         |001e: invoke-interface {v0, v3}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+71be22: 0c03                                   |0021: move-result-object v3
+71be24: 1f03 741b                              |0022: check-cast v3, Ljava/util/concurrent/ConcurrentHashMap; // type@1b74
+71be28: 6e30 92d6 5304                         |0024: invoke-virtual {v3, v5, v4}, Ljava/util/concurrent/ConcurrentHashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d692
+71be2e: 1e02                                   |0027: monitor-exit v2
+71be30: 0e00                                   |0028: return-void
+71be32: 0d03                                   |0029: move-exception v3
+71be34: 1e02                                   |002a: monitor-exit v2
+71be36: 2703                                   |002b: throw v3
+      catches       : 2
+        0x0001 - 0x0027
+          <any> -> 0x0029
+        0x002a - 0x002b
+          <any> -> 0x0029
+      positions     :
+        0x0001 line=83
+        0x0004 line=84
+        0x0007 line=85
+        0x000a line=86
+        0x0012 line=87
+        0x001c line=92
+        0x0027 line=93
+      locals        :
+        0x0000 - 0x002c reg=2 this Lcom/google/firebase/components/EventBus;
+        0x0000 - 0x002c reg=3 (null) Ljava/lang/Class;
+        0x0000 - 0x002c reg=4 (null) Ljava/util/concurrent/Executor;
+        0x0000 - 0x002c reg=5 (null) Lcom/google/firebase/events/EventHandler;
+
+    #4              : (in Lcom/google/firebase/components/EventBus;)
+      name          : 'unsubscribe'
+      type          : '(Ljava/lang/Class;Lcom/google/firebase/events/EventHandler;)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 2
+      insns size    : 44 16-bit code units
+71be4c:                                        |[71be4c] com.google.firebase.components.EventBus.unsubscribe:(Ljava/lang/Class;Lcom/google/firebase/events/EventHandler;)V
+71be5c: 1d01                                   |0000: monitor-enter v1
+71be5e: 7110 15bd 0200                         |0001: invoke-static {v2}, Lcom/google/firebase/components/Preconditions;.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object; // method@bd15
+71be64: 7110 15bd 0300                         |0004: invoke-static {v3}, Lcom/google/firebase/components/Preconditions;.checkNotNull:(Ljava/lang/Object;)Ljava/lang/Object; // method@bd15
+71be6a: 5410 f76f                              |0007: iget-object v0, v1, Lcom/google/firebase/components/EventBus;.handlerMap:Ljava/util/Map; // field@6ff7
+71be6e: 7220 00d6 2000                         |0009: invoke-interface {v0, v2}, Ljava/util/Map;.containsKey:(Ljava/lang/Object;)Z // method@d600
+71be74: 0a00                                   |000c: move-result v0
+71be76: 3900 0400                              |000d: if-nez v0, 0011 // +0004
+71be7a: 1e01                                   |000f: monitor-exit v1
+71be7c: 0e00                                   |0010: return-void
+71be7e: 5410 f76f                              |0011: iget-object v0, v1, Lcom/google/firebase/components/EventBus;.handlerMap:Ljava/util/Map; // field@6ff7
+71be82: 7220 03d6 2000                         |0013: invoke-interface {v0, v2}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+71be88: 0c00                                   |0016: move-result-object v0
+71be8a: 1f00 741b                              |0017: check-cast v0, Ljava/util/concurrent/ConcurrentHashMap; // type@1b74
+71be8e: 6e20 94d6 3000                         |0019: invoke-virtual {v0, v3}, Ljava/util/concurrent/ConcurrentHashMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d694
+71be94: 6e10 91d6 0000                         |001c: invoke-virtual {v0}, Ljava/util/concurrent/ConcurrentHashMap;.isEmpty:()Z // method@d691
+71be9a: 0a03                                   |001f: move-result v3
+71be9c: 3803 0700                              |0020: if-eqz v3, 0027 // +0007
+71bea0: 5413 f76f                              |0022: iget-object v3, v1, Lcom/google/firebase/components/EventBus;.handlerMap:Ljava/util/Map; // field@6ff7
+71bea4: 7220 09d6 2300                         |0024: invoke-interface {v3, v2}, Ljava/util/Map;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d609
+71beaa: 1e01                                   |0027: monitor-exit v1
+71beac: 0e00                                   |0028: return-void
+71beae: 0d02                                   |0029: move-exception v2
+71beb0: 1e01                                   |002a: monitor-exit v1
+71beb2: 2702                                   |002b: throw v2
+      catches       : 3
+        0x0001 - 0x000d
+          <any> -> 0x0029
+        0x0011 - 0x0027
+          <any> -> 0x0029
+        0x002a - 0x002b
+          <any> -> 0x0029
+      positions     :
+        0x0001 line=102
+        0x0004 line=103
+        0x0007 line=105
+        0x000f line=106
+        0x0011 line=109
+        0x0019 line=113
+        0x001c line=115
+        0x0022 line=116
+        0x0027 line=118
+      locals        :
+        0x0000 - 0x002c reg=1 this Lcom/google/firebase/components/EventBus;
+        0x0000 - 0x002c reg=2 (null) Ljava/lang/Class;
+        0x0000 - 0x002c reg=3 (null) Lcom/google/firebase/events/EventHandler;
+
+  source_file_idx   : 9490 (EventBus.java)
+

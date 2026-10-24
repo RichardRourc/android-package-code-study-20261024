@@ -1,0 +1,384 @@
+Class #5454            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/EnhancedIntentService;'
+  Access flags      : 0x0401 (PUBLIC ABSTRACT)
+  Superclass        : 'Landroid/app/Service;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'binder'
+      type          : 'Landroid/os/Binder;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'executor'
+      type          : 'Ljava/util/concurrent/ExecutorService;'
+      access        : 0x0010 (FINAL)
+    #2              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'lastStartId'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'lock'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'runningTasks'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 20 16-bit code units
+72498c:                                        |[72498c] com.google.firebase.messaging.EnhancedIntentService.<init>:()V
+72499c: 7010 e201 0100                         |0000: invoke-direct {v1}, Landroid/app/Service;.<init>:()V // method@01e2
+7249a2: 7100 cbbf 0000                         |0003: invoke-static {}, Lcom/google/firebase/messaging/FcmExecutors;.newIntentHandleExecutor:()Ljava/util/concurrent/ExecutorService; // method@bfcb
+7249a8: 0c00                                   |0006: move-result-object v0
+7249aa: 5b10 5573                              |0007: iput-object v0, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.executor:Ljava/util/concurrent/ExecutorService; // field@7355
+7249ae: 2200 8b1a                              |0009: new-instance v0, Ljava/lang/Object; // type@1a8b
+7249b2: 7010 c8d1 0000                         |000b: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+7249b8: 5b10 5773                              |000e: iput-object v0, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.lock:Ljava/lang/Object; // field@7357
+7249bc: 1200                                   |0010: const/4 v0, #int 0 // #0
+7249be: 5910 5873                              |0011: iput v0, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.runningTasks:I // field@7358
+7249c2: 0e00                                   |0013: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0003 line=2
+      locals        :
+        0x0000 - 0x0014 reg=1 this Lcom/google/firebase/messaging/EnhancedIntentService;
+
+    #1              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'access$000'
+      type          : '(Lcom/google/firebase/messaging/EnhancedIntentService;Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 5 16-bit code units
+7249c4:                                        |[7249c4] com.google.firebase.messaging.EnhancedIntentService.access$000:(Lcom/google/firebase/messaging/EnhancedIntentService;Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task;
+7249d4: 7020 a7bf 1000                         |0000: invoke-direct {v0, v1}, Lcom/google/firebase/messaging/EnhancedIntentService;.processIntent:(Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task; // method@bfa7
+7249da: 0c00                                   |0003: move-result-object v0
+7249dc: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Lcom/google/firebase/messaging/EnhancedIntentService;
+        0x0000 - 0x0005 reg=1 (null) Landroid/content/Intent;
+
+    #2              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'finishTask'
+      type          : '(Landroid/content/Intent;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 26 16-bit code units
+7249e0:                                        |[7249e0] com.google.firebase.messaging.EnhancedIntentService.finishTask:(Landroid/content/Intent;)V
+7249f0: 3802 0500                              |0000: if-eqz v2, 0005 // +0005
+7249f4: 7110 49c1 0200                         |0002: invoke-static {v2}, Lcom/google/firebase/messaging/WakeLockHolder;.completeWakefulIntent:(Landroid/content/Intent;)V // method@c149
+7249fa: 5412 5773                              |0005: iget-object v2, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.lock:Ljava/lang/Object; // field@7357
+7249fe: 1d02                                   |0007: monitor-enter v2
+724a00: 5210 5873                              |0008: iget v0, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.runningTasks:I // field@7358
+724a04: d800 00ff                              |000a: add-int/lit8 v0, v0, #int -1 // #ff
+724a08: 5910 5873                              |000c: iput v0, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.runningTasks:I // field@7358
+724a0c: 3900 0700                              |000e: if-nez v0, 0015 // +0007
+724a10: 5210 5673                              |0010: iget v0, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.lastStartId:I // field@7356
+724a14: 6e20 a9bf 0100                         |0012: invoke-virtual {v1, v0}, Lcom/google/firebase/messaging/EnhancedIntentService;.stopSelfResultHook:(I)Z // method@bfa9
+724a1a: 1e02                                   |0015: monitor-exit v2
+724a1c: 0e00                                   |0016: return-void
+724a1e: 0d01                                   |0017: move-exception v1
+724a20: 1e02                                   |0018: monitor-exit v2
+724a22: 2701                                   |0019: throw v1
+      catches       : 1
+        0x0008 - 0x0019
+          <any> -> 0x0017
+      positions     :
+        0x0002 line=1
+        0x0007 line=2
+        0x0012 line=3
+        0x0015 line=4
+      locals        :
+        0x0000 - 0x001a reg=1 this Lcom/google/firebase/messaging/EnhancedIntentService;
+        0x0000 - 0x001a reg=2 (null) Landroid/content/Intent;
+
+    #3              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'processIntent'
+      type          : '(Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 32 16-bit code units
+724a30:                                        |[724a30] com.google.firebase.messaging.EnhancedIntentService.processIntent:(Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task;
+724a40: 6e20 a1bf 4300                         |0000: invoke-virtual {v3, v4}, Lcom/google/firebase/messaging/EnhancedIntentService;.handleIntentOnMainThread:(Landroid/content/Intent;)Z // method@bfa1
+724a46: 0a00                                   |0003: move-result v0
+724a48: 3800 0800                              |0004: if-eqz v0, 000c // +0008
+724a4c: 1203                                   |0006: const/4 v3, #int 0 // #0
+724a4e: 7110 90ae 0300                         |0007: invoke-static {v3}, Lcom/google/android/gms/tasks/Tasks;.forResult:(Ljava/lang/Object;)Lcom/google/android/gms/tasks/Task; // method@ae90
+724a54: 0c03                                   |000a: move-result-object v3
+724a56: 1103                                   |000b: return-object v3
+724a58: 2200 5f15                              |000c: new-instance v0, Lcom/google/android/gms/tasks/TaskCompletionSource; // type@155f
+724a5c: 7010 7fae 0000                         |000e: invoke-direct {v0}, Lcom/google/android/gms/tasks/TaskCompletionSource;.<init>:()V // method@ae7f
+724a62: 5431 5573                              |0011: iget-object v1, v3, Lcom/google/firebase/messaging/EnhancedIntentService;.executor:Ljava/util/concurrent/ExecutorService; // field@7355
+724a66: 2202 c417                              |0013: new-instance v2, Lcom/google/firebase/messaging/EnhancedIntentService$$Lambda$0; // type@17c4
+724a6a: 7040 93bf 3204                         |0015: invoke-direct {v2, v3, v4, v0}, Lcom/google/firebase/messaging/EnhancedIntentService$$Lambda$0;.<init>:(Lcom/google/firebase/messaging/EnhancedIntentService;Landroid/content/Intent;Lcom/google/android/gms/tasks/TaskCompletionSource;)V // method@bf93
+724a70: 7220 add6 2100                         |0018: invoke-interface {v1, v2}, Ljava/util/concurrent/ExecutorService;.execute:(Ljava/lang/Runnable;)V // method@d6ad
+724a76: 6e10 81ae 0000                         |001b: invoke-virtual {v0}, Lcom/google/android/gms/tasks/TaskCompletionSource;.getTask:()Lcom/google/android/gms/tasks/Task; // method@ae81
+724a7c: 0c03                                   |001e: move-result-object v3
+724a7e: 1103                                   |001f: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0007 line=2
+        0x000c line=3
+        0x0015 line=4
+        0x001b line=5
+      locals        :
+        0x0000 - 0x0020 reg=3 this Lcom/google/firebase/messaging/EnhancedIntentService;
+        0x0000 - 0x0020 reg=4 (null) Landroid/content/Intent;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'getStartCommandIntent'
+      type          : '(Landroid/content/Intent;)Landroid/content/Intent;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 1 16-bit code units
+724a80:                                        |[724a80] com.google.firebase.messaging.EnhancedIntentService.getStartCommandIntent:(Landroid/content/Intent;)Landroid/content/Intent;
+724a90: 1101                                   |0000: return-object v1
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'handleIntent'
+      type          : '(Landroid/content/Intent;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #2              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'handleIntentOnMainThread'
+      type          : '(Landroid/content/Intent;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 2 16-bit code units
+724a94:                                        |[724a94] com.google.firebase.messaging.EnhancedIntentService.handleIntentOnMainThread:(Landroid/content/Intent;)Z
+724aa4: 1200                                   |0000: const/4 v0, #int 0 // #0
+724aa6: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #3              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'lambda$onStartCommand$1$EnhancedIntentService'
+      type          : '(Landroid/content/Intent;Lcom/google/android/gms/tasks/Task;)V'
+      access        : 0x1010 (FINAL SYNTHETIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 4 16-bit code units
+724aa8:                                        |[724aa8] com.google.firebase.messaging.EnhancedIntentService.lambda$onStartCommand$1$EnhancedIntentService:(Landroid/content/Intent;Lcom/google/android/gms/tasks/Task;)V
+724ab8: 7020 9ebf 1000                         |0000: invoke-direct {v0, v1}, Lcom/google/firebase/messaging/EnhancedIntentService;.finishTask:(Landroid/content/Intent;)V // method@bf9e
+724abe: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/google/firebase/messaging/EnhancedIntentService;
+        0x0000 - 0x0004 reg=1 (null) Landroid/content/Intent;
+        0x0000 - 0x0004 reg=2 (null) Lcom/google/android/gms/tasks/Task;
+
+    #4              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'lambda$processIntent$0$EnhancedIntentService'
+      type          : '(Landroid/content/Intent;Lcom/google/android/gms/tasks/TaskCompletionSource;)V'
+      access        : 0x1010 (FINAL SYNTHETIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 2
+      insns size    : 13 16-bit code units
+724ac0:                                        |[724ac0] com.google.firebase.messaging.EnhancedIntentService.lambda$processIntent$0$EnhancedIntentService:(Landroid/content/Intent;Lcom/google/android/gms/tasks/TaskCompletionSource;)V
+724ad0: 1200                                   |0000: const/4 v0, #int 0 // #0
+724ad2: 6e20 a0bf 2100                         |0001: invoke-virtual {v1, v2}, Lcom/google/firebase/messaging/EnhancedIntentService;.handleIntent:(Landroid/content/Intent;)V // method@bfa0
+724ad8: 6e20 83ae 0300                         |0004: invoke-virtual {v3, v0}, Lcom/google/android/gms/tasks/TaskCompletionSource;.setResult:(Ljava/lang/Object;)V // method@ae83
+724ade: 0e00                                   |0007: return-void
+724ae0: 0d01                                   |0008: move-exception v1
+724ae2: 6e20 83ae 0300                         |0009: invoke-virtual {v3, v0}, Lcom/google/android/gms/tasks/TaskCompletionSource;.setResult:(Ljava/lang/Object;)V // method@ae83
+724ae8: 2701                                   |000c: throw v1
+      catches       : 1
+        0x0001 - 0x0004
+          <any> -> 0x0008
+      positions     :
+        0x0001 line=1
+        0x0004 line=2
+        0x000c line=3
+      locals        :
+        0x0000 - 0x000d reg=1 this Lcom/google/firebase/messaging/EnhancedIntentService;
+        0x0000 - 0x000d reg=2 (null) Landroid/content/Intent;
+        0x0000 - 0x000d reg=3 (null) Lcom/google/android/gms/tasks/TaskCompletionSource;
+
+    #5              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'onBind'
+      type          : '(Landroid/content/Intent;)Landroid/os/IBinder;'
+      access        : 0x20011 (PUBLIC FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 40 16-bit code units
+724af8:                                        |[724af8] com.google.firebase.messaging.EnhancedIntentService.onBind:(Landroid/content/Intent;)Landroid/os/IBinder;
+724b08: 1d01                                   |0000: monitor-enter v1
+724b0a: 1a02 8124                              |0001: const-string v2, "EnhancedIntentService" // string@2481
+724b0e: 1230                                   |0003: const/4 v0, #int 3 // #3
+724b10: 7120 2308 0200                         |0004: invoke-static {v2, v0}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+724b16: 0a02                                   |0007: move-result v2
+724b18: 3802 0900                              |0008: if-eqz v2, 0011 // +0009
+724b1c: 1a02 8124                              |000a: const-string v2, "EnhancedIntentService" // string@2481
+724b20: 1a00 5462                              |000c: const-string v0, "Service received bind request" // string@6254
+724b24: 7120 1c08 0200                         |000e: invoke-static {v2, v0}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+724b2a: 5412 5473                              |0011: iget-object v2, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.binder:Landroid/os/Binder; // field@7354
+724b2e: 3902 0e00                              |0013: if-nez v2, 0021 // +000e
+724b32: 2202 0a18                              |0015: new-instance v2, Lcom/google/firebase/messaging/WithinAppServiceBinder; // type@180a
+724b36: 2200 c717                              |0017: new-instance v0, Lcom/google/firebase/messaging/EnhancedIntentService$1; // type@17c7
+724b3a: 7020 9abf 1000                         |0019: invoke-direct {v0, v1}, Lcom/google/firebase/messaging/EnhancedIntentService$1;.<init>:(Lcom/google/firebase/messaging/EnhancedIntentService;)V // method@bf9a
+724b40: 7020 53c1 0200                         |001c: invoke-direct {v2, v0}, Lcom/google/firebase/messaging/WithinAppServiceBinder;.<init>:(Lcom/google/firebase/messaging/WithinAppServiceBinder$IntentHandler;)V // method@c153
+724b46: 5b12 5473                              |001f: iput-object v2, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.binder:Landroid/os/Binder; // field@7354
+724b4a: 5412 5473                              |0021: iget-object v2, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.binder:Landroid/os/Binder; // field@7354
+724b4e: 1e01                                   |0023: monitor-exit v1
+724b50: 1102                                   |0024: return-object v2
+724b52: 0d02                                   |0025: move-exception v2
+724b54: 1e01                                   |0026: monitor-exit v1
+724b56: 2702                                   |0027: throw v2
+      catches       : 2
+        0x0001 - 0x0023
+          <any> -> 0x0025
+        0x0026 - 0x0027
+          <any> -> 0x0025
+      positions     :
+        0x0004 line=1
+        0x000e line=2
+        0x0019 line=3
+      locals        :
+        0x0000 - 0x0028 reg=1 this Lcom/google/firebase/messaging/EnhancedIntentService;
+        0x0000 - 0x0028 reg=2 (null) Landroid/content/Intent;
+
+    #6              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'onDestroy'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+724b6c:                                        |[724b6c] com.google.firebase.messaging.EnhancedIntentService.onDestroy:()V
+724b7c: 5410 5573                              |0000: iget-object v0, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.executor:Ljava/util/concurrent/ExecutorService; // field@7355
+724b80: 7210 aed6 0000                         |0002: invoke-interface {v0}, Ljava/util/concurrent/ExecutorService;.shutdown:()V // method@d6ae
+724b86: 6f10 e401 0100                         |0005: invoke-super {v1}, Landroid/app/Service;.onDestroy:()V // method@01e4
+724b8c: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+        0x0005 line=2
+      locals        :
+        0x0000 - 0x0009 reg=1 this Lcom/google/firebase/messaging/EnhancedIntentService;
+
+    #7              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'onStartCommand'
+      type          : '(Landroid/content/Intent;II)I'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 3
+      insns size    : 52 16-bit code units
+724b90:                                        |[724b90] com.google.firebase.messaging.EnhancedIntentService.onStartCommand:(Landroid/content/Intent;II)I
+724ba0: 5413 5773                              |0000: iget-object v3, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.lock:Ljava/lang/Object; // field@7357
+724ba4: 1d03                                   |0002: monitor-enter v3
+724ba6: 5914 5673                              |0003: iput v4, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.lastStartId:I // field@7356
+724baa: 5214 5873                              |0005: iget v4, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.runningTasks:I // field@7358
+724bae: d804 0401                              |0007: add-int/lit8 v4, v4, #int 1 // #01
+724bb2: 5914 5873                              |0009: iput v4, v1, Lcom/google/firebase/messaging/EnhancedIntentService;.runningTasks:I // field@7358
+724bb6: 1e03                                   |000b: monitor-exit v3
+724bb8: 6e20 9fbf 2100                         |000c: invoke-virtual {v1, v2}, Lcom/google/firebase/messaging/EnhancedIntentService;.getStartCommandIntent:(Landroid/content/Intent;)Landroid/content/Intent; // method@bf9f
+724bbe: 0c03                                   |000f: move-result-object v3
+724bc0: 1224                                   |0010: const/4 v4, #int 2 // #2
+724bc2: 3903 0600                              |0011: if-nez v3, 0017 // +0006
+724bc6: 7020 9ebf 2100                         |0013: invoke-direct {v1, v2}, Lcom/google/firebase/messaging/EnhancedIntentService;.finishTask:(Landroid/content/Intent;)V // method@bf9e
+724bcc: 0f04                                   |0016: return v4
+724bce: 7020 a7bf 3100                         |0017: invoke-direct {v1, v3}, Lcom/google/firebase/messaging/EnhancedIntentService;.processIntent:(Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task; // method@bfa7
+724bd4: 0c03                                   |001a: move-result-object v3
+724bd6: 6e10 7bae 0300                         |001b: invoke-virtual {v3}, Lcom/google/android/gms/tasks/Task;.isComplete:()Z // method@ae7b
+724bdc: 0a00                                   |001e: move-result v0
+724bde: 3800 0600                              |001f: if-eqz v0, 0025 // +0006
+724be2: 7020 9ebf 2100                         |0021: invoke-direct {v1, v2}, Lcom/google/firebase/messaging/EnhancedIntentService;.finishTask:(Landroid/content/Intent;)V // method@bf9e
+724be8: 0f04                                   |0024: return v4
+724bea: 6204 5073                              |0025: sget-object v4, Lcom/google/firebase/messaging/EnhancedIntentService$$Lambda$1;.$instance:Ljava/util/concurrent/Executor; // field@7350
+724bee: 2200 c617                              |0027: new-instance v0, Lcom/google/firebase/messaging/EnhancedIntentService$$Lambda$2; // type@17c6
+724bf2: 7030 98bf 1002                         |0029: invoke-direct {v0, v1, v2}, Lcom/google/firebase/messaging/EnhancedIntentService$$Lambda$2;.<init>:(Lcom/google/firebase/messaging/EnhancedIntentService;Landroid/content/Intent;)V // method@bf98
+724bf8: 6e30 6cae 4300                         |002c: invoke-virtual {v3, v4, v0}, Lcom/google/android/gms/tasks/Task;.addOnCompleteListener:(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/OnCompleteListener;)Lcom/google/android/gms/tasks/Task; // method@ae6c
+724bfe: 1231                                   |002f: const/4 v1, #int 3 // #3
+724c00: 0f01                                   |0030: return v1
+724c02: 0d01                                   |0031: move-exception v1
+724c04: 1e03                                   |0032: monitor-exit v3
+724c06: 2701                                   |0033: throw v1
+      catches       : 2
+        0x0003 - 0x000c
+          <any> -> 0x0031
+        0x0032 - 0x0033
+          <any> -> 0x0031
+      positions     :
+        0x0002 line=1
+        0x000b line=2
+        0x000c line=3
+        0x0013 line=4
+        0x0017 line=5
+        0x001b line=6
+        0x0021 line=7
+        0x0027 line=8
+        0x0032 line=2
+      locals        :
+        0x0000 - 0x0034 reg=1 this Lcom/google/firebase/messaging/EnhancedIntentService;
+        0x0000 - 0x0034 reg=2 (null) Landroid/content/Intent;
+        0x0000 - 0x0034 reg=3 (null) I
+        0x0000 - 0x0034 reg=4 (null) I
+
+    #8              : (in Lcom/google/firebase/messaging/EnhancedIntentService;)
+      name          : 'stopSelfResultHook'
+      type          : '(I)Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 5 16-bit code units
+724c1c:                                        |[724c1c] com.google.firebase.messaging.EnhancedIntentService.stopSelfResultHook:(I)Z
+724c2c: 6e20 a8bf 1000                         |0000: invoke-virtual {v0, v1}, Lcom/google/firebase/messaging/EnhancedIntentService;.stopSelfResult:(I)Z // method@bfa8
+724c32: 0a00                                   |0003: move-result v0
+724c34: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lcom/google/firebase/messaging/EnhancedIntentService;
+        0x0000 - 0x0005 reg=1 (null) I
+
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

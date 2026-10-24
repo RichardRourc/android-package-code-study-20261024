@@ -1,0 +1,536 @@
+Class #80            -
+  Class descriptor  : 'Lokio/GzipSource;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lokio/Source;'
+  Static fields     -
+    #0              : (in Lokio/GzipSource;)
+      name          : 'FCOMMENT'
+      type          : 'B'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 4
+    #1              : (in Lokio/GzipSource;)
+      name          : 'FEXTRA'
+      type          : 'B'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 2
+    #2              : (in Lokio/GzipSource;)
+      name          : 'FHCRC'
+      type          : 'B'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1
+    #3              : (in Lokio/GzipSource;)
+      name          : 'FNAME'
+      type          : 'B'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 3
+    #4              : (in Lokio/GzipSource;)
+      name          : 'SECTION_BODY'
+      type          : 'B'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1
+    #5              : (in Lokio/GzipSource;)
+      name          : 'SECTION_DONE'
+      type          : 'B'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 3
+    #6              : (in Lokio/GzipSource;)
+      name          : 'SECTION_HEADER'
+      type          : 'B'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 0
+    #7              : (in Lokio/GzipSource;)
+      name          : 'SECTION_TRAILER'
+      type          : 'B'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 2
+  Instance fields   -
+    #0              : (in Lokio/GzipSource;)
+      name          : 'crc'
+      type          : 'Ljava/util/zip/CRC32;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lokio/GzipSource;)
+      name          : 'inflater'
+      type          : 'Ljava/util/zip/Inflater;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lokio/GzipSource;)
+      name          : 'inflaterSource'
+      type          : 'Lokio/InflaterSource;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Lokio/GzipSource;)
+      name          : 'section'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Lokio/GzipSource;)
+      name          : 'source'
+      type          : 'Lokio/BufferedSource;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lokio/GzipSource;)
+      name          : '<init>'
+      type          : '(Lokio/Source;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 45 16-bit code units
+031ec0:                                        |[031ec0] okio.GzipSource.<init>:(Lokio/Source;)V
+031ed0: 7010 3502 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@0235
+031ed6: 1200                                   |0003: const/4 v0, #int 0 // #0
+031ed8: 5920 1001                              |0004: iput v0, v2, Lokio/GzipSource;.section:I // field@0110
+031edc: 2200 0a01                              |0006: new-instance v0, Ljava/util/zip/CRC32; // type@010a
+031ee0: 7010 ee02 0000                         |0008: invoke-direct {v0}, Ljava/util/zip/CRC32;.<init>:()V // method@02ee
+031ee6: 5b20 0d01                              |000b: iput-object v0, v2, Lokio/GzipSource;.crc:Ljava/util/zip/CRC32; // field@010d
+031eea: 3803 1800                              |000d: if-eqz v3, 0025 // +0018
+031eee: 2200 0d01                              |000f: new-instance v0, Ljava/util/zip/Inflater; // type@010d
+031ef2: 1211                                   |0011: const/4 v1, #int 1 // #1
+031ef4: 7020 fa02 1000                         |0012: invoke-direct {v0, v1}, Ljava/util/zip/Inflater;.<init>:(Z)V // method@02fa
+031efa: 5b20 0e01                              |0015: iput-object v0, v2, Lokio/GzipSource;.inflater:Ljava/util/zip/Inflater; // field@010e
+031efe: 7110 ac05 0300                         |0017: invoke-static {v3}, Lokio/Okio;.buffer:(Lokio/Source;)Lokio/BufferedSource; // method@05ac
+031f04: 0c03                                   |001a: move-result-object v3
+031f06: 5b23 1101                              |001b: iput-object v3, v2, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+031f0a: 2201 5601                              |001d: new-instance v1, Lokio/InflaterSource; // type@0156
+031f0e: 7030 9205 3100                         |001f: invoke-direct {v1, v3, v0}, Lokio/InflaterSource;.<init>:(Lokio/BufferedSource;Ljava/util/zip/Inflater;)V // method@0592
+031f14: 5b21 0f01                              |0022: iput-object v1, v2, Lokio/GzipSource;.inflaterSource:Lokio/InflaterSource; // field@010f
+031f18: 0e00                                   |0024: return-void
+031f1a: 2202 af00                              |0025: new-instance v2, Ljava/lang/IllegalArgumentException; // type@00af
+031f1e: 1a03 2d0a                              |0027: const-string v3, "source == null" // string@0a2d
+031f22: 7020 1b02 3200                         |0029: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+031f28: 2702                                   |002c: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=60
+        0x0004 line=39
+        0x0006 line=58
+        0x000f line=62
+        0x0017 line=63
+        0x001d line=64
+        0x0025 line=61
+      locals        :
+        0x0000 - 0x002d reg=2 this Lokio/GzipSource;
+        0x0000 - 0x002d reg=3 (null) Lokio/Source;
+
+    #1              : (in Lokio/GzipSource;)
+      name          : 'checkEqual'
+      type          : '(Ljava/lang/String;II)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 2
+      insns size    : 27 16-bit code units
+031f2c:                                        |[031f2c] okio.GzipSource.checkEqual:(Ljava/lang/String;II)V
+031f3c: 3323 0300                              |0000: if-ne v3, v2, 0003 // +0003
+031f40: 0e00                                   |0002: return-void
+031f42: 2200 9000                              |0003: new-instance v0, Ljava/io/IOException; // type@0090
+031f46: 7110 2402 0300                         |0005: invoke-static {v3}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@0224
+031f4c: 0c03                                   |0008: move-result-object v3
+031f4e: 7110 2402 0200                         |0009: invoke-static {v2}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@0224
+031f54: 0c02                                   |000c: move-result-object v2
+031f56: 2430 cd01 3102                         |000d: filled-new-array {v1, v3, v2}, [Ljava/lang/Object; // type@01cd
+031f5c: 0c01                                   |0010: move-result-object v1
+031f5e: 1a02 2900                              |0011: const-string v2, "%s: actual 0x%08x != expected 0x%08x" // string@0029
+031f62: 7120 4c02 1200                         |0013: invoke-static {v2, v1}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@024c
+031f68: 0c01                                   |0016: move-result-object v1
+031f6a: 7020 d501 1000                         |0017: invoke-direct {v0, v1}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@01d5
+031f70: 2700                                   |001a: throw v0
+      catches       : (none)
+      positions     :
+        0x0003 line=205
+        0x0005 line=206
+        0x0011 line=205
+      locals        :
+        0x0000 - 0x001b reg=0 this Lokio/GzipSource;
+        0x0000 - 0x001b reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x001b reg=2 (null) I
+        0x0000 - 0x001b reg=3 (null) I
+
+    #2              : (in Lokio/GzipSource;)
+      name          : 'consumeHeader'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 18
+      ins           : 1
+      outs          : 6
+      insns size    : 256 16-bit code units
+031f74:                                        |[031f74] okio.GzipSource.consumeHeader:()V
+031f84: 0806 1100                              |0000: move-object/from16 v6, v17
+031f88: 5460 1101                              |0002: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+031f8c: 1601 0a00                              |0004: const-wide/16 v1, #int 10 // #a
+031f90: 7230 3c05 1002                         |0006: invoke-interface {v0, v1, v2}, Lokio/BufferedSource;.require:(J)V // method@053c
+031f96: 5460 1101                              |0009: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+031f9a: 7210 1805 0000                         |000b: invoke-interface {v0}, Lokio/BufferedSource;.buffer:()Lokio/Buffer; // method@0518
+031fa0: 0c00                                   |000e: move-result-object v0
+031fa2: 1601 0300                              |000f: const-wide/16 v1, #int 3 // #3
+031fa6: 6e30 a404 1002                         |0011: invoke-virtual {v0, v1, v2}, Lokio/Buffer;.getByte:(J)B // method@04a4
+031fac: 0a07                                   |0014: move-result v7
+031fae: e100 0701                              |0015: shr-int/lit8 v0, v7, #int 1 // #01
+031fb2: 1218                                   |0017: const/4 v8, #int 1 // #1
+031fb4: b580                                   |0018: and-int/2addr v0, v8
+031fb6: 1209                                   |0019: const/4 v9, #int 0 // #0
+031fb8: 3380 0400                              |001a: if-ne v0, v8, 001e // +0004
+031fbc: 018a                                   |001c: move v10, v8
+031fbe: 2802                                   |001d: goto 001f // +0002
+031fc0: 019a                                   |001e: move v10, v9
+031fc2: 380a 1100                              |001f: if-eqz v10, 0030 // +0011
+031fc6: 5460 1101                              |0021: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+031fca: 7210 1805 0000                         |0023: invoke-interface {v0}, Lokio/BufferedSource;.buffer:()Lokio/Buffer; // method@0518
+031fd0: 0c01                                   |0026: move-result-object v1
+031fd2: 1602 0000                              |0027: const-wide/16 v2, #int 0 // #0
+031fd6: 1604 0a00                              |0029: const-wide/16 v4, #int 10 // #a
+031fda: 0800 1100                              |002b: move-object/from16 v0, v17
+031fde: 7606 9105 0000                         |002d: invoke-direct/range {v0, v1, v2, v3, v4, v5}, Lokio/GzipSource;.updateCrc:(Lokio/Buffer;JJ)V // method@0591
+031fe4: 5460 1101                              |0030: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+031fe8: 7210 3205 0000                         |0032: invoke-interface {v0}, Lokio/BufferedSource;.readShort:()S // method@0532
+031fee: 0a00                                   |0035: move-result v0
+031ff0: 1a01 9b01                              |0036: const-string v1, "ID1ID2" // string@019b
+031ff4: 1302 8b1f                              |0038: const/16 v2, #int 8075 // #1f8b
+031ff8: 7040 8b05 1602                         |003a: invoke-direct {v6, v1, v2, v0}, Lokio/GzipSource;.checkEqual:(Ljava/lang/String;II)V // method@058b
+031ffe: 5460 1101                              |003d: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+032002: 1601 0800                              |003f: const-wide/16 v1, #int 8 // #8
+032006: 7230 3d05 1002                         |0041: invoke-interface {v0, v1, v2}, Lokio/BufferedSource;.skip:(J)V // method@053d
+03200c: e100 0702                              |0044: shr-int/lit8 v0, v7, #int 2 // #02
+032010: b580                                   |0046: and-int/2addr v0, v8
+032012: 3380 3f00                              |0047: if-ne v0, v8, 0086 // +003f
+032016: 5460 1101                              |0049: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+03201a: 1601 0200                              |004b: const-wide/16 v1, #int 2 // #2
+03201e: 7230 3c05 1002                         |004d: invoke-interface {v0, v1, v2}, Lokio/BufferedSource;.require:(J)V // method@053c
+032024: 380a 1100                              |0050: if-eqz v10, 0061 // +0011
+032028: 5460 1101                              |0052: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+03202c: 7210 1805 0000                         |0054: invoke-interface {v0}, Lokio/BufferedSource;.buffer:()Lokio/Buffer; // method@0518
+032032: 0c01                                   |0057: move-result-object v1
+032034: 1602 0000                              |0058: const-wide/16 v2, #int 0 // #0
+032038: 1604 0200                              |005a: const-wide/16 v4, #int 2 // #2
+03203c: 0800 1100                              |005c: move-object/from16 v0, v17
+032040: 7606 9105 0000                         |005e: invoke-direct/range {v0, v1, v2, v3, v4, v5}, Lokio/GzipSource;.updateCrc:(Lokio/Buffer;JJ)V // method@0591
+032046: 5460 1101                              |0061: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+03204a: 7210 1805 0000                         |0063: invoke-interface {v0}, Lokio/BufferedSource;.buffer:()Lokio/Buffer; // method@0518
+032050: 0c00                                   |0066: move-result-object v0
+032052: 6e10 c404 0000                         |0067: invoke-virtual {v0}, Lokio/Buffer;.readShortLe:()S // method@04c4
+032058: 0a00                                   |006a: move-result v0
+03205a: 5461 1101                              |006b: iget-object v1, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+03205e: 810b                                   |006d: int-to-long v11, v0
+032060: 7230 3c05 b10c                         |006e: invoke-interface {v1, v11, v12}, Lokio/BufferedSource;.require:(J)V // method@053c
+032066: 380a 1000                              |0071: if-eqz v10, 0081 // +0010
+03206a: 5460 1101                              |0073: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+03206e: 7210 1805 0000                         |0075: invoke-interface {v0}, Lokio/BufferedSource;.buffer:()Lokio/Buffer; // method@0518
+032074: 0c01                                   |0078: move-result-object v1
+032076: 1602 0000                              |0079: const-wide/16 v2, #int 0 // #0
+03207a: 0800 1100                              |007b: move-object/from16 v0, v17
+03207e: 04b4                                   |007d: move-wide v4, v11
+032080: 7606 9105 0000                         |007e: invoke-direct/range {v0, v1, v2, v3, v4, v5}, Lokio/GzipSource;.updateCrc:(Lokio/Buffer;JJ)V // method@0591
+032086: 5460 1101                              |0081: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+03208a: 7230 3d05 b00c                         |0083: invoke-interface {v0, v11, v12}, Lokio/BufferedSource;.skip:(J)V // method@053d
+032090: e100 0703                              |0086: shr-int/lit8 v0, v7, #int 3 // #03
+032094: b580                                   |0088: and-int/2addr v0, v8
+032096: 160b ffff                              |0089: const-wide/16 v11, #int -1 // #ffff
+03209a: 160d 0100                              |008b: const-wide/16 v13, #int 1 // #1
+03209e: 3380 2b00                              |008d: if-ne v0, v8, 00b8 // +002b
+0320a2: 5460 1101                              |008f: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+0320a6: 7220 1b05 9000                         |0091: invoke-interface {v0, v9}, Lokio/BufferedSource;.indexOf:(B)J // method@051b
+0320ac: 0b0f                                   |0094: move-result-wide v15
+0320ae: 3100 0f0b                              |0095: cmp-long v0, v15, v11
+0320b2: 3800 1b00                              |0097: if-eqz v0, 00b2 // +001b
+0320b6: 380a 1100                              |0099: if-eqz v10, 00aa // +0011
+0320ba: 5460 1101                              |009b: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+0320be: 7210 1805 0000                         |009d: invoke-interface {v0}, Lokio/BufferedSource;.buffer:()Lokio/Buffer; // method@0518
+0320c4: 0c01                                   |00a0: move-result-object v1
+0320c6: 1602 0000                              |00a1: const-wide/16 v2, #int 0 // #0
+0320ca: 9b04 0f0d                              |00a3: add-long v4, v15, v13
+0320ce: 0800 1100                              |00a5: move-object/from16 v0, v17
+0320d2: 7606 9105 0000                         |00a7: invoke-direct/range {v0, v1, v2, v3, v4, v5}, Lokio/GzipSource;.updateCrc:(Lokio/Buffer;JJ)V // method@0591
+0320d8: 5460 1101                              |00aa: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+0320dc: 9b01 0f0d                              |00ac: add-long v1, v15, v13
+0320e0: 7230 3d05 1002                         |00ae: invoke-interface {v0, v1, v2}, Lokio/BufferedSource;.skip:(J)V // method@053d
+0320e6: 2807                                   |00b1: goto 00b8 // +0007
+0320e8: 2200 8800                              |00b2: new-instance v0, Ljava/io/EOFException; // type@0088
+0320ec: 7010 c401 0000                         |00b4: invoke-direct {v0}, Ljava/io/EOFException;.<init>:()V // method@01c4
+0320f2: 2700                                   |00b7: throw v0
+0320f4: e100 0704                              |00b8: shr-int/lit8 v0, v7, #int 4 // #04
+0320f8: b580                                   |00ba: and-int/2addr v0, v8
+0320fa: 3380 2a00                              |00bb: if-ne v0, v8, 00e5 // +002a
+0320fe: 5460 1101                              |00bd: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+032102: 7220 1b05 9000                         |00bf: invoke-interface {v0, v9}, Lokio/BufferedSource;.indexOf:(B)J // method@051b
+032108: 0b07                                   |00c2: move-result-wide v7
+03210a: 3100 070b                              |00c3: cmp-long v0, v7, v11
+03210e: 3800 1a00                              |00c5: if-eqz v0, 00df // +001a
+032112: 380a 1100                              |00c7: if-eqz v10, 00d8 // +0011
+032116: 5460 1101                              |00c9: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+03211a: 7210 1805 0000                         |00cb: invoke-interface {v0}, Lokio/BufferedSource;.buffer:()Lokio/Buffer; // method@0518
+032120: 0c01                                   |00ce: move-result-object v1
+032122: 1602 0000                              |00cf: const-wide/16 v2, #int 0 // #0
+032126: 9b04 070d                              |00d1: add-long v4, v7, v13
+03212a: 0800 1100                              |00d3: move-object/from16 v0, v17
+03212e: 7606 9105 0000                         |00d5: invoke-direct/range {v0, v1, v2, v3, v4, v5}, Lokio/GzipSource;.updateCrc:(Lokio/Buffer;JJ)V // method@0591
+032134: 5460 1101                              |00d8: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+032138: bbd7                                   |00da: add-long/2addr v7, v13
+03213a: 7230 3d05 7008                         |00db: invoke-interface {v0, v7, v8}, Lokio/BufferedSource;.skip:(J)V // method@053d
+032140: 2807                                   |00de: goto 00e5 // +0007
+032142: 2200 8800                              |00df: new-instance v0, Ljava/io/EOFException; // type@0088
+032146: 7010 c401 0000                         |00e1: invoke-direct {v0}, Ljava/io/EOFException;.<init>:()V // method@01c4
+03214c: 2700                                   |00e4: throw v0
+03214e: 380a 1a00                              |00e5: if-eqz v10, 00ff // +001a
+032152: 5460 1101                              |00e7: iget-object v0, v6, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+032156: 7210 3305 0000                         |00e9: invoke-interface {v0}, Lokio/BufferedSource;.readShortLe:()S // method@0533
+03215c: 0a00                                   |00ec: move-result v0
+03215e: 5461 0d01                              |00ed: iget-object v1, v6, Lokio/GzipSource;.crc:Ljava/util/zip/CRC32; // field@010d
+032162: 6e10 ef02 0100                         |00ef: invoke-virtual {v1}, Ljava/util/zip/CRC32;.getValue:()J // method@02ef
+032168: 0b01                                   |00f2: move-result-wide v1
+03216a: 8411                                   |00f3: long-to-int v1, v1
+03216c: 8f11                                   |00f4: int-to-short v1, v1
+03216e: 1a02 4801                              |00f5: const-string v2, "FHCRC" // string@0148
+032172: 7040 8b05 2610                         |00f7: invoke-direct {v6, v2, v0, v1}, Lokio/GzipSource;.checkEqual:(Ljava/lang/String;II)V // method@058b
+032178: 5460 0d01                              |00fa: iget-object v0, v6, Lokio/GzipSource;.crc:Ljava/util/zip/CRC32; // field@010d
+03217c: 6e10 f002 0000                         |00fc: invoke-virtual {v0}, Ljava/util/zip/CRC32;.reset:()V // method@02f0
+032182: 0e00                                   |00ff: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=114
+        0x0009 line=115
+        0x0021 line=117
+        0x0030 line=119
+        0x0036 line=120
+        0x003d line=121
+        0x0049 line=128
+        0x0052 line=129
+        0x0061 line=130
+        0x006b line=131
+        0x0073 line=132
+        0x0081 line=133
+        0x008f line=141
+        0x009b line=143
+        0x00aa line=144
+        0x00b2 line=142
+        0x00bd line=152
+        0x00c9 line=154
+        0x00d8 line=155
+        0x00df line=153
+        0x00e7 line=163
+        0x00fa line=164
+      locals        :
+        0x0000 - 0x0100 reg=17 this Lokio/GzipSource;
+
+    #3              : (in Lokio/GzipSource;)
+      name          : 'consumeTrailer'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 36 16-bit code units
+032184:                                        |[032184] okio.GzipSource.consumeTrailer:()V
+032194: 5430 1101                              |0000: iget-object v0, v3, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+032198: 7210 2f05 0000                         |0002: invoke-interface {v0}, Lokio/BufferedSource;.readIntLe:()I // method@052f
+03219e: 0a00                                   |0005: move-result v0
+0321a0: 5431 0d01                              |0006: iget-object v1, v3, Lokio/GzipSource;.crc:Ljava/util/zip/CRC32; // field@010d
+0321a4: 6e10 ef02 0100                         |0008: invoke-virtual {v1}, Ljava/util/zip/CRC32;.getValue:()J // method@02ef
+0321aa: 0b01                                   |000b: move-result-wide v1
+0321ac: 8411                                   |000c: long-to-int v1, v1
+0321ae: 1a02 0801                              |000d: const-string v2, "CRC" // string@0108
+0321b2: 7040 8b05 2310                         |000f: invoke-direct {v3, v2, v0, v1}, Lokio/GzipSource;.checkEqual:(Ljava/lang/String;II)V // method@058b
+0321b8: 5430 1101                              |0012: iget-object v0, v3, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+0321bc: 7210 2f05 0000                         |0014: invoke-interface {v0}, Lokio/BufferedSource;.readIntLe:()I // method@052f
+0321c2: 0a00                                   |0017: move-result v0
+0321c4: 5431 0e01                              |0018: iget-object v1, v3, Lokio/GzipSource;.inflater:Ljava/util/zip/Inflater; // field@010e
+0321c8: 6e10 fe02 0100                         |001a: invoke-virtual {v1}, Ljava/util/zip/Inflater;.getTotalOut:()I // method@02fe
+0321ce: 0a01                                   |001d: move-result v1
+0321d0: 1a02 b701                              |001e: const-string v2, "ISIZE" // string@01b7
+0321d4: 7040 8b05 2310                         |0020: invoke-direct {v3, v2, v0, v1}, Lokio/GzipSource;.checkEqual:(Ljava/lang/String;II)V // method@058b
+0321da: 0e00                                   |0023: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=173
+        0x0012 line=174
+      locals        :
+        0x0000 - 0x0024 reg=3 this Lokio/GzipSource;
+
+    #4              : (in Lokio/GzipSource;)
+      name          : 'updateCrc'
+      type          : '(Lokio/Buffer;JJ)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 6
+      outs          : 4
+      insns size    : 56 16-bit code units
+0321dc:                                        |[0321dc] okio.GzipSource.updateCrc:(Lokio/Buffer;JJ)V
+0321ec: 5455 f200                              |0000: iget-object v5, v5, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+0321f0: 5250 2601                              |0002: iget v0, v5, Lokio/Segment;.limit:I // field@0126
+0321f4: 5251 2901                              |0004: iget v1, v5, Lokio/Segment;.pos:I // field@0129
+0321f8: b110                                   |0006: sub-int/2addr v0, v1
+0321fa: 8100                                   |0007: int-to-long v0, v0
+0321fc: 3100 0600                              |0008: cmp-long v0, v6, v0
+032200: 3a00 0c00                              |000a: if-ltz v0, 0016 // +000c
+032204: 5250 2601                              |000c: iget v0, v5, Lokio/Segment;.limit:I // field@0126
+032208: 5251 2901                              |000e: iget v1, v5, Lokio/Segment;.pos:I // field@0129
+03220c: b110                                   |0010: sub-int/2addr v0, v1
+03220e: 8100                                   |0011: int-to-long v0, v0
+032210: bc06                                   |0012: sub-long/2addr v6, v0
+032212: 5455 2701                              |0013: iget-object v5, v5, Lokio/Segment;.next:Lokio/Segment; // field@0127
+032216: 28ed                                   |0015: goto 0002 // -0013
+032218: 1600 0000                              |0016: const-wide/16 v0, #int 0 // #0
+03221c: 3102 0800                              |0018: cmp-long v2, v8, v0
+032220: 3d02 1d00                              |001a: if-lez v2, 0037 // +001d
+032224: 5252 2901                              |001c: iget v2, v5, Lokio/Segment;.pos:I // field@0129
+032228: 8122                                   |001e: int-to-long v2, v2
+03222a: bb62                                   |001f: add-long/2addr v2, v6
+03222c: 8426                                   |0020: long-to-int v6, v2
+03222e: 5257 2601                              |0021: iget v7, v5, Lokio/Segment;.limit:I // field@0126
+032232: b167                                   |0023: sub-int/2addr v7, v6
+032234: 8172                                   |0024: int-to-long v2, v7
+032236: 7140 3002 3298                         |0025: invoke-static {v2, v3, v8, v9}, Ljava/lang/Math;.min:(JJ)J // method@0230
+03223c: 0b02                                   |0028: move-result-wide v2
+03223e: 8427                                   |0029: long-to-int v7, v2
+032240: 5442 0d01                              |002a: iget-object v2, v4, Lokio/GzipSource;.crc:Ljava/util/zip/CRC32; // field@010d
+032244: 5453 2501                              |002c: iget-object v3, v5, Lokio/Segment;.data:[B // field@0125
+032248: 6e40 f102 3276                         |002e: invoke-virtual {v2, v3, v6, v7}, Ljava/util/zip/CRC32;.update:([BII)V // method@02f1
+03224e: 8176                                   |0031: int-to-long v6, v7
+032250: bc68                                   |0032: sub-long/2addr v8, v6
+032252: 5455 2701                              |0033: iget-object v5, v5, Lokio/Segment;.next:Lokio/Segment; // field@0127
+032256: 0406                                   |0035: move-wide v6, v0
+032258: 28e0                                   |0036: goto 0016 // -0020
+03225a: 0e00                                   |0037: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=188
+        0x0002 line=189
+        0x000c line=190
+        0x0013 line=189
+        0x001c line=195
+        0x0021 line=196
+        0x002a line=197
+        0x0033 line=194
+      locals        :
+        0x0000 - 0x0038 reg=4 this Lokio/GzipSource;
+        0x0000 - 0x0038 reg=5 (null) Lokio/Buffer;
+        0x0000 - 0x0038 reg=6 (null) J
+        0x0000 - 0x0038 reg=8 (null) J
+
+  Virtual methods   -
+    #0              : (in Lokio/GzipSource;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 6 16-bit code units
+03225c:                                        |[03225c] okio.GzipSource.close:()V
+03226c: 5400 0f01                              |0000: iget-object v0, v0, Lokio/GzipSource;.inflaterSource:Lokio/InflaterSource; // field@010f
+032270: 6e10 9405 0000                         |0002: invoke-virtual {v0}, Lokio/InflaterSource;.close:()V // method@0594
+032276: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=182
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lokio/GzipSource;
+
+    #1              : (in Lokio/GzipSource;)
+      name          : 'read'
+      type          : '(Lokio/Buffer;J)J'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 15
+      ins           : 4
+      outs          : 6
+      insns size    : 96 16-bit code units
+032278:                                        |[032278] okio.GzipSource.read:(Lokio/Buffer;J)J
+032288: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+03228c: 3102 0d00                              |0002: cmp-long v2, v13, v0
+032290: 3a02 4700                              |0004: if-ltz v2, 004b // +0047
+032294: 3902 0300                              |0006: if-nez v2, 0009 // +0003
+032298: 1000                                   |0008: return-wide v0
+03229a: 52b0 1001                              |0009: iget v0, v11, Lokio/GzipSource;.section:I // field@0110
+03229e: 1211                                   |000b: const/4 v1, #int 1 // #1
+0322a0: 3900 0700                              |000c: if-nez v0, 0013 // +0007
+0322a4: 7010 8d05 0b00                         |000e: invoke-direct {v11}, Lokio/GzipSource;.consumeHeader:()V // method@058d
+0322aa: 59b1 1001                              |0011: iput v1, v11, Lokio/GzipSource;.section:I // field@0110
+0322ae: 52b0 1001                              |0013: iget v0, v11, Lokio/GzipSource;.section:I // field@0110
+0322b2: 1602 ffff                              |0015: const-wide/16 v2, #int -1 // #ffff
+0322b6: 1224                                   |0017: const/4 v4, #int 2 // #2
+0322b8: 3310 1700                              |0018: if-ne v0, v1, 002f // +0017
+0322bc: 53c7 f300                              |001a: iget-wide v7, v12, Lokio/Buffer;.size:J // field@00f3
+0322c0: 54b0 0f01                              |001c: iget-object v0, v11, Lokio/GzipSource;.inflaterSource:Lokio/InflaterSource; // field@010f
+0322c4: 6e40 9505 c0ed                         |001e: invoke-virtual {v0, v12, v13, v14}, Lokio/InflaterSource;.read:(Lokio/Buffer;J)J // method@0595
+0322ca: 0b0d                                   |0021: move-result-wide v13
+0322cc: 3100 0d02                              |0022: cmp-long v0, v13, v2
+0322d0: 3800 0900                              |0024: if-eqz v0, 002d // +0009
+0322d4: 07b5                                   |0026: move-object v5, v11
+0322d6: 07c6                                   |0027: move-object v6, v12
+0322d8: 04d9                                   |0028: move-wide v9, v13
+0322da: 7606 9105 0500                         |0029: invoke-direct/range {v5, v6, v7, v8, v9, v10}, Lokio/GzipSource;.updateCrc:(Lokio/Buffer;JJ)V // method@0591
+0322e0: 100d                                   |002c: return-wide v13
+0322e2: 59b4 1001                              |002d: iput v4, v11, Lokio/GzipSource;.section:I // field@0110
+0322e6: 52bc 1001                              |002f: iget v12, v11, Lokio/GzipSource;.section:I // field@0110
+0322ea: 334c 1900                              |0031: if-ne v12, v4, 004a // +0019
+0322ee: 7010 8e05 0b00                         |0033: invoke-direct {v11}, Lokio/GzipSource;.consumeTrailer:()V // method@058e
+0322f4: 123c                                   |0036: const/4 v12, #int 3 // #3
+0322f6: 59bc 1001                              |0037: iput v12, v11, Lokio/GzipSource;.section:I // field@0110
+0322fa: 54bb 1101                              |0039: iget-object v11, v11, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+0322fe: 7210 1a05 0b00                         |003b: invoke-interface {v11}, Lokio/BufferedSource;.exhausted:()Z // method@051a
+032304: 0a0b                                   |003e: move-result v11
+032306: 380b 0300                              |003f: if-eqz v11, 0042 // +0003
+03230a: 2809                                   |0041: goto 004a // +0009
+03230c: 220b 9000                              |0042: new-instance v11, Ljava/io/IOException; // type@0090
+032310: 1a0c ad07                              |0044: const-string v12, "gzip finished without exhausting source" // string@07ad
+032314: 7020 d501 cb00                         |0046: invoke-direct {v11, v12}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@01d5
+03231a: 270b                                   |0049: throw v11
+03231c: 1002                                   |004a: return-wide v2
+03231e: 220b af00                              |004b: new-instance v11, Ljava/lang/IllegalArgumentException; // type@00af
+032322: 220c c600                              |004d: new-instance v12, Ljava/lang/StringBuilder; // type@00c6
+032326: 1a00 a305                              |004f: const-string v0, "byteCount < 0: " // string@05a3
+03232a: 7020 5d02 0c00                         |0051: invoke-direct {v12, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@025d
+032330: 6e30 6002 dc0e                         |0054: invoke-virtual {v12, v13, v14}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@0260
+032336: 0c0c                                   |0057: move-result-object v12
+032338: 6e10 6502 0c00                         |0058: invoke-virtual {v12}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@0265
+03233e: 0c0c                                   |005b: move-result-object v12
+032340: 7020 1b02 cb00                         |005c: invoke-direct {v11, v12}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+032346: 270b                                   |005f: throw v11
+      catches       : (none)
+      positions     :
+        0x0009 line=72
+        0x000e line=73
+        0x0011 line=74
+        0x0013 line=78
+        0x001a line=79
+        0x001c line=80
+        0x0029 line=82
+        0x002d line=85
+        0x002f line=91
+        0x0033 line=92
+        0x0037 line=93
+        0x0039 line=99
+        0x0042 line=100
+        0x004b line=68
+      locals        :
+        0x0000 - 0x0060 reg=11 this Lokio/GzipSource;
+        0x0000 - 0x0060 reg=12 (null) Lokio/Buffer;
+        0x0000 - 0x0060 reg=13 (null) J
+
+    #2              : (in Lokio/GzipSource;)
+      name          : 'timeout'
+      type          : '()Lokio/Timeout;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+032348:                                        |[032348] okio.GzipSource.timeout:()Lokio/Timeout;
+032358: 5400 1101                              |0000: iget-object v0, v0, Lokio/GzipSource;.source:Lokio/BufferedSource; // field@0111
+03235c: 7210 3e05 0000                         |0002: invoke-interface {v0}, Lokio/BufferedSource;.timeout:()Lokio/Timeout; // method@053e
+032362: 0c00                                   |0005: move-result-object v0
+032364: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=178
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lokio/GzipSource;
+
+  source_file_idx   : 397 (GzipSource.java)
+

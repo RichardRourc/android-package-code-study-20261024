@@ -1,0 +1,615 @@
+Class #1479            -
+  Class descriptor  : 'Landroidx/lifecycle/LiveData;'
+  Access flags      : 0x0401 (PUBLIC ABSTRACT)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'NOT_SET'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : null
+    #1              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'START_VERSION'
+      type          : 'I'
+      access        : 0x0018 (STATIC FINAL)
+      value         : -1
+  Instance fields   -
+    #0              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'mActiveCount'
+      type          : 'I'
+      access        : 0x0000 ()
+    #1              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'mData'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0042 (PRIVATE VOLATILE)
+    #2              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'mDataLock'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0010 (FINAL)
+    #3              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'mDispatchInvalidated'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'mDispatchingValue'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'mObservers'
+      type          : 'Landroidx/arch/core/internal/SafeIterableMap;'
+      access        : 0x0002 (PRIVATE)
+    #6              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'mPendingData'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0040 (VOLATILE)
+    #7              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'mPostValueRunnable'
+      type          : 'Ljava/lang/Runnable;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #8              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'mVersion'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Landroidx/lifecycle/LiveData;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 8 16-bit code units
+5446bc:                                        |[5446bc] androidx.lifecycle.LiveData.<clinit>:()V
+5446cc: 2200 8b1a                              |0000: new-instance v0, Ljava/lang/Object; // type@1a8b
+5446d0: 7010 c8d1 0000                         |0002: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5446d6: 6900 0132                              |0005: sput-object v0, Landroidx/lifecycle/LiveData;.NOT_SET:Ljava/lang/Object; // field@3201
+5446da: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=64
+      locals        :
+
+    #1              : (in Landroidx/lifecycle/LiveData;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 37 16-bit code units
+5446dc:                                        |[5446dc] androidx.lifecycle.LiveData.<init>:()V
+5446ec: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5446f2: 2200 8b1a                              |0003: new-instance v0, Ljava/lang/Object; // type@1a8b
+5446f6: 7010 c8d1 0000                         |0005: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5446fc: 5b10 0532                              |0008: iput-object v0, v1, Landroidx/lifecycle/LiveData;.mDataLock:Ljava/lang/Object; // field@3205
+544700: 2200 7104                              |000a: new-instance v0, Landroidx/arch/core/internal/SafeIterableMap; // type@0471
+544704: 7010 5923 0000                         |000c: invoke-direct {v0}, Landroidx/arch/core/internal/SafeIterableMap;.<init>:()V // method@2359
+54470a: 5b10 0832                              |000f: iput-object v0, v1, Landroidx/lifecycle/LiveData;.mObservers:Landroidx/arch/core/internal/SafeIterableMap; // field@3208
+54470e: 1200                                   |0011: const/4 v0, #int 0 // #0
+544710: 5910 0332                              |0012: iput v0, v1, Landroidx/lifecycle/LiveData;.mActiveCount:I // field@3203
+544714: 6200 0132                              |0014: sget-object v0, Landroidx/lifecycle/LiveData;.NOT_SET:Ljava/lang/Object; // field@3201
+544718: 5b10 0432                              |0016: iput-object v0, v1, Landroidx/lifecycle/LiveData;.mData:Ljava/lang/Object; // field@3204
+54471c: 5b10 0932                              |0018: iput-object v0, v1, Landroidx/lifecycle/LiveData;.mPendingData:Ljava/lang/Object; // field@3209
+544720: 12f0                                   |001a: const/4 v0, #int -1 // #ff
+544722: 5910 0b32                              |001b: iput v0, v1, Landroidx/lifecycle/LiveData;.mVersion:I // field@320b
+544726: 2200 4f08                              |001d: new-instance v0, Landroidx/lifecycle/LiveData$1; // type@084f
+54472a: 7020 e644 1000                         |001f: invoke-direct {v0, v1}, Landroidx/lifecycle/LiveData$1;.<init>:(Landroidx/lifecycle/LiveData;)V // method@44e6
+544730: 5b10 0a32                              |0022: iput-object v0, v1, Landroidx/lifecycle/LiveData;.mPostValueRunnable:Ljava/lang/Runnable; // field@320a
+544734: 0e00                                   |0024: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=59
+        0x0003 line=60
+        0x000a line=66
+        0x0012 line=70
+        0x0014 line=72
+        0x0018 line=75
+        0x001b line=77
+        0x001d line=82
+      locals        :
+        0x0000 - 0x0025 reg=1 this Landroidx/lifecycle/LiveData;
+
+    #2              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'assertMainThread'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 38 16-bit code units
+544738:                                        |[544738] androidx.lifecycle.LiveData.assertMainThread:(Ljava/lang/String;)V
+544748: 7100 2223 0000                         |0000: invoke-static {}, Landroidx/arch/core/executor/ArchTaskExecutor;.getInstance:()Landroidx/arch/core/executor/ArchTaskExecutor; // method@2322
+54474e: 0c00                                   |0003: move-result-object v0
+544750: 6e10 2423 0000                         |0004: invoke-virtual {v0}, Landroidx/arch/core/executor/ArchTaskExecutor;.isMainThread:()Z // method@2324
+544756: 0a00                                   |0007: move-result v0
+544758: 3800 0300                              |0008: if-eqz v0, 000b // +0003
+54475c: 0e00                                   |000a: return-void
+54475e: 2200 7b1a                              |000b: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+544762: 2201 991a                              |000d: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+544766: 1a02 141c                              |000f: const-string v2, "Cannot invoke " // string@1c14
+54476a: 7020 3cd2 2100                         |0011: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+544770: 6e20 45d2 3100                         |0014: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+544776: 0c03                                   |0017: move-result-object v3
+544778: 1a01 7b04                              |0018: const-string v1, " on a background thread" // string@047b
+54477c: 6e20 45d2 1300                         |001a: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+544782: 0c03                                   |001d: move-result-object v3
+544784: 6e10 58d2 0300                         |001e: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+54478a: 0c03                                   |0021: move-result-object v3
+54478c: 7020 4cd1 3000                         |0022: invoke-direct {v0, v3}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+544792: 2700                                   |0025: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=442
+        0x000b line=443
+      locals        :
+        0x0000 - 0x0026 reg=3 (null) Ljava/lang/String;
+
+    #3              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'considerNotify'
+      type          : '(Landroidx/lifecycle/LiveData$ObserverWrapper;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 33 16-bit code units
+544794:                                        |[544794] androidx.lifecycle.LiveData.considerNotify:(Landroidx/lifecycle/LiveData$ObserverWrapper;)V
+5447a4: 5530 fd31                              |0000: iget-boolean v0, v3, Landroidx/lifecycle/LiveData$ObserverWrapper;.mActive:Z // field@31fd
+5447a8: 3900 0300                              |0002: if-nez v0, 0005 // +0003
+5447ac: 0e00                                   |0004: return-void
+5447ae: 6e10 f544 0300                         |0005: invoke-virtual {v3}, Landroidx/lifecycle/LiveData$ObserverWrapper;.shouldBeActive:()Z // method@44f5
+5447b4: 0a00                                   |0008: move-result v0
+5447b6: 3900 0700                              |0009: if-nez v0, 0010 // +0007
+5447ba: 1202                                   |000b: const/4 v2, #int 0 // #0
+5447bc: 6e20 f244 2300                         |000c: invoke-virtual {v3, v2}, Landroidx/lifecycle/LiveData$ObserverWrapper;.activeStateChanged:(Z)V // method@44f2
+5447c2: 0e00                                   |000f: return-void
+5447c4: 5230 fe31                              |0010: iget v0, v3, Landroidx/lifecycle/LiveData$ObserverWrapper;.mLastVersion:I // field@31fe
+5447c8: 5221 0b32                              |0012: iget v1, v2, Landroidx/lifecycle/LiveData;.mVersion:I // field@320b
+5447cc: 3410 0300                              |0014: if-lt v0, v1, 0017 // +0003
+5447d0: 0e00                                   |0016: return-void
+5447d2: 5931 fe31                              |0017: iput v1, v3, Landroidx/lifecycle/LiveData$ObserverWrapper;.mLastVersion:I // field@31fe
+5447d6: 5433 ff31                              |0019: iget-object v3, v3, Landroidx/lifecycle/LiveData$ObserverWrapper;.mObserver:Landroidx/lifecycle/Observer; // field@31ff
+5447da: 5422 0432                              |001b: iget-object v2, v2, Landroidx/lifecycle/LiveData;.mData:Ljava/lang/Object; // field@3204
+5447de: 7220 1845 2300                         |001d: invoke-interface {v3, v2}, Landroidx/lifecycle/Observer;.onChanged:(Ljava/lang/Object;)V // method@4518
+5447e4: 0e00                                   |0020: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=96
+        0x0005 line=104
+        0x000c line=105
+        0x0010 line=108
+        0x0017 line=111
+        0x0019 line=113
+      locals        :
+        0x0000 - 0x0021 reg=2 this Landroidx/lifecycle/LiveData;
+        0x0000 - 0x0021 reg=3 (null) Landroidx/lifecycle/LiveData$ObserverWrapper;
+
+  Virtual methods   -
+    #0              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'dispatchingValue'
+      type          : '(Landroidx/lifecycle/LiveData$ObserverWrapper;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 58 16-bit code units
+5447e8:                                        |[5447e8] androidx.lifecycle.LiveData.dispatchingValue:(Landroidx/lifecycle/LiveData$ObserverWrapper;)V
+5447f8: 5530 0732                              |0000: iget-boolean v0, v3, Landroidx/lifecycle/LiveData;.mDispatchingValue:Z // field@3207
+5447fc: 1211                                   |0002: const/4 v1, #int 1 // #1
+5447fe: 3800 0500                              |0003: if-eqz v0, 0008 // +0005
+544802: 5c31 0632                              |0005: iput-boolean v1, v3, Landroidx/lifecycle/LiveData;.mDispatchInvalidated:Z // field@3206
+544806: 0e00                                   |0007: return-void
+544808: 5c31 0732                              |0008: iput-boolean v1, v3, Landroidx/lifecycle/LiveData;.mDispatchingValue:Z // field@3207
+54480c: 1200                                   |000a: const/4 v0, #int 0 // #0
+54480e: 5c30 0632                              |000b: iput-boolean v0, v3, Landroidx/lifecycle/LiveData;.mDispatchInvalidated:Z // field@3206
+544812: 3804 0700                              |000d: if-eqz v4, 0014 // +0007
+544816: 7020 f944 4300                         |000f: invoke-direct {v3, v4}, Landroidx/lifecycle/LiveData;.considerNotify:(Landroidx/lifecycle/LiveData$ObserverWrapper;)V // method@44f9
+54481c: 1204                                   |0012: const/4 v4, #int 0 // #0
+54481e: 2820                                   |0013: goto 0033 // +0020
+544820: 5431 0832                              |0014: iget-object v1, v3, Landroidx/lifecycle/LiveData;.mObservers:Landroidx/arch/core/internal/SafeIterableMap; // field@3208
+544824: 6e10 6023 0100                         |0016: invoke-virtual {v1}, Landroidx/arch/core/internal/SafeIterableMap;.iteratorWithAdditions:()Landroidx/arch/core/internal/SafeIterableMap$IteratorWithAdditions; // method@2360
+54482a: 0c01                                   |0019: move-result-object v1
+54482c: 7210 a0d5 0100                         |001a: invoke-interface {v1}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+544832: 0a02                                   |001d: move-result v2
+544834: 3802 1500                              |001e: if-eqz v2, 0033 // +0015
+544838: 7210 a1d5 0100                         |0020: invoke-interface {v1}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+54483e: 0c02                                   |0023: move-result-object v2
+544840: 1f02 551b                              |0024: check-cast v2, Ljava/util/Map$Entry; // type@1b55
+544844: 7210 fdd5 0200                         |0026: invoke-interface {v2}, Ljava/util/Map$Entry;.getValue:()Ljava/lang/Object; // method@d5fd
+54484a: 0c02                                   |0029: move-result-object v2
+54484c: 1f02 5208                              |002a: check-cast v2, Landroidx/lifecycle/LiveData$ObserverWrapper; // type@0852
+544850: 7020 f944 2300                         |002c: invoke-direct {v3, v2}, Landroidx/lifecycle/LiveData;.considerNotify:(Landroidx/lifecycle/LiveData$ObserverWrapper;)V // method@44f9
+544856: 5532 0632                              |002f: iget-boolean v2, v3, Landroidx/lifecycle/LiveData;.mDispatchInvalidated:Z // field@3206
+54485a: 3802 e9ff                              |0031: if-eqz v2, 001a // -0017
+54485e: 5531 0632                              |0033: iget-boolean v1, v3, Landroidx/lifecycle/LiveData;.mDispatchInvalidated:Z // field@3206
+544862: 3901 d5ff                              |0035: if-nez v1, 000a // -002b
+544866: 5c30 0732                              |0037: iput-boolean v0, v3, Landroidx/lifecycle/LiveData;.mDispatchingValue:Z // field@3207
+54486a: 0e00                                   |0039: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=118
+        0x0005 line=119
+        0x0008 line=122
+        0x000b line=124
+        0x000f line=126
+        0x0014 line=129
+        0x0016 line=130
+        0x0020 line=131
+        0x002f line=132
+        0x0033 line=137
+        0x0037 line=138
+      locals        :
+        0x0000 - 0x003a reg=3 this Landroidx/lifecycle/LiveData;
+        0x0000 - 0x003a reg=4 (null) Landroidx/lifecycle/LiveData$ObserverWrapper;
+
+    #1              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'getValue'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 9 16-bit code units
+54486c:                                        |[54486c] androidx.lifecycle.LiveData.getValue:()Ljava/lang/Object;
+54487c: 5411 0432                              |0000: iget-object v1, v1, Landroidx/lifecycle/LiveData;.mData:Ljava/lang/Object; // field@3204
+544880: 6200 0132                              |0002: sget-object v0, Landroidx/lifecycle/LiveData;.NOT_SET:Ljava/lang/Object; // field@3201
+544884: 3201 0300                              |0004: if-eq v1, v0, 0007 // +0003
+544888: 1101                                   |0006: return-object v1
+54488a: 1201                                   |0007: const/4 v1, #int 0 // #0
+54488c: 1101                                   |0008: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=301
+        0x0002 line=302
+      locals        :
+        0x0000 - 0x0009 reg=1 this Landroidx/lifecycle/LiveData;
+
+    #2              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'getVersion'
+      type          : '()I'
+      access        : 0x0000 ()
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+544890:                                        |[544890] androidx.lifecycle.LiveData.getVersion:()I
+5448a0: 5200 0b32                              |0000: iget v0, v0, Landroidx/lifecycle/LiveData;.mVersion:I // field@320b
+5448a4: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=310
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/lifecycle/LiveData;
+
+    #3              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'hasActiveObservers'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+5448a8:                                        |[5448a8] androidx.lifecycle.LiveData.hasActiveObservers:()Z
+5448b8: 5200 0332                              |0000: iget v0, v0, Landroidx/lifecycle/LiveData;.mActiveCount:I // field@3203
+5448bc: 3d00 0400                              |0002: if-lez v0, 0006 // +0004
+5448c0: 1210                                   |0004: const/4 v0, #int 1 // #1
+5448c2: 2802                                   |0005: goto 0007 // +0002
+5448c4: 1200                                   |0006: const/4 v0, #int 0 // #0
+5448c6: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=353
+      locals        :
+        0x0000 - 0x0008 reg=0 this Landroidx/lifecycle/LiveData;
+
+    #4              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'hasObservers'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 12 16-bit code units
+5448c8:                                        |[5448c8] androidx.lifecycle.LiveData.hasObservers:()Z
+5448d8: 5400 0832                              |0000: iget-object v0, v0, Landroidx/lifecycle/LiveData;.mObservers:Landroidx/arch/core/internal/SafeIterableMap; // field@3208
+5448dc: 6e10 6523 0000                         |0002: invoke-virtual {v0}, Landroidx/arch/core/internal/SafeIterableMap;.size:()I // method@2365
+5448e2: 0a00                                   |0005: move-result v0
+5448e4: 3d00 0400                              |0006: if-lez v0, 000a // +0004
+5448e8: 1210                                   |0008: const/4 v0, #int 1 // #1
+5448ea: 2802                                   |0009: goto 000b // +0002
+5448ec: 1200                                   |000a: const/4 v0, #int 0 // #0
+5448ee: 0f00                                   |000b: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=343
+      locals        :
+        0x0000 - 0x000c reg=0 this Landroidx/lifecycle/LiveData;
+
+    #5              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'observe'
+      type          : '(Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Observer;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 4
+      insns size    : 59 16-bit code units
+5448f0:                                        |[5448f0] androidx.lifecycle.LiveData.observe:(Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Observer;)V
+544900: 1a00 8cc4                              |0000: const-string v0, "observe" // string@c48c
+544904: 7110 f844 0000                         |0002: invoke-static {v0}, Landroidx/lifecycle/LiveData;.assertMainThread:(Ljava/lang/String;)V // method@44f8
+54490a: 7210 c144 0300                         |0005: invoke-interface {v3}, Landroidx/lifecycle/LifecycleOwner;.getLifecycle:()Landroidx/lifecycle/Lifecycle; // method@44c1
+544910: 0c00                                   |0008: move-result-object v0
+544912: 6e10 be44 0000                         |0009: invoke-virtual {v0}, Landroidx/lifecycle/Lifecycle;.getCurrentState:()Landroidx/lifecycle/Lifecycle$State; // method@44be
+544918: 0c00                                   |000c: move-result-object v0
+54491a: 6201 e331                              |000d: sget-object v1, Landroidx/lifecycle/Lifecycle$State;.DESTROYED:Landroidx/lifecycle/Lifecycle$State; // field@31e3
+54491e: 3310 0300                              |000f: if-ne v0, v1, 0012 // +0003
+544922: 0e00                                   |0011: return-void
+544924: 2200 5108                              |0012: new-instance v0, Landroidx/lifecycle/LiveData$LifecycleBoundObserver; // type@0851
+544928: 7040 eb44 2043                         |0014: invoke-direct {v0, v2, v3, v4}, Landroidx/lifecycle/LiveData$LifecycleBoundObserver;.<init>:(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Observer;)V // method@44eb
+54492e: 5422 0832                              |0017: iget-object v2, v2, Landroidx/lifecycle/LiveData;.mObservers:Landroidx/arch/core/internal/SafeIterableMap; // field@3208
+544932: 6e30 6323 4200                         |0019: invoke-virtual {v2, v4, v0}, Landroidx/arch/core/internal/SafeIterableMap;.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@2363
+544938: 0c02                                   |001c: move-result-object v2
+54493a: 1f02 5208                              |001d: check-cast v2, Landroidx/lifecycle/LiveData$ObserverWrapper; // type@0852
+54493e: 3802 1100                              |001f: if-eqz v2, 0030 // +0011
+544942: 6e20 f444 3200                         |0021: invoke-virtual {v2, v3}, Landroidx/lifecycle/LiveData$ObserverWrapper;.isAttachedTo:(Landroidx/lifecycle/LifecycleOwner;)Z // method@44f4
+544948: 0a04                                   |0024: move-result v4
+54494a: 3804 0300                              |0025: if-eqz v4, 0028 // +0003
+54494e: 2809                                   |0027: goto 0030 // +0009
+544950: 2202 7a1a                              |0028: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+544954: 1a03 b21b                              |002a: const-string v3, "Cannot add the same observer with different lifecycles" // string@1bb2
+544958: 7020 47d1 3200                         |002c: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+54495e: 2702                                   |002f: throw v2
+544960: 3802 0300                              |0030: if-eqz v2, 0033 // +0003
+544964: 0e00                                   |0032: return-void
+544966: 7210 c144 0300                         |0033: invoke-interface {v3}, Landroidx/lifecycle/LifecycleOwner;.getLifecycle:()Landroidx/lifecycle/Lifecycle; // method@44c1
+54496c: 0c02                                   |0036: move-result-object v2
+54496e: 6e20 bd44 0200                         |0037: invoke-virtual {v2, v0}, Landroidx/lifecycle/Lifecycle;.addObserver:(Landroidx/lifecycle/LifecycleObserver;)V // method@44bd
+544974: 0e00                                   |003a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=171
+        0x0005 line=172
+        0x0012 line=176
+        0x0017 line=177
+        0x0021 line=178
+        0x0028 line=179
+        0x0033 line=185
+      locals        :
+        0x0000 - 0x003b reg=2 this Landroidx/lifecycle/LiveData;
+        0x0000 - 0x003b reg=3 (null) Landroidx/lifecycle/LifecycleOwner;
+        0x0000 - 0x003b reg=4 (null) Landroidx/lifecycle/Observer;
+
+    #6              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'observeForever'
+      type          : '(Landroidx/lifecycle/Observer;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 41 16-bit code units
+544978:                                        |[544978] androidx.lifecycle.LiveData.observeForever:(Landroidx/lifecycle/Observer;)V
+544988: 1a00 8dc4                              |0000: const-string v0, "observeForever" // string@c48d
+54498c: 7110 f844 0000                         |0002: invoke-static {v0}, Landroidx/lifecycle/LiveData;.assertMainThread:(Ljava/lang/String;)V // method@44f8
+544992: 2200 5008                              |0005: new-instance v0, Landroidx/lifecycle/LiveData$AlwaysActiveObserver; // type@0850
+544996: 7030 e844 1002                         |0007: invoke-direct {v0, v1, v2}, Landroidx/lifecycle/LiveData$AlwaysActiveObserver;.<init>:(Landroidx/lifecycle/LiveData;Landroidx/lifecycle/Observer;)V // method@44e8
+54499c: 5411 0832                              |000a: iget-object v1, v1, Landroidx/lifecycle/LiveData;.mObservers:Landroidx/arch/core/internal/SafeIterableMap; // field@3208
+5449a0: 6e30 6323 2100                         |000c: invoke-virtual {v1, v2, v0}, Landroidx/arch/core/internal/SafeIterableMap;.putIfAbsent:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@2363
+5449a6: 0c01                                   |000f: move-result-object v1
+5449a8: 1f01 5208                              |0010: check-cast v1, Landroidx/lifecycle/LiveData$ObserverWrapper; // type@0852
+5449ac: 3801 0f00                              |0012: if-eqz v1, 0021 // +000f
+5449b0: 2012 5108                              |0014: instance-of v2, v1, Landroidx/lifecycle/LiveData$LifecycleBoundObserver; // type@0851
+5449b4: 3902 0300                              |0016: if-nez v2, 0019 // +0003
+5449b8: 2809                                   |0018: goto 0021 // +0009
+5449ba: 2201 7a1a                              |0019: new-instance v1, Ljava/lang/IllegalArgumentException; // type@1a7a
+5449be: 1a02 b21b                              |001b: const-string v2, "Cannot add the same observer with different lifecycles" // string@1bb2
+5449c2: 7020 47d1 2100                         |001d: invoke-direct {v1, v2}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+5449c8: 2701                                   |0020: throw v1
+5449ca: 3801 0300                              |0021: if-eqz v1, 0024 // +0003
+5449ce: 0e00                                   |0023: return-void
+5449d0: 1211                                   |0024: const/4 v1, #int 1 // #1
+5449d2: 6e20 e944 1000                         |0025: invoke-virtual {v0, v1}, Landroidx/lifecycle/LiveData$AlwaysActiveObserver;.activeStateChanged:(Z)V // method@44e9
+5449d8: 0e00                                   |0028: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=204
+        0x0005 line=205
+        0x000a line=206
+        0x0014 line=207
+        0x0019 line=208
+        0x0025 line=214
+      locals        :
+        0x0000 - 0x0029 reg=1 this Landroidx/lifecycle/LiveData;
+        0x0000 - 0x0029 reg=2 (null) Landroidx/lifecycle/Observer;
+
+    #7              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'onActive'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 1 16-bit code units
+5449dc:                                        |[5449dc] androidx.lifecycle.LiveData.onActive:()V
+5449ec: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #8              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'onInactive'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 1 16-bit code units
+5449f0:                                        |[5449f0] androidx.lifecycle.LiveData.onInactive:()V
+544a00: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #9              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'postValue'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 31 16-bit code units
+544a04:                                        |[544a04] androidx.lifecycle.LiveData.postValue:(Ljava/lang/Object;)V
+544a14: 5430 0532                              |0000: iget-object v0, v3, Landroidx/lifecycle/LiveData;.mDataLock:Ljava/lang/Object; // field@3205
+544a18: 1d00                                   |0002: monitor-enter v0
+544a1a: 5431 0932                              |0003: iget-object v1, v3, Landroidx/lifecycle/LiveData;.mPendingData:Ljava/lang/Object; // field@3209
+544a1e: 6202 0132                              |0005: sget-object v2, Landroidx/lifecycle/LiveData;.NOT_SET:Ljava/lang/Object; // field@3201
+544a22: 3321 0400                              |0007: if-ne v1, v2, 000b // +0004
+544a26: 1211                                   |0009: const/4 v1, #int 1 // #1
+544a28: 2802                                   |000a: goto 000c // +0002
+544a2a: 1201                                   |000b: const/4 v1, #int 0 // #0
+544a2c: 5b34 0932                              |000c: iput-object v4, v3, Landroidx/lifecycle/LiveData;.mPendingData:Ljava/lang/Object; // field@3209
+544a30: 1e00                                   |000e: monitor-exit v0
+544a32: 3901 0300                              |000f: if-nez v1, 0012 // +0003
+544a36: 0e00                                   |0011: return-void
+544a38: 7100 2223 0000                         |0012: invoke-static {}, Landroidx/arch/core/executor/ArchTaskExecutor;.getInstance:()Landroidx/arch/core/executor/ArchTaskExecutor; // method@2322
+544a3e: 0c04                                   |0015: move-result-object v4
+544a40: 5433 0a32                              |0016: iget-object v3, v3, Landroidx/lifecycle/LiveData;.mPostValueRunnable:Ljava/lang/Runnable; // field@320a
+544a44: 6e20 2523 3400                         |0018: invoke-virtual {v4, v3}, Landroidx/arch/core/executor/ArchTaskExecutor;.postToMainThread:(Ljava/lang/Runnable;)V // method@2325
+544a4a: 0e00                                   |001b: return-void
+544a4c: 0d03                                   |001c: move-exception v3
+544a4e: 1e00                                   |001d: monitor-exit v0
+544a50: 2703                                   |001e: throw v3
+      catches       : 2
+        0x0003 - 0x000f
+          <any> -> 0x001c
+        0x001d - 0x001e
+          <any> -> 0x001c
+      positions     :
+        0x0000 line=266
+        0x0003 line=267
+        0x000c line=268
+        0x000e line=269
+        0x0012 line=273
+        0x001d line=269
+      locals        :
+        0x0000 - 0x001f reg=3 this Landroidx/lifecycle/LiveData;
+        0x0000 - 0x001f reg=4 (null) Ljava/lang/Object;
+
+    #10              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'removeObserver'
+      type          : '(Landroidx/lifecycle/Observer;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 24 16-bit code units
+544a68:                                        |[544a68] androidx.lifecycle.LiveData.removeObserver:(Landroidx/lifecycle/Observer;)V
+544a78: 1a00 56ce                              |0000: const-string v0, "removeObserver" // string@ce56
+544a7c: 7110 f844 0000                         |0002: invoke-static {v0}, Landroidx/lifecycle/LiveData;.assertMainThread:(Ljava/lang/String;)V // method@44f8
+544a82: 5411 0832                              |0005: iget-object v1, v1, Landroidx/lifecycle/LiveData;.mObservers:Landroidx/arch/core/internal/SafeIterableMap; // field@3208
+544a86: 6e20 6423 2100                         |0007: invoke-virtual {v1, v2}, Landroidx/arch/core/internal/SafeIterableMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@2364
+544a8c: 0c01                                   |000a: move-result-object v1
+544a8e: 1f01 5208                              |000b: check-cast v1, Landroidx/lifecycle/LiveData$ObserverWrapper; // type@0852
+544a92: 3901 0300                              |000d: if-nez v1, 0010 // +0003
+544a96: 0e00                                   |000f: return-void
+544a98: 6e10 f344 0100                         |0010: invoke-virtual {v1}, Landroidx/lifecycle/LiveData$ObserverWrapper;.detachObserver:()V // method@44f3
+544a9e: 1202                                   |0013: const/4 v2, #int 0 // #0
+544aa0: 6e20 f244 2100                         |0014: invoke-virtual {v1, v2}, Landroidx/lifecycle/LiveData$ObserverWrapper;.activeStateChanged:(Z)V // method@44f2
+544aa6: 0e00                                   |0017: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=224
+        0x0005 line=225
+        0x0010 line=229
+        0x0014 line=230
+      locals        :
+        0x0000 - 0x0018 reg=1 this Landroidx/lifecycle/LiveData;
+        0x0000 - 0x0018 reg=2 (null) Landroidx/lifecycle/Observer;
+
+    #11              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'removeObservers'
+      type          : '(Landroidx/lifecycle/LifecycleOwner;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 46 16-bit code units
+544aa8:                                        |[544aa8] androidx.lifecycle.LiveData.removeObservers:(Landroidx/lifecycle/LifecycleOwner;)V
+544ab8: 1a00 57ce                              |0000: const-string v0, "removeObservers" // string@ce57
+544abc: 7110 f844 0000                         |0002: invoke-static {v0}, Landroidx/lifecycle/LiveData;.assertMainThread:(Ljava/lang/String;)V // method@44f8
+544ac2: 5430 0832                              |0005: iget-object v0, v3, Landroidx/lifecycle/LiveData;.mObservers:Landroidx/arch/core/internal/SafeIterableMap; // field@3208
+544ac6: 6e10 5f23 0000                         |0007: invoke-virtual {v0}, Landroidx/arch/core/internal/SafeIterableMap;.iterator:()Ljava/util/Iterator; // method@235f
+544acc: 0c00                                   |000a: move-result-object v0
+544ace: 7210 a0d5 0000                         |000b: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+544ad4: 0a01                                   |000e: move-result v1
+544ad6: 3801 1e00                              |000f: if-eqz v1, 002d // +001e
+544ada: 7210 a1d5 0000                         |0011: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+544ae0: 0c01                                   |0014: move-result-object v1
+544ae2: 1f01 551b                              |0015: check-cast v1, Ljava/util/Map$Entry; // type@1b55
+544ae6: 7210 fdd5 0100                         |0017: invoke-interface {v1}, Ljava/util/Map$Entry;.getValue:()Ljava/lang/Object; // method@d5fd
+544aec: 0c02                                   |001a: move-result-object v2
+544aee: 1f02 5208                              |001b: check-cast v2, Landroidx/lifecycle/LiveData$ObserverWrapper; // type@0852
+544af2: 6e20 f444 4200                         |001d: invoke-virtual {v2, v4}, Landroidx/lifecycle/LiveData$ObserverWrapper;.isAttachedTo:(Landroidx/lifecycle/LifecycleOwner;)Z // method@44f4
+544af8: 0a02                                   |0020: move-result v2
+544afa: 3802 eaff                              |0021: if-eqz v2, 000b // -0016
+544afe: 7210 fcd5 0100                         |0023: invoke-interface {v1}, Ljava/util/Map$Entry;.getKey:()Ljava/lang/Object; // method@d5fc
+544b04: 0c01                                   |0026: move-result-object v1
+544b06: 1f01 5808                              |0027: check-cast v1, Landroidx/lifecycle/Observer; // type@0858
+544b0a: 6e20 0445 1300                         |0029: invoke-virtual {v3, v1}, Landroidx/lifecycle/LiveData;.removeObserver:(Landroidx/lifecycle/Observer;)V // method@4504
+544b10: 28df                                   |002c: goto 000b // -0021
+544b12: 0e00                                   |002d: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=241
+        0x0005 line=242
+        0x0017 line=243
+        0x0023 line=244
+      locals        :
+        0x0000 - 0x002e reg=3 this Landroidx/lifecycle/LiveData;
+        0x0000 - 0x002e reg=4 (null) Landroidx/lifecycle/LifecycleOwner;
+
+    #12              : (in Landroidx/lifecycle/LiveData;)
+      name          : 'setValue'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 18 16-bit code units
+544b14:                                        |[544b14] androidx.lifecycle.LiveData.setValue:(Ljava/lang/Object;)V
+544b24: 1a00 cfdb                              |0000: const-string v0, "setValue" // string@dbcf
+544b28: 7110 f844 0000                         |0002: invoke-static {v0}, Landroidx/lifecycle/LiveData;.assertMainThread:(Ljava/lang/String;)V // method@44f8
+544b2e: 5210 0b32                              |0005: iget v0, v1, Landroidx/lifecycle/LiveData;.mVersion:I // field@320b
+544b32: d800 0001                              |0007: add-int/lit8 v0, v0, #int 1 // #01
+544b36: 5910 0b32                              |0009: iput v0, v1, Landroidx/lifecycle/LiveData;.mVersion:I // field@320b
+544b3a: 5b12 0432                              |000b: iput-object v2, v1, Landroidx/lifecycle/LiveData;.mData:Ljava/lang/Object; // field@3204
+544b3e: 1202                                   |000d: const/4 v2, #int 0 // #0
+544b40: 6e20 fa44 2100                         |000e: invoke-virtual {v1, v2}, Landroidx/lifecycle/LiveData;.dispatchingValue:(Landroidx/lifecycle/LiveData$ObserverWrapper;)V // method@44fa
+544b46: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=286
+        0x0005 line=287
+        0x000b line=288
+        0x000e line=289
+      locals        :
+        0x0000 - 0x0012 reg=1 this Landroidx/lifecycle/LiveData;
+        0x0000 - 0x0012 reg=2 (null) Ljava/lang/Object;
+
+  source_file_idx   : 19901 (LiveData.java)
+

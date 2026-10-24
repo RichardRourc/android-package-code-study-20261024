@@ -1,0 +1,2544 @@
+Class #2580            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'DEFAULT_T_SIZE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 64
+    #1              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'MAX_ENTRIES_FOR_REUSE'
+      type          : 'I'
+      access        : 0x001c (PROTECTED STATIC FINAL)
+      value         : 6000
+    #2              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'MAX_T_SIZE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 65536
+    #3              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'MIN_HASH_SIZE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 16
+    #4              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'MULT'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 33
+    #5              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'MULT2'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 65599
+    #6              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'MULT3'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 31
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_count'
+      type          : 'I'
+      access        : 0x0004 (PROTECTED)
+    #1              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_failOnDoS'
+      type          : 'Z'
+      access        : 0x0014 (PROTECTED FINAL)
+    #2              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_hashArea'
+      type          : '[I'
+      access        : 0x0004 (PROTECTED)
+    #3              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_hashShared'
+      type          : 'Z'
+      access        : 0x0004 (PROTECTED)
+    #4              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_hashSize'
+      type          : 'I'
+      access        : 0x0004 (PROTECTED)
+    #5              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_intern'
+      type          : 'Z'
+      access        : 0x0014 (PROTECTED FINAL)
+    #6              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_longNameOffset'
+      type          : 'I'
+      access        : 0x0004 (PROTECTED)
+    #7              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_names'
+      type          : '[Ljava/lang/String;'
+      access        : 0x0004 (PROTECTED)
+    #8              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_parent'
+      type          : 'Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #9              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_secondaryStart'
+      type          : 'I'
+      access        : 0x0004 (PROTECTED)
+    #10              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_seed'
+      type          : 'I'
+      access        : 0x0014 (PROTECTED FINAL)
+    #11              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_spilloverEnd'
+      type          : 'I'
+      access        : 0x0004 (PROTECTED)
+    #12              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_tableInfo'
+      type          : 'Ljava/util/concurrent/atomic/AtomicReference;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #13              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_tertiaryShift'
+      type          : 'I'
+      access        : 0x0004 (PROTECTED)
+    #14              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_tertiaryStart'
+      type          : 'I'
+      access        : 0x0004 (PROTECTED)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '<init>'
+      type          : '(II)V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 2
+      insns size    : 45 16-bit code units
+5dfdd4:                                        |[5dfdd4] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.<init>:(II)V
+5dfde4: 7010 c8d1 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5dfdea: 1200                                   |0003: const/4 v0, #int 0 // #0
+5dfdec: 5b20 c647                              |0004: iput-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._parent:Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // field@47c6
+5dfdf0: 1200                                   |0006: const/4 v0, #int 0 // #0
+5dfdf2: 5920 be47                              |0007: iput v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5dfdf6: 1211                                   |0009: const/4 v1, #int 1 // #1
+5dfdf8: 5c21 c147                              |000a: iput-boolean v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashShared:Z // field@47c1
+5dfdfc: 5924 c847                              |000c: iput v4, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._seed:I // field@47c8
+5dfe00: 5c20 c347                              |000e: iput-boolean v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._intern:Z // field@47c3
+5dfe04: 5c21 bf47                              |0010: iput-boolean v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._failOnDoS:Z // field@47bf
+5dfe08: 1304 1000                              |0012: const/16 v4, #int 16 // #10
+5dfe0c: 3543 0400                              |0014: if-ge v3, v4, 0018 // +0004
+5dfe10: 0143                                   |0016: move v3, v4
+5dfe12: 280a                                   |0017: goto 0021 // +000a
+5dfe14: d800 03ff                              |0018: add-int/lit8 v0, v3, #int -1 // #ff
+5dfe18: b530                                   |001a: and-int/2addr v0, v3
+5dfe1a: 3800 0600                              |001b: if-eqz v0, 0021 // +0006
+5dfe1e: 3534 f9ff                              |001d: if-ge v4, v3, 0016 // -0007
+5dfe22: b044                                   |001f: add-int/2addr v4, v4
+5dfe24: 28fd                                   |0020: goto 001d // -0003
+5dfe26: 2204 941b                              |0021: new-instance v4, Ljava/util/concurrent/atomic/AtomicReference; // type@1b94
+5dfe2a: 7110 8169 0300                         |0023: invoke-static {v3}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.createInitial:(I)Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo; // method@6981
+5dfe30: 0c03                                   |0026: move-result-object v3
+5dfe32: 7020 08d7 3400                         |0027: invoke-direct {v4, v3}, Ljava/util/concurrent/atomic/AtomicReference;.<init>:(Ljava/lang/Object;)V // method@d708
+5dfe38: 5b24 ca47                              |002a: iput-object v4, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tableInfo:Ljava/util/concurrent/atomic/AtomicReference; // field@47ca
+5dfe3c: 0e00                                   |002c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=227
+        0x0004 line=229
+        0x0007 line=230
+        0x000a line=233
+        0x000c line=234
+        0x000e line=235
+        0x0010 line=236
+        0x0021 line=251
+      locals        :
+        0x0000 - 0x002d reg=2 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x002d reg=3 (null) I
+        0x0000 - 0x002d reg=4 (null) I
+
+    #1              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;)V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 1
+      insns size    : 47 16-bit code units
+5dfe40:                                        |[5dfe40] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.<init>:(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;)V
+5dfe50: 7010 c8d1 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5dfe56: 1200                                   |0003: const/4 v0, #int 0 // #0
+5dfe58: 5b20 c647                              |0004: iput-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._parent:Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // field@47c6
+5dfe5c: 1201                                   |0006: const/4 v1, #int 0 // #0
+5dfe5e: 5921 c847                              |0007: iput v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._seed:I // field@47c8
+5dfe62: 5c21 c347                              |0009: iput-boolean v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._intern:Z // field@47c3
+5dfe66: 1211                                   |000b: const/4 v1, #int 1 // #1
+5dfe68: 5c21 bf47                              |000c: iput-boolean v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._failOnDoS:Z // field@47bf
+5dfe6c: 5b20 ca47                              |000e: iput-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tableInfo:Ljava/util/concurrent/atomic/AtomicReference; // field@47ca
+5dfe70: 12f0                                   |0010: const/4 v0, #int -1 // #ff
+5dfe72: 5920 be47                              |0011: iput v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5dfe76: 5430 b247                              |0013: iget-object v0, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.mainHash:[I // field@47b2
+5dfe7a: 5b20 c047                              |0015: iput-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5dfe7e: 5430 b347                              |0017: iget-object v0, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.names:[Ljava/lang/String; // field@47b3
+5dfe82: 5b20 c547                              |0019: iput-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5dfe86: 5233 b447                              |001b: iget v3, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.size:I // field@47b4
+5dfe8a: 5923 c247                              |001d: iput v3, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5dfe8e: 5423 c047                              |001f: iget-object v3, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5dfe92: 2133                                   |0021: array-length v3, v3
+5dfe94: 5923 c747                              |0022: iput v3, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5dfe98: 5923 cc47                              |0024: iput v3, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5dfe9c: 5921 cb47                              |0026: iput v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryShift:I // field@47cb
+5dfea0: 5923 c947                              |0028: iput v3, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5dfea4: 5923 c447                              |002a: iput v3, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._longNameOffset:I // field@47c4
+5dfea8: 5c21 c147                              |002c: iput-boolean v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashShared:Z // field@47c1
+5dfeac: 0e00                                   |002e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=294
+        0x0004 line=295
+        0x0007 line=296
+        0x0009 line=297
+        0x000c line=298
+        0x000e line=299
+        0x0011 line=305
+        0x0013 line=307
+        0x0017 line=308
+        0x001b line=310
+        0x001f line=314
+        0x0022 line=315
+        0x0024 line=316
+        0x0026 line=317
+        0x0028 line=319
+        0x002a line=320
+        0x002c line=323
+      locals        :
+        0x0000 - 0x002f reg=2 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x002f reg=3 (null) Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;
+
+    #2              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;ILcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;ZZ)V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 6
+      ins           : 6
+      outs          : 1
+      insns size    : 55 16-bit code units
+5dfeb0:                                        |[5dfeb0] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.<init>:(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;ILcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;ZZ)V
+5dfec0: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5dfec6: 5b01 c647                              |0003: iput-object v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._parent:Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // field@47c6
+5dfeca: 5902 c847                              |0005: iput v2, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._seed:I // field@47c8
+5dfece: 5c04 c347                              |0007: iput-boolean v4, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._intern:Z // field@47c3
+5dfed2: 5c05 bf47                              |0009: iput-boolean v5, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._failOnDoS:Z // field@47bf
+5dfed6: 1201                                   |000b: const/4 v1, #int 0 // #0
+5dfed8: 5b01 ca47                              |000c: iput-object v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tableInfo:Ljava/util/concurrent/atomic/AtomicReference; // field@47ca
+5dfedc: 5231 b047                              |000e: iget v1, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.count:I // field@47b0
+5dfee0: 5901 be47                              |0010: iput v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5dfee4: 5231 b447                              |0012: iget v1, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.size:I // field@47b4
+5dfee8: 5901 c247                              |0014: iput v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5dfeec: e001 0102                              |0016: shl-int/lit8 v1, v1, #int 2 // #02
+5dfef0: 5901 c747                              |0018: iput v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5dfef4: e102 0101                              |001a: shr-int/lit8 v2, v1, #int 1 // #01
+5dfef8: b021                                   |001c: add-int/2addr v1, v2
+5dfefa: 5901 cc47                              |001d: iput v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5dfefe: 5231 b647                              |001f: iget v1, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.tertiaryShift:I // field@47b6
+5dff02: 5901 cb47                              |0021: iput v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryShift:I // field@47cb
+5dff06: 5431 b247                              |0023: iget-object v1, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.mainHash:[I // field@47b2
+5dff0a: 5b01 c047                              |0025: iput-object v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5dff0e: 5431 b347                              |0027: iget-object v1, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.names:[Ljava/lang/String; // field@47b3
+5dff12: 5b01 c547                              |0029: iput-object v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5dff16: 5231 b547                              |002b: iget v1, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.spilloverEnd:I // field@47b5
+5dff1a: 5901 c947                              |002d: iput v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5dff1e: 5231 b147                              |002f: iget v1, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.longNameOffset:I // field@47b1
+5dff22: 5901 c447                              |0031: iput v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._longNameOffset:I // field@47c4
+5dff26: 1211                                   |0033: const/4 v1, #int 1 // #1
+5dff28: 5c01 c147                              |0034: iput-boolean v1, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashShared:Z // field@47c1
+5dff2c: 0e00                                   |0036: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=260
+        0x0003 line=261
+        0x0005 line=262
+        0x0007 line=263
+        0x0009 line=264
+        0x000c line=265
+        0x000e line=268
+        0x0012 line=269
+        0x0018 line=270
+        0x001d line=271
+        0x001f line=272
+        0x0023 line=274
+        0x0027 line=275
+        0x002b line=277
+        0x002f line=278
+        0x0034 line=281
+      locals        :
+        0x0000 - 0x0037 reg=0 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0037 reg=1 (null) Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0037 reg=2 (null) I
+        0x0000 - 0x0037 reg=3 (null) Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;
+        0x0000 - 0x0037 reg=4 (null) Z
+        0x0000 - 0x0037 reg=5 (null) Z
+
+    #3              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_appendLongName'
+      type          : '([II)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 5
+      insns size    : 47 16-bit code units
+5dff30:                                        |[5dff30] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._appendLongName:([II)I
+5dff40: 5240 c447                              |0000: iget v0, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._longNameOffset:I // field@47c4
+5dff44: 9001 0006                              |0002: add-int v1, v0, v6
+5dff48: 5442 c047                              |0004: iget-object v2, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5dff4c: 2123                                   |0006: array-length v3, v2
+5dff4e: 3731 1c00                              |0007: if-le v1, v3, 0023 // +001c
+5dff52: 2122                                   |0009: array-length v2, v2
+5dff54: b121                                   |000a: sub-int/2addr v1, v2
+5dff56: 1302 0010                              |000b: const/16 v2, #int 4096 // #1000
+5dff5a: 5243 c247                              |000d: iget v3, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5dff5e: 7120 9fd1 3200                         |000f: invoke-static {v2, v3}, Ljava/lang/Math;.min:(II)I // method@d19f
+5dff64: 0a02                                   |0012: move-result v2
+5dff66: 5443 c047                              |0013: iget-object v3, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5dff6a: 2133                                   |0015: array-length v3, v3
+5dff6c: 7120 9bd1 2100                         |0016: invoke-static {v1, v2}, Ljava/lang/Math;.max:(II)I // method@d19b
+5dff72: 0a01                                   |0019: move-result v1
+5dff74: b013                                   |001a: add-int/2addr v3, v1
+5dff76: 5441 c047                              |001b: iget-object v1, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5dff7a: 7120 c8d4 3100                         |001d: invoke-static {v1, v3}, Ljava/util/Arrays;.copyOf:([II)[I // method@d4c8
+5dff80: 0c01                                   |0020: move-result-object v1
+5dff82: 5b41 c047                              |0021: iput-object v1, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5dff86: 1201                                   |0023: const/4 v1, #int 0 // #0
+5dff88: 5442 c047                              |0024: iget-object v2, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5dff8c: 7156 5ad2 1502                         |0026: invoke-static {v5, v1, v2, v0, v6}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+5dff92: 5245 c447                              |0029: iget v5, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._longNameOffset:I // field@47c4
+5dff96: b065                                   |002b: add-int/2addr v5, v6
+5dff98: 5945 c447                              |002c: iput v5, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._longNameOffset:I // field@47c4
+5dff9c: 0f00                                   |002e: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1082
+        0x0004 line=1085
+        0x0009 line=1087
+        0x000d line=1089
+        0x0013 line=1091
+        0x001b line=1092
+        0x0024 line=1094
+        0x0029 line=1095
+      locals        :
+        0x0000 - 0x002f reg=4 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x002f reg=5 (null) [I
+        0x0000 - 0x002f reg=6 (null) I
+
+    #4              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_calcOffset'
+      type          : '(I)I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 8 16-bit code units
+5dffa0:                                        |[5dffa0] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._calcOffset:(I)I
+5dffb0: 5200 c247                              |0000: iget v0, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5dffb4: d800 00ff                              |0002: add-int/lit8 v0, v0, #int -1 // #ff
+5dffb8: b510                                   |0004: and-int/2addr v0, v1
+5dffba: e000 0002                              |0005: shl-int/lit8 v0, v0, #int 2 // #02
+5dffbe: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=709
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0008 reg=1 (null) I
+
+    #5              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_calcTertiaryShift'
+      type          : '(I)I'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 22 16-bit code units
+5dffc0:                                        |[5dffc0] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._calcTertiaryShift:(I)I
+5dffd0: e101 0102                              |0000: shr-int/lit8 v1, v1, #int 2 // #02
+5dffd4: 1300 4000                              |0002: const/16 v0, #int 64 // #40
+5dffd8: 3501 0400                              |0004: if-ge v1, v0, 0008 // +0004
+5dffdc: 1241                                   |0006: const/4 v1, #int 4 // #4
+5dffde: 0f01                                   |0007: return v1
+5dffe0: 1300 0001                              |0008: const/16 v0, #int 256 // #100
+5dffe4: 3601 0400                              |000a: if-gt v1, v0, 000e // +0004
+5dffe8: 1251                                   |000c: const/4 v1, #int 5 // #5
+5dffea: 0f01                                   |000d: return v1
+5dffec: 1300 0004                              |000e: const/16 v0, #int 1024 // #400
+5dfff0: 3601 0400                              |0010: if-gt v1, v0, 0014 // +0004
+5dfff4: 1261                                   |0012: const/4 v1, #int 6 // #6
+5dfff6: 0f01                                   |0013: return v1
+5dfff8: 1271                                   |0014: const/4 v1, #int 7 // #7
+5dfffa: 0f01                                   |0015: return v1
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #6              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_checkNeedForRehash'
+      type          : '()Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 1
+      outs          : 1
+      insns size    : 42 16-bit code units
+5dfffc:                                        |[5dfffc] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._checkNeedForRehash:()Z
+5e000c: 5270 be47                              |0000: iget v0, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0010: 5271 c247                              |0002: iget v1, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e0014: 1212                                   |0004: const/4 v2, #int 1 // #1
+5e0016: b921                                   |0005: shr-int/2addr v1, v2
+5e0018: 3710 2200                              |0006: if-le v0, v1, 0028 // +0022
+5e001c: 5270 c947                              |0008: iget v0, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e0020: 7010 9069 0700                         |000a: invoke-direct {v7}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverStart:()I // method@6990
+5e0026: 0a01                                   |000d: move-result v1
+5e0028: b110                                   |000e: sub-int/2addr v0, v1
+5e002a: e100 0002                              |000f: shr-int/lit8 v0, v0, #int 2 // #02
+5e002e: 5271 be47                              |0011: iget v1, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0032: d803 0101                              |0013: add-int/lit8 v3, v1, #int 1 // #01
+5e0036: e103 0307                              |0015: shr-int/lit8 v3, v3, #int 7 // #07
+5e003a: 3630 1000                              |0017: if-gt v0, v3, 0027 // +0010
+5e003e: 8310                                   |0019: int-to-double v0, v1
+5e0040: 5277 c247                              |001a: iget v7, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e0044: 8373                                   |001c: int-to-double v3, v7
+5e0046: 1805 9a99 9999 9999 e93f               |001d: const-wide v5, #double 0.8 // #3fe999999999999a
+5e0050: cd53                                   |0022: mul-double/2addr v3, v5
+5e0052: 2f07 0003                              |0023: cmpl-double v7, v0, v3
+5e0056: 3d07 0300                              |0025: if-lez v7, 0028 // +0003
+5e005a: 0f02                                   |0027: return v2
+5e005c: 1207                                   |0028: const/4 v7, #int 0 // #0
+5e005e: 0f07                                   |0029: return v7
+      catches       : (none)
+      positions     :
+        0x0000 line=1070
+        0x0008 line=1071
+        0x0011 line=1072
+      locals        :
+        0x0000 - 0x002a reg=7 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #7              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_findOffsetForAdd'
+      type          : '(I)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 2
+      insns size    : 87 16-bit code units
+5e0060:                                        |[5e0060] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._findOffsetForAdd:(I)I
+5e0070: 7020 8669 6500                         |0000: invoke-direct {v5, v6}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._calcOffset:(I)I // method@6986
+5e0076: 0a00                                   |0003: move-result v0
+5e0078: 5451 c047                              |0004: iget-object v1, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e007c: d802 0003                              |0006: add-int/lit8 v2, v0, #int 3 // #03
+5e0080: 4402 0102                              |0008: aget v2, v1, v2
+5e0084: 3902 0300                              |000a: if-nez v2, 000d // +0003
+5e0088: 0f00                                   |000c: return v0
+5e008a: 7010 8869 0500                         |000d: invoke-direct {v5}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._checkNeedForRehash:()Z // method@6988
+5e0090: 0a02                                   |0010: move-result v2
+5e0092: 3802 0700                              |0011: if-eqz v2, 0018 // +0007
+5e0096: 7020 8f69 6500                         |0013: invoke-direct {v5, v6}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._resizeAndFindOffsetForAdd:(I)I // method@698f
+5e009c: 0a05                                   |0016: move-result v5
+5e009e: 0f05                                   |0017: return v5
+5e00a0: 5252 c747                              |0018: iget v2, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5e00a4: e103 0003                              |001a: shr-int/lit8 v3, v0, #int 3 // #03
+5e00a8: e003 0302                              |001c: shl-int/lit8 v3, v3, #int 2 // #02
+5e00ac: b032                                   |001e: add-int/2addr v2, v3
+5e00ae: d803 0203                              |001f: add-int/lit8 v3, v2, #int 3 // #03
+5e00b2: 4403 0103                              |0021: aget v3, v1, v3
+5e00b6: 3903 0300                              |0023: if-nez v3, 0026 // +0003
+5e00ba: 0f02                                   |0025: return v2
+5e00bc: 5252 cc47                              |0026: iget v2, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5e00c0: 5253 cb47                              |0028: iget v3, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryShift:I // field@47cb
+5e00c4: d804 0302                              |002a: add-int/lit8 v4, v3, #int 2 // #02
+5e00c8: b940                                   |002c: shr-int/2addr v0, v4
+5e00ca: b830                                   |002d: shl-int/2addr v0, v3
+5e00cc: b002                                   |002e: add-int/2addr v2, v0
+5e00ce: 1210                                   |002f: const/4 v0, #int 1 // #1
+5e00d0: b830                                   |0030: shl-int/2addr v0, v3
+5e00d2: b020                                   |0031: add-int/2addr v0, v2
+5e00d4: 3502 0c00                              |0032: if-ge v2, v0, 003e // +000c
+5e00d8: d803 0203                              |0034: add-int/lit8 v3, v2, #int 3 // #03
+5e00dc: 4403 0103                              |0036: aget v3, v1, v3
+5e00e0: 3903 0300                              |0038: if-nez v3, 003b // +0003
+5e00e4: 0f02                                   |003a: return v2
+5e00e6: d802 0204                              |003b: add-int/lit8 v2, v2, #int 4 // #04
+5e00ea: 28f5                                   |003d: goto 0032 // -000b
+5e00ec: 5250 c947                              |003e: iget v0, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e00f0: d801 0004                              |0040: add-int/lit8 v1, v0, #int 4 // #04
+5e00f4: 5951 c947                              |0042: iput v1, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e00f8: 5252 c247                              |0044: iget v2, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e00fc: e002 0203                              |0046: shl-int/lit8 v2, v2, #int 3 // #03
+5e0100: 3421 0e00                              |0048: if-lt v1, v2, 0056 // +000e
+5e0104: 5550 bf47                              |004a: iget-boolean v0, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._failOnDoS:Z // field@47bf
+5e0108: 3800 0500                              |004c: if-eqz v0, 0051 // +0005
+5e010c: 6e10 8e69 0500                         |004e: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._reportTooManyCollisions:()V // method@698e
+5e0112: 7020 8f69 6500                         |0051: invoke-direct {v5, v6}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._resizeAndFindOffsetForAdd:(I)I // method@698f
+5e0118: 0a05                                   |0054: move-result v5
+5e011a: 0f05                                   |0055: return v5
+5e011c: 0f00                                   |0056: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=988
+        0x0004 line=989
+        0x0008 line=990
+        0x000d line=996
+        0x0013 line=997
+        0x0018 line=1001
+        0x0021 line=1002
+        0x0026 line=1008
+        0x0036 line=1011
+        0x003e line=1018
+        0x0042 line=1019
+        0x0044 line=1029
+        0x004a line=1031
+        0x004e line=1032
+        0x0051 line=1034
+      locals        :
+        0x0000 - 0x0057 reg=5 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0057 reg=6 (null) I
+
+    #8              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_findSecondary'
+      type          : '(II)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 9
+      ins           : 3
+      outs          : 1
+      insns size    : 70 16-bit code units
+5e0120:                                        |[5e0120] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._findSecondary:(II)Ljava/lang/String;
+5e0130: 5260 cc47                              |0000: iget v0, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5e0134: 5261 cb47                              |0002: iget v1, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryShift:I // field@47cb
+5e0138: d802 0102                              |0004: add-int/lit8 v2, v1, #int 2 // #02
+5e013c: b927                                   |0006: shr-int/2addr v7, v2
+5e013e: b817                                   |0007: shl-int/2addr v7, v1
+5e0140: b070                                   |0008: add-int/2addr v0, v7
+5e0142: 5467 c047                              |0009: iget-object v7, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0146: 1212                                   |000b: const/4 v2, #int 1 // #1
+5e0148: 9801 0201                              |000c: shl-int v1, v2, v1
+5e014c: b001                                   |000e: add-int/2addr v1, v0
+5e014e: 1203                                   |000f: const/4 v3, #int 0 // #0
+5e0150: 3510 1900                              |0010: if-ge v0, v1, 0029 // +0019
+5e0154: d804 0003                              |0012: add-int/lit8 v4, v0, #int 3 // #03
+5e0158: 4404 0704                              |0014: aget v4, v7, v4
+5e015c: 4405 0700                              |0016: aget v5, v7, v0
+5e0160: 3358 0b00                              |0018: if-ne v8, v5, 0023 // +000b
+5e0164: 3342 0900                              |001a: if-ne v2, v4, 0023 // +0009
+5e0168: 5466 c547                              |001c: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e016c: e107 0002                              |001e: shr-int/lit8 v7, v0, #int 2 // #02
+5e0170: 4606 0607                              |0020: aget-object v6, v6, v7
+5e0174: 1106                                   |0022: return-object v6
+5e0176: 3904 0300                              |0023: if-nez v4, 0026 // +0003
+5e017a: 1103                                   |0025: return-object v3
+5e017c: d800 0004                              |0026: add-int/lit8 v0, v0, #int 4 // #04
+5e0180: 28e7                                   |0028: goto 000f // -0019
+5e0182: 7010 9069 0600                         |0029: invoke-direct {v6}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverStart:()I // method@6990
+5e0188: 0a00                                   |002c: move-result v0
+5e018a: 5261 c947                              |002d: iget v1, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e018e: 3510 1600                              |002f: if-ge v0, v1, 0045 // +0016
+5e0192: 4401 0700                              |0031: aget v1, v7, v0
+5e0196: 3318 0f00                              |0033: if-ne v8, v1, 0042 // +000f
+5e019a: d801 0003                              |0035: add-int/lit8 v1, v0, #int 3 // #03
+5e019e: 4401 0701                              |0037: aget v1, v7, v1
+5e01a2: 3312 0900                              |0039: if-ne v2, v1, 0042 // +0009
+5e01a6: 5466 c547                              |003b: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e01aa: e107 0002                              |003d: shr-int/lit8 v7, v0, #int 2 // #02
+5e01ae: 4606 0607                              |003f: aget-object v6, v6, v7
+5e01b2: 1106                                   |0041: return-object v6
+5e01b4: d800 0004                              |0042: add-int/lit8 v0, v0, #int 4 // #04
+5e01b8: 28e9                                   |0044: goto 002d // -0017
+5e01ba: 1103                                   |0045: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=726
+        0x0009 line=727
+        0x0014 line=730
+        0x0016 line=731
+        0x001c line=732
+        0x0029 line=741
+        0x0031 line=742
+        0x003b line=743
+      locals        :
+        0x0000 - 0x0046 reg=6 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0046 reg=7 (null) I
+        0x0000 - 0x0046 reg=8 (null) I
+
+    #9              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_findSecondary'
+      type          : '(III)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 1
+      insns size    : 83 16-bit code units
+5e01bc:                                        |[5e01bc] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._findSecondary:(III)Ljava/lang/String;
+5e01cc: 5260 cc47                              |0000: iget v0, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5e01d0: 5261 cb47                              |0002: iget v1, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryShift:I // field@47cb
+5e01d4: d802 0102                              |0004: add-int/lit8 v2, v1, #int 2 // #02
+5e01d8: b927                                   |0006: shr-int/2addr v7, v2
+5e01da: b817                                   |0007: shl-int/2addr v7, v1
+5e01dc: b070                                   |0008: add-int/2addr v0, v7
+5e01de: 5467 c047                              |0009: iget-object v7, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e01e2: 1212                                   |000b: const/4 v2, #int 1 // #1
+5e01e4: 9801 0201                              |000c: shl-int v1, v2, v1
+5e01e8: b001                                   |000e: add-int/2addr v1, v0
+5e01ea: 1202                                   |000f: const/4 v2, #int 0 // #0
+5e01ec: 1223                                   |0010: const/4 v3, #int 2 // #2
+5e01ee: 3510 1f00                              |0011: if-ge v0, v1, 0030 // +001f
+5e01f2: d804 0003                              |0013: add-int/lit8 v4, v0, #int 3 // #03
+5e01f6: 4404 0704                              |0015: aget v4, v7, v4
+5e01fa: 4405 0700                              |0017: aget v5, v7, v0
+5e01fe: 3358 1100                              |0019: if-ne v8, v5, 002a // +0011
+5e0202: d805 0001                              |001b: add-int/lit8 v5, v0, #int 1 // #01
+5e0206: 4405 0705                              |001d: aget v5, v7, v5
+5e020a: 3359 0b00                              |001f: if-ne v9, v5, 002a // +000b
+5e020e: 3343 0900                              |0021: if-ne v3, v4, 002a // +0009
+5e0212: 5466 c547                              |0023: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0216: e107 0002                              |0025: shr-int/lit8 v7, v0, #int 2 // #02
+5e021a: 4606 0607                              |0027: aget-object v6, v6, v7
+5e021e: 1106                                   |0029: return-object v6
+5e0220: 3904 0300                              |002a: if-nez v4, 002d // +0003
+5e0224: 1102                                   |002c: return-object v2
+5e0226: d800 0004                              |002d: add-int/lit8 v0, v0, #int 4 // #04
+5e022a: 28e0                                   |002f: goto 000f // -0020
+5e022c: 7010 9069 0600                         |0030: invoke-direct {v6}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverStart:()I // method@6990
+5e0232: 0a00                                   |0033: move-result v0
+5e0234: 5261 c947                              |0034: iget v1, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e0238: 3510 1c00                              |0036: if-ge v0, v1, 0052 // +001c
+5e023c: 4401 0700                              |0038: aget v1, v7, v0
+5e0240: 3318 1500                              |003a: if-ne v8, v1, 004f // +0015
+5e0244: d801 0001                              |003c: add-int/lit8 v1, v0, #int 1 // #01
+5e0248: 4401 0701                              |003e: aget v1, v7, v1
+5e024c: 3319 0f00                              |0040: if-ne v9, v1, 004f // +000f
+5e0250: d801 0003                              |0042: add-int/lit8 v1, v0, #int 3 // #03
+5e0254: 4401 0701                              |0044: aget v1, v7, v1
+5e0258: 3313 0900                              |0046: if-ne v3, v1, 004f // +0009
+5e025c: 5466 c547                              |0048: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0260: e107 0002                              |004a: shr-int/lit8 v7, v0, #int 2 // #02
+5e0264: 4606 0607                              |004c: aget-object v6, v6, v7
+5e0268: 1106                                   |004e: return-object v6
+5e026a: d800 0004                              |004f: add-int/lit8 v0, v0, #int 4 // #04
+5e026e: 28e3                                   |0051: goto 0034 // -001d
+5e0270: 1102                                   |0052: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=751
+        0x0009 line=752
+        0x0015 line=756
+        0x0017 line=757
+        0x0023 line=758
+        0x0030 line=764
+        0x0038 line=765
+        0x0048 line=766
+      locals        :
+        0x0000 - 0x0053 reg=6 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0053 reg=7 (null) I
+        0x0000 - 0x0053 reg=8 (null) I
+        0x0000 - 0x0053 reg=9 (null) I
+
+    #10              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_findSecondary'
+      type          : '(IIII)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 11
+      ins           : 5
+      outs          : 1
+      insns size    : 95 16-bit code units
+5e0274:                                        |[5e0274] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._findSecondary:(IIII)Ljava/lang/String;
+5e0284: 5260 cc47                              |0000: iget v0, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5e0288: 5261 cb47                              |0002: iget v1, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryShift:I // field@47cb
+5e028c: d802 0102                              |0004: add-int/lit8 v2, v1, #int 2 // #02
+5e0290: b927                                   |0006: shr-int/2addr v7, v2
+5e0292: b817                                   |0007: shl-int/2addr v7, v1
+5e0294: b070                                   |0008: add-int/2addr v0, v7
+5e0296: 5467 c047                              |0009: iget-object v7, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e029a: 1212                                   |000b: const/4 v2, #int 1 // #1
+5e029c: 9801 0201                              |000c: shl-int v1, v2, v1
+5e02a0: b001                                   |000e: add-int/2addr v1, v0
+5e02a2: 1202                                   |000f: const/4 v2, #int 0 // #0
+5e02a4: 1233                                   |0010: const/4 v3, #int 3 // #3
+5e02a6: 3510 2500                              |0011: if-ge v0, v1, 0036 // +0025
+5e02aa: d804 0003                              |0013: add-int/lit8 v4, v0, #int 3 // #03
+5e02ae: 4404 0704                              |0015: aget v4, v7, v4
+5e02b2: 4405 0700                              |0017: aget v5, v7, v0
+5e02b6: 3358 1700                              |0019: if-ne v8, v5, 0030 // +0017
+5e02ba: d805 0001                              |001b: add-int/lit8 v5, v0, #int 1 // #01
+5e02be: 4405 0705                              |001d: aget v5, v7, v5
+5e02c2: 3359 1100                              |001f: if-ne v9, v5, 0030 // +0011
+5e02c6: d805 0002                              |0021: add-int/lit8 v5, v0, #int 2 // #02
+5e02ca: 4405 0705                              |0023: aget v5, v7, v5
+5e02ce: 335a 0b00                              |0025: if-ne v10, v5, 0030 // +000b
+5e02d2: 3343 0900                              |0027: if-ne v3, v4, 0030 // +0009
+5e02d6: 5466 c547                              |0029: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e02da: e107 0002                              |002b: shr-int/lit8 v7, v0, #int 2 // #02
+5e02de: 4606 0607                              |002d: aget-object v6, v6, v7
+5e02e2: 1106                                   |002f: return-object v6
+5e02e4: 3904 0300                              |0030: if-nez v4, 0033 // +0003
+5e02e8: 1102                                   |0032: return-object v2
+5e02ea: d800 0004                              |0033: add-int/lit8 v0, v0, #int 4 // #04
+5e02ee: 28da                                   |0035: goto 000f // -0026
+5e02f0: 7010 9069 0600                         |0036: invoke-direct {v6}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverStart:()I // method@6990
+5e02f6: 0a00                                   |0039: move-result v0
+5e02f8: 5261 c947                              |003a: iget v1, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e02fc: 3510 2200                              |003c: if-ge v0, v1, 005e // +0022
+5e0300: 4401 0700                              |003e: aget v1, v7, v0
+5e0304: 3318 1b00                              |0040: if-ne v8, v1, 005b // +001b
+5e0308: d801 0001                              |0042: add-int/lit8 v1, v0, #int 1 // #01
+5e030c: 4401 0701                              |0044: aget v1, v7, v1
+5e0310: 3319 1500                              |0046: if-ne v9, v1, 005b // +0015
+5e0314: d801 0002                              |0048: add-int/lit8 v1, v0, #int 2 // #02
+5e0318: 4401 0701                              |004a: aget v1, v7, v1
+5e031c: 331a 0f00                              |004c: if-ne v10, v1, 005b // +000f
+5e0320: d801 0003                              |004e: add-int/lit8 v1, v0, #int 3 // #03
+5e0324: 4401 0701                              |0050: aget v1, v7, v1
+5e0328: 3313 0900                              |0052: if-ne v3, v1, 005b // +0009
+5e032c: 5466 c547                              |0054: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0330: e107 0002                              |0056: shr-int/lit8 v7, v0, #int 2 // #02
+5e0334: 4606 0607                              |0058: aget-object v6, v6, v7
+5e0338: 1106                                   |005a: return-object v6
+5e033a: d800 0004                              |005b: add-int/lit8 v0, v0, #int 4 // #04
+5e033e: 28dd                                   |005d: goto 003a // -0023
+5e0340: 1102                                   |005e: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=774
+        0x0009 line=775
+        0x0015 line=779
+        0x0017 line=780
+        0x0029 line=781
+        0x0036 line=787
+        0x003e line=788
+        0x0054 line=790
+      locals        :
+        0x0000 - 0x005f reg=6 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x005f reg=7 (null) I
+        0x0000 - 0x005f reg=8 (null) I
+        0x0000 - 0x005f reg=9 (null) I
+        0x0000 - 0x005f reg=10 (null) I
+
+    #11              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_findSecondary'
+      type          : '(II[II)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 5
+      outs          : 4
+      insns size    : 90 16-bit code units
+5e0344:                                        |[5e0344] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._findSecondary:(II[II)Ljava/lang/String;
+5e0354: 5250 cc47                              |0000: iget v0, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5e0358: 5251 cb47                              |0002: iget v1, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryShift:I // field@47cb
+5e035c: d802 0102                              |0004: add-int/lit8 v2, v1, #int 2 // #02
+5e0360: b926                                   |0006: shr-int/2addr v6, v2
+5e0362: b816                                   |0007: shl-int/2addr v6, v1
+5e0364: b060                                   |0008: add-int/2addr v0, v6
+5e0366: 5456 c047                              |0009: iget-object v6, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e036a: 1212                                   |000b: const/4 v2, #int 1 // #1
+5e036c: 9801 0201                              |000c: shl-int v1, v2, v1
+5e0370: b001                                   |000e: add-int/2addr v1, v0
+5e0372: 1202                                   |000f: const/4 v2, #int 0 // #0
+5e0374: 3510 2300                              |0010: if-ge v0, v1, 0033 // +0023
+5e0378: d803 0003                              |0012: add-int/lit8 v3, v0, #int 3 // #03
+5e037c: 4403 0603                              |0014: aget v3, v6, v3
+5e0380: 4404 0600                              |0016: aget v4, v6, v0
+5e0384: 3347 1500                              |0018: if-ne v7, v4, 002d // +0015
+5e0388: 3339 1300                              |001a: if-ne v9, v3, 002d // +0013
+5e038c: d804 0001                              |001c: add-int/lit8 v4, v0, #int 1 // #01
+5e0390: 4404 0604                              |001e: aget v4, v6, v4
+5e0394: 7040 9169 8549                         |0020: invoke-direct {v5, v8, v9, v4}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._verifyLongName:([III)Z // method@6991
+5e039a: 0a04                                   |0023: move-result v4
+5e039c: 3804 0900                              |0024: if-eqz v4, 002d // +0009
+5e03a0: 5455 c547                              |0026: iget-object v5, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e03a4: e106 0002                              |0028: shr-int/lit8 v6, v0, #int 2 // #02
+5e03a8: 4605 0506                              |002a: aget-object v5, v5, v6
+5e03ac: 1105                                   |002c: return-object v5
+5e03ae: 3903 0300                              |002d: if-nez v3, 0030 // +0003
+5e03b2: 1102                                   |002f: return-object v2
+5e03b4: d800 0004                              |0030: add-int/lit8 v0, v0, #int 4 // #04
+5e03b8: 28dd                                   |0032: goto 000f // -0023
+5e03ba: 7010 9069 0500                         |0033: invoke-direct {v5}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverStart:()I // method@6990
+5e03c0: 0a00                                   |0036: move-result v0
+5e03c2: 5251 c947                              |0037: iget v1, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e03c6: 3510 2000                              |0039: if-ge v0, v1, 0059 // +0020
+5e03ca: 4401 0600                              |003b: aget v1, v6, v0
+5e03ce: 3317 1900                              |003d: if-ne v7, v1, 0056 // +0019
+5e03d2: d801 0003                              |003f: add-int/lit8 v1, v0, #int 3 // #03
+5e03d6: 4401 0601                              |0041: aget v1, v6, v1
+5e03da: 3319 1300                              |0043: if-ne v9, v1, 0056 // +0013
+5e03de: d801 0001                              |0045: add-int/lit8 v1, v0, #int 1 // #01
+5e03e2: 4401 0601                              |0047: aget v1, v6, v1
+5e03e6: 7040 9169 8519                         |0049: invoke-direct {v5, v8, v9, v1}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._verifyLongName:([III)Z // method@6991
+5e03ec: 0a01                                   |004c: move-result v1
+5e03ee: 3801 0900                              |004d: if-eqz v1, 0056 // +0009
+5e03f2: 5455 c547                              |004f: iget-object v5, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e03f6: e106 0002                              |0051: shr-int/lit8 v6, v0, #int 2 // #02
+5e03fa: 4605 0506                              |0053: aget-object v5, v5, v6
+5e03fe: 1105                                   |0055: return-object v5
+5e0400: d800 0004                              |0056: add-int/lit8 v0, v0, #int 4 // #04
+5e0404: 28df                                   |0058: goto 0037 // -0021
+5e0406: 1102                                   |0059: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=798
+        0x0009 line=799
+        0x0014 line=803
+        0x0016 line=804
+        0x001e line=805
+        0x0026 line=806
+        0x0033 line=813
+        0x003b line=814
+        0x0047 line=815
+        0x004f line=816
+      locals        :
+        0x0000 - 0x005a reg=5 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x005a reg=6 (null) I
+        0x0000 - 0x005a reg=7 (null) I
+        0x0000 - 0x005a reg=8 (null) [I
+        0x0000 - 0x005a reg=9 (null) I
+
+    #12              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_resizeAndFindOffsetForAdd'
+      type          : '(I)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 2
+      insns size    : 61 16-bit code units
+5e0408:                                        |[5e0408] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._resizeAndFindOffsetForAdd:(I)I
+5e0418: 7010 ab69 0400                         |0000: invoke-direct {v4}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.rehash:()V // method@69ab
+5e041e: 7020 8669 5400                         |0003: invoke-direct {v4, v5}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._calcOffset:(I)I // method@6986
+5e0424: 0a05                                   |0006: move-result v5
+5e0426: 5440 c047                              |0007: iget-object v0, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e042a: d801 0503                              |0009: add-int/lit8 v1, v5, #int 3 // #03
+5e042e: 4401 0001                              |000b: aget v1, v0, v1
+5e0432: 3901 0300                              |000d: if-nez v1, 0010 // +0003
+5e0436: 0f05                                   |000f: return v5
+5e0438: 5241 c747                              |0010: iget v1, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5e043c: e102 0503                              |0012: shr-int/lit8 v2, v5, #int 3 // #03
+5e0440: e002 0202                              |0014: shl-int/lit8 v2, v2, #int 2 // #02
+5e0444: b021                                   |0016: add-int/2addr v1, v2
+5e0446: d802 0103                              |0017: add-int/lit8 v2, v1, #int 3 // #03
+5e044a: 4402 0002                              |0019: aget v2, v0, v2
+5e044e: 3902 0300                              |001b: if-nez v2, 001e // +0003
+5e0452: 0f01                                   |001d: return v1
+5e0454: 5241 cc47                              |001e: iget v1, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5e0458: 5242 cb47                              |0020: iget v2, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryShift:I // field@47cb
+5e045c: d803 0202                              |0022: add-int/lit8 v3, v2, #int 2 // #02
+5e0460: b935                                   |0024: shr-int/2addr v5, v3
+5e0462: b825                                   |0025: shl-int/2addr v5, v2
+5e0464: b051                                   |0026: add-int/2addr v1, v5
+5e0466: 1215                                   |0027: const/4 v5, #int 1 // #1
+5e0468: b825                                   |0028: shl-int/2addr v5, v2
+5e046a: b015                                   |0029: add-int/2addr v5, v1
+5e046c: 3551 0c00                              |002a: if-ge v1, v5, 0036 // +000c
+5e0470: d802 0103                              |002c: add-int/lit8 v2, v1, #int 3 // #03
+5e0474: 4402 0002                              |002e: aget v2, v0, v2
+5e0478: 3902 0300                              |0030: if-nez v2, 0033 // +0003
+5e047c: 0f01                                   |0032: return v1
+5e047e: d801 0104                              |0033: add-int/lit8 v1, v1, #int 4 // #04
+5e0482: 28f5                                   |0035: goto 002a // -000b
+5e0484: 5245 c947                              |0036: iget v5, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e0488: d800 0504                              |0038: add-int/lit8 v0, v5, #int 4 // #04
+5e048c: 5940 c947                              |003a: iput v0, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e0490: 0f05                                   |003c: return v5
+      catches       : (none)
+      positions     :
+        0x0000 line=1043
+        0x0003 line=1046
+        0x0007 line=1047
+        0x000b line=1048
+        0x0010 line=1051
+        0x0019 line=1052
+        0x001e line=1055
+        0x002e line=1058
+        0x0036 line=1062
+        0x003a line=1063
+      locals        :
+        0x0000 - 0x003d reg=4 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x003d reg=5 (null) I
+
+    #13              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_spilloverStart'
+      type          : '()I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 6 16-bit code units
+5e0494:                                        |[5e0494] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._spilloverStart:()I
+5e04a4: 5211 c247                              |0000: iget v1, v1, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e04a8: e000 0103                              |0002: shl-int/lit8 v0, v1, #int 3 // #03
+5e04ac: b110                                   |0004: sub-int/2addr v0, v1
+5e04ae: 0f00                                   |0005: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1314
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #14              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_verifyLongName'
+      type          : '([III)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 4
+      insns size    : 122 16-bit code units
+5e04b0:                                        |[5e04b0] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._verifyLongName:([III)Z
+5e04c0: 5460 c047                              |0000: iget-object v0, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e04c4: 1211                                   |0002: const/4 v1, #int 1 // #1
+5e04c6: 1202                                   |0003: const/4 v2, #int 0 // #0
+5e04c8: 2b08 6800 0000                         |0004: packed-switch v8, 0000006c // +00000068
+5e04ce: 7040 9269 7698                         |0007: invoke-direct {v6, v7, v8, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._verifyLongName2:([III)Z // method@6992
+5e04d4: 0a06                                   |000a: move-result v6
+5e04d6: 0f06                                   |000b: return v6
+5e04d8: 4406 0702                              |000c: aget v6, v7, v2
+5e04dc: d808 0901                              |000e: add-int/lit8 v8, v9, #int 1 // #01
+5e04e0: 4409 0009                              |0010: aget v9, v0, v9
+5e04e4: 3296 0300                              |0012: if-eq v6, v9, 0015 // +0003
+5e04e8: 0f02                                   |0014: return v2
+5e04ea: 0189                                   |0015: move v9, v8
+5e04ec: 0116                                   |0016: move v6, v1
+5e04ee: 2802                                   |0017: goto 0019 // +0002
+5e04f0: 0126                                   |0018: move v6, v2
+5e04f2: d808 0601                              |0019: add-int/lit8 v8, v6, #int 1 // #01
+5e04f6: 4406 0706                              |001b: aget v6, v7, v6
+5e04fa: d803 0901                              |001d: add-int/lit8 v3, v9, #int 1 // #01
+5e04fe: 4409 0009                              |001f: aget v9, v0, v9
+5e0502: 3296 0300                              |0021: if-eq v6, v9, 0024 // +0003
+5e0506: 0f02                                   |0023: return v2
+5e0508: 0139                                   |0024: move v9, v3
+5e050a: 2802                                   |0025: goto 0027 // +0002
+5e050c: 0128                                   |0026: move v8, v2
+5e050e: d806 0801                              |0027: add-int/lit8 v6, v8, #int 1 // #01
+5e0512: 4408 0708                              |0029: aget v8, v7, v8
+5e0516: d803 0901                              |002b: add-int/lit8 v3, v9, #int 1 // #01
+5e051a: 4409 0009                              |002d: aget v9, v0, v9
+5e051e: 3298 0300                              |002f: if-eq v8, v9, 0032 // +0003
+5e0522: 0f02                                   |0031: return v2
+5e0524: 0139                                   |0032: move v9, v3
+5e0526: 2802                                   |0033: goto 0035 // +0002
+5e0528: 0126                                   |0034: move v6, v2
+5e052a: d808 0601                              |0035: add-int/lit8 v8, v6, #int 1 // #01
+5e052e: 4406 0706                              |0037: aget v6, v7, v6
+5e0532: d803 0901                              |0039: add-int/lit8 v3, v9, #int 1 // #01
+5e0536: 4409 0009                              |003b: aget v9, v0, v9
+5e053a: 3296 0300                              |003d: if-eq v6, v9, 0040 // +0003
+5e053e: 0f02                                   |003f: return v2
+5e0540: 0139                                   |0040: move v9, v3
+5e0542: 2802                                   |0041: goto 0043 // +0002
+5e0544: 0128                                   |0042: move v8, v2
+5e0546: d806 0801                              |0043: add-int/lit8 v6, v8, #int 1 // #01
+5e054a: 4403 0708                              |0045: aget v3, v7, v8
+5e054e: d804 0901                              |0047: add-int/lit8 v4, v9, #int 1 // #01
+5e0552: 4405 0009                              |0049: aget v5, v0, v9
+5e0556: 3253 0300                              |004b: if-eq v3, v5, 004e // +0003
+5e055a: 0f02                                   |004d: return v2
+5e055c: d803 0802                              |004e: add-int/lit8 v3, v8, #int 2 // #02
+5e0560: 4406 0706                              |0050: aget v6, v7, v6
+5e0564: d805 0902                              |0052: add-int/lit8 v5, v9, #int 2 // #02
+5e0568: 4404 0004                              |0054: aget v4, v0, v4
+5e056c: 3246 0300                              |0056: if-eq v6, v4, 0059 // +0003
+5e0570: 0f02                                   |0058: return v2
+5e0572: d808 0803                              |0059: add-int/lit8 v8, v8, #int 3 // #03
+5e0576: 4406 0703                              |005b: aget v6, v7, v3
+5e057a: d809 0903                              |005d: add-int/lit8 v9, v9, #int 3 // #03
+5e057e: 4403 0005                              |005f: aget v3, v0, v5
+5e0582: 3236 0300                              |0061: if-eq v6, v3, 0064 // +0003
+5e0586: 0f02                                   |0063: return v2
+5e0588: 4406 0708                              |0064: aget v6, v7, v8
+5e058c: 4407 0009                              |0066: aget v7, v0, v9
+5e0590: 3276 0300                              |0068: if-eq v6, v7, 006b // +0003
+5e0594: 0f02                                   |006a: return v2
+5e0596: 0f01                                   |006b: return v1
+5e0598: 0001 0500 0400 0000 3e00 0000 3000 ... |006c: packed-switch-data (14 units)
+      catches       : (none)
+      positions     :
+        0x0000 line=825
+        0x0007 line=831
+        0x000c line=833
+        0x001b line=835
+        0x0029 line=837
+        0x0037 line=839
+        0x0045 line=841
+        0x0050 line=842
+        0x005b line=843
+        0x0064 line=844
+      locals        :
+        0x0000 - 0x007a reg=6 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x007a reg=7 (null) [I
+        0x0000 - 0x007a reg=8 (null) I
+        0x0000 - 0x007a reg=9 (null) I
+
+    #15              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_verifyLongName2'
+      type          : '([III)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 9
+      ins           : 4
+      outs          : 0
+      insns size    : 22 16-bit code units
+5e05b4:                                        |[5e05b4] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._verifyLongName2:([III)Z
+5e05c4: 1200                                   |0000: const/4 v0, #int 0 // #0
+5e05c6: 0101                                   |0001: move v1, v0
+5e05c8: d802 0101                              |0002: add-int/lit8 v2, v1, #int 1 // #01
+5e05cc: 4401 0601                              |0004: aget v1, v6, v1
+5e05d0: 5453 c047                              |0006: iget-object v3, v5, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e05d4: d804 0801                              |0008: add-int/lit8 v4, v8, #int 1 // #01
+5e05d8: 4408 0308                              |000a: aget v8, v3, v8
+5e05dc: 3281 0300                              |000c: if-eq v1, v8, 000f // +0003
+5e05e0: 0f00                                   |000e: return v0
+5e05e2: 3472 0400                              |000f: if-lt v2, v7, 0013 // +0004
+5e05e6: 1215                                   |0011: const/4 v5, #int 1 // #1
+5e05e8: 0f05                                   |0012: return v5
+5e05ea: 0121                                   |0013: move v1, v2
+5e05ec: 0148                                   |0014: move v8, v4
+5e05ee: 28ed                                   |0015: goto 0002 // -0013
+      catches       : (none)
+      positions     :
+        0x0004 line=853
+      locals        :
+        0x0000 - 0x0016 reg=5 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0016 reg=6 (null) [I
+        0x0000 - 0x0016 reg=7 (null) I
+        0x0000 - 0x0016 reg=8 (null) I
+
+    #16              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_verifySharing'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 52 16-bit code units
+5e05f0:                                        |[5e05f0] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._verifySharing:()V
+5e0600: 5520 c147                              |0000: iget-boolean v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashShared:Z // field@47c1
+5e0604: 3800 3100                              |0002: if-eqz v0, 0033 // +0031
+5e0608: 5420 c647                              |0004: iget-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._parent:Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // field@47c6
+5e060c: 3900 1600                              |0006: if-nez v0, 001c // +0016
+5e0610: 5222 be47                              |0008: iget v2, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0614: 3902 0a00                              |000a: if-nez v2, 0014 // +000a
+5e0618: 2202 7b1a                              |000c: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+5e061c: 1a00 ae1b                              |000e: const-string v0, "Cannot add names to Root symbol table" // string@1bae
+5e0620: 7020 4cd1 0200                         |0010: invoke-direct {v2, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+5e0626: 2702                                   |0013: throw v2
+5e0628: 2202 7b1a                              |0014: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+5e062c: 1a00 ad1b                              |0016: const-string v0, "Cannot add names to Placeholder symbol table" // string@1bad
+5e0630: 7020 4cd1 0200                         |0018: invoke-direct {v2, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+5e0636: 2702                                   |001b: throw v2
+5e0638: 5420 c047                              |001c: iget-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e063c: 2101                                   |001e: array-length v1, v0
+5e063e: 7120 c8d4 1000                         |001f: invoke-static {v0, v1}, Ljava/util/Arrays;.copyOf:([II)[I // method@d4c8
+5e0644: 0c00                                   |0022: move-result-object v0
+5e0646: 5b20 c047                              |0023: iput-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e064a: 5420 c547                              |0025: iget-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e064e: 2101                                   |0027: array-length v1, v0
+5e0650: 7120 cad4 1000                         |0028: invoke-static {v0, v1}, Ljava/util/Arrays;.copyOf:([Ljava/lang/Object;I)[Ljava/lang/Object; // method@d4ca
+5e0656: 0c00                                   |002b: move-result-object v0
+5e0658: 1f00 b020                              |002c: check-cast v0, [Ljava/lang/String; // type@20b0
+5e065c: 5b20 c547                              |002e: iput-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0660: 1200                                   |0030: const/4 v0, #int 0 // #0
+5e0662: 5c20 c147                              |0031: iput-boolean v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashShared:Z // field@47c1
+5e0666: 0e00                                   |0033: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=966
+        0x0004 line=969
+        0x0008 line=970
+        0x000c line=971
+        0x0014 line=973
+        0x001c line=976
+        0x0025 line=977
+        0x0031 line=978
+      locals        :
+        0x0000 - 0x0034 reg=2 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #17              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'createRoot'
+      type          : '()Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 4
+      ins           : 0
+      outs          : 1
+      insns size    : 17 16-bit code units
+5e0668:                                        |[5e0668] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.createRoot:()Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+5e0678: 7100 5bd2 0000                         |0000: invoke-static {}, Ljava/lang/System;.currentTimeMillis:()J // method@d25b
+5e067e: 0b00                                   |0003: move-result-wide v0
+5e0680: 8402                                   |0004: long-to-int v2, v0
+5e0682: 1303 2000                              |0005: const/16 v3, #int 32 // #20
+5e0686: c530                                   |0007: ushr-long/2addr v0, v3
+5e0688: 8400                                   |0008: long-to-int v0, v0
+5e068a: b002                                   |0009: add-int/2addr v2, v0
+5e068c: de00 0201                              |000a: or-int/lit8 v0, v2, #int 1 // #01
+5e0690: 7110 9e69 0000                         |000c: invoke-static {v0}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.createRoot:(I)Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // method@699e
+5e0696: 0c00                                   |000f: move-result-object v0
+5e0698: 1100                                   |0010: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=341
+        0x000c line=344
+      locals        :
+
+    #18              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'createRoot'
+      type          : '(I)Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;'
+      access        : 0x000c (PROTECTED STATIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 8 16-bit code units
+5e069c:                                        |[5e069c] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.createRoot:(I)Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+5e06ac: 2200 8e0c                              |0000: new-instance v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // type@0c8e
+5e06b0: 1301 4000                              |0002: const/16 v1, #int 64 // #40
+5e06b4: 7030 8269 1002                         |0004: invoke-direct {v0, v1, v2}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.<init>:(II)V // method@6982
+5e06ba: 1100                                   |0007: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=350
+      locals        :
+        0x0000 - 0x0008 reg=2 (null) I
+
+    #19              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'mergeChild'
+      type          : '(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 31 16-bit code units
+5e06bc:                                        |[5e06bc] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.mergeChild:(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;)V
+5e06cc: 5240 b047                              |0000: iget v0, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.count:I // field@47b0
+5e06d0: 5431 ca47                              |0002: iget-object v1, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tableInfo:Ljava/util/concurrent/atomic/AtomicReference; // field@47ca
+5e06d4: 6e10 0ad7 0100                         |0004: invoke-virtual {v1}, Ljava/util/concurrent/atomic/AtomicReference;.get:()Ljava/lang/Object; // method@d70a
+5e06da: 0c01                                   |0007: move-result-object v1
+5e06dc: 1f01 8d0c                              |0008: check-cast v1, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo; // type@0c8d
+5e06e0: 5212 b047                              |000a: iget v2, v1, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.count:I // field@47b0
+5e06e4: 3320 0300                              |000c: if-ne v0, v2, 000f // +0003
+5e06e8: 0e00                                   |000e: return-void
+5e06ea: 1302 7017                              |000f: const/16 v2, #int 6000 // #1770
+5e06ee: 3720 0800                              |0011: if-le v0, v2, 0019 // +0008
+5e06f2: 1304 4000                              |0013: const/16 v4, #int 64 // #40
+5e06f6: 7110 8169 0400                         |0015: invoke-static {v4}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.createInitial:(I)Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo; // method@6981
+5e06fc: 0c04                                   |0018: move-result-object v4
+5e06fe: 5433 ca47                              |0019: iget-object v3, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tableInfo:Ljava/util/concurrent/atomic/AtomicReference; // field@47ca
+5e0702: 7130 7e69 1304                         |001b: invoke-static {v3, v1, v4}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReference;Ljava/lang/Object;Ljava/lang/Object;)Z // method@697e
+5e0708: 0e00                                   |001e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=411
+        0x0002 line=412
+        0x000a line=416
+        0x0015 line=426
+        0x0019 line=428
+      locals        :
+        0x0000 - 0x001f reg=3 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x001f reg=4 (null) Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;
+
+    #20              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'nukeSymbols'
+      type          : '(Z)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 29 16-bit code units
+5e070c:                                        |[5e070c] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.nukeSymbols:(Z)V
+5e071c: 1200                                   |0000: const/4 v0, #int 0 // #0
+5e071e: 5920 be47                              |0001: iput v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0722: 7010 9069 0200                         |0003: invoke-direct {v2}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverStart:()I // method@6990
+5e0728: 0a01                                   |0006: move-result v1
+5e072a: 5921 c947                              |0007: iput v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e072e: 5221 c247                              |0009: iget v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e0732: e001 0103                              |000b: shl-int/lit8 v1, v1, #int 3 // #03
+5e0736: 5921 c447                              |000d: iput v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._longNameOffset:I // field@47c4
+5e073a: 3803 0d00                              |000f: if-eqz v3, 001c // +000d
+5e073e: 5423 c047                              |0011: iget-object v3, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0742: 7120 ead4 0300                         |0013: invoke-static {v3, v0}, Ljava/util/Arrays;.fill:([II)V // method@d4ea
+5e0748: 5422 c547                              |0016: iget-object v2, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e074c: 1203                                   |0018: const/4 v3, #int 0 // #0
+5e074e: 7120 eed4 3200                         |0019: invoke-static {v2, v3}, Ljava/util/Arrays;.fill:([Ljava/lang/Object;Ljava/lang/Object;)V // method@d4ee
+5e0754: 0e00                                   |001c: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=1291
+        0x0003 line=1293
+        0x0009 line=1295
+        0x0011 line=1297
+        0x0016 line=1298
+      locals        :
+        0x0000 - 0x001d reg=2 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x001d reg=3 (null) Z
+
+    #21              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'rehash'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 14
+      ins           : 1
+      outs          : 5
+      insns size    : 180 16-bit code units
+5e0758:                                        |[5e0758] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.rehash:()V
+5e0768: 1200                                   |0000: const/4 v0, #int 0 // #0
+5e076a: 5cd0 c147                              |0001: iput-boolean v0, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashShared:Z // field@47c1
+5e076e: 54d1 c047                              |0003: iget-object v1, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0772: 54d2 c547                              |0005: iget-object v2, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0776: 52d3 c247                              |0007: iget v3, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e077a: 52d4 be47                              |0009: iget v4, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e077e: 9005 0303                              |000b: add-int v5, v3, v3
+5e0782: 52d6 c947                              |000d: iget v6, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e0786: 1507 0100                              |000f: const/high16 v7, #int 65536 // #1
+5e078a: 1218                                   |0011: const/4 v8, #int 1 // #1
+5e078c: 3775 0600                              |0012: if-le v5, v7, 0018 // +0006
+5e0790: 7020 a969 8d00                         |0014: invoke-direct {v13, v8}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.nukeSymbols:(Z)V // method@69a9
+5e0796: 0e00                                   |0017: return-void
+5e0798: 2117                                   |0018: array-length v7, v1
+5e079a: 1239                                   |0019: const/4 v9, #int 3 // #3
+5e079c: b893                                   |001a: shl-int/2addr v3, v9
+5e079e: b037                                   |001b: add-int/2addr v7, v3
+5e07a0: 2373 801f                              |001c: new-array v3, v7, [I // type@1f80
+5e07a4: 5bd3 c047                              |001e: iput-object v3, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e07a8: 59d5 c247                              |0020: iput v5, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e07ac: e003 0502                              |0022: shl-int/lit8 v3, v5, #int 2 // #02
+5e07b0: 59d3 c747                              |0024: iput v3, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5e07b4: e107 0301                              |0026: shr-int/lit8 v7, v3, #int 1 // #01
+5e07b8: b073                                   |0028: add-int/2addr v3, v7
+5e07ba: 59d3 cc47                              |0029: iput v3, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5e07be: 7110 8769 0500                         |002b: invoke-static {v5}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._calcTertiaryShift:(I)I // method@6987
+5e07c4: 0a03                                   |002e: move-result v3
+5e07c6: 59d3 cb47                              |002f: iput v3, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryShift:I // field@47cb
+5e07ca: 2123                                   |0031: array-length v3, v2
+5e07cc: b883                                   |0032: shl-int/2addr v3, v8
+5e07ce: 2333 b020                              |0033: new-array v3, v3, [Ljava/lang/String; // type@20b0
+5e07d2: 5bd3 c547                              |0035: iput-object v3, v13, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e07d6: 7020 a969 0d00                         |0037: invoke-direct {v13, v0}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.nukeSymbols:(Z)V // method@69a9
+5e07dc: 1303 1000                              |003a: const/16 v3, #int 16 // #10
+5e07e0: 2333 801f                              |003c: new-array v3, v3, [I // type@1f80
+5e07e4: 0105                                   |003e: move v5, v0
+5e07e6: 0157                                   |003f: move v7, v5
+5e07e8: 3565 5200                              |0040: if-ge v5, v6, 0092 // +0052
+5e07ec: d80a 0503                              |0042: add-int/lit8 v10, v5, #int 3 // #03
+5e07f0: 440a 010a                              |0044: aget v10, v1, v10
+5e07f4: 390a 0300                              |0046: if-nez v10, 0049 // +0003
+5e07f8: 2847                                   |0048: goto 008f // +0047
+5e07fa: d807 0701                              |0049: add-int/lit8 v7, v7, #int 1 // #01
+5e07fe: e10b 0502                              |004b: shr-int/lit8 v11, v5, #int 2 // #02
+5e0802: 460b 020b                              |004d: aget-object v11, v2, v11
+5e0806: 328a 3900                              |004f: if-eq v10, v8, 0088 // +0039
+5e080a: 122c                                   |0051: const/4 v12, #int 2 // #2
+5e080c: 32ca 2800                              |0052: if-eq v10, v12, 007a // +0028
+5e0810: 329a 1200                              |0054: if-eq v10, v9, 0066 // +0012
+5e0814: 213c                                   |0056: array-length v12, v3
+5e0816: 37ca 0400                              |0057: if-le v10, v12, 005b // +0004
+5e081a: 23a3 801f                              |0059: new-array v3, v10, [I // type@1f80
+5e081e: d80c 0501                              |005b: add-int/lit8 v12, v5, #int 1 // #01
+5e0822: 440c 010c                              |005d: aget v12, v1, v12
+5e0826: 715a 5ad2 c103                         |005f: invoke-static {v1, v12, v3, v0, v10}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+5e082c: 6e40 9769 bda3                         |0062: invoke-virtual {v13, v11, v3, v10}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.addName:(Ljava/lang/String;[II)Ljava/lang/String; // method@6997
+5e0832: 282a                                   |0065: goto 008f // +002a
+5e0834: 440a 0105                              |0066: aget v10, v1, v5
+5e0838: 4b0a 0300                              |0068: aput v10, v3, v0
+5e083c: d80a 0501                              |006a: add-int/lit8 v10, v5, #int 1 // #01
+5e0840: 440a 010a                              |006c: aget v10, v1, v10
+5e0844: 4b0a 0308                              |006e: aput v10, v3, v8
+5e0848: d80a 0502                              |0070: add-int/lit8 v10, v5, #int 2 // #02
+5e084c: 440a 010a                              |0072: aget v10, v1, v10
+5e0850: 4b0a 030c                              |0074: aput v10, v3, v12
+5e0854: 6e40 9769 bd93                         |0076: invoke-virtual {v13, v11, v3, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.addName:(Ljava/lang/String;[II)Ljava/lang/String; // method@6997
+5e085a: 2816                                   |0079: goto 008f // +0016
+5e085c: 440a 0105                              |007a: aget v10, v1, v5
+5e0860: 4b0a 0300                              |007c: aput v10, v3, v0
+5e0864: d80a 0501                              |007e: add-int/lit8 v10, v5, #int 1 // #01
+5e0868: 440a 010a                              |0080: aget v10, v1, v10
+5e086c: 4b0a 0308                              |0082: aput v10, v3, v8
+5e0870: 6e40 9769 bdc3                         |0084: invoke-virtual {v13, v11, v3, v12}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.addName:(Ljava/lang/String;[II)Ljava/lang/String; // method@6997
+5e0876: 2808                                   |0087: goto 008f // +0008
+5e0878: 440a 0105                              |0088: aget v10, v1, v5
+5e087c: 4b0a 0300                              |008a: aput v10, v3, v0
+5e0880: 6e40 9769 bd83                         |008c: invoke-virtual {v13, v11, v3, v8}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.addName:(Ljava/lang/String;[II)Ljava/lang/String; // method@6997
+5e0886: d805 0504                              |008f: add-int/lit8 v5, v5, #int 4 // #04
+5e088a: 28af                                   |0091: goto 0040 // -0051
+5e088c: 3347 0300                              |0092: if-ne v7, v4, 0095 // +0003
+5e0890: 0e00                                   |0094: return-void
+5e0892: 220d 7b1a                              |0095: new-instance v13, Ljava/lang/IllegalStateException; // type@1a7b
+5e0896: 2200 991a                              |0097: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+5e089a: 1a01 fb26                              |0099: const-string v1, "Failed rehash(): old count=" // string@26fb
+5e089e: 7020 3cd2 1000                         |009b: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5e08a4: 6e20 40d2 4000                         |009e: invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+5e08aa: 0c00                                   |00a1: move-result-object v0
+5e08ac: 1a01 310e                              |00a2: const-string v1, ", copyCount=" // string@0e31
+5e08b0: 6e20 45d2 1000                         |00a4: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e08b6: 0c00                                   |00a7: move-result-object v0
+5e08b8: 6e20 40d2 7000                         |00a8: invoke-virtual {v0, v7}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+5e08be: 0c00                                   |00ab: move-result-object v0
+5e08c0: 6e10 58d2 0000                         |00ac: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5e08c6: 0c00                                   |00af: move-result-object v0
+5e08c8: 7020 4cd1 0d00                         |00b0: invoke-direct {v13, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+5e08ce: 270d                                   |00b3: throw v13
+      catches       : (none)
+      positions     :
+        0x0001 line=1208
+        0x0003 line=1212
+        0x0005 line=1213
+        0x0007 line=1214
+        0x0009 line=1215
+        0x000d line=1217
+        0x0014 line=1223
+        0x0018 line=1227
+        0x0020 line=1228
+        0x0024 line=1229
+        0x0029 line=1230
+        0x002b line=1231
+        0x0031 line=1234
+        0x0037 line=1235
+        0x003c line=1243
+        0x0044 line=1245
+        0x004d line=1250
+        0x0056 line=1268
+        0x0059 line=1269
+        0x005d line=1272
+        0x005f line=1273
+        0x0062 line=1274
+        0x0066 line=1262
+        0x006c line=1263
+        0x0072 line=1264
+        0x0076 line=1265
+        0x007a line=1257
+        0x0080 line=1258
+        0x0084 line=1259
+        0x0088 line=1253
+        0x008c line=1254
+        0x0095 line=1282
+      locals        :
+        0x0000 - 0x00b4 reg=13 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : '_reportTooManyCollisions'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 62 16-bit code units
+5e08d0:                                        |[5e08d0] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer._reportTooManyCollisions:()V
+5e08e0: 5230 c247                              |0000: iget v0, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e08e4: 1301 0004                              |0002: const/16 v1, #int 1024 // #400
+5e08e8: 3610 0300                              |0004: if-gt v0, v1, 0007 // +0003
+5e08ec: 0e00                                   |0006: return-void
+5e08ee: 2200 7b1a                              |0007: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+5e08f2: 2201 991a                              |0009: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+5e08f6: 1a02 1863                              |000b: const-string v2, "Spill-over slots in symbol table with " // string@6318
+5e08fa: 7020 3cd2 2100                         |000d: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5e0900: 5232 be47                              |0010: iget v2, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0904: 6e20 40d2 2100                         |0012: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+5e090a: 0c01                                   |0015: move-result-object v1
+5e090c: 1a02 c103                              |0016: const-string v2, " entries, hash area of " // string@03c1
+5e0910: 6e20 45d2 2100                         |0018: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e0916: 0c01                                   |001b: move-result-object v1
+5e0918: 5232 c247                              |001c: iget v2, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e091c: 6e20 40d2 2100                         |001e: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+5e0922: 0c01                                   |0021: move-result-object v1
+5e0924: 1a02 b204                              |0022: const-string v2, " slots is now full (all " // string@04b2
+5e0928: 6e20 45d2 2100                         |0024: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e092e: 0c01                                   |0027: move-result-object v1
+5e0930: 5233 c247                              |0028: iget v3, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e0934: e103 0303                              |002a: shr-int/lit8 v3, v3, #int 3 // #03
+5e0938: 6e20 40d2 3100                         |002c: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+5e093e: 0c03                                   |002f: move-result-object v3
+5e0940: 1a01 b104                              |0030: const-string v1, " slots -- suspect a DoS attack based on hash collisions. You can disable the check via `JsonFactory.Feature.FAIL_ON_SYMBOL_HASH_OVERFLOW`" // string@04b1
+5e0944: 6e20 45d2 1300                         |0032: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5e094a: 0c03                                   |0035: move-result-object v3
+5e094c: 6e10 58d2 0300                         |0036: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5e0952: 0c03                                   |0039: move-result-object v3
+5e0954: 7020 4cd1 3000                         |003a: invoke-direct {v0, v3}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+5e095a: 2700                                   |003d: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1321
+        0x0007 line=1324
+      locals        :
+        0x0000 - 0x003e reg=3 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #1              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'addName'
+      type          : '(Ljava/lang/String;I)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 2
+      insns size    : 42 16-bit code units
+5e095c:                                        |[5e095c] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.addName:(Ljava/lang/String;I)Ljava/lang/String;
+5e096c: 7010 9369 0300                         |0000: invoke-direct {v3}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._verifySharing:()V // method@6993
+5e0972: 5530 c347                              |0003: iget-boolean v0, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._intern:Z // field@47c3
+5e0976: 3800 0800                              |0005: if-eqz v0, 000d // +0008
+5e097a: 6200 3048                              |0007: sget-object v0, Lcom/fasterxml/jackson/core/util/InternCache;.instance:Lcom/fasterxml/jackson/core/util/InternCache; // field@4830
+5e097e: 6e20 7d6a 4000                         |0009: invoke-virtual {v0, v4}, Lcom/fasterxml/jackson/core/util/InternCache;.intern:(Ljava/lang/String;)Ljava/lang/String; // method@6a7d
+5e0984: 0c04                                   |000c: move-result-object v4
+5e0986: 6e20 9969 5300                         |000d: invoke-virtual {v3, v5}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:(I)I // method@6999
+5e098c: 0a00                                   |0010: move-result v0
+5e098e: 7020 8969 0300                         |0011: invoke-direct {v3, v0}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findOffsetForAdd:(I)I // method@6989
+5e0994: 0a00                                   |0014: move-result v0
+5e0996: 5431 c047                              |0015: iget-object v1, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e099a: 4b05 0100                              |0017: aput v5, v1, v0
+5e099e: d805 0003                              |0019: add-int/lit8 v5, v0, #int 3 // #03
+5e09a2: 1212                                   |001b: const/4 v2, #int 1 // #1
+5e09a4: 4b02 0105                              |001c: aput v2, v1, v5
+5e09a8: 5435 c547                              |001e: iget-object v5, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e09ac: e100 0002                              |0020: shr-int/lit8 v0, v0, #int 2 // #02
+5e09b0: 4d04 0500                              |0022: aput-object v4, v5, v0
+5e09b4: 5235 be47                              |0024: iget v5, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e09b8: b025                                   |0026: add-int/2addr v5, v2
+5e09ba: 5935 be47                              |0027: iput v5, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e09be: 1104                                   |0029: return-object v4
+      catches       : (none)
+      positions     :
+        0x0000 line=867
+        0x0003 line=868
+        0x0007 line=869
+        0x000d line=871
+        0x0015 line=872
+        0x001c line=873
+        0x001e line=874
+        0x0024 line=875
+      locals        :
+        0x0000 - 0x002a reg=3 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x002a reg=4 (null) Ljava/lang/String;
+        0x0000 - 0x002a reg=5 (null) I
+
+    #2              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'addName'
+      type          : '(Ljava/lang/String;II)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 3
+      insns size    : 47 16-bit code units
+5e09c0:                                        |[5e09c0] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.addName:(Ljava/lang/String;II)Ljava/lang/String;
+5e09d0: 7010 9369 0200                         |0000: invoke-direct {v2}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._verifySharing:()V // method@6993
+5e09d6: 5520 c347                              |0003: iget-boolean v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._intern:Z // field@47c3
+5e09da: 3800 0800                              |0005: if-eqz v0, 000d // +0008
+5e09de: 6200 3048                              |0007: sget-object v0, Lcom/fasterxml/jackson/core/util/InternCache;.instance:Lcom/fasterxml/jackson/core/util/InternCache; // field@4830
+5e09e2: 6e20 7d6a 3000                         |0009: invoke-virtual {v0, v3}, Lcom/fasterxml/jackson/core/util/InternCache;.intern:(Ljava/lang/String;)Ljava/lang/String; // method@6a7d
+5e09e8: 0c03                                   |000c: move-result-object v3
+5e09ea: 6e30 9a69 4205                         |000d: invoke-virtual {v2, v4, v5}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:(II)I // method@699a
+5e09f0: 0a00                                   |0010: move-result v0
+5e09f2: 7020 8969 0200                         |0011: invoke-direct {v2, v0}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findOffsetForAdd:(I)I // method@6989
+5e09f8: 0a00                                   |0014: move-result v0
+5e09fa: 5421 c047                              |0015: iget-object v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e09fe: 4b04 0100                              |0017: aput v4, v1, v0
+5e0a02: d804 0001                              |0019: add-int/lit8 v4, v0, #int 1 // #01
+5e0a06: 4b05 0104                              |001b: aput v5, v1, v4
+5e0a0a: d804 0003                              |001d: add-int/lit8 v4, v0, #int 3 // #03
+5e0a0e: 1225                                   |001f: const/4 v5, #int 2 // #2
+5e0a10: 4b05 0104                              |0020: aput v5, v1, v4
+5e0a14: 5424 c547                              |0022: iget-object v4, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0a18: e105 0002                              |0024: shr-int/lit8 v5, v0, #int 2 // #02
+5e0a1c: 4d03 0405                              |0026: aput-object v3, v4, v5
+5e0a20: 5224 be47                              |0028: iget v4, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0a24: d804 0401                              |002a: add-int/lit8 v4, v4, #int 1 // #01
+5e0a28: 5924 be47                              |002c: iput v4, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0a2c: 1103                                   |002e: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=880
+        0x0003 line=881
+        0x0007 line=882
+        0x000d line=889
+        0x0011 line=890
+        0x0015 line=891
+        0x001b line=892
+        0x0020 line=893
+        0x0022 line=894
+        0x0028 line=895
+      locals        :
+        0x0000 - 0x002f reg=2 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x002f reg=3 (null) Ljava/lang/String;
+        0x0000 - 0x002f reg=4 (null) I
+        0x0000 - 0x002f reg=5 (null) I
+
+    #3              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'addName'
+      type          : '(Ljava/lang/String;III)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 5
+      outs          : 4
+      insns size    : 51 16-bit code units
+5e0a30:                                        |[5e0a30] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.addName:(Ljava/lang/String;III)Ljava/lang/String;
+5e0a40: 7010 9369 0200                         |0000: invoke-direct {v2}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._verifySharing:()V // method@6993
+5e0a46: 5520 c347                              |0003: iget-boolean v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._intern:Z // field@47c3
+5e0a4a: 3800 0800                              |0005: if-eqz v0, 000d // +0008
+5e0a4e: 6200 3048                              |0007: sget-object v0, Lcom/fasterxml/jackson/core/util/InternCache;.instance:Lcom/fasterxml/jackson/core/util/InternCache; // field@4830
+5e0a52: 6e20 7d6a 3000                         |0009: invoke-virtual {v0, v3}, Lcom/fasterxml/jackson/core/util/InternCache;.intern:(Ljava/lang/String;)Ljava/lang/String; // method@6a7d
+5e0a58: 0c03                                   |000c: move-result-object v3
+5e0a5a: 6e40 9b69 4265                         |000d: invoke-virtual {v2, v4, v5, v6}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:(III)I // method@699b
+5e0a60: 0a00                                   |0010: move-result v0
+5e0a62: 7020 8969 0200                         |0011: invoke-direct {v2, v0}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findOffsetForAdd:(I)I // method@6989
+5e0a68: 0a00                                   |0014: move-result v0
+5e0a6a: 5421 c047                              |0015: iget-object v1, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0a6e: 4b04 0100                              |0017: aput v4, v1, v0
+5e0a72: d804 0001                              |0019: add-int/lit8 v4, v0, #int 1 // #01
+5e0a76: 4b05 0104                              |001b: aput v5, v1, v4
+5e0a7a: d804 0002                              |001d: add-int/lit8 v4, v0, #int 2 // #02
+5e0a7e: 4b06 0104                              |001f: aput v6, v1, v4
+5e0a82: d804 0003                              |0021: add-int/lit8 v4, v0, #int 3 // #03
+5e0a86: 1235                                   |0023: const/4 v5, #int 3 // #3
+5e0a88: 4b05 0104                              |0024: aput v5, v1, v4
+5e0a8c: 5424 c547                              |0026: iget-object v4, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0a90: e105 0002                              |0028: shr-int/lit8 v5, v0, #int 2 // #02
+5e0a94: 4d03 0405                              |002a: aput-object v3, v4, v5
+5e0a98: 5224 be47                              |002c: iget v4, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0a9c: d804 0401                              |002e: add-int/lit8 v4, v4, #int 1 // #01
+5e0aa0: 5924 be47                              |0030: iput v4, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0aa4: 1103                                   |0032: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=900
+        0x0003 line=901
+        0x0007 line=902
+        0x000d line=904
+        0x0015 line=905
+        0x001b line=906
+        0x001f line=907
+        0x0024 line=908
+        0x0026 line=909
+        0x002c line=910
+      locals        :
+        0x0000 - 0x0033 reg=2 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0033 reg=3 (null) Ljava/lang/String;
+        0x0000 - 0x0033 reg=4 (null) I
+        0x0000 - 0x0033 reg=5 (null) I
+        0x0000 - 0x0033 reg=6 (null) I
+
+    #4              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'addName'
+      type          : '(Ljava/lang/String;[II)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 4
+      insns size    : 149 16-bit code units
+5e0aa8:                                        |[5e0aa8] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.addName:(Ljava/lang/String;[II)Ljava/lang/String;
+5e0ab8: 7010 9369 0600                         |0000: invoke-direct {v6}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._verifySharing:()V // method@6993
+5e0abe: 5560 c347                              |0003: iget-boolean v0, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._intern:Z // field@47c3
+5e0ac2: 3800 0800                              |0005: if-eqz v0, 000d // +0008
+5e0ac6: 6200 3048                              |0007: sget-object v0, Lcom/fasterxml/jackson/core/util/InternCache;.instance:Lcom/fasterxml/jackson/core/util/InternCache; // field@4830
+5e0aca: 6e20 7d6a 7000                         |0009: invoke-virtual {v0, v7}, Lcom/fasterxml/jackson/core/util/InternCache;.intern:(Ljava/lang/String;)Ljava/lang/String; // method@6a7d
+5e0ad0: 0c07                                   |000c: move-result-object v7
+5e0ad2: 1200                                   |000d: const/4 v0, #int 0 // #0
+5e0ad4: 1221                                   |000e: const/4 v1, #int 2 // #2
+5e0ad6: 1212                                   |000f: const/4 v2, #int 1 // #1
+5e0ad8: 3229 6500                              |0010: if-eq v9, v2, 0075 // +0065
+5e0adc: 3219 4600                              |0012: if-eq v9, v1, 0058 // +0046
+5e0ae0: 1233                                   |0014: const/4 v3, #int 3 // #3
+5e0ae2: 3239 1d00                              |0015: if-eq v9, v3, 0032 // +001d
+5e0ae6: 6e30 9c69 8609                         |0017: invoke-virtual {v6, v8, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:([II)I // method@699c
+5e0aec: 0a00                                   |001a: move-result v0
+5e0aee: 7020 8969 0600                         |001b: invoke-direct {v6, v0}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findOffsetForAdd:(I)I // method@6989
+5e0af4: 0a03                                   |001e: move-result v3
+5e0af6: 5464 c047                              |001f: iget-object v4, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0afa: 4b00 0403                              |0021: aput v0, v4, v3
+5e0afe: 7030 8569 8609                         |0023: invoke-direct {v6, v8, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._appendLongName:([II)I // method@6985
+5e0b04: 0a08                                   |0026: move-result v8
+5e0b06: 5460 c047                              |0027: iget-object v0, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0b0a: d804 0301                              |0029: add-int/lit8 v4, v3, #int 1 // #01
+5e0b0e: 4b08 0004                              |002b: aput v8, v0, v4
+5e0b12: d808 0303                              |002d: add-int/lit8 v8, v3, #int 3 // #03
+5e0b16: 4b09 0008                              |002f: aput v9, v0, v8
+5e0b1a: 2858                                   |0031: goto 0089 // +0058
+5e0b1c: 4409 0800                              |0032: aget v9, v8, v0
+5e0b20: 4404 0802                              |0034: aget v4, v8, v2
+5e0b24: 4405 0801                              |0036: aget v5, v8, v1
+5e0b28: 6e40 9b69 9654                         |0038: invoke-virtual {v6, v9, v4, v5}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:(III)I // method@699b
+5e0b2e: 0a09                                   |003b: move-result v9
+5e0b30: 7020 8969 9600                         |003c: invoke-direct {v6, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findOffsetForAdd:(I)I // method@6989
+5e0b36: 0a09                                   |003f: move-result v9
+5e0b38: 5464 c047                              |0040: iget-object v4, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0b3c: 4400 0800                              |0042: aget v0, v8, v0
+5e0b40: 4b00 0409                              |0044: aput v0, v4, v9
+5e0b44: d800 0901                              |0046: add-int/lit8 v0, v9, #int 1 // #01
+5e0b48: 4405 0802                              |0048: aget v5, v8, v2
+5e0b4c: 4b05 0400                              |004a: aput v5, v4, v0
+5e0b50: d800 0902                              |004c: add-int/lit8 v0, v9, #int 2 // #02
+5e0b54: 4408 0801                              |004e: aget v8, v8, v1
+5e0b58: 4b08 0400                              |0050: aput v8, v4, v0
+5e0b5c: d808 0903                              |0052: add-int/lit8 v8, v9, #int 3 // #03
+5e0b60: 4b03 0408                              |0054: aput v3, v4, v8
+5e0b64: 0193                                   |0056: move v3, v9
+5e0b66: 2832                                   |0057: goto 0089 // +0032
+5e0b68: 4409 0800                              |0058: aget v9, v8, v0
+5e0b6c: 4403 0802                              |005a: aget v3, v8, v2
+5e0b70: 6e30 9a69 9603                         |005c: invoke-virtual {v6, v9, v3}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:(II)I // method@699a
+5e0b76: 0a09                                   |005f: move-result v9
+5e0b78: 7020 8969 9600                         |0060: invoke-direct {v6, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findOffsetForAdd:(I)I // method@6989
+5e0b7e: 0a03                                   |0063: move-result v3
+5e0b80: 5469 c047                              |0064: iget-object v9, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0b84: 4400 0800                              |0066: aget v0, v8, v0
+5e0b88: 4b00 0903                              |0068: aput v0, v9, v3
+5e0b8c: d800 0301                              |006a: add-int/lit8 v0, v3, #int 1 // #01
+5e0b90: 4408 0802                              |006c: aget v8, v8, v2
+5e0b94: 4b08 0900                              |006e: aput v8, v9, v0
+5e0b98: d808 0303                              |0070: add-int/lit8 v8, v3, #int 3 // #03
+5e0b9c: 4b01 0908                              |0072: aput v1, v9, v8
+5e0ba0: 2815                                   |0074: goto 0089 // +0015
+5e0ba2: 4409 0800                              |0075: aget v9, v8, v0
+5e0ba6: 6e20 9969 9600                         |0077: invoke-virtual {v6, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:(I)I // method@6999
+5e0bac: 0a09                                   |007a: move-result v9
+5e0bae: 7020 8969 9600                         |007b: invoke-direct {v6, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findOffsetForAdd:(I)I // method@6989
+5e0bb4: 0a03                                   |007e: move-result v3
+5e0bb6: 5469 c047                              |007f: iget-object v9, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0bba: 4408 0800                              |0081: aget v8, v8, v0
+5e0bbe: 4b08 0903                              |0083: aput v8, v9, v3
+5e0bc2: d808 0303                              |0085: add-int/lit8 v8, v3, #int 3 // #03
+5e0bc6: 4b02 0908                              |0087: aput v2, v9, v8
+5e0bca: 5468 c547                              |0089: iget-object v8, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0bce: e109 0302                              |008b: shr-int/lit8 v9, v3, #int 2 // #02
+5e0bd2: 4d07 0809                              |008d: aput-object v7, v8, v9
+5e0bd6: 5268 be47                              |008f: iget v8, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0bda: b028                                   |0091: add-int/2addr v8, v2
+5e0bdc: 5968 be47                              |0092: iput v8, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e0be0: 1107                                   |0094: return-object v7
+      catches       : (none)
+      positions     :
+        0x0000 line=916
+        0x0003 line=917
+        0x0007 line=918
+        0x0017 line=948
+        0x001b line=949
+        0x001f line=951
+        0x0023 line=952
+        0x0027 line=953
+        0x002f line=954
+        0x0032 line=940
+        0x0040 line=941
+        0x0048 line=942
+        0x004e line=943
+        0x0054 line=944
+        0x0058 line=932
+        0x0064 line=933
+        0x006c line=934
+        0x0072 line=935
+        0x0075 line=925
+        0x007f line=926
+        0x0087 line=927
+        0x0089 line=957
+        0x008f line=960
+      locals        :
+        0x0000 - 0x0095 reg=6 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0095 reg=7 (null) Ljava/lang/String;
+        0x0000 - 0x0095 reg=8 (null) [I
+        0x0000 - 0x0095 reg=9 (null) I
+
+    #5              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'bucketCount'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+5e0be4:                                        |[5e0be4] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.bucketCount:()I
+5e0bf4: 5200 c247                              |0000: iget v0, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e0bf8: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=452
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #6              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'calcHash'
+      type          : '(I)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 13 16-bit code units
+5e0bfc:                                        |[5e0bfc] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.calcHash:(I)I
+5e0c0c: 5200 c847                              |0000: iget v0, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._seed:I // field@47c8
+5e0c10: b710                                   |0002: xor-int/2addr v0, v1
+5e0c12: e201 0010                              |0003: ushr-int/lit8 v1, v0, #int 16 // #10
+5e0c16: b010                                   |0005: add-int/2addr v0, v1
+5e0c18: e001 0003                              |0006: shl-int/lit8 v1, v0, #int 3 // #03
+5e0c1c: b710                                   |0008: xor-int/2addr v0, v1
+5e0c1e: e201 000c                              |0009: ushr-int/lit8 v1, v0, #int 12 // #0c
+5e0c22: b010                                   |000b: add-int/2addr v0, v1
+5e0c24: 0f00                                   |000c: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1121
+      locals        :
+        0x0000 - 0x000d reg=0 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x000d reg=1 (null) I
+
+    #7              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'calcHash'
+      type          : '(II)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 0
+      insns size    : 22 16-bit code units
+5e0c28:                                        |[5e0c28] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.calcHash:(II)I
+5e0c38: e200 020f                              |0000: ushr-int/lit8 v0, v2, #int 15 // #0f
+5e0c3c: b002                                   |0002: add-int/2addr v2, v0
+5e0c3e: e200 0209                              |0003: ushr-int/lit8 v0, v2, #int 9 // #09
+5e0c42: b702                                   |0005: xor-int/2addr v2, v0
+5e0c44: da03 0321                              |0006: mul-int/lit8 v3, v3, #int 33 // #21
+5e0c48: b032                                   |0008: add-int/2addr v2, v3
+5e0c4a: 5211 c847                              |0009: iget v1, v1, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._seed:I // field@47c8
+5e0c4e: b721                                   |000b: xor-int/2addr v1, v2
+5e0c50: e202 0110                              |000c: ushr-int/lit8 v2, v1, #int 16 // #10
+5e0c54: b021                                   |000e: add-int/2addr v1, v2
+5e0c56: e202 0104                              |000f: ushr-int/lit8 v2, v1, #int 4 // #04
+5e0c5a: b721                                   |0011: xor-int/2addr v1, v2
+5e0c5c: e002 0103                              |0012: shl-int/lit8 v2, v1, #int 3 // #03
+5e0c60: b021                                   |0014: add-int/2addr v1, v2
+5e0c62: 0f01                                   |0015: return v1
+      catches       : (none)
+      positions     :
+        0x0009 line=1142
+      locals        :
+        0x0000 - 0x0016 reg=1 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0016 reg=2 (null) I
+        0x0000 - 0x0016 reg=3 (null) I
+
+    #8              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'calcHash'
+      type          : '(III)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 0
+      insns size    : 25 16-bit code units
+5e0c64:                                        |[5e0c64] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.calcHash:(III)I
+5e0c74: 5200 c847                              |0000: iget v0, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._seed:I // field@47c8
+5e0c78: b710                                   |0002: xor-int/2addr v0, v1
+5e0c7a: e201 0009                              |0003: ushr-int/lit8 v1, v0, #int 9 // #09
+5e0c7e: b010                                   |0005: add-int/2addr v0, v1
+5e0c80: da00 001f                              |0006: mul-int/lit8 v0, v0, #int 31 // #1f
+5e0c84: b020                                   |0008: add-int/2addr v0, v2
+5e0c86: da00 0021                              |0009: mul-int/lit8 v0, v0, #int 33 // #21
+5e0c8a: e201 000f                              |000b: ushr-int/lit8 v1, v0, #int 15 // #0f
+5e0c8e: b010                                   |000d: add-int/2addr v0, v1
+5e0c90: b730                                   |000e: xor-int/2addr v0, v3
+5e0c92: e201 0004                              |000f: ushr-int/lit8 v1, v0, #int 4 // #04
+5e0c96: b010                                   |0011: add-int/2addr v0, v1
+5e0c98: e201 000f                              |0012: ushr-int/lit8 v1, v0, #int 15 // #0f
+5e0c9c: b010                                   |0014: add-int/2addr v0, v1
+5e0c9e: e001 0009                              |0015: shl-int/lit8 v1, v0, #int 9 // #09
+5e0ca2: b710                                   |0017: xor-int/2addr v0, v1
+5e0ca4: 0f00                                   |0018: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1152
+      locals        :
+        0x0000 - 0x0019 reg=0 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0019 reg=1 (null) I
+        0x0000 - 0x0019 reg=2 (null) I
+        0x0000 - 0x0019 reg=3 (null) I
+
+    #9              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'calcHash'
+      type          : '([II)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 1
+      insns size    : 57 16-bit code units
+5e0ca8:                                        |[5e0ca8] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.calcHash:([II)I
+5e0cb8: 1240                                   |0000: const/4 v0, #int 4 // #4
+5e0cba: 3405 3200                              |0001: if-lt v5, v0, 0033 // +0032
+5e0cbe: 1200                                   |0003: const/4 v0, #int 0 // #0
+5e0cc0: 4400 0400                              |0004: aget v0, v4, v0
+5e0cc4: 5233 c847                              |0006: iget v3, v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._seed:I // field@47c8
+5e0cc8: b703                                   |0008: xor-int/2addr v3, v0
+5e0cca: e200 0309                              |0009: ushr-int/lit8 v0, v3, #int 9 // #09
+5e0cce: b003                                   |000b: add-int/2addr v3, v0
+5e0cd0: 1210                                   |000c: const/4 v0, #int 1 // #1
+5e0cd2: 4400 0400                              |000d: aget v0, v4, v0
+5e0cd6: b003                                   |000f: add-int/2addr v3, v0
+5e0cd8: e200 030f                              |0010: ushr-int/lit8 v0, v3, #int 15 // #0f
+5e0cdc: b003                                   |0012: add-int/2addr v3, v0
+5e0cde: da03 0321                              |0013: mul-int/lit8 v3, v3, #int 33 // #21
+5e0ce2: 1220                                   |0015: const/4 v0, #int 2 // #2
+5e0ce4: 4400 0400                              |0016: aget v0, v4, v0
+5e0ce8: b703                                   |0018: xor-int/2addr v3, v0
+5e0cea: e200 0304                              |0019: ushr-int/lit8 v0, v3, #int 4 // #04
+5e0cee: b003                                   |001b: add-int/2addr v3, v0
+5e0cf0: 1230                                   |001c: const/4 v0, #int 3 // #3
+5e0cf2: 3550 0b00                              |001d: if-ge v0, v5, 0028 // +000b
+5e0cf6: 4401 0400                              |001f: aget v1, v4, v0
+5e0cfa: e102 0115                              |0021: shr-int/lit8 v2, v1, #int 21 // #15
+5e0cfe: b721                                   |0023: xor-int/2addr v1, v2
+5e0d00: b013                                   |0024: add-int/2addr v3, v1
+5e0d02: d800 0001                              |0025: add-int/lit8 v0, v0, #int 1 // #01
+5e0d06: 28f6                                   |0027: goto 001d // -000a
+5e0d08: 1404 3f00 0100                         |0028: const v4, #float 9.19238e-41 // #0001003f
+5e0d0e: b243                                   |002b: mul-int/2addr v3, v4
+5e0d10: e204 0313                              |002c: ushr-int/lit8 v4, v3, #int 19 // #13
+5e0d14: b043                                   |002e: add-int/2addr v3, v4
+5e0d16: e004 0305                              |002f: shl-int/lit8 v4, v3, #int 5 // #05
+5e0d1a: b743                                   |0031: xor-int/2addr v3, v4
+5e0d1c: 0f03                                   |0032: return v3
+5e0d1e: 2203 7a1a                              |0033: new-instance v3, Ljava/lang/IllegalArgumentException; // type@1a7a
+5e0d22: 7010 46d1 0300                         |0035: invoke-direct {v3}, Ljava/lang/IllegalArgumentException;.<init>:()V // method@d146
+5e0d28: 2703                                   |0038: throw v3
+      catches       : (none)
+      positions     :
+        0x0004 line=1178
+        0x000d line=1180
+        0x0016 line=1183
+        0x001f line=1187
+        0x0033 line=1171
+      locals        :
+        0x0000 - 0x0039 reg=3 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0039 reg=4 (null) [I
+        0x0000 - 0x0039 reg=5 (null) I
+
+    #10              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'findName'
+      type          : '(I)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 3
+      insns size    : 64 16-bit code units
+5e0d2c:                                        |[5e0d2c] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.findName:(I)Ljava/lang/String;
+5e0d3c: 6e20 9969 7600                         |0000: invoke-virtual {v6, v7}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:(I)I // method@6999
+5e0d42: 0a00                                   |0003: move-result v0
+5e0d44: 7020 8669 0600                         |0004: invoke-direct {v6, v0}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._calcOffset:(I)I // method@6986
+5e0d4a: 0a00                                   |0007: move-result v0
+5e0d4c: 5461 c047                              |0008: iget-object v1, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0d50: d802 0003                              |000a: add-int/lit8 v2, v0, #int 3 // #03
+5e0d54: 4402 0102                              |000c: aget v2, v1, v2
+5e0d58: 1203                                   |000e: const/4 v3, #int 0 // #0
+5e0d5a: 1214                                   |000f: const/4 v4, #int 1 // #1
+5e0d5c: 3342 0d00                              |0010: if-ne v2, v4, 001d // +000d
+5e0d60: 4402 0100                              |0012: aget v2, v1, v0
+5e0d64: 3372 0c00                              |0014: if-ne v2, v7, 0020 // +000c
+5e0d68: 5466 c547                              |0016: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0d6c: e107 0002                              |0018: shr-int/lit8 v7, v0, #int 2 // #02
+5e0d70: 4606 0607                              |001a: aget-object v6, v6, v7
+5e0d74: 1106                                   |001c: return-object v6
+5e0d76: 3902 0300                              |001d: if-nez v2, 0020 // +0003
+5e0d7a: 1103                                   |001f: return-object v3
+5e0d7c: 5262 c747                              |0020: iget v2, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5e0d80: e105 0003                              |0022: shr-int/lit8 v5, v0, #int 3 // #03
+5e0d84: e005 0502                              |0024: shl-int/lit8 v5, v5, #int 2 // #02
+5e0d88: b052                                   |0026: add-int/2addr v2, v5
+5e0d8a: d805 0203                              |0027: add-int/lit8 v5, v2, #int 3 // #03
+5e0d8e: 4405 0105                              |0029: aget v5, v1, v5
+5e0d92: 3345 0d00                              |002b: if-ne v5, v4, 0038 // +000d
+5e0d96: 4401 0102                              |002d: aget v1, v1, v2
+5e0d9a: 3371 0c00                              |002f: if-ne v1, v7, 003b // +000c
+5e0d9e: 5466 c547                              |0031: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0da2: e107 0202                              |0033: shr-int/lit8 v7, v2, #int 2 // #02
+5e0da6: 4606 0607                              |0035: aget-object v6, v6, v7
+5e0daa: 1106                                   |0037: return-object v6
+5e0dac: 3905 0300                              |0038: if-nez v5, 003b // +0003
+5e0db0: 1103                                   |003a: return-object v3
+5e0db2: 7030 8a69 0607                         |003b: invoke-direct {v6, v0, v7}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findSecondary:(II)Ljava/lang/String; // method@698a
+5e0db8: 0c06                                   |003e: move-result-object v6
+5e0dba: 1106                                   |003f: return-object v6
+      catches       : (none)
+      positions     :
+        0x0000 line=570
+        0x0008 line=572
+        0x000c line=574
+        0x0012 line=577
+        0x0016 line=578
+        0x0020 line=584
+        0x0029 line=586
+        0x002d line=589
+        0x0031 line=590
+        0x003b line=597
+      locals        :
+        0x0000 - 0x0040 reg=6 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0040 reg=7 (null) I
+
+    #11              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'findName'
+      type          : '(II)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 3
+      outs          : 4
+      insns size    : 75 16-bit code units
+5e0dbc:                                        |[5e0dbc] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.findName:(II)Ljava/lang/String;
+5e0dcc: 6e30 9a69 7608                         |0000: invoke-virtual {v6, v7, v8}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:(II)I // method@699a
+5e0dd2: 0a00                                   |0003: move-result v0
+5e0dd4: 7020 8669 0600                         |0004: invoke-direct {v6, v0}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._calcOffset:(I)I // method@6986
+5e0dda: 0a00                                   |0007: move-result v0
+5e0ddc: 5461 c047                              |0008: iget-object v1, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0de0: d802 0003                              |000a: add-int/lit8 v2, v0, #int 3 // #03
+5e0de4: 4402 0102                              |000c: aget v2, v1, v2
+5e0de8: 1203                                   |000e: const/4 v3, #int 0 // #0
+5e0dea: 1224                                   |000f: const/4 v4, #int 2 // #2
+5e0dec: 3342 1300                              |0010: if-ne v2, v4, 0023 // +0013
+5e0df0: 4402 0100                              |0012: aget v2, v1, v0
+5e0df4: 3327 1200                              |0014: if-ne v7, v2, 0026 // +0012
+5e0df8: d802 0001                              |0016: add-int/lit8 v2, v0, #int 1 // #01
+5e0dfc: 4402 0102                              |0018: aget v2, v1, v2
+5e0e00: 3328 0c00                              |001a: if-ne v8, v2, 0026 // +000c
+5e0e04: 5466 c547                              |001c: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0e08: e107 0002                              |001e: shr-int/lit8 v7, v0, #int 2 // #02
+5e0e0c: 4606 0607                              |0020: aget-object v6, v6, v7
+5e0e10: 1106                                   |0022: return-object v6
+5e0e12: 3902 0300                              |0023: if-nez v2, 0026 // +0003
+5e0e16: 1103                                   |0025: return-object v3
+5e0e18: 5262 c747                              |0026: iget v2, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5e0e1c: e105 0003                              |0028: shr-int/lit8 v5, v0, #int 3 // #03
+5e0e20: b845                                   |002a: shl-int/2addr v5, v4
+5e0e22: b052                                   |002b: add-int/2addr v2, v5
+5e0e24: d805 0203                              |002c: add-int/lit8 v5, v2, #int 3 // #03
+5e0e28: 4405 0105                              |002e: aget v5, v1, v5
+5e0e2c: 3345 1300                              |0030: if-ne v5, v4, 0043 // +0013
+5e0e30: 4403 0102                              |0032: aget v3, v1, v2
+5e0e34: 3337 1200                              |0034: if-ne v7, v3, 0046 // +0012
+5e0e38: d803 0201                              |0036: add-int/lit8 v3, v2, #int 1 // #01
+5e0e3c: 4401 0103                              |0038: aget v1, v1, v3
+5e0e40: 3318 0c00                              |003a: if-ne v8, v1, 0046 // +000c
+5e0e44: 5466 c547                              |003c: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0e48: e107 0202                              |003e: shr-int/lit8 v7, v2, #int 2 // #02
+5e0e4c: 4606 0607                              |0040: aget-object v6, v6, v7
+5e0e50: 1106                                   |0042: return-object v6
+5e0e52: 3905 0300                              |0043: if-nez v5, 0046 // +0003
+5e0e56: 1103                                   |0045: return-object v3
+5e0e58: 7040 8b69 0687                         |0046: invoke-direct {v6, v0, v7, v8}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findSecondary:(III)Ljava/lang/String; // method@698b
+5e0e5e: 0c06                                   |0049: move-result-object v6
+5e0e60: 1106                                   |004a: return-object v6
+      catches       : (none)
+      positions     :
+        0x0000 line=602
+        0x0008 line=604
+        0x000c line=606
+        0x0012 line=609
+        0x001c line=610
+        0x0026 line=616
+        0x002e line=618
+        0x0032 line=621
+        0x003c line=622
+        0x0046 line=627
+      locals        :
+        0x0000 - 0x004b reg=6 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x004b reg=7 (null) I
+        0x0000 - 0x004b reg=8 (null) I
+
+    #12              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'findName'
+      type          : '(III)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 5
+      insns size    : 88 16-bit code units
+5e0e64:                                        |[5e0e64] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.findName:(III)Ljava/lang/String;
+5e0e74: 6e40 9b69 7698                         |0000: invoke-virtual {v6, v7, v8, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:(III)I // method@699b
+5e0e7a: 0a00                                   |0003: move-result v0
+5e0e7c: 7020 8669 0600                         |0004: invoke-direct {v6, v0}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._calcOffset:(I)I // method@6986
+5e0e82: 0a00                                   |0007: move-result v0
+5e0e84: 5461 c047                              |0008: iget-object v1, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0e88: d802 0003                              |000a: add-int/lit8 v2, v0, #int 3 // #03
+5e0e8c: 4402 0102                              |000c: aget v2, v1, v2
+5e0e90: 1203                                   |000e: const/4 v3, #int 0 // #0
+5e0e92: 1234                                   |000f: const/4 v4, #int 3 // #3
+5e0e94: 3342 1900                              |0010: if-ne v2, v4, 0029 // +0019
+5e0e98: 4402 0100                              |0012: aget v2, v1, v0
+5e0e9c: 3327 1800                              |0014: if-ne v7, v2, 002c // +0018
+5e0ea0: d802 0001                              |0016: add-int/lit8 v2, v0, #int 1 // #01
+5e0ea4: 4402 0102                              |0018: aget v2, v1, v2
+5e0ea8: 3382 1200                              |001a: if-ne v2, v8, 002c // +0012
+5e0eac: d802 0002                              |001c: add-int/lit8 v2, v0, #int 2 // #02
+5e0eb0: 4402 0102                              |001e: aget v2, v1, v2
+5e0eb4: 3392 0c00                              |0020: if-ne v2, v9, 002c // +000c
+5e0eb8: 5466 c547                              |0022: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0ebc: e107 0002                              |0024: shr-int/lit8 v7, v0, #int 2 // #02
+5e0ec0: 4606 0607                              |0026: aget-object v6, v6, v7
+5e0ec4: 1106                                   |0028: return-object v6
+5e0ec6: 3902 0300                              |0029: if-nez v2, 002c // +0003
+5e0eca: 1103                                   |002b: return-object v3
+5e0ecc: 5262 c747                              |002c: iget v2, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5e0ed0: e105 0003                              |002e: shr-int/lit8 v5, v0, #int 3 // #03
+5e0ed4: e005 0502                              |0030: shl-int/lit8 v5, v5, #int 2 // #02
+5e0ed8: b052                                   |0032: add-int/2addr v2, v5
+5e0eda: d805 0203                              |0033: add-int/lit8 v5, v2, #int 3 // #03
+5e0ede: 4405 0105                              |0035: aget v5, v1, v5
+5e0ee2: 3345 1900                              |0037: if-ne v5, v4, 0050 // +0019
+5e0ee6: 4403 0102                              |0039: aget v3, v1, v2
+5e0eea: 3337 1800                              |003b: if-ne v7, v3, 0053 // +0018
+5e0eee: d803 0201                              |003d: add-int/lit8 v3, v2, #int 1 // #01
+5e0ef2: 4403 0103                              |003f: aget v3, v1, v3
+5e0ef6: 3383 1200                              |0041: if-ne v3, v8, 0053 // +0012
+5e0efa: d803 0202                              |0043: add-int/lit8 v3, v2, #int 2 // #02
+5e0efe: 4401 0103                              |0045: aget v1, v1, v3
+5e0f02: 3391 0c00                              |0047: if-ne v1, v9, 0053 // +000c
+5e0f06: 5466 c547                              |0049: iget-object v6, v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0f0a: e107 0202                              |004b: shr-int/lit8 v7, v2, #int 2 // #02
+5e0f0e: 4606 0607                              |004d: aget-object v6, v6, v7
+5e0f12: 1106                                   |004f: return-object v6
+5e0f14: 3905 0300                              |0050: if-nez v5, 0053 // +0003
+5e0f18: 1103                                   |0052: return-object v3
+5e0f1a: 7059 8c69 0687                         |0053: invoke-direct {v6, v0, v7, v8, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findSecondary:(IIII)Ljava/lang/String; // method@698c
+5e0f20: 0c06                                   |0056: move-result-object v6
+5e0f22: 1106                                   |0057: return-object v6
+      catches       : (none)
+      positions     :
+        0x0000 line=632
+        0x0008 line=633
+        0x000c line=634
+        0x0012 line=637
+        0x0022 line=638
+        0x002c line=644
+        0x0035 line=646
+        0x0039 line=649
+        0x0049 line=650
+        0x0053 line=655
+      locals        :
+        0x0000 - 0x0058 reg=6 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0058 reg=7 (null) I
+        0x0000 - 0x0058 reg=8 (null) I
+        0x0000 - 0x0058 reg=9 (null) I
+
+    #13              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'findName'
+      type          : '([II)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 10
+      ins           : 3
+      outs          : 5
+      insns size    : 122 16-bit code units
+5e0f24:                                        |[5e0f24] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.findName:([II)Ljava/lang/String;
+5e0f34: 1240                                   |0000: const/4 v0, #int 4 // #4
+5e0f36: 1221                                   |0001: const/4 v1, #int 2 // #2
+5e0f38: 3509 2900                              |0002: if-ge v9, v0, 002b // +0029
+5e0f3c: 1200                                   |0004: const/4 v0, #int 0 // #0
+5e0f3e: 1212                                   |0005: const/4 v2, #int 1 // #1
+5e0f40: 3229 1e00                              |0006: if-eq v9, v2, 0024 // +001e
+5e0f44: 3219 1300                              |0008: if-eq v9, v1, 001b // +0013
+5e0f48: 1233                                   |000a: const/4 v3, #int 3 // #3
+5e0f4a: 3239 0500                              |000b: if-eq v9, v3, 0010 // +0005
+5e0f4e: 1a07 0000                              |000d: const-string v7, "" // string@0000
+5e0f52: 1107                                   |000f: return-object v7
+5e0f54: 4409 0800                              |0010: aget v9, v8, v0
+5e0f58: 4400 0802                              |0012: aget v0, v8, v2
+5e0f5c: 4408 0801                              |0014: aget v8, v8, v1
+5e0f60: 6e40 a169 9780                         |0016: invoke-virtual {v7, v9, v0, v8}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.findName:(III)Ljava/lang/String; // method@69a1
+5e0f66: 0c07                                   |0019: move-result-object v7
+5e0f68: 1107                                   |001a: return-object v7
+5e0f6a: 4409 0800                              |001b: aget v9, v8, v0
+5e0f6e: 4408 0802                              |001d: aget v8, v8, v2
+5e0f72: 6e30 a069 9708                         |001f: invoke-virtual {v7, v9, v8}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.findName:(II)Ljava/lang/String; // method@69a0
+5e0f78: 0c07                                   |0022: move-result-object v7
+5e0f7a: 1107                                   |0023: return-object v7
+5e0f7c: 4408 0800                              |0024: aget v8, v8, v0
+5e0f80: 6e20 9f69 8700                         |0026: invoke-virtual {v7, v8}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.findName:(I)Ljava/lang/String; // method@699f
+5e0f86: 0c07                                   |0029: move-result-object v7
+5e0f88: 1107                                   |002a: return-object v7
+5e0f8a: 6e30 9c69 8709                         |002b: invoke-virtual {v7, v8, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.calcHash:([II)I // method@699c
+5e0f90: 0a00                                   |002e: move-result v0
+5e0f92: 7020 8669 0700                         |002f: invoke-direct {v7, v0}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._calcOffset:(I)I // method@6986
+5e0f98: 0a02                                   |0032: move-result v2
+5e0f9a: 5473 c047                              |0033: iget-object v3, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e0f9e: d804 0203                              |0035: add-int/lit8 v4, v2, #int 3 // #03
+5e0fa2: 4404 0304                              |0037: aget v4, v3, v4
+5e0fa6: 4405 0302                              |0039: aget v5, v3, v2
+5e0faa: 3350 1500                              |003b: if-ne v0, v5, 0050 // +0015
+5e0fae: 3394 1300                              |003d: if-ne v4, v9, 0050 // +0013
+5e0fb2: d805 0201                              |003f: add-int/lit8 v5, v2, #int 1 // #01
+5e0fb6: 4405 0305                              |0041: aget v5, v3, v5
+5e0fba: 7040 9169 8759                         |0043: invoke-direct {v7, v8, v9, v5}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._verifyLongName:([III)Z // method@6991
+5e0fc0: 0a05                                   |0046: move-result v5
+5e0fc2: 3805 0900                              |0047: if-eqz v5, 0050 // +0009
+5e0fc6: 5477 c547                              |0049: iget-object v7, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e0fca: e108 0202                              |004b: shr-int/lit8 v8, v2, #int 2 // #02
+5e0fce: 4607 0708                              |004d: aget-object v7, v7, v8
+5e0fd2: 1107                                   |004f: return-object v7
+5e0fd4: 3904 0400                              |0050: if-nez v4, 0054 // +0004
+5e0fd8: 1207                                   |0052: const/4 v7, #int 0 // #0
+5e0fda: 1107                                   |0053: return-object v7
+5e0fdc: 5274 c747                              |0054: iget v4, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5e0fe0: e105 0203                              |0056: shr-int/lit8 v5, v2, #int 3 // #03
+5e0fe4: b815                                   |0058: shl-int/2addr v5, v1
+5e0fe6: b054                                   |0059: add-int/2addr v4, v5
+5e0fe8: d805 0403                              |005a: add-int/lit8 v5, v4, #int 3 // #03
+5e0fec: 4405 0305                              |005c: aget v5, v3, v5
+5e0ff0: 4406 0304                              |005e: aget v6, v3, v4
+5e0ff4: 3360 1500                              |0060: if-ne v0, v6, 0075 // +0015
+5e0ff8: 3395 1300                              |0062: if-ne v5, v9, 0075 // +0013
+5e0ffc: d805 0401                              |0064: add-int/lit8 v5, v4, #int 1 // #01
+5e1000: 4403 0305                              |0066: aget v3, v3, v5
+5e1004: 7040 9169 8739                         |0068: invoke-direct {v7, v8, v9, v3}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._verifyLongName:([III)Z // method@6991
+5e100a: 0a03                                   |006b: move-result v3
+5e100c: 3803 0900                              |006c: if-eqz v3, 0075 // +0009
+5e1010: 5477 c547                              |006e: iget-object v7, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._names:[Ljava/lang/String; // field@47c5
+5e1014: e108 0402                              |0070: shr-int/lit8 v8, v4, #int 2 // #02
+5e1018: 4607 0708                              |0072: aget-object v7, v7, v8
+5e101c: 1107                                   |0074: return-object v7
+5e101e: 7059 8d69 2780                         |0075: invoke-direct {v7, v2, v0, v8, v9}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._findSecondary:(II[II)Ljava/lang/String; // method@698d
+5e1024: 0c07                                   |0078: move-result-object v7
+5e1026: 1107                                   |0079: return-object v7
+      catches       : (none)
+      positions     :
+        0x000d line=673
+        0x0010 line=667
+        0x001b line=669
+        0x0024 line=671
+        0x002b line=676
+        0x002f line=677
+        0x0033 line=679
+        0x0037 line=681
+        0x0039 line=683
+        0x0041 line=685
+        0x0049 line=686
+        0x0054 line=693
+        0x005c line=695
+        0x005e line=696
+        0x0066 line=697
+        0x006e line=698
+        0x0075 line=701
+      locals        :
+        0x0000 - 0x007a reg=7 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x007a reg=8 (null) [I
+        0x0000 - 0x007a reg=9 (null) I
+
+    #14              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'hashSeed'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+5e1028:                                        |[5e1028] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.hashSeed:()I
+5e1038: 5200 c847                              |0000: iget v0, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._seed:I // field@47c8
+5e103c: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=463
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #15              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'isCanonicalizing'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+5e1040:                                        |[5e1040] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.isCanonicalizing:()Z
+5e1050: 5400 c647                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._parent:Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // field@47c6
+5e1054: 3800 0400                              |0002: if-eqz v0, 0006 // +0004
+5e1058: 1210                                   |0004: const/4 v0, #int 1 // #1
+5e105a: 2802                                   |0005: goto 0007 // +0002
+5e105c: 1200                                   |0006: const/4 v0, #int 0 // #0
+5e105e: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=473
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #16              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'makeChild'
+      type          : '(I)Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 6
+      insns size    : 31 16-bit code units
+5e1060:                                        |[5e1060] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.makeChild:(I)Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+5e1070: 2206 8e0c                              |0000: new-instance v6, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // type@0c8e
+5e1074: 5272 c847                              |0002: iget v2, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._seed:I // field@47c8
+5e1078: 5470 ca47                              |0004: iget-object v0, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tableInfo:Ljava/util/concurrent/atomic/AtomicReference; // field@47ca
+5e107c: 6e10 0ad7 0000                         |0006: invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicReference;.get:()Ljava/lang/Object; // method@d70a
+5e1082: 0c00                                   |0009: move-result-object v0
+5e1084: 0703                                   |000a: move-object v3, v0
+5e1086: 1f03 8d0c                              |000b: check-cast v3, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo; // type@0c8d
+5e108a: 6200 6944                              |000d: sget-object v0, Lcom/fasterxml/jackson/core/JsonFactory$Feature;.INTERN_FIELD_NAMES:Lcom/fasterxml/jackson/core/JsonFactory$Feature; // field@4469
+5e108e: 6e20 c560 8000                         |000f: invoke-virtual {v0, v8}, Lcom/fasterxml/jackson/core/JsonFactory$Feature;.enabledIn:(I)Z // method@60c5
+5e1094: 0a04                                   |0012: move-result v4
+5e1096: 6200 6844                              |0013: sget-object v0, Lcom/fasterxml/jackson/core/JsonFactory$Feature;.FAIL_ON_SYMBOL_HASH_OVERFLOW:Lcom/fasterxml/jackson/core/JsonFactory$Feature; // field@4468
+5e109a: 6e20 c560 8000                         |0015: invoke-virtual {v0, v8}, Lcom/fasterxml/jackson/core/JsonFactory$Feature;.enabledIn:(I)Z // method@60c5
+5e10a0: 0a05                                   |0018: move-result v5
+5e10a2: 0760                                   |0019: move-object v0, v6
+5e10a4: 0771                                   |001a: move-object v1, v7
+5e10a6: 7606 8469 0000                         |001b: invoke-direct/range {v0, v1, v2, v3, v4, v5}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.<init>:(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;ILcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;ZZ)V // method@6984
+5e10ac: 1106                                   |001e: return-object v6
+      catches       : (none)
+      positions     :
+        0x0000 line=362
+        0x0006 line=363
+        0x000f line=364
+        0x0015 line=365
+      locals        :
+        0x0000 - 0x001f reg=7 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x001f reg=8 (null) I
+
+    #17              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'makeChildOrPlaceholder'
+      type          : '(I)Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 6
+      insns size    : 53 16-bit code units
+5e10b0:                                        |[5e10b0] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.makeChildOrPlaceholder:(I)Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+5e10c0: 6200 6744                              |0000: sget-object v0, Lcom/fasterxml/jackson/core/JsonFactory$Feature;.CANONICALIZE_FIELD_NAMES:Lcom/fasterxml/jackson/core/JsonFactory$Feature; // field@4467
+5e10c4: 6e20 c560 8000                         |0002: invoke-virtual {v0, v8}, Lcom/fasterxml/jackson/core/JsonFactory$Feature;.enabledIn:(I)Z // method@60c5
+5e10ca: 0a00                                   |0005: move-result v0
+5e10cc: 3800 2100                              |0006: if-eqz v0, 0027 // +0021
+5e10d0: 2200 8e0c                              |0008: new-instance v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // type@0c8e
+5e10d4: 5273 c847                              |000a: iget v3, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._seed:I // field@47c8
+5e10d8: 5471 ca47                              |000c: iget-object v1, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tableInfo:Ljava/util/concurrent/atomic/AtomicReference; // field@47ca
+5e10dc: 6e10 0ad7 0100                         |000e: invoke-virtual {v1}, Ljava/util/concurrent/atomic/AtomicReference;.get:()Ljava/lang/Object; // method@d70a
+5e10e2: 0c01                                   |0011: move-result-object v1
+5e10e4: 0714                                   |0012: move-object v4, v1
+5e10e6: 1f04 8d0c                              |0013: check-cast v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo; // type@0c8d
+5e10ea: 6201 6944                              |0015: sget-object v1, Lcom/fasterxml/jackson/core/JsonFactory$Feature;.INTERN_FIELD_NAMES:Lcom/fasterxml/jackson/core/JsonFactory$Feature; // field@4469
+5e10ee: 6e20 c560 8100                         |0017: invoke-virtual {v1, v8}, Lcom/fasterxml/jackson/core/JsonFactory$Feature;.enabledIn:(I)Z // method@60c5
+5e10f4: 0a05                                   |001a: move-result v5
+5e10f6: 6201 6844                              |001b: sget-object v1, Lcom/fasterxml/jackson/core/JsonFactory$Feature;.FAIL_ON_SYMBOL_HASH_OVERFLOW:Lcom/fasterxml/jackson/core/JsonFactory$Feature; // field@4468
+5e10fa: 6e20 c560 8100                         |001d: invoke-virtual {v1, v8}, Lcom/fasterxml/jackson/core/JsonFactory$Feature;.enabledIn:(I)Z // method@60c5
+5e1100: 0a06                                   |0020: move-result v6
+5e1102: 0701                                   |0021: move-object v1, v0
+5e1104: 0772                                   |0022: move-object v2, v7
+5e1106: 7606 8469 0100                         |0023: invoke-direct/range {v1, v2, v3, v4, v5, v6}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.<init>:(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;ILcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;ZZ)V // method@6984
+5e110c: 1100                                   |0026: return-object v0
+5e110e: 2208 8e0c                              |0027: new-instance v8, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // type@0c8e
+5e1112: 5477 ca47                              |0029: iget-object v7, v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tableInfo:Ljava/util/concurrent/atomic/AtomicReference; // field@47ca
+5e1116: 6e10 0ad7 0700                         |002b: invoke-virtual {v7}, Ljava/util/concurrent/atomic/AtomicReference;.get:()Ljava/lang/Object; // method@d70a
+5e111c: 0c07                                   |002e: move-result-object v7
+5e111e: 1f07 8d0c                              |002f: check-cast v7, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo; // type@0c8d
+5e1122: 7020 8369 7800                         |0031: invoke-direct {v8, v7}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.<init>:(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;)V // method@6983
+5e1128: 1108                                   |0034: return-object v8
+      catches       : (none)
+      positions     :
+        0x0000 line=381
+        0x0008 line=383
+        0x000e line=384
+        0x0017 line=385
+        0x001d line=386
+        0x0027 line=388
+      locals        :
+        0x0000 - 0x0035 reg=7 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+        0x0000 - 0x0035 reg=8 (null) I
+
+    #18              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'maybeDirty'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 5 16-bit code units
+5e112c:                                        |[5e112c] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.maybeDirty:()Z
+5e113c: 5500 c147                              |0000: iget-boolean v0, v0, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashShared:Z // field@47c1
+5e1140: df00 0001                              |0002: xor-int/lit8 v0, v0, #int 1 // #01
+5e1144: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=461
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #19              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'primaryCount'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 0
+      insns size    : 18 16-bit code units
+5e1148:                                        |[5e1148] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.primaryCount:()I
+5e1158: 5240 c747                              |0000: iget v0, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5e115c: 1201                                   |0002: const/4 v1, #int 0 // #0
+5e115e: 1232                                   |0003: const/4 v2, #int 3 // #3
+5e1160: 3502 0d00                              |0004: if-ge v2, v0, 0011 // +000d
+5e1164: 5443 c047                              |0006: iget-object v3, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e1168: 4403 0302                              |0008: aget v3, v3, v2
+5e116c: 3803 0400                              |000a: if-eqz v3, 000e // +0004
+5e1170: d801 0101                              |000c: add-int/lit8 v1, v1, #int 1 // #01
+5e1174: d802 0204                              |000e: add-int/lit8 v2, v2, #int 4 // #04
+5e1178: 28f4                                   |0010: goto 0004 // -000c
+5e117a: 0f01                                   |0011: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=486
+        0x0006 line=487
+      locals        :
+        0x0000 - 0x0012 reg=4 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #20              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'release'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 24 16-bit code units
+5e117c:                                        |[5e117c] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.release:()V
+5e118c: 5420 c647                              |0000: iget-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._parent:Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // field@47c6
+5e1190: 3800 1500                              |0002: if-eqz v0, 0017 // +0015
+5e1194: 6e10 a769 0200                         |0004: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.maybeDirty:()Z // method@69a7
+5e119a: 0a00                                   |0007: move-result v0
+5e119c: 3800 0f00                              |0008: if-eqz v0, 0017 // +000f
+5e11a0: 5420 c647                              |000a: iget-object v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._parent:Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer; // field@47c6
+5e11a4: 2201 8d0c                              |000c: new-instance v1, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo; // type@0c8d
+5e11a8: 7020 8069 2100                         |000e: invoke-direct {v1, v2}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.<init>:(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)V // method@6980
+5e11ae: 7020 a869 1000                         |0011: invoke-direct {v0, v1}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.mergeChild:(Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;)V // method@69a8
+5e11b4: 1210                                   |0014: const/4 v0, #int 1 // #1
+5e11b6: 5c20 c147                              |0015: iput-boolean v0, v2, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashShared:Z // field@47c1
+5e11ba: 0e00                                   |0017: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=401
+        0x000a line=402
+        0x0015 line=405
+      locals        :
+        0x0000 - 0x0018 reg=2 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #21              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'secondaryCount'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 0
+      insns size    : 21 16-bit code units
+5e11bc:                                        |[5e11bc] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.secondaryCount:()I
+5e11cc: 5240 c747                              |0000: iget v0, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._secondaryStart:I // field@47c7
+5e11d0: d800 0003                              |0002: add-int/lit8 v0, v0, #int 3 // #03
+5e11d4: 5241 cc47                              |0004: iget v1, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5e11d8: 1202                                   |0006: const/4 v2, #int 0 // #0
+5e11da: 3510 0d00                              |0007: if-ge v0, v1, 0014 // +000d
+5e11de: 5443 c047                              |0009: iget-object v3, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e11e2: 4403 0300                              |000b: aget v3, v3, v0
+5e11e6: 3803 0400                              |000d: if-eqz v3, 0011 // +0004
+5e11ea: d802 0201                              |000f: add-int/lit8 v2, v2, #int 1 // #01
+5e11ee: d800 0004                              |0011: add-int/lit8 v0, v0, #int 4 // #04
+5e11f2: 28f4                                   |0013: goto 0007 // -000c
+5e11f4: 0f02                                   |0014: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=502
+        0x0004 line=503
+        0x0009 line=504
+      locals        :
+        0x0000 - 0x0015 reg=4 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #22              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'size'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 16 16-bit code units
+5e11f8:                                        |[5e11f8] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.size:()I
+5e1208: 5410 ca47                              |0000: iget-object v0, v1, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tableInfo:Ljava/util/concurrent/atomic/AtomicReference; // field@47ca
+5e120c: 3800 0b00                              |0002: if-eqz v0, 000d // +000b
+5e1210: 6e10 0ad7 0000                         |0004: invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicReference;.get:()Ljava/lang/Object; // method@d70a
+5e1216: 0c01                                   |0007: move-result-object v1
+5e1218: 1f01 8d0c                              |0008: check-cast v1, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo; // type@0c8d
+5e121c: 5211 b047                              |000a: iget v1, v1, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer$TableInfo;.count:I // field@47b0
+5e1220: 0f01                                   |000c: return v1
+5e1222: 5211 be47                              |000d: iget v1, v1, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e1226: 0f01                                   |000f: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=442
+        0x0004 line=443
+        0x000d line=446
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #23              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'spilloverCount'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 10 16-bit code units
+5e1228:                                        |[5e1228] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.spilloverCount:()I
+5e1238: 5210 c947                              |0000: iget v0, v1, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverEnd:I // field@47c9
+5e123c: 7010 9069 0100                         |0002: invoke-direct {v1}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._spilloverStart:()I // method@6990
+5e1242: 0a01                                   |0005: move-result v1
+5e1244: b110                                   |0006: sub-int/2addr v0, v1
+5e1246: e101 0002                              |0007: shr-int/lit8 v1, v0, #int 2 // #02
+5e124a: 0f01                                   |0009: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=536
+      locals        :
+        0x0000 - 0x000a reg=1 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #24              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'tertiaryCount'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 0
+      insns size    : 22 16-bit code units
+5e124c:                                        |[5e124c] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.tertiaryCount:()I
+5e125c: 5240 cc47                              |0000: iget v0, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._tertiaryStart:I // field@47cc
+5e1260: d800 0003                              |0002: add-int/lit8 v0, v0, #int 3 // #03
+5e1264: 5241 c247                              |0004: iget v1, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e1268: b001                                   |0006: add-int/2addr v1, v0
+5e126a: 1202                                   |0007: const/4 v2, #int 0 // #0
+5e126c: 3510 0d00                              |0008: if-ge v0, v1, 0015 // +000d
+5e1270: 5443 c047                              |000a: iget-object v3, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e1274: 4403 0300                              |000c: aget v3, v3, v0
+5e1278: 3803 0400                              |000e: if-eqz v3, 0012 // +0004
+5e127c: d802 0201                              |0010: add-int/lit8 v2, v2, #int 1 // #01
+5e1280: d800 0004                              |0012: add-int/lit8 v0, v0, #int 4 // #04
+5e1284: 28f4                                   |0014: goto 0008 // -000c
+5e1286: 0f02                                   |0015: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=519
+        0x0004 line=520
+        0x000a line=521
+      locals        :
+        0x0000 - 0x0016 reg=4 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #25              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 16
+      ins           : 1
+      outs          : 2
+      insns size    : 78 16-bit code units
+5e1288:                                        |[5e1288] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.toString:()Ljava/lang/String;
+5e1298: 6e10 aa69 0f00                         |0000: invoke-virtual {v15}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.primaryCount:()I // method@69aa
+5e129e: 0a00                                   |0003: move-result v0
+5e12a0: 6e10 ad69 0f00                         |0004: invoke-virtual {v15}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.secondaryCount:()I // method@69ad
+5e12a6: 0a01                                   |0007: move-result v1
+5e12a8: 6e10 b069 0f00                         |0008: invoke-virtual {v15}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.tertiaryCount:()I // method@69b0
+5e12ae: 0a02                                   |000b: move-result v2
+5e12b0: 6e10 af69 0f00                         |000c: invoke-virtual {v15}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.spilloverCount:()I // method@69af
+5e12b6: 0a03                                   |000f: move-result v3
+5e12b8: 6e10 b269 0f00                         |0010: invoke-virtual {v15}, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;.totalCount:()I // method@69b2
+5e12be: 0a04                                   |0013: move-result v4
+5e12c0: 6e10 ccd1 0f00                         |0014: invoke-virtual {v15}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+5e12c6: 0c05                                   |0017: move-result-object v5
+5e12c8: 6e10 f0d0 0500                         |0018: invoke-virtual {v5}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+5e12ce: 0c06                                   |001b: move-result-object v6
+5e12d0: 52f5 be47                              |001c: iget v5, v15, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._count:I // field@47be
+5e12d4: 7110 6bd1 0500                         |001e: invoke-static {v5}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5e12da: 0c07                                   |0021: move-result-object v7
+5e12dc: 52ff c247                              |0022: iget v15, v15, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e12e0: 7110 6bd1 0f00                         |0024: invoke-static {v15}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5e12e6: 0c08                                   |0027: move-result-object v8
+5e12e8: 7110 6bd1 0000                         |0028: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5e12ee: 0c09                                   |002b: move-result-object v9
+5e12f0: 7110 6bd1 0100                         |002c: invoke-static {v1}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5e12f6: 0c0a                                   |002f: move-result-object v10
+5e12f8: 7110 6bd1 0200                         |0030: invoke-static {v2}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5e12fe: 0c0b                                   |0033: move-result-object v11
+5e1300: 7110 6bd1 0300                         |0034: invoke-static {v3}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5e1306: 0c0c                                   |0037: move-result-object v12
+5e1308: b010                                   |0038: add-int/2addr v0, v1
+5e130a: b020                                   |0039: add-int/2addr v0, v2
+5e130c: b030                                   |003a: add-int/2addr v0, v3
+5e130e: 7110 6bd1 0000                         |003b: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5e1314: 0c0d                                   |003e: move-result-object v13
+5e1316: 7110 6bd1 0400                         |003f: invoke-static {v4}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5e131c: 0c0e                                   |0042: move-result-object v14
+5e131e: 2509 ad20 0600                         |0043: filled-new-array/range {v6, v7, v8, v9, v10, v11, v12, v13, v14}, [Ljava/lang/Object; // type@20ad
+5e1324: 0c0f                                   |0046: move-result-object v15
+5e1326: 1a00 c570                              |0047: const-string v0, "[%s: size=%d, hashSize=%d, %d/%d/%d/%d pri/sec/ter/spill (=%s), total:%d]" // string@70c5
+5e132a: 7120 05d2 f000                         |0049: invoke-static {v0, v15}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+5e1330: 0c0f                                   |004c: move-result-object v15
+5e1332: 110f                                   |004d: return-object v15
+      catches       : (none)
+      positions     :
+        0x0000 line=552
+        0x0004 line=553
+        0x0008 line=554
+        0x000c line=555
+        0x0010 line=556
+        0x0014 line=558
+        0x0028 line=559
+        0x0047 line=557
+      locals        :
+        0x0000 - 0x004e reg=15 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+    #26              : (in Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;)
+      name          : 'totalCount'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 0
+      insns size    : 19 16-bit code units
+5e1334:                                        |[5e1334] com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer.totalCount:()I
+5e1344: 5240 c247                              |0000: iget v0, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashSize:I // field@47c2
+5e1348: 1231                                   |0002: const/4 v1, #int 3 // #3
+5e134a: b810                                   |0003: shl-int/2addr v0, v1
+5e134c: 1202                                   |0004: const/4 v2, #int 0 // #0
+5e134e: 3501 0d00                              |0005: if-ge v1, v0, 0012 // +000d
+5e1352: 5443 c047                              |0007: iget-object v3, v4, Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;._hashArea:[I // field@47c0
+5e1356: 4403 0301                              |0009: aget v3, v3, v1
+5e135a: 3803 0400                              |000b: if-eqz v3, 000f // +0004
+5e135e: d802 0201                              |000d: add-int/lit8 v2, v2, #int 1 // #01
+5e1362: d801 0104                              |000f: add-int/lit8 v1, v1, #int 4 // #04
+5e1366: 28f4                                   |0011: goto 0005 // -000c
+5e1368: 0f02                                   |0012: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=542
+        0x0007 line=543
+      locals        :
+        0x0000 - 0x0013 reg=4 this Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;
+
+  source_file_idx   : 6559 (ByteQuadsCanonicalizer.java)
+

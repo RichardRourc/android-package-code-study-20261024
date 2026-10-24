@@ -1,0 +1,807 @@
+Class #5461            -
+  Class descriptor  : 'Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'ADD_CLOSED'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 2
+    #1              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'ADD_FROZEN'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 1
+    #2              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'ADD_SUCCESS'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 0
+    #3              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'CAPACITY_BITS'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 30
+    #4              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'CLOSED_MASK'
+      type          : 'J'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 2305843009213693952
+    #5              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'CLOSED_SHIFT'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 61
+    #6              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'Companion'
+      type          : 'Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion;'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : null
+    #7              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'FROZEN_MASK'
+      type          : 'J'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 1152921504606846976
+    #8              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'FROZEN_SHIFT'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 60
+    #9              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'HEAD_MASK'
+      type          : 'J'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 1073741823
+    #10              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'HEAD_SHIFT'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 0
+    #11              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'INITIAL_CAPACITY'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 8
+    #12              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'MAX_CAPACITY_MASK'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 1073741823
+    #13              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'MIN_ADD_SPIN_CAPACITY'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 1024
+    #14              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'REMOVE_FROZEN'
+      type          : 'Lkotlinx/coroutines/internal/Symbol;'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : null
+    #15              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'TAIL_MASK'
+      type          : 'J'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 1152921503533105152
+    #16              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'TAIL_SHIFT'
+      type          : 'I'
+      access        : 0x0019 (PUBLIC STATIC FINAL)
+      value         : 30
+    #17              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : '_next$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;'
+      access        : 0x101a (PRIVATE STATIC FINAL SYNTHETIC)
+    #18              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : '_state$FU'
+      type          : 'Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;'
+      access        : 0x101a (PRIVATE STATIC FINAL SYNTHETIC)
+  Instance fields   -
+    #0              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : '_next'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #1              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : '_state'
+      type          : 'J'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #2              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'array'
+      type          : 'Ljava/util/concurrent/atomic/AtomicReferenceArray;'
+      access        : 0x1002 (PRIVATE SYNTHETIC)
+    #3              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'capacity'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'mask'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'singleConsumer'
+      type          : 'Z'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 0
+      outs          : 3
+      insns size    : 38 16-bit code units
+34dfd8:                                        |[34dfd8] kotlinx.coroutines.internal.LockFreeTaskQueueCore.<clinit>:()V
+34dfe8: 2200 7c19                              |0000: new-instance v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion; // type@197c
+34dfec: 1201                                   |0002: const/4 v1, #int 0 // #0
+34dfee: 7020 17b2 1000                         |0003: invoke-direct {v0, v1}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion;.<init>:(Lkotlin/jvm/internal/DefaultConstructorMarker;)V // method@b217
+34dff4: 6900 3f46                              |0006: sput-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.Companion:Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion; // field@463f
+34dff8: 2200 9019                              |0008: new-instance v0, Lkotlinx/coroutines/internal/Symbol; // type@1990
+34dffc: 1a01 944e                              |000a: const-string v1, "REMOVE_FROZEN" // string@4e94
+34e000: 7020 99b2 1000                         |000c: invoke-direct {v0, v1}, Lkotlinx/coroutines/internal/Symbol;.<init>:(Ljava/lang/String;)V // method@b299
+34e006: 6900 4746                              |000f: sput-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.REMOVE_FROZEN:Lkotlinx/coroutines/internal/Symbol; // field@4647
+34e00a: 1c00 7a11                              |0011: const-class v0, Ljava/lang/Object; // type@117a
+34e00e: 1a01 105f                              |0013: const-string v1, "_next" // string@5f10
+34e012: 1c02 7e19                              |0015: const-class v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore; // type@197e
+34e016: 7130 4276 0201                         |0017: invoke-static {v2, v0, v1}, Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // method@7642
+34e01c: 0c00                                   |001a: move-result-object v0
+34e01e: 6900 4b46                              |001b: sput-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._next$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@464b
+34e022: 1a00 295f                              |001d: const-string v0, "_state" // string@5f29
+34e026: 7120 3076 0200                         |001f: invoke-static {v2, v0}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.newUpdater:(Ljava/lang/Class;Ljava/lang/String;)Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // method@7630
+34e02c: 0c00                                   |0022: move-result-object v0
+34e02e: 6900 4d46                              |0023: sput-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@464d
+34e032: 0e00                                   |0025: return-void
+      catches       : (none)
+      positions     :
+        0x0008 line=288
+      locals        :
+
+    #1              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : '<init>'
+      type          : '(IZ)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 2
+      insns size    : 56 16-bit code units
+34e034:                                        |[34e034] kotlinx.coroutines.internal.LockFreeTaskQueueCore.<init>:(IZ)V
+34e044: 7010 df71 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@71df
+34e04a: 5923 4f46                              |0003: iput v3, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.capacity:I // field@464f
+34e04e: 5c24 5146                              |0005: iput-boolean v4, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.singleConsumer:Z // field@4651
+34e052: d804 03ff                              |0007: add-int/lit8 v4, v3, #int -1 // #ff
+34e056: 5924 5046                              |0009: iput v4, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.mask:I // field@4650
+34e05a: 1200                                   |000b: const/4 v0, #int 0 // #0
+34e05c: 5b20 4a46                              |000c: iput-object v0, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._next:Ljava/lang/Object; // field@464a
+34e060: 1600 0000                              |000e: const-wide/16 v0, #int 0 // #0
+34e064: 5a20 4c46                              |0010: iput-wide v0, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34e068: 2200 6f12                              |0012: new-instance v0, Ljava/util/concurrent/atomic/AtomicReferenceArray; // type@126f
+34e06c: 7020 3776 3000                         |0014: invoke-direct {v0, v3}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.<init>:(I)V // method@7637
+34e072: 5b20 4e46                              |0017: iput-object v0, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34e076: 1400 ffff ff3f                         |0019: const v0, #float 2 // #3fffffff
+34e07c: 1a01 af1f                              |001c: const-string v1, "Check failed." // string@1faf
+34e080: 3604 1000                              |001e: if-gt v4, v0, 002e // +0010
+34e084: b543                                   |0020: and-int/2addr v3, v4
+34e086: 3903 0300                              |0021: if-nez v3, 0024 // +0003
+34e08a: 0e00                                   |0023: return-void
+34e08c: 2203 6a11                              |0024: new-instance v3, Ljava/lang/IllegalStateException; // type@116a
+34e090: 6e10 e671 0100                         |0026: invoke-virtual {v1}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+34e096: 0c04                                   |0029: move-result-object v4
+34e098: 7020 7071 4300                         |002a: invoke-direct {v3, v4}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+34e09e: 2703                                   |002d: throw v3
+34e0a0: 2203 6a11                              |002e: new-instance v3, Ljava/lang/IllegalStateException; // type@116a
+34e0a4: 6e10 e671 0100                         |0030: invoke-virtual {v1}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+34e0aa: 0c04                                   |0033: move-result-object v4
+34e0ac: 7020 7071 4300                         |0034: invoke-direct {v3, v4}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@7170
+34e0b2: 2703                                   |0037: throw v3
+      catches       : (none)
+      positions     :
+        0x0000 line=76
+        0x0003 line=77
+        0x0005 line=78
+        0x0009 line=80
+        0x000c line=81
+        0x0010 line=82
+        0x0012 line=83
+        0x001c line=86
+        0x0024 line=87
+        0x002e line=86
+      locals        :
+        0x0000 - 0x0038 reg=2 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+        0x0000 - 0x0038 reg=3 (null) I
+        0x0000 - 0x0038 reg=4 (null) Z
+
+    #2              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'allocateNextCopy'
+      type          : '(J)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 9
+      ins           : 3
+      outs          : 5
+      insns size    : 70 16-bit code units
+34ddc8:                                        |[34ddc8] kotlinx.coroutines.internal.LockFreeTaskQueueCore.allocateNextCopy:(J)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+34ddd8: 2200 7e19                              |0000: new-instance v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore; // type@197e
+34dddc: 5261 4f46                              |0002: iget v1, v6, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.capacity:I // field@464f
+34dde0: da01 0102                              |0004: mul-int/lit8 v1, v1, #int 2 // #02
+34dde4: 5562 5146                              |0006: iget-boolean v2, v6, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.singleConsumer:Z // field@4651
+34dde8: 7030 1fb2 1002                         |0008: invoke-direct {v0, v1, v2}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.<init>:(IZ)V // method@b21f
+34ddee: 1701 ffff ff3f                         |000b: const-wide/32 v1, #float 2 // #3fffffff
+34ddf4: c071                                   |000e: and-long/2addr v1, v7
+34ddf6: 8411                                   |000f: long-to-int v1, v1
+34ddf8: 1802 0000 00c0 ffff ff0f               |0010: const-wide v2, #double 1.28823e-231 // #0fffffffc0000000
+34de02: c072                                   |0015: and-long/2addr v2, v7
+34de04: 1304 1e00                              |0016: const/16 v4, #int 30 // #1e
+34de08: c442                                   |0018: shr-long/2addr v2, v4
+34de0a: 8422                                   |0019: long-to-int v2, v2
+34de0c: 5263 5046                              |001a: iget v3, v6, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.mask:I // field@4650
+34de10: 9504 0103                              |001c: and-int v4, v1, v3
+34de14: 9505 0203                              |001e: and-int v5, v2, v3
+34de18: 3254 1b00                              |0020: if-eq v4, v5, 003b // +001b
+34de1c: 5464 4e46                              |0022: iget-object v4, v6, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34de20: b513                                   |0024: and-int/2addr v3, v1
+34de22: 6e20 3976 3400                         |0025: invoke-virtual {v4, v3}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.get:(I)Ljava/lang/Object; // method@7639
+34de28: 0c03                                   |0028: move-result-object v3
+34de2a: 3903 0700                              |0029: if-nez v3, 0030 // +0007
+34de2e: 2203 7d19                              |002b: new-instance v3, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Placeholder; // type@197d
+34de32: 7020 1db2 1300                         |002d: invoke-direct {v3, v1}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Placeholder;.<init>:(I)V // method@b21d
+34de38: 5404 4e46                              |0030: iget-object v4, v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34de3c: 5205 5046                              |0032: iget v5, v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.mask:I // field@4650
+34de40: b515                                   |0034: and-int/2addr v5, v1
+34de42: 6e30 3d76 5403                         |0035: invoke-virtual {v4, v5, v3}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.set:(ILjava/lang/Object;)V // method@763d
+34de48: d801 0101                              |0038: add-int/lit8 v1, v1, #int 1 // #01
+34de4c: 28e0                                   |003a: goto 001a // -0020
+34de4e: 6201 3f46                              |003b: sget-object v1, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.Companion:Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion; // field@463f
+34de52: 1902 0010                              |003d: const-wide/high16 v2, #long 1152921504606846976 // #1000
+34de56: 6e53 1cb2 7128                         |003f: invoke-virtual {v1, v7, v8, v2, v3}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion;.wo:(JJ)J // method@b21c
+34de5c: 0b07                                   |0042: move-result-wide v7
+34de5e: 5a07 4c46                              |0043: iput-wide v7, v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34de62: 1100                                   |0045: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=230
+        0x001a line=233
+        0x0022 line=235
+        0x0030 line=236
+        0x003b line=239
+      locals        :
+        0x0000 - 0x0046 reg=6 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+        0x0000 - 0x0046 reg=7 (null) J
+
+    #3              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'allocateOrGetNextCopy'
+      type          : '(J)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 4
+      insns size    : 18 16-bit code units
+34de64:                                        |[34de64] kotlinx.coroutines.internal.LockFreeTaskQueueCore.allocateOrGetNextCopy:(J)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+34de74: 5430 4a46                              |0000: iget-object v0, v3, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._next:Ljava/lang/Object; // field@464a
+34de78: 1f00 7e19                              |0002: check-cast v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore; // type@197e
+34de7c: 3800 0300                              |0004: if-eqz v0, 0007 // +0003
+34de80: 1100                                   |0006: return-object v0
+34de82: 6200 4b46                              |0007: sget-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._next$FU:Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater; // field@464b
+34de86: 1201                                   |0009: const/4 v1, #int 0 // #0
+34de88: 7030 21b2 4305                         |000a: invoke-direct {v3, v4, v5}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.allocateNextCopy:(J)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore; // method@b221
+34de8e: 0c02                                   |000d: move-result-object v2
+34de90: 7140 ec29 3021                         |000e: invoke-static {v0, v3, v1, v2}, Landroidx/concurrent/futures/AbstractResolvableFuture$SafeAtomicHelper$$ExternalSyntheticBackportWithForwarding0;.m:(Ljava/util/concurrent/atomic/AtomicReferenceFieldUpdater;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z // method@29ec
+34de96: 28ef                                   |0011: goto 0000 // -0011
+      catches       : (none)
+      positions     :
+        0x0000 line=340
+        0x0007 line=225
+      locals        :
+        0x0000 - 0x0012 reg=3 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+        0x0000 - 0x0012 reg=4 (null) J
+
+    #4              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'fillPlaceholder'
+      type          : '(ILjava/lang/Object;)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 30 16-bit code units
+34de98:                                        |[34de98] kotlinx.coroutines.internal.LockFreeTaskQueueCore.fillPlaceholder:(ILjava/lang/Object;)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+34dea8: 5420 4e46                              |0000: iget-object v0, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34deac: 5221 5046                              |0002: iget v1, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.mask:I // field@4650
+34deb0: b531                                   |0004: and-int/2addr v1, v3
+34deb2: 6e20 3976 1000                         |0005: invoke-virtual {v0, v1}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.get:(I)Ljava/lang/Object; // method@7639
+34deb8: 0c00                                   |0008: move-result-object v0
+34deba: 2001 7d19                              |0009: instance-of v1, v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Placeholder; // type@197d
+34debe: 3801 1100                              |000b: if-eqz v1, 001c // +0011
+34dec2: 1f00 7d19                              |000d: check-cast v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Placeholder; // type@197d
+34dec6: 5200 3846                              |000f: iget v0, v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Placeholder;.index:I // field@4638
+34deca: 3330 0b00                              |0011: if-ne v0, v3, 001c // +000b
+34dece: 5420 4e46                              |0013: iget-object v0, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34ded2: 5221 5046                              |0015: iget v1, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.mask:I // field@4650
+34ded6: b513                                   |0017: and-int/2addr v3, v1
+34ded8: 6e30 3d76 3004                         |0018: invoke-virtual {v0, v3, v4}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.set:(ILjava/lang/Object;)V // method@763d
+34dede: 1102                                   |001b: return-object v2
+34dee0: 1203                                   |001c: const/4 v3, #int 0 // #0
+34dee2: 1103                                   |001d: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=143
+        0x0009 line=154
+        0x0013 line=155
+      locals        :
+        0x0000 - 0x001e reg=2 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+        0x0000 - 0x001e reg=3 (null) I
+        0x0000 - 0x001e reg=4 (null) Ljava/lang/Object;
+
+    #5              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'markFrozen'
+      type          : '()J'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 9
+      ins           : 1
+      outs          : 6
+      insns size    : 25 16-bit code units
+34df94:                                        |[34df94] kotlinx.coroutines.internal.LockFreeTaskQueueCore.markFrozen:()J
+34dfa4: 5382 4c46                              |0000: iget-wide v2, v8, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34dfa8: 1900 0010                              |0002: const-wide/high16 v0, #long 1152921504606846976 // #1000
+34dfac: a004 0200                              |0004: and-long v4, v2, v0
+34dfb0: 1606 0000                              |0006: const-wide/16 v6, #int 0 // #0
+34dfb4: 3104 0406                              |0008: cmp-long v4, v4, v6
+34dfb8: 3804 0300                              |000a: if-eqz v4, 000d // +0003
+34dfbc: 1002                                   |000c: return-wide v2
+34dfbe: a104 0200                              |000d: or-long v4, v2, v0
+34dfc2: 6200 4d46                              |000f: sget-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@464d
+34dfc6: 0781                                   |0011: move-object v1, v8
+34dfc8: 7406 2c76 0000                         |0012: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.compareAndSet:(Ljava/lang/Object;JJ)Z // method@762c
+34dfce: 0a00                                   |0015: move-result v0
+34dfd0: 3800 eaff                              |0016: if-eqz v0, 0000 // -0016
+34dfd4: 1004                                   |0018: return-wide v4
+      catches       : (none)
+      positions     :
+        0x0000 line=336
+        0x000f line=338
+      locals        :
+        0x0000 - 0x0019 reg=8 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+
+    #6              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'removeSlowPath'
+      type          : '(II)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 12
+      ins           : 3
+      outs          : 6
+      insns size    : 62 16-bit code units
+34df08:                                        |[34df08] kotlinx.coroutines.internal.LockFreeTaskQueueCore.removeSlowPath:(II)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+34df18: 5392 4c46                              |0000: iget-wide v2, v9, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34df1c: 6200 3f46                              |0002: sget-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.Companion:Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion; // field@463f
+34df20: 1704 ffff ff3f                         |0004: const-wide/32 v4, #float 2 // #3fffffff
+34df26: c024                                   |0007: and-long/2addr v4, v2
+34df28: 8446                                   |0008: long-to-int v6, v4
+34df2a: 7100 f4a3 0000                         |0009: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+34df30: 0a01                                   |000c: move-result v1
+34df32: 3801 0b00                              |000d: if-eqz v1, 0018 // +000b
+34df36: 33a6 0300                              |000f: if-ne v6, v10, 0012 // +0003
+34df3a: 2807                                   |0011: goto 0018 // +0007
+34df3c: 220a 5311                              |0012: new-instance v10, Ljava/lang/AssertionError; // type@1153
+34df40: 7010 d570 0a00                         |0014: invoke-direct {v10}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+34df46: 270a                                   |0017: throw v10
+34df48: 1904 0010                              |0018: const-wide/high16 v4, #long 1152921504606846976 // #1000
+34df4c: c024                                   |001a: and-long/2addr v4, v2
+34df4e: 1607 0000                              |001b: const-wide/16 v7, #int 0 // #0
+34df52: 3101 0407                              |001d: cmp-long v1, v4, v7
+34df56: 3801 0700                              |001f: if-eqz v1, 0026 // +0007
+34df5a: 6e10 2ab2 0900                         |0021: invoke-virtual {v9}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.next:()Lkotlinx/coroutines/internal/LockFreeTaskQueueCore; // method@b22a
+34df60: 0c0a                                   |0024: move-result-object v10
+34df62: 110a                                   |0025: return-object v10
+34df64: 0701                                   |0026: move-object v1, v0
+34df66: 6200 4d46                              |0027: sget-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@464d
+34df6a: 6e40 19b2 21b3                         |0029: invoke-virtual {v1, v2, v3, v11}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion;.updateHead:(JI)J // method@b219
+34df70: 0b04                                   |002c: move-result-wide v4
+34df72: 0791                                   |002d: move-object v1, v9
+34df74: 7406 2c76 0000                         |002e: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.compareAndSet:(Ljava/lang/Object;JJ)Z // method@762c
+34df7a: 0a00                                   |0031: move-result v0
+34df7c: 3800 ceff                              |0032: if-eqz v0, 0000 // -0032
+34df80: 541a 4e46                              |0034: iget-object v10, v1, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34df84: 521b 5046                              |0036: iget v11, v1, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.mask:I // field@4650
+34df88: b56b                                   |0038: and-int/2addr v11, v6
+34df8a: 1200                                   |0039: const/4 v0, #int 0 // #0
+34df8c: 6e30 3d76 ba00                         |003a: invoke-virtual {v10, v11, v0}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.set:(ILjava/lang/Object;)V // method@763d
+34df92: 1100                                   |003d: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=330
+        0x0002 line=200
+        0x0009 line=201
+        0x0021 line=204
+        0x0027 line=206
+        0x0034 line=207
+      locals        :
+        0x0000 - 0x003e reg=9 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+        0x0000 - 0x003e reg=10 (null) I
+        0x0000 - 0x003e reg=11 (null) I
+
+  Virtual methods   -
+    #0              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'addLast'
+      type          : '(Ljava/lang/Object;)I'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 14
+      ins           : 2
+      outs          : 6
+      insns size    : 126 16-bit code units
+34db18:                                        |[34db18] kotlinx.coroutines.internal.LockFreeTaskQueueCore.addLast:(Ljava/lang/Object;)I
+34db28: 53c2 4c46                              |0000: iget-wide v2, v12, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34db2c: 1900 0030                              |0002: const-wide/high16 v0, #long 3458764513820540928 // #3000
+34db30: c020                                   |0004: and-long/2addr v0, v2
+34db32: 1606 0000                              |0005: const-wide/16 v6, #int 0 // #0
+34db36: 3100 0006                              |0007: cmp-long v0, v0, v6
+34db3a: 3800 0900                              |0009: if-eqz v0, 0012 // +0009
+34db3e: 620d 3f46                              |000b: sget-object v13, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.Companion:Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion; // field@463f
+34db42: 6e30 18b2 2d03                         |000d: invoke-virtual {v13, v2, v3}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion;.addFailReason:(J)I // method@b218
+34db48: 0a0d                                   |0010: move-result v13
+34db4a: 0f0d                                   |0011: return v13
+34db4c: 6200 3f46                              |0012: sget-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.Companion:Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion; // field@463f
+34db50: 1704 ffff ff3f                         |0014: const-wide/32 v4, #float 2 // #3fffffff
+34db56: c024                                   |0017: and-long/2addr v4, v2
+34db58: 8441                                   |0018: long-to-int v1, v4
+34db5a: 1804 0000 00c0 ffff ff0f               |0019: const-wide v4, #double 1.28823e-231 // #0fffffffc0000000
+34db64: c024                                   |001e: and-long/2addr v4, v2
+34db66: 1308 1e00                              |001f: const/16 v8, #int 30 // #1e
+34db6a: c484                                   |0021: shr-long/2addr v4, v8
+34db6c: 8448                                   |0022: long-to-int v8, v4
+34db6e: 52c9 5046                              |0023: iget v9, v12, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.mask:I // field@4650
+34db72: d804 0802                              |0025: add-int/lit8 v4, v8, #int 2 // #02
+34db76: b594                                   |0027: and-int/2addr v4, v9
+34db78: 9505 0109                              |0028: and-int v5, v1, v9
+34db7c: 121a                                   |002a: const/4 v10, #int 1 // #1
+34db7e: 3354 0300                              |002b: if-ne v4, v5, 002e // +0003
+34db82: 0f0a                                   |002d: return v10
+34db84: 55c4 5146                              |002e: iget-boolean v4, v12, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.singleConsumer:Z // field@4651
+34db88: 1405 ffff ff3f                         |0030: const v5, #float 2 // #3fffffff
+34db8e: 3904 1d00                              |0033: if-nez v4, 0050 // +001d
+34db92: 54c4 4e46                              |0035: iget-object v4, v12, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34db96: 950b 0809                              |0037: and-int v11, v8, v9
+34db9a: 6e20 3976 b400                         |0039: invoke-virtual {v4, v11}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.get:(I)Ljava/lang/Object; // method@7639
+34dba0: 0c04                                   |003c: move-result-object v4
+34dba2: 3804 1300                              |003d: if-eqz v4, 0050 // +0013
+34dba6: 52c0 4f46                              |003f: iget v0, v12, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.capacity:I // field@464f
+34dbaa: 1302 0004                              |0041: const/16 v2, #int 1024 // #400
+34dbae: 3420 0c00                              |0043: if-lt v0, v2, 004f // +000c
+34dbb2: b118                                   |0045: sub-int/2addr v8, v1
+34dbb4: 9501 0805                              |0046: and-int v1, v8, v5
+34dbb8: e100 0001                              |0048: shr-int/lit8 v0, v0, #int 1 // #01
+34dbbc: 3701 0300                              |004a: if-le v1, v0, 004d // +0003
+34dbc0: 2803                                   |004c: goto 004f // +0003
+34dbc2: 07c1                                   |004d: move-object v1, v12
+34dbc4: 28b2                                   |004e: goto 0000 // -004e
+34dbc6: 0f0a                                   |004f: return v10
+34dbc8: d801 0801                              |0050: add-int/lit8 v1, v8, #int 1 // #01
+34dbcc: b551                                   |0052: and-int/2addr v1, v5
+34dbce: 0704                                   |0053: move-object v4, v0
+34dbd0: 6200 4d46                              |0054: sget-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@464d
+34dbd4: 6e40 1ab2 2413                         |0056: invoke-virtual {v4, v2, v3, v1}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion;.updateTail:(JI)J // method@b21a
+34dbda: 0b04                                   |0059: move-result-wide v4
+34dbdc: 07c1                                   |005a: move-object v1, v12
+34dbde: 7406 2c76 0000                         |005b: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.compareAndSet:(Ljava/lang/Object;JJ)Z // method@762c
+34dbe4: 0a00                                   |005e: move-result v0
+34dbe6: 3800 a1ff                              |005f: if-eqz v0, 0000 // -005f
+34dbea: 5410 4e46                              |0061: iget-object v0, v1, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34dbee: 9502 0809                              |0063: and-int v2, v8, v9
+34dbf2: 6e30 3d76 200d                         |0065: invoke-virtual {v0, v2, v13}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.set:(ILjava/lang/Object;)V // method@763d
+34dbf8: 0710                                   |0068: move-object v0, v1
+34dbfa: 5302 4c46                              |0069: iget-wide v2, v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34dbfe: 1904 0010                              |006b: const-wide/high16 v4, #long 1152921504606846976 // #1000
+34dc02: c042                                   |006d: and-long/2addr v2, v4
+34dc04: 3102 0206                              |006e: cmp-long v2, v2, v6
+34dc08: 3802 0c00                              |0070: if-eqz v2, 007c // +000c
+34dc0c: 6e10 2ab2 0000                         |0072: invoke-virtual {v0}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.next:()Lkotlinx/coroutines/internal/LockFreeTaskQueueCore; // method@b22a
+34dc12: 0c00                                   |0075: move-result-object v0
+34dc14: 7030 24b2 800d                         |0076: invoke-direct {v0, v8, v13}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.fillPlaceholder:(ILjava/lang/Object;)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore; // method@b224
+34dc1a: 0c00                                   |0079: move-result-object v0
+34dc1c: 3900 efff                              |007a: if-nez v0, 0069 // -0011
+34dc20: 120d                                   |007c: const/4 v13, #int 0 // #0
+34dc22: 0f0d                                   |007d: return v13
+      catches       : (none)
+      positions     :
+        0x0000 line=320
+        0x000b line=106
+        0x0012 line=107
+        0x0023 line=108
+        0x002e line=114
+        0x003f line=120
+        0x0054 line=127
+        0x0061 line=129
+        0x0069 line=133
+        0x0072 line=134
+      locals        :
+        0x0000 - 0x007e reg=12 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+        0x0000 - 0x007e reg=13 (null) Ljava/lang/Object;
+
+    #1              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'close'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 10
+      ins           : 1
+      outs          : 6
+      insns size    : 36 16-bit code units
+34da50:                                        |[34da50] kotlinx.coroutines.internal.LockFreeTaskQueueCore.close:()Z
+34da60: 5392 4c46                              |0000: iget-wide v2, v9, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34da64: 1900 0020                              |0002: const-wide/high16 v0, #long 2305843009213693952 // #2000
+34da68: a004 0200                              |0004: and-long v4, v2, v0
+34da6c: 1606 0000                              |0006: const-wide/16 v6, #int 0 // #0
+34da70: 3104 0406                              |0008: cmp-long v4, v4, v6
+34da74: 1218                                   |000a: const/4 v8, #int 1 // #1
+34da76: 3804 0300                              |000b: if-eqz v4, 000e // +0003
+34da7a: 0f08                                   |000d: return v8
+34da7c: 1904 0010                              |000e: const-wide/high16 v4, #long 1152921504606846976 // #1000
+34da80: c024                                   |0010: and-long/2addr v4, v2
+34da82: 3104 0406                              |0011: cmp-long v4, v4, v6
+34da86: 3804 0400                              |0013: if-eqz v4, 0017 // +0004
+34da8a: 1200                                   |0015: const/4 v0, #int 0 // #0
+34da8c: 0f00                                   |0016: return v0
+34da8e: a104 0200                              |0017: or-long v4, v2, v0
+34da92: 6200 4d46                              |0019: sget-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@464d
+34da96: 0791                                   |001b: move-object v1, v9
+34da98: 7406 2c76 0000                         |001c: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.compareAndSet:(Ljava/lang/Object;JJ)Z // method@762c
+34da9e: 0a00                                   |001f: move-result v0
+34daa0: 3900 0300                              |0020: if-nez v0, 0023 // +0003
+34daa4: 28de                                   |0022: goto 0000 // -0022
+34daa6: 0f08                                   |0023: return v8
+      catches       : (none)
+      positions     :
+        0x0000 line=316
+        0x0019 line=318
+      locals        :
+        0x0000 - 0x0024 reg=9 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+
+    #2              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'getSize'
+      type          : '()I'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 0
+      insns size    : 23 16-bit code units
+34dc24:                                        |[34dc24] kotlinx.coroutines.internal.LockFreeTaskQueueCore.getSize:()I
+34dc34: 5350 4c46                              |0000: iget-wide v0, v5, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34dc38: 1702 ffff ff3f                         |0002: const-wide/32 v2, #float 2 // #3fffffff
+34dc3e: c002                                   |0005: and-long/2addr v2, v0
+34dc40: 8422                                   |0006: long-to-int v2, v2
+34dc42: 1803 0000 00c0 ffff ff0f               |0007: const-wide v3, #double 1.28823e-231 // #0fffffffc0000000
+34dc4c: c030                                   |000c: and-long/2addr v0, v3
+34dc4e: 1303 1e00                              |000d: const/16 v3, #int 30 // #1e
+34dc52: c430                                   |000f: shr-long/2addr v0, v3
+34dc54: 8400                                   |0010: long-to-int v0, v0
+34dc56: b120                                   |0011: sub-int/2addr v0, v2
+34dc58: 1401 ffff ff3f                         |0012: const v1, #float 2 // #3fffffff
+34dc5e: b510                                   |0015: and-int/2addr v0, v1
+34dc60: 0f00                                   |0016: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=92
+      locals        :
+        0x0000 - 0x0017 reg=5 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+
+    #3              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'isClosed'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 0
+      insns size    : 15 16-bit code units
+34daa8:                                        |[34daa8] kotlinx.coroutines.internal.LockFreeTaskQueueCore.isClosed:()Z
+34dab8: 5340 4c46                              |0000: iget-wide v0, v4, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34dabc: 1902 0020                              |0002: const-wide/high16 v2, #long 2305843009213693952 // #2000
+34dac0: c020                                   |0004: and-long/2addr v0, v2
+34dac2: 1602 0000                              |0005: const-wide/16 v2, #int 0 // #0
+34dac6: 3100 0002                              |0007: cmp-long v0, v0, v2
+34daca: 3800 0400                              |0009: if-eqz v0, 000d // +0004
+34dace: 1210                                   |000b: const/4 v0, #int 1 // #1
+34dad0: 0f00                                   |000c: return v0
+34dad2: 1200                                   |000d: const/4 v0, #int 0 // #0
+34dad4: 0f00                                   |000e: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=261
+      locals        :
+        0x0000 - 0x000f reg=4 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+
+    #4              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'isEmpty'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 0
+      insns size    : 23 16-bit code units
+34dad8:                                        |[34dad8] kotlinx.coroutines.internal.LockFreeTaskQueueCore.isEmpty:()Z
+34dae8: 5350 4c46                              |0000: iget-wide v0, v5, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34daec: 1702 ffff ff3f                         |0002: const-wide/32 v2, #float 2 // #3fffffff
+34daf2: c002                                   |0005: and-long/2addr v2, v0
+34daf4: 8422                                   |0006: long-to-int v2, v2
+34daf6: 1803 0000 00c0 ffff ff0f               |0007: const-wide v3, #double 1.28823e-231 // #0fffffffc0000000
+34db00: c030                                   |000c: and-long/2addr v0, v3
+34db02: 1303 1e00                              |000d: const/16 v3, #int 30 // #1e
+34db06: c430                                   |000f: shr-long/2addr v0, v3
+34db08: 8400                                   |0010: long-to-int v0, v0
+34db0a: 3302 0400                              |0011: if-ne v2, v0, 0015 // +0004
+34db0e: 1210                                   |0013: const/4 v0, #int 1 // #1
+34db10: 0f00                                   |0014: return v0
+34db12: 1200                                   |0015: const/4 v0, #int 0 // #0
+34db14: 0f00                                   |0016: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=91
+      locals        :
+        0x0000 - 0x0017 reg=5 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+
+    #5              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'map'
+      type          : '(Lkotlin/jvm/functions/Function1;)Ljava/util/List;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 2
+      insns size    : 58 16-bit code units
+34dd44:                                        |[34dd44] kotlinx.coroutines.internal.LockFreeTaskQueueCore.map:(Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+34dd54: 2200 1412                              |0000: new-instance v0, Ljava/util/ArrayList; // type@1214
+34dd58: 5261 4f46                              |0002: iget v1, v6, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.capacity:I // field@464f
+34dd5c: 7020 2974 1000                         |0004: invoke-direct {v0, v1}, Ljava/util/ArrayList;.<init>:(I)V // method@7429
+34dd62: 5361 4c46                              |0007: iget-wide v1, v6, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34dd66: 1703 ffff ff3f                         |0009: const-wide/32 v3, #float 2 // #3fffffff
+34dd6c: c013                                   |000c: and-long/2addr v3, v1
+34dd6e: 8433                                   |000d: long-to-int v3, v3
+34dd70: 1804 0000 00c0 ffff ff0f               |000e: const-wide v4, #double 1.28823e-231 // #0fffffffc0000000
+34dd7a: c041                                   |0013: and-long/2addr v1, v4
+34dd7c: 1304 1e00                              |0014: const/16 v4, #int 30 // #1e
+34dd80: c441                                   |0016: shr-long/2addr v1, v4
+34dd82: 8411                                   |0017: long-to-int v1, v1
+34dd84: 5262 5046                              |0018: iget v2, v6, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.mask:I // field@4650
+34dd88: 9504 0302                              |001a: and-int v4, v3, v2
+34dd8c: 9505 0102                              |001c: and-int v5, v1, v2
+34dd90: 3254 1900                              |001e: if-eq v4, v5, 0037 // +0019
+34dd94: 5464 4e46                              |0020: iget-object v4, v6, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34dd98: b532                                   |0022: and-int/2addr v2, v3
+34dd9a: 6e20 3976 2400                         |0023: invoke-virtual {v4, v2}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.get:(I)Ljava/lang/Object; // method@7639
+34dda0: 0c02                                   |0026: move-result-object v2
+34dda2: 3802 0d00                              |0027: if-eqz v2, 0034 // +000d
+34dda6: 2024 7d19                              |0029: instance-of v4, v2, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Placeholder; // type@197d
+34ddaa: 3904 0900                              |002b: if-nez v4, 0034 // +0009
+34ddae: 7220 9292 2700                         |002d: invoke-interface {v7, v2}, Lkotlin/jvm/functions/Function1;.invoke:(Ljava/lang/Object;)Ljava/lang/Object; // method@9292
+34ddb4: 0c02                                   |0030: move-result-object v2
+34ddb6: 6e20 2c74 2000                         |0031: invoke-virtual {v0, v2}, Ljava/util/ArrayList;.add:(Ljava/lang/Object;)Z // method@742c
+34ddbc: d803 0301                              |0034: add-int/lit8 v3, v3, #int 1 // #01
+34ddc0: 28e2                                   |0036: goto 0018 // -001e
+34ddc2: 1f00 2812                              |0037: check-cast v0, Ljava/util/List; // type@1228
+34ddc6: 1100                                   |0039: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=246
+        0x0007 line=247
+        0x0018 line=249
+        0x0020 line=251
+        0x0029 line=253
+        0x0037 line=257
+      locals        :
+        0x0000 - 0x003a reg=6 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+        0x0000 - 0x003a reg=7 (null) Lkotlin/jvm/functions/Function1;
+
+    #6              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'next'
+      type          : '()Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 9 16-bit code units
+34dee4:                                        |[34dee4] kotlinx.coroutines.internal.LockFreeTaskQueueCore.next:()Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+34def4: 7010 29b2 0200                         |0000: invoke-direct {v2}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.markFrozen:()J // method@b229
+34defa: 0b00                                   |0003: move-result-wide v0
+34defc: 7030 22b2 0201                         |0004: invoke-direct {v2, v0, v1}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.allocateOrGetNextCopy:(J)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore; // method@b222
+34df02: 0c00                                   |0007: move-result-object v0
+34df04: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=214
+      locals        :
+        0x0000 - 0x0009 reg=2 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+
+    #7              : (in Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;)
+      name          : 'removeFirstOrNull'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 11
+      ins           : 1
+      outs          : 6
+      insns size    : 103 16-bit code units
+34dc64:                                        |[34dc64] kotlinx.coroutines.internal.LockFreeTaskQueueCore.removeFirstOrNull:()Ljava/lang/Object;
+34dc74: 53a2 4c46                              |0000: iget-wide v2, v10, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state:J // field@464c
+34dc78: 1900 0010                              |0002: const-wide/high16 v0, #long 1152921504606846976 // #1000
+34dc7c: c020                                   |0004: and-long/2addr v0, v2
+34dc7e: 1604 0000                              |0005: const-wide/16 v4, #int 0 // #0
+34dc82: 3100 0004                              |0007: cmp-long v0, v0, v4
+34dc86: 3800 0500                              |0009: if-eqz v0, 000e // +0005
+34dc8a: 6200 4746                              |000b: sget-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.REMOVE_FROZEN:Lkotlinx/coroutines/internal/Symbol; // field@4647
+34dc8e: 1100                                   |000d: return-object v0
+34dc90: 6200 3f46                              |000e: sget-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.Companion:Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion; // field@463f
+34dc94: 1704 ffff ff3f                         |0010: const-wide/32 v4, #float 2 // #3fffffff
+34dc9a: c024                                   |0013: and-long/2addr v4, v2
+34dc9c: 8446                                   |0014: long-to-int v6, v4
+34dc9e: 1804 0000 00c0 ffff ff0f               |0015: const-wide v4, #double 1.28823e-231 // #0fffffffc0000000
+34dca8: c024                                   |001a: and-long/2addr v4, v2
+34dcaa: 1301 1e00                              |001b: const/16 v1, #int 30 // #1e
+34dcae: c414                                   |001d: shr-long/2addr v4, v1
+34dcb0: 8441                                   |001e: long-to-int v1, v4
+34dcb2: 52a4 5046                              |001f: iget v4, v10, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.mask:I // field@4650
+34dcb6: b541                                   |0021: and-int/2addr v1, v4
+34dcb8: 9505 0604                              |0022: and-int v5, v6, v4
+34dcbc: 1207                                   |0024: const/4 v7, #int 0 // #0
+34dcbe: 3351 0300                              |0025: if-ne v1, v5, 0028 // +0003
+34dcc2: 1107                                   |0027: return-object v7
+34dcc4: 54a1 4e46                              |0028: iget-object v1, v10, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34dcc8: b564                                   |002a: and-int/2addr v4, v6
+34dcca: 6e20 3976 4100                         |002b: invoke-virtual {v1, v4}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.get:(I)Ljava/lang/Object; // method@7639
+34dcd0: 0c08                                   |002e: move-result-object v8
+34dcd2: 3908 0900                              |002f: if-nez v8, 0038 // +0009
+34dcd6: 55a0 5146                              |0031: iget-boolean v0, v10, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.singleConsumer:Z // field@4651
+34dcda: 3800 0300                              |0033: if-eqz v0, 0036 // +0003
+34dcde: 1107                                   |0035: return-object v7
+34dce0: 07a1                                   |0036: move-object v1, v10
+34dce2: 28c9                                   |0037: goto 0000 // -0037
+34dce4: 2081 7d19                              |0038: instance-of v1, v8, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Placeholder; // type@197d
+34dce8: 3801 0300                              |003a: if-eqz v1, 003d // +0003
+34dcec: 1107                                   |003c: return-object v7
+34dcee: d801 0601                              |003d: add-int/lit8 v1, v6, #int 1 // #01
+34dcf2: 1404 ffff ff3f                         |003f: const v4, #float 2 // #3fffffff
+34dcf8: 9509 0104                              |0042: and-int v9, v1, v4
+34dcfc: 0701                                   |0044: move-object v1, v0
+34dcfe: 6200 4d46                              |0045: sget-object v0, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;._state$FU:Ljava/util/concurrent/atomic/AtomicLongFieldUpdater; // field@464d
+34dd02: 6e40 19b2 2193                         |0047: invoke-virtual {v1, v2, v3, v9}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore$Companion;.updateHead:(JI)J // method@b219
+34dd08: 0b04                                   |004a: move-result-wide v4
+34dd0a: 07a1                                   |004b: move-object v1, v10
+34dd0c: 7406 2c76 0000                         |004c: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Ljava/util/concurrent/atomic/AtomicLongFieldUpdater;.compareAndSet:(Ljava/lang/Object;JJ)Z // method@762c
+34dd12: 0a00                                   |004f: move-result v0
+34dd14: 3800 0b00                              |0050: if-eqz v0, 005b // +000b
+34dd18: 5410 4e46                              |0052: iget-object v0, v1, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.array:Ljava/util/concurrent/atomic/AtomicReferenceArray; // field@464e
+34dd1c: 5212 5046                              |0054: iget v2, v1, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.mask:I // field@4650
+34dd20: b562                                   |0056: and-int/2addr v2, v6
+34dd22: 6e30 3d76 2007                         |0057: invoke-virtual {v0, v2, v7}, Ljava/util/concurrent/atomic/AtomicReferenceArray;.set:(ILjava/lang/Object;)V // method@763d
+34dd28: 1108                                   |005a: return-object v8
+34dd2a: 5510 5146                              |005b: iget-boolean v0, v1, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.singleConsumer:Z // field@4651
+34dd2e: 3800 a3ff                              |005d: if-eqz v0, 0000 // -005d
+34dd32: 0710                                   |005f: move-object v0, v1
+34dd34: 7030 2cb2 6009                         |0060: invoke-direct {v0, v6, v9}, Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;.removeSlowPath:(II)Lkotlinx/coroutines/internal/LockFreeTaskQueueCore; // method@b22c
+34dd3a: 0c00                                   |0063: move-result-object v0
+34dd3c: 3900 fcff                              |0064: if-nez v0, 0060 // -0004
+34dd40: 1108                                   |0066: return-object v8
+      catches       : (none)
+      positions     :
+        0x0000 line=325
+        0x000b line=166
+        0x000e line=167
+        0x001f line=168
+        0x0028 line=169
+        0x0031 line=172
+        0x0038 line=177
+        0x0045 line=180
+        0x0052 line=183
+        0x005b line=187
+        0x0060 line=192
+      locals        :
+        0x0000 - 0x0067 reg=10 this Lkotlinx/coroutines/internal/LockFreeTaskQueueCore;
+
+  source_file_idx   : 18715 (LockFreeTaskQueue.kt)
+

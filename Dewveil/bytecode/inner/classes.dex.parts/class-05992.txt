@@ -1,0 +1,886 @@
+Class #5992            -
+  Class descriptor  : 'Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'beg'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'chars'
+      type          : '[C'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'cur'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'dn'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'end'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'length'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #6              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'pos'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : '<init>'
+      type          : '(Ljavax/security/auth/x500/X500Principal;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 18 16-bit code units
+768b7c:                                        |[768b7c] com.squareup.okhttp.internal.tls.DistinguishedNameParser.<init>:(Ljavax/security/auth/x500/X500Principal;)V
+768b8c: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+768b92: 1a00 4e5d                              |0003: const-string v0, "RFC2253" // string@5d4e
+768b96: 6e20 97d7 0200                         |0005: invoke-virtual {v2, v0}, Ljavax/security/auth/x500/X500Principal;.getName:(Ljava/lang/String;)Ljava/lang/String; // method@d797
+768b9c: 0c02                                   |0008: move-result-object v2
+768b9e: 5b12 9389                              |0009: iput-object v2, v1, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+768ba2: 6e10 16d2 0200                         |000b: invoke-virtual {v2}, Ljava/lang/String;.length:()I // method@d216
+768ba8: 0a02                                   |000e: move-result v2
+768baa: 5912 9589                              |000f: iput v2, v1, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+768bae: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=39
+        0x0003 line=43
+        0x000b line=44
+      locals        :
+        0x0000 - 0x0012 reg=1 this Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;
+        0x0000 - 0x0012 reg=2 (null) Ljavax/security/auth/x500/X500Principal;
+
+    #1              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'escapedAV'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 9
+      ins           : 1
+      outs          : 4
+      insns size    : 158 16-bit code units
+768bb0:                                        |[768bb0] com.squareup.okhttp.internal.tls.DistinguishedNameParser.escapedAV:()Ljava/lang/String;
+768bc0: 5280 9689                              |0000: iget v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768bc4: 5980 9089                              |0002: iput v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+768bc8: 5980 9489                              |0004: iput v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768bcc: 5280 9689                              |0006: iget v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768bd0: 5281 9589                              |0008: iget v1, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+768bd4: 3410 0f00                              |000a: if-lt v0, v1, 0019 // +000f
+768bd8: 2200 971a                              |000c: new-instance v0, Ljava/lang/String; // type@1a97
+768bdc: 5481 9189                              |000e: iget-object v1, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+768be0: 5282 9089                              |0010: iget v2, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+768be4: 5288 9489                              |0012: iget v8, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768be8: b128                                   |0014: sub-int/2addr v8, v2
+768bea: 7040 f5d1 1082                         |0015: invoke-direct {v0, v1, v2, v8}, Ljava/lang/String;.<init>:([CII)V // method@d1f5
+768bf0: 1100                                   |0018: return-object v0
+768bf2: 5481 9189                              |0019: iget-object v1, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+768bf6: 4902 0100                              |001b: aget-char v2, v1, v0
+768bfa: 1303 2c00                              |001d: const/16 v3, #int 44 // #2c
+768bfe: 1304 2b00                              |001f: const/16 v4, #int 43 // #2b
+768c02: 1305 3b00                              |0021: const/16 v5, #int 59 // #3b
+768c06: 1306 2000                              |0023: const/16 v6, #int 32 // #20
+768c0a: 3262 3900                              |0025: if-eq v2, v6, 005e // +0039
+768c0e: 3252 2a00                              |0027: if-eq v2, v5, 0051 // +002a
+768c12: 1305 5c00                              |0029: const/16 v5, #int 92 // #5c
+768c16: 3252 1300                              |002b: if-eq v2, v5, 003e // +0013
+768c1a: 3242 2400                              |002d: if-eq v2, v4, 0051 // +0024
+768c1e: 3232 2200                              |002f: if-eq v2, v3, 0051 // +0022
+768c22: 5283 9489                              |0031: iget v3, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768c26: d804 0301                              |0033: add-int/lit8 v4, v3, #int 1 // #01
+768c2a: 5984 9489                              |0035: iput v4, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768c2e: 5002 0103                              |0037: aput-char v2, v1, v3
+768c32: d800 0001                              |0039: add-int/lit8 v0, v0, #int 1 // #01
+768c36: 5980 9689                              |003b: iput v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768c3a: 28c9                                   |003d: goto 0006 // -0037
+768c3c: 5280 9489                              |003e: iget v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768c40: d802 0001                              |0040: add-int/lit8 v2, v0, #int 1 // #01
+768c44: 5982 9489                              |0042: iput v2, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768c48: 7010 79ce 0800                         |0044: invoke-direct {v8}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.getEscaped:()C // method@ce79
+768c4e: 0a02                                   |0047: move-result v2
+768c50: 5002 0100                              |0048: aput-char v2, v1, v0
+768c54: 5280 9689                              |004a: iget v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768c58: d800 0001                              |004c: add-int/lit8 v0, v0, #int 1 // #01
+768c5c: 5980 9689                              |004e: iput v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768c60: 28b6                                   |0050: goto 0006 // -004a
+768c62: 2200 971a                              |0051: new-instance v0, Ljava/lang/String; // type@1a97
+768c66: 5481 9189                              |0053: iget-object v1, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+768c6a: 5282 9089                              |0055: iget v2, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+768c6e: 5288 9489                              |0057: iget v8, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768c72: b128                                   |0059: sub-int/2addr v8, v2
+768c74: 7040 f5d1 1082                         |005a: invoke-direct {v0, v1, v2, v8}, Ljava/lang/String;.<init>:([CII)V // method@d1f5
+768c7a: 1100                                   |005d: return-object v0
+768c7c: 5282 9489                              |005e: iget v2, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768c80: 5982 9289                              |0060: iput v2, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.cur:I // field@8992
+768c84: d800 0001                              |0062: add-int/lit8 v0, v0, #int 1 // #01
+768c88: 5980 9689                              |0064: iput v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768c8c: d800 0201                              |0066: add-int/lit8 v0, v2, #int 1 // #01
+768c90: 5980 9489                              |0068: iput v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768c94: 5006 0102                              |006a: aput-char v6, v1, v2
+768c98: 5280 9689                              |006c: iget v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768c9c: 5281 9589                              |006e: iget v1, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+768ca0: 3510 1500                              |0070: if-ge v0, v1, 0085 // +0015
+768ca4: 5482 9189                              |0072: iget-object v2, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+768ca8: 4907 0200                              |0074: aget-char v7, v2, v0
+768cac: 3367 0f00                              |0076: if-ne v7, v6, 0085 // +000f
+768cb0: 5281 9489                              |0078: iget v1, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768cb4: d807 0101                              |007a: add-int/lit8 v7, v1, #int 1 // #01
+768cb8: 5987 9489                              |007c: iput v7, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+768cbc: 5006 0201                              |007e: aput-char v6, v2, v1
+768cc0: d800 0001                              |0080: add-int/lit8 v0, v0, #int 1 // #01
+768cc4: 5980 9689                              |0082: iput v0, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768cc8: 28e8                                   |0084: goto 006c // -0018
+768cca: 3210 0c00                              |0085: if-eq v0, v1, 0091 // +000c
+768cce: 5481 9189                              |0087: iget-object v1, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+768cd2: 4900 0100                              |0089: aget-char v0, v1, v0
+768cd6: 3230 0600                              |008b: if-eq v0, v3, 0091 // +0006
+768cda: 3240 0400                              |008d: if-eq v0, v4, 0091 // +0004
+768cde: 3350 77ff                              |008f: if-ne v0, v5, 0006 // -0089
+768ce2: 2200 971a                              |0091: new-instance v0, Ljava/lang/String; // type@1a97
+768ce6: 5481 9189                              |0093: iget-object v1, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+768cea: 5282 9089                              |0095: iget v2, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+768cee: 5288 9289                              |0097: iget v8, v8, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.cur:I // field@8992
+768cf2: b128                                   |0099: sub-int/2addr v8, v2
+768cf4: 7040 f5d1 1082                         |009a: invoke-direct {v0, v1, v2, v8}, Ljava/lang/String;.<init>:([CII)V // method@d1f5
+768cfa: 1100                                   |009d: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=188
+        0x0004 line=189
+        0x0006 line=191
+        0x000c line=193
+        0x0019 line=196
+        0x0031 line=225
+        0x003b line=226
+        0x003e line=204
+        0x004a line=205
+        0x0051 line=201
+        0x005e line=210
+        0x0064 line=212
+        0x0068 line=213
+        0x006c line=215
+        0x0078 line=216
+        0x0082 line=215
+        0x0087 line=218
+        0x0091 line=221
+      locals        :
+        0x0000 - 0x009e reg=8 this Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;
+
+    #2              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'getByte'
+      type          : '(I)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 11
+      ins           : 2
+      outs          : 2
+      insns size    : 131 16-bit code units
+768cfc:                                        |[768cfc] com.squareup.okhttp.internal.tls.DistinguishedNameParser.getByte:(I)I
+768d0c: d800 0a01                              |0000: add-int/lit8 v0, v10, #int 1 // #01
+768d10: 5291 9589                              |0002: iget v1, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+768d14: 1a02 6a55                              |0004: const-string v2, "Malformed DN: " // string@556a
+768d18: 3510 6800                              |0006: if-ge v0, v1, 006e // +0068
+768d1c: 5491 9189                              |0008: iget-object v1, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+768d20: 490a 010a                              |000a: aget-char v10, v1, v10
+768d24: 1303 4600                              |000c: const/16 v3, #int 70 // #46
+768d28: 1304 6600                              |000e: const/16 v4, #int 102 // #66
+768d2c: 1305 4100                              |0010: const/16 v5, #int 65 // #41
+768d30: 1306 3900                              |0012: const/16 v6, #int 57 // #39
+768d34: 1307 6100                              |0014: const/16 v7, #int 97 // #61
+768d38: 1308 3000                              |0016: const/16 v8, #int 48 // #30
+768d3c: 348a 0600                              |0018: if-lt v10, v8, 001e // +0006
+768d40: 366a 0400                              |001a: if-gt v10, v6, 001e // +0004
+768d44: b18a                                   |001c: sub-int/2addr v10, v8
+768d46: 280e                                   |001d: goto 002b // +000e
+768d48: 347a 0700                              |001e: if-lt v10, v7, 0025 // +0007
+768d4c: 364a 0500                              |0020: if-gt v10, v4, 0025 // +0005
+768d50: d80a 0aa9                              |0022: add-int/lit8 v10, v10, #int -87 // #a9
+768d54: 2807                                   |0024: goto 002b // +0007
+768d56: 345a 3400                              |0025: if-lt v10, v5, 0059 // +0034
+768d5a: 363a 3200                              |0027: if-gt v10, v3, 0059 // +0032
+768d5e: d80a 0ac9                              |0029: add-int/lit8 v10, v10, #int -55 // #c9
+768d62: 4900 0100                              |002b: aget-char v0, v1, v0
+768d66: 3480 0600                              |002d: if-lt v0, v8, 0033 // +0006
+768d6a: 3660 0400                              |002f: if-gt v0, v6, 0033 // +0004
+768d6e: b180                                   |0031: sub-int/2addr v0, v8
+768d70: 280e                                   |0032: goto 0040 // +000e
+768d72: 3470 0700                              |0033: if-lt v0, v7, 003a // +0007
+768d76: 3640 0500                              |0035: if-gt v0, v4, 003a // +0005
+768d7a: d800 00a9                              |0037: add-int/lit8 v0, v0, #int -87 // #a9
+768d7e: 2807                                   |0039: goto 0040 // +0007
+768d80: 3450 0a00                              |003a: if-lt v0, v5, 0044 // +000a
+768d84: 3630 0800                              |003c: if-gt v0, v3, 0044 // +0008
+768d88: d800 00c9                              |003e: add-int/lit8 v0, v0, #int -55 // #c9
+768d8c: e009 0a04                              |0040: shl-int/lit8 v9, v10, #int 4 // #04
+768d90: b009                                   |0042: add-int/2addr v9, v0
+768d92: 0f09                                   |0043: return v9
+768d94: 220a 7b1a                              |0044: new-instance v10, Ljava/lang/IllegalStateException; // type@1a7b
+768d98: 2200 991a                              |0046: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+768d9c: 7020 3cd2 2000                         |0048: invoke-direct {v0, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+768da2: 5499 9389                              |004b: iget-object v9, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+768da6: 6e20 45d2 9000                         |004d: invoke-virtual {v0, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+768dac: 0c09                                   |0050: move-result-object v9
+768dae: 6e10 58d2 0900                         |0051: invoke-virtual {v9}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+768db4: 0c09                                   |0054: move-result-object v9
+768db6: 7020 4cd1 9a00                         |0055: invoke-direct {v10, v9}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+768dbc: 270a                                   |0058: throw v10
+768dbe: 220a 7b1a                              |0059: new-instance v10, Ljava/lang/IllegalStateException; // type@1a7b
+768dc2: 2200 991a                              |005b: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+768dc6: 7020 3cd2 2000                         |005d: invoke-direct {v0, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+768dcc: 5499 9389                              |0060: iget-object v9, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+768dd0: 6e20 45d2 9000                         |0062: invoke-virtual {v0, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+768dd6: 0c09                                   |0065: move-result-object v9
+768dd8: 6e10 58d2 0900                         |0066: invoke-virtual {v9}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+768dde: 0c09                                   |0069: move-result-object v9
+768de0: 7020 4cd1 9a00                         |006a: invoke-direct {v10, v9}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+768de6: 270a                                   |006d: throw v10
+768de8: 220a 7b1a                              |006e: new-instance v10, Ljava/lang/IllegalStateException; // type@1a7b
+768dec: 2200 991a                              |0070: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+768df0: 7020 3cd2 2000                         |0072: invoke-direct {v0, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+768df6: 5499 9389                              |0075: iget-object v9, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+768dfa: 6e20 45d2 9000                         |0077: invoke-virtual {v0, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+768e00: 0c09                                   |007a: move-result-object v9
+768e02: 6e10 58d2 0900                         |007b: invoke-virtual {v9}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+768e08: 0c09                                   |007e: move-result-object v9
+768e0a: 7020 4cd1 9a00                         |007f: invoke-direct {v10, v9}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+768e10: 270a                                   |0082: throw v10
+      catches       : (none)
+      positions     :
+        0x0002 line=312
+        0x0008 line=318
+        0x002b line=329
+        0x0044 line=337
+        0x0059 line=326
+        0x006e line=313
+      locals        :
+        0x0000 - 0x0083 reg=9 this Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;
+        0x0000 - 0x0083 reg=10 (null) I
+
+    #3              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'getEscaped'
+      type          : '()C'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 96 16-bit code units
+768e14:                                        |[768e14] com.squareup.okhttp.internal.tls.DistinguishedNameParser.getEscaped:()C
+768e24: 5230 9689                              |0000: iget v0, v3, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768e28: d800 0001                              |0002: add-int/lit8 v0, v0, #int 1 // #01
+768e2c: 5930 9689                              |0004: iput v0, v3, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768e30: 5231 9589                              |0006: iget v1, v3, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+768e34: 3210 2a00                              |0008: if-eq v0, v1, 0032 // +002a
+768e38: 5431 9189                              |000a: iget-object v1, v3, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+768e3c: 4900 0100                              |000c: aget-char v0, v1, v0
+768e40: 1301 2000                              |000e: const/16 v1, #int 32 // #20
+768e44: 3210 2100                              |0010: if-eq v0, v1, 0031 // +0021
+768e48: 1301 2500                              |0012: const/16 v1, #int 37 // #25
+768e4c: 3210 1d00                              |0014: if-eq v0, v1, 0031 // +001d
+768e50: 1301 5c00                              |0016: const/16 v1, #int 92 // #5c
+768e54: 3210 1900                              |0018: if-eq v0, v1, 0031 // +0019
+768e58: 1301 5f00                              |001a: const/16 v1, #int 95 // #5f
+768e5c: 3210 1500                              |001c: if-eq v0, v1, 0031 // +0015
+768e60: 1301 2200                              |001e: const/16 v1, #int 34 // #22
+768e64: 3210 1100                              |0020: if-eq v0, v1, 0031 // +0011
+768e68: 1301 2300                              |0022: const/16 v1, #int 35 // #23
+768e6c: 3210 0d00                              |0024: if-eq v0, v1, 0031 // +000d
+768e70: 2b00 2400 0000                         |0026: packed-switch v0, 0000004a // +00000024
+768e76: 2b00 2b00 0000                         |0029: packed-switch v0, 00000054 // +0000002b
+768e7c: 7010 7ace 0300                         |002c: invoke-direct {v3}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.getUTF8:()C // method@ce7a
+768e82: 0a03                                   |002f: move-result v3
+768e84: 0f03                                   |0030: return v3
+768e86: 0f00                                   |0031: return v0
+768e88: 2200 7b1a                              |0032: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+768e8c: 2201 991a                              |0034: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+768e90: 1a02 bb6a                              |0036: const-string v2, "Unexpected end of DN: " // string@6abb
+768e94: 7020 3cd2 2100                         |0038: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+768e9a: 5433 9389                              |003b: iget-object v3, v3, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+768e9e: 6e20 45d2 3100                         |003d: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+768ea4: 0c03                                   |0040: move-result-object v3
+768ea6: 6e10 58d2 0300                         |0041: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+768eac: 0c03                                   |0044: move-result-object v3
+768eae: 7020 4cd1 3000                         |0045: invoke-direct {v0, v3}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+768eb4: 2700                                   |0048: throw v0
+768eb6: 0000                                   |0049: nop // spacer
+768eb8: 0001 0300 2a00 0000 0b00 0000 0b00 ... |004a: packed-switch-data (10 units)
+768ecc: 0001 0400 3b00 0000 0800 0000 0800 ... |0054: packed-switch-data (12 units)
+      catches       : (none)
+      positions     :
+        0x0000 line=233
+        0x0006 line=234
+        0x000a line=238
+        0x002c line=257
+        0x0032 line=235
+      locals        :
+        0x0000 - 0x0060 reg=3 this Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;
+
+    #4              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'getUTF8'
+      type          : '()C'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 1
+      outs          : 2
+      insns size    : 99 16-bit code units
+768ee4:                                        |[768ee4] com.squareup.okhttp.internal.tls.DistinguishedNameParser.getUTF8:()C
+768ef4: 5290 9689                              |0000: iget v0, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768ef8: 7020 78ce 0900                         |0002: invoke-direct {v9, v0}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.getByte:(I)I // method@ce78
+768efe: 0a00                                   |0005: move-result v0
+768f00: 5291 9689                              |0006: iget v1, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768f04: 1212                                   |0008: const/4 v2, #int 1 // #1
+768f06: b021                                   |0009: add-int/2addr v1, v2
+768f08: 5991 9689                              |000a: iput v1, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768f0c: 1301 8000                              |000c: const/16 v1, #int 128 // #80
+768f10: 3510 0400                              |000e: if-ge v0, v1, 0012 // +0004
+768f14: 8e09                                   |0010: int-to-char v9, v0
+768f16: 0f09                                   |0011: return v9
+768f18: 1303 c000                              |0012: const/16 v3, #int 192 // #c0
+768f1c: 1304 3f00                              |0014: const/16 v4, #int 63 // #3f
+768f20: 3430 4c00                              |0016: if-lt v0, v3, 0062 // +004c
+768f24: 1303 f700                              |0018: const/16 v3, #int 247 // #f7
+768f28: 3630 4800                              |001a: if-gt v0, v3, 0062 // +0048
+768f2c: 1303 df00                              |001c: const/16 v3, #int 223 // #df
+768f30: 3630 0600                              |001e: if-gt v0, v3, 0024 // +0006
+768f34: dd00 001f                              |0020: and-int/lit8 v0, v0, #int 31 // #1f
+768f38: 0123                                   |0022: move v3, v2
+768f3a: 280c                                   |0023: goto 002f // +000c
+768f3c: 1303 ef00                              |0024: const/16 v3, #int 239 // #ef
+768f40: 3630 0600                              |0026: if-gt v0, v3, 002c // +0006
+768f44: dd00 000f                              |0028: and-int/lit8 v0, v0, #int 15 // #0f
+768f48: 1223                                   |002a: const/4 v3, #int 2 // #2
+768f4a: 2804                                   |002b: goto 002f // +0004
+768f4c: dd00 0007                              |002c: and-int/lit8 v0, v0, #int 7 // #07
+768f50: 1233                                   |002e: const/4 v3, #int 3 // #3
+768f52: 1205                                   |002f: const/4 v5, #int 0 // #0
+768f54: 3535 3000                              |0030: if-ge v5, v3, 0060 // +0030
+768f58: 5296 9689                              |0032: iget v6, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768f5c: d807 0601                              |0034: add-int/lit8 v7, v6, #int 1 // #01
+768f60: 5997 9689                              |0036: iput v7, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768f64: 5298 9589                              |0038: iget v8, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+768f68: 3287 2500                              |003a: if-eq v7, v8, 005f // +0025
+768f6c: 5498 9189                              |003c: iget-object v8, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+768f70: 4907 0807                              |003e: aget-char v7, v8, v7
+768f74: 1308 5c00                              |0040: const/16 v8, #int 92 // #5c
+768f78: 3287 0300                              |0042: if-eq v7, v8, 0045 // +0003
+768f7c: 281b                                   |0044: goto 005f // +001b
+768f7e: d806 0602                              |0045: add-int/lit8 v6, v6, #int 2 // #02
+768f82: 5996 9689                              |0047: iput v6, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768f86: 7020 78ce 6900                         |0049: invoke-direct {v9, v6}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.getByte:(I)I // method@ce78
+768f8c: 0a06                                   |004c: move-result v6
+768f8e: 5297 9689                              |004d: iget v7, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768f92: b027                                   |004f: add-int/2addr v7, v2
+768f94: 5997 9689                              |0050: iput v7, v9, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768f98: d567 c000                              |0052: and-int/lit16 v7, v6, #int 192 // #00c0
+768f9c: 3217 0300                              |0054: if-eq v7, v1, 0057 // +0003
+768fa0: 0f04                                   |0056: return v4
+768fa2: e000 0006                              |0057: shl-int/lit8 v0, v0, #int 6 // #06
+768fa6: dd06 063f                              |0059: and-int/lit8 v6, v6, #int 63 // #3f
+768faa: b060                                   |005b: add-int/2addr v0, v6
+768fac: d805 0501                              |005c: add-int/lit8 v5, v5, #int 1 // #01
+768fb0: 28d2                                   |005e: goto 0030 // -002e
+768fb2: 0f04                                   |005f: return v4
+768fb4: 8e09                                   |0060: int-to-char v9, v0
+768fb6: 0f09                                   |0061: return v9
+768fb8: 0f04                                   |0062: return v4
+      catches       : (none)
+      positions     :
+        0x0000 line=264
+        0x0006 line=265
+        0x0032 line=285
+        0x0038 line=286
+        0x0047 line=289
+        0x0049 line=291
+        0x004d line=292
+      locals        :
+        0x0000 - 0x0063 reg=9 this Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;
+
+    #5              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'hexAV'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 4
+      insns size    : 171 16-bit code units
+768fbc:                                        |[768fbc] com.squareup.okhttp.internal.tls.DistinguishedNameParser.hexAV:()Ljava/lang/String;
+768fcc: 5260 9689                              |0000: iget v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768fd0: d801 0004                              |0002: add-int/lit8 v1, v0, #int 4 // #04
+768fd4: 5262 9589                              |0004: iget v2, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+768fd8: 1a03 bb6a                              |0006: const-string v3, "Unexpected end of DN: " // string@6abb
+768fdc: 3521 8e00                              |0008: if-ge v1, v2, 0096 // +008e
+768fe0: 5960 9089                              |000a: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+768fe4: d800 0001                              |000c: add-int/lit8 v0, v0, #int 1 // #01
+768fe8: 5960 9689                              |000e: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768fec: 5260 9689                              |0010: iget v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+768ff0: 5261 9589                              |0012: iget v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+768ff4: 3210 4000                              |0014: if-eq v0, v1, 0054 // +0040
+768ff8: 5461 9189                              |0016: iget-object v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+768ffc: 4902 0100                              |0018: aget-char v2, v1, v0
+769000: 1304 2b00                              |001a: const/16 v4, #int 43 // #2b
+769004: 3242 3800                              |001c: if-eq v2, v4, 0054 // +0038
+769008: 1304 2c00                              |001e: const/16 v4, #int 44 // #2c
+76900c: 3242 3400                              |0020: if-eq v2, v4, 0054 // +0034
+769010: 1304 3b00                              |0022: const/16 v4, #int 59 // #3b
+769014: 3342 0300                              |0024: if-ne v2, v4, 0027 // +0003
+769018: 282e                                   |0026: goto 0054 // +002e
+76901a: 1304 2000                              |0027: const/16 v4, #int 32 // #20
+76901e: 3342 1900                              |0029: if-ne v2, v4, 0042 // +0019
+769022: 5960 9489                              |002b: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+769026: d800 0001                              |002d: add-int/lit8 v0, v0, #int 1 // #01
+76902a: 5960 9689                              |002f: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+76902e: 5260 9689                              |0031: iget v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769032: 5261 9589                              |0033: iget v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+769036: 3510 2100                              |0035: if-ge v0, v1, 0056 // +0021
+76903a: 5461 9189                              |0037: iget-object v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+76903e: 4901 0100                              |0039: aget-char v1, v1, v0
+769042: 3341 1b00                              |003b: if-ne v1, v4, 0056 // +001b
+769046: d800 0001                              |003d: add-int/lit8 v0, v0, #int 1 // #01
+76904a: 5960 9689                              |003f: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+76904e: 28f0                                   |0041: goto 0031 // -0010
+769050: 1304 4100                              |0042: const/16 v4, #int 65 // #41
+769054: 3442 0b00                              |0044: if-lt v2, v4, 004f // +000b
+769058: 1304 4600                              |0046: const/16 v4, #int 70 // #46
+76905c: 3642 0700                              |0048: if-gt v2, v4, 004f // +0007
+769060: d802 0220                              |004a: add-int/lit8 v2, v2, #int 32 // #20
+769064: 8e22                                   |004c: int-to-char v2, v2
+769066: 5002 0100                              |004d: aput-char v2, v1, v0
+76906a: d800 0001                              |004f: add-int/lit8 v0, v0, #int 1 // #01
+76906e: 5960 9689                              |0051: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769072: 28bd                                   |0053: goto 0010 // -0043
+769074: 5960 9489                              |0054: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+769078: 5260 9489                              |0056: iget v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+76907c: 5261 9089                              |0058: iget v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+769080: b110                                   |005a: sub-int/2addr v0, v1
+769082: 1252                                   |005b: const/4 v2, #int 5 // #5
+769084: 3420 2500                              |005c: if-lt v0, v2, 0081 // +0025
+769088: dd02 0001                              |005e: and-int/lit8 v2, v0, #int 1 // #01
+76908c: 3802 2100                              |0060: if-eqz v2, 0081 // +0021
+769090: db02 0002                              |0062: div-int/lit8 v2, v0, #int 2 // #02
+769094: 2323 7c1f                              |0064: new-array v3, v2, [B // type@1f7c
+769098: d801 0101                              |0066: add-int/lit8 v1, v1, #int 1 // #01
+76909c: 1204                                   |0068: const/4 v4, #int 0 // #0
+76909e: 3524 0e00                              |0069: if-ge v4, v2, 0077 // +000e
+7690a2: 7020 78ce 1600                         |006b: invoke-direct {v6, v1}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.getByte:(I)I // method@ce78
+7690a8: 0a05                                   |006e: move-result v5
+7690aa: 8d55                                   |006f: int-to-byte v5, v5
+7690ac: 4f05 0304                              |0070: aput-byte v5, v3, v4
+7690b0: d801 0102                              |0072: add-int/lit8 v1, v1, #int 2 // #02
+7690b4: d804 0401                              |0074: add-int/lit8 v4, v4, #int 1 // #01
+7690b8: 28f3                                   |0076: goto 0069 // -000d
+7690ba: 2201 971a                              |0077: new-instance v1, Ljava/lang/String; // type@1a97
+7690be: 5462 9189                              |0079: iget-object v2, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+7690c2: 5266 9089                              |007b: iget v6, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+7690c6: 7040 f5d1 2106                         |007d: invoke-direct {v1, v2, v6, v0}, Ljava/lang/String;.<init>:([CII)V // method@d1f5
+7690cc: 1101                                   |0080: return-object v1
+7690ce: 2200 7b1a                              |0081: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+7690d2: 2201 991a                              |0083: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+7690d6: 7020 3cd2 3100                         |0085: invoke-direct {v1, v3}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+7690dc: 5466 9389                              |0088: iget-object v6, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+7690e0: 6e20 45d2 6100                         |008a: invoke-virtual {v1, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7690e6: 0c06                                   |008d: move-result-object v6
+7690e8: 6e10 58d2 0600                         |008e: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+7690ee: 0c06                                   |0091: move-result-object v6
+7690f0: 7020 4cd1 6000                         |0092: invoke-direct {v0, v6}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+7690f6: 2700                                   |0095: throw v0
+7690f8: 2200 7b1a                              |0096: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+7690fc: 2201 991a                              |0098: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+769100: 7020 3cd2 3100                         |009a: invoke-direct {v1, v3}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+769106: 5466 9389                              |009d: iget-object v6, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+76910a: 6e20 45d2 6100                         |009f: invoke-virtual {v1, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+769110: 0c06                                   |00a2: move-result-object v6
+769112: 6e10 58d2 0600                         |00a3: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+769118: 0c06                                   |00a6: move-result-object v6
+76911a: 7020 4cd1 6000                         |00a7: invoke-direct {v0, v6}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+769120: 2700                                   |00aa: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=138
+        0x000a line=143
+        0x000e line=144
+        0x0010 line=149
+        0x002b line=156
+        0x002f line=157
+        0x0031 line=160
+        0x004d line=164
+        0x0051 line=167
+        0x0054 line=151
+        0x0056 line=172
+        0x0062 line=178
+        0x006b line=180
+        0x0077 line=183
+        0x0081 line=174
+        0x0096 line=140
+      locals        :
+        0x0000 - 0x00ab reg=6 this Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;
+
+    #6              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'nextAT'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 4
+      insns size    : 231 16-bit code units
+769124:                                        |[769124] com.squareup.okhttp.internal.tls.DistinguishedNameParser.nextAT:()Ljava/lang/String;
+769134: 5260 9689                              |0000: iget v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769138: 5261 9589                              |0002: iget v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+76913c: 1302 2000                              |0004: const/16 v2, #int 32 // #20
+769140: 3510 0d00                              |0006: if-ge v0, v1, 0013 // +000d
+769144: 5463 9189                              |0008: iget-object v3, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+769148: 4903 0300                              |000a: aget-char v3, v3, v0
+76914c: 3323 0700                              |000c: if-ne v3, v2, 0013 // +0007
+769150: d800 0001                              |000e: add-int/lit8 v0, v0, #int 1 // #01
+769154: 5960 9689                              |0010: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769158: 28ee                                   |0012: goto 0000 // -0012
+76915a: 3310 0400                              |0013: if-ne v0, v1, 0017 // +0004
+76915e: 1206                                   |0015: const/4 v6, #int 0 // #0
+769160: 1106                                   |0016: return-object v6
+769162: 5960 9089                              |0017: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+769166: d800 0001                              |0019: add-int/lit8 v0, v0, #int 1 // #01
+76916a: 5960 9689                              |001b: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+76916e: 5260 9689                              |001d: iget v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769172: 5261 9589                              |001f: iget v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+769176: 1303 3d00                              |0021: const/16 v3, #int 61 // #3d
+76917a: 3510 0f00                              |0023: if-ge v0, v1, 0032 // +000f
+76917e: 5464 9189                              |0025: iget-object v4, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+769182: 4904 0400                              |0027: aget-char v4, v4, v0
+769186: 3234 0900                              |0029: if-eq v4, v3, 0032 // +0009
+76918a: 3224 0700                              |002b: if-eq v4, v2, 0032 // +0007
+76918e: d800 0001                              |002d: add-int/lit8 v0, v0, #int 1 // #01
+769192: 5960 9689                              |002f: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769196: 28ec                                   |0031: goto 001d // -0014
+769198: 1a04 bb6a                              |0032: const-string v4, "Unexpected end of DN: " // string@6abb
+76919c: 3510 9e00                              |0034: if-ge v0, v1, 00d2 // +009e
+7691a0: 5960 9489                              |0036: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+7691a4: 5461 9189                              |0038: iget-object v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+7691a8: 4900 0100                              |003a: aget-char v0, v1, v0
+7691ac: 3320 3300                              |003c: if-ne v0, v2, 006f // +0033
+7691b0: 5260 9689                              |003e: iget v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+7691b4: 5261 9589                              |0040: iget v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+7691b8: 3510 0f00                              |0042: if-ge v0, v1, 0051 // +000f
+7691bc: 5465 9189                              |0044: iget-object v5, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+7691c0: 4905 0500                              |0046: aget-char v5, v5, v0
+7691c4: 3235 0900                              |0048: if-eq v5, v3, 0051 // +0009
+7691c8: 3325 0700                              |004a: if-ne v5, v2, 0051 // +0007
+7691cc: d800 0001                              |004c: add-int/lit8 v0, v0, #int 1 // #01
+7691d0: 5960 9689                              |004e: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+7691d4: 28ee                                   |0050: goto 003e // -0012
+7691d6: 5465 9189                              |0051: iget-object v5, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+7691da: 4905 0500                              |0053: aget-char v5, v5, v0
+7691de: 3335 0500                              |0055: if-ne v5, v3, 005a // +0005
+7691e2: 3210 0300                              |0057: if-eq v0, v1, 005a // +0003
+7691e6: 2816                                   |0059: goto 006f // +0016
+7691e8: 2200 7b1a                              |005a: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+7691ec: 2201 991a                              |005c: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+7691f0: 7020 3cd2 4100                         |005e: invoke-direct {v1, v4}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+7691f6: 5466 9389                              |0061: iget-object v6, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+7691fa: 6e20 45d2 6100                         |0063: invoke-virtual {v1, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+769200: 0c06                                   |0066: move-result-object v6
+769202: 6e10 58d2 0600                         |0067: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+769208: 0c06                                   |006a: move-result-object v6
+76920a: 7020 4cd1 6000                         |006b: invoke-direct {v0, v6}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+769210: 2700                                   |006e: throw v0
+769212: 5260 9689                              |006f: iget v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769216: d800 0001                              |0071: add-int/lit8 v0, v0, #int 1 // #01
+76921a: 5960 9689                              |0073: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+76921e: 5260 9689                              |0075: iget v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769222: 5261 9589                              |0077: iget v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+769226: 3510 0d00                              |0079: if-ge v0, v1, 0086 // +000d
+76922a: 5461 9189                              |007b: iget-object v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+76922e: 4901 0100                              |007d: aget-char v1, v1, v0
+769232: 3321 0700                              |007f: if-ne v1, v2, 0086 // +0007
+769236: d800 0001                              |0081: add-int/lit8 v0, v0, #int 1 // #01
+76923a: 5960 9689                              |0083: iput v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+76923e: 28f0                                   |0085: goto 0075 // -0010
+769240: 5260 9489                              |0086: iget v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+769244: 5261 9089                              |0088: iget v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+769248: b110                                   |008a: sub-int/2addr v0, v1
+76924a: 1242                                   |008b: const/4 v2, #int 4 // #4
+76924c: 3720 3900                              |008c: if-le v0, v2, 00c5 // +0039
+769250: 5460 9189                              |008e: iget-object v0, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+769254: d803 0103                              |0090: add-int/lit8 v3, v1, #int 3 // #03
+769258: 4903 0003                              |0092: aget-char v3, v0, v3
+76925c: 1304 2e00                              |0094: const/16 v4, #int 46 // #2e
+769260: 3343 2f00                              |0096: if-ne v3, v4, 00c5 // +002f
+769264: 4903 0001                              |0098: aget-char v3, v0, v1
+769268: 1304 4f00                              |009a: const/16 v4, #int 79 // #4f
+76926c: 3243 0600                              |009c: if-eq v3, v4, 00a2 // +0006
+769270: 1304 6f00                              |009e: const/16 v4, #int 111 // #6f
+769274: 3343 2500                              |00a0: if-ne v3, v4, 00c5 // +0025
+769278: d803 0101                              |00a2: add-int/lit8 v3, v1, #int 1 // #01
+76927c: 4903 0003                              |00a4: aget-char v3, v0, v3
+769280: 1304 4900                              |00a6: const/16 v4, #int 73 // #49
+769284: 3243 0a00                              |00a8: if-eq v3, v4, 00b2 // +000a
+769288: d803 0101                              |00aa: add-int/lit8 v3, v1, #int 1 // #01
+76928c: 4903 0003                              |00ac: aget-char v3, v0, v3
+769290: 1304 6900                              |00ae: const/16 v4, #int 105 // #69
+769294: 3343 1500                              |00b0: if-ne v3, v4, 00c5 // +0015
+769298: d803 0102                              |00b2: add-int/lit8 v3, v1, #int 2 // #02
+76929c: 4903 0003                              |00b4: aget-char v3, v0, v3
+7692a0: 1304 4400                              |00b6: const/16 v4, #int 68 // #44
+7692a4: 3243 0a00                              |00b8: if-eq v3, v4, 00c2 // +000a
+7692a8: d803 0102                              |00ba: add-int/lit8 v3, v1, #int 2 // #02
+7692ac: 4900 0003                              |00bc: aget-char v0, v0, v3
+7692b0: 1303 6400                              |00be: const/16 v3, #int 100 // #64
+7692b4: 3330 0500                              |00c0: if-ne v0, v3, 00c5 // +0005
+7692b8: b021                                   |00c2: add-int/2addr v1, v2
+7692ba: 5961 9089                              |00c3: iput v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+7692be: 2200 971a                              |00c5: new-instance v0, Ljava/lang/String; // type@1a97
+7692c2: 5461 9189                              |00c7: iget-object v1, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+7692c6: 5262 9089                              |00c9: iget v2, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+7692ca: 5266 9489                              |00cb: iget v6, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+7692ce: b126                                   |00cd: sub-int/2addr v6, v2
+7692d0: 7040 f5d1 1062                         |00ce: invoke-direct {v0, v1, v2, v6}, Ljava/lang/String;.<init>:([CII)V // method@d1f5
+7692d6: 1100                                   |00d1: return-object v0
+7692d8: 2200 7b1a                              |00d2: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+7692dc: 2201 991a                              |00d4: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+7692e0: 7020 3cd2 4100                         |00d6: invoke-direct {v1, v4}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+7692e6: 5466 9389                              |00d9: iget-object v6, v6, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+7692ea: 6e20 45d2 6100                         |00db: invoke-virtual {v1, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7692f0: 0c06                                   |00de: move-result-object v6
+7692f2: 6e10 58d2 0600                         |00df: invoke-virtual {v6}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+7692f8: 0c06                                   |00e2: move-result-object v6
+7692fa: 7020 4cd1 6000                         |00e3: invoke-direct {v0, v6}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+769300: 2700                                   |00e6: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=51
+        0x0017 line=58
+        0x001b line=61
+        0x001d line=62
+        0x0032 line=66
+        0x0036 line=71
+        0x0038 line=75
+        0x003e line=76
+        0x0051 line=79
+        0x005a line=80
+        0x006f line=84
+        0x0075 line=88
+        0x0086 line=93
+        0x00c3 line=97
+        0x00c5 line=100
+        0x00d2 line=67
+      locals        :
+        0x0000 - 0x00e7 reg=6 this Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;
+
+    #7              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'quotedAV'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 113 16-bit code units
+769304:                                        |[769304] com.squareup.okhttp.internal.tls.DistinguishedNameParser.quotedAV:()Ljava/lang/String;
+769314: 5240 9689                              |0000: iget v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769318: d800 0001                              |0002: add-int/lit8 v0, v0, #int 1 // #01
+76931c: 5940 9689                              |0004: iput v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769320: 5940 9089                              |0006: iput v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+769324: 5940 9489                              |0008: iput v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+769328: 5240 9689                              |000a: iget v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+76932c: 5241 9589                              |000c: iget v1, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+769330: 3210 4c00                              |000e: if-eq v0, v1, 005a // +004c
+769334: 5441 9189                              |0010: iget-object v1, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+769338: 4902 0100                              |0012: aget-char v2, v1, v0
+76933c: 1303 2200                              |0014: const/16 v3, #int 34 // #22
+769340: 3332 2600                              |0016: if-ne v2, v3, 003c // +0026
+769344: d800 0001                              |0018: add-int/lit8 v0, v0, #int 1 // #01
+769348: 5940 9689                              |001a: iput v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+76934c: 5240 9689                              |001c: iget v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769350: 5241 9589                              |001e: iget v1, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+769354: 3510 0f00                              |0020: if-ge v0, v1, 002f // +000f
+769358: 5441 9189                              |0022: iget-object v1, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+76935c: 4901 0100                              |0024: aget-char v1, v1, v0
+769360: 1302 2000                              |0026: const/16 v2, #int 32 // #20
+769364: 3321 0700                              |0028: if-ne v1, v2, 002f // +0007
+769368: d800 0001                              |002a: add-int/lit8 v0, v0, #int 1 // #01
+76936c: 5940 9689                              |002c: iput v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769370: 28ee                                   |002e: goto 001c // -0012
+769372: 2200 971a                              |002f: new-instance v0, Ljava/lang/String; // type@1a97
+769376: 5441 9189                              |0031: iget-object v1, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+76937a: 5242 9089                              |0033: iget v2, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+76937e: 5244 9489                              |0035: iget v4, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+769382: b124                                   |0037: sub-int/2addr v4, v2
+769384: 7040 f5d1 1042                         |0038: invoke-direct {v0, v1, v2, v4}, Ljava/lang/String;.<init>:([CII)V // method@d1f5
+76938a: 1100                                   |003b: return-object v0
+76938c: 1300 5c00                              |003c: const/16 v0, #int 92 // #5c
+769390: 3302 0b00                              |003e: if-ne v2, v0, 0049 // +000b
+769394: 5240 9489                              |0040: iget v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+769398: 7010 79ce 0400                         |0042: invoke-direct {v4}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.getEscaped:()C // method@ce79
+76939e: 0a02                                   |0045: move-result v2
+7693a0: 5002 0100                              |0046: aput-char v2, v1, v0
+7693a4: 2805                                   |0048: goto 004d // +0005
+7693a6: 5240 9489                              |0049: iget v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+7693aa: 5002 0100                              |004b: aput-char v2, v1, v0
+7693ae: 5240 9689                              |004d: iget v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+7693b2: d800 0001                              |004f: add-int/lit8 v0, v0, #int 1 // #01
+7693b6: 5940 9689                              |0051: iput v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+7693ba: 5240 9489                              |0053: iget v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+7693be: d800 0001                              |0055: add-int/lit8 v0, v0, #int 1 // #01
+7693c2: 5940 9489                              |0057: iput v0, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+7693c6: 28b1                                   |0059: goto 000a // -004f
+7693c8: 2200 7b1a                              |005a: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+7693cc: 2201 991a                              |005c: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+7693d0: 1a02 bb6a                              |005e: const-string v2, "Unexpected end of DN: " // string@6abb
+7693d4: 7020 3cd2 2100                         |0060: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+7693da: 5444 9389                              |0063: iget-object v4, v4, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+7693de: 6e20 45d2 4100                         |0065: invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7693e4: 0c04                                   |0068: move-result-object v4
+7693e6: 6e10 58d2 0400                         |0069: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+7693ec: 0c04                                   |006c: move-result-object v4
+7693ee: 7020 4cd1 4000                         |006d: invoke-direct {v0, v4}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+7693f4: 2700                                   |0070: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=105
+        0x0006 line=106
+        0x0008 line=107
+        0x000a line=110
+        0x0010 line=114
+        0x001a line=116
+        0x001c line=130
+        0x002f line=133
+        0x0040 line=119
+        0x0049 line=122
+        0x004d line=124
+        0x0053 line=125
+        0x005a line=111
+      locals        :
+        0x0000 - 0x0071 reg=4 this Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;
+
+  Virtual methods   -
+    #0              : (in Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;)
+      name          : 'findMostSpecific'
+      type          : '(Ljava/lang/String;)Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 2
+      insns size    : 154 16-bit code units
+7693f8:                                        |[7693f8] com.squareup.okhttp.internal.tls.DistinguishedNameParser.findMostSpecific:(Ljava/lang/String;)Ljava/lang/String;
+769408: 1200                                   |0000: const/4 v0, #int 0 // #0
+76940a: 5970 9689                              |0001: iput v0, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+76940e: 5970 9089                              |0003: iput v0, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.beg:I // field@8990
+769412: 5970 9489                              |0005: iput v0, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.end:I // field@8994
+769416: 5970 9289                              |0007: iput v0, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.cur:I // field@8992
+76941a: 5470 9389                              |0009: iget-object v0, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+76941e: 6e10 25d2 0000                         |000b: invoke-virtual {v0}, Ljava/lang/String;.toCharArray:()[C // method@d225
+769424: 0c00                                   |000e: move-result-object v0
+769426: 5b70 9189                              |000f: iput-object v0, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+76942a: 7010 7cce 0700                         |0011: invoke-direct {v7}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.nextAT:()Ljava/lang/String; // method@ce7c
+769430: 0c00                                   |0014: move-result-object v0
+769432: 1201                                   |0015: const/4 v1, #int 0 // #0
+769434: 3900 0300                              |0016: if-nez v0, 0019 // +0003
+769438: 1101                                   |0018: return-object v1
+76943a: 5272 9689                              |0019: iget v2, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+76943e: 5273 9589                              |001b: iget v3, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+769442: 3332 0300                              |001d: if-ne v2, v3, 0020 // +0003
+769446: 1101                                   |001f: return-object v1
+769448: 5473 9189                              |0020: iget-object v3, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+76944c: 4902 0302                              |0022: aget-char v2, v3, v2
+769450: 1303 2200                              |0024: const/16 v3, #int 34 // #22
+769454: 1304 3b00                              |0026: const/16 v4, #int 59 // #3b
+769458: 1305 2c00                              |0028: const/16 v5, #int 44 // #2c
+76945c: 1306 2b00                              |002a: const/16 v6, #int 43 // #2b
+769460: 3232 1900                              |002c: if-eq v2, v3, 0045 // +0019
+769464: 1303 2300                              |002e: const/16 v3, #int 35 // #23
+769468: 3232 1000                              |0030: if-eq v2, v3, 0040 // +0010
+76946c: 3262 0b00                              |0032: if-eq v2, v6, 003d // +000b
+769470: 3252 0900                              |0034: if-eq v2, v5, 003d // +0009
+769474: 3242 0700                              |0036: if-eq v2, v4, 003d // +0007
+769478: 7010 76ce 0700                         |0038: invoke-direct {v7}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.escapedAV:()Ljava/lang/String; // method@ce76
+76947e: 0c02                                   |003b: move-result-object v2
+769480: 280d                                   |003c: goto 0049 // +000d
+769482: 1a02 0000                              |003d: const-string v2, "" // string@0000
+769486: 280a                                   |003f: goto 0049 // +000a
+769488: 7010 7bce 0700                         |0040: invoke-direct {v7}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.hexAV:()Ljava/lang/String; // method@ce7b
+76948e: 0c02                                   |0043: move-result-object v2
+769490: 2805                                   |0044: goto 0049 // +0005
+769492: 7010 7dce 0700                         |0045: invoke-direct {v7}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.quotedAV:()Ljava/lang/String; // method@ce7d
+769498: 0c02                                   |0048: move-result-object v2
+76949a: 6e20 04d2 0800                         |0049: invoke-virtual {v8, v0}, Ljava/lang/String;.equalsIgnoreCase:(Ljava/lang/String;)Z // method@d204
+7694a0: 0a00                                   |004c: move-result v0
+7694a2: 3800 0300                              |004d: if-eqz v0, 0050 // +0003
+7694a6: 1102                                   |004f: return-object v2
+7694a8: 5270 9689                              |0050: iget v0, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+7694ac: 5272 9589                              |0052: iget v2, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.length:I // field@8995
+7694b0: 3420 0300                              |0054: if-lt v0, v2, 0057 // +0003
+7694b4: 1101                                   |0056: return-object v1
+7694b6: 5472 9189                              |0057: iget-object v2, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.chars:[C // field@8991
+7694ba: 4902 0200                              |0059: aget-char v2, v2, v0
+7694be: 1a03 6a55                              |005b: const-string v3, "Malformed DN: " // string@556a
+7694c2: 3252 1d00                              |005d: if-eq v2, v5, 007a // +001d
+7694c6: 3342 0300                              |005f: if-ne v2, v4, 0062 // +0003
+7694ca: 2819                                   |0061: goto 007a // +0019
+7694cc: 3362 0300                              |0062: if-ne v2, v6, 0065 // +0003
+7694d0: 2816                                   |0064: goto 007a // +0016
+7694d2: 2208 7b1a                              |0065: new-instance v8, Ljava/lang/IllegalStateException; // type@1a7b
+7694d6: 2200 991a                              |0067: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+7694da: 7020 3cd2 3000                         |0069: invoke-direct {v0, v3}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+7694e0: 5477 9389                              |006c: iget-object v7, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+7694e4: 6e20 45d2 7000                         |006e: invoke-virtual {v0, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7694ea: 0c07                                   |0071: move-result-object v7
+7694ec: 6e10 58d2 0700                         |0072: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+7694f2: 0c07                                   |0075: move-result-object v7
+7694f4: 7020 4cd1 7800                         |0076: invoke-direct {v8, v7}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+7694fa: 2708                                   |0079: throw v8
+7694fc: d800 0001                              |007a: add-int/lit8 v0, v0, #int 1 // #01
+769500: 5970 9689                              |007c: iput v0, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.pos:I // field@8996
+769504: 7010 7cce 0700                         |007e: invoke-direct {v7}, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.nextAT:()Ljava/lang/String; // method@ce7c
+76950a: 0c00                                   |0081: move-result-object v0
+76950c: 3800 0300                              |0082: if-eqz v0, 0085 // +0003
+769510: 2895                                   |0084: goto 0019 // -006b
+769512: 2208 7b1a                              |0085: new-instance v8, Ljava/lang/IllegalStateException; // type@1a7b
+769516: 2200 991a                              |0087: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+76951a: 7020 3cd2 3000                         |0089: invoke-direct {v0, v3}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+769520: 5477 9389                              |008c: iget-object v7, v7, Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;.dn:Ljava/lang/String; // field@8993
+769524: 6e20 45d2 7000                         |008e: invoke-virtual {v0, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+76952a: 0c07                                   |0091: move-result-object v7
+76952c: 6e10 58d2 0700                         |0092: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+769532: 0c07                                   |0095: move-result-object v7
+769534: 7020 4cd1 7800                         |0096: invoke-direct {v8, v7}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+76953a: 2708                                   |0099: throw v8
+      catches       : (none)
+      positions     :
+        0x0001 line=351
+        0x0003 line=352
+        0x0005 line=353
+        0x0007 line=354
+        0x0009 line=355
+        0x0011 line=357
+        0x0019 line=364
+        0x0020 line=368
+        0x0038 line=381
+        0x003d line=379
+        0x0040 line=373
+        0x0045 line=370
+        0x0049 line=387
+        0x0050 line=391
+        0x0057 line=395
+        0x0065 line=397
+        0x007c line=400
+        0x007e line=401
+        0x0085 line=403
+      locals        :
+        0x0000 - 0x009a reg=7 this Lcom/squareup/okhttp/internal/tls/DistinguishedNameParser;
+        0x0000 - 0x009a reg=8 (null) Ljava/lang/String;
+
+  source_file_idx   : 8858 (DistinguishedNameParser.java)
+

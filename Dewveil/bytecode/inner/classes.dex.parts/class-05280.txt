@@ -1,0 +1,318 @@
+Class #5280            -
+  Class descriptor  : 'Lcom/google/firebase/components/CycleDetector;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/components/CycleDetector;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+71b4a0:                                        |[71b4a0] com.google.firebase.components.CycleDetector.<init>:()V
+71b4b0: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+71b4b6: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=25
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/google/firebase/components/CycleDetector;
+
+    #1              : (in Lcom/google/firebase/components/CycleDetector;)
+      name          : 'detect'
+      type          : '(Ljava/util/List;)V'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 8
+      ins           : 1
+      outs          : 2
+      insns size    : 117 16-bit code units
+71b4b8:                                        |[71b4b8] com.google.firebase.components.CycleDetector.detect:(Ljava/util/List;)V
+71b4c8: 7110 d6bc 0700                         |0000: invoke-static {v7}, Lcom/google/firebase/components/CycleDetector;.toGraph:(Ljava/util/List;)Ljava/util/Set; // method@bcd6
+71b4ce: 0c00                                   |0003: move-result-object v0
+71b4d0: 7110 d5bc 0000                         |0004: invoke-static {v0}, Lcom/google/firebase/components/CycleDetector;.getRoots:(Ljava/util/Set;)Ljava/util/Set; // method@bcd5
+71b4d6: 0c01                                   |0007: move-result-object v1
+71b4d8: 1202                                   |0008: const/4 v2, #int 0 // #0
+71b4da: 7210 31d6 0100                         |0009: invoke-interface {v1}, Ljava/util/Set;.isEmpty:()Z // method@d631
+71b4e0: 0a03                                   |000c: move-result v3
+71b4e2: 3903 3200                              |000d: if-nez v3, 003f // +0032
+71b4e6: 7210 32d6 0100                         |000f: invoke-interface {v1}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+71b4ec: 0c03                                   |0012: move-result-object v3
+71b4ee: 7210 a1d5 0300                         |0013: invoke-interface {v3}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b4f4: 0c03                                   |0016: move-result-object v3
+71b4f6: 1f03 1017                              |0017: check-cast v3, Lcom/google/firebase/components/CycleDetector$ComponentNode; // type@1710
+71b4fa: 7220 33d6 3100                         |0019: invoke-interface {v1, v3}, Ljava/util/Set;.remove:(Ljava/lang/Object;)Z // method@d633
+71b500: d802 0201                              |001c: add-int/lit8 v2, v2, #int 1 // #01
+71b504: 6e10 cabc 0300                         |001e: invoke-virtual {v3}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.getDependencies:()Ljava/util/Set; // method@bcca
+71b50a: 0c04                                   |0021: move-result-object v4
+71b50c: 7210 32d6 0400                         |0022: invoke-interface {v4}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+71b512: 0c04                                   |0025: move-result-object v4
+71b514: 7210 a0d5 0400                         |0026: invoke-interface {v4}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71b51a: 0a05                                   |0029: move-result v5
+71b51c: 3805 dfff                              |002a: if-eqz v5, 0009 // -0021
+71b520: 7210 a1d5 0400                         |002c: invoke-interface {v4}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b526: 0c05                                   |002f: move-result-object v5
+71b528: 1f05 1017                              |0030: check-cast v5, Lcom/google/firebase/components/CycleDetector$ComponentNode; // type@1710
+71b52c: 6e20 cdbc 3500                         |0032: invoke-virtual {v5, v3}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.removeDependent:(Lcom/google/firebase/components/CycleDetector$ComponentNode;)V // method@bccd
+71b532: 6e10 ccbc 0500                         |0035: invoke-virtual {v5}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.isRoot:()Z // method@bccc
+71b538: 0a06                                   |0038: move-result v6
+71b53a: 3806 edff                              |0039: if-eqz v6, 0026 // -0013
+71b53e: 7220 2cd6 5100                         |003b: invoke-interface {v1, v5}, Ljava/util/Set;.add:(Ljava/lang/Object;)Z // method@d62c
+71b544: 28e8                                   |003e: goto 0026 // -0018
+71b546: 7210 dbd5 0700                         |003f: invoke-interface {v7}, Ljava/util/List;.size:()I // method@d5db
+71b54c: 0a07                                   |0042: move-result v7
+71b54e: 3372 0300                              |0043: if-ne v2, v7, 0046 // +0003
+71b552: 0e00                                   |0045: return-void
+71b554: 2207 3a1b                              |0046: new-instance v7, Ljava/util/ArrayList; // type@1b3a
+71b558: 7010 9fd4 0700                         |0048: invoke-direct {v7}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+71b55e: 7210 32d6 0000                         |004b: invoke-interface {v0}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+71b564: 0c00                                   |004e: move-result-object v0
+71b566: 7210 a0d5 0000                         |004f: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71b56c: 0a01                                   |0052: move-result v1
+71b56e: 3801 1c00                              |0053: if-eqz v1, 006f // +001c
+71b572: 7210 a1d5 0000                         |0055: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b578: 0c01                                   |0058: move-result-object v1
+71b57a: 1f01 1017                              |0059: check-cast v1, Lcom/google/firebase/components/CycleDetector$ComponentNode; // type@1710
+71b57e: 6e10 ccbc 0100                         |005b: invoke-virtual {v1}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.isRoot:()Z // method@bccc
+71b584: 0a02                                   |005e: move-result v2
+71b586: 3902 f0ff                              |005f: if-nez v2, 004f // -0010
+71b58a: 6e10 cbbc 0100                         |0061: invoke-virtual {v1}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.isLeaf:()Z // method@bccb
+71b590: 0a02                                   |0064: move-result v2
+71b592: 3902 eaff                              |0065: if-nez v2, 004f // -0016
+71b596: 6e10 c9bc 0100                         |0067: invoke-virtual {v1}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.getComponent:()Lcom/google/firebase/components/Component; // method@bcc9
+71b59c: 0c01                                   |006a: move-result-object v1
+71b59e: 7220 c9d5 1700                         |006b: invoke-interface {v7, v1}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+71b5a4: 28e1                                   |006e: goto 004f // -001f
+71b5a6: 2200 1417                              |006f: new-instance v0, Lcom/google/firebase/components/DependencyCycleException; // type@1714
+71b5aa: 7020 e8bc 7000                         |0071: invoke-direct {v0, v7}, Lcom/google/firebase/components/DependencyCycleException;.<init>:(Ljava/util/List;)V // method@bce8
+71b5b0: 2700                                   |0074: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=100
+        0x0004 line=101
+        0x0009 line=104
+        0x000f line=105
+        0x0019 line=106
+        0x001e line=109
+        0x0032 line=110
+        0x0035 line=111
+        0x003b line=112
+        0x003f line=119
+        0x0046 line=124
+        0x004b line=125
+        0x005b line=126
+        0x0067 line=127
+        0x006f line=131
+      locals        :
+        0x0000 - 0x0075 reg=7 (null) Ljava/util/List;
+
+    #2              : (in Lcom/google/firebase/components/CycleDetector;)
+      name          : 'getRoots'
+      type          : '(Ljava/util/Set;)Ljava/util/Set;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 32 16-bit code units
+71b5b4:                                        |[71b5b4] com.google.firebase.components.CycleDetector.getRoots:(Ljava/util/Set;)Ljava/util/Set;
+71b5c4: 2200 4a1b                              |0000: new-instance v0, Ljava/util/HashSet; // type@1b4a
+71b5c8: 7010 90d5 0000                         |0002: invoke-direct {v0}, Ljava/util/HashSet;.<init>:()V // method@d590
+71b5ce: 7210 32d6 0300                         |0005: invoke-interface {v3}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+71b5d4: 0c03                                   |0008: move-result-object v3
+71b5d6: 7210 a0d5 0300                         |0009: invoke-interface {v3}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71b5dc: 0a01                                   |000c: move-result v1
+71b5de: 3801 1200                              |000d: if-eqz v1, 001f // +0012
+71b5e2: 7210 a1d5 0300                         |000f: invoke-interface {v3}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b5e8: 0c01                                   |0012: move-result-object v1
+71b5ea: 1f01 1017                              |0013: check-cast v1, Lcom/google/firebase/components/CycleDetector$ComponentNode; // type@1710
+71b5ee: 6e10 ccbc 0100                         |0015: invoke-virtual {v1}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.isRoot:()Z // method@bccc
+71b5f4: 0a02                                   |0018: move-result v2
+71b5f6: 3802 f0ff                              |0019: if-eqz v2, 0009 // -0010
+71b5fa: 7220 2cd6 1000                         |001b: invoke-interface {v0, v1}, Ljava/util/Set;.add:(Ljava/lang/Object;)Z // method@d62c
+71b600: 28eb                                   |001e: goto 0009 // -0015
+71b602: 1100                                   |001f: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=182
+        0x0005 line=183
+        0x0015 line=184
+        0x001b line=185
+      locals        :
+        0x0000 - 0x0020 reg=3 (null) Ljava/util/Set;
+
+    #3              : (in Lcom/google/firebase/components/CycleDetector;)
+      name          : 'toGraph'
+      type          : '(Ljava/util/List;)Ljava/util/Set;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 10
+      ins           : 1
+      outs          : 4
+      insns size    : 257 16-bit code units
+71b604:                                        |[71b604] com.google.firebase.components.CycleDetector.toGraph:(Ljava/util/List;)Ljava/util/Set;
+71b614: 2200 491b                              |0000: new-instance v0, Ljava/util/HashMap; // type@1b49
+71b618: 7210 dbd5 0900                         |0002: invoke-interface {v9}, Ljava/util/List;.size:()I // method@d5db
+71b61e: 0a01                                   |0005: move-result v1
+71b620: 7020 7fd5 1000                         |0006: invoke-direct {v0, v1}, Ljava/util/HashMap;.<init>:(I)V // method@d57f
+71b626: 7210 d2d5 0900                         |0009: invoke-interface {v9}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@d5d2
+71b62c: 0c09                                   |000c: move-result-object v9
+71b62e: 7210 a0d5 0900                         |000d: invoke-interface {v9}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71b634: 0a01                                   |0010: move-result v1
+71b636: 1202                                   |0011: const/4 v2, #int 0 // #0
+71b638: 3801 6100                              |0012: if-eqz v1, 0073 // +0061
+71b63c: 7210 a1d5 0900                         |0014: invoke-interface {v9}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b642: 0c01                                   |0017: move-result-object v1
+71b644: 1f01 fc16                              |0018: check-cast v1, Lcom/google/firebase/components/Component; // type@16fc
+71b648: 2203 1017                              |001a: new-instance v3, Lcom/google/firebase/components/CycleDetector$ComponentNode; // type@1710
+71b64c: 7020 c6bc 1300                         |001c: invoke-direct {v3, v1}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.<init>:(Lcom/google/firebase/components/Component;)V // method@bcc6
+71b652: 6e10 75bc 0100                         |001f: invoke-virtual {v1}, Lcom/google/firebase/components/Component;.getProvidedInterfaces:()Ljava/util/Set; // method@bc75
+71b658: 0c04                                   |0022: move-result-object v4
+71b65a: 7210 32d6 0400                         |0023: invoke-interface {v4}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+71b660: 0c04                                   |0026: move-result-object v4
+71b662: 7210 a0d5 0400                         |0027: invoke-interface {v4}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71b668: 0a05                                   |002a: move-result v5
+71b66a: 3805 e2ff                              |002b: if-eqz v5, 000d // -001e
+71b66e: 7210 a1d5 0400                         |002d: invoke-interface {v4}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b674: 0c05                                   |0030: move-result-object v5
+71b676: 1f05 6b1a                              |0031: check-cast v5, Ljava/lang/Class; // type@1a6b
+71b67a: 2206 1117                              |0033: new-instance v6, Lcom/google/firebase/components/CycleDetector$Dep; // type@1711
+71b67e: 6e10 7cbc 0100                         |0035: invoke-virtual {v1}, Lcom/google/firebase/components/Component;.isValue:()Z // method@bc7c
+71b684: 0a07                                   |0038: move-result v7
+71b686: df07 0701                              |0039: xor-int/lit8 v7, v7, #int 1 // #01
+71b68a: 7040 cfbc 5627                         |003b: invoke-direct {v6, v5, v7, v2}, Lcom/google/firebase/components/CycleDetector$Dep;.<init>:(Ljava/lang/Class;ZLcom/google/firebase/components/CycleDetector$1;)V // method@bccf
+71b690: 7220 00d6 6000                         |003e: invoke-interface {v0, v6}, Ljava/util/Map;.containsKey:(Ljava/lang/Object;)Z // method@d600
+71b696: 0a07                                   |0041: move-result v7
+71b698: 3907 0a00                              |0042: if-nez v7, 004c // +000a
+71b69c: 2207 4a1b                              |0044: new-instance v7, Ljava/util/HashSet; // type@1b4a
+71b6a0: 7010 90d5 0700                         |0046: invoke-direct {v7}, Ljava/util/HashSet;.<init>:()V // method@d590
+71b6a6: 7230 06d6 6007                         |0049: invoke-interface {v0, v6, v7}, Ljava/util/Map;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d606
+71b6ac: 7220 03d6 6000                         |004c: invoke-interface {v0, v6}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+71b6b2: 0c07                                   |004f: move-result-object v7
+71b6b4: 1f07 621b                              |0050: check-cast v7, Ljava/util/Set; // type@1b62
+71b6b8: 7210 31d6 0700                         |0052: invoke-interface {v7}, Ljava/util/Set;.isEmpty:()Z // method@d631
+71b6be: 0a08                                   |0055: move-result v8
+71b6c0: 3908 1900                              |0056: if-nez v8, 006f // +0019
+71b6c4: 7110 d0bc 0600                         |0058: invoke-static {v6}, Lcom/google/firebase/components/CycleDetector$Dep;.access$100:(Lcom/google/firebase/components/CycleDetector$Dep;)Z // method@bcd0
+71b6ca: 0a06                                   |005b: move-result v6
+71b6cc: 3806 0300                              |005c: if-eqz v6, 005f // +0003
+71b6d0: 2811                                   |005e: goto 006f // +0011
+71b6d2: 2209 7a1a                              |005f: new-instance v9, Ljava/lang/IllegalArgumentException; // type@1a7a
+71b6d6: 1a00 0157                              |0061: const-string v0, "Multiple components provide %s." // string@5701
+71b6da: 2410 ad20 0500                         |0063: filled-new-array {v5}, [Ljava/lang/Object; // type@20ad
+71b6e0: 0c01                                   |0066: move-result-object v1
+71b6e2: 7120 05d2 1000                         |0067: invoke-static {v0, v1}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+71b6e8: 0c00                                   |006a: move-result-object v0
+71b6ea: 7020 47d1 0900                         |006b: invoke-direct {v9, v0}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+71b6f0: 2709                                   |006e: throw v9
+71b6f2: 7220 2cd6 3700                         |006f: invoke-interface {v7, v3}, Ljava/util/Set;.add:(Ljava/lang/Object;)Z // method@d62c
+71b6f8: 28b5                                   |0072: goto 0027 // -004b
+71b6fa: 7210 0bd6 0000                         |0073: invoke-interface {v0}, Ljava/util/Map;.values:()Ljava/util/Collection; // method@d60b
+71b700: 0c09                                   |0076: move-result-object v9
+71b702: 7210 37d5 0900                         |0077: invoke-interface {v9}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+71b708: 0c09                                   |007a: move-result-object v9
+71b70a: 7210 a0d5 0900                         |007b: invoke-interface {v9}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71b710: 0a01                                   |007e: move-result v1
+71b712: 3801 6400                              |007f: if-eqz v1, 00e3 // +0064
+71b716: 7210 a1d5 0900                         |0081: invoke-interface {v9}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b71c: 0c01                                   |0084: move-result-object v1
+71b71e: 1f01 621b                              |0085: check-cast v1, Ljava/util/Set; // type@1b62
+71b722: 7210 32d6 0100                         |0087: invoke-interface {v1}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+71b728: 0c01                                   |008a: move-result-object v1
+71b72a: 7210 a0d5 0100                         |008b: invoke-interface {v1}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71b730: 0a03                                   |008e: move-result v3
+71b732: 3803 ecff                              |008f: if-eqz v3, 007b // -0014
+71b736: 7210 a1d5 0100                         |0091: invoke-interface {v1}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b73c: 0c03                                   |0094: move-result-object v3
+71b73e: 1f03 1017                              |0095: check-cast v3, Lcom/google/firebase/components/CycleDetector$ComponentNode; // type@1710
+71b742: 6e10 c9bc 0300                         |0097: invoke-virtual {v3}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.getComponent:()Lcom/google/firebase/components/Component; // method@bcc9
+71b748: 0c04                                   |009a: move-result-object v4
+71b74a: 6e10 73bc 0400                         |009b: invoke-virtual {v4}, Lcom/google/firebase/components/Component;.getDependencies:()Ljava/util/Set; // method@bc73
+71b750: 0c04                                   |009e: move-result-object v4
+71b752: 7210 32d6 0400                         |009f: invoke-interface {v4}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+71b758: 0c04                                   |00a2: move-result-object v4
+71b75a: 7210 a0d5 0400                         |00a3: invoke-interface {v4}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71b760: 0a05                                   |00a6: move-result v5
+71b762: 3805 e4ff                              |00a7: if-eqz v5, 008b // -001c
+71b766: 7210 a1d5 0400                         |00a9: invoke-interface {v4}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b76c: 0c05                                   |00ac: move-result-object v5
+71b76e: 1f05 1317                              |00ad: check-cast v5, Lcom/google/firebase/components/Dependency; // type@1713
+71b772: 6e10 debc 0500                         |00af: invoke-virtual {v5}, Lcom/google/firebase/components/Dependency;.isDirectInjection:()Z // method@bcde
+71b778: 0a06                                   |00b2: move-result v6
+71b77a: 3906 0300                              |00b3: if-nez v6, 00b6 // +0003
+71b77e: 28ee                                   |00b5: goto 00a3 // -0012
+71b780: 2206 1117                              |00b6: new-instance v6, Lcom/google/firebase/components/CycleDetector$Dep; // type@1711
+71b784: 6e10 dbbc 0500                         |00b8: invoke-virtual {v5}, Lcom/google/firebase/components/Dependency;.getInterface:()Ljava/lang/Class; // method@bcdb
+71b78a: 0c07                                   |00bb: move-result-object v7
+71b78c: 6e10 e0bc 0500                         |00bc: invoke-virtual {v5}, Lcom/google/firebase/components/Dependency;.isSet:()Z // method@bce0
+71b792: 0a05                                   |00bf: move-result v5
+71b794: 7040 cfbc 7625                         |00c0: invoke-direct {v6, v7, v5, v2}, Lcom/google/firebase/components/CycleDetector$Dep;.<init>:(Ljava/lang/Class;ZLcom/google/firebase/components/CycleDetector$1;)V // method@bccf
+71b79a: 7220 03d6 6000                         |00c3: invoke-interface {v0, v6}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+71b7a0: 0c05                                   |00c6: move-result-object v5
+71b7a2: 1f05 621b                              |00c7: check-cast v5, Ljava/util/Set; // type@1b62
+71b7a6: 3905 0300                              |00c9: if-nez v5, 00cc // +0003
+71b7aa: 28d8                                   |00cb: goto 00a3 // -0028
+71b7ac: 7210 32d6 0500                         |00cc: invoke-interface {v5}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+71b7b2: 0c05                                   |00cf: move-result-object v5
+71b7b4: 7210 a0d5 0500                         |00d0: invoke-interface {v5}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71b7ba: 0a06                                   |00d3: move-result v6
+71b7bc: 3806 cfff                              |00d4: if-eqz v6, 00a3 // -0031
+71b7c0: 7210 a1d5 0500                         |00d6: invoke-interface {v5}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b7c6: 0c06                                   |00d9: move-result-object v6
+71b7c8: 1f06 1017                              |00da: check-cast v6, Lcom/google/firebase/components/CycleDetector$ComponentNode; // type@1710
+71b7cc: 6e20 c7bc 6300                         |00dc: invoke-virtual {v3, v6}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.addDependency:(Lcom/google/firebase/components/CycleDetector$ComponentNode;)V // method@bcc7
+71b7d2: 6e20 c8bc 3600                         |00df: invoke-virtual {v6, v3}, Lcom/google/firebase/components/CycleDetector$ComponentNode;.addDependent:(Lcom/google/firebase/components/CycleDetector$ComponentNode;)V // method@bcc8
+71b7d8: 28ee                                   |00e2: goto 00d0 // -0012
+71b7da: 2209 4a1b                              |00e3: new-instance v9, Ljava/util/HashSet; // type@1b4a
+71b7de: 7010 90d5 0900                         |00e5: invoke-direct {v9}, Ljava/util/HashSet;.<init>:()V // method@d590
+71b7e4: 7210 0bd6 0000                         |00e8: invoke-interface {v0}, Ljava/util/Map;.values:()Ljava/util/Collection; // method@d60b
+71b7ea: 0c00                                   |00eb: move-result-object v0
+71b7ec: 7210 37d5 0000                         |00ec: invoke-interface {v0}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+71b7f2: 0c00                                   |00ef: move-result-object v0
+71b7f4: 7210 a0d5 0000                         |00f0: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+71b7fa: 0a01                                   |00f3: move-result v1
+71b7fc: 3801 0c00                              |00f4: if-eqz v1, 0100 // +000c
+71b800: 7210 a1d5 0000                         |00f6: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+71b806: 0c01                                   |00f9: move-result-object v1
+71b808: 1f01 621b                              |00fa: check-cast v1, Ljava/util/Set; // type@1b62
+71b80c: 6e20 95d5 1900                         |00fc: invoke-virtual {v9, v1}, Ljava/util/HashSet;.addAll:(Ljava/util/Collection;)Z // method@d595
+71b812: 28f1                                   |00ff: goto 00f0 // -000f
+71b814: 1109                                   |0100: return-object v9
+      catches       : (none)
+      positions     :
+        0x0000 line=135
+        0x0009 line=136
+        0x001a line=137
+        0x001f line=138
+        0x0033 line=139
+        0x003e line=140
+        0x0044 line=141
+        0x004c line=143
+        0x0052 line=144
+        0x005f line=145
+        0x0067 line=146
+        0x006f line=148
+        0x0073 line=152
+        0x0087 line=153
+        0x0097 line=154
+        0x00af line=155
+        0x00b6 line=159
+        0x00b8 line=160
+        0x00cc line=164
+        0x00dc line=165
+        0x00df line=166
+        0x00e3 line=172
+        0x00e8 line=173
+        0x00fc line=174
+      locals        :
+        0x0000 - 0x0101 reg=9 (null) Ljava/util/List;
+
+  Virtual methods   -
+  source_file_idx   : 8250 (CycleDetector.java)
+

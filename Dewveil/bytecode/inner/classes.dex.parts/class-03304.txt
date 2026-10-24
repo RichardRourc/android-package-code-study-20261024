@@ -1,0 +1,400 @@
+Class #3304            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/databind/util/ObjectBuffer;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : 'MAX_CHUNK'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 262144
+    #1              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : 'SMALL_CHUNK'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 16384
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : '_freeBuffer'
+      type          : '[Ljava/lang/Object;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : '_head'
+      type          : 'Lcom/fasterxml/jackson/databind/util/LinkedNode;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : '_size'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : '_tail'
+      type          : 'Lcom/fasterxml/jackson/databind/util/LinkedNode;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+65b244:                                        |[65b244] com.fasterxml.jackson.databind.util.ObjectBuffer.<init>:()V
+65b254: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+65b25a: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=54
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : '_copyTo'
+      type          : '(Ljava/lang/Object;I[Ljava/lang/Object;I)V'
+      access        : 0x0014 (PROTECTED FINAL)
+      code          -
+      registers     : 9
+      ins           : 5
+      outs          : 5
+      insns size    : 60 16-bit code units
+65b25c:                                        |[65b25c] com.fasterxml.jackson.databind.util.ObjectBuffer._copyTo:(Ljava/lang/Object;I[Ljava/lang/Object;I)V
+65b26c: 5444 9451                              |0000: iget-object v4, v4, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._head:Lcom/fasterxml/jackson/databind/util/LinkedNode; // field@5194
+65b270: 1200                                   |0002: const/4 v0, #int 0 // #0
+65b272: 0101                                   |0003: move v1, v0
+65b274: 3804 1200                              |0004: if-eqz v4, 0016 // +0012
+65b278: 6e10 d98e 0400                         |0006: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/util/LinkedNode;.value:()Ljava/lang/Object; // method@8ed9
+65b27e: 0c02                                   |0009: move-result-object v2
+65b280: 1f02 ad20                              |000a: check-cast v2, [Ljava/lang/Object; // type@20ad
+65b284: 2123                                   |000c: array-length v3, v2
+65b286: 7153 5ad2 0215                         |000d: invoke-static {v2, v0, v5, v1, v3}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+65b28c: b031                                   |0010: add-int/2addr v1, v3
+65b28e: 6e10 d88e 0400                         |0011: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/util/LinkedNode;.next:()Lcom/fasterxml/jackson/databind/util/LinkedNode; // method@8ed8
+65b294: 0c04                                   |0014: move-result-object v4
+65b296: 28ef                                   |0015: goto 0004 // -0011
+65b298: 7158 5ad2 0715                         |0016: invoke-static {v7, v0, v5, v1, v8}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+65b29e: b081                                   |0019: add-int/2addr v1, v8
+65b2a0: 3361 0300                              |001a: if-ne v1, v6, 001d // +0003
+65b2a4: 0e00                                   |001c: return-void
+65b2a6: 2204 7b1a                              |001d: new-instance v4, Ljava/lang/IllegalStateException; // type@1a7b
+65b2aa: 2205 991a                              |001f: new-instance v5, Ljava/lang/StringBuilder; // type@1a99
+65b2ae: 1a07 a762                              |0021: const-string v7, "Should have gotten " // string@62a7
+65b2b2: 7020 3cd2 7500                         |0023: invoke-direct {v5, v7}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+65b2b8: 6e20 40d2 6500                         |0026: invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+65b2be: 0c05                                   |0029: move-result-object v5
+65b2c0: 1a06 c003                              |002a: const-string v6, " entries, got " // string@03c0
+65b2c4: 6e20 45d2 6500                         |002c: invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+65b2ca: 0c05                                   |002f: move-result-object v5
+65b2cc: 6e20 40d2 1500                         |0030: invoke-virtual {v5, v1}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+65b2d2: 0c05                                   |0033: move-result-object v5
+65b2d4: 6e10 58d2 0500                         |0034: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+65b2da: 0c05                                   |0037: move-result-object v5
+65b2dc: 7020 4cd1 5400                         |0038: invoke-direct {v4, v5}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+65b2e2: 2704                                   |003b: throw v4
+      catches       : (none)
+      positions     :
+        0x0000 line=212
+        0x0006 line=213
+        0x000c line=214
+        0x000d line=215
+        0x0011 line=212
+        0x0016 line=218
+        0x001d line=223
+      locals        :
+        0x0000 - 0x003c reg=4 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+        0x0000 - 0x003c reg=5 (null) Ljava/lang/Object;
+        0x0000 - 0x003c reg=6 (null) I
+        0x0000 - 0x003c reg=7 (null) [Ljava/lang/Object;
+        0x0000 - 0x003c reg=8 (null) I
+
+    #1              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : '_reset'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 21 16-bit code units
+65b2e4:                                        |[65b2e4] com.fasterxml.jackson.databind.util.ObjectBuffer._reset:()V
+65b2f4: 5410 9651                              |0000: iget-object v0, v1, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._tail:Lcom/fasterxml/jackson/databind/util/LinkedNode; // field@5196
+65b2f8: 3800 0a00                              |0002: if-eqz v0, 000c // +000a
+65b2fc: 6e10 d98e 0000                         |0004: invoke-virtual {v0}, Lcom/fasterxml/jackson/databind/util/LinkedNode;.value:()Ljava/lang/Object; // method@8ed9
+65b302: 0c00                                   |0007: move-result-object v0
+65b304: 1f00 ad20                              |0008: check-cast v0, [Ljava/lang/Object; // type@20ad
+65b308: 5b10 9351                              |000a: iput-object v0, v1, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._freeBuffer:[Ljava/lang/Object; // field@5193
+65b30c: 1200                                   |000c: const/4 v0, #int 0 // #0
+65b30e: 5b10 9651                              |000d: iput-object v0, v1, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._tail:Lcom/fasterxml/jackson/databind/util/LinkedNode; // field@5196
+65b312: 5b10 9451                              |000f: iput-object v0, v1, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._head:Lcom/fasterxml/jackson/databind/util/LinkedNode; // field@5194
+65b316: 1200                                   |0011: const/4 v0, #int 0 // #0
+65b318: 5910 9551                              |0012: iput v0, v1, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._size:I // field@5195
+65b31c: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=199
+        0x0004 line=200
+        0x000d line=203
+        0x0012 line=204
+      locals        :
+        0x0000 - 0x0015 reg=1 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+
+    #2              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : 'appendCompletedChunk'
+      type          : '([Ljava/lang/Object;)[Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 44 16-bit code units
+65b320:                                        |[65b320] com.fasterxml.jackson.databind.util.ObjectBuffer.appendCompletedChunk:([Ljava/lang/Object;)[Ljava/lang/Object;
+65b330: 2200 5b0f                              |0000: new-instance v0, Lcom/fasterxml/jackson/databind/util/LinkedNode; // type@0f5b
+65b334: 1201                                   |0002: const/4 v1, #int 0 // #0
+65b336: 7030 d58e 3001                         |0003: invoke-direct {v0, v3, v1}, Lcom/fasterxml/jackson/databind/util/LinkedNode;.<init>:(Ljava/lang/Object;Lcom/fasterxml/jackson/databind/util/LinkedNode;)V // method@8ed5
+65b33c: 5421 9451                              |0006: iget-object v1, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._head:Lcom/fasterxml/jackson/databind/util/LinkedNode; // field@5194
+65b340: 3901 0700                              |0008: if-nez v1, 000f // +0007
+65b344: 5b20 9651                              |000a: iput-object v0, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._tail:Lcom/fasterxml/jackson/databind/util/LinkedNode; // field@5196
+65b348: 5b20 9451                              |000c: iput-object v0, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._head:Lcom/fasterxml/jackson/databind/util/LinkedNode; // field@5194
+65b34c: 2808                                   |000e: goto 0016 // +0008
+65b34e: 5421 9651                              |000f: iget-object v1, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._tail:Lcom/fasterxml/jackson/databind/util/LinkedNode; // field@5196
+65b352: 6e20 d78e 0100                         |0011: invoke-virtual {v1, v0}, Lcom/fasterxml/jackson/databind/util/LinkedNode;.linkNext:(Lcom/fasterxml/jackson/databind/util/LinkedNode;)V // method@8ed7
+65b358: 5b20 9651                              |0014: iput-object v0, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._tail:Lcom/fasterxml/jackson/databind/util/LinkedNode; // field@5196
+65b35c: 2133                                   |0016: array-length v3, v3
+65b35e: 5220 9551                              |0017: iget v0, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._size:I // field@5195
+65b362: b030                                   |0019: add-int/2addr v0, v3
+65b364: 5920 9551                              |001a: iput v0, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._size:I // field@5195
+65b368: 1302 0040                              |001c: const/16 v2, #int 16384 // #4000
+65b36c: 3523 0400                              |001e: if-ge v3, v2, 0022 // +0004
+65b370: b033                                   |0020: add-int/2addr v3, v3
+65b372: 2808                                   |0021: goto 0029 // +0008
+65b374: 1502 0400                              |0022: const/high16 v2, #int 262144 // #4
+65b378: 3523 0500                              |0024: if-ge v3, v2, 0029 // +0005
+65b37c: e102 0302                              |0026: shr-int/lit8 v2, v3, #int 2 // #02
+65b380: b023                                   |0028: add-int/2addr v3, v2
+65b382: 2332 ad20                              |0029: new-array v2, v3, [Ljava/lang/Object; // type@20ad
+65b386: 1102                                   |002b: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=104
+        0x0006 line=105
+        0x000a line=106
+        0x000f line=108
+        0x0014 line=109
+        0x0016 line=111
+        0x0017 line=112
+        0x0029 line=119
+      locals        :
+        0x0000 - 0x002c reg=2 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+        0x0000 - 0x002c reg=3 (null) [Ljava/lang/Object;
+
+    #3              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : 'bufferedSize'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+65b388:                                        |[65b388] com.fasterxml.jackson.databind.util.ObjectBuffer.bufferedSize:()I
+65b398: 5200 9551                              |0000: iget v0, v0, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._size:I // field@5195
+65b39c: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=188
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+
+    #4              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : 'completeAndClearBuffer'
+      type          : '([Ljava/lang/Object;ILjava/util/List;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 4
+      outs          : 2
+      insns size    : 41 16-bit code units
+65b3a0:                                        |[65b3a0] com.fasterxml.jackson.databind.util.ObjectBuffer.completeAndClearBuffer:([Ljava/lang/Object;ILjava/util/List;)V
+65b3b0: 5450 9451                              |0000: iget-object v0, v5, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._head:Lcom/fasterxml/jackson/databind/util/LinkedNode; // field@5194
+65b3b4: 1201                                   |0002: const/4 v1, #int 0 // #0
+65b3b6: 3800 1800                              |0003: if-eqz v0, 001b // +0018
+65b3ba: 6e10 d98e 0000                         |0005: invoke-virtual {v0}, Lcom/fasterxml/jackson/databind/util/LinkedNode;.value:()Ljava/lang/Object; // method@8ed9
+65b3c0: 0c02                                   |0008: move-result-object v2
+65b3c2: 1f02 ad20                              |0009: check-cast v2, [Ljava/lang/Object; // type@20ad
+65b3c6: 2123                                   |000b: array-length v3, v2
+65b3c8: 3531 0a00                              |000c: if-ge v1, v3, 0016 // +000a
+65b3cc: 4604 0201                              |000e: aget-object v4, v2, v1
+65b3d0: 7220 c9d5 4800                         |0010: invoke-interface {v8, v4}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+65b3d6: d801 0101                              |0013: add-int/lit8 v1, v1, #int 1 // #01
+65b3da: 28f7                                   |0015: goto 000c // -0009
+65b3dc: 6e10 d88e 0000                         |0016: invoke-virtual {v0}, Lcom/fasterxml/jackson/databind/util/LinkedNode;.next:()Lcom/fasterxml/jackson/databind/util/LinkedNode; // method@8ed8
+65b3e2: 0c00                                   |0019: move-result-object v0
+65b3e4: 28e8                                   |001a: goto 0002 // -0018
+65b3e6: 3571 0a00                              |001b: if-ge v1, v7, 0025 // +000a
+65b3ea: 4600 0601                              |001d: aget-object v0, v6, v1
+65b3ee: 7220 c9d5 0800                         |001f: invoke-interface {v8, v0}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+65b3f4: d801 0101                              |0022: add-int/lit8 v1, v1, #int 1 // #01
+65b3f8: 28f7                                   |0024: goto 001b // -0009
+65b3fa: 6e10 fb8e 0500                         |0025: invoke-virtual {v5}, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._reset:()V // method@8efb
+65b400: 0e00                                   |0028: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=161
+        0x0005 line=162
+        0x000b line=163
+        0x000e line=164
+        0x0016 line=161
+        0x001d line=169
+        0x0025 line=171
+      locals        :
+        0x0000 - 0x0029 reg=5 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+        0x0000 - 0x0029 reg=6 (null) [Ljava/lang/Object;
+        0x0000 - 0x0029 reg=7 (null) I
+        0x0000 - 0x0029 reg=8 (null) Ljava/util/List;
+
+    #5              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : 'completeAndClearBuffer'
+      type          : '([Ljava/lang/Object;I)[Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 5
+      insns size    : 12 16-bit code units
+65b404:                                        |[65b404] com.fasterxml.jackson.databind.util.ObjectBuffer.completeAndClearBuffer:([Ljava/lang/Object;I)[Ljava/lang/Object;
+65b414: 5220 9551                              |0000: iget v0, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._size:I // field@5195
+65b418: b040                                   |0002: add-int/2addr v0, v4
+65b41a: 2301 ad20                              |0003: new-array v1, v0, [Ljava/lang/Object; // type@20ad
+65b41e: 6e54 fa8e 1230                         |0005: invoke-virtual {v2, v1, v0, v3, v4}, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._copyTo:(Ljava/lang/Object;I[Ljava/lang/Object;I)V // method@8efa
+65b424: 6e10 fb8e 0200                         |0008: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._reset:()V // method@8efb
+65b42a: 1101                                   |000b: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=134
+        0x0003 line=135
+        0x0005 line=136
+        0x0008 line=137
+      locals        :
+        0x0000 - 0x000c reg=2 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+        0x0000 - 0x000c reg=3 (null) [Ljava/lang/Object;
+        0x0000 - 0x000c reg=4 (null) I
+
+    #6              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : 'completeAndClearBuffer'
+      type          : '([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 18 16-bit code units
+65b42c:                                        |[65b42c] com.fasterxml.jackson.databind.util.ObjectBuffer.completeAndClearBuffer:([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object;
+65b43c: 5210 9551                              |0000: iget v0, v1, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._size:I // field@5195
+65b440: b030                                   |0002: add-int/2addr v0, v3
+65b442: 7120 a6d2 0400                         |0003: invoke-static {v4, v0}, Ljava/lang/reflect/Array;.newInstance:(Ljava/lang/Class;I)Ljava/lang/Object; // method@d2a6
+65b448: 0c04                                   |0006: move-result-object v4
+65b44a: 1f04 ad20                              |0007: check-cast v4, [Ljava/lang/Object; // type@20ad
+65b44e: 1f04 ad20                              |0009: check-cast v4, [Ljava/lang/Object; // type@20ad
+65b452: 6e53 fa8e 4120                         |000b: invoke-virtual {v1, v4, v0, v2, v3}, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._copyTo:(Ljava/lang/Object;I[Ljava/lang/Object;I)V // method@8efa
+65b458: 6e10 fb8e 0100                         |000e: invoke-virtual {v1}, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._reset:()V // method@8efb
+65b45e: 1104                                   |0011: return-object v4
+      catches       : (none)
+      positions     :
+        0x0000 line=151
+        0x0003 line=153
+        0x000b line=154
+        0x000e line=155
+      locals        :
+        0x0000 - 0x0012 reg=1 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+        0x0000 - 0x0012 reg=2 (null) [Ljava/lang/Object;
+        0x0000 - 0x0012 reg=3 (null) I
+        0x0000 - 0x0012 reg=4 (null) Ljava/lang/Class;
+
+    #7              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : 'initialCapacity'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+65b460:                                        |[65b460] com.fasterxml.jackson.databind.util.ObjectBuffer.initialCapacity:()I
+65b470: 5400 9351                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._freeBuffer:[Ljava/lang/Object; // field@5193
+65b474: 3900 0400                              |0002: if-nez v0, 0006 // +0004
+65b478: 1200                                   |0004: const/4 v0, #int 0 // #0
+65b47a: 2802                                   |0005: goto 0007 // +0002
+65b47c: 2100                                   |0006: array-length v0, v0
+65b47e: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=181
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+
+    #8              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : 'resetAndStart'
+      type          : '()[Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 14 16-bit code units
+65b480:                                        |[65b480] com.fasterxml.jackson.databind.util.ObjectBuffer.resetAndStart:()[Ljava/lang/Object;
+65b490: 6e10 fb8e 0100                         |0000: invoke-virtual {v1}, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._reset:()V // method@8efb
+65b496: 5410 9351                              |0003: iget-object v0, v1, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._freeBuffer:[Ljava/lang/Object; // field@5193
+65b49a: 3900 0800                              |0005: if-nez v0, 000d // +0008
+65b49e: 1300 0c00                              |0007: const/16 v0, #int 12 // #c
+65b4a2: 2300 ad20                              |0009: new-array v0, v0, [Ljava/lang/Object; // type@20ad
+65b4a6: 5b10 9351                              |000b: iput-object v0, v1, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._freeBuffer:[Ljava/lang/Object; // field@5193
+65b4aa: 1100                                   |000d: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=68
+        0x0003 line=69
+        0x0009 line=70
+      locals        :
+        0x0000 - 0x000e reg=1 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+
+    #9              : (in Lcom/fasterxml/jackson/databind/util/ObjectBuffer;)
+      name          : 'resetAndStart'
+      type          : '([Ljava/lang/Object;I)[Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 5
+      insns size    : 29 16-bit code units
+65b4ac:                                        |[65b4ac] com.fasterxml.jackson.databind.util.ObjectBuffer.resetAndStart:([Ljava/lang/Object;I)[Ljava/lang/Object;
+65b4bc: 6e10 fb8e 0200                         |0000: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._reset:()V // method@8efb
+65b4c2: 5420 9351                              |0003: iget-object v0, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._freeBuffer:[Ljava/lang/Object; // field@5193
+65b4c6: 3800 0500                              |0005: if-eqz v0, 000a // +0005
+65b4ca: 2100                                   |0007: array-length v0, v0
+65b4cc: 3540 0c00                              |0008: if-ge v0, v4, 0014 // +000c
+65b4d0: 1300 0c00                              |000a: const/16 v0, #int 12 // #c
+65b4d4: 7120 9bd1 4000                         |000c: invoke-static {v0, v4}, Ljava/lang/Math;.max:(II)I // method@d19b
+65b4da: 0a00                                   |000f: move-result v0
+65b4dc: 2300 ad20                              |0010: new-array v0, v0, [Ljava/lang/Object; // type@20ad
+65b4e0: 5b20 9351                              |0012: iput-object v0, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._freeBuffer:[Ljava/lang/Object; // field@5193
+65b4e4: 5420 9351                              |0014: iget-object v0, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._freeBuffer:[Ljava/lang/Object; // field@5193
+65b4e8: 1201                                   |0016: const/4 v1, #int 0 // #0
+65b4ea: 7154 5ad2 1310                         |0017: invoke-static {v3, v1, v0, v1, v4}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+65b4f0: 5422 9351                              |001a: iget-object v2, v2, Lcom/fasterxml/jackson/databind/util/ObjectBuffer;._freeBuffer:[Ljava/lang/Object; // field@5193
+65b4f4: 1102                                   |001c: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=80
+        0x0003 line=81
+        0x000c line=82
+        0x0014 line=84
+        0x001a line=85
+      locals        :
+        0x0000 - 0x001d reg=2 this Lcom/fasterxml/jackson/databind/util/ObjectBuffer;
+        0x0000 - 0x001d reg=3 (null) [Ljava/lang/Object;
+        0x0000 - 0x001d reg=4 (null) I
+
+  source_file_idx   : 22921 (ObjectBuffer.java)
+

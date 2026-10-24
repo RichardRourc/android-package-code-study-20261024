@@ -1,0 +1,142 @@
+Class #533            -
+  Class descriptor  : 'Landroidx/arch/core/executor/DefaultTaskExecutor;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Landroidx/arch/core/executor/TaskExecutor;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Landroidx/arch/core/executor/DefaultTaskExecutor;)
+      name          : 'mDiskIO'
+      type          : 'Ljava/util/concurrent/ExecutorService;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Landroidx/arch/core/executor/DefaultTaskExecutor;)
+      name          : 'mLock'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Landroidx/arch/core/executor/DefaultTaskExecutor;)
+      name          : 'mMainHandler'
+      type          : 'Landroid/os/Handler;'
+      access        : 0x0042 (PRIVATE VOLATILE)
+  Direct methods    -
+    #0              : (in Landroidx/arch/core/executor/DefaultTaskExecutor;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 23 16-bit code units
+4a780c:                                        |[4a780c] androidx.arch.core.executor.DefaultTaskExecutor.<init>:()V
+4a781c: 7010 2d23 0200                         |0000: invoke-direct {v2}, Landroidx/arch/core/executor/TaskExecutor;.<init>:()V // method@232d
+4a7822: 2200 8b1a                              |0003: new-instance v0, Ljava/lang/Object; // type@1a8b
+4a7826: 7010 c8d1 0000                         |0005: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+4a782c: 5b20 4c10                              |0008: iput-object v0, v2, Landroidx/arch/core/executor/DefaultTaskExecutor;.mLock:Ljava/lang/Object; // field@104c
+4a7830: 2200 6704                              |000a: new-instance v0, Landroidx/arch/core/executor/DefaultTaskExecutor$1; // type@0467
+4a7834: 7020 2723 2000                         |000c: invoke-direct {v0, v2}, Landroidx/arch/core/executor/DefaultTaskExecutor$1;.<init>:(Landroidx/arch/core/executor/DefaultTaskExecutor;)V // method@2327
+4a783a: 1221                                   |000f: const/4 v1, #int 2 // #2
+4a783c: 7120 b4d6 0100                         |0010: invoke-static {v1, v0}, Ljava/util/concurrent/Executors;.newFixedThreadPool:(ILjava/util/concurrent/ThreadFactory;)Ljava/util/concurrent/ExecutorService; // method@d6b4
+4a7842: 0c00                                   |0013: move-result-object v0
+4a7844: 5b20 4b10                              |0014: iput-object v0, v2, Landroidx/arch/core/executor/DefaultTaskExecutor;.mDiskIO:Ljava/util/concurrent/ExecutorService; // field@104b
+4a7848: 0e00                                   |0016: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=34
+        0x0003 line=36
+        0x000a line=38
+      locals        :
+        0x0000 - 0x0017 reg=2 this Landroidx/arch/core/executor/DefaultTaskExecutor;
+
+  Virtual methods   -
+    #0              : (in Landroidx/arch/core/executor/DefaultTaskExecutor;)
+      name          : 'executeOnDiskIO'
+      type          : '(Ljava/lang/Runnable;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 6 16-bit code units
+4a784c:                                        |[4a784c] androidx.arch.core.executor.DefaultTaskExecutor.executeOnDiskIO:(Ljava/lang/Runnable;)V
+4a785c: 5400 4b10                              |0000: iget-object v0, v0, Landroidx/arch/core/executor/DefaultTaskExecutor;.mDiskIO:Ljava/util/concurrent/ExecutorService; // field@104b
+4a7860: 7220 add6 1000                         |0002: invoke-interface {v0, v1}, Ljava/util/concurrent/ExecutorService;.execute:(Ljava/lang/Runnable;)V // method@d6ad
+4a7866: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=56
+      locals        :
+        0x0000 - 0x0006 reg=0 this Landroidx/arch/core/executor/DefaultTaskExecutor;
+        0x0000 - 0x0006 reg=1 (null) Ljava/lang/Runnable;
+
+    #1              : (in Landroidx/arch/core/executor/DefaultTaskExecutor;)
+      name          : 'isMainThread'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 18 16-bit code units
+4a7868:                                        |[4a7868] androidx.arch.core.executor.DefaultTaskExecutor.isMainThread:()Z
+4a7878: 7100 5906 0000                         |0000: invoke-static {}, Landroid/os/Looper;.getMainLooper:()Landroid/os/Looper; // method@0659
+4a787e: 0c01                                   |0003: move-result-object v1
+4a7880: 6e10 5a06 0100                         |0004: invoke-virtual {v1}, Landroid/os/Looper;.getThread:()Ljava/lang/Thread; // method@065a
+4a7886: 0c01                                   |0007: move-result-object v1
+4a7888: 7100 69d2 0000                         |0008: invoke-static {}, Ljava/lang/Thread;.currentThread:()Ljava/lang/Thread; // method@d269
+4a788e: 0c00                                   |000b: move-result-object v0
+4a7890: 3301 0400                              |000c: if-ne v1, v0, 0010 // +0004
+4a7894: 1211                                   |000e: const/4 v1, #int 1 // #1
+4a7896: 2802                                   |000f: goto 0011 // +0002
+4a7898: 1201                                   |0010: const/4 v1, #int 0 // #0
+4a789a: 0f01                                   |0011: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=74
+      locals        :
+        0x0000 - 0x0012 reg=1 this Landroidx/arch/core/executor/DefaultTaskExecutor;
+
+    #2              : (in Landroidx/arch/core/executor/DefaultTaskExecutor;)
+      name          : 'postToMainThread'
+      type          : '(Ljava/lang/Runnable;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 33 16-bit code units
+4a789c:                                        |[4a789c] androidx.arch.core.executor.DefaultTaskExecutor.postToMainThread:(Ljava/lang/Runnable;)V
+4a78ac: 5430 4d10                              |0000: iget-object v0, v3, Landroidx/arch/core/executor/DefaultTaskExecutor;.mMainHandler:Landroid/os/Handler; // field@104d
+4a78b0: 3900 1900                              |0002: if-nez v0, 001b // +0019
+4a78b4: 5430 4c10                              |0004: iget-object v0, v3, Landroidx/arch/core/executor/DefaultTaskExecutor;.mLock:Ljava/lang/Object; // field@104c
+4a78b8: 1d00                                   |0006: monitor-enter v0
+4a78ba: 5431 4d10                              |0007: iget-object v1, v3, Landroidx/arch/core/executor/DefaultTaskExecutor;.mMainHandler:Landroid/os/Handler; // field@104d
+4a78be: 3901 0d00                              |0009: if-nez v1, 0016 // +000d
+4a78c2: 2201 3201                              |000b: new-instance v1, Landroid/os/Handler; // type@0132
+4a78c6: 7100 5906 0000                         |000d: invoke-static {}, Landroid/os/Looper;.getMainLooper:()Landroid/os/Looper; // method@0659
+4a78cc: 0c02                                   |0010: move-result-object v2
+4a78ce: 7020 2706 2100                         |0011: invoke-direct {v1, v2}, Landroid/os/Handler;.<init>:(Landroid/os/Looper;)V // method@0627
+4a78d4: 5b31 4d10                              |0014: iput-object v1, v3, Landroidx/arch/core/executor/DefaultTaskExecutor;.mMainHandler:Landroid/os/Handler; // field@104d
+4a78d8: 1e00                                   |0016: monitor-exit v0
+4a78da: 2804                                   |0017: goto 001b // +0004
+4a78dc: 0d03                                   |0018: move-exception v3
+4a78de: 1e00                                   |0019: monitor-exit v0
+4a78e0: 2703                                   |001a: throw v3
+4a78e2: 5433 4d10                              |001b: iget-object v3, v3, Landroidx/arch/core/executor/DefaultTaskExecutor;.mMainHandler:Landroid/os/Handler; // field@104d
+4a78e6: 6e20 3406 4300                         |001d: invoke-virtual {v3, v4}, Landroid/os/Handler;.post:(Ljava/lang/Runnable;)Z // method@0634
+4a78ec: 0e00                                   |0020: return-void
+      catches       : 1
+        0x0007 - 0x001a
+          <any> -> 0x0018
+      positions     :
+        0x0000 line=61
+        0x0004 line=62
+        0x0007 line=63
+        0x000b line=64
+        0x0016 line=66
+        0x001b line=69
+      locals        :
+        0x0000 - 0x0021 reg=3 this Landroidx/arch/core/executor/DefaultTaskExecutor;
+        0x0000 - 0x0021 reg=4 (null) Ljava/lang/Runnable;
+
+  source_file_idx   : 8725 (DefaultTaskExecutor.java)
+

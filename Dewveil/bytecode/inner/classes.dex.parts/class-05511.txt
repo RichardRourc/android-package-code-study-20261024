@@ -1,0 +1,226 @@
+Class #5511            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/TopicsStore;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/google/firebase/messaging/TopicsStore;)
+      name          : 'topicsStoreWeakReference'
+      type          : 'Ljava/lang/ref/WeakReference;'
+      access        : 0x000a (PRIVATE STATIC)
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/messaging/TopicsStore;)
+      name          : 'sharedPreferences'
+      type          : 'Landroid/content/SharedPreferences;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/google/firebase/messaging/TopicsStore;)
+      name          : 'syncExecutor'
+      type          : 'Ljava/util/concurrent/Executor;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/google/firebase/messaging/TopicsStore;)
+      name          : 'topicOperationsQueue'
+      type          : 'Lcom/google/firebase/messaging/SharedPreferencesQueue;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/TopicsStore;)
+      name          : '<init>'
+      type          : '(Landroid/content/SharedPreferences;Ljava/util/concurrent/Executor;)V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 1
+      insns size    : 8 16-bit code units
+72b354:                                        |[72b354] com.google.firebase.messaging.TopicsStore.<init>:(Landroid/content/SharedPreferences;Ljava/util/concurrent/Executor;)V
+72b364: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+72b36a: 5b02 f273                              |0003: iput-object v2, v0, Lcom/google/firebase/messaging/TopicsStore;.syncExecutor:Ljava/util/concurrent/Executor; // field@73f2
+72b36e: 5b01 f173                              |0005: iput-object v1, v0, Lcom/google/firebase/messaging/TopicsStore;.sharedPreferences:Landroid/content/SharedPreferences; // field@73f1
+72b372: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lcom/google/firebase/messaging/TopicsStore;)
+      name          : 'getInstance'
+      type          : '(Landroid/content/Context;Ljava/util/concurrent/Executor;)Lcom/google/firebase/messaging/TopicsStore;'
+      access        : 0x20009 (PUBLIC STATIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 46 16-bit code units
+72b374:                                        |[72b374] com.google.firebase.messaging.TopicsStore.getInstance:(Landroid/content/Context;Ljava/util/concurrent/Executor;)Lcom/google/firebase/messaging/TopicsStore;
+72b384: 1c00 0118                              |0000: const-class v0, Lcom/google/firebase/messaging/TopicsStore; // type@1801
+72b388: 1d00                                   |0002: monitor-enter v0
+72b38a: 6201 f473                              |0003: sget-object v1, Lcom/google/firebase/messaging/TopicsStore;.topicsStoreWeakReference:Ljava/lang/ref/WeakReference; // field@73f4
+72b38e: 3801 0900                              |0005: if-eqz v1, 000e // +0009
+72b392: 6e10 a0d2 0100                         |0007: invoke-virtual {v1}, Ljava/lang/ref/WeakReference;.get:()Ljava/lang/Object; // method@d2a0
+72b398: 0c01                                   |000a: move-result-object v1
+72b39a: 1f01 0118                              |000b: check-cast v1, Lcom/google/firebase/messaging/TopicsStore; // type@1801
+72b39e: 2802                                   |000d: goto 000f // +0002
+72b3a0: 1201                                   |000e: const/4 v1, #int 0 // #0
+72b3a2: 3901 1a00                              |000f: if-nez v1, 0029 // +001a
+72b3a6: 1a01 c587                              |0011: const-string v1, "com.google.android.gms.appid" // string@87c5
+72b3aa: 1202                                   |0013: const/4 v2, #int 0 // #0
+72b3ac: 6e30 4802 1302                         |0014: invoke-virtual {v3, v1, v2}, Landroid/content/Context;.getSharedPreferences:(Ljava/lang/String;I)Landroid/content/SharedPreferences; // method@0248
+72b3b2: 0c03                                   |0017: move-result-object v3
+72b3b4: 2201 0118                              |0018: new-instance v1, Lcom/google/firebase/messaging/TopicsStore; // type@1801
+72b3b8: 7030 19c1 3104                         |001a: invoke-direct {v1, v3, v4}, Lcom/google/firebase/messaging/TopicsStore;.<init>:(Landroid/content/SharedPreferences;Ljava/util/concurrent/Executor;)V // method@c119
+72b3be: 7010 1dc1 0100                         |001d: invoke-direct {v1}, Lcom/google/firebase/messaging/TopicsStore;.initStore:()V // method@c11d
+72b3c4: 2203 af1a                              |0020: new-instance v3, Ljava/lang/ref/WeakReference; // type@1aaf
+72b3c8: 7020 9ed2 1300                         |0022: invoke-direct {v3, v1}, Ljava/lang/ref/WeakReference;.<init>:(Ljava/lang/Object;)V // method@d29e
+72b3ce: 6903 f473                              |0025: sput-object v3, Lcom/google/firebase/messaging/TopicsStore;.topicsStoreWeakReference:Ljava/lang/ref/WeakReference; // field@73f4
+72b3d2: 1e00                                   |0027: monitor-exit v0
+72b3d4: 1101                                   |0028: return-object v1
+72b3d6: 1e00                                   |0029: monitor-exit v0
+72b3d8: 1101                                   |002a: return-object v1
+72b3da: 0d03                                   |002b: move-exception v3
+72b3dc: 1e00                                   |002c: monitor-exit v0
+72b3de: 2703                                   |002d: throw v3
+      catches       : 2
+        0x0003 - 0x0027
+          <any> -> 0x002b
+        0x002c - 0x002d
+          <any> -> 0x002b
+      positions     :
+        0x0007 line=1
+        0x0014 line=2
+        0x001a line=3
+        0x001d line=4
+        0x0022 line=5
+      locals        :
+        0x0000 - 0x002e reg=3 (null) Landroid/content/Context;
+        0x0000 - 0x002e reg=4 (null) Ljava/util/concurrent/Executor;
+
+    #2              : (in Lcom/google/firebase/messaging/TopicsStore;)
+      name          : 'initStore'
+      type          : '()V'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 20 16-bit code units
+72b3f4:                                        |[72b3f4] com.google.firebase.messaging.TopicsStore.initStore:()V
+72b404: 1d04                                   |0000: monitor-enter v4
+72b406: 5440 f173                              |0001: iget-object v0, v4, Lcom/google/firebase/messaging/TopicsStore;.sharedPreferences:Landroid/content/SharedPreferences; // field@73f1
+72b40a: 1a01 54e2                              |0003: const-string v1, "topic_operation_queue" // string@e254
+72b40e: 1a02 090e                              |0005: const-string v2, "," // string@0e09
+72b412: 5443 f273                              |0007: iget-object v3, v4, Lcom/google/firebase/messaging/TopicsStore;.syncExecutor:Ljava/util/concurrent/Executor; // field@73f2
+72b416: 7140 f0c0 1032                         |0009: invoke-static {v0, v1, v2, v3}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.createInstance:(Landroid/content/SharedPreferences;Ljava/lang/String;Ljava/lang/String;Ljava/util/concurrent/Executor;)Lcom/google/firebase/messaging/SharedPreferencesQueue; // method@c0f0
+72b41c: 0c00                                   |000c: move-result-object v0
+72b41e: 5b40 f373                              |000d: iput-object v0, v4, Lcom/google/firebase/messaging/TopicsStore;.topicOperationsQueue:Lcom/google/firebase/messaging/SharedPreferencesQueue; // field@73f3
+72b422: 1e04                                   |000f: monitor-exit v4
+72b424: 0e00                                   |0010: return-void
+72b426: 0d00                                   |0011: move-exception v0
+72b428: 1e04                                   |0012: monitor-exit v4
+72b42a: 2700                                   |0013: throw v0
+      catches       : 2
+        0x0001 - 0x000f
+          <any> -> 0x0011
+        0x0012 - 0x0013
+          <any> -> 0x0011
+      positions     :
+        0x0009 line=1
+      locals        :
+        0x0000 - 0x0014 reg=4 this Lcom/google/firebase/messaging/TopicsStore;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/messaging/TopicsStore;)
+      name          : 'addTopicOperation'
+      type          : '(Lcom/google/firebase/messaging/TopicOperation;)Z'
+      access        : 0x20000 (DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 16 16-bit code units
+72b440:                                        |[72b440] com.google.firebase.messaging.TopicsStore.addTopicOperation:(Lcom/google/firebase/messaging/TopicOperation;)Z
+72b450: 1d01                                   |0000: monitor-enter v1
+72b452: 5410 f373                              |0001: iget-object v0, v1, Lcom/google/firebase/messaging/TopicsStore;.topicOperationsQueue:Lcom/google/firebase/messaging/SharedPreferencesQueue; // field@73f3
+72b456: 6e10 16c1 0200                         |0003: invoke-virtual {v2}, Lcom/google/firebase/messaging/TopicOperation;.serialize:()Ljava/lang/String; // method@c116
+72b45c: 0c02                                   |0006: move-result-object v2
+72b45e: 6e20 edc0 2000                         |0007: invoke-virtual {v0, v2}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.add:(Ljava/lang/String;)Z // method@c0ed
+72b464: 0a02                                   |000a: move-result v2
+72b466: 1e01                                   |000b: monitor-exit v1
+72b468: 0f02                                   |000c: return v2
+72b46a: 0d02                                   |000d: move-exception v2
+72b46c: 1e01                                   |000e: monitor-exit v1
+72b46e: 2702                                   |000f: throw v2
+      catches       : 2
+        0x0001 - 0x000b
+          <any> -> 0x000d
+        0x000e - 0x000f
+          <any> -> 0x000d
+      positions     :
+        0x0007 line=1
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/google/firebase/messaging/TopicsStore;
+        0x0000 - 0x0010 reg=2 (null) Lcom/google/firebase/messaging/TopicOperation;
+
+    #1              : (in Lcom/google/firebase/messaging/TopicsStore;)
+      name          : 'getNextTopicOperation'
+      type          : '()Lcom/google/firebase/messaging/TopicOperation;'
+      access        : 0x20000 (DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 16 16-bit code units
+72b484:                                        |[72b484] com.google.firebase.messaging.TopicsStore.getNextTopicOperation:()Lcom/google/firebase/messaging/TopicOperation;
+72b494: 1d01                                   |0000: monitor-enter v1
+72b496: 5410 f373                              |0001: iget-object v0, v1, Lcom/google/firebase/messaging/TopicsStore;.topicOperationsQueue:Lcom/google/firebase/messaging/SharedPreferencesQueue; // field@73f3
+72b49a: 6e10 f2c0 0000                         |0003: invoke-virtual {v0}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.peek:()Ljava/lang/String; // method@c0f2
+72b4a0: 0c00                                   |0006: move-result-object v0
+72b4a2: 7110 11c1 0000                         |0007: invoke-static {v0}, Lcom/google/firebase/messaging/TopicOperation;.from:(Ljava/lang/String;)Lcom/google/firebase/messaging/TopicOperation; // method@c111
+72b4a8: 0c00                                   |000a: move-result-object v0
+72b4aa: 1e01                                   |000b: monitor-exit v1
+72b4ac: 1100                                   |000c: return-object v0
+72b4ae: 0d00                                   |000d: move-exception v0
+72b4b0: 1e01                                   |000e: monitor-exit v1
+72b4b2: 2700                                   |000f: throw v0
+      catches       : 2
+        0x0001 - 0x000b
+          <any> -> 0x000d
+        0x000e - 0x000f
+          <any> -> 0x000d
+      positions     :
+        0x0003 line=1
+        0x0007 line=2
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/google/firebase/messaging/TopicsStore;
+
+    #2              : (in Lcom/google/firebase/messaging/TopicsStore;)
+      name          : 'removeTopicOperation'
+      type          : '(Lcom/google/firebase/messaging/TopicOperation;)Z'
+      access        : 0x20000 (DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 16 16-bit code units
+72b4c8:                                        |[72b4c8] com.google.firebase.messaging.TopicsStore.removeTopicOperation:(Lcom/google/firebase/messaging/TopicOperation;)Z
+72b4d8: 1d01                                   |0000: monitor-enter v1
+72b4da: 5410 f373                              |0001: iget-object v0, v1, Lcom/google/firebase/messaging/TopicsStore;.topicOperationsQueue:Lcom/google/firebase/messaging/SharedPreferencesQueue; // field@73f3
+72b4de: 6e10 16c1 0200                         |0003: invoke-virtual {v2}, Lcom/google/firebase/messaging/TopicOperation;.serialize:()Ljava/lang/String; // method@c116
+72b4e4: 0c02                                   |0006: move-result-object v2
+72b4e6: 6e20 f3c0 2000                         |0007: invoke-virtual {v0, v2}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.remove:(Ljava/lang/Object;)Z // method@c0f3
+72b4ec: 0a02                                   |000a: move-result v2
+72b4ee: 1e01                                   |000b: monitor-exit v1
+72b4f0: 0f02                                   |000c: return v2
+72b4f2: 0d02                                   |000d: move-exception v2
+72b4f4: 1e01                                   |000e: monitor-exit v1
+72b4f6: 2702                                   |000f: throw v2
+      catches       : 2
+        0x0001 - 0x000b
+          <any> -> 0x000d
+        0x000e - 0x000f
+          <any> -> 0x000d
+      positions     :
+        0x0007 line=1
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/google/firebase/messaging/TopicsStore;
+        0x0000 - 0x0010 reg=2 (null) Lcom/google/firebase/messaging/TopicOperation;
+
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

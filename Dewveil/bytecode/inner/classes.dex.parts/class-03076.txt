@@ -1,0 +1,806 @@
+Class #3076            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Lcom/fasterxml/jackson/databind/jsontype/SubtypeResolver;'
+  Interfaces        -
+    #0              : 'Ljava/io/Serializable;'
+  Static fields     -
+    #0              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : 'serialVersionUID'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : '_registeredSubtypes'
+      type          : 'Ljava/util/LinkedHashSet;'
+      access        : 0x0004 (PROTECTED)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+634e40:                                        |[634e40] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.<init>:()V
+634e50: 7010 0a82 0000                         |0000: invoke-direct {v0}, Lcom/fasterxml/jackson/databind/jsontype/SubtypeResolver;.<init>:()V // method@820a
+634e56: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=24
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+
+    #1              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 18 16-bit code units
+634e58:                                        |[634e58] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.<init>:(Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)V
+634e68: 7010 0a82 0100                         |0000: invoke-direct {v1}, Lcom/fasterxml/jackson/databind/jsontype/SubtypeResolver;.<init>:()V // method@820a
+634e6e: 5422 c04e                              |0003: iget-object v2, v2, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._registeredSubtypes:Ljava/util/LinkedHashSet; // field@4ec0
+634e72: 3902 0400                              |0005: if-nez v2, 0009 // +0004
+634e76: 1202                                   |0007: const/4 v2, #int 0 // #0
+634e78: 2807                                   |0008: goto 000f // +0007
+634e7a: 2200 4f1b                              |0009: new-instance v0, Ljava/util/LinkedHashSet; // type@1b4f
+634e7e: 7020 b4d5 2000                         |000b: invoke-direct {v0, v2}, Ljava/util/LinkedHashSet;.<init>:(Ljava/util/Collection;)V // method@d5b4
+634e84: 0702                                   |000e: move-object v2, v0
+634e86: 5b12 c04e                              |000f: iput-object v2, v1, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._registeredSubtypes:Ljava/util/LinkedHashSet; // field@4ec0
+634e8a: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=27
+        0x0003 line=28
+        0x0009 line=29
+      locals        :
+        0x0000 - 0x0012 reg=1 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x0012 reg=2 (null) Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : '_collectAndResolve'
+      type          : '(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Ljava/util/HashMap;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 12
+      ins           : 6
+      outs          : 6
+      insns size    : 108 16-bit code units
+634e8c:                                        |[634e8c] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver._collectAndResolve:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Ljava/util/HashMap;)V
+634e9c: 6e10 fa81 0800                         |0000: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.hasName:()Z // method@81fa
+634ea2: 0a00                                   |0003: move-result v0
+634ea4: 3900 1200                              |0004: if-nez v0, 0016 // +0012
+634ea8: 6e20 f56b 7a00                         |0006: invoke-virtual {v10, v7}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findTypeName:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;)Ljava/lang/String; // method@6bf5
+634eae: 0c00                                   |0009: move-result-object v0
+634eb0: 3800 0c00                              |000a: if-eqz v0, 0016 // +000c
+634eb4: 2201 5d0e                              |000c: new-instance v1, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+634eb8: 6e10 f981 0800                         |000e: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+634ebe: 0c08                                   |0011: move-result-object v8
+634ec0: 7030 f681 8100                         |0012: invoke-direct {v1, v8, v0}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.<init>:(Ljava/lang/Class;Ljava/lang/String;)V // method@81f6
+634ec6: 0718                                   |0015: move-object v8, v1
+634ec8: 2200 5d0e                              |0016: new-instance v0, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+634ecc: 6e10 f981 0800                         |0018: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+634ed2: 0c01                                   |001b: move-result-object v1
+634ed4: 7020 f581 1000                         |001c: invoke-direct {v0, v1}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.<init>:(Ljava/lang/Class;)V // method@81f5
+634eda: 6e20 83d5 0b00                         |001f: invoke-virtual {v11, v0}, Ljava/util/HashMap;.containsKey:(Ljava/lang/Object;)Z // method@d583
+634ee0: 0a01                                   |0022: move-result v1
+634ee2: 3801 1800                              |0023: if-eqz v1, 003b // +0018
+634ee6: 6e10 fa81 0800                         |0025: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.hasName:()Z // method@81fa
+634eec: 0a06                                   |0028: move-result v6
+634eee: 3806 1100                              |0029: if-eqz v6, 003a // +0011
+634ef2: 6e20 86d5 0b00                         |002b: invoke-virtual {v11, v0}, Ljava/util/HashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d586
+634ef8: 0c06                                   |002e: move-result-object v6
+634efa: 1f06 5d0e                              |002f: check-cast v6, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+634efe: 6e10 fa81 0600                         |0031: invoke-virtual {v6}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.hasName:()Z // method@81fa
+634f04: 0a06                                   |0034: move-result v6
+634f06: 3906 0500                              |0035: if-nez v6, 003a // +0005
+634f0a: 6e30 8ad5 0b08                         |0037: invoke-virtual {v11, v0, v8}, Ljava/util/HashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d58a
+634f10: 0e00                                   |003a: return-void
+634f12: 6e30 8ad5 0b08                         |003b: invoke-virtual {v11, v0, v8}, Ljava/util/HashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d58a
+634f18: 6e20 f46b 7a00                         |003e: invoke-virtual {v10, v7}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findSubtypes:(Lcom/fasterxml/jackson/databind/introspect/Annotated;)Ljava/util/List; // method@6bf4
+634f1e: 0c07                                   |0041: move-result-object v7
+634f20: 3807 2900                              |0042: if-eqz v7, 006b // +0029
+634f24: 7210 36d5 0700                         |0044: invoke-interface {v7}, Ljava/util/Collection;.isEmpty:()Z // method@d536
+634f2a: 0a08                                   |0047: move-result v8
+634f2c: 3908 2300                              |0048: if-nez v8, 006b // +0023
+634f30: 7210 37d5 0700                         |004a: invoke-interface {v7}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+634f36: 0c07                                   |004d: move-result-object v7
+634f38: 7210 a0d5 0700                         |004e: invoke-interface {v7}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+634f3e: 0a08                                   |0051: move-result v8
+634f40: 3808 1900                              |0052: if-eqz v8, 006b // +0019
+634f44: 7210 a1d5 0700                         |0054: invoke-interface {v7}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+634f4a: 0c08                                   |0057: move-result-object v8
+634f4c: 0782                                   |0058: move-object v2, v8
+634f4e: 1f02 5d0e                              |0059: check-cast v2, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+634f52: 6e10 f981 0200                         |005b: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+634f58: 0c08                                   |005e: move-result-object v8
+634f5a: 7120 b57d 8900                         |005f: invoke-static {v9, v8}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClassResolver;.resolveWithoutSuperTypes:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass; // method@7db5
+634f60: 0c01                                   |0062: move-result-object v1
+634f62: 0760                                   |0063: move-object v0, v6
+634f64: 0793                                   |0064: move-object v3, v9
+634f66: 07a4                                   |0065: move-object v4, v10
+634f68: 07b5                                   |0066: move-object v5, v11
+634f6a: 7406 bf82 0000                         |0067: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolve:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Ljava/util/HashMap;)V // method@82bf
+634f70: 28e4                                   |006a: goto 004e // -001c
+634f72: 0e00                                   |006b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=241
+        0x0006 line=242
+        0x000c line=244
+        0x0016 line=250
+        0x001f line=253
+        0x0025 line=255
+        0x002b line=256
+        0x0031 line=257
+        0x0037 line=258
+        0x003b line=264
+        0x003e line=265
+        0x0044 line=266
+        0x004a line=267
+        0x005b line=269
+        0x005f line=268
+        0x0067 line=270
+      locals        :
+        0x0000 - 0x006c reg=6 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x006c reg=7 (null) Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;
+        0x0000 - 0x006c reg=8 (null) Lcom/fasterxml/jackson/databind/jsontype/NamedType;
+        0x0000 - 0x006c reg=9 (null) Lcom/fasterxml/jackson/databind/cfg/MapperConfig;
+        0x0000 - 0x006c reg=10 (null) Lcom/fasterxml/jackson/databind/AnnotationIntrospector;
+        0x0000 - 0x006c reg=11 (null) Ljava/util/HashMap;
+
+    #1              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : '_collectAndResolveByTypeId'
+      type          : '(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/util/Set;Ljava/util/Map;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 12
+      ins           : 6
+      outs          : 6
+      insns size    : 95 16-bit code units
+634f74:                                        |[634f74] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver._collectAndResolveByTypeId:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/util/Set;Ljava/util/Map;)V
+634f84: 6e10 9873 0900                         |0000: invoke-virtual {v9}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.getAnnotationIntrospector:()Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // method@7398
+634f8a: 0c00                                   |0003: move-result-object v0
+634f8c: 6e10 fa81 0800                         |0004: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.hasName:()Z // method@81fa
+634f92: 0a01                                   |0007: move-result v1
+634f94: 3901 1200                              |0008: if-nez v1, 001a // +0012
+634f98: 6e20 f56b 7000                         |000a: invoke-virtual {v0, v7}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findTypeName:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;)Ljava/lang/String; // method@6bf5
+634f9e: 0c01                                   |000d: move-result-object v1
+634fa0: 3801 0c00                              |000e: if-eqz v1, 001a // +000c
+634fa4: 2202 5d0e                              |0010: new-instance v2, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+634fa8: 6e10 f981 0800                         |0012: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+634fae: 0c08                                   |0015: move-result-object v8
+634fb0: 7030 f681 8201                         |0016: invoke-direct {v2, v8, v1}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.<init>:(Ljava/lang/Class;Ljava/lang/String;)V // method@81f6
+634fb6: 0728                                   |0019: move-object v8, v2
+634fb8: 6e10 fa81 0800                         |001a: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.hasName:()Z // method@81fa
+634fbe: 0a01                                   |001d: move-result v1
+634fc0: 3801 0900                              |001e: if-eqz v1, 0027 // +0009
+634fc4: 6e10 f881 0800                         |0020: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getName:()Ljava/lang/String; // method@81f8
+634fca: 0c01                                   |0023: move-result-object v1
+634fcc: 7230 06d6 1b08                         |0024: invoke-interface {v11, v1, v8}, Ljava/util/Map;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d606
+634fd2: 6e10 f981 0800                         |0027: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+634fd8: 0c08                                   |002a: move-result-object v8
+634fda: 7220 2cd6 8a00                         |002b: invoke-interface {v10, v8}, Ljava/util/Set;.add:(Ljava/lang/Object;)Z // method@d62c
+634fe0: 0a08                                   |002e: move-result v8
+634fe2: 3808 2f00                              |002f: if-eqz v8, 005e // +002f
+634fe6: 6e20 f46b 7000                         |0031: invoke-virtual {v0, v7}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findSubtypes:(Lcom/fasterxml/jackson/databind/introspect/Annotated;)Ljava/util/List; // method@6bf4
+634fec: 0c07                                   |0034: move-result-object v7
+634fee: 3807 2900                              |0035: if-eqz v7, 005e // +0029
+634ff2: 7210 36d5 0700                         |0037: invoke-interface {v7}, Ljava/util/Collection;.isEmpty:()Z // method@d536
+634ff8: 0a08                                   |003a: move-result v8
+634ffa: 3908 2300                              |003b: if-nez v8, 005e // +0023
+634ffe: 7210 37d5 0700                         |003d: invoke-interface {v7}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+635004: 0c07                                   |0040: move-result-object v7
+635006: 7210 a0d5 0700                         |0041: invoke-interface {v7}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+63500c: 0a08                                   |0044: move-result v8
+63500e: 3808 1900                              |0045: if-eqz v8, 005e // +0019
+635012: 7210 a1d5 0700                         |0047: invoke-interface {v7}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+635018: 0c08                                   |004a: move-result-object v8
+63501a: 0782                                   |004b: move-object v2, v8
+63501c: 1f02 5d0e                              |004c: check-cast v2, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+635020: 6e10 f981 0200                         |004e: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+635026: 0c08                                   |0051: move-result-object v8
+635028: 7120 b57d 8900                         |0052: invoke-static {v9, v8}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClassResolver;.resolveWithoutSuperTypes:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass; // method@7db5
+63502e: 0c01                                   |0055: move-result-object v1
+635030: 0760                                   |0056: move-object v0, v6
+635032: 0793                                   |0057: move-object v3, v9
+635034: 07a4                                   |0058: move-object v4, v10
+635036: 07b5                                   |0059: move-object v5, v11
+635038: 7406 c082 0000                         |005a: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolveByTypeId:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/util/Set;Ljava/util/Map;)V // method@82c0
+63503e: 28e4                                   |005d: goto 0041 // -001c
+635040: 0e00                                   |005e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=283
+        0x0004 line=284
+        0x000a line=285
+        0x0010 line=287
+        0x001a line=290
+        0x0020 line=291
+        0x0027 line=295
+        0x0031 line=296
+        0x0037 line=297
+        0x003d line=298
+        0x004e line=300
+        0x0052 line=299
+        0x005a line=301
+      locals        :
+        0x0000 - 0x005f reg=6 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x005f reg=7 (null) Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;
+        0x0000 - 0x005f reg=8 (null) Lcom/fasterxml/jackson/databind/jsontype/NamedType;
+        0x0000 - 0x005f reg=9 (null) Lcom/fasterxml/jackson/databind/cfg/MapperConfig;
+        0x0000 - 0x005f reg=10 (null) Ljava/util/Set;
+        0x0000 - 0x005f reg=11 (null) Ljava/util/Map;
+
+    #2              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : '_combineNamedAndUnnamed'
+      type          : '(Ljava/lang/Class;Ljava/util/Set;Ljava/util/Map;)Ljava/util/Collection;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 2
+      insns size    : 76 16-bit code units
+635044:                                        |[635044] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver._combineNamedAndUnnamed:(Ljava/lang/Class;Ljava/util/Set;Ljava/util/Map;)Ljava/util/Collection;
+635054: 2201 3a1b                              |0000: new-instance v1, Ljava/util/ArrayList; // type@1b3a
+635058: 7210 0bd6 0400                         |0002: invoke-interface {v4}, Ljava/util/Map;.values:()Ljava/util/Collection; // method@d60b
+63505e: 0c00                                   |0005: move-result-object v0
+635060: 7020 a1d4 0100                         |0006: invoke-direct {v1, v0}, Ljava/util/ArrayList;.<init>:(Ljava/util/Collection;)V // method@d4a1
+635066: 7210 0bd6 0400                         |0009: invoke-interface {v4}, Ljava/util/Map;.values:()Ljava/util/Collection; // method@d60b
+63506c: 0c04                                   |000c: move-result-object v4
+63506e: 7210 37d5 0400                         |000d: invoke-interface {v4}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+635074: 0c04                                   |0010: move-result-object v4
+635076: 7210 a0d5 0400                         |0011: invoke-interface {v4}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+63507c: 0a00                                   |0014: move-result v0
+63507e: 3800 1000                              |0015: if-eqz v0, 0025 // +0010
+635082: 7210 a1d5 0400                         |0017: invoke-interface {v4}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+635088: 0c00                                   |001a: move-result-object v0
+63508a: 1f00 5d0e                              |001b: check-cast v0, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+63508e: 6e10 f981 0000                         |001d: invoke-virtual {v0}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+635094: 0c00                                   |0020: move-result-object v0
+635096: 7220 33d6 0300                         |0021: invoke-interface {v3, v0}, Ljava/util/Set;.remove:(Ljava/lang/Object;)Z // method@d633
+63509c: 28ed                                   |0024: goto 0011 // -0013
+63509e: 7210 32d6 0300                         |0025: invoke-interface {v3}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+6350a4: 0c03                                   |0028: move-result-object v3
+6350a6: 7210 a0d5 0300                         |0029: invoke-interface {v3}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+6350ac: 0a04                                   |002c: move-result v4
+6350ae: 3804 1e00                              |002d: if-eqz v4, 004b // +001e
+6350b2: 7210 a1d5 0300                         |002f: invoke-interface {v3}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+6350b8: 0c04                                   |0032: move-result-object v4
+6350ba: 1f04 6b1a                              |0033: check-cast v4, Ljava/lang/Class; // type@1a6b
+6350be: 3324 0d00                              |0035: if-ne v4, v2, 0042 // +000d
+6350c2: 6e10 efd0 0400                         |0037: invoke-virtual {v4}, Ljava/lang/Class;.getModifiers:()I // method@d0ef
+6350c8: 0a00                                   |003a: move-result v0
+6350ca: 7110 e1d2 0000                         |003b: invoke-static {v0}, Ljava/lang/reflect/Modifier;.isAbstract:(I)Z // method@d2e1
+6350d0: 0a00                                   |003e: move-result v0
+6350d2: 3800 0300                              |003f: if-eqz v0, 0042 // +0003
+6350d6: 28e8                                   |0041: goto 0029 // -0018
+6350d8: 2200 5d0e                              |0042: new-instance v0, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+6350dc: 7020 f581 4000                         |0044: invoke-direct {v0, v4}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.<init>:(Ljava/lang/Class;)V // method@81f5
+6350e2: 6e20 a3d4 0100                         |0047: invoke-virtual {v1, v0}, Ljava/util/ArrayList;.add:(Ljava/lang/Object;)Z // method@d4a3
+6350e8: 28df                                   |004a: goto 0029 // -0021
+6350ea: 1101                                   |004b: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=314
+        0x0009 line=319
+        0x001d line=320
+        0x0025 line=322
+        0x0037 line=325
+        0x0042 line=328
+      locals        :
+        0x0000 - 0x004c reg=1 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x004c reg=2 (null) Ljava/lang/Class;
+        0x0000 - 0x004c reg=3 (null) Ljava/util/Set;
+        0x0000 - 0x004c reg=4 (null) Ljava/util/Map;
+
+    #3              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : 'collectAndResolveSubtypesByClass'
+      type          : '(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;)Ljava/util/Collection;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 13
+      ins           : 3
+      outs          : 6
+      insns size    : 90 16-bit code units
+6350ec:                                        |[6350ec] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.collectAndResolveSubtypesByClass:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;)Ljava/util/Collection;
+6350fc: 6e10 9873 0b00                         |0000: invoke-virtual {v11}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.getAnnotationIntrospector:()Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // method@7398
+635102: 0c06                                   |0003: move-result-object v6
+635104: 2207 491b                              |0004: new-instance v7, Ljava/util/HashMap; // type@1b49
+635108: 7010 7ed5 0700                         |0006: invoke-direct {v7}, Ljava/util/HashMap;.<init>:()V // method@d57e
+63510e: 54a0 c04e                              |0009: iget-object v0, v10, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._registeredSubtypes:Ljava/util/LinkedHashSet; // field@4ec0
+635112: 3800 3300                              |000b: if-eqz v0, 003e // +0033
+635116: 6e10 9a7d 0c00                         |000d: invoke-virtual {v12}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;.getRawType:()Ljava/lang/Class; // method@7d9a
+63511c: 0c08                                   |0010: move-result-object v8
+63511e: 54a0 c04e                              |0011: iget-object v0, v10, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._registeredSubtypes:Ljava/util/LinkedHashSet; // field@4ec0
+635122: 6e10 b7d5 0000                         |0013: invoke-virtual {v0}, Ljava/util/LinkedHashSet;.iterator:()Ljava/util/Iterator; // method@d5b7
+635128: 0c09                                   |0016: move-result-object v9
+63512a: 7210 a0d5 0900                         |0017: invoke-interface {v9}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+635130: 0a00                                   |001a: move-result v0
+635132: 3800 2300                              |001b: if-eqz v0, 003e // +0023
+635136: 7210 a1d5 0900                         |001d: invoke-interface {v9}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+63513c: 0c00                                   |0020: move-result-object v0
+63513e: 0702                                   |0021: move-object v2, v0
+635140: 1f02 5d0e                              |0022: check-cast v2, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+635144: 6e10 f981 0200                         |0024: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+63514a: 0c00                                   |0027: move-result-object v0
+63514c: 6e20 fbd0 0800                         |0028: invoke-virtual {v8, v0}, Ljava/lang/Class;.isAssignableFrom:(Ljava/lang/Class;)Z // method@d0fb
+635152: 0a00                                   |002b: move-result v0
+635154: 3800 ebff                              |002c: if-eqz v0, 0017 // -0015
+635158: 6e10 f981 0200                         |002e: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+63515e: 0c00                                   |0031: move-result-object v0
+635160: 7120 b57d 0b00                         |0032: invoke-static {v11, v0}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClassResolver;.resolveWithoutSuperTypes:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass; // method@7db5
+635166: 0c01                                   |0035: move-result-object v1
+635168: 07a0                                   |0036: move-object v0, v10
+63516a: 07b3                                   |0037: move-object v3, v11
+63516c: 0764                                   |0038: move-object v4, v6
+63516e: 0775                                   |0039: move-object v5, v7
+635170: 7406 bf82 0000                         |003a: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolve:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Ljava/util/HashMap;)V // method@82bf
+635176: 28da                                   |003d: goto 0017 // -0026
+635178: 2202 5d0e                              |003e: new-instance v2, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+63517c: 6e10 9a7d 0c00                         |0040: invoke-virtual {v12}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;.getRawType:()Ljava/lang/Class; // method@7d9a
+635182: 0c00                                   |0043: move-result-object v0
+635184: 1201                                   |0044: const/4 v1, #int 0 // #0
+635186: 7030 f681 0201                         |0045: invoke-direct {v2, v0, v1}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.<init>:(Ljava/lang/Class;Ljava/lang/String;)V // method@81f6
+63518c: 07a0                                   |0048: move-object v0, v10
+63518e: 07c1                                   |0049: move-object v1, v12
+635190: 07b3                                   |004a: move-object v3, v11
+635192: 0764                                   |004b: move-object v4, v6
+635194: 0775                                   |004c: move-object v5, v7
+635196: 7406 bf82 0000                         |004d: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolve:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Ljava/util/HashMap;)V // method@82bf
+63519c: 220a 3a1b                              |0050: new-instance v10, Ljava/util/ArrayList; // type@1b3a
+6351a0: 6e10 8fd5 0700                         |0052: invoke-virtual {v7}, Ljava/util/HashMap;.values:()Ljava/util/Collection; // method@d58f
+6351a6: 0c0b                                   |0055: move-result-object v11
+6351a8: 7020 a1d4 ba00                         |0056: invoke-direct {v10, v11}, Ljava/util/ArrayList;.<init>:(Ljava/util/Collection;)V // method@d4a1
+6351ae: 110a                                   |0059: return-object v10
+      catches       : (none)
+      positions     :
+        0x0000 line=135
+        0x0004 line=136
+        0x0009 line=139
+        0x000d line=140
+        0x0011 line=141
+        0x0024 line=143
+        0x002e line=145
+        0x0032 line=144
+        0x003a line=146
+        0x003e line=151
+        0x004d line=152
+        0x0050 line=153
+      locals        :
+        0x0000 - 0x005a reg=10 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x005a reg=11 (null) Lcom/fasterxml/jackson/databind/cfg/MapperConfig;
+        0x0000 - 0x005a reg=12 (null) Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;
+
+    #4              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : 'collectAndResolveSubtypesByClass'
+      type          : '(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;Lcom/fasterxml/jackson/databind/JavaType;)Ljava/util/Collection;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 13
+      ins           : 4
+      outs          : 6
+      insns size    : 145 16-bit code units
+6351b0:                                        |[6351b0] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.collectAndResolveSubtypesByClass:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;Lcom/fasterxml/jackson/databind/JavaType;)Ljava/util/Collection;
+6351c0: 6e10 9873 0a00                         |0000: invoke-virtual {v10}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.getAnnotationIntrospector:()Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // method@7398
+6351c6: 0c06                                   |0003: move-result-object v6
+6351c8: 380c 0700                              |0004: if-eqz v12, 000b // +0007
+6351cc: 6e10 a66d 0c00                         |0006: invoke-virtual {v12}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+6351d2: 0c0c                                   |0009: move-result-object v12
+6351d4: 2807                                   |000a: goto 0011 // +0007
+6351d6: 380b 7e00                              |000b: if-eqz v11, 0089 // +007e
+6351da: 6e10 127e 0b00                         |000d: invoke-virtual {v11}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;.getRawType:()Ljava/lang/Class; // method@7e12
+6351e0: 0c0c                                   |0010: move-result-object v12
+6351e2: 2207 491b                              |0011: new-instance v7, Ljava/util/HashMap; // type@1b49
+6351e6: 7010 7ed5 0700                         |0013: invoke-direct {v7}, Ljava/util/HashMap;.<init>:()V // method@d57e
+6351ec: 5490 c04e                              |0016: iget-object v0, v9, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._registeredSubtypes:Ljava/util/LinkedHashSet; // field@4ec0
+6351f0: 3800 2d00                              |0018: if-eqz v0, 0045 // +002d
+6351f4: 6e10 b7d5 0000                         |001a: invoke-virtual {v0}, Ljava/util/LinkedHashSet;.iterator:()Ljava/util/Iterator; // method@d5b7
+6351fa: 0c08                                   |001d: move-result-object v8
+6351fc: 7210 a0d5 0800                         |001e: invoke-interface {v8}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+635202: 0a00                                   |0021: move-result v0
+635204: 3800 2300                              |0022: if-eqz v0, 0045 // +0023
+635208: 7210 a1d5 0800                         |0024: invoke-interface {v8}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+63520e: 0c00                                   |0027: move-result-object v0
+635210: 0702                                   |0028: move-object v2, v0
+635212: 1f02 5d0e                              |0029: check-cast v2, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+635216: 6e10 f981 0200                         |002b: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+63521c: 0c00                                   |002e: move-result-object v0
+63521e: 6e20 fbd0 0c00                         |002f: invoke-virtual {v12, v0}, Ljava/lang/Class;.isAssignableFrom:(Ljava/lang/Class;)Z // method@d0fb
+635224: 0a00                                   |0032: move-result v0
+635226: 3800 ebff                              |0033: if-eqz v0, 001e // -0015
+63522a: 6e10 f981 0200                         |0035: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+635230: 0c00                                   |0038: move-result-object v0
+635232: 7120 b57d 0a00                         |0039: invoke-static {v10, v0}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClassResolver;.resolveWithoutSuperTypes:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass; // method@7db5
+635238: 0c01                                   |003c: move-result-object v1
+63523a: 0790                                   |003d: move-object v0, v9
+63523c: 07a3                                   |003e: move-object v3, v10
+63523e: 0764                                   |003f: move-object v4, v6
+635240: 0775                                   |0040: move-object v5, v7
+635242: 7406 bf82 0000                         |0041: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolve:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Ljava/util/HashMap;)V // method@82bf
+635248: 28da                                   |0044: goto 001e // -0026
+63524a: 380b 2900                              |0045: if-eqz v11, 006e // +0029
+63524e: 6e20 f46b b600                         |0047: invoke-virtual {v6, v11}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findSubtypes:(Lcom/fasterxml/jackson/databind/introspect/Annotated;)Ljava/util/List; // method@6bf4
+635254: 0c0b                                   |004a: move-result-object v11
+635256: 380b 2300                              |004b: if-eqz v11, 006e // +0023
+63525a: 7210 37d5 0b00                         |004d: invoke-interface {v11}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+635260: 0c0b                                   |0050: move-result-object v11
+635262: 7210 a0d5 0b00                         |0051: invoke-interface {v11}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+635268: 0a00                                   |0054: move-result v0
+63526a: 3800 1900                              |0055: if-eqz v0, 006e // +0019
+63526e: 7210 a1d5 0b00                         |0057: invoke-interface {v11}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+635274: 0c00                                   |005a: move-result-object v0
+635276: 0702                                   |005b: move-object v2, v0
+635278: 1f02 5d0e                              |005c: check-cast v2, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+63527c: 6e10 f981 0200                         |005e: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+635282: 0c00                                   |0061: move-result-object v0
+635284: 7120 b57d 0a00                         |0062: invoke-static {v10, v0}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClassResolver;.resolveWithoutSuperTypes:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass; // method@7db5
+63528a: 0c01                                   |0065: move-result-object v1
+63528c: 0790                                   |0066: move-object v0, v9
+63528e: 07a3                                   |0067: move-object v3, v10
+635290: 0764                                   |0068: move-object v4, v6
+635292: 0775                                   |0069: move-object v5, v7
+635294: 7406 bf82 0000                         |006a: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolve:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Ljava/util/HashMap;)V // method@82bf
+63529a: 28e4                                   |006d: goto 0051 // -001c
+63529c: 2202 5d0e                              |006e: new-instance v2, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+6352a0: 120b                                   |0070: const/4 v11, #int 0 // #0
+6352a2: 7030 f681 c20b                         |0071: invoke-direct {v2, v12, v11}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.<init>:(Ljava/lang/Class;Ljava/lang/String;)V // method@81f6
+6352a8: 7120 b57d ca00                         |0074: invoke-static {v10, v12}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClassResolver;.resolveWithoutSuperTypes:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass; // method@7db5
+6352ae: 0c01                                   |0077: move-result-object v1
+6352b0: 0790                                   |0078: move-object v0, v9
+6352b2: 07a3                                   |0079: move-object v3, v10
+6352b4: 0764                                   |007a: move-object v4, v6
+6352b6: 0775                                   |007b: move-object v5, v7
+6352b8: 7406 bf82 0000                         |007c: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolve:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Ljava/util/HashMap;)V // method@82bf
+6352be: 2209 3a1b                              |007f: new-instance v9, Ljava/util/ArrayList; // type@1b3a
+6352c2: 6e10 8fd5 0700                         |0081: invoke-virtual {v7}, Ljava/util/HashMap;.values:()Ljava/util/Collection; // method@d58f
+6352c8: 0c0a                                   |0084: move-result-object v10
+6352ca: 7020 a1d4 a900                         |0085: invoke-direct {v9, v10}, Ljava/util/ArrayList;.<init>:(Ljava/util/Collection;)V // method@d4a1
+6352d0: 1109                                   |0088: return-object v9
+6352d2: 2209 7a1a                              |0089: new-instance v9, Ljava/lang/IllegalArgumentException; // type@1a7a
+6352d6: 1a0a 4419                              |008b: const-string v10, "Both property and base type are nulls" // string@1944
+6352da: 7020 47d1 a900                         |008d: invoke-direct {v9, v10}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+6352e0: 2709                                   |0090: throw v9
+      catches       : (none)
+      positions     :
+        0x0000 line=85
+        0x0006 line=90
+        0x000d line=92
+        0x0011 line=97
+        0x0016 line=99
+        0x001a line=100
+        0x002b line=102
+        0x0035 line=104
+        0x0039 line=103
+        0x0041 line=105
+        0x0047 line=112
+        0x004d line=114
+        0x005e line=116
+        0x0062 line=115
+        0x006a line=117
+        0x006e line=122
+        0x0074 line=123
+        0x007c line=126
+        0x007f line=128
+        0x0089 line=94
+      locals        :
+        0x0000 - 0x0091 reg=9 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x0091 reg=10 (null) Lcom/fasterxml/jackson/databind/cfg/MapperConfig;
+        0x0000 - 0x0091 reg=11 (null) Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;
+        0x0000 - 0x0091 reg=12 (null) Lcom/fasterxml/jackson/databind/JavaType;
+
+    #5              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : 'collectAndResolveSubtypesByTypeId'
+      type          : '(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;)Ljava/util/Collection;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 12
+      ins           : 3
+      outs          : 6
+      insns size    : 80 16-bit code units
+6352e4:                                        |[6352e4] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.collectAndResolveSubtypesByTypeId:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;)Ljava/util/Collection;
+6352f4: 6e10 9a7d 0b00                         |0000: invoke-virtual {v11}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;.getRawType:()Ljava/lang/Class; // method@7d9a
+6352fa: 0c00                                   |0003: move-result-object v0
+6352fc: 2207 4a1b                              |0004: new-instance v7, Ljava/util/HashSet; // type@1b4a
+635300: 7010 90d5 0700                         |0006: invoke-direct {v7}, Ljava/util/HashSet;.<init>:()V // method@d590
+635306: 2208 4e1b                              |0009: new-instance v8, Ljava/util/LinkedHashMap; // type@1b4e
+63530a: 7010 a3d5 0800                         |000b: invoke-direct {v8}, Ljava/util/LinkedHashMap;.<init>:()V // method@d5a3
+635310: 2203 5d0e                              |000e: new-instance v3, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+635314: 1201                                   |0010: const/4 v1, #int 0 // #0
+635316: 7030 f681 0301                         |0011: invoke-direct {v3, v0, v1}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.<init>:(Ljava/lang/Class;Ljava/lang/String;)V // method@81f6
+63531c: 0791                                   |0014: move-object v1, v9
+63531e: 07b2                                   |0015: move-object v2, v11
+635320: 07a4                                   |0016: move-object v4, v10
+635322: 0775                                   |0017: move-object v5, v7
+635324: 0786                                   |0018: move-object v6, v8
+635326: 7406 c082 0100                         |0019: invoke-virtual/range {v1, v2, v3, v4, v5, v6}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolveByTypeId:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/util/Set;Ljava/util/Map;)V // method@82c0
+63532c: 549b c04e                              |001c: iget-object v11, v9, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._registeredSubtypes:Ljava/util/LinkedHashSet; // field@4ec0
+635330: 380b 2d00                              |001e: if-eqz v11, 004b // +002d
+635334: 6e10 b7d5 0b00                         |0020: invoke-virtual {v11}, Ljava/util/LinkedHashSet;.iterator:()Ljava/util/Iterator; // method@d5b7
+63533a: 0c0b                                   |0023: move-result-object v11
+63533c: 7210 a0d5 0b00                         |0024: invoke-interface {v11}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+635342: 0a01                                   |0027: move-result v1
+635344: 3801 2300                              |0028: if-eqz v1, 004b // +0023
+635348: 7210 a1d5 0b00                         |002a: invoke-interface {v11}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+63534e: 0c01                                   |002d: move-result-object v1
+635350: 0713                                   |002e: move-object v3, v1
+635352: 1f03 5d0e                              |002f: check-cast v3, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+635356: 6e10 f981 0300                         |0031: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+63535c: 0c01                                   |0034: move-result-object v1
+63535e: 6e20 fbd0 1000                         |0035: invoke-virtual {v0, v1}, Ljava/lang/Class;.isAssignableFrom:(Ljava/lang/Class;)Z // method@d0fb
+635364: 0a01                                   |0038: move-result v1
+635366: 3801 ebff                              |0039: if-eqz v1, 0024 // -0015
+63536a: 6e10 f981 0300                         |003b: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+635370: 0c01                                   |003e: move-result-object v1
+635372: 7120 b57d 1a00                         |003f: invoke-static {v10, v1}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClassResolver;.resolveWithoutSuperTypes:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass; // method@7db5
+635378: 0c02                                   |0042: move-result-object v2
+63537a: 0791                                   |0043: move-object v1, v9
+63537c: 07a4                                   |0044: move-object v4, v10
+63537e: 0775                                   |0045: move-object v5, v7
+635380: 0786                                   |0046: move-object v6, v8
+635382: 7406 c082 0100                         |0047: invoke-virtual/range {v1, v2, v3, v4, v5, v6}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolveByTypeId:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/util/Set;Ljava/util/Map;)V // method@82c0
+635388: 28da                                   |004a: goto 0024 // -0026
+63538a: 6e40 c182 0987                         |004b: invoke-virtual {v9, v0, v7, v8}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._combineNamedAndUnnamed:(Ljava/lang/Class;Ljava/util/Set;Ljava/util/Map;)Ljava/util/Collection; // method@82c1
+635390: 0c09                                   |004e: move-result-object v9
+635392: 1109                                   |004f: return-object v9
+      catches       : (none)
+      positions     :
+        0x0000 line=207
+        0x0004 line=208
+        0x0009 line=209
+        0x000e line=211
+        0x0019 line=212
+        0x001c line=214
+        0x0020 line=215
+        0x0031 line=217
+        0x003b line=219
+        0x003f line=218
+        0x0047 line=220
+        0x004b line=224
+      locals        :
+        0x0000 - 0x0050 reg=9 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x0050 reg=10 (null) Lcom/fasterxml/jackson/databind/cfg/MapperConfig;
+        0x0000 - 0x0050 reg=11 (null) Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;
+
+    #6              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : 'collectAndResolveSubtypesByTypeId'
+      type          : '(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;Lcom/fasterxml/jackson/databind/JavaType;)Ljava/util/Collection;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 13
+      ins           : 4
+      outs          : 6
+      insns size    : 128 16-bit code units
+635394:                                        |[635394] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.collectAndResolveSubtypesByTypeId:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;Lcom/fasterxml/jackson/databind/JavaType;)Ljava/util/Collection;
+6353a4: 6e10 9873 0a00                         |0000: invoke-virtual {v10}, Lcom/fasterxml/jackson/databind/cfg/MapperConfig;.getAnnotationIntrospector:()Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // method@7398
+6353aa: 0c00                                   |0003: move-result-object v0
+6353ac: 6e10 a66d 0c00                         |0004: invoke-virtual {v12}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+6353b2: 0c0c                                   |0007: move-result-object v12
+6353b4: 2207 4a1b                              |0008: new-instance v7, Ljava/util/HashSet; // type@1b4a
+6353b8: 7010 90d5 0700                         |000a: invoke-direct {v7}, Ljava/util/HashSet;.<init>:()V // method@d590
+6353be: 2208 4e1b                              |000d: new-instance v8, Ljava/util/LinkedHashMap; // type@1b4e
+6353c2: 7010 a3d5 0800                         |000f: invoke-direct {v8}, Ljava/util/LinkedHashMap;.<init>:()V // method@d5a3
+6353c8: 2203 5d0e                              |0012: new-instance v3, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+6353cc: 1201                                   |0014: const/4 v1, #int 0 // #0
+6353ce: 7030 f681 c301                         |0015: invoke-direct {v3, v12, v1}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.<init>:(Ljava/lang/Class;Ljava/lang/String;)V // method@81f6
+6353d4: 7120 b57d ca00                         |0018: invoke-static {v10, v12}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClassResolver;.resolveWithoutSuperTypes:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass; // method@7db5
+6353da: 0c02                                   |001b: move-result-object v2
+6353dc: 0791                                   |001c: move-object v1, v9
+6353de: 07a4                                   |001d: move-object v4, v10
+6353e0: 0775                                   |001e: move-object v5, v7
+6353e2: 0786                                   |001f: move-object v6, v8
+6353e4: 7406 c082 0100                         |0020: invoke-virtual/range {v1, v2, v3, v4, v5, v6}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolveByTypeId:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/util/Set;Ljava/util/Map;)V // method@82c0
+6353ea: 380b 2900                              |0023: if-eqz v11, 004c // +0029
+6353ee: 6e20 f46b b000                         |0025: invoke-virtual {v0, v11}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findSubtypes:(Lcom/fasterxml/jackson/databind/introspect/Annotated;)Ljava/util/List; // method@6bf4
+6353f4: 0c0b                                   |0028: move-result-object v11
+6353f6: 380b 2300                              |0029: if-eqz v11, 004c // +0023
+6353fa: 7210 37d5 0b00                         |002b: invoke-interface {v11}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+635400: 0c0b                                   |002e: move-result-object v11
+635402: 7210 a0d5 0b00                         |002f: invoke-interface {v11}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+635408: 0a00                                   |0032: move-result v0
+63540a: 3800 1900                              |0033: if-eqz v0, 004c // +0019
+63540e: 7210 a1d5 0b00                         |0035: invoke-interface {v11}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+635414: 0c00                                   |0038: move-result-object v0
+635416: 0703                                   |0039: move-object v3, v0
+635418: 1f03 5d0e                              |003a: check-cast v3, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+63541c: 6e10 f981 0300                         |003c: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+635422: 0c00                                   |003f: move-result-object v0
+635424: 7120 b57d 0a00                         |0040: invoke-static {v10, v0}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClassResolver;.resolveWithoutSuperTypes:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass; // method@7db5
+63542a: 0c02                                   |0043: move-result-object v2
+63542c: 0791                                   |0044: move-object v1, v9
+63542e: 07a4                                   |0045: move-object v4, v10
+635430: 0775                                   |0046: move-object v5, v7
+635432: 0786                                   |0047: move-object v6, v8
+635434: 7406 c082 0100                         |0048: invoke-virtual/range {v1, v2, v3, v4, v5, v6}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolveByTypeId:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/util/Set;Ljava/util/Map;)V // method@82c0
+63543a: 28e4                                   |004b: goto 002f // -001c
+63543c: 549b c04e                              |004c: iget-object v11, v9, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._registeredSubtypes:Ljava/util/LinkedHashSet; // field@4ec0
+635440: 380b 2d00                              |004e: if-eqz v11, 007b // +002d
+635444: 6e10 b7d5 0b00                         |0050: invoke-virtual {v11}, Ljava/util/LinkedHashSet;.iterator:()Ljava/util/Iterator; // method@d5b7
+63544a: 0c0b                                   |0053: move-result-object v11
+63544c: 7210 a0d5 0b00                         |0054: invoke-interface {v11}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+635452: 0a00                                   |0057: move-result v0
+635454: 3800 2300                              |0058: if-eqz v0, 007b // +0023
+635458: 7210 a1d5 0b00                         |005a: invoke-interface {v11}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+63545e: 0c00                                   |005d: move-result-object v0
+635460: 0703                                   |005e: move-object v3, v0
+635462: 1f03 5d0e                              |005f: check-cast v3, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+635466: 6e10 f981 0300                         |0061: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+63546c: 0c00                                   |0064: move-result-object v0
+63546e: 6e20 fbd0 0c00                         |0065: invoke-virtual {v12, v0}, Ljava/lang/Class;.isAssignableFrom:(Ljava/lang/Class;)Z // method@d0fb
+635474: 0a00                                   |0068: move-result v0
+635476: 3800 ebff                              |0069: if-eqz v0, 0054 // -0015
+63547a: 6e10 f981 0300                         |006b: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.getType:()Ljava/lang/Class; // method@81f9
+635480: 0c00                                   |006e: move-result-object v0
+635482: 7120 b57d 0a00                         |006f: invoke-static {v10, v0}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClassResolver;.resolveWithoutSuperTypes:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass; // method@7db5
+635488: 0c02                                   |0072: move-result-object v2
+63548a: 0791                                   |0073: move-object v1, v9
+63548c: 07a4                                   |0074: move-object v4, v10
+63548e: 0775                                   |0075: move-object v5, v7
+635490: 0786                                   |0076: move-object v6, v8
+635492: 7406 c082 0100                         |0077: invoke-virtual/range {v1, v2, v3, v4, v5, v6}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._collectAndResolveByTypeId:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass;Lcom/fasterxml/jackson/databind/jsontype/NamedType;Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Ljava/util/Set;Ljava/util/Map;)V // method@82c0
+635498: 28da                                   |007a: goto 0054 // -0026
+63549a: 6e40 c182 c987                         |007b: invoke-virtual {v9, v12, v7, v8}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._combineNamedAndUnnamed:(Ljava/lang/Class;Ljava/util/Set;Ljava/util/Map;)Ljava/util/Collection; // method@82c1
+6354a0: 0c09                                   |007e: move-result-object v9
+6354a2: 1109                                   |007f: return-object v9
+      catches       : (none)
+      positions     :
+        0x0000 line=166
+        0x0004 line=167
+        0x0008 line=170
+        0x000d line=171
+        0x0012 line=174
+        0x0018 line=175
+        0x0020 line=177
+        0x0025 line=181
+        0x002b line=183
+        0x003c line=184
+        0x0048 line=185
+        0x004c line=190
+        0x0050 line=191
+        0x0061 line=193
+        0x006b line=195
+        0x006f line=194
+        0x0077 line=196
+        0x007b line=200
+      locals        :
+        0x0000 - 0x0080 reg=9 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x0080 reg=10 (null) Lcom/fasterxml/jackson/databind/cfg/MapperConfig;
+        0x0000 - 0x0080 reg=11 (null) Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;
+        0x0000 - 0x0080 reg=12 (null) Lcom/fasterxml/jackson/databind/JavaType;
+
+    #7              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : 'copy'
+      type          : '()Lcom/fasterxml/jackson/databind/jsontype/SubtypeResolver;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 6 16-bit code units
+6354a4:                                        |[6354a4] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.copy:()Lcom/fasterxml/jackson/databind/jsontype/SubtypeResolver;
+6354b4: 2200 750e                              |0000: new-instance v0, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver; // type@0e75
+6354b8: 7020 be82 1000                         |0002: invoke-direct {v0, v1}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;.<init>:(Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)V // method@82be
+6354be: 1100                                   |0005: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=36
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+
+    #8              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : 'registerSubtypes'
+      type          : '(Ljava/util/Collection;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 2
+      insns size    : 38 16-bit code units
+6354c0:                                        |[6354c0] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.registerSubtypes:(Ljava/util/Collection;)V
+6354d0: 7210 3bd5 0600                         |0000: invoke-interface {v6}, Ljava/util/Collection;.size:()I // method@d53b
+6354d6: 0a00                                   |0003: move-result v0
+6354d8: 2300 3620                              |0004: new-array v0, v0, [Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@2036
+6354dc: 7210 37d5 0600                         |0006: invoke-interface {v6}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+6354e2: 0c06                                   |0009: move-result-object v6
+6354e4: 1201                                   |000a: const/4 v1, #int 0 // #0
+6354e6: 7210 a0d5 0600                         |000b: invoke-interface {v6}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+6354ec: 0a02                                   |000e: move-result v2
+6354ee: 3802 1300                              |000f: if-eqz v2, 0022 // +0013
+6354f2: 7210 a1d5 0600                         |0011: invoke-interface {v6}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+6354f8: 0c02                                   |0014: move-result-object v2
+6354fa: 1f02 6b1a                              |0015: check-cast v2, Ljava/lang/Class; // type@1a6b
+6354fe: d803 0101                              |0017: add-int/lit8 v3, v1, #int 1 // #01
+635502: 2204 5d0e                              |0019: new-instance v4, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+635506: 7020 f581 2400                         |001b: invoke-direct {v4, v2}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.<init>:(Ljava/lang/Class;)V // method@81f5
+63550c: 4d04 0001                              |001e: aput-object v4, v0, v1
+635510: 0131                                   |0020: move v1, v3
+635512: 28ea                                   |0021: goto 000b // -0016
+635514: 6e20 c882 0500                         |0022: invoke-virtual {v5, v0}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;.registerSubtypes:([Lcom/fasterxml/jackson/databind/jsontype/NamedType;)V // method@82c8
+63551a: 0e00                                   |0025: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=66
+        0x0004 line=67
+        0x0006 line=69
+        0x0019 line=70
+        0x0022 line=72
+      locals        :
+        0x0000 - 0x0026 reg=5 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x0026 reg=6 (null) Ljava/util/Collection;
+
+    #9              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : 'registerSubtypes'
+      type          : '([Lcom/fasterxml/jackson/databind/jsontype/NamedType;)V'
+      access        : 0x0081 (PUBLIC VARARGS)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 2
+      insns size    : 26 16-bit code units
+63551c:                                        |[63551c] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.registerSubtypes:([Lcom/fasterxml/jackson/databind/jsontype/NamedType;)V
+63552c: 5440 c04e                              |0000: iget-object v0, v4, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._registeredSubtypes:Ljava/util/LinkedHashSet; // field@4ec0
+635530: 3900 0900                              |0002: if-nez v0, 000b // +0009
+635534: 2200 4f1b                              |0004: new-instance v0, Ljava/util/LinkedHashSet; // type@1b4f
+635538: 7010 b2d5 0000                         |0006: invoke-direct {v0}, Ljava/util/LinkedHashSet;.<init>:()V // method@d5b2
+63553e: 5b40 c04e                              |0009: iput-object v0, v4, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._registeredSubtypes:Ljava/util/LinkedHashSet; // field@4ec0
+635542: 2150                                   |000b: array-length v0, v5
+635544: 1201                                   |000c: const/4 v1, #int 0 // #0
+635546: 3501 0c00                              |000d: if-ge v1, v0, 0019 // +000c
+63554a: 4602 0501                              |000f: aget-object v2, v5, v1
+63554e: 5443 c04e                              |0011: iget-object v3, v4, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;._registeredSubtypes:Ljava/util/LinkedHashSet; // field@4ec0
+635552: 6e20 b5d5 2300                         |0013: invoke-virtual {v3, v2}, Ljava/util/LinkedHashSet;.add:(Ljava/lang/Object;)Z // method@d5b5
+635558: d801 0101                              |0016: add-int/lit8 v1, v1, #int 1 // #01
+63555c: 28f5                                   |0018: goto 000d // -000b
+63555e: 0e00                                   |0019: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=47
+        0x0004 line=48
+        0x000b line=50
+        0x0011 line=51
+      locals        :
+        0x0000 - 0x001a reg=4 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x001a reg=5 (null) [Lcom/fasterxml/jackson/databind/jsontype/NamedType;
+
+    #10              : (in Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;)
+      name          : 'registerSubtypes'
+      type          : '([Ljava/lang/Class;)V'
+      access        : 0x0081 (PUBLIC VARARGS)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 2
+      insns size    : 23 16-bit code units
+635560:                                        |[635560] com.fasterxml.jackson.databind.jsontype.impl.StdSubtypeResolver.registerSubtypes:([Ljava/lang/Class;)V
+635570: 2160                                   |0000: array-length v0, v6
+635572: 2300 3620                              |0001: new-array v0, v0, [Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@2036
+635576: 2161                                   |0003: array-length v1, v6
+635578: 1202                                   |0004: const/4 v2, #int 0 // #0
+63557a: 3512 0e00                              |0005: if-ge v2, v1, 0013 // +000e
+63557e: 2203 5d0e                              |0007: new-instance v3, Lcom/fasterxml/jackson/databind/jsontype/NamedType; // type@0e5d
+635582: 4604 0602                              |0009: aget-object v4, v6, v2
+635586: 7020 f581 4300                         |000b: invoke-direct {v3, v4}, Lcom/fasterxml/jackson/databind/jsontype/NamedType;.<init>:(Ljava/lang/Class;)V // method@81f5
+63558c: 4d03 0002                              |000e: aput-object v3, v0, v2
+635590: d802 0201                              |0010: add-int/lit8 v2, v2, #int 1 // #01
+635594: 28f3                                   |0012: goto 0005 // -000d
+635596: 6e20 c882 0500                         |0013: invoke-virtual {v5, v0}, Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;.registerSubtypes:([Lcom/fasterxml/jackson/databind/jsontype/NamedType;)V // method@82c8
+63559c: 0e00                                   |0016: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=57
+        0x0003 line=58
+        0x0007 line=59
+        0x0013 line=61
+      locals        :
+        0x0000 - 0x0017 reg=5 this Lcom/fasterxml/jackson/databind/jsontype/impl/StdSubtypeResolver;
+        0x0000 - 0x0017 reg=6 (null) [Ljava/lang/Class;
+
+  source_file_idx   : 25463 (StdSubtypeResolver.java)
+

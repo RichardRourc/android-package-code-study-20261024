@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+    <meta charset=UTF-8>
+    <title>Adjust WebSDK</title>
+
+    <script type="text/javascript" src="adjust_event.js"></script>
+    <script type="text/javascript" src="adjust_third_party_sharing.js"></script>
+    <script type="text/javascript" src="adjust_config.js"></script>
+    <script type="text/javascript" src="adjust.js"></script>
+</head>
+
+<body>
+
+
+<script type="text/javascript">
+    //initSdk: initiate adjust sdk instance, do it only once per page load
+    let yourAppToken = 'tlezge2rp2io';
+    let environment = AdjustConfig.EnvironmentProduction;
+    let adjustConfig = new AdjustConfig(yourAppToken, environment);
+    adjustConfig.setLogLevel(AdjustConfig.LogLevelInfo);
+
+    Adjust.onCreate(adjustConfig);
+
+
+
+
+
+    window.onload = function () {
+      let btnTrackPartnerEvent = document.getElementById('btnTrackPartnerEvent')
+      btnTrackPartnerEvent.onclick = function (e) {
+        e.preventDefault()
+        let adjustEvent = new AdjustEvent('pm1yfs');
+
+        Adjust.trackEvent(adjustEvent);
+
+      }
+
+    }
+
+
+
+    /**
+     * trackEvent: track standard event, requires sdk instance to be initiated
+     */
+    /*
+    Adjust.trackEvent({
+      eventToken: 'YOUR_EVENT_TOKEN',
+      // deduplicationId: 'YOUR_EVENT_DEDUPLICATION_ID' // optional
+    });
+    */
+
+    /**
+     * trackEvent: track revenue event, requires sdk instance to be initiated
+     */
+    /*
+    Adjust.trackEvent({
+      eventToken: 'YOUR_EVENT_TOKEN',
+      // deduplicationId: 'YOUR_EVENT_DEDUPLICATION_ID' // optional
+      revenue: 111,
+      currency: 'EUR',
+      callbackParams: [
+        {key: 'some-key-1', value: 'some-value-1'},
+        {key: 'some-key-2', value: 'some-value-2'},
+        {key: 'key1', value: 'new-value1'}
+      ],
+      partnerParams: [
+        {key: 'key-1', value: 'new-value-1'},
+        {key: 'some-partner-key-1', value: 'some-partner-value-1'},
+        {key: 'key-2', value: 'new-value-2'},
+        {key: 'some-partner-key-2', value: 'some-partner-value-2'},
+        {key: 'some-partner-key-1', value: 'some-partner-value-3'}
+      ]
+    });
+    */
+
+
+</script>
+
+
+<div style="padding: 20px;">
+    <div style="width:400px;height:35px;text-align:center;">
+        <button id='btnTrackPartnerEvent'>Track Partner event</button>
+    </div>
+</div>
+</body>
+
+</html>

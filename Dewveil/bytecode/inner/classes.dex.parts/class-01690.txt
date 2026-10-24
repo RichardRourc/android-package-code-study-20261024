@@ -1,0 +1,622 @@
+Class #1690            -
+  Class descriptor  : 'Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;'
+  Access flags      : 0x0401 (PUBLIC ABSTRACT)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'mLayoutManager'
+      type          : 'Landroidx/recyclerview/widget/RecyclerView$LayoutManager;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'mPendingInitialRun'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'mRecyclerView'
+      type          : 'Landroidx/recyclerview/widget/RecyclerView;'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'mRecyclingAction'
+      type          : 'Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'mRunning'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'mStarted'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #6              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'mTargetPosition'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #7              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'mTargetView'
+      type          : 'Landroid/view/View;'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 15 16-bit code units
+560b04:                                        |[560b04] androidx.recyclerview.widget.RecyclerView$SmoothScroller.<init>:()V
+560b14: 7010 c8d1 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@d1c8
+560b1a: 12f0                                   |0003: const/4 v0, #int -1 // #ff
+560b1c: 5920 7136                              |0004: iput v0, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetPosition:I // field@3671
+560b20: 2200 3c09                              |0006: new-instance v0, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action; // type@093c
+560b24: 1201                                   |0008: const/4 v1, #int 0 // #0
+560b26: 7030 b04b 1001                         |0009: invoke-direct {v0, v1, v1}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action;.<init>:(II)V // method@4bb0
+560b2c: 5b20 6e36                              |000c: iput-object v0, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclingAction:Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action; // field@366e
+560b30: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=11507
+        0x0004 line=11491
+        0x0006 line=11508
+      locals        :
+        0x0000 - 0x000f reg=2 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+
+  Virtual methods   -
+    #0              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'computeScrollVectorForPosition'
+      type          : '(I)Landroid/graphics/PointF;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 43 16-bit code units
+560b34:                                        |[560b34] androidx.recyclerview.widget.RecyclerView$SmoothScroller.computeScrollVectorForPosition:(I)Landroid/graphics/PointF;
+560b44: 6e10 c64b 0100                         |0000: invoke-virtual {v1}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.getLayoutManager:()Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // method@4bc6
+560b4a: 0c01                                   |0003: move-result-object v1
+560b4c: 2010 3d09                              |0004: instance-of v0, v1, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$ScrollVectorProvider; // type@093d
+560b50: 3800 0900                              |0006: if-eqz v0, 000f // +0009
+560b54: 1f01 3d09                              |0008: check-cast v1, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$ScrollVectorProvider; // type@093d
+560b58: 7220 c04b 2100                         |000a: invoke-interface {v1, v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$ScrollVectorProvider;.computeScrollVectorForPosition:(I)Landroid/graphics/PointF; // method@4bc0
+560b5e: 0c01                                   |000d: move-result-object v1
+560b60: 1101                                   |000e: return-object v1
+560b62: 2201 991a                              |000f: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+560b66: 1a02 1370                              |0011: const-string v2, "You should override computeScrollVectorForPosition when the LayoutManager does not implement " // string@7013
+560b6a: 7020 3cd2 2100                         |0013: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+560b70: 1c02 3d09                              |0016: const-class v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$ScrollVectorProvider; // type@093d
+560b74: 6e10 d7d0 0200                         |0018: invoke-virtual {v2}, Ljava/lang/Class;.getCanonicalName:()Ljava/lang/String; // method@d0d7
+560b7a: 0c02                                   |001b: move-result-object v2
+560b7c: 6e20 45d2 2100                         |001c: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+560b82: 0c01                                   |001f: move-result-object v1
+560b84: 6e10 58d2 0100                         |0020: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+560b8a: 0c01                                   |0023: move-result-object v1
+560b8c: 1a02 c15d                              |0024: const-string v2, "RecyclerView" // string@5dc1
+560b90: 7120 2708 1200                         |0026: invoke-static {v2, v1}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+560b96: 1201                                   |0029: const/4 v1, #int 0 // #0
+560b98: 1101                                   |002a: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=11562
+        0x0004 line=11563
+        0x0008 line=11564
+        0x000a line=11565
+        0x000f line=11567
+        0x0018 line=11568
+        0x0024 line=11567
+      locals        :
+        0x0000 - 0x002b reg=1 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+        0x0000 - 0x002b reg=2 (null) I
+
+    #1              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'findViewByPosition'
+      type          : '(I)Landroid/view/View;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 9 16-bit code units
+560b9c:                                        |[560b9c] androidx.recyclerview.widget.RecyclerView$SmoothScroller.findViewByPosition:(I)Landroid/view/View;
+560bac: 5400 6d36                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclerView:Landroidx/recyclerview/widget/RecyclerView; // field@366d
+560bb0: 5400 f336                              |0002: iget-object v0, v0, Landroidx/recyclerview/widget/RecyclerView;.mLayout:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@36f3
+560bb4: 6e20 c34a 1000                         |0004: invoke-virtual {v0, v1}, Landroidx/recyclerview/widget/RecyclerView$LayoutManager;.findViewByPosition:(I)Landroid/view/View; // method@4ac3
+560bba: 0c00                                   |0007: move-result-object v0
+560bbc: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=11707
+      locals        :
+        0x0000 - 0x0009 reg=0 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+        0x0000 - 0x0009 reg=1 (null) I
+
+    #2              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'getChildCount'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+560bc0:                                        |[560bc0] androidx.recyclerview.widget.RecyclerView$SmoothScroller.getChildCount:()I
+560bd0: 5400 6d36                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclerView:Landroidx/recyclerview/widget/RecyclerView; // field@366d
+560bd4: 5400 f336                              |0002: iget-object v0, v0, Landroidx/recyclerview/widget/RecyclerView;.mLayout:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@36f3
+560bd8: 6e10 ca4a 0000                         |0004: invoke-virtual {v0}, Landroidx/recyclerview/widget/RecyclerView$LayoutManager;.getChildCount:()I // method@4aca
+560bde: 0a00                                   |0007: move-result v0
+560be0: 0f00                                   |0008: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=11700
+      locals        :
+        0x0000 - 0x0009 reg=0 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+
+    #3              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'getChildPosition'
+      type          : '(Landroid/view/View;)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 7 16-bit code units
+560be4:                                        |[560be4] androidx.recyclerview.widget.RecyclerView$SmoothScroller.getChildPosition:(Landroid/view/View;)I
+560bf4: 5400 6d36                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclerView:Landroidx/recyclerview/widget/RecyclerView; // field@366d
+560bf8: 6e20 854c 1000                         |0002: invoke-virtual {v0, v1}, Landroidx/recyclerview/widget/RecyclerView;.getChildLayoutPosition:(Landroid/view/View;)I // method@4c85
+560bfe: 0a00                                   |0005: move-result v0
+560c00: 0f00                                   |0006: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=11693
+      locals        :
+        0x0000 - 0x0007 reg=0 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+        0x0000 - 0x0007 reg=1 (null) Landroid/view/View;
+
+    #4              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'getLayoutManager'
+      type          : '()Landroidx/recyclerview/widget/RecyclerView$LayoutManager;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+560c04:                                        |[560c04] androidx.recyclerview.widget.RecyclerView$SmoothScroller.getLayoutManager:()Landroidx/recyclerview/widget/RecyclerView$LayoutManager;
+560c14: 5400 6b36                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mLayoutManager:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@366b
+560c18: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=11578
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+
+    #5              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'getTargetPosition'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+560c1c:                                        |[560c1c] androidx.recyclerview.widget.RecyclerView$SmoothScroller.getTargetPosition:()I
+560c2c: 5200 7136                              |0000: iget v0, v0, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetPosition:I // field@3671
+560c30: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=11630
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+
+    #6              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'instantScrollToPosition'
+      type          : '(I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 6 16-bit code units
+560c34:                                        |[560c34] androidx.recyclerview.widget.RecyclerView$SmoothScroller.instantScrollToPosition:(I)V
+560c44: 5400 6d36                              |0000: iget-object v0, v0, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclerView:Landroidx/recyclerview/widget/RecyclerView; // field@366d
+560c48: 6e20 0b4d 1000                         |0002: invoke-virtual {v0, v1}, Landroidx/recyclerview/widget/RecyclerView;.scrollToPosition:(I)V // method@4d0b
+560c4e: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=11716
+      locals        :
+        0x0000 - 0x0006 reg=0 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+        0x0000 - 0x0006 reg=1 (null) I
+
+    #7              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'isPendingInitialRun'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+560c50:                                        |[560c50] androidx.recyclerview.widget.RecyclerView$SmoothScroller.isPendingInitialRun:()Z
+560c60: 5500 6c36                              |0000: iget-boolean v0, v0, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mPendingInitialRun:Z // field@366c
+560c64: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=11612
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+
+    #8              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'isRunning'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+560c68:                                        |[560c68] androidx.recyclerview.widget.RecyclerView$SmoothScroller.isRunning:()Z
+560c78: 5500 6f36                              |0000: iget-boolean v0, v0, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRunning:Z // field@366f
+560c7c: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=11620
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+
+    #9              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'normalize'
+      type          : '(Landroid/graphics/PointF;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 28 16-bit code units
+560c80:                                        |[560c80] androidx.recyclerview.widget.RecyclerView$SmoothScroller.normalize:(Landroid/graphics/PointF;)V
+560c90: 5232 9e00                              |0000: iget v2, v3, Landroid/graphics/PointF;.x:F // field@009e
+560c94: 5230 9e00                              |0002: iget v0, v3, Landroid/graphics/PointF;.x:F // field@009e
+560c98: c802                                   |0004: mul-float/2addr v2, v0
+560c9a: 5230 9f00                              |0005: iget v0, v3, Landroid/graphics/PointF;.y:F // field@009f
+560c9e: 5231 9f00                              |0007: iget v1, v3, Landroid/graphics/PointF;.y:F // field@009f
+560ca2: c810                                   |0009: mul-float/2addr v0, v1
+560ca4: c602                                   |000a: add-float/2addr v2, v0
+560ca6: 8920                                   |000b: float-to-double v0, v2
+560ca8: 7120 aed1 1000                         |000c: invoke-static {v0, v1}, Ljava/lang/Math;.sqrt:(D)D // method@d1ae
+560cae: 0b00                                   |000f: move-result-wide v0
+560cb0: 8c02                                   |0010: double-to-float v2, v0
+560cb2: 5230 9e00                              |0011: iget v0, v3, Landroid/graphics/PointF;.x:F // field@009e
+560cb6: c920                                   |0013: div-float/2addr v0, v2
+560cb8: 5930 9e00                              |0014: iput v0, v3, Landroid/graphics/PointF;.x:F // field@009e
+560cbc: 5230 9f00                              |0016: iget v0, v3, Landroid/graphics/PointF;.y:F // field@009f
+560cc0: c920                                   |0018: div-float/2addr v0, v2
+560cc2: 5930 9f00                              |0019: iput v0, v3, Landroid/graphics/PointF;.y:F // field@009f
+560cc6: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=11733
+        0x0011 line=11735
+        0x0016 line=11736
+      locals        :
+        0x0000 - 0x001c reg=2 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+        0x0000 - 0x001c reg=3 (null) Landroid/graphics/PointF;
+
+    #10              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'onAnimation'
+      type          : '(II)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 8
+      ins           : 3
+      outs          : 5
+      insns size    : 150 16-bit code units
+560cc8:                                        |[560cc8] androidx.recyclerview.widget.RecyclerView$SmoothScroller.onAnimation:(II)V
+560cd8: 5450 6d36                              |0000: iget-object v0, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclerView:Landroidx/recyclerview/widget/RecyclerView; // field@366d
+560cdc: 5551 6f36                              |0002: iget-boolean v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRunning:Z // field@366f
+560ce0: 3801 0900                              |0004: if-eqz v1, 000d // +0009
+560ce4: 5251 7136                              |0006: iget v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetPosition:I // field@3671
+560ce8: 12f2                                   |0008: const/4 v2, #int -1 // #ff
+560cea: 3221 0400                              |0009: if-eq v1, v2, 000d // +0004
+560cee: 3900 0500                              |000b: if-nez v0, 0010 // +0005
+560cf2: 6e10 d44b 0500                         |000d: invoke-virtual {v5}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.stop:()V // method@4bd4
+560cf8: 5551 6c36                              |0010: iget-boolean v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mPendingInitialRun:Z // field@366c
+560cfc: 1202                                   |0012: const/4 v2, #int 0 // #0
+560cfe: 3801 3000                              |0013: if-eqz v1, 0043 // +0030
+560d02: 5451 7236                              |0015: iget-object v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetView:Landroid/view/View; // field@3672
+560d06: 3901 2c00                              |0017: if-nez v1, 0043 // +002c
+560d0a: 5451 6b36                              |0019: iget-object v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mLayoutManager:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@366b
+560d0e: 3801 2800                              |001b: if-eqz v1, 0043 // +0028
+560d12: 5251 7136                              |001d: iget v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetPosition:I // field@3671
+560d16: 6e20 c24b 1500                         |001f: invoke-virtual {v5, v1}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.computeScrollVectorForPosition:(I)Landroid/graphics/PointF; // method@4bc2
+560d1c: 0c01                                   |0022: move-result-object v1
+560d1e: 3801 2000                              |0023: if-eqz v1, 0043 // +0020
+560d22: 5213 9e00                              |0025: iget v3, v1, Landroid/graphics/PointF;.x:F // field@009e
+560d26: 1204                                   |0027: const/4 v4, #int 0 // #0
+560d28: 2d03 0304                              |0028: cmpl-float v3, v3, v4
+560d2c: 3903 0800                              |002a: if-nez v3, 0032 // +0008
+560d30: 5213 9f00                              |002c: iget v3, v1, Landroid/graphics/PointF;.y:F // field@009f
+560d34: 2d03 0304                              |002e: cmpl-float v3, v3, v4
+560d38: 3803 1300                              |0030: if-eqz v3, 0043 // +0013
+560d3c: 5213 9e00                              |0032: iget v3, v1, Landroid/graphics/PointF;.x:F // field@009e
+560d40: 7110 abd1 0300                         |0034: invoke-static {v3}, Ljava/lang/Math;.signum:(F)F // method@d1ab
+560d46: 0a03                                   |0037: move-result v3
+560d48: 8733                                   |0038: float-to-int v3, v3
+560d4a: 5211 9f00                              |0039: iget v1, v1, Landroid/graphics/PointF;.y:F // field@009f
+560d4e: 7110 abd1 0100                         |003b: invoke-static {v1}, Ljava/lang/Math;.signum:(F)F // method@d1ab
+560d54: 0a01                                   |003e: move-result v1
+560d56: 8711                                   |003f: float-to-int v1, v1
+560d58: 6e40 094d 3021                         |0040: invoke-virtual {v0, v3, v1, v2}, Landroidx/recyclerview/widget/RecyclerView;.scrollStep:(II[I)V // method@4d09
+560d5e: 1201                                   |0043: const/4 v1, #int 0 // #0
+560d60: 5c51 6c36                              |0044: iput-boolean v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mPendingInitialRun:Z // field@366c
+560d64: 5451 7236                              |0046: iget-object v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetView:Landroid/view/View; // field@3672
+560d68: 3801 2500                              |0048: if-eqz v1, 006d // +0025
+560d6c: 6e20 c54b 1500                         |004a: invoke-virtual {v5, v1}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.getChildPosition:(Landroid/view/View;)I // method@4bc5
+560d72: 0a01                                   |004d: move-result v1
+560d74: 5253 7136                              |004e: iget v3, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetPosition:I // field@3671
+560d78: 3331 1400                              |0050: if-ne v1, v3, 0064 // +0014
+560d7c: 5451 7236                              |0052: iget-object v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetView:Landroid/view/View; // field@3672
+560d80: 5402 1237                              |0054: iget-object v2, v0, Landroidx/recyclerview/widget/RecyclerView;.mState:Landroidx/recyclerview/widget/RecyclerView$State; // field@3712
+560d84: 5453 6e36                              |0056: iget-object v3, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclingAction:Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action; // field@366e
+560d88: 6e40 d14b 1532                         |0058: invoke-virtual {v5, v1, v2, v3}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.onTargetFound:(Landroid/view/View;Landroidx/recyclerview/widget/RecyclerView$State;Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action;)V // method@4bd1
+560d8e: 5451 6e36                              |005b: iget-object v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclingAction:Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action; // field@366e
+560d92: 6e20 b94b 0100                         |005d: invoke-virtual {v1, v0}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action;.runIfNecessary:(Landroidx/recyclerview/widget/RecyclerView;)V // method@4bb9
+560d98: 6e10 d44b 0500                         |0060: invoke-virtual {v5}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.stop:()V // method@4bd4
+560d9e: 280a                                   |0063: goto 006d // +000a
+560da0: 1a01 c15d                              |0064: const-string v1, "RecyclerView" // string@5dc1
+560da4: 1a03 be5b                              |0066: const-string v3, "Passed over target position while smooth scrolling." // string@5bbe
+560da8: 7120 1e08 3100                         |0068: invoke-static {v1, v3}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@081e
+560dae: 5b52 7236                              |006b: iput-object v2, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetView:Landroid/view/View; // field@3672
+560db2: 5551 6f36                              |006d: iget-boolean v1, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRunning:Z // field@366f
+560db6: 3801 2600                              |006f: if-eqz v1, 0095 // +0026
+560dba: 5401 1237                              |0071: iget-object v1, v0, Landroidx/recyclerview/widget/RecyclerView;.mState:Landroidx/recyclerview/widget/RecyclerView$State; // field@3712
+560dbe: 5452 6e36                              |0073: iget-object v2, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclingAction:Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action; // field@366e
+560dc2: 6e52 ce4b 6517                         |0075: invoke-virtual {v5, v6, v7, v1, v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.onSeekTargetStep:(IILandroidx/recyclerview/widget/RecyclerView$State;Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action;)V // method@4bce
+560dc8: 5456 6e36                              |0078: iget-object v6, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclingAction:Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action; // field@366e
+560dcc: 6e10 b74b 0600                         |007a: invoke-virtual {v6}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action;.hasJumpTarget:()Z // method@4bb7
+560dd2: 0a06                                   |007d: move-result v6
+560dd4: 5457 6e36                              |007e: iget-object v7, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclingAction:Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action; // field@366e
+560dd8: 6e20 b94b 0700                         |0080: invoke-virtual {v7, v0}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action;.runIfNecessary:(Landroidx/recyclerview/widget/RecyclerView;)V // method@4bb9
+560dde: 3806 1200                              |0083: if-eqz v6, 0095 // +0012
+560de2: 5556 6f36                              |0085: iget-boolean v6, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRunning:Z // field@366f
+560de6: 3806 0b00                              |0087: if-eqz v6, 0092 // +000b
+560dea: 1216                                   |0089: const/4 v6, #int 1 // #1
+560dec: 5c56 6c36                              |008a: iput-boolean v6, v5, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mPendingInitialRun:Z // field@366c
+560df0: 5405 1a37                              |008c: iget-object v5, v0, Landroidx/recyclerview/widget/RecyclerView;.mViewFlinger:Landroidx/recyclerview/widget/RecyclerView$ViewFlinger; // field@371a
+560df4: 6e10 ef4b 0500                         |008e: invoke-virtual {v5}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.postOnAnimation:()V // method@4bef
+560dfa: 2804                                   |0091: goto 0095 // +0004
+560dfc: 6e10 d44b 0500                         |0092: invoke-virtual {v5}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.stop:()V // method@4bd4
+560e02: 0e00                                   |0095: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=11637
+        0x0002 line=11638
+        0x000d line=11639
+        0x0010 line=11648
+        0x001d line=11649
+        0x0025 line=11650
+        0x0032 line=11651
+        0x0034 line=11652
+        0x003b line=11653
+        0x0040 line=11651
+        0x0044 line=11658
+        0x0046 line=11660
+        0x004a line=11662
+        0x0052 line=11663
+        0x005b line=11664
+        0x0060 line=11665
+        0x0064 line=11667
+        0x006b line=11668
+        0x006d line=11671
+        0x0071 line=11672
+        0x0078 line=11673
+        0x007e line=11674
+        0x0085 line=11677
+        0x008a line=11678
+        0x008c line=11679
+        0x0092 line=11683
+      locals        :
+        0x0000 - 0x0096 reg=5 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+        0x0000 - 0x0096 reg=6 (null) I
+        0x0000 - 0x0096 reg=7 (null) I
+
+    #11              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'onChildAttachedToWindow'
+      type          : '(Landroid/view/View;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 13 16-bit code units
+560e04:                                        |[560e04] androidx.recyclerview.widget.RecyclerView$SmoothScroller.onChildAttachedToWindow:(Landroid/view/View;)V
+560e14: 6e20 c54b 3200                         |0000: invoke-virtual {v2, v3}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.getChildPosition:(Landroid/view/View;)I // method@4bc5
+560e1a: 0a00                                   |0003: move-result v0
+560e1c: 6e10 c74b 0200                         |0004: invoke-virtual {v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.getTargetPosition:()I // method@4bc7
+560e22: 0a01                                   |0007: move-result v1
+560e24: 3310 0400                              |0008: if-ne v0, v1, 000c // +0004
+560e28: 5b23 7236                              |000a: iput-object v3, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetView:Landroid/view/View; // field@3672
+560e2c: 0e00                                   |000c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=11720
+        0x000a line=11721
+      locals        :
+        0x0000 - 0x000d reg=2 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+        0x0000 - 0x000d reg=3 (null) Landroid/view/View;
+
+    #12              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'onSeekTargetStep'
+      type          : '(IILandroidx/recyclerview/widget/RecyclerView$State;Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action;)V'
+      access        : 0x0404 (PROTECTED ABSTRACT)
+      code          : (none)
+
+    #13              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'onStart'
+      type          : '()V'
+      access        : 0x0404 (PROTECTED ABSTRACT)
+      code          : (none)
+
+    #14              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'onStop'
+      type          : '()V'
+      access        : 0x0404 (PROTECTED ABSTRACT)
+      code          : (none)
+
+    #15              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'onTargetFound'
+      type          : '(Landroid/view/View;Landroidx/recyclerview/widget/RecyclerView$State;Landroidx/recyclerview/widget/RecyclerView$SmoothScroller$Action;)V'
+      access        : 0x0404 (PROTECTED ABSTRACT)
+      code          : (none)
+
+    #16              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'setTargetPosition'
+      type          : '(I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+560e30:                                        |[560e30] androidx.recyclerview.widget.RecyclerView$SmoothScroller.setTargetPosition:(I)V
+560e40: 5901 7136                              |0000: iput v1, v0, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetPosition:I // field@3671
+560e44: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=11547
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+        0x0000 - 0x0003 reg=1 (null) I
+
+    #17              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'start'
+      type          : '(Landroidx/recyclerview/widget/RecyclerView;Landroidx/recyclerview/widget/RecyclerView$LayoutManager;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 2
+      insns size    : 107 16-bit code units
+560e48:                                        |[560e48] androidx.recyclerview.widget.RecyclerView$SmoothScroller.start:(Landroidx/recyclerview/widget/RecyclerView;Landroidx/recyclerview/widget/RecyclerView$LayoutManager;)V
+560e58: 5520 7036                              |0000: iget-boolean v0, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mStarted:Z // field@3670
+560e5c: 3800 3600                              |0002: if-eqz v0, 0038 // +0036
+560e60: 2200 991a                              |0004: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+560e64: 1a01 1b15                              |0006: const-string v1, "An instance of " // string@151b
+560e68: 7020 3cd2 1000                         |0008: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+560e6e: 6e10 ccd1 0200                         |000b: invoke-virtual {v2}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+560e74: 0c01                                   |000e: move-result-object v1
+560e76: 6e10 f3d0 0100                         |000f: invoke-virtual {v1}, Ljava/lang/Class;.getSimpleName:()Ljava/lang/String; // method@d0f3
+560e7c: 0c01                                   |0012: move-result-object v1
+560e7e: 6e20 45d2 1000                         |0013: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+560e84: 0c00                                   |0016: move-result-object v0
+560e86: 1a01 f504                              |0017: const-string v1, " was started more than once. Each instance of" // string@04f5
+560e8a: 6e20 45d2 1000                         |0019: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+560e90: 0c00                                   |001c: move-result-object v0
+560e92: 6e10 ccd1 0200                         |001d: invoke-virtual {v2}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+560e98: 0c01                                   |0020: move-result-object v1
+560e9a: 6e10 f3d0 0100                         |0021: invoke-virtual {v1}, Ljava/lang/Class;.getSimpleName:()Ljava/lang/String; // method@d0f3
+560ea0: 0c01                                   |0024: move-result-object v1
+560ea2: 6e20 45d2 1000                         |0025: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+560ea8: 0c00                                   |0028: move-result-object v0
+560eaa: 1a01 0404                              |0029: const-string v1, " is intended to only be used once. You should create a new instance for each use." // string@0404
+560eae: 6e20 45d2 1000                         |002b: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+560eb4: 0c00                                   |002e: move-result-object v0
+560eb6: 6e10 58d2 0000                         |002f: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+560ebc: 0c00                                   |0032: move-result-object v0
+560ebe: 1a01 c15d                              |0033: const-string v1, "RecyclerView" // string@5dc1
+560ec2: 7120 2708 0100                         |0035: invoke-static {v1, v0}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+560ec8: 5b23 6d36                              |0038: iput-object v3, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclerView:Landroidx/recyclerview/widget/RecyclerView; // field@366d
+560ecc: 5b24 6b36                              |003a: iput-object v4, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mLayoutManager:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@366b
+560ed0: 5224 7136                              |003c: iget v4, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetPosition:I // field@3671
+560ed4: 12f0                                   |003e: const/4 v0, #int -1 // #ff
+560ed6: 3204 2400                              |003f: if-eq v4, v0, 0063 // +0024
+560eda: 5433 1237                              |0041: iget-object v3, v3, Landroidx/recyclerview/widget/RecyclerView;.mState:Landroidx/recyclerview/widget/RecyclerView$State; // field@3712
+560ede: 5224 7136                              |0043: iget v4, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetPosition:I // field@3671
+560ee2: 5934 8536                              |0045: iput v4, v3, Landroidx/recyclerview/widget/RecyclerView$State;.mTargetPosition:I // field@3685
+560ee6: 1213                                   |0047: const/4 v3, #int 1 // #1
+560ee8: 5c23 6f36                              |0048: iput-boolean v3, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRunning:Z // field@366f
+560eec: 5c23 6c36                              |004a: iput-boolean v3, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mPendingInitialRun:Z // field@366c
+560ef0: 6e10 c74b 0200                         |004c: invoke-virtual {v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.getTargetPosition:()I // method@4bc7
+560ef6: 0a04                                   |004f: move-result v4
+560ef8: 6e20 c34b 4200                         |0050: invoke-virtual {v2, v4}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.findViewByPosition:(I)Landroid/view/View; // method@4bc3
+560efe: 0c04                                   |0053: move-result-object v4
+560f00: 5b24 7236                              |0054: iput-object v4, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetView:Landroid/view/View; // field@3672
+560f04: 6e10 cf4b 0200                         |0056: invoke-virtual {v2}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.onStart:()V // method@4bcf
+560f0a: 5424 6d36                              |0059: iget-object v4, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclerView:Landroidx/recyclerview/widget/RecyclerView; // field@366d
+560f0e: 5444 1a37                              |005b: iget-object v4, v4, Landroidx/recyclerview/widget/RecyclerView;.mViewFlinger:Landroidx/recyclerview/widget/RecyclerView$ViewFlinger; // field@371a
+560f12: 6e10 ef4b 0400                         |005d: invoke-virtual {v4}, Landroidx/recyclerview/widget/RecyclerView$ViewFlinger;.postOnAnimation:()V // method@4bef
+560f18: 5c23 7036                              |0060: iput-boolean v3, v2, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mStarted:Z // field@3670
+560f1c: 0e00                                   |0062: return-void
+560f1e: 2202 7a1a                              |0063: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+560f22: 1a03 eb2d                              |0065: const-string v3, "Invalid target position" // string@2deb
+560f26: 7020 47d1 3200                         |0067: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+560f2c: 2702                                   |006a: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=11524
+        0x0004 line=11525
+        0x001d line=11526
+        0x0033 line=11525
+        0x0038 line=11531
+        0x003a line=11532
+        0x003c line=11533
+        0x0041 line=11536
+        0x0048 line=11537
+        0x004a line=11538
+        0x004c line=11539
+        0x0056 line=11540
+        0x0059 line=11541
+        0x0060 line=11543
+        0x0063 line=11534
+      locals        :
+        0x0000 - 0x006b reg=2 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+        0x0000 - 0x006b reg=3 (null) Landroidx/recyclerview/widget/RecyclerView;
+        0x0000 - 0x006b reg=4 (null) Landroidx/recyclerview/widget/RecyclerView$LayoutManager;
+
+    #18              : (in Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)
+      name          : 'stop'
+      type          : '()V'
+      access        : 0x0014 (PROTECTED FINAL)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 35 16-bit code units
+560f30:                                        |[560f30] androidx.recyclerview.widget.RecyclerView$SmoothScroller.stop:()V
+560f40: 5530 6f36                              |0000: iget-boolean v0, v3, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRunning:Z // field@366f
+560f44: 3900 0300                              |0002: if-nez v0, 0005 // +0003
+560f48: 0e00                                   |0004: return-void
+560f4a: 1200                                   |0005: const/4 v0, #int 0 // #0
+560f4c: 5c30 6f36                              |0006: iput-boolean v0, v3, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRunning:Z // field@366f
+560f50: 6e10 d04b 0300                         |0008: invoke-virtual {v3}, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.onStop:()V // method@4bd0
+560f56: 5431 6d36                              |000b: iget-object v1, v3, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclerView:Landroidx/recyclerview/widget/RecyclerView; // field@366d
+560f5a: 5411 1237                              |000d: iget-object v1, v1, Landroidx/recyclerview/widget/RecyclerView;.mState:Landroidx/recyclerview/widget/RecyclerView$State; // field@3712
+560f5e: 12f2                                   |000f: const/4 v2, #int -1 // #ff
+560f60: 5912 8536                              |0010: iput v2, v1, Landroidx/recyclerview/widget/RecyclerView$State;.mTargetPosition:I // field@3685
+560f64: 1201                                   |0012: const/4 v1, #int 0 // #0
+560f66: 5b31 7236                              |0013: iput-object v1, v3, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetView:Landroid/view/View; // field@3672
+560f6a: 5932 7136                              |0015: iput v2, v3, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mTargetPosition:I // field@3671
+560f6e: 5c30 6c36                              |0017: iput-boolean v0, v3, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mPendingInitialRun:Z // field@366c
+560f72: 5430 6b36                              |0019: iget-object v0, v3, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mLayoutManager:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@366b
+560f76: 6e20 1e4b 3000                         |001b: invoke-virtual {v0, v3}, Landroidx/recyclerview/widget/RecyclerView$LayoutManager;.onSmoothScrollerStopped:(Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;)V // method@4b1e
+560f7c: 5b31 6b36                              |001e: iput-object v1, v3, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mLayoutManager:Landroidx/recyclerview/widget/RecyclerView$LayoutManager; // field@366b
+560f80: 5b31 6d36                              |0020: iput-object v1, v3, Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;.mRecyclerView:Landroidx/recyclerview/widget/RecyclerView; // field@366d
+560f84: 0e00                                   |0022: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=11588
+        0x0006 line=11591
+        0x0008 line=11592
+        0x000b line=11593
+        0x0013 line=11594
+        0x0015 line=11595
+        0x0017 line=11596
+        0x0019 line=11598
+        0x001e line=11600
+        0x0020 line=11601
+      locals        :
+        0x0000 - 0x0023 reg=3 this Landroidx/recyclerview/widget/RecyclerView$SmoothScroller;
+
+  source_file_idx   : 24004 (RecyclerView.java)
+

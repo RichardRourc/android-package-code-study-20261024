@@ -1,0 +1,315 @@
+// Ghidra pseudocode. Not original C/C++ source.
+// Program: libpl_droidsonroids_gif.so
+// Executable SHA256: 6fe3a2e6c3a0b092a79eb16d26516a28289305ad28f7354d5b41a03f4d203997
+// Entry: 00103dc8; body: [[00103dc8, 00103f2f]]
+
+void FUN_00103dc8(long *param_1,int param_2,char *param_3)
+
+{
+  int iVar1;
+  long lVar2;
+  char cVar3;
+  int *piVar4;
+  long lVar5;
+  char *pcVar6;
+  char acStack_250 [256];
+  char local_150 [264];
+  long local_48;
+  
+  lVar2 = tpidr_el0;
+  local_48 = *(long *)(lVar2 + 0x28);
+  piVar4 = (int *)__errno();
+  iVar1 = 2;
+  if (*piVar4 != 0xc) {
+    iVar1 = param_2;
+  }
+  if (iVar1 == 0) {
+    local_150[0xf7] = '\0';
+    local_150[0xf8] = '\0';
+    local_150[0xf9] = '\0';
+    local_150[0xfa] = '\0';
+    local_150[0xfb] = '\0';
+    local_150[0xfc] = '\0';
+    local_150[0xfd] = '\0';
+    local_150[0xfe] = '\0';
+    local_150[0xf0] = '\0';
+    local_150[0xf1] = '\0';
+    local_150[0xf2] = '\0';
+    local_150[0xf3] = '\0';
+    local_150[0xf4] = '\0';
+    local_150[0xf5] = '\0';
+    local_150[0xf6] = '\0';
+    local_150[0xd8] = '\0';
+    local_150[0xd9] = '\0';
+    local_150[0xda] = '\0';
+    local_150[0xdb] = '\0';
+    local_150[0xdc] = '\0';
+    local_150[0xdd] = '\0';
+    local_150[0xde] = '\0';
+    local_150[0xdf] = '\0';
+    local_150[0xd0] = '\0';
+    local_150[0xd1] = '\0';
+    local_150[0xd2] = '\0';
+    local_150[0xd3] = '\0';
+    local_150[0xd4] = '\0';
+    local_150[0xd5] = '\0';
+    local_150[0xd6] = '\0';
+    local_150[0xd7] = '\0';
+    local_150[0xe8] = '\0';
+    local_150[0xe9] = '\0';
+    local_150[0xea] = '\0';
+    local_150[0xeb] = '\0';
+    local_150[0xec] = '\0';
+    local_150[0xed] = '\0';
+    local_150[0xee] = '\0';
+    local_150[0xef] = 0;
+    local_150[0xe0] = '\0';
+    local_150[0xe1] = '\0';
+    local_150[0xe2] = '\0';
+    local_150[0xe3] = '\0';
+    local_150[0xe4] = '\0';
+    local_150[0xe5] = '\0';
+    local_150[0xe6] = '\0';
+    local_150[0xe7] = '\0';
+    local_150[0xb8] = '\0';
+    local_150[0xb9] = '\0';
+    local_150[0xba] = '\0';
+    local_150[0xbb] = '\0';
+    local_150[0xbc] = '\0';
+    local_150[0xbd] = '\0';
+    local_150[0xbe] = '\0';
+    local_150[0xbf] = '\0';
+    local_150[0xb0] = '\0';
+    local_150[0xb1] = '\0';
+    local_150[0xb2] = '\0';
+    local_150[0xb3] = '\0';
+    local_150[0xb4] = '\0';
+    local_150[0xb5] = '\0';
+    local_150[0xb6] = '\0';
+    local_150[0xb7] = '\0';
+    local_150[200] = '\0';
+    local_150[0xc9] = '\0';
+    local_150[0xca] = '\0';
+    local_150[0xcb] = '\0';
+    local_150[0xcc] = '\0';
+    local_150[0xcd] = '\0';
+    local_150[0xce] = '\0';
+    local_150[0xcf] = '\0';
+    local_150[0xc0] = '\0';
+    local_150[0xc1] = '\0';
+    local_150[0xc2] = '\0';
+    local_150[0xc3] = '\0';
+    local_150[0xc4] = '\0';
+    local_150[0xc5] = '\0';
+    local_150[0xc6] = '\0';
+    local_150[199] = '\0';
+    local_150[0x98] = '\0';
+    local_150[0x99] = '\0';
+    local_150[0x9a] = '\0';
+    local_150[0x9b] = '\0';
+    local_150[0x9c] = '\0';
+    local_150[0x9d] = '\0';
+    local_150[0x9e] = '\0';
+    local_150[0x9f] = '\0';
+    local_150[0x90] = '\0';
+    local_150[0x91] = '\0';
+    local_150[0x92] = '\0';
+    local_150[0x93] = '\0';
+    local_150[0x94] = '\0';
+    local_150[0x95] = '\0';
+    local_150[0x96] = '\0';
+    local_150[0x97] = '\0';
+    local_150[0xa8] = '\0';
+    local_150[0xa9] = '\0';
+    local_150[0xaa] = '\0';
+    local_150[0xab] = '\0';
+    local_150[0xac] = '\0';
+    local_150[0xad] = '\0';
+    local_150[0xae] = '\0';
+    local_150[0xaf] = '\0';
+    local_150[0xa0] = '\0';
+    local_150[0xa1] = '\0';
+    local_150[0xa2] = '\0';
+    local_150[0xa3] = '\0';
+    local_150[0xa4] = '\0';
+    local_150[0xa5] = '\0';
+    local_150[0xa6] = '\0';
+    local_150[0xa7] = '\0';
+    local_150[0x78] = '\0';
+    local_150[0x79] = '\0';
+    local_150[0x7a] = '\0';
+    local_150[0x7b] = '\0';
+    local_150[0x7c] = '\0';
+    local_150[0x7d] = '\0';
+    local_150[0x7e] = '\0';
+    local_150[0x7f] = '\0';
+    local_150[0x70] = '\0';
+    local_150[0x71] = '\0';
+    local_150[0x72] = '\0';
+    local_150[0x73] = '\0';
+    local_150[0x74] = '\0';
+    local_150[0x75] = '\0';
+    local_150[0x76] = '\0';
+    local_150[0x77] = '\0';
+    local_150[0x88] = '\0';
+    local_150[0x89] = '\0';
+    local_150[0x8a] = '\0';
+    local_150[0x8b] = '\0';
+    local_150[0x8c] = '\0';
+    local_150[0x8d] = '\0';
+    local_150[0x8e] = '\0';
+    local_150[0x8f] = '\0';
+    local_150[0x80] = '\0';
+    local_150[0x81] = '\0';
+    local_150[0x82] = '\0';
+    local_150[0x83] = '\0';
+    local_150[0x84] = '\0';
+    local_150[0x85] = '\0';
+    local_150[0x86] = '\0';
+    local_150[0x87] = '\0';
+    local_150[0x58] = '\0';
+    local_150[0x59] = '\0';
+    local_150[0x5a] = '\0';
+    local_150[0x5b] = '\0';
+    local_150[0x5c] = '\0';
+    local_150[0x5d] = '\0';
+    local_150[0x5e] = '\0';
+    local_150[0x5f] = '\0';
+    local_150[0x50] = '\0';
+    local_150[0x51] = '\0';
+    local_150[0x52] = '\0';
+    local_150[0x53] = '\0';
+    local_150[0x54] = '\0';
+    local_150[0x55] = '\0';
+    local_150[0x56] = '\0';
+    local_150[0x57] = '\0';
+    local_150[0x68] = '\0';
+    local_150[0x69] = '\0';
+    local_150[0x6a] = '\0';
+    local_150[0x6b] = '\0';
+    local_150[0x6c] = '\0';
+    local_150[0x6d] = '\0';
+    local_150[0x6e] = '\0';
+    local_150[0x6f] = '\0';
+    local_150[0x60] = '\0';
+    local_150[0x61] = '\0';
+    local_150[0x62] = '\0';
+    local_150[99] = '\0';
+    local_150[100] = '\0';
+    local_150[0x65] = '\0';
+    local_150[0x66] = '\0';
+    local_150[0x67] = '\0';
+    local_150[0x38] = '\0';
+    local_150[0x39] = '\0';
+    local_150[0x3a] = '\0';
+    local_150[0x3b] = '\0';
+    local_150[0x3c] = '\0';
+    local_150[0x3d] = '\0';
+    local_150[0x3e] = '\0';
+    local_150[0x3f] = '\0';
+    local_150[0x30] = '\0';
+    local_150[0x31] = '\0';
+    local_150[0x32] = '\0';
+    local_150[0x33] = '\0';
+    local_150[0x34] = '\0';
+    local_150[0x35] = '\0';
+    local_150[0x36] = '\0';
+    local_150[0x37] = '\0';
+    local_150[0x48] = '\0';
+    local_150[0x49] = '\0';
+    local_150[0x4a] = '\0';
+    local_150[0x4b] = '\0';
+    local_150[0x4c] = '\0';
+    local_150[0x4d] = '\0';
+    local_150[0x4e] = '\0';
+    local_150[0x4f] = '\0';
+    local_150[0x40] = '\0';
+    local_150[0x41] = '\0';
+    local_150[0x42] = '\0';
+    local_150[0x43] = '\0';
+    local_150[0x44] = '\0';
+    local_150[0x45] = '\0';
+    local_150[0x46] = '\0';
+    local_150[0x47] = '\0';
+    local_150[0x18] = '\0';
+    local_150[0x19] = '\0';
+    local_150[0x1a] = '\0';
+    local_150[0x1b] = '\0';
+    local_150[0x1c] = '\0';
+    local_150[0x1d] = '\0';
+    local_150[0x1e] = '\0';
+    local_150[0x1f] = '\0';
+    local_150[0x10] = '\0';
+    local_150[0x11] = '\0';
+    local_150[0x12] = '\0';
+    local_150[0x13] = '\0';
+    local_150[0x14] = '\0';
+    local_150[0x15] = '\0';
+    local_150[0x16] = '\0';
+    local_150[0x17] = '\0';
+    local_150[0x28] = '\0';
+    local_150[0x29] = '\0';
+    local_150[0x2a] = '\0';
+    local_150[0x2b] = '\0';
+    local_150[0x2c] = '\0';
+    local_150[0x2d] = '\0';
+    local_150[0x2e] = '\0';
+    local_150[0x2f] = '\0';
+    local_150[0x20] = '\0';
+    local_150[0x21] = '\0';
+    local_150[0x22] = '\0';
+    local_150[0x23] = '\0';
+    local_150[0x24] = '\0';
+    local_150[0x25] = '\0';
+    local_150[0x26] = '\0';
+    local_150[0x27] = '\0';
+    local_150[8] = '\0';
+    local_150[9] = '\0';
+    local_150[10] = '\0';
+    local_150[0xb] = '\0';
+    local_150[0xc] = '\0';
+    local_150[0xd] = '\0';
+    local_150[0xe] = '\0';
+    local_150[0xf] = '\0';
+    local_150[0] = '\0';
+    local_150[1] = '\0';
+    local_150[2] = '\0';
+    local_150[3] = '\0';
+    local_150[4] = '\0';
+    local_150[5] = '\0';
+    local_150[6] = '\0';
+    local_150[7] = '\0';
+    strncat(local_150,param_3,0xff);
+    pcVar6 = strerror_r(*piVar4,acStack_250,0xff);
+    if ((int)pcVar6 != 0) {
+      pcVar6 = "java/lang/RuntimeException";
+      param_3 = local_150;
+      goto LAB_00103eb8;
+    }
+    param_3 = local_150;
+    strncat(local_150,acStack_250,0xff);
+  }
+  else {
+    if (iVar1 == 2) {
+      pcVar6 = "java/lang/OutOfMemoryError";
+      goto LAB_00103eb8;
+    }
+    if (iVar1 == 3) {
+      pcVar6 = "java/lang/NullPointerException";
+      goto LAB_00103eb8;
+    }
+  }
+  pcVar6 = "java/lang/RuntimeException";
+LAB_00103eb8:
+  cVar3 = (**(code **)(*param_1 + 0x720))(param_1);
+  if ((cVar3 != '\x01') && (lVar5 = (**(code **)(*param_1 + 0x30))(param_1,pcVar6), lVar5 != 0)) {
+    (**(code **)(*param_1 + 0x70))(param_1,lVar5,param_3);
+  }
+  if (*(long *)(lVar2 + 0x28) == local_48) {
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  __stack_chk_fail();
+}
+
+

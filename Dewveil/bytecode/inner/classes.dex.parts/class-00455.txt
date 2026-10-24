@@ -1,0 +1,803 @@
+Class #455            -
+  Class descriptor  : 'Landroidx/collection/LruCache;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Landroidx/collection/LruCache;)
+      name          : 'createCount'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Landroidx/collection/LruCache;)
+      name          : 'evictionCount'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Landroidx/collection/LruCache;)
+      name          : 'hitCount'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Landroidx/collection/LruCache;)
+      name          : 'map'
+      type          : 'Ljava/util/LinkedHashMap;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Landroidx/collection/LruCache;)
+      name          : 'maxSize'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Landroidx/collection/LruCache;)
+      name          : 'missCount'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #6              : (in Landroidx/collection/LruCache;)
+      name          : 'putCount'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #7              : (in Landroidx/collection/LruCache;)
+      name          : 'size'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Landroidx/collection/LruCache;)
+      name          : '<init>'
+      type          : '(I)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 27 16-bit code units
+4ac5f8:                                        |[4ac5f8] androidx.collection.LruCache.<init>:(I)V
+4ac608: 7010 c8d1 0300                         |0000: invoke-direct {v3}, Ljava/lang/Object;.<init>:()V // method@d1c8
+4ac60e: 3d04 1000                              |0003: if-lez v4, 0013 // +0010
+4ac612: 5934 6611                              |0005: iput v4, v3, Landroidx/collection/LruCache;.maxSize:I // field@1166
+4ac616: 2204 4e1b                              |0007: new-instance v4, Ljava/util/LinkedHashMap; // type@1b4e
+4ac61a: 1500 403f                              |0009: const/high16 v0, #int 1061158912 // #3f40
+4ac61e: 1211                                   |000b: const/4 v1, #int 1 // #1
+4ac620: 1202                                   |000c: const/4 v2, #int 0 // #0
+4ac622: 7040 a5d5 2410                         |000d: invoke-direct {v4, v2, v0, v1}, Ljava/util/LinkedHashMap;.<init>:(IFZ)V // method@d5a5
+4ac628: 5b34 6511                              |0010: iput-object v4, v3, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4ac62c: 0e00                                   |0012: return-void
+4ac62e: 2203 7a1a                              |0013: new-instance v3, Ljava/lang/IllegalArgumentException; // type@1a7a
+4ac632: 1a04 d0bf                              |0015: const-string v4, "maxSize <= 0" // string@bfd0
+4ac636: 7020 47d1 4300                         |0017: invoke-direct {v3, v4}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+4ac63c: 2703                                   |001a: throw v3
+      catches       : (none)
+      positions     :
+        0x0000 line=51
+        0x0005 line=55
+        0x0007 line=56
+        0x0013 line=53
+      locals        :
+        0x0000 - 0x001b reg=3 this Landroidx/collection/LruCache;
+        0x0000 - 0x001b reg=4 (null) I
+
+    #1              : (in Landroidx/collection/LruCache;)
+      name          : 'safeSizeOf'
+      type          : '(Ljava/lang/Object;Ljava/lang/Object;)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 38 16-bit code units
+4ac640:                                        |[4ac640] androidx.collection.LruCache.safeSizeOf:(Ljava/lang/Object;Ljava/lang/Object;)I
+4ac650: 6e30 d224 3204                         |0000: invoke-virtual {v2, v3, v4}, Landroidx/collection/LruCache;.sizeOf:(Ljava/lang/Object;Ljava/lang/Object;)I // method@24d2
+4ac656: 0a02                                   |0003: move-result v2
+4ac658: 3a02 0300                              |0004: if-ltz v2, 0007 // +0003
+4ac65c: 0f02                                   |0006: return v2
+4ac65e: 2202 7b1a                              |0007: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+4ac662: 2200 991a                              |0009: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+4ac666: 1a01 fe57                              |000b: const-string v1, "Negative size: " // string@57fe
+4ac66a: 7020 3cd2 1000                         |000d: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+4ac670: 6e20 44d2 3000                         |0010: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+4ac676: 0c03                                   |0013: move-result-object v3
+4ac678: 1a00 1b11                              |0014: const-string v0, "=" // string@111b
+4ac67c: 6e20 45d2 0300                         |0016: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4ac682: 0c03                                   |0019: move-result-object v3
+4ac684: 6e20 44d2 4300                         |001a: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+4ac68a: 0c03                                   |001d: move-result-object v3
+4ac68c: 6e10 58d2 0300                         |001e: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+4ac692: 0c03                                   |0021: move-result-object v3
+4ac694: 7020 4cd1 3200                         |0022: invoke-direct {v2, v3}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+4ac69a: 2702                                   |0025: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=259
+        0x0007 line=261
+      locals        :
+        0x0000 - 0x0026 reg=2 this Landroidx/collection/LruCache;
+        0x0000 - 0x0026 reg=3 (null) Ljava/lang/Object;
+        0x0000 - 0x0026 reg=4 (null) Ljava/lang/Object;
+
+  Virtual methods   -
+    #0              : (in Landroidx/collection/LruCache;)
+      name          : 'create'
+      type          : '(Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 2 16-bit code units
+4ac69c:                                        |[4ac69c] androidx.collection.LruCache.create:(Ljava/lang/Object;)Ljava/lang/Object;
+4ac6ac: 1200                                   |0000: const/4 v0, #int 0 // #0
+4ac6ae: 1100                                   |0001: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Landroidx/collection/LruCache;)
+      name          : 'createCount'
+      type          : '()I'
+      access        : 0x20011 (PUBLIC FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+4ac6b0:                                        |[4ac6b0] androidx.collection.LruCache.createCount:()I
+4ac6c0: 1d01                                   |0000: monitor-enter v1
+4ac6c2: 5210 6211                              |0001: iget v0, v1, Landroidx/collection/LruCache;.createCount:I // field@1162
+4ac6c6: 1e01                                   |0003: monitor-exit v1
+4ac6c8: 0f00                                   |0004: return v0
+4ac6ca: 0d00                                   |0005: move-exception v0
+4ac6cc: 1e01                                   |0006: monitor-exit v1
+4ac6ce: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=322
+      locals        :
+        0x0000 - 0x0008 reg=1 this Landroidx/collection/LruCache;
+
+    #2              : (in Landroidx/collection/LruCache;)
+      name          : 'entryRemoved'
+      type          : '(ZLjava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 0
+      insns size    : 1 16-bit code units
+4ac6e4:                                        |[4ac6e4] androidx.collection.LruCache.entryRemoved:(ZLjava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V
+4ac6f4: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #3              : (in Landroidx/collection/LruCache;)
+      name          : 'evictAll'
+      type          : '()V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 5 16-bit code units
+4ac6f8:                                        |[4ac6f8] androidx.collection.LruCache.evictAll:()V
+4ac708: 12f0                                   |0000: const/4 v0, #int -1 // #ff
+4ac70a: 6e20 d524 0100                         |0001: invoke-virtual {v1, v0}, Landroidx/collection/LruCache;.trimToSize:(I)V // method@24d5
+4ac710: 0e00                                   |0004: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=281
+      locals        :
+        0x0000 - 0x0005 reg=1 this Landroidx/collection/LruCache;
+
+    #4              : (in Landroidx/collection/LruCache;)
+      name          : 'evictionCount'
+      type          : '()I'
+      access        : 0x20011 (PUBLIC FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+4ac714:                                        |[4ac714] androidx.collection.LruCache.evictionCount:()I
+4ac724: 1d01                                   |0000: monitor-enter v1
+4ac726: 5210 6311                              |0001: iget v0, v1, Landroidx/collection/LruCache;.evictionCount:I // field@1163
+4ac72a: 1e01                                   |0003: monitor-exit v1
+4ac72c: 0f00                                   |0004: return v0
+4ac72e: 0d00                                   |0005: move-exception v0
+4ac730: 1e01                                   |0006: monitor-exit v1
+4ac732: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=336
+      locals        :
+        0x0000 - 0x0008 reg=1 this Landroidx/collection/LruCache;
+
+    #5              : (in Landroidx/collection/LruCache;)
+      name          : 'get'
+      type          : '(Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 5
+      insns size    : 92 16-bit code units
+4ac748:                                        |[4ac748] androidx.collection.LruCache.get:(Ljava/lang/Object;)Ljava/lang/Object;
+4ac758: 3805 5400                              |0000: if-eqz v5, 0054 // +0054
+4ac75c: 1d04                                   |0002: monitor-enter v4
+4ac75e: 5440 6511                              |0003: iget-object v0, v4, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4ac762: 6e20 aad5 5000                         |0005: invoke-virtual {v0, v5}, Ljava/util/LinkedHashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5aa
+4ac768: 0c00                                   |0008: move-result-object v0
+4ac76a: 3800 0a00                              |0009: if-eqz v0, 0013 // +000a
+4ac76e: 5245 6411                              |000b: iget v5, v4, Landroidx/collection/LruCache;.hitCount:I // field@1164
+4ac772: d805 0501                              |000d: add-int/lit8 v5, v5, #int 1 // #01
+4ac776: 5945 6411                              |000f: iput v5, v4, Landroidx/collection/LruCache;.hitCount:I // field@1164
+4ac77a: 1e04                                   |0011: monitor-exit v4
+4ac77c: 1100                                   |0012: return-object v0
+4ac77e: 5240 6711                              |0013: iget v0, v4, Landroidx/collection/LruCache;.missCount:I // field@1167
+4ac782: d800 0001                              |0015: add-int/lit8 v0, v0, #int 1 // #01
+4ac786: 5940 6711                              |0017: iput v0, v4, Landroidx/collection/LruCache;.missCount:I // field@1167
+4ac78a: 1e04                                   |0019: monitor-exit v4
+4ac78c: 6e20 c324 5400                         |001a: invoke-virtual {v4, v5}, Landroidx/collection/LruCache;.create:(Ljava/lang/Object;)Ljava/lang/Object; // method@24c3
+4ac792: 0c00                                   |001d: move-result-object v0
+4ac794: 3900 0400                              |001e: if-nez v0, 0022 // +0004
+4ac798: 1204                                   |0020: const/4 v4, #int 0 // #0
+4ac79a: 1104                                   |0021: return-object v4
+4ac79c: 1d04                                   |0022: monitor-enter v4
+4ac79e: 5241 6211                              |0023: iget v1, v4, Landroidx/collection/LruCache;.createCount:I // field@1162
+4ac7a2: d801 0101                              |0025: add-int/lit8 v1, v1, #int 1 // #01
+4ac7a6: 5941 6211                              |0027: iput v1, v4, Landroidx/collection/LruCache;.createCount:I // field@1162
+4ac7aa: 5441 6511                              |0029: iget-object v1, v4, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4ac7ae: 6e30 add5 5100                         |002b: invoke-virtual {v1, v5, v0}, Ljava/util/LinkedHashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d5ad
+4ac7b4: 0c01                                   |002e: move-result-object v1
+4ac7b6: 3801 0800                              |002f: if-eqz v1, 0037 // +0008
+4ac7ba: 5442 6511                              |0031: iget-object v2, v4, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4ac7be: 6e30 add5 5201                         |0033: invoke-virtual {v2, v5, v1}, Ljava/util/LinkedHashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d5ad
+4ac7c4: 280a                                   |0036: goto 0040 // +000a
+4ac7c6: 5242 6911                              |0037: iget v2, v4, Landroidx/collection/LruCache;.size:I // field@1169
+4ac7ca: 7030 d024 5400                         |0039: invoke-direct {v4, v5, v0}, Landroidx/collection/LruCache;.safeSizeOf:(Ljava/lang/Object;Ljava/lang/Object;)I // method@24d0
+4ac7d0: 0a03                                   |003c: move-result v3
+4ac7d2: b032                                   |003d: add-int/2addr v2, v3
+4ac7d4: 5942 6911                              |003e: iput v2, v4, Landroidx/collection/LruCache;.size:I // field@1169
+4ac7d8: 1e04                                   |0040: monitor-exit v4
+4ac7da: 3801 0700                              |0041: if-eqz v1, 0048 // +0007
+4ac7de: 1202                                   |0043: const/4 v2, #int 0 // #0
+4ac7e0: 6e51 c524 2405                         |0044: invoke-virtual {v4, v2, v5, v0, v1}, Landroidx/collection/LruCache;.entryRemoved:(ZLjava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V // method@24c5
+4ac7e6: 1101                                   |0047: return-object v1
+4ac7e8: 5245 6611                              |0048: iget v5, v4, Landroidx/collection/LruCache;.maxSize:I // field@1166
+4ac7ec: 6e20 d524 5400                         |004a: invoke-virtual {v4, v5}, Landroidx/collection/LruCache;.trimToSize:(I)V // method@24d5
+4ac7f2: 1100                                   |004d: return-object v0
+4ac7f4: 0d05                                   |004e: move-exception v5
+4ac7f6: 1e04                                   |004f: monitor-exit v4
+4ac7f8: 2705                                   |0050: throw v5
+4ac7fa: 0d05                                   |0051: move-exception v5
+4ac7fc: 1e04                                   |0052: monitor-exit v4
+4ac7fe: 2705                                   |0053: throw v5
+4ac800: 2204 881a                              |0054: new-instance v4, Ljava/lang/NullPointerException; // type@1a88
+4ac804: 1a05 8cae                              |0056: const-string v5, "key == null" // string@ae8c
+4ac808: 7020 bdd1 5400                         |0058: invoke-direct {v4, v5}, Ljava/lang/NullPointerException;.<init>:(Ljava/lang/String;)V // method@d1bd
+4ac80e: 2704                                   |005b: throw v4
+      catches       : 4
+        0x0003 - 0x001a
+          <any> -> 0x0051
+        0x0023 - 0x0041
+          <any> -> 0x004e
+        0x004f - 0x0050
+          <any> -> 0x004e
+        0x0052 - 0x0053
+          <any> -> 0x0051
+      positions     :
+        0x0002 line=88
+        0x0003 line=89
+        0x000b line=91
+        0x0011 line=92
+        0x0013 line=94
+        0x0019 line=95
+        0x001a line=104
+        0x0022 line=109
+        0x0023 line=110
+        0x0029 line=111
+        0x0031 line=115
+        0x0037 line=117
+        0x0040 line=119
+        0x0044 line=122
+        0x0048 line=125
+        0x004f line=119
+        0x0052 line=95
+        0x0054 line=84
+      locals        :
+        0x0000 - 0x005c reg=4 this Landroidx/collection/LruCache;
+        0x0000 - 0x005c reg=5 (null) Ljava/lang/Object;
+
+    #6              : (in Landroidx/collection/LruCache;)
+      name          : 'hitCount'
+      type          : '()I'
+      access        : 0x20011 (PUBLIC FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+4ac838:                                        |[4ac838] androidx.collection.LruCache.hitCount:()I
+4ac848: 1d01                                   |0000: monitor-enter v1
+4ac84a: 5210 6411                              |0001: iget v0, v1, Landroidx/collection/LruCache;.hitCount:I // field@1164
+4ac84e: 1e01                                   |0003: monitor-exit v1
+4ac850: 0f00                                   |0004: return v0
+4ac852: 0d00                                   |0005: move-exception v0
+4ac854: 1e01                                   |0006: monitor-exit v1
+4ac856: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=307
+      locals        :
+        0x0000 - 0x0008 reg=1 this Landroidx/collection/LruCache;
+
+    #7              : (in Landroidx/collection/LruCache;)
+      name          : 'maxSize'
+      type          : '()I'
+      access        : 0x20011 (PUBLIC FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+4ac86c:                                        |[4ac86c] androidx.collection.LruCache.maxSize:()I
+4ac87c: 1d01                                   |0000: monitor-enter v1
+4ac87e: 5210 6611                              |0001: iget v0, v1, Landroidx/collection/LruCache;.maxSize:I // field@1166
+4ac882: 1e01                                   |0003: monitor-exit v1
+4ac884: 0f00                                   |0004: return v0
+4ac886: 0d00                                   |0005: move-exception v0
+4ac888: 1e01                                   |0006: monitor-exit v1
+4ac88a: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=299
+      locals        :
+        0x0000 - 0x0008 reg=1 this Landroidx/collection/LruCache;
+
+    #8              : (in Landroidx/collection/LruCache;)
+      name          : 'missCount'
+      type          : '()I'
+      access        : 0x20011 (PUBLIC FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+4ac8a0:                                        |[4ac8a0] androidx.collection.LruCache.missCount:()I
+4ac8b0: 1d01                                   |0000: monitor-enter v1
+4ac8b2: 5210 6711                              |0001: iget v0, v1, Landroidx/collection/LruCache;.missCount:I // field@1167
+4ac8b6: 1e01                                   |0003: monitor-exit v1
+4ac8b8: 0f00                                   |0004: return v0
+4ac8ba: 0d00                                   |0005: move-exception v0
+4ac8bc: 1e01                                   |0006: monitor-exit v1
+4ac8be: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=315
+      locals        :
+        0x0000 - 0x0008 reg=1 this Landroidx/collection/LruCache;
+
+    #9              : (in Landroidx/collection/LruCache;)
+      name          : 'put'
+      type          : '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 5
+      insns size    : 61 16-bit code units
+4ac8d4:                                        |[4ac8d4] androidx.collection.LruCache.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+4ac8e4: 3804 3500                              |0000: if-eqz v4, 0035 // +0035
+4ac8e8: 3805 3300                              |0002: if-eqz v5, 0035 // +0033
+4ac8ec: 1d03                                   |0004: monitor-enter v3
+4ac8ee: 5230 6811                              |0005: iget v0, v3, Landroidx/collection/LruCache;.putCount:I // field@1168
+4ac8f2: d800 0001                              |0007: add-int/lit8 v0, v0, #int 1 // #01
+4ac8f6: 5930 6811                              |0009: iput v0, v3, Landroidx/collection/LruCache;.putCount:I // field@1168
+4ac8fa: 5230 6911                              |000b: iget v0, v3, Landroidx/collection/LruCache;.size:I // field@1169
+4ac8fe: 7030 d024 4305                         |000d: invoke-direct {v3, v4, v5}, Landroidx/collection/LruCache;.safeSizeOf:(Ljava/lang/Object;Ljava/lang/Object;)I // method@24d0
+4ac904: 0a01                                   |0010: move-result v1
+4ac906: b010                                   |0011: add-int/2addr v0, v1
+4ac908: 5930 6911                              |0012: iput v0, v3, Landroidx/collection/LruCache;.size:I // field@1169
+4ac90c: 5430 6511                              |0014: iget-object v0, v3, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4ac910: 6e30 add5 4005                         |0016: invoke-virtual {v0, v4, v5}, Ljava/util/LinkedHashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d5ad
+4ac916: 0c00                                   |0019: move-result-object v0
+4ac918: 3800 0b00                              |001a: if-eqz v0, 0025 // +000b
+4ac91c: 5231 6911                              |001c: iget v1, v3, Landroidx/collection/LruCache;.size:I // field@1169
+4ac920: 7030 d024 4300                         |001e: invoke-direct {v3, v4, v0}, Landroidx/collection/LruCache;.safeSizeOf:(Ljava/lang/Object;Ljava/lang/Object;)I // method@24d0
+4ac926: 0a02                                   |0021: move-result v2
+4ac928: b121                                   |0022: sub-int/2addr v1, v2
+4ac92a: 5931 6911                              |0023: iput v1, v3, Landroidx/collection/LruCache;.size:I // field@1169
+4ac92e: 1e03                                   |0025: monitor-exit v3
+4ac930: 3800 0600                              |0026: if-eqz v0, 002c // +0006
+4ac934: 1201                                   |0028: const/4 v1, #int 0 // #0
+4ac936: 6e55 c524 1304                         |0029: invoke-virtual {v3, v1, v4, v0, v5}, Landroidx/collection/LruCache;.entryRemoved:(ZLjava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V // method@24c5
+4ac93c: 5234 6611                              |002c: iget v4, v3, Landroidx/collection/LruCache;.maxSize:I // field@1166
+4ac940: 6e20 d524 4300                         |002e: invoke-virtual {v3, v4}, Landroidx/collection/LruCache;.trimToSize:(I)V // method@24d5
+4ac946: 1100                                   |0031: return-object v0
+4ac948: 0d04                                   |0032: move-exception v4
+4ac94a: 1e03                                   |0033: monitor-exit v3
+4ac94c: 2704                                   |0034: throw v4
+4ac94e: 2203 881a                              |0035: new-instance v3, Ljava/lang/NullPointerException; // type@1a88
+4ac952: 1a04 8dae                              |0037: const-string v4, "key == null || value == null" // string@ae8d
+4ac956: 7020 bdd1 4300                         |0039: invoke-direct {v3, v4}, Ljava/lang/NullPointerException;.<init>:(Ljava/lang/String;)V // method@d1bd
+4ac95c: 2703                                   |003c: throw v3
+      catches       : 2
+        0x0005 - 0x0026
+          <any> -> 0x0032
+        0x0033 - 0x0034
+          <any> -> 0x0032
+      positions     :
+        0x0004 line=143
+        0x0005 line=144
+        0x000b line=145
+        0x0014 line=146
+        0x001c line=148
+        0x0025 line=150
+        0x0029 line=153
+        0x002c line=156
+        0x0033 line=150
+        0x0035 line=139
+      locals        :
+        0x0000 - 0x003d reg=3 this Landroidx/collection/LruCache;
+        0x0000 - 0x003d reg=4 (null) Ljava/lang/Object;
+        0x0000 - 0x003d reg=5 (null) Ljava/lang/Object;
+
+    #10              : (in Landroidx/collection/LruCache;)
+      name          : 'putCount'
+      type          : '()I'
+      access        : 0x20011 (PUBLIC FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+4ac974:                                        |[4ac974] androidx.collection.LruCache.putCount:()I
+4ac984: 1d01                                   |0000: monitor-enter v1
+4ac986: 5210 6811                              |0001: iget v0, v1, Landroidx/collection/LruCache;.putCount:I // field@1168
+4ac98a: 1e01                                   |0003: monitor-exit v1
+4ac98c: 0f00                                   |0004: return v0
+4ac98e: 0d00                                   |0005: move-exception v0
+4ac990: 1e01                                   |0006: monitor-exit v1
+4ac992: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=329
+      locals        :
+        0x0000 - 0x0008 reg=1 this Landroidx/collection/LruCache;
+
+    #11              : (in Landroidx/collection/LruCache;)
+      name          : 'remove'
+      type          : '(Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 5
+      insns size    : 40 16-bit code units
+4ac9a8:                                        |[4ac9a8] androidx.collection.LruCache.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+4ac9b8: 3804 2000                              |0000: if-eqz v4, 0020 // +0020
+4ac9bc: 1d03                                   |0002: monitor-enter v3
+4ac9be: 5430 6511                              |0003: iget-object v0, v3, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4ac9c2: 6e20 afd5 4000                         |0005: invoke-virtual {v0, v4}, Ljava/util/LinkedHashMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5af
+4ac9c8: 0c00                                   |0008: move-result-object v0
+4ac9ca: 3800 0b00                              |0009: if-eqz v0, 0014 // +000b
+4ac9ce: 5231 6911                              |000b: iget v1, v3, Landroidx/collection/LruCache;.size:I // field@1169
+4ac9d2: 7030 d024 4300                         |000d: invoke-direct {v3, v4, v0}, Landroidx/collection/LruCache;.safeSizeOf:(Ljava/lang/Object;Ljava/lang/Object;)I // method@24d0
+4ac9d8: 0a02                                   |0010: move-result v2
+4ac9da: b121                                   |0011: sub-int/2addr v1, v2
+4ac9dc: 5931 6911                              |0012: iput v1, v3, Landroidx/collection/LruCache;.size:I // field@1169
+4ac9e0: 1e03                                   |0014: monitor-exit v3
+4ac9e2: 3800 0700                              |0015: if-eqz v0, 001c // +0007
+4ac9e6: 1201                                   |0017: const/4 v1, #int 0 // #0
+4ac9e8: 1202                                   |0018: const/4 v2, #int 0 // #0
+4ac9ea: 6e52 c524 1304                         |0019: invoke-virtual {v3, v1, v4, v0, v2}, Landroidx/collection/LruCache;.entryRemoved:(ZLjava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V // method@24c5
+4ac9f0: 1100                                   |001c: return-object v0
+4ac9f2: 0d04                                   |001d: move-exception v4
+4ac9f4: 1e03                                   |001e: monitor-exit v3
+4ac9f6: 2704                                   |001f: throw v4
+4ac9f8: 2203 881a                              |0020: new-instance v3, Ljava/lang/NullPointerException; // type@1a88
+4ac9fc: 1a04 8cae                              |0022: const-string v4, "key == null" // string@ae8c
+4aca00: 7020 bdd1 4300                         |0024: invoke-direct {v3, v4}, Ljava/lang/NullPointerException;.<init>:(Ljava/lang/String;)V // method@d1bd
+4aca06: 2703                                   |0027: throw v3
+      catches       : 2
+        0x0003 - 0x0015
+          <any> -> 0x001d
+        0x001e - 0x001f
+          <any> -> 0x001d
+      positions     :
+        0x0002 line=205
+        0x0003 line=206
+        0x000b line=208
+        0x0014 line=210
+        0x0019 line=213
+        0x001e line=210
+        0x0020 line=201
+      locals        :
+        0x0000 - 0x0028 reg=3 this Landroidx/collection/LruCache;
+        0x0000 - 0x0028 reg=4 (null) Ljava/lang/Object;
+
+    #12              : (in Landroidx/collection/LruCache;)
+      name          : 'resize'
+      type          : '(I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 21 16-bit code units
+4aca1c:                                        |[4aca1c] androidx.collection.LruCache.resize:(I)V
+4aca2c: 3d01 0d00                              |0000: if-lez v1, 000d // +000d
+4aca30: 1d00                                   |0002: monitor-enter v0
+4aca32: 5901 6611                              |0003: iput v1, v0, Landroidx/collection/LruCache;.maxSize:I // field@1166
+4aca36: 1e00                                   |0005: monitor-exit v0
+4aca38: 6e20 d524 1000                         |0006: invoke-virtual {v0, v1}, Landroidx/collection/LruCache;.trimToSize:(I)V // method@24d5
+4aca3e: 0e00                                   |0009: return-void
+4aca40: 0d01                                   |000a: move-exception v1
+4aca42: 1e00                                   |000b: monitor-exit v0
+4aca44: 2701                                   |000c: throw v1
+4aca46: 2200 7a1a                              |000d: new-instance v0, Ljava/lang/IllegalArgumentException; // type@1a7a
+4aca4a: 1a01 d0bf                              |000f: const-string v1, "maxSize <= 0" // string@bfd0
+4aca4e: 7020 47d1 1000                         |0011: invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+4aca54: 2700                                   |0014: throw v0
+      catches       : 2
+        0x0003 - 0x0006
+          <any> -> 0x000a
+        0x000b - 0x000c
+          <any> -> 0x000a
+      positions     :
+        0x0002 line=69
+        0x0003 line=70
+        0x0005 line=71
+        0x0006 line=72
+        0x000b line=71
+        0x000d line=66
+      locals        :
+        0x0000 - 0x0015 reg=0 this Landroidx/collection/LruCache;
+        0x0000 - 0x0015 reg=1 (null) I
+
+    #13              : (in Landroidx/collection/LruCache;)
+      name          : 'size'
+      type          : '()I'
+      access        : 0x20011 (PUBLIC FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+4aca6c:                                        |[4aca6c] androidx.collection.LruCache.size:()I
+4aca7c: 1d01                                   |0000: monitor-enter v1
+4aca7e: 5210 6911                              |0001: iget v0, v1, Landroidx/collection/LruCache;.size:I // field@1169
+4aca82: 1e01                                   |0003: monitor-exit v1
+4aca84: 0f00                                   |0004: return v0
+4aca86: 0d00                                   |0005: move-exception v0
+4aca88: 1e01                                   |0006: monitor-exit v1
+4aca8a: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=290
+      locals        :
+        0x0000 - 0x0008 reg=1 this Landroidx/collection/LruCache;
+
+    #14              : (in Landroidx/collection/LruCache;)
+      name          : 'sizeOf'
+      type          : '(Ljava/lang/Object;Ljava/lang/Object;)I'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 0
+      insns size    : 2 16-bit code units
+4acaa0:                                        |[4acaa0] androidx.collection.LruCache.sizeOf:(Ljava/lang/Object;Ljava/lang/Object;)I
+4acab0: 1210                                   |0000: const/4 v0, #int 1 // #1
+4acab2: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #15              : (in Landroidx/collection/LruCache;)
+      name          : 'snapshot'
+      type          : '()Ljava/util/Map;'
+      access        : 0x20011 (PUBLIC FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 13 16-bit code units
+4acab4:                                        |[4acab4] androidx.collection.LruCache.snapshot:()Ljava/util/Map;
+4acac4: 1d02                                   |0000: monitor-enter v2
+4acac6: 2200 4e1b                              |0001: new-instance v0, Ljava/util/LinkedHashMap; // type@1b4e
+4acaca: 5421 6511                              |0003: iget-object v1, v2, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4acace: 7020 a6d5 1000                         |0005: invoke-direct {v0, v1}, Ljava/util/LinkedHashMap;.<init>:(Ljava/util/Map;)V // method@d5a6
+4acad4: 1e02                                   |0008: monitor-exit v2
+4acad6: 1100                                   |0009: return-object v0
+4acad8: 0d00                                   |000a: move-exception v0
+4acada: 1e02                                   |000b: monitor-exit v2
+4acadc: 2700                                   |000c: throw v0
+      catches       : 2
+        0x0001 - 0x0008
+          <any> -> 0x000a
+        0x000b - 0x000c
+          <any> -> 0x000a
+      positions     :
+        0x0001 line=344
+      locals        :
+        0x0000 - 0x000d reg=2 this Landroidx/collection/LruCache;
+
+    #16              : (in Landroidx/collection/LruCache;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x20011 (PUBLIC FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 3
+      insns size    : 52 16-bit code units
+4acaf4:                                        |[4acaf4] androidx.collection.LruCache.toString:()Ljava/lang/String;
+4acb04: 1d06                                   |0000: monitor-enter v6
+4acb06: 5260 6411                              |0001: iget v0, v6, Landroidx/collection/LruCache;.hitCount:I // field@1164
+4acb0a: 5261 6711                              |0003: iget v1, v6, Landroidx/collection/LruCache;.missCount:I // field@1167
+4acb0e: b001                                   |0005: add-int/2addr v1, v0
+4acb10: 3801 0600                              |0006: if-eqz v1, 000c // +0006
+4acb14: da00 0064                              |0008: mul-int/lit8 v0, v0, #int 100 // #64
+4acb18: b310                                   |000a: div-int/2addr v0, v1
+4acb1a: 2802                                   |000b: goto 000d // +0002
+4acb1c: 1200                                   |000c: const/4 v0, #int 0 // #0
+4acb1e: 6201 468a                              |000d: sget-object v1, Ljava/util/Locale;.US:Ljava/util/Locale; // field@8a46
+4acb22: 1a02 0b54                              |000f: const-string v2, "LruCache[maxSize=%d,hits=%d,misses=%d,hitRate=%d%%]" // string@540b
+4acb26: 5263 6611                              |0011: iget v3, v6, Landroidx/collection/LruCache;.maxSize:I // field@1166
+4acb2a: 7110 6bd1 0300                         |0013: invoke-static {v3}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+4acb30: 0c03                                   |0016: move-result-object v3
+4acb32: 5264 6411                              |0017: iget v4, v6, Landroidx/collection/LruCache;.hitCount:I // field@1164
+4acb36: 7110 6bd1 0400                         |0019: invoke-static {v4}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+4acb3c: 0c04                                   |001c: move-result-object v4
+4acb3e: 5265 6711                              |001d: iget v5, v6, Landroidx/collection/LruCache;.missCount:I // field@1167
+4acb42: 7110 6bd1 0500                         |001f: invoke-static {v5}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+4acb48: 0c05                                   |0022: move-result-object v5
+4acb4a: 7110 6bd1 0000                         |0023: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+4acb50: 0c00                                   |0026: move-result-object v0
+4acb52: 2440 ad20 4305                         |0027: filled-new-array {v3, v4, v5, v0}, [Ljava/lang/Object; // type@20ad
+4acb58: 0c00                                   |002a: move-result-object v0
+4acb5a: 7130 06d2 2100                         |002b: invoke-static {v1, v2, v0}, Ljava/lang/String;.format:(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d206
+4acb60: 0c00                                   |002e: move-result-object v0
+4acb62: 1e06                                   |002f: monitor-exit v6
+4acb64: 1100                                   |0030: return-object v0
+4acb66: 0d00                                   |0031: move-exception v0
+4acb68: 1e06                                   |0032: monitor-exit v6
+4acb6a: 2700                                   |0033: throw v0
+      catches       : 2
+        0x0001 - 0x002f
+          <any> -> 0x0031
+        0x0032 - 0x0033
+          <any> -> 0x0031
+      positions     :
+        0x0001 line=348
+        0x000a line=349
+        0x000d line=350
+        0x0013 line=351
+        0x002b line=350
+      locals        :
+        0x0000 - 0x0034 reg=6 this Landroidx/collection/LruCache;
+
+    #17              : (in Landroidx/collection/LruCache;)
+      name          : 'trimToSize'
+      type          : '(I)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 5
+      insns size    : 118 16-bit code units
+4acb80:                                        |[4acb80] androidx.collection.LruCache.trimToSize:(I)V
+4acb90: 1d04                                   |0000: monitor-enter v4
+4acb92: 5240 6911                              |0001: iget v0, v4, Landroidx/collection/LruCache;.size:I // field@1169
+4acb96: 3a00 4f00                              |0003: if-ltz v0, 0052 // +004f
+4acb9a: 5440 6511                              |0005: iget-object v0, v4, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4acb9e: 6e10 abd5 0000                         |0007: invoke-virtual {v0}, Ljava/util/LinkedHashMap;.isEmpty:()Z // method@d5ab
+4acba4: 0a00                                   |000a: move-result v0
+4acba6: 3800 0600                              |000b: if-eqz v0, 0011 // +0006
+4acbaa: 5240 6911                              |000d: iget v0, v4, Landroidx/collection/LruCache;.size:I // field@1169
+4acbae: 3900 4300                              |000f: if-nez v0, 0052 // +0043
+4acbb2: 5240 6911                              |0011: iget v0, v4, Landroidx/collection/LruCache;.size:I // field@1169
+4acbb6: 3750 3d00                              |0013: if-le v0, v5, 0050 // +003d
+4acbba: 5440 6511                              |0015: iget-object v0, v4, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4acbbe: 6e10 abd5 0000                         |0017: invoke-virtual {v0}, Ljava/util/LinkedHashMap;.isEmpty:()Z // method@d5ab
+4acbc4: 0a00                                   |001a: move-result v0
+4acbc6: 3800 0300                              |001b: if-eqz v0, 001e // +0003
+4acbca: 2833                                   |001d: goto 0050 // +0033
+4acbcc: 5440 6511                              |001e: iget-object v0, v4, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4acbd0: 6e10 a9d5 0000                         |0020: invoke-virtual {v0}, Ljava/util/LinkedHashMap;.entrySet:()Ljava/util/Set; // method@d5a9
+4acbd6: 0c00                                   |0023: move-result-object v0
+4acbd8: 7210 32d6 0000                         |0024: invoke-interface {v0}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+4acbde: 0c00                                   |0027: move-result-object v0
+4acbe0: 7210 a1d5 0000                         |0028: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+4acbe6: 0c00                                   |002b: move-result-object v0
+4acbe8: 1f00 551b                              |002c: check-cast v0, Ljava/util/Map$Entry; // type@1b55
+4acbec: 7210 fcd5 0000                         |002e: invoke-interface {v0}, Ljava/util/Map$Entry;.getKey:()Ljava/lang/Object; // method@d5fc
+4acbf2: 0c01                                   |0031: move-result-object v1
+4acbf4: 7210 fdd5 0000                         |0032: invoke-interface {v0}, Ljava/util/Map$Entry;.getValue:()Ljava/lang/Object; // method@d5fd
+4acbfa: 0c00                                   |0035: move-result-object v0
+4acbfc: 5442 6511                              |0036: iget-object v2, v4, Landroidx/collection/LruCache;.map:Ljava/util/LinkedHashMap; // field@1165
+4acc00: 6e20 afd5 1200                         |0038: invoke-virtual {v2, v1}, Ljava/util/LinkedHashMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5af
+4acc06: 5242 6911                              |003b: iget v2, v4, Landroidx/collection/LruCache;.size:I // field@1169
+4acc0a: 7030 d024 1400                         |003d: invoke-direct {v4, v1, v0}, Landroidx/collection/LruCache;.safeSizeOf:(Ljava/lang/Object;Ljava/lang/Object;)I // method@24d0
+4acc10: 0a03                                   |0040: move-result v3
+4acc12: b132                                   |0041: sub-int/2addr v2, v3
+4acc14: 5942 6911                              |0042: iput v2, v4, Landroidx/collection/LruCache;.size:I // field@1169
+4acc18: 5242 6311                              |0044: iget v2, v4, Landroidx/collection/LruCache;.evictionCount:I // field@1163
+4acc1c: 1213                                   |0046: const/4 v3, #int 1 // #1
+4acc1e: b032                                   |0047: add-int/2addr v2, v3
+4acc20: 5942 6311                              |0048: iput v2, v4, Landroidx/collection/LruCache;.evictionCount:I // field@1163
+4acc24: 1e04                                   |004a: monitor-exit v4
+4acc26: 1202                                   |004b: const/4 v2, #int 0 // #0
+4acc28: 6e52 c524 3401                         |004c: invoke-virtual {v4, v3, v1, v0, v2}, Landroidx/collection/LruCache;.entryRemoved:(ZLjava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V // method@24c5
+4acc2e: 28b1                                   |004f: goto 0000 // -004f
+4acc30: 1e04                                   |0050: monitor-exit v4
+4acc32: 0e00                                   |0051: return-void
+4acc34: 2205 7b1a                              |0052: new-instance v5, Ljava/lang/IllegalStateException; // type@1a7b
+4acc38: 2200 991a                              |0054: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+4acc3c: 7010 39d2 0000                         |0056: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+4acc42: 6e10 ccd1 0400                         |0059: invoke-virtual {v4}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@d1cc
+4acc48: 0c01                                   |005c: move-result-object v1
+4acc4a: 6e10 f0d0 0100                         |005d: invoke-virtual {v1}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+4acc50: 0c01                                   |0060: move-result-object v1
+4acc52: 6e20 45d2 1000                         |0061: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4acc58: 0c00                                   |0064: move-result-object v0
+4acc5a: 1a01 fa0f                              |0065: const-string v1, ".sizeOf() is reporting inconsistent results!" // string@0ffa
+4acc5e: 6e20 45d2 1000                         |0067: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+4acc64: 0c00                                   |006a: move-result-object v0
+4acc66: 6e10 58d2 0000                         |006b: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+4acc6c: 0c00                                   |006e: move-result-object v0
+4acc6e: 7020 4cd1 0500                         |006f: invoke-direct {v5, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+4acc74: 2705                                   |0072: throw v5
+4acc76: 0d05                                   |0073: move-exception v5
+4acc78: 1e04                                   |0074: monitor-exit v4
+4acc7a: 2705                                   |0075: throw v5
+      catches       : 2
+        0x0001 - 0x004b
+          <any> -> 0x0073
+        0x0050 - 0x0075
+          <any> -> 0x0073
+      positions     :
+        0x0000 line=171
+        0x0001 line=172
+        0x0011 line=177
+        0x001e line=181
+        0x002e line=182
+        0x0032 line=183
+        0x0036 line=184
+        0x003b line=185
+        0x0044 line=186
+        0x004a line=187
+        0x004c line=189
+        0x0050 line=178
+        0x0052 line=173
+        0x0074 line=187
+      locals        :
+        0x0000 - 0x0076 reg=4 this Landroidx/collection/LruCache;
+        0x0000 - 0x0076 reg=5 (null) I
+
+  source_file_idx   : 21514 (LruCache.java)
+

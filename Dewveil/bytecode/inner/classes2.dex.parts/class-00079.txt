@@ -1,0 +1,314 @@
+Class #79            -
+  Class descriptor  : 'Lokio/GzipSink;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lokio/Sink;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lokio/GzipSink;)
+      name          : 'closed'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lokio/GzipSink;)
+      name          : 'crc'
+      type          : 'Ljava/util/zip/CRC32;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lokio/GzipSink;)
+      name          : 'deflater'
+      type          : 'Ljava/util/zip/Deflater;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Lokio/GzipSink;)
+      name          : 'deflaterSink'
+      type          : 'Lokio/DeflaterSink;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lokio/GzipSink;)
+      name          : 'sink'
+      type          : 'Lokio/BufferedSink;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lokio/GzipSink;)
+      name          : '<init>'
+      type          : '(Lokio/Sink;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 46 16-bit code units
+031c4c:                                        |[031c4c] okio.GzipSink.<init>:(Lokio/Sink;)V
+031c5c: 7010 3502 0300                         |0000: invoke-direct {v3}, Ljava/lang/Object;.<init>:()V // method@0235
+031c62: 2200 0a01                              |0003: new-instance v0, Ljava/util/zip/CRC32; // type@010a
+031c66: 7010 ee02 0000                         |0005: invoke-direct {v0}, Ljava/util/zip/CRC32;.<init>:()V // method@02ee
+031c6c: 5b30 0101                              |0008: iput-object v0, v3, Lokio/GzipSink;.crc:Ljava/util/zip/CRC32; // field@0101
+031c70: 3804 1c00                              |000a: if-eqz v4, 0026 // +001c
+031c74: 2200 0c01                              |000c: new-instance v0, Ljava/util/zip/Deflater; // type@010c
+031c78: 12f1                                   |000e: const/4 v1, #int -1 // #ff
+031c7a: 1212                                   |000f: const/4 v2, #int 1 // #1
+031c7c: 7030 f202 1002                         |0010: invoke-direct {v0, v1, v2}, Ljava/util/zip/Deflater;.<init>:(IZ)V // method@02f2
+031c82: 5b30 0201                              |0013: iput-object v0, v3, Lokio/GzipSink;.deflater:Ljava/util/zip/Deflater; // field@0102
+031c86: 7110 ab05 0400                         |0015: invoke-static {v4}, Lokio/Okio;.buffer:(Lokio/Sink;)Lokio/BufferedSink; // method@05ab
+031c8c: 0c04                                   |0018: move-result-object v4
+031c8e: 5b34 0401                              |0019: iput-object v4, v3, Lokio/GzipSink;.sink:Lokio/BufferedSink; // field@0104
+031c92: 2201 5001                              |001b: new-instance v1, Lokio/DeflaterSink; // type@0150
+031c96: 7030 6105 4100                         |001d: invoke-direct {v1, v4, v0}, Lokio/DeflaterSink;.<init>:(Lokio/BufferedSink;Ljava/util/zip/Deflater;)V // method@0561
+031c9c: 5b31 0301                              |0020: iput-object v1, v3, Lokio/GzipSink;.deflaterSink:Lokio/DeflaterSink; // field@0103
+031ca0: 7010 8905 0300                         |0022: invoke-direct {v3}, Lokio/GzipSink;.writeHeader:()V // method@0589
+031ca6: 0e00                                   |0025: return-void
+031ca8: 2203 af00                              |0026: new-instance v3, Ljava/lang/IllegalArgumentException; // type@00af
+031cac: 1a04 1c0a                              |0028: const-string v4, "sink == null" // string@0a1c
+031cb0: 7020 1b02 4300                         |002a: invoke-direct {v3, v4}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+031cb6: 2703                                   |002d: throw v3
+      catches       : (none)
+      positions     :
+        0x0000 line=56
+        0x0003 line=54
+        0x000c line=58
+        0x0015 line=59
+        0x001b line=60
+        0x0022 line=62
+        0x0026 line=57
+      locals        :
+        0x0000 - 0x002e reg=3 this Lokio/GzipSink;
+        0x0000 - 0x002e reg=4 (null) Lokio/Sink;
+
+    #1              : (in Lokio/GzipSink;)
+      name          : 'updateCrc'
+      type          : '(Lokio/Buffer;J)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 4
+      outs          : 4
+      insns size    : 34 16-bit code units
+031cb8:                                        |[031cb8] okio.GzipSink.updateCrc:(Lokio/Buffer;J)V
+031cc8: 5455 f200                              |0000: iget-object v5, v5, Lokio/Buffer;.head:Lokio/Segment; // field@00f2
+031ccc: 1600 0000                              |0002: const-wide/16 v0, #int 0 // #0
+031cd0: 3100 0600                              |0004: cmp-long v0, v6, v0
+031cd4: 3d00 1b00                              |0006: if-lez v0, 0021 // +001b
+031cd8: 5250 2601                              |0008: iget v0, v5, Lokio/Segment;.limit:I // field@0126
+031cdc: 5251 2901                              |000a: iget v1, v5, Lokio/Segment;.pos:I // field@0129
+031ce0: b110                                   |000c: sub-int/2addr v0, v1
+031ce2: 8100                                   |000d: int-to-long v0, v0
+031ce4: 7140 3002 7610                         |000e: invoke-static {v6, v7, v0, v1}, Ljava/lang/Math;.min:(JJ)J // method@0230
+031cea: 0b00                                   |0011: move-result-wide v0
+031cec: 8400                                   |0012: long-to-int v0, v0
+031cee: 5441 0101                              |0013: iget-object v1, v4, Lokio/GzipSink;.crc:Ljava/util/zip/CRC32; // field@0101
+031cf2: 5452 2501                              |0015: iget-object v2, v5, Lokio/Segment;.data:[B // field@0125
+031cf6: 5253 2901                              |0017: iget v3, v5, Lokio/Segment;.pos:I // field@0129
+031cfa: 6e40 f102 2103                         |0019: invoke-virtual {v1, v2, v3, v0}, Ljava/util/zip/CRC32;.update:([BII)V // method@02f1
+031d00: 8100                                   |001c: int-to-long v0, v0
+031d02: bc06                                   |001d: sub-long/2addr v6, v0
+031d04: 5455 2701                              |001e: iget-object v5, v5, Lokio/Segment;.next:Lokio/Segment; // field@0127
+031d08: 28e2                                   |0020: goto 0002 // -001e
+031d0a: 0e00                                   |0021: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=131
+        0x0008 line=132
+        0x0013 line=133
+        0x001e line=131
+      locals        :
+        0x0000 - 0x0022 reg=4 this Lokio/GzipSink;
+        0x0000 - 0x0022 reg=5 (null) Lokio/Buffer;
+        0x0000 - 0x0022 reg=6 (null) J
+
+    #2              : (in Lokio/GzipSink;)
+      name          : 'writeFooter'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 24 16-bit code units
+031d0c:                                        |[031d0c] okio.GzipSink.writeFooter:()V
+031d1c: 5430 0401                              |0000: iget-object v0, v3, Lokio/GzipSink;.sink:Lokio/BufferedSink; // field@0104
+031d20: 5431 0101                              |0002: iget-object v1, v3, Lokio/GzipSink;.crc:Ljava/util/zip/CRC32; // field@0101
+031d24: 6e10 ef02 0100                         |0004: invoke-virtual {v1}, Ljava/util/zip/CRC32;.getValue:()J // method@02ef
+031d2a: 0b01                                   |0007: move-result-wide v1
+031d2c: 8411                                   |0008: long-to-int v1, v1
+031d2e: 7220 0e05 1000                         |0009: invoke-interface {v0, v1}, Lokio/BufferedSink;.writeIntLe:(I)Lokio/BufferedSink; // method@050e
+031d34: 5430 0401                              |000c: iget-object v0, v3, Lokio/GzipSink;.sink:Lokio/BufferedSink; // field@0104
+031d38: 5433 0201                              |000e: iget-object v3, v3, Lokio/GzipSink;.deflater:Ljava/util/zip/Deflater; // field@0102
+031d3c: 6e10 f702 0300                         |0010: invoke-virtual {v3}, Ljava/util/zip/Deflater;.getTotalIn:()I // method@02f7
+031d42: 0a03                                   |0013: move-result v3
+031d44: 7220 0e05 3000                         |0014: invoke-interface {v0, v3}, Lokio/BufferedSink;.writeIntLe:(I)Lokio/BufferedSink; // method@050e
+031d4a: 0e00                                   |0017: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=125
+        0x000c line=126
+      locals        :
+        0x0000 - 0x0018 reg=3 this Lokio/GzipSink;
+
+    #3              : (in Lokio/GzipSink;)
+      name          : 'writeHeader'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 30 16-bit code units
+031d4c:                                        |[031d4c] okio.GzipSink.writeHeader:()V
+031d5c: 5411 0401                              |0000: iget-object v1, v1, Lokio/GzipSink;.sink:Lokio/BufferedSink; // field@0104
+031d60: 7210 fe04 0100                         |0002: invoke-interface {v1}, Lokio/BufferedSink;.buffer:()Lokio/Buffer; // method@04fe
+031d66: 0c01                                   |0005: move-result-object v1
+031d68: 1300 8b1f                              |0006: const/16 v0, #int 8075 // #1f8b
+031d6c: 6e20 ee04 0100                         |0008: invoke-virtual {v1, v0}, Lokio/Buffer;.writeShort:(I)Lokio/Buffer; // method@04ee
+031d72: 1300 0800                              |000b: const/16 v0, #int 8 // #8
+031d76: 6e20 e004 0100                         |000d: invoke-virtual {v1, v0}, Lokio/Buffer;.writeByte:(I)Lokio/Buffer; // method@04e0
+031d7c: 1200                                   |0010: const/4 v0, #int 0 // #0
+031d7e: 6e20 e004 0100                         |0011: invoke-virtual {v1, v0}, Lokio/Buffer;.writeByte:(I)Lokio/Buffer; // method@04e0
+031d84: 6e20 e604 0100                         |0014: invoke-virtual {v1, v0}, Lokio/Buffer;.writeInt:(I)Lokio/Buffer; // method@04e6
+031d8a: 6e20 e004 0100                         |0017: invoke-virtual {v1, v0}, Lokio/Buffer;.writeByte:(I)Lokio/Buffer; // method@04e0
+031d90: 6e20 e004 0100                         |001a: invoke-virtual {v1, v0}, Lokio/Buffer;.writeByte:(I)Lokio/Buffer; // method@04e0
+031d96: 0e00                                   |001d: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=115
+        0x0008 line=116
+        0x000d line=117
+        0x0011 line=118
+        0x0014 line=119
+        0x0017 line=120
+        0x001a line=121
+      locals        :
+        0x0000 - 0x001e reg=1 this Lokio/GzipSink;
+
+  Virtual methods   -
+    #0              : (in Lokio/GzipSink;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 45 16-bit code units
+031d98:                                        |[031d98] okio.GzipSink.close:()V
+031da8: 5520 0001                              |0000: iget-boolean v0, v2, Lokio/GzipSink;.closed:Z // field@0100
+031dac: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+031db0: 0e00                                   |0004: return-void
+031db2: 5420 0301                              |0005: iget-object v0, v2, Lokio/GzipSink;.deflaterSink:Lokio/DeflaterSink; // field@0103
+031db6: 6e10 6505 0000                         |0007: invoke-virtual {v0}, Lokio/DeflaterSink;.finishDeflate:()V // method@0565
+031dbc: 7010 8805 0200                         |000a: invoke-direct {v2}, Lokio/GzipSink;.writeFooter:()V // method@0588
+031dc2: 1200                                   |000d: const/4 v0, #int 0 // #0
+031dc4: 2802                                   |000e: goto 0010 // +0002
+031dc6: 0d00                                   |000f: move-exception v0
+031dc8: 5421 0201                              |0010: iget-object v1, v2, Lokio/GzipSink;.deflater:Ljava/util/zip/Deflater; // field@0102
+031dcc: 6e10 f502 0100                         |0012: invoke-virtual {v1}, Ljava/util/zip/Deflater;.end:()V // method@02f5
+031dd2: 2805                                   |0015: goto 001a // +0005
+031dd4: 0d01                                   |0016: move-exception v1
+031dd6: 3900 0300                              |0017: if-nez v0, 001a // +0003
+031dda: 0710                                   |0019: move-object v0, v1
+031ddc: 5421 0401                              |001a: iget-object v1, v2, Lokio/GzipSink;.sink:Lokio/BufferedSink; // field@0104
+031de0: 7210 ff04 0100                         |001c: invoke-interface {v1}, Lokio/BufferedSink;.close:()V // method@04ff
+031de6: 2805                                   |001f: goto 0024 // +0005
+031de8: 0d01                                   |0020: move-exception v1
+031dea: 3900 0300                              |0021: if-nez v0, 0024 // +0003
+031dee: 0710                                   |0023: move-object v0, v1
+031df0: 1211                                   |0024: const/4 v1, #int 1 // #1
+031df2: 5c21 0001                              |0025: iput-boolean v1, v2, Lokio/GzipSink;.closed:Z // field@0100
+031df6: 3800 0500                              |0027: if-eqz v0, 002c // +0005
+031dfa: 7110 5006 0000                         |0029: invoke-static {v0}, Lokio/Util;.sneakyRethrow:(Ljava/lang/Throwable;)V // method@0650
+031e00: 0e00                                   |002c: return-void
+      catches       : 3
+        0x0005 - 0x000d
+          <any> -> 0x000f
+        0x0010 - 0x0015
+          <any> -> 0x0016
+        0x001a - 0x001f
+          <any> -> 0x0020
+      positions     :
+        0x0000 line=82
+        0x0005 line=91
+        0x000a line=92
+        0x0010 line=98
+        0x001a line=104
+        0x0025 line=108
+        0x0029 line=110
+      locals        :
+        0x0000 - 0x002d reg=2 this Lokio/GzipSink;
+
+    #1              : (in Lokio/GzipSink;)
+      name          : 'flush'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 6 16-bit code units
+031e24:                                        |[031e24] okio.GzipSink.flush:()V
+031e34: 5400 0301                              |0000: iget-object v0, v0, Lokio/GzipSink;.deflaterSink:Lokio/DeflaterSink; // field@0103
+031e38: 6e10 6605 0000                         |0002: invoke-virtual {v0}, Lokio/DeflaterSink;.flush:()V // method@0566
+031e3e: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=74
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lokio/GzipSink;
+
+    #2              : (in Lokio/GzipSink;)
+      name          : 'timeout'
+      type          : '()Lokio/Timeout;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+031e40:                                        |[031e40] okio.GzipSink.timeout:()Lokio/Timeout;
+031e50: 5400 0401                              |0000: iget-object v0, v0, Lokio/GzipSink;.sink:Lokio/BufferedSink; // field@0104
+031e54: 7210 0405 0000                         |0002: invoke-interface {v0}, Lokio/BufferedSink;.timeout:()Lokio/Timeout; // method@0504
+031e5a: 0c00                                   |0005: move-result-object v0
+031e5c: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=78
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lokio/GzipSink;
+
+    #3              : (in Lokio/GzipSink;)
+      name          : 'write'
+      type          : '(Lokio/Buffer;J)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 4
+      insns size    : 39 16-bit code units
+031e60:                                        |[031e60] okio.GzipSink.write:(Lokio/Buffer;J)V
+031e70: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+031e74: 3100 0400                              |0002: cmp-long v0, v4, v0
+031e78: 3a00 0e00                              |0004: if-ltz v0, 0012 // +000e
+031e7c: 3900 0300                              |0006: if-nez v0, 0009 // +0003
+031e80: 0e00                                   |0008: return-void
+031e82: 7040 8605 3254                         |0009: invoke-direct {v2, v3, v4, v5}, Lokio/GzipSink;.updateCrc:(Lokio/Buffer;J)V // method@0586
+031e88: 5422 0301                              |000c: iget-object v2, v2, Lokio/GzipSink;.deflaterSink:Lokio/DeflaterSink; // field@0103
+031e8c: 6e40 6905 3254                         |000e: invoke-virtual {v2, v3, v4, v5}, Lokio/DeflaterSink;.write:(Lokio/Buffer;J)V // method@0569
+031e92: 0e00                                   |0011: return-void
+031e94: 2202 af00                              |0012: new-instance v2, Ljava/lang/IllegalArgumentException; // type@00af
+031e98: 2203 c600                              |0014: new-instance v3, Ljava/lang/StringBuilder; // type@00c6
+031e9c: 1a00 a305                              |0016: const-string v0, "byteCount < 0: " // string@05a3
+031ea0: 7020 5d02 0300                         |0018: invoke-direct {v3, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@025d
+031ea6: 6e30 6002 4305                         |001b: invoke-virtual {v3, v4, v5}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@0260
+031eac: 0c03                                   |001e: move-result-object v3
+031eae: 6e10 6502 0300                         |001f: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@0265
+031eb4: 0c03                                   |0022: move-result-object v3
+031eb6: 7020 1b02 3200                         |0023: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@021b
+031ebc: 2702                                   |0026: throw v2
+      catches       : (none)
+      positions     :
+        0x0009 line=69
+        0x000c line=70
+        0x0012 line=66
+      locals        :
+        0x0000 - 0x0027 reg=2 this Lokio/GzipSink;
+        0x0000 - 0x0027 reg=3 (null) Lokio/Buffer;
+        0x0000 - 0x0027 reg=4 (null) J
+
+  source_file_idx   : 396 (GzipSink.java)
+

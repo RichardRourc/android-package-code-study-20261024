@@ -1,0 +1,392 @@
+Class #2404            -
+  Class descriptor  : 'Lcom/android/volley/toolbox/NetworkUtility;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/android/volley/toolbox/NetworkUtility;)
+      name          : 'SLOW_REQUEST_THRESHOLD_MS'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 3000
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Lcom/android/volley/toolbox/NetworkUtility;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+5b0e60:                                        |[5b0e60] com.android.volley.toolbox.NetworkUtility.<init>:()V
+5b0e70: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5b0e76: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=48
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lcom/android/volley/toolbox/NetworkUtility;
+
+    #1              : (in Lcom/android/volley/toolbox/NetworkUtility;)
+      name          : 'attemptRetryOnException'
+      type          : '(Lcom/android/volley/Request;Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;)V'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 60 16-bit code units
+5b0e78:                                        |[5b0e78] com.android.volley.toolbox.NetworkUtility.attemptRetryOnException:(Lcom/android/volley/Request;Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;)V
+5b0e88: 6e10 3d5d 0300                         |0000: invoke-virtual {v3}, Lcom/android/volley/Request;.getRetryPolicy:()Lcom/android/volley/RetryPolicy; // method@5d3d
+5b0e8e: 0c00                                   |0003: move-result-object v0
+5b0e90: 6e10 405d 0300                         |0004: invoke-virtual {v3}, Lcom/android/volley/Request;.getTimeoutMs:()I // method@5d40
+5b0e96: 0a01                                   |0007: move-result v1
+5b0e98: 7110 b95e 0400                         |0008: invoke-static {v4}, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;.access$000:(Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;)Lcom/android/volley/VolleyError; // method@5eb9
+5b0e9e: 0c02                                   |000b: move-result-object v2
+5b0ea0: 7220 7e5d 2000                         |000c: invoke-interface {v0, v2}, Lcom/android/volley/RetryPolicy;.retry:(Lcom/android/volley/VolleyError;)V // method@5d7e
+5b0ea6: 7110 ba5e 0400                         |000f: invoke-static {v4}, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;.access$100:(Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;)Ljava/lang/String; // method@5eba
+5b0eac: 0c04                                   |0012: move-result-object v4
+5b0eae: 7110 6bd1 0100                         |0013: invoke-static {v1}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5b0eb4: 0c00                                   |0016: move-result-object v0
+5b0eb6: 2420 ad20 0400                         |0017: filled-new-array {v4, v0}, [Ljava/lang/Object; // type@20ad
+5b0ebc: 0c04                                   |001a: move-result-object v4
+5b0ebe: 1a00 7906                              |001b: const-string v0, "%s-retry [timeout=%s]" // string@0679
+5b0ec2: 7120 05d2 4000                         |001d: invoke-static {v0, v4}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+5b0ec8: 0c04                                   |0020: move-result-object v4
+5b0eca: 6e20 265d 4300                         |0021: invoke-virtual {v3, v4}, Lcom/android/volley/Request;.addMarker:(Ljava/lang/String;)V // method@5d26
+5b0ed0: 0e00                                   |0024: return-void
+5b0ed2: 0d00                                   |0025: move-exception v0
+5b0ed4: 7110 ba5e 0400                         |0026: invoke-static {v4}, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;.access$100:(Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;)Ljava/lang/String; // method@5eba
+5b0eda: 0c04                                   |0029: move-result-object v4
+5b0edc: 7110 6bd1 0100                         |002a: invoke-static {v1}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5b0ee2: 0c01                                   |002d: move-result-object v1
+5b0ee4: 2420 ad20 1400                         |002e: filled-new-array {v4, v1}, [Ljava/lang/Object; // type@20ad
+5b0eea: 0c04                                   |0031: move-result-object v4
+5b0eec: 1a01 7a06                              |0032: const-string v1, "%s-timeout-giveup [timeout=%s]" // string@067a
+5b0ef0: 7120 05d2 4100                         |0034: invoke-static {v1, v4}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+5b0ef6: 0c04                                   |0037: move-result-object v4
+5b0ef8: 6e20 265d 4300                         |0038: invoke-virtual {v3, v4}, Lcom/android/volley/Request;.addMarker:(Ljava/lang/String;)V // method@5d26
+5b0efe: 2700                                   |003b: throw v0
+      catches       : 1
+        0x0008 - 0x000f
+          Lcom/android/volley/VolleyError; -> 0x0025
+      positions     :
+        0x0000 line=125
+        0x0004 line=126
+        0x0008 line=128
+        0x000f line=135
+        0x0026 line=132
+        0x0032 line=131
+        0x0038 line=130
+        0x003b line=133
+      locals        :
+        0x0000 - 0x003c reg=3 (null) Lcom/android/volley/Request;
+        0x0000 - 0x003c reg=4 (null) Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;
+
+    #2              : (in Lcom/android/volley/toolbox/NetworkUtility;)
+      name          : 'getNotModifiedNetworkResponse'
+      type          : '(Lcom/android/volley/Request;JLjava/util/List;)Lcom/android/volley/NetworkResponse;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 15
+      ins           : 4
+      outs          : 7
+      insns size    : 36 16-bit code units
+5b0f10:                                        |[5b0f10] com.android.volley.toolbox.NetworkUtility.getNotModifiedNetworkResponse:(Lcom/android/volley/Request;JLjava/util/List;)Lcom/android/volley/NetworkResponse;
+5b0f20: 6e10 315d 0b00                         |0000: invoke-virtual {v11}, Lcom/android/volley/Request;.getCacheEntry:()Lcom/android/volley/Cache$Entry; // method@5d31
+5b0f26: 0c0b                                   |0003: move-result-object v11
+5b0f28: 390b 0f00                              |0004: if-nez v11, 0013 // +000f
+5b0f2c: 220b 930b                              |0006: new-instance v11, Lcom/android/volley/NetworkResponse; // type@0b93
+5b0f30: 1202                                   |0008: const/4 v2, #int 0 // #0
+5b0f32: 1213                                   |0009: const/4 v3, #int 1 // #1
+5b0f34: 1301 3001                              |000a: const/16 v1, #int 304 // #130
+5b0f38: 07b0                                   |000c: move-object v0, v11
+5b0f3a: 04c4                                   |000d: move-wide v4, v12
+5b0f3c: 07e6                                   |000e: move-object v6, v14
+5b0f3e: 7607 0f5d 0000                         |000f: invoke-direct/range {v0, v1, v2, v3, v4, v5, v6}, Lcom/android/volley/NetworkResponse;.<init>:(I[BZJLjava/util/List;)V // method@5d0f
+5b0f44: 110b                                   |0012: return-object v11
+5b0f46: 7120 245e be00                         |0013: invoke-static {v14, v11}, Lcom/android/volley/toolbox/HttpHeaderParser;.combineHeaders:(Ljava/util/List;Lcom/android/volley/Cache$Entry;)Ljava/util/List; // method@5e24
+5b0f4c: 0c0a                                   |0016: move-result-object v10
+5b0f4e: 220e 930b                              |0017: new-instance v14, Lcom/android/volley/NetworkResponse; // type@0b93
+5b0f52: 54b6 ad42                              |0019: iget-object v6, v11, Lcom/android/volley/Cache$Entry;.data:[B // field@42ad
+5b0f56: 1217                                   |001b: const/4 v7, #int 1 // #1
+5b0f58: 1305 3001                              |001c: const/16 v5, #int 304 // #130
+5b0f5c: 07e4                                   |001e: move-object v4, v14
+5b0f5e: 04c8                                   |001f: move-wide v8, v12
+5b0f60: 7607 0f5d 0400                         |0020: invoke-direct/range {v4, v5, v6, v7, v8, v9, v10}, Lcom/android/volley/NetworkResponse;.<init>:(I[BZJLjava/util/List;)V // method@5d0f
+5b0f66: 110e                                   |0023: return-object v14
+      catches       : (none)
+      positions     :
+        0x0000 line=67
+        0x0006 line=69
+        0x0013 line=77
+        0x0017 line=78
+      locals        :
+        0x0000 - 0x0024 reg=11 (null) Lcom/android/volley/Request;
+        0x0000 - 0x0024 reg=12 (null) J
+        0x0000 - 0x0024 reg=14 (null) Ljava/util/List;
+
+    #3              : (in Lcom/android/volley/toolbox/NetworkUtility;)
+      name          : 'inputStreamToBytes'
+      type          : '(Ljava/io/InputStream;ILcom/android/volley/toolbox/ByteArrayPool;)[B'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 8
+      ins           : 3
+      outs          : 4
+      insns size    : 69 16-bit code units
+5b0f68:                                        |[5b0f68] com.android.volley.toolbox.NetworkUtility.inputStreamToBytes:(Ljava/io/InputStream;ILcom/android/volley/toolbox/ByteArrayPool;)[B
+5b0f78: 1a00 b024                              |0000: const-string v0, "Error occurred when closing InputStream" // string@24b0
+5b0f7c: 2201 e30b                              |0002: new-instance v1, Lcom/android/volley/toolbox/PoolingByteArrayOutputStream; // type@0be3
+5b0f80: 7030 d05e 7106                         |0004: invoke-direct {v1, v7, v6}, Lcom/android/volley/toolbox/PoolingByteArrayOutputStream;.<init>:(Lcom/android/volley/toolbox/ByteArrayPool;I)V // method@5ed0
+5b0f86: 1306 0004                              |0007: const/16 v6, #int 1024 // #400
+5b0f8a: 1202                                   |0009: const/4 v2, #int 0 // #0
+5b0f8c: 6e20 e25d 6700                         |000a: invoke-virtual {v7, v6}, Lcom/android/volley/toolbox/ByteArrayPool;.getBuf:(I)[B // method@5de2
+5b0f92: 0c06                                   |000d: move-result-object v6
+5b0f94: 6e20 22d0 6500                         |000e: invoke-virtual {v5, v6}, Ljava/io/InputStream;.read:([B)I // method@d022
+5b0f9a: 0a03                                   |0011: move-result v3
+5b0f9c: 12f4                                   |0012: const/4 v4, #int -1 // #ff
+5b0f9e: 3243 0600                              |0013: if-eq v3, v4, 0019 // +0006
+5b0fa2: 6e40 d65e 6132                         |0015: invoke-virtual {v1, v6, v2, v3}, Lcom/android/volley/toolbox/PoolingByteArrayOutputStream;.write:([BII)V // method@5ed6
+5b0fa8: 28f6                                   |0018: goto 000e // -000a
+5b0faa: 6e10 d45e 0100                         |0019: invoke-virtual {v1}, Lcom/android/volley/toolbox/PoolingByteArrayOutputStream;.toByteArray:()[B // method@5ed4
+5b0fb0: 0c03                                   |001c: move-result-object v3
+5b0fb2: 3805 0b00                              |001d: if-eqz v5, 0028 // +000b
+5b0fb6: 6e10 1ed0 0500                         |001f: invoke-virtual {v5}, Ljava/io/InputStream;.close:()V // method@d01e
+5b0fbc: 2806                                   |0022: goto 0028 // +0006
+5b0fbe: 2325 ad20                              |0023: new-array v5, v2, [Ljava/lang/Object; // type@20ad
+5b0fc2: 7120 995d 5000                         |0025: invoke-static {v0, v5}, Lcom/android/volley/VolleyLog;.v:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5d99
+5b0fc8: 6e20 e35d 6700                         |0028: invoke-virtual {v7, v6}, Lcom/android/volley/toolbox/ByteArrayPool;.returnBuf:([B)V // method@5de3
+5b0fce: 6e10 d15e 0100                         |002b: invoke-virtual {v1}, Lcom/android/volley/toolbox/PoolingByteArrayOutputStream;.close:()V // method@5ed1
+5b0fd4: 1103                                   |002e: return-object v3
+5b0fd6: 0d03                                   |002f: move-exception v3
+5b0fd8: 2803                                   |0030: goto 0033 // +0003
+5b0fda: 0d03                                   |0031: move-exception v3
+5b0fdc: 1206                                   |0032: const/4 v6, #int 0 // #0
+5b0fde: 3805 0b00                              |0033: if-eqz v5, 003e // +000b
+5b0fe2: 6e10 1ed0 0500                         |0035: invoke-virtual {v5}, Ljava/io/InputStream;.close:()V // method@d01e
+5b0fe8: 2806                                   |0038: goto 003e // +0006
+5b0fea: 2325 ad20                              |0039: new-array v5, v2, [Ljava/lang/Object; // type@20ad
+5b0fee: 7120 995d 5000                         |003b: invoke-static {v0, v5}, Lcom/android/volley/VolleyLog;.v:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5d99
+5b0ff4: 6e20 e35d 6700                         |003e: invoke-virtual {v7, v6}, Lcom/android/volley/toolbox/ByteArrayPool;.returnBuf:([B)V // method@5de3
+5b0ffa: 6e10 d15e 0100                         |0041: invoke-virtual {v1}, Lcom/android/volley/toolbox/PoolingByteArrayOutputStream;.close:()V // method@5ed1
+5b1000: 2703                                   |0044: throw v3
+      catches       : 4
+        0x000a - 0x000e
+          <any> -> 0x0031
+        0x000e - 0x001d
+          <any> -> 0x002f
+        0x001f - 0x0022
+          Ljava/io/IOException; -> 0x0023
+        0x0035 - 0x0038
+          Ljava/io/IOException; -> 0x0039
+      positions     :
+        0x0000 line=89
+        0x000a line=92
+        0x000e line=94
+        0x0015 line=95
+        0x0019 line=97
+        0x001f line=102
+        0x0023 line=107
+        0x0028 line=109
+        0x002b line=110
+        0x0035 line=102
+        0x0039 line=107
+        0x003e line=109
+        0x0041 line=110
+      locals        :
+        0x0000 - 0x0045 reg=5 (null) Ljava/io/InputStream;
+        0x0000 - 0x0045 reg=6 (null) I
+        0x0000 - 0x0045 reg=7 (null) Lcom/android/volley/toolbox/ByteArrayPool;
+
+    #4              : (in Lcom/android/volley/toolbox/NetworkUtility;)
+      name          : 'logSlowRequests'
+      type          : '(JLcom/android/volley/Request;[BI)V'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 7
+      ins           : 5
+      outs          : 2
+      insns size    : 50 16-bit code units
+5b1034:                                        |[5b1034] com.android.volley.toolbox.NetworkUtility.logSlowRequests:(JLcom/android/volley/Request;[BI)V
+5b1044: 6300 1d43                              |0000: sget-boolean v0, Lcom/android/volley/VolleyLog;.DEBUG:Z // field@431d
+5b1048: 3900 0800                              |0002: if-nez v0, 000a // +0008
+5b104c: 1600 b80b                              |0004: const-wide/16 v0, #int 3000 // #bb8
+5b1050: 3100 0200                              |0006: cmp-long v0, v2, v0
+5b1054: 3d00 2900                              |0008: if-lez v0, 0031 // +0029
+5b1058: 7120 82d1 3200                         |000a: invoke-static {v2, v3}, Ljava/lang/Long;.valueOf:(J)Ljava/lang/Long; // method@d182
+5b105e: 0c02                                   |000d: move-result-object v2
+5b1060: 3805 0800                              |000e: if-eqz v5, 0016 // +0008
+5b1064: 2153                                   |0010: array-length v3, v5
+5b1066: 7110 6bd1 0300                         |0011: invoke-static {v3}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5b106c: 0c03                                   |0014: move-result-object v3
+5b106e: 2803                                   |0015: goto 0018 // +0003
+5b1070: 1a03 38c4                              |0016: const-string v3, "null" // string@c438
+5b1074: 7110 6bd1 0600                         |0018: invoke-static {v6}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5b107a: 0c05                                   |001b: move-result-object v5
+5b107c: 6e10 3d5d 0400                         |001c: invoke-virtual {v4}, Lcom/android/volley/Request;.getRetryPolicy:()Lcom/android/volley/RetryPolicy; // method@5d3d
+5b1082: 0c06                                   |001f: move-result-object v6
+5b1084: 7210 7c5d 0600                         |0020: invoke-interface {v6}, Lcom/android/volley/RetryPolicy;.getCurrentRetryCount:()I // method@5d7c
+5b108a: 0a06                                   |0023: move-result v6
+5b108c: 7110 6bd1 0600                         |0024: invoke-static {v6}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5b1092: 0c06                                   |0027: move-result-object v6
+5b1094: 2456 ad20 2453                         |0028: filled-new-array {v4, v2, v3, v5, v6}, [Ljava/lang/Object; // type@20ad
+5b109a: 0c02                                   |002b: move-result-object v2
+5b109c: 1a03 542a                              |002c: const-string v3, "HTTP response for request=<%s> [lifetime=%d], [size=%s], [rc=%d], [retryCount=%s]" // string@2a54
+5b10a0: 7120 955d 2300                         |002e: invoke-static {v3, v2}, Lcom/android/volley/VolleyLog;.d:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5d95
+5b10a6: 0e00                                   |0031: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=53
+        0x000a line=58
+        0x0010 line=59
+        0x0018 line=60
+        0x001c line=61
+        0x002c line=54
+      locals        :
+        0x0000 - 0x0032 reg=2 (null) J
+        0x0000 - 0x0032 reg=4 (null) Lcom/android/volley/Request;
+        0x0000 - 0x0032 reg=5 (null) [B
+        0x0000 - 0x0032 reg=6 (null) I
+
+    #5              : (in Lcom/android/volley/toolbox/NetworkUtility;)
+      name          : 'shouldRetryException'
+      type          : '(Lcom/android/volley/Request;Ljava/io/IOException;JLcom/android/volley/toolbox/HttpResponse;[B)Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 15
+      ins           : 6
+      outs          : 7
+      insns size    : 199 16-bit code units
+5b10a8:                                        |[5b10a8] com.android.volley.toolbox.NetworkUtility.shouldRetryException:(Lcom/android/volley/Request;Ljava/io/IOException;JLcom/android/volley/toolbox/HttpResponse;[B)Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;
+5b10b8: 20a0 da1a                              |0000: instance-of v0, v10, Ljava/net/SocketTimeoutException; // type@1ada
+5b10bc: 1201                                   |0002: const/4 v1, #int 0 // #0
+5b10be: 3800 0f00                              |0003: if-eqz v0, 0012 // +000f
+5b10c2: 2209 df0b                              |0005: new-instance v9, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo; // type@0bdf
+5b10c6: 220a a90b                              |0007: new-instance v10, Lcom/android/volley/TimeoutError; // type@0ba9
+5b10ca: 7010 815d 0a00                         |0009: invoke-direct {v10}, Lcom/android/volley/TimeoutError;.<init>:()V // method@5d81
+5b10d0: 1a0b 8fdd                              |000c: const-string v11, "socket" // string@dd8f
+5b10d4: 7040 b85e b91a                         |000e: invoke-direct {v9, v11, v10, v1}, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;.<init>:(Ljava/lang/String;Lcom/android/volley/VolleyError;Lcom/android/volley/toolbox/NetworkUtility$1;)V // method@5eb8
+5b10da: 1109                                   |0011: return-object v9
+5b10dc: 20a0 cf1a                              |0012: instance-of v0, v10, Ljava/net/MalformedURLException; // type@1acf
+5b10e0: 3900 9a00                              |0014: if-nez v0, 00ae // +009a
+5b10e4: 380d 7f00                              |0016: if-eqz v13, 0095 // +007f
+5b10e8: 6e10 355e 0d00                         |0018: invoke-virtual {v13}, Lcom/android/volley/toolbox/HttpResponse;.getStatusCode:()I // method@5e35
+5b10ee: 0a0a                                   |001b: move-result v10
+5b10f0: 7110 6bd1 0a00                         |001c: invoke-static {v10}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+5b10f6: 0c00                                   |001f: move-result-object v0
+5b10f8: 6e10 425d 0900                         |0020: invoke-virtual {v9}, Lcom/android/volley/Request;.getUrl:()Ljava/lang/String; // method@5d42
+5b10fe: 0c02                                   |0023: move-result-object v2
+5b1100: 2420 ad20 2000                         |0024: filled-new-array {v0, v2}, [Ljava/lang/Object; // type@20ad
+5b1106: 0c00                                   |0027: move-result-object v0
+5b1108: 1a02 d36a                              |0028: const-string v2, "Unexpected response code %d for %s" // string@6ad3
+5b110c: 7120 965d 0200                         |002a: invoke-static {v2, v0}, Lcom/android/volley/VolleyLog;.e:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5d96
+5b1112: 380e 5b00                              |002d: if-eqz v14, 0088 // +005b
+5b1116: 6e10 345e 0d00                         |002f: invoke-virtual {v13}, Lcom/android/volley/toolbox/HttpResponse;.getHeaders:()Ljava/util/List; // method@5e34
+5b111c: 0c08                                   |0032: move-result-object v8
+5b111e: 220d 930b                              |0033: new-instance v13, Lcom/android/volley/NetworkResponse; // type@0b93
+5b1122: 7100 d906 0000                         |0035: invoke-static {}, Landroid/os/SystemClock;.elapsedRealtime:()J // method@06d9
+5b1128: 0b02                                   |0038: move-result-wide v2
+5b112a: 9c06 020b                              |0039: sub-long v6, v2, v11
+5b112e: 1205                                   |003b: const/4 v5, #int 0 // #0
+5b1130: 07d2                                   |003c: move-object v2, v13
+5b1132: 01a3                                   |003d: move v3, v10
+5b1134: 07e4                                   |003e: move-object v4, v14
+5b1136: 7607 0f5d 0200                         |003f: invoke-direct/range {v2, v3, v4, v5, v6, v7, v8}, Lcom/android/volley/NetworkResponse;.<init>:(I[BZJLjava/util/List;)V // method@5d0f
+5b113c: 130b 9101                              |0042: const/16 v11, #int 401 // #191
+5b1140: 32ba 3700                              |0044: if-eq v10, v11, 007b // +0037
+5b1144: 130b 9301                              |0046: const/16 v11, #int 403 // #193
+5b1148: 33ba 0300                              |0048: if-ne v10, v11, 004b // +0003
+5b114c: 2831                                   |004a: goto 007b // +0031
+5b114e: 130b 9001                              |004b: const/16 v11, #int 400 // #190
+5b1152: 34ba 0d00                              |004d: if-lt v10, v11, 005a // +000d
+5b1156: 130b f301                              |004f: const/16 v11, #int 499 // #1f3
+5b115a: 37ba 0300                              |0051: if-le v10, v11, 0054 // +0003
+5b115e: 2807                                   |0053: goto 005a // +0007
+5b1160: 2209 8a0b                              |0054: new-instance v9, Lcom/android/volley/ClientError; // type@0b8a
+5b1164: 7020 e85c d900                         |0056: invoke-direct {v9, v13}, Lcom/android/volley/ClientError;.<init>:(Lcom/android/volley/NetworkResponse;)V // method@5ce8
+5b116a: 2709                                   |0059: throw v9
+5b116c: 130b f401                              |005a: const/16 v11, #int 500 // #1f4
+5b1170: 34ba 1900                              |005c: if-lt v10, v11, 0075 // +0019
+5b1174: 130b 5702                              |005e: const/16 v11, #int 599 // #257
+5b1178: 36ba 1500                              |0060: if-gt v10, v11, 0075 // +0015
+5b117c: 6e10 565d 0900                         |0062: invoke-virtual {v9}, Lcom/android/volley/Request;.shouldRetryServerErrors:()Z // method@5d56
+5b1182: 0a09                                   |0065: move-result v9
+5b1184: 3809 0f00                              |0066: if-eqz v9, 0075 // +000f
+5b1188: 2209 df0b                              |0068: new-instance v9, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo; // type@0bdf
+5b118c: 220a a80b                              |006a: new-instance v10, Lcom/android/volley/ServerError; // type@0ba8
+5b1190: 7020 805d da00                         |006c: invoke-direct {v10, v13}, Lcom/android/volley/ServerError;.<init>:(Lcom/android/volley/NetworkResponse;)V // method@5d80
+5b1196: 1a0b 82d3                              |006f: const-string v11, "server" // string@d382
+5b119a: 7040 b85e b91a                         |0071: invoke-direct {v9, v11, v10, v1}, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;.<init>:(Ljava/lang/String;Lcom/android/volley/VolleyError;Lcom/android/volley/toolbox/NetworkUtility$1;)V // method@5eb8
+5b11a0: 1109                                   |0074: return-object v9
+5b11a2: 2209 a80b                              |0075: new-instance v9, Lcom/android/volley/ServerError; // type@0ba8
+5b11a6: 7020 805d d900                         |0077: invoke-direct {v9, v13}, Lcom/android/volley/ServerError;.<init>:(Lcom/android/volley/NetworkResponse;)V // method@5d80
+5b11ac: 2709                                   |007a: throw v9
+5b11ae: 2209 df0b                              |007b: new-instance v9, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo; // type@0bdf
+5b11b2: 220a 840b                              |007d: new-instance v10, Lcom/android/volley/AuthFailureError; // type@0b84
+5b11b6: 7020 cb5c da00                         |007f: invoke-direct {v10, v13}, Lcom/android/volley/AuthFailureError;.<init>:(Lcom/android/volley/NetworkResponse;)V // method@5ccb
+5b11bc: 1a0b c381                              |0082: const-string v11, "auth" // string@81c3
+5b11c0: 7040 b85e b91a                         |0084: invoke-direct {v9, v11, v10, v1}, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;.<init>:(Ljava/lang/String;Lcom/android/volley/VolleyError;Lcom/android/volley/toolbox/NetworkUtility$1;)V // method@5eb8
+5b11c6: 1109                                   |0087: return-object v9
+5b11c8: 2209 df0b                              |0088: new-instance v9, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo; // type@0bdf
+5b11cc: 220a 920b                              |008a: new-instance v10, Lcom/android/volley/NetworkError; // type@0b92
+5b11d0: 7010 095d 0a00                         |008c: invoke-direct {v10}, Lcom/android/volley/NetworkError;.<init>:()V // method@5d09
+5b11d6: 1a0b a2c2                              |008f: const-string v11, "network" // string@c2a2
+5b11da: 7040 b85e b91a                         |0091: invoke-direct {v9, v11, v10, v1}, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;.<init>:(Ljava/lang/String;Lcom/android/volley/VolleyError;Lcom/android/volley/toolbox/NetworkUtility$1;)V // method@5eb8
+5b11e0: 1109                                   |0094: return-object v9
+5b11e2: 6e10 555d 0900                         |0095: invoke-virtual {v9}, Lcom/android/volley/Request;.shouldRetryConnectionErrors:()Z // method@5d55
+5b11e8: 0a09                                   |0098: move-result v9
+5b11ea: 3809 0f00                              |0099: if-eqz v9, 00a8 // +000f
+5b11ee: 2209 df0b                              |009b: new-instance v9, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo; // type@0bdf
+5b11f2: 220a 940b                              |009d: new-instance v10, Lcom/android/volley/NoConnectionError; // type@0b94
+5b11f6: 7010 145d 0a00                         |009f: invoke-direct {v10}, Lcom/android/volley/NoConnectionError;.<init>:()V // method@5d14
+5b11fc: 1a0b 3789                              |00a2: const-string v11, "connection" // string@8937
+5b1200: 7040 b85e b91a                         |00a4: invoke-direct {v9, v11, v10, v1}, Lcom/android/volley/toolbox/NetworkUtility$RetryInfo;.<init>:(Ljava/lang/String;Lcom/android/volley/VolleyError;Lcom/android/volley/toolbox/NetworkUtility$1;)V // method@5eb8
+5b1206: 1109                                   |00a7: return-object v9
+5b1208: 2209 940b                              |00a8: new-instance v9, Lcom/android/volley/NoConnectionError; // type@0b94
+5b120c: 7020 155d a900                         |00aa: invoke-direct {v9, v10}, Lcom/android/volley/NoConnectionError;.<init>:(Ljava/lang/Throwable;)V // method@5d15
+5b1212: 2709                                   |00ad: throw v9
+5b1214: 220b 901a                              |00ae: new-instance v11, Ljava/lang/RuntimeException; // type@1a90
+5b1218: 220c 991a                              |00b0: new-instance v12, Ljava/lang/StringBuilder; // type@1a99
+5b121c: 1a0d 0a18                              |00b2: const-string v13, "Bad URL " // string@180a
+5b1220: 7020 3cd2 dc00                         |00b4: invoke-direct {v12, v13}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5b1226: 6e10 425d 0900                         |00b7: invoke-virtual {v9}, Lcom/android/volley/Request;.getUrl:()Ljava/lang/String; // method@5d42
+5b122c: 0c09                                   |00ba: move-result-object v9
+5b122e: 6e20 45d2 9c00                         |00bb: invoke-virtual {v12, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5b1234: 0c09                                   |00be: move-result-object v9
+5b1236: 6e10 58d2 0900                         |00bf: invoke-virtual {v9}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5b123c: 0c09                                   |00c2: move-result-object v9
+5b123e: 7030 dad1 9b0a                         |00c3: invoke-direct {v11, v9, v10}, Ljava/lang/RuntimeException;.<init>:(Ljava/lang/String;Ljava/lang/Throwable;)V // method@d1da
+5b1244: 270b                                   |00c6: throw v11
+      catches       : (none)
+      positions     :
+        0x0000 line=161
+        0x0005 line=162
+        0x0012 line=163
+        0x0018 line=168
+        0x001c line=175
+        0x002f line=179
+        0x0033 line=180
+        0x0035 line=185
+        0x0054 line=193
+        0x0062 line=196
+        0x0068 line=197
+        0x0075 line=201
+        0x007b line=189
+        0x0088 line=203
+        0x0095 line=170
+        0x009b line=171
+        0x00a8 line=173
+        0x00ae line=164
+      locals        :
+        0x0000 - 0x00c7 reg=9 (null) Lcom/android/volley/Request;
+        0x0000 - 0x00c7 reg=10 (null) Ljava/io/IOException;
+        0x0000 - 0x00c7 reg=11 (null) J
+        0x0000 - 0x00c7 reg=13 (null) Lcom/android/volley/toolbox/HttpResponse;
+        0x0000 - 0x00c7 reg=14 (null) [B
+
+  Virtual methods   -
+  source_file_idx   : 22562 (NetworkUtility.java)
+

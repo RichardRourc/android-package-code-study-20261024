@@ -1,0 +1,1697 @@
+Class #3124            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;'
+  Access flags      : 0x0401 (PUBLIC ABSTRACT)
+  Superclass        : 'Lcom/fasterxml/jackson/databind/ser/std/StdSerializer;'
+  Interfaces        -
+    #0              : 'Lcom/fasterxml/jackson/databind/ser/ContextualSerializer;'
+    #1              : 'Lcom/fasterxml/jackson/databind/ser/ResolvableSerializer;'
+    #2              : 'Lcom/fasterxml/jackson/databind/jsonFormatVisitors/JsonFormatVisitable;'
+    #3              : 'Lcom/fasterxml/jackson/databind/jsonschema/SchemaAware;'
+  Static fields     -
+    #0              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'NAME_FOR_OBJECT_REF'
+      type          : 'Lcom/fasterxml/jackson/databind/PropertyName;'
+      access        : 0x001c (PROTECTED STATIC FINAL)
+    #1              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'NO_PROPS'
+      type          : '[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;'
+      access        : 0x001c (PROTECTED STATIC FINAL)
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_anyGetterWriter'
+      type          : 'Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #1              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_beanType'
+      type          : 'Lcom/fasterxml/jackson/databind/JavaType;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #2              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_filteredProps'
+      type          : '[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #3              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_objectIdWriter'
+      type          : 'Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #4              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_propertyFilterId'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #5              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_props'
+      type          : '[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #6              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_serializationShape'
+      type          : 'Lcom/fasterxml/jackson/annotation/JsonFormat$Shape;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #7              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_typeId'
+      type          : 'Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;'
+      access        : 0x0014 (PROTECTED FINAL)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 2
+      insns size    : 15 16-bit code units
+647b64:                                        |[647b64] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.<clinit>:()V
+647b74: 2200 e00c                              |0000: new-instance v0, Lcom/fasterxml/jackson/databind/PropertyName; // type@0ce0
+647b78: 1a01 2705                              |0002: const-string v1, "#object-ref" // string@0527
+647b7c: 7020 4271 1000                         |0004: invoke-direct {v0, v1}, Lcom/fasterxml/jackson/databind/PropertyName;.<init>:(Ljava/lang/String;)V // method@7142
+647b82: 6900 2450                              |0007: sput-object v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.NAME_FOR_OBJECT_REF:Lcom/fasterxml/jackson/databind/PropertyName; // field@5024
+647b86: 1200                                   |0009: const/4 v0, #int 0 // #0
+647b88: 2300 3b20                              |000a: new-array v0, v0, [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // type@203b
+647b8c: 6900 2550                              |000c: sput-object v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.NO_PROPS:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5025
+647b90: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=45
+        0x000a line=47
+      locals        :
+
+    #1              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/ser/BeanSerializerBuilder;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 2
+      insns size    : 62 16-bit code units
+647b94:                                        |[647b94] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.<init>:(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/ser/BeanSerializerBuilder;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)V
+647ba4: 7020 988b 1000                         |0000: invoke-direct {v0, v1}, Lcom/fasterxml/jackson/databind/ser/std/StdSerializer;.<init>:(Lcom/fasterxml/jackson/databind/JavaType;)V // method@8b98
+647baa: 5b01 2750                              |0003: iput-object v1, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+647bae: 5b03 2c50                              |0005: iput-object v3, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+647bb2: 5b04 2850                              |0007: iput-object v4, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+647bb6: 1201                                   |0009: const/4 v1, #int 0 // #0
+647bb8: 3902 0d00                              |000a: if-nez v2, 0017 // +000d
+647bbc: 5b01 2e50                              |000c: iput-object v1, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeId:Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // field@502e
+647bc0: 5b01 2650                              |000e: iput-object v1, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+647bc4: 5b01 2b50                              |0010: iput-object v1, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+647bc8: 5b01 2a50                              |0012: iput-object v1, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+647bcc: 5b01 2d50                              |0014: iput-object v1, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializationShape:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@502d
+647bd0: 2827                                   |0016: goto 003d // +0027
+647bd2: 6e10 ba86 0200                         |0017: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/ser/BeanSerializerBuilder;.getTypeId:()Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // method@86ba
+647bd8: 0c03                                   |001a: move-result-object v3
+647bda: 5b03 2e50                              |001b: iput-object v3, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeId:Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // field@502e
+647bde: 6e10 b386 0200                         |001d: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/ser/BeanSerializerBuilder;.getAnyGetter:()Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // method@86b3
+647be4: 0c03                                   |0020: move-result-object v3
+647be6: 5b03 2650                              |0021: iput-object v3, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+647bea: 6e10 b686 0200                         |0023: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/ser/BeanSerializerBuilder;.getFilterId:()Ljava/lang/Object; // method@86b6
+647bf0: 0c03                                   |0026: move-result-object v3
+647bf2: 5b03 2b50                              |0027: iput-object v3, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+647bf6: 6e10 b886 0200                         |0029: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/ser/BeanSerializerBuilder;.getObjectIdWriter:()Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // method@86b8
+647bfc: 0c03                                   |002c: move-result-object v3
+647bfe: 5b03 2a50                              |002d: iput-object v3, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+647c02: 6e10 b486 0200                         |002f: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/ser/BeanSerializerBuilder;.getBeanDescription:()Lcom/fasterxml/jackson/databind/BeanDescription; // method@86b4
+647c08: 0c02                                   |0032: move-result-object v2
+647c0a: 6e20 1a6c 1200                         |0033: invoke-virtual {v2, v1}, Lcom/fasterxml/jackson/databind/BeanDescription;.findExpectedFormat:(Lcom/fasterxml/jackson/annotation/JsonFormat$Value;)Lcom/fasterxml/jackson/annotation/JsonFormat$Value; // method@6c1a
+647c10: 0c01                                   |0036: move-result-object v1
+647c12: 6e10 665f 0100                         |0037: invoke-virtual {v1}, Lcom/fasterxml/jackson/annotation/JsonFormat$Value;.getShape:()Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // method@5f66
+647c18: 0c01                                   |003a: move-result-object v1
+647c1a: 5b01 2d50                              |003b: iput-object v1, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializationShape:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@502d
+647c1e: 0e00                                   |003d: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=116
+        0x0003 line=117
+        0x0005 line=118
+        0x0007 line=119
+        0x000c line=123
+        0x000e line=124
+        0x0010 line=125
+        0x0012 line=126
+        0x0014 line=127
+        0x0017 line=129
+        0x001d line=130
+        0x0023 line=131
+        0x0029 line=132
+        0x002f line=133
+        0x0037 line=134
+      locals        :
+        0x0000 - 0x003e reg=0 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x003e reg=1 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x003e reg=2 (null) Lcom/fasterxml/jackson/databind/ser/BeanSerializerBuilder;
+        0x0000 - 0x003e reg=3 (null) [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;
+        0x0000 - 0x003e reg=4 (null) [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;
+
+    #2              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 8 16-bit code units
+647c20:                                        |[647c20] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)V
+647c30: 5430 2c50                              |0000: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+647c34: 5431 2850                              |0002: iget-object v1, v3, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+647c38: 7040 f788 3210                         |0004: invoke-direct {v2, v3, v0, v1}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)V // method@88f7
+647c3e: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=296
+      locals        :
+        0x0000 - 0x0008 reg=2 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0008 reg=3 (null) Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+
+    #3              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 4
+      insns size    : 6 16-bit code units
+647c40:                                        |[647c40] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;)V
+647c50: 5420 2b50                              |0000: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+647c54: 7040 f388 2103                         |0002: invoke-direct {v1, v2, v3, v0}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;Ljava/lang/Object;)V // method@88f3
+647c5a: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=156
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0006 reg=2 (null) Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0006 reg=3 (null) Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;
+
+    #4              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;Ljava/lang/Object;)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 2
+      insns size    : 34 16-bit code units
+647c5c:                                        |[647c5c] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;Ljava/lang/Object;)V
+647c6c: 5420 2950                              |0000: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._handledType:Ljava/lang/Class; // field@5029
+647c70: 7020 9a8b 0100                         |0002: invoke-direct {v1, v0}, Lcom/fasterxml/jackson/databind/ser/std/StdSerializer;.<init>:(Ljava/lang/Class;)V // method@8b9a
+647c76: 5420 2750                              |0005: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+647c7a: 5b10 2750                              |0007: iput-object v0, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+647c7e: 5420 2c50                              |0009: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+647c82: 5b10 2c50                              |000b: iput-object v0, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+647c86: 5420 2850                              |000d: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+647c8a: 5b10 2850                              |000f: iput-object v0, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+647c8e: 5420 2e50                              |0011: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeId:Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // field@502e
+647c92: 5b10 2e50                              |0013: iput-object v0, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeId:Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // field@502e
+647c96: 5420 2650                              |0015: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+647c9a: 5b10 2650                              |0017: iput-object v0, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+647c9e: 5b13 2a50                              |0019: iput-object v3, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+647ca2: 5b14 2b50                              |001b: iput-object v4, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+647ca6: 5422 2d50                              |001d: iget-object v2, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializationShape:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@502d
+647caa: 5b12 2d50                              |001f: iput-object v2, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializationShape:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@502d
+647cae: 0e00                                   |0021: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=165
+        0x0005 line=166
+        0x0009 line=167
+        0x000d line=168
+        0x0011 line=170
+        0x0015 line=171
+        0x0019 line=172
+        0x001b line=173
+        0x001d line=174
+      locals        :
+        0x0000 - 0x0022 reg=1 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0022 reg=2 (null) Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0022 reg=3 (null) Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;
+        0x0000 - 0x0022 reg=4 (null) Ljava/lang/Object;
+
+    #5              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Lcom/fasterxml/jackson/databind/util/NameTransformer;)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 4
+      insns size    : 16 16-bit code units
+647cb0:                                        |[647cb0] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Lcom/fasterxml/jackson/databind/util/NameTransformer;)V
+647cc0: 5430 2c50                              |0000: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+647cc4: 7120 0889 4000                         |0002: invoke-static {v0, v4}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.rename:([Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;Lcom/fasterxml/jackson/databind/util/NameTransformer;)[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // method@8908
+647cca: 0c00                                   |0005: move-result-object v0
+647ccc: 5431 2850                              |0006: iget-object v1, v3, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+647cd0: 7120 0889 4100                         |0008: invoke-static {v1, v4}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.rename:([Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;Lcom/fasterxml/jackson/databind/util/NameTransformer;)[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // method@8908
+647cd6: 0c04                                   |000b: move-result-object v4
+647cd8: 7040 f788 3240                         |000c: invoke-direct {v2, v3, v0, v4}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)V // method@88f7
+647cde: 0e00                                   |000f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=304
+      locals        :
+        0x0000 - 0x0010 reg=2 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0010 reg=3 (null) Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0010 reg=4 (null) Lcom/fasterxml/jackson/databind/util/NameTransformer;
+
+    #6              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Ljava/util/Set;)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 4
+      insns size    : 5 16-bit code units
+647ce0:                                        |[647ce0] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Ljava/util/Set;)V
+647cf0: 1200                                   |0000: const/4 v0, #int 0 // #0
+647cf2: 7040 f688 2103                         |0001: invoke-direct {v1, v2, v3, v0}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Ljava/util/Set;Ljava/util/Set;)V // method@88f6
+647cf8: 0e00                                   |0004: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=185
+      locals        :
+        0x0000 - 0x0005 reg=1 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0005 reg=2 (null) Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0005 reg=3 (null) Ljava/util/Set;
+
+    #7              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Ljava/util/Set;Ljava/util/Set;)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 13
+      ins           : 4
+      outs          : 3
+      insns size    : 111 16-bit code units
+647cfc:                                        |[647cfc] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Ljava/util/Set;Ljava/util/Set;)V
+647d0c: 54a0 2950                              |0000: iget-object v0, v10, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._handledType:Ljava/lang/Class; // field@5029
+647d10: 7020 9a8b 0900                         |0002: invoke-direct {v9, v0}, Lcom/fasterxml/jackson/databind/ser/std/StdSerializer;.<init>:(Ljava/lang/Class;)V // method@8b9a
+647d16: 54a0 2750                              |0005: iget-object v0, v10, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+647d1a: 5b90 2750                              |0007: iput-object v0, v9, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+647d1e: 54a0 2c50                              |0009: iget-object v0, v10, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+647d22: 54a1 2850                              |000b: iget-object v1, v10, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+647d26: 2102                                   |000d: array-length v2, v0
+647d28: 2203 3a1b                              |000e: new-instance v3, Ljava/util/ArrayList; // type@1b3a
+647d2c: 7020 a0d4 2300                         |0010: invoke-direct {v3, v2}, Ljava/util/ArrayList;.<init>:(I)V // method@d4a0
+647d32: 1204                                   |0013: const/4 v4, #int 0 // #0
+647d34: 3901 0400                              |0014: if-nez v1, 0018 // +0004
+647d38: 0745                                   |0016: move-object v5, v4
+647d3a: 2806                                   |0017: goto 001d // +0006
+647d3c: 2205 3a1b                              |0018: new-instance v5, Ljava/util/ArrayList; // type@1b3a
+647d40: 7020 a0d4 2500                         |001a: invoke-direct {v5, v2}, Ljava/util/ArrayList;.<init>:(I)V // method@d4a0
+647d46: 1206                                   |001d: const/4 v6, #int 0 // #0
+647d48: 3526 1c00                              |001e: if-ge v6, v2, 003a // +001c
+647d4c: 4607 0006                              |0020: aget-object v7, v0, v6
+647d50: 6e10 7e86 0700                         |0022: invoke-virtual {v7}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getName:()Ljava/lang/String; // method@867e
+647d56: 0c08                                   |0025: move-result-object v8
+647d58: 7130 bc8e b80c                         |0026: invoke-static {v8, v11, v12}, Lcom/fasterxml/jackson/databind/util/IgnorePropertiesUtil;.shouldIgnore:(Ljava/lang/Object;Ljava/util/Collection;Ljava/util/Collection;)Z // method@8ebc
+647d5e: 0a08                                   |0029: move-result v8
+647d60: 3808 0300                              |002a: if-eqz v8, 002d // +0003
+647d64: 280b                                   |002c: goto 0037 // +000b
+647d66: 6e20 a3d4 7300                         |002d: invoke-virtual {v3, v7}, Ljava/util/ArrayList;.add:(Ljava/lang/Object;)Z // method@d4a3
+647d6c: 3801 0700                              |0030: if-eqz v1, 0037 // +0007
+647d70: 4607 0106                              |0032: aget-object v7, v1, v6
+647d74: 6e20 a3d4 7500                         |0034: invoke-virtual {v5, v7}, Ljava/util/ArrayList;.add:(Ljava/lang/Object;)Z // method@d4a3
+647d7a: d806 0601                              |0037: add-int/lit8 v6, v6, #int 1 // #01
+647d7e: 28e5                                   |0039: goto 001e // -001b
+647d80: 6e10 b4d4 0300                         |003a: invoke-virtual {v3}, Ljava/util/ArrayList;.size:()I // method@d4b4
+647d86: 0a0b                                   |003d: move-result v11
+647d88: 23bb 3b20                              |003e: new-array v11, v11, [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // type@203b
+647d8c: 6e20 b7d4 b300                         |0040: invoke-virtual {v3, v11}, Ljava/util/ArrayList;.toArray:([Ljava/lang/Object;)[Ljava/lang/Object; // method@d4b7
+647d92: 0c0b                                   |0043: move-result-object v11
+647d94: 1f0b 3b20                              |0044: check-cast v11, [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // type@203b
+647d98: 5b9b 2c50                              |0046: iput-object v11, v9, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+647d9c: 3905 0300                              |0048: if-nez v5, 004b // +0003
+647da0: 280e                                   |004a: goto 0058 // +000e
+647da2: 6e10 b4d4 0500                         |004b: invoke-virtual {v5}, Ljava/util/ArrayList;.size:()I // method@d4b4
+647da8: 0a0b                                   |004e: move-result v11
+647daa: 23bb 3b20                              |004f: new-array v11, v11, [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // type@203b
+647dae: 6e20 b7d4 b500                         |0051: invoke-virtual {v5, v11}, Ljava/util/ArrayList;.toArray:([Ljava/lang/Object;)[Ljava/lang/Object; // method@d4b7
+647db4: 0c0b                                   |0054: move-result-object v11
+647db6: 07b4                                   |0055: move-object v4, v11
+647db8: 1f04 3b20                              |0056: check-cast v4, [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // type@203b
+647dbc: 5b94 2850                              |0058: iput-object v4, v9, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+647dc0: 54ab 2e50                              |005a: iget-object v11, v10, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeId:Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // field@502e
+647dc4: 5b9b 2e50                              |005c: iput-object v11, v9, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeId:Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // field@502e
+647dc8: 54ab 2650                              |005e: iget-object v11, v10, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+647dcc: 5b9b 2650                              |0060: iput-object v11, v9, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+647dd0: 54ab 2a50                              |0062: iget-object v11, v10, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+647dd4: 5b9b 2a50                              |0064: iput-object v11, v9, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+647dd8: 54ab 2b50                              |0066: iget-object v11, v10, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+647ddc: 5b9b 2b50                              |0068: iput-object v11, v9, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+647de0: 54aa 2d50                              |006a: iget-object v10, v10, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializationShape:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@502d
+647de4: 5b9a 2d50                              |006c: iput-object v10, v9, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializationShape:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@502d
+647de8: 0e00                                   |006e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=190
+        0x0005 line=192
+        0x0009 line=193
+        0x000b line=194
+        0x000d line=195
+        0x000e line=197
+        0x0018 line=198
+        0x0020 line=201
+        0x0022 line=203
+        0x002d line=206
+        0x0032 line=208
+        0x003a line=211
+        0x004b line=212
+        0x005a line=214
+        0x005e line=215
+        0x0062 line=216
+        0x0066 line=217
+        0x006a line=218
+      locals        :
+        0x0000 - 0x006f reg=9 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x006f reg=10 (null) Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x006f reg=11 (null) Ljava/util/Set;
+        0x0000 - 0x006f reg=12 (null) Ljava/util/Set;
+
+    #8              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 2
+      insns size    : 34 16-bit code units
+647dec:                                        |[647dec] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)V
+647dfc: 5420 2950                              |0000: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._handledType:Ljava/lang/Class; // field@5029
+647e00: 7020 9a8b 0100                         |0002: invoke-direct {v1, v0}, Lcom/fasterxml/jackson/databind/ser/std/StdSerializer;.<init>:(Ljava/lang/Class;)V // method@8b9a
+647e06: 5420 2750                              |0005: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+647e0a: 5b10 2750                              |0007: iput-object v0, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+647e0e: 5b13 2c50                              |0009: iput-object v3, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+647e12: 5b14 2850                              |000b: iput-object v4, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+647e16: 5423 2e50                              |000d: iget-object v3, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeId:Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // field@502e
+647e1a: 5b13 2e50                              |000f: iput-object v3, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeId:Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // field@502e
+647e1e: 5423 2650                              |0011: iget-object v3, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+647e22: 5b13 2650                              |0013: iput-object v3, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+647e26: 5423 2a50                              |0015: iget-object v3, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+647e2a: 5b13 2a50                              |0017: iput-object v3, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+647e2e: 5423 2b50                              |0019: iget-object v3, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+647e32: 5b13 2b50                              |001b: iput-object v3, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+647e36: 5422 2d50                              |001d: iget-object v2, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializationShape:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@502d
+647e3a: 5b12 2d50                              |001f: iput-object v2, v1, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializationShape:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@502d
+647e3e: 0e00                                   |0021: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=141
+        0x0005 line=142
+        0x0009 line=143
+        0x000b line=144
+        0x000d line=146
+        0x0011 line=147
+        0x0015 line=148
+        0x0019 line=149
+        0x001d line=150
+      locals        :
+        0x0000 - 0x0022 reg=1 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0022 reg=2 (null) Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0022 reg=3 (null) [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;
+        0x0000 - 0x0022 reg=4 (null) [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;
+
+    #9              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;[Ljava/lang/String;)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 4
+      insns size    : 9 16-bit code units
+647e40:                                        |[647e40] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;[Ljava/lang/String;)V
+647e50: 7110 ee8d 0300                         |0000: invoke-static {v3}, Lcom/fasterxml/jackson/databind/util/ArrayBuilders;.arrayToSet:([Ljava/lang/Object;)Ljava/util/HashSet; // method@8dee
+647e56: 0c03                                   |0003: move-result-object v3
+647e58: 1200                                   |0004: const/4 v0, #int 0 // #0
+647e5a: 7040 f688 2103                         |0005: invoke-direct {v1, v2, v3, v0}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.<init>:(Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;Ljava/util/Set;Ljava/util/Set;)V // method@88f6
+647e60: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=180
+      locals        :
+        0x0000 - 0x0009 reg=1 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0009 reg=2 (null) Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0009 reg=3 (null) [Ljava/lang/String;
+
+    #10              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'rename'
+      type          : '([Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;Lcom/fasterxml/jackson/databind/util/NameTransformer;)[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 2
+      insns size    : 33 16-bit code units
+647e64:                                        |[647e64] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.rename:([Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;Lcom/fasterxml/jackson/databind/util/NameTransformer;)[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;
+647e74: 3804 2000                              |0000: if-eqz v4, 0020 // +0020
+647e78: 2140                                   |0002: array-length v0, v4
+647e7a: 3800 1d00                              |0003: if-eqz v0, 0020 // +001d
+647e7e: 3805 1b00                              |0005: if-eqz v5, 0020 // +001b
+647e82: 6200 9051                              |0007: sget-object v0, Lcom/fasterxml/jackson/databind/util/NameTransformer;.NOP:Lcom/fasterxml/jackson/databind/util/NameTransformer; // field@5190
+647e86: 3305 0300                              |0009: if-ne v5, v0, 000c // +0003
+647e8a: 2815                                   |000b: goto 0020 // +0015
+647e8c: 2140                                   |000c: array-length v0, v4
+647e8e: 2301 3b20                              |000d: new-array v1, v0, [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // type@203b
+647e92: 1202                                   |000f: const/4 v2, #int 0 // #0
+647e94: 3502 0f00                              |0010: if-ge v2, v0, 001f // +000f
+647e98: 4603 0402                              |0012: aget-object v3, v4, v2
+647e9c: 3803 0800                              |0014: if-eqz v3, 001c // +0008
+647ea0: 6e20 8e86 5300                         |0016: invoke-virtual {v3, v5}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.rename:(Lcom/fasterxml/jackson/databind/util/NameTransformer;)Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // method@868e
+647ea6: 0c03                                   |0019: move-result-object v3
+647ea8: 4d03 0102                              |001a: aput-object v3, v1, v2
+647eac: d802 0201                              |001c: add-int/lit8 v2, v2, #int 1 // #01
+647eb0: 28f2                                   |001e: goto 0010 // -000e
+647eb2: 1101                                   |001f: return-object v1
+647eb4: 1104                                   |0020: return-object v4
+      catches       : (none)
+      positions     :
+        0x0002 line=310
+        0x000c line=313
+        0x000d line=314
+        0x0012 line=316
+        0x0016 line=318
+      locals        :
+        0x0000 - 0x0021 reg=4 (null) [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;
+        0x0000 - 0x0021 reg=5 (null) Lcom/fasterxml/jackson/databind/util/NameTransformer;
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_customTypeId'
+      type          : '(Ljava/lang/Object;)Ljava/lang/String;'
+      access        : 0x0014 (PROTECTED FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 23 16-bit code units
+647eb8:                                        |[647eb8] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase._customTypeId:(Ljava/lang/Object;)Ljava/lang/String;
+647ec8: 5400 2e50                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeId:Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // field@502e
+647ecc: 6e20 157e 1000                         |0002: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;.getValue:(Ljava/lang/Object;)Ljava/lang/Object; // method@7e15
+647ed2: 0c00                                   |0005: move-result-object v0
+647ed4: 3900 0500                              |0006: if-nez v0, 000b // +0005
+647ed8: 1a00 0000                              |0008: const-string v0, "" // string@0000
+647edc: 1100                                   |000a: return-object v0
+647ede: 2001 971a                              |000b: instance-of v1, v0, Ljava/lang/String; // type@1a97
+647ee2: 3801 0500                              |000d: if-eqz v1, 0012 // +0005
+647ee6: 1f00 971a                              |000f: check-cast v0, Ljava/lang/String; // type@1a97
+647eea: 2805                                   |0011: goto 0016 // +0005
+647eec: 6e10 d0d1 0000                         |0012: invoke-virtual {v0}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@d1d0
+647ef2: 0c00                                   |0015: move-result-object v0
+647ef4: 1100                                   |0016: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=747
+        0x0008 line=749
+        0x000b line=751
+      locals        :
+        0x0000 - 0x0017 reg=0 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0017 reg=1 (null) Ljava/lang/Object;
+
+    #1              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_serializeObjectId'
+      type          : '(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 8
+      ins           : 6
+      outs          : 4
+      insns size    : 32 16-bit code units
+647ef8:                                        |[647ef8] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase._serializeObjectId:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId;)V
+647f08: 5420 2a50                              |0000: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+647f0c: 6201 dc44                              |0002: sget-object v1, Lcom/fasterxml/jackson/core/JsonToken;.START_OBJECT:Lcom/fasterxml/jackson/core/JsonToken; // field@44dc
+647f10: 6e40 fd88 6213                         |0004: invoke-virtual {v2, v6, v3, v1}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeIdDef:(Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonToken;)Lcom/fasterxml/jackson/core/type/WritableTypeId; // method@88fd
+647f16: 0c01                                   |0007: move-result-object v1
+647f18: 6e30 4382 4601                         |0008: invoke-virtual {v6, v4, v1}, Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;.writeTypePrefix:(Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/core/type/WritableTypeId;)Lcom/fasterxml/jackson/core/type/WritableTypeId; // method@8243
+647f1e: 6e20 9161 3400                         |000b: invoke-virtual {v4, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.setCurrentValue:(Ljava/lang/Object;)V // method@6191
+647f24: 6e40 bd88 4705                         |000e: invoke-virtual {v7, v4, v5, v0}, Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId;.writeAsField:(Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;)V // method@88bd
+647f2a: 5427 2b50                              |0011: iget-object v7, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+647f2e: 3807 0600                              |0013: if-eqz v7, 0019 // +0006
+647f32: 6e40 0c89 3254                         |0015: invoke-virtual {v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.serializeFieldsFiltered:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@890c
+647f38: 2804                                   |0018: goto 001c // +0004
+647f3a: 6e40 0b89 3254                         |0019: invoke-virtual {v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.serializeFields:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@890b
+647f40: 6e30 4a82 4601                         |001c: invoke-virtual {v6, v4, v1}, Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;.writeTypeSuffix:(Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/core/type/WritableTypeId;)Lcom/fasterxml/jackson/core/type/WritableTypeId; // method@824a
+647f46: 0e00                                   |001f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=713
+        0x0002 line=714
+        0x0008 line=716
+        0x000b line=718
+        0x000e line=719
+        0x0011 line=720
+        0x0015 line=721
+        0x0019 line=723
+        0x001c line=725
+      locals        :
+        0x0000 - 0x0020 reg=2 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0020 reg=3 (null) Ljava/lang/Object;
+        0x0000 - 0x0020 reg=4 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0020 reg=5 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+        0x0000 - 0x0020 reg=6 (null) Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;
+        0x0000 - 0x0020 reg=7 (null) Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId;
+
+    #2              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_serializeWithObjectId'
+      type          : '(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;)V'
+      access        : 0x0014 (PROTECTED FINAL)
+      code          -
+      registers     : 13
+      ins           : 5
+      outs          : 6
+      insns size    : 38 16-bit code units
+647f48:                                        |[647f48] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase._serializeWithObjectId:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;)V
+647f58: 5480 2a50                              |0000: iget-object v0, v8, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+647f5c: 5401 cc4f                              |0002: iget-object v1, v0, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.generator:Lcom/fasterxml/jackson/annotation/ObjectIdGenerator; // field@4fcc
+647f60: 6e30 2f72 9b01                         |0004: invoke-virtual {v11, v9, v1}, Lcom/fasterxml/jackson/databind/SerializerProvider;.findObjectId:(Ljava/lang/Object;Lcom/fasterxml/jackson/annotation/ObjectIdGenerator;)Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId; // method@722f
+647f66: 0c07                                   |0007: move-result-object v7
+647f68: 6e40 be88 a70b                         |0008: invoke-virtual {v7, v10, v11, v0}, Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId;.writeAsId:(Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;)Z // method@88be
+647f6e: 0a01                                   |000b: move-result v1
+647f70: 3801 0300                              |000c: if-eqz v1, 000f // +0003
+647f74: 0e00                                   |000e: return-void
+647f76: 6e20 bc88 9700                         |000f: invoke-virtual {v7, v9}, Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId;.generateId:(Ljava/lang/Object;)Ljava/lang/Object; // method@88bc
+647f7c: 0c01                                   |0012: move-result-object v1
+647f7e: 5502 cb4f                              |0013: iget-boolean v2, v0, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.alwaysAsId:Z // field@4fcb
+647f82: 3802 0800                              |0015: if-eqz v2, 001d // +0008
+647f86: 5408 cf4f                              |0017: iget-object v8, v0, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.serializer:Lcom/fasterxml/jackson/databind/JsonSerializer; // field@4fcf
+647f8a: 6e40 816e 18ba                         |0019: invoke-virtual {v8, v1, v10, v11}, Lcom/fasterxml/jackson/databind/JsonSerializer;.serialize:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@6e81
+647f90: 0e00                                   |001c: return-void
+647f92: 0782                                   |001d: move-object v2, v8
+647f94: 0793                                   |001e: move-object v3, v9
+647f96: 07a4                                   |001f: move-object v4, v10
+647f98: 07b5                                   |0020: move-object v5, v11
+647f9a: 07c6                                   |0021: move-object v6, v12
+647f9c: 7406 fa88 0200                         |0022: invoke-virtual/range {v2, v3, v4, v5, v6, v7}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializeObjectId:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId;)V // method@88fa
+647fa2: 0e00                                   |0025: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=694
+        0x0002 line=695
+        0x0008 line=697
+        0x000f line=701
+        0x0013 line=702
+        0x0017 line=703
+        0x0022 line=706
+      locals        :
+        0x0000 - 0x0026 reg=8 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0026 reg=9 (null) Ljava/lang/Object;
+        0x0000 - 0x0026 reg=10 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0026 reg=11 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+        0x0000 - 0x0026 reg=12 (null) Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;
+
+    #3              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_serializeWithObjectId'
+      type          : '(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Z)V'
+      access        : 0x0014 (PROTECTED FINAL)
+      code          -
+      registers     : 9
+      ins           : 5
+      outs          : 4
+      insns size    : 54 16-bit code units
+647fa4:                                        |[647fa4] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase._serializeWithObjectId:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Z)V
+647fb4: 5440 2a50                              |0000: iget-object v0, v4, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+647fb8: 5401 cc4f                              |0002: iget-object v1, v0, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.generator:Lcom/fasterxml/jackson/annotation/ObjectIdGenerator; // field@4fcc
+647fbc: 6e30 2f72 5701                         |0004: invoke-virtual {v7, v5, v1}, Lcom/fasterxml/jackson/databind/SerializerProvider;.findObjectId:(Ljava/lang/Object;Lcom/fasterxml/jackson/annotation/ObjectIdGenerator;)Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId; // method@722f
+647fc2: 0c01                                   |0007: move-result-object v1
+647fc4: 6e40 be88 6107                         |0008: invoke-virtual {v1, v6, v7, v0}, Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId;.writeAsId:(Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;)Z // method@88be
+647fca: 0a02                                   |000b: move-result v2
+647fcc: 3802 0300                              |000c: if-eqz v2, 000f // +0003
+647fd0: 0e00                                   |000e: return-void
+647fd2: 6e20 bc88 5100                         |000f: invoke-virtual {v1, v5}, Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId;.generateId:(Ljava/lang/Object;)Ljava/lang/Object; // method@88bc
+647fd8: 0c02                                   |0012: move-result-object v2
+647fda: 5503 cb4f                              |0013: iget-boolean v3, v0, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.alwaysAsId:Z // field@4fcb
+647fde: 3803 0800                              |0015: if-eqz v3, 001d // +0008
+647fe2: 5404 cf4f                              |0017: iget-object v4, v0, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.serializer:Lcom/fasterxml/jackson/databind/JsonSerializer; // field@4fcf
+647fe6: 6e40 816e 2476                         |0019: invoke-virtual {v4, v2, v6, v7}, Lcom/fasterxml/jackson/databind/JsonSerializer;.serialize:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@6e81
+647fec: 0e00                                   |001c: return-void
+647fee: 3808 0500                              |001d: if-eqz v8, 0022 // +0005
+647ff2: 6e20 d561 5600                         |001f: invoke-virtual {v6, v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:(Ljava/lang/Object;)V // method@61d5
+647ff8: 6e40 bd88 6107                         |0022: invoke-virtual {v1, v6, v7, v0}, Lcom/fasterxml/jackson/databind/ser/impl/WritableObjectId;.writeAsField:(Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;)V // method@88bd
+647ffe: 5440 2b50                              |0025: iget-object v0, v4, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+648002: 3800 0600                              |0027: if-eqz v0, 002d // +0006
+648006: 6e40 0c89 5476                         |0029: invoke-virtual {v4, v5, v6, v7}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.serializeFieldsFiltered:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@890c
+64800c: 2804                                   |002c: goto 0030 // +0004
+64800e: 6e40 0b89 5476                         |002d: invoke-virtual {v4, v5, v6, v7}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.serializeFields:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@890b
+648014: 3808 0500                              |0030: if-eqz v8, 0035 // +0005
+648018: 6e10 a861 0600                         |0032: invoke-virtual {v6}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndObject:()V // method@61a8
+64801e: 0e00                                   |0035: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=665
+        0x0002 line=666
+        0x0008 line=668
+        0x000f line=672
+        0x0013 line=673
+        0x0017 line=674
+        0x001f line=678
+        0x0022 line=680
+        0x0025 line=681
+        0x0029 line=682
+        0x002d line=684
+        0x0032 line=687
+      locals        :
+        0x0000 - 0x0036 reg=4 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0036 reg=5 (null) Ljava/lang/Object;
+        0x0000 - 0x0036 reg=6 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0036 reg=7 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+        0x0000 - 0x0036 reg=8 (null) Z
+
+    #4              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : '_typeIdDef'
+      type          : '(Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonToken;)Lcom/fasterxml/jackson/core/type/WritableTypeId;'
+      access        : 0x0014 (PROTECTED FINAL)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 4
+      insns size    : 22 16-bit code units
+648020:                                        |[648020] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase._typeIdDef:(Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonToken;)Lcom/fasterxml/jackson/core/type/WritableTypeId;
+648030: 5400 2e50                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeId:Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // field@502e
+648034: 3900 0700                              |0002: if-nez v0, 0009 // +0007
+648038: 6e30 3a82 2103                         |0004: invoke-virtual {v1, v2, v3}, Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;.typeId:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonToken;)Lcom/fasterxml/jackson/core/type/WritableTypeId; // method@823a
+64803e: 0c00                                   |0007: move-result-object v0
+648040: 1100                                   |0008: return-object v0
+648042: 6e20 157e 2000                         |0009: invoke-virtual {v0, v2}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;.getValue:(Ljava/lang/Object;)Ljava/lang/Object; // method@7e15
+648048: 0c00                                   |000c: move-result-object v0
+64804a: 3900 0400                              |000d: if-nez v0, 0011 // +0004
+64804e: 1a00 0000                              |000f: const-string v0, "" // string@0000
+648052: 6e40 3b82 2103                         |0011: invoke-virtual {v1, v2, v3, v0}, Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;.typeId:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonToken;Ljava/lang/Object;)Lcom/fasterxml/jackson/core/type/WritableTypeId; // method@823b
+648058: 0c00                                   |0014: move-result-object v0
+64805a: 1100                                   |0015: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=733
+        0x0004 line=734
+        0x0009 line=736
+        0x000f line=739
+        0x0011 line=741
+      locals        :
+        0x0000 - 0x0016 reg=0 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0016 reg=1 (null) Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;
+        0x0000 - 0x0016 reg=2 (null) Ljava/lang/Object;
+        0x0000 - 0x0016 reg=3 (null) Lcom/fasterxml/jackson/core/JsonToken;
+
+    #5              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'acceptJsonFormatVisitor'
+      type          : '(Lcom/fasterxml/jackson/databind/jsonFormatVisitors/JsonFormatVisitorWrapper;Lcom/fasterxml/jackson/databind/JavaType;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 4
+      insns size    : 77 16-bit code units
+64805c:                                        |[64805c] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.acceptJsonFormatVisitor:(Lcom/fasterxml/jackson/databind/jsonFormatVisitors/JsonFormatVisitorWrapper;Lcom/fasterxml/jackson/databind/JavaType;)V
+64806c: 3905 0300                              |0000: if-nez v5, 0003 // +0003
+648070: 0e00                                   |0002: return-void
+648072: 7220 8d81 6500                         |0003: invoke-interface {v5, v6}, Lcom/fasterxml/jackson/databind/jsonFormatVisitors/JsonFormatVisitorWrapper;.expectObjectFormat:(Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/jsonFormatVisitors/JsonObjectFormatVisitor; // method@818d
+648078: 0c06                                   |0006: move-result-object v6
+64807a: 3906 0300                              |0007: if-nez v6, 000a // +0003
+64807e: 0e00                                   |0009: return-void
+648080: 7210 8f81 0500                         |000a: invoke-interface {v5}, Lcom/fasterxml/jackson/databind/jsonFormatVisitors/JsonFormatVisitorWrapper;.getProvider:()Lcom/fasterxml/jackson/databind/SerializerProvider; // method@818f
+648086: 0c00                                   |000d: move-result-object v0
+648088: 5441 2b50                              |000e: iget-object v1, v4, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+64808c: 1202                                   |0010: const/4 v2, #int 0 // #0
+64808e: 1203                                   |0011: const/4 v3, #int 0 // #0
+648090: 3801 1b00                              |0012: if-eqz v1, 002d // +001b
+648094: 7210 8f81 0500                         |0014: invoke-interface {v5}, Lcom/fasterxml/jackson/databind/jsonFormatVisitors/JsonFormatVisitorWrapper;.getProvider:()Lcom/fasterxml/jackson/databind/SerializerProvider; // method@818f
+64809a: 0c05                                   |0017: move-result-object v5
+64809c: 5441 2b50                              |0018: iget-object v1, v4, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+6480a0: 6e40 0489 5431                         |001a: invoke-virtual {v4, v5, v1, v3}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.findPropertyFilter:(Lcom/fasterxml/jackson/databind/SerializerProvider;Ljava/lang/Object;Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/ser/PropertyFilter; // method@8904
+6480a6: 0c05                                   |001d: move-result-object v5
+6480a8: 5441 2c50                              |001e: iget-object v1, v4, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+6480ac: 2111                                   |0020: array-length v1, v1
+6480ae: 3512 2b00                              |0021: if-ge v2, v1, 004c // +002b
+6480b2: 5443 2c50                              |0023: iget-object v3, v4, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+6480b6: 4603 0302                              |0025: aget-object v3, v3, v2
+6480ba: 7240 3987 3506                         |0027: invoke-interface {v5, v3, v6, v0}, Lcom/fasterxml/jackson/databind/ser/PropertyFilter;.depositSchemaProperty:(Lcom/fasterxml/jackson/databind/ser/PropertyWriter;Lcom/fasterxml/jackson/databind/jsonFormatVisitors/JsonObjectFormatVisitor;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@8739
+6480c0: d802 0201                              |002a: add-int/lit8 v2, v2, #int 1 // #01
+6480c4: 28f5                                   |002c: goto 0021 // -000b
+6480c6: 5445 2850                              |002d: iget-object v5, v4, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+6480ca: 3805 0900                              |002f: if-eqz v5, 0038 // +0009
+6480ce: 3900 0300                              |0031: if-nez v0, 0034 // +0003
+6480d2: 2805                                   |0033: goto 0038 // +0005
+6480d4: 6e10 3972 0000                         |0034: invoke-virtual {v0}, Lcom/fasterxml/jackson/databind/SerializerProvider;.getActiveView:()Ljava/lang/Class; // method@7239
+6480da: 0c03                                   |0037: move-result-object v3
+6480dc: 3803 0500                              |0038: if-eqz v3, 003d // +0005
+6480e0: 5444 2850                              |003a: iget-object v4, v4, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+6480e4: 2803                                   |003c: goto 003f // +0003
+6480e6: 5444 2c50                              |003d: iget-object v4, v4, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+6480ea: 2145                                   |003f: array-length v5, v4
+6480ec: 3552 0c00                              |0040: if-ge v2, v5, 004c // +000c
+6480f0: 4601 0402                              |0042: aget-object v1, v4, v2
+6480f4: 3801 0500                              |0044: if-eqz v1, 0049 // +0005
+6480f8: 6e30 7486 6100                         |0046: invoke-virtual {v1, v6, v0}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.depositSchemaProperty:(Lcom/fasterxml/jackson/databind/jsonFormatVisitors/JsonObjectFormatVisitor;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@8674
+6480fe: d802 0201                              |0049: add-int/lit8 v2, v2, #int 1 // #01
+648102: 28f5                                   |004b: goto 0040 // -000b
+648104: 0e00                                   |004c: return-void
+      catches       : (none)
+      positions     :
+        0x0003 line=891
+        0x000a line=895
+        0x000e line=896
+        0x0014 line=897
+        0x001e line=899
+        0x0023 line=900
+        0x002d line=903
+        0x0034 line=904
+        0x003a line=907
+        0x003d line=909
+        0x003f line=912
+        0x0042 line=913
+        0x0046 line=915
+      locals        :
+        0x0000 - 0x004d reg=4 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x004d reg=5 (null) Lcom/fasterxml/jackson/databind/jsonFormatVisitors/JsonFormatVisitorWrapper;
+        0x0000 - 0x004d reg=6 (null) Lcom/fasterxml/jackson/databind/JavaType;
+
+    #6              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'asArraySerializer'
+      type          : '()Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;'
+      access        : 0x0404 (PROTECTED ABSTRACT)
+      code          : (none)
+
+    #7              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'createContextual'
+      type          : '(Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/BeanProperty;)Lcom/fasterxml/jackson/databind/JsonSerializer;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 20
+      ins           : 3
+      outs          : 7
+      insns size    : 466 16-bit code units
+648108:                                        |[648108] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.createContextual:(Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/BeanProperty;)Lcom/fasterxml/jackson/databind/JsonSerializer;
+648118: 0800 1100                              |0000: move-object/from16 v0, v17
+64811c: 0801 1200                              |0002: move-object/from16 v1, v18
+648120: 0809 1300                              |0004: move-object/from16 v9, v19
+648124: 7401 3a72 1200                         |0006: invoke-virtual/range {v18}, Lcom/fasterxml/jackson/databind/SerializerProvider;.getAnnotationIntrospector:()Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // method@723a
+64812a: 0c02                                   |0009: move-result-object v2
+64812c: 1203                                   |000a: const/4 v3, #int 0 // #0
+64812e: 3809 0a00                              |000b: if-eqz v9, 0015 // +000a
+648132: 3902 0300                              |000d: if-nez v2, 0010 // +0003
+648136: 2806                                   |000f: goto 0015 // +0006
+648138: 7801 616c 1300                         |0010: invoke-interface/range {v19}, Lcom/fasterxml/jackson/databind/BeanProperty;.getMember:()Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // method@6c61
+64813e: 0c04                                   |0013: move-result-object v4
+648140: 2802                                   |0014: goto 0016 // +0002
+648142: 0734                                   |0015: move-object v4, v3
+648144: 7401 3c72 1200                         |0016: invoke-virtual/range {v18}, Lcom/fasterxml/jackson/databind/SerializerProvider;.getConfig:()Lcom/fasterxml/jackson/databind/SerializationConfig; // method@723c
+64814a: 0c05                                   |0019: move-result-object v5
+64814c: 5406 2950                              |001a: iget-object v6, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._handledType:Ljava/lang/Class; // field@5029
+648150: 6e40 0389 1069                         |001c: invoke-virtual {v0, v1, v9, v6}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.findFormatOverrides:(Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/BeanProperty;Ljava/lang/Class;)Lcom/fasterxml/jackson/annotation/JsonFormat$Value; // method@8903
+648156: 0c06                                   |001f: move-result-object v6
+648158: 1217                                   |0020: const/4 v7, #int 1 // #1
+64815a: 1208                                   |0021: const/4 v8, #int 0 // #0
+64815c: 3806 8800                              |0022: if-eqz v6, 00aa // +0088
+648160: 6e10 6b5f 0600                         |0024: invoke-virtual {v6}, Lcom/fasterxml/jackson/annotation/JsonFormat$Value;.hasShape:()Z // method@5f6b
+648166: 0a0a                                   |0027: move-result v10
+648168: 380a 8200                              |0028: if-eqz v10, 00aa // +0082
+64816c: 6e10 665f 0600                         |002a: invoke-virtual {v6}, Lcom/fasterxml/jackson/annotation/JsonFormat$Value;.getShape:()Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // method@5f66
+648172: 0c0a                                   |002d: move-result-object v10
+648174: 620b e043                              |002e: sget-object v11, Lcom/fasterxml/jackson/annotation/JsonFormat$Shape;.ANY:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@43e0
+648178: 32ba 7b00                              |0030: if-eq v10, v11, 00ab // +007b
+64817c: 540b 2d50                              |0032: iget-object v11, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializationShape:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@502d
+648180: 32ba 7700                              |0034: if-eq v10, v11, 00ab // +0077
+648184: 540b 2750                              |0036: iget-object v11, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+648188: 6e10 b86d 0b00                         |0038: invoke-virtual {v11}, Lcom/fasterxml/jackson/databind/JavaType;.isEnumType:()Z // method@6db8
+64818e: 0a0b                                   |003b: move-result v11
+648190: 380b 2c00                              |003c: if-eqz v11, 0068 // +002c
+648194: 620b 2350                              |003e: sget-object v11, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase$1;.$SwitchMap$com$fasterxml$jackson$annotation$JsonFormat$Shape:[I // field@5023
+648198: 6e10 4e5f 0a00                         |0040: invoke-virtual {v10}, Lcom/fasterxml/jackson/annotation/JsonFormat$Shape;.ordinal:()I // method@5f4e
+64819e: 0a0c                                   |0043: move-result v12
+6481a0: 440b 0b0c                              |0044: aget v11, v11, v12
+6481a4: 327b 0900                              |0046: if-eq v11, v7, 004f // +0009
+6481a8: 122c                                   |0048: const/4 v12, #int 2 // #2
+6481aa: 32cb 0600                              |0049: if-eq v11, v12, 004f // +0006
+6481ae: 123c                                   |004b: const/4 v12, #int 3 // #3
+6481b0: 32cb 0300                              |004c: if-eq v11, v12, 004f // +0003
+6481b4: 285d                                   |004e: goto 00ab // +005d
+6481b6: 5402 2750                              |004f: iget-object v2, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+6481ba: 6e20 d171 2500                         |0051: invoke-virtual {v5, v2}, Lcom/fasterxml/jackson/databind/SerializationConfig;.introspectClassAnnotations:(Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/BeanDescription; // method@71d1
+6481c0: 0c02                                   |0054: move-result-object v2
+6481c2: 5400 2750                              |0055: iget-object v0, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+6481c6: 6e10 a66d 0000                         |0057: invoke-virtual {v0}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+6481cc: 0c00                                   |005a: move-result-object v0
+6481ce: 7401 3c72 1200                         |005b: invoke-virtual/range {v18}, Lcom/fasterxml/jackson/databind/SerializerProvider;.getConfig:()Lcom/fasterxml/jackson/databind/SerializationConfig; // method@723c
+6481d4: 0c03                                   |005e: move-result-object v3
+6481d6: 7140 7a89 3062                         |005f: invoke-static {v0, v3, v2, v6}, Lcom/fasterxml/jackson/databind/ser/std/EnumSerializer;.construct:(Ljava/lang/Class;Lcom/fasterxml/jackson/databind/SerializationConfig;Lcom/fasterxml/jackson/databind/BeanDescription;Lcom/fasterxml/jackson/annotation/JsonFormat$Value;)Lcom/fasterxml/jackson/databind/ser/std/EnumSerializer; // method@897a
+6481dc: 0c00                                   |0062: move-result-object v0
+6481de: 6e30 4872 0109                         |0063: invoke-virtual {v1, v0, v9}, Lcom/fasterxml/jackson/databind/SerializerProvider;.handlePrimaryContextualization:(Lcom/fasterxml/jackson/databind/JsonSerializer;Lcom/fasterxml/jackson/databind/BeanProperty;)Lcom/fasterxml/jackson/databind/JsonSerializer; // method@7248
+6481e4: 0c00                                   |0066: move-result-object v0
+6481e6: 1100                                   |0067: return-object v0
+6481e8: 6206 e443                              |0068: sget-object v6, Lcom/fasterxml/jackson/annotation/JsonFormat$Shape;.NATURAL:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@43e4
+6481ec: 336a 4100                              |006a: if-ne v10, v6, 00ab // +0041
+6481f0: 5406 2750                              |006c: iget-object v6, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+6481f4: 6e10 bc6d 0600                         |006e: invoke-virtual {v6}, Lcom/fasterxml/jackson/databind/JavaType;.isMapLikeType:()Z // method@6dbc
+6481fa: 0a06                                   |0071: move-result v6
+6481fc: 3806 0d00                              |0072: if-eqz v6, 007f // +000d
+648200: 1c06 561b                              |0074: const-class v6, Ljava/util/Map; // type@1b56
+648204: 540b 2950                              |0076: iget-object v11, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._handledType:Ljava/lang/Class; // field@5029
+648208: 6e20 fbd0 b600                         |0078: invoke-virtual {v6, v11}, Ljava/lang/Class;.isAssignableFrom:(Ljava/lang/Class;)Z // method@d0fb
+64820e: 0a06                                   |007b: move-result v6
+648210: 3806 0300                              |007c: if-eqz v6, 007f // +0003
+648214: 282d                                   |007e: goto 00ab // +002d
+648216: 1c06 551b                              |007f: const-class v6, Ljava/util/Map$Entry; // type@1b55
+64821a: 540b 2950                              |0081: iget-object v11, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._handledType:Ljava/lang/Class; // field@5029
+64821e: 6e20 fbd0 b600                         |0083: invoke-virtual {v6, v11}, Ljava/lang/Class;.isAssignableFrom:(Ljava/lang/Class;)Z // method@d0fb
+648224: 0a06                                   |0086: move-result v6
+648226: 3806 2400                              |0087: if-eqz v6, 00ab // +0024
+64822a: 5402 2750                              |0089: iget-object v2, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+64822e: 1c03 551b                              |008b: const-class v3, Ljava/util/Map$Entry; // type@1b55
+648232: 6e20 966d 3200                         |008d: invoke-virtual {v2, v3}, Lcom/fasterxml/jackson/databind/JavaType;.findSuperType:(Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/JavaType; // method@6d96
+648238: 0c02                                   |0090: move-result-object v2
+64823a: 6e20 946d 8200                         |0091: invoke-virtual {v2, v8}, Lcom/fasterxml/jackson/databind/JavaType;.containedTypeOrUnknown:(I)Lcom/fasterxml/jackson/databind/JavaType; // method@6d94
+648240: 0c04                                   |0094: move-result-object v4
+648242: 6e20 946d 7200                         |0095: invoke-virtual {v2, v7}, Lcom/fasterxml/jackson/databind/JavaType;.containedTypeOrUnknown:(I)Lcom/fasterxml/jackson/databind/JavaType; // method@6d94
+648248: 0c05                                   |0098: move-result-object v5
+64824a: 220a c30e                              |0099: new-instance v10, Lcom/fasterxml/jackson/databind/ser/impl/MapEntrySerializer; // type@0ec3
+64824e: 5403 2750                              |009b: iget-object v3, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+648252: 1206                                   |009d: const/4 v6, #int 0 // #0
+648254: 1207                                   |009e: const/4 v7, #int 0 // #0
+648256: 07a2                                   |009f: move-object v2, v10
+648258: 0808 1300                              |00a0: move-object/from16 v8, v19
+64825c: 7607 e487 0200                         |00a2: invoke-direct/range {v2, v3, v4, v5, v6, v7, v8}, Lcom/fasterxml/jackson/databind/ser/impl/MapEntrySerializer;.<init>:(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JavaType;ZLcom/fasterxml/jackson/databind/jsontype/TypeSerializer;Lcom/fasterxml/jackson/databind/BeanProperty;)V // method@87e4
+648262: 6e30 4872 a109                         |00a5: invoke-virtual {v1, v10, v9}, Lcom/fasterxml/jackson/databind/SerializerProvider;.handlePrimaryContextualization:(Lcom/fasterxml/jackson/databind/JsonSerializer;Lcom/fasterxml/jackson/databind/BeanProperty;)Lcom/fasterxml/jackson/databind/JsonSerializer; // method@7248
+648268: 0c00                                   |00a8: move-result-object v0
+64826a: 1100                                   |00a9: return-object v0
+64826c: 073a                                   |00aa: move-object v10, v3
+64826e: 5406 2a50                              |00ab: iget-object v6, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+648272: 3804 be00                              |00ad: if-eqz v4, 016b // +00be
+648276: 6e30 df6b 5204                         |00af: invoke-virtual {v2, v5, v4}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findPropertyIgnoralByName:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/Annotated;)Lcom/fasterxml/jackson/annotation/JsonIgnoreProperties$Value; // method@6bdf
+64827c: 0c0b                                   |00b2: move-result-object v11
+64827e: 6e10 945f 0b00                         |00b3: invoke-virtual {v11}, Lcom/fasterxml/jackson/annotation/JsonIgnoreProperties$Value;.findIgnoredForSerialization:()Ljava/util/Set; // method@5f94
+648284: 0c0b                                   |00b6: move-result-object v11
+648286: 6e30 e26b 5204                         |00b7: invoke-virtual {v2, v5, v4}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findPropertyInclusionByName:(Lcom/fasterxml/jackson/databind/cfg/MapperConfig;Lcom/fasterxml/jackson/databind/introspect/Annotated;)Lcom/fasterxml/jackson/annotation/JsonIncludeProperties$Value; // method@6be2
+64828c: 0c05                                   |00ba: move-result-object v5
+64828e: 6e10 dd5f 0500                         |00bb: invoke-virtual {v5}, Lcom/fasterxml/jackson/annotation/JsonIncludeProperties$Value;.getIncluded:()Ljava/util/Set; // method@5fdd
+648294: 0c05                                   |00be: move-result-object v5
+648296: 6e20 d56b 4200                         |00bf: invoke-virtual {v2, v4}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findObjectIdInfo:(Lcom/fasterxml/jackson/databind/introspect/Annotated;)Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo; // method@6bd5
+64829c: 0c0c                                   |00c2: move-result-object v12
+64829e: 390c 1700                              |00c3: if-nez v12, 00da // +0017
+6482a2: 3806 1200                              |00c5: if-eqz v6, 00d7 // +0012
+6482a6: 6e30 d66b 4203                         |00c7: invoke-virtual {v2, v4, v3}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findObjectReferenceInfo:(Lcom/fasterxml/jackson/databind/introspect/Annotated;Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;)Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo; // method@6bd6
+6482ac: 0c0c                                   |00ca: move-result-object v12
+6482ae: 380c 0c00                              |00cb: if-eqz v12, 00d7 // +000c
+6482b2: 5406 2a50                              |00cd: iget-object v6, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+6482b6: 6e10 3c80 0c00                         |00cf: invoke-virtual {v12}, Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;.getAlwaysAsId:()Z // method@803c
+6482bc: 0a0c                                   |00d2: move-result v12
+6482be: 6e20 fc87 c600                         |00d3: invoke-virtual {v6, v12}, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.withAlwaysAsId:(Z)Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // method@87fc
+6482c4: 0c06                                   |00d6: move-result-object v6
+6482c6: 018d                                   |00d7: move v13, v8
+6482c8: 2900 8000                              |00d8: goto/16 0158 // +0080
+6482cc: 6e30 d66b 420c                         |00da: invoke-virtual {v2, v4, v12}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findObjectReferenceInfo:(Lcom/fasterxml/jackson/databind/introspect/Annotated;Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;)Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo; // method@6bd6
+6482d2: 0c06                                   |00dd: move-result-object v6
+6482d4: 6e10 3d80 0600                         |00de: invoke-virtual {v6}, Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;.getGeneratorType:()Ljava/lang/Class; // method@803d
+6482da: 0c0c                                   |00e1: move-result-object v12
+6482dc: 6e20 2072 c100                         |00e2: invoke-virtual {v1, v12}, Lcom/fasterxml/jackson/databind/SerializerProvider;.constructType:(Ljava/lang/reflect/Type;)Lcom/fasterxml/jackson/databind/JavaType; // method@7220
+6482e2: 0c0d                                   |00e5: move-result-object v13
+6482e4: 7401 4672 1200                         |00e6: invoke-virtual/range {v18}, Lcom/fasterxml/jackson/databind/SerializerProvider;.getTypeFactory:()Lcom/fasterxml/jackson/databind/type/TypeFactory; // method@7246
+6482ea: 0c0e                                   |00e9: move-result-object v14
+6482ec: 1c0f 250c                              |00ea: const-class v15, Lcom/fasterxml/jackson/annotation/ObjectIdGenerator; // type@0c25
+6482f0: 6e30 968d de0f                         |00ec: invoke-virtual {v14, v13, v15}, Lcom/fasterxml/jackson/databind/type/TypeFactory;.findTypeParameters:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)[Lcom/fasterxml/jackson/databind/JavaType; // method@8d96
+6482f6: 0c0d                                   |00ef: move-result-object v13
+6482f8: 460d 0d08                              |00f0: aget-object v13, v13, v8
+6482fc: 1c0e 290c                              |00f2: const-class v14, Lcom/fasterxml/jackson/annotation/ObjectIdGenerators$PropertyGenerator; // type@0c29
+648300: 33ec 5300                              |00f4: if-ne v12, v14, 0147 // +0053
+648304: 6e10 3e80 0600                         |00f6: invoke-virtual {v6}, Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;.getPropertyName:()Lcom/fasterxml/jackson/databind/PropertyName; // method@803e
+64830a: 0c0c                                   |00f9: move-result-object v12
+64830c: 6e10 4871 0c00                         |00fa: invoke-virtual {v12}, Lcom/fasterxml/jackson/databind/PropertyName;.getSimpleName:()Ljava/lang/String; // method@7148
+648312: 0c0c                                   |00fd: move-result-object v12
+648314: 540d 2c50                              |00fe: iget-object v13, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+648318: 21de                                   |0100: array-length v14, v13
+64831a: 018d                                   |0101: move v13, v8
+64831c: 33ed 1d00                              |0102: if-ne v13, v14, 011f // +001d
+648320: 540f 2750                              |0104: iget-object v15, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._beanType:Lcom/fasterxml/jackson/databind/JavaType; // field@5027
+648324: 7401 0689 1100                         |0106: invoke-virtual/range {v17}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.handledType:()Ljava/lang/Class; // method@8906
+64832a: 0c10                                   |0109: move-result-object v16
+64832c: 7701 5f8e 1000                         |010a: invoke-static/range {v16}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.nameOf:(Ljava/lang/Class;)Ljava/lang/String; // method@8e5f
+648332: 0c07                                   |010d: move-result-object v7
+648334: 7110 5d8e 0c00                         |010e: invoke-static {v12}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.name:(Ljava/lang/String;)Ljava/lang/String; // method@8e5d
+64833a: 0c08                                   |0111: move-result-object v8
+64833c: 2420 ad20 8700                         |0112: filled-new-array {v7, v8}, [Ljava/lang/Object; // type@20ad
+648342: 0c07                                   |0115: move-result-object v7
+648344: 1a08 992d                              |0116: const-string v8, "Invalid Object Id definition for %s: cannot find property with name %s" // string@2d99
+648348: 7120 05d2 7800                         |0118: invoke-static {v8, v7}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+64834e: 0c07                                   |011b: move-result-object v7
+648350: 6e30 5472 f107                         |011c: invoke-virtual {v1, v15, v7}, Lcom/fasterxml/jackson/databind/SerializerProvider;.reportBadDefinition:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/String;)Ljava/lang/Object; // method@7254
+648356: 5407 2c50                              |011f: iget-object v7, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+64835a: 4607 070d                              |0121: aget-object v7, v7, v13
+64835e: 6e10 7e86 0700                         |0123: invoke-virtual {v7}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getName:()Ljava/lang/String; // method@867e
+648364: 0c08                                   |0126: move-result-object v8
+648366: 6e20 03d2 8c00                         |0127: invoke-virtual {v12, v8}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+64836c: 0a08                                   |012a: move-result v8
+64836e: 3808 1700                              |012b: if-eqz v8, 0142 // +0017
+648372: 6e10 8486 0700                         |012d: invoke-virtual {v7}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getType:()Lcom/fasterxml/jackson/databind/JavaType; // method@8684
+648378: 0c08                                   |0130: move-result-object v8
+64837a: 220c c50e                              |0131: new-instance v12, Lcom/fasterxml/jackson/databind/ser/impl/PropertyBasedObjectIdGenerator; // type@0ec5
+64837e: 7030 fe87 6c07                         |0133: invoke-direct {v12, v6, v7}, Lcom/fasterxml/jackson/databind/ser/impl/PropertyBasedObjectIdGenerator;.<init>:(Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)V // method@87fe
+648384: 0737                                   |0136: move-object v7, v3
+648386: 1f07 e00c                              |0137: check-cast v7, Lcom/fasterxml/jackson/databind/PropertyName; // type@0ce0
+64838a: 6e10 3c80 0600                         |0139: invoke-virtual {v6}, Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;.getAlwaysAsId:()Z // method@803c
+648390: 0a06                                   |013c: move-result v6
+648392: 7140 fb87 386c                         |013d: invoke-static {v8, v3, v12, v6}, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.construct:(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/PropertyName;Lcom/fasterxml/jackson/annotation/ObjectIdGenerator;Z)Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // method@87fb
+648398: 0c06                                   |0140: move-result-object v6
+64839a: 2817                                   |0141: goto 0158 // +0017
+64839c: d80d 0d01                              |0142: add-int/lit8 v13, v13, #int 1 // #01
+6483a0: 1217                                   |0144: const/4 v7, #int 1 // #1
+6483a2: 1208                                   |0145: const/4 v8, #int 0 // #0
+6483a4: 28bc                                   |0146: goto 0102 // -0044
+6483a6: 6e30 5372 4106                         |0147: invoke-virtual {v1, v4, v6}, Lcom/fasterxml/jackson/databind/SerializerProvider;.objectIdGeneratorInstance:(Lcom/fasterxml/jackson/databind/introspect/Annotated;Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;)Lcom/fasterxml/jackson/annotation/ObjectIdGenerator; // method@7253
+6483ac: 0c07                                   |014a: move-result-object v7
+6483ae: 6e10 3e80 0600                         |014b: invoke-virtual {v6}, Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;.getPropertyName:()Lcom/fasterxml/jackson/databind/PropertyName; // method@803e
+6483b4: 0c08                                   |014e: move-result-object v8
+6483b6: 6e10 3c80 0600                         |014f: invoke-virtual {v6}, Lcom/fasterxml/jackson/databind/introspect/ObjectIdInfo;.getAlwaysAsId:()Z // method@803c
+6483bc: 0a06                                   |0152: move-result v6
+6483be: 7140 fb87 8d67                         |0153: invoke-static {v13, v8, v7, v6}, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.construct:(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/PropertyName;Lcom/fasterxml/jackson/annotation/ObjectIdGenerator;Z)Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // method@87fb
+6483c4: 0c06                                   |0156: move-result-object v6
+6483c6: 120d                                   |0157: const/4 v13, #int 0 // #0
+6483c8: 6e20 c86b 4200                         |0158: invoke-virtual {v2, v4}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findFilterId:(Lcom/fasterxml/jackson/databind/introspect/Annotated;)Ljava/lang/Object; // method@6bc8
+6483ce: 0c02                                   |015b: move-result-object v2
+6483d0: 3802 0d00                              |015c: if-eqz v2, 0169 // +000d
+6483d4: 5404 2b50                              |015e: iget-object v4, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+6483d8: 3804 0f00                              |0160: if-eqz v4, 016f // +000f
+6483dc: 6e20 cad1 4200                         |0162: invoke-virtual {v2, v4}, Ljava/lang/Object;.equals:(Ljava/lang/Object;)Z // method@d1ca
+6483e2: 0a04                                   |0165: move-result v4
+6483e4: 3904 0300                              |0166: if-nez v4, 0169 // +0003
+6483e8: 2807                                   |0168: goto 016f // +0007
+6483ea: 0732                                   |0169: move-object v2, v3
+6483ec: 2805                                   |016a: goto 016f // +0005
+6483ee: 0732                                   |016b: move-object v2, v3
+6483f0: 0725                                   |016c: move-object v5, v2
+6483f2: 075b                                   |016d: move-object v11, v5
+6483f4: 120d                                   |016e: const/4 v13, #int 0 // #0
+6483f6: 3d0d 2c00                              |016f: if-lez v13, 019b // +002c
+6483fa: 5404 2c50                              |0171: iget-object v4, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+6483fe: 2147                                   |0173: array-length v7, v4
+648400: 7120 cad4 7400                         |0174: invoke-static {v4, v7}, Ljava/util/Arrays;.copyOf:([Ljava/lang/Object;I)[Ljava/lang/Object; // method@d4ca
+648406: 0c04                                   |0177: move-result-object v4
+648408: 1f04 3b20                              |0178: check-cast v4, [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // type@203b
+64840c: 4607 040d                              |017a: aget-object v7, v4, v13
+648410: 1218                                   |017c: const/4 v8, #int 1 // #1
+648412: 120c                                   |017d: const/4 v12, #int 0 // #0
+648414: 715d 5ad2 c484                         |017e: invoke-static {v4, v12, v4, v8, v13}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+64841a: 4d07 040c                              |0181: aput-object v7, v4, v12
+64841e: 5407 2850                              |0183: iget-object v7, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+648422: 3907 0300                              |0185: if-nez v7, 0188 // +0003
+648426: 280f                                   |0187: goto 0196 // +000f
+648428: 2173                                   |0188: array-length v3, v7
+64842a: 7120 cad4 3700                         |0189: invoke-static {v7, v3}, Ljava/util/Arrays;.copyOf:([Ljava/lang/Object;I)[Ljava/lang/Object; // method@d4ca
+648430: 0c03                                   |018c: move-result-object v3
+648432: 1f03 3b20                              |018d: check-cast v3, [Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // type@203b
+648436: 4607 030d                              |018f: aget-object v7, v3, v13
+64843a: 715d 5ad2 c383                         |0191: invoke-static {v3, v12, v3, v8, v13}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+648440: 4d07 030c                              |0194: aput-object v7, v3, v12
+648444: 6e30 1689 4003                         |0196: invoke-virtual {v0, v4, v3}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.withProperties:([Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase; // method@8916
+64844a: 0c03                                   |0199: move-result-object v3
+64844c: 2802                                   |019a: goto 019c // +0002
+64844e: 0703                                   |019b: move-object v3, v0
+648450: 3806 1400                              |019c: if-eqz v6, 01b0 // +0014
+648454: 5464 cd4f                              |019e: iget-object v4, v6, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.idType:Lcom/fasterxml/jackson/databind/JavaType; // field@4fcd
+648458: 6e30 3672 4109                         |01a0: invoke-virtual {v1, v4, v9}, Lcom/fasterxml/jackson/databind/SerializerProvider;.findValueSerializer:(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/BeanProperty;)Lcom/fasterxml/jackson/databind/JsonSerializer; // method@7236
+64845e: 0c01                                   |01a3: move-result-object v1
+648460: 6e20 fd87 1600                         |01a4: invoke-virtual {v6, v1}, Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;.withSerializer:(Lcom/fasterxml/jackson/databind/JsonSerializer;)Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // method@87fd
+648466: 0c01                                   |01a7: move-result-object v1
+648468: 5404 2a50                              |01a8: iget-object v4, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+64846c: 3241 0600                              |01aa: if-eq v1, v4, 01b0 // +0006
+648470: 6e20 1589 1300                         |01ac: invoke-virtual {v3, v1}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.withObjectIdWriter:(Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase; // method@8915
+648476: 0c03                                   |01af: move-result-object v3
+648478: 380b 0800                              |01b0: if-eqz v11, 01b8 // +0008
+64847c: 7210 31d6 0b00                         |01b2: invoke-interface {v11}, Ljava/util/Set;.isEmpty:()Z // method@d631
+648482: 0a01                                   |01b5: move-result v1
+648484: 3801 0400                              |01b6: if-eqz v1, 01ba // +0004
+648488: 3805 0600                              |01b8: if-eqz v5, 01be // +0006
+64848c: 6e30 1089 b305                         |01ba: invoke-virtual {v3, v11, v5}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.withByNameInclusion:(Ljava/util/Set;Ljava/util/Set;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase; // method@8910
+648492: 0c03                                   |01bd: move-result-object v3
+648494: 3802 0600                              |01be: if-eqz v2, 01c4 // +0006
+648498: 6e20 1289 2300                         |01c0: invoke-virtual {v3, v2}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.withFilterId:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase; // method@8912
+64849e: 0c03                                   |01c3: move-result-object v3
+6484a0: 390a 0400                              |01c4: if-nez v10, 01c8 // +0004
+6484a4: 540a 2d50                              |01c6: iget-object v10, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializationShape:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@502d
+6484a8: 6200 e143                              |01c8: sget-object v0, Lcom/fasterxml/jackson/annotation/JsonFormat$Shape;.ARRAY:Lcom/fasterxml/jackson/annotation/JsonFormat$Shape; // field@43e1
+6484ac: 330a 0700                              |01ca: if-ne v10, v0, 01d1 // +0007
+6484b0: 6e10 ff88 0300                         |01cc: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.asArraySerializer:()Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase; // method@88ff
+6484b6: 0c00                                   |01cf: move-result-object v0
+6484b8: 1100                                   |01d0: return-object v0
+6484ba: 1103                                   |01d1: return-object v3
+      catches       : (none)
+      positions     :
+        0x0006 line=448
+        0x0010 line=450
+        0x0016 line=451
+        0x001a line=455
+        0x0024 line=457
+        0x002a line=458
+        0x002e line=460
+        0x0036 line=461
+        0x003e line=462
+        0x004f line=468
+        0x0055 line=469
+        0x005b line=470
+        0x005f line=469
+        0x0063 line=471
+        0x0068 line=474
+        0x006c line=475
+        0x007f line=477
+        0x0089 line=478
+        0x0091 line=480
+        0x0095 line=481
+        0x0099 line=485
+        0x00a5 line=487
+        0x00ab line=493
+        0x00af line=504
+        0x00b7 line=505
+        0x00bf line=506
+        0x00c7 line=510
+        0x00cd line=512
+        0x00da line=520
+        0x00de line=521
+        0x00e2 line=522
+        0x00e6 line=523
+        0x00f2 line=525
+        0x00f6 line=526
+        0x00fe line=529
+        0x0104 line=531
+        0x0106 line=533
+        0x0116 line=531
+        0x011f line=535
+        0x0123 line=536
+        0x012d line=544
+        0x0131 line=545
+        0x0136 line=546
+        0x0147 line=548
+        0x014b line=549
+        0x014f line=550
+        0x0153 line=549
+        0x0158 line=554
+        0x015e line=557
+        0x0171 line=567
+        0x017a line=568
+        0x017e line=569
+        0x0181 line=570
+        0x0183 line=572
+        0x0188 line=575
+        0x018f line=576
+        0x0191 line=577
+        0x0194 line=578
+        0x0196 line=580
+        0x019e line=584
+        0x01a4 line=585
+        0x01a8 line=586
+        0x01ac line=587
+        0x01b2 line=592
+        0x01ba line=594
+        0x01c0 line=597
+        0x01c6 line=601
+        0x01c8 line=604
+        0x01cc line=605
+      locals        :
+        0x0000 - 0x01d2 reg=17 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x01d2 reg=18 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+        0x0000 - 0x01d2 reg=19 (null) Lcom/fasterxml/jackson/databind/BeanProperty;
+
+    #8              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'findConvertingSerializer'
+      type          : '(Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)Lcom/fasterxml/jackson/databind/JsonSerializer;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 4
+      insns size    : 53 16-bit code units
+6484bc:                                        |[6484bc] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.findConvertingSerializer:(Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)Lcom/fasterxml/jackson/databind/JsonSerializer;
+6484cc: 6e10 3a72 0400                         |0000: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/SerializerProvider;.getAnnotationIntrospector:()Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // method@723a
+6484d2: 0c03                                   |0003: move-result-object v3
+6484d4: 1200                                   |0004: const/4 v0, #int 0 // #0
+6484d6: 3803 2f00                              |0005: if-eqz v3, 0034 // +002f
+6484da: 6e10 7d86 0500                         |0007: invoke-virtual {v5}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getMember:()Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // method@867d
+6484e0: 0c01                                   |000a: move-result-object v1
+6484e2: 3801 2900                              |000b: if-eqz v1, 0034 // +0029
+6484e6: 6e20 ea6b 1300                         |000d: invoke-virtual {v3, v1}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.findSerializationConverter:(Lcom/fasterxml/jackson/databind/introspect/Annotated;)Ljava/lang/Object; // method@6bea
+6484ec: 0c03                                   |0010: move-result-object v3
+6484ee: 3803 2300                              |0011: if-eqz v3, 0034 // +0023
+6484f2: 6e10 7d86 0500                         |0013: invoke-virtual {v5}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getMember:()Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // method@867d
+6484f8: 0c01                                   |0016: move-result-object v1
+6484fa: 6e30 2172 1403                         |0017: invoke-virtual {v4, v1, v3}, Lcom/fasterxml/jackson/databind/SerializerProvider;.converterInstance:(Lcom/fasterxml/jackson/databind/introspect/Annotated;Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/util/Converter; // method@7221
+648500: 0c03                                   |001a: move-result-object v3
+648502: 6e10 4672 0400                         |001b: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/SerializerProvider;.getTypeFactory:()Lcom/fasterxml/jackson/databind/type/TypeFactory; // method@7246
+648508: 0c01                                   |001e: move-result-object v1
+64850a: 7220 7c8e 1300                         |001f: invoke-interface {v3, v1}, Lcom/fasterxml/jackson/databind/util/Converter;.getOutputType:(Lcom/fasterxml/jackson/databind/type/TypeFactory;)Lcom/fasterxml/jackson/databind/JavaType; // method@8e7c
+648510: 0c01                                   |0022: move-result-object v1
+648512: 6e10 bb6d 0100                         |0023: invoke-virtual {v1}, Lcom/fasterxml/jackson/databind/JavaType;.isJavaLangObject:()Z // method@6dbb
+648518: 0a02                                   |0026: move-result v2
+64851a: 3802 0300                              |0027: if-eqz v2, 002a // +0003
+64851e: 2805                                   |0029: goto 002e // +0005
+648520: 6e30 3672 1405                         |002a: invoke-virtual {v4, v1, v5}, Lcom/fasterxml/jackson/databind/SerializerProvider;.findValueSerializer:(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/BeanProperty;)Lcom/fasterxml/jackson/databind/JsonSerializer; // method@7236
+648526: 0c00                                   |002d: move-result-object v0
+648528: 2204 150f                              |002e: new-instance v4, Lcom/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer; // type@0f15
+64852c: 7040 558b 3401                         |0030: invoke-direct {v4, v3, v1, v0}, Lcom/fasterxml/jackson/databind/ser/std/StdDelegatingSerializer;.<init>:(Lcom/fasterxml/jackson/databind/util/Converter;Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JsonSerializer;)V // method@8b55
+648532: 1104                                   |0033: return-object v4
+648534: 1100                                   |0034: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=424
+        0x0007 line=426
+        0x000d line=428
+        0x0013 line=430
+        0x001b line=431
+        0x0023 line=433
+        0x002a line=434
+        0x002e line=435
+      locals        :
+        0x0000 - 0x0035 reg=3 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0035 reg=4 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+        0x0000 - 0x0035 reg=5 (null) Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;
+
+    #9              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'getSchema'
+      type          : '(Lcom/fasterxml/jackson/databind/SerializerProvider;Ljava/lang/reflect/Type;)Lcom/fasterxml/jackson/databind/JsonNode;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 3
+      outs          : 4
+      insns size    : 75 16-bit code units
+648538:                                        |[648538] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.getSchema:(Lcom/fasterxml/jackson/databind/SerializerProvider;Ljava/lang/reflect/Type;)Lcom/fasterxml/jackson/databind/JsonNode;
+648548: 1a07 81c4                              |0000: const-string v7, "object" // string@c481
+64854c: 1210                                   |0002: const/4 v0, #int 1 // #1
+64854e: 6e30 0189 7500                         |0003: invoke-virtual {v5, v7, v0}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.createSchemaNode:(Ljava/lang/String;Z)Lcom/fasterxml/jackson/databind/node/ObjectNode; // method@8901
+648554: 0c07                                   |0006: move-result-object v7
+648556: 5450 2950                              |0007: iget-object v0, v5, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._handledType:Ljava/lang/Class; // field@5029
+64855a: 1c01 4e0e                              |0009: const-class v1, Lcom/fasterxml/jackson/databind/jsonschema/JsonSerializableSchema; // type@0e4e
+64855e: 6e20 d6d0 1000                         |000b: invoke-virtual {v0, v1}, Ljava/lang/Class;.getAnnotation:(Ljava/lang/Class;)Ljava/lang/annotation/Annotation; // method@d0d6
+648564: 0c00                                   |000e: move-result-object v0
+648566: 1f00 4e0e                              |000f: check-cast v0, Lcom/fasterxml/jackson/databind/jsonschema/JsonSerializableSchema; // type@0e4e
+64856a: 3800 1300                              |0011: if-eqz v0, 0024 // +0013
+64856e: 7210 c081 0000                         |0013: invoke-interface {v0}, Lcom/fasterxml/jackson/databind/jsonschema/JsonSerializableSchema;.id:()Ljava/lang/String; // method@81c0
+648574: 0c00                                   |0016: move-result-object v0
+648576: 3800 0d00                              |0017: if-eqz v0, 0024 // +000d
+64857a: 6e10 11d2 0000                         |0019: invoke-virtual {v0}, Ljava/lang/String;.isEmpty:()Z // method@d211
+648580: 0a01                                   |001c: move-result v1
+648582: 3901 0700                              |001d: if-nez v1, 0024 // +0007
+648586: 1a01 45a8                              |001f: const-string v1, "id" // string@a845
+64858a: 6e30 9885 1700                         |0021: invoke-virtual {v7, v1, v0}, Lcom/fasterxml/jackson/databind/node/ObjectNode;.put:(Ljava/lang/String;Ljava/lang/String;)Lcom/fasterxml/jackson/databind/node/ObjectNode; // method@8598
+648590: 6e10 8785 0700                         |0024: invoke-virtual {v7}, Lcom/fasterxml/jackson/databind/node/ObjectNode;.objectNode:()Lcom/fasterxml/jackson/databind/node/ObjectNode; // method@8587
+648596: 0c00                                   |0027: move-result-object v0
+648598: 5451 2b50                              |0028: iget-object v1, v5, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+64859c: 1202                                   |002a: const/4 v2, #int 0 // #0
+64859e: 3801 0600                              |002b: if-eqz v1, 0031 // +0006
+6485a2: 6e40 0489 6521                         |002d: invoke-virtual {v5, v6, v1, v2}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.findPropertyFilter:(Lcom/fasterxml/jackson/databind/SerializerProvider;Ljava/lang/Object;Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/ser/PropertyFilter; // method@8904
+6485a8: 0c02                                   |0030: move-result-object v2
+6485aa: 1201                                   |0031: const/4 v1, #int 0 // #0
+6485ac: 5453 2c50                              |0032: iget-object v3, v5, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+6485b0: 2134                                   |0034: array-length v4, v3
+6485b2: 3541 1000                              |0035: if-ge v1, v4, 0045 // +0010
+6485b6: 4603 0301                              |0037: aget-object v3, v3, v1
+6485ba: 3902 0600                              |0039: if-nez v2, 003f // +0006
+6485be: 6e30 7586 0306                         |003b: invoke-virtual {v3, v0, v6}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.depositSchemaProperty:(Lcom/fasterxml/jackson/databind/node/ObjectNode;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@8675
+6485c4: 2804                                   |003e: goto 0042 // +0004
+6485c6: 7240 3a87 3260                         |003f: invoke-interface {v2, v3, v0, v6}, Lcom/fasterxml/jackson/databind/ser/PropertyFilter;.depositSchemaProperty:(Lcom/fasterxml/jackson/databind/ser/PropertyWriter;Lcom/fasterxml/jackson/databind/node/ObjectNode;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@873a
+6485cc: d801 0101                              |0042: add-int/lit8 v1, v1, #int 1 // #01
+6485d0: 28ee                                   |0044: goto 0032 // -0012
+6485d2: 1a05 0bcb                              |0045: const-string v5, "properties" // string@cb0b
+6485d6: 6e30 b185 5700                         |0047: invoke-virtual {v7, v5, v0}, Lcom/fasterxml/jackson/databind/node/ObjectNode;.set:(Ljava/lang/String;Lcom/fasterxml/jackson/databind/JsonNode;)Lcom/fasterxml/jackson/databind/JsonNode; // method@85b1
+6485dc: 1107                                   |004a: return-object v7
+      catches       : (none)
+      positions     :
+        0x0000 line=849
+        0x0007 line=852
+        0x0013 line=854
+        0x0019 line=855
+        0x001f line=856
+        0x0024 line=862
+        0x0028 line=864
+        0x002d line=865
+        0x0032 line=870
+        0x0037 line=871
+        0x003b line=873
+        0x003f line=875
+        0x0045 line=879
+      locals        :
+        0x0000 - 0x004b reg=5 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x004b reg=6 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+        0x0000 - 0x004b reg=7 (null) Ljava/lang/reflect/Type;
+
+    #10              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'properties'
+      type          : '()Ljava/util/Iterator;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 11 16-bit code units
+6485e0:                                        |[6485e0] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.properties:()Ljava/util/Iterator;
+6485f0: 5400 2c50                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+6485f4: 7110 b9d4 0000                         |0002: invoke-static {v0}, Ljava/util/Arrays;.asList:([Ljava/lang/Object;)Ljava/util/List; // method@d4b9
+6485fa: 0c00                                   |0005: move-result-object v0
+6485fc: 7210 d2d5 0000                         |0006: invoke-interface {v0}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@d5d2
+648602: 0c00                                   |0009: move-result-object v0
+648604: 1100                                   |000a: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=618
+      locals        :
+        0x0000 - 0x000b reg=0 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+
+    #11              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'resolve'
+      type          : '(Lcom/fasterxml/jackson/databind/SerializerProvider;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 3
+      insns size    : 155 16-bit code units
+648608:                                        |[648608] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.resolve:(Lcom/fasterxml/jackson/databind/SerializerProvider;)V
+648618: 5470 2850                              |0000: iget-object v0, v7, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+64861c: 1201                                   |0002: const/4 v1, #int 0 // #0
+64861e: 3900 0400                              |0003: if-nez v0, 0007 // +0004
+648622: 0110                                   |0005: move v0, v1
+648624: 2802                                   |0006: goto 0008 // +0002
+648626: 2100                                   |0007: array-length v0, v0
+648628: 5472 2c50                              |0008: iget-object v2, v7, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+64862c: 2122                                   |000a: array-length v2, v2
+64862e: 3521 8800                              |000b: if-ge v1, v2, 0093 // +0088
+648632: 5473 2c50                              |000d: iget-object v3, v7, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+648636: 4603 0301                              |000f: aget-object v3, v3, v1
+64863a: 6e10 9786 0300                         |0011: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.willSuppressNulls:()Z // method@8697
+648640: 0a04                                   |0014: move-result v4
+648642: 3904 1c00                              |0015: if-nez v4, 0031 // +001c
+648646: 6e10 8886 0300                         |0017: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.hasNullSerializer:()Z // method@8688
+64864c: 0a04                                   |001a: move-result v4
+64864e: 3904 1600                              |001b: if-nez v4, 0031 // +0016
+648652: 6e20 2e72 3800                         |001d: invoke-virtual {v8, v3}, Lcom/fasterxml/jackson/databind/SerializerProvider;.findNullValueSerializer:(Lcom/fasterxml/jackson/databind/BeanProperty;)Lcom/fasterxml/jackson/databind/JsonSerializer; // method@722e
+648658: 0c04                                   |0020: move-result-object v4
+64865a: 3804 1000                              |0021: if-eqz v4, 0031 // +0010
+64865e: 6e20 7186 4300                         |0023: invoke-virtual {v3, v4}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.assignNullSerializer:(Lcom/fasterxml/jackson/databind/JsonSerializer;)V // method@8671
+648664: 3501 0b00                              |0026: if-ge v1, v0, 0031 // +000b
+648668: 5475 2850                              |0028: iget-object v5, v7, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+64866c: 4605 0501                              |002a: aget-object v5, v5, v1
+648670: 3805 0500                              |002c: if-eqz v5, 0031 // +0005
+648674: 6e20 7186 4500                         |002e: invoke-virtual {v5, v4}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.assignNullSerializer:(Lcom/fasterxml/jackson/databind/JsonSerializer;)V // method@8671
+64867a: 6e10 8986 0300                         |0031: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.hasSerializer:()Z // method@8689
+648680: 0a04                                   |0034: move-result v4
+648682: 3804 0300                              |0035: if-eqz v4, 0038 // +0003
+648686: 2858                                   |0037: goto 008f // +0058
+648688: 6e30 0289 8703                         |0038: invoke-virtual {v7, v8, v3}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.findConvertingSerializer:(Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)Lcom/fasterxml/jackson/databind/JsonSerializer; // method@8902
+64868e: 0c04                                   |003b: move-result-object v4
+648690: 3904 4400                              |003c: if-nez v4, 0080 // +0044
+648694: 6e10 8186 0300                         |003e: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getSerializationType:()Lcom/fasterxml/jackson/databind/JavaType; // method@8681
+64869a: 0c04                                   |0041: move-result-object v4
+64869c: 3904 1c00                              |0042: if-nez v4, 005e // +001c
+6486a0: 6e10 8486 0300                         |0044: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getType:()Lcom/fasterxml/jackson/databind/JavaType; // method@8684
+6486a6: 0c04                                   |0047: move-result-object v4
+6486a8: 6e10 b96d 0400                         |0048: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/JavaType;.isFinal:()Z // method@6db9
+6486ae: 0a05                                   |004b: move-result v5
+6486b0: 3905 1200                              |004c: if-nez v5, 005e // +0012
+6486b4: 6e10 b66d 0400                         |004e: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/JavaType;.isContainerType:()Z // method@6db6
+6486ba: 0a05                                   |0051: move-result v5
+6486bc: 3905 0800                              |0052: if-nez v5, 005a // +0008
+6486c0: 6e10 926d 0400                         |0054: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/JavaType;.containedTypeCount:()I // method@6d92
+6486c6: 0a05                                   |0057: move-result v5
+6486c8: 3d05 3700                              |0058: if-lez v5, 008f // +0037
+6486cc: 6e20 9486 4300                         |005a: invoke-virtual {v3, v4}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.setNonTrivialBaseType:(Lcom/fasterxml/jackson/databind/JavaType;)V // method@8694
+6486d2: 2832                                   |005d: goto 008f // +0032
+6486d4: 6e30 3672 4803                         |005e: invoke-virtual {v8, v4, v3}, Lcom/fasterxml/jackson/databind/SerializerProvider;.findValueSerializer:(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/BeanProperty;)Lcom/fasterxml/jackson/databind/JsonSerializer; // method@7236
+6486da: 0c05                                   |0061: move-result-object v5
+6486dc: 6e10 b66d 0400                         |0062: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/JavaType;.isContainerType:()Z // method@6db6
+6486e2: 0a06                                   |0065: move-result v6
+6486e4: 3806 1900                              |0066: if-eqz v6, 007f // +0019
+6486e8: 6e10 9b6d 0400                         |0068: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/JavaType;.getContentType:()Lcom/fasterxml/jackson/databind/JavaType; // method@6d9b
+6486ee: 0c04                                   |006b: move-result-object v4
+6486f0: 6e10 aa6d 0400                         |006c: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/JavaType;.getTypeHandler:()Ljava/lang/Object; // method@6daa
+6486f6: 0c04                                   |006f: move-result-object v4
+6486f8: 1f04 670e                              |0070: check-cast v4, Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer; // type@0e67
+6486fc: 3804 0d00                              |0072: if-eqz v4, 007f // +000d
+648700: 2056 aa0e                              |0074: instance-of v6, v5, Lcom/fasterxml/jackson/databind/ser/ContainerSerializer; // type@0eaa
+648704: 3806 0900                              |0076: if-eqz v6, 007f // +0009
+648708: 1f05 aa0e                              |0078: check-cast v5, Lcom/fasterxml/jackson/databind/ser/ContainerSerializer; // type@0eaa
+64870c: 6e20 fd86 4500                         |007a: invoke-virtual {v5, v4}, Lcom/fasterxml/jackson/databind/ser/ContainerSerializer;.withValueTypeSerializer:(Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;)Lcom/fasterxml/jackson/databind/ser/ContainerSerializer; // method@86fd
+648712: 0c04                                   |007d: move-result-object v4
+648714: 2802                                   |007e: goto 0080 // +0002
+648716: 0754                                   |007f: move-object v4, v5
+648718: 3501 0c00                              |0080: if-ge v1, v0, 008c // +000c
+64871c: 5475 2850                              |0082: iget-object v5, v7, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+648720: 4605 0501                              |0084: aget-object v5, v5, v1
+648724: 3805 0600                              |0086: if-eqz v5, 008c // +0006
+648728: 6e20 7286 4500                         |0088: invoke-virtual {v5, v4}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.assignSerializer:(Lcom/fasterxml/jackson/databind/JsonSerializer;)V // method@8672
+64872e: 2804                                   |008b: goto 008f // +0004
+648730: 6e20 7286 4300                         |008c: invoke-virtual {v3, v4}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.assignSerializer:(Lcom/fasterxml/jackson/databind/JsonSerializer;)V // method@8672
+648736: d801 0101                              |008f: add-int/lit8 v1, v1, #int 1 // #01
+64873a: 2900 7aff                              |0091: goto/16 000b // -0086
+64873e: 5477 2650                              |0093: iget-object v7, v7, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+648742: 3807 0500                              |0095: if-eqz v7, 009a // +0005
+648746: 6e20 3986 8700                         |0097: invoke-virtual {v7, v8}, Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter;.resolve:(Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@8639
+64874c: 0e00                                   |009a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=338
+        0x0008 line=339
+        0x000d line=340
+        0x0011 line=342
+        0x001d line=343
+        0x0023 line=345
+        0x0028 line=348
+        0x002e line=350
+        0x0031 line=356
+        0x0038 line=360
+        0x003e line=363
+        0x0044 line=368
+        0x0048 line=369
+        0x004e line=370
+        0x005a line=371
+        0x005e line=376
+        0x0062 line=379
+        0x0068 line=380
+        0x0074 line=383
+        0x0078 line=386
+        0x0082 line=394
+        0x0088 line=396
+        0x008c line=403
+        0x0093 line=407
+        0x0097 line=409
+      locals        :
+        0x0000 - 0x009b reg=7 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x009b reg=8 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+
+    #12              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'serialize'
+      type          : '(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #13              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'serializeFields'
+      type          : '(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 9
+      ins           : 4
+      outs          : 5
+      insns size    : 76 16-bit code units
+648750:                                        |[648750] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFields:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V
+648760: 1a00 8572                              |0000: const-string v0, "[anySetter]" // string@7285
+648764: 5451 2850                              |0002: iget-object v1, v5, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+648768: 3801 0b00                              |0004: if-eqz v1, 000f // +000b
+64876c: 6e10 3972 0800                         |0006: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/SerializerProvider;.getActiveView:()Ljava/lang/Class; // method@7239
+648772: 0c01                                   |0009: move-result-object v1
+648774: 3801 0500                              |000a: if-eqz v1, 000f // +0005
+648778: 5451 2850                              |000c: iget-object v1, v5, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+64877c: 2803                                   |000e: goto 0011 // +0003
+64877e: 5451 2c50                              |000f: iget-object v1, v5, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+648782: 1202                                   |0011: const/4 v2, #int 0 // #0
+648784: 2113                                   |0012: array-length v3, v1
+648786: 3532 0c00                              |0013: if-ge v2, v3, 001f // +000c
+64878a: 4604 0102                              |0015: aget-object v4, v1, v2
+64878e: 3804 0500                              |0017: if-eqz v4, 001c // +0005
+648792: 6e40 9086 6487                         |0019: invoke-virtual {v4, v6, v7, v8}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.serializeAsField:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@8690
+648798: d802 0201                              |001c: add-int/lit8 v2, v2, #int 1 // #01
+64879c: 28f5                                   |001e: goto 0013 // -000b
+64879e: 5453 2650                              |001f: iget-object v3, v5, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+6487a2: 3803 2a00                              |0021: if-eqz v3, 004b // +002a
+6487a6: 6e40 3886 6387                         |0023: invoke-virtual {v3, v6, v7, v8}, Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter;.getAndSerialize:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@8638
+6487ac: 2825                                   |0026: goto 004b // +0025
+6487ae: 0d05                                   |0027: move-exception v5
+6487b0: 2208 c60c                              |0028: new-instance v8, Lcom/fasterxml/jackson/databind/JsonMappingException; // type@0cc6
+6487b4: 1a03 e42c                              |002a: const-string v3, "Infinite recursion (StackOverflowError)" // string@2ce4
+6487b8: 7040 f46d 7853                         |002c: invoke-direct {v8, v7, v3, v5}, Lcom/fasterxml/jackson/databind/JsonMappingException;.<init>:(Ljava/io/Closeable;Ljava/lang/String;Ljava/lang/Throwable;)V // method@6df4
+6487be: 2115                                   |002f: array-length v5, v1
+6487c0: 3352 0300                              |0030: if-ne v2, v5, 0033 // +0003
+6487c4: 2807                                   |0032: goto 0039 // +0007
+6487c6: 4605 0102                              |0033: aget-object v5, v1, v2
+6487ca: 6e10 7e86 0500                         |0035: invoke-virtual {v5}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getName:()Ljava/lang/String; // method@867e
+6487d0: 0c00                                   |0038: move-result-object v0
+6487d2: 6e30 8d6c 6800                         |0039: invoke-virtual {v8, v6, v0}, Lcom/fasterxml/jackson/databind/DatabindException;.prependPath:(Ljava/lang/Object;Ljava/lang/String;)V // method@6c8d
+6487d8: 2708                                   |003c: throw v8
+6487da: 0d07                                   |003d: move-exception v7
+6487dc: 2113                                   |003e: array-length v3, v1
+6487de: 3332 0300                              |003f: if-ne v2, v3, 0042 // +0003
+6487e2: 2807                                   |0041: goto 0048 // +0007
+6487e4: 4600 0102                              |0042: aget-object v0, v1, v2
+6487e8: 6e10 7e86 0000                         |0044: invoke-virtual {v0}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getName:()Ljava/lang/String; // method@867e
+6487ee: 0c00                                   |0047: move-result-object v0
+6487f0: 6e50 1789 8567                         |0048: invoke-virtual {v5, v8, v7, v6, v0}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.wrapAndThrow:(Lcom/fasterxml/jackson/databind/SerializerProvider;Ljava/lang/Throwable;Ljava/lang/Object;Ljava/lang/String;)V // method@8917
+6487f6: 0e00                                   |004b: return-void
+      catches       : 1
+        0x0012 - 0x0026
+          Ljava/lang/Exception; -> 0x003d
+          Ljava/lang/StackOverflowError; -> 0x0027
+      positions     :
+        0x0000 line=764
+        0x000c line=765
+        0x000f line=767
+        0x0012 line=771
+        0x0015 line=772
+        0x0019 line=774
+        0x001f line=777
+        0x0023 line=778
+        0x0028 line=789
+        0x002f line=791
+        0x0039 line=792
+        0x003c line=793
+        0x003e line=781
+        0x0048 line=782
+      locals        :
+        0x0000 - 0x004c reg=5 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x004c reg=6 (null) Ljava/lang/Object;
+        0x0000 - 0x004c reg=7 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x004c reg=8 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+
+    #14              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'serializeFieldsFiltered'
+      type          : '(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 5
+      insns size    : 88 16-bit code units
+648808:                                        |[648808] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeFieldsFiltered:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V
+648818: 1a00 8572                              |0000: const-string v0, "[anySetter]" // string@7285
+64881c: 5461 2850                              |0002: iget-object v1, v6, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+648820: 3801 0b00                              |0004: if-eqz v1, 000f // +000b
+648824: 6e10 3972 0900                         |0006: invoke-virtual {v9}, Lcom/fasterxml/jackson/databind/SerializerProvider;.getActiveView:()Ljava/lang/Class; // method@7239
+64882a: 0c01                                   |0009: move-result-object v1
+64882c: 3801 0500                              |000a: if-eqz v1, 000f // +0005
+648830: 5461 2850                              |000c: iget-object v1, v6, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._filteredProps:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@5028
+648834: 2803                                   |000e: goto 0011 // +0003
+648836: 5461 2c50                              |000f: iget-object v1, v6, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._props:[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter; // field@502c
+64883a: 5462 2b50                              |0011: iget-object v2, v6, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+64883e: 6e40 0489 9672                         |0013: invoke-virtual {v6, v9, v2, v7}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.findPropertyFilter:(Lcom/fasterxml/jackson/databind/SerializerProvider;Ljava/lang/Object;Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/ser/PropertyFilter; // method@8904
+648844: 0c02                                   |0016: move-result-object v2
+648846: 3902 0600                              |0017: if-nez v2, 001d // +0006
+64884a: 6e40 0b89 7698                         |0019: invoke-virtual {v6, v7, v8, v9}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.serializeFields:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@890b
+648850: 0e00                                   |001c: return-void
+648852: 1203                                   |001d: const/4 v3, #int 0 // #0
+648854: 2114                                   |001e: array-length v4, v1
+648856: 3543 0c00                              |001f: if-ge v3, v4, 002b // +000c
+64885a: 4605 0103                              |0021: aget-object v5, v1, v3
+64885e: 3805 0500                              |0023: if-eqz v5, 0028 // +0005
+648862: 7255 3c87 7298                         |0025: invoke-interface {v2, v7, v8, v9, v5}, Lcom/fasterxml/jackson/databind/ser/PropertyFilter;.serializeAsField:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/ser/PropertyWriter;)V // method@873c
+648868: d803 0301                              |0028: add-int/lit8 v3, v3, #int 1 // #01
+64886c: 28f5                                   |002a: goto 001f // -000b
+64886e: 5464 2650                              |002b: iget-object v4, v6, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._anyGetterWriter:Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter; // field@5026
+648872: 3804 2a00                              |002d: if-eqz v4, 0057 // +002a
+648876: 6e52 3786 7498                         |002f: invoke-virtual {v4, v7, v8, v9, v2}, Lcom/fasterxml/jackson/databind/ser/AnyGetterWriter;.getAndFilter:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/ser/PropertyFilter;)V // method@8637
+64887c: 2825                                   |0032: goto 0057 // +0025
+64887e: 0d06                                   |0033: move-exception v6
+648880: 2209 c60c                              |0034: new-instance v9, Lcom/fasterxml/jackson/databind/JsonMappingException; // type@0cc6
+648884: 1a02 e42c                              |0036: const-string v2, "Infinite recursion (StackOverflowError)" // string@2ce4
+648888: 7040 f46d 8962                         |0038: invoke-direct {v9, v8, v2, v6}, Lcom/fasterxml/jackson/databind/JsonMappingException;.<init>:(Ljava/io/Closeable;Ljava/lang/String;Ljava/lang/Throwable;)V // method@6df4
+64888e: 2116                                   |003b: array-length v6, v1
+648890: 3363 0300                              |003c: if-ne v3, v6, 003f // +0003
+648894: 2807                                   |003e: goto 0045 // +0007
+648896: 4606 0103                              |003f: aget-object v6, v1, v3
+64889a: 6e10 7e86 0600                         |0041: invoke-virtual {v6}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getName:()Ljava/lang/String; // method@867e
+6488a0: 0c00                                   |0044: move-result-object v0
+6488a2: 6e30 8d6c 7900                         |0045: invoke-virtual {v9, v7, v0}, Lcom/fasterxml/jackson/databind/DatabindException;.prependPath:(Ljava/lang/Object;Ljava/lang/String;)V // method@6c8d
+6488a8: 2709                                   |0048: throw v9
+6488aa: 0d08                                   |0049: move-exception v8
+6488ac: 2112                                   |004a: array-length v2, v1
+6488ae: 3323 0300                              |004b: if-ne v3, v2, 004e // +0003
+6488b2: 2807                                   |004d: goto 0054 // +0007
+6488b4: 4600 0103                              |004e: aget-object v0, v1, v3
+6488b8: 6e10 7e86 0000                         |0050: invoke-virtual {v0}, Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;.getName:()Ljava/lang/String; // method@867e
+6488be: 0c00                                   |0053: move-result-object v0
+6488c0: 6e50 1789 9678                         |0054: invoke-virtual {v6, v9, v8, v7, v0}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.wrapAndThrow:(Lcom/fasterxml/jackson/databind/SerializerProvider;Ljava/lang/Throwable;Ljava/lang/Object;Ljava/lang/String;)V // method@8917
+6488c6: 0e00                                   |0057: return-void
+      catches       : 1
+        0x001e - 0x0032
+          Ljava/lang/Exception; -> 0x0049
+          Ljava/lang/StackOverflowError; -> 0x0033
+      positions     :
+        0x0000 line=809
+        0x000c line=810
+        0x000f line=812
+        0x0011 line=814
+        0x0019 line=817
+        0x001e line=822
+        0x0021 line=823
+        0x0025 line=825
+        0x002b line=828
+        0x002f line=829
+        0x0034 line=837
+        0x003b line=838
+        0x0045 line=839
+        0x0048 line=840
+        0x004a line=832
+        0x0054 line=833
+      locals        :
+        0x0000 - 0x0058 reg=6 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0058 reg=7 (null) Ljava/lang/Object;
+        0x0000 - 0x0058 reg=8 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0058 reg=9 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+
+    #15              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'serializeWithType'
+      type          : '(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 5
+      outs          : 5
+      insns size    : 35 16-bit code units
+6488d8:                                        |[6488d8] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.serializeWithType:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;)V
+6488e8: 5420 2a50                              |0000: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+6488ec: 3800 0600                              |0002: if-eqz v0, 0008 // +0006
+6488f0: 6e56 fb88 3254                         |0004: invoke-virtual {v2, v3, v4, v5, v6}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._serializeWithObjectId:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;)V // method@88fb
+6488f6: 0e00                                   |0007: return-void
+6488f8: 6200 dc44                              |0008: sget-object v0, Lcom/fasterxml/jackson/core/JsonToken;.START_OBJECT:Lcom/fasterxml/jackson/core/JsonToken; // field@44dc
+6488fc: 6e40 fd88 6203                         |000a: invoke-virtual {v2, v6, v3, v0}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._typeIdDef:(Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonToken;)Lcom/fasterxml/jackson/core/type/WritableTypeId; // method@88fd
+648902: 0c00                                   |000d: move-result-object v0
+648904: 6e30 4382 4600                         |000e: invoke-virtual {v6, v4, v0}, Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;.writeTypePrefix:(Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/core/type/WritableTypeId;)Lcom/fasterxml/jackson/core/type/WritableTypeId; // method@8243
+64890a: 6e20 9161 3400                         |0011: invoke-virtual {v4, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.setCurrentValue:(Ljava/lang/Object;)V // method@6191
+648910: 5421 2b50                              |0014: iget-object v1, v2, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._propertyFilterId:Ljava/lang/Object; // field@502b
+648914: 3801 0600                              |0016: if-eqz v1, 001c // +0006
+648918: 6e40 0c89 3254                         |0018: invoke-virtual {v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.serializeFieldsFiltered:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@890c
+64891e: 2804                                   |001b: goto 001f // +0004
+648920: 6e40 0b89 3254                         |001c: invoke-virtual {v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.serializeFields:(Ljava/lang/Object;Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@890b
+648926: 6e30 4a82 4600                         |001f: invoke-virtual {v6, v4, v0}, Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;.writeTypeSuffix:(Lcom/fasterxml/jackson/core/JsonGenerator;Lcom/fasterxml/jackson/core/type/WritableTypeId;)Lcom/fasterxml/jackson/core/type/WritableTypeId; // method@824a
+64892c: 0e00                                   |0022: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=643
+        0x0004 line=647
+        0x0008 line=651
+        0x000e line=652
+        0x0011 line=653
+        0x0014 line=654
+        0x0018 line=655
+        0x001c line=657
+        0x001f line=659
+      locals        :
+        0x0000 - 0x0023 reg=2 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0023 reg=3 (null) Ljava/lang/Object;
+        0x0000 - 0x0023 reg=4 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+        0x0000 - 0x0023 reg=5 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+        0x0000 - 0x0023 reg=6 (null) Lcom/fasterxml/jackson/databind/jsontype/TypeSerializer;
+
+    #16              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'usesObjectId'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+648930:                                        |[648930] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.usesObjectId:()Z
+648940: 5400 2a50                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;._objectIdWriter:Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter; // field@502a
+648944: 3800 0400                              |0002: if-eqz v0, 0006 // +0004
+648948: 1210                                   |0004: const/4 v0, #int 1 // #1
+64894a: 2802                                   |0005: goto 0007 // +0002
+64894c: 1200                                   |0006: const/4 v0, #int 0 // #0
+64894e: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=629
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+
+    #17              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'withByNameInclusion'
+      type          : '(Ljava/util/Set;Ljava/util/Set;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;'
+      access        : 0x0404 (PROTECTED ABSTRACT)
+      code          : (none)
+
+    #18              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'withFilterId'
+      type          : '(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonSerializer;'
+      access        : 0x1041 (PUBLIC BRIDGE SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 5 16-bit code units
+648950:                                        |[648950] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.withFilterId:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/JsonSerializer;
+648960: 6e20 1289 1000                         |0000: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.withFilterId:(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase; // method@8912
+648966: 0c00                                   |0003: move-result-object v0
+648968: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=39
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0005 reg=1 (null) Ljava/lang/Object;
+
+    #19              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'withFilterId'
+      type          : '(Ljava/lang/Object;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #20              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'withIgnorals'
+      type          : '(Ljava/util/Set;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 6 16-bit code units
+64896c:                                        |[64896c] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.withIgnorals:(Ljava/util/Set;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+64897c: 1200                                   |0000: const/4 v0, #int 0 // #0
+64897e: 6e30 1089 2100                         |0001: invoke-virtual {v1, v2, v0}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.withByNameInclusion:(Ljava/util/Set;Ljava/util/Set;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase; // method@8910
+648984: 0c01                                   |0004: move-result-object v1
+648986: 1101                                   |0005: return-object v1
+      catches       : (none)
+      positions     :
+        0x0001 line=238
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0006 reg=2 (null) Ljava/util/Set;
+
+    #21              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'withIgnorals'
+      type          : '([Ljava/lang/String;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 9 16-bit code units
+648988:                                        |[648988] com.fasterxml.jackson.databind.ser.std.BeanSerializerBase.withIgnorals:([Ljava/lang/String;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+648998: 7110 ee8d 0100                         |0000: invoke-static {v1}, Lcom/fasterxml/jackson/databind/util/ArrayBuilders;.arrayToSet:([Ljava/lang/Object;)Ljava/util/HashSet; // method@8dee
+64899e: 0c01                                   |0003: move-result-object v1
+6489a0: 6e20 1389 1000                         |0004: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;.withIgnorals:(Ljava/util/Set;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase; // method@8913
+6489a6: 0c00                                   |0007: move-result-object v0
+6489a8: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=258
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;
+        0x0000 - 0x0009 reg=1 (null) [Ljava/lang/String;
+
+    #22              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'withObjectIdWriter'
+      type          : '(Lcom/fasterxml/jackson/databind/ser/impl/ObjectIdWriter;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;'
+      access        : 0x0401 (PUBLIC ABSTRACT)
+      code          : (none)
+
+    #23              : (in Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;)
+      name          : 'withProperties'
+      type          : '([Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;[Lcom/fasterxml/jackson/databind/ser/BeanPropertyWriter;)Lcom/fasterxml/jackson/databind/ser/std/BeanSerializerBase;'
+      access        : 0x0404 (PROTECTED ABSTRACT)
+      code          : (none)
+
+  source_file_idx   : 6413 (BeanSerializerBase.java)
+

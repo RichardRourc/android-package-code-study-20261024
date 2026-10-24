@@ -1,0 +1,180 @@
+Class #5991            -
+  Class descriptor  : 'Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;)
+      name          : 'MAX_SIGNERS'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 9
+  Instance fields   -
+    #0              : (in Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;)
+      name          : 'trustRootIndex'
+      type          : 'Lcom/squareup/okhttp/internal/tls/TrustRootIndex;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;)
+      name          : '<init>'
+      type          : '(Lcom/squareup/okhttp/internal/tls/TrustRootIndex;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 6 16-bit code units
+7689dc:                                        |[7689dc] com.squareup.okhttp.internal.tls.CertificateChainCleaner.<init>:(Lcom/squareup/okhttp/internal/tls/TrustRootIndex;)V
+7689ec: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+7689f2: 5b01 8f89                              |0003: iput-object v1, v0, Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;.trustRootIndex:Lcom/squareup/okhttp/internal/tls/TrustRootIndex; // field@898f
+7689f6: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=48
+        0x0003 line=49
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;
+        0x0000 - 0x0006 reg=1 (null) Lcom/squareup/okhttp/internal/tls/TrustRootIndex;
+
+    #1              : (in Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;)
+      name          : 'verifySignature'
+      type          : '(Ljava/security/cert/X509Certificate;Ljava/security/cert/X509Certificate;)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 2
+      insns size    : 26 16-bit code units
+7689f8:                                        |[7689f8] com.squareup.okhttp.internal.tls.CertificateChainCleaner.verifySignature:(Ljava/security/cert/X509Certificate;Ljava/security/cert/X509Certificate;)Z
+768a08: 6e10 46d4 0200                         |0000: invoke-virtual {v2}, Ljava/security/cert/X509Certificate;.getIssuerDN:()Ljava/security/Principal; // method@d446
+768a0e: 0c01                                   |0003: move-result-object v1
+768a10: 6e10 4ad4 0300                         |0004: invoke-virtual {v3}, Ljava/security/cert/X509Certificate;.getSubjectDN:()Ljava/security/Principal; // method@d44a
+768a16: 0c00                                   |0007: move-result-object v0
+768a18: 6e20 cad1 0100                         |0008: invoke-virtual {v1, v0}, Ljava/lang/Object;.equals:(Ljava/lang/Object;)Z // method@d1ca
+768a1e: 0a01                                   |000b: move-result v1
+768a20: 1200                                   |000c: const/4 v0, #int 0 // #0
+768a22: 3901 0300                              |000d: if-nez v1, 0010 // +0003
+768a26: 0f00                                   |000f: return v0
+768a28: 6e10 48d4 0300                         |0010: invoke-virtual {v3}, Ljava/security/cert/X509Certificate;.getPublicKey:()Ljava/security/PublicKey; // method@d448
+768a2e: 0c01                                   |0013: move-result-object v1
+768a30: 6e20 4cd4 1200                         |0014: invoke-virtual {v2, v1}, Ljava/security/cert/X509Certificate;.verify:(Ljava/security/PublicKey;)V // method@d44c
+768a36: 1211                                   |0017: const/4 v1, #int 1 // #1
+768a38: 0f01                                   |0018: return v1
+768a3a: 0f00                                   |0019: return v0
+      catches       : 1
+        0x0010 - 0x0017
+          Ljava/security/GeneralSecurityException; -> 0x0019
+      positions     :
+        0x0000 line=109
+        0x0010 line=111
+      locals        :
+        0x0000 - 0x001a reg=1 this Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;
+        0x0000 - 0x001a reg=2 (null) Ljava/security/cert/X509Certificate;
+        0x0000 - 0x001a reg=3 (null) Ljava/security/cert/X509Certificate;
+
+  Virtual methods   -
+    #0              : (in Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;)
+      name          : 'clean'
+      type          : '(Ljava/util/List;)Ljava/util/List;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 3
+      insns size    : 143 16-bit code units
+768a4c:                                        |[768a4c] com.squareup.okhttp.internal.tls.CertificateChainCleaner.clean:(Ljava/util/List;)Ljava/util/List;
+768a5c: 2200 391b                              |0000: new-instance v0, Ljava/util/ArrayDeque; // type@1b39
+768a60: 7020 92d4 8000                         |0002: invoke-direct {v0, v8}, Ljava/util/ArrayDeque;.<init>:(Ljava/util/Collection;)V // method@d492
+768a66: 2208 3a1b                              |0005: new-instance v8, Ljava/util/ArrayList; // type@1b3a
+768a6a: 7010 9fd4 0800                         |0007: invoke-direct {v8}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+768a70: 7210 63d5 0000                         |000a: invoke-interface {v0}, Ljava/util/Deque;.removeFirst:()Ljava/lang/Object; // method@d563
+768a76: 0c01                                   |000d: move-result-object v1
+768a78: 7220 c9d5 1800                         |000e: invoke-interface {v8, v1}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+768a7e: 1201                                   |0011: const/4 v1, #int 0 // #0
+768a80: 0112                                   |0012: move v2, v1
+768a82: 1303 0900                              |0013: const/16 v3, #int 9 // #9
+768a86: 3531 6500                              |0015: if-ge v1, v3, 007a // +0065
+768a8a: 7210 dbd5 0800                         |0017: invoke-interface {v8}, Ljava/util/List;.size:()I // method@d5db
+768a90: 0a03                                   |001a: move-result v3
+768a92: 1214                                   |001b: const/4 v4, #int 1 // #1
+768a94: b143                                   |001c: sub-int/2addr v3, v4
+768a96: 7220 cfd5 3800                         |001d: invoke-interface {v8, v3}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+768a9c: 0c03                                   |0020: move-result-object v3
+768a9e: 1f03 211b                              |0021: check-cast v3, Ljava/security/cert/X509Certificate; // type@1b21
+768aa2: 5475 8f89                              |0023: iget-object v5, v7, Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;.trustRootIndex:Lcom/squareup/okhttp/internal/tls/TrustRootIndex; // field@898f
+768aa6: 7220 8ace 3500                         |0025: invoke-interface {v5, v3}, Lcom/squareup/okhttp/internal/tls/TrustRootIndex;.findByIssuerAndSignature:(Ljava/security/cert/X509Certificate;)Ljava/security/cert/X509Certificate; // method@ce8a
+768aac: 0c05                                   |0028: move-result-object v5
+768aae: 3805 1a00                              |0029: if-eqz v5, 0043 // +001a
+768ab2: 7210 dbd5 0800                         |002b: invoke-interface {v8}, Ljava/util/List;.size:()I // method@d5db
+768ab8: 0a02                                   |002e: move-result v2
+768aba: 3642 0800                              |002f: if-gt v2, v4, 0037 // +0008
+768abe: 6e20 44d4 5300                         |0031: invoke-virtual {v3, v5}, Ljava/security/cert/X509Certificate;.equals:(Ljava/lang/Object;)Z // method@d444
+768ac4: 0a02                                   |0034: move-result v2
+768ac6: 3902 0500                              |0035: if-nez v2, 003a // +0005
+768aca: 7220 c9d5 5800                         |0037: invoke-interface {v8, v5}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+768ad0: 7030 74ce 5705                         |003a: invoke-direct {v7, v5, v5}, Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;.verifySignature:(Ljava/security/cert/X509Certificate;Ljava/security/cert/X509Certificate;)Z // method@ce74
+768ad6: 0a02                                   |003d: move-result v2
+768ad8: 3802 0300                              |003e: if-eqz v2, 0041 // +0003
+768adc: 1108                                   |0040: return-object v8
+768ade: 0142                                   |0041: move v2, v4
+768ae0: 281d                                   |0042: goto 005f // +001d
+768ae2: 7210 61d5 0000                         |0043: invoke-interface {v0}, Ljava/util/Deque;.iterator:()Ljava/util/Iterator; // method@d561
+768ae8: 0c04                                   |0046: move-result-object v4
+768aea: 7210 a0d5 0400                         |0047: invoke-interface {v4}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+768af0: 0a05                                   |004a: move-result v5
+768af2: 3805 1700                              |004b: if-eqz v5, 0062 // +0017
+768af6: 7210 a1d5 0400                         |004d: invoke-interface {v4}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+768afc: 0c05                                   |0050: move-result-object v5
+768afe: 1f05 211b                              |0051: check-cast v5, Ljava/security/cert/X509Certificate; // type@1b21
+768b02: 7030 74ce 3705                         |0053: invoke-direct {v7, v3, v5}, Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;.verifySignature:(Ljava/security/cert/X509Certificate;Ljava/security/cert/X509Certificate;)Z // method@ce74
+768b08: 0a06                                   |0056: move-result v6
+768b0a: 3806 f0ff                              |0057: if-eqz v6, 0047 // -0010
+768b0e: 7210 a2d5 0400                         |0059: invoke-interface {v4}, Ljava/util/Iterator;.remove:()V // method@d5a2
+768b14: 7220 c9d5 5800                         |005c: invoke-interface {v8, v5}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+768b1a: d801 0101                              |005f: add-int/lit8 v1, v1, #int 1 // #01
+768b1e: 28b2                                   |0061: goto 0013 // -004e
+768b20: 3802 0300                              |0062: if-eqz v2, 0065 // +0003
+768b24: 1108                                   |0064: return-object v8
+768b26: 2207 cf1b                              |0065: new-instance v7, Ljavax/net/ssl/SSLPeerUnverifiedException; // type@1bcf
+768b2a: 2208 991a                              |0067: new-instance v8, Ljava/lang/StringBuilder; // type@1a99
+768b2e: 1a00 3327                              |0069: const-string v0, "Failed to find a trusted cert that signed " // string@2733
+768b32: 7020 3cd2 0800                         |006b: invoke-direct {v8, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+768b38: 6e20 44d2 3800                         |006e: invoke-virtual {v8, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+768b3e: 0c08                                   |0071: move-result-object v8
+768b40: 6e10 58d2 0800                         |0072: invoke-virtual {v8}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+768b46: 0c08                                   |0075: move-result-object v8
+768b48: 7020 88d7 8700                         |0076: invoke-direct {v7, v8}, Ljavax/net/ssl/SSLPeerUnverifiedException;.<init>:(Ljava/lang/String;)V // method@d788
+768b4e: 2707                                   |0079: throw v7
+768b50: 2207 cf1b                              |007a: new-instance v7, Ljavax/net/ssl/SSLPeerUnverifiedException; // type@1bcf
+768b54: 2200 991a                              |007c: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+768b58: 1a01 7b1c                              |007e: const-string v1, "Certificate chain too long: " // string@1c7b
+768b5c: 7020 3cd2 1000                         |0080: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+768b62: 6e20 44d2 8000                         |0083: invoke-virtual {v0, v8}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+768b68: 0c08                                   |0086: move-result-object v8
+768b6a: 6e10 58d2 0800                         |0087: invoke-virtual {v8}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+768b70: 0c08                                   |008a: move-result-object v8
+768b72: 7020 88d7 8700                         |008b: invoke-direct {v7, v8}, Ljavax/net/ssl/SSLPeerUnverifiedException;.<init>:(Ljava/lang/String;)V // method@d788
+768b78: 2707                                   |008e: throw v7
+      catches       : (none)
+      positions     :
+        0x0000 line=60
+        0x0005 line=61
+        0x000a line=62
+        0x0017 line=67
+        0x0023 line=72
+        0x002b line=74
+        0x0037 line=75
+        0x003a line=77
+        0x0043 line=86
+        0x004d line=87
+        0x0053 line=88
+        0x0059 line=89
+        0x005c line=90
+        0x0065 line=101
+        0x007a line=104
+      locals        :
+        0x0000 - 0x008f reg=7 this Lcom/squareup/okhttp/internal/tls/CertificateChainCleaner;
+        0x0000 - 0x008f reg=8 (null) Ljava/util/List;
+
+  source_file_idx   : 7295 (CertificateChainCleaner.java)
+

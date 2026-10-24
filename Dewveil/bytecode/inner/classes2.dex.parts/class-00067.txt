@@ -1,0 +1,491 @@
+Class #67            -
+  Class descriptor  : 'Lokio/AsyncTimeout;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Lokio/Timeout;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lokio/AsyncTimeout;)
+      name          : 'head'
+      type          : 'Lokio/AsyncTimeout;'
+      access        : 0x000a (PRIVATE STATIC)
+  Instance fields   -
+    #0              : (in Lokio/AsyncTimeout;)
+      name          : 'inQueue'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lokio/AsyncTimeout;)
+      name          : 'next'
+      type          : 'Lokio/AsyncTimeout;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lokio/AsyncTimeout;)
+      name          : 'timeoutAt'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lokio/AsyncTimeout;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+02d7d8:                                        |[02d7d8] okio.AsyncTimeout.<init>:()V
+02d7e8: 7010 3f06 0000                         |0000: invoke-direct {v0}, Lokio/Timeout;.<init>:()V // method@063f
+02d7ee: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=40
+      locals        :
+        0x0000 - 0x0004 reg=0 this Lokio/AsyncTimeout;
+
+    #1              : (in Lokio/AsyncTimeout;)
+      name          : 'access$000'
+      type          : '()Lokio/AsyncTimeout;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 0
+      insns size    : 5 16-bit code units
+02d7f0:                                        |[02d7f0] okio.AsyncTimeout.access$000:()Lokio/AsyncTimeout;
+02d800: 7100 7204 0000                         |0000: invoke-static {}, Lokio/AsyncTimeout;.awaitTimeout:()Lokio/AsyncTimeout; // method@0472
+02d806: 0c00                                   |0003: move-result-object v0
+02d808: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=40
+      locals        :
+
+    #2              : (in Lokio/AsyncTimeout;)
+      name          : 'awaitTimeout'
+      type          : '()Lokio/AsyncTimeout;'
+      access        : 0x2000a (PRIVATE STATIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 9
+      ins           : 0
+      outs          : 4
+      insns size    : 59 16-bit code units
+02d80c:                                        |[02d80c] okio.AsyncTimeout.awaitTimeout:()Lokio/AsyncTimeout;
+02d81c: 1c00 4801                              |0000: const-class v0, Lokio/AsyncTimeout; // type@0148
+02d820: 1d00                                   |0002: monitor-enter v0
+02d822: 6201 e800                              |0003: sget-object v1, Lokio/AsyncTimeout;.head:Lokio/AsyncTimeout; // field@00e8
+02d826: 5411 ea00                              |0005: iget-object v1, v1, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d82a: 1202                                   |0007: const/4 v2, #int 0 // #0
+02d82c: 3901 0900                              |0008: if-nez v1, 0011 // +0009
+02d830: 1c01 4801                              |000a: const-class v1, Lokio/AsyncTimeout; // type@0148
+02d834: 6e10 3c02 0100                         |000c: invoke-virtual {v1}, Ljava/lang/Object;.wait:()V // method@023c
+02d83a: 1e00                                   |000f: monitor-exit v0
+02d83c: 1102                                   |0010: return-object v2
+02d83e: 7100 6902 0000                         |0011: invoke-static {}, Ljava/lang/System;.nanoTime:()J // method@0269
+02d844: 0b03                                   |0014: move-result-wide v3
+02d846: 7030 7b04 3104                         |0015: invoke-direct {v1, v3, v4}, Lokio/AsyncTimeout;.remainingNanos:(J)J // method@047b
+02d84c: 0b03                                   |0018: move-result-wide v3
+02d84e: 1605 0000                              |0019: const-wide/16 v5, #int 0 // #0
+02d852: 3105 0305                              |001b: cmp-long v5, v3, v5
+02d856: 3d05 1100                              |001d: if-lez v5, 002e // +0011
+02d85a: 1705 4042 0f00                         |001f: const-wide/32 v5, #float 1.4013e-39 // #000f4240
+02d860: 9e07 0305                              |0022: div-long v7, v3, v5
+02d864: bd75                                   |0024: mul-long/2addr v5, v7
+02d866: bc53                                   |0025: sub-long/2addr v3, v5
+02d868: 1c01 4801                              |0026: const-class v1, Lokio/AsyncTimeout; // type@0148
+02d86c: 8433                                   |0028: long-to-int v3, v3
+02d86e: 6e40 3d02 7138                         |0029: invoke-virtual {v1, v7, v8, v3}, Ljava/lang/Object;.wait:(JI)V // method@023d
+02d874: 1e00                                   |002c: monitor-exit v0
+02d876: 1102                                   |002d: return-object v2
+02d878: 6203 e800                              |002e: sget-object v3, Lokio/AsyncTimeout;.head:Lokio/AsyncTimeout; // field@00e8
+02d87c: 5414 ea00                              |0030: iget-object v4, v1, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d880: 5b34 ea00                              |0032: iput-object v4, v3, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d884: 5b12 ea00                              |0034: iput-object v2, v1, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d888: 1e00                                   |0036: monitor-exit v0
+02d88a: 1101                                   |0037: return-object v1
+02d88c: 0d01                                   |0038: move-exception v1
+02d88e: 1e00                                   |0039: monitor-exit v0
+02d890: 2701                                   |003a: throw v1
+      catches       : 4
+        0x0003 - 0x000f
+          <any> -> 0x0038
+        0x0011 - 0x002c
+          <any> -> 0x0038
+        0x002e - 0x0036
+          <any> -> 0x0038
+        0x0039 - 0x003a
+          <any> -> 0x0038
+      positions     :
+        0x0003 line=307
+        0x000a line=311
+        0x000f line=312
+        0x0011 line=315
+        0x0022 line=321
+        0x0026 line=323
+        0x002c line=324
+        0x002e line=328
+        0x0034 line=329
+        0x0036 line=330
+      locals        :
+
+    #3              : (in Lokio/AsyncTimeout;)
+      name          : 'cancelScheduledTimeout'
+      type          : '(Lokio/AsyncTimeout;)Z'
+      access        : 0x2000a (PRIVATE STATIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 0
+      insns size    : 29 16-bit code units
+02d8b8:                                        |[02d8b8] okio.AsyncTimeout.cancelScheduledTimeout:(Lokio/AsyncTimeout;)Z
+02d8c8: 1c00 4801                              |0000: const-class v0, Lokio/AsyncTimeout; // type@0148
+02d8cc: 1d00                                   |0002: monitor-enter v0
+02d8ce: 6201 e800                              |0003: sget-object v1, Lokio/AsyncTimeout;.head:Lokio/AsyncTimeout; // field@00e8
+02d8d2: 3801 1200                              |0005: if-eqz v1, 0017 // +0012
+02d8d6: 5412 ea00                              |0007: iget-object v2, v1, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d8da: 3332 0c00                              |0009: if-ne v2, v3, 0015 // +000c
+02d8de: 5432 ea00                              |000b: iget-object v2, v3, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d8e2: 5b12 ea00                              |000d: iput-object v2, v1, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d8e6: 1201                                   |000f: const/4 v1, #int 0 // #0
+02d8e8: 5b31 ea00                              |0010: iput-object v1, v3, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d8ec: 1e00                                   |0012: monitor-exit v0
+02d8ee: 1203                                   |0013: const/4 v3, #int 0 // #0
+02d8f0: 0f03                                   |0014: return v3
+02d8f2: 0721                                   |0015: move-object v1, v2
+02d8f4: 28ef                                   |0016: goto 0005 // -0011
+02d8f6: 1e00                                   |0017: monitor-exit v0
+02d8f8: 1213                                   |0018: const/4 v3, #int 1 // #1
+02d8fa: 0f03                                   |0019: return v3
+02d8fc: 0d03                                   |001a: move-exception v3
+02d8fe: 1e00                                   |001b: monitor-exit v0
+02d900: 2703                                   |001c: throw v3
+      catches       : 2
+        0x0003 - 0x0012
+          <any> -> 0x001a
+        0x001b - 0x001c
+          <any> -> 0x001a
+      positions     :
+        0x0003 line=117
+        0x0007 line=118
+        0x000b line=119
+        0x0010 line=120
+        0x0012 line=121
+        0x0017 line=126
+      locals        :
+        0x0000 - 0x001d reg=3 (null) Lokio/AsyncTimeout;
+
+    #4              : (in Lokio/AsyncTimeout;)
+      name          : 'remainingNanos'
+      type          : '(J)J'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 0
+      insns size    : 4 16-bit code units
+02d918:                                        |[02d918] okio.AsyncTimeout.remainingNanos:(J)J
+02d928: 5320 eb00                              |0000: iget-wide v0, v2, Lokio/AsyncTimeout;.timeoutAt:J // field@00eb
+02d92c: bc30                                   |0002: sub-long/2addr v0, v3
+02d92e: 1000                                   |0003: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0000 line=134
+      locals        :
+        0x0000 - 0x0004 reg=2 this Lokio/AsyncTimeout;
+        0x0000 - 0x0004 reg=3 (null) J
+
+    #5              : (in Lokio/AsyncTimeout;)
+      name          : 'scheduleTimeout'
+      type          : '(Lokio/AsyncTimeout;JZ)V'
+      access        : 0x2000a (PRIVATE STATIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 9
+      ins           : 4
+      outs          : 4
+      insns size    : 109 16-bit code units
+02d930:                                        |[02d930] okio.AsyncTimeout.scheduleTimeout:(Lokio/AsyncTimeout;JZ)V
+02d940: 1c00 4801                              |0000: const-class v0, Lokio/AsyncTimeout; // type@0148
+02d944: 1d00                                   |0002: monitor-enter v0
+02d946: 6201 e800                              |0003: sget-object v1, Lokio/AsyncTimeout;.head:Lokio/AsyncTimeout; // field@00e8
+02d94a: 3901 1100                              |0005: if-nez v1, 0016 // +0011
+02d94e: 2201 4801                              |0007: new-instance v1, Lokio/AsyncTimeout; // type@0148
+02d952: 7010 7004 0100                         |0009: invoke-direct {v1}, Lokio/AsyncTimeout;.<init>:()V // method@0470
+02d958: 6901 e800                              |000c: sput-object v1, Lokio/AsyncTimeout;.head:Lokio/AsyncTimeout; // field@00e8
+02d95c: 2201 4701                              |000e: new-instance v1, Lokio/AsyncTimeout$Watchdog; // type@0147
+02d960: 7010 6c04 0100                         |0010: invoke-direct {v1}, Lokio/AsyncTimeout$Watchdog;.<init>:()V // method@046c
+02d966: 6e10 6f04 0100                         |0013: invoke-virtual {v1}, Lokio/AsyncTimeout$Watchdog;.start:()V // method@046f
+02d96c: 7100 6902 0000                         |0016: invoke-static {}, Ljava/lang/System;.nanoTime:()J // method@0269
+02d972: 0b01                                   |0019: move-result-wide v1
+02d974: 1603 0000                              |001a: const-wide/16 v3, #int 0 // #0
+02d978: 3103 0603                              |001c: cmp-long v3, v6, v3
+02d97c: 3803 1100                              |001e: if-eqz v3, 002f // +0011
+02d980: 3808 0f00                              |0020: if-eqz v8, 002f // +000f
+02d984: 6e10 7404 0500                         |0022: invoke-virtual {v5}, Lokio/AsyncTimeout;.deadlineNanoTime:()J // method@0474
+02d98a: 0b03                                   |0025: move-result-wide v3
+02d98c: bc13                                   |0026: sub-long/2addr v3, v1
+02d98e: 7140 3002 7643                         |0027: invoke-static {v6, v7, v3, v4}, Ljava/lang/Math;.min:(JJ)J // method@0230
+02d994: 0b06                                   |002a: move-result-wide v6
+02d996: bb16                                   |002b: add-long/2addr v6, v1
+02d998: 5a56 eb00                              |002c: iput-wide v6, v5, Lokio/AsyncTimeout;.timeoutAt:J // field@00eb
+02d99c: 280f                                   |002e: goto 003d // +000f
+02d99e: 3803 0600                              |002f: if-eqz v3, 0035 // +0006
+02d9a2: bb16                                   |0031: add-long/2addr v6, v1
+02d9a4: 5a56 eb00                              |0032: iput-wide v6, v5, Lokio/AsyncTimeout;.timeoutAt:J // field@00eb
+02d9a8: 2809                                   |0034: goto 003d // +0009
+02d9aa: 3808 2f00                              |0035: if-eqz v8, 0064 // +002f
+02d9ae: 6e10 7404 0500                         |0037: invoke-virtual {v5}, Lokio/AsyncTimeout;.deadlineNanoTime:()J // method@0474
+02d9b4: 0b06                                   |003a: move-result-wide v6
+02d9b6: 5a56 eb00                              |003b: iput-wide v6, v5, Lokio/AsyncTimeout;.timeoutAt:J // field@00eb
+02d9ba: 7030 7b04 1502                         |003d: invoke-direct {v5, v1, v2}, Lokio/AsyncTimeout;.remainingNanos:(J)J // method@047b
+02d9c0: 0b06                                   |0040: move-result-wide v6
+02d9c2: 6208 e800                              |0041: sget-object v8, Lokio/AsyncTimeout;.head:Lokio/AsyncTimeout; // field@00e8
+02d9c6: 5483 ea00                              |0043: iget-object v3, v8, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d9ca: 3803 0e00                              |0045: if-eqz v3, 0053 // +000e
+02d9ce: 7030 7b04 1302                         |0047: invoke-direct {v3, v1, v2}, Lokio/AsyncTimeout;.remainingNanos:(J)J // method@047b
+02d9d4: 0b03                                   |004a: move-result-wide v3
+02d9d6: 3103 0603                              |004b: cmp-long v3, v6, v3
+02d9da: 3b03 0300                              |004d: if-gez v3, 0050 // +0003
+02d9de: 2804                                   |004f: goto 0053 // +0004
+02d9e0: 5488 ea00                              |0050: iget-object v8, v8, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d9e4: 28f1                                   |0052: goto 0043 // -000f
+02d9e6: 5486 ea00                              |0053: iget-object v6, v8, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d9ea: 5b56 ea00                              |0055: iput-object v6, v5, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d9ee: 5b85 ea00                              |0057: iput-object v5, v8, Lokio/AsyncTimeout;.next:Lokio/AsyncTimeout; // field@00ea
+02d9f2: 6205 e800                              |0059: sget-object v5, Lokio/AsyncTimeout;.head:Lokio/AsyncTimeout; // field@00e8
+02d9f6: 3358 0700                              |005b: if-ne v8, v5, 0062 // +0007
+02d9fa: 1c05 4801                              |005d: const-class v5, Lokio/AsyncTimeout; // type@0148
+02d9fe: 6e10 3a02 0500                         |005f: invoke-virtual {v5}, Ljava/lang/Object;.notify:()V // method@023a
+02da04: 1e00                                   |0062: monitor-exit v0
+02da06: 0e00                                   |0063: return-void
+02da08: 2205 9b00                              |0064: new-instance v5, Ljava/lang/AssertionError; // type@009b
+02da0c: 7010 e701 0500                         |0066: invoke-direct {v5}, Ljava/lang/AssertionError;.<init>:()V // method@01e7
+02da12: 2705                                   |0069: throw v5
+02da14: 0d05                                   |006a: move-exception v5
+02da16: 1e00                                   |006b: monitor-exit v0
+02da18: 2705                                   |006c: throw v5
+      catches       : 2
+        0x0003 - 0x0062
+          <any> -> 0x006a
+        0x0064 - 0x006c
+          <any> -> 0x006a
+      positions     :
+        0x0003 line=75
+        0x0007 line=76
+        0x000e line=77
+        0x0016 line=80
+        0x0022 line=84
+        0x0032 line=86
+        0x0037 line=88
+        0x003d line=94
+        0x0041 line=95
+        0x0043 line=96
+        0x0050 line=95
+        0x0053 line=97
+        0x0057 line=98
+        0x0059 line=99
+        0x005d line=100
+        0x0062 line=105
+        0x0064 line=90
+      locals        :
+        0x0000 - 0x006d reg=5 (null) Lokio/AsyncTimeout;
+        0x0000 - 0x006d reg=6 (null) J
+        0x0000 - 0x006d reg=8 (null) Z
+
+  Virtual methods   -
+    #0              : (in Lokio/AsyncTimeout;)
+      name          : 'enter'
+      type          : '()V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 4
+      insns size    : 36 16-bit code units
+02da30:                                        |[02da30] okio.AsyncTimeout.enter:()V
+02da40: 5550 e900                              |0000: iget-boolean v0, v5, Lokio/AsyncTimeout;.inQueue:Z // field@00e9
+02da44: 3900 1a00                              |0002: if-nez v0, 001c // +001a
+02da48: 6e10 8004 0500                         |0004: invoke-virtual {v5}, Lokio/AsyncTimeout;.timeoutNanos:()J // method@0480
+02da4e: 0b00                                   |0007: move-result-wide v0
+02da50: 6e10 7904 0500                         |0008: invoke-virtual {v5}, Lokio/AsyncTimeout;.hasDeadline:()Z // method@0479
+02da56: 0a02                                   |000b: move-result v2
+02da58: 1603 0000                              |000c: const-wide/16 v3, #int 0 // #0
+02da5c: 3103 0003                              |000e: cmp-long v3, v0, v3
+02da60: 3903 0500                              |0010: if-nez v3, 0015 // +0005
+02da64: 3902 0300                              |0012: if-nez v2, 0015 // +0003
+02da68: 0e00                                   |0014: return-void
+02da6a: 1213                                   |0015: const/4 v3, #int 1 // #1
+02da6c: 5c53 e900                              |0016: iput-boolean v3, v5, Lokio/AsyncTimeout;.inQueue:Z // field@00e9
+02da70: 7140 7c04 0521                         |0018: invoke-static {v5, v0, v1, v2}, Lokio/AsyncTimeout;.scheduleTimeout:(Lokio/AsyncTimeout;JZ)V // method@047c
+02da76: 0e00                                   |001b: return-void
+02da78: 2205 b000                              |001c: new-instance v5, Ljava/lang/IllegalStateException; // type@00b0
+02da7c: 1a00 9f04                              |001e: const-string v0, "Unbalanced enter/exit" // string@049f
+02da80: 7020 1e02 0500                         |0020: invoke-direct {v5, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@021e
+02da86: 2705                                   |0023: throw v5
+      catches       : (none)
+      positions     :
+        0x0000 line=62
+        0x0004 line=63
+        0x0008 line=64
+        0x0016 line=68
+        0x0018 line=69
+        0x001c line=62
+      locals        :
+        0x0000 - 0x0024 reg=5 this Lokio/AsyncTimeout;
+
+    #1              : (in Lokio/AsyncTimeout;)
+      name          : 'exit'
+      type          : '(Ljava/io/IOException;)Ljava/io/IOException;'
+      access        : 0x0010 (FINAL)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 12 16-bit code units
+02da88:                                        |[02da88] okio.AsyncTimeout.exit:(Ljava/io/IOException;)Ljava/io/IOException;
+02da98: 6e10 7804 0100                         |0000: invoke-virtual {v1}, Lokio/AsyncTimeout;.exit:()Z // method@0478
+02da9e: 0a00                                   |0003: move-result v0
+02daa0: 3900 0300                              |0004: if-nez v0, 0007 // +0003
+02daa4: 1102                                   |0006: return-object v2
+02daa6: 6e20 7a04 2100                         |0007: invoke-virtual {v1, v2}, Lokio/AsyncTimeout;.newTimeoutException:(Ljava/io/IOException;)Ljava/io/IOException; // method@047a
+02daac: 0c01                                   |000a: move-result-object v1
+02daae: 1101                                   |000b: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=260
+        0x0007 line=261
+      locals        :
+        0x0000 - 0x000c reg=1 this Lokio/AsyncTimeout;
+        0x0000 - 0x000c reg=2 (null) Ljava/io/IOException;
+
+    #2              : (in Lokio/AsyncTimeout;)
+      name          : 'exit'
+      type          : '(Z)V'
+      access        : 0x0010 (FINAL)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 16 16-bit code units
+02dab0:                                        |[02dab0] okio.AsyncTimeout.exit:(Z)V
+02dac0: 6e10 7804 0100                         |0000: invoke-virtual {v1}, Lokio/AsyncTimeout;.exit:()Z // method@0478
+02dac6: 0a00                                   |0003: move-result v0
+02dac8: 3800 0b00                              |0004: if-eqz v0, 000f // +000b
+02dacc: 3902 0300                              |0006: if-nez v2, 0009 // +0003
+02dad0: 2807                                   |0008: goto 000f // +0007
+02dad2: 1202                                   |0009: const/4 v2, #int 0 // #0
+02dad4: 6e20 7a04 2100                         |000a: invoke-virtual {v1, v2}, Lokio/AsyncTimeout;.newTimeoutException:(Ljava/io/IOException;)Ljava/io/IOException; // method@047a
+02dada: 0c01                                   |000d: move-result-object v1
+02dadc: 2701                                   |000e: throw v1
+02dade: 0e00                                   |000f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=249
+        0x000a line=250
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lokio/AsyncTimeout;
+        0x0000 - 0x0010 reg=2 (null) Z
+
+    #3              : (in Lokio/AsyncTimeout;)
+      name          : 'exit'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 13 16-bit code units
+02dae0:                                        |[02dae0] okio.AsyncTimeout.exit:()Z
+02daf0: 5520 e900                              |0000: iget-boolean v0, v2, Lokio/AsyncTimeout;.inQueue:Z // field@00e9
+02daf4: 1201                                   |0002: const/4 v1, #int 0 // #0
+02daf6: 3900 0300                              |0003: if-nez v0, 0006 // +0003
+02dafa: 0f01                                   |0005: return v1
+02dafc: 5c21 e900                              |0006: iput-boolean v1, v2, Lokio/AsyncTimeout;.inQueue:Z // field@00e9
+02db00: 7110 7304 0200                         |0008: invoke-static {v2}, Lokio/AsyncTimeout;.cancelScheduledTimeout:(Lokio/AsyncTimeout;)Z // method@0473
+02db06: 0a02                                   |000b: move-result v2
+02db08: 0f02                                   |000c: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=109
+        0x0006 line=110
+        0x0008 line=111
+      locals        :
+        0x0000 - 0x000d reg=2 this Lokio/AsyncTimeout;
+
+    #4              : (in Lokio/AsyncTimeout;)
+      name          : 'newTimeoutException'
+      type          : '(Ljava/io/IOException;)Ljava/io/IOException;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 13 16-bit code units
+02db0c:                                        |[02db0c] okio.AsyncTimeout.newTimeoutException:(Ljava/io/IOException;)Ljava/io/IOException;
+02db1c: 2201 9300                              |0000: new-instance v1, Ljava/io/InterruptedIOException; // type@0093
+02db20: 1a00 6c0a                              |0002: const-string v0, "timeout" // string@0a6c
+02db24: 7020 dc01 0100                         |0004: invoke-direct {v1, v0}, Ljava/io/InterruptedIOException;.<init>:(Ljava/lang/String;)V // method@01dc
+02db2a: 3802 0500                              |0007: if-eqz v2, 000c // +0005
+02db2e: 6e20 dd01 2100                         |0009: invoke-virtual {v1, v2}, Ljava/io/InterruptedIOException;.initCause:(Ljava/lang/Throwable;)Ljava/lang/Throwable; // method@01dd
+02db34: 1101                                   |000c: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=270
+        0x0009 line=272
+      locals        :
+        0x0000 - 0x000d reg=1 this Lokio/AsyncTimeout;
+        0x0000 - 0x000d reg=2 (null) Ljava/io/IOException;
+
+    #5              : (in Lokio/AsyncTimeout;)
+      name          : 'sink'
+      type          : '(Lokio/Sink;)Lokio/Sink;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 6 16-bit code units
+02db38:                                        |[02db38] okio.AsyncTimeout.sink:(Lokio/Sink;)Lokio/Sink;
+02db48: 2200 4501                              |0000: new-instance v0, Lokio/AsyncTimeout$1; // type@0145
+02db4c: 7030 6104 1002                         |0002: invoke-direct {v0, v1, v2}, Lokio/AsyncTimeout$1;.<init>:(Lokio/AsyncTimeout;Lokio/Sink;)V // method@0461
+02db52: 1100                                   |0005: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=150
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lokio/AsyncTimeout;
+        0x0000 - 0x0006 reg=2 (null) Lokio/Sink;
+
+    #6              : (in Lokio/AsyncTimeout;)
+      name          : 'source'
+      type          : '(Lokio/Source;)Lokio/Source;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 6 16-bit code units
+02db54:                                        |[02db54] okio.AsyncTimeout.source:(Lokio/Source;)Lokio/Source;
+02db64: 2200 4601                              |0000: new-instance v0, Lokio/AsyncTimeout$2; // type@0146
+02db68: 7030 6704 1002                         |0002: invoke-direct {v0, v1, v2}, Lokio/AsyncTimeout$2;.<init>:(Lokio/AsyncTimeout;Lokio/Source;)V // method@0467
+02db6e: 1100                                   |0005: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=206
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lokio/AsyncTimeout;
+        0x0000 - 0x0006 reg=2 (null) Lokio/Source;
+
+    #7              : (in Lokio/AsyncTimeout;)
+      name          : 'timedOut'
+      type          : '()V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 1 16-bit code units
+02db70:                                        |[02db70] okio.AsyncTimeout.timedOut:()V
+02db80: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+  source_file_idx   : 224 (AsyncTimeout.java)
+

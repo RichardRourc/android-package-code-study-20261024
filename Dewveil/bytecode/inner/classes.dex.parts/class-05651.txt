@@ -1,0 +1,632 @@
+Class #5651            -
+  Class descriptor  : 'Lcom/google/gson/internal/bind/JsonTreeWriter;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Lcom/google/gson/stream/JsonWriter;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'SENTINEL_CLOSED'
+      type          : 'Lcom/google/gson/JsonPrimitive;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+    #1              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'UNWRITABLE_WRITER'
+      type          : 'Ljava/io/Writer;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+    #0              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'pendingName'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'product'
+      type          : 'Lcom/google/gson/JsonElement;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'stack'
+      type          : 'Ljava/util/List;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 2
+      insns size    : 17 16-bit code units
+7369e4:                                        |[7369e4] com.google.gson.internal.bind.JsonTreeWriter.<clinit>:()V
+7369f4: 2200 8b18                              |0000: new-instance v0, Lcom/google/gson/internal/bind/JsonTreeWriter$1; // type@188b
+7369f8: 7010 4cc4 0000                         |0002: invoke-direct {v0}, Lcom/google/gson/internal/bind/JsonTreeWriter$1;.<init>:()V // method@c44c
+7369fe: 6900 2375                              |0005: sput-object v0, Lcom/google/gson/internal/bind/JsonTreeWriter;.UNWRITABLE_WRITER:Ljava/io/Writer; // field@7523
+736a02: 2200 3e18                              |0007: new-instance v0, Lcom/google/gson/JsonPrimitive; // type@183e
+736a06: 1a01 f086                              |0009: const-string v1, "closed" // string@86f0
+736a0a: 7020 c3c2 1000                         |000b: invoke-direct {v0, v1}, Lcom/google/gson/JsonPrimitive;.<init>:(Ljava/lang/String;)V // method@c2c3
+736a10: 6900 2275                              |000e: sput-object v0, Lcom/google/gson/internal/bind/JsonTreeWriter;.SENTINEL_CLOSED:Lcom/google/gson/JsonPrimitive; // field@7522
+736a14: 0e00                                   |0010: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=34
+        0x0007 line=46
+      locals        :
+
+    #1              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 17 16-bit code units
+736a18:                                        |[736a18] com.google.gson.internal.bind.JsonTreeWriter.<init>:()V
+736a28: 6200 2375                              |0000: sget-object v0, Lcom/google/gson/internal/bind/JsonTreeWriter;.UNWRITABLE_WRITER:Ljava/io/Writer; // field@7523
+736a2c: 7020 aec5 0100                         |0002: invoke-direct {v1, v0}, Lcom/google/gson/stream/JsonWriter;.<init>:(Ljava/io/Writer;)V // method@c5ae
+736a32: 2200 3a1b                              |0005: new-instance v0, Ljava/util/ArrayList; // type@1b3a
+736a36: 7010 9fd4 0000                         |0007: invoke-direct {v0}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+736a3c: 5b10 2675                              |000a: iput-object v0, v1, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736a40: 6200 9174                              |000c: sget-object v0, Lcom/google/gson/JsonNull;.INSTANCE:Lcom/google/gson/JsonNull; // field@7491
+736a44: 5b10 2575                              |000e: iput-object v0, v1, Lcom/google/gson/internal/bind/JsonTreeWriter;.product:Lcom/google/gson/JsonElement; // field@7525
+736a48: 0e00                                   |0010: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=58
+        0x0005 line=49
+        0x000c line=55
+      locals        :
+        0x0000 - 0x0011 reg=1 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+
+    #2              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'peek'
+      type          : '()Lcom/google/gson/JsonElement;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 15 16-bit code units
+736a4c:                                        |[736a4c] com.google.gson.internal.bind.JsonTreeWriter.peek:()Lcom/google/gson/JsonElement;
+736a5c: 5411 2675                              |0000: iget-object v1, v1, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736a60: 7210 dbd5 0100                         |0002: invoke-interface {v1}, Ljava/util/List;.size:()I // method@d5db
+736a66: 0a00                                   |0005: move-result v0
+736a68: d800 00ff                              |0006: add-int/lit8 v0, v0, #int -1 // #ff
+736a6c: 7220 cfd5 0100                         |0008: invoke-interface {v1, v0}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+736a72: 0c01                                   |000b: move-result-object v1
+736a74: 1f01 3818                              |000c: check-cast v1, Lcom/google/gson/JsonElement; // type@1838
+736a78: 1101                                   |000e: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=72
+      locals        :
+        0x0000 - 0x000f reg=1 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+
+    #3              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'put'
+      type          : '(Lcom/google/gson/JsonElement;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 62 16-bit code units
+736a7c:                                        |[736a7c] com.google.gson.internal.bind.JsonTreeWriter.put:(Lcom/google/gson/JsonElement;)V
+736a8c: 5420 2475                              |0000: iget-object v0, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.pendingName:Ljava/lang/String; // field@7524
+736a90: 3800 1d00                              |0002: if-eqz v0, 001f // +001d
+736a94: 6e10 96c2 0300                         |0004: invoke-virtual {v3}, Lcom/google/gson/JsonElement;.isJsonNull:()Z // method@c296
+736a9a: 0a00                                   |0007: move-result v0
+736a9c: 3800 0800                              |0008: if-eqz v0, 0010 // +0008
+736aa0: 6e10 59c4 0200                         |000a: invoke-virtual {v2}, Lcom/google/gson/internal/bind/JsonTreeWriter;.getSerializeNulls:()Z // method@c459
+736aa6: 0a00                                   |000d: move-result v0
+736aa8: 3800 0d00                              |000e: if-eqz v0, 001b // +000d
+736aac: 7010 5dc4 0200                         |0010: invoke-direct {v2}, Lcom/google/gson/internal/bind/JsonTreeWriter;.peek:()Lcom/google/gson/JsonElement; // method@c45d
+736ab2: 0c00                                   |0013: move-result-object v0
+736ab4: 1f00 3b18                              |0014: check-cast v0, Lcom/google/gson/JsonObject; // type@183b
+736ab8: 5421 2475                              |0016: iget-object v1, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.pendingName:Ljava/lang/String; // field@7524
+736abc: 6e30 a4c2 1003                         |0018: invoke-virtual {v0, v1, v3}, Lcom/google/gson/JsonObject;.add:(Ljava/lang/String;Lcom/google/gson/JsonElement;)V // method@c2a4
+736ac2: 1203                                   |001b: const/4 v3, #int 0 // #0
+736ac4: 5b23 2475                              |001c: iput-object v3, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.pendingName:Ljava/lang/String; // field@7524
+736ac8: 2819                                   |001e: goto 0037 // +0019
+736aca: 5420 2675                              |001f: iget-object v0, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736ace: 7210 d1d5 0000                         |0021: invoke-interface {v0}, Ljava/util/List;.isEmpty:()Z // method@d5d1
+736ad4: 0a00                                   |0024: move-result v0
+736ad6: 3800 0500                              |0025: if-eqz v0, 002a // +0005
+736ada: 5b23 2575                              |0027: iput-object v3, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.product:Lcom/google/gson/JsonElement; // field@7525
+736ade: 280e                                   |0029: goto 0037 // +000e
+736ae0: 7010 5dc4 0200                         |002a: invoke-direct {v2}, Lcom/google/gson/internal/bind/JsonTreeWriter;.peek:()Lcom/google/gson/JsonElement; // method@c45d
+736ae6: 0c02                                   |002d: move-result-object v2
+736ae8: 2020 3518                              |002e: instance-of v0, v2, Lcom/google/gson/JsonArray; // type@1835
+736aec: 3800 0800                              |0030: if-eqz v0, 0038 // +0008
+736af0: 1f02 3518                              |0032: check-cast v2, Lcom/google/gson/JsonArray; // type@1835
+736af4: 6e20 63c2 3200                         |0034: invoke-virtual {v2, v3}, Lcom/google/gson/JsonArray;.add:(Lcom/google/gson/JsonElement;)V // method@c263
+736afa: 0e00                                   |0037: return-void
+736afc: 2202 7b1a                              |0038: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+736b00: 7010 4bd1 0200                         |003a: invoke-direct {v2}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+736b06: 2702                                   |003d: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=76
+        0x0004 line=77
+        0x0010 line=78
+        0x0016 line=79
+        0x001c line=81
+        0x001f line=82
+        0x0027 line=83
+        0x002a line=85
+        0x002e line=86
+        0x0032 line=87
+        0x0038 line=89
+      locals        :
+        0x0000 - 0x003e reg=2 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+        0x0000 - 0x003e reg=3 (null) Lcom/google/gson/JsonElement;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'beginArray'
+      type          : '()Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 14 16-bit code units
+736b08:                                        |[736b08] com.google.gson.internal.bind.JsonTreeWriter.beginArray:()Lcom/google/gson/stream/JsonWriter;
+736b18: 2200 3518                              |0000: new-instance v0, Lcom/google/gson/JsonArray; // type@1835
+736b1c: 7010 62c2 0000                         |0002: invoke-direct {v0}, Lcom/google/gson/JsonArray;.<init>:()V // method@c262
+736b22: 7020 5ec4 0200                         |0005: invoke-direct {v2, v0}, Lcom/google/gson/internal/bind/JsonTreeWriter;.put:(Lcom/google/gson/JsonElement;)V // method@c45e
+736b28: 5421 2675                              |0008: iget-object v1, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736b2c: 7220 c9d5 0100                         |000a: invoke-interface {v1, v0}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+736b32: 1102                                   |000d: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=95
+        0x0005 line=96
+        0x0008 line=97
+      locals        :
+        0x0000 - 0x000e reg=2 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+
+    #1              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'beginObject'
+      type          : '()Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 14 16-bit code units
+736b34:                                        |[736b34] com.google.gson.internal.bind.JsonTreeWriter.beginObject:()Lcom/google/gson/stream/JsonWriter;
+736b44: 2200 3b18                              |0000: new-instance v0, Lcom/google/gson/JsonObject; // type@183b
+736b48: 7010 a3c2 0000                         |0002: invoke-direct {v0}, Lcom/google/gson/JsonObject;.<init>:()V // method@c2a3
+736b4e: 7020 5ec4 0200                         |0005: invoke-direct {v2, v0}, Lcom/google/gson/internal/bind/JsonTreeWriter;.put:(Lcom/google/gson/JsonElement;)V // method@c45e
+736b54: 5421 2675                              |0008: iget-object v1, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736b58: 7220 c9d5 0100                         |000a: invoke-interface {v1, v0}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+736b5e: 1102                                   |000d: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=114
+        0x0005 line=115
+        0x0008 line=116
+      locals        :
+        0x0000 - 0x000e reg=2 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+
+    #2              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 24 16-bit code units
+736b60:                                        |[736b60] com.google.gson.internal.bind.JsonTreeWriter.close:()V
+736b70: 5410 2675                              |0000: iget-object v0, v1, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736b74: 7210 d1d5 0000                         |0002: invoke-interface {v0}, Ljava/util/List;.isEmpty:()Z // method@d5d1
+736b7a: 0a00                                   |0005: move-result v0
+736b7c: 3800 0a00                              |0006: if-eqz v0, 0010 // +000a
+736b80: 5411 2675                              |0008: iget-object v1, v1, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736b84: 6200 2275                              |000a: sget-object v0, Lcom/google/gson/internal/bind/JsonTreeWriter;.SENTINEL_CLOSED:Lcom/google/gson/JsonPrimitive; // field@7522
+736b88: 7220 c9d5 0100                         |000c: invoke-interface {v1, v0}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+736b8e: 0e00                                   |000f: return-void
+736b90: 2201 481a                              |0010: new-instance v1, Ljava/io/IOException; // type@1a48
+736b94: 1a00 c92c                              |0012: const-string v0, "Incomplete document" // string@2cc9
+736b98: 7020 14d0 0100                         |0014: invoke-direct {v1, v0}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+736b9e: 2701                                   |0017: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=203
+        0x0008 line=206
+        0x0010 line=204
+      locals        :
+        0x0000 - 0x0018 reg=1 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+
+    #3              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'endArray'
+      type          : '()Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 44 16-bit code units
+736ba0:                                        |[736ba0] com.google.gson.internal.bind.JsonTreeWriter.endArray:()Lcom/google/gson/stream/JsonWriter;
+736bb0: 5420 2675                              |0000: iget-object v0, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736bb4: 7210 d1d5 0000                         |0002: invoke-interface {v0}, Ljava/util/List;.isEmpty:()Z // method@d5d1
+736bba: 0a00                                   |0005: move-result v0
+736bbc: 3900 2000                              |0006: if-nez v0, 0026 // +0020
+736bc0: 5420 2475                              |0008: iget-object v0, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.pendingName:Ljava/lang/String; // field@7524
+736bc4: 3900 1c00                              |000a: if-nez v0, 0026 // +001c
+736bc8: 7010 5dc4 0200                         |000c: invoke-direct {v2}, Lcom/google/gson/internal/bind/JsonTreeWriter;.peek:()Lcom/google/gson/JsonElement; // method@c45d
+736bce: 0c00                                   |000f: move-result-object v0
+736bd0: 2000 3518                              |0010: instance-of v0, v0, Lcom/google/gson/JsonArray; // type@1835
+736bd4: 3800 0e00                              |0012: if-eqz v0, 0020 // +000e
+736bd8: 5420 2675                              |0014: iget-object v0, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736bdc: 7210 dbd5 0000                         |0016: invoke-interface {v0}, Ljava/util/List;.size:()I // method@d5db
+736be2: 0a01                                   |0019: move-result v1
+736be4: d801 01ff                              |001a: add-int/lit8 v1, v1, #int -1 // #ff
+736be8: 7220 d6d5 1000                         |001c: invoke-interface {v0, v1}, Ljava/util/List;.remove:(I)Ljava/lang/Object; // method@d5d6
+736bee: 1102                                   |001f: return-object v2
+736bf0: 2202 7b1a                              |0020: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+736bf4: 7010 4bd1 0200                         |0022: invoke-direct {v2}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+736bfa: 2702                                   |0025: throw v2
+736bfc: 2202 7b1a                              |0026: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+736c00: 7010 4bd1 0200                         |0028: invoke-direct {v2}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+736c06: 2702                                   |002b: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=102
+        0x000c line=105
+        0x0010 line=106
+        0x0014 line=107
+        0x0020 line=110
+        0x0026 line=103
+      locals        :
+        0x0000 - 0x002c reg=2 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+
+    #4              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'endObject'
+      type          : '()Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 44 16-bit code units
+736c08:                                        |[736c08] com.google.gson.internal.bind.JsonTreeWriter.endObject:()Lcom/google/gson/stream/JsonWriter;
+736c18: 5420 2675                              |0000: iget-object v0, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736c1c: 7210 d1d5 0000                         |0002: invoke-interface {v0}, Ljava/util/List;.isEmpty:()Z // method@d5d1
+736c22: 0a00                                   |0005: move-result v0
+736c24: 3900 2000                              |0006: if-nez v0, 0026 // +0020
+736c28: 5420 2475                              |0008: iget-object v0, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.pendingName:Ljava/lang/String; // field@7524
+736c2c: 3900 1c00                              |000a: if-nez v0, 0026 // +001c
+736c30: 7010 5dc4 0200                         |000c: invoke-direct {v2}, Lcom/google/gson/internal/bind/JsonTreeWriter;.peek:()Lcom/google/gson/JsonElement; // method@c45d
+736c36: 0c00                                   |000f: move-result-object v0
+736c38: 2000 3b18                              |0010: instance-of v0, v0, Lcom/google/gson/JsonObject; // type@183b
+736c3c: 3800 0e00                              |0012: if-eqz v0, 0020 // +000e
+736c40: 5420 2675                              |0014: iget-object v0, v2, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736c44: 7210 dbd5 0000                         |0016: invoke-interface {v0}, Ljava/util/List;.size:()I // method@d5db
+736c4a: 0a01                                   |0019: move-result v1
+736c4c: d801 01ff                              |001a: add-int/lit8 v1, v1, #int -1 // #ff
+736c50: 7220 d6d5 1000                         |001c: invoke-interface {v0, v1}, Ljava/util/List;.remove:(I)Ljava/lang/Object; // method@d5d6
+736c56: 1102                                   |001f: return-object v2
+736c58: 2202 7b1a                              |0020: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+736c5c: 7010 4bd1 0200                         |0022: invoke-direct {v2}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+736c62: 2702                                   |0025: throw v2
+736c64: 2202 7b1a                              |0026: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+736c68: 7010 4bd1 0200                         |0028: invoke-direct {v2}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+736c6e: 2702                                   |002b: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=121
+        0x000c line=124
+        0x0010 line=125
+        0x0014 line=126
+        0x0020 line=129
+        0x0026 line=122
+      locals        :
+        0x0000 - 0x002c reg=2 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+
+    #5              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'flush'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 1 16-bit code units
+736c70:                                        |[736c70] com.google.gson.internal.bind.JsonTreeWriter.flush:()V
+736c80: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #6              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'get'
+      type          : '()Lcom/google/gson/JsonElement;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 34 16-bit code units
+736c84:                                        |[736c84] com.google.gson.internal.bind.JsonTreeWriter.get:()Lcom/google/gson/JsonElement;
+736c94: 5430 2675                              |0000: iget-object v0, v3, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736c98: 7210 d1d5 0000                         |0002: invoke-interface {v0}, Ljava/util/List;.isEmpty:()Z // method@d5d1
+736c9e: 0a00                                   |0005: move-result v0
+736ca0: 3800 0500                              |0006: if-eqz v0, 000b // +0005
+736ca4: 5433 2575                              |0008: iget-object v3, v3, Lcom/google/gson/internal/bind/JsonTreeWriter;.product:Lcom/google/gson/JsonElement; // field@7525
+736ca8: 1103                                   |000a: return-object v3
+736caa: 2200 7b1a                              |000b: new-instance v0, Ljava/lang/IllegalStateException; // type@1a7b
+736cae: 2201 991a                              |000d: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+736cb2: 1a02 6625                              |000f: const-string v2, "Expected one JSON element but was " // string@2566
+736cb6: 7020 3cd2 2100                         |0011: invoke-direct {v1, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+736cbc: 5433 2675                              |0014: iget-object v3, v3, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736cc0: 6e20 44d2 3100                         |0016: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+736cc6: 0c03                                   |0019: move-result-object v3
+736cc8: 6e10 58d2 0300                         |001a: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+736cce: 0c03                                   |001d: move-result-object v3
+736cd0: 7020 4cd1 3000                         |001e: invoke-direct {v0, v3}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+736cd6: 2700                                   |0021: throw v0
+      catches       : (none)
+      positions     :
+        0x0000 line=65
+        0x0008 line=68
+        0x000b line=66
+      locals        :
+        0x0000 - 0x0022 reg=3 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+
+    #7              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'name'
+      type          : '(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 35 16-bit code units
+736cd8:                                        |[736cd8] com.google.gson.internal.bind.JsonTreeWriter.name:(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;
+736ce8: 5410 2675                              |0000: iget-object v0, v1, Lcom/google/gson/internal/bind/JsonTreeWriter;.stack:Ljava/util/List; // field@7526
+736cec: 7210 d1d5 0000                         |0002: invoke-interface {v0}, Ljava/util/List;.isEmpty:()Z // method@d5d1
+736cf2: 0a00                                   |0005: move-result v0
+736cf4: 3900 1700                              |0006: if-nez v0, 001d // +0017
+736cf8: 5410 2475                              |0008: iget-object v0, v1, Lcom/google/gson/internal/bind/JsonTreeWriter;.pendingName:Ljava/lang/String; // field@7524
+736cfc: 3900 1300                              |000a: if-nez v0, 001d // +0013
+736d00: 7010 5dc4 0100                         |000c: invoke-direct {v1}, Lcom/google/gson/internal/bind/JsonTreeWriter;.peek:()Lcom/google/gson/JsonElement; // method@c45d
+736d06: 0c00                                   |000f: move-result-object v0
+736d08: 2000 3b18                              |0010: instance-of v0, v0, Lcom/google/gson/JsonObject; // type@183b
+736d0c: 3800 0500                              |0012: if-eqz v0, 0017 // +0005
+736d10: 5b12 2475                              |0014: iput-object v2, v1, Lcom/google/gson/internal/bind/JsonTreeWriter;.pendingName:Ljava/lang/String; // field@7524
+736d14: 1101                                   |0016: return-object v1
+736d16: 2201 7b1a                              |0017: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+736d1a: 7010 4bd1 0100                         |0019: invoke-direct {v1}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+736d20: 2701                                   |001c: throw v1
+736d22: 2201 7b1a                              |001d: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+736d26: 7010 4bd1 0100                         |001f: invoke-direct {v1}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+736d2c: 2701                                   |0022: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=133
+        0x000c line=136
+        0x0010 line=137
+        0x0014 line=138
+        0x0017 line=141
+        0x001d line=134
+      locals        :
+        0x0000 - 0x0023 reg=1 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+        0x0000 - 0x0023 reg=2 (null) Ljava/lang/String;
+
+    #8              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'nullValue'
+      type          : '()Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 6 16-bit code units
+736d30:                                        |[736d30] com.google.gson.internal.bind.JsonTreeWriter.nullValue:()Lcom/google/gson/stream/JsonWriter;
+736d40: 6200 9174                              |0000: sget-object v0, Lcom/google/gson/JsonNull;.INSTANCE:Lcom/google/gson/JsonNull; // field@7491
+736d44: 7020 5ec4 0100                         |0002: invoke-direct {v1, v0}, Lcom/google/gson/internal/bind/JsonTreeWriter;.put:(Lcom/google/gson/JsonElement;)V // method@c45e
+736d4a: 1101                                   |0005: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=153
+      locals        :
+        0x0000 - 0x0006 reg=1 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+
+    #9              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'value'
+      type          : '(D)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 53 16-bit code units
+736d4c:                                        |[736d4c] com.google.gson.internal.bind.JsonTreeWriter.value:(D)Lcom/google/gson/stream/JsonWriter;
+736d5c: 6e10 5ac4 0200                         |0000: invoke-virtual {v2}, Lcom/google/gson/internal/bind/JsonTreeWriter;.isLenient:()Z // method@c45a
+736d62: 0a00                                   |0003: move-result v0
+736d64: 3900 2400                              |0004: if-nez v0, 0028 // +0024
+736d68: 7120 19d1 4300                         |0006: invoke-static {v3, v4}, Ljava/lang/Double;.isNaN:(D)Z // method@d119
+736d6e: 0a00                                   |0009: move-result v0
+736d70: 3900 0900                              |000a: if-nez v0, 0013 // +0009
+736d74: 7120 17d1 4300                         |000c: invoke-static {v3, v4}, Ljava/lang/Double;.isInfinite:(D)Z // method@d117
+736d7a: 0a00                                   |000f: move-result v0
+736d7c: 3900 0300                              |0010: if-nez v0, 0013 // +0003
+736d80: 2816                                   |0012: goto 0028 // +0016
+736d82: 2202 7a1a                              |0013: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+736d86: 2200 991a                              |0015: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+736d8a: 1a01 612e                              |0017: const-string v1, "JSON forbids NaN and infinities: " // string@2e61
+736d8e: 7020 3cd2 1000                         |0019: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+736d94: 6e30 3ed2 3004                         |001c: invoke-virtual {v0, v3, v4}, Ljava/lang/StringBuilder;.append:(D)Ljava/lang/StringBuilder; // method@d23e
+736d9a: 0c03                                   |001f: move-result-object v3
+736d9c: 6e10 58d2 0300                         |0020: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+736da2: 0c03                                   |0023: move-result-object v3
+736da4: 7020 47d1 3200                         |0024: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+736daa: 2702                                   |0027: throw v2
+736dac: 2200 3e18                              |0028: new-instance v0, Lcom/google/gson/JsonPrimitive; // type@183e
+736db0: 7120 1dd1 4300                         |002a: invoke-static {v3, v4}, Ljava/lang/Double;.valueOf:(D)Ljava/lang/Double; // method@d11d
+736db6: 0c03                                   |002d: move-result-object v3
+736db8: 7020 c1c2 3000                         |002e: invoke-direct {v0, v3}, Lcom/google/gson/JsonPrimitive;.<init>:(Ljava/lang/Number;)V // method@c2c1
+736dbe: 7020 5ec4 0200                         |0031: invoke-direct {v2, v0}, Lcom/google/gson/internal/bind/JsonTreeWriter;.put:(Lcom/google/gson/JsonElement;)V // method@c45e
+736dc4: 1102                                   |0034: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=171
+        0x0013 line=172
+        0x0028 line=174
+      locals        :
+        0x0000 - 0x0035 reg=2 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+        0x0000 - 0x0035 reg=3 (null) D
+
+    #10              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'value'
+      type          : '(J)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 2
+      insns size    : 13 16-bit code units
+736dc8:                                        |[736dc8] com.google.gson.internal.bind.JsonTreeWriter.value:(J)Lcom/google/gson/stream/JsonWriter;
+736dd8: 2200 3e18                              |0000: new-instance v0, Lcom/google/gson/JsonPrimitive; // type@183e
+736ddc: 7120 82d1 3200                         |0002: invoke-static {v2, v3}, Ljava/lang/Long;.valueOf:(J)Ljava/lang/Long; // method@d182
+736de2: 0c02                                   |0005: move-result-object v2
+736de4: 7020 c1c2 2000                         |0006: invoke-direct {v0, v2}, Lcom/google/gson/JsonPrimitive;.<init>:(Ljava/lang/Number;)V // method@c2c1
+736dea: 7020 5ec4 0100                         |0009: invoke-direct {v1, v0}, Lcom/google/gson/internal/bind/JsonTreeWriter;.put:(Lcom/google/gson/JsonElement;)V // method@c45e
+736df0: 1101                                   |000c: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=179
+      locals        :
+        0x0000 - 0x000d reg=1 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+        0x0000 - 0x000d reg=2 (null) J
+
+    #11              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'value'
+      type          : '(Ljava/lang/Boolean;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 16 16-bit code units
+736df4:                                        |[736df4] com.google.gson.internal.bind.JsonTreeWriter.value:(Ljava/lang/Boolean;)Lcom/google/gson/stream/JsonWriter;
+736e04: 3902 0700                              |0000: if-nez v2, 0007 // +0007
+736e08: 6e10 5cc4 0100                         |0002: invoke-virtual {v1}, Lcom/google/gson/internal/bind/JsonTreeWriter;.nullValue:()Lcom/google/gson/stream/JsonWriter; // method@c45c
+736e0e: 0c01                                   |0005: move-result-object v1
+736e10: 1101                                   |0006: return-object v1
+736e12: 2200 3e18                              |0007: new-instance v0, Lcom/google/gson/JsonPrimitive; // type@183e
+736e16: 7020 bfc2 2000                         |0009: invoke-direct {v0, v2}, Lcom/google/gson/JsonPrimitive;.<init>:(Ljava/lang/Boolean;)V // method@c2bf
+736e1c: 7020 5ec4 0100                         |000c: invoke-direct {v1, v0}, Lcom/google/gson/internal/bind/JsonTreeWriter;.put:(Lcom/google/gson/JsonElement;)V // method@c45e
+736e22: 1101                                   |000f: return-object v1
+      catches       : (none)
+      positions     :
+        0x0002 line=164
+        0x0007 line=166
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+        0x0000 - 0x0010 reg=2 (null) Ljava/lang/Boolean;
+
+    #12              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'value'
+      type          : '(Ljava/lang/Number;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 60 16-bit code units
+736e24:                                        |[736e24] com.google.gson.internal.bind.JsonTreeWriter.value:(Ljava/lang/Number;)Lcom/google/gson/stream/JsonWriter;
+736e34: 3904 0700                              |0000: if-nez v4, 0007 // +0007
+736e38: 6e10 5cc4 0300                         |0002: invoke-virtual {v3}, Lcom/google/gson/internal/bind/JsonTreeWriter;.nullValue:()Lcom/google/gson/stream/JsonWriter; // method@c45c
+736e3e: 0c03                                   |0005: move-result-object v3
+736e40: 1103                                   |0006: return-object v3
+736e42: 6e10 5ac4 0300                         |0007: invoke-virtual {v3}, Lcom/google/gson/internal/bind/JsonTreeWriter;.isLenient:()Z // method@c45a
+736e48: 0a00                                   |000a: move-result v0
+736e4a: 3900 2800                              |000b: if-nez v0, 0033 // +0028
+736e4e: 6e10 c0d1 0400                         |000d: invoke-virtual {v4}, Ljava/lang/Number;.doubleValue:()D // method@d1c0
+736e54: 0b00                                   |0010: move-result-wide v0
+736e56: 7120 19d1 1000                         |0011: invoke-static {v0, v1}, Ljava/lang/Double;.isNaN:(D)Z // method@d119
+736e5c: 0a02                                   |0014: move-result v2
+736e5e: 3902 0900                              |0015: if-nez v2, 001e // +0009
+736e62: 7120 17d1 1000                         |0017: invoke-static {v0, v1}, Ljava/lang/Double;.isInfinite:(D)Z // method@d117
+736e68: 0a00                                   |001a: move-result v0
+736e6a: 3900 0300                              |001b: if-nez v0, 001e // +0003
+736e6e: 2816                                   |001d: goto 0033 // +0016
+736e70: 2203 7a1a                              |001e: new-instance v3, Ljava/lang/IllegalArgumentException; // type@1a7a
+736e74: 2200 991a                              |0020: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+736e78: 1a01 612e                              |0022: const-string v1, "JSON forbids NaN and infinities: " // string@2e61
+736e7c: 7020 3cd2 1000                         |0024: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+736e82: 6e20 44d2 4000                         |0027: invoke-virtual {v0, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+736e88: 0c04                                   |002a: move-result-object v4
+736e8a: 6e10 58d2 0400                         |002b: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+736e90: 0c04                                   |002e: move-result-object v4
+736e92: 7020 47d1 4300                         |002f: invoke-direct {v3, v4}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+736e98: 2703                                   |0032: throw v3
+736e9a: 2200 3e18                              |0033: new-instance v0, Lcom/google/gson/JsonPrimitive; // type@183e
+736e9e: 7020 c1c2 4000                         |0035: invoke-direct {v0, v4}, Lcom/google/gson/JsonPrimitive;.<init>:(Ljava/lang/Number;)V // method@c2c1
+736ea4: 7020 5ec4 0300                         |0038: invoke-direct {v3, v0}, Lcom/google/gson/internal/bind/JsonTreeWriter;.put:(Lcom/google/gson/JsonElement;)V // method@c45e
+736eaa: 1103                                   |003b: return-object v3
+      catches       : (none)
+      positions     :
+        0x0002 line=185
+        0x0007 line=188
+        0x000d line=189
+        0x0011 line=190
+        0x001e line=191
+        0x0033 line=195
+      locals        :
+        0x0000 - 0x003c reg=3 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+        0x0000 - 0x003c reg=4 (null) Ljava/lang/Number;
+
+    #13              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'value'
+      type          : '(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 16 16-bit code units
+736eac:                                        |[736eac] com.google.gson.internal.bind.JsonTreeWriter.value:(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;
+736ebc: 3902 0700                              |0000: if-nez v2, 0007 // +0007
+736ec0: 6e10 5cc4 0100                         |0002: invoke-virtual {v1}, Lcom/google/gson/internal/bind/JsonTreeWriter;.nullValue:()Lcom/google/gson/stream/JsonWriter; // method@c45c
+736ec6: 0c01                                   |0005: move-result-object v1
+736ec8: 1101                                   |0006: return-object v1
+736eca: 2200 3e18                              |0007: new-instance v0, Lcom/google/gson/JsonPrimitive; // type@183e
+736ece: 7020 c3c2 2000                         |0009: invoke-direct {v0, v2}, Lcom/google/gson/JsonPrimitive;.<init>:(Ljava/lang/String;)V // method@c2c3
+736ed4: 7020 5ec4 0100                         |000c: invoke-direct {v1, v0}, Lcom/google/gson/internal/bind/JsonTreeWriter;.put:(Lcom/google/gson/JsonElement;)V // method@c45e
+736eda: 1101                                   |000f: return-object v1
+      catches       : (none)
+      positions     :
+        0x0002 line=146
+        0x0007 line=148
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+        0x0000 - 0x0010 reg=2 (null) Ljava/lang/String;
+
+    #14              : (in Lcom/google/gson/internal/bind/JsonTreeWriter;)
+      name          : 'value'
+      type          : '(Z)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 13 16-bit code units
+736edc:                                        |[736edc] com.google.gson.internal.bind.JsonTreeWriter.value:(Z)Lcom/google/gson/stream/JsonWriter;
+736eec: 2200 3e18                              |0000: new-instance v0, Lcom/google/gson/JsonPrimitive; // type@183e
+736ef0: 7110 a3d0 0200                         |0002: invoke-static {v2}, Ljava/lang/Boolean;.valueOf:(Z)Ljava/lang/Boolean; // method@d0a3
+736ef6: 0c02                                   |0005: move-result-object v2
+736ef8: 7020 bfc2 2000                         |0006: invoke-direct {v0, v2}, Lcom/google/gson/JsonPrimitive;.<init>:(Ljava/lang/Boolean;)V // method@c2bf
+736efe: 7020 5ec4 0100                         |0009: invoke-direct {v1, v0}, Lcom/google/gson/internal/bind/JsonTreeWriter;.put:(Lcom/google/gson/JsonElement;)V // method@c45e
+736f04: 1101                                   |000c: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=158
+      locals        :
+        0x0000 - 0x000d reg=1 this Lcom/google/gson/internal/bind/JsonTreeWriter;
+        0x0000 - 0x000d reg=2 (null) Z
+
+  source_file_idx   : 12033 (JsonTreeWriter.java)
+

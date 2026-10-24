@@ -1,0 +1,866 @@
+Class #2947            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Lcom/fasterxml/jackson/databind/introspect/CollectorBase;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : '_collectAnnotations'
+      type          : 'Z'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : '_defaultConstructor'
+      type          : 'Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : '_typeContext'
+      type          : 'Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Z)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 2
+      insns size    : 8 16-bit code units
+6242b0:                                        |[6242b0] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector.<init>:(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Z)V
+6242c0: 7020 8a7f 1000                         |0000: invoke-direct {v0, v1}, Lcom/fasterxml/jackson/databind/introspect/CollectorBase;.<init>:(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;)V // method@7f8a
+6242c6: 5b02 7b4d                              |0003: iput-object v2, v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._typeContext:Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext; // field@4d7b
+6242ca: 5c03 784d                              |0005: iput-boolean v3, v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._collectAnnotations:Z // field@4d78
+6242ce: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=43
+        0x0003 line=44
+        0x0005 line=45
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;
+        0x0000 - 0x0008 reg=1 (null) Lcom/fasterxml/jackson/databind/AnnotationIntrospector;
+        0x0000 - 0x0008 reg=2 (null) Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;
+        0x0000 - 0x0008 reg=3 (null) Z
+
+    #1              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : '_findPotentialConstructors'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Ljava/util/List;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 16
+      ins           : 3
+      outs          : 3
+      insns size    : 223 16-bit code units
+6242d0:                                        |[6242d0] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector._findPotentialConstructors:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Ljava/util/List;
+6242e0: 6e10 b86d 0e00                         |0000: invoke-virtual {v14}, Lcom/fasterxml/jackson/databind/JavaType;.isEnumType:()Z // method@6db8
+6242e6: 0a00                                   |0003: move-result v0
+6242e8: 1201                                   |0004: const/4 v1, #int 0 // #0
+6242ea: 1202                                   |0005: const/4 v2, #int 0 // #0
+6242ec: 3900 3200                              |0006: if-nez v0, 0038 // +0032
+6242f0: 6e10 a66d 0e00                         |0008: invoke-virtual {v14}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+6242f6: 0c0e                                   |000b: move-result-object v14
+6242f8: 7110 418e 0e00                         |000c: invoke-static {v14}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.getConstructors:(Ljava/lang/Class;)[Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor; // method@8e41
+6242fe: 0c0e                                   |000f: move-result-object v14
+624300: 21e0                                   |0010: array-length v0, v14
+624302: 0113                                   |0011: move v3, v1
+624304: 0724                                   |0012: move-object v4, v2
+624306: 0745                                   |0013: move-object v5, v4
+624308: 3503 2600                              |0014: if-ge v3, v0, 003a // +0026
+62430c: 4606 0e03                              |0016: aget-object v6, v14, v3
+624310: 6e10 158e 0600                         |0018: invoke-virtual {v6}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getConstructor:()Ljava/lang/reflect/Constructor; // method@8e15
+624316: 0c07                                   |001b: move-result-object v7
+624318: 7110 e57d 0700                         |001c: invoke-static {v7}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.isIncludableConstructor:(Ljava/lang/reflect/Constructor;)Z // method@7de5
+62431e: 0a07                                   |001f: move-result v7
+624320: 3907 0300                              |0020: if-nez v7, 0023 // +0003
+624324: 2813                                   |0022: goto 0035 // +0013
+624326: 6e10 188e 0600                         |0023: invoke-virtual {v6}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getParamCount:()I // method@8e18
+62432c: 0a07                                   |0026: move-result v7
+62432e: 3907 0400                              |0027: if-nez v7, 002b // +0004
+624332: 0764                                   |0029: move-object v4, v6
+624334: 280b                                   |002a: goto 0035 // +000b
+624336: 3905 0700                              |002b: if-nez v5, 0032 // +0007
+62433a: 2205 3a1b                              |002d: new-instance v5, Ljava/util/ArrayList; // type@1b3a
+62433e: 7010 9fd4 0500                         |002f: invoke-direct {v5}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+624344: 7220 c9d5 6500                         |0032: invoke-interface {v5, v6}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+62434a: d803 0301                              |0035: add-int/lit8 v3, v3, #int 1 // #01
+62434e: 28dd                                   |0037: goto 0014 // -0023
+624350: 0724                                   |0038: move-object v4, v2
+624352: 0745                                   |0039: move-object v5, v4
+624354: 3905 0b00                              |003a: if-nez v5, 0045 // +000b
+624358: 7100 42d5 0000                         |003c: invoke-static {}, Ljava/util/Collections;.emptyList:()Ljava/util/List; // method@d542
+62435e: 0c0e                                   |003f: move-result-object v14
+624360: 3904 0300                              |0040: if-nez v4, 0043 // +0003
+624364: 110e                                   |0042: return-object v14
+624366: 0110                                   |0043: move v0, v1
+624368: 2816                                   |0044: goto 005a // +0016
+62436a: 7210 dbd5 0500                         |0045: invoke-interface {v5}, Ljava/util/List;.size:()I // method@d5db
+624370: 0a0e                                   |0048: move-result v14
+624372: 2200 3a1b                              |0049: new-instance v0, Ljava/util/ArrayList; // type@1b3a
+624376: 7020 a0d4 e000                         |004b: invoke-direct {v0, v14}, Ljava/util/ArrayList;.<init>:(I)V // method@d4a0
+62437c: 0113                                   |004e: move v3, v1
+62437e: 35e3 0800                              |004f: if-ge v3, v14, 0057 // +0008
+624382: 7220 c9d5 2000                         |0051: invoke-interface {v0, v2}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+624388: d803 0301                              |0054: add-int/lit8 v3, v3, #int 1 // #01
+62438c: 28f9                                   |0056: goto 004f // -0007
+62438e: 070c                                   |0057: move-object v12, v0
+624390: 01e0                                   |0058: move v0, v14
+624392: 07ce                                   |0059: move-object v14, v12
+624394: 380f 6200                              |005a: if-eqz v15, 00bc // +0062
+624398: 7110 418e 0f00                         |005c: invoke-static {v15}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.getConstructors:(Ljava/lang/Class;)[Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor; // method@8e41
+62439e: 0c0f                                   |005f: move-result-object v15
+6243a0: 21f3                                   |0060: array-length v3, v15
+6243a2: 0116                                   |0061: move v6, v1
+6243a4: 0727                                   |0062: move-object v7, v2
+6243a6: 3536 5900                              |0063: if-ge v6, v3, 00bc // +0059
+6243aa: 4608 0f06                              |0065: aget-object v8, v15, v6
+6243ae: 6e10 188e 0800                         |0067: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getParamCount:()I // method@8e18
+6243b4: 0a09                                   |006a: move-result v9
+6243b6: 3909 0c00                              |006b: if-nez v9, 0077 // +000c
+6243ba: 3804 4c00                              |006d: if-eqz v4, 00b9 // +004c
+6243be: 6e30 e27d 4d08                         |006f: invoke-virtual {v13, v4, v8}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.constructDefaultConstructor:(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // method@7de2
+6243c4: 0c04                                   |0072: move-result-object v4
+6243c6: 5bd4 794d                              |0073: iput-object v4, v13, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._defaultConstructor:Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // field@4d79
+6243ca: 0724                                   |0075: move-object v4, v2
+6243cc: 2843                                   |0076: goto 00b9 // +0043
+6243ce: 3805 4200                              |0077: if-eqz v5, 00b9 // +0042
+6243d2: 3907 1b00                              |0079: if-nez v7, 0094 // +001b
+6243d6: 2307 2e20                              |007b: new-array v7, v0, [Lcom/fasterxml/jackson/databind/introspect/MemberKey; // type@202e
+6243da: 0119                                   |007d: move v9, v1
+6243dc: 3509 1600                              |007e: if-ge v9, v0, 0094 // +0016
+6243e0: 220a 130e                              |0080: new-instance v10, Lcom/fasterxml/jackson/databind/introspect/MemberKey; // type@0e13
+6243e4: 7220 cfd5 9500                         |0082: invoke-interface {v5, v9}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+6243ea: 0c0b                                   |0085: move-result-object v11
+6243ec: 1f0b 4c0f                              |0086: check-cast v11, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor; // type@0f4c
+6243f0: 6e10 158e 0b00                         |0088: invoke-virtual {v11}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getConstructor:()Ljava/lang/reflect/Constructor; // method@8e15
+6243f6: 0c0b                                   |008b: move-result-object v11
+6243f8: 7020 2380 ba00                         |008c: invoke-direct {v10, v11}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.<init>:(Ljava/lang/reflect/Constructor;)V // method@8023
+6243fe: 4d0a 0709                              |008f: aput-object v10, v7, v9
+624402: d809 0901                              |0091: add-int/lit8 v9, v9, #int 1 // #01
+624406: 28eb                                   |0093: goto 007e // -0015
+624408: 2209 130e                              |0094: new-instance v9, Lcom/fasterxml/jackson/databind/introspect/MemberKey; // type@0e13
+62440c: 6e10 158e 0800                         |0096: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getConstructor:()Ljava/lang/reflect/Constructor; // method@8e15
+624412: 0c0a                                   |0099: move-result-object v10
+624414: 7020 2380 a900                         |009a: invoke-direct {v9, v10}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.<init>:(Ljava/lang/reflect/Constructor;)V // method@8023
+62441a: 011a                                   |009d: move v10, v1
+62441c: 350a 1b00                              |009e: if-ge v10, v0, 00b9 // +001b
+624420: 460b 070a                              |00a0: aget-object v11, v7, v10
+624424: 6e20 2680 b900                         |00a2: invoke-virtual {v9, v11}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.equals:(Ljava/lang/Object;)Z // method@8026
+62442a: 0a0b                                   |00a5: move-result v11
+62442c: 380b 1000                              |00a6: if-eqz v11, 00b6 // +0010
+624430: 7220 cfd5 a500                         |00a8: invoke-interface {v5, v10}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+624436: 0c09                                   |00ab: move-result-object v9
+624438: 1f09 4c0f                              |00ac: check-cast v9, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor; // type@0f4c
+62443c: 6e30 e47d 9d08                         |00ae: invoke-virtual {v13, v9, v8}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.constructNonDefaultConstructor:(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // method@7de4
+624442: 0c08                                   |00b1: move-result-object v8
+624444: 7230 dad5 ae08                         |00b2: invoke-interface {v14, v10, v8}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+62444a: 2804                                   |00b5: goto 00b9 // +0004
+62444c: d80a 0a01                              |00b6: add-int/lit8 v10, v10, #int 1 // #01
+624450: 28e6                                   |00b8: goto 009e // -001a
+624452: d806 0601                              |00b9: add-int/lit8 v6, v6, #int 1 // #01
+624456: 28a8                                   |00bb: goto 0063 // -0058
+624458: 3804 0800                              |00bc: if-eqz v4, 00c4 // +0008
+62445c: 6e30 e27d 4d02                         |00be: invoke-virtual {v13, v4, v2}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.constructDefaultConstructor:(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // method@7de2
+624462: 0c0f                                   |00c1: move-result-object v15
+624464: 5bdf 794d                              |00c2: iput-object v15, v13, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._defaultConstructor:Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // field@4d79
+624468: 3501 1a00                              |00c4: if-ge v1, v0, 00de // +001a
+62446c: 7220 cfd5 1e00                         |00c6: invoke-interface {v14, v1}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+624472: 0c0f                                   |00c9: move-result-object v15
+624474: 1f0f ee0d                              |00ca: check-cast v15, Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // type@0dee
+624478: 390f 0f00                              |00cc: if-nez v15, 00db // +000f
+62447c: 7220 cfd5 1500                         |00ce: invoke-interface {v5, v1}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+624482: 0c0f                                   |00d1: move-result-object v15
+624484: 1f0f 4c0f                              |00d2: check-cast v15, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor; // type@0f4c
+624488: 6e30 e47d fd02                         |00d4: invoke-virtual {v13, v15, v2}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.constructNonDefaultConstructor:(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // method@7de4
+62448e: 0c0f                                   |00d7: move-result-object v15
+624490: 7230 dad5 1e0f                         |00d8: invoke-interface {v14, v1, v15}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+624496: d801 0101                              |00db: add-int/lit8 v1, v1, #int 1 // #01
+62449a: 28e7                                   |00dd: goto 00c4 // -0019
+62449c: 110e                                   |00de: return-object v14
+      catches       : (none)
+      positions     :
+        0x0000 line=114
+        0x0008 line=115
+        0x0010 line=116
+        0x0018 line=117
+        0x0023 line=120
+        0x002d line=124
+        0x0032 line=126
+        0x003c line=133
+        0x0045 line=140
+        0x0049 line=141
+        0x0051 line=143
+        0x005c line=150
+        0x0067 line=151
+        0x006f line=153
+        0x007b line=160
+        0x0080 line=162
+        0x0094 line=165
+        0x00a0 line=168
+        0x00a8 line=170
+        0x00b2 line=169
+        0x00be line=179
+        0x00c6 line=182
+        0x00ce line=185
+        0x00d8 line=184
+      locals        :
+        0x0000 - 0x00df reg=13 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;
+        0x0000 - 0x00df reg=14 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x00df reg=15 (null) Ljava/lang/Class;
+
+    #2              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : '_findPotentialFactories'
+      type          : '(Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Ljava/util/List;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 19
+      ins           : 4
+      outs          : 4
+      insns size    : 184 16-bit code units
+6244a0:                                        |[6244a0] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector._findPotentialFactories:(Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Ljava/util/List;
+6244b0: 07f0                                   |0000: move-object v0, v15
+6244b2: 7401 a66d 1100                         |0001: invoke-virtual/range {v17}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+6244b8: 0c01                                   |0004: move-result-object v1
+6244ba: 7110 408e 0100                         |0005: invoke-static {v1}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.getClassMethods:(Ljava/lang/Class;)[Ljava/lang/reflect/Method; // method@8e40
+6244c0: 0c01                                   |0008: move-result-object v1
+6244c2: 2112                                   |0009: array-length v2, v1
+6244c4: 1203                                   |000a: const/4 v3, #int 0 // #0
+6244c6: 1204                                   |000b: const/4 v4, #int 0 // #0
+6244c8: 0736                                   |000c: move-object v6, v3
+6244ca: 0145                                   |000d: move v5, v4
+6244cc: 3525 1800                              |000e: if-ge v5, v2, 0026 // +0018
+6244d0: 4607 0105                              |0010: aget-object v7, v1, v5
+6244d4: 7110 da7d 0700                         |0012: invoke-static {v7}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._isIncludableFactoryMethod:(Ljava/lang/reflect/Method;)Z // method@7dda
+6244da: 0a08                                   |0015: move-result v8
+6244dc: 3908 0300                              |0016: if-nez v8, 0019 // +0003
+6244e0: 280b                                   |0018: goto 0023 // +000b
+6244e2: 3906 0700                              |0019: if-nez v6, 0020 // +0007
+6244e6: 2206 3a1b                              |001b: new-instance v6, Ljava/util/ArrayList; // type@1b3a
+6244ea: 7010 9fd4 0600                         |001d: invoke-direct {v6}, Ljava/util/ArrayList;.<init>:()V // method@d49f
+6244f0: 7220 c9d5 7600                         |0020: invoke-interface {v6, v7}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+6244f6: d805 0501                              |0023: add-int/lit8 v5, v5, #int 1 // #01
+6244fa: 28e9                                   |0025: goto 000e // -0017
+6244fc: 3906 0700                              |0026: if-nez v6, 002d // +0007
+624500: 7100 42d5 0000                         |0028: invoke-static {}, Ljava/util/Collections;.emptyList:()Ljava/util/List; // method@d542
+624506: 0c00                                   |002b: move-result-object v0
+624508: 1100                                   |002c: return-object v0
+62450a: 5401 7b4d                              |002d: iget-object v1, v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._typeContext:Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext; // field@4d7b
+62450e: 7210 dbd5 0600                         |002f: invoke-interface {v6}, Ljava/util/List;.size:()I // method@d5db
+624514: 0a02                                   |0032: move-result v2
+624516: 2205 3a1b                              |0033: new-instance v5, Ljava/util/ArrayList; // type@1b3a
+62451a: 7020 a0d4 2500                         |0035: invoke-direct {v5, v2}, Ljava/util/ArrayList;.<init>:(I)V // method@d4a0
+624520: 0147                                   |0038: move v7, v4
+624522: 3527 0800                              |0039: if-ge v7, v2, 0041 // +0008
+624526: 7220 c9d5 3500                         |003b: invoke-interface {v5, v3}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+62452c: d807 0701                              |003e: add-int/lit8 v7, v7, #int 1 // #01
+624530: 28f9                                   |0040: goto 0039 // -0007
+624532: 3812 4f00                              |0041: if-eqz v18, 0090 // +004f
+624536: 7401 e2d0 1200                         |0043: invoke-virtual/range {v18}, Ljava/lang/Class;.getDeclaredMethods:()[Ljava/lang/reflect/Method; // method@d0e2
+62453c: 0c07                                   |0046: move-result-object v7
+62453e: 2178                                   |0047: array-length v8, v7
+624540: 073a                                   |0048: move-object v10, v3
+624542: 0149                                   |0049: move v9, v4
+624544: 3589 4600                              |004a: if-ge v9, v8, 0090 // +0046
+624548: 460b 0709                              |004c: aget-object v11, v7, v9
+62454c: 7110 da7d 0b00                         |004e: invoke-static {v11}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._isIncludableFactoryMethod:(Ljava/lang/reflect/Method;)Z // method@7dda
+624552: 0a0c                                   |0051: move-result v12
+624554: 390c 0300                              |0052: if-nez v12, 0055 // +0003
+624558: 2839                                   |0054: goto 008d // +0039
+62455a: 390a 1700                              |0055: if-nez v10, 006c // +0017
+62455e: 232a 2e20                              |0057: new-array v10, v2, [Lcom/fasterxml/jackson/databind/introspect/MemberKey; // type@202e
+624562: 014c                                   |0059: move v12, v4
+624564: 352c 1200                              |005a: if-ge v12, v2, 006c // +0012
+624568: 220d 130e                              |005c: new-instance v13, Lcom/fasterxml/jackson/databind/introspect/MemberKey; // type@0e13
+62456c: 7220 cfd5 c600                         |005e: invoke-interface {v6, v12}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+624572: 0c0e                                   |0061: move-result-object v14
+624574: 1f0e ba1a                              |0062: check-cast v14, Ljava/lang/reflect/Method; // type@1aba
+624578: 7020 2480 ed00                         |0064: invoke-direct {v13, v14}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.<init>:(Ljava/lang/reflect/Method;)V // method@8024
+62457e: 4d0d 0a0c                              |0067: aput-object v13, v10, v12
+624582: d80c 0c01                              |0069: add-int/lit8 v12, v12, #int 1 // #01
+624586: 28ef                                   |006b: goto 005a // -0011
+624588: 220c 130e                              |006c: new-instance v12, Lcom/fasterxml/jackson/databind/introspect/MemberKey; // type@0e13
+62458c: 7020 2480 bc00                         |006e: invoke-direct {v12, v11}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.<init>:(Ljava/lang/reflect/Method;)V // method@8024
+624592: 014d                                   |0071: move v13, v4
+624594: 352d 1b00                              |0072: if-ge v13, v2, 008d // +001b
+624598: 460e 0a0d                              |0074: aget-object v14, v10, v13
+62459c: 6e20 2680 ec00                         |0076: invoke-virtual {v12, v14}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.equals:(Ljava/lang/Object;)Z // method@8026
+6245a2: 0a0e                                   |0079: move-result v14
+6245a4: 380e 1000                              |007a: if-eqz v14, 008a // +0010
+6245a8: 7220 cfd5 d600                         |007c: invoke-interface {v6, v13}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+6245ae: 0c0c                                   |007f: move-result-object v12
+6245b0: 1f0c ba1a                              |0080: check-cast v12, Ljava/lang/reflect/Method; // type@1aba
+6245b4: 6e40 e37d cfb1                         |0082: invoke-virtual {v15, v12, v1, v11}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.constructFactoryCreator:(Ljava/lang/reflect/Method;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Method;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod; // method@7de3
+6245ba: 0c0b                                   |0085: move-result-object v11
+6245bc: 7230 dad5 d50b                         |0086: invoke-interface {v5, v13, v11}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+6245c2: 2804                                   |0089: goto 008d // +0004
+6245c4: d80d 0d01                              |008a: add-int/lit8 v13, v13, #int 1 // #01
+6245c8: 28e6                                   |008c: goto 0072 // -001a
+6245ca: d809 0901                              |008d: add-int/lit8 v9, v9, #int 1 // #01
+6245ce: 28bb                                   |008f: goto 004a // -0045
+6245d0: 3524 2700                              |0090: if-ge v4, v2, 00b7 // +0027
+6245d4: 7220 cfd5 4500                         |0092: invoke-interface {v5, v4}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+6245da: 0c07                                   |0095: move-result-object v7
+6245dc: 1f07 f60d                              |0096: check-cast v7, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod; // type@0df6
+6245e0: 3907 1800                              |0098: if-nez v7, 00b0 // +0018
+6245e4: 7220 cfd5 4600                         |009a: invoke-interface {v6, v4}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+6245ea: 0c07                                   |009d: move-result-object v7
+6245ec: 1f07 ba1a                              |009e: check-cast v7, Ljava/lang/reflect/Method; // type@1aba
+6245f0: 0808 1000                              |00a0: move-object/from16 v8, v16
+6245f4: 0809 1100                              |00a2: move-object/from16 v9, v17
+6245f8: 7140 2f80 9718                         |00a4: invoke-static {v7, v9, v8, v1}, Lcom/fasterxml/jackson/databind/introspect/MethodGenericTypeResolver;.narrowMethodTypeParameters:(Ljava/lang/reflect/Method;Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;)Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext; // method@802f
+6245fe: 0c0a                                   |00a7: move-result-object v10
+624600: 6e40 e37d 7f3a                         |00a8: invoke-virtual {v15, v7, v10, v3}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.constructFactoryCreator:(Ljava/lang/reflect/Method;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Method;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod; // method@7de3
+624606: 0c07                                   |00ab: move-result-object v7
+624608: 7230 dad5 4507                         |00ac: invoke-interface {v5, v4, v7}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+62460e: 2805                                   |00af: goto 00b4 // +0005
+624610: 0808 1000                              |00b0: move-object/from16 v8, v16
+624614: 0809 1100                              |00b2: move-object/from16 v9, v17
+624618: d804 0401                              |00b4: add-int/lit8 v4, v4, #int 1 // #01
+62461c: 28da                                   |00b6: goto 0090 // -0026
+62461e: 1105                                   |00b7: return-object v5
+      catches       : (none)
+      positions     :
+        0x0001 line=197
+        0x0012 line=198
+        0x001b line=204
+        0x0020 line=206
+        0x0028 line=210
+        0x002d line=229
+        0x002f line=231
+        0x0033 line=232
+        0x003b line=234
+        0x0043 line=239
+        0x004e line=240
+        0x0057 line=244
+        0x005c line=246
+        0x006c line=249
+        0x0074 line=251
+        0x007c line=253
+        0x0086 line=252
+        0x0092 line=262
+        0x009a line=264
+        0x00a4 line=269
+        0x00a8 line=272
+        0x00ac line=271
+      locals        :
+        0x0000 - 0x00b8 reg=15 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;
+        0x0000 - 0x00b8 reg=16 (null) Lcom/fasterxml/jackson/databind/type/TypeFactory;
+        0x0000 - 0x00b8 reg=17 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x00b8 reg=18 (null) Ljava/lang/Class;
+
+    #3              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : '_isIncludableFactoryMethod'
+      type          : '(Ljava/lang/reflect/Method;)Z'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 20 16-bit code units
+624620:                                        |[624620] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector._isIncludableFactoryMethod:(Ljava/lang/reflect/Method;)Z
+624630: 6e10 d5d2 0100                         |0000: invoke-virtual {v1}, Ljava/lang/reflect/Method;.getModifiers:()I // method@d2d5
+624636: 0a00                                   |0003: move-result v0
+624638: 7110 e7d2 0000                         |0004: invoke-static {v0}, Ljava/lang/reflect/Modifier;.isStatic:(I)Z // method@d2e7
+62463e: 0a00                                   |0007: move-result v0
+624640: 3800 0a00                              |0008: if-eqz v0, 0012 // +000a
+624644: 6e10 dfd2 0100                         |000a: invoke-virtual {v1}, Ljava/lang/reflect/Method;.isSynthetic:()Z // method@d2df
+62464a: 0a01                                   |000d: move-result v1
+62464c: 3901 0400                              |000e: if-nez v1, 0012 // +0004
+624650: 1211                                   |0010: const/4 v1, #int 1 // #1
+624652: 2802                                   |0011: goto 0013 // +0002
+624654: 1201                                   |0012: const/4 v1, #int 0 // #0
+624656: 0f01                                   |0013: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=280
+        0x000a line=283
+      locals        :
+        0x0000 - 0x0014 reg=1 (null) Ljava/lang/reflect/Method;
+
+    #4              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : 'collectAnnotations'
+      type          : '(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 32 16-bit code units
+624658:                                        |[624658] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector.collectAnnotations:(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;
+624668: 5510 784d                              |0000: iget-boolean v0, v1, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._collectAnnotations:Z // field@4d78
+62466c: 3800 1900                              |0002: if-eqz v0, 001b // +0019
+624670: 6e10 168e 0200                         |0004: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getDeclaredAnnotations:()[Ljava/lang/annotation/Annotation; // method@8e16
+624676: 0c02                                   |0007: move-result-object v2
+624678: 6e20 dd7d 2100                         |0008: invoke-virtual {v1, v2}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:([Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7ddd
+62467e: 0c02                                   |000b: move-result-object v2
+624680: 3803 0a00                              |000c: if-eqz v3, 0016 // +000a
+624684: 6e10 168e 0300                         |000e: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getDeclaredAnnotations:()[Ljava/lang/annotation/Annotation; // method@8e16
+62468a: 0c03                                   |0011: move-result-object v3
+62468c: 6e30 dc7d 2103                         |0012: invoke-virtual {v1, v2, v3}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:(Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;[Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7ddc
+624692: 0c02                                   |0015: move-result-object v2
+624694: 6e10 9c7e 0200                         |0016: invoke-virtual {v2}, Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;.asAnnotationMap:()Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7e9c
+62469a: 0c01                                   |0019: move-result-object v1
+62469c: 1101                                   |001a: return-object v1
+62469e: 7100 d67d 0000                         |001b: invoke-static {}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._emptyAnnotationMap:()Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7dd6
+6246a4: 0c01                                   |001e: move-result-object v1
+6246a6: 1101                                   |001f: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=389
+        0x0004 line=390
+        0x000e line=392
+        0x0016 line=394
+        0x001b line=396
+      locals        :
+        0x0000 - 0x0020 reg=1 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;
+        0x0000 - 0x0020 reg=2 (null) Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;
+        0x0000 - 0x0020 reg=3 (null) Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;
+
+    #5              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : 'collectAnnotations'
+      type          : '(Ljava/lang/reflect/AnnotatedElement;Ljava/lang/reflect/AnnotatedElement;)Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 23 16-bit code units
+6246a8:                                        |[6246a8] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector.collectAnnotations:(Ljava/lang/reflect/AnnotatedElement;Ljava/lang/reflect/AnnotatedElement;)Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;
+6246b8: 7210 a3d2 0100                         |0000: invoke-interface {v1}, Ljava/lang/reflect/AnnotatedElement;.getDeclaredAnnotations:()[Ljava/lang/annotation/Annotation; // method@d2a3
+6246be: 0c01                                   |0003: move-result-object v1
+6246c0: 6e20 dd7d 1000                         |0004: invoke-virtual {v0, v1}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:([Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7ddd
+6246c6: 0c01                                   |0007: move-result-object v1
+6246c8: 3802 0a00                              |0008: if-eqz v2, 0012 // +000a
+6246cc: 7210 a3d2 0200                         |000a: invoke-interface {v2}, Ljava/lang/reflect/AnnotatedElement;.getDeclaredAnnotations:()[Ljava/lang/annotation/Annotation; // method@d2a3
+6246d2: 0c02                                   |000d: move-result-object v2
+6246d4: 6e30 dc7d 1002                         |000e: invoke-virtual {v0, v1, v2}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:(Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;[Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7ddc
+6246da: 0c01                                   |0011: move-result-object v1
+6246dc: 6e10 9c7e 0100                         |0012: invoke-virtual {v1}, Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;.asAnnotationMap:()Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7e9c
+6246e2: 0c00                                   |0015: move-result-object v0
+6246e4: 1100                                   |0016: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=400
+        0x000a line=402
+        0x0012 line=404
+      locals        :
+        0x0000 - 0x0017 reg=0 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;
+        0x0000 - 0x0017 reg=1 (null) Ljava/lang/reflect/AnnotatedElement;
+        0x0000 - 0x0017 reg=2 (null) Ljava/lang/reflect/AnnotatedElement;
+
+    #6              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : 'collectAnnotations'
+      type          : '([[Ljava/lang/annotation/Annotation;[[Ljava/lang/annotation/Annotation;)[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 3
+      outs          : 3
+      insns size    : 41 16-bit code units
+6246e8:                                        |[6246e8] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector.collectAnnotations:([[Ljava/lang/annotation/Annotation;[[Ljava/lang/annotation/Annotation;)[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;
+6246f8: 5550 784d                              |0000: iget-boolean v0, v5, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._collectAnnotations:Z // field@4d78
+6246fc: 3800 2400                              |0002: if-eqz v0, 0026 // +0024
+624700: 2160                                   |0004: array-length v0, v6
+624702: 2301 2c20                              |0005: new-array v1, v0, [Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // type@202c
+624706: 1202                                   |0007: const/4 v2, #int 0 // #0
+624708: 3502 1d00                              |0008: if-ge v2, v0, 0025 // +001d
+62470c: 7100 9f7e 0000                         |000a: invoke-static {}, Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;.emptyCollector:()Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7e9f
+624712: 0c03                                   |000d: move-result-object v3
+624714: 4604 0602                              |000e: aget-object v4, v6, v2
+624718: 6e30 dc7d 3504                         |0010: invoke-virtual {v5, v3, v4}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:(Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;[Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7ddc
+62471e: 0c03                                   |0013: move-result-object v3
+624720: 3807 0800                              |0014: if-eqz v7, 001c // +0008
+624724: 4604 0702                              |0016: aget-object v4, v7, v2
+624728: 6e30 dc7d 3504                         |0018: invoke-virtual {v5, v3, v4}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:(Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;[Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7ddc
+62472e: 0c03                                   |001b: move-result-object v3
+624730: 6e10 9c7e 0300                         |001c: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;.asAnnotationMap:()Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7e9c
+624736: 0c03                                   |001f: move-result-object v3
+624738: 4d03 0102                              |0020: aput-object v3, v1, v2
+62473c: d802 0201                              |0022: add-int/lit8 v2, v2, #int 1 // #01
+624740: 28e4                                   |0024: goto 0008 // -001c
+624742: 1101                                   |0025: return-object v1
+624744: 6205 774d                              |0026: sget-object v5, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.NO_ANNOTATION_MAPS:[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // field@4d77
+624748: 1105                                   |0028: return-object v5
+      catches       : (none)
+      positions     :
+        0x0000 line=370
+        0x0004 line=371
+        0x0005 line=372
+        0x000a line=374
+        0x0016 line=377
+        0x001c line=379
+        0x0026 line=383
+      locals        :
+        0x0000 - 0x0029 reg=5 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;
+        0x0000 - 0x0029 reg=6 (null) [[Ljava/lang/annotation/Annotation;
+        0x0000 - 0x0029 reg=7 (null) [[Ljava/lang/annotation/Annotation;
+
+    #7              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : 'collectCreators'
+      type          : '(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;Z)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass$Creators;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 7
+      ins           : 6
+      outs          : 4
+      insns size    : 16 16-bit code units
+62474c:                                        |[62474c] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector.collectCreators:(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;Z)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass$Creators;
+62475c: 3805 0400                              |0000: if-eqz v5, 0004 // +0004
+624760: 1210                                   |0002: const/4 v0, #int 1 // #1
+624762: 2802                                   |0003: goto 0005 // +0002
+624764: 1200                                   |0004: const/4 v0, #int 0 // #0
+624766: b606                                   |0005: or-int/2addr v6, v0
+624768: 2200 ef0d                              |0006: new-instance v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector; // type@0def
+62476c: 7040 d57d 1063                         |0008: invoke-direct {v0, v1, v3, v6}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.<init>:(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Z)V // method@7dd5
+624772: 6e40 db7d 2054                         |000b: invoke-virtual {v0, v2, v4, v5}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collect:(Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass$Creators; // method@7ddb
+624778: 0c01                                   |000e: move-result-object v1
+62477a: 1101                                   |000f: return-object v1
+      catches       : (none)
+      positions     :
+        0x0006 line=60
+        0x000b line=61
+      locals        :
+        0x0000 - 0x0010 reg=1 (null) Lcom/fasterxml/jackson/databind/AnnotationIntrospector;
+        0x0000 - 0x0010 reg=2 (null) Lcom/fasterxml/jackson/databind/type/TypeFactory;
+        0x0000 - 0x0010 reg=3 (null) Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;
+        0x0000 - 0x0010 reg=4 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x0010 reg=5 (null) Ljava/lang/Class;
+        0x0000 - 0x0010 reg=6 (null) Z
+
+    #8              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : 'isIncludableConstructor'
+      type          : '(Ljava/lang/reflect/Constructor;)Z'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+62477c:                                        |[62477c] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector.isIncludableConstructor:(Ljava/lang/reflect/Constructor;)Z
+62478c: 6e10 b2d2 0000                         |0000: invoke-virtual {v0}, Ljava/lang/reflect/Constructor;.isSynthetic:()Z // method@d2b2
+624792: 0a00                                   |0003: move-result v0
+624794: df00 0001                              |0004: xor-int/lit8 v0, v0, #int 1 // #01
+624798: 0f00                                   |0006: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=409
+      locals        :
+        0x0000 - 0x0007 reg=0 (null) Ljava/lang/reflect/Constructor;
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : 'collect'
+      type          : '(Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass$Creators;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 4
+      insns size    : 89 16-bit code units
+62479c:                                        |[62479c] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector.collect:(Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass$Creators;
+6247ac: 7030 d87d 4205                         |0000: invoke-direct {v2, v4, v5}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._findPotentialConstructors:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Ljava/util/List; // method@7dd8
+6247b2: 0c00                                   |0003: move-result-object v0
+6247b4: 7040 d97d 3254                         |0004: invoke-direct {v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._findPotentialFactories:(Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Ljava/util/List; // method@7dd9
+6247ba: 0c03                                   |0007: move-result-object v3
+6247bc: 5524 784d                              |0008: iget-boolean v4, v2, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._collectAnnotations:Z // field@4d78
+6247c0: 3804 4700                              |000a: if-eqz v4, 0051 // +0047
+6247c4: 5424 794d                              |000c: iget-object v4, v2, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._defaultConstructor:Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // field@4d79
+6247c8: 3804 0f00                              |000e: if-eqz v4, 001d // +000f
+6247cc: 5424 7a4d                              |0010: iget-object v4, v2, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._intr:Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // field@4d7a
+6247d0: 5425 794d                              |0012: iget-object v5, v2, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._defaultConstructor:Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // field@4d79
+6247d4: 6e20 036c 5400                         |0014: invoke-virtual {v4, v5}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.hasIgnoreMarker:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;)Z // method@6c03
+6247da: 0a04                                   |0017: move-result v4
+6247dc: 3804 0500                              |0018: if-eqz v4, 001d // +0005
+6247e0: 1204                                   |001a: const/4 v4, #int 0 // #0
+6247e2: 5b24 794d                              |001b: iput-object v4, v2, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._defaultConstructor:Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // field@4d79
+6247e6: 7210 dbd5 0000                         |001d: invoke-interface {v0}, Ljava/util/List;.size:()I // method@d5db
+6247ec: 0a04                                   |0020: move-result v4
+6247ee: d804 04ff                              |0021: add-int/lit8 v4, v4, #int -1 // #ff
+6247f2: 3a04 1400                              |0023: if-ltz v4, 0037 // +0014
+6247f6: 5425 7a4d                              |0025: iget-object v5, v2, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._intr:Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // field@4d7a
+6247fa: 7220 cfd5 4000                         |0027: invoke-interface {v0, v4}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+624800: 0c01                                   |002a: move-result-object v1
+624802: 1f01 f40d                              |002b: check-cast v1, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // type@0df4
+624806: 6e20 036c 1500                         |002d: invoke-virtual {v5, v1}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.hasIgnoreMarker:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;)Z // method@6c03
+62480c: 0a05                                   |0030: move-result v5
+62480e: 3805 f0ff                              |0031: if-eqz v5, 0021 // -0010
+624812: 7220 d6d5 4000                         |0033: invoke-interface {v0, v4}, Ljava/util/List;.remove:(I)Ljava/lang/Object; // method@d5d6
+624818: 28eb                                   |0036: goto 0021 // -0015
+62481a: 7210 dbd5 0300                         |0037: invoke-interface {v3}, Ljava/util/List;.size:()I // method@d5db
+624820: 0a04                                   |003a: move-result v4
+624822: d804 04ff                              |003b: add-int/lit8 v4, v4, #int -1 // #ff
+624826: 3a04 1400                              |003d: if-ltz v4, 0051 // +0014
+62482a: 5425 7a4d                              |003f: iget-object v5, v2, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._intr:Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // field@4d7a
+62482e: 7220 cfd5 4300                         |0041: invoke-interface {v3, v4}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+624834: 0c01                                   |0044: move-result-object v1
+624836: 1f01 f40d                              |0045: check-cast v1, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember; // type@0df4
+62483a: 6e20 036c 1500                         |0047: invoke-virtual {v5, v1}, Lcom/fasterxml/jackson/databind/AnnotationIntrospector;.hasIgnoreMarker:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedMember;)Z // method@6c03
+624840: 0a05                                   |004a: move-result v5
+624842: 3805 f0ff                              |004b: if-eqz v5, 003b // -0010
+624846: 7220 d6d5 4300                         |004d: invoke-interface {v3, v4}, Ljava/util/List;.remove:(I)Ljava/lang/Object; // method@d5d6
+62484c: 28eb                                   |0050: goto 003b // -0015
+62484e: 2204 ea0d                              |0051: new-instance v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass$Creators; // type@0dea
+624852: 5422 794d                              |0053: iget-object v2, v2, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._defaultConstructor:Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // field@4d79
+624856: 7040 7f7d 2430                         |0055: invoke-direct {v4, v2, v0, v3}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedClass$Creators;.<init>:(Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor;Ljava/util/List;Ljava/util/List;)V // method@7d7f
+62485c: 1104                                   |0058: return-object v4
+      catches       : (none)
+      positions     :
+        0x0000 line=70
+        0x0004 line=71
+        0x0008 line=77
+        0x000c line=78
+        0x0010 line=79
+        0x001b line=80
+        0x001d line=84
+        0x0025 line=85
+        0x0033 line=86
+        0x0037 line=89
+        0x003f line=90
+        0x004d line=91
+        0x0051 line=95
+      locals        :
+        0x0000 - 0x0059 reg=2 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;
+        0x0000 - 0x0059 reg=3 (null) Lcom/fasterxml/jackson/databind/type/TypeFactory;
+        0x0000 - 0x0059 reg=4 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x0059 reg=5 (null) Ljava/lang/Class;
+
+    #1              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : 'constructDefaultConstructor'
+      type          : '(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 5
+      insns size    : 18 16-bit code units
+624860:                                        |[624860] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector.constructDefaultConstructor:(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor;
+624870: 2200 ee0d                              |0000: new-instance v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // type@0dee
+624874: 5431 7b4d                              |0002: iget-object v1, v3, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._typeContext:Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext; // field@4d7b
+624878: 6e10 158e 0400                         |0004: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getConstructor:()Ljava/lang/reflect/Constructor; // method@8e15
+62487e: 0c02                                   |0007: move-result-object v2
+624880: 7030 de7d 4305                         |0008: invoke-direct {v3, v4, v5}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7dde
+624886: 0c03                                   |000b: move-result-object v3
+624888: 6204 774d                              |000c: sget-object v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.NO_ANNOTATION_MAPS:[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // field@4d77
+62488c: 7054 ba7d 1032                         |000e: invoke-direct {v0, v1, v2, v3, v4}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor;.<init>:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Constructor;Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;)V // method@7dba
+624892: 1100                                   |0011: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=289
+        0x0008 line=290
+      locals        :
+        0x0000 - 0x0012 reg=3 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;
+        0x0000 - 0x0012 reg=4 (null) Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;
+        0x0000 - 0x0012 reg=5 (null) Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;
+
+    #2              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : 'constructFactoryCreator'
+      type          : '(Ljava/lang/reflect/Method;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Method;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 8
+      ins           : 4
+      outs          : 5
+      insns size    : 66 16-bit code units
+624894:                                        |[624894] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector.constructFactoryCreator:(Ljava/lang/reflect/Method;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Method;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod;
+6248a4: 6e10 d8d2 0500                         |0000: invoke-virtual {v5}, Ljava/lang/reflect/Method;.getParameterTypes:()[Ljava/lang/Class; // method@d2d8
+6248aa: 0c00                                   |0003: move-result-object v0
+6248ac: 2100                                   |0004: array-length v0, v0
+6248ae: 5441 7a4d                              |0005: iget-object v1, v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._intr:Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // field@4d7a
+6248b2: 3901 1000                              |0007: if-nez v1, 0017 // +0010
+6248b6: 2204 f60d                              |0009: new-instance v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod; // type@0df6
+6248ba: 7100 d67d 0000                         |000b: invoke-static {}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._emptyAnnotationMap:()Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7dd6
+6248c0: 0c07                                   |000e: move-result-object v7
+6248c2: 7110 d77d 0000                         |000f: invoke-static {v0}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._emptyAnnotationMaps:(I)[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7dd7
+6248c8: 0c00                                   |0012: move-result-object v0
+6248ca: 7050 1c7e 6475                         |0013: invoke-direct {v4, v6, v5, v7, v0}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod;.<init>:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Method;Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;)V // method@7e1c
+6248d0: 1104                                   |0016: return-object v4
+6248d2: 3900 0e00                              |0017: if-nez v0, 0025 // +000e
+6248d6: 2200 f60d                              |0019: new-instance v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod; // type@0df6
+6248da: 7030 df7d 5407                         |001b: invoke-direct {v4, v5, v7}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:(Ljava/lang/reflect/AnnotatedElement;Ljava/lang/reflect/AnnotatedElement;)Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7ddf
+6248e0: 0c04                                   |001e: move-result-object v4
+6248e2: 6207 774d                              |001f: sget-object v7, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.NO_ANNOTATION_MAPS:[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // field@4d77
+6248e6: 7057 1c7e 6045                         |0021: invoke-direct {v0, v6, v5, v4, v7}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod;.<init>:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Method;Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;)V // method@7e1c
+6248ec: 1100                                   |0024: return-object v0
+6248ee: 2200 f60d                              |0025: new-instance v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod; // type@0df6
+6248f2: 7030 df7d 5407                         |0027: invoke-direct {v4, v5, v7}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:(Ljava/lang/reflect/AnnotatedElement;Ljava/lang/reflect/AnnotatedElement;)Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7ddf
+6248f8: 0c01                                   |002a: move-result-object v1
+6248fa: 6e10 d7d2 0500                         |002b: invoke-virtual {v5}, Ljava/lang/reflect/Method;.getParameterAnnotations:()[[Ljava/lang/annotation/Annotation; // method@d2d7
+624900: 0c02                                   |002e: move-result-object v2
+624902: 3907 0700                              |002f: if-nez v7, 0036 // +0007
+624906: 1207                                   |0031: const/4 v7, #int 0 // #0
+624908: 0773                                   |0032: move-object v3, v7
+62490a: 1f03 f420                              |0033: check-cast v3, [[Ljava/lang/annotation/Annotation; // type@20f4
+62490e: 2805                                   |0035: goto 003a // +0005
+624910: 6e10 d7d2 0700                         |0036: invoke-virtual {v7}, Ljava/lang/reflect/Method;.getParameterAnnotations:()[[Ljava/lang/annotation/Annotation; // method@d2d7
+624916: 0c07                                   |0039: move-result-object v7
+624918: 7030 e07d 2407                         |003a: invoke-direct {v4, v2, v7}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:([[Ljava/lang/annotation/Annotation;[[Ljava/lang/annotation/Annotation;)[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7de0
+62491e: 0c04                                   |003d: move-result-object v4
+624920: 7054 1c7e 6015                         |003e: invoke-direct {v0, v6, v5, v1, v4}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod;.<init>:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Method;Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;)V // method@7e1c
+624926: 1100                                   |0041: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=355
+        0x0005 line=356
+        0x0009 line=357
+        0x000f line=358
+        0x0019 line=361
+        0x0025 line=364
+        0x002b line=365
+        0x0036 line=366
+        0x003a line=365
+      locals        :
+        0x0000 - 0x0042 reg=4 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;
+        0x0000 - 0x0042 reg=5 (null) Ljava/lang/reflect/Method;
+        0x0000 - 0x0042 reg=6 (null) Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;
+        0x0000 - 0x0042 reg=7 (null) Ljava/lang/reflect/Method;
+
+    #3              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;)
+      name          : 'constructNonDefaultConstructor'
+      type          : '(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 10
+      ins           : 3
+      outs          : 5
+      insns size    : 186 16-bit code units
+624928:                                        |[624928] com.fasterxml.jackson.databind.introspect.AnnotatedCreatorCollector.constructNonDefaultConstructor:(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor;
+624938: 6e10 188e 0800                         |0000: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getParamCount:()I // method@8e18
+62493e: 0a00                                   |0003: move-result v0
+624940: 5471 7a4d                              |0004: iget-object v1, v7, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._intr:Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // field@4d7a
+624944: 3901 1600                              |0006: if-nez v1, 001c // +0016
+624948: 2209 ee0d                              |0008: new-instance v9, Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // type@0dee
+62494c: 5477 7b4d                              |000a: iget-object v7, v7, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._typeContext:Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext; // field@4d7b
+624950: 6e10 158e 0800                         |000c: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getConstructor:()Ljava/lang/reflect/Constructor; // method@8e15
+624956: 0c08                                   |000f: move-result-object v8
+624958: 7100 d67d 0000                         |0010: invoke-static {}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._emptyAnnotationMap:()Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7dd6
+62495e: 0c01                                   |0013: move-result-object v1
+624960: 7110 d77d 0000                         |0014: invoke-static {v0}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._emptyAnnotationMaps:(I)[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7dd7
+624966: 0c00                                   |0017: move-result-object v0
+624968: 7050 ba7d 7918                         |0018: invoke-direct {v9, v7, v8, v1, v0}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor;.<init>:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Constructor;Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;)V // method@7dba
+62496e: 1109                                   |001b: return-object v9
+624970: 3900 1400                              |001c: if-nez v0, 0030 // +0014
+624974: 2200 ee0d                              |001e: new-instance v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // type@0dee
+624978: 5471 7b4d                              |0020: iget-object v1, v7, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._typeContext:Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext; // field@4d7b
+62497c: 6e10 158e 0800                         |0022: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getConstructor:()Ljava/lang/reflect/Constructor; // method@8e15
+624982: 0c02                                   |0025: move-result-object v2
+624984: 7030 de7d 8709                         |0026: invoke-direct {v7, v8, v9}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7dde
+62498a: 0c07                                   |0029: move-result-object v7
+62498c: 6208 774d                              |002a: sget-object v8, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.NO_ANNOTATION_MAPS:[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // field@4d77
+624990: 7058 ba7d 1072                         |002c: invoke-direct {v0, v1, v2, v7, v8}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor;.<init>:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Constructor;Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;)V // method@7dba
+624996: 1100                                   |002f: return-object v0
+624998: 6e10 198e 0800                         |0030: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getParameterAnnotations:()[[Ljava/lang/annotation/Annotation; // method@8e19
+62499e: 0c01                                   |0033: move-result-object v1
+6249a0: 2112                                   |0034: array-length v2, v1
+6249a2: 1203                                   |0035: const/4 v3, #int 0 // #0
+6249a4: 3220 6600                              |0036: if-eq v0, v2, 009c // +0066
+6249a8: 6e10 178e 0800                         |0038: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getDeclaringClass:()Ljava/lang/Class; // method@8e17
+6249ae: 0c02                                   |003b: move-result-object v2
+6249b0: 7110 538e 0200                         |003c: invoke-static {v2}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.isEnumType:(Ljava/lang/Class;)Z // method@8e53
+6249b6: 0a04                                   |003f: move-result v4
+6249b8: 1205                                   |0040: const/4 v5, #int 0 // #0
+6249ba: 3804 1800                              |0041: if-eqz v4, 0059 // +0018
+6249be: 2114                                   |0043: array-length v4, v1
+6249c0: 1226                                   |0044: const/4 v6, #int 2 // #2
+6249c2: b064                                   |0045: add-int/2addr v4, v6
+6249c4: 3340 1300                              |0046: if-ne v0, v4, 0059 // +0013
+6249c8: 2112                                   |0048: array-length v2, v1
+6249ca: b062                                   |0049: add-int/2addr v2, v6
+6249cc: 2322 f420                              |004a: new-array v2, v2, [[Ljava/lang/annotation/Annotation; // type@20f4
+6249d0: 2114                                   |004c: array-length v4, v1
+6249d2: 7154 5ad2 5162                         |004d: invoke-static {v1, v5, v2, v6, v4}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+6249d8: 0731                                   |0050: move-object v1, v3
+6249da: 1f01 f420                              |0051: check-cast v1, [[Ljava/lang/annotation/Annotation; // type@20f4
+6249de: 7030 e07d 2703                         |0053: invoke-direct {v7, v2, v3}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:([[Ljava/lang/annotation/Annotation;[[Ljava/lang/annotation/Annotation;)[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7de0
+6249e4: 0c03                                   |0056: move-result-object v3
+6249e6: 0721                                   |0057: move-object v1, v2
+6249e8: 2820                                   |0058: goto 0078 // +0020
+6249ea: 6e10 00d1 0200                         |0059: invoke-virtual {v2}, Ljava/lang/Class;.isMemberClass:()Z // method@d100
+6249f0: 0a02                                   |005c: move-result v2
+6249f2: 3802 1b00                              |005d: if-eqz v2, 0078 // +001b
+6249f6: 2112                                   |005f: array-length v2, v1
+6249f8: 1214                                   |0060: const/4 v4, #int 1 // #1
+6249fa: b042                                   |0061: add-int/2addr v2, v4
+6249fc: 3320 1600                              |0062: if-ne v0, v2, 0078 // +0016
+624a00: 2112                                   |0064: array-length v2, v1
+624a02: b042                                   |0065: add-int/2addr v2, v4
+624a04: 2322 f420                              |0066: new-array v2, v2, [[Ljava/lang/annotation/Annotation; // type@20f4
+624a08: 2116                                   |0068: array-length v6, v1
+624a0a: 7156 5ad2 5142                         |0069: invoke-static {v1, v5, v2, v4, v6}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+624a10: 6201 764d                              |006c: sget-object v1, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.NO_ANNOTATIONS:[Ljava/lang/annotation/Annotation; // field@4d76
+624a14: 4d01 0205                              |006e: aput-object v1, v2, v5
+624a18: 0731                                   |0070: move-object v1, v3
+624a1a: 1f01 f420                              |0071: check-cast v1, [[Ljava/lang/annotation/Annotation; // type@20f4
+624a1e: 7030 e07d 2703                         |0073: invoke-direct {v7, v2, v3}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:([[Ljava/lang/annotation/Annotation;[[Ljava/lang/annotation/Annotation;)[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7de0
+624a24: 0c03                                   |0076: move-result-object v3
+624a26: 28e0                                   |0077: goto 0057 // -0020
+624a28: 3803 0300                              |0078: if-eqz v3, 007b // +0003
+624a2c: 2830                                   |007a: goto 00aa // +0030
+624a2e: 2207 7b1a                              |007b: new-instance v7, Ljava/lang/IllegalStateException; // type@1a7b
+624a32: 6e10 178e 0800                         |007d: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getDeclaringClass:()Ljava/lang/Class; // method@8e17
+624a38: 0c08                                   |0080: move-result-object v8
+624a3a: 6e10 f0d0 0800                         |0081: invoke-virtual {v8}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+624a40: 0c08                                   |0084: move-result-object v8
+624a42: 7110 6bd1 0000                         |0085: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+624a48: 0c09                                   |0088: move-result-object v9
+624a4a: 2110                                   |0089: array-length v0, v1
+624a4c: 7110 6bd1 0000                         |008a: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+624a52: 0c00                                   |008d: move-result-object v0
+624a54: 2430 ad20 9800                         |008e: filled-new-array {v8, v9, v0}, [Ljava/lang/Object; // type@20ad
+624a5a: 0c08                                   |0091: move-result-object v8
+624a5c: 1a09 712d                              |0092: const-string v9, "Internal error: constructor for %s has mismatch: %d parameters; %d sets of annotations" // string@2d71
+624a60: 7120 05d2 8900                         |0094: invoke-static {v9, v8}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+624a66: 0c08                                   |0097: move-result-object v8
+624a68: 7020 4cd1 8700                         |0098: invoke-direct {v7, v8}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+624a6e: 2707                                   |009b: throw v7
+624a70: 3909 0600                              |009c: if-nez v9, 00a2 // +0006
+624a74: 0730                                   |009e: move-object v0, v3
+624a76: 1f00 f420                              |009f: check-cast v0, [[Ljava/lang/annotation/Annotation; // type@20f4
+624a7a: 2805                                   |00a1: goto 00a6 // +0005
+624a7c: 6e10 198e 0900                         |00a2: invoke-virtual {v9}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getParameterAnnotations:()[[Ljava/lang/annotation/Annotation; // method@8e19
+624a82: 0c03                                   |00a5: move-result-object v3
+624a84: 7030 e07d 1703                         |00a6: invoke-direct {v7, v1, v3}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:([[Ljava/lang/annotation/Annotation;[[Ljava/lang/annotation/Annotation;)[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7de0
+624a8a: 0c03                                   |00a9: move-result-object v3
+624a8c: 2200 ee0d                              |00aa: new-instance v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor; // type@0dee
+624a90: 5471 7b4d                              |00ac: iget-object v1, v7, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;._typeContext:Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext; // field@4d7b
+624a94: 6e10 158e 0800                         |00ae: invoke-virtual {v8}, Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;.getConstructor:()Ljava/lang/reflect/Constructor; // method@8e15
+624a9a: 0c02                                   |00b1: move-result-object v2
+624a9c: 7030 de7d 8709                         |00b2: invoke-direct {v7, v8, v9}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;.collectAnnotations:(Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;)Lcom/fasterxml/jackson/databind/introspect/AnnotationMap; // method@7dde
+624aa2: 0c07                                   |00b5: move-result-object v7
+624aa4: 7053 ba7d 1072                         |00b6: invoke-direct {v0, v1, v2, v7, v3}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedConstructor;.<init>:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Constructor;Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;[Lcom/fasterxml/jackson/databind/introspect/AnnotationMap;)V // method@7dba
+624aaa: 1100                                   |00b9: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=298
+        0x0004 line=299
+        0x0008 line=300
+        0x0010 line=301
+        0x001e line=309
+        0x0026 line=310
+        0x0030 line=315
+        0x0034 line=316
+        0x0038 line=321
+        0x003c line=323
+        0x0048 line=325
+        0x004c line=326
+        0x0050 line=327
+        0x0059 line=328
+        0x005f line=330
+        0x0064 line=333
+        0x0068 line=334
+        0x006c line=335
+        0x0070 line=336
+        0x007b line=340
+        0x007d line=342
+        0x0092 line=340
+        0x009e line=345
+        0x00a2 line=346
+        0x00a6 line=345
+        0x00aa line=348
+        0x00b2 line=349
+      locals        :
+        0x0000 - 0x00ba reg=7 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedCreatorCollector;
+        0x0000 - 0x00ba reg=8 (null) Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;
+        0x0000 - 0x00ba reg=9 (null) Lcom/fasterxml/jackson/databind/util/ClassUtil$Ctor;
+
+  source_file_idx   : 5479 (AnnotatedCreatorCollector.java)
+

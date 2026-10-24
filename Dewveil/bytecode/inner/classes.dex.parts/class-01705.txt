@@ -1,0 +1,539 @@
+Class #1705            -
+  Class descriptor  : 'Landroidx/recyclerview/widget/OpReorderer;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Landroidx/recyclerview/widget/OpReorderer;)
+      name          : 'mCallback'
+      type          : 'Landroidx/recyclerview/widget/OpReorderer$Callback;'
+      access        : 0x0010 (FINAL)
+  Direct methods    -
+    #0              : (in Landroidx/recyclerview/widget/OpReorderer;)
+      name          : '<init>'
+      type          : '(Landroidx/recyclerview/widget/OpReorderer$Callback;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 6 16-bit code units
+55a060:                                        |[55a060] androidx.recyclerview.widget.OpReorderer.<init>:(Landroidx/recyclerview/widget/OpReorderer$Callback;)V
+55a070: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+55a076: 5b01 ff35                              |0003: iput-object v1, v0, Landroidx/recyclerview/widget/OpReorderer;.mCallback:Landroidx/recyclerview/widget/OpReorderer$Callback; // field@35ff
+55a07a: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=25
+        0x0003 line=26
+      locals        :
+        0x0000 - 0x0006 reg=0 this Landroidx/recyclerview/widget/OpReorderer;
+        0x0000 - 0x0006 reg=1 (null) Landroidx/recyclerview/widget/OpReorderer$Callback;
+
+    #1              : (in Landroidx/recyclerview/widget/OpReorderer;)
+      name          : 'getLastMoveOutOfOrder'
+      type          : '(Ljava/util/List;)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 2
+      insns size    : 30 16-bit code units
+55a07c:                                        |[55a07c] androidx.recyclerview.widget.OpReorderer.getLastMoveOutOfOrder:(Ljava/util/List;)I
+55a08c: 7210 dbd5 0500                         |0000: invoke-interface {v5}, Ljava/util/List;.size:()I // method@d5db
+55a092: 0a04                                   |0003: move-result v4
+55a094: 1210                                   |0004: const/4 v0, #int 1 // #1
+55a096: b104                                   |0005: sub-int/2addr v4, v0
+55a098: 1201                                   |0006: const/4 v1, #int 0 // #0
+55a09a: 3a04 1500                              |0007: if-ltz v4, 001c // +0015
+55a09e: 7220 cfd5 4500                         |0009: invoke-interface {v5, v4}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+55a0a4: 0c02                                   |000c: move-result-object v2
+55a0a6: 1f02 b908                              |000d: check-cast v2, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp; // type@08b9
+55a0aa: 5222 2234                              |000f: iget v2, v2, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.cmd:I // field@3422
+55a0ae: 1303 0800                              |0011: const/16 v3, #int 8 // #8
+55a0b2: 3332 0500                              |0013: if-ne v2, v3, 0018 // +0005
+55a0b6: 3801 0400                              |0015: if-eqz v1, 0019 // +0004
+55a0ba: 0f04                                   |0017: return v4
+55a0bc: 0101                                   |0018: move v1, v0
+55a0be: d804 04ff                              |0019: add-int/lit8 v4, v4, #int -1 // #ff
+55a0c2: 28ec                                   |001b: goto 0007 // -0014
+55a0c4: 12f4                                   |001c: const/4 v4, #int -1 // #ff
+55a0c6: 0f04                                   |001d: return v4
+      catches       : (none)
+      positions     :
+        0x0000 line=214
+        0x0009 line=215
+        0x000f line=216
+      locals        :
+        0x0000 - 0x001e reg=4 this Landroidx/recyclerview/widget/OpReorderer;
+        0x0000 - 0x001e reg=5 (null) Ljava/util/List;
+
+    #2              : (in Landroidx/recyclerview/widget/OpReorderer;)
+      name          : 'swapMoveAdd'
+      type          : '(Ljava/util/List;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 6
+      outs          : 3
+      insns size    : 55 16-bit code units
+55a0c8:                                        |[55a0c8] androidx.recyclerview.widget.OpReorderer.swapMoveAdd:(Ljava/util/List;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V
+55a0d8: 5252 2334                              |0000: iget v2, v5, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a0dc: 5270 2534                              |0002: iget v0, v7, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a0e0: 3502 0400                              |0004: if-ge v2, v0, 0008 // +0004
+55a0e4: 12f2                                   |0006: const/4 v2, #int -1 // #ff
+55a0e6: 2802                                   |0007: goto 0009 // +0002
+55a0e8: 1202                                   |0008: const/4 v2, #int 0 // #0
+55a0ea: 5250 2534                              |0009: iget v0, v5, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a0ee: 5271 2534                              |000b: iget v1, v7, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a0f2: 3510 0400                              |000d: if-ge v0, v1, 0011 // +0004
+55a0f6: d802 0201                              |000f: add-int/lit8 v2, v2, #int 1 // #01
+55a0fa: 5270 2534                              |0011: iget v0, v7, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a0fe: 5251 2534                              |0013: iget v1, v5, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a102: 3610 0900                              |0015: if-gt v0, v1, 001e // +0009
+55a106: 5250 2534                              |0017: iget v0, v5, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a10a: 5271 2334                              |0019: iget v1, v7, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a10e: b010                                   |001b: add-int/2addr v0, v1
+55a110: 5950 2534                              |001c: iput v0, v5, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a114: 5270 2534                              |001e: iget v0, v7, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a118: 5251 2334                              |0020: iget v1, v5, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a11c: 3610 0900                              |0022: if-gt v0, v1, 002b // +0009
+55a120: 5250 2334                              |0024: iget v0, v5, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a124: 5271 2334                              |0026: iget v1, v7, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a128: b010                                   |0028: add-int/2addr v0, v1
+55a12a: 5950 2334                              |0029: iput v0, v5, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a12e: 5270 2534                              |002b: iget v0, v7, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a132: b020                                   |002d: add-int/2addr v0, v2
+55a134: 5970 2534                              |002e: iput v0, v7, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a138: 7230 dad5 4307                         |0030: invoke-interface {v3, v4, v7}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+55a13e: 7230 dad5 6305                         |0033: invoke-interface {v3, v6, v5}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+55a144: 0e00                                   |0036: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=157
+        0x0009 line=160
+        0x0011 line=163
+        0x0017 line=164
+        0x001e line=166
+        0x0024 line=167
+        0x002b line=169
+        0x0030 line=170
+        0x0033 line=171
+      locals        :
+        0x0000 - 0x0037 reg=2 this Landroidx/recyclerview/widget/OpReorderer;
+        0x0000 - 0x0037 reg=3 (null) Ljava/util/List;
+        0x0000 - 0x0037 reg=4 (null) I
+        0x0000 - 0x0037 reg=5 (null) Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;
+        0x0000 - 0x0037 reg=6 (null) I
+        0x0000 - 0x0037 reg=7 (null) Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;
+
+    #3              : (in Landroidx/recyclerview/widget/OpReorderer;)
+      name          : 'swapMoveOp'
+      type          : '(Ljava/util/List;II)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 11
+      ins           : 4
+      outs          : 6
+      insns size    : 50 16-bit code units
+55a148:                                        |[55a148] androidx.recyclerview.widget.OpReorderer.swapMoveOp:(Ljava/util/List;II)V
+55a158: 7220 cfd5 9800                         |0000: invoke-interface {v8, v9}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+55a15e: 0c00                                   |0003: move-result-object v0
+55a160: 0704                                   |0004: move-object v4, v0
+55a162: 1f04 b908                              |0005: check-cast v4, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp; // type@08b9
+55a166: 7220 cfd5 a800                         |0007: invoke-interface {v8, v10}, Ljava/util/List;.get:(I)Ljava/lang/Object; // method@d5cf
+55a16c: 0c00                                   |000a: move-result-object v0
+55a16e: 0706                                   |000b: move-object v6, v0
+55a170: 1f06 b908                              |000c: check-cast v6, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp; // type@08b9
+55a174: 5260 2234                              |000e: iget v0, v6, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.cmd:I // field@3422
+55a178: 1211                                   |0010: const/4 v1, #int 1 // #1
+55a17a: 3210 1900                              |0011: if-eq v0, v1, 002a // +0019
+55a17e: 1221                                   |0013: const/4 v1, #int 2 // #2
+55a180: 3210 0e00                              |0014: if-eq v0, v1, 0022 // +000e
+55a184: 1241                                   |0016: const/4 v1, #int 4 // #4
+55a186: 3210 0300                              |0017: if-eq v0, v1, 001a // +0003
+55a18a: 2818                                   |0019: goto 0031 // +0018
+55a18c: 0771                                   |001a: move-object v1, v7
+55a18e: 0782                                   |001b: move-object v2, v8
+55a190: 0193                                   |001c: move v3, v9
+55a192: 01a5                                   |001d: move v5, v10
+55a194: 7406 c949 0100                         |001e: invoke-virtual/range {v1, v2, v3, v4, v5, v6}, Landroidx/recyclerview/widget/OpReorderer;.swapMoveUpdate:(Ljava/util/List;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V // method@49c9
+55a19a: 2810                                   |0021: goto 0031 // +0010
+55a19c: 0771                                   |0022: move-object v1, v7
+55a19e: 0782                                   |0023: move-object v2, v8
+55a1a0: 0193                                   |0024: move v3, v9
+55a1a2: 01a5                                   |0025: move v5, v10
+55a1a4: 7406 c849 0100                         |0026: invoke-virtual/range {v1, v2, v3, v4, v5, v6}, Landroidx/recyclerview/widget/OpReorderer;.swapMoveRemove:(Ljava/util/List;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V // method@49c8
+55a1aa: 2808                                   |0029: goto 0031 // +0008
+55a1ac: 0771                                   |002a: move-object v1, v7
+55a1ae: 0782                                   |002b: move-object v2, v8
+55a1b0: 0193                                   |002c: move v3, v9
+55a1b2: 01a5                                   |002d: move v5, v10
+55a1b4: 7606 c649 0100                         |002e: invoke-direct/range {v1, v2, v3, v4, v5, v6}, Landroidx/recyclerview/widget/OpReorderer;.swapMoveAdd:(Ljava/util/List;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V // method@49c6
+55a1ba: 0e00                                   |0031: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=39
+        0x0007 line=40
+        0x000e line=41
+        0x001e line=49
+        0x0026 line=43
+        0x002e line=46
+      locals        :
+        0x0000 - 0x0032 reg=7 this Landroidx/recyclerview/widget/OpReorderer;
+        0x0000 - 0x0032 reg=8 (null) Ljava/util/List;
+        0x0000 - 0x0032 reg=9 (null) I
+        0x0000 - 0x0032 reg=10 (null) I
+
+  Virtual methods   -
+    #0              : (in Landroidx/recyclerview/widget/OpReorderer;)
+      name          : 'reorderOps'
+      type          : '(Ljava/util/List;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 14 16-bit code units
+55a1bc:                                        |[55a1bc] androidx.recyclerview.widget.OpReorderer.reorderOps:(Ljava/util/List;)V
+55a1cc: 7020 c449 3200                         |0000: invoke-direct {v2, v3}, Landroidx/recyclerview/widget/OpReorderer;.getLastMoveOutOfOrder:(Ljava/util/List;)I // method@49c4
+55a1d2: 0a00                                   |0003: move-result v0
+55a1d4: 12f1                                   |0004: const/4 v1, #int -1 // #ff
+55a1d6: 3210 0800                              |0005: if-eq v0, v1, 000d // +0008
+55a1da: d801 0001                              |0007: add-int/lit8 v1, v0, #int 1 // #01
+55a1de: 7040 c749 3210                         |0009: invoke-direct {v2, v3, v0, v1}, Landroidx/recyclerview/widget/OpReorderer;.swapMoveOp:(Ljava/util/List;II)V // method@49c7
+55a1e4: 28f4                                   |000c: goto 0000 // -000c
+55a1e6: 0e00                                   |000d: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=33
+        0x0009 line=34
+      locals        :
+        0x0000 - 0x000e reg=2 this Landroidx/recyclerview/widget/OpReorderer;
+        0x0000 - 0x000e reg=3 (null) Ljava/util/List;
+
+    #1              : (in Landroidx/recyclerview/widget/OpReorderer;)
+      name          : 'swapMoveRemove'
+      type          : '(Ljava/util/List;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 14
+      ins           : 6
+      outs          : 5
+      insns size    : 285 16-bit code units
+55a1e8:                                        |[55a1e8] androidx.recyclerview.widget.OpReorderer.swapMoveRemove:(Ljava/util/List;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V
+55a1f8: 52b0 2534                              |0000: iget v0, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a1fc: 52b1 2334                              |0002: iget v1, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a200: 1212                                   |0004: const/4 v2, #int 1 // #1
+55a202: 1203                                   |0005: const/4 v3, #int 0 // #0
+55a204: 3510 1600                              |0006: if-ge v0, v1, 001c // +0016
+55a208: 52d0 2534                              |0008: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a20c: 52b1 2534                              |000a: iget v1, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a210: 3310 0e00                              |000c: if-ne v0, v1, 001a // +000e
+55a214: 52d0 2334                              |000e: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a218: 52b1 2334                              |0010: iget v1, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a21c: 52b4 2534                              |0012: iget v4, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a220: b141                                   |0014: sub-int/2addr v1, v4
+55a222: 3310 0500                              |0015: if-ne v0, v1, 001a // +0005
+55a226: 0130                                   |0017: move v0, v3
+55a228: 0123                                   |0018: move v3, v2
+55a22a: 2817                                   |0019: goto 0030 // +0017
+55a22c: 0130                                   |001a: move v0, v3
+55a22e: 2815                                   |001b: goto 0030 // +0015
+55a230: 52d0 2534                              |001c: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a234: 52b1 2334                              |001e: iget v1, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a238: b021                                   |0020: add-int/2addr v1, v2
+55a23a: 3310 0e00                              |0021: if-ne v0, v1, 002f // +000e
+55a23e: 52d0 2334                              |0023: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a242: 52b1 2534                              |0025: iget v1, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a246: 52b4 2334                              |0027: iget v4, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a24a: b141                                   |0029: sub-int/2addr v1, v4
+55a24c: 3310 0500                              |002a: if-ne v0, v1, 002f // +0005
+55a250: 0120                                   |002c: move v0, v2
+55a252: 0103                                   |002d: move v3, v0
+55a254: 2802                                   |002e: goto 0030 // +0002
+55a256: 0120                                   |002f: move v0, v2
+55a258: 52b1 2334                              |0030: iget v1, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a25c: 52d4 2534                              |0032: iget v4, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a260: 1225                                   |0034: const/4 v5, #int 2 // #2
+55a262: 3541 0800                              |0035: if-ge v1, v4, 003d // +0008
+55a266: 52d1 2534                              |0037: iget v1, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a26a: b121                                   |0039: sub-int/2addr v1, v2
+55a26c: 59d1 2534                              |003a: iput v1, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a270: 2820                                   |003c: goto 005c // +0020
+55a272: 52b1 2334                              |003d: iget v1, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a276: 52d4 2534                              |003f: iget v4, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a27a: 52d6 2334                              |0041: iget v6, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a27e: b064                                   |0043: add-int/2addr v4, v6
+55a280: 3541 1800                              |0044: if-ge v1, v4, 005c // +0018
+55a284: 52da 2334                              |0046: iget v10, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a288: b12a                                   |0048: sub-int/2addr v10, v2
+55a28a: 59da 2334                              |0049: iput v10, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a28e: 59b5 2234                              |004b: iput v5, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.cmd:I // field@3422
+55a292: 59b2 2334                              |004d: iput v2, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a296: 52da 2334                              |004f: iget v10, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a29a: 390a 0a00                              |0051: if-nez v10, 005b // +000a
+55a29e: 7220 d6d5 c900                         |0053: invoke-interface {v9, v12}, Ljava/util/List;.remove:(I)Ljava/lang/Object; // method@d5d6
+55a2a4: 5488 ff35                              |0056: iget-object v8, v8, Landroidx/recyclerview/widget/OpReorderer;.mCallback:Landroidx/recyclerview/widget/OpReorderer$Callback; // field@35ff
+55a2a8: 7220 c249 d800                         |0058: invoke-interface {v8, v13}, Landroidx/recyclerview/widget/OpReorderer$Callback;.recycleUpdateOp:(Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V // method@49c2
+55a2ae: 0e00                                   |005b: return-void
+55a2b0: 52b1 2534                              |005c: iget v1, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a2b4: 52d4 2534                              |005e: iget v4, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a2b8: 1206                                   |0060: const/4 v6, #int 0 // #0
+55a2ba: 3641 0800                              |0061: if-gt v1, v4, 0069 // +0008
+55a2be: 52d1 2534                              |0063: iget v1, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a2c2: b021                                   |0065: add-int/2addr v1, v2
+55a2c4: 59d1 2534                              |0066: iput v1, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a2c8: 2822                                   |0068: goto 008a // +0022
+55a2ca: 52b1 2534                              |0069: iget v1, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a2ce: 52d4 2534                              |006b: iget v4, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a2d2: 52d7 2334                              |006d: iget v7, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a2d6: b074                                   |006f: add-int/2addr v4, v7
+55a2d8: 3541 1a00                              |0070: if-ge v1, v4, 008a // +001a
+55a2dc: 52d1 2534                              |0072: iget v1, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a2e0: 52d4 2334                              |0074: iget v4, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a2e4: b041                                   |0076: add-int/2addr v1, v4
+55a2e6: 52b4 2534                              |0077: iget v4, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a2ea: b141                                   |0079: sub-int/2addr v1, v4
+55a2ec: 5484 ff35                              |007a: iget-object v4, v8, Landroidx/recyclerview/widget/OpReorderer;.mCallback:Landroidx/recyclerview/widget/OpReorderer$Callback; // field@35ff
+55a2f0: 52b7 2534                              |007c: iget v7, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a2f4: b027                                   |007e: add-int/2addr v7, v2
+55a2f6: 7256 c149 5417                         |007f: invoke-interface {v4, v5, v7, v1, v6}, Landroidx/recyclerview/widget/OpReorderer$Callback;.obtainUpdateOp:(IIILjava/lang/Object;)Landroidx/recyclerview/widget/AdapterHelper$UpdateOp; // method@49c1
+55a2fc: 0c06                                   |0082: move-result-object v6
+55a2fe: 52b1 2534                              |0083: iget v1, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a302: 52d2 2534                              |0085: iget v2, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a306: b121                                   |0087: sub-int/2addr v1, v2
+55a308: 59d1 2334                              |0088: iput v1, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a30c: 3803 0e00                              |008a: if-eqz v3, 0098 // +000e
+55a310: 7230 dad5 a90d                         |008c: invoke-interface {v9, v10, v13}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+55a316: 7220 d6d5 c900                         |008f: invoke-interface {v9, v12}, Ljava/util/List;.remove:(I)Ljava/lang/Object; // method@d5d6
+55a31c: 5488 ff35                              |0092: iget-object v8, v8, Landroidx/recyclerview/widget/OpReorderer;.mCallback:Landroidx/recyclerview/widget/OpReorderer$Callback; // field@35ff
+55a320: 7220 c249 b800                         |0094: invoke-interface {v8, v11}, Landroidx/recyclerview/widget/OpReorderer$Callback;.recycleUpdateOp:(Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V // method@49c2
+55a326: 0e00                                   |0097: return-void
+55a328: 3800 3900                              |0098: if-eqz v0, 00d1 // +0039
+55a32c: 3806 1c00                              |009a: if-eqz v6, 00b6 // +001c
+55a330: 52b8 2534                              |009c: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a334: 5260 2534                              |009e: iget v0, v6, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a338: 3708 0900                              |00a0: if-le v8, v0, 00a9 // +0009
+55a33c: 52b8 2534                              |00a2: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a340: 5260 2334                              |00a4: iget v0, v6, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a344: b108                                   |00a6: sub-int/2addr v8, v0
+55a346: 59b8 2534                              |00a7: iput v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a34a: 52b8 2334                              |00a9: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a34e: 5260 2534                              |00ab: iget v0, v6, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a352: 3708 0900                              |00ad: if-le v8, v0, 00b6 // +0009
+55a356: 52b8 2334                              |00af: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a35a: 5260 2334                              |00b1: iget v0, v6, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a35e: b108                                   |00b3: sub-int/2addr v8, v0
+55a360: 59b8 2334                              |00b4: iput v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a364: 52b8 2534                              |00b6: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a368: 52d0 2534                              |00b8: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a36c: 3708 0900                              |00ba: if-le v8, v0, 00c3 // +0009
+55a370: 52b8 2534                              |00bc: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a374: 52d0 2334                              |00be: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a378: b108                                   |00c0: sub-int/2addr v8, v0
+55a37a: 59b8 2534                              |00c1: iput v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a37e: 52b8 2334                              |00c3: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a382: 52d0 2534                              |00c5: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a386: 3708 4000                              |00c7: if-le v8, v0, 0107 // +0040
+55a38a: 52b8 2334                              |00c9: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a38e: 52d0 2334                              |00cb: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a392: b108                                   |00cd: sub-int/2addr v8, v0
+55a394: 59b8 2334                              |00ce: iput v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a398: 2837                                   |00d0: goto 0107 // +0037
+55a39a: 3806 1c00                              |00d1: if-eqz v6, 00ed // +001c
+55a39e: 52b8 2534                              |00d3: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a3a2: 5260 2534                              |00d5: iget v0, v6, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a3a6: 3408 0900                              |00d7: if-lt v8, v0, 00e0 // +0009
+55a3aa: 52b8 2534                              |00d9: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a3ae: 5260 2334                              |00db: iget v0, v6, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a3b2: b108                                   |00dd: sub-int/2addr v8, v0
+55a3b4: 59b8 2534                              |00de: iput v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a3b8: 52b8 2334                              |00e0: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a3bc: 5260 2534                              |00e2: iget v0, v6, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a3c0: 3408 0900                              |00e4: if-lt v8, v0, 00ed // +0009
+55a3c4: 52b8 2334                              |00e6: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a3c8: 5260 2334                              |00e8: iget v0, v6, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a3cc: b108                                   |00ea: sub-int/2addr v8, v0
+55a3ce: 59b8 2334                              |00eb: iput v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a3d2: 52b8 2534                              |00ed: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a3d6: 52d0 2534                              |00ef: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a3da: 3408 0900                              |00f1: if-lt v8, v0, 00fa // +0009
+55a3de: 52b8 2534                              |00f3: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a3e2: 52d0 2334                              |00f5: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a3e6: b108                                   |00f7: sub-int/2addr v8, v0
+55a3e8: 59b8 2534                              |00f8: iput v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a3ec: 52b8 2334                              |00fa: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a3f0: 52d0 2534                              |00fc: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a3f4: 3408 0900                              |00fe: if-lt v8, v0, 0107 // +0009
+55a3f8: 52b8 2334                              |0100: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a3fc: 52d0 2334                              |0102: iget v0, v13, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a400: b108                                   |0104: sub-int/2addr v8, v0
+55a402: 59b8 2334                              |0105: iput v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a406: 7230 dad5 a90d                         |0107: invoke-interface {v9, v10, v13}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+55a40c: 52b8 2534                              |010a: iget v8, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a410: 52bd 2334                              |010c: iget v13, v11, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a414: 32d8 0600                              |010e: if-eq v8, v13, 0114 // +0006
+55a418: 7230 dad5 c90b                         |0110: invoke-interface {v9, v12, v11}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+55a41e: 2804                                   |0113: goto 0117 // +0004
+55a420: 7220 d6d5 c900                         |0114: invoke-interface {v9, v12}, Ljava/util/List;.remove:(I)Ljava/lang/Object; // method@d5d6
+55a426: 3806 0500                              |0117: if-eqz v6, 011c // +0005
+55a42a: 7230 c8d5 a906                         |0119: invoke-interface {v9, v10, v6}, Ljava/util/List;.add:(ILjava/lang/Object;)V // method@d5c8
+55a430: 0e00                                   |011c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=61
+        0x0008 line=63
+        0x001c line=69
+        0x0030 line=76
+        0x0037 line=77
+        0x003d line=78
+        0x0046 line=80
+        0x004b line=81
+        0x004d line=82
+        0x004f line=83
+        0x0053 line=84
+        0x0056 line=85
+        0x005c line=92
+        0x0063 line=93
+        0x0069 line=94
+        0x0072 line=95
+        0x007a line=97
+        0x0083 line=98
+        0x008c line=103
+        0x008f line=104
+        0x0092 line=105
+        0x009c line=112
+        0x00a2 line=113
+        0x00a9 line=115
+        0x00af line=116
+        0x00b6 line=119
+        0x00bc line=120
+        0x00c3 line=122
+        0x00c9 line=123
+        0x00d3 line=127
+        0x00d9 line=128
+        0x00e0 line=130
+        0x00e6 line=131
+        0x00ed line=134
+        0x00f3 line=135
+        0x00fa line=137
+        0x0100 line=138
+        0x0107 line=142
+        0x010a line=143
+        0x0110 line=144
+        0x0114 line=146
+        0x0119 line=149
+      locals        :
+        0x0000 - 0x011d reg=8 this Landroidx/recyclerview/widget/OpReorderer;
+        0x0000 - 0x011d reg=9 (null) Ljava/util/List;
+        0x0000 - 0x011d reg=10 (null) I
+        0x0000 - 0x011d reg=11 (null) Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;
+        0x0000 - 0x011d reg=12 (null) I
+        0x0000 - 0x011d reg=13 (null) Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;
+
+    #2              : (in Landroidx/recyclerview/widget/OpReorderer;)
+      name          : 'swapMoveUpdate'
+      type          : '(Ljava/util/List;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 13
+      ins           : 6
+      outs          : 5
+      insns size    : 116 16-bit code units
+55a434:                                        |[55a434] androidx.recyclerview.widget.OpReorderer.swapMoveUpdate:(Ljava/util/List;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;ILandroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V
+55a444: 52a0 2334                              |0000: iget v0, v10, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a448: 52c1 2534                              |0002: iget v1, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a44c: 1242                                   |0004: const/4 v2, #int 4 // #4
+55a44e: 1213                                   |0005: const/4 v3, #int 1 // #1
+55a450: 1204                                   |0006: const/4 v4, #int 0 // #0
+55a452: 3510 0800                              |0007: if-ge v0, v1, 000f // +0008
+55a456: 52c0 2534                              |0009: iget v0, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a45a: b130                                   |000b: sub-int/2addr v0, v3
+55a45c: 59c0 2534                              |000c: iput v0, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a460: 281a                                   |000e: goto 0028 // +001a
+55a462: 52a0 2334                              |000f: iget v0, v10, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a466: 52c1 2534                              |0011: iget v1, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a46a: 52c5 2334                              |0013: iget v5, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a46e: b051                                   |0015: add-int/2addr v1, v5
+55a470: 3510 1200                              |0016: if-ge v0, v1, 0028 // +0012
+55a474: 52c0 2334                              |0018: iget v0, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a478: b130                                   |001a: sub-int/2addr v0, v3
+55a47a: 59c0 2334                              |001b: iput v0, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a47e: 5470 ff35                              |001d: iget-object v0, v7, Landroidx/recyclerview/widget/OpReorderer;.mCallback:Landroidx/recyclerview/widget/OpReorderer$Callback; // field@35ff
+55a482: 52a1 2534                              |001f: iget v1, v10, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a486: 54c5 2434                              |0021: iget-object v5, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.payload:Ljava/lang/Object; // field@3424
+55a48a: 7255 c149 2031                         |0023: invoke-interface {v0, v2, v1, v3, v5}, Landroidx/recyclerview/widget/OpReorderer$Callback;.obtainUpdateOp:(IIILjava/lang/Object;)Landroidx/recyclerview/widget/AdapterHelper$UpdateOp; // method@49c1
+55a490: 0c00                                   |0026: move-result-object v0
+55a492: 2802                                   |0027: goto 0029 // +0002
+55a494: 0740                                   |0028: move-object v0, v4
+55a496: 52a1 2534                              |0029: iget v1, v10, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a49a: 52c5 2534                              |002b: iget v5, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a49e: 3651 0800                              |002d: if-gt v1, v5, 0035 // +0008
+55a4a2: 52c1 2534                              |002f: iget v1, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a4a6: b031                                   |0031: add-int/2addr v1, v3
+55a4a8: 59c1 2534                              |0032: iput v1, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a4ac: 2822                                   |0034: goto 0056 // +0022
+55a4ae: 52a1 2534                              |0035: iget v1, v10, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a4b2: 52c5 2534                              |0037: iget v5, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a4b6: 52c6 2334                              |0039: iget v6, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a4ba: b065                                   |003b: add-int/2addr v5, v6
+55a4bc: 3551 1a00                              |003c: if-ge v1, v5, 0056 // +001a
+55a4c0: 52c1 2534                              |003e: iget v1, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a4c4: 52c4 2334                              |0040: iget v4, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a4c8: b041                                   |0042: add-int/2addr v1, v4
+55a4ca: 52a4 2534                              |0043: iget v4, v10, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a4ce: b141                                   |0045: sub-int/2addr v1, v4
+55a4d0: 5474 ff35                              |0046: iget-object v4, v7, Landroidx/recyclerview/widget/OpReorderer;.mCallback:Landroidx/recyclerview/widget/OpReorderer$Callback; // field@35ff
+55a4d4: 52a5 2534                              |0048: iget v5, v10, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.positionStart:I // field@3425
+55a4d8: b035                                   |004a: add-int/2addr v5, v3
+55a4da: 54c3 2434                              |004b: iget-object v3, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.payload:Ljava/lang/Object; // field@3424
+55a4de: 7253 c149 2415                         |004d: invoke-interface {v4, v2, v5, v1, v3}, Landroidx/recyclerview/widget/OpReorderer$Callback;.obtainUpdateOp:(IIILjava/lang/Object;)Landroidx/recyclerview/widget/AdapterHelper$UpdateOp; // method@49c1
+55a4e4: 0c04                                   |0050: move-result-object v4
+55a4e6: 52c2 2334                              |0051: iget v2, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a4ea: b112                                   |0053: sub-int/2addr v2, v1
+55a4ec: 59c2 2334                              |0054: iput v2, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a4f0: 7230 dad5 b80a                         |0056: invoke-interface {v8, v11, v10}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+55a4f6: 52ca 2334                              |0059: iget v10, v12, Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;.itemCount:I // field@3423
+55a4fa: 3d0a 0600                              |005b: if-lez v10, 0061 // +0006
+55a4fe: 7230 dad5 980c                         |005d: invoke-interface {v8, v9, v12}, Ljava/util/List;.set:(ILjava/lang/Object;)Ljava/lang/Object; // method@d5da
+55a504: 2809                                   |0060: goto 0069 // +0009
+55a506: 7220 d6d5 9800                         |0061: invoke-interface {v8, v9}, Ljava/util/List;.remove:(I)Ljava/lang/Object; // method@d5d6
+55a50c: 5477 ff35                              |0064: iget-object v7, v7, Landroidx/recyclerview/widget/OpReorderer;.mCallback:Landroidx/recyclerview/widget/OpReorderer$Callback; // field@35ff
+55a510: 7220 c249 c700                         |0066: invoke-interface {v7, v12}, Landroidx/recyclerview/widget/OpReorderer$Callback;.recycleUpdateOp:(Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;)V // method@49c2
+55a516: 3800 0500                              |0069: if-eqz v0, 006e // +0005
+55a51a: 7230 c8d5 9800                         |006b: invoke-interface {v8, v9, v0}, Ljava/util/List;.add:(ILjava/lang/Object;)V // method@d5c8
+55a520: 3804 0500                              |006e: if-eqz v4, 0073 // +0005
+55a524: 7230 c8d5 9804                         |0070: invoke-interface {v8, v9, v4}, Ljava/util/List;.add:(ILjava/lang/Object;)V // method@d5c8
+55a52a: 0e00                                   |0073: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=179
+        0x0009 line=180
+        0x000f line=181
+        0x0018 line=183
+        0x001d line=184
+        0x0029 line=187
+        0x002f line=188
+        0x0035 line=189
+        0x003e line=190
+        0x0046 line=192
+        0x0051 line=195
+        0x0056 line=197
+        0x0059 line=198
+        0x005d line=199
+        0x0061 line=201
+        0x0064 line=202
+        0x006b line=205
+        0x0070 line=208
+      locals        :
+        0x0000 - 0x0074 reg=7 this Landroidx/recyclerview/widget/OpReorderer;
+        0x0000 - 0x0074 reg=8 (null) Ljava/util/List;
+        0x0000 - 0x0074 reg=9 (null) I
+        0x0000 - 0x0074 reg=10 (null) Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;
+        0x0000 - 0x0074 reg=11 (null) I
+        0x0000 - 0x0074 reg=12 (null) Landroidx/recyclerview/widget/AdapterHelper$UpdateOp;
+
+  source_file_idx   : 23056 (OpReorderer.java)
+

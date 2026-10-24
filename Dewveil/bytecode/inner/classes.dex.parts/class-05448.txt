@@ -1,0 +1,300 @@
+Class #5448            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/DisplayNotification;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/messaging/DisplayNotification;)
+      name          : 'context'
+      type          : 'Landroid/content/Context;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/google/firebase/messaging/DisplayNotification;)
+      name          : 'networkIoExecutor'
+      type          : 'Ljava/util/concurrent/Executor;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/google/firebase/messaging/DisplayNotification;)
+      name          : 'params'
+      type          : 'Lcom/google/firebase/messaging/NotificationParams;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/DisplayNotification;)
+      name          : '<init>'
+      type          : '(Landroid/content/Context;Lcom/google/firebase/messaging/NotificationParams;Ljava/util/concurrent/Executor;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 1
+      insns size    : 10 16-bit code units
+7245b8:                                        |[7245b8] com.google.firebase.messaging.DisplayNotification.<init>:(Landroid/content/Context;Lcom/google/firebase/messaging/NotificationParams;Ljava/util/concurrent/Executor;)V
+7245c8: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+7245ce: 5b03 4b73                              |0003: iput-object v3, v0, Lcom/google/firebase/messaging/DisplayNotification;.networkIoExecutor:Ljava/util/concurrent/Executor; // field@734b
+7245d2: 5b01 4a73                              |0005: iput-object v1, v0, Lcom/google/firebase/messaging/DisplayNotification;.context:Landroid/content/Context; // field@734a
+7245d6: 5b02 4c73                              |0007: iput-object v2, v0, Lcom/google/firebase/messaging/DisplayNotification;.params:Lcom/google/firebase/messaging/NotificationParams; // field@734c
+7245da: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lcom/google/firebase/messaging/DisplayNotification;)
+      name          : 'isAppForeground'
+      type          : '()Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 78 16-bit code units
+7245dc:                                        |[7245dc] com.google.firebase.messaging.DisplayNotification.isAppForeground:()Z
+7245ec: 5440 4a73                              |0000: iget-object v0, v4, Lcom/google/firebase/messaging/DisplayNotification;.context:Landroid/content/Context; // field@734a
+7245f0: 1a01 a7ae                              |0002: const-string v1, "keyguard" // string@aea7
+7245f4: 6e20 4c02 1000                         |0004: invoke-virtual {v0, v1}, Landroid/content/Context;.getSystemService:(Ljava/lang/String;)Ljava/lang/Object; // method@024c
+7245fa: 0c00                                   |0007: move-result-object v0
+7245fc: 1f00 3100                              |0008: check-cast v0, Landroid/app/KeyguardManager; // type@0031
+724600: 6e10 1b01 0000                         |000a: invoke-virtual {v0}, Landroid/app/KeyguardManager;.inKeyguardRestrictedInputMode:()Z // method@011b
+724606: 0a00                                   |000d: move-result v0
+724608: 1201                                   |000e: const/4 v1, #int 0 // #0
+72460a: 3800 0300                              |000f: if-eqz v0, 0012 // +0003
+72460e: 0f01                                   |0011: return v1
+724610: 7100 a399 0000                         |0012: invoke-static {}, Lcom/google/android/gms/common/util/PlatformVersion;.isAtLeastLollipop:()Z // method@99a3
+724616: 0a00                                   |0015: move-result v0
+724618: 3900 0700                              |0016: if-nez v0, 001d // +0007
+72461c: 1602 0a00                              |0018: const-wide/16 v2, #int 10 // #a
+724620: 7120 da06 3200                         |001a: invoke-static {v2, v3}, Landroid/os/SystemClock;.sleep:(J)V // method@06da
+724626: 7100 ce06 0000                         |001d: invoke-static {}, Landroid/os/Process;.myPid:()I // method@06ce
+72462c: 0a00                                   |0020: move-result v0
+72462e: 5444 4a73                              |0021: iget-object v4, v4, Lcom/google/firebase/messaging/DisplayNotification;.context:Landroid/content/Context; // field@734a
+724632: 1a02 847c                              |0023: const-string v2, "activity" // string@7c84
+724636: 6e20 4c02 2400                         |0025: invoke-virtual {v4, v2}, Landroid/content/Context;.getSystemService:(Ljava/lang/String;)Ljava/lang/Object; // method@024c
+72463c: 0c04                                   |0028: move-result-object v4
+72463e: 1f04 2400                              |0029: check-cast v4, Landroid/app/ActivityManager; // type@0024
+724642: 6e10 ac00 0400                         |002b: invoke-virtual {v4}, Landroid/app/ActivityManager;.getRunningAppProcesses:()Ljava/util/List; // method@00ac
+724648: 0c04                                   |002e: move-result-object v4
+72464a: 3804 1e00                              |002f: if-eqz v4, 004d // +001e
+72464e: 7210 d2d5 0400                         |0031: invoke-interface {v4}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@d5d2
+724654: 0c04                                   |0034: move-result-object v4
+724656: 7210 a0d5 0400                         |0035: invoke-interface {v4}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+72465c: 0a02                                   |0038: move-result v2
+72465e: 3802 1400                              |0039: if-eqz v2, 004d // +0014
+724662: 7210 a1d5 0400                         |003b: invoke-interface {v4}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+724668: 0c02                                   |003e: move-result-object v2
+72466a: 1f02 2200                              |003f: check-cast v2, Landroid/app/ActivityManager$RunningAppProcessInfo; // type@0022
+72466e: 5223 0300                              |0041: iget v3, v2, Landroid/app/ActivityManager$RunningAppProcessInfo;.pid:I // field@0003
+724672: 3303 f2ff                              |0043: if-ne v3, v0, 0035 // -000e
+724676: 5224 0200                              |0045: iget v4, v2, Landroid/app/ActivityManager$RunningAppProcessInfo;.importance:I // field@0002
+72467a: 1300 6400                              |0047: const/16 v0, #int 100 // #64
+72467e: 3304 0400                              |0049: if-ne v4, v0, 004d // +0004
+724682: 1214                                   |004b: const/4 v4, #int 1 // #1
+724684: 0f04                                   |004c: return v4
+724686: 0f01                                   |004d: return v1
+      catches       : (none)
+      positions     :
+        0x0004 line=1
+        0x000a line=2
+        0x0012 line=3
+        0x001a line=4
+        0x001d line=5
+        0x0025 line=6
+        0x002b line=7
+        0x0031 line=8
+        0x0041 line=9
+        0x0045 line=10
+      locals        :
+        0x0000 - 0x004e reg=4 this Lcom/google/firebase/messaging/DisplayNotification;
+
+    #2              : (in Lcom/google/firebase/messaging/DisplayNotification;)
+      name          : 'showNotification'
+      type          : '(Lcom/google/firebase/messaging/CommonNotificationBuilder$DisplayNotificationInfo;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 38 16-bit code units
+724688:                                        |[724688] com.google.firebase.messaging.DisplayNotification.showNotification:(Lcom/google/firebase/messaging/CommonNotificationBuilder$DisplayNotificationInfo;)V
+724698: 1230                                   |0000: const/4 v0, #int 3 // #3
+72469a: 1a01 6c28                              |0001: const-string v1, "FirebaseMessaging" // string@286c
+72469e: 7120 2308 0100                         |0003: invoke-static {v1, v0}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+7246a4: 0a00                                   |0006: move-result v0
+7246a6: 3800 0700                              |0007: if-eqz v0, 000e // +0007
+7246aa: 1a00 b062                              |0009: const-string v0, "Showing notification" // string@62b0
+7246ae: 7120 1c08 0100                         |000b: invoke-static {v1, v0}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+7246b4: 5422 4a73                              |000e: iget-object v2, v2, Lcom/google/firebase/messaging/DisplayNotification;.context:Landroid/content/Context; // field@734a
+7246b8: 1a00 f1c3                              |0010: const-string v0, "notification" // string@c3f1
+7246bc: 6e20 4c02 0200                         |0012: invoke-virtual {v2, v0}, Landroid/content/Context;.getSystemService:(Ljava/lang/String;)Ljava/lang/Object; // method@024c
+7246c2: 0c02                                   |0015: move-result-object v2
+7246c4: 1f02 4100                              |0016: check-cast v2, Landroid/app/NotificationManager; // type@0041
+7246c8: 5430 ec72                              |0018: iget-object v0, v3, Lcom/google/firebase/messaging/CommonNotificationBuilder$DisplayNotificationInfo;.tag:Ljava/lang/String; // field@72ec
+7246cc: 5231 ea72                              |001a: iget v1, v3, Lcom/google/firebase/messaging/CommonNotificationBuilder$DisplayNotificationInfo;.id:I // field@72ea
+7246d0: 5433 eb72                              |001c: iget-object v3, v3, Lcom/google/firebase/messaging/CommonNotificationBuilder$DisplayNotificationInfo;.notificationBuilder:Landroidx/core/app/NotificationCompat$Builder; // field@72eb
+7246d4: 6e10 2d32 0300                         |001e: invoke-virtual {v3}, Landroidx/core/app/NotificationCompat$Builder;.build:()Landroid/app/Notification; // method@322d
+7246da: 0c03                                   |0021: move-result-object v3
+7246dc: 6e40 9d01 0231                         |0022: invoke-virtual {v2, v0, v1, v3}, Landroid/app/NotificationManager;.notify:(Ljava/lang/String;ILandroid/app/Notification;)V // method@019d
+7246e2: 0e00                                   |0025: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=1
+        0x000b line=2
+        0x0012 line=3
+        0x001e line=4
+      locals        :
+        0x0000 - 0x0026 reg=2 this Lcom/google/firebase/messaging/DisplayNotification;
+        0x0000 - 0x0026 reg=3 (null) Lcom/google/firebase/messaging/CommonNotificationBuilder$DisplayNotificationInfo;
+
+    #3              : (in Lcom/google/firebase/messaging/DisplayNotification;)
+      name          : 'startImageDownloadInBackground'
+      type          : '()Lcom/google/firebase/messaging/ImageDownload;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 20 16-bit code units
+7246e4:                                        |[7246e4] com.google.firebase.messaging.DisplayNotification.startImageDownloadInBackground:()Lcom/google/firebase/messaging/ImageDownload;
+7246f4: 5420 4c73                              |0000: iget-object v0, v2, Lcom/google/firebase/messaging/DisplayNotification;.params:Lcom/google/firebase/messaging/NotificationParams; // field@734c
+7246f8: 1a01 a097                              |0002: const-string v1, "gcm.n.image" // string@97a0
+7246fc: 6e20 89c0 1000                         |0004: invoke-virtual {v0, v1}, Lcom/google/firebase/messaging/NotificationParams;.getString:(Ljava/lang/String;)Ljava/lang/String; // method@c089
+724702: 0c00                                   |0007: move-result-object v0
+724704: 7110 4cc0 0000                         |0008: invoke-static {v0}, Lcom/google/firebase/messaging/ImageDownload;.create:(Ljava/lang/String;)Lcom/google/firebase/messaging/ImageDownload; // method@c04c
+72470a: 0c00                                   |000b: move-result-object v0
+72470c: 3800 0700                              |000c: if-eqz v0, 0013 // +0007
+724710: 5422 4b73                              |000e: iget-object v2, v2, Lcom/google/firebase/messaging/DisplayNotification;.networkIoExecutor:Ljava/util/concurrent/Executor; // field@734b
+724714: 6e20 4ec0 2000                         |0010: invoke-virtual {v0, v2}, Lcom/google/firebase/messaging/ImageDownload;.start:(Ljava/util/concurrent/Executor;)V // method@c04e
+72471a: 1100                                   |0013: return-object v0
+      catches       : (none)
+      positions     :
+        0x0004 line=1
+        0x0008 line=2
+        0x0010 line=3
+      locals        :
+        0x0000 - 0x0014 reg=2 this Lcom/google/firebase/messaging/DisplayNotification;
+
+    #4              : (in Lcom/google/firebase/messaging/DisplayNotification;)
+      name          : 'waitForAndApplyImageDownload'
+      type          : '(Landroidx/core/app/NotificationCompat$Builder;Lcom/google/firebase/messaging/ImageDownload;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 4
+      insns size    : 105 16-bit code units
+72471c:                                        |[72471c] com.google.firebase.messaging.DisplayNotification.waitForAndApplyImageDownload:(Landroidx/core/app/NotificationCompat$Builder;Lcom/google/firebase/messaging/ImageDownload;)V
+72472c: 1a04 6c28                              |0000: const-string v4, "FirebaseMessaging" // string@286c
+724730: 3906 0300                              |0002: if-nez v6, 0005 // +0003
+724734: 0e00                                   |0004: return-void
+724736: 6e10 4dc0 0600                         |0005: invoke-virtual {v6}, Lcom/google/firebase/messaging/ImageDownload;.getTask:()Lcom/google/android/gms/tasks/Task; // method@c04d
+72473c: 0c00                                   |0008: move-result-object v0
+72473e: 6201 4b8a                              |0009: sget-object v1, Ljava/util/concurrent/TimeUnit;.SECONDS:Ljava/util/concurrent/TimeUnit; // field@8a4b
+724742: 1602 0500                              |000b: const-wide/16 v2, #int 5 // #5
+724746: 7140 8bae 2013                         |000d: invoke-static {v0, v2, v3, v1}, Lcom/google/android/gms/tasks/Tasks;.await:(Lcom/google/android/gms/tasks/Task;JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object; // method@ae8b
+72474c: 0c00                                   |0010: move-result-object v0
+72474e: 1f00 ab00                              |0011: check-cast v0, Landroid/graphics/Bitmap; // type@00ab
+724752: 6e20 5332 0500                         |0013: invoke-virtual {v5, v0}, Landroidx/core/app/NotificationCompat$Builder;.setLargeIcon:(Landroid/graphics/Bitmap;)Landroidx/core/app/NotificationCompat$Builder; // method@3253
+724758: 2201 f505                              |0016: new-instance v1, Landroidx/core/app/NotificationCompat$BigPictureStyle; // type@05f5
+72475c: 7010 0132 0100                         |0018: invoke-direct {v1}, Landroidx/core/app/NotificationCompat$BigPictureStyle;.<init>:()V // method@3201
+724762: 6e20 0532 0100                         |001b: invoke-virtual {v1, v0}, Landroidx/core/app/NotificationCompat$BigPictureStyle;.bigPicture:(Landroid/graphics/Bitmap;)Landroidx/core/app/NotificationCompat$BigPictureStyle; // method@3205
+724768: 0c00                                   |001e: move-result-object v0
+72476a: 1201                                   |001f: const/4 v1, #int 0 // #0
+72476c: 6e20 0432 1000                         |0020: invoke-virtual {v0, v1}, Landroidx/core/app/NotificationCompat$BigPictureStyle;.bigLargeIcon:(Landroid/graphics/Bitmap;)Landroidx/core/app/NotificationCompat$BigPictureStyle; // method@3204
+724772: 0c00                                   |0023: move-result-object v0
+724774: 6e20 6532 0500                         |0024: invoke-virtual {v5, v0}, Landroidx/core/app/NotificationCompat$Builder;.setStyle:(Landroidx/core/app/NotificationCompat$Style;)Landroidx/core/app/NotificationCompat$Builder; // method@3265
+72477a: 0e00                                   |0027: return-void
+72477c: 1a05 2927                              |0028: const-string v5, "Failed to download image in time, showing notification without it" // string@2729
+724780: 7120 2708 5400                         |002a: invoke-static {v4, v5}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+724786: 6e10 4bc0 0600                         |002d: invoke-virtual {v6}, Lcom/google/firebase/messaging/ImageDownload;.close:()V // method@c04b
+72478c: 0e00                                   |0030: return-void
+72478e: 1a05 8b2d                              |0031: const-string v5, "Interrupted while downloading image, showing notification without it" // string@2d8b
+724792: 7120 2708 5400                         |0033: invoke-static {v4, v5}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+724798: 6e10 4bc0 0600                         |0036: invoke-virtual {v6}, Lcom/google/firebase/messaging/ImageDownload;.close:()V // method@c04b
+72479e: 7100 69d2 0000                         |0039: invoke-static {}, Ljava/lang/Thread;.currentThread:()Ljava/lang/Thread; // method@d269
+7247a4: 0c04                                   |003c: move-result-object v4
+7247a6: 6e10 71d2 0400                         |003d: invoke-virtual {v4}, Ljava/lang/Thread;.interrupt:()V // method@d271
+7247ac: 0e00                                   |0040: return-void
+7247ae: 0d05                                   |0041: move-exception v5
+7247b0: 6e10 abd6 0500                         |0042: invoke-virtual {v5}, Ljava/util/concurrent/ExecutionException;.getCause:()Ljava/lang/Throwable; // method@d6ab
+7247b6: 0c05                                   |0045: move-result-object v5
+7247b8: 7110 30d2 0500                         |0046: invoke-static {v5}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+7247be: 0c05                                   |0049: move-result-object v5
+7247c0: 7110 30d2 0500                         |004a: invoke-static {v5}, Ljava/lang/String;.valueOf:(Ljava/lang/Object;)Ljava/lang/String; // method@d230
+7247c6: 0c06                                   |004d: move-result-object v6
+7247c8: 6e10 16d2 0600                         |004e: invoke-virtual {v6}, Ljava/lang/String;.length:()I // method@d216
+7247ce: 0a06                                   |0051: move-result v6
+7247d0: 2200 991a                              |0052: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+7247d4: d806 061a                              |0054: add-int/lit8 v6, v6, #int 26 // #1a
+7247d8: 7020 3ad2 6000                         |0056: invoke-direct {v0, v6}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+7247de: 1a06 2a27                              |0059: const-string v6, "Failed to download image: " // string@272a
+7247e2: 6e20 45d2 6000                         |005b: invoke-virtual {v0, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7247e8: 6e20 45d2 5000                         |005e: invoke-virtual {v0, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7247ee: 6e10 58d2 0000                         |0061: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+7247f4: 0c05                                   |0064: move-result-object v5
+7247f6: 7120 2708 5400                         |0065: invoke-static {v4, v5}, Landroid/util/Log;.w:(Ljava/lang/String;Ljava/lang/String;)I // method@0827
+7247fc: 0e00                                   |0068: return-void
+      catches       : 1
+        0x0005 - 0x0027
+          Ljava/util/concurrent/ExecutionException; -> 0x0041
+          Ljava/lang/InterruptedException; -> 0x0031
+          Ljava/util/concurrent/TimeoutException; -> 0x0028
+      positions     :
+        0x0005 line=1
+        0x0013 line=2
+        0x0016 line=3
+        0x0028 line=8
+        0x002a line=4
+        0x002d line=5
+        0x0031 line=9
+        0x0033 line=6
+        0x0036 line=7
+        0x0039 line=8
+        0x0042 line=9
+      locals        :
+        0x0000 - 0x0069 reg=4 this Lcom/google/firebase/messaging/DisplayNotification;
+        0x0000 - 0x0069 reg=5 (null) Landroidx/core/app/NotificationCompat$Builder;
+        0x0000 - 0x0069 reg=6 (null) Lcom/google/firebase/messaging/ImageDownload;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/messaging/DisplayNotification;)
+      name          : 'handleNotification'
+      type          : '()Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 3
+      insns size    : 41 16-bit code units
+724814:                                        |[724814] com.google.firebase.messaging.DisplayNotification.handleNotification:()Z
+724824: 5440 4c73                              |0000: iget-object v0, v4, Lcom/google/firebase/messaging/DisplayNotification;.params:Lcom/google/firebase/messaging/NotificationParams; // field@734c
+724828: 1a01 a797                              |0002: const-string v1, "gcm.n.noui" // string@97a7
+72482c: 6e20 7ac0 1000                         |0004: invoke-virtual {v0, v1}, Lcom/google/firebase/messaging/NotificationParams;.getBoolean:(Ljava/lang/String;)Z // method@c07a
+724832: 0a00                                   |0007: move-result v0
+724834: 1211                                   |0008: const/4 v1, #int 1 // #1
+724836: 3800 0300                              |0009: if-eqz v0, 000c // +0003
+72483a: 0f01                                   |000b: return v1
+72483c: 7010 8fbf 0400                         |000c: invoke-direct {v4}, Lcom/google/firebase/messaging/DisplayNotification;.isAppForeground:()Z // method@bf8f
+724842: 0a00                                   |000f: move-result v0
+724844: 3800 0400                              |0010: if-eqz v0, 0014 // +0004
+724848: 1204                                   |0012: const/4 v4, #int 0 // #0
+72484a: 0f04                                   |0013: return v4
+72484c: 7010 91bf 0400                         |0014: invoke-direct {v4}, Lcom/google/firebase/messaging/DisplayNotification;.startImageDownloadInBackground:()Lcom/google/firebase/messaging/ImageDownload; // method@bf91
+724852: 0c00                                   |0017: move-result-object v0
+724854: 5442 4a73                              |0018: iget-object v2, v4, Lcom/google/firebase/messaging/DisplayNotification;.context:Landroid/content/Context; // field@734a
+724858: 5443 4c73                              |001a: iget-object v3, v4, Lcom/google/firebase/messaging/DisplayNotification;.params:Lcom/google/firebase/messaging/NotificationParams; // field@734c
+72485c: 7120 76bf 3200                         |001c: invoke-static {v2, v3}, Lcom/google/firebase/messaging/CommonNotificationBuilder;.createNotificationInfo:(Landroid/content/Context;Lcom/google/firebase/messaging/NotificationParams;)Lcom/google/firebase/messaging/CommonNotificationBuilder$DisplayNotificationInfo; // method@bf76
+724862: 0c02                                   |001f: move-result-object v2
+724864: 5423 eb72                              |0020: iget-object v3, v2, Lcom/google/firebase/messaging/CommonNotificationBuilder$DisplayNotificationInfo;.notificationBuilder:Landroidx/core/app/NotificationCompat$Builder; // field@72eb
+724868: 7030 92bf 3400                         |0022: invoke-direct {v4, v3, v0}, Lcom/google/firebase/messaging/DisplayNotification;.waitForAndApplyImageDownload:(Landroidx/core/app/NotificationCompat$Builder;Lcom/google/firebase/messaging/ImageDownload;)V // method@bf92
+72486e: 7020 90bf 2400                         |0025: invoke-direct {v4, v2}, Lcom/google/firebase/messaging/DisplayNotification;.showNotification:(Lcom/google/firebase/messaging/CommonNotificationBuilder$DisplayNotificationInfo;)V // method@bf90
+724874: 0f01                                   |0028: return v1
+      catches       : (none)
+      positions     :
+        0x0004 line=1
+        0x000c line=2
+        0x0014 line=3
+        0x001c line=4
+        0x0022 line=5
+        0x0025 line=6
+      locals        :
+        0x0000 - 0x0029 reg=4 this Lcom/google/firebase/messaging/DisplayNotification;
+
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

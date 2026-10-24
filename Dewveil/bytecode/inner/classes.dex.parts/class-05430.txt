@@ -1,0 +1,328 @@
+Class #5430            -
+  Class descriptor  : 'Lcom/google/firebase/installations/remote/RequestLimiter;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'MAXIMUM_BACKOFF_DURATION_FOR_CONFIGURATION_ERRORS'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+    #1              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'MAXIMUM_BACKOFF_DURATION_FOR_SERVER_ERRORS'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'attemptCount'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'nextRequestTime'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'utils'
+      type          : 'Lcom/google/firebase/installations/Utils;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 0
+      outs          : 3
+      insns size    : 21 16-bit code units
+723394:                                        |[723394] com.google.firebase.installations.remote.RequestLimiter.<clinit>:()V
+7233a4: 6200 488a                              |0000: sget-object v0, Ljava/util/concurrent/TimeUnit;.HOURS:Ljava/util/concurrent/TimeUnit; // field@8a48
+7233a8: 1601 1800                              |0002: const-wide/16 v1, #int 24 // #18
+7233ac: 6e30 e7d6 1002                         |0004: invoke-virtual {v0, v1, v2}, Ljava/util/concurrent/TimeUnit;.toMillis:(J)J // method@d6e7
+7233b2: 0b00                                   |0007: move-result-wide v0
+7233b4: 6800 d972                              |0008: sput-wide v0, Lcom/google/firebase/installations/remote/RequestLimiter;.MAXIMUM_BACKOFF_DURATION_FOR_CONFIGURATION_ERRORS:J // field@72d9
+7233b8: 6200 4a8a                              |000a: sget-object v0, Ljava/util/concurrent/TimeUnit;.MINUTES:Ljava/util/concurrent/TimeUnit; // field@8a4a
+7233bc: 1601 1e00                              |000c: const-wide/16 v1, #int 30 // #1e
+7233c0: 6e30 e7d6 1002                         |000e: invoke-virtual {v0, v1, v2}, Ljava/util/concurrent/TimeUnit;.toMillis:(J)J // method@d6e7
+7233c6: 0b00                                   |0011: move-result-wide v0
+7233c8: 6800 da72                              |0012: sput-wide v0, Lcom/google/firebase/installations/remote/RequestLimiter;.MAXIMUM_BACKOFF_DURATION_FOR_SERVER_ERRORS:J // field@72da
+7233cc: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=28
+        0x0004 line=29
+        0x000a line=30
+        0x000e line=31
+      locals        :
+
+    #1              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 10 16-bit code units
+7233d0:                                        |[7233d0] com.google.firebase.installations.remote.RequestLimiter.<init>:()V
+7233e0: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+7233e6: 7100 93be 0000                         |0003: invoke-static {}, Lcom/google/firebase/installations/Utils;.getInstance:()Lcom/google/firebase/installations/Utils; // method@be93
+7233ec: 0c00                                   |0006: move-result-object v0
+7233ee: 5b10 dd72                              |0007: iput-object v0, v1, Lcom/google/firebase/installations/remote/RequestLimiter;.utils:Lcom/google/firebase/installations/Utils; // field@72dd
+7233f2: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=45
+        0x0003 line=47
+      locals        :
+        0x0000 - 0x000a reg=1 this Lcom/google/firebase/installations/remote/RequestLimiter;
+
+    #2              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : '<init>'
+      type          : '(Lcom/google/firebase/installations/Utils;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 6 16-bit code units
+7233f4:                                        |[7233f4] com.google.firebase.installations.remote.RequestLimiter.<init>:(Lcom/google/firebase/installations/Utils;)V
+723404: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+72340a: 5b01 dd72                              |0003: iput-object v1, v0, Lcom/google/firebase/installations/remote/RequestLimiter;.utils:Lcom/google/firebase/installations/Utils; // field@72dd
+72340e: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=40
+        0x0003 line=42
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/google/firebase/installations/remote/RequestLimiter;
+        0x0000 - 0x0006 reg=1 (null) Lcom/google/firebase/installations/Utils;
+
+    #3              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'getBackoffDuration'
+      type          : '(I)J'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 4
+      insns size    : 41 16-bit code units
+723410:                                        |[723410] com.google.firebase.installations.remote.RequestLimiter.getBackoffDuration:(I)J
+723420: 1d04                                   |0000: monitor-enter v4
+723422: 7110 4cbf 0500                         |0001: invoke-static {v5}, Lcom/google/firebase/installations/remote/RequestLimiter;.isRetryableError:(I)Z // method@bf4c
+723428: 0a05                                   |0004: move-result v5
+72342a: 3905 0600                              |0005: if-nez v5, 000b // +0006
+72342e: 6100 d972                              |0007: sget-wide v0, Lcom/google/firebase/installations/remote/RequestLimiter;.MAXIMUM_BACKOFF_DURATION_FOR_CONFIGURATION_ERRORS:J // field@72d9
+723432: 1e04                                   |0009: monitor-exit v4
+723434: 1000                                   |000a: return-wide v0
+723436: 5245 db72                              |000b: iget v5, v4, Lcom/google/firebase/installations/remote/RequestLimiter;.attemptCount:I // field@72db
+72343a: 8350                                   |000d: int-to-double v0, v5
+72343c: 1902 0040                              |000e: const-wide/high16 v2, #long 4611686018427387904 // #4000
+723440: 7140 a5d1 3210                         |0010: invoke-static {v2, v3, v0, v1}, Ljava/lang/Math;.pow:(DD)D // method@d1a5
+723446: 0b00                                   |0013: move-result-wide v0
+723448: 5445 dd72                              |0014: iget-object v5, v4, Lcom/google/firebase/installations/remote/RequestLimiter;.utils:Lcom/google/firebase/installations/Utils; // field@72dd
+72344c: 6e10 95be 0500                         |0016: invoke-virtual {v5}, Lcom/google/firebase/installations/Utils;.getRandomDelayForSyncPrevention:()J // method@be95
+723452: 0b02                                   |0019: move-result-wide v2
+723454: 8622                                   |001a: long-to-double v2, v2
+723456: cb20                                   |001b: add-double/2addr v0, v2
+723458: 6102 da72                              |001c: sget-wide v2, Lcom/google/firebase/installations/remote/RequestLimiter;.MAXIMUM_BACKOFF_DURATION_FOR_SERVER_ERRORS:J // field@72da
+72345c: 8622                                   |001e: long-to-double v2, v2
+72345e: 7140 9dd1 1032                         |001f: invoke-static {v0, v1, v2, v3}, Ljava/lang/Math;.min:(DD)D // method@d19d
+723464: 0b00                                   |0022: move-result-wide v0
+723466: 8b00                                   |0023: double-to-long v0, v0
+723468: 1e04                                   |0024: monitor-exit v4
+72346a: 1000                                   |0025: return-wide v0
+72346c: 0d05                                   |0026: move-exception v5
+72346e: 1e04                                   |0027: monitor-exit v4
+723470: 2705                                   |0028: throw v5
+      catches       : 3
+        0x0001 - 0x0009
+          <any> -> 0x0026
+        0x000b - 0x0023
+          <any> -> 0x0026
+        0x0027 - 0x0028
+          <any> -> 0x0026
+      positions     :
+        0x0001 line=68
+        0x0007 line=69
+        0x000b line=73
+        0x0010 line=75
+        0x001f line=74
+        0x0024 line=73
+      locals        :
+        0x0000 - 0x0029 reg=4 this Lcom/google/firebase/installations/remote/RequestLimiter;
+        0x0000 - 0x0029 reg=5 (null) I
+
+    #4              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'isRetryableError'
+      type          : '(I)Z'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 17 16-bit code units
+723490:                                        |[723490] com.google.firebase.installations.remote.RequestLimiter.isRetryableError:(I)Z
+7234a0: 1300 ad01                              |0000: const/16 v0, #int 429 // #1ad
+7234a4: 3201 0d00                              |0002: if-eq v1, v0, 000f // +000d
+7234a8: 1300 f401                              |0004: const/16 v0, #int 500 // #1f4
+7234ac: 3401 0700                              |0006: if-lt v1, v0, 000d // +0007
+7234b0: 1300 5802                              |0008: const/16 v0, #int 600 // #258
+7234b4: 3501 0300                              |000a: if-ge v1, v0, 000d // +0003
+7234b8: 2803                                   |000c: goto 000f // +0003
+7234ba: 1201                                   |000d: const/4 v1, #int 0 // #0
+7234bc: 2802                                   |000e: goto 0010 // +0002
+7234be: 1211                                   |000f: const/4 v1, #int 1 // #1
+7234c0: 0f01                                   |0010: return v1
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #5              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'isSuccessfulOrRequiresNewFidCreation'
+      type          : '(I)Z'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 21 16-bit code units
+7234c4:                                        |[7234c4] com.google.firebase.installations.remote.RequestLimiter.isSuccessfulOrRequiresNewFidCreation:(I)Z
+7234d4: 1300 c800                              |0000: const/16 v0, #int 200 // #c8
+7234d8: 3401 0600                              |0002: if-lt v1, v0, 0008 // +0006
+7234dc: 1300 2c01                              |0004: const/16 v0, #int 300 // #12c
+7234e0: 3401 0d00                              |0006: if-lt v1, v0, 0013 // +000d
+7234e4: 1300 9101                              |0008: const/16 v0, #int 401 // #191
+7234e8: 3201 0900                              |000a: if-eq v1, v0, 0013 // +0009
+7234ec: 1300 9401                              |000c: const/16 v0, #int 404 // #194
+7234f0: 3301 0300                              |000e: if-ne v1, v0, 0011 // +0003
+7234f4: 2803                                   |0010: goto 0013 // +0003
+7234f6: 1201                                   |0011: const/4 v1, #int 0 // #0
+7234f8: 2802                                   |0012: goto 0014 // +0002
+7234fa: 1211                                   |0013: const/4 v1, #int 1 // #1
+7234fc: 0f01                                   |0014: return v1
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #6              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'resetBackoffStrategy'
+      type          : '()V'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 9 16-bit code units
+723500:                                        |[723500] com.google.firebase.installations.remote.RequestLimiter.resetBackoffStrategy:()V
+723510: 1d01                                   |0000: monitor-enter v1
+723512: 1200                                   |0001: const/4 v0, #int 0 // #0
+723514: 5910 db72                              |0002: iput v0, v1, Lcom/google/firebase/installations/remote/RequestLimiter;.attemptCount:I // field@72db
+723518: 1e01                                   |0004: monitor-exit v1
+72351a: 0e00                                   |0005: return-void
+72351c: 0d00                                   |0006: move-exception v0
+72351e: 1e01                                   |0007: monitor-exit v1
+723520: 2700                                   |0008: throw v0
+      catches       : 2
+        0x0002 - 0x0004
+          <any> -> 0x0006
+        0x0007 - 0x0008
+          <any> -> 0x0006
+      positions     :
+        0x0002 line=63
+        0x0004 line=64
+      locals        :
+        0x0000 - 0x0009 reg=1 this Lcom/google/firebase/installations/remote/RequestLimiter;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'isRequestAllowed'
+      type          : '()Z'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 1
+      insns size    : 26 16-bit code units
+723538:                                        |[723538] com.google.firebase.installations.remote.RequestLimiter.isRequestAllowed:()Z
+723548: 1d04                                   |0000: monitor-enter v4
+72354a: 5240 db72                              |0001: iget v0, v4, Lcom/google/firebase/installations/remote/RequestLimiter;.attemptCount:I // field@72db
+72354e: 3800 1100                              |0003: if-eqz v0, 0014 // +0011
+723552: 5440 dd72                              |0005: iget-object v0, v4, Lcom/google/firebase/installations/remote/RequestLimiter;.utils:Lcom/google/firebase/installations/Utils; // field@72dd
+723556: 6e10 91be 0000                         |0007: invoke-virtual {v0}, Lcom/google/firebase/installations/Utils;.currentTimeInMillis:()J // method@be91
+72355c: 0b00                                   |000a: move-result-wide v0
+72355e: 5342 dc72                              |000b: iget-wide v2, v4, Lcom/google/firebase/installations/remote/RequestLimiter;.nextRequestTime:J // field@72dc
+723562: 3100 0002                              |000d: cmp-long v0, v0, v2
+723566: 3d00 0300                              |000f: if-lez v0, 0012 // +0003
+72356a: 2803                                   |0011: goto 0014 // +0003
+72356c: 1200                                   |0012: const/4 v0, #int 0 // #0
+72356e: 2802                                   |0013: goto 0015 // +0002
+723570: 1210                                   |0014: const/4 v0, #int 1 // #1
+723572: 1e04                                   |0015: monitor-exit v4
+723574: 0f00                                   |0016: return v0
+723576: 0d00                                   |0017: move-exception v0
+723578: 1e04                                   |0018: monitor-exit v4
+72357a: 2700                                   |0019: throw v0
+      catches       : 2
+        0x0001 - 0x000d
+          <any> -> 0x0017
+        0x0018 - 0x0019
+          <any> -> 0x0017
+      positions     :
+        0x0001 line=99
+      locals        :
+        0x0000 - 0x001a reg=4 this Lcom/google/firebase/installations/remote/RequestLimiter;
+
+    #1              : (in Lcom/google/firebase/installations/remote/RequestLimiter;)
+      name          : 'setNextRequestTime'
+      type          : '(I)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 2
+      insns size    : 36 16-bit code units
+723590:                                        |[723590] com.google.firebase.installations.remote.RequestLimiter.setNextRequestTime:(I)V
+7235a0: 1d04                                   |0000: monitor-enter v4
+7235a2: 7110 4dbf 0500                         |0001: invoke-static {v5}, Lcom/google/firebase/installations/remote/RequestLimiter;.isSuccessfulOrRequiresNewFidCreation:(I)Z // method@bf4d
+7235a8: 0a00                                   |0004: move-result v0
+7235aa: 3800 0700                              |0005: if-eqz v0, 000c // +0007
+7235ae: 7010 4ebf 0400                         |0007: invoke-direct {v4}, Lcom/google/firebase/installations/remote/RequestLimiter;.resetBackoffStrategy:()V // method@bf4e
+7235b4: 1e04                                   |000a: monitor-exit v4
+7235b6: 0e00                                   |000b: return-void
+7235b8: 5240 db72                              |000c: iget v0, v4, Lcom/google/firebase/installations/remote/RequestLimiter;.attemptCount:I // field@72db
+7235bc: d800 0001                              |000e: add-int/lit8 v0, v0, #int 1 // #01
+7235c0: 5940 db72                              |0010: iput v0, v4, Lcom/google/firebase/installations/remote/RequestLimiter;.attemptCount:I // field@72db
+7235c4: 7020 4abf 5400                         |0012: invoke-direct {v4, v5}, Lcom/google/firebase/installations/remote/RequestLimiter;.getBackoffDuration:(I)J // method@bf4a
+7235ca: 0b00                                   |0015: move-result-wide v0
+7235cc: 5445 dd72                              |0016: iget-object v5, v4, Lcom/google/firebase/installations/remote/RequestLimiter;.utils:Lcom/google/firebase/installations/Utils; // field@72dd
+7235d0: 6e10 91be 0500                         |0018: invoke-virtual {v5}, Lcom/google/firebase/installations/Utils;.currentTimeInMillis:()J // method@be91
+7235d6: 0b02                                   |001b: move-result-wide v2
+7235d8: bb02                                   |001c: add-long/2addr v2, v0
+7235da: 5a42 dc72                              |001d: iput-wide v2, v4, Lcom/google/firebase/installations/remote/RequestLimiter;.nextRequestTime:J // field@72dc
+7235de: 1e04                                   |001f: monitor-exit v4
+7235e0: 0e00                                   |0020: return-void
+7235e2: 0d05                                   |0021: move-exception v5
+7235e4: 1e04                                   |0022: monitor-exit v4
+7235e6: 2705                                   |0023: throw v5
+      catches       : 3
+        0x0001 - 0x000a
+          <any> -> 0x0021
+        0x000c - 0x001f
+          <any> -> 0x0021
+        0x0022 - 0x0023
+          <any> -> 0x0021
+      positions     :
+        0x0001 line=53
+        0x0007 line=54
+        0x000a line=55
+        0x000c line=57
+        0x0012 line=58
+        0x0016 line=59
+        0x001f line=60
+      locals        :
+        0x0000 - 0x0024 reg=4 this Lcom/google/firebase/installations/remote/RequestLimiter;
+        0x0000 - 0x0024 reg=5 (null) I
+
+  source_file_idx   : 24087 (RequestLimiter.java)
+

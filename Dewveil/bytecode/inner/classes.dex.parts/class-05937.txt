@@ -1,0 +1,890 @@
+Class #5937            -
+  Class descriptor  : 'Lcom/squareup/okhttp/internal/framed/Http2$Reader;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Lcom/squareup/okhttp/internal/framed/FrameReader;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'client'
+      type          : 'Z'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'continuation'
+      type          : 'Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'hpackReader'
+      type          : 'Lcom/squareup/okhttp/internal/framed/Hpack$Reader;'
+      access        : 0x0010 (FINAL)
+    #3              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'source'
+      type          : 'Lokio/BufferedSource;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : '<init>'
+      type          : '(Lokio/BufferedSource;IZ)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 3
+      insns size    : 22 16-bit code units
+75ea34:                                        |[75ea34] com.squareup.okhttp.internal.framed.Http2$Reader.<init>:(Lokio/BufferedSource;IZ)V
+75ea44: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+75ea4a: 5b01 9f88                              |0003: iput-object v1, v0, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75ea4e: 5c03 9c88                              |0005: iput-boolean v3, v0, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.client:Z // field@889c
+75ea52: 2203 aa19                              |0007: new-instance v3, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource; // type@19aa
+75ea56: 7020 accc 1300                         |0009: invoke-direct {v3, v1}, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.<init>:(Lokio/BufferedSource;)V // method@ccac
+75ea5c: 5b03 9d88                              |000c: iput-object v3, v0, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.continuation:Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource; // field@889d
+75ea60: 2201 a719                              |000e: new-instance v1, Lcom/squareup/okhttp/internal/framed/Hpack$Reader; // type@19a7
+75ea64: 7030 8dcc 2103                         |0010: invoke-direct {v1, v2, v3}, Lcom/squareup/okhttp/internal/framed/Hpack$Reader;.<init>:(ILokio/Source;)V // method@cc8d
+75ea6a: 5b01 9e88                              |0013: iput-object v1, v0, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.hpackReader:Lcom/squareup/okhttp/internal/framed/Hpack$Reader; // field@889e
+75ea6e: 0e00                                   |0015: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=95
+        0x0003 line=96
+        0x0005 line=97
+        0x0007 line=98
+        0x000e line=99
+      locals        :
+        0x0000 - 0x0016 reg=0 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x0016 reg=1 (null) Lokio/BufferedSource;
+        0x0000 - 0x0016 reg=2 (null) I
+        0x0000 - 0x0016 reg=3 (null) Z
+
+    #1              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readData'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 5
+      outs          : 5
+      insns size    : 50 16-bit code units
+75ea70:                                        |[75ea70] com.squareup.okhttp.internal.framed.Http2$Reader.readData:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V
+75ea80: dd00 0601                              |0000: and-int/lit8 v0, v6, #int 1 // #01
+75ea84: 1201                                   |0002: const/4 v1, #int 0 // #0
+75ea86: 3800 0400                              |0003: if-eqz v0, 0007 // +0004
+75ea8a: 1210                                   |0005: const/4 v0, #int 1 // #1
+75ea8c: 2802                                   |0006: goto 0008 // +0002
+75ea8e: 0110                                   |0007: move v0, v1
+75ea90: dd02 0620                              |0008: and-int/lit8 v2, v6, #int 32 // #20
+75ea94: 3902 1f00                              |000a: if-nez v2, 0029 // +001f
+75ea98: dd02 0608                              |000c: and-int/lit8 v2, v6, #int 8 // #08
+75ea9c: 3802 0b00                              |000e: if-eqz v2, 0019 // +000b
+75eaa0: 5431 9f88                              |0010: iget-object v1, v3, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75eaa4: 7210 52fe 0100                         |0012: invoke-interface {v1}, Lokio/BufferedSource;.readByte:()B // method@fe52
+75eaaa: 0a01                                   |0015: move-result v1
+75eaac: d511 ff00                              |0016: and-int/lit16 v1, v1, #int 255 // #00ff
+75eab0: 8f11                                   |0018: int-to-short v1, v1
+75eab2: 7130 decc 6501                         |0019: invoke-static {v5, v6, v1}, Lcom/squareup/okhttp/internal/framed/Http2;.access$400:(IBS)I // method@ccde
+75eab8: 0a05                                   |001c: move-result v5
+75eaba: 5436 9f88                              |001d: iget-object v6, v3, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75eabe: 7255 b6cb 0467                         |001f: invoke-interface {v4, v0, v7, v6, v5}, Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;.data:(ZILokio/BufferedSource;I)V // method@cbb6
+75eac4: 5433 9f88                              |0022: iget-object v3, v3, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75eac8: 8114                                   |0024: int-to-long v4, v1
+75eaca: 7230 5cfe 4305                         |0025: invoke-interface {v3, v4, v5}, Lokio/BufferedSource;.skip:(J)V // method@fe5c
+75ead0: 0e00                                   |0028: return-void
+75ead2: 1a03 635b                              |0029: const-string v3, "PROTOCOL_ERROR: FLAG_COMPRESSED without SETTINGS_COMPRESS_DATA" // string@5b63
+75ead6: 2314 ad20                              |002b: new-array v4, v1, [Ljava/lang/Object; // type@20ad
+75eada: 7120 dccc 4300                         |002d: invoke-static {v3, v4}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75eae0: 0c03                                   |0030: move-result-object v3
+75eae2: 2703                                   |0031: throw v3
+      catches       : (none)
+      positions     :
+        0x0010 line=225
+        0x0019 line=226
+        0x001d line=228
+        0x0022 line=229
+        0x0029 line=222
+      locals        :
+        0x0000 - 0x0032 reg=3 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x0032 reg=4 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+        0x0000 - 0x0032 reg=5 (null) I
+        0x0000 - 0x0032 reg=6 (null) B
+        0x0000 - 0x0032 reg=7 (null) I
+
+    #2              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readGoAway'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 5
+      outs          : 4
+      insns size    : 80 16-bit code units
+75eae4:                                        |[75eae4] com.squareup.okhttp.internal.framed.Http2$Reader.readGoAway:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V
+75eaf4: 1305 0800                              |0000: const/16 v5, #int 8 // #8
+75eaf8: 3454 3f00                              |0002: if-lt v4, v5, 0041 // +003f
+75eafc: 3906 3300                              |0004: if-nez v6, 0037 // +0033
+75eb00: 5426 9f88                              |0006: iget-object v6, v2, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75eb04: 7210 58fe 0600                         |0008: invoke-interface {v6}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75eb0a: 0a06                                   |000b: move-result v6
+75eb0c: 5420 9f88                              |000c: iget-object v0, v2, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75eb10: 7210 58fe 0000                         |000e: invoke-interface {v0}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75eb16: 0a00                                   |0011: move-result v0
+75eb18: b154                                   |0012: sub-int/2addr v4, v5
+75eb1a: 7110 afcb 0000                         |0013: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/ErrorCode;.fromHttp2:(I)Lcom/squareup/okhttp/internal/framed/ErrorCode; // method@cbaf
+75eb20: 0c05                                   |0016: move-result-object v5
+75eb22: 3805 1100                              |0017: if-eqz v5, 0028 // +0011
+75eb26: 6200 908e                              |0019: sget-object v0, Lokio/ByteString;.EMPTY:Lokio/ByteString; // field@8e90
+75eb2a: 3d04 0900                              |001b: if-lez v4, 0024 // +0009
+75eb2e: 5422 9f88                              |001d: iget-object v2, v2, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75eb32: 8140                                   |001f: int-to-long v0, v4
+75eb34: 7230 55fe 0201                         |0020: invoke-interface {v2, v0, v1}, Lokio/BufferedSource;.readByteString:(J)Lokio/ByteString; // method@fe55
+75eb3a: 0c00                                   |0023: move-result-object v0
+75eb3c: 7240 b7cb 6305                         |0024: invoke-interface {v3, v6, v5, v0}, Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;.goAway:(ILcom/squareup/okhttp/internal/framed/ErrorCode;Lokio/ByteString;)V // method@cbb7
+75eb42: 0e00                                   |0027: return-void
+75eb44: 7110 6bd1 0000                         |0028: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+75eb4a: 0c02                                   |002b: move-result-object v2
+75eb4c: 2410 ad20 0200                         |002c: filled-new-array {v2}, [Ljava/lang/Object; // type@20ad
+75eb52: 0c02                                   |002f: move-result-object v2
+75eb54: 1a03 8666                              |0030: const-string v3, "TYPE_GOAWAY unexpected error code: %d" // string@6686
+75eb58: 7120 dccc 2300                         |0032: invoke-static {v3, v2}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75eb5e: 0c02                                   |0035: move-result-object v2
+75eb60: 2702                                   |0036: throw v2
+75eb62: 1202                                   |0037: const/4 v2, #int 0 // #0
+75eb64: 2322 ad20                              |0038: new-array v2, v2, [Ljava/lang/Object; // type@20ad
+75eb68: 1a03 8566                              |003a: const-string v3, "TYPE_GOAWAY streamId != 0" // string@6685
+75eb6c: 7120 dccc 2300                         |003c: invoke-static {v3, v2}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75eb72: 0c02                                   |003f: move-result-object v2
+75eb74: 2702                                   |0040: throw v2
+75eb76: 7110 6bd1 0400                         |0041: invoke-static {v4}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+75eb7c: 0c02                                   |0044: move-result-object v2
+75eb7e: 2410 ad20 0200                         |0045: filled-new-array {v2}, [Ljava/lang/Object; // type@20ad
+75eb84: 0c02                                   |0048: move-result-object v2
+75eb86: 1a03 8366                              |0049: const-string v3, "TYPE_GOAWAY length < 8: %s" // string@6683
+75eb8a: 7120 dccc 2300                         |004b: invoke-static {v3, v2}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75eb90: 0c02                                   |004e: move-result-object v2
+75eb92: 2702                                   |004f: throw v2
+      catches       : (none)
+      positions     :
+        0x0006 line=336
+        0x000c line=337
+        0x0013 line=339
+        0x0019 line=343
+        0x001d line=345
+        0x0024 line=347
+        0x0028 line=341
+        0x0038 line=335
+        0x0041 line=334
+      locals        :
+        0x0000 - 0x0050 reg=2 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x0050 reg=3 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+        0x0000 - 0x0050 reg=4 (null) I
+        0x0000 - 0x0050 reg=5 (null) B
+        0x0000 - 0x0050 reg=6 (null) I
+
+    #3              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readHeaderBlock'
+      type          : '(ISBI)Ljava/util/List;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 5
+      outs          : 1
+      insns size    : 30 16-bit code units
+75eb94:                                        |[75eb94] com.squareup.okhttp.internal.framed.Http2$Reader.readHeaderBlock:(ISBI)Ljava/util/List;
+75eba4: 5410 9d88                              |0000: iget-object v0, v1, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.continuation:Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource; // field@889d
+75eba8: 5902 9488                              |0002: iput v2, v0, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.left:I // field@8894
+75ebac: 5902 9588                              |0004: iput v2, v0, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.length:I // field@8895
+75ebb0: 5412 9d88                              |0006: iget-object v2, v1, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.continuation:Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource; // field@889d
+75ebb4: 5f23 9688                              |0008: iput-short v3, v2, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.padding:S // field@8896
+75ebb8: 5412 9d88                              |000a: iget-object v2, v1, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.continuation:Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource; // field@889d
+75ebbc: 5d24 9388                              |000c: iput-byte v4, v2, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.flags:B // field@8893
+75ebc0: 5412 9d88                              |000e: iget-object v2, v1, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.continuation:Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource; // field@889d
+75ebc4: 5925 9888                              |0010: iput v5, v2, Lcom/squareup/okhttp/internal/framed/Http2$ContinuationSource;.streamId:I // field@8898
+75ebc8: 5412 9e88                              |0012: iget-object v2, v1, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.hpackReader:Lcom/squareup/okhttp/internal/framed/Hpack$Reader; // field@889e
+75ebcc: 6e10 9acc 0200                         |0014: invoke-virtual {v2}, Lcom/squareup/okhttp/internal/framed/Hpack$Reader;.readHeaders:()V // method@cc9a
+75ebd2: 5411 9e88                              |0017: iget-object v1, v1, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.hpackReader:Lcom/squareup/okhttp/internal/framed/Hpack$Reader; // field@889e
+75ebd6: 6e10 92cc 0100                         |0019: invoke-virtual {v1}, Lcom/squareup/okhttp/internal/framed/Hpack$Reader;.getAndResetHeaderList:()Ljava/util/List; // method@cc92
+75ebdc: 0c01                                   |001c: move-result-object v1
+75ebde: 1101                                   |001d: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=205
+        0x0006 line=206
+        0x000a line=207
+        0x000e line=208
+        0x0012 line=212
+        0x0017 line=213
+      locals        :
+        0x0000 - 0x001e reg=1 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x001e reg=2 (null) I
+        0x0000 - 0x001e reg=3 (null) S
+        0x0000 - 0x001e reg=4 (null) B
+        0x0000 - 0x001e reg=5 (null) I
+
+    #4              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readHeaders'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 14
+      ins           : 5
+      outs          : 7
+      insns size    : 60 16-bit code units
+75ebe0:                                        |[75ebe0] com.squareup.okhttp.internal.framed.Http2$Reader.readHeaders:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V
+75ebf0: 1200                                   |0000: const/4 v0, #int 0 // #0
+75ebf2: 380d 3200                              |0001: if-eqz v13, 0033 // +0032
+75ebf6: dd01 0c01                              |0003: and-int/lit8 v1, v12, #int 1 // #01
+75ebfa: 3801 0500                              |0005: if-eqz v1, 000a // +0005
+75ebfe: 1211                                   |0007: const/4 v1, #int 1 // #1
+75ec00: 0114                                   |0008: move v4, v1
+75ec02: 2802                                   |0009: goto 000b // +0002
+75ec04: 0104                                   |000a: move v4, v0
+75ec06: dd01 0c08                              |000b: and-int/lit8 v1, v12, #int 8 // #08
+75ec0a: 3801 0b00                              |000d: if-eqz v1, 0018 // +000b
+75ec0e: 5490 9f88                              |000f: iget-object v0, v9, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75ec12: 7210 52fe 0000                         |0011: invoke-interface {v0}, Lokio/BufferedSource;.readByte:()B // method@fe52
+75ec18: 0a00                                   |0014: move-result v0
+75ec1a: d500 ff00                              |0015: and-int/lit16 v0, v0, #int 255 // #00ff
+75ec1e: 8f00                                   |0017: int-to-short v0, v0
+75ec20: dd01 0c20                              |0018: and-int/lit8 v1, v12, #int 32 // #20
+75ec24: 3801 0700                              |001a: if-eqz v1, 0021 // +0007
+75ec28: 7030 becc a90d                         |001c: invoke-direct {v9, v10, v13}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readPriority:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;I)V // method@ccbe
+75ec2e: d80b 0bfb                              |001f: add-int/lit8 v11, v11, #int -5 // #fb
+75ec32: 7130 decc cb00                         |0021: invoke-static {v11, v12, v0}, Lcom/squareup/okhttp/internal/framed/Http2;.access$400:(IBS)I // method@ccde
+75ec38: 0a0b                                   |0024: move-result v11
+75ec3a: 705d bbcc b9c0                         |0025: invoke-direct {v9, v11, v0, v12, v13}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readHeaderBlock:(ISBI)Ljava/util/List; // method@ccbb
+75ec40: 0c07                                   |0028: move-result-object v7
+75ec42: 12f6                                   |0029: const/4 v6, #int -1 // #ff
+75ec44: 6208 8088                              |002a: sget-object v8, Lcom/squareup/okhttp/internal/framed/HeadersMode;.HTTP_20_HEADERS:Lcom/squareup/okhttp/internal/framed/HeadersMode; // field@8880
+75ec48: 1203                                   |002c: const/4 v3, #int 0 // #0
+75ec4a: 07a2                                   |002d: move-object v2, v10
+75ec4c: 01d5                                   |002e: move v5, v13
+75ec4e: 7807 b8cb 0200                         |002f: invoke-interface/range {v2, v3, v4, v5, v6, v7, v8}, Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;.headers:(ZZIILjava/util/List;Lcom/squareup/okhttp/internal/framed/HeadersMode;)V // method@cbb8
+75ec54: 0e00                                   |0032: return-void
+75ec56: 1a09 645b                              |0033: const-string v9, "PROTOCOL_ERROR: TYPE_HEADERS streamId == 0" // string@5b64
+75ec5a: 230a ad20                              |0035: new-array v10, v0, [Ljava/lang/Object; // type@20ad
+75ec5e: 7120 dccc a900                         |0037: invoke-static {v9, v10}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ec64: 0c09                                   |003a: move-result-object v9
+75ec66: 2709                                   |003b: throw v9
+      catches       : (none)
+      positions     :
+        0x000f line=189
+        0x001c line=192
+        0x0021 line=196
+        0x0025 line=198
+        0x002a line=200
+        0x0033 line=185
+      locals        :
+        0x0000 - 0x003c reg=9 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x003c reg=10 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+        0x0000 - 0x003c reg=11 (null) I
+        0x0000 - 0x003c reg=12 (null) B
+        0x0000 - 0x003c reg=13 (null) I
+
+    #5              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readPing'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 5
+      outs          : 4
+      insns size    : 52 16-bit code units
+75ec68:                                        |[75ec68] com.squareup.okhttp.internal.framed.Http2$Reader.readPing:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V
+75ec78: 1300 0800                              |0000: const/16 v0, #int 8 // #8
+75ec7c: 3303 2300                              |0002: if-ne v3, v0, 0025 // +0023
+75ec80: 1203                                   |0004: const/4 v3, #int 0 // #0
+75ec82: 3905 1700                              |0005: if-nez v5, 001c // +0017
+75ec86: 5415 9f88                              |0007: iget-object v5, v1, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75ec8a: 7210 58fe 0500                         |0009: invoke-interface {v5}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75ec90: 0a05                                   |000c: move-result v5
+75ec92: 5411 9f88                              |000d: iget-object v1, v1, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75ec96: 7210 58fe 0100                         |000f: invoke-interface {v1}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75ec9c: 0a01                                   |0012: move-result v1
+75ec9e: 1210                                   |0013: const/4 v0, #int 1 // #1
+75eca0: b504                                   |0014: and-int/2addr v4, v0
+75eca2: 3804 0300                              |0015: if-eqz v4, 0018 // +0003
+75eca6: 0103                                   |0017: move v3, v0
+75eca8: 7240 b9cb 3215                         |0018: invoke-interface {v2, v3, v5, v1}, Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;.ping:(ZII)V // method@cbb9
+75ecae: 0e00                                   |001b: return-void
+75ecb0: 1a01 a266                              |001c: const-string v1, "TYPE_PING streamId != 0" // string@66a2
+75ecb4: 2332 ad20                              |001e: new-array v2, v3, [Ljava/lang/Object; // type@20ad
+75ecb8: 7120 dccc 2100                         |0020: invoke-static {v1, v2}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ecbe: 0c01                                   |0023: move-result-object v1
+75ecc0: 2701                                   |0024: throw v1
+75ecc2: 7110 6bd1 0300                         |0025: invoke-static {v3}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+75ecc8: 0c01                                   |0028: move-result-object v1
+75ecca: 2410 ad20 0100                         |0029: filled-new-array {v1}, [Ljava/lang/Object; // type@20ad
+75ecd0: 0c01                                   |002c: move-result-object v1
+75ecd2: 1a02 a066                              |002d: const-string v2, "TYPE_PING length != 8: %s" // string@66a0
+75ecd6: 7120 dccc 1200                         |002f: invoke-static {v2, v1}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ecdc: 0c01                                   |0032: move-result-object v1
+75ecde: 2701                                   |0033: throw v1
+      catches       : (none)
+      positions     :
+        0x0007 line=326
+        0x000d line=327
+        0x0018 line=329
+        0x001c line=325
+        0x0025 line=324
+      locals        :
+        0x0000 - 0x0034 reg=1 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x0034 reg=2 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+        0x0000 - 0x0034 reg=3 (null) I
+        0x0000 - 0x0034 reg=4 (null) B
+        0x0000 - 0x0034 reg=5 (null) I
+
+    #6              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readPriority'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;I)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 5
+      insns size    : 32 16-bit code units
+75ece0:                                        |[75ece0] com.squareup.okhttp.internal.framed.Http2$Reader.readPriority:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;I)V
+75ecf0: 5440 9f88                              |0000: iget-object v0, v4, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75ecf4: 7210 58fe 0000                         |0002: invoke-interface {v0}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75ecfa: 0a00                                   |0005: move-result v0
+75ecfc: 1501 0080                              |0006: const/high16 v1, #int -2147483648 // #8000
+75ed00: b501                                   |0008: and-int/2addr v1, v0
+75ed02: 1212                                   |0009: const/4 v2, #int 1 // #1
+75ed04: 3801 0400                              |000a: if-eqz v1, 000e // +0004
+75ed08: 0121                                   |000c: move v1, v2
+75ed0a: 2802                                   |000d: goto 000f // +0002
+75ed0c: 1201                                   |000e: const/4 v1, #int 0 // #0
+75ed0e: 1403 ffff ff7f                         |000f: const v3, #float nan // #7fffffff
+75ed14: b530                                   |0012: and-int/2addr v0, v3
+75ed16: 5444 9f88                              |0013: iget-object v4, v4, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75ed1a: 7210 52fe 0400                         |0015: invoke-interface {v4}, Lokio/BufferedSource;.readByte:()B // method@fe52
+75ed20: 0a04                                   |0018: move-result v4
+75ed22: d544 ff00                              |0019: and-int/lit16 v4, v4, #int 255 // #00ff
+75ed26: b024                                   |001b: add-int/2addr v4, v2
+75ed28: 7251 bacb 6540                         |001c: invoke-interface {v5, v6, v0, v4, v1}, Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;.priority:(IIIZ)V // method@cbba
+75ed2e: 0e00                                   |001f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=240
+        0x0013 line=243
+        0x001c line=244
+      locals        :
+        0x0000 - 0x0020 reg=4 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x0020 reg=5 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+        0x0000 - 0x0020 reg=6 (null) I
+
+    #7              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readPriority'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 3
+      insns size    : 34 16-bit code units
+75ed30:                                        |[75ed30] com.squareup.okhttp.internal.framed.Http2$Reader.readPriority:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V
+75ed40: 1253                                   |0000: const/4 v3, #int 5 // #5
+75ed42: 3332 1200                              |0001: if-ne v2, v3, 0013 // +0012
+75ed46: 3804 0600                              |0003: if-eqz v4, 0009 // +0006
+75ed4a: 7030 becc 1004                         |0005: invoke-direct {v0, v1, v4}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readPriority:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;I)V // method@ccbe
+75ed50: 0e00                                   |0008: return-void
+75ed52: 1200                                   |0009: const/4 v0, #int 0 // #0
+75ed54: 2300 ad20                              |000a: new-array v0, v0, [Ljava/lang/Object; // type@20ad
+75ed58: 1a01 a566                              |000c: const-string v1, "TYPE_PRIORITY streamId == 0" // string@66a5
+75ed5c: 7120 dccc 0100                         |000e: invoke-static {v1, v0}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ed62: 0c00                                   |0011: move-result-object v0
+75ed64: 2700                                   |0012: throw v0
+75ed66: 7110 6bd1 0200                         |0013: invoke-static {v2}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+75ed6c: 0c00                                   |0016: move-result-object v0
+75ed6e: 2410 ad20 0000                         |0017: filled-new-array {v0}, [Ljava/lang/Object; // type@20ad
+75ed74: 0c00                                   |001a: move-result-object v0
+75ed76: 1a01 a466                              |001b: const-string v1, "TYPE_PRIORITY length: %d != 5" // string@66a4
+75ed7a: 7120 dccc 0100                         |001d: invoke-static {v1, v0}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ed80: 0c00                                   |0020: move-result-object v0
+75ed82: 2700                                   |0021: throw v0
+      catches       : (none)
+      positions     :
+        0x0005 line=236
+        0x000a line=235
+        0x0013 line=234
+      locals        :
+        0x0000 - 0x0022 reg=0 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x0022 reg=1 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+        0x0000 - 0x0022 reg=2 (null) I
+        0x0000 - 0x0022 reg=3 (null) B
+        0x0000 - 0x0022 reg=4 (null) I
+
+    #8              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readPushPromise'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 5
+      outs          : 5
+      insns size    : 49 16-bit code units
+75ed84:                                        |[75ed84] com.squareup.okhttp.internal.framed.Http2$Reader.readPushPromise:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V
+75ed94: 1200                                   |0000: const/4 v0, #int 0 // #0
+75ed96: 3807 2700                              |0001: if-eqz v7, 0028 // +0027
+75ed9a: dd01 0608                              |0003: and-int/lit8 v1, v6, #int 8 // #08
+75ed9e: 3801 0b00                              |0005: if-eqz v1, 0010 // +000b
+75eda2: 5430 9f88                              |0007: iget-object v0, v3, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75eda6: 7210 52fe 0000                         |0009: invoke-interface {v0}, Lokio/BufferedSource;.readByte:()B // method@fe52
+75edac: 0a00                                   |000c: move-result v0
+75edae: d500 ff00                              |000d: and-int/lit16 v0, v0, #int 255 // #00ff
+75edb2: 8f00                                   |000f: int-to-short v0, v0
+75edb4: 5431 9f88                              |0010: iget-object v1, v3, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75edb8: 7210 58fe 0100                         |0012: invoke-interface {v1}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75edbe: 0a01                                   |0015: move-result v1
+75edc0: 1402 ffff ff7f                         |0016: const v2, #float nan // #7fffffff
+75edc6: b521                                   |0019: and-int/2addr v1, v2
+75edc8: d805 05fc                              |001a: add-int/lit8 v5, v5, #int -4 // #fc
+75edcc: 7130 decc 6500                         |001c: invoke-static {v5, v6, v0}, Lcom/squareup/okhttp/internal/framed/Http2;.access$400:(IBS)I // method@ccde
+75edd2: 0a05                                   |001f: move-result v5
+75edd4: 7057 bbcc 5360                         |0020: invoke-direct {v3, v5, v0, v6, v7}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readHeaderBlock:(ISBI)Ljava/util/List; // method@ccbb
+75edda: 0c03                                   |0023: move-result-object v3
+75eddc: 7240 bbcb 7431                         |0024: invoke-interface {v4, v7, v1, v3}, Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;.pushPromise:(IILjava/util/List;)V // method@cbbb
+75ede2: 0e00                                   |0027: return-void
+75ede4: 1a03 655b                              |0028: const-string v3, "PROTOCOL_ERROR: TYPE_PUSH_PROMISE streamId == 0" // string@5b65
+75ede8: 2304 ad20                              |002a: new-array v4, v0, [Ljava/lang/Object; // type@20ad
+75edec: 7120 dccc 4300                         |002c: invoke-static {v3, v4}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75edf2: 0c03                                   |002f: move-result-object v3
+75edf4: 2703                                   |0030: throw v3
+      catches       : (none)
+      positions     :
+        0x0007 line=314
+        0x0010 line=315
+        0x001c line=317
+        0x0020 line=318
+        0x0024 line=319
+        0x0028 line=312
+      locals        :
+        0x0000 - 0x0031 reg=3 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x0031 reg=4 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+        0x0000 - 0x0031 reg=5 (null) I
+        0x0000 - 0x0031 reg=6 (null) B
+        0x0000 - 0x0031 reg=7 (null) I
+
+    #9              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readRstStream'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 3
+      insns size    : 61 16-bit code units
+75edf8:                                        |[75edf8] com.squareup.okhttp.internal.framed.Http2$Reader.readRstStream:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V
+75ee08: 1243                                   |0000: const/4 v3, #int 4 // #4
+75ee0a: 3332 2d00                              |0001: if-ne v2, v3, 002e // +002d
+75ee0e: 3804 2100                              |0003: if-eqz v4, 0024 // +0021
+75ee12: 5400 9f88                              |0005: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75ee16: 7210 58fe 0000                         |0007: invoke-interface {v0}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75ee1c: 0a00                                   |000a: move-result v0
+75ee1e: 7110 afcb 0000                         |000b: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/ErrorCode;.fromHttp2:(I)Lcom/squareup/okhttp/internal/framed/ErrorCode; // method@cbaf
+75ee24: 0c02                                   |000e: move-result-object v2
+75ee26: 3802 0600                              |000f: if-eqz v2, 0015 // +0006
+75ee2a: 7230 bccb 4102                         |0011: invoke-interface {v1, v4, v2}, Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;.rstStream:(ILcom/squareup/okhttp/internal/framed/ErrorCode;)V // method@cbbc
+75ee30: 0e00                                   |0014: return-void
+75ee32: 7110 6bd1 0000                         |0015: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+75ee38: 0c00                                   |0018: move-result-object v0
+75ee3a: 2410 ad20 0000                         |0019: filled-new-array {v0}, [Ljava/lang/Object; // type@20ad
+75ee40: 0c00                                   |001c: move-result-object v0
+75ee42: 1a01 af66                              |001d: const-string v1, "TYPE_RST_STREAM unexpected error code: %d" // string@66af
+75ee46: 7120 dccc 0100                         |001f: invoke-static {v1, v0}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ee4c: 0c00                                   |0022: move-result-object v0
+75ee4e: 2700                                   |0023: throw v0
+75ee50: 1200                                   |0024: const/4 v0, #int 0 // #0
+75ee52: 2300 ad20                              |0025: new-array v0, v0, [Ljava/lang/Object; // type@20ad
+75ee56: 1a01 ae66                              |0027: const-string v1, "TYPE_RST_STREAM streamId == 0" // string@66ae
+75ee5a: 7120 dccc 0100                         |0029: invoke-static {v1, v0}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ee60: 0c00                                   |002c: move-result-object v0
+75ee62: 2700                                   |002d: throw v0
+75ee64: 7110 6bd1 0200                         |002e: invoke-static {v2}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+75ee6a: 0c00                                   |0031: move-result-object v0
+75ee6c: 2410 ad20 0000                         |0032: filled-new-array {v0}, [Ljava/lang/Object; // type@20ad
+75ee72: 0c00                                   |0035: move-result-object v0
+75ee74: 1a01 ac66                              |0036: const-string v1, "TYPE_RST_STREAM length: %d != 4" // string@66ac
+75ee78: 7120 dccc 0100                         |0038: invoke-static {v1, v0}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ee7e: 0c00                                   |003b: move-result-object v0
+75ee80: 2700                                   |003c: throw v0
+      catches       : (none)
+      positions     :
+        0x0005 line=251
+        0x000b line=252
+        0x0011 line=256
+        0x0015 line=254
+        0x0025 line=250
+        0x002e line=249
+      locals        :
+        0x0000 - 0x003d reg=0 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x003d reg=1 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+        0x0000 - 0x003d reg=2 (null) I
+        0x0000 - 0x003d reg=3 (null) B
+        0x0000 - 0x003d reg=4 (null) I
+
+    #10              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readSettings'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 5
+      outs          : 4
+      insns size    : 184 16-bit code units
+75ee84:                                        |[75ee84] com.squareup.okhttp.internal.framed.Http2$Reader.readSettings:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V
+75ee94: 1200                                   |0000: const/4 v0, #int 0 // #0
+75ee96: 3909 9d00                              |0001: if-nez v9, 009e // +009d
+75ee9a: 1219                                   |0003: const/4 v9, #int 1 // #1
+75ee9c: b598                                   |0004: and-int/2addr v8, v9
+75ee9e: 3808 1100                              |0005: if-eqz v8, 0016 // +0011
+75eea2: 3907 0600                              |0007: if-nez v7, 000d // +0006
+75eea6: 7210 b4cb 0600                         |0009: invoke-interface {v6}, Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;.ackSettings:()V // method@cbb4
+75eeac: 0e00                                   |000c: return-void
+75eeae: 1a05 c226                              |000d: const-string v5, "FRAME_SIZE_ERROR ack frame should be empty!" // string@26c2
+75eeb2: 2306 ad20                              |000f: new-array v6, v0, [Ljava/lang/Object; // type@20ad
+75eeb6: 7120 dccc 6500                         |0011: invoke-static {v5, v6}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75eebc: 0c05                                   |0014: move-result-object v5
+75eebe: 2705                                   |0015: throw v5
+75eec0: dc08 0706                              |0016: rem-int/lit8 v8, v7, #int 6 // #06
+75eec4: 3908 7700                              |0018: if-nez v8, 008f // +0077
+75eec8: 2208 b719                              |001a: new-instance v8, Lcom/squareup/okhttp/internal/framed/Settings; // type@19b7
+75eecc: 7010 13cd 0800                         |001c: invoke-direct {v8}, Lcom/squareup/okhttp/internal/framed/Settings;.<init>:()V // method@cd13
+75eed2: 0101                                   |001f: move v1, v0
+75eed4: 3571 5c00                              |0020: if-ge v1, v7, 007c // +005c
+75eed8: 5452 9f88                              |0022: iget-object v2, v5, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75eedc: 7210 59fe 0200                         |0024: invoke-interface {v2}, Lokio/BufferedSource;.readShort:()S // method@fe59
+75eee2: 0a02                                   |0027: move-result v2
+75eee4: 5453 9f88                              |0028: iget-object v3, v5, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75eee8: 7210 58fe 0300                         |002a: invoke-interface {v3}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75eeee: 0a03                                   |002d: move-result v3
+75eef0: 2b02 7a00 0000                         |002e: packed-switch v2, 000000a8 // +0000007a
+75eef6: 7110 e4d1 0200                         |0031: invoke-static {v2}, Ljava/lang/Short;.valueOf:(S)Ljava/lang/Short; // method@d1e4
+75eefc: 0c05                                   |0034: move-result-object v5
+75eefe: 2410 ad20 0500                         |0035: filled-new-array {v5}, [Ljava/lang/Object; // type@20ad
+75ef04: 0c05                                   |0038: move-result-object v5
+75ef06: 1a06 605b                              |0039: const-string v6, "PROTOCOL_ERROR invalid settings id: %s" // string@5b60
+75ef0a: 7120 dccc 5600                         |003b: invoke-static {v6, v5}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ef10: 0c05                                   |003e: move-result-object v5
+75ef12: 2705                                   |003f: throw v5
+75ef14: 1304 0040                              |0040: const/16 v4, #int 16384 // #4000
+75ef18: 3443 0800                              |0042: if-lt v3, v4, 004a // +0008
+75ef1c: 1404 ffff ff00                         |0044: const v4, #float 2.35099e-38 // #00ffffff
+75ef22: 3643 0300                              |0047: if-gt v3, v4, 004a // +0003
+75ef26: 282d                                   |0049: goto 0076 // +002d
+75ef28: 7110 6bd1 0300                         |004a: invoke-static {v3}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+75ef2e: 0c05                                   |004d: move-result-object v5
+75ef30: 2410 ad20 0500                         |004e: filled-new-array {v5}, [Ljava/lang/Object; // type@20ad
+75ef36: 0c05                                   |0051: move-result-object v5
+75ef38: 1a06 5f5b                              |0052: const-string v6, "PROTOCOL_ERROR SETTINGS_MAX_FRAME_SIZE: %s" // string@5b5f
+75ef3c: 7120 dccc 5600                         |0054: invoke-static {v6, v5}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ef42: 0c05                                   |0057: move-result-object v5
+75ef44: 2705                                   |0058: throw v5
+75ef46: 3a03 0400                              |0059: if-ltz v3, 005d // +0004
+75ef4a: 1272                                   |005b: const/4 v2, #int 7 // #7
+75ef4c: 281a                                   |005c: goto 0076 // +001a
+75ef4e: 1a05 5e5b                              |005d: const-string v5, "PROTOCOL_ERROR SETTINGS_INITIAL_WINDOW_SIZE > 2^31 - 1" // string@5b5e
+75ef52: 2306 ad20                              |005f: new-array v6, v0, [Ljava/lang/Object; // type@20ad
+75ef56: 7120 dccc 6500                         |0061: invoke-static {v5, v6}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ef5c: 0c05                                   |0064: move-result-object v5
+75ef5e: 2705                                   |0065: throw v5
+75ef60: 1242                                   |0066: const/4 v2, #int 4 // #4
+75ef62: 280f                                   |0067: goto 0076 // +000f
+75ef64: 3803 0e00                              |0068: if-eqz v3, 0076 // +000e
+75ef68: 3393 0300                              |006a: if-ne v3, v9, 006d // +0003
+75ef6c: 280a                                   |006c: goto 0076 // +000a
+75ef6e: 1a05 5d5b                              |006d: const-string v5, "PROTOCOL_ERROR SETTINGS_ENABLE_PUSH != 0 or 1" // string@5b5d
+75ef72: 2306 ad20                              |006f: new-array v6, v0, [Ljava/lang/Object; // type@20ad
+75ef76: 7120 dccc 6500                         |0071: invoke-static {v5, v6}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75ef7c: 0c05                                   |0074: move-result-object v5
+75ef7e: 2705                                   |0075: throw v5
+75ef80: 6e40 28cd 2830                         |0076: invoke-virtual {v8, v2, v0, v3}, Lcom/squareup/okhttp/internal/framed/Settings;.set:(III)Lcom/squareup/okhttp/internal/framed/Settings; // method@cd28
+75ef86: d801 0106                              |0079: add-int/lit8 v1, v1, #int 6 // #06
+75ef8a: 28a5                                   |007b: goto 0020 // -005b
+75ef8c: 7230 bdcb 0608                         |007c: invoke-interface {v6, v0, v8}, Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;.settings:(ZLcom/squareup/okhttp/internal/framed/Settings;)V // method@cbbd
+75ef92: 6e10 1ccd 0800                         |007f: invoke-virtual {v8}, Lcom/squareup/okhttp/internal/framed/Settings;.getHeaderTableSize:()I // method@cd1c
+75ef98: 0a06                                   |0082: move-result v6
+75ef9a: 3a06 0b00                              |0083: if-ltz v6, 008e // +000b
+75ef9e: 5455 9e88                              |0085: iget-object v5, v5, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.hpackReader:Lcom/squareup/okhttp/internal/framed/Hpack$Reader; // field@889e
+75efa2: 6e10 1ccd 0800                         |0087: invoke-virtual {v8}, Lcom/squareup/okhttp/internal/framed/Settings;.getHeaderTableSize:()I // method@cd1c
+75efa8: 0a06                                   |008a: move-result v6
+75efaa: 6e20 94cc 6500                         |008b: invoke-virtual {v5, v6}, Lcom/squareup/okhttp/internal/framed/Hpack$Reader;.headerTableSizeSetting:(I)V // method@cc94
+75efb0: 0e00                                   |008e: return-void
+75efb2: 7110 6bd1 0700                         |008f: invoke-static {v7}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+75efb8: 0c05                                   |0092: move-result-object v5
+75efba: 2410 ad20 0500                         |0093: filled-new-array {v5}, [Ljava/lang/Object; // type@20ad
+75efc0: 0c05                                   |0096: move-result-object v5
+75efc2: 1a06 b366                              |0097: const-string v6, "TYPE_SETTINGS length %% 6 != 0: %s" // string@66b3
+75efc6: 7120 dccc 5600                         |0099: invoke-static {v6, v5}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75efcc: 0c05                                   |009c: move-result-object v5
+75efce: 2705                                   |009d: throw v5
+75efd0: 1a05 b566                              |009e: const-string v5, "TYPE_SETTINGS streamId != 0" // string@66b5
+75efd4: 2306 ad20                              |00a0: new-array v6, v0, [Ljava/lang/Object; // type@20ad
+75efd8: 7120 dccc 6500                         |00a2: invoke-static {v5, v6}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75efde: 0c05                                   |00a5: move-result-object v5
+75efe0: 2705                                   |00a6: throw v5
+75efe2: 0000                                   |00a7: nop // spacer
+75efe4: 0001 0600 0100 0000 4800 0000 3a00 ... |00a8: packed-switch-data (16 units)
+      catches       : (none)
+      positions     :
+        0x0009 line=264
+        0x000d line=263
+        0x0016 line=268
+        0x001a line=269
+        0x0022 line=271
+        0x0028 line=272
+        0x0031 line=299
+        0x004a line=293
+        0x005d line=288
+        0x006d line=279
+        0x0076 line=301
+        0x007c line=303
+        0x007f line=304
+        0x0085 line=305
+        0x008f line=268
+        0x009e line=261
+      locals        :
+        0x0000 - 0x00b8 reg=5 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x00b8 reg=6 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+        0x0000 - 0x00b8 reg=7 (null) I
+        0x0000 - 0x00b8 reg=8 (null) B
+        0x0000 - 0x00b8 reg=9 (null) I
+
+    #11              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readWindowUpdate'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 5
+      outs          : 4
+      insns size    : 54 16-bit code units
+75f004:                                        |[75f004] com.squareup.okhttp.internal.framed.Http2$Reader.readWindowUpdate:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V
+75f014: 1245                                   |0000: const/4 v5, #int 4 // #4
+75f016: 3354 2600                              |0001: if-ne v4, v5, 0027 // +0026
+75f01a: 5422 9f88                              |0003: iget-object v2, v2, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75f01e: 7210 58fe 0200                         |0005: invoke-interface {v2}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75f024: 0a02                                   |0008: move-result v2
+75f026: 8124                                   |0009: int-to-long v4, v2
+75f028: 1700 ffff ff7f                         |000a: const-wide/32 v0, #float nan // #7fffffff
+75f02e: c004                                   |000d: and-long/2addr v4, v0
+75f030: 1600 0000                              |000e: const-wide/16 v0, #int 0 // #0
+75f034: 3102 0400                              |0010: cmp-long v2, v4, v0
+75f038: 3802 0600                              |0012: if-eqz v2, 0018 // +0006
+75f03c: 7240 becb 6354                         |0014: invoke-interface {v3, v6, v4, v5}, Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;.windowUpdate:(IJ)V // method@cbbe
+75f042: 0e00                                   |0017: return-void
+75f044: 7120 82d1 5400                         |0018: invoke-static {v4, v5}, Ljava/lang/Long;.valueOf:(J)Ljava/lang/Long; // method@d182
+75f04a: 0c02                                   |001b: move-result-object v2
+75f04c: 2410 ad20 0200                         |001c: filled-new-array {v2}, [Ljava/lang/Object; // type@20ad
+75f052: 0c02                                   |001f: move-result-object v2
+75f054: 1a03 10e7                              |0020: const-string v3, "windowSizeIncrement was 0" // string@e710
+75f058: 7120 dccc 2300                         |0022: invoke-static {v3, v2}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75f05e: 0c02                                   |0025: move-result-object v2
+75f060: 2702                                   |0026: throw v2
+75f062: 7110 6bd1 0400                         |0027: invoke-static {v4}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+75f068: 0c02                                   |002a: move-result-object v2
+75f06a: 2410 ad20 0200                         |002b: filled-new-array {v2}, [Ljava/lang/Object; // type@20ad
+75f070: 0c02                                   |002e: move-result-object v2
+75f072: 1a03 e866                              |002f: const-string v3, "TYPE_WINDOW_UPDATE length !=4: %s" // string@66e8
+75f076: 7120 dccc 2300                         |0031: invoke-static {v3, v2}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75f07c: 0c02                                   |0034: move-result-object v2
+75f07e: 2702                                   |0035: throw v2
+      catches       : (none)
+      positions     :
+        0x0003 line=353
+        0x0014 line=355
+        0x0018 line=354
+        0x0027 line=352
+      locals        :
+        0x0000 - 0x0036 reg=2 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x0036 reg=3 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+        0x0000 - 0x0036 reg=4 (null) I
+        0x0000 - 0x0036 reg=5 (null) B
+        0x0000 - 0x0036 reg=6 (null) I
+
+  Virtual methods   -
+    #0              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 6 16-bit code units
+75f080:                                        |[75f080] com.squareup.okhttp.internal.framed.Http2$Reader.close:()V
+75f090: 5400 9f88                              |0000: iget-object v0, v0, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75f094: 7210 4efe 0000                         |0002: invoke-interface {v0}, Lokio/BufferedSource;.close:()V // method@fe4e
+75f09a: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=359
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+
+    #1              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'nextFrame'
+      type          : '(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 5
+      insns size    : 156 16-bit code units
+75f09c:                                        |[75f09c] com.squareup.okhttp.internal.framed.Http2$Reader.nextFrame:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;)Z
+75f0ac: 5470 9f88                              |0000: iget-object v0, v7, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75f0b0: 1601 0900                              |0002: const-wide/16 v1, #int 9 // #9
+75f0b4: 7230 5bfe 1002                         |0004: invoke-interface {v0, v1, v2}, Lokio/BufferedSource;.require:(J)V // method@fe5b
+75f0ba: 5470 9f88                              |0007: iget-object v0, v7, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75f0be: 7110 ddcc 0000                         |0009: invoke-static {v0}, Lcom/squareup/okhttp/internal/framed/Http2;.access$300:(Lokio/BufferedSource;)I // method@ccdd
+75f0c4: 0a00                                   |000c: move-result v0
+75f0c6: 3a00 6800                              |000d: if-ltz v0, 0075 // +0068
+75f0ca: 1301 0040                              |000f: const/16 v1, #int 16384 // #4000
+75f0ce: 3610 6400                              |0011: if-gt v0, v1, 0075 // +0064
+75f0d2: 5471 9f88                              |0013: iget-object v1, v7, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75f0d6: 7210 52fe 0100                         |0015: invoke-interface {v1}, Lokio/BufferedSource;.readByte:()B // method@fe52
+75f0dc: 0a01                                   |0018: move-result v1
+75f0de: d511 ff00                              |0019: and-int/lit16 v1, v1, #int 255 // #00ff
+75f0e2: 8d11                                   |001b: int-to-byte v1, v1
+75f0e4: 5472 9f88                              |001c: iget-object v2, v7, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75f0e8: 7210 52fe 0200                         |001e: invoke-interface {v2}, Lokio/BufferedSource;.readByte:()B // method@fe52
+75f0ee: 0a02                                   |0021: move-result v2
+75f0f0: d522 ff00                              |0022: and-int/lit16 v2, v2, #int 255 // #00ff
+75f0f4: 8d22                                   |0024: int-to-byte v2, v2
+75f0f6: 5473 9f88                              |0025: iget-object v3, v7, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75f0fa: 7210 58fe 0300                         |0027: invoke-interface {v3}, Lokio/BufferedSource;.readInt:()I // method@fe58
+75f100: 0a03                                   |002a: move-result v3
+75f102: 1404 ffff ff7f                         |002b: const v4, #float nan // #7fffffff
+75f108: b543                                   |002e: and-int/2addr v3, v4
+75f10a: 7100 dbcc 0000                         |002f: invoke-static {}, Lcom/squareup/okhttp/internal/framed/Http2;.access$100:()Ljava/util/logging/Logger; // method@ccdb
+75f110: 0c04                                   |0032: move-result-object v4
+75f112: 6205 4c8a                              |0033: sget-object v5, Ljava/util/logging/Level;.FINE:Ljava/util/logging/Level; // field@8a4c
+75f116: 6e20 26d7 5400                         |0035: invoke-virtual {v4, v5}, Ljava/util/logging/Logger;.isLoggable:(Ljava/util/logging/Level;)Z // method@d726
+75f11c: 0a04                                   |0038: move-result v4
+75f11e: 1215                                   |0039: const/4 v5, #int 1 // #1
+75f120: 3804 0d00                              |003a: if-eqz v4, 0047 // +000d
+75f124: 7100 dbcc 0000                         |003c: invoke-static {}, Lcom/squareup/okhttp/internal/framed/Http2;.access$100:()Ljava/util/logging/Logger; // method@ccdb
+75f12a: 0c04                                   |003f: move-result-object v4
+75f12c: 7152 b4cc 3510                         |0040: invoke-static {v5, v3, v0, v1, v2}, Lcom/squareup/okhttp/internal/framed/Http2$FrameLogger;.formatHeader:(ZIIBB)Ljava/lang/String; // method@ccb4
+75f132: 0c06                                   |0043: move-result-object v6
+75f134: 6e20 24d7 6400                         |0044: invoke-virtual {v4, v6}, Ljava/util/logging/Logger;.fine:(Ljava/lang/String;)V // method@d724
+75f13a: 2b01 3f00 0000                         |0047: packed-switch v1, 00000086 // +0000003f
+75f140: 5477 9f88                              |004a: iget-object v7, v7, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75f144: 8100                                   |004c: int-to-long v0, v0
+75f146: 7230 5cfe 0701                         |004d: invoke-interface {v7, v0, v1}, Lokio/BufferedSource;.skip:(J)V // method@fe5c
+75f14c: 2824                                   |0050: goto 0074 // +0024
+75f14e: 7053 c3cc 8720                         |0051: invoke-direct {v7, v8, v0, v2, v3}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readWindowUpdate:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V // method@ccc3
+75f154: 2820                                   |0054: goto 0074 // +0020
+75f156: 7053 bacc 8720                         |0055: invoke-direct {v7, v8, v0, v2, v3}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readGoAway:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V // method@ccba
+75f15c: 281c                                   |0058: goto 0074 // +001c
+75f15e: 7053 bdcc 8720                         |0059: invoke-direct {v7, v8, v0, v2, v3}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readPing:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V // method@ccbd
+75f164: 2818                                   |005c: goto 0074 // +0018
+75f166: 7053 c0cc 8720                         |005d: invoke-direct {v7, v8, v0, v2, v3}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readPushPromise:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V // method@ccc0
+75f16c: 2814                                   |0060: goto 0074 // +0014
+75f16e: 7053 c2cc 8720                         |0061: invoke-direct {v7, v8, v0, v2, v3}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readSettings:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V // method@ccc2
+75f174: 2810                                   |0064: goto 0074 // +0010
+75f176: 7053 c1cc 8720                         |0065: invoke-direct {v7, v8, v0, v2, v3}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readRstStream:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V // method@ccc1
+75f17c: 280c                                   |0068: goto 0074 // +000c
+75f17e: 7053 bfcc 8720                         |0069: invoke-direct {v7, v8, v0, v2, v3}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readPriority:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V // method@ccbf
+75f184: 2808                                   |006c: goto 0074 // +0008
+75f186: 7053 bccc 8720                         |006d: invoke-direct {v7, v8, v0, v2, v3}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readHeaders:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V // method@ccbc
+75f18c: 2804                                   |0070: goto 0074 // +0004
+75f18e: 7053 b9cc 8720                         |0071: invoke-direct {v7, v8, v0, v2, v3}, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.readData:(Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;IBI)V // method@ccb9
+75f194: 0f05                                   |0074: return v5
+75f196: 7110 6bd1 0000                         |0075: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+75f19c: 0c07                                   |0078: move-result-object v7
+75f19e: 2410 ad20 0700                         |0079: filled-new-array {v7}, [Ljava/lang/Object; // type@20ad
+75f1a4: 0c07                                   |007c: move-result-object v7
+75f1a6: 1a08 c426                              |007d: const-string v8, "FRAME_SIZE_ERROR: %s" // string@26c4
+75f1aa: 7120 dccc 7800                         |007f: invoke-static {v8, v7}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75f1b0: 0c07                                   |0082: move-result-object v7
+75f1b2: 2707                                   |0083: throw v7
+75f1b4: 1207                                   |0084: const/4 v7, #int 0 // #0
+75f1b6: 0f07                                   |0085: return v7
+75f1b8: 0001 0900 0000 0000 2a00 0000 2600 ... |0086: packed-switch-data (22 units)
+      catches       : 1
+        0x0000 - 0x0007
+          Ljava/io/IOException; -> 0x0084
+      positions     :
+        0x0000 line=113
+        0x0007 line=130
+        0x0013 line=134
+        0x001c line=135
+        0x0025 line=136
+        0x002f line=137
+        0x004a line=178
+        0x0051 line=173
+        0x0055 line=169
+        0x0059 line=165
+        0x005d line=161
+        0x0061 line=157
+        0x0065 line=153
+        0x0069 line=149
+        0x006d line=145
+        0x0071 line=141
+        0x0075 line=132
+      locals        :
+        0x0000 - 0x009c reg=7 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+        0x0000 - 0x009c reg=8 (null) Lcom/squareup/okhttp/internal/framed/FrameReader$Handler;
+
+    #2              : (in Lcom/squareup/okhttp/internal/framed/Http2$Reader;)
+      name          : 'readConnectionPreface'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 3
+      insns size    : 79 16-bit code units
+75f1f4:                                        |[75f1f4] com.squareup.okhttp.internal.framed.Http2$Reader.readConnectionPreface:()V
+75f204: 5530 9c88                              |0000: iget-boolean v0, v3, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.client:Z // field@889c
+75f208: 3800 0300                              |0002: if-eqz v0, 0005 // +0003
+75f20c: 0e00                                   |0004: return-void
+75f20e: 5433 9f88                              |0005: iget-object v3, v3, Lcom/squareup/okhttp/internal/framed/Http2$Reader;.source:Lokio/BufferedSource; // field@889f
+75f212: 7100 dacc 0000                         |0007: invoke-static {}, Lcom/squareup/okhttp/internal/framed/Http2;.access$000:()Lokio/ByteString; // method@ccda
+75f218: 0c00                                   |000a: move-result-object v0
+75f21a: 6e10 66fe 0000                         |000b: invoke-virtual {v0}, Lokio/ByteString;.size:()I // method@fe66
+75f220: 0a00                                   |000e: move-result v0
+75f222: 8100                                   |000f: int-to-long v0, v0
+75f224: 7230 55fe 0301                         |0010: invoke-interface {v3, v0, v1}, Lokio/BufferedSource;.readByteString:(J)Lokio/ByteString; // method@fe55
+75f22a: 0c03                                   |0013: move-result-object v3
+75f22c: 7100 dbcc 0000                         |0014: invoke-static {}, Lcom/squareup/okhttp/internal/framed/Http2;.access$100:()Ljava/util/logging/Logger; // method@ccdb
+75f232: 0c00                                   |0017: move-result-object v0
+75f234: 6201 4c8a                              |0018: sget-object v1, Ljava/util/logging/Level;.FINE:Ljava/util/logging/Level; // field@8a4c
+75f238: 6e20 26d7 1000                         |001a: invoke-virtual {v0, v1}, Ljava/util/logging/Logger;.isLoggable:(Ljava/util/logging/Level;)Z // method@d726
+75f23e: 0a00                                   |001d: move-result v0
+75f240: 3800 1700                              |001e: if-eqz v0, 0035 // +0017
+75f244: 7100 dbcc 0000                         |0020: invoke-static {}, Lcom/squareup/okhttp/internal/framed/Http2;.access$100:()Ljava/util/logging/Logger; // method@ccdb
+75f24a: 0c00                                   |0023: move-result-object v0
+75f24c: 6e10 64fe 0300                         |0024: invoke-virtual {v3}, Lokio/ByteString;.hex:()Ljava/lang/String; // method@fe64
+75f252: 0c01                                   |0027: move-result-object v1
+75f254: 2410 ad20 0100                         |0028: filled-new-array {v1}, [Ljava/lang/Object; // type@20ad
+75f25a: 0c01                                   |002b: move-result-object v1
+75f25c: 1a02 d810                              |002c: const-string v2, "<< CONNECTION %s" // string@10d8
+75f260: 7120 05d2 1200                         |002e: invoke-static {v2, v1}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+75f266: 0c01                                   |0031: move-result-object v1
+75f268: 6e20 24d7 1000                         |0032: invoke-virtual {v0, v1}, Ljava/util/logging/Logger;.fine:(Ljava/lang/String;)V // method@d724
+75f26e: 7100 dacc 0000                         |0035: invoke-static {}, Lcom/squareup/okhttp/internal/framed/Http2;.access$000:()Lokio/ByteString; // method@ccda
+75f274: 0c00                                   |0038: move-result-object v0
+75f276: 6e20 61fe 3000                         |0039: invoke-virtual {v0, v3}, Lokio/ByteString;.equals:(Ljava/lang/Object;)Z // method@fe61
+75f27c: 0a00                                   |003c: move-result v0
+75f27e: 3800 0300                              |003d: if-eqz v0, 0040 // +0003
+75f282: 0e00                                   |003f: return-void
+75f284: 6e10 69fe 0300                         |0040: invoke-virtual {v3}, Lokio/ByteString;.utf8:()Ljava/lang/String; // method@fe69
+75f28a: 0c03                                   |0043: move-result-object v3
+75f28c: 2410 ad20 0300                         |0044: filled-new-array {v3}, [Ljava/lang/Object; // type@20ad
+75f292: 0c03                                   |0047: move-result-object v3
+75f294: 1a00 5a25                              |0048: const-string v0, "Expected a connection header but was %s" // string@255a
+75f298: 7120 dccc 3000                         |004a: invoke-static {v0, v3}, Lcom/squareup/okhttp/internal/framed/Http2;.access$200:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/IOException; // method@ccdc
+75f29e: 0c03                                   |004d: move-result-object v3
+75f2a0: 2703                                   |004e: throw v3
+      catches       : (none)
+      positions     :
+        0x0000 line=103
+        0x0005 line=104
+        0x0014 line=105
+        0x0035 line=106
+        0x0040 line=107
+      locals        :
+        0x0000 - 0x004f reg=3 this Lcom/squareup/okhttp/internal/framed/Http2$Reader;
+
+  source_file_idx   : 10916 (Http2.java)
+

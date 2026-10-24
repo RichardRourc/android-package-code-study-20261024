@@ -1,0 +1,455 @@
+Class #2955            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Lcom/fasterxml/jackson/databind/introspect/CollectorBase;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;)
+      name          : '_collectAnnotations'
+      type          : 'Z'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;)
+      name          : '_mixInResolver'
+      type          : 'Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;)
+      name          : '<init>'
+      type          : '(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;Z)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 2
+      insns size    : 11 16-bit code units
+625b40:                                        |[625b40] com.fasterxml.jackson.databind.introspect.AnnotatedMethodCollector.<init>:(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;Z)V
+625b50: 7020 8a7f 1000                         |0000: invoke-direct {v0, v1}, Lcom/fasterxml/jackson/databind/introspect/CollectorBase;.<init>:(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;)V // method@7f8a
+625b56: 3901 0300                              |0003: if-nez v1, 0006 // +0003
+625b5a: 1202                                   |0005: const/4 v2, #int 0 // #0
+625b5c: 5b02 9c4d                              |0006: iput-object v2, v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._mixInResolver:Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver; // field@4d9c
+625b60: 5c03 9a4d                              |0008: iput-boolean v3, v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._collectAnnotations:Z // field@4d9a
+625b64: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=27
+        0x0006 line=28
+        0x0008 line=29
+      locals        :
+        0x0000 - 0x000b reg=0 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;
+        0x0000 - 0x000b reg=1 (null) Lcom/fasterxml/jackson/databind/AnnotationIntrospector;
+        0x0000 - 0x000b reg=2 (null) Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;
+        0x0000 - 0x000b reg=3 (null) Z
+
+    #1              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;)
+      name          : '_addMemberMethods'
+      type          : '(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/Class;Ljava/util/Map;Ljava/lang/Class;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 5
+      outs          : 5
+      insns size    : 115 16-bit code units
+625b68:                                        |[625b68] com.fasterxml.jackson.databind.introspect.AnnotatedMethodCollector._addMemberMethods:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/Class;Ljava/util/Map;Ljava/lang/Class;)V
+625b78: 3809 0500                              |0000: if-eqz v9, 0005 // +0005
+625b7c: 6e59 447e 6587                         |0002: invoke-virtual {v5, v6, v7, v8, v9}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._addMethodMixIns:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/Class;Ljava/util/Map;Ljava/lang/Class;)V // method@7e44
+625b82: 3907 0300                              |0005: if-nez v7, 0008 // +0003
+625b86: 0e00                                   |0007: return-void
+625b88: 7110 408e 0700                         |0008: invoke-static {v7}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.getClassMethods:(Ljava/lang/Class;)[Ljava/lang/reflect/Method; // method@8e40
+625b8e: 0c07                                   |000b: move-result-object v7
+625b90: 2179                                   |000c: array-length v9, v7
+625b92: 1200                                   |000d: const/4 v0, #int 0 // #0
+625b94: 3590 6400                              |000e: if-ge v0, v9, 0072 // +0064
+625b98: 4601 0700                              |0010: aget-object v1, v7, v0
+625b9c: 7110 457e 0100                         |0012: invoke-static {v1}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._isIncludableMemberMethod:(Ljava/lang/reflect/Method;)Z // method@7e45
+625ba2: 0a02                                   |0015: move-result v2
+625ba4: 3902 0300                              |0016: if-nez v2, 0019 // +0003
+625ba8: 2857                                   |0018: goto 006f // +0057
+625baa: 2202 130e                              |0019: new-instance v2, Lcom/fasterxml/jackson/databind/introspect/MemberKey; // type@0e13
+625bae: 7020 2480 1200                         |001b: invoke-direct {v2, v1}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.<init>:(Ljava/lang/reflect/Method;)V // method@8024
+625bb4: 7220 03d6 2800                         |001e: invoke-interface {v8, v2}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+625bba: 0c03                                   |0021: move-result-object v3
+625bbc: 1f03 f70d                              |0022: check-cast v3, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder; // type@0df7
+625bc0: 3903 1c00                              |0024: if-nez v3, 0040 // +001c
+625bc4: 5453 9b4d                              |0026: iget-object v3, v5, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._intr:Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // field@4d9b
+625bc8: 3903 0700                              |0028: if-nez v3, 002f // +0007
+625bcc: 7100 9f7e 0000                         |002a: invoke-static {}, Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;.emptyCollector:()Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7e9f
+625bd2: 0c03                                   |002d: move-result-object v3
+625bd4: 2809                                   |002e: goto 0037 // +0009
+625bd6: 6e10 d1d2 0100                         |002f: invoke-virtual {v1}, Ljava/lang/reflect/Method;.getDeclaredAnnotations:()[Ljava/lang/annotation/Annotation; // method@d2d1
+625bdc: 0c03                                   |0032: move-result-object v3
+625bde: 6e20 477e 3500                         |0033: invoke-virtual {v5, v3}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;.collectAnnotations:([Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7e47
+625be4: 0c03                                   |0036: move-result-object v3
+625be6: 2204 f70d                              |0037: new-instance v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder; // type@0df7
+625bea: 7040 407e 6431                         |0039: invoke-direct {v4, v6, v1, v3}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.<init>:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Method;Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;)V // method@7e40
+625bf0: 7230 06d6 2804                         |003c: invoke-interface {v8, v2, v4}, Ljava/util/Map;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d606
+625bf6: 2830                                   |003f: goto 006f // +0030
+625bf8: 5552 9a4d                              |0040: iget-boolean v2, v5, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._collectAnnotations:Z // field@4d9a
+625bfc: 3802 0e00                              |0042: if-eqz v2, 0050 // +000e
+625c00: 5432 974d                              |0044: iget-object v2, v3, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.annotations:Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // field@4d97
+625c04: 6e10 d1d2 0100                         |0046: invoke-virtual {v1}, Ljava/lang/reflect/Method;.getDeclaredAnnotations:()[Ljava/lang/annotation/Annotation; // method@d2d1
+625c0a: 0c04                                   |0049: move-result-object v4
+625c0c: 6e30 487e 2504                         |004a: invoke-virtual {v5, v2, v4}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;.collectDefaultAnnotations:(Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;[Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7e48
+625c12: 0c02                                   |004d: move-result-object v2
+625c14: 5b32 974d                              |004e: iput-object v2, v3, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.annotations:Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // field@4d97
+625c18: 5432 984d                              |0050: iget-object v2, v3, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.method:Ljava/lang/reflect/Method; // field@4d98
+625c1c: 3902 0500                              |0052: if-nez v2, 0057 // +0005
+625c20: 5b31 984d                              |0054: iput-object v1, v3, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.method:Ljava/lang/reflect/Method; // field@4d98
+625c24: 2819                                   |0056: goto 006f // +0019
+625c26: 6e10 d5d2 0200                         |0057: invoke-virtual {v2}, Ljava/lang/reflect/Method;.getModifiers:()I // method@d2d5
+625c2c: 0a02                                   |005a: move-result v2
+625c2e: 7110 e1d2 0200                         |005b: invoke-static {v2}, Ljava/lang/reflect/Modifier;.isAbstract:(I)Z // method@d2e1
+625c34: 0a02                                   |005e: move-result v2
+625c36: 3802 1000                              |005f: if-eqz v2, 006f // +0010
+625c3a: 6e10 d5d2 0100                         |0061: invoke-virtual {v1}, Ljava/lang/reflect/Method;.getModifiers:()I // method@d2d5
+625c40: 0a02                                   |0064: move-result v2
+625c42: 7110 e1d2 0200                         |0065: invoke-static {v2}, Ljava/lang/reflect/Modifier;.isAbstract:(I)Z // method@d2e1
+625c48: 0a02                                   |0068: move-result v2
+625c4a: 3902 0600                              |0069: if-nez v2, 006f // +0006
+625c4e: 5b31 984d                              |006b: iput-object v1, v3, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.method:Ljava/lang/reflect/Method; // field@4d98
+625c52: 5b36 994d                              |006d: iput-object v6, v3, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.typeContext:Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext; // field@4d99
+625c56: d800 0001                              |006f: add-int/lit8 v0, v0, #int 1 // #01
+625c5a: 289d                                   |0071: goto 000e // -0063
+625c5c: 0e00                                   |0072: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=111
+        0x0008 line=117
+        0x0012 line=118
+        0x0019 line=121
+        0x001e line=122
+        0x0026 line=124
+        0x002f line=125
+        0x0037 line=126
+        0x0040 line=128
+        0x0044 line=129
+        0x0050 line=131
+        0x0054 line=133
+        0x0057 line=135
+        0x0061 line=136
+        0x006b line=143
+        0x006d line=146
+      locals        :
+        0x0000 - 0x0073 reg=5 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;
+        0x0000 - 0x0073 reg=6 (null) Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;
+        0x0000 - 0x0073 reg=7 (null) Ljava/lang/Class;
+        0x0000 - 0x0073 reg=8 (null) Ljava/util/Map;
+        0x0000 - 0x0073 reg=9 (null) Ljava/lang/Class;
+
+    #2              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;)
+      name          : '_isIncludableMemberMethod'
+      type          : '(Ljava/lang/reflect/Method;)Z'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 34 16-bit code units
+625c60:                                        |[625c60] com.fasterxml.jackson.databind.introspect.AnnotatedMethodCollector._isIncludableMemberMethod:(Ljava/lang/reflect/Method;)Z
+625c70: 6e10 d5d2 0200                         |0000: invoke-virtual {v2}, Ljava/lang/reflect/Method;.getModifiers:()I // method@d2d5
+625c76: 0a00                                   |0003: move-result v0
+625c78: 7110 e7d2 0000                         |0004: invoke-static {v0}, Ljava/lang/reflect/Modifier;.isStatic:(I)Z // method@d2e7
+625c7e: 0a00                                   |0007: move-result v0
+625c80: 1201                                   |0008: const/4 v1, #int 0 // #0
+625c82: 3900 1800                              |0009: if-nez v0, 0021 // +0018
+625c86: 6e10 dfd2 0200                         |000b: invoke-virtual {v2}, Ljava/lang/reflect/Method;.isSynthetic:()Z // method@d2df
+625c8c: 0a00                                   |000e: move-result v0
+625c8e: 3900 1200                              |000f: if-nez v0, 0021 // +0012
+625c92: 6e10 ded2 0200                         |0011: invoke-virtual {v2}, Ljava/lang/reflect/Method;.isBridge:()Z // method@d2de
+625c98: 0a00                                   |0014: move-result v0
+625c9a: 3800 0300                              |0015: if-eqz v0, 0018 // +0003
+625c9e: 280a                                   |0017: goto 0021 // +000a
+625ca0: 6e10 d8d2 0200                         |0018: invoke-virtual {v2}, Ljava/lang/reflect/Method;.getParameterTypes:()[Ljava/lang/Class; // method@d2d8
+625ca6: 0c02                                   |001b: move-result-object v2
+625ca8: 2122                                   |001c: array-length v2, v2
+625caa: 1220                                   |001d: const/4 v0, #int 2 // #2
+625cac: 3602 0300                              |001e: if-gt v2, v0, 0021 // +0003
+625cb0: 1211                                   |0020: const/4 v1, #int 1 // #1
+625cb2: 0f01                                   |0021: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=179
+        0x000b line=182
+        0x0018 line=187
+      locals        :
+        0x0000 - 0x0022 reg=2 (null) Ljava/lang/reflect/Method;
+
+    #3              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;)
+      name          : 'collectMethods'
+      type          : '(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/JavaType;Ljava/util/List;Ljava/lang/Class;Z)Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodMap;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 14
+      ins           : 8
+      outs          : 6
+      insns size    : 15 16-bit code units
+625cb4:                                        |[625cb4] com.fasterxml.jackson.databind.introspect.AnnotatedMethodCollector.collectMethods:(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/JavaType;Ljava/util/List;Ljava/lang/Class;Z)Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodMap;
+625cc4: 2200 f80d                              |0000: new-instance v0, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector; // type@0df8
+625cc8: 7040 427e 60d8                         |0002: invoke-direct {v0, v6, v8, v13}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;.<init>:(Lcom/fasterxml/jackson/databind/AnnotationIntrospector;Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;Z)V // method@7e42
+625cce: 0791                                   |0005: move-object v1, v9
+625cd0: 0772                                   |0006: move-object v2, v7
+625cd2: 07a3                                   |0007: move-object v3, v10
+625cd4: 07b4                                   |0008: move-object v4, v11
+625cd6: 07c5                                   |0009: move-object v5, v12
+625cd8: 7406 467e 0000                         |000a: invoke-virtual/range {v0, v1, v2, v3, v4, v5}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;.collect:(Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Lcom/fasterxml/jackson/databind/JavaType;Ljava/util/List;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodMap; // method@7e46
+625cde: 0c06                                   |000d: move-result-object v6
+625ce0: 1106                                   |000e: return-object v6
+      catches       : (none)
+      positions     :
+        0x0000 line=39
+        0x000a line=40
+      locals        :
+        0x0000 - 0x000f reg=6 (null) Lcom/fasterxml/jackson/databind/AnnotationIntrospector;
+        0x0000 - 0x000f reg=7 (null) Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;
+        0x0000 - 0x000f reg=8 (null) Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;
+        0x0000 - 0x000f reg=9 (null) Lcom/fasterxml/jackson/databind/type/TypeFactory;
+        0x0000 - 0x000f reg=10 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x000f reg=11 (null) Ljava/util/List;
+        0x0000 - 0x000f reg=12 (null) Ljava/lang/Class;
+        0x0000 - 0x000f reg=13 (null) Z
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;)
+      name          : '_addMethodMixIns'
+      type          : '(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/Class;Ljava/util/Map;Ljava/lang/Class;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 11
+      ins           : 5
+      outs          : 4
+      insns size    : 86 16-bit code units
+625ce4:                                        |[625ce4] com.fasterxml.jackson.databind.introspect.AnnotatedMethodCollector._addMethodMixIns:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/Class;Ljava/util/Map;Ljava/lang/Class;)V
+625cf4: 5460 9b4d                              |0000: iget-object v0, v6, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._intr:Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // field@4d9b
+625cf8: 3900 0300                              |0002: if-nez v0, 0005 // +0003
+625cfc: 0e00                                   |0004: return-void
+625cfe: 1210                                   |0005: const/4 v0, #int 1 // #1
+625d00: 7130 3a8e 8a00                         |0006: invoke-static {v10, v8, v0}, Lcom/fasterxml/jackson/databind/util/ClassUtil;.findRawSuperTypes:(Ljava/lang/Class;Ljava/lang/Class;Z)Ljava/util/List; // method@8e3a
+625d06: 0c08                                   |0009: move-result-object v8
+625d08: 7210 d2d5 0800                         |000a: invoke-interface {v8}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@d5d2
+625d0e: 0c08                                   |000d: move-result-object v8
+625d10: 7210 a0d5 0800                         |000e: invoke-interface {v8}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+625d16: 0a0a                                   |0011: move-result v10
+625d18: 380a 4300                              |0012: if-eqz v10, 0055 // +0043
+625d1c: 7210 a1d5 0800                         |0014: invoke-interface {v8}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+625d22: 0c0a                                   |0017: move-result-object v10
+625d24: 1f0a 6b1a                              |0018: check-cast v10, Ljava/lang/Class; // type@1a6b
+625d28: 6e10 e2d0 0a00                         |001a: invoke-virtual {v10}, Ljava/lang/Class;.getDeclaredMethods:()[Ljava/lang/reflect/Method; // method@d0e2
+625d2e: 0c0a                                   |001d: move-result-object v10
+625d30: 21a0                                   |001e: array-length v0, v10
+625d32: 1201                                   |001f: const/4 v1, #int 0 // #0
+625d34: 3501 eeff                              |0020: if-ge v1, v0, 000e // -0012
+625d38: 4602 0a01                              |0022: aget-object v2, v10, v1
+625d3c: 7110 457e 0200                         |0024: invoke-static {v2}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._isIncludableMemberMethod:(Ljava/lang/reflect/Method;)Z // method@7e45
+625d42: 0a03                                   |0027: move-result v3
+625d44: 3903 0300                              |0028: if-nez v3, 002b // +0003
+625d48: 2828                                   |002a: goto 0052 // +0028
+625d4a: 2203 130e                              |002b: new-instance v3, Lcom/fasterxml/jackson/databind/introspect/MemberKey; // type@0e13
+625d4e: 7020 2480 2300                         |002d: invoke-direct {v3, v2}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.<init>:(Ljava/lang/reflect/Method;)V // method@8024
+625d54: 7220 03d6 3900                         |0030: invoke-interface {v9, v3}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d603
+625d5a: 0c04                                   |0033: move-result-object v4
+625d5c: 1f04 f70d                              |0034: check-cast v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder; // type@0df7
+625d60: 6e10 d1d2 0200                         |0036: invoke-virtual {v2}, Ljava/lang/reflect/Method;.getDeclaredAnnotations:()[Ljava/lang/annotation/Annotation; // method@d2d1
+625d66: 0c02                                   |0039: move-result-object v2
+625d68: 3904 1000                              |003a: if-nez v4, 004a // +0010
+625d6c: 2204 f70d                              |003c: new-instance v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder; // type@0df7
+625d70: 1205                                   |003e: const/4 v5, #int 0 // #0
+625d72: 6e20 477e 2600                         |003f: invoke-virtual {v6, v2}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;.collectAnnotations:([Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7e47
+625d78: 0c02                                   |0042: move-result-object v2
+625d7a: 7040 407e 7425                         |0043: invoke-direct {v4, v7, v5, v2}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.<init>:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/reflect/Method;Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;)V // method@7e40
+625d80: 7230 06d6 3904                         |0046: invoke-interface {v9, v3, v4}, Ljava/util/Map;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d606
+625d86: 2809                                   |0049: goto 0052 // +0009
+625d88: 5443 974d                              |004a: iget-object v3, v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.annotations:Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // field@4d97
+625d8c: 6e30 487e 3602                         |004c: invoke-virtual {v6, v3, v2}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;.collectDefaultAnnotations:(Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;[Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7e48
+625d92: 0c02                                   |004f: move-result-object v2
+625d94: 5b42 974d                              |0050: iput-object v2, v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.annotations:Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // field@4d97
+625d98: d801 0101                              |0052: add-int/lit8 v1, v1, #int 1 // #01
+625d9c: 28cc                                   |0054: goto 0020 // -0034
+625d9e: 0e00                                   |0055: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=155
+        0x0006 line=158
+        0x001a line=159
+        0x0024 line=160
+        0x002b line=163
+        0x0030 line=164
+        0x0036 line=165
+        0x003c line=169
+        0x004a line=171
+      locals        :
+        0x0000 - 0x0056 reg=6 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;
+        0x0000 - 0x0056 reg=7 (null) Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;
+        0x0000 - 0x0056 reg=8 (null) Ljava/lang/Class;
+        0x0000 - 0x0056 reg=9 (null) Ljava/util/Map;
+        0x0000 - 0x0056 reg=10 (null) Ljava/lang/Class;
+
+    #1              : (in Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;)
+      name          : 'collect'
+      type          : '(Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Lcom/fasterxml/jackson/databind/JavaType;Ljava/util/List;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodMap;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 10
+      ins           : 6
+      outs          : 5
+      insns size    : 236 16-bit code units
+625da0:                                        |[625da0] com.fasterxml.jackson.databind.introspect.AnnotatedMethodCollector.collect:(Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Lcom/fasterxml/jackson/databind/JavaType;Ljava/util/List;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodMap;
+625db0: 2200 4e1b                              |0000: new-instance v0, Ljava/util/LinkedHashMap; // type@1b4e
+625db4: 7010 a3d5 0000                         |0002: invoke-direct {v0}, Ljava/util/LinkedHashMap;.<init>:()V // method@d5a3
+625dba: 6e10 a66d 0700                         |0005: invoke-virtual {v7}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+625dc0: 0c01                                   |0008: move-result-object v1
+625dc2: 7059 437e 6401                         |0009: invoke-direct {v4, v6, v1, v0, v9}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._addMemberMethods:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/Class;Ljava/util/Map;Ljava/lang/Class;)V // method@7e43
+625dc8: 7210 d2d5 0800                         |000c: invoke-interface {v8}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@d5d2
+625dce: 0c08                                   |000f: move-result-object v8
+625dd0: 7210 a0d5 0800                         |0010: invoke-interface {v8}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+625dd6: 0a09                                   |0013: move-result v9
+625dd8: 3809 2700                              |0014: if-eqz v9, 003b // +0027
+625ddc: 7210 a1d5 0800                         |0016: invoke-interface {v8}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+625de2: 0c09                                   |0019: move-result-object v9
+625de4: 1f09 c20c                              |001a: check-cast v9, Lcom/fasterxml/jackson/databind/JavaType; // type@0cc2
+625de8: 5441 9c4d                              |001c: iget-object v1, v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._mixInResolver:Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver; // field@4d9c
+625dec: 3901 0400                              |001e: if-nez v1, 0022 // +0004
+625df0: 1201                                   |0020: const/4 v1, #int 0 // #0
+625df2: 2809                                   |0021: goto 002a // +0009
+625df4: 6e10 a66d 0900                         |0022: invoke-virtual {v9}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+625dfa: 0c02                                   |0025: move-result-object v2
+625dfc: 7220 7f7f 2100                         |0026: invoke-interface {v1, v2}, Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;.findMixInClassFor:(Ljava/lang/Class;)Ljava/lang/Class; // method@7f7f
+625e02: 0c01                                   |0029: move-result-object v1
+625e04: 2202 250e                              |002a: new-instance v2, Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext$Basic; // type@0e25
+625e08: 6e10 996d 0900                         |002c: invoke-virtual {v9}, Lcom/fasterxml/jackson/databind/JavaType;.getBindings:()Lcom/fasterxml/jackson/databind/type/TypeBindings; // method@6d99
+625e0e: 0c03                                   |002f: move-result-object v3
+625e10: 7030 eb80 5203                         |0030: invoke-direct {v2, v5, v3}, Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext$Basic;.<init>:(Lcom/fasterxml/jackson/databind/type/TypeFactory;Lcom/fasterxml/jackson/databind/type/TypeBindings;)V // method@80eb
+625e16: 6e10 a66d 0900                         |0033: invoke-virtual {v9}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+625e1c: 0c09                                   |0036: move-result-object v9
+625e1e: 7051 437e 2409                         |0037: invoke-direct {v4, v2, v9, v0, v1}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._addMemberMethods:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/Class;Ljava/util/Map;Ljava/lang/Class;)V // method@7e43
+625e24: 28d6                                   |003a: goto 0010 // -002a
+625e26: 5445 9c4d                              |003b: iget-object v5, v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._mixInResolver:Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver; // field@4d9c
+625e2a: 3805 6c00                              |003d: if-eqz v5, 00a9 // +006c
+625e2e: 1c08 8b1a                              |003f: const-class v8, Ljava/lang/Object; // type@1a8b
+625e32: 7220 7f7f 8500                         |0041: invoke-interface {v5, v8}, Lcom/fasterxml/jackson/databind/introspect/ClassIntrospector$MixInResolver;.findMixInClassFor:(Ljava/lang/Class;)Ljava/lang/Class; // method@7f7f
+625e38: 0c05                                   |0044: move-result-object v5
+625e3a: 3805 6400                              |0045: if-eqz v5, 00a9 // +0064
+625e3e: 6e10 a66d 0700                         |0047: invoke-virtual {v7}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+625e44: 0c07                                   |004a: move-result-object v7
+625e46: 6e55 447e 6407                         |004b: invoke-virtual {v4, v6, v7, v0, v5}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._addMethodMixIns:(Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;Ljava/lang/Class;Ljava/util/Map;Ljava/lang/Class;)V // method@7e44
+625e4c: 5445 9b4d                              |004e: iget-object v5, v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;._intr:Lcom/fasterxml/jackson/databind/AnnotationIntrospector; // field@4d9b
+625e50: 3805 5900                              |0050: if-eqz v5, 00a9 // +0059
+625e54: 7210 04d6 0000                         |0052: invoke-interface {v0}, Ljava/util/Map;.isEmpty:()Z // method@d604
+625e5a: 0a05                                   |0055: move-result v5
+625e5c: 3905 5300                              |0056: if-nez v5, 00a9 // +0053
+625e60: 7210 02d6 0000                         |0058: invoke-interface {v0}, Ljava/util/Map;.entrySet:()Ljava/util/Set; // method@d602
+625e66: 0c05                                   |005b: move-result-object v5
+625e68: 7210 32d6 0500                         |005c: invoke-interface {v5}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+625e6e: 0c05                                   |005f: move-result-object v5
+625e70: 7210 a0d5 0500                         |0060: invoke-interface {v5}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+625e76: 0a06                                   |0063: move-result v6
+625e78: 3806 4500                              |0064: if-eqz v6, 00a9 // +0045
+625e7c: 7210 a1d5 0500                         |0066: invoke-interface {v5}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+625e82: 0c06                                   |0069: move-result-object v6
+625e84: 1f06 551b                              |006a: check-cast v6, Ljava/util/Map$Entry; // type@1b55
+625e88: 7210 fcd5 0600                         |006c: invoke-interface {v6}, Ljava/util/Map$Entry;.getKey:()Ljava/lang/Object; // method@d5fc
+625e8e: 0c07                                   |006f: move-result-object v7
+625e90: 1f07 130e                              |0070: check-cast v7, Lcom/fasterxml/jackson/databind/introspect/MemberKey; // type@0e13
+625e94: 1a08 51a7                              |0072: const-string v8, "hashCode" // string@a751
+625e98: 6e10 2780 0700                         |0074: invoke-virtual {v7}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.getName:()Ljava/lang/String; // method@8027
+625e9e: 0c09                                   |0077: move-result-object v9
+625ea0: 6e20 03d2 9800                         |0078: invoke-virtual {v8, v9}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+625ea6: 0a08                                   |007b: move-result v8
+625ea8: 3808 e4ff                              |007c: if-eqz v8, 0060 // -001c
+625eac: 6e10 2580 0700                         |007e: invoke-virtual {v7}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.argCount:()I // method@8025
+625eb2: 0a08                                   |0081: move-result v8
+625eb4: 3808 0300                              |0082: if-eqz v8, 0085 // +0003
+625eb8: 28dc                                   |0084: goto 0060 // -0024
+625eba: 1c08 8b1a                              |0085: const-class v8, Ljava/lang/Object; // type@1a8b
+625ebe: 6e10 2780 0700                         |0087: invoke-virtual {v7}, Lcom/fasterxml/jackson/databind/introspect/MemberKey;.getName:()Ljava/lang/String; // method@8027
+625ec4: 0c07                                   |008a: move-result-object v7
+625ec6: 1209                                   |008b: const/4 v9, #int 0 // #0
+625ec8: 2399 a520                              |008c: new-array v9, v9, [Ljava/lang/Class; // type@20a5
+625ecc: 6e30 e1d0 7809                         |008e: invoke-virtual {v8, v7, v9}, Ljava/lang/Class;.getDeclaredMethod:(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method; // method@d0e1
+625ed2: 0c07                                   |0091: move-result-object v7
+625ed4: 3807 ceff                              |0092: if-eqz v7, 0060 // -0032
+625ed8: 7210 fdd5 0600                         |0094: invoke-interface {v6}, Ljava/util/Map$Entry;.getValue:()Ljava/lang/Object; // method@d5fd
+625ede: 0c06                                   |0097: move-result-object v6
+625ee0: 1f06 f70d                              |0098: check-cast v6, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder; // type@0df7
+625ee4: 5468 974d                              |009a: iget-object v8, v6, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.annotations:Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // field@4d97
+625ee8: 6e10 d1d2 0700                         |009c: invoke-virtual {v7}, Ljava/lang/reflect/Method;.getDeclaredAnnotations:()[Ljava/lang/annotation/Annotation; // method@d2d1
+625eee: 0c09                                   |009f: move-result-object v9
+625ef0: 6e30 487e 8409                         |00a0: invoke-virtual {v4, v8, v9}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;.collectDefaultAnnotations:(Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector;[Ljava/lang/annotation/Annotation;)Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // method@7e48
+625ef6: 0c08                                   |00a3: move-result-object v8
+625ef8: 5b68 974d                              |00a4: iput-object v8, v6, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.annotations:Lcom/fasterxml/jackson/databind/introspect/AnnotationCollector; // field@4d97
+625efc: 5b67 984d                              |00a6: iput-object v7, v6, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.method:Ljava/lang/reflect/Method; // field@4d98
+625f00: 28b8                                   |00a8: goto 0060 // -0048
+625f02: 7210 04d6 0000                         |00a9: invoke-interface {v0}, Ljava/util/Map;.isEmpty:()Z // method@d604
+625f08: 0a04                                   |00ac: move-result v4
+625f0a: 3804 0800                              |00ad: if-eqz v4, 00b5 // +0008
+625f0e: 2204 f90d                              |00af: new-instance v4, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodMap; // type@0df9
+625f12: 7010 4a7e 0400                         |00b1: invoke-direct {v4}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodMap;.<init>:()V // method@7e4a
+625f18: 1104                                   |00b4: return-object v4
+625f1a: 2204 4e1b                              |00b5: new-instance v4, Ljava/util/LinkedHashMap; // type@1b4e
+625f1e: 7210 0ad6 0000                         |00b7: invoke-interface {v0}, Ljava/util/Map;.size:()I // method@d60a
+625f24: 0a05                                   |00ba: move-result v5
+625f26: 7020 a4d5 5400                         |00bb: invoke-direct {v4, v5}, Ljava/util/LinkedHashMap;.<init>:(I)V // method@d5a4
+625f2c: 7210 02d6 0000                         |00be: invoke-interface {v0}, Ljava/util/Map;.entrySet:()Ljava/util/Set; // method@d602
+625f32: 0c05                                   |00c1: move-result-object v5
+625f34: 7210 32d6 0500                         |00c2: invoke-interface {v5}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+625f3a: 0c05                                   |00c5: move-result-object v5
+625f3c: 7210 a0d5 0500                         |00c6: invoke-interface {v5}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+625f42: 0a06                                   |00c9: move-result v6
+625f44: 3806 1c00                              |00ca: if-eqz v6, 00e6 // +001c
+625f48: 7210 a1d5 0500                         |00cc: invoke-interface {v5}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+625f4e: 0c06                                   |00cf: move-result-object v6
+625f50: 1f06 551b                              |00d0: check-cast v6, Ljava/util/Map$Entry; // type@1b55
+625f54: 7210 fdd5 0600                         |00d2: invoke-interface {v6}, Ljava/util/Map$Entry;.getValue:()Ljava/lang/Object; // method@d5fd
+625f5a: 0c07                                   |00d5: move-result-object v7
+625f5c: 1f07 f70d                              |00d6: check-cast v7, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder; // type@0df7
+625f60: 6e10 417e 0700                         |00d8: invoke-virtual {v7}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector$MethodBuilder;.build:()Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethod; // method@7e41
+625f66: 0c07                                   |00db: move-result-object v7
+625f68: 3807 eaff                              |00dc: if-eqz v7, 00c6 // -0016
+625f6c: 7210 fcd5 0600                         |00de: invoke-interface {v6}, Ljava/util/Map$Entry;.getKey:()Ljava/lang/Object; // method@d5fc
+625f72: 0c06                                   |00e1: move-result-object v6
+625f74: 7230 06d6 6407                         |00e2: invoke-interface {v4, v6, v7}, Ljava/util/Map;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d606
+625f7a: 28e1                                   |00e5: goto 00c6 // -001f
+625f7c: 2205 f90d                              |00e6: new-instance v5, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodMap; // type@0df9
+625f80: 7020 4b7e 4500                         |00e8: invoke-direct {v5, v4}, Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodMap;.<init>:(Ljava/util/Map;)V // method@7e4b
+625f86: 1105                                   |00eb: return-object v5
+      catches       : 1
+        0x0085 - 0x00a8
+          Ljava/lang/Exception; -> 0x0060
+      positions     :
+        0x0000 line=46
+        0x0005 line=49
+        0x000c line=52
+        0x001c line=53
+        0x002a line=54
+        0x002c line=55
+        0x0033 line=56
+        0x0037 line=54
+        0x003b line=60
+        0x003f line=61
+        0x0047 line=63
+        0x004e line=72
+        0x0058 line=74
+        0x006c line=75
+        0x0072 line=76
+        0x0085 line=81
+        0x0094 line=83
+        0x009a line=84
+        0x009c line=85
+        0x00a0 line=84
+        0x00a6 line=86
+        0x00a9 line=93
+        0x00af line=94
+        0x00b5 line=96
+        0x00be line=97
+        0x00d2 line=98
+        0x00de line=100
+        0x00e6 line=103
+      locals        :
+        0x0000 - 0x00ec reg=4 this Lcom/fasterxml/jackson/databind/introspect/AnnotatedMethodCollector;
+        0x0000 - 0x00ec reg=5 (null) Lcom/fasterxml/jackson/databind/type/TypeFactory;
+        0x0000 - 0x00ec reg=6 (null) Lcom/fasterxml/jackson/databind/introspect/TypeResolutionContext;
+        0x0000 - 0x00ec reg=7 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x00ec reg=8 (null) Ljava/util/List;
+        0x0000 - 0x00ec reg=9 (null) Ljava/lang/Class;
+
+  source_file_idx   : 5484 (AnnotatedMethodCollector.java)
+

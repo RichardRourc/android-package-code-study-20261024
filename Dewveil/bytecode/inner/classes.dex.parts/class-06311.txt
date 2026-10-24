@@ -1,0 +1,534 @@
+Class #6311            -
+  Class descriptor  : 'Lkotlin/collections/RingBuffer;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Lkotlin/collections/AbstractList;'
+  Interfaces        -
+    #0              : 'Ljava/util/RandomAccess;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'buffer'
+      type          : '[Ljava/lang/Object;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'capacity'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'size'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'startIndex'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lkotlin/collections/RingBuffer;)
+      name          : '<init>'
+      type          : '(I)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 7 16-bit code units
+7b4474:                                        |[7b4474] kotlin.collections.RingBuffer.<init>:(I)V
+7b4484: 2322 ad20                              |0000: new-array v2, v2, [Ljava/lang/Object; // type@20ad
+7b4488: 1200                                   |0002: const/4 v0, #int 0 // #0
+7b448a: 7030 25e9 2100                         |0003: invoke-direct {v1, v2, v0}, Lkotlin/collections/RingBuffer;.<init>:([Ljava/lang/Object;I)V // method@e925
+7b4490: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=95
+      locals        :
+        0x0000 - 0x0007 reg=1 this Lkotlin/collections/RingBuffer;
+        0x0000 - 0x0007 reg=2 (null) I
+
+    #1              : (in Lkotlin/collections/RingBuffer;)
+      name          : '<init>'
+      type          : '([Ljava/lang/Object;I)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 2
+      insns size    : 77 16-bit code units
+7b4494:                                        |[7b4494] kotlin.collections.RingBuffer.<init>:([Ljava/lang/Object;I)V
+7b44a4: 1a00 3b83                              |0000: const-string v0, "buffer" // string@833b
+7b44a8: 7120 c2f2 0200                         |0002: invoke-static {v2, v0}, Lkotlin/jvm/internal/Intrinsics;.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V // method@f2c2
+7b44ae: 7010 7adb 0100                         |0005: invoke-direct {v1}, Lkotlin/collections/AbstractList;.<init>:()V // method@db7a
+7b44b4: 5b12 268b                              |0008: iput-object v2, v1, Lkotlin/collections/RingBuffer;.buffer:[Ljava/lang/Object; // field@8b26
+7b44b8: 3a03 2f00                              |000a: if-ltz v3, 0039 // +002f
+7b44bc: 2120                                   |000c: array-length v0, v2
+7b44be: 3603 0800                              |000d: if-gt v3, v0, 0015 // +0008
+7b44c2: 2122                                   |000f: array-length v2, v2
+7b44c4: 5912 278b                              |0010: iput v2, v1, Lkotlin/collections/RingBuffer;.capacity:I // field@8b27
+7b44c8: 5913 288b                              |0012: iput v3, v1, Lkotlin/collections/RingBuffer;.size:I // field@8b28
+7b44cc: 0e00                                   |0014: return-void
+7b44ce: 2201 991a                              |0015: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+7b44d2: 1a00 5cd0                              |0017: const-string v0, "ring buffer filled size: " // string@d05c
+7b44d6: 7020 3cd2 0100                         |0019: invoke-direct {v1, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+7b44dc: 6e20 40d2 3100                         |001c: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+7b44e2: 0c01                                   |001f: move-result-object v1
+7b44e4: 1a03 7c03                              |0020: const-string v3, " cannot be larger than the buffer size: " // string@037c
+7b44e8: 6e20 45d2 3100                         |0022: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7b44ee: 0c01                                   |0025: move-result-object v1
+7b44f0: 2122                                   |0026: array-length v2, v2
+7b44f2: 6e20 40d2 2100                         |0027: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+7b44f8: 0c01                                   |002a: move-result-object v1
+7b44fa: 6e10 58d2 0100                         |002b: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+7b4500: 0c01                                   |002e: move-result-object v1
+7b4502: 2202 7a1a                              |002f: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+7b4506: 6e10 d0d1 0100                         |0031: invoke-virtual {v1}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@d1d0
+7b450c: 0c01                                   |0034: move-result-object v1
+7b450e: 7020 47d1 1200                         |0035: invoke-direct {v2, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+7b4514: 2702                                   |0038: throw v2
+7b4516: 1a01 5bd0                              |0039: const-string v1, "ring buffer filled size should not be negative but it is " // string@d05b
+7b451a: 7110 6bd1 0300                         |003b: invoke-static {v3}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+7b4520: 0c02                                   |003e: move-result-object v2
+7b4522: 7120 cff2 2100                         |003f: invoke-static {v1, v2}, Lkotlin/jvm/internal/Intrinsics;.stringPlus:(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String; // method@f2cf
+7b4528: 0c01                                   |0042: move-result-object v1
+7b452a: 2202 7a1a                              |0043: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+7b452e: 6e10 d0d1 0100                         |0045: invoke-virtual {v1}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@d1d0
+7b4534: 0c01                                   |0048: move-result-object v1
+7b4536: 7020 47d1 1200                         |0049: invoke-direct {v2, v1}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+7b453c: 2702                                   |004c: throw v2
+      catches       : (none)
+      positions     :
+        0x0005 line=89
+        0x000c line=92
+        0x000f line=97
+        0x0012 line=100
+        0x0015 line=92
+        0x0039 line=91
+      locals        :
+        0x0000 - 0x004d reg=1 this Lkotlin/collections/RingBuffer;
+        0x0000 - 0x004d reg=2 (null) [Ljava/lang/Object;
+        0x0000 - 0x004d reg=3 (null) I
+
+    #2              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'access$getBuffer$p'
+      type          : '(Lkotlin/collections/RingBuffer;)[Ljava/lang/Object;'
+      access        : 0x1019 (PUBLIC STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+7b4540:                                        |[7b4540] kotlin.collections.RingBuffer.access$getBuffer$p:(Lkotlin/collections/RingBuffer;)[Ljava/lang/Object;
+7b4550: 5400 268b                              |0000: iget-object v0, v0, Lkotlin/collections/RingBuffer;.buffer:[Ljava/lang/Object; // field@8b26
+7b4554: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=89
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lkotlin/collections/RingBuffer;
+
+    #3              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'access$getCapacity$p'
+      type          : '(Lkotlin/collections/RingBuffer;)I'
+      access        : 0x1019 (PUBLIC STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+7b4558:                                        |[7b4558] kotlin.collections.RingBuffer.access$getCapacity$p:(Lkotlin/collections/RingBuffer;)I
+7b4568: 5200 278b                              |0000: iget v0, v0, Lkotlin/collections/RingBuffer;.capacity:I // field@8b27
+7b456c: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=89
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lkotlin/collections/RingBuffer;
+
+    #4              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'access$getStartIndex$p'
+      type          : '(Lkotlin/collections/RingBuffer;)I'
+      access        : 0x1019 (PUBLIC STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+7b4570:                                        |[7b4570] kotlin.collections.RingBuffer.access$getStartIndex$p:(Lkotlin/collections/RingBuffer;)I
+7b4580: 5200 298b                              |0000: iget v0, v0, Lkotlin/collections/RingBuffer;.startIndex:I // field@8b29
+7b4584: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=89
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lkotlin/collections/RingBuffer;
+
+    #5              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'forward'
+      type          : '(II)I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 1
+      insns size    : 7 16-bit code units
+7b4588:                                        |[7b4588] kotlin.collections.RingBuffer.forward:(II)I
+7b4598: b021                                   |0000: add-int/2addr v1, v2
+7b459a: 7110 27e9 0000                         |0001: invoke-static {v0}, Lkotlin/collections/RingBuffer;.access$getCapacity$p:(Lkotlin/collections/RingBuffer;)I // method@e927
+7b45a0: 0a00                                   |0004: move-result v0
+7b45a2: b401                                   |0005: rem-int/2addr v1, v0
+7b45a4: 0f01                                   |0006: return v1
+      catches       : (none)
+      positions     :
+        0x0001 line=205
+      locals        :
+        0x0000 - 0x0007 reg=0 this Lkotlin/collections/RingBuffer;
+        0x0000 - 0x0007 reg=1 (null) I
+        0x0000 - 0x0007 reg=2 (null) I
+
+  Virtual methods   -
+    #0              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'add'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 39 16-bit code units
+7b45a8:                                        |[7b45a8] kotlin.collections.RingBuffer.add:(Ljava/lang/Object;)V
+7b45b8: 6e10 2ee9 0300                         |0000: invoke-virtual {v3}, Lkotlin/collections/RingBuffer;.isFull:()Z // method@e92e
+7b45be: 0a00                                   |0003: move-result v0
+7b45c0: 3900 1b00                              |0004: if-nez v0, 001f // +001b
+7b45c4: 5430 268b                              |0006: iget-object v0, v3, Lkotlin/collections/RingBuffer;.buffer:[Ljava/lang/Object; // field@8b26
+7b45c8: 5231 298b                              |0008: iget v1, v3, Lkotlin/collections/RingBuffer;.startIndex:I // field@8b29
+7b45cc: 6e10 31e9 0300                         |000a: invoke-virtual {v3}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b45d2: 0a02                                   |000d: move-result v2
+7b45d4: b021                                   |000e: add-int/2addr v1, v2
+7b45d6: 7110 27e9 0300                         |000f: invoke-static {v3}, Lkotlin/collections/RingBuffer;.access$getCapacity$p:(Lkotlin/collections/RingBuffer;)I // method@e927
+7b45dc: 0a02                                   |0012: move-result v2
+7b45de: b421                                   |0013: rem-int/2addr v1, v2
+7b45e0: 4d04 0001                              |0014: aput-object v4, v0, v1
+7b45e4: 6e10 31e9 0300                         |0016: invoke-virtual {v3}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b45ea: 0a04                                   |0019: move-result v4
+7b45ec: d804 0401                              |001a: add-int/lit8 v4, v4, #int 1 // #01
+7b45f0: 5934 288b                              |001c: iput v4, v3, Lkotlin/collections/RingBuffer;.size:I // field@8b28
+7b45f4: 0e00                                   |001e: return-void
+7b45f6: 2203 7b1a                              |001f: new-instance v3, Ljava/lang/IllegalStateException; // type@1a7b
+7b45fa: 1a04 5dd0                              |0021: const-string v4, "ring buffer is full" // string@d05d
+7b45fe: 7020 4cd1 4300                         |0023: invoke-direct {v3, v4}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+7b4604: 2703                                   |0026: throw v3
+      catches       : (none)
+      positions     :
+        0x0000 line=172
+        0x0006 line=176
+        0x000f line=210
+        0x0014 line=176
+        0x0016 line=177
+        0x001f line=173
+      locals        :
+        0x0000 - 0x0027 reg=3 this Lkotlin/collections/RingBuffer;
+        0x0000 - 0x0027 reg=4 (null) Ljava/lang/Object;
+
+    #1              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'expanded'
+      type          : '(I)Lkotlin/collections/RingBuffer;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 43 16-bit code units
+7b4608:                                        |[7b4608] kotlin.collections.RingBuffer.expanded:(I)Lkotlin/collections/RingBuffer;
+7b4618: 5220 278b                              |0000: iget v0, v2, Lkotlin/collections/RingBuffer;.capacity:I // field@8b27
+7b461c: e101 0001                              |0002: shr-int/lit8 v1, v0, #int 1 // #01
+7b4620: b010                                   |0004: add-int/2addr v0, v1
+7b4622: d800 0001                              |0005: add-int/lit8 v0, v0, #int 1 // #01
+7b4626: 7120 d7f5 3000                         |0007: invoke-static {v0, v3}, Lkotlin/ranges/RangesKt;.coerceAtMost:(II)I // method@f5d7
+7b462c: 0a03                                   |000a: move-result v3
+7b462e: 5220 298b                              |000b: iget v0, v2, Lkotlin/collections/RingBuffer;.startIndex:I // field@8b29
+7b4632: 3900 0e00                              |000d: if-nez v0, 001b // +000e
+7b4636: 5420 268b                              |000f: iget-object v0, v2, Lkotlin/collections/RingBuffer;.buffer:[Ljava/lang/Object; // field@8b26
+7b463a: 7120 cad4 3000                         |0011: invoke-static {v0, v3}, Ljava/util/Arrays;.copyOf:([Ljava/lang/Object;I)[Ljava/lang/Object; // method@d4ca
+7b4640: 0c03                                   |0014: move-result-object v3
+7b4642: 1a00 b58a                              |0015: const-string v0, "copyOf(this, newSize)" // string@8ab5
+7b4646: 7120 c1f2 0300                         |0017: invoke-static {v3, v0}, Lkotlin/jvm/internal/Intrinsics;.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V // method@f2c1
+7b464c: 2807                                   |001a: goto 0021 // +0007
+7b464e: 2333 ad20                              |001b: new-array v3, v3, [Ljava/lang/Object; // type@20ad
+7b4652: 6e20 33e9 3200                         |001d: invoke-virtual {v2, v3}, Lkotlin/collections/RingBuffer;.toArray:([Ljava/lang/Object;)[Ljava/lang/Object; // method@e933
+7b4658: 0c03                                   |0020: move-result-object v3
+7b465a: 2200 d41c                              |0021: new-instance v0, Lkotlin/collections/RingBuffer; // type@1cd4
+7b465e: 6e10 31e9 0200                         |0023: invoke-virtual {v2}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b4664: 0a02                                   |0026: move-result v2
+7b4666: 7030 25e9 3002                         |0027: invoke-direct {v0, v3, v2}, Lkotlin/collections/RingBuffer;.<init>:([Ljava/lang/Object;I)V // method@e925
+7b466c: 1100                                   |002a: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=163
+        0x000b line=164
+        0x0021 line=165
+      locals        :
+        0x0000 - 0x002b reg=2 this Lkotlin/collections/RingBuffer;
+        0x0000 - 0x002b reg=3 (null) I
+
+    #2              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'get'
+      type          : '(I)Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 22 16-bit code units
+7b4670:                                        |[7b4670] kotlin.collections.RingBuffer.get:(I)Ljava/lang/Object;
+7b4680: 6200 ca8a                              |0000: sget-object v0, Lkotlin/collections/AbstractList;.Companion:Lkotlin/collections/AbstractList$Companion; // field@8aca
+7b4684: 6e10 31e9 0200                         |0002: invoke-virtual {v2}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b468a: 0a01                                   |0005: move-result v1
+7b468c: 6e30 62db 3001                         |0006: invoke-virtual {v0, v3, v1}, Lkotlin/collections/AbstractList$Companion;.checkElementIndex$kotlin_stdlib:(II)V // method@db62
+7b4692: 5420 268b                              |0009: iget-object v0, v2, Lkotlin/collections/RingBuffer;.buffer:[Ljava/lang/Object; // field@8b26
+7b4696: 5221 298b                              |000b: iget v1, v2, Lkotlin/collections/RingBuffer;.startIndex:I // field@8b29
+7b469a: b031                                   |000d: add-int/2addr v1, v3
+7b469c: 7110 27e9 0200                         |000e: invoke-static {v2}, Lkotlin/collections/RingBuffer;.access$getCapacity$p:(Lkotlin/collections/RingBuffer;)I // method@e927
+7b46a2: 0a02                                   |0011: move-result v2
+7b46a4: b421                                   |0012: rem-int/2addr v1, v2
+7b46a6: 4602 0001                              |0013: aget-object v2, v0, v1
+7b46aa: 1102                                   |0015: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=104
+        0x0009 line=106
+        0x000e line=209
+      locals        :
+        0x0000 - 0x0016 reg=2 this Lkotlin/collections/RingBuffer;
+        0x0000 - 0x0016 reg=3 (null) I
+
+    #3              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'getSize'
+      type          : '()I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+7b46ac:                                        |[7b46ac] kotlin.collections.RingBuffer.getSize:()I
+7b46bc: 5200 288b                              |0000: iget v0, v0, Lkotlin/collections/RingBuffer;.size:I // field@8b28
+7b46c0: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=100
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lkotlin/collections/RingBuffer;
+
+    #4              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'isFull'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 12 16-bit code units
+7b46c4:                                        |[7b46c4] kotlin.collections.RingBuffer.isFull:()Z
+7b46d4: 6e10 31e9 0100                         |0000: invoke-virtual {v1}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b46da: 0a00                                   |0003: move-result v0
+7b46dc: 5211 278b                              |0004: iget v1, v1, Lkotlin/collections/RingBuffer;.capacity:I // field@8b27
+7b46e0: 3310 0400                              |0006: if-ne v0, v1, 000a // +0004
+7b46e4: 1211                                   |0008: const/4 v1, #int 1 // #1
+7b46e6: 2802                                   |0009: goto 000b // +0002
+7b46e8: 1201                                   |000a: const/4 v1, #int 0 // #0
+7b46ea: 0f01                                   |000b: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=109
+      locals        :
+        0x0000 - 0x000c reg=1 this Lkotlin/collections/RingBuffer;
+
+    #5              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'iterator'
+      type          : '()Ljava/util/Iterator;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 8 16-bit code units
+7b46ec:                                        |[7b46ec] kotlin.collections.RingBuffer.iterator:()Ljava/util/Iterator;
+7b46fc: 2200 d31c                              |0000: new-instance v0, Lkotlin/collections/RingBuffer$iterator$1; // type@1cd3
+7b4700: 7020 20e9 1000                         |0002: invoke-direct {v0, v1}, Lkotlin/collections/RingBuffer$iterator$1;.<init>:(Lkotlin/collections/RingBuffer;)V // method@e920
+7b4706: 1f00 4d1b                              |0005: check-cast v0, Ljava/util/Iterator; // type@1b4d
+7b470a: 1100                                   |0007: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=111
+      locals        :
+        0x0000 - 0x0008 reg=1 this Lkotlin/collections/RingBuffer;
+
+    #6              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'removeFirst'
+      type          : '(I)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 4
+      insns size    : 110 16-bit code units
+7b470c:                                        |[7b470c] kotlin.collections.RingBuffer.removeFirst:(I)V
+7b471c: 3a06 5a00                              |0000: if-ltz v6, 005a // +005a
+7b4720: 6e10 31e9 0500                         |0002: invoke-virtual {v5}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b4726: 0a00                                   |0005: move-result v0
+7b4728: 3606 2d00                              |0006: if-gt v6, v0, 0033 // +002d
+7b472c: 3d06 2a00                              |0008: if-lez v6, 0032 // +002a
+7b4730: 5250 298b                              |000a: iget v0, v5, Lkotlin/collections/RingBuffer;.startIndex:I // field@8b29
+7b4734: 9001 0006                              |000c: add-int v1, v0, v6
+7b4738: 7110 27e9 0500                         |000e: invoke-static {v5}, Lkotlin/collections/RingBuffer;.access$getCapacity$p:(Lkotlin/collections/RingBuffer;)I // method@e927
+7b473e: 0a02                                   |0011: move-result v2
+7b4740: b421                                   |0012: rem-int/2addr v1, v2
+7b4742: 1202                                   |0013: const/4 v2, #int 0 // #0
+7b4744: 3710 1000                              |0014: if-le v0, v1, 0024 // +0010
+7b4748: 5453 268b                              |0016: iget-object v3, v5, Lkotlin/collections/RingBuffer;.buffer:[Ljava/lang/Object; // field@8b26
+7b474c: 5254 278b                              |0018: iget v4, v5, Lkotlin/collections/RingBuffer;.capacity:I // field@8b27
+7b4750: 7140 74dc 2340                         |001a: invoke-static {v3, v2, v0, v4}, Lkotlin/collections/ArraysKt;.fill:([Ljava/lang/Object;Ljava/lang/Object;II)V // method@dc74
+7b4756: 5450 268b                              |001d: iget-object v0, v5, Lkotlin/collections/RingBuffer;.buffer:[Ljava/lang/Object; // field@8b26
+7b475a: 1203                                   |001f: const/4 v3, #int 0 // #0
+7b475c: 7140 74dc 2013                         |0020: invoke-static {v0, v2, v3, v1}, Lkotlin/collections/ArraysKt;.fill:([Ljava/lang/Object;Ljava/lang/Object;II)V // method@dc74
+7b4762: 2806                                   |0023: goto 0029 // +0006
+7b4764: 5453 268b                              |0024: iget-object v3, v5, Lkotlin/collections/RingBuffer;.buffer:[Ljava/lang/Object; // field@8b26
+7b4768: 7140 74dc 2310                         |0026: invoke-static {v3, v2, v0, v1}, Lkotlin/collections/ArraysKt;.fill:([Ljava/lang/Object;Ljava/lang/Object;II)V // method@dc74
+7b476e: 5951 298b                              |0029: iput v1, v5, Lkotlin/collections/RingBuffer;.startIndex:I // field@8b29
+7b4772: 6e10 31e9 0500                         |002b: invoke-virtual {v5}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b4778: 0a00                                   |002e: move-result v0
+7b477a: b160                                   |002f: sub-int/2addr v0, v6
+7b477c: 5950 288b                              |0030: iput v0, v5, Lkotlin/collections/RingBuffer;.size:I // field@8b28
+7b4780: 0e00                                   |0032: return-void
+7b4782: 2200 991a                              |0033: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+7b4786: 1a01 43c2                              |0035: const-string v1, "n shouldn't be greater than the buffer size: n = " // string@c243
+7b478a: 7020 3cd2 1000                         |0037: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+7b4790: 6e20 40d2 6000                         |003a: invoke-virtual {v0, v6}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+7b4796: 0c06                                   |003d: move-result-object v6
+7b4798: 1a00 b80e                              |003e: const-string v0, ", size = " // string@0eb8
+7b479c: 6e20 45d2 0600                         |0040: invoke-virtual {v6, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7b47a2: 0c06                                   |0043: move-result-object v6
+7b47a4: 6e10 31e9 0500                         |0044: invoke-virtual {v5}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b47aa: 0a05                                   |0047: move-result v5
+7b47ac: 6e20 40d2 5600                         |0048: invoke-virtual {v6, v5}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+7b47b2: 0c05                                   |004b: move-result-object v5
+7b47b4: 6e10 58d2 0500                         |004c: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+7b47ba: 0c05                                   |004f: move-result-object v5
+7b47bc: 2206 7a1a                              |0050: new-instance v6, Ljava/lang/IllegalArgumentException; // type@1a7a
+7b47c0: 6e10 d0d1 0500                         |0052: invoke-virtual {v5}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@d1d0
+7b47c6: 0c05                                   |0055: move-result-object v5
+7b47c8: 7020 47d1 5600                         |0056: invoke-direct {v6, v5}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+7b47ce: 2706                                   |0059: throw v6
+7b47d0: 1a05 44c2                              |005a: const-string v5, "n shouldn't be negative but it is " // string@c244
+7b47d4: 7110 6bd1 0600                         |005c: invoke-static {v6}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+7b47da: 0c06                                   |005f: move-result-object v6
+7b47dc: 7120 cff2 6500                         |0060: invoke-static {v5, v6}, Lkotlin/jvm/internal/Intrinsics;.stringPlus:(Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String; // method@f2cf
+7b47e2: 0c05                                   |0063: move-result-object v5
+7b47e4: 2206 7a1a                              |0064: new-instance v6, Ljava/lang/IllegalArgumentException; // type@1a7a
+7b47e8: 6e10 d0d1 0500                         |0066: invoke-virtual {v5}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@d1d0
+7b47ee: 0c05                                   |0069: move-result-object v5
+7b47f0: 7020 47d1 5600                         |006a: invoke-direct {v6, v5}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+7b47f6: 2706                                   |006d: throw v6
+      catches       : (none)
+      positions     :
+        0x0002 line=185
+        0x000a line=188
+        0x000e line=211
+        0x0016 line=192
+        0x001d line=193
+        0x0024 line=195
+        0x0029 line=198
+        0x002b line=199
+        0x0033 line=185
+        0x005a line=184
+      locals        :
+        0x0000 - 0x006e reg=5 this Lkotlin/collections/RingBuffer;
+        0x0000 - 0x006e reg=6 (null) I
+
+    #7              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'toArray'
+      type          : '()[Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 11 16-bit code units
+7b47f8:                                        |[7b47f8] kotlin.collections.RingBuffer.toArray:()[Ljava/lang/Object;
+7b4808: 6e10 31e9 0100                         |0000: invoke-virtual {v1}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b480e: 0a00                                   |0003: move-result v0
+7b4810: 2300 ad20                              |0004: new-array v0, v0, [Ljava/lang/Object; // type@20ad
+7b4814: 6e20 33e9 0100                         |0006: invoke-virtual {v1, v0}, Lkotlin/collections/RingBuffer;.toArray:([Ljava/lang/Object;)[Ljava/lang/Object; // method@e933
+7b481a: 0c01                                   |0009: move-result-object v1
+7b481c: 1101                                   |000a: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=155
+      locals        :
+        0x0000 - 0x000b reg=1 this Lkotlin/collections/RingBuffer;
+
+    #8              : (in Lkotlin/collections/RingBuffer;)
+      name          : 'toArray'
+      type          : '([Ljava/lang/Object;)[Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 2
+      insns size    : 78 16-bit code units
+7b4820:                                        |[7b4820] kotlin.collections.RingBuffer.toArray:([Ljava/lang/Object;)[Ljava/lang/Object;
+7b4830: 1a00 0f81                              |0000: const-string v0, "array" // string@810f
+7b4834: 7120 c2f2 0600                         |0002: invoke-static {v6, v0}, Lkotlin/jvm/internal/Intrinsics;.checkNotNullParameter:(Ljava/lang/Object;Ljava/lang/String;)V // method@f2c2
+7b483a: 2160                                   |0005: array-length v0, v6
+7b483c: 6e10 31e9 0500                         |0006: invoke-virtual {v5}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b4842: 0a01                                   |0009: move-result v1
+7b4844: 3510 0f00                              |000a: if-ge v0, v1, 0019 // +000f
+7b4848: 6e10 31e9 0500                         |000c: invoke-virtual {v5}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b484e: 0a00                                   |000f: move-result v0
+7b4850: 7120 cad4 0600                         |0010: invoke-static {v6, v0}, Ljava/util/Arrays;.copyOf:([Ljava/lang/Object;I)[Ljava/lang/Object; // method@d4ca
+7b4856: 0c06                                   |0013: move-result-object v6
+7b4858: 1a00 b58a                              |0014: const-string v0, "copyOf(this, newSize)" // string@8ab5
+7b485c: 7120 c1f2 0600                         |0016: invoke-static {v6, v0}, Lkotlin/jvm/internal/Intrinsics;.checkNotNullExpressionValue:(Ljava/lang/Object;Ljava/lang/String;)V // method@f2c1
+7b4862: 6e10 31e9 0500                         |0019: invoke-virtual {v5}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b4868: 0a00                                   |001c: move-result v0
+7b486a: 5251 298b                              |001d: iget v1, v5, Lkotlin/collections/RingBuffer;.startIndex:I // field@8b29
+7b486e: 1202                                   |001f: const/4 v2, #int 0 // #0
+7b4870: 0123                                   |0020: move v3, v2
+7b4872: 3503 1100                              |0021: if-ge v3, v0, 0032 // +0011
+7b4876: 5254 278b                              |0023: iget v4, v5, Lkotlin/collections/RingBuffer;.capacity:I // field@8b27
+7b487a: 3541 0d00                              |0025: if-ge v1, v4, 0032 // +000d
+7b487e: 5454 268b                              |0027: iget-object v4, v5, Lkotlin/collections/RingBuffer;.buffer:[Ljava/lang/Object; // field@8b26
+7b4882: 4604 0401                              |0029: aget-object v4, v4, v1
+7b4886: 4d04 0603                              |002b: aput-object v4, v6, v3
+7b488a: d803 0301                              |002d: add-int/lit8 v3, v3, #int 1 // #01
+7b488e: d801 0101                              |002f: add-int/lit8 v1, v1, #int 1 // #01
+7b4892: 28f0                                   |0031: goto 0021 // -0010
+7b4894: 3503 0d00                              |0032: if-ge v3, v0, 003f // +000d
+7b4898: 5451 268b                              |0034: iget-object v1, v5, Lkotlin/collections/RingBuffer;.buffer:[Ljava/lang/Object; // field@8b26
+7b489c: 4601 0102                              |0036: aget-object v1, v1, v2
+7b48a0: 4d01 0603                              |0038: aput-object v1, v6, v3
+7b48a4: d803 0301                              |003a: add-int/lit8 v3, v3, #int 1 // #01
+7b48a8: d802 0201                              |003c: add-int/lit8 v2, v2, #int 1 // #01
+7b48ac: 28f4                                   |003e: goto 0032 // -000c
+7b48ae: 2160                                   |003f: array-length v0, v6
+7b48b0: 6e10 31e9 0500                         |0040: invoke-virtual {v5}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b48b6: 0a01                                   |0043: move-result v1
+7b48b8: 3710 0900                              |0044: if-le v0, v1, 004d // +0009
+7b48bc: 6e10 31e9 0500                         |0046: invoke-virtual {v5}, Lkotlin/collections/RingBuffer;.size:()I // method@e931
+7b48c2: 0a05                                   |0049: move-result v5
+7b48c4: 1200                                   |004a: const/4 v0, #int 0 // #0
+7b48c6: 4d00 0605                              |004b: aput-object v0, v6, v5
+7b48ca: 1106                                   |004d: return-object v6
+      catches       : (none)
+      positions     :
+        0x0005 line=130
+        0x0019 line=132
+        0x001d line=135
+        0x0023 line=137
+        0x0027 line=138
+        0x0034 line=145
+        0x003f line=149
+      locals        :
+        0x0000 - 0x004e reg=5 this Lkotlin/collections/RingBuffer;
+        0x0000 - 0x004e reg=6 (null) [Ljava/lang/Object;
+
+  source_file_idx   : 25329 (SlidingWindow.kt)
+

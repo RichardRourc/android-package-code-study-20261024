@@ -1,0 +1,189 @@
+Class #3080            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Lcom/fasterxml/jackson/databind/AbstractTypeResolver;'
+  Interfaces        -
+    #0              : 'Ljava/io/Serializable;'
+  Static fields     -
+    #0              : (in Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;)
+      name          : 'serialVersionUID'
+      type          : 'J'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;)
+      name          : '_mappings'
+      type          : 'Ljava/util/HashMap;'
+      access        : 0x0014 (PROTECTED FINAL)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 11 16-bit code units
+636de8:                                        |[636de8] com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver.<init>:()V
+636df8: 7010 9e6b 0100                         |0000: invoke-direct {v1}, Lcom/fasterxml/jackson/databind/AbstractTypeResolver;.<init>:()V // method@6b9e
+636dfe: 2200 491b                              |0003: new-instance v0, Ljava/util/HashMap; // type@1b49
+636e02: 7010 7ed5 0000                         |0005: invoke-direct {v0}, Ljava/util/HashMap;.<init>:()V // method@d57e
+636e08: 5b10 e14e                              |0008: iput-object v0, v1, Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;._mappings:Ljava/util/HashMap; // field@4ee1
+636e0c: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=29
+        0x0003 line=38
+      locals        :
+        0x0000 - 0x000b reg=1 this Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;)
+      name          : 'addMapping'
+      type          : '(Ljava/lang/Class;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 111 16-bit code units
+636e10:                                        |[636e10] com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver.addMapping:(Ljava/lang/Class;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;
+636e20: 3243 6700                              |0000: if-eq v3, v4, 0067 // +0067
+636e24: 6e20 fbd0 4300                         |0002: invoke-virtual {v3, v4}, Ljava/lang/Class;.isAssignableFrom:(Ljava/lang/Class;)Z // method@d0fb
+636e2a: 0a00                                   |0005: move-result v0
+636e2c: 1a01 ab1b                              |0006: const-string v1, "Cannot add mapping from class " // string@1bab
+636e30: 3800 3400                              |0008: if-eqz v0, 003c // +0034
+636e34: 6e10 efd0 0300                         |000a: invoke-virtual {v3}, Ljava/lang/Class;.getModifiers:()I // method@d0ef
+636e3a: 0a00                                   |000d: move-result v0
+636e3c: 7110 e1d2 0000                         |000e: invoke-static {v0}, Ljava/lang/reflect/Modifier;.isAbstract:(I)Z // method@d2e1
+636e42: 0a00                                   |0011: move-result v0
+636e44: 3800 0d00                              |0012: if-eqz v0, 001f // +000d
+636e48: 5420 e14e                              |0014: iget-object v0, v2, Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;._mappings:Ljava/util/HashMap; // field@4ee1
+636e4c: 2201 2a0f                              |0016: new-instance v1, Lcom/fasterxml/jackson/databind/type/ClassKey; // type@0f2a
+636e50: 7020 128c 3100                         |0018: invoke-direct {v1, v3}, Lcom/fasterxml/jackson/databind/type/ClassKey;.<init>:(Ljava/lang/Class;)V // method@8c12
+636e56: 6e30 8ad5 1004                         |001b: invoke-virtual {v0, v1, v4}, Ljava/util/HashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d58a
+636e5c: 1102                                   |001e: return-object v2
+636e5e: 2202 7a1a                              |001f: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+636e62: 2204 991a                              |0021: new-instance v4, Ljava/lang/StringBuilder; // type@1a99
+636e66: 7020 3cd2 1400                         |0023: invoke-direct {v4, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+636e6c: 6e10 f0d0 0300                         |0026: invoke-virtual {v3}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+636e72: 0c03                                   |0029: move-result-object v3
+636e74: 6e20 45d2 3400                         |002a: invoke-virtual {v4, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+636e7a: 0c03                                   |002d: move-result-object v3
+636e7c: 1a04 af04                              |002e: const-string v4, " since it is not abstract" // string@04af
+636e80: 6e20 45d2 4300                         |0030: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+636e86: 0c03                                   |0033: move-result-object v3
+636e88: 6e10 58d2 0300                         |0034: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+636e8e: 0c03                                   |0037: move-result-object v3
+636e90: 7020 47d1 3200                         |0038: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+636e96: 2702                                   |003b: throw v2
+636e98: 2202 7a1a                              |003c: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+636e9c: 2200 991a                              |003e: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+636ea0: 7020 3cd2 1000                         |0040: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+636ea6: 6e10 f0d0 0300                         |0043: invoke-virtual {v3}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+636eac: 0c03                                   |0046: move-result-object v3
+636eae: 6e20 45d2 3000                         |0047: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+636eb4: 0c03                                   |004a: move-result-object v3
+636eb6: 1a00 ca04                              |004b: const-string v0, " to " // string@04ca
+636eba: 6e20 45d2 0300                         |004d: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+636ec0: 0c03                                   |0050: move-result-object v3
+636ec2: 6e10 f0d0 0400                         |0051: invoke-virtual {v4}, Ljava/lang/Class;.getName:()Ljava/lang/String; // method@d0f0
+636ec8: 0c04                                   |0054: move-result-object v4
+636eca: 6e20 45d2 4300                         |0055: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+636ed0: 0c03                                   |0058: move-result-object v3
+636ed2: 1a04 1b0e                              |0059: const-string v4, ", as latter is not a subtype of former" // string@0e1b
+636ed6: 6e20 45d2 4300                         |005b: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+636edc: 0c03                                   |005e: move-result-object v3
+636ede: 6e10 58d2 0300                         |005f: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+636ee4: 0c03                                   |0062: move-result-object v3
+636ee6: 7020 47d1 3200                         |0063: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+636eec: 2702                                   |0066: throw v2
+636eee: 2202 7a1a                              |0067: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+636ef2: 1a03 ac1b                              |0069: const-string v3, "Cannot add mapping from class to itself" // string@1bac
+636ef6: 7020 47d1 3200                         |006b: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+636efc: 2702                                   |006e: throw v2
+      catches       : (none)
+      positions     :
+        0x0002 line=58
+        0x000a line=62
+        0x0014 line=66
+        0x001f line=63
+        0x003c line=59
+        0x0051 line=60
+        0x0067 line=56
+      locals        :
+        0x0000 - 0x006f reg=2 this Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;
+        0x0000 - 0x006f reg=3 (null) Ljava/lang/Class;
+        0x0000 - 0x006f reg=4 (null) Ljava/lang/Class;
+
+    #1              : (in Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;)
+      name          : 'findTypeMapping'
+      type          : '(Lcom/fasterxml/jackson/databind/DeserializationConfig;Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/JavaType;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 30 16-bit code units
+636f00:                                        |[636f00] com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver.findTypeMapping:(Lcom/fasterxml/jackson/databind/DeserializationConfig;Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/JavaType;
+636f10: 6e10 a66d 0400                         |0000: invoke-virtual {v4}, Lcom/fasterxml/jackson/databind/JavaType;.getRawClass:()Ljava/lang/Class; // method@6da6
+636f16: 0c00                                   |0003: move-result-object v0
+636f18: 5422 e14e                              |0004: iget-object v2, v2, Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;._mappings:Ljava/util/HashMap; // field@4ee1
+636f1c: 2201 2a0f                              |0006: new-instance v1, Lcom/fasterxml/jackson/databind/type/ClassKey; // type@0f2a
+636f20: 7020 128c 0100                         |0008: invoke-direct {v1, v0}, Lcom/fasterxml/jackson/databind/type/ClassKey;.<init>:(Ljava/lang/Class;)V // method@8c12
+636f26: 6e20 86d5 1200                         |000b: invoke-virtual {v2, v1}, Ljava/util/HashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d586
+636f2c: 0c02                                   |000e: move-result-object v2
+636f2e: 1f02 6b1a                              |000f: check-cast v2, Ljava/lang/Class; // type@1a6b
+636f32: 3902 0400                              |0011: if-nez v2, 0015 // +0004
+636f36: 1202                                   |0013: const/4 v2, #int 0 // #0
+636f38: 1102                                   |0014: return-object v2
+636f3a: 6e10 c26c 0300                         |0015: invoke-virtual {v3}, Lcom/fasterxml/jackson/databind/DeserializationConfig;.getTypeFactory:()Lcom/fasterxml/jackson/databind/type/TypeFactory; // method@6cc2
+636f40: 0c03                                   |0018: move-result-object v3
+636f42: 6e30 8d8d 4302                         |0019: invoke-virtual {v3, v4, v2}, Lcom/fasterxml/jackson/databind/type/TypeFactory;.constructSpecializedType:(Lcom/fasterxml/jackson/databind/JavaType;Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/JavaType; // method@8d8d
+636f48: 0c02                                   |001c: move-result-object v2
+636f4a: 1102                                   |001d: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=74
+        0x0004 line=75
+        0x0015 line=80
+      locals        :
+        0x0000 - 0x001e reg=2 this Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;
+        0x0000 - 0x001e reg=3 (null) Lcom/fasterxml/jackson/databind/DeserializationConfig;
+        0x0000 - 0x001e reg=4 (null) Lcom/fasterxml/jackson/databind/JavaType;
+
+    #2              : (in Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;)
+      name          : 'resolveAbstractType'
+      type          : '(Lcom/fasterxml/jackson/databind/DeserializationConfig;Lcom/fasterxml/jackson/databind/BeanDescription;)Lcom/fasterxml/jackson/databind/JavaType;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 0
+      insns size    : 2 16-bit code units
+636f4c:                                        |[636f4c] com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver.resolveAbstractType:(Lcom/fasterxml/jackson/databind/DeserializationConfig;Lcom/fasterxml/jackson/databind/BeanDescription;)Lcom/fasterxml/jackson/databind/JavaType;
+636f5c: 1200                                   |0000: const/4 v0, #int 0 // #0
+636f5e: 1100                                   |0001: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #3              : (in Lcom/fasterxml/jackson/databind/module/SimpleAbstractTypeResolver;)
+      name          : 'resolveAbstractType'
+      type          : '(Lcom/fasterxml/jackson/databind/DeserializationConfig;Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/JavaType;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 0
+      insns size    : 2 16-bit code units
+636f60:                                        |[636f60] com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver.resolveAbstractType:(Lcom/fasterxml/jackson/databind/DeserializationConfig;Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/JavaType;
+636f70: 1200                                   |0000: const/4 v0, #int 0 // #0
+636f72: 1100                                   |0001: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+  source_file_idx   : 25273 (SimpleAbstractTypeResolver.java)
+

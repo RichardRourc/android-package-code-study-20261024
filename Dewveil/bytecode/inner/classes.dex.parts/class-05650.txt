@@ -1,0 +1,1212 @@
+Class #5650            -
+  Class descriptor  : 'Lcom/google/gson/stream/JsonWriter;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/io/Closeable;'
+    #1              : 'Ljava/io/Flushable;'
+  Static fields     -
+    #0              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'HTML_SAFE_REPLACEMENT_CHARS'
+      type          : '[Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+    #1              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'REPLACEMENT_CHARS'
+      type          : '[Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+    #0              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'deferredName'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'htmlSafe'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'indent'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'lenient'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #4              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'out'
+      type          : 'Ljava/io/Writer;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'separator'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+    #6              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'serializeNulls'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #7              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'stack'
+      type          : '[I'
+      access        : 0x0002 (PRIVATE)
+    #8              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'stackSize'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+  Direct methods    -
+    #0              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 0
+      outs          : 2
+      insns size    : 115 16-bit code units
+73dab8:                                        |[73dab8] com.google.gson.stream.JsonWriter.<clinit>:()V
+73dac8: 1300 8000                              |0000: const/16 v0, #int 128 // #80
+73dacc: 2300 b020                              |0002: new-array v0, v0, [Ljava/lang/String; // type@20b0
+73dad0: 6900 e675                              |0004: sput-object v0, Lcom/google/gson/stream/JsonWriter;.REPLACEMENT_CHARS:[Ljava/lang/String; // field@75e6
+73dad4: 1200                                   |0006: const/4 v0, #int 0 // #0
+73dad6: 1301 1f00                              |0007: const/16 v1, #int 31 // #1f
+73dada: 3610 1700                              |0009: if-gt v0, v1, 0020 // +0017
+73dade: 6201 e675                              |000b: sget-object v1, Lcom/google/gson/stream/JsonWriter;.REPLACEMENT_CHARS:[Ljava/lang/String; // field@75e6
+73dae2: 7110 6bd1 0000                         |000d: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+73dae8: 0c02                                   |0010: move-result-object v2
+73daea: 2410 ad20 0200                         |0011: filled-new-array {v2}, [Ljava/lang/Object; // type@20ad
+73daf0: 0c02                                   |0014: move-result-object v2
+73daf2: 1a03 c572                              |0015: const-string v3, "\\u%04x" // string@72c5
+73daf6: 7120 05d2 2300                         |0017: invoke-static {v3, v2}, Ljava/lang/String;.format:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@d205
+73dafc: 0c02                                   |001a: move-result-object v2
+73dafe: 4d02 0100                              |001b: aput-object v2, v1, v0
+73db02: d800 0001                              |001d: add-int/lit8 v0, v0, #int 1 // #01
+73db06: 28e8                                   |001f: goto 0007 // -0018
+73db08: 6200 e675                              |0020: sget-object v0, Lcom/google/gson/stream/JsonWriter;.REPLACEMENT_CHARS:[Ljava/lang/String; // field@75e6
+73db0c: 1301 2200                              |0022: const/16 v1, #int 34 // #22
+73db10: 1a02 a672                              |0024: const-string v2, "\\\"" // string@72a6
+73db14: 4d02 0001                              |0026: aput-object v2, v0, v1
+73db18: 1301 5c00                              |0028: const/16 v1, #int 92 // #5c
+73db1c: 1a02 ad72                              |002a: const-string v2, "\\\\" // string@72ad
+73db20: 4d02 0001                              |002c: aput-object v2, v0, v1
+73db24: 1301 0900                              |002e: const/16 v1, #int 9 // #9
+73db28: 1a02 c372                              |0030: const-string v2, "\\t" // string@72c3
+73db2c: 4d02 0001                              |0032: aput-object v2, v0, v1
+73db30: 1301 0800                              |0034: const/16 v1, #int 8 // #8
+73db34: 1a02 bb72                              |0036: const-string v2, "\\b" // string@72bb
+73db38: 4d02 0001                              |0038: aput-object v2, v0, v1
+73db3c: 1301 0a00                              |003a: const/16 v1, #int 10 // #a
+73db40: 1a02 c072                              |003c: const-string v2, "\\n" // string@72c0
+73db44: 4d02 0001                              |003e: aput-object v2, v0, v1
+73db48: 1301 0d00                              |0040: const/16 v1, #int 13 // #d
+73db4c: 1a02 c172                              |0042: const-string v2, "\\r" // string@72c1
+73db50: 4d02 0001                              |0044: aput-object v2, v0, v1
+73db54: 1301 0c00                              |0046: const/16 v1, #int 12 // #c
+73db58: 1a02 bf72                              |0048: const-string v2, "\\f" // string@72bf
+73db5c: 4d02 0001                              |004a: aput-object v2, v0, v1
+73db60: 6e10 68ff 0000                         |004c: invoke-virtual {v0}, [Ljava/lang/String;.clone:()Ljava/lang/Object; // method@ff68
+73db66: 0c00                                   |004f: move-result-object v0
+73db68: 1f00 b020                              |0050: check-cast v0, [Ljava/lang/String; // type@20b0
+73db6c: 6900 e575                              |0052: sput-object v0, Lcom/google/gson/stream/JsonWriter;.HTML_SAFE_REPLACEMENT_CHARS:[Ljava/lang/String; // field@75e5
+73db70: 1301 3c00                              |0054: const/16 v1, #int 60 // #3c
+73db74: 1a02 c872                              |0056: const-string v2, "\\u003c" // string@72c8
+73db78: 4d02 0001                              |0058: aput-object v2, v0, v1
+73db7c: 1301 3e00                              |005a: const/16 v1, #int 62 // #3e
+73db80: 1a02 ca72                              |005c: const-string v2, "\\u003e" // string@72ca
+73db84: 4d02 0001                              |005e: aput-object v2, v0, v1
+73db88: 1301 2600                              |0060: const/16 v1, #int 38 // #26
+73db8c: 1a02 c672                              |0062: const-string v2, "\\u0026" // string@72c6
+73db90: 4d02 0001                              |0064: aput-object v2, v0, v1
+73db94: 1301 3d00                              |0066: const/16 v1, #int 61 // #3d
+73db98: 1a02 c972                              |0068: const-string v2, "\\u003d" // string@72c9
+73db9c: 4d02 0001                              |006a: aput-object v2, v0, v1
+73dba0: 1301 2700                              |006c: const/16 v1, #int 39 // #27
+73dba4: 1a02 c772                              |006e: const-string v2, "\\u0027" // string@72c7
+73dba8: 4d02 0001                              |0070: aput-object v2, v0, v1
+73dbac: 0e00                                   |0072: return-void
+      catches       : (none)
+      positions     :
+        0x0002 line=145
+        0x000b line=147
+        0x0020 line=149
+        0x002a line=150
+        0x0030 line=151
+        0x0036 line=152
+        0x003c line=153
+        0x0042 line=154
+        0x0048 line=155
+        0x004c line=156
+        0x0056 line=157
+        0x005c line=158
+        0x0062 line=159
+        0x0068 line=160
+        0x006e line=161
+      locals        :
+
+    #1              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : '<init>'
+      type          : '(Ljava/io/Writer;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 36 16-bit code units
+73dbb0:                                        |[73dbb0] com.google.gson.stream.JsonWriter.<init>:(Ljava/io/Writer;)V
+73dbc0: 7010 c8d1 0100                         |0000: invoke-direct {v1}, Ljava/lang/Object;.<init>:()V // method@d1c8
+73dbc6: 1300 2000                              |0003: const/16 v0, #int 32 // #20
+73dbca: 2300 801f                              |0005: new-array v0, v0, [I // type@1f80
+73dbce: 5b10 ee75                              |0007: iput-object v0, v1, Lcom/google/gson/stream/JsonWriter;.stack:[I // field@75ee
+73dbd2: 1200                                   |0009: const/4 v0, #int 0 // #0
+73dbd4: 5910 ef75                              |000a: iput v0, v1, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73dbd8: 1260                                   |000c: const/4 v0, #int 6 // #6
+73dbda: 7020 c1c5 0100                         |000d: invoke-direct {v1, v0}, Lcom/google/gson/stream/JsonWriter;.push:(I)V // method@c5c1
+73dbe0: 1a00 6910                              |0010: const-string v0, ":" // string@1069
+73dbe4: 5b10 ec75                              |0012: iput-object v0, v1, Lcom/google/gson/stream/JsonWriter;.separator:Ljava/lang/String; // field@75ec
+73dbe8: 1210                                   |0014: const/4 v0, #int 1 // #1
+73dbea: 5c10 ed75                              |0015: iput-boolean v0, v1, Lcom/google/gson/stream/JsonWriter;.serializeNulls:Z // field@75ed
+73dbee: 3802 0500                              |0017: if-eqz v2, 001c // +0005
+73dbf2: 5b12 eb75                              |0019: iput-object v2, v1, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73dbf6: 0e00                                   |001b: return-void
+73dbf8: 2201 881a                              |001c: new-instance v1, Ljava/lang/NullPointerException; // type@1a88
+73dbfc: 1a02 30c8                              |001e: const-string v2, "out == null" // string@c830
+73dc00: 7020 bdd1 2100                         |0020: invoke-direct {v1, v2}, Ljava/lang/NullPointerException;.<init>:(Ljava/lang/String;)V // method@d1bd
+73dc06: 2701                                   |0023: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=197
+        0x0005 line=167
+        0x000a line=168
+        0x000d line=170
+        0x0010 line=182
+        0x0015 line=190
+        0x0019 line=201
+        0x001c line=199
+      locals        :
+        0x0000 - 0x0024 reg=1 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0024 reg=2 (null) Ljava/io/Writer;
+
+    #2              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'beforeName'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 34 16-bit code units
+73dc08:                                        |[73dc08] com.google.gson.stream.JsonWriter.beforeName:()V
+73dc18: 7010 c0c5 0200                         |0000: invoke-direct {v2}, Lcom/google/gson/stream/JsonWriter;.peek:()I // method@c5c0
+73dc1e: 0a00                                   |0003: move-result v0
+73dc20: 1251                                   |0004: const/4 v1, #int 5 // #5
+73dc22: 3310 0a00                              |0005: if-ne v0, v1, 000f // +000a
+73dc26: 5420 eb75                              |0007: iget-object v0, v2, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73dc2a: 1301 2c00                              |0009: const/16 v1, #int 44 // #2c
+73dc2e: 6e20 89d0 1000                         |000b: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(I)V // method@d089
+73dc34: 2804                                   |000e: goto 0012 // +0004
+73dc36: 1231                                   |000f: const/4 v1, #int 3 // #3
+73dc38: 3310 0a00                              |0010: if-ne v0, v1, 001a // +000a
+73dc3c: 7010 bdc5 0200                         |0012: invoke-direct {v2}, Lcom/google/gson/stream/JsonWriter;.newline:()V // method@c5bd
+73dc42: 1240                                   |0015: const/4 v0, #int 4 // #4
+73dc44: 7020 c2c5 0200                         |0016: invoke-direct {v2, v0}, Lcom/google/gson/stream/JsonWriter;.replaceTop:(I)V // method@c5c2
+73dc4a: 0e00                                   |0019: return-void
+73dc4c: 2202 7b1a                              |001a: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+73dc50: 1a00 0c58                              |001c: const-string v0, "Nesting problem." // string@580c
+73dc54: 7020 4cd1 0200                         |001e: invoke-direct {v2, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+73dc5a: 2702                                   |0021: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=612
+        0x0007 line=614
+        0x0012 line=618
+        0x0016 line=619
+        0x001a line=616
+      locals        :
+        0x0000 - 0x0022 reg=2 this Lcom/google/gson/stream/JsonWriter;
+
+    #3              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'beforeValue'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 74 16-bit code units
+73dc5c:                                        |[73dc5c] com.google.gson.stream.JsonWriter.beforeValue:()V
+73dc6c: 7010 c0c5 0300                         |0000: invoke-direct {v3}, Lcom/google/gson/stream/JsonWriter;.peek:()I // method@c5c0
+73dc72: 0a00                                   |0003: move-result v0
+73dc74: 1211                                   |0004: const/4 v1, #int 1 // #1
+73dc76: 1222                                   |0005: const/4 v2, #int 2 // #2
+73dc78: 3210 3d00                              |0006: if-eq v0, v1, 0043 // +003d
+73dc7c: 3220 3000                              |0008: if-eq v0, v2, 0038 // +0030
+73dc80: 1241                                   |000a: const/4 v1, #int 4 // #4
+73dc82: 3210 2100                              |000b: if-eq v0, v1, 002c // +0021
+73dc86: 1261                                   |000d: const/4 v1, #int 6 // #6
+73dc88: 1272                                   |000e: const/4 v2, #int 7 // #7
+73dc8a: 3210 1900                              |000f: if-eq v0, v1, 0028 // +0019
+73dc8e: 3320 0f00                              |0011: if-ne v0, v2, 0020 // +000f
+73dc92: 5530 ea75                              |0013: iget-boolean v0, v3, Lcom/google/gson/stream/JsonWriter;.lenient:Z // field@75ea
+73dc96: 3800 0300                              |0015: if-eqz v0, 0018 // +0003
+73dc9a: 2811                                   |0017: goto 0028 // +0011
+73dc9c: 2203 7b1a                              |0018: new-instance v3, Ljava/lang/IllegalStateException; // type@1a7b
+73dca0: 1a00 622e                              |001a: const-string v0, "JSON must have only one top-level value." // string@2e62
+73dca4: 7020 4cd1 0300                         |001c: invoke-direct {v3, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+73dcaa: 2703                                   |001f: throw v3
+73dcac: 2203 7b1a                              |0020: new-instance v3, Ljava/lang/IllegalStateException; // type@1a7b
+73dcb0: 1a00 0c58                              |0022: const-string v0, "Nesting problem." // string@580c
+73dcb4: 7020 4cd1 0300                         |0024: invoke-direct {v3, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+73dcba: 2703                                   |0027: throw v3
+73dcbc: 7020 c2c5 2300                         |0028: invoke-direct {v3, v2}, Lcom/google/gson/stream/JsonWriter;.replaceTop:(I)V // method@c5c2
+73dcc2: 281e                                   |002b: goto 0049 // +001e
+73dcc4: 5430 eb75                              |002c: iget-object v0, v3, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73dcc8: 5431 ec75                              |002e: iget-object v1, v3, Lcom/google/gson/stream/JsonWriter;.separator:Ljava/lang/String; // field@75ec
+73dccc: 6e20 86d0 1000                         |0030: invoke-virtual {v0, v1}, Ljava/io/Writer;.append:(Ljava/lang/CharSequence;)Ljava/io/Writer; // method@d086
+73dcd2: 1250                                   |0033: const/4 v0, #int 5 // #5
+73dcd4: 7020 c2c5 0300                         |0034: invoke-direct {v3, v0}, Lcom/google/gson/stream/JsonWriter;.replaceTop:(I)V // method@c5c2
+73dcda: 2812                                   |0037: goto 0049 // +0012
+73dcdc: 5430 eb75                              |0038: iget-object v0, v3, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73dce0: 1301 2c00                              |003a: const/16 v1, #int 44 // #2c
+73dce4: 6e20 85d0 1000                         |003c: invoke-virtual {v0, v1}, Ljava/io/Writer;.append:(C)Ljava/io/Writer; // method@d085
+73dcea: 7010 bdc5 0300                         |003f: invoke-direct {v3}, Lcom/google/gson/stream/JsonWriter;.newline:()V // method@c5bd
+73dcf0: 2807                                   |0042: goto 0049 // +0007
+73dcf2: 7020 c2c5 2300                         |0043: invoke-direct {v3, v2}, Lcom/google/gson/stream/JsonWriter;.replaceTop:(I)V // method@c5c2
+73dcf8: 7010 bdc5 0300                         |0046: invoke-direct {v3}, Lcom/google/gson/stream/JsonWriter;.newline:()V // method@c5bd
+73dcfe: 0e00                                   |0049: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=629
+        0x0013 line=631
+        0x0018 line=632
+        0x0020 line=656
+        0x0028 line=637
+        0x002c line=651
+        0x0034 line=652
+        0x0038 line=646
+        0x003f line=647
+        0x0043 line=641
+        0x0046 line=642
+      locals        :
+        0x0000 - 0x004a reg=3 this Lcom/google/gson/stream/JsonWriter;
+
+    #4              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'close'
+      type          : '(IILjava/lang/String;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 2
+      insns size    : 61 16-bit code units
+73dd00:                                        |[73dd00] com.google.gson.stream.JsonWriter.close:(IILjava/lang/String;)Lcom/google/gson/stream/JsonWriter;
+73dd10: 7010 c0c5 0100                         |0000: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.peek:()I // method@c5c0
+73dd16: 0a00                                   |0003: move-result v0
+73dd18: 3230 0d00                              |0004: if-eq v0, v3, 0011 // +000d
+73dd1c: 3320 0300                              |0006: if-ne v0, v2, 0009 // +0003
+73dd20: 2809                                   |0008: goto 0011 // +0009
+73dd22: 2201 7b1a                              |0009: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+73dd26: 1a02 0c58                              |000b: const-string v2, "Nesting problem." // string@580c
+73dd2a: 7020 4cd1 2100                         |000d: invoke-direct {v1, v2}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+73dd30: 2701                                   |0010: throw v1
+73dd32: 5412 e775                              |0011: iget-object v2, v1, Lcom/google/gson/stream/JsonWriter;.deferredName:Ljava/lang/String; // field@75e7
+73dd36: 3902 1300                              |0013: if-nez v2, 0026 // +0013
+73dd3a: 5212 ef75                              |0015: iget v2, v1, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73dd3e: d802 02ff                              |0017: add-int/lit8 v2, v2, #int -1 // #ff
+73dd42: 5912 ef75                              |0019: iput v2, v1, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73dd46: 3330 0500                              |001b: if-ne v0, v3, 0020 // +0005
+73dd4a: 7010 bdc5 0100                         |001d: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.newline:()V // method@c5bd
+73dd50: 5412 eb75                              |0020: iget-object v2, v1, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73dd54: 6e20 8ad0 4200                         |0022: invoke-virtual {v2, v4}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73dd5a: 1101                                   |0025: return-object v1
+73dd5c: 2202 7b1a                              |0026: new-instance v2, Ljava/lang/IllegalStateException; // type@1a7b
+73dd60: 2203 991a                              |0028: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+73dd64: 1a04 b021                              |002a: const-string v4, "Dangling name: " // string@21b0
+73dd68: 7020 3cd2 4300                         |002c: invoke-direct {v3, v4}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+73dd6e: 5411 e775                              |002f: iget-object v1, v1, Lcom/google/gson/stream/JsonWriter;.deferredName:Ljava/lang/String; // field@75e7
+73dd72: 6e20 45d2 1300                         |0031: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+73dd78: 0c01                                   |0034: move-result-object v1
+73dd7a: 6e10 58d2 0100                         |0035: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+73dd80: 0c01                                   |0038: move-result-object v1
+73dd82: 7020 4cd1 1200                         |0039: invoke-direct {v2, v1}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+73dd88: 2702                                   |003c: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=337
+        0x0009 line=339
+        0x0011 line=341
+        0x0015 line=345
+        0x001d line=347
+        0x0020 line=349
+        0x0026 line=342
+      locals        :
+        0x0000 - 0x003d reg=1 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x003d reg=2 (null) I
+        0x0000 - 0x003d reg=3 (null) I
+        0x0000 - 0x003d reg=4 (null) Ljava/lang/String;
+
+    #5              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'newline'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 28 16-bit code units
+73dd8c:                                        |[73dd8c] com.google.gson.stream.JsonWriter.newline:()V
+73dd9c: 5440 e975                              |0000: iget-object v0, v4, Lcom/google/gson/stream/JsonWriter;.indent:Ljava/lang/String; // field@75e9
+73dda0: 3900 0300                              |0002: if-nez v0, 0005 // +0003
+73dda4: 0e00                                   |0004: return-void
+73dda6: 5440 eb75                              |0005: iget-object v0, v4, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73ddaa: 1a01 9502                              |0007: const-string v1, "\n" // string@0295
+73ddae: 6e20 8ad0 1000                         |0009: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73ddb4: 5240 ef75                              |000c: iget v0, v4, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73ddb8: 1211                                   |000e: const/4 v1, #int 1 // #1
+73ddba: 3501 0c00                              |000f: if-ge v1, v0, 001b // +000c
+73ddbe: 5442 eb75                              |0011: iget-object v2, v4, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73ddc2: 5443 e975                              |0013: iget-object v3, v4, Lcom/google/gson/stream/JsonWriter;.indent:Ljava/lang/String; // field@75e9
+73ddc6: 6e20 8ad0 3200                         |0015: invoke-virtual {v2, v3}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73ddcc: d801 0101                              |0018: add-int/lit8 v1, v1, #int 1 // #01
+73ddd0: 28f5                                   |001a: goto 000f // -000b
+73ddd2: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=597
+        0x0005 line=601
+        0x000c line=602
+        0x0011 line=603
+      locals        :
+        0x0000 - 0x001c reg=4 this Lcom/google/gson/stream/JsonWriter;
+
+    #6              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'open'
+      type          : '(ILjava/lang/String;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 12 16-bit code units
+73ddd4:                                        |[73ddd4] com.google.gson.stream.JsonWriter.open:(ILjava/lang/String;)Lcom/google/gson/stream/JsonWriter;
+73dde4: 7010 b0c5 0000                         |0000: invoke-direct {v0}, Lcom/google/gson/stream/JsonWriter;.beforeValue:()V // method@c5b0
+73ddea: 7020 c1c5 1000                         |0003: invoke-direct {v0, v1}, Lcom/google/gson/stream/JsonWriter;.push:(I)V // method@c5c1
+73ddf0: 5401 eb75                              |0006: iget-object v1, v0, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73ddf4: 6e20 8ad0 2100                         |0008: invoke-virtual {v1, v2}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73ddfa: 1100                                   |000b: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=325
+        0x0003 line=326
+        0x0006 line=327
+      locals        :
+        0x0000 - 0x000c reg=0 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x000c reg=1 (null) I
+        0x0000 - 0x000c reg=2 (null) Ljava/lang/String;
+
+    #7              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'peek'
+      type          : '()I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 19 16-bit code units
+73ddfc:                                        |[73ddfc] com.google.gson.stream.JsonWriter.peek:()I
+73de0c: 5210 ef75                              |0000: iget v0, v1, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73de10: 3800 0900                              |0002: if-eqz v0, 000b // +0009
+73de14: 5411 ee75                              |0004: iget-object v1, v1, Lcom/google/gson/stream/JsonWriter;.stack:[I // field@75ee
+73de18: d800 00ff                              |0006: add-int/lit8 v0, v0, #int -1 // #ff
+73de1c: 4401 0100                              |0008: aget v1, v1, v0
+73de20: 0f01                                   |000a: return v1
+73de22: 2201 7b1a                              |000b: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+73de26: 1a00 132f                              |000d: const-string v0, "JsonWriter is closed." // string@2f13
+73de2a: 7020 4cd1 0100                         |000f: invoke-direct {v1, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+73de30: 2701                                   |0012: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=366
+        0x0004 line=369
+        0x000b line=367
+      locals        :
+        0x0000 - 0x0013 reg=1 this Lcom/google/gson/stream/JsonWriter;
+
+    #8              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'push'
+      type          : '(I)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 5
+      insns size    : 28 16-bit code units
+73de34:                                        |[73de34] com.google.gson.stream.JsonWriter.push:(I)V
+73de44: 5240 ef75                              |0000: iget v0, v4, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73de48: 5441 ee75                              |0002: iget-object v1, v4, Lcom/google/gson/stream/JsonWriter;.stack:[I // field@75ee
+73de4c: 2112                                   |0004: array-length v2, v1
+73de4e: 3320 0c00                              |0005: if-ne v0, v2, 0011 // +000c
+73de52: da02 0002                              |0007: mul-int/lit8 v2, v0, #int 2 // #02
+73de56: 2322 801f                              |0009: new-array v2, v2, [I // type@1f80
+73de5a: 1203                                   |000b: const/4 v3, #int 0 // #0
+73de5c: 7150 5ad2 3132                         |000c: invoke-static {v1, v3, v2, v3, v0}, Ljava/lang/System;.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V // method@d25a
+73de62: 5b42 ee75                              |000f: iput-object v2, v4, Lcom/google/gson/stream/JsonWriter;.stack:[I // field@75ee
+73de66: 5440 ee75                              |0011: iget-object v0, v4, Lcom/google/gson/stream/JsonWriter;.stack:[I // field@75ee
+73de6a: 5241 ef75                              |0013: iget v1, v4, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73de6e: d802 0101                              |0015: add-int/lit8 v2, v1, #int 1 // #01
+73de72: 5942 ef75                              |0017: iput v2, v4, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73de76: 4b05 0001                              |0019: aput v5, v0, v1
+73de7a: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=354
+        0x0009 line=355
+        0x000c line=356
+        0x000f line=357
+        0x0011 line=359
+      locals        :
+        0x0000 - 0x001c reg=4 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x001c reg=5 (null) I
+
+    #9              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'replaceTop'
+      type          : '(I)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 0
+      insns size    : 9 16-bit code units
+73de7c:                                        |[73de7c] com.google.gson.stream.JsonWriter.replaceTop:(I)V
+73de8c: 5410 ee75                              |0000: iget-object v0, v1, Lcom/google/gson/stream/JsonWriter;.stack:[I // field@75ee
+73de90: 5211 ef75                              |0002: iget v1, v1, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73de94: d801 01ff                              |0004: add-int/lit8 v1, v1, #int -1 // #ff
+73de98: 4b02 0001                              |0006: aput v2, v0, v1
+73de9c: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=376
+      locals        :
+        0x0000 - 0x0009 reg=1 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0009 reg=2 (null) I
+
+    #10              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'string'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 2
+      outs          : 4
+      insns size    : 83 16-bit code units
+73dea0:                                        |[73dea0] com.google.gson.stream.JsonWriter.string:(Ljava/lang/String;)V
+73deb0: 5580 e875                              |0000: iget-boolean v0, v8, Lcom/google/gson/stream/JsonWriter;.htmlSafe:Z // field@75e8
+73deb4: 3800 0500                              |0002: if-eqz v0, 0007 // +0005
+73deb8: 6200 e575                              |0004: sget-object v0, Lcom/google/gson/stream/JsonWriter;.HTML_SAFE_REPLACEMENT_CHARS:[Ljava/lang/String; // field@75e5
+73debc: 2803                                   |0006: goto 0009 // +0003
+73debe: 6200 e675                              |0007: sget-object v0, Lcom/google/gson/stream/JsonWriter;.REPLACEMENT_CHARS:[Ljava/lang/String; // field@75e6
+73dec2: 5481 eb75                              |0009: iget-object v1, v8, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73dec6: 1a02 0c05                              |000b: const-string v2, "\"" // string@050c
+73deca: 6e20 8ad0 2100                         |000d: invoke-virtual {v1, v2}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73ded0: 6e10 16d2 0900                         |0010: invoke-virtual {v9}, Ljava/lang/String;.length:()I // method@d216
+73ded6: 0a01                                   |0013: move-result v1
+73ded8: 1203                                   |0014: const/4 v3, #int 0 // #0
+73deda: 0134                                   |0015: move v4, v3
+73dedc: 3513 2f00                              |0016: if-ge v3, v1, 0045 // +002f
+73dee0: 6e20 f7d1 3900                         |0018: invoke-virtual {v9, v3}, Ljava/lang/String;.charAt:(I)C // method@d1f7
+73dee6: 0a05                                   |001b: move-result v5
+73dee8: 1306 8000                              |001c: const/16 v6, #int 128 // #80
+73deec: 3565 0700                              |001e: if-ge v5, v6, 0025 // +0007
+73def0: 4605 0005                              |0020: aget-object v5, v0, v5
+73def4: 3905 1000                              |0022: if-nez v5, 0032 // +0010
+73def8: 281e                                   |0024: goto 0042 // +001e
+73defa: 1306 2820                              |0025: const/16 v6, #int 8232 // #2028
+73defe: 3365 0500                              |0027: if-ne v5, v6, 002c // +0005
+73df02: 1a05 cb72                              |0029: const-string v5, "\\u2028" // string@72cb
+73df06: 2807                                   |002b: goto 0032 // +0007
+73df08: 1306 2920                              |002c: const/16 v6, #int 8233 // #2029
+73df0c: 3365 1400                              |002e: if-ne v5, v6, 0042 // +0014
+73df10: 1a05 cc72                              |0030: const-string v5, "\\u2029" // string@72cc
+73df14: 3534 0900                              |0032: if-ge v4, v3, 003b // +0009
+73df18: 5486 eb75                              |0034: iget-object v6, v8, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73df1c: 9107 0304                              |0036: sub-int v7, v3, v4
+73df20: 6e40 8bd0 9674                         |0038: invoke-virtual {v6, v9, v4, v7}, Ljava/io/Writer;.write:(Ljava/lang/String;II)V // method@d08b
+73df26: 5484 eb75                              |003b: iget-object v4, v8, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73df2a: 6e20 8ad0 5400                         |003d: invoke-virtual {v4, v5}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73df30: d804 0301                              |0040: add-int/lit8 v4, v3, #int 1 // #01
+73df34: d803 0301                              |0042: add-int/lit8 v3, v3, #int 1 // #01
+73df38: 28d2                                   |0044: goto 0016 // -002e
+73df3a: 3514 0800                              |0045: if-ge v4, v1, 004d // +0008
+73df3e: 5480 eb75                              |0047: iget-object v0, v8, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73df42: b141                                   |0049: sub-int/2addr v1, v4
+73df44: 6e40 8bd0 9014                         |004a: invoke-virtual {v0, v9, v4, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;II)V // method@d08b
+73df4a: 5488 eb75                              |004d: iget-object v8, v8, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73df4e: 6e20 8ad0 2800                         |004f: invoke-virtual {v8, v2}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73df54: 0e00                                   |0052: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=565
+        0x0009 line=566
+        0x0010 line=568
+        0x0018 line=570
+        0x0020 line=573
+        0x0029 line=578
+        0x0030 line=580
+        0x0034 line=585
+        0x003b line=587
+        0x0047 line=591
+        0x004d line=593
+      locals        :
+        0x0000 - 0x0053 reg=8 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0053 reg=9 (null) Ljava/lang/String;
+
+    #11              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'writeDeferredName'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 16 16-bit code units
+73df58:                                        |[73df58] com.google.gson.stream.JsonWriter.writeDeferredName:()V
+73df68: 5410 e775                              |0000: iget-object v0, v1, Lcom/google/gson/stream/JsonWriter;.deferredName:Ljava/lang/String; // field@75e7
+73df6c: 3800 0d00                              |0002: if-eqz v0, 000f // +000d
+73df70: 7010 afc5 0100                         |0004: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.beforeName:()V // method@c5af
+73df76: 5410 e775                              |0007: iget-object v0, v1, Lcom/google/gson/stream/JsonWriter;.deferredName:Ljava/lang/String; // field@75e7
+73df7a: 7020 c7c5 0100                         |0009: invoke-direct {v1, v0}, Lcom/google/gson/stream/JsonWriter;.string:(Ljava/lang/String;)V // method@c5c7
+73df80: 1200                                   |000c: const/4 v0, #int 0 // #0
+73df82: 5b10 e775                              |000d: iput-object v0, v1, Lcom/google/gson/stream/JsonWriter;.deferredName:Ljava/lang/String; // field@75e7
+73df86: 0e00                                   |000f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=400
+        0x0004 line=401
+        0x0007 line=402
+        0x000d line=403
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/google/gson/stream/JsonWriter;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'beginArray'
+      type          : '()Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 11 16-bit code units
+73df88:                                        |[73df88] com.google.gson.stream.JsonWriter.beginArray:()Lcom/google/gson/stream/JsonWriter;
+73df98: 7010 cec5 0200                         |0000: invoke-direct {v2}, Lcom/google/gson/stream/JsonWriter;.writeDeferredName:()V // method@c5ce
+73df9e: 1210                                   |0003: const/4 v0, #int 1 // #1
+73dfa0: 1a01 c170                              |0004: const-string v1, "[" // string@70c1
+73dfa4: 7030 bfc5 0201                         |0006: invoke-direct {v2, v0, v1}, Lcom/google/gson/stream/JsonWriter;.open:(ILjava/lang/String;)Lcom/google/gson/stream/JsonWriter; // method@c5bf
+73dfaa: 0c02                                   |0009: move-result-object v2
+73dfac: 1102                                   |000a: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=287
+        0x0004 line=288
+      locals        :
+        0x0000 - 0x000b reg=2 this Lcom/google/gson/stream/JsonWriter;
+
+    #1              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'beginObject'
+      type          : '()Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 11 16-bit code units
+73dfb0:                                        |[73dfb0] com.google.gson.stream.JsonWriter.beginObject:()Lcom/google/gson/stream/JsonWriter;
+73dfc0: 7010 cec5 0200                         |0000: invoke-direct {v2}, Lcom/google/gson/stream/JsonWriter;.writeDeferredName:()V // method@c5ce
+73dfc6: 1230                                   |0003: const/4 v0, #int 3 // #3
+73dfc8: 1a01 b3e9                              |0004: const-string v1, "{" // string@e9b3
+73dfcc: 7030 bfc5 0201                         |0006: invoke-direct {v2, v0, v1}, Lcom/google/gson/stream/JsonWriter;.open:(ILjava/lang/String;)Lcom/google/gson/stream/JsonWriter; // method@c5bf
+73dfd2: 0c02                                   |0009: move-result-object v2
+73dfd4: 1102                                   |000a: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=307
+        0x0004 line=308
+      locals        :
+        0x0000 - 0x000b reg=2 this Lcom/google/gson/stream/JsonWriter;
+
+    #2              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 32 16-bit code units
+73dfd8:                                        |[73dfd8] com.google.gson.stream.JsonWriter.close:()V
+73dfe8: 5430 eb75                              |0000: iget-object v0, v3, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73dfec: 6e10 87d0 0000                         |0002: invoke-virtual {v0}, Ljava/io/Writer;.close:()V // method@d087
+73dff2: 5230 ef75                              |0005: iget v0, v3, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73dff6: 1211                                   |0007: const/4 v1, #int 1 // #1
+73dff8: 3610 1000                              |0008: if-gt v0, v1, 0018 // +0010
+73dffc: 3310 0a00                              |000a: if-ne v0, v1, 0014 // +000a
+73e000: 5432 ee75                              |000c: iget-object v2, v3, Lcom/google/gson/stream/JsonWriter;.stack:[I // field@75ee
+73e004: b110                                   |000e: sub-int/2addr v0, v1
+73e006: 4400 0200                              |000f: aget v0, v2, v0
+73e00a: 1271                                   |0011: const/4 v1, #int 7 // #7
+73e00c: 3310 0600                              |0012: if-ne v0, v1, 0018 // +0006
+73e010: 1200                                   |0014: const/4 v0, #int 0 // #0
+73e012: 5930 ef75                              |0015: iput v0, v3, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73e016: 0e00                                   |0017: return-void
+73e018: 2203 481a                              |0018: new-instance v3, Ljava/io/IOException; // type@1a48
+73e01c: 1a00 c92c                              |001a: const-string v0, "Incomplete document" // string@2cc9
+73e020: 7020 14d0 0300                         |001c: invoke-direct {v3, v0}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+73e026: 2703                                   |001f: throw v3
+      catches       : (none)
+      positions     :
+        0x0000 line=555
+        0x0005 line=557
+        0x000c line=558
+        0x0015 line=561
+        0x0018 line=559
+      locals        :
+        0x0000 - 0x0020 reg=3 this Lcom/google/gson/stream/JsonWriter;
+
+    #3              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'endArray'
+      type          : '()Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 9 16-bit code units
+73e028:                                        |[73e028] com.google.gson.stream.JsonWriter.endArray:()Lcom/google/gson/stream/JsonWriter;
+73e038: 1220                                   |0000: const/4 v0, #int 2 // #2
+73e03a: 1a01 d072                              |0001: const-string v1, "]" // string@72d0
+73e03e: 1212                                   |0003: const/4 v2, #int 1 // #1
+73e040: 7040 b3c5 2310                         |0004: invoke-direct {v3, v2, v0, v1}, Lcom/google/gson/stream/JsonWriter;.close:(IILjava/lang/String;)Lcom/google/gson/stream/JsonWriter; // method@c5b3
+73e046: 0c03                                   |0007: move-result-object v3
+73e048: 1103                                   |0008: return-object v3
+      catches       : (none)
+      positions     :
+        0x0001 line=297
+      locals        :
+        0x0000 - 0x0009 reg=3 this Lcom/google/gson/stream/JsonWriter;
+
+    #4              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'endObject'
+      type          : '()Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 9 16-bit code units
+73e04c:                                        |[73e04c] com.google.gson.stream.JsonWriter.endObject:()Lcom/google/gson/stream/JsonWriter;
+73e05c: 1250                                   |0000: const/4 v0, #int 5 // #5
+73e05e: 1a01 d0e9                              |0001: const-string v1, "}" // string@e9d0
+73e062: 1232                                   |0003: const/4 v2, #int 3 // #3
+73e064: 7040 b3c5 2310                         |0004: invoke-direct {v3, v2, v0, v1}, Lcom/google/gson/stream/JsonWriter;.close:(IILjava/lang/String;)Lcom/google/gson/stream/JsonWriter; // method@c5b3
+73e06a: 0c03                                   |0007: move-result-object v3
+73e06c: 1103                                   |0008: return-object v3
+      catches       : (none)
+      positions     :
+        0x0001 line=317
+      locals        :
+        0x0000 - 0x0009 reg=3 this Lcom/google/gson/stream/JsonWriter;
+
+    #5              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'flush'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 18 16-bit code units
+73e070:                                        |[73e070] com.google.gson.stream.JsonWriter.flush:()V
+73e080: 5210 ef75                              |0000: iget v0, v1, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73e084: 3800 0800                              |0002: if-eqz v0, 000a // +0008
+73e088: 5411 eb75                              |0004: iget-object v1, v1, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73e08c: 6e10 88d0 0100                         |0006: invoke-virtual {v1}, Ljava/io/Writer;.flush:()V // method@d088
+73e092: 0e00                                   |0009: return-void
+73e094: 2201 7b1a                              |000a: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+73e098: 1a00 132f                              |000c: const-string v0, "JsonWriter is closed." // string@2f13
+73e09c: 7020 4cd1 0100                         |000e: invoke-direct {v1, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+73e0a2: 2701                                   |0011: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=543
+        0x0004 line=546
+        0x000a line=544
+      locals        :
+        0x0000 - 0x0012 reg=1 this Lcom/google/gson/stream/JsonWriter;
+
+    #6              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'getSerializeNulls'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+73e0a4:                                        |[73e0a4] com.google.gson.stream.JsonWriter.getSerializeNulls:()Z
+73e0b4: 5500 ed75                              |0000: iget-boolean v0, v0, Lcom/google/gson/stream/JsonWriter;.serializeNulls:Z // field@75ed
+73e0b8: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=277
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/google/gson/stream/JsonWriter;
+
+    #7              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'isHtmlSafe'
+      type          : '()Z'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+73e0bc:                                        |[73e0bc] com.google.gson.stream.JsonWriter.isHtmlSafe:()Z
+73e0cc: 5500 e875                              |0000: iget-boolean v0, v0, Lcom/google/gson/stream/JsonWriter;.htmlSafe:Z // field@75e8
+73e0d0: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=261
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/google/gson/stream/JsonWriter;
+
+    #8              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'isLenient'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+73e0d4:                                        |[73e0d4] com.google.gson.stream.JsonWriter.isLenient:()Z
+73e0e4: 5500 ea75                              |0000: iget-boolean v0, v0, Lcom/google/gson/stream/JsonWriter;.lenient:Z // field@75ea
+73e0e8: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=242
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/google/gson/stream/JsonWriter;
+
+    #9              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'jsonValue'
+      type          : '(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 19 16-bit code units
+73e0ec:                                        |[73e0ec] com.google.gson.stream.JsonWriter.jsonValue:(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;
+73e0fc: 3902 0700                              |0000: if-nez v2, 0007 // +0007
+73e100: 6e10 bec5 0100                         |0002: invoke-virtual {v1}, Lcom/google/gson/stream/JsonWriter;.nullValue:()Lcom/google/gson/stream/JsonWriter; // method@c5be
+73e106: 0c01                                   |0005: move-result-object v1
+73e108: 1101                                   |0006: return-object v1
+73e10a: 7010 cec5 0100                         |0007: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.writeDeferredName:()V // method@c5ce
+73e110: 7010 b0c5 0100                         |000a: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.beforeValue:()V // method@c5b0
+73e116: 5410 eb75                              |000d: iget-object v0, v1, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73e11a: 6e20 86d0 2000                         |000f: invoke-virtual {v0, v2}, Ljava/io/Writer;.append:(Ljava/lang/CharSequence;)Ljava/io/Writer; // method@d086
+73e120: 1101                                   |0012: return-object v1
+      catches       : (none)
+      positions     :
+        0x0002 line=432
+        0x0007 line=434
+        0x000a line=435
+        0x000d line=436
+      locals        :
+        0x0000 - 0x0013 reg=1 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0013 reg=2 (null) Ljava/lang/String;
+
+    #10              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'name'
+      type          : '(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 35 16-bit code units
+73e124:                                        |[73e124] com.google.gson.stream.JsonWriter.name:(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;
+73e134: 3802 1b00                              |0000: if-eqz v2, 001b // +001b
+73e138: 5410 e775                              |0002: iget-object v0, v1, Lcom/google/gson/stream/JsonWriter;.deferredName:Ljava/lang/String; // field@75e7
+73e13c: 3900 1100                              |0004: if-nez v0, 0015 // +0011
+73e140: 5210 ef75                              |0006: iget v0, v1, Lcom/google/gson/stream/JsonWriter;.stackSize:I // field@75ef
+73e144: 3800 0500                              |0008: if-eqz v0, 000d // +0005
+73e148: 5b12 e775                              |000a: iput-object v2, v1, Lcom/google/gson/stream/JsonWriter;.deferredName:Ljava/lang/String; // field@75e7
+73e14c: 1101                                   |000c: return-object v1
+73e14e: 2201 7b1a                              |000d: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+73e152: 1a02 132f                              |000f: const-string v2, "JsonWriter is closed." // string@2f13
+73e156: 7020 4cd1 2100                         |0011: invoke-direct {v1, v2}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+73e15c: 2701                                   |0014: throw v1
+73e15e: 2201 7b1a                              |0015: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+73e162: 7010 4bd1 0100                         |0017: invoke-direct {v1}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+73e168: 2701                                   |001a: throw v1
+73e16a: 2201 881a                              |001b: new-instance v1, Ljava/lang/NullPointerException; // type@1a88
+73e16e: 1a02 49c2                              |001d: const-string v2, "name == null" // string@c249
+73e172: 7020 bdd1 2100                         |001f: invoke-direct {v1, v2}, Ljava/lang/NullPointerException;.<init>:(Ljava/lang/String;)V // method@d1bd
+73e178: 2701                                   |0022: throw v1
+      catches       : (none)
+      positions     :
+        0x0002 line=389
+        0x0006 line=392
+        0x000a line=395
+        0x000d line=393
+        0x0015 line=390
+        0x001b line=387
+      locals        :
+        0x0000 - 0x0023 reg=1 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0023 reg=2 (null) Ljava/lang/String;
+
+    #11              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'nullValue'
+      type          : '()Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 27 16-bit code units
+73e17c:                                        |[73e17c] com.google.gson.stream.JsonWriter.nullValue:()Lcom/google/gson/stream/JsonWriter;
+73e18c: 5420 e775                              |0000: iget-object v0, v2, Lcom/google/gson/stream/JsonWriter;.deferredName:Ljava/lang/String; // field@75e7
+73e190: 3800 0e00                              |0002: if-eqz v0, 0010 // +000e
+73e194: 5520 ed75                              |0004: iget-boolean v0, v2, Lcom/google/gson/stream/JsonWriter;.serializeNulls:Z // field@75ed
+73e198: 3800 0600                              |0006: if-eqz v0, 000c // +0006
+73e19c: 7010 cec5 0200                         |0008: invoke-direct {v2}, Lcom/google/gson/stream/JsonWriter;.writeDeferredName:()V // method@c5ce
+73e1a2: 2805                                   |000b: goto 0010 // +0005
+73e1a4: 1200                                   |000c: const/4 v0, #int 0 // #0
+73e1a6: 5b20 e775                              |000d: iput-object v0, v2, Lcom/google/gson/stream/JsonWriter;.deferredName:Ljava/lang/String; // field@75e7
+73e1aa: 1102                                   |000f: return-object v2
+73e1ac: 7010 b0c5 0200                         |0010: invoke-direct {v2}, Lcom/google/gson/stream/JsonWriter;.beforeValue:()V // method@c5b0
+73e1b2: 5420 eb75                              |0013: iget-object v0, v2, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73e1b6: 1a01 38c4                              |0015: const-string v1, "null" // string@c438
+73e1ba: 6e20 8ad0 1000                         |0017: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73e1c0: 1102                                   |001a: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=446
+        0x0004 line=447
+        0x0008 line=448
+        0x000d line=450
+        0x0010 line=454
+        0x0013 line=455
+      locals        :
+        0x0000 - 0x001b reg=2 this Lcom/google/gson/stream/JsonWriter;
+
+    #12              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'setHtmlSafe'
+      type          : '(Z)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+73e1c4:                                        |[73e1c4] com.google.gson.stream.JsonWriter.setHtmlSafe:(Z)V
+73e1d4: 5c01 e875                              |0000: iput-boolean v1, v0, Lcom/google/gson/stream/JsonWriter;.htmlSafe:Z // field@75e8
+73e1d8: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=253
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0003 reg=1 (null) Z
+
+    #13              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'setIndent'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 21 16-bit code units
+73e1dc:                                        |[73e1dc] com.google.gson.stream.JsonWriter.setIndent:(Ljava/lang/String;)V
+73e1ec: 6e10 16d2 0200                         |0000: invoke-virtual {v2}, Ljava/lang/String;.length:()I // method@d216
+73e1f2: 0a00                                   |0003: move-result v0
+73e1f4: 3900 0a00                              |0004: if-nez v0, 000e // +000a
+73e1f8: 1202                                   |0006: const/4 v2, #int 0 // #0
+73e1fa: 5b12 e975                              |0007: iput-object v2, v1, Lcom/google/gson/stream/JsonWriter;.indent:Ljava/lang/String; // field@75e9
+73e1fe: 1a02 6910                              |0009: const-string v2, ":" // string@1069
+73e202: 5b12 ec75                              |000b: iput-object v2, v1, Lcom/google/gson/stream/JsonWriter;.separator:Ljava/lang/String; // field@75ec
+73e206: 2807                                   |000d: goto 0014 // +0007
+73e208: 5b12 e975                              |000e: iput-object v2, v1, Lcom/google/gson/stream/JsonWriter;.indent:Ljava/lang/String; // field@75e9
+73e20c: 1a02 6b10                              |0010: const-string v2, ": " // string@106b
+73e210: 5b12 ec75                              |0012: iput-object v2, v1, Lcom/google/gson/stream/JsonWriter;.separator:Ljava/lang/String; // field@75ec
+73e214: 0e00                                   |0014: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=213
+        0x0007 line=214
+        0x0009 line=215
+        0x000e line=217
+        0x0010 line=218
+      locals        :
+        0x0000 - 0x0015 reg=1 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0015 reg=2 (null) Ljava/lang/String;
+
+    #14              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'setLenient'
+      type          : '(Z)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+73e218:                                        |[73e218] com.google.gson.stream.JsonWriter.setLenient:(Z)V
+73e228: 5c01 ea75                              |0000: iput-boolean v1, v0, Lcom/google/gson/stream/JsonWriter;.lenient:Z // field@75ea
+73e22c: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=235
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0003 reg=1 (null) Z
+
+    #15              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'setSerializeNulls'
+      type          : '(Z)V'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+73e230:                                        |[73e230] com.google.gson.stream.JsonWriter.setSerializeNulls:(Z)V
+73e240: 5c01 ed75                              |0000: iput-boolean v1, v0, Lcom/google/gson/stream/JsonWriter;.serializeNulls:Z // field@75ed
+73e244: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=269
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0003 reg=1 (null) Z
+
+    #16              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'value'
+      type          : '(D)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 49 16-bit code units
+73e248:                                        |[73e248] com.google.gson.stream.JsonWriter.value:(D)Lcom/google/gson/stream/JsonWriter;
+73e258: 7120 19d1 4300                         |0000: invoke-static {v3, v4}, Ljava/lang/Double;.isNaN:(D)Z // method@d119
+73e25e: 0a00                                   |0003: move-result v0
+73e260: 3900 1800                              |0004: if-nez v0, 001c // +0018
+73e264: 7120 17d1 4300                         |0006: invoke-static {v3, v4}, Ljava/lang/Double;.isInfinite:(D)Z // method@d117
+73e26a: 0a00                                   |0009: move-result v0
+73e26c: 3900 1200                              |000a: if-nez v0, 001c // +0012
+73e270: 7010 cec5 0200                         |000c: invoke-direct {v2}, Lcom/google/gson/stream/JsonWriter;.writeDeferredName:()V // method@c5ce
+73e276: 7010 b0c5 0200                         |000f: invoke-direct {v2}, Lcom/google/gson/stream/JsonWriter;.beforeValue:()V // method@c5b0
+73e27c: 5420 eb75                              |0012: iget-object v0, v2, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73e280: 7120 1cd1 4300                         |0014: invoke-static {v3, v4}, Ljava/lang/Double;.toString:(D)Ljava/lang/String; // method@d11c
+73e286: 0c03                                   |0017: move-result-object v3
+73e288: 6e20 86d0 3000                         |0018: invoke-virtual {v0, v3}, Ljava/io/Writer;.append:(Ljava/lang/CharSequence;)Ljava/io/Writer; // method@d086
+73e28e: 1102                                   |001b: return-object v2
+73e290: 2202 7a1a                              |001c: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+73e294: 2200 991a                              |001e: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+73e298: 1a01 2d59                              |0020: const-string v1, "Numeric values must be finite, but was " // string@592d
+73e29c: 7020 3cd2 1000                         |0022: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+73e2a2: 6e30 3ed2 3004                         |0025: invoke-virtual {v0, v3, v4}, Ljava/lang/StringBuilder;.append:(D)Ljava/lang/StringBuilder; // method@d23e
+73e2a8: 0c03                                   |0028: move-result-object v3
+73e2aa: 6e10 58d2 0300                         |0029: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+73e2b0: 0c03                                   |002c: move-result-object v3
+73e2b2: 7020 47d1 3200                         |002d: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+73e2b8: 2702                                   |0030: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=494
+        0x000c line=497
+        0x000f line=498
+        0x0012 line=499
+        0x001c line=495
+      locals        :
+        0x0000 - 0x0031 reg=2 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0031 reg=3 (null) D
+
+    #17              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'value'
+      type          : '(J)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 2
+      insns size    : 16 16-bit code units
+73e2bc:                                        |[73e2bc] com.google.gson.stream.JsonWriter.value:(J)Lcom/google/gson/stream/JsonWriter;
+73e2cc: 7010 cec5 0100                         |0000: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.writeDeferredName:()V // method@c5ce
+73e2d2: 7010 b0c5 0100                         |0003: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.beforeValue:()V // method@c5b0
+73e2d8: 5410 eb75                              |0006: iget-object v0, v1, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73e2dc: 7120 80d1 3200                         |0008: invoke-static {v2, v3}, Ljava/lang/Long;.toString:(J)Ljava/lang/String; // method@d180
+73e2e2: 0c02                                   |000b: move-result-object v2
+73e2e4: 6e20 8ad0 2000                         |000c: invoke-virtual {v0, v2}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73e2ea: 1101                                   |000f: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=509
+        0x0003 line=510
+        0x0006 line=511
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0010 reg=2 (null) J
+
+    #18              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'value'
+      type          : '(Ljava/lang/Boolean;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 30 16-bit code units
+73e2ec:                                        |[73e2ec] com.google.gson.stream.JsonWriter.value:(Ljava/lang/Boolean;)Lcom/google/gson/stream/JsonWriter;
+73e2fc: 3902 0700                              |0000: if-nez v2, 0007 // +0007
+73e300: 6e10 bec5 0100                         |0002: invoke-virtual {v1}, Lcom/google/gson/stream/JsonWriter;.nullValue:()Lcom/google/gson/stream/JsonWriter; // method@c5be
+73e306: 0c01                                   |0005: move-result-object v1
+73e308: 1101                                   |0006: return-object v1
+73e30a: 7010 cec5 0100                         |0007: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.writeDeferredName:()V // method@c5ce
+73e310: 7010 b0c5 0100                         |000a: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.beforeValue:()V // method@c5b0
+73e316: 5410 eb75                              |000d: iget-object v0, v1, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73e31a: 6e10 9bd0 0200                         |000f: invoke-virtual {v2}, Ljava/lang/Boolean;.booleanValue:()Z // method@d09b
+73e320: 0a02                                   |0012: move-result v2
+73e322: 3802 0500                              |0013: if-eqz v2, 0018 // +0005
+73e326: 1a02 f2e2                              |0015: const-string v2, "true" // string@e2f2
+73e32a: 2803                                   |0017: goto 001a // +0003
+73e32c: 1a02 6893                              |0018: const-string v2, "false" // string@9368
+73e330: 6e20 8ad0 2000                         |001a: invoke-virtual {v0, v2}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73e336: 1101                                   |001d: return-object v1
+      catches       : (none)
+      positions     :
+        0x0002 line=478
+        0x0007 line=480
+        0x000a line=481
+        0x000d line=482
+      locals        :
+        0x0000 - 0x001e reg=1 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x001e reg=2 (null) Ljava/lang/Boolean;
+
+    #19              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'value'
+      type          : '(Ljava/lang/Number;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 73 16-bit code units
+73e338:                                        |[73e338] com.google.gson.stream.JsonWriter.value:(Ljava/lang/Number;)Lcom/google/gson/stream/JsonWriter;
+73e348: 3903 0700                              |0000: if-nez v3, 0007 // +0007
+73e34c: 6e10 bec5 0200                         |0002: invoke-virtual {v2}, Lcom/google/gson/stream/JsonWriter;.nullValue:()Lcom/google/gson/stream/JsonWriter; // method@c5be
+73e352: 0c02                                   |0005: move-result-object v2
+73e354: 1102                                   |0006: return-object v2
+73e356: 7010 cec5 0200                         |0007: invoke-direct {v2}, Lcom/google/gson/stream/JsonWriter;.writeDeferredName:()V // method@c5ce
+73e35c: 6e10 d0d1 0300                         |000a: invoke-virtual {v3}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@d1d0
+73e362: 0c00                                   |000d: move-result-object v0
+73e364: 5521 ea75                              |000e: iget-boolean v1, v2, Lcom/google/gson/stream/JsonWriter;.lenient:Z // field@75ea
+73e368: 3901 3000                              |0010: if-nez v1, 0040 // +0030
+73e36c: 1a01 1b0f                              |0012: const-string v1, "-Infinity" // string@0f1b
+73e370: 6e20 03d2 1000                         |0014: invoke-virtual {v0, v1}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+73e376: 0a01                                   |0017: move-result v1
+73e378: 3901 1300                              |0018: if-nez v1, 002b // +0013
+73e37c: 1a01 e52c                              |001a: const-string v1, "Infinity" // string@2ce5
+73e380: 6e20 03d2 1000                         |001c: invoke-virtual {v0, v1}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+73e386: 0a01                                   |001f: move-result v1
+73e388: 3901 0b00                              |0020: if-nez v1, 002b // +000b
+73e38c: 1a01 c857                              |0022: const-string v1, "NaN" // string@57c8
+73e390: 6e20 03d2 1000                         |0024: invoke-virtual {v0, v1}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+73e396: 0a01                                   |0027: move-result v1
+73e398: 3901 0300                              |0028: if-nez v1, 002b // +0003
+73e39c: 2816                                   |002a: goto 0040 // +0016
+73e39e: 2202 7a1a                              |002b: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+73e3a2: 2200 991a                              |002d: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+73e3a6: 1a01 2d59                              |002f: const-string v1, "Numeric values must be finite, but was " // string@592d
+73e3aa: 7020 3cd2 1000                         |0031: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+73e3b0: 6e20 44d2 3000                         |0034: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+73e3b6: 0c03                                   |0037: move-result-object v3
+73e3b8: 6e10 58d2 0300                         |0038: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+73e3be: 0c03                                   |003b: move-result-object v3
+73e3c0: 7020 47d1 3200                         |003c: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+73e3c6: 2702                                   |003f: throw v2
+73e3c8: 7010 b0c5 0200                         |0040: invoke-direct {v2}, Lcom/google/gson/stream/JsonWriter;.beforeValue:()V // method@c5b0
+73e3ce: 5423 eb75                              |0043: iget-object v3, v2, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73e3d2: 6e20 86d0 0300                         |0045: invoke-virtual {v3, v0}, Ljava/io/Writer;.append:(Ljava/lang/CharSequence;)Ljava/io/Writer; // method@d086
+73e3d8: 1102                                   |0048: return-object v2
+      catches       : (none)
+      positions     :
+        0x0002 line=524
+        0x0007 line=527
+        0x000a line=528
+        0x000e line=529
+        0x0014 line=530
+        0x002b line=531
+        0x0040 line=533
+        0x0043 line=534
+      locals        :
+        0x0000 - 0x0049 reg=2 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0049 reg=3 (null) Ljava/lang/Number;
+
+    #20              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'value'
+      type          : '(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 17 16-bit code units
+73e3dc:                                        |[73e3dc] com.google.gson.stream.JsonWriter.value:(Ljava/lang/String;)Lcom/google/gson/stream/JsonWriter;
+73e3ec: 3901 0700                              |0000: if-nez v1, 0007 // +0007
+73e3f0: 6e10 bec5 0000                         |0002: invoke-virtual {v0}, Lcom/google/gson/stream/JsonWriter;.nullValue:()Lcom/google/gson/stream/JsonWriter; // method@c5be
+73e3f6: 0c00                                   |0005: move-result-object v0
+73e3f8: 1100                                   |0006: return-object v0
+73e3fa: 7010 cec5 0000                         |0007: invoke-direct {v0}, Lcom/google/gson/stream/JsonWriter;.writeDeferredName:()V // method@c5ce
+73e400: 7010 b0c5 0000                         |000a: invoke-direct {v0}, Lcom/google/gson/stream/JsonWriter;.beforeValue:()V // method@c5b0
+73e406: 7020 c7c5 1000                         |000d: invoke-direct {v0, v1}, Lcom/google/gson/stream/JsonWriter;.string:(Ljava/lang/String;)V // method@c5c7
+73e40c: 1100                                   |0010: return-object v0
+      catches       : (none)
+      positions     :
+        0x0002 line=415
+        0x0007 line=417
+        0x000a line=418
+        0x000d line=419
+      locals        :
+        0x0000 - 0x0011 reg=0 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0011 reg=1 (null) Ljava/lang/String;
+
+    #21              : (in Lcom/google/gson/stream/JsonWriter;)
+      name          : 'value'
+      type          : '(Z)Lcom/google/gson/stream/JsonWriter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 19 16-bit code units
+73e410:                                        |[73e410] com.google.gson.stream.JsonWriter.value:(Z)Lcom/google/gson/stream/JsonWriter;
+73e420: 7010 cec5 0100                         |0000: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.writeDeferredName:()V // method@c5ce
+73e426: 7010 b0c5 0100                         |0003: invoke-direct {v1}, Lcom/google/gson/stream/JsonWriter;.beforeValue:()V // method@c5b0
+73e42c: 5410 eb75                              |0006: iget-object v0, v1, Lcom/google/gson/stream/JsonWriter;.out:Ljava/io/Writer; // field@75eb
+73e430: 3802 0500                              |0008: if-eqz v2, 000d // +0005
+73e434: 1a02 f2e2                              |000a: const-string v2, "true" // string@e2f2
+73e438: 2803                                   |000c: goto 000f // +0003
+73e43a: 1a02 6893                              |000d: const-string v2, "false" // string@9368
+73e43e: 6e20 8ad0 2000                         |000f: invoke-virtual {v0, v2}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+73e444: 1101                                   |0012: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=465
+        0x0003 line=466
+        0x0006 line=467
+      locals        :
+        0x0000 - 0x0013 reg=1 this Lcom/google/gson/stream/JsonWriter;
+        0x0000 - 0x0013 reg=2 (null) Z
+
+  source_file_idx   : 12052 (JsonWriter.java)
+

@@ -1,0 +1,601 @@
+Class #899            -
+  Class descriptor  : 'Landroidx/core/app/JobIntentService;'
+  Access flags      : 0x0401 (PUBLIC ABSTRACT)
+  Superclass        : 'Landroid/app/Service;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'DEBUG'
+      type          : 'Z'
+      access        : 0x0018 (STATIC FINAL)
+      value         : false
+    #1              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'TAG'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "JobIntentService"
+    #2              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'sClassWorkEnqueuer'
+      type          : 'Ljava/util/HashMap;'
+      access        : 0x0018 (STATIC FINAL)
+    #3              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'sLock'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0018 (STATIC FINAL)
+  Instance fields   -
+    #0              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'mCompatQueue'
+      type          : 'Ljava/util/ArrayList;'
+      access        : 0x0010 (FINAL)
+    #1              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'mCompatWorkEnqueuer'
+      type          : 'Landroidx/core/app/JobIntentService$WorkEnqueuer;'
+      access        : 0x0000 ()
+    #2              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'mCurProcessor'
+      type          : 'Landroidx/core/app/JobIntentService$CommandProcessor;'
+      access        : 0x0000 ()
+    #3              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'mDestroyed'
+      type          : 'Z'
+      access        : 0x0000 ()
+    #4              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'mInterruptIfStopped'
+      type          : 'Z'
+      access        : 0x0000 ()
+    #5              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'mJobImpl'
+      type          : 'Landroidx/core/app/JobIntentService$CompatJobEngine;'
+      access        : 0x0000 ()
+    #6              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'mStopped'
+      type          : 'Z'
+      access        : 0x0000 ()
+  Direct methods    -
+    #0              : (in Landroidx/core/app/JobIntentService;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 15 16-bit code units
+152780:                                        |[152780] androidx.core.app.JobIntentService.<clinit>:()V
+152790: 2200 7a11                              |0000: new-instance v0, Ljava/lang/Object; // type@117a
+152794: 7010 df71 0000                         |0002: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@71df
+15279a: 6900 a311                              |0005: sput-object v0, Landroidx/core/app/JobIntentService;.sLock:Ljava/lang/Object; // field@11a3
+15279e: 2200 2112                              |0007: new-instance v0, Ljava/util/HashMap; // type@1221
+1527a2: 7010 d474 0000                         |0009: invoke-direct {v0}, Ljava/util/HashMap;.<init>:()V // method@74d4
+1527a8: 6900 a211                              |000c: sput-object v0, Landroidx/core/app/JobIntentService;.sClassWorkEnqueuer:Ljava/util/HashMap; // field@11a2
+1527ac: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=109
+        0x0007 line=110
+      locals        :
+
+    #1              : (in Landroidx/core/app/JobIntentService;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 28 16-bit code units
+1527b0:                                        |[1527b0] androidx.core.app.JobIntentService.<init>:()V
+1527c0: 7010 0e02 0200                         |0000: invoke-direct {v2}, Landroid/app/Service;.<init>:()V // method@020e
+1527c6: 1200                                   |0003: const/4 v0, #int 0 // #0
+1527c8: 5c20 9f11                              |0004: iput-boolean v0, v2, Landroidx/core/app/JobIntentService;.mInterruptIfStopped:Z // field@119f
+1527cc: 5c20 a111                              |0006: iput-boolean v0, v2, Landroidx/core/app/JobIntentService;.mStopped:Z // field@11a1
+1527d0: 5c20 9e11                              |0008: iput-boolean v0, v2, Landroidx/core/app/JobIntentService;.mDestroyed:Z // field@119e
+1527d4: 6000 d600                              |000a: sget v0, Landroid/os/Build$VERSION;.SDK_INT:I // field@00d6
+1527d8: 1301 1a00                              |000c: const/16 v1, #int 26 // #1a
+1527dc: 3410 0600                              |000e: if-lt v0, v1, 0014 // +0006
+1527e0: 1200                                   |0010: const/4 v0, #int 0 // #0
+1527e2: 5b20 9b11                              |0011: iput-object v0, v2, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+1527e6: 0e00                                   |0013: return-void
+1527e8: 2200 1412                              |0014: new-instance v0, Ljava/util/ArrayList; // type@1214
+1527ec: 7010 2874 0000                         |0016: invoke-direct {v0}, Ljava/util/ArrayList;.<init>:()V // method@7428
+1527f2: 5b20 9b11                              |0019: iput-object v0, v2, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+1527f6: 0e00                                   |001b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=420
+        0x0004 line=103
+        0x0006 line=104
+        0x0008 line=105
+        0x000a line=421
+        0x0011 line=422
+        0x0014 line=424
+      locals        :
+        0x0000 - 0x001c reg=2 this Landroidx/core/app/JobIntentService;
+
+    #2              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'enqueueWork'
+      type          : '(Landroid/content/Context;Landroid/content/ComponentName;ILandroid/content/Intent;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 4
+      insns size    : 29 16-bit code units
+1527f8:                                        |[1527f8] androidx.core.app.JobIntentService.enqueueWork:(Landroid/content/Context;Landroid/content/ComponentName;ILandroid/content/Intent;)V
+152808: 3805 1500                              |0000: if-eqz v5, 0015 // +0015
+15280c: 6200 a311                              |0002: sget-object v0, Landroidx/core/app/JobIntentService;.sLock:Ljava/lang/Object; // field@11a3
+152810: 1d00                                   |0004: monitor-enter v0
+152812: 1211                                   |0005: const/4 v1, #int 1 // #1
+152814: 7140 bf2b 3241                         |0006: invoke-static {v2, v3, v1, v4}, Landroidx/core/app/JobIntentService;.getWorkEnqueuer:(Landroid/content/Context;Landroid/content/ComponentName;ZI)Landroidx/core/app/JobIntentService$WorkEnqueuer; // method@2bbf
+15281a: 0c02                                   |0009: move-result-object v2
+15281c: 6e20 b32b 4200                         |000a: invoke-virtual {v2, v4}, Landroidx/core/app/JobIntentService$WorkEnqueuer;.ensureJobId:(I)V // method@2bb3
+152822: 6e20 b22b 5200                         |000d: invoke-virtual {v2, v5}, Landroidx/core/app/JobIntentService$WorkEnqueuer;.enqueueWork:(Landroid/content/Intent;)V // method@2bb2
+152828: 1e00                                   |0010: monitor-exit v0
+15282a: 0e00                                   |0011: return-void
+15282c: 0d02                                   |0012: move-exception v2
+15282e: 1e00                                   |0013: monitor-exit v0
+152830: 2702                                   |0014: throw v2
+152832: 2202 6911                              |0015: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1169
+152836: 1a03 a5b3                              |0017: const-string v3, "work must not be null" // string@b3a5
+15283a: 7020 6b71 3200                         |0019: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+152840: 2702                                   |001c: throw v2
+      catches       : 1
+        0x0006 - 0x0014
+          <any> -> 0x0012
+      positions     :
+        0x0002 line=524
+        0x0006 line=525
+        0x000a line=526
+        0x000d line=527
+        0x0010 line=528
+        0x0015 line=522
+      locals        :
+        0x0000 - 0x001d reg=2 (null) Landroid/content/Context;
+        0x0000 - 0x001d reg=3 (null) Landroid/content/ComponentName;
+        0x0000 - 0x001d reg=4 (null) I
+        0x0000 - 0x001d reg=5 (null) Landroid/content/Intent;
+
+    #3              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'enqueueWork'
+      type          : '(Landroid/content/Context;Ljava/lang/Class;ILandroid/content/Intent;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 4
+      insns size    : 9 16-bit code units
+152850:                                        |[152850] androidx.core.app.JobIntentService.enqueueWork:(Landroid/content/Context;Ljava/lang/Class;ILandroid/content/Intent;)V
+152860: 2200 6300                              |0000: new-instance v0, Landroid/content/ComponentName; // type@0063
+152864: 7030 3802 1002                         |0002: invoke-direct {v0, v1, v2}, Landroid/content/ComponentName;.<init>:(Landroid/content/Context;Ljava/lang/Class;)V // method@0238
+15286a: 7140 bb2b 0143                         |0005: invoke-static {v1, v0, v3, v4}, Landroidx/core/app/JobIntentService;.enqueueWork:(Landroid/content/Context;Landroid/content/ComponentName;ILandroid/content/Intent;)V // method@2bbb
+152870: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=505
+      locals        :
+        0x0000 - 0x0009 reg=1 (null) Landroid/content/Context;
+        0x0000 - 0x0009 reg=2 (null) Ljava/lang/Class;
+        0x0000 - 0x0009 reg=3 (null) I
+        0x0000 - 0x0009 reg=4 (null) Landroid/content/Intent;
+
+    #4              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'getWorkEnqueuer'
+      type          : '(Landroid/content/Context;Landroid/content/ComponentName;ZI)Landroidx/core/app/JobIntentService$WorkEnqueuer;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 4
+      insns size    : 42 16-bit code units
+15264c:                                        |[15264c] androidx.core.app.JobIntentService.getWorkEnqueuer:(Landroid/content/Context;Landroid/content/ComponentName;ZI)Landroidx/core/app/JobIntentService$WorkEnqueuer;
+15265c: 6200 a211                              |0000: sget-object v0, Landroidx/core/app/JobIntentService;.sClassWorkEnqueuer:Ljava/util/HashMap; // field@11a2
+152660: 6e20 dc74 4000                         |0002: invoke-virtual {v0, v4}, Ljava/util/HashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@74dc
+152666: 0c01                                   |0005: move-result-object v1
+152668: 1f01 d405                              |0006: check-cast v1, Landroidx/core/app/JobIntentService$WorkEnqueuer; // type@05d4
+15266c: 3901 2100                              |0008: if-nez v1, 0029 // +0021
+152670: 6001 d600                              |000a: sget v1, Landroid/os/Build$VERSION;.SDK_INT:I // field@00d6
+152674: 1302 1a00                              |000c: const/16 v2, #int 26 // #1a
+152678: 3421 1200                              |000e: if-lt v1, v2, 0020 // +0012
+15267c: 3805 0800                              |0010: if-eqz v5, 0018 // +0008
+152680: 2205 d305                              |0012: new-instance v5, Landroidx/core/app/JobIntentService$JobWorkEnqueuer; // type@05d3
+152684: 7040 ae2b 3564                         |0014: invoke-direct {v5, v3, v4, v6}, Landroidx/core/app/JobIntentService$JobWorkEnqueuer;.<init>:(Landroid/content/Context;Landroid/content/ComponentName;I)V // method@2bae
+15268a: 280e                                   |0017: goto 0025 // +000e
+15268c: 2203 6911                              |0018: new-instance v3, Ljava/lang/IllegalArgumentException; // type@1169
+152690: 1a04 201f                              |001a: const-string v4, "Can't be here without a job id" // string@1f20
+152694: 7020 6b71 4300                         |001c: invoke-direct {v3, v4}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+15269a: 2703                                   |001f: throw v3
+15269c: 2205 ce05                              |0020: new-instance v5, Landroidx/core/app/JobIntentService$CompatWorkEnqueuer; // type@05ce
+1526a0: 7030 9b2b 3504                         |0022: invoke-direct {v5, v3, v4}, Landroidx/core/app/JobIntentService$CompatWorkEnqueuer;.<init>:(Landroid/content/Context;Landroid/content/ComponentName;)V // method@2b9b
+1526a6: 6e30 e074 4005                         |0025: invoke-virtual {v0, v4, v5}, Ljava/util/HashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@74e0
+1526ac: 1105                                   |0028: return-object v5
+1526ae: 1101                                   |0029: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=533
+        0x000a line=535
+        0x0012 line=539
+        0x0018 line=537
+        0x0020 line=541
+        0x0025 line=543
+      locals        :
+        0x0000 - 0x002a reg=3 (null) Landroid/content/Context;
+        0x0000 - 0x002a reg=4 (null) Landroid/content/ComponentName;
+        0x0000 - 0x002a reg=5 (null) Z
+        0x0000 - 0x002a reg=6 (null) I
+
+  Virtual methods   -
+    #0              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'dequeueWork'
+      type          : '()Landroidx/core/app/JobIntentService$GenericWorkItem;'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 37 16-bit code units
+1525e4:                                        |[1525e4] androidx.core.app.JobIntentService.dequeueWork:()Landroidx/core/app/JobIntentService$GenericWorkItem;
+1525f4: 5430 a011                              |0000: iget-object v0, v3, Landroidx/core/app/JobIntentService;.mJobImpl:Landroidx/core/app/JobIntentService$CompatJobEngine; // field@11a0
+1525f8: 3800 0700                              |0002: if-eqz v0, 0009 // +0007
+1525fc: 7210 9a2b 0000                         |0004: invoke-interface {v0}, Landroidx/core/app/JobIntentService$CompatJobEngine;.dequeueWork:()Landroidx/core/app/JobIntentService$GenericWorkItem; // method@2b9a
+152602: 0c00                                   |0007: move-result-object v0
+152604: 1100                                   |0008: return-object v0
+152606: 5430 9b11                              |0009: iget-object v0, v3, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+15260a: 1d00                                   |000b: monitor-enter v0
+15260c: 5431 9b11                              |000c: iget-object v1, v3, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+152610: 6e10 3a74 0100                         |000e: invoke-virtual {v1}, Ljava/util/ArrayList;.size:()I // method@743a
+152616: 0a01                                   |0011: move-result v1
+152618: 3d01 0d00                              |0012: if-lez v1, 001f // +000d
+15261c: 5431 9b11                              |0014: iget-object v1, v3, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+152620: 1202                                   |0016: const/4 v2, #int 0 // #0
+152622: 6e20 3674 2100                         |0017: invoke-virtual {v1, v2}, Ljava/util/ArrayList;.remove:(I)Ljava/lang/Object; // method@7436
+152628: 0c01                                   |001a: move-result-object v1
+15262a: 1f01 d005                              |001b: check-cast v1, Landroidx/core/app/JobIntentService$GenericWorkItem; // type@05d0
+15262e: 1e00                                   |001d: monitor-exit v0
+152630: 1101                                   |001e: return-object v1
+152632: 1201                                   |001f: const/4 v1, #int 0 // #0
+152634: 1e00                                   |0020: monitor-exit v0
+152636: 1101                                   |0021: return-object v1
+152638: 0d01                                   |0022: move-exception v1
+15263a: 1e00                                   |0023: monitor-exit v0
+15263c: 2701                                   |0024: throw v1
+      catches       : 1
+        0x000c - 0x0024
+          <any> -> 0x0022
+      positions     :
+        0x0000 line=644
+        0x0004 line=645
+        0x0009 line=647
+        0x000c line=648
+        0x0014 line=649
+        0x0020 line=651
+        0x0023 line=653
+      locals        :
+        0x0000 - 0x0025 reg=3 this Landroidx/core/app/JobIntentService;
+
+    #1              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'doStopCurrentWork'
+      type          : '()Z'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 17 16-bit code units
+1526b0:                                        |[1526b0] androidx.core.app.JobIntentService.doStopCurrentWork:()Z
+1526c0: 5420 9d11                              |0000: iget-object v0, v2, Landroidx/core/app/JobIntentService;.mCurProcessor:Landroidx/core/app/JobIntentService$CommandProcessor; // field@119d
+1526c4: 3800 0700                              |0002: if-eqz v0, 0009 // +0007
+1526c8: 5521 9f11                              |0004: iget-boolean v1, v2, Landroidx/core/app/JobIntentService;.mInterruptIfStopped:Z // field@119f
+1526cc: 6e20 912b 1000                         |0006: invoke-virtual {v0, v1}, Landroidx/core/app/JobIntentService$CommandProcessor;.cancel:(Z)Z // method@2b91
+1526d2: 1210                                   |0009: const/4 v0, #int 1 // #1
+1526d4: 5c20 a111                              |000a: iput-boolean v0, v2, Landroidx/core/app/JobIntentService;.mStopped:Z // field@11a1
+1526d8: 6e10 c62b 0200                         |000c: invoke-virtual {v2}, Landroidx/core/app/JobIntentService;.onStopCurrentWork:()Z // method@2bc6
+1526de: 0a00                                   |000f: move-result v0
+1526e0: 0f00                                   |0010: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=603
+        0x0004 line=604
+        0x000a line=606
+        0x000c line=607
+      locals        :
+        0x0000 - 0x0011 reg=2 this Landroidx/core/app/JobIntentService;
+
+    #2              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'ensureProcessorRunningLocked'
+      type          : '(Z)V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 31 16-bit code units
+152874:                                        |[152874] androidx.core.app.JobIntentService.ensureProcessorRunningLocked:(Z)V
+152884: 5420 9d11                              |0000: iget-object v0, v2, Landroidx/core/app/JobIntentService;.mCurProcessor:Landroidx/core/app/JobIntentService$CommandProcessor; // field@119d
+152888: 3900 1c00                              |0002: if-nez v0, 001e // +001c
+15288c: 2200 cc05                              |0004: new-instance v0, Landroidx/core/app/JobIntentService$CommandProcessor; // type@05cc
+152890: 7020 902b 2000                         |0006: invoke-direct {v0, v2}, Landroidx/core/app/JobIntentService$CommandProcessor;.<init>:(Landroidx/core/app/JobIntentService;)V // method@2b90
+152896: 5b20 9d11                              |0009: iput-object v0, v2, Landroidx/core/app/JobIntentService;.mCurProcessor:Landroidx/core/app/JobIntentService$CommandProcessor; // field@119d
+15289a: 5420 9c11                              |000b: iget-object v0, v2, Landroidx/core/app/JobIntentService;.mCompatWorkEnqueuer:Landroidx/core/app/JobIntentService$WorkEnqueuer; // field@119c
+15289e: 3800 0700                              |000d: if-eqz v0, 0014 // +0007
+1528a2: 3803 0500                              |000f: if-eqz v3, 0014 // +0005
+1528a6: 6e10 b52b 0000                         |0011: invoke-virtual {v0}, Landroidx/core/app/JobIntentService$WorkEnqueuer;.serviceProcessingStarted:()V // method@2bb5
+1528ac: 5423 9d11                              |0014: iget-object v3, v2, Landroidx/core/app/JobIntentService;.mCurProcessor:Landroidx/core/app/JobIntentService$CommandProcessor; // field@119d
+1528b0: 6200 d300                              |0016: sget-object v0, Landroid/os/AsyncTask;.THREAD_POOL_EXECUTOR:Ljava/util/concurrent/Executor; // field@00d3
+1528b4: 1201                                   |0018: const/4 v1, #int 0 // #0
+1528b6: 2311 b41a                              |0019: new-array v1, v1, [Ljava/lang/Void; // type@1ab4
+1528ba: 6e30 942b 0301                         |001b: invoke-virtual {v3, v0, v1}, Landroidx/core/app/JobIntentService$CommandProcessor;.executeOnExecutor:(Ljava/util/concurrent/Executor;[Ljava/lang/Object;)Landroid/os/AsyncTask; // method@2b94
+1528c0: 0e00                                   |001e: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=612
+        0x0004 line=613
+        0x000b line=614
+        0x0011 line=615
+        0x0014 line=618
+      locals        :
+        0x0000 - 0x001f reg=2 this Landroidx/core/app/JobIntentService;
+        0x0000 - 0x001f reg=3 (null) Z
+
+    #3              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'isStopped'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+1526e4:                                        |[1526e4] androidx.core.app.JobIntentService.isStopped:()Z
+1526f4: 5510 a111                              |0000: iget-boolean v0, v1, Landroidx/core/app/JobIntentService;.mStopped:Z // field@11a1
+1526f8: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=584
+      locals        :
+        0x0000 - 0x0003 reg=1 this Landroidx/core/app/JobIntentService;
+
+    #4              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'onBind'
+      type          : '(Landroid/content/Intent;)Landroid/os/IBinder;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 11 16-bit code units
+1525bc:                                        |[1525bc] androidx.core.app.JobIntentService.onBind:(Landroid/content/Intent;)Landroid/os/IBinder;
+1525cc: 5401 a011                              |0000: iget-object v1, v0, Landroidx/core/app/JobIntentService;.mJobImpl:Landroidx/core/app/JobIntentService$CompatJobEngine; // field@11a0
+1525d0: 3801 0700                              |0002: if-eqz v1, 0009 // +0007
+1525d4: 7210 992b 0100                         |0004: invoke-interface {v1}, Landroidx/core/app/JobIntentService$CompatJobEngine;.compatGetBinder:()Landroid/os/IBinder; // method@2b99
+1525da: 0c01                                   |0007: move-result-object v1
+1525dc: 1101                                   |0008: return-object v1
+1525de: 1201                                   |0009: const/4 v1, #int 0 // #0
+1525e0: 1101                                   |000a: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=469
+        0x0004 line=470
+      locals        :
+        0x0000 - 0x000b reg=0 this Landroidx/core/app/JobIntentService;
+        0x0000 - 0x000b reg=1 (null) Landroid/content/Intent;
+
+    #5              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'onCreate'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 4
+      insns size    : 39 16-bit code units
+1528c4:                                        |[1528c4] androidx.core.app.JobIntentService.onCreate:()V
+1528d4: 6f10 0f02 0300                         |0000: invoke-super {v3}, Landroid/app/Service;.onCreate:()V // method@020f
+1528da: 6000 d600                              |0003: sget v0, Landroid/os/Build$VERSION;.SDK_INT:I // field@00d6
+1528de: 1301 1a00                              |0005: const/16 v1, #int 26 // #1a
+1528e2: 1202                                   |0007: const/4 v2, #int 0 // #0
+1528e4: 3410 0c00                              |0008: if-lt v0, v1, 0014 // +000c
+1528e8: 2200 d205                              |000a: new-instance v0, Landroidx/core/app/JobIntentService$JobServiceEngineImpl; // type@05d2
+1528ec: 7020 a82b 3000                         |000c: invoke-direct {v0, v3}, Landroidx/core/app/JobIntentService$JobServiceEngineImpl;.<init>:(Landroidx/core/app/JobIntentService;)V // method@2ba8
+1528f2: 5b30 a011                              |000f: iput-object v0, v3, Landroidx/core/app/JobIntentService;.mJobImpl:Landroidx/core/app/JobIntentService$CompatJobEngine; // field@11a0
+1528f6: 5b32 9c11                              |0011: iput-object v2, v3, Landroidx/core/app/JobIntentService;.mCompatWorkEnqueuer:Landroidx/core/app/JobIntentService$WorkEnqueuer; // field@119c
+1528fa: 0e00                                   |0013: return-void
+1528fc: 5b32 a011                              |0014: iput-object v2, v3, Landroidx/core/app/JobIntentService;.mJobImpl:Landroidx/core/app/JobIntentService$CompatJobEngine; // field@11a0
+152900: 2200 6300                              |0016: new-instance v0, Landroid/content/ComponentName; // type@0063
+152904: 6e10 e371 0300                         |0018: invoke-virtual {v3}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+15290a: 0c01                                   |001b: move-result-object v1
+15290c: 7030 3802 3001                         |001c: invoke-direct {v0, v3, v1}, Landroid/content/ComponentName;.<init>:(Landroid/content/Context;Ljava/lang/Class;)V // method@0238
+152912: 1201                                   |001f: const/4 v1, #int 0 // #0
+152914: 7140 bf2b 0311                         |0020: invoke-static {v3, v0, v1, v1}, Landroidx/core/app/JobIntentService;.getWorkEnqueuer:(Landroid/content/Context;Landroid/content/ComponentName;ZI)Landroidx/core/app/JobIntentService$WorkEnqueuer; // method@2bbf
+15291a: 0c00                                   |0023: move-result-object v0
+15291c: 5b30 9c11                              |0024: iput-object v0, v3, Landroidx/core/app/JobIntentService;.mCompatWorkEnqueuer:Landroidx/core/app/JobIntentService$WorkEnqueuer; // field@119c
+152920: 0e00                                   |0026: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=430
+        0x0003 line=432
+        0x000a line=433
+        0x0011 line=434
+        0x0014 line=436
+        0x0016 line=437
+        0x0020 line=438
+      locals        :
+        0x0000 - 0x0027 reg=3 this Landroidx/core/app/JobIntentService;
+
+    #6              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'onDestroy'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 22 16-bit code units
+152924:                                        |[152924] androidx.core.app.JobIntentService.onDestroy:()V
+152934: 6f10 1002 0200                         |0000: invoke-super {v2}, Landroid/app/Service;.onDestroy:()V // method@0210
+15293a: 5420 9b11                              |0003: iget-object v0, v2, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+15293e: 3800 1000                              |0005: if-eqz v0, 0015 // +0010
+152942: 1d00                                   |0007: monitor-enter v0
+152944: 1211                                   |0008: const/4 v1, #int 1 // #1
+152946: 5c21 9e11                              |0009: iput-boolean v1, v2, Landroidx/core/app/JobIntentService;.mDestroyed:Z // field@119e
+15294a: 5421 9c11                              |000b: iget-object v1, v2, Landroidx/core/app/JobIntentService;.mCompatWorkEnqueuer:Landroidx/core/app/JobIntentService$WorkEnqueuer; // field@119c
+15294e: 6e10 b42b 0100                         |000d: invoke-virtual {v1}, Landroidx/core/app/JobIntentService$WorkEnqueuer;.serviceProcessingFinished:()V // method@2bb4
+152954: 1e00                                   |0010: monitor-exit v0
+152956: 0e00                                   |0011: return-void
+152958: 0d01                                   |0012: move-exception v1
+15295a: 1e00                                   |0013: monitor-exit v0
+15295c: 2701                                   |0014: throw v1
+15295e: 0e00                                   |0015: return-void
+      catches       : 1
+        0x0009 - 0x0014
+          <any> -> 0x0012
+      positions     :
+        0x0000 line=480
+        0x0003 line=481
+        0x0007 line=482
+        0x0009 line=483
+        0x000b line=484
+        0x0010 line=485
+      locals        :
+        0x0000 - 0x0016 reg=2 this Landroidx/core/app/JobIntentService;
+
+    #7              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'onHandleWork'
+      type          : '(Landroid/content/Intent;)V'
+      access        : 0x0404 (PROTECTED ABSTRACT)
+      code          : (none)
+
+    #8              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'onStartCommand'
+      type          : '(Landroid/content/Intent;II)I'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 4
+      insns size    : 42 16-bit code units
+152710:                                        |[152710] androidx.core.app.JobIntentService.onStartCommand:(Landroid/content/Intent;II)I
+152720: 5424 9b11                              |0000: iget-object v4, v2, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+152724: 3804 2600                              |0002: if-eqz v4, 0028 // +0026
+152728: 5424 9c11                              |0004: iget-object v4, v2, Landroidx/core/app/JobIntentService;.mCompatWorkEnqueuer:Landroidx/core/app/JobIntentService$WorkEnqueuer; // field@119c
+15272c: 6e10 b62b 0400                         |0006: invoke-virtual {v4}, Landroidx/core/app/JobIntentService$WorkEnqueuer;.serviceStartReceived:()V // method@2bb6
+152732: 5424 9b11                              |0009: iget-object v4, v2, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+152736: 1d04                                   |000b: monitor-enter v4
+152738: 5420 9b11                              |000c: iget-object v0, v2, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+15273c: 2201 cf05                              |000e: new-instance v1, Landroidx/core/app/JobIntentService$CompatWorkItem; // type@05cf
+152740: 3803 0300                              |0010: if-eqz v3, 0013 // +0003
+152744: 2806                                   |0012: goto 0018 // +0006
+152746: 2203 7200                              |0013: new-instance v3, Landroid/content/Intent; // type@0072
+15274a: 7010 a902 0300                         |0015: invoke-direct {v3}, Landroid/content/Intent;.<init>:()V // method@02a9
+152750: 7040 a02b 2153                         |0018: invoke-direct {v1, v2, v3, v5}, Landroidx/core/app/JobIntentService$CompatWorkItem;.<init>:(Landroidx/core/app/JobIntentService;Landroid/content/Intent;I)V // method@2ba0
+152756: 6e20 2c74 1000                         |001b: invoke-virtual {v0, v1}, Ljava/util/ArrayList;.add:(Ljava/lang/Object;)Z // method@742c
+15275c: 1213                                   |001e: const/4 v3, #int 1 // #1
+15275e: 6e20 bd2b 3200                         |001f: invoke-virtual {v2, v3}, Landroidx/core/app/JobIntentService;.ensureProcessorRunningLocked:(Z)V // method@2bbd
+152764: 1e04                                   |0022: monitor-exit v4
+152766: 1233                                   |0023: const/4 v3, #int 3 // #3
+152768: 0f03                                   |0024: return v3
+15276a: 0d03                                   |0025: move-exception v3
+15276c: 1e04                                   |0026: monitor-exit v4
+15276e: 2703                                   |0027: throw v3
+152770: 1223                                   |0028: const/4 v3, #int 2 // #2
+152772: 0f03                                   |0029: return v3
+      catches       : 1
+        0x000c - 0x0027
+          <any> -> 0x0025
+      positions     :
+        0x0000 line=448
+        0x0004 line=449
+        0x0009 line=451
+        0x000c line=452
+        0x001f line=454
+        0x0022 line=455
+      locals        :
+        0x0000 - 0x002a reg=2 this Landroidx/core/app/JobIntentService;
+        0x0000 - 0x002a reg=3 (null) Landroid/content/Intent;
+        0x0000 - 0x002a reg=4 (null) I
+        0x0000 - 0x002a reg=5 (null) I
+
+    #9              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'onStopCurrentWork'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+1526fc:                                        |[1526fc] androidx.core.app.JobIntentService.onStopCurrentWork:()Z
+15270c: 1210                                   |0000: const/4 v0, #int 1 // #1
+15270e: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #10              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'processorFinished'
+      type          : '()V'
+      access        : 0x0000 ()
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 38 16-bit code units
+15296c:                                        |[15296c] androidx.core.app.JobIntentService.processorFinished:()V
+15297c: 5420 9b11                              |0000: iget-object v0, v2, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+152980: 3800 2300                              |0002: if-eqz v0, 0025 // +0023
+152984: 1d00                                   |0004: monitor-enter v0
+152986: 1201                                   |0005: const/4 v1, #int 0 // #0
+152988: 5b21 9d11                              |0006: iput-object v1, v2, Landroidx/core/app/JobIntentService;.mCurProcessor:Landroidx/core/app/JobIntentService$CommandProcessor; // field@119d
+15298c: 5421 9b11                              |0008: iget-object v1, v2, Landroidx/core/app/JobIntentService;.mCompatQueue:Ljava/util/ArrayList; // field@119b
+152990: 3801 0d00                              |000a: if-eqz v1, 0017 // +000d
+152994: 6e10 3a74 0100                         |000c: invoke-virtual {v1}, Ljava/util/ArrayList;.size:()I // method@743a
+15299a: 0a01                                   |000f: move-result v1
+15299c: 3d01 0700                              |0010: if-lez v1, 0017 // +0007
+1529a0: 1201                                   |0012: const/4 v1, #int 0 // #0
+1529a2: 6e20 bd2b 1200                         |0013: invoke-virtual {v2, v1}, Landroidx/core/app/JobIntentService;.ensureProcessorRunningLocked:(Z)V // method@2bbd
+1529a8: 280a                                   |0016: goto 0020 // +000a
+1529aa: 5521 9e11                              |0017: iget-boolean v1, v2, Landroidx/core/app/JobIntentService;.mDestroyed:Z // field@119e
+1529ae: 3901 0700                              |0019: if-nez v1, 0020 // +0007
+1529b2: 5421 9c11                              |001b: iget-object v1, v2, Landroidx/core/app/JobIntentService;.mCompatWorkEnqueuer:Landroidx/core/app/JobIntentService$WorkEnqueuer; // field@119c
+1529b6: 6e10 b42b 0100                         |001d: invoke-virtual {v1}, Landroidx/core/app/JobIntentService$WorkEnqueuer;.serviceProcessingFinished:()V // method@2bb4
+1529bc: 1e00                                   |0020: monitor-exit v0
+1529be: 0e00                                   |0021: return-void
+1529c0: 0d01                                   |0022: move-exception v1
+1529c2: 1e00                                   |0023: monitor-exit v0
+1529c4: 2701                                   |0024: throw v1
+1529c6: 0e00                                   |0025: return-void
+      catches       : 1
+        0x0006 - 0x0024
+          <any> -> 0x0022
+      positions     :
+        0x0000 line=623
+        0x0004 line=624
+        0x0006 line=625
+        0x0008 line=634
+        0x0013 line=635
+        0x0017 line=636
+        0x001b line=637
+        0x0020 line=639
+      locals        :
+        0x0000 - 0x0026 reg=2 this Landroidx/core/app/JobIntentService;
+
+    #11              : (in Landroidx/core/app/JobIntentService;)
+      name          : 'setInterruptIfStopped'
+      type          : '(Z)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+1529d4:                                        |[1529d4] androidx.core.app.JobIntentService.setInterruptIfStopped:(Z)V
+1529e4: 5c01 9f11                              |0000: iput-boolean v1, v0, Landroidx/core/app/JobIntentService;.mInterruptIfStopped:Z // field@119f
+1529e8: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=576
+      locals        :
+        0x0000 - 0x0003 reg=0 this Landroidx/core/app/JobIntentService;
+        0x0000 - 0x0003 reg=1 (null) Z
+
+  source_file_idx   : 10937 (JobIntentService.java)
+

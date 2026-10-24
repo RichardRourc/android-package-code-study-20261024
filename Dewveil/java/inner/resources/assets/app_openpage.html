@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>按鈕開新分頁範例</title>
+    <style>
+        /* 簡單按鈕樣式 */
+        body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial; padding: 40px; }
+        .btn {
+          display: inline-block;
+          padding: 10px 18px;
+          margin: 8px;
+          border-radius: 8px;
+          border: 1px solid #444;
+          background: #f2f2f2;
+          cursor: pointer;
+          font-size: 16px;
+          text-decoration: none;
+          color: #111;
+        }
+        .btn:active { transform: translateY(1px); }
+    </style>
+</head>
+<body>
+<h1>按鈕開新分頁示範</h1>
+<p>下面有三種按鈕範例：使用 &lt;a&gt;（推薦）、使用 JS 的 <code>window.open</code>（並移除 opener）、以及用匿名視窗開啟的簡單示範。</p>
+
+<!-- 方法一：用 <a> 標籤（最簡單、安全） -->
+<a class="btn" href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">打開 Google（a 標籤）</a>
+<a class="btn" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">打開 Yahoo（a 標籤）</a>
+
+<!-- 方法二：用 button + JavaScript window.open，並清除 opener -->
+<button class="btn" id="btnBing">打開 Bing（button + window.open）</button>
+
+<!-- 方法三：示範用 window.open 並嘗試加 features（一般不需要） -->
+<button class="btn" id="btnExample">打開 Example（button，移除 opener）</button>
+
+<script>
+    // 方法二：使用 window.open，並移除 opener（避免開啟的分頁可操控原頁）
+    document.getElementById('btnBing').addEventListener('click', function () {
+      const url = 'https://www.bing.com';
+      const w = window.open(url, '_blank'); // 開新分頁
+      if (w) { try { w.opener = null; } catch (e) { /* 某些瀏覽器上可能會丟例外 */ } }
+    });
+
+    // 方法三：範例（示範如果想在 window.open 後立刻移除 opener）
+    document.getElementById('btnExample').addEventListener('click', function () {
+      const url = 'https://www.youtube.com';
+      // 嘗試直接用第三個參數加入 features（多數情況不需要）
+      const w = window.open(url, '_blank');
+      if (w) {
+        try { w.opener = null; } catch (e) { /* ignore */ }
+      } else {
+        // popup 被阻擋（例如瀏覽器設定），可改為改用 <a> 的方式
+        alert('彈跳視窗被阻擋，請允許彈跳或使用連結打開。');
+      }
+    });
+</script>
+</body>
+</html>

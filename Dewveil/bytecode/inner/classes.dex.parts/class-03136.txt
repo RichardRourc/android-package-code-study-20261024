@@ -1,0 +1,529 @@
+Class #3136            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/databind/ser/SerializerCache;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : '_readOnlyMap'
+      type          : 'Ljava/util/concurrent/atomic/AtomicReference;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : '_sharedMap'
+      type          : 'Ljava/util/HashMap;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 20 16-bit code units
+6433d8:                                        |[6433d8] com.fasterxml.jackson.databind.ser.SerializerCache.<init>:()V
+6433e8: 7010 c8d1 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@d1c8
+6433ee: 2200 491b                              |0003: new-instance v0, Ljava/util/HashMap; // type@1b49
+6433f2: 1301 4000                              |0005: const/16 v1, #int 64 // #40
+6433f6: 7020 7fd5 1000                         |0007: invoke-direct {v0, v1}, Ljava/util/HashMap;.<init>:(I)V // method@d57f
+6433fc: 5b20 974f                              |000a: iput-object v0, v2, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+643400: 2200 941b                              |000c: new-instance v0, Ljava/util/concurrent/atomic/AtomicReference; // type@1b94
+643404: 7010 07d7 0000                         |000e: invoke-direct {v0}, Ljava/util/concurrent/atomic/AtomicReference;.<init>:()V // method@d707
+64340a: 5b20 964f                              |0011: iput-object v0, v2, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._readOnlyMap:Ljava/util/concurrent/atomic/AtomicReference; // field@4f96
+64340e: 0e00                                   |0013: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=42
+        0x0003 line=33
+        0x000c line=39
+      locals        :
+        0x0000 - 0x0014 reg=2 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+
+    #1              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : '_makeReadOnlyLookupMap'
+      type          : '()Lcom/fasterxml/jackson/databind/ser/impl/ReadOnlyClassToSerializerMap;'
+      access        : 0x20012 (PRIVATE FINAL DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 27 16-bit code units
+643410:                                        |[643410] com.fasterxml.jackson.databind.ser.SerializerCache._makeReadOnlyLookupMap:()Lcom/fasterxml/jackson/databind/ser/impl/ReadOnlyClassToSerializerMap;
+643420: 1d02                                   |0000: monitor-enter v2
+643422: 5420 964f                              |0001: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._readOnlyMap:Ljava/util/concurrent/atomic/AtomicReference; // field@4f96
+643426: 6e10 0ad7 0000                         |0003: invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicReference;.get:()Ljava/lang/Object; // method@d70a
+64342c: 0c00                                   |0006: move-result-object v0
+64342e: 1f00 ce0e                              |0007: check-cast v0, Lcom/fasterxml/jackson/databind/ser/impl/ReadOnlyClassToSerializerMap; // type@0ece
+643432: 3900 0d00                              |0009: if-nez v0, 0016 // +000d
+643436: 5420 974f                              |000b: iget-object v0, v2, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+64343a: 7110 2b88 0000                         |000d: invoke-static {v0}, Lcom/fasterxml/jackson/databind/ser/impl/ReadOnlyClassToSerializerMap;.from:(Ljava/util/HashMap;)Lcom/fasterxml/jackson/databind/ser/impl/ReadOnlyClassToSerializerMap; // method@882b
+643440: 0c00                                   |0010: move-result-object v0
+643442: 5421 964f                              |0011: iget-object v1, v2, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._readOnlyMap:Ljava/util/concurrent/atomic/AtomicReference; // field@4f96
+643446: 6e20 0cd7 0100                         |0013: invoke-virtual {v1, v0}, Ljava/util/concurrent/atomic/AtomicReference;.set:(Ljava/lang/Object;)V // method@d70c
+64344c: 1e02                                   |0016: monitor-exit v2
+64344e: 1100                                   |0017: return-object v0
+643450: 0d00                                   |0018: move-exception v0
+643452: 1e02                                   |0019: monitor-exit v2
+643454: 2700                                   |001a: throw v0
+      catches       : 2
+        0x0001 - 0x0016
+          <any> -> 0x0018
+        0x0019 - 0x001a
+          <any> -> 0x0018
+      positions     :
+        0x0001 line=60
+        0x000b line=62
+        0x0011 line=63
+        0x0016 line=65
+      locals        :
+        0x0000 - 0x001b reg=2 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'addAndResolveNonTypedSerializer'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JsonSerializer;Lcom/fasterxml/jackson/databind/SerializerProvider;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 3
+      insns size    : 35 16-bit code units
+64346c:                                        |[64346c] com.fasterxml.jackson.databind.ser.SerializerCache.addAndResolveNonTypedSerializer:(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JsonSerializer;Lcom/fasterxml/jackson/databind/SerializerProvider;)V
+64347c: 1d03                                   |0000: monitor-enter v3
+64347e: 5430 974f                              |0001: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+643482: 2201 710f                              |0003: new-instance v1, Lcom/fasterxml/jackson/databind/util/TypeKey; // type@0f71
+643486: 1202                                   |0005: const/4 v2, #int 0 // #0
+643488: 7030 2090 4102                         |0006: invoke-direct {v1, v4, v2}, Lcom/fasterxml/jackson/databind/util/TypeKey;.<init>:(Lcom/fasterxml/jackson/databind/JavaType;Z)V // method@9020
+64348e: 6e30 8ad5 1005                         |0009: invoke-virtual {v0, v1, v5}, Ljava/util/HashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d58a
+643494: 0c04                                   |000c: move-result-object v4
+643496: 3904 0800                              |000d: if-nez v4, 0015 // +0008
+64349a: 5434 964f                              |000f: iget-object v4, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._readOnlyMap:Ljava/util/concurrent/atomic/AtomicReference; // field@4f96
+64349e: 1200                                   |0011: const/4 v0, #int 0 // #0
+6434a0: 6e20 0cd7 0400                         |0012: invoke-virtual {v4, v0}, Ljava/util/concurrent/atomic/AtomicReference;.set:(Ljava/lang/Object;)V // method@d70c
+6434a6: 2054 b30e                              |0015: instance-of v4, v5, Lcom/fasterxml/jackson/databind/ser/ResolvableSerializer; // type@0eb3
+6434aa: 3804 0700                              |0017: if-eqz v4, 001e // +0007
+6434ae: 1f05 b30e                              |0019: check-cast v5, Lcom/fasterxml/jackson/databind/ser/ResolvableSerializer; // type@0eb3
+6434b2: 7220 4b87 6500                         |001b: invoke-interface {v5, v6}, Lcom/fasterxml/jackson/databind/ser/ResolvableSerializer;.resolve:(Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@874b
+6434b8: 1e03                                   |001e: monitor-exit v3
+6434ba: 0e00                                   |001f: return-void
+6434bc: 0d04                                   |0020: move-exception v4
+6434be: 1e03                                   |0021: monitor-exit v3
+6434c0: 2704                                   |0022: throw v4
+      catches       : 1
+        0x0001 - 0x0022
+          <any> -> 0x0020
+      positions     :
+        0x0000 line=164
+        0x0001 line=165
+        0x000f line=166
+        0x0015 line=173
+        0x0019 line=174
+        0x001e line=176
+      locals        :
+        0x0000 - 0x0023 reg=3 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+        0x0000 - 0x0023 reg=4 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x0023 reg=5 (null) Lcom/fasterxml/jackson/databind/JsonSerializer;
+        0x0000 - 0x0023 reg=6 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+
+    #1              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'addAndResolveNonTypedSerializer'
+      type          : '(Ljava/lang/Class;Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JsonSerializer;Lcom/fasterxml/jackson/databind/SerializerProvider;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 8
+      ins           : 5
+      outs          : 3
+      insns size    : 48 16-bit code units
+6434d0:                                        |[6434d0] com.fasterxml.jackson.databind.ser.SerializerCache.addAndResolveNonTypedSerializer:(Ljava/lang/Class;Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JsonSerializer;Lcom/fasterxml/jackson/databind/SerializerProvider;)V
+6434e0: 1d03                                   |0000: monitor-enter v3
+6434e2: 5430 974f                              |0001: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+6434e6: 2201 710f                              |0003: new-instance v1, Lcom/fasterxml/jackson/databind/util/TypeKey; // type@0f71
+6434ea: 1202                                   |0005: const/4 v2, #int 0 // #0
+6434ec: 7030 2290 4102                         |0006: invoke-direct {v1, v4, v2}, Lcom/fasterxml/jackson/databind/util/TypeKey;.<init>:(Ljava/lang/Class;Z)V // method@9022
+6434f2: 6e30 8ad5 1006                         |0009: invoke-virtual {v0, v1, v6}, Ljava/util/HashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d58a
+6434f8: 0c04                                   |000c: move-result-object v4
+6434fa: 5430 974f                              |000d: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+6434fe: 2201 710f                              |000f: new-instance v1, Lcom/fasterxml/jackson/databind/util/TypeKey; // type@0f71
+643502: 7030 2090 5102                         |0011: invoke-direct {v1, v5, v2}, Lcom/fasterxml/jackson/databind/util/TypeKey;.<init>:(Lcom/fasterxml/jackson/databind/JavaType;Z)V // method@9020
+643508: 6e30 8ad5 1006                         |0014: invoke-virtual {v0, v1, v6}, Ljava/util/HashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d58a
+64350e: 0c05                                   |0017: move-result-object v5
+643510: 3804 0400                              |0018: if-eqz v4, 001c // +0004
+643514: 3905 0800                              |001a: if-nez v5, 0022 // +0008
+643518: 5434 964f                              |001c: iget-object v4, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._readOnlyMap:Ljava/util/concurrent/atomic/AtomicReference; // field@4f96
+64351c: 1205                                   |001e: const/4 v5, #int 0 // #0
+64351e: 6e20 0cd7 5400                         |001f: invoke-virtual {v4, v5}, Ljava/util/concurrent/atomic/AtomicReference;.set:(Ljava/lang/Object;)V // method@d70c
+643524: 2064 b30e                              |0022: instance-of v4, v6, Lcom/fasterxml/jackson/databind/ser/ResolvableSerializer; // type@0eb3
+643528: 3804 0700                              |0024: if-eqz v4, 002b // +0007
+64352c: 1f06 b30e                              |0026: check-cast v6, Lcom/fasterxml/jackson/databind/ser/ResolvableSerializer; // type@0eb3
+643530: 7220 4b87 7600                         |0028: invoke-interface {v6, v7}, Lcom/fasterxml/jackson/databind/ser/ResolvableSerializer;.resolve:(Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@874b
+643536: 1e03                                   |002b: monitor-exit v3
+643538: 0e00                                   |002c: return-void
+64353a: 0d04                                   |002d: move-exception v4
+64353c: 1e03                                   |002e: monitor-exit v3
+64353e: 2704                                   |002f: throw v4
+      catches       : 1
+        0x0001 - 0x002f
+          <any> -> 0x002d
+      positions     :
+        0x0000 line=190
+        0x0001 line=191
+        0x000d line=192
+        0x001c line=194
+        0x0022 line=196
+        0x0026 line=197
+        0x002b line=199
+      locals        :
+        0x0000 - 0x0030 reg=3 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+        0x0000 - 0x0030 reg=4 (null) Ljava/lang/Class;
+        0x0000 - 0x0030 reg=5 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x0030 reg=6 (null) Lcom/fasterxml/jackson/databind/JsonSerializer;
+        0x0000 - 0x0030 reg=7 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+
+    #2              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'addAndResolveNonTypedSerializer'
+      type          : '(Ljava/lang/Class;Lcom/fasterxml/jackson/databind/JsonSerializer;Lcom/fasterxml/jackson/databind/SerializerProvider;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 7
+      ins           : 4
+      outs          : 3
+      insns size    : 35 16-bit code units
+64354c:                                        |[64354c] com.fasterxml.jackson.databind.ser.SerializerCache.addAndResolveNonTypedSerializer:(Ljava/lang/Class;Lcom/fasterxml/jackson/databind/JsonSerializer;Lcom/fasterxml/jackson/databind/SerializerProvider;)V
+64355c: 1d03                                   |0000: monitor-enter v3
+64355e: 5430 974f                              |0001: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+643562: 2201 710f                              |0003: new-instance v1, Lcom/fasterxml/jackson/databind/util/TypeKey; // type@0f71
+643566: 1202                                   |0005: const/4 v2, #int 0 // #0
+643568: 7030 2290 4102                         |0006: invoke-direct {v1, v4, v2}, Lcom/fasterxml/jackson/databind/util/TypeKey;.<init>:(Ljava/lang/Class;Z)V // method@9022
+64356e: 6e30 8ad5 1005                         |0009: invoke-virtual {v0, v1, v5}, Ljava/util/HashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d58a
+643574: 0c04                                   |000c: move-result-object v4
+643576: 3904 0800                              |000d: if-nez v4, 0015 // +0008
+64357a: 5434 964f                              |000f: iget-object v4, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._readOnlyMap:Ljava/util/concurrent/atomic/AtomicReference; // field@4f96
+64357e: 1200                                   |0011: const/4 v0, #int 0 // #0
+643580: 6e20 0cd7 0400                         |0012: invoke-virtual {v4, v0}, Ljava/util/concurrent/atomic/AtomicReference;.set:(Ljava/lang/Object;)V // method@d70c
+643586: 2054 b30e                              |0015: instance-of v4, v5, Lcom/fasterxml/jackson/databind/ser/ResolvableSerializer; // type@0eb3
+64358a: 3804 0700                              |0017: if-eqz v4, 001e // +0007
+64358e: 1f05 b30e                              |0019: check-cast v5, Lcom/fasterxml/jackson/databind/ser/ResolvableSerializer; // type@0eb3
+643592: 7220 4b87 6500                         |001b: invoke-interface {v5, v6}, Lcom/fasterxml/jackson/databind/ser/ResolvableSerializer;.resolve:(Lcom/fasterxml/jackson/databind/SerializerProvider;)V // method@874b
+643598: 1e03                                   |001e: monitor-exit v3
+64359a: 0e00                                   |001f: return-void
+64359c: 0d04                                   |0020: move-exception v4
+64359e: 1e03                                   |0021: monitor-exit v3
+6435a0: 2704                                   |0022: throw v4
+      catches       : 1
+        0x0001 - 0x0022
+          <any> -> 0x0020
+      positions     :
+        0x0000 line=145
+        0x0001 line=146
+        0x000f line=147
+        0x0015 line=154
+        0x0019 line=155
+        0x001e line=157
+      locals        :
+        0x0000 - 0x0023 reg=3 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+        0x0000 - 0x0023 reg=4 (null) Ljava/lang/Class;
+        0x0000 - 0x0023 reg=5 (null) Lcom/fasterxml/jackson/databind/JsonSerializer;
+        0x0000 - 0x0023 reg=6 (null) Lcom/fasterxml/jackson/databind/SerializerProvider;
+
+    #3              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'addTypedSerializer'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JsonSerializer;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 3
+      insns size    : 26 16-bit code units
+6435b0:                                        |[6435b0] com.fasterxml.jackson.databind.ser.SerializerCache.addTypedSerializer:(Lcom/fasterxml/jackson/databind/JavaType;Lcom/fasterxml/jackson/databind/JsonSerializer;)V
+6435c0: 1d03                                   |0000: monitor-enter v3
+6435c2: 5430 974f                              |0001: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+6435c6: 2201 710f                              |0003: new-instance v1, Lcom/fasterxml/jackson/databind/util/TypeKey; // type@0f71
+6435ca: 1212                                   |0005: const/4 v2, #int 1 // #1
+6435cc: 7030 2090 4102                         |0006: invoke-direct {v1, v4, v2}, Lcom/fasterxml/jackson/databind/util/TypeKey;.<init>:(Lcom/fasterxml/jackson/databind/JavaType;Z)V // method@9020
+6435d2: 6e30 8ad5 1005                         |0009: invoke-virtual {v0, v1, v5}, Ljava/util/HashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d58a
+6435d8: 0c04                                   |000c: move-result-object v4
+6435da: 3904 0800                              |000d: if-nez v4, 0015 // +0008
+6435de: 5434 964f                              |000f: iget-object v4, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._readOnlyMap:Ljava/util/concurrent/atomic/AtomicReference; // field@4f96
+6435e2: 1205                                   |0011: const/4 v5, #int 0 // #0
+6435e4: 6e20 0cd7 5400                         |0012: invoke-virtual {v4, v5}, Ljava/util/concurrent/atomic/AtomicReference;.set:(Ljava/lang/Object;)V // method@d70c
+6435ea: 1e03                                   |0015: monitor-exit v3
+6435ec: 0e00                                   |0016: return-void
+6435ee: 0d04                                   |0017: move-exception v4
+6435f0: 1e03                                   |0018: monitor-exit v3
+6435f2: 2704                                   |0019: throw v4
+      catches       : 1
+        0x0001 - 0x0019
+          <any> -> 0x0017
+      positions     :
+        0x0000 line=123
+        0x0001 line=124
+        0x000f line=126
+        0x0015 line=128
+      locals        :
+        0x0000 - 0x001a reg=3 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+        0x0000 - 0x001a reg=4 (null) Lcom/fasterxml/jackson/databind/JavaType;
+        0x0000 - 0x001a reg=5 (null) Lcom/fasterxml/jackson/databind/JsonSerializer;
+
+    #4              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'addTypedSerializer'
+      type          : '(Ljava/lang/Class;Lcom/fasterxml/jackson/databind/JsonSerializer;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 3
+      insns size    : 26 16-bit code units
+643600:                                        |[643600] com.fasterxml.jackson.databind.ser.SerializerCache.addTypedSerializer:(Ljava/lang/Class;Lcom/fasterxml/jackson/databind/JsonSerializer;)V
+643610: 1d03                                   |0000: monitor-enter v3
+643612: 5430 974f                              |0001: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+643616: 2201 710f                              |0003: new-instance v1, Lcom/fasterxml/jackson/databind/util/TypeKey; // type@0f71
+64361a: 1212                                   |0005: const/4 v2, #int 1 // #1
+64361c: 7030 2290 4102                         |0006: invoke-direct {v1, v4, v2}, Lcom/fasterxml/jackson/databind/util/TypeKey;.<init>:(Ljava/lang/Class;Z)V // method@9022
+643622: 6e30 8ad5 1005                         |0009: invoke-virtual {v0, v1, v5}, Ljava/util/HashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d58a
+643628: 0c04                                   |000c: move-result-object v4
+64362a: 3904 0800                              |000d: if-nez v4, 0015 // +0008
+64362e: 5434 964f                              |000f: iget-object v4, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._readOnlyMap:Ljava/util/concurrent/atomic/AtomicReference; // field@4f96
+643632: 1205                                   |0011: const/4 v5, #int 0 // #0
+643634: 6e20 0cd7 5400                         |0012: invoke-virtual {v4, v5}, Ljava/util/concurrent/atomic/AtomicReference;.set:(Ljava/lang/Object;)V // method@d70c
+64363a: 1e03                                   |0015: monitor-exit v3
+64363c: 0e00                                   |0016: return-void
+64363e: 0d04                                   |0017: move-exception v4
+643640: 1e03                                   |0018: monitor-exit v3
+643642: 2704                                   |0019: throw v4
+      catches       : 1
+        0x0001 - 0x0019
+          <any> -> 0x0017
+      positions     :
+        0x0000 line=133
+        0x0001 line=134
+        0x000f line=136
+        0x0015 line=138
+      locals        :
+        0x0000 - 0x001a reg=3 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+        0x0000 - 0x001a reg=4 (null) Ljava/lang/Class;
+        0x0000 - 0x001a reg=5 (null) Lcom/fasterxml/jackson/databind/JsonSerializer;
+
+    #5              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'flush'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 11 16-bit code units
+643650:                                        |[643650] com.fasterxml.jackson.databind.ser.SerializerCache.flush:()V
+643660: 1d01                                   |0000: monitor-enter v1
+643662: 5410 974f                              |0001: iget-object v0, v1, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+643666: 6e10 82d5 0000                         |0003: invoke-virtual {v0}, Ljava/util/HashMap;.clear:()V // method@d582
+64366c: 1e01                                   |0006: monitor-exit v1
+64366e: 0e00                                   |0007: return-void
+643670: 0d00                                   |0008: move-exception v0
+643672: 1e01                                   |0009: monitor-exit v1
+643674: 2700                                   |000a: throw v0
+      catches       : 2
+        0x0001 - 0x0006
+          <any> -> 0x0008
+        0x0009 - 0x000a
+          <any> -> 0x0008
+      positions     :
+        0x0001 line=207
+        0x0006 line=208
+      locals        :
+        0x0000 - 0x000b reg=1 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+
+    #6              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'getReadOnlyLookupMap'
+      type          : '()Lcom/fasterxml/jackson/databind/ser/impl/ReadOnlyClassToSerializerMap;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 16 16-bit code units
+64368c:                                        |[64368c] com.fasterxml.jackson.databind.ser.SerializerCache.getReadOnlyLookupMap:()Lcom/fasterxml/jackson/databind/ser/impl/ReadOnlyClassToSerializerMap;
+64369c: 5410 964f                              |0000: iget-object v0, v1, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._readOnlyMap:Ljava/util/concurrent/atomic/AtomicReference; // field@4f96
+6436a0: 6e10 0ad7 0000                         |0002: invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicReference;.get:()Ljava/lang/Object; // method@d70a
+6436a6: 0c00                                   |0005: move-result-object v0
+6436a8: 1f00 ce0e                              |0006: check-cast v0, Lcom/fasterxml/jackson/databind/ser/impl/ReadOnlyClassToSerializerMap; // type@0ece
+6436ac: 3800 0300                              |0008: if-eqz v0, 000b // +0003
+6436b0: 1100                                   |000a: return-object v0
+6436b2: 7010 4d87 0100                         |000b: invoke-direct {v1}, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._makeReadOnlyLookupMap:()Lcom/fasterxml/jackson/databind/ser/impl/ReadOnlyClassToSerializerMap; // method@874d
+6436b8: 0c01                                   |000e: move-result-object v1
+6436ba: 1101                                   |000f: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=50
+        0x000b line=54
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+
+    #7              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'size'
+      type          : '()I'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 12 16-bit code units
+6436bc:                                        |[6436bc] com.fasterxml.jackson.databind.ser.SerializerCache.size:()I
+6436cc: 1d01                                   |0000: monitor-enter v1
+6436ce: 5410 974f                              |0001: iget-object v0, v1, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+6436d2: 6e10 8dd5 0000                         |0003: invoke-virtual {v0}, Ljava/util/HashMap;.size:()I // method@d58d
+6436d8: 0a00                                   |0006: move-result v0
+6436da: 1e01                                   |0007: monitor-exit v1
+6436dc: 0f00                                   |0008: return v0
+6436de: 0d00                                   |0009: move-exception v0
+6436e0: 1e01                                   |000a: monitor-exit v1
+6436e2: 2700                                   |000b: throw v0
+      catches       : 2
+        0x0001 - 0x0007
+          <any> -> 0x0009
+        0x000a - 0x000b
+          <any> -> 0x0009
+      positions     :
+        0x0001 line=75
+      locals        :
+        0x0000 - 0x000c reg=1 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+
+    #8              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'typedValueSerializer'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/JsonSerializer;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 20 16-bit code units
+6436f8:                                        |[6436f8] com.fasterxml.jackson.databind.ser.SerializerCache.typedValueSerializer:(Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/JsonSerializer;
+643708: 1d03                                   |0000: monitor-enter v3
+64370a: 5430 974f                              |0001: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+64370e: 2201 710f                              |0003: new-instance v1, Lcom/fasterxml/jackson/databind/util/TypeKey; // type@0f71
+643712: 1212                                   |0005: const/4 v2, #int 1 // #1
+643714: 7030 2090 4102                         |0006: invoke-direct {v1, v4, v2}, Lcom/fasterxml/jackson/databind/util/TypeKey;.<init>:(Lcom/fasterxml/jackson/databind/JavaType;Z)V // method@9020
+64371a: 6e20 86d5 1000                         |0009: invoke-virtual {v0, v1}, Ljava/util/HashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d586
+643720: 0c04                                   |000c: move-result-object v4
+643722: 1f04 cc0c                              |000d: check-cast v4, Lcom/fasterxml/jackson/databind/JsonSerializer; // type@0ccc
+643726: 1e03                                   |000f: monitor-exit v3
+643728: 1104                                   |0010: return-object v4
+64372a: 0d04                                   |0011: move-exception v4
+64372c: 1e03                                   |0012: monitor-exit v3
+64372e: 2704                                   |0013: throw v4
+      catches       : 1
+        0x0001 - 0x0013
+          <any> -> 0x0011
+      positions     :
+        0x0000 line=98
+        0x0001 line=99
+        0x0012 line=100
+      locals        :
+        0x0000 - 0x0014 reg=3 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+        0x0000 - 0x0014 reg=4 (null) Lcom/fasterxml/jackson/databind/JavaType;
+
+    #9              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'typedValueSerializer'
+      type          : '(Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/JsonSerializer;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 20 16-bit code units
+64373c:                                        |[64373c] com.fasterxml.jackson.databind.ser.SerializerCache.typedValueSerializer:(Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/JsonSerializer;
+64374c: 1d03                                   |0000: monitor-enter v3
+64374e: 5430 974f                              |0001: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+643752: 2201 710f                              |0003: new-instance v1, Lcom/fasterxml/jackson/databind/util/TypeKey; // type@0f71
+643756: 1212                                   |0005: const/4 v2, #int 1 // #1
+643758: 7030 2290 4102                         |0006: invoke-direct {v1, v4, v2}, Lcom/fasterxml/jackson/databind/util/TypeKey;.<init>:(Ljava/lang/Class;Z)V // method@9022
+64375e: 6e20 86d5 1000                         |0009: invoke-virtual {v0, v1}, Ljava/util/HashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d586
+643764: 0c04                                   |000c: move-result-object v4
+643766: 1f04 cc0c                              |000d: check-cast v4, Lcom/fasterxml/jackson/databind/JsonSerializer; // type@0ccc
+64376a: 1e03                                   |000f: monitor-exit v3
+64376c: 1104                                   |0010: return-object v4
+64376e: 0d04                                   |0011: move-exception v4
+643770: 1e03                                   |0012: monitor-exit v3
+643772: 2704                                   |0013: throw v4
+      catches       : 1
+        0x0001 - 0x0013
+          <any> -> 0x0011
+      positions     :
+        0x0000 line=105
+        0x0001 line=106
+        0x0012 line=107
+      locals        :
+        0x0000 - 0x0014 reg=3 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+        0x0000 - 0x0014 reg=4 (null) Ljava/lang/Class;
+
+    #10              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'untypedValueSerializer'
+      type          : '(Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/JsonSerializer;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 20 16-bit code units
+643780:                                        |[643780] com.fasterxml.jackson.databind.ser.SerializerCache.untypedValueSerializer:(Lcom/fasterxml/jackson/databind/JavaType;)Lcom/fasterxml/jackson/databind/JsonSerializer;
+643790: 1d03                                   |0000: monitor-enter v3
+643792: 5430 974f                              |0001: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+643796: 2201 710f                              |0003: new-instance v1, Lcom/fasterxml/jackson/databind/util/TypeKey; // type@0f71
+64379a: 1202                                   |0005: const/4 v2, #int 0 // #0
+64379c: 7030 2090 4102                         |0006: invoke-direct {v1, v4, v2}, Lcom/fasterxml/jackson/databind/util/TypeKey;.<init>:(Lcom/fasterxml/jackson/databind/JavaType;Z)V // method@9020
+6437a2: 6e20 86d5 1000                         |0009: invoke-virtual {v0, v1}, Ljava/util/HashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d586
+6437a8: 0c04                                   |000c: move-result-object v4
+6437aa: 1f04 cc0c                              |000d: check-cast v4, Lcom/fasterxml/jackson/databind/JsonSerializer; // type@0ccc
+6437ae: 1e03                                   |000f: monitor-exit v3
+6437b0: 1104                                   |0010: return-object v4
+6437b2: 0d04                                   |0011: move-exception v4
+6437b4: 1e03                                   |0012: monitor-exit v3
+6437b6: 2704                                   |0013: throw v4
+      catches       : 1
+        0x0001 - 0x0013
+          <any> -> 0x0011
+      positions     :
+        0x0000 line=91
+        0x0001 line=92
+        0x0012 line=93
+      locals        :
+        0x0000 - 0x0014 reg=3 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+        0x0000 - 0x0014 reg=4 (null) Lcom/fasterxml/jackson/databind/JavaType;
+
+    #11              : (in Lcom/fasterxml/jackson/databind/ser/SerializerCache;)
+      name          : 'untypedValueSerializer'
+      type          : '(Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/JsonSerializer;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 20 16-bit code units
+6437c4:                                        |[6437c4] com.fasterxml.jackson.databind.ser.SerializerCache.untypedValueSerializer:(Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/JsonSerializer;
+6437d4: 1d03                                   |0000: monitor-enter v3
+6437d6: 5430 974f                              |0001: iget-object v0, v3, Lcom/fasterxml/jackson/databind/ser/SerializerCache;._sharedMap:Ljava/util/HashMap; // field@4f97
+6437da: 2201 710f                              |0003: new-instance v1, Lcom/fasterxml/jackson/databind/util/TypeKey; // type@0f71
+6437de: 1202                                   |0005: const/4 v2, #int 0 // #0
+6437e0: 7030 2290 4102                         |0006: invoke-direct {v1, v4, v2}, Lcom/fasterxml/jackson/databind/util/TypeKey;.<init>:(Ljava/lang/Class;Z)V // method@9022
+6437e6: 6e20 86d5 1000                         |0009: invoke-virtual {v0, v1}, Ljava/util/HashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d586
+6437ec: 0c04                                   |000c: move-result-object v4
+6437ee: 1f04 cc0c                              |000d: check-cast v4, Lcom/fasterxml/jackson/databind/JsonSerializer; // type@0ccc
+6437f2: 1e03                                   |000f: monitor-exit v3
+6437f4: 1104                                   |0010: return-object v4
+6437f6: 0d04                                   |0011: move-exception v4
+6437f8: 1e03                                   |0012: monitor-exit v3
+6437fa: 2704                                   |0013: throw v4
+      catches       : 1
+        0x0001 - 0x0013
+          <any> -> 0x0011
+      positions     :
+        0x0000 line=84
+        0x0001 line=85
+        0x0012 line=86
+      locals        :
+        0x0000 - 0x0014 reg=3 this Lcom/fasterxml/jackson/databind/ser/SerializerCache;
+        0x0000 - 0x0014 reg=4 (null) Ljava/lang/Class;
+
+  source_file_idx   : 25151 (SerializerCache.java)
+

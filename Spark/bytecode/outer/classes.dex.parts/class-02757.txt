@@ -1,0 +1,1229 @@
+Class #2757            -
+  Class descriptor  : 'Lcom/adjust/sdk/InstallReferrer;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/lang/reflect/InvocationHandler;'
+  Static fields     -
+    #0              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'PACKAGE_BASE_NAME'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "com.android.installreferrer."
+    #1              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'STATUS_DEVELOPER_ERROR'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 3
+    #2              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'STATUS_FEATURE_NOT_SUPPORTED'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 2
+    #3              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'STATUS_OK'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 0
+    #4              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'STATUS_SERVICE_DISCONNECTED'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : -1
+    #5              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'STATUS_SERVICE_UNAVAILABLE'
+      type          : 'I'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : 1
+  Instance fields   -
+    #0              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'context'
+      type          : 'Landroid/content/Context;'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'executor'
+      type          : 'Lcom/adjust/sdk/scheduler/ThreadExecutor;'
+      access        : 0x0002 (PRIVATE)
+    #2              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'logger'
+      type          : 'Lcom/adjust/sdk/ILogger;'
+      access        : 0x0002 (PRIVATE)
+    #3              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'referrerCallback'
+      type          : 'Lcom/adjust/sdk/InstallReferrerReadListener;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'referrerClient'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x0002 (PRIVATE)
+    #5              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'retries'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #6              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'retryTimer'
+      type          : 'Lcom/adjust/sdk/scheduler/TimerOnce;'
+      access        : 0x0002 (PRIVATE)
+    #7              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'retryWaitTime'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #8              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'shouldTryToRead'
+      type          : 'Ljava/util/concurrent/atomic/AtomicBoolean;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : '<init>'
+      type          : '(Landroid/content/Context;Lcom/adjust/sdk/InstallReferrerReadListener;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 50 16-bit code units
+201214:                                        |[201214] com.adjust.sdk.InstallReferrer.<init>:(Landroid/content/Context;Lcom/adjust/sdk/InstallReferrerReadListener;)V
+201224: 7010 df71 0200                         |0000: invoke-direct {v2}, Ljava/lang/Object;.<init>:()V // method@71df
+20122a: 1300 b80b                              |0003: const/16 v0, #int 3000 // #bb8
+20122e: 5920 9129                              |0005: iput v0, v2, Lcom/adjust/sdk/InstallReferrer;.retryWaitTime:I // field@2991
+201232: 7100 f75a 0000                         |0007: invoke-static {}, Lcom/adjust/sdk/AdjustFactory;.getLogger:()Lcom/adjust/sdk/ILogger; // method@5af7
+201238: 0c00                                   |000a: move-result-object v0
+20123a: 5b20 8c29                              |000b: iput-object v0, v2, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+20123e: 5b23 8a29                              |000d: iput-object v3, v2, Lcom/adjust/sdk/InstallReferrer;.context:Landroid/content/Context; // field@298a
+201242: 2203 6912                              |000f: new-instance v3, Ljava/util/concurrent/atomic/AtomicBoolean; // type@1269
+201246: 1210                                   |0011: const/4 v0, #int 1 // #1
+201248: 7020 1576 0300                         |0012: invoke-direct {v3, v0}, Ljava/util/concurrent/atomic/AtomicBoolean;.<init>:(Z)V // method@7615
+20124e: 5b23 9229                              |0015: iput-object v3, v2, Lcom/adjust/sdk/InstallReferrer;.shouldTryToRead:Ljava/util/concurrent/atomic/AtomicBoolean; // field@2992
+201252: 1203                                   |0017: const/4 v3, #int 0 // #0
+201254: 5923 8f29                              |0018: iput v3, v2, Lcom/adjust/sdk/InstallReferrer;.retries:I // field@298f
+201258: 2203 8e0d                              |001a: new-instance v3, Lcom/adjust/sdk/scheduler/TimerOnce; // type@0d8e
+20125c: 2200 2d0d                              |001c: new-instance v0, Lcom/adjust/sdk/InstallReferrer$1; // type@0d2d
+201260: 7020 a25c 2000                         |001e: invoke-direct {v0, v2}, Lcom/adjust/sdk/InstallReferrer$1;.<init>:(Lcom/adjust/sdk/InstallReferrer;)V // method@5ca2
+201266: 1a01 f829                              |0021: const-string v1, "InstallReferrer" // string@29f8
+20126a: 7030 bb5e 0301                         |0023: invoke-direct {v3, v0, v1}, Lcom/adjust/sdk/scheduler/TimerOnce;.<init>:(Ljava/lang/Runnable;Ljava/lang/String;)V // method@5ebb
+201270: 5b23 9029                              |0026: iput-object v3, v2, Lcom/adjust/sdk/InstallReferrer;.retryTimer:Lcom/adjust/sdk/scheduler/TimerOnce; // field@2990
+201274: 5b24 8d29                              |0028: iput-object v4, v2, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+201278: 2203 830d                              |002a: new-instance v3, Lcom/adjust/sdk/scheduler/SingleThreadCachedScheduler; // type@0d83
+20127c: 7020 955e 1300                         |002c: invoke-direct {v3, v1}, Lcom/adjust/sdk/scheduler/SingleThreadCachedScheduler;.<init>:(Ljava/lang/String;)V // method@5e95
+201282: 5b23 8b29                              |002f: iput-object v3, v2, Lcom/adjust/sdk/InstallReferrer;.executor:Lcom/adjust/sdk/scheduler/ThreadExecutor; // field@298b
+201286: 0e00                                   |0031: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0005 line=2
+        0x0007 line=51
+        0x000d line=52
+        0x000f line=53
+        0x0018 line=54
+        0x001a line=55
+        0x0028 line=61
+        0x002a line=62
+      locals        :
+        0x0000 - 0x0032 reg=2 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0032 reg=3 (null) Landroid/content/Context;
+        0x0000 - 0x0032 reg=4 (null) Lcom/adjust/sdk/InstallReferrerReadListener;
+
+    #1              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'access$000'
+      type          : '(Lcom/adjust/sdk/InstallReferrer;Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 4
+      insns size    : 5 16-bit code units
+200c70:                                        |[200c70] com.adjust.sdk.InstallReferrer.access$000:(Lcom/adjust/sdk/InstallReferrer;Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;
+200c80: 7040 b65c 1032                         |0000: invoke-direct {v0, v1, v2, v3}, Lcom/adjust/sdk/InstallReferrer;.invokeI:(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object; // method@5cb6
+200c86: 0c00                                   |0003: move-result-object v0
+200c88: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0005 reg=1 (null) Ljava/lang/Object;
+        0x0000 - 0x0005 reg=2 (null) Ljava/lang/reflect/Method;
+        0x0000 - 0x0005 reg=3 (null) [Ljava/lang/Object;
+
+    #2              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'access$100'
+      type          : '(Lcom/adjust/sdk/InstallReferrer;)Lcom/adjust/sdk/InstallReferrerReadListener;'
+      access        : 0x1009 (PUBLIC STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+200ba4:                                        |[200ba4] com.adjust.sdk.InstallReferrer.access$100:(Lcom/adjust/sdk/InstallReferrer;)Lcom/adjust/sdk/InstallReferrerReadListener;
+200bb4: 5400 8d29                              |0000: iget-object v0, v0, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200bb8: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/adjust/sdk/InstallReferrer;
+
+    #3              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'closeReferrerClient'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 4
+      insns size    : 51 16-bit code units
+201288:                                        |[201288] com.adjust.sdk.InstallReferrer.closeReferrerClient:()V
+201298: 5450 8e29                              |0000: iget-object v0, v5, Lcom/adjust/sdk/InstallReferrer;.referrerClient:Ljava/lang/Object; // field@298e
+20129c: 3900 0300                              |0002: if-nez v0, 0005 // +0003
+2012a0: 0e00                                   |0004: return-void
+2012a2: 1201                                   |0005: const/4 v1, #int 0 // #0
+2012a4: 1a02 d372                              |0006: const-string v2, "endConnection" // string@72d3
+2012a8: 1203                                   |0008: const/4 v3, #int 0 // #0
+2012aa: 2334 ac1a                              |0009: new-array v4, v3, [Ljava/lang/Object; // type@1aac
+2012ae: 7140 875d 2041                         |000b: invoke-static {v0, v2, v1, v4}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+2012b4: 5450 8c29                              |000e: iget-object v0, v5, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+2012b8: 1a02 ec29                              |0010: const-string v2, "Install Referrer API connection closed" // string@29ec
+2012bc: 2333 ac1a                              |0012: new-array v3, v3, [Ljava/lang/Object; // type@1aac
+2012c0: 7230 855c 2003                         |0014: invoke-interface {v0, v2, v3}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+2012c6: 2819                                   |0017: goto 0030 // +0019
+2012c8: 0d00                                   |0018: move-exception v0
+2012ca: 5452 8c29                              |0019: iget-object v2, v5, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+2012ce: 6e10 9f72 0000                         |001b: invoke-virtual {v0}, Ljava/lang/Throwable;.getMessage:()Ljava/lang/String; // method@729f
+2012d4: 0c03                                   |001e: move-result-object v3
+2012d6: 6e10 e371 0000                         |001f: invoke-virtual {v0}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+2012dc: 0c00                                   |0022: move-result-object v0
+2012de: 6e10 0f71 0000                         |0023: invoke-virtual {v0}, Ljava/lang/Class;.getCanonicalName:()Ljava/lang/String; // method@710f
+2012e4: 0c00                                   |0026: move-result-object v0
+2012e6: 2420 ac1a 0300                         |0027: filled-new-array {v3, v0}, [Ljava/lang/Object; // type@1aac
+2012ec: 0c00                                   |002a: move-result-object v0
+2012ee: 1a03 e96a                              |002b: const-string v3, "closeReferrerClient error (%s) thrown by (%s)" // string@6ae9
+2012f2: 7230 865c 3200                         |002d: invoke-interface {v2, v3, v0}, Lcom/adjust/sdk/ILogger;.error:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c86
+2012f8: 5b51 8e29                              |0030: iput-object v1, v5, Lcom/adjust/sdk/InstallReferrer;.referrerClient:Ljava/lang/Object; // field@298e
+2012fc: 0e00                                   |0032: return-void
+      catches       : 1
+        0x0006 - 0x0017
+          Ljava/lang/Exception; -> 0x0018
+      positions     :
+        0x0000 line=1
+        0x0006 line=6
+        0x000e line=7
+        0x0019 line=9
+        0x001b line=10
+        0x001f line=11
+        0x002b line=12
+        0x0030 line=16
+      locals        :
+        0x0000 - 0x0033 reg=5 this Lcom/adjust/sdk/InstallReferrer;
+
+    #4              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'createInstallReferrerClient'
+      type          : '(Landroid/content/Context;)Ljava/lang/Object;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 4
+      insns size    : 88 16-bit code units
+200c8c:                                        |[200c8c] com.adjust.sdk.InstallReferrer.createInstallReferrerClient:(Landroid/content/Context;)Ljava/lang/Object;
+200c9c: 1200                                   |0000: const/4 v0, #int 0 // #0
+200c9e: 1a01 6d6b                              |0001: const-string v1, "com.android.installreferrer.api.InstallReferrerClient" // string@6b6d
+200ca2: 1a02 9897                              |0003: const-string v2, "newBuilder" // string@9798
+200ca6: 1213                                   |0005: const/4 v3, #int 1 // #1
+200ca8: 2333 a51a                              |0006: new-array v3, v3, [Ljava/lang/Class; // type@1aa5
+200cac: 1c04 6900                              |0008: const-class v4, Landroid/content/Context; // type@0069
+200cb0: 1205                                   |000a: const/4 v5, #int 0 // #0
+200cb2: 4d04 0305                              |000b: aput-object v4, v3, v5
+200cb6: 2410 ac1a 0700                         |000d: filled-new-array {v7}, [Ljava/lang/Object; // type@1aac
+200cbc: 0c07                                   |0010: move-result-object v7
+200cbe: 7140 895d 2173                         |0011: invoke-static {v1, v2, v3, v7}, Lcom/adjust/sdk/Reflection;.invokeStaticMethod:(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d89
+200cc4: 0c07                                   |0014: move-result-object v7
+200cc6: 1a01 5468                              |0015: const-string v1, "build" // string@6854
+200cca: 2352 ac1a                              |0017: new-array v2, v5, [Ljava/lang/Object; // type@1aac
+200cce: 7140 875d 1720                         |0019: invoke-static {v7, v1, v0, v2}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+200cd4: 0c07                                   |001c: move-result-object v7
+200cd6: 1107                                   |001d: return-object v7
+200cd8: 0d07                                   |001e: move-exception v7
+200cda: 5461 8d29                              |001f: iget-object v1, v6, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200cde: 6e10 9f72 0700                         |0021: invoke-virtual {v7}, Ljava/lang/Throwable;.getMessage:()Ljava/lang/String; // method@729f
+200ce4: 0c02                                   |0024: move-result-object v2
+200ce6: 6e10 e371 0700                         |0025: invoke-virtual {v7}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+200cec: 0c07                                   |0028: move-result-object v7
+200cee: 6e10 0f71 0700                         |0029: invoke-virtual {v7}, Ljava/lang/Class;.getCanonicalName:()Ljava/lang/String; // method@710f
+200cf4: 0c07                                   |002c: move-result-object v7
+200cf6: 2420 ac1a 7200                         |002d: filled-new-array {v2, v7}, [Ljava/lang/Object; // type@1aac
+200cfc: 0c07                                   |0030: move-result-object v7
+200cfe: 1a02 8f6e                              |0031: const-string v2, "createInstallReferrerClient error (%s) from (%s)" // string@6e8f
+200d02: 7120 1a5e 7200                         |0033: invoke-static {v2, v7}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+200d08: 0c07                                   |0036: move-result-object v7
+200d0a: 7220 bb5c 7100                         |0037: invoke-interface {v1, v7}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200d10: 281d                                   |003a: goto 0057 // +001d
+200d12: 0d07                                   |003b: move-exception v7
+200d14: 5461 8d29                              |003c: iget-object v1, v6, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200d18: 6e10 3971 0700                         |003e: invoke-virtual {v7}, Ljava/lang/ClassNotFoundException;.getMessage:()Ljava/lang/String; // method@7139
+200d1e: 0c02                                   |0041: move-result-object v2
+200d20: 6e10 e371 0700                         |0042: invoke-virtual {v7}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+200d26: 0c07                                   |0045: move-result-object v7
+200d28: 6e10 0f71 0700                         |0046: invoke-virtual {v7}, Ljava/lang/Class;.getCanonicalName:()Ljava/lang/String; // method@710f
+200d2e: 0c07                                   |0049: move-result-object v7
+200d30: 2420 ac1a 7200                         |004a: filled-new-array {v2, v7}, [Ljava/lang/Object; // type@1aac
+200d36: 0c07                                   |004d: move-result-object v7
+200d38: 1a02 072a                              |004e: const-string v2, "InstallReferrer not integrated in project (%s) thrown by (%s)" // string@2a07
+200d3c: 7120 1a5e 7200                         |0050: invoke-static {v2, v7}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+200d42: 0c07                                   |0053: move-result-object v7
+200d44: 7220 bb5c 7100                         |0054: invoke-interface {v1, v7}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200d4a: 1100                                   |0057: return-object v0
+      catches       : 1
+        0x0001 - 0x001d
+          Ljava/lang/ClassNotFoundException; -> 0x003b
+          Ljava/lang/Exception; -> 0x001e
+      positions     :
+        0x0001 line=1
+        0x0015 line=4
+        0x001f line=10
+        0x0021 line=12
+        0x0031 line=13
+        0x0037 line=14
+        0x003c line=15
+        0x003e line=17
+        0x004e line=18
+        0x0054 line=19
+      locals        :
+        0x0000 - 0x0058 reg=6 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0058 reg=7 (null) Landroid/content/Context;
+
+    #5              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'createProxyInstallReferrerStateListener'
+      type          : '(Ljava/lang/Class;)Ljava/lang/Object;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 32 16-bit code units
+200d5c:                                        |[200d5c] com.adjust.sdk.InstallReferrer.createProxyInstallReferrerStateListener:(Ljava/lang/Class;)Ljava/lang/Object;
+200d6c: 6e10 1071 0400                         |0000: invoke-virtual {v4}, Ljava/lang/Class;.getClassLoader:()Ljava/lang/ClassLoader; // method@7110
+200d72: 0c00                                   |0003: move-result-object v0
+200d74: 1211                                   |0004: const/4 v1, #int 1 // #1
+200d76: 2311 a51a                              |0005: new-array v1, v1, [Ljava/lang/Class; // type@1aa5
+200d7a: 1202                                   |0007: const/4 v2, #int 0 // #0
+200d7c: 4d04 0102                              |0008: aput-object v4, v1, v2
+200d80: 7130 dd72 1003                         |000a: invoke-static {v0, v1, v3}, Ljava/lang/reflect/Proxy;.newProxyInstance:(Ljava/lang/ClassLoader;[Ljava/lang/Class;Ljava/lang/reflect/InvocationHandler;)Ljava/lang/Object; // method@72dd
+200d86: 0c04                                   |000d: move-result-object v4
+200d88: 1104                                   |000e: return-object v4
+200d8a: 5434 8d29                              |000f: iget-object v4, v3, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200d8e: 1a00 bd4b                              |0011: const-string v0, "Null argument passed to InstallReferrer proxy" // string@4bbd
+200d92: 7220 bb5c 0400                         |0013: invoke-interface {v4, v0}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200d98: 2808                                   |0016: goto 001e // +0008
+200d9a: 5434 8d29                              |0017: iget-object v4, v3, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200d9e: 1a00 092a                              |0019: const-string v0, "InstallReferrer proxy violating parameter restrictions" // string@2a09
+200da2: 7220 bb5c 0400                         |001b: invoke-interface {v4, v0}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200da8: 1204                                   |001e: const/4 v4, #int 0 // #0
+200daa: 1104                                   |001f: return-object v4
+      catches       : 1
+        0x0000 - 0x000e
+          Ljava/lang/IllegalArgumentException; -> 0x0017
+          Ljava/lang/NullPointerException; -> 0x000f
+      positions     :
+        0x0000 line=1
+        0x000a line=2
+        0x000f line=10
+        0x0017 line=11
+      locals        :
+        0x0000 - 0x0020 reg=3 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0020 reg=4 (null) Ljava/lang/Class;
+
+    #6              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'getBooleanGooglePlayInstantParam'
+      type          : '(Ljava/lang/Object;)Ljava/lang/Boolean;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 20 16-bit code units
+200bbc:                                        |[200bbc] com.adjust.sdk.InstallReferrer.getBooleanGooglePlayInstantParam:(Ljava/lang/Object;)Ljava/lang/Boolean;
+200bcc: 1200                                   |0000: const/4 v0, #int 0 // #0
+200bce: 3904 0300                              |0001: if-nez v4, 0004 // +0003
+200bd2: 1100                                   |0003: return-object v0
+200bd4: 1a01 dd7a                              |0004: const-string v1, "getGooglePlayInstantParam" // string@7add
+200bd8: 1202                                   |0006: const/4 v2, #int 0 // #0
+200bda: 2322 ac1a                              |0007: new-array v2, v2, [Ljava/lang/Object; // type@1aac
+200bde: 7140 875d 1420                         |0009: invoke-static {v4, v1, v0, v2}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+200be4: 0c04                                   |000c: move-result-object v4
+200be6: 1f04 5511                              |000d: check-cast v4, Ljava/lang/Boolean; // type@1155
+200bea: 6e10 d870 0400                         |000f: invoke-virtual {v4}, Ljava/lang/Boolean;.booleanValue:()Z // method@70d8
+200bf0: 1104                                   |0012: return-object v4
+200bf2: 1100                                   |0013: return-object v0
+      catches       : 1
+        0x0004 - 0x0012
+          Ljava/lang/Exception; -> 0x0013
+      positions     :
+        0x0004 line=1
+      locals        :
+        0x0000 - 0x0014 reg=3 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0014 reg=4 (null) Ljava/lang/Object;
+
+    #7              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'getInstallBeginTimestampSeconds'
+      type          : '(Ljava/lang/Object;)J'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 4
+      insns size    : 47 16-bit code units
+20107c:                                        |[20107c] com.adjust.sdk.InstallReferrer.getInstallBeginTimestampSeconds:(Ljava/lang/Object;)J
+20108c: 1600 ffff                              |0000: const-wide/16 v0, #int -1 // #ffff
+201090: 3906 0300                              |0002: if-nez v6, 0005 // +0003
+201094: 1000                                   |0004: return-wide v0
+201096: 1a02 8b7b                              |0005: const-string v2, "getInstallBeginTimestampSeconds" // string@7b8b
+20109a: 1203                                   |0007: const/4 v3, #int 0 // #0
+20109c: 2333 ac1a                              |0008: new-array v3, v3, [Ljava/lang/Object; // type@1aac
+2010a0: 1204                                   |000a: const/4 v4, #int 0 // #0
+2010a2: 7140 875d 2634                         |000b: invoke-static {v6, v2, v4, v3}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+2010a8: 0c06                                   |000e: move-result-object v6
+2010aa: 1f06 7011                              |000f: check-cast v6, Ljava/lang/Long; // type@1170
+2010ae: 6e10 9271 0600                         |0011: invoke-virtual {v6}, Ljava/lang/Long;.longValue:()J // method@7192
+2010b4: 0b00                                   |0014: move-result-wide v0
+2010b6: 1000                                   |0015: return-wide v0
+2010b8: 0d06                                   |0016: move-exception v6
+2010ba: 5452 8c29                              |0017: iget-object v2, v5, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+2010be: 6e10 9f72 0600                         |0019: invoke-virtual {v6}, Ljava/lang/Throwable;.getMessage:()Ljava/lang/String; // method@729f
+2010c4: 0c03                                   |001c: move-result-object v3
+2010c6: 6e10 e371 0600                         |001d: invoke-virtual {v6}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+2010cc: 0c06                                   |0020: move-result-object v6
+2010ce: 6e10 0f71 0600                         |0021: invoke-virtual {v6}, Ljava/lang/Class;.getCanonicalName:()Ljava/lang/String; // method@710f
+2010d4: 0c06                                   |0024: move-result-object v6
+2010d6: 2420 ac1a 6300                         |0025: filled-new-array {v3, v6}, [Ljava/lang/Object; // type@1aac
+2010dc: 0c06                                   |0028: move-result-object v6
+2010de: 1a03 8c7b                              |0029: const-string v3, "getInstallBeginTimestampSeconds error (%s) thrown by (%s)" // string@7b8c
+2010e2: 7230 865c 3206                         |002b: invoke-interface {v2, v3, v6}, Lcom/adjust/sdk/ILogger;.error:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c86
+2010e8: 1000                                   |002e: return-wide v0
+      catches       : 1
+        0x0005 - 0x0015
+          Ljava/lang/Exception; -> 0x0016
+      positions     :
+        0x0005 line=1
+        0x0011 line=3
+        0x0017 line=5
+        0x0019 line=6
+        0x001d line=7
+        0x0029 line=8
+      locals        :
+        0x0000 - 0x002f reg=5 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x002f reg=6 (null) Ljava/lang/Object;
+
+    #8              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'getInstallBeginTimestampServerSeconds'
+      type          : '(Ljava/lang/Object;)J'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 4
+      insns size    : 22 16-bit code units
+2010fc:                                        |[2010fc] com.adjust.sdk.InstallReferrer.getInstallBeginTimestampServerSeconds:(Ljava/lang/Object;)J
+20110c: 1600 ffff                              |0000: const-wide/16 v0, #int -1 // #ffff
+201110: 3906 0300                              |0002: if-nez v6, 0005 // +0003
+201114: 1000                                   |0004: return-wide v0
+201116: 1a02 8d7b                              |0005: const-string v2, "getInstallBeginTimestampServerSeconds" // string@7b8d
+20111a: 1203                                   |0007: const/4 v3, #int 0 // #0
+20111c: 2333 ac1a                              |0008: new-array v3, v3, [Ljava/lang/Object; // type@1aac
+201120: 1204                                   |000a: const/4 v4, #int 0 // #0
+201122: 7140 875d 2634                         |000b: invoke-static {v6, v2, v4, v3}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+201128: 0c06                                   |000e: move-result-object v6
+20112a: 1f06 7011                              |000f: check-cast v6, Ljava/lang/Long; // type@1170
+20112e: 6e10 9271 0600                         |0011: invoke-virtual {v6}, Ljava/lang/Long;.longValue:()J // method@7192
+201134: 0b00                                   |0014: move-result-wide v0
+201136: 1000                                   |0015: return-wide v0
+      catches       : 1
+        0x0005 - 0x0015
+          Ljava/lang/Exception; -> 0x0015
+      positions     :
+        0x0005 line=1
+        0x0011 line=3
+      locals        :
+        0x0000 - 0x0016 reg=5 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0016 reg=6 (null) Ljava/lang/Object;
+
+    #9              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'getInstallReferrer'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 4
+      insns size    : 41 16-bit code units
+200dbc:                                        |[200dbc] com.adjust.sdk.InstallReferrer.getInstallReferrer:()Ljava/lang/Object;
+200dcc: 5440 8e29                              |0000: iget-object v0, v4, Lcom/adjust/sdk/InstallReferrer;.referrerClient:Ljava/lang/Object; // field@298e
+200dd0: 1201                                   |0002: const/4 v1, #int 0 // #0
+200dd2: 3900 0300                              |0003: if-nez v0, 0006 // +0003
+200dd6: 1101                                   |0005: return-object v1
+200dd8: 1a02 8e7b                              |0006: const-string v2, "getInstallReferrer" // string@7b8e
+200ddc: 1203                                   |0008: const/4 v3, #int 0 // #0
+200dde: 2333 ac1a                              |0009: new-array v3, v3, [Ljava/lang/Object; // type@1aac
+200de2: 7140 875d 2031                         |000b: invoke-static {v0, v2, v1, v3}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+200de8: 0c00                                   |000e: move-result-object v0
+200dea: 1100                                   |000f: return-object v0
+200dec: 0d00                                   |0010: move-exception v0
+200dee: 5442 8c29                              |0011: iget-object v2, v4, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+200df2: 6e10 9f72 0000                         |0013: invoke-virtual {v0}, Ljava/lang/Throwable;.getMessage:()Ljava/lang/String; // method@729f
+200df8: 0c03                                   |0016: move-result-object v3
+200dfa: 6e10 e371 0000                         |0017: invoke-virtual {v0}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+200e00: 0c00                                   |001a: move-result-object v0
+200e02: 6e10 0f71 0000                         |001b: invoke-virtual {v0}, Ljava/lang/Class;.getCanonicalName:()Ljava/lang/String; // method@710f
+200e08: 0c00                                   |001e: move-result-object v0
+200e0a: 2420 ac1a 0300                         |001f: filled-new-array {v3, v0}, [Ljava/lang/Object; // type@1aac
+200e10: 0c00                                   |0022: move-result-object v0
+200e12: 1a03 8f7b                              |0023: const-string v3, "getInstallReferrer error (%s) thrown by (%s)" // string@7b8f
+200e16: 7230 865c 3200                         |0025: invoke-interface {v2, v3, v0}, Lcom/adjust/sdk/ILogger;.error:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c86
+200e1c: 1101                                   |0028: return-object v1
+      catches       : 1
+        0x0006 - 0x000f
+          Ljava/lang/Exception; -> 0x0010
+      positions     :
+        0x0000 line=1
+        0x0006 line=5
+        0x0011 line=8
+        0x0013 line=9
+        0x0017 line=10
+        0x0023 line=11
+      locals        :
+        0x0000 - 0x0029 reg=4 this Lcom/adjust/sdk/InstallReferrer;
+
+    #10              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'getInstallReferrerStateListenerClass'
+      type          : '()Ljava/lang/Class;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 37 16-bit code units
+200c04:                                        |[200c04] com.adjust.sdk.InstallReferrer.getInstallReferrerStateListenerClass:()Ljava/lang/Class;
+200c14: 1a00 6e6b                              |0000: const-string v0, "com.android.installreferrer.api.InstallReferrerStateListener" // string@6b6e
+200c18: 7110 0c71 0000                         |0002: invoke-static {v0}, Ljava/lang/Class;.forName:(Ljava/lang/String;)Ljava/lang/Class; // method@710c
+200c1e: 0c00                                   |0005: move-result-object v0
+200c20: 1100                                   |0006: return-object v0
+200c22: 0d00                                   |0007: move-exception v0
+200c24: 5431 8d29                              |0008: iget-object v1, v3, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200c28: 6e10 9f72 0000                         |000a: invoke-virtual {v0}, Ljava/lang/Throwable;.getMessage:()Ljava/lang/String; // method@729f
+200c2e: 0c02                                   |000d: move-result-object v2
+200c30: 6e10 e371 0000                         |000e: invoke-virtual {v0}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+200c36: 0c00                                   |0011: move-result-object v0
+200c38: 6e10 0f71 0000                         |0012: invoke-virtual {v0}, Ljava/lang/Class;.getCanonicalName:()Ljava/lang/String; // method@710f
+200c3e: 0c00                                   |0015: move-result-object v0
+200c40: 2420 ac1a 0200                         |0016: filled-new-array {v2, v0}, [Ljava/lang/Object; // type@1aac
+200c46: 0c00                                   |0019: move-result-object v0
+200c48: 1a02 917b                              |001a: const-string v2, "getInstallReferrerStateListenerClass error (%s) from (%s)" // string@7b91
+200c4c: 7120 1a5e 0200                         |001c: invoke-static {v2, v0}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+200c52: 0c00                                   |001f: move-result-object v0
+200c54: 7220 bb5c 0100                         |0020: invoke-interface {v1, v0}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200c5a: 1200                                   |0023: const/4 v0, #int 0 // #0
+200c5c: 1100                                   |0024: return-object v0
+      catches       : 1
+        0x0000 - 0x0006
+          Ljava/lang/Exception; -> 0x0007
+      positions     :
+        0x0000 line=1
+        0x0008 line=3
+        0x000a line=5
+        0x001a line=6
+        0x0020 line=7
+      locals        :
+        0x0000 - 0x0025 reg=3 this Lcom/adjust/sdk/InstallReferrer;
+
+    #11              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'getReferrerClickTimestampSeconds'
+      type          : '(Ljava/lang/Object;)J'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 4
+      insns size    : 47 16-bit code units
+201148:                                        |[201148] com.adjust.sdk.InstallReferrer.getReferrerClickTimestampSeconds:(Ljava/lang/Object;)J
+201158: 1600 ffff                              |0000: const-wide/16 v0, #int -1 // #ffff
+20115c: 3906 0300                              |0002: if-nez v6, 0005 // +0003
+201160: 1000                                   |0004: return-wide v0
+201162: 1a02 d67e                              |0005: const-string v2, "getReferrerClickTimestampSeconds" // string@7ed6
+201166: 1203                                   |0007: const/4 v3, #int 0 // #0
+201168: 2333 ac1a                              |0008: new-array v3, v3, [Ljava/lang/Object; // type@1aac
+20116c: 1204                                   |000a: const/4 v4, #int 0 // #0
+20116e: 7140 875d 2634                         |000b: invoke-static {v6, v2, v4, v3}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+201174: 0c06                                   |000e: move-result-object v6
+201176: 1f06 7011                              |000f: check-cast v6, Ljava/lang/Long; // type@1170
+20117a: 6e10 9271 0600                         |0011: invoke-virtual {v6}, Ljava/lang/Long;.longValue:()J // method@7192
+201180: 0b00                                   |0014: move-result-wide v0
+201182: 1000                                   |0015: return-wide v0
+201184: 0d06                                   |0016: move-exception v6
+201186: 5452 8c29                              |0017: iget-object v2, v5, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+20118a: 6e10 9f72 0600                         |0019: invoke-virtual {v6}, Ljava/lang/Throwable;.getMessage:()Ljava/lang/String; // method@729f
+201190: 0c03                                   |001c: move-result-object v3
+201192: 6e10 e371 0600                         |001d: invoke-virtual {v6}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+201198: 0c06                                   |0020: move-result-object v6
+20119a: 6e10 0f71 0600                         |0021: invoke-virtual {v6}, Ljava/lang/Class;.getCanonicalName:()Ljava/lang/String; // method@710f
+2011a0: 0c06                                   |0024: move-result-object v6
+2011a2: 2420 ac1a 6300                         |0025: filled-new-array {v3, v6}, [Ljava/lang/Object; // type@1aac
+2011a8: 0c06                                   |0028: move-result-object v6
+2011aa: 1a03 d77e                              |0029: const-string v3, "getReferrerClickTimestampSeconds error (%s) thrown by (%s)" // string@7ed7
+2011ae: 7230 865c 3206                         |002b: invoke-interface {v2, v3, v6}, Lcom/adjust/sdk/ILogger;.error:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c86
+2011b4: 1000                                   |002e: return-wide v0
+      catches       : 1
+        0x0005 - 0x0015
+          Ljava/lang/Exception; -> 0x0016
+      positions     :
+        0x0005 line=1
+        0x0011 line=3
+        0x0017 line=5
+        0x0019 line=6
+        0x001d line=7
+        0x0029 line=8
+      locals        :
+        0x0000 - 0x002f reg=5 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x002f reg=6 (null) Ljava/lang/Object;
+
+    #12              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'getReferrerClickTimestampServerSeconds'
+      type          : '(Ljava/lang/Object;)J'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 2
+      outs          : 4
+      insns size    : 22 16-bit code units
+2011c8:                                        |[2011c8] com.adjust.sdk.InstallReferrer.getReferrerClickTimestampServerSeconds:(Ljava/lang/Object;)J
+2011d8: 1600 ffff                              |0000: const-wide/16 v0, #int -1 // #ffff
+2011dc: 3906 0300                              |0002: if-nez v6, 0005 // +0003
+2011e0: 1000                                   |0004: return-wide v0
+2011e2: 1a02 d87e                              |0005: const-string v2, "getReferrerClickTimestampServerSeconds" // string@7ed8
+2011e6: 1203                                   |0007: const/4 v3, #int 0 // #0
+2011e8: 2333 ac1a                              |0008: new-array v3, v3, [Ljava/lang/Object; // type@1aac
+2011ec: 1204                                   |000a: const/4 v4, #int 0 // #0
+2011ee: 7140 875d 2634                         |000b: invoke-static {v6, v2, v4, v3}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+2011f4: 0c06                                   |000e: move-result-object v6
+2011f6: 1f06 7011                              |000f: check-cast v6, Ljava/lang/Long; // type@1170
+2011fa: 6e10 9271 0600                         |0011: invoke-virtual {v6}, Ljava/lang/Long;.longValue:()J // method@7192
+201200: 0b00                                   |0014: move-result-wide v0
+201202: 1000                                   |0015: return-wide v0
+      catches       : 1
+        0x0005 - 0x0015
+          Ljava/lang/Exception; -> 0x0015
+      positions     :
+        0x0005 line=1
+        0x0011 line=3
+      locals        :
+        0x0000 - 0x0016 reg=5 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0016 reg=6 (null) Ljava/lang/Object;
+
+    #13              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'getStringInstallReferrer'
+      type          : '(Ljava/lang/Object;)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 41 16-bit code units
+200fc4:                                        |[200fc4] com.adjust.sdk.InstallReferrer.getStringInstallReferrer:(Ljava/lang/Object;)Ljava/lang/String;
+200fd4: 1200                                   |0000: const/4 v0, #int 0 // #0
+200fd6: 3904 0300                              |0001: if-nez v4, 0004 // +0003
+200fda: 1100                                   |0003: return-object v0
+200fdc: 1a01 8e7b                              |0004: const-string v1, "getInstallReferrer" // string@7b8e
+200fe0: 1202                                   |0006: const/4 v2, #int 0 // #0
+200fe2: 2322 ac1a                              |0007: new-array v2, v2, [Ljava/lang/Object; // type@1aac
+200fe6: 7140 875d 1420                         |0009: invoke-static {v4, v1, v0, v2}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+200fec: 0c04                                   |000c: move-result-object v4
+200fee: 1f04 8611                              |000d: check-cast v4, Ljava/lang/String; // type@1186
+200ff2: 1104                                   |000f: return-object v4
+200ff4: 0d04                                   |0010: move-exception v4
+200ff6: 5431 8c29                              |0011: iget-object v1, v3, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+200ffa: 6e10 9f72 0400                         |0013: invoke-virtual {v4}, Ljava/lang/Throwable;.getMessage:()Ljava/lang/String; // method@729f
+201000: 0c02                                   |0016: move-result-object v2
+201002: 6e10 e371 0400                         |0017: invoke-virtual {v4}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+201008: 0c04                                   |001a: move-result-object v4
+20100a: 6e10 0f71 0400                         |001b: invoke-virtual {v4}, Ljava/lang/Class;.getCanonicalName:()Ljava/lang/String; // method@710f
+201010: 0c04                                   |001e: move-result-object v4
+201012: 2420 ac1a 4200                         |001f: filled-new-array {v2, v4}, [Ljava/lang/Object; // type@1aac
+201018: 0c04                                   |0022: move-result-object v4
+20101a: 1a02 2f80                              |0023: const-string v2, "getStringInstallReferrer error (%s) thrown by (%s)" // string@802f
+20101e: 7230 865c 2104                         |0025: invoke-interface {v1, v2, v4}, Lcom/adjust/sdk/ILogger;.error:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c86
+201024: 1100                                   |0028: return-object v0
+      catches       : 1
+        0x0004 - 0x000f
+          Ljava/lang/Exception; -> 0x0010
+      positions     :
+        0x0004 line=1
+        0x0011 line=5
+        0x0013 line=6
+        0x0017 line=7
+        0x0023 line=8
+      locals        :
+        0x0000 - 0x0029 reg=3 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0029 reg=4 (null) Ljava/lang/Object;
+
+    #14              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'getStringInstallVersion'
+      type          : '(Ljava/lang/Object;)Ljava/lang/String;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 4
+      insns size    : 17 16-bit code units
+201038:                                        |[201038] com.adjust.sdk.InstallReferrer.getStringInstallVersion:(Ljava/lang/Object;)Ljava/lang/String;
+201048: 1200                                   |0000: const/4 v0, #int 0 // #0
+20104a: 3904 0300                              |0001: if-nez v4, 0004 // +0003
+20104e: 1100                                   |0003: return-object v0
+201050: 1a01 957b                              |0004: const-string v1, "getInstallVersion" // string@7b95
+201054: 1202                                   |0006: const/4 v2, #int 0 // #0
+201056: 2322 ac1a                              |0007: new-array v2, v2, [Ljava/lang/Object; // type@1aac
+20105a: 7140 875d 1420                         |0009: invoke-static {v4, v1, v0, v2}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+201060: 0c04                                   |000c: move-result-object v4
+201062: 1f04 8611                              |000d: check-cast v4, Ljava/lang/String; // type@1186
+201066: 1104                                   |000f: return-object v4
+201068: 1100                                   |0010: return-object v0
+      catches       : 1
+        0x0004 - 0x000f
+          Ljava/lang/Exception; -> 0x0010
+      positions     :
+        0x0004 line=1
+      locals        :
+        0x0000 - 0x0011 reg=3 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0011 reg=4 (null) Ljava/lang/Object;
+
+    #15              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'invokeI'
+      type          : '(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 3
+      insns size    : 174 16-bit code units
+200e58:                                        |[200e58] com.adjust.sdk.InstallReferrer.invokeI:(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;
+200e68: 1207                                   |0000: const/4 v7, #int 0 // #0
+200e6a: 3908 0a00                              |0001: if-nez v8, 000b // +000a
+200e6e: 5468 8d29                              |0003: iget-object v8, v6, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200e72: 1a09 032a                              |0005: const-string v9, "InstallReferrer invoke method null" // string@2a03
+200e76: 7220 bb5c 9800                         |0007: invoke-interface {v8, v9}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200e7c: 1107                                   |000a: return-object v7
+200e7e: 6e10 d272 0800                         |000b: invoke-virtual {v8}, Ljava/lang/reflect/Method;.getName:()Ljava/lang/String; // method@72d2
+200e84: 0c08                                   |000e: move-result-object v8
+200e86: 3908 0a00                              |000f: if-nez v8, 0019 // +000a
+200e8a: 5468 8d29                              |0011: iget-object v8, v6, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200e8e: 1a09 012a                              |0013: const-string v9, "InstallReferrer invoke method name null" // string@2a01
+200e92: 7220 bb5c 9800                         |0015: invoke-interface {v8, v9}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200e98: 1107                                   |0018: return-object v7
+200e9a: 5460 8c29                              |0019: iget-object v0, v6, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+200e9e: 2410 ac1a 0800                         |001b: filled-new-array {v8}, [Ljava/lang/Object; // type@1aac
+200ea4: 0c01                                   |001e: move-result-object v1
+200ea6: 1a02 022a                              |001f: const-string v2, "InstallReferrer invoke method name: %s" // string@2a02
+200eaa: 7230 855c 2001                         |0021: invoke-interface {v0, v2, v1}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+200eb0: 1200                                   |0024: const/4 v0, #int 0 // #0
+200eb2: 3909 0d00                              |0025: if-nez v9, 0032 // +000d
+200eb6: 5469 8c29                              |0027: iget-object v9, v6, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+200eba: 2301 ac1a                              |0029: new-array v1, v0, [Ljava/lang/Object; // type@1aac
+200ebe: 1a02 002a                              |002b: const-string v2, "InstallReferrer invoke args null" // string@2a00
+200ec2: 7230 8c5c 2901                         |002d: invoke-interface {v9, v2, v1}, Lcom/adjust/sdk/ILogger;.warn:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c8c
+200ec8: 2309 ac1a                              |0030: new-array v9, v0, [Ljava/lang/Object; // type@1aac
+200ecc: 2191                                   |0032: array-length v1, v9
+200ece: 0102                                   |0033: move v2, v0
+200ed0: 3512 1200                              |0034: if-ge v2, v1, 0046 // +0012
+200ed4: 4603 0902                              |0036: aget-object v3, v9, v2
+200ed8: 5464 8c29                              |0038: iget-object v4, v6, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+200edc: 2410 ac1a 0300                         |003a: filled-new-array {v3}, [Ljava/lang/Object; // type@1aac
+200ee2: 0c03                                   |003d: move-result-object v3
+200ee4: 1a05 ff29                              |003e: const-string v5, "InstallReferrer invoke arg: %s" // string@29ff
+200ee8: 7230 855c 5403                         |0040: invoke-interface {v4, v5, v3}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+200eee: d802 0201                              |0043: add-int/lit8 v2, v2, #int 1 // #01
+200ef2: 28ef                                   |0045: goto 0034 // -0011
+200ef4: 1a01 6b9a                              |0046: const-string v1, "onInstallReferrerSetupFinished" // string@9a6b
+200ef8: 6e20 1a72 1800                         |0048: invoke-virtual {v8, v1}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@721a
+200efe: 0a01                                   |004b: move-result v1
+200f00: 3801 3d00                              |004c: if-eqz v1, 0089 // +003d
+200f04: 2198                                   |004e: array-length v8, v9
+200f06: 1211                                   |004f: const/4 v1, #int 1 // #1
+200f08: 3218 1700                              |0050: if-eq v8, v1, 0067 // +0017
+200f0c: 5468 8d29                              |0052: iget-object v8, v6, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200f10: 2199                                   |0054: array-length v9, v9
+200f12: 7110 8771 0900                         |0055: invoke-static {v9}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@7187
+200f18: 0c09                                   |0058: move-result-object v9
+200f1a: 2410 ac1a 0900                         |0059: filled-new-array {v9}, [Ljava/lang/Object; // type@1aac
+200f20: 0c09                                   |005c: move-result-object v9
+200f22: 1a00 052a                              |005d: const-string v0, "InstallReferrer invoke onInstallReferrerSetupFinished args lenght not 1: %d" // string@2a05
+200f26: 7120 1a5e 9000                         |005f: invoke-static {v0, v9}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+200f2c: 0c09                                   |0062: move-result-object v9
+200f2e: 7220 bb5c 9800                         |0063: invoke-interface {v8, v9}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200f34: 1107                                   |0066: return-object v7
+200f36: 4608 0900                              |0067: aget-object v8, v9, v0
+200f3a: 2089 6d11                              |0069: instance-of v9, v8, Ljava/lang/Integer; // type@116d
+200f3e: 3909 0a00                              |006b: if-nez v9, 0075 // +000a
+200f42: 5468 8d29                              |006d: iget-object v8, v6, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200f46: 1a09 042a                              |006f: const-string v9, "InstallReferrer invoke onInstallReferrerSetupFinished arg not int" // string@2a04
+200f4a: 7220 bb5c 9800                         |0071: invoke-interface {v8, v9}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200f50: 1107                                   |0074: return-object v7
+200f52: 1f08 6d11                              |0075: check-cast v8, Ljava/lang/Integer; // type@116d
+200f56: 3908 0a00                              |0077: if-nez v8, 0081 // +000a
+200f5a: 5468 8d29                              |0079: iget-object v8, v6, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200f5e: 1a09 062a                              |007b: const-string v9, "InstallReferrer invoke onInstallReferrerSetupFinished responseCode arg is null" // string@2a06
+200f62: 7220 bb5c 9800                         |007d: invoke-interface {v8, v9}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200f68: 1107                                   |0080: return-object v7
+200f6a: 6e10 7b71 0800                         |0081: invoke-virtual {v8}, Ljava/lang/Integer;.intValue:()I // method@717b
+200f70: 0a08                                   |0084: move-result v8
+200f72: 7020 b75c 8600                         |0085: invoke-direct {v6, v8}, Lcom/adjust/sdk/InstallReferrer;.onInstallReferrerSetupFinishedIntI:(I)V // method@5cb7
+200f78: 2825                                   |0088: goto 00ad // +0025
+200f7a: 1a09 6a9a                              |0089: const-string v9, "onInstallReferrerServiceDisconnected" // string@9a6a
+200f7e: 6e20 1a72 9800                         |008b: invoke-virtual {v8, v9}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@721a
+200f84: 0a01                                   |008e: move-result v1
+200f86: 3801 0f00                              |008f: if-eqz v1, 009e // +000f
+200f8a: 5468 8c29                              |0091: iget-object v8, v6, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+200f8e: 2300 ac1a                              |0093: new-array v0, v0, [Ljava/lang/Object; // type@1aac
+200f92: 1a01 6120                              |0095: const-string v1, "Connection to install referrer service was lost. Retrying ..." // string@2061
+200f96: 7230 855c 1800                         |0097: invoke-interface {v8, v1, v0}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+200f9c: 7020 b85c 9600                         |009a: invoke-direct {v6, v9}, Lcom/adjust/sdk/InstallReferrer;.retryI:(Ljava/lang/String;)V // method@5cb8
+200fa2: 2810                                   |009d: goto 00ad // +0010
+200fa4: 5469 8d29                              |009e: iget-object v9, v6, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+200fa8: 2410 ac1a 0800                         |00a0: filled-new-array {v8}, [Ljava/lang/Object; // type@1aac
+200fae: 0c08                                   |00a3: move-result-object v8
+200fb0: 1a00 3e4f                              |00a4: const-string v0, "Reflection call method name not expected: %s" // string@4f3e
+200fb4: 7120 1a5e 8000                         |00a6: invoke-static {v0, v8}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+200fba: 0c08                                   |00a9: move-result-object v8
+200fbc: 7220 bb5c 8900                         |00aa: invoke-interface {v9, v8}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+200fc2: 1107                                   |00ad: return-object v7
+      catches       : (none)
+      positions     :
+        0x0003 line=1
+        0x000b line=4
+        0x0011 line=6
+        0x0019 line=10
+        0x0027 line=12
+        0x0030 line=13
+        0x0032 line=15
+        0x0038 line=16
+        0x0046 line=20
+        0x004e line=21
+        0x0052 line=22
+        0x0055 line=24
+        0x005d line=25
+        0x0067 line=31
+        0x0069 line=32
+        0x006d line=33
+        0x0075 line=37
+        0x0079 line=39
+        0x0081 line=43
+        0x0089 line=44
+        0x0091 line=45
+        0x009a line=46
+        0x009e line=48
+        0x00a4 line=49
+        0x00aa line=50
+      locals        :
+        0x0000 - 0x00ae reg=6 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x00ae reg=7 (null) Ljava/lang/Object;
+        0x0000 - 0x00ae reg=8 (null) Ljava/lang/reflect/Method;
+        0x0000 - 0x00ae reg=9 (null) [Ljava/lang/Object;
+
+    #16              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'onInstallReferrerSetupFinishedIntI'
+      type          : '(I)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 19
+      ins           : 2
+      outs          : 13
+      insns size    : 207 16-bit code units
+201310:                                        |[201310] com.adjust.sdk.InstallReferrer.onInstallReferrerSetupFinishedIntI:(I)V
+201320: 0801 1100                              |0000: move-object/from16 v1, v17
+201324: 0200 1200                              |0002: move/from16 v0, v18
+201328: 12f2                                   |0004: const/4 v2, #int -1 // #ff
+20132a: 1203                                   |0005: const/4 v3, #int 0 // #0
+20132c: 3220 b900                              |0006: if-eq v0, v2, 00bf // +00b9
+201330: 3800 3e00                              |0008: if-eqz v0, 0046 // +003e
+201334: 1212                                   |000a: const/4 v2, #int 1 // #1
+201336: 3220 3000                              |000b: if-eq v0, v2, 003b // +0030
+20133a: 1222                                   |000d: const/4 v2, #int 2 // #2
+20133c: 3220 2500                              |000e: if-eq v0, v2, 0033 // +0025
+201340: 1232                                   |0010: const/4 v2, #int 3 // #3
+201342: 3220 1700                              |0011: if-eq v0, v2, 0028 // +0017
+201346: 5412 8d29                              |0013: iget-object v2, v1, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+20134a: 7110 8771 0000                         |0015: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@7187
+201350: 0c00                                   |0018: move-result-object v0
+201352: 2410 ac1a 0000                         |0019: filled-new-array {v0}, [Ljava/lang/Object; // type@1aac
+201358: 0c00                                   |001c: move-result-object v0
+20135a: 1a04 6759                              |001d: const-string v4, "Unexpected response code of install referrer response: %d. Closing connection" // string@5967
+20135e: 7120 1a5e 0400                         |001f: invoke-static {v4, v0}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201364: 0c00                                   |0022: move-result-object v0
+201366: 7220 bb5c 0200                         |0023: invoke-interface {v2, v0}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+20136c: 2900 7e00                              |0026: goto/16 00a4 // +007e
+201370: 5410 8c29                              |0028: iget-object v0, v1, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+201374: 2332 ac1a                              |002a: new-array v2, v3, [Ljava/lang/Object; // type@1aac
+201378: 1a03 ed29                              |002c: const-string v3, "Install Referrer API general errors caused by incorrect usage. Retrying..." // string@29ed
+20137c: 7230 855c 3002                         |002e: invoke-interface {v0, v3, v2}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+201382: 2900 9800                              |0031: goto/16 00c9 // +0098
+201386: 5410 8d29                              |0033: iget-object v0, v1, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+20138a: 1a02 ee29                              |0035: const-string v2, "Install Referrer API not supported by the installed Play Store app. Closing connection" // string@29ee
+20138e: 7220 bb5c 2000                         |0037: invoke-interface {v0, v2}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+201394: 286a                                   |003a: goto 00a4 // +006a
+201396: 5410 8c29                              |003b: iget-object v0, v1, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+20139a: 2332 ac1a                              |003d: new-array v2, v3, [Ljava/lang/Object; // type@1aac
+20139e: 1a03 eb20                              |003f: const-string v3, "Could not initiate connection to the Install Referrer service. Retrying..." // string@20eb
+2013a2: 7230 855c 3002                         |0041: invoke-interface {v0, v3, v2}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+2013a8: 2900 8500                              |0044: goto/16 00c9 // +0085
+2013ac: 7010 af5c 0100                         |0046: invoke-direct {v1}, Lcom/adjust/sdk/InstallReferrer;.getInstallReferrer:()Ljava/lang/Object; // method@5caf
+2013b2: 0c00                                   |0049: move-result-object v0
+2013b4: 7020 b35c 0100                         |004a: invoke-direct {v1, v0}, Lcom/adjust/sdk/InstallReferrer;.getStringInstallReferrer:(Ljava/lang/Object;)Ljava/lang/String; // method@5cb3
+2013ba: 0c05                                   |004d: move-result-object v5
+2013bc: 7020 b15c 0100                         |004e: invoke-direct {v1, v0}, Lcom/adjust/sdk/InstallReferrer;.getReferrerClickTimestampSeconds:(Ljava/lang/Object;)J // method@5cb1
+2013c2: 0b06                                   |0051: move-result-wide v6
+2013c4: 7020 ad5c 0100                         |0052: invoke-direct {v1, v0}, Lcom/adjust/sdk/InstallReferrer;.getInstallBeginTimestampSeconds:(Ljava/lang/Object;)J // method@5cad
+2013ca: 0b08                                   |0055: move-result-wide v8
+2013cc: 5412 8c29                              |0056: iget-object v2, v1, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+2013d0: 1a04 cb84                              |0058: const-string v4, "installReferrer: %s, clickTime: %d, installBeginTime: %d" // string@84cb
+2013d4: 7120 9e71 7600                         |005a: invoke-static {v6, v7}, Ljava/lang/Long;.valueOf:(J)Ljava/lang/Long; // method@719e
+2013da: 0c0a                                   |005d: move-result-object v10
+2013dc: 7120 9e71 9800                         |005e: invoke-static {v8, v9}, Ljava/lang/Long;.valueOf:(J)Ljava/lang/Long; // method@719e
+2013e2: 0c0b                                   |0061: move-result-object v11
+2013e4: 2430 ac1a a50b                         |0062: filled-new-array {v5, v10, v11}, [Ljava/lang/Object; // type@1aac
+2013ea: 0c0a                                   |0065: move-result-object v10
+2013ec: 7230 855c 420a                         |0066: invoke-interface {v2, v4, v10}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+2013f2: 7020 b45c 0100                         |0069: invoke-direct {v1, v0}, Lcom/adjust/sdk/InstallReferrer;.getStringInstallVersion:(Ljava/lang/Object;)Ljava/lang/String; // method@5cb4
+2013f8: 0c0e                                   |006c: move-result-object v14
+2013fa: 7020 b25c 0100                         |006d: invoke-direct {v1, v0}, Lcom/adjust/sdk/InstallReferrer;.getReferrerClickTimestampServerSeconds:(Ljava/lang/Object;)J // method@5cb2
+201400: 0b0a                                   |0070: move-result-wide v10
+201402: 7020 ae5c 0100                         |0071: invoke-direct {v1, v0}, Lcom/adjust/sdk/InstallReferrer;.getInstallBeginTimestampServerSeconds:(Ljava/lang/Object;)J // method@5cae
+201408: 0b0c                                   |0074: move-result-wide v12
+20140a: 7020 ac5c 0100                         |0075: invoke-direct {v1, v0}, Lcom/adjust/sdk/InstallReferrer;.getBooleanGooglePlayInstantParam:(Ljava/lang/Object;)Ljava/lang/Boolean; // method@5cac
+201410: 0c0f                                   |0078: move-result-object v15
+201412: 5410 8c29                              |0079: iget-object v0, v1, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+201416: 1a02 d684                              |007b: const-string v2, "installVersion: %s, clickTimeServer: %d, installBeginServer: %d, googlePlayInstant: %b" // string@84d6
+20141a: 7120 9e71 ba00                         |007d: invoke-static {v10, v11}, Ljava/lang/Long;.valueOf:(J)Ljava/lang/Long; // method@719e
+201420: 0c04                                   |0080: move-result-object v4
+201422: 7120 9e71 dc00                         |0081: invoke-static {v12, v13}, Ljava/lang/Long;.valueOf:(J)Ljava/lang/Long; // method@719e
+201428: 0c03                                   |0084: move-result-object v3
+20142a: 2440 ac1a 4ef3                         |0085: filled-new-array {v14, v4, v3, v15}, [Ljava/lang/Object; // type@1aac
+201430: 0c03                                   |0088: move-result-object v3
+201432: 7230 855c 2003                         |0089: invoke-interface {v0, v2, v3}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+201438: 5410 8c29                              |008c: iget-object v0, v1, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+20143c: 1a02 f029                              |008e: const-string v2, "Install Referrer read successfully. Closing connection" // string@29f0
+201440: 1203                                   |0090: const/4 v3, #int 0 // #0
+201442: 2334 ac1a                              |0091: new-array v4, v3, [Ljava/lang/Object; // type@1aac
+201446: 7230 855c 2004                         |0093: invoke-interface {v0, v2, v4}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+20144c: 2204 580d                              |0096: new-instance v4, Lcom/adjust/sdk/ReferrerDetails; // type@0d58
+201450: 1310 0000                              |0098: const/16 v16, #int 0 // #0
+201454: 760d 725d 0400                         |009a: invoke-direct/range {v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16}, Lcom/adjust/sdk/ReferrerDetails;.<init>:(Ljava/lang/String;JJJJLjava/lang/String;Ljava/lang/Boolean;Ljava/lang/Boolean;)V // method@5d72
+20145a: 5410 8d29                              |009d: iget-object v0, v1, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+20145e: 1a02 eb81                              |009f: const-string v2, "google" // string@81eb
+201462: 7230 bc5c 4002                         |00a1: invoke-interface {v0, v4, v2}, Lcom/adjust/sdk/InstallReferrerReadListener;.onInstallReferrerRead:(Lcom/adjust/sdk/ReferrerDetails;Ljava/lang/String;)V // method@5cbc
+201468: 5410 9229                              |00a4: iget-object v0, v1, Lcom/adjust/sdk/InstallReferrer;.shouldTryToRead:Ljava/util/concurrent/atomic/AtomicBoolean; // field@2992
+20146c: 1203                                   |00a6: const/4 v3, #int 0 // #0
+20146e: 6e20 1976 3000                         |00a7: invoke-virtual {v0, v3}, Ljava/util/concurrent/atomic/AtomicBoolean;.set:(Z)V // method@7619
+201474: 7010 a95c 0100                         |00aa: invoke-direct {v1}, Lcom/adjust/sdk/InstallReferrer;.closeReferrerClient:()V // method@5ca9
+20147a: 0e00                                   |00ad: return-void
+20147c: 0d00                                   |00ae: move-exception v0
+20147e: 5412 8c29                              |00af: iget-object v2, v1, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+201482: 6e10 9f72 0000                         |00b1: invoke-virtual {v0}, Ljava/lang/Throwable;.getMessage:()Ljava/lang/String; // method@729f
+201488: 0c00                                   |00b4: move-result-object v0
+20148a: 2410 ac1a 0000                         |00b5: filled-new-array {v0}, [Ljava/lang/Object; // type@1aac
+201490: 0c00                                   |00b8: move-result-object v0
+201492: 1a03 0d21                              |00b9: const-string v3, "Couldn't get install referrer from client (%s). Retrying..." // string@210d
+201496: 7230 8c5c 3200                         |00bb: invoke-interface {v2, v3, v0}, Lcom/adjust/sdk/ILogger;.warn:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c8c
+20149c: 280b                                   |00be: goto 00c9 // +000b
+20149e: 5410 8c29                              |00bf: iget-object v0, v1, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+2014a2: 1203                                   |00c1: const/4 v3, #int 0 // #0
+2014a4: 2332 ac1a                              |00c2: new-array v2, v3, [Ljava/lang/Object; // type@1aac
+2014a8: 1a03 c14d                              |00c4: const-string v3, "Play Store service is not connected now. Retrying..." // string@4dc1
+2014ac: 7230 855c 3002                         |00c6: invoke-interface {v0, v3, v2}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+2014b2: 1a00 cc72                              |00c9: const-string v0, "end of onInstallReferrerSetupFinishedIntI" // string@72cc
+2014b6: 7020 b85c 0100                         |00cb: invoke-direct {v1, v0}, Lcom/adjust/sdk/InstallReferrer;.retryI:(Ljava/lang/String;)V // method@5cb8
+2014bc: 0e00                                   |00ce: return-void
+      catches       : 1
+        0x0046 - 0x00a4
+          Ljava/lang/Exception; -> 0x00ae
+      positions     :
+        0x0013 line=1
+        0x0015 line=3
+        0x001d line=4
+        0x0028 line=5
+        0x0033 line=6
+        0x003b line=12
+        0x0046 line=13
+        0x004a line=14
+        0x004e line=15
+        0x0052 line=16
+        0x0056 line=17
+        0x005a line=18
+        0x0066 line=19
+        0x0069 line=22
+        0x006d line=23
+        0x0071 line=24
+        0x0075 line=25
+        0x0079 line=26
+        0x007d line=28
+        0x0089 line=29
+        0x008c line=33
+        0x0096 line=35
+        0x009d line=40
+        0x00a4 line=91
+        0x00aa line=92
+        0x00af line=93
+        0x00b1 line=95
+        0x00b9 line=96
+        0x00bf line=126
+        0x00c9 line=143
+      locals        :
+        0x0000 - 0x00cf reg=17 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x00cf reg=18 (null) I
+
+    #17              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'retryI'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 3
+      insns size    : 112 16-bit code units
+2014d0:                                        |[2014d0] com.adjust.sdk.InstallReferrer.retryI:(Ljava/lang/String;)V
+2014e0: 5440 9229                              |0000: iget-object v0, v4, Lcom/adjust/sdk/InstallReferrer;.shouldTryToRead:Ljava/util/concurrent/atomic/AtomicBoolean; // field@2992
+2014e4: 6e10 1776 0000                         |0002: invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicBoolean;.get:()Z // method@7617
+2014ea: 0a00                                   |0005: move-result v0
+2014ec: 3900 1500                              |0006: if-nez v0, 001b // +0015
+2014f0: 5440 8d29                              |0008: iget-object v0, v4, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+2014f4: 2410 ac1a 0500                         |000a: filled-new-array {v5}, [Ljava/lang/Object; // type@1aac
+2014fa: 0c05                                   |000d: move-result-object v5
+2014fc: 1a01 4454                              |000e: const-string v1, "Should not try to read Install referrer from %s" // string@5444
+201500: 7120 1a5e 5100                         |0010: invoke-static {v1, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201506: 0c05                                   |0013: move-result-object v5
+201508: 7220 bb5c 5000                         |0014: invoke-interface {v0, v5}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+20150e: 7010 a95c 0400                         |0017: invoke-direct {v4}, Lcom/adjust/sdk/InstallReferrer;.closeReferrerClient:()V // method@5ca9
+201514: 0e00                                   |001a: return-void
+201516: 5240 8f29                              |001b: iget v0, v4, Lcom/adjust/sdk/InstallReferrer;.retries:I // field@298f
+20151a: d800 0001                              |001d: add-int/lit8 v0, v0, #int 1 // #01
+20151e: 1221                                   |001f: const/4 v1, #int 2 // #2
+201520: 3710 1600                              |0020: if-le v0, v1, 0036 // +0016
+201524: 5440 8d29                              |0022: iget-object v0, v4, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+201528: 7110 8771 0100                         |0024: invoke-static {v1}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@7187
+20152e: 0c01                                   |0027: move-result-object v1
+201530: 2420 ac1a 5100                         |0028: filled-new-array {v1, v5}, [Ljava/lang/Object; // type@1aac
+201536: 0c05                                   |002b: move-result-object v5
+201538: 1a01 9a3e                              |002c: const-string v1, "Limit number of retry of %d for install referrer surpassed from %s" // string@3e9a
+20153c: 7120 1a5e 5100                         |002e: invoke-static {v1, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+201542: 0c05                                   |0031: move-result-object v5
+201544: 7220 bb5c 5000                         |0032: invoke-interface {v0, v5}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+20154a: 0e00                                   |0035: return-void
+20154c: 5445 9029                              |0036: iget-object v5, v4, Lcom/adjust/sdk/InstallReferrer;.retryTimer:Lcom/adjust/sdk/scheduler/TimerOnce; // field@2990
+201550: 6e10 c25e 0500                         |0038: invoke-virtual {v5}, Lcom/adjust/sdk/scheduler/TimerOnce;.getFireIn:()J // method@5ec2
+201556: 0b00                                   |003b: move-result-wide v0
+201558: 1602 0000                              |003c: const-wide/16 v2, #int 0 // #0
+20155c: 3105 0002                              |003e: cmp-long v5, v0, v2
+201560: 3d05 1200                              |0040: if-lez v5, 0052 // +0012
+201564: 5445 8c29                              |0042: iget-object v5, v4, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+201568: 7120 9e71 1000                         |0044: invoke-static {v0, v1}, Ljava/lang/Long;.valueOf:(J)Ljava/lang/Long; // method@719e
+20156e: 0c00                                   |0047: move-result-object v0
+201570: 2410 ac1a 0000                         |0048: filled-new-array {v0}, [Ljava/lang/Object; // type@1aac
+201576: 0c00                                   |004b: move-result-object v0
+201578: 1a01 bd1a                              |004c: const-string v1, "Already waiting to retry to read install referrer in %d milliseconds" // string@1abd
+20157c: 7230 855c 1500                         |004e: invoke-interface {v5, v1, v0}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+201582: 0e00                                   |0051: return-void
+201584: 5245 8f29                              |0052: iget v5, v4, Lcom/adjust/sdk/InstallReferrer;.retries:I // field@298f
+201588: d805 0501                              |0054: add-int/lit8 v5, v5, #int 1 // #01
+20158c: 5945 8f29                              |0056: iput v5, v4, Lcom/adjust/sdk/InstallReferrer;.retries:I // field@298f
+201590: 5440 8c29                              |0058: iget-object v0, v4, Lcom/adjust/sdk/InstallReferrer;.logger:Lcom/adjust/sdk/ILogger; // field@298c
+201594: 7110 8771 0500                         |005a: invoke-static {v5}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@7187
+20159a: 0c05                                   |005d: move-result-object v5
+20159c: 2410 ac1a 0500                         |005e: filled-new-array {v5}, [Ljava/lang/Object; // type@1aac
+2015a2: 0c05                                   |0061: move-result-object v5
+2015a4: 1a01 b94f                              |0062: const-string v1, "Retry number %d to connect to install referrer API" // string@4fb9
+2015a8: 7230 855c 1005                         |0064: invoke-interface {v0, v1, v5}, Lcom/adjust/sdk/ILogger;.debug:(Ljava/lang/String;[Ljava/lang/Object;)V // method@5c85
+2015ae: 5445 9029                              |0067: iget-object v5, v4, Lcom/adjust/sdk/InstallReferrer;.retryTimer:Lcom/adjust/sdk/scheduler/TimerOnce; // field@2990
+2015b2: 5240 9129                              |0069: iget v0, v4, Lcom/adjust/sdk/InstallReferrer;.retryWaitTime:I // field@2991
+2015b6: 8100                                   |006b: int-to-long v0, v0
+2015b8: 6e30 c35e 0501                         |006c: invoke-virtual {v5, v0, v1}, Lcom/adjust/sdk/scheduler/TimerOnce;.startIn:(J)V // method@5ec3
+2015be: 0e00                                   |006f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0008 line=2
+        0x000e line=3
+        0x0014 line=4
+        0x0017 line=6
+        0x001b line=10
+        0x0022 line=11
+        0x0024 line=13
+        0x002c line=14
+        0x0032 line=15
+        0x0036 line=21
+        0x0042 line=23
+        0x0052 line=27
+        0x0058 line=28
+        0x0067 line=30
+      locals        :
+        0x0000 - 0x0070 reg=4 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0070 reg=5 (null) Ljava/lang/String;
+
+    #18              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'startConnection'
+      type          : '(Ljava/lang/Class;Ljava/lang/Object;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 3
+      outs          : 4
+      insns size    : 82 16-bit code units
+201660:                                        |[201660] com.adjust.sdk.InstallReferrer.startConnection:(Ljava/lang/Class;Ljava/lang/Object;)V
+201670: 5440 8e29                              |0000: iget-object v0, v4, Lcom/adjust/sdk/InstallReferrer;.referrerClient:Ljava/lang/Object; // field@298e
+201674: 1a01 8fac                              |0002: const-string v1, "startConnection" // string@ac8f
+201678: 1212                                   |0004: const/4 v2, #int 1 // #1
+20167a: 2322 a51a                              |0005: new-array v2, v2, [Ljava/lang/Class; // type@1aa5
+20167e: 1203                                   |0007: const/4 v3, #int 0 // #0
+201680: 4d05 0203                              |0008: aput-object v5, v2, v3
+201684: 2410 ac1a 0600                         |000a: filled-new-array {v6}, [Ljava/lang/Object; // type@1aac
+20168a: 0c05                                   |000d: move-result-object v5
+20168c: 7140 875d 1052                         |000e: invoke-static {v0, v1, v2, v5}, Lcom/adjust/sdk/Reflection;.invokeInstanceMethod:(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/lang/Object; // method@5d87
+201692: 0e00                                   |0011: return-void
+201694: 0d05                                   |0012: move-exception v5
+201696: 5446 8d29                              |0013: iget-object v6, v4, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+20169a: 6e10 9f72 0500                         |0015: invoke-virtual {v5}, Ljava/lang/Throwable;.getMessage:()Ljava/lang/String; // method@729f
+2016a0: 0c00                                   |0018: move-result-object v0
+2016a2: 6e10 e371 0500                         |0019: invoke-virtual {v5}, Ljava/lang/Object;.getClass:()Ljava/lang/Class; // method@71e3
+2016a8: 0c05                                   |001c: move-result-object v5
+2016aa: 6e10 0f71 0500                         |001d: invoke-virtual {v5}, Ljava/lang/Class;.getCanonicalName:()Ljava/lang/String; // method@710f
+2016b0: 0c05                                   |0020: move-result-object v5
+2016b2: 2420 ac1a 5000                         |0021: filled-new-array {v0, v5}, [Ljava/lang/Object; // type@1aac
+2016b8: 0c05                                   |0024: move-result-object v5
+2016ba: 1a00 90ac                              |0025: const-string v0, "startConnection error (%s) thrown by (%s)" // string@ac90
+2016be: 7120 1a5e 5000                         |0027: invoke-static {v0, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+2016c4: 0c05                                   |002a: move-result-object v5
+2016c6: 7220 bb5c 5600                         |002b: invoke-interface {v6, v5}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+2016cc: 2823                                   |002e: goto 0051 // +0023
+2016ce: 0d05                                   |002f: move-exception v5
+2016d0: 7110 2c5e 0500                         |0030: invoke-static {v5}, Lcom/adjust/sdk/Util;.hasRootCause:(Ljava/lang/Exception;)Z // method@5e2c
+2016d6: 0a06                                   |0033: move-result v6
+2016d8: 3806 1600                              |0034: if-eqz v6, 004a // +0016
+2016dc: 5446 8d29                              |0036: iget-object v6, v4, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+2016e0: 7110 265e 0500                         |0038: invoke-static {v5}, Lcom/adjust/sdk/Util;.getRootCause:(Ljava/lang/Exception;)Ljava/lang/String; // method@5e26
+2016e6: 0c05                                   |003b: move-result-object v5
+2016e8: 2410 ac1a 0500                         |003c: filled-new-array {v5}, [Ljava/lang/Object; // type@1aac
+2016ee: 0c05                                   |003f: move-result-object v5
+2016f0: 1a00 fe29                              |0040: const-string v0, "InstallReferrer encountered an InvocationTargetException %s" // string@29fe
+2016f4: 7120 1a5e 5000                         |0042: invoke-static {v0, v5}, Lcom/adjust/sdk/Util;.formatString:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String; // method@5e1a
+2016fa: 0c05                                   |0045: move-result-object v5
+2016fc: 7220 bb5c 5600                         |0046: invoke-interface {v6, v5}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+201702: 2808                                   |0049: goto 0051 // +0008
+201704: 5445 8d29                              |004a: iget-object v5, v4, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+201708: 1a06 fd29                              |004c: const-string v6, "InstallReferrer encountered an InvocationTargetException" // string@29fd
+20170c: 7220 bb5c 6500                         |004e: invoke-interface {v5, v6}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+201712: 0e00                                   |0051: return-void
+      catches       : 1
+        0x0000 - 0x0011
+          Ljava/lang/reflect/InvocationTargetException; -> 0x002f
+          Ljava/lang/Exception; -> 0x0012
+      positions     :
+        0x0000 line=36
+        0x0013 line=48
+        0x0015 line=49
+        0x0025 line=50
+        0x0030 line=51
+        0x0036 line=53
+        0x0038 line=55
+        0x0040 line=56
+        0x0046 line=57
+        0x004a line=61
+      locals        :
+        0x0000 - 0x0052 reg=4 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x0052 reg=5 (null) Ljava/lang/Class;
+        0x0000 - 0x0052 reg=6 (null) Ljava/lang/Object;
+
+  Virtual methods   -
+    #0              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'invoke'
+      type          : '(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 4
+      outs          : 5
+      insns size    : 12 16-bit code units
+200e30:                                        |[200e30] com.adjust.sdk.InstallReferrer.invoke:(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;
+200e40: 5420 8b29                              |0000: iget-object v0, v2, Lcom/adjust/sdk/InstallReferrer;.executor:Lcom/adjust/sdk/scheduler/ThreadExecutor; // field@298b
+200e44: 2201 2e0d                              |0002: new-instance v1, Lcom/adjust/sdk/InstallReferrer$2; // type@0d2e
+200e48: 7055 a45c 2143                         |0004: invoke-direct {v1, v2, v3, v4, v5}, Lcom/adjust/sdk/InstallReferrer$2;.<init>:(Lcom/adjust/sdk/InstallReferrer;Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)V // method@5ca4
+200e4e: 7220 a85e 1000                         |0007: invoke-interface {v0, v1}, Lcom/adjust/sdk/scheduler/ThreadExecutor;.submit:(Ljava/lang/Runnable;)V // method@5ea8
+200e54: 1203                                   |000a: const/4 v3, #int 0 // #0
+200e56: 1103                                   |000b: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x000c reg=2 this Lcom/adjust/sdk/InstallReferrer;
+        0x0000 - 0x000c reg=3 (null) Ljava/lang/Object;
+        0x0000 - 0x000c reg=4 (null) Ljava/lang/reflect/Method;
+        0x0000 - 0x000c reg=5 (null) [Ljava/lang/Object;
+
+    #1              : (in Lcom/adjust/sdk/InstallReferrer;)
+      name          : 'startConnection'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 72 16-bit code units
+2015c0:                                        |[2015c0] com.adjust.sdk.InstallReferrer.startConnection:()V
+2015d0: 7100 035b 0000                         |0000: invoke-static {}, Lcom/adjust/sdk/AdjustFactory;.getTryInstallReferrer:()Z // method@5b03
+2015d6: 0a00                                   |0003: move-result v0
+2015d8: 3900 0a00                              |0004: if-nez v0, 000e // +000a
+2015dc: 5420 8d29                              |0006: iget-object v0, v2, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+2015e0: 1a01 b253                              |0008: const-string v1, "Sdk has been configured to not try install referrer" // string@53b2
+2015e4: 7220 bb5c 1000                         |000a: invoke-interface {v0, v1}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+2015ea: 0e00                                   |000d: return-void
+2015ec: 7010 a95c 0200                         |000e: invoke-direct {v2}, Lcom/adjust/sdk/InstallReferrer;.closeReferrerClient:()V // method@5ca9
+2015f2: 5420 9229                              |0011: iget-object v0, v2, Lcom/adjust/sdk/InstallReferrer;.shouldTryToRead:Ljava/util/concurrent/atomic/AtomicBoolean; // field@2992
+2015f6: 6e10 1776 0000                         |0013: invoke-virtual {v0}, Ljava/util/concurrent/atomic/AtomicBoolean;.get:()Z // method@7617
+2015fc: 0a00                                   |0016: move-result v0
+2015fe: 3900 0a00                              |0017: if-nez v0, 0021 // +000a
+201602: 5420 8d29                              |0019: iget-object v0, v2, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+201606: 1a01 4554                              |001b: const-string v1, "Should not try to read the install referrer any longer" // string@5445
+20160a: 7220 bb5c 1000                         |001d: invoke-interface {v0, v1}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+201610: 0e00                                   |0020: return-void
+201612: 5420 8a29                              |0021: iget-object v0, v2, Lcom/adjust/sdk/InstallReferrer;.context:Landroid/content/Context; // field@298a
+201616: 3900 0a00                              |0023: if-nez v0, 002d // +000a
+20161a: 5420 8d29                              |0025: iget-object v0, v2, Lcom/adjust/sdk/InstallReferrer;.referrerCallback:Lcom/adjust/sdk/InstallReferrerReadListener; // field@298d
+20161e: 1a01 804f                              |0027: const-string v1, "Requires context to read the install referrer" // string@4f80
+201622: 7220 bb5c 1000                         |0029: invoke-interface {v0, v1}, Lcom/adjust/sdk/InstallReferrerReadListener;.onFail:(Ljava/lang/String;)V // method@5cbb
+201628: 0e00                                   |002c: return-void
+20162a: 7020 aa5c 0200                         |002d: invoke-direct {v2, v0}, Lcom/adjust/sdk/InstallReferrer;.createInstallReferrerClient:(Landroid/content/Context;)Ljava/lang/Object; // method@5caa
+201630: 0c00                                   |0030: move-result-object v0
+201632: 5b20 8e29                              |0031: iput-object v0, v2, Lcom/adjust/sdk/InstallReferrer;.referrerClient:Ljava/lang/Object; // field@298e
+201636: 3900 0300                              |0033: if-nez v0, 0036 // +0003
+20163a: 280e                                   |0035: goto 0043 // +000e
+20163c: 7010 b05c 0200                         |0036: invoke-direct {v2}, Lcom/adjust/sdk/InstallReferrer;.getInstallReferrerStateListenerClass:()Ljava/lang/Class; // method@5cb0
+201642: 0c00                                   |0039: move-result-object v0
+201644: 3900 0300                              |003a: if-nez v0, 003d // +0003
+201648: 2807                                   |003c: goto 0043 // +0007
+20164a: 7020 ab5c 0200                         |003d: invoke-direct {v2, v0}, Lcom/adjust/sdk/InstallReferrer;.createProxyInstallReferrerStateListener:(Ljava/lang/Class;)Ljava/lang/Object; // method@5cab
+201650: 0c01                                   |0040: move-result-object v1
+201652: 3901 0300                              |0041: if-nez v1, 0044 // +0003
+201656: 0e00                                   |0043: return-void
+201658: 7030 ba5c 0201                         |0044: invoke-direct {v2, v0, v1}, Lcom/adjust/sdk/InstallReferrer;.startConnection:(Ljava/lang/Class;Ljava/lang/Object;)V // method@5cba
+20165e: 0e00                                   |0047: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0006 line=2
+        0x000e line=5
+        0x0011 line=7
+        0x0019 line=8
+        0x0021 line=12
+        0x0025 line=13
+        0x002d line=17
+        0x0036 line=23
+        0x003d line=29
+        0x0044 line=35
+      locals        :
+        0x0000 - 0x0048 reg=2 this Lcom/adjust/sdk/InstallReferrer;
+
+  source_file_idx   : 21628 (SourceFile)
+

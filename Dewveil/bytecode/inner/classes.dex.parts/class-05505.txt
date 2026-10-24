@@ -1,0 +1,408 @@
+Class #5505            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/SharedPreferencesQueue;'
+  Access flags      : 0x0010 (FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'bulkOperation'
+      type          : 'Z'
+      access        : 0x0002 (PRIVATE)
+    #1              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'internalQueue'
+      type          : 'Ljava/util/ArrayDeque;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'itemSeparator'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'queueName'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'sharedPreferences'
+      type          : 'Landroid/content/SharedPreferences;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'syncExecutor'
+      type          : 'Ljava/util/concurrent/Executor;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : '<init>'
+      type          : '(Landroid/content/SharedPreferences;Ljava/lang/String;Ljava/lang/String;Ljava/util/concurrent/Executor;)V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 1
+      insns size    : 26 16-bit code units
+72a3b0:                                        |[72a3b0] com.google.firebase.messaging.SharedPreferencesQueue.<init>:(Landroid/content/SharedPreferences;Ljava/lang/String;Ljava/lang/String;Ljava/util/concurrent/Executor;)V
+72a3c0: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+72a3c6: 2202 391b                              |0003: new-instance v2, Ljava/util/ArrayDeque; // type@1b39
+72a3ca: 7010 90d4 0200                         |0005: invoke-direct {v2}, Ljava/util/ArrayDeque;.<init>:()V // method@d490
+72a3d0: 5b02 dd73                              |0008: iput-object v2, v0, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a3d4: 1202                                   |000a: const/4 v2, #int 0 // #0
+72a3d6: 5c02 dc73                              |000b: iput-boolean v2, v0, Lcom/google/firebase/messaging/SharedPreferencesQueue;.bulkOperation:Z // field@73dc
+72a3da: 5b01 e073                              |000d: iput-object v1, v0, Lcom/google/firebase/messaging/SharedPreferencesQueue;.sharedPreferences:Landroid/content/SharedPreferences; // field@73e0
+72a3de: 1a01 54e2                              |000f: const-string v1, "topic_operation_queue" // string@e254
+72a3e2: 5b01 df73                              |0011: iput-object v1, v0, Lcom/google/firebase/messaging/SharedPreferencesQueue;.queueName:Ljava/lang/String; // field@73df
+72a3e6: 1a01 090e                              |0013: const-string v1, "," // string@0e09
+72a3ea: 5b01 de73                              |0015: iput-object v1, v0, Lcom/google/firebase/messaging/SharedPreferencesQueue;.itemSeparator:Ljava/lang/String; // field@73de
+72a3ee: 5b04 e173                              |0017: iput-object v4, v0, Lcom/google/firebase/messaging/SharedPreferencesQueue;.syncExecutor:Ljava/util/concurrent/Executor; // field@73e1
+72a3f2: 0e00                                   |0019: return-void
+      catches       : (none)
+      positions     :
+        0x0005 line=1
+      locals        :
+        0x0000 - 0x001a reg=0 this Lcom/google/firebase/messaging/SharedPreferencesQueue;
+        0x0000 - 0x001a reg=1 (null) Landroid/content/SharedPreferences;
+        0x0000 - 0x001a reg=2 (null) Ljava/lang/String;
+        0x0000 - 0x001a reg=3 (null) Ljava/lang/String;
+        0x0000 - 0x001a reg=4 (null) Ljava/util/concurrent/Executor;
+
+    #1              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'checkAndSyncState'
+      type          : '(Z)Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 12 16-bit code units
+72a3f4:                                        |[72a3f4] com.google.firebase.messaging.SharedPreferencesQueue.checkAndSyncState:(Z)Z
+72a404: 3802 0b00                              |0000: if-eqz v2, 000b // +000b
+72a408: 5510 dc73                              |0002: iget-boolean v0, v1, Lcom/google/firebase/messaging/SharedPreferencesQueue;.bulkOperation:Z // field@73dc
+72a40c: 3900 0700                              |0004: if-nez v0, 000b // +0007
+72a410: 7010 f6c0 0100                         |0006: invoke-direct {v1}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.syncStateAsync:()V // method@c0f6
+72a416: 1211                                   |0009: const/4 v1, #int 1 // #1
+72a418: 0f01                                   |000a: return v1
+72a41a: 0f02                                   |000b: return v2
+      catches       : (none)
+      positions     :
+        0x0006 line=1
+      locals        :
+        0x0000 - 0x000c reg=1 this Lcom/google/firebase/messaging/SharedPreferencesQueue;
+        0x0000 - 0x000c reg=2 (null) Z
+
+    #2              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'createInstance'
+      type          : '(Landroid/content/SharedPreferences;Ljava/lang/String;Ljava/lang/String;Ljava/util/concurrent/Executor;)Lcom/google/firebase/messaging/SharedPreferencesQueue;'
+      access        : 0x0008 (STATIC)
+      code          -
+      registers     : 5
+      ins           : 4
+      outs          : 5
+      insns size    : 13 16-bit code units
+72a41c:                                        |[72a41c] com.google.firebase.messaging.SharedPreferencesQueue.createInstance:(Landroid/content/SharedPreferences;Ljava/lang/String;Ljava/lang/String;Ljava/util/concurrent/Executor;)Lcom/google/firebase/messaging/SharedPreferencesQueue;
+72a42c: 2202 fb17                              |0000: new-instance v2, Lcom/google/firebase/messaging/SharedPreferencesQueue; // type@17fb
+72a430: 1a03 54e2                              |0002: const-string v3, "topic_operation_queue" // string@e254
+72a434: 1a00 090e                              |0004: const-string v0, "," // string@0e09
+72a438: 7054 ecc0 1203                         |0006: invoke-direct {v2, v1, v3, v0, v4}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.<init>:(Landroid/content/SharedPreferences;Ljava/lang/String;Ljava/lang/String;Ljava/util/concurrent/Executor;)V // method@c0ec
+72a43e: 7010 f1c0 0200                         |0009: invoke-direct {v2}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.initQueue:()V // method@c0f1
+72a444: 1102                                   |000c: return-object v2
+      catches       : (none)
+      positions     :
+        0x0006 line=1
+        0x0009 line=2
+      locals        :
+        0x0000 - 0x000d reg=1 (null) Landroid/content/SharedPreferences;
+        0x0000 - 0x000d reg=2 (null) Ljava/lang/String;
+        0x0000 - 0x000d reg=3 (null) Ljava/lang/String;
+        0x0000 - 0x000d reg=4 (null) Ljava/util/concurrent/Executor;
+
+    #3              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'initQueue'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 3
+      insns size    : 76 16-bit code units
+72a448:                                        |[72a448] com.google.firebase.messaging.SharedPreferencesQueue.initQueue:()V
+72a458: 5460 dd73                              |0000: iget-object v0, v6, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a45c: 1d00                                   |0002: monitor-enter v0
+72a45e: 5461 dd73                              |0003: iget-object v1, v6, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a462: 6e10 94d4 0100                         |0005: invoke-virtual {v1}, Ljava/util/ArrayDeque;.clear:()V // method@d494
+72a468: 5461 e073                              |0008: iget-object v1, v6, Lcom/google/firebase/messaging/SharedPreferencesQueue;.sharedPreferences:Landroid/content/SharedPreferences; // field@73e0
+72a46c: 5462 df73                              |000a: iget-object v2, v6, Lcom/google/firebase/messaging/SharedPreferencesQueue;.queueName:Ljava/lang/String; // field@73df
+72a470: 1a03 0000                              |000c: const-string v3, "" // string@0000
+72a474: 7230 bd02 2103                         |000e: invoke-interface {v1, v2, v3}, Landroid/content/SharedPreferences;.getString:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; // method@02bd
+72a47a: 0c01                                   |0011: move-result-object v1
+72a47c: 7110 ca07 0100                         |0012: invoke-static {v1}, Landroid/text/TextUtils;.isEmpty:(Ljava/lang/CharSequence;)Z // method@07ca
+72a482: 0a02                                   |0015: move-result v2
+72a484: 3902 3100                              |0016: if-nez v2, 0047 // +0031
+72a488: 5462 de73                              |0018: iget-object v2, v6, Lcom/google/firebase/messaging/SharedPreferencesQueue;.itemSeparator:Ljava/lang/String; // field@73de
+72a48c: 6e20 fed1 2100                         |001a: invoke-virtual {v1, v2}, Ljava/lang/String;.contains:(Ljava/lang/CharSequence;)Z // method@d1fe
+72a492: 0a02                                   |001d: move-result v2
+72a494: 3902 0300                              |001e: if-nez v2, 0021 // +0003
+72a498: 2827                                   |0020: goto 0047 // +0027
+72a49a: 5462 de73                              |0021: iget-object v2, v6, Lcom/google/firebase/messaging/SharedPreferencesQueue;.itemSeparator:Ljava/lang/String; // field@73de
+72a49e: 12f3                                   |0023: const/4 v3, #int -1 // #ff
+72a4a0: 6e30 1fd2 2103                         |0024: invoke-virtual {v1, v2, v3}, Ljava/lang/String;.split:(Ljava/lang/String;I)[Ljava/lang/String; // method@d21f
+72a4a6: 0c01                                   |0027: move-result-object v1
+72a4a8: 2112                                   |0028: array-length v2, v1
+72a4aa: 1203                                   |0029: const/4 v3, #int 0 // #0
+72a4ac: 3902 0900                              |002a: if-nez v2, 0033 // +0009
+72a4b0: 1a04 6c28                              |002c: const-string v4, "FirebaseMessaging" // string@286c
+72a4b4: 1a05 911f                              |002e: const-string v5, "Corrupted queue. Please check the queue contents and item separator provided" // string@1f91
+72a4b8: 7120 1e08 5400                         |0030: invoke-static {v4, v5}, Landroid/util/Log;.e:(Ljava/lang/String;Ljava/lang/String;)I // method@081e
+72a4be: 3523 1200                              |0033: if-ge v3, v2, 0045 // +0012
+72a4c2: 4604 0103                              |0035: aget-object v4, v1, v3
+72a4c6: 7110 ca07 0400                         |0037: invoke-static {v4}, Landroid/text/TextUtils;.isEmpty:(Ljava/lang/CharSequence;)Z // method@07ca
+72a4cc: 0a05                                   |003a: move-result v5
+72a4ce: 3905 0700                              |003b: if-nez v5, 0042 // +0007
+72a4d2: 5465 dd73                              |003d: iget-object v5, v6, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a4d6: 6e20 93d4 4500                         |003f: invoke-virtual {v5, v4}, Ljava/util/ArrayDeque;.add:(Ljava/lang/Object;)Z // method@d493
+72a4dc: d803 0301                              |0042: add-int/lit8 v3, v3, #int 1 // #01
+72a4e0: 28ef                                   |0044: goto 0033 // -0011
+72a4e2: 1e00                                   |0045: monitor-exit v0
+72a4e4: 0e00                                   |0046: return-void
+72a4e6: 1e00                                   |0047: monitor-exit v0
+72a4e8: 0e00                                   |0048: return-void
+72a4ea: 0d06                                   |0049: move-exception v6
+72a4ec: 1e00                                   |004a: monitor-exit v0
+72a4ee: 2706                                   |004b: throw v6
+      catches       : 1
+        0x0003 - 0x004b
+          <any> -> 0x0049
+      positions     :
+        0x0002 line=1
+        0x0005 line=2
+        0x000e line=3
+        0x0012 line=4
+        0x0021 line=5
+        0x0024 line=6
+        0x0028 line=7
+        0x0030 line=8
+        0x0035 line=9
+        0x0037 line=10
+        0x003f line=11
+        0x0045 line=12
+        0x0047 line=5
+        0x004a line=12
+      locals        :
+        0x0000 - 0x004c reg=6 this Lcom/google/firebase/messaging/SharedPreferencesQueue;
+
+    #4              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'syncState'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 3
+      insns size    : 27 16-bit code units
+72a4fc:                                        |[72a4fc] com.google.firebase.messaging.SharedPreferencesQueue.syncState:()V
+72a50c: 5430 dd73                              |0000: iget-object v0, v3, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a510: 1d00                                   |0002: monitor-enter v0
+72a512: 5431 e073                              |0003: iget-object v1, v3, Lcom/google/firebase/messaging/SharedPreferencesQueue;.sharedPreferences:Landroid/content/SharedPreferences; // field@73e0
+72a516: 7210 b802 0100                         |0005: invoke-interface {v1}, Landroid/content/SharedPreferences;.edit:()Landroid/content/SharedPreferences$Editor; // method@02b8
+72a51c: 0c01                                   |0008: move-result-object v1
+72a51e: 5432 df73                              |0009: iget-object v2, v3, Lcom/google/firebase/messaging/SharedPreferencesQueue;.queueName:Ljava/lang/String; // field@73df
+72a522: 6e10 f4c0 0300                         |000b: invoke-virtual {v3}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.serialize:()Ljava/lang/String; // method@c0f4
+72a528: 0c03                                   |000e: move-result-object v3
+72a52a: 7230 b502 2103                         |000f: invoke-interface {v1, v2, v3}, Landroid/content/SharedPreferences$Editor;.putString:(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor; // method@02b5
+72a530: 0c03                                   |0012: move-result-object v3
+72a532: 7210 b102 0300                         |0013: invoke-interface {v3}, Landroid/content/SharedPreferences$Editor;.commit:()Z // method@02b1
+72a538: 1e00                                   |0016: monitor-exit v0
+72a53a: 0e00                                   |0017: return-void
+72a53c: 0d03                                   |0018: move-exception v3
+72a53e: 1e00                                   |0019: monitor-exit v0
+72a540: 2703                                   |001a: throw v3
+      catches       : 1
+        0x0003 - 0x001a
+          <any> -> 0x0018
+      positions     :
+        0x0002 line=1
+        0x0005 line=2
+        0x0016 line=3
+      locals        :
+        0x0000 - 0x001b reg=3 this Lcom/google/firebase/messaging/SharedPreferencesQueue;
+
+    #5              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'syncStateAsync'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 11 16-bit code units
+72a550:                                        |[72a550] com.google.firebase.messaging.SharedPreferencesQueue.syncStateAsync:()V
+72a560: 5420 e173                              |0000: iget-object v0, v2, Lcom/google/firebase/messaging/SharedPreferencesQueue;.syncExecutor:Ljava/util/concurrent/Executor; // field@73e1
+72a564: 2201 fa17                              |0002: new-instance v1, Lcom/google/firebase/messaging/SharedPreferencesQueue$$Lambda$0; // type@17fa
+72a568: 7020 eac0 2100                         |0004: invoke-direct {v1, v2}, Lcom/google/firebase/messaging/SharedPreferencesQueue$$Lambda$0;.<init>:(Lcom/google/firebase/messaging/SharedPreferencesQueue;)V // method@c0ea
+72a56e: 7220 acd6 1000                         |0007: invoke-interface {v0, v1}, Ljava/util/concurrent/Executor;.execute:(Ljava/lang/Runnable;)V // method@d6ac
+72a574: 0e00                                   |000a: return-void
+      catches       : (none)
+      positions     :
+        0x0004 line=1
+      locals        :
+        0x0000 - 0x000b reg=2 this Lcom/google/firebase/messaging/SharedPreferencesQueue;
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'add'
+      type          : '(Ljava/lang/String;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 34 16-bit code units
+72a578:                                        |[72a578] com.google.firebase.messaging.SharedPreferencesQueue.add:(Ljava/lang/String;)Z
+72a588: 7110 ca07 0300                         |0000: invoke-static {v3}, Landroid/text/TextUtils;.isEmpty:(Ljava/lang/CharSequence;)Z // method@07ca
+72a58e: 0a00                                   |0003: move-result v0
+72a590: 3900 1c00                              |0004: if-nez v0, 0020 // +001c
+72a594: 5420 de73                              |0006: iget-object v0, v2, Lcom/google/firebase/messaging/SharedPreferencesQueue;.itemSeparator:Ljava/lang/String; // field@73de
+72a598: 6e20 fed1 0300                         |0008: invoke-virtual {v3, v0}, Ljava/lang/String;.contains:(Ljava/lang/CharSequence;)Z // method@d1fe
+72a59e: 0a00                                   |000b: move-result v0
+72a5a0: 3800 0300                              |000c: if-eqz v0, 000f // +0003
+72a5a4: 2812                                   |000e: goto 0020 // +0012
+72a5a6: 5420 dd73                              |000f: iget-object v0, v2, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a5aa: 1d00                                   |0011: monitor-enter v0
+72a5ac: 5421 dd73                              |0012: iget-object v1, v2, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a5b0: 6e20 93d4 3100                         |0014: invoke-virtual {v1, v3}, Ljava/util/ArrayDeque;.add:(Ljava/lang/Object;)Z // method@d493
+72a5b6: 0a03                                   |0017: move-result v3
+72a5b8: 7020 efc0 3200                         |0018: invoke-direct {v2, v3}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.checkAndSyncState:(Z)Z // method@c0ef
+72a5be: 1e00                                   |001b: monitor-exit v0
+72a5c0: 0f03                                   |001c: return v3
+72a5c2: 0d02                                   |001d: move-exception v2
+72a5c4: 1e00                                   |001e: monitor-exit v0
+72a5c6: 2702                                   |001f: throw v2
+72a5c8: 1202                                   |0020: const/4 v2, #int 0 // #0
+72a5ca: 0f02                                   |0021: return v2
+      catches       : 1
+        0x0012 - 0x001f
+          <any> -> 0x001d
+      positions     :
+        0x0000 line=1
+        0x0011 line=2
+        0x0014 line=3
+        0x001e line=4
+      locals        :
+        0x0000 - 0x0022 reg=2 this Lcom/google/firebase/messaging/SharedPreferencesQueue;
+        0x0000 - 0x0022 reg=3 (null) Ljava/lang/String;
+
+    #1              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'bridge$lambda$0$SharedPreferencesQueue'
+      type          : '()V'
+      access        : 0x1050 (FINAL BRIDGE SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+72a5d8:                                        |[72a5d8] com.google.firebase.messaging.SharedPreferencesQueue.bridge$lambda$0$SharedPreferencesQueue:()V
+72a5e8: 7010 f5c0 0000                         |0000: invoke-direct {v0}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.syncState:()V // method@c0f5
+72a5ee: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #2              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'peek'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 16 16-bit code units
+72a5f0:                                        |[72a5f0] com.google.firebase.messaging.SharedPreferencesQueue.peek:()Ljava/lang/String;
+72a600: 5410 dd73                              |0000: iget-object v0, v1, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a604: 1d00                                   |0002: monitor-enter v0
+72a606: 5411 dd73                              |0003: iget-object v1, v1, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a60a: 6e10 98d4 0100                         |0005: invoke-virtual {v1}, Ljava/util/ArrayDeque;.peek:()Ljava/lang/Object; // method@d498
+72a610: 0c01                                   |0008: move-result-object v1
+72a612: 1f01 971a                              |0009: check-cast v1, Ljava/lang/String; // type@1a97
+72a616: 1e00                                   |000b: monitor-exit v0
+72a618: 1101                                   |000c: return-object v1
+72a61a: 0d01                                   |000d: move-exception v1
+72a61c: 1e00                                   |000e: monitor-exit v0
+72a61e: 2701                                   |000f: throw v1
+      catches       : 1
+        0x0003 - 0x000f
+          <any> -> 0x000d
+      positions     :
+        0x0002 line=1
+        0x0005 line=2
+        0x000e line=3
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/google/firebase/messaging/SharedPreferencesQueue;
+
+    #3              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'remove'
+      type          : '(Ljava/lang/Object;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 17 16-bit code units
+72a62c:                                        |[72a62c] com.google.firebase.messaging.SharedPreferencesQueue.remove:(Ljava/lang/Object;)Z
+72a63c: 5420 dd73                              |0000: iget-object v0, v2, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a640: 1d00                                   |0002: monitor-enter v0
+72a642: 5421 dd73                              |0003: iget-object v1, v2, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a646: 6e20 9dd4 3100                         |0005: invoke-virtual {v1, v3}, Ljava/util/ArrayDeque;.remove:(Ljava/lang/Object;)Z // method@d49d
+72a64c: 0a03                                   |0008: move-result v3
+72a64e: 7020 efc0 3200                         |0009: invoke-direct {v2, v3}, Lcom/google/firebase/messaging/SharedPreferencesQueue;.checkAndSyncState:(Z)Z // method@c0ef
+72a654: 1e00                                   |000c: monitor-exit v0
+72a656: 0f03                                   |000d: return v3
+72a658: 0d02                                   |000e: move-exception v2
+72a65a: 1e00                                   |000f: monitor-exit v0
+72a65c: 2702                                   |0010: throw v2
+      catches       : 1
+        0x0003 - 0x0010
+          <any> -> 0x000e
+      positions     :
+        0x0002 line=1
+        0x0005 line=2
+        0x000f line=3
+      locals        :
+        0x0000 - 0x0011 reg=2 this Lcom/google/firebase/messaging/SharedPreferencesQueue;
+        0x0000 - 0x0011 reg=3 (null) Ljava/lang/Object;
+
+    #4              : (in Lcom/google/firebase/messaging/SharedPreferencesQueue;)
+      name          : 'serialize'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 37 16-bit code units
+72a66c:                                        |[72a66c] com.google.firebase.messaging.SharedPreferencesQueue.serialize:()Ljava/lang/String;
+72a67c: 2200 991a                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+72a680: 7010 39d2 0000                         |0002: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+72a686: 5431 dd73                              |0005: iget-object v1, v3, Lcom/google/firebase/messaging/SharedPreferencesQueue;.internalQueue:Ljava/util/ArrayDeque; // field@73dd
+72a68a: 6e10 97d4 0100                         |0007: invoke-virtual {v1}, Ljava/util/ArrayDeque;.iterator:()Ljava/util/Iterator; // method@d497
+72a690: 0c01                                   |000a: move-result-object v1
+72a692: 7210 a0d5 0100                         |000b: invoke-interface {v1}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+72a698: 0a02                                   |000e: move-result v2
+72a69a: 3802 1100                              |000f: if-eqz v2, 0020 // +0011
+72a69e: 7210 a1d5 0100                         |0011: invoke-interface {v1}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+72a6a4: 0c02                                   |0014: move-result-object v2
+72a6a6: 1f02 971a                              |0015: check-cast v2, Ljava/lang/String; // type@1a97
+72a6aa: 6e20 45d2 2000                         |0017: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72a6b0: 5432 de73                              |001a: iget-object v2, v3, Lcom/google/firebase/messaging/SharedPreferencesQueue;.itemSeparator:Ljava/lang/String; // field@73de
+72a6b4: 6e20 45d2 2000                         |001c: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+72a6ba: 28ec                                   |001f: goto 000b // -0014
+72a6bc: 6e10 58d2 0000                         |0020: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+72a6c2: 0c03                                   |0023: move-result-object v3
+72a6c4: 1103                                   |0024: return-object v3
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+        0x0007 line=2
+        0x0017 line=3
+        0x0020 line=4
+      locals        :
+        0x0000 - 0x0025 reg=3 this Lcom/google/firebase/messaging/SharedPreferencesQueue;
+
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

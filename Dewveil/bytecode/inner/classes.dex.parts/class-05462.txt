@@ -1,0 +1,375 @@
+Class #5462            -
+  Class descriptor  : 'Lcom/google/firebase/messaging/FcmBroadcastProcessor;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'fcmServiceConn'
+      type          : 'Lcom/google/firebase/messaging/WithinAppServiceConnection;'
+      access        : 0x000a (PRIVATE STATIC)
+    #1              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'lock'
+      type          : 'Ljava/lang/Object;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+  Instance fields   -
+    #0              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'context'
+      type          : 'Landroid/content/Context;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'executor'
+      type          : 'Ljava/util/concurrent/Executor;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 8 16-bit code units
+724e58:                                        |[724e58] com.google.firebase.messaging.FcmBroadcastProcessor.<clinit>:()V
+724e68: 2200 8b1a                              |0000: new-instance v0, Ljava/lang/Object; // type@1a8b
+724e6c: 7010 c8d1 0000                         |0002: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+724e72: 6900 6573                              |0005: sput-object v0, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.lock:Ljava/lang/Object; // field@7365
+724e76: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #1              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : '<init>'
+      type          : '(Landroid/content/Context;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 10 16-bit code units
+724e78:                                        |[724e78] com.google.firebase.messaging.FcmBroadcastProcessor.<init>:(Landroid/content/Context;)V
+724e88: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+724e8e: 5b01 6273                              |0003: iput-object v1, v0, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.context:Landroid/content/Context; // field@7362
+724e92: 6201 5973                              |0005: sget-object v1, Lcom/google/firebase/messaging/FcmBroadcastProcessor$$Lambda$0;.$instance:Ljava/util/concurrent/Executor; // field@7359
+724e96: 5b01 6373                              |0007: iput-object v1, v0, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.executor:Ljava/util/concurrent/Executor; // field@7363
+724e9a: 0e00                                   |0009: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #2              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : '<init>'
+      type          : '(Landroid/content/Context;Ljava/util/concurrent/ExecutorService;)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 1
+      insns size    : 8 16-bit code units
+724e9c:                                        |[724e9c] com.google.firebase.messaging.FcmBroadcastProcessor.<init>:(Landroid/content/Context;Ljava/util/concurrent/ExecutorService;)V
+724eac: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+724eb2: 5b01 6273                              |0003: iput-object v1, v0, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.context:Landroid/content/Context; // field@7362
+724eb6: 5b02 6373                              |0005: iput-object v2, v0, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.executor:Ljava/util/concurrent/Executor; // field@7363
+724eba: 0e00                                   |0007: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #3              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'bindToMessagingService'
+      type          : '(Landroid/content/Context;Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 33 16-bit code units
+724ebc:                                        |[724ebc] com.google.firebase.messaging.FcmBroadcastProcessor.bindToMessagingService:(Landroid/content/Context;Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task;
+724ecc: 1230                                   |0000: const/4 v0, #int 3 // #3
+724ece: 1a01 6c28                              |0001: const-string v1, "FirebaseMessaging" // string@286c
+724ed2: 7120 2308 0100                         |0003: invoke-static {v1, v0}, Landroid/util/Log;.isLoggable:(Ljava/lang/String;I)Z // method@0823
+724ed8: 0a00                                   |0006: move-result v0
+724eda: 3800 0700                              |0007: if-eqz v0, 000e // +0007
+724ede: 1a00 2919                              |0009: const-string v0, "Binding to service" // string@1929
+724ee2: 7120 1c08 0100                         |000b: invoke-static {v1, v0}, Landroid/util/Log;.d:(Ljava/lang/String;Ljava/lang/String;)I // method@081c
+724ee8: 1a00 1588                              |000e: const-string v0, "com.google.firebase.MESSAGING_EVENT" // string@8815
+724eec: 7120 c1bf 0200                         |0010: invoke-static {v2, v0}, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.getServiceConnection:(Landroid/content/Context;Ljava/lang/String;)Lcom/google/firebase/messaging/WithinAppServiceConnection; // method@bfc1
+724ef2: 0c02                                   |0013: move-result-object v2
+724ef4: 6e20 67c1 3200                         |0014: invoke-virtual {v2, v3}, Lcom/google/firebase/messaging/WithinAppServiceConnection;.sendIntent:(Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task; // method@c167
+724efa: 0c02                                   |0017: move-result-object v2
+724efc: 6203 5e73                              |0018: sget-object v3, Lcom/google/firebase/messaging/FcmBroadcastProcessor$$Lambda$3;.$instance:Ljava/util/concurrent/Executor; // field@735e
+724f00: 6200 5f73                              |001a: sget-object v0, Lcom/google/firebase/messaging/FcmBroadcastProcessor$$Lambda$4;.$instance:Lcom/google/android/gms/tasks/Continuation; // field@735f
+724f04: 6e30 74ae 3200                         |001c: invoke-virtual {v2, v3, v0}, Lcom/google/android/gms/tasks/Task;.continueWith:(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/Continuation;)Lcom/google/android/gms/tasks/Task; // method@ae74
+724f0a: 0c02                                   |001f: move-result-object v2
+724f0c: 1102                                   |0020: return-object v2
+      catches       : (none)
+      positions     :
+        0x0001 line=1
+        0x000b line=2
+        0x0010 line=3
+        0x0014 line=4
+        0x001c line=5
+      locals        :
+        0x0000 - 0x0021 reg=2 (null) Landroid/content/Context;
+        0x0000 - 0x0021 reg=3 (null) Landroid/content/Intent;
+
+    #4              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'getServiceConnection'
+      type          : '(Landroid/content/Context;Ljava/lang/String;)Lcom/google/firebase/messaging/WithinAppServiceConnection;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 23 16-bit code units
+724f10:                                        |[724f10] com.google.firebase.messaging.FcmBroadcastProcessor.getServiceConnection:(Landroid/content/Context;Ljava/lang/String;)Lcom/google/firebase/messaging/WithinAppServiceConnection;
+724f20: 1a03 1588                              |0000: const-string v3, "com.google.firebase.MESSAGING_EVENT" // string@8815
+724f24: 6200 6573                              |0002: sget-object v0, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.lock:Ljava/lang/Object; // field@7365
+724f28: 1d00                                   |0004: monitor-enter v0
+724f2a: 6201 6473                              |0005: sget-object v1, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.fcmServiceConn:Lcom/google/firebase/messaging/WithinAppServiceConnection; // field@7364
+724f2e: 3901 0900                              |0007: if-nez v1, 0010 // +0009
+724f32: 2201 0e18                              |0009: new-instance v1, Lcom/google/firebase/messaging/WithinAppServiceConnection; // type@180e
+724f36: 7030 61c1 2103                         |000b: invoke-direct {v1, v2, v3}, Lcom/google/firebase/messaging/WithinAppServiceConnection;.<init>:(Landroid/content/Context;Ljava/lang/String;)V // method@c161
+724f3c: 6901 6473                              |000e: sput-object v1, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.fcmServiceConn:Lcom/google/firebase/messaging/WithinAppServiceConnection; // field@7364
+724f40: 6202 6473                              |0010: sget-object v2, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.fcmServiceConn:Lcom/google/firebase/messaging/WithinAppServiceConnection; // field@7364
+724f44: 1e00                                   |0012: monitor-exit v0
+724f46: 1102                                   |0013: return-object v2
+724f48: 0d02                                   |0014: move-exception v2
+724f4a: 1e00                                   |0015: monitor-exit v0
+724f4c: 2702                                   |0016: throw v2
+      catches       : 1
+        0x0005 - 0x0016
+          <any> -> 0x0014
+      positions     :
+        0x0004 line=1
+        0x000b line=2
+        0x0012 line=3
+        0x0015 line=4
+      locals        :
+        0x0000 - 0x0017 reg=2 (null) Landroid/content/Context;
+        0x0000 - 0x0017 reg=3 (null) Ljava/lang/String;
+
+    #5              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'lambda$bindToMessagingService$3$FcmBroadcastProcessor'
+      type          : '(Lcom/google/android/gms/tasks/Task;)Ljava/lang/Integer;'
+      access        : 0x1018 (STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 6 16-bit code units
+724f5c:                                        |[724f5c] com.google.firebase.messaging.FcmBroadcastProcessor.lambda$bindToMessagingService$3$FcmBroadcastProcessor:(Lcom/google/android/gms/tasks/Task;)Ljava/lang/Integer;
+724f6c: 12f0                                   |0000: const/4 v0, #int -1 // #ff
+724f6e: 7110 6bd1 0000                         |0001: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+724f74: 0c00                                   |0004: move-result-object v0
+724f76: 1100                                   |0005: return-object v0
+      catches       : (none)
+      positions     :
+        0x0001 line=1
+      locals        :
+        0x0000 - 0x0006 reg=0 (null) Lcom/google/android/gms/tasks/Task;
+
+    #6              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'lambda$startMessagingService$0$FcmBroadcastProcessor'
+      type          : '(Landroid/content/Context;Landroid/content/Intent;)Ljava/lang/Integer;'
+      access        : 0x1018 (STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 13 16-bit code units
+724f78:                                        |[724f78] com.google.firebase.messaging.FcmBroadcastProcessor.lambda$startMessagingService$0$FcmBroadcastProcessor:(Landroid/content/Context;Landroid/content/Intent;)Ljava/lang/Integer;
+724f88: 7100 e3c0 0000                         |0000: invoke-static {}, Lcom/google/firebase/messaging/ServiceStarter;.getInstance:()Lcom/google/firebase/messaging/ServiceStarter; // method@c0e3
+724f8e: 0c00                                   |0003: move-result-object v0
+724f90: 6e30 e9c0 1002                         |0004: invoke-virtual {v0, v1, v2}, Lcom/google/firebase/messaging/ServiceStarter;.startMessagingService:(Landroid/content/Context;Landroid/content/Intent;)I // method@c0e9
+724f96: 0a01                                   |0007: move-result v1
+724f98: 7110 6bd1 0100                         |0008: invoke-static {v1}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+724f9e: 0c01                                   |000b: move-result-object v1
+724fa0: 1101                                   |000c: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+      locals        :
+        0x0000 - 0x000d reg=1 (null) Landroid/content/Context;
+        0x0000 - 0x000d reg=2 (null) Landroid/content/Intent;
+
+    #7              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'lambda$startMessagingService$1$FcmBroadcastProcessor'
+      type          : '(Lcom/google/android/gms/tasks/Task;)Ljava/lang/Integer;'
+      access        : 0x1018 (STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+724fa4:                                        |[724fa4] com.google.firebase.messaging.FcmBroadcastProcessor.lambda$startMessagingService$1$FcmBroadcastProcessor:(Lcom/google/android/gms/tasks/Task;)Ljava/lang/Integer;
+724fb4: 1300 9301                              |0000: const/16 v0, #int 403 // #193
+724fb8: 7110 6bd1 0000                         |0002: invoke-static {v0}, Ljava/lang/Integer;.valueOf:(I)Ljava/lang/Integer; // method@d16b
+724fbe: 0c00                                   |0005: move-result-object v0
+724fc0: 1100                                   |0006: return-object v0
+      catches       : (none)
+      positions     :
+        0x0002 line=1
+      locals        :
+        0x0000 - 0x0007 reg=0 (null) Lcom/google/android/gms/tasks/Task;
+
+    #8              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'lambda$startMessagingService$2$FcmBroadcastProcessor'
+      type          : '(Landroid/content/Context;Landroid/content/Intent;Lcom/google/android/gms/tasks/Task;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x1018 (STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 35 16-bit code units
+724fc4:                                        |[724fc4] com.google.firebase.messaging.FcmBroadcastProcessor.lambda$startMessagingService$2$FcmBroadcastProcessor:(Landroid/content/Context;Landroid/content/Intent;Lcom/google/android/gms/tasks/Task;)Lcom/google/android/gms/tasks/Task;
+724fd4: 7100 a799 0000                         |0000: invoke-static {}, Lcom/google/android/gms/common/util/PlatformVersion;.isAtLeastO:()Z // method@99a7
+724fda: 0a00                                   |0003: move-result v0
+724fdc: 3800 1e00                              |0004: if-eqz v0, 0022 // +001e
+724fe0: 6e10 78ae 0400                         |0006: invoke-virtual {v4}, Lcom/google/android/gms/tasks/Task;.getResult:()Ljava/lang/Object; // method@ae78
+724fe6: 0c00                                   |0009: move-result-object v0
+724fe8: 1f00 7f1a                              |000a: check-cast v0, Ljava/lang/Integer; // type@1a7f
+724fec: 6e10 5cd1 0000                         |000c: invoke-virtual {v0}, Ljava/lang/Integer;.intValue:()I // method@d15c
+724ff2: 0a00                                   |000f: move-result v0
+724ff4: 1301 9201                              |0010: const/16 v1, #int 402 // #192
+724ff8: 3210 0300                              |0012: if-eq v0, v1, 0015 // +0003
+724ffc: 280e                                   |0014: goto 0022 // +000e
+724ffe: 7120 c0bf 3200                         |0015: invoke-static {v2, v3}, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.bindToMessagingService:(Landroid/content/Context;Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task; // method@bfc0
+725004: 0c02                                   |0018: move-result-object v2
+725006: 6203 6073                              |0019: sget-object v3, Lcom/google/firebase/messaging/FcmBroadcastProcessor$$Lambda$5;.$instance:Ljava/util/concurrent/Executor; // field@7360
+72500a: 6204 6173                              |001b: sget-object v4, Lcom/google/firebase/messaging/FcmBroadcastProcessor$$Lambda$6;.$instance:Lcom/google/android/gms/tasks/Continuation; // field@7361
+72500e: 6e30 74ae 3204                         |001d: invoke-virtual {v2, v3, v4}, Lcom/google/android/gms/tasks/Task;.continueWith:(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/Continuation;)Lcom/google/android/gms/tasks/Task; // method@ae74
+725014: 0c02                                   |0020: move-result-object v2
+725016: 1102                                   |0021: return-object v2
+725018: 1104                                   |0022: return-object v4
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0006 line=2
+        0x0015 line=3
+        0x001d line=4
+      locals        :
+        0x0000 - 0x0023 reg=2 (null) Landroid/content/Context;
+        0x0000 - 0x0023 reg=3 (null) Landroid/content/Intent;
+        0x0000 - 0x0023 reg=4 (null) Lcom/google/android/gms/tasks/Task;
+
+    #9              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'reset'
+      type          : '()V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 2
+      ins           : 0
+      outs          : 0
+      insns size    : 11 16-bit code units
+72501c:                                        |[72501c] com.google.firebase.messaging.FcmBroadcastProcessor.reset:()V
+72502c: 6200 6573                              |0000: sget-object v0, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.lock:Ljava/lang/Object; // field@7365
+725030: 1d00                                   |0002: monitor-enter v0
+725032: 1201                                   |0003: const/4 v1, #int 0 // #0
+725034: 6901 6473                              |0004: sput-object v1, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.fcmServiceConn:Lcom/google/firebase/messaging/WithinAppServiceConnection; // field@7364
+725038: 1e00                                   |0006: monitor-exit v0
+72503a: 0e00                                   |0007: return-void
+72503c: 0d01                                   |0008: move-exception v1
+72503e: 1e00                                   |0009: monitor-exit v0
+725040: 2701                                   |000a: throw v1
+      catches       : 1
+        0x0004 - 0x000a
+          <any> -> 0x0008
+      positions     :
+        0x0002 line=1
+        0x0006 line=2
+      locals        :
+
+  Virtual methods   -
+    #0              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'process'
+      type          : '(Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 3
+      insns size    : 28 16-bit code units
+725050:                                        |[725050] com.google.firebase.messaging.FcmBroadcastProcessor.process:(Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task;
+725060: 1a00 b197                              |0000: const-string v0, "gcm.rawData64" // string@97b1
+725064: 6e20 8902 0400                         |0002: invoke-virtual {v4, v0}, Landroid/content/Intent;.getStringExtra:(Ljava/lang/String;)Ljava/lang/String; // method@0289
+72506a: 0c01                                   |0005: move-result-object v1
+72506c: 3801 0f00                              |0006: if-eqz v1, 0015 // +000f
+725070: 1202                                   |0008: const/4 v2, #int 0 // #0
+725072: 7120 0008 2100                         |0009: invoke-static {v1, v2}, Landroid/util/Base64;.decode:(Ljava/lang/String;I)[B // method@0800
+725078: 0c01                                   |000c: move-result-object v1
+72507a: 1a02 0ccc                              |000d: const-string v2, "rawData" // string@cc0c
+72507e: 6e30 9602 2401                         |000f: invoke-virtual {v4, v2, v1}, Landroid/content/Intent;.putExtra:(Ljava/lang/String;[B)Landroid/content/Intent; // method@0296
+725084: 6e20 9a02 0400                         |0012: invoke-virtual {v4, v0}, Landroid/content/Intent;.removeExtra:(Ljava/lang/String;)V // method@029a
+72508a: 5430 6273                              |0015: iget-object v0, v3, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.context:Landroid/content/Context; // field@7362
+72508e: 6e30 c8bf 0304                         |0017: invoke-virtual {v3, v0, v4}, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.startMessagingService:(Landroid/content/Context;Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task; // method@bfc8
+725094: 0c03                                   |001a: move-result-object v3
+725096: 1103                                   |001b: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0009 line=2
+        0x0012 line=3
+        0x0017 line=4
+      locals        :
+        0x0000 - 0x001c reg=3 this Lcom/google/firebase/messaging/FcmBroadcastProcessor;
+        0x0000 - 0x001c reg=4 (null) Landroid/content/Intent;
+
+    #1              : (in Lcom/google/firebase/messaging/FcmBroadcastProcessor;)
+      name          : 'startMessagingService'
+      type          : '(Landroid/content/Context;Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 3
+      insns size    : 57 16-bit code units
+725098:                                        |[725098] com.google.firebase.messaging.FcmBroadcastProcessor.startMessagingService:(Landroid/content/Context;Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task;
+7250a8: 7100 a799 0000                         |0000: invoke-static {}, Lcom/google/android/gms/common/util/PlatformVersion;.isAtLeastO:()Z // method@99a7
+7250ae: 0a00                                   |0003: move-result v0
+7250b0: 1201                                   |0004: const/4 v1, #int 0 // #0
+7250b2: 3800 0d00                              |0005: if-eqz v0, 0012 // +000d
+7250b6: 6e10 3102 0400                         |0007: invoke-virtual {v4}, Landroid/content/Context;.getApplicationInfo:()Landroid/content/pm/ApplicationInfo; // method@0231
+7250bc: 0c00                                   |000a: move-result-object v0
+7250be: 5200 3300                              |000b: iget v0, v0, Landroid/content/pm/ApplicationInfo;.targetSdkVersion:I // field@0033
+7250c2: 1302 1a00                              |000d: const/16 v2, #int 26 // #1a
+7250c6: 3420 0300                              |000f: if-lt v0, v2, 0012 // +0003
+7250ca: 1211                                   |0011: const/4 v1, #int 1 // #1
+7250cc: 6e10 8202 0500                         |0012: invoke-virtual {v5}, Landroid/content/Intent;.getFlags:()I // method@0282
+7250d2: 0a00                                   |0015: move-result v0
+7250d4: 1502 0010                              |0016: const/high16 v2, #int 268435456 // #1000
+7250d8: b520                                   |0018: and-int/2addr v0, v2
+7250da: 3801 0900                              |0019: if-eqz v1, 0022 // +0009
+7250de: 3900 0700                              |001b: if-nez v0, 0022 // +0007
+7250e2: 7120 c0bf 5400                         |001d: invoke-static {v4, v5}, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.bindToMessagingService:(Landroid/content/Context;Landroid/content/Intent;)Lcom/google/android/gms/tasks/Task; // method@bfc0
+7250e8: 0c03                                   |0020: move-result-object v3
+7250ea: 1103                                   |0021: return-object v3
+7250ec: 5430 6373                              |0022: iget-object v0, v3, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.executor:Ljava/util/concurrent/Executor; // field@7363
+7250f0: 2201 ca17                              |0024: new-instance v1, Lcom/google/firebase/messaging/FcmBroadcastProcessor$$Lambda$1; // type@17ca
+7250f4: 7030 adbf 4105                         |0026: invoke-direct {v1, v4, v5}, Lcom/google/firebase/messaging/FcmBroadcastProcessor$$Lambda$1;.<init>:(Landroid/content/Context;Landroid/content/Intent;)V // method@bfad
+7250fa: 7120 8dae 1000                         |0029: invoke-static {v0, v1}, Lcom/google/android/gms/tasks/Tasks;.call:(Ljava/util/concurrent/Executor;Ljava/util/concurrent/Callable;)Lcom/google/android/gms/tasks/Task; // method@ae8d
+725100: 0c00                                   |002c: move-result-object v0
+725102: 5433 6373                              |002d: iget-object v3, v3, Lcom/google/firebase/messaging/FcmBroadcastProcessor;.executor:Ljava/util/concurrent/Executor; // field@7363
+725106: 2201 cb17                              |002f: new-instance v1, Lcom/google/firebase/messaging/FcmBroadcastProcessor$$Lambda$2; // type@17cb
+72510a: 7030 afbf 4105                         |0031: invoke-direct {v1, v4, v5}, Lcom/google/firebase/messaging/FcmBroadcastProcessor$$Lambda$2;.<init>:(Landroid/content/Context;Landroid/content/Intent;)V // method@bfaf
+725110: 6e30 76ae 3001                         |0034: invoke-virtual {v0, v3, v1}, Lcom/google/android/gms/tasks/Task;.continueWithTask:(Ljava/util/concurrent/Executor;Lcom/google/android/gms/tasks/Continuation;)Lcom/google/android/gms/tasks/Task; // method@ae76
+725116: 0c03                                   |0037: move-result-object v3
+725118: 1103                                   |0038: return-object v3
+      catches       : (none)
+      positions     :
+        0x0000 line=1
+        0x0007 line=2
+        0x0012 line=3
+        0x001d line=7
+        0x0026 line=4
+        0x0029 line=5
+        0x002f line=6
+      locals        :
+        0x0000 - 0x0039 reg=3 this Lcom/google/firebase/messaging/FcmBroadcastProcessor;
+        0x0000 - 0x0039 reg=4 (null) Landroid/content/Context;
+        0x0000 - 0x0039 reg=5 (null) Landroid/content/Intent;
+
+  source_file_idx   : 34861 (com.google.firebase:firebase-messaging@@22.0.0)
+

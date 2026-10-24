@@ -1,0 +1,923 @@
+Class #4938            -
+  Class descriptor  : 'Lkotlinx/coroutines/channels/ArrayBroadcastChannel;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Lkotlinx/coroutines/channels/AbstractSendChannel;'
+  Interfaces        -
+    #0              : 'Lkotlinx/coroutines/channels/BroadcastChannel;'
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : '_head'
+      type          : 'J'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #1              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : '_size'
+      type          : 'I'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #2              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : '_tail'
+      type          : 'J'
+      access        : 0x1042 (PRIVATE VOLATILE SYNTHETIC)
+    #3              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'buffer'
+      type          : '[Ljava/lang/Object;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #4              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'bufferLock'
+      type          : 'Ljava/util/concurrent/locks/ReentrantLock;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'capacity'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #6              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'subscribers'
+      type          : 'Ljava/util/List;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : '<init>'
+      type          : '(I)V'
+      access        : 0x10001 (PUBLIC CONSTRUCTOR)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 67 16-bit code units
+326910:                                        |[326910] kotlinx.coroutines.channels.ArrayBroadcastChannel.<init>:(I)V
+326920: 1200                                   |0000: const/4 v0, #int 0 // #0
+326922: 7020 64a7 0200                         |0001: invoke-direct {v2, v0}, Lkotlinx/coroutines/channels/AbstractSendChannel;.<init>:(Lkotlin/jvm/functions/Function1;)V // method@a764
+326928: 5923 b240                              |0004: iput v3, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.capacity:I // field@40b2
+32692c: 1210                                   |0006: const/4 v0, #int 1 // #1
+32692e: 3403 1d00                              |0007: if-lt v3, v0, 0024 // +001d
+326932: 2200 7512                              |0009: new-instance v0, Ljava/util/concurrent/locks/ReentrantLock; // type@1275
+326936: 7010 4d76 0000                         |000b: invoke-direct {v0}, Ljava/util/concurrent/locks/ReentrantLock;.<init>:()V // method@764d
+32693c: 5b20 b140                              |000e: iput-object v0, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.bufferLock:Ljava/util/concurrent/locks/ReentrantLock; // field@40b1
+326940: 2333 ac1a                              |0010: new-array v3, v3, [Ljava/lang/Object; // type@1aac
+326944: 5b23 b040                              |0012: iput-object v3, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.buffer:[Ljava/lang/Object; // field@40b0
+326948: 1600 0000                              |0014: const-wide/16 v0, #int 0 // #0
+32694c: 5a20 ad40                              |0016: iput-wide v0, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;._head:J // field@40ad
+326950: 5a20 af40                              |0018: iput-wide v0, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;._tail:J // field@40af
+326954: 1203                                   |001a: const/4 v3, #int 0 // #0
+326956: 5923 ae40                              |001b: iput v3, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;._size:I // field@40ae
+32695a: 7100 21b1 0000                         |001d: invoke-static {}, Lkotlinx/coroutines/internal/ConcurrentKt;.subscriberList:()Ljava/util/List; // method@b121
+326960: 0c03                                   |0020: move-result-object v3
+326962: 5b23 b340                              |0021: iput-object v3, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.subscribers:Ljava/util/List; // field@40b3
+326966: 0e00                                   |0023: return-void
+326968: 2200 8811                              |0024: new-instance v0, Ljava/lang/StringBuilder; // type@1188
+32696c: 1a01 371c                              |0026: const-string v1, "ArrayBroadcastChannel capacity must be at least 1, but " // string@1c37
+326970: 7020 4e72 1000                         |0028: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+326976: 6e20 5272 3000                         |002b: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+32697c: 0c03                                   |002e: move-result-object v3
+32697e: 1a00 a907                              |002f: const-string v0, " was specified" // string@07a9
+326982: 6e20 5772 0300                         |0031: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+326988: 0c03                                   |0034: move-result-object v3
+32698a: 6e10 6b72 0300                         |0035: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+326990: 0c03                                   |0038: move-result-object v3
+326992: 2200 6911                              |0039: new-instance v0, Ljava/lang/IllegalArgumentException; // type@1169
+326996: 6e10 e671 0300                         |003b: invoke-virtual {v3}, Ljava/lang/Object;.toString:()Ljava/lang/String; // method@71e6
+32699c: 0c03                                   |003e: move-result-object v3
+32699e: 7020 6b71 3000                         |003f: invoke-direct {v0, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@716b
+3269a4: 2700                                   |0042: throw v0
+      catches       : (none)
+      positions     :
+        0x0001 line=31
+        0x0004 line=30
+        0x0009 line=47
+        0x0010 line=48
+        0x0016 line=53
+        0x0018 line=58
+        0x001b line=63
+        0x001d line=69
+        0x0024 line=33
+      locals        :
+        0x0000 - 0x0043 reg=2 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x0043 reg=3 (null) I
+
+    #1              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'access$elementAt'
+      type          : '(Lkotlinx/coroutines/channels/ArrayBroadcastChannel;J)Ljava/lang/Object;'
+      access        : 0x1019 (PUBLIC STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 5 16-bit code units
+326608:                                        |[326608] kotlinx.coroutines.channels.ArrayBroadcastChannel.access$elementAt:(Lkotlinx/coroutines/channels/ArrayBroadcastChannel;J)Ljava/lang/Object;
+326618: 7030 b7a7 1002                         |0000: invoke-direct {v0, v1, v2}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.elementAt:(J)Ljava/lang/Object; // method@a7b7
+32661e: 0c00                                   |0003: move-result-object v0
+326620: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=26
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x0005 reg=1 (null) J
+
+    #2              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'access$getTail'
+      type          : '(Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)J'
+      access        : 0x1019 (PUBLIC STATIC FINAL SYNTHETIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+326870:                                        |[326870] kotlinx.coroutines.channels.ArrayBroadcastChannel.access$getTail:(Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)J
+326880: 7010 bfa7 0200                         |0000: invoke-direct {v2}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getTail:()J // method@a7bf
+326886: 0b00                                   |0003: move-result-wide v0
+326888: 1000                                   |0004: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0000 line=26
+      locals        :
+        0x0000 - 0x0005 reg=2 (null) Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+
+    #3              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'cancelInternal'
+      type          : '(Ljava/lang/Throwable;)Z'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 27 16-bit code units
+326528:                                        |[326528] kotlinx.coroutines.channels.ArrayBroadcastChannel.cancelInternal:(Ljava/lang/Throwable;)Z
+326538: 6e20 b5a7 4300                         |0000: invoke-virtual {v3, v4}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.close:(Ljava/lang/Throwable;)Z // method@a7b5
+32653e: 0a00                                   |0003: move-result v0
+326540: 5431 b340                              |0004: iget-object v1, v3, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.subscribers:Ljava/util/List; // field@40b3
+326544: 7210 1475 0100                         |0006: invoke-interface {v1}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@7514
+32654a: 0c01                                   |0009: move-result-object v1
+32654c: 7210 f274 0100                         |000a: invoke-interface {v1}, Ljava/util/Iterator;.hasNext:()Z // method@74f2
+326552: 0a02                                   |000d: move-result v2
+326554: 3802 0c00                              |000e: if-eqz v2, 001a // +000c
+326558: 7210 f374 0100                         |0010: invoke-interface {v1}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@74f3
+32655e: 0c02                                   |0013: move-result-object v2
+326560: 1f02 6117                              |0014: check-cast v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber; // type@1761
+326564: 6e20 9fa7 4200                         |0016: invoke-virtual {v2, v4}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;.cancelInternal$kotlinx_coroutines_core:(Ljava/lang/Throwable;)Z // method@a79f
+32656a: 28f1                                   |0019: goto 000a // -000f
+32656c: 0f00                                   |001a: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=94
+        0x0004 line=95
+      locals        :
+        0x0000 - 0x001b reg=3 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x001b reg=4 (null) Ljava/lang/Throwable;
+
+    #4              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'checkSubOffers'
+      type          : '()V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 5
+      insns size    : 43 16-bit code units
+3269c4:                                        |[3269c4] kotlinx.coroutines.channels.ArrayBroadcastChannel.checkSubOffers:()V
+3269d4: 5440 b340                              |0000: iget-object v0, v4, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.subscribers:Ljava/util/List; // field@40b3
+3269d8: 7210 1475 0000                         |0002: invoke-interface {v0}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@7514
+3269de: 0c00                                   |0005: move-result-object v0
+3269e0: 1201                                   |0006: const/4 v1, #int 0 // #0
+3269e2: 0112                                   |0007: move v2, v1
+3269e4: 7210 f274 0000                         |0008: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@74f2
+3269ea: 0a03                                   |000b: move-result v3
+3269ec: 3803 1300                              |000c: if-eqz v3, 001f // +0013
+3269f0: 7210 f374 0000                         |000e: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@74f3
+3269f6: 0c02                                   |0011: move-result-object v2
+3269f8: 1f02 6117                              |0012: check-cast v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber; // type@1761
+3269fc: 6e10 a0a7 0200                         |0014: invoke-virtual {v2}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;.checkOffer:()Z // method@a7a0
+326a02: 0a02                                   |0017: move-result v2
+326a04: 1213                                   |0018: const/4 v3, #int 1 // #1
+326a06: 3802 0400                              |0019: if-eqz v2, 001d // +0004
+326a0a: 0131                                   |001b: move v1, v3
+326a0c: 28eb                                   |001c: goto 0007 // -0015
+326a0e: 0132                                   |001d: move v2, v3
+326a10: 28ea                                   |001e: goto 0008 // -0016
+326a12: 3901 0600                              |001f: if-nez v1, 0025 // +0006
+326a16: 3902 0300                              |0021: if-nez v2, 0024 // +0003
+326a1a: 2802                                   |0023: goto 0025 // +0002
+326a1c: 0e00                                   |0024: return-void
+326a1e: 1230                                   |0025: const/4 v0, #int 3 // #3
+326a20: 1201                                   |0026: const/4 v1, #int 0 // #0
+326a22: 7151 caa7 1401                         |0027: invoke-static {v4, v1, v1, v0, v1}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.updateHead$default:(Lkotlinx/coroutines/channels/ArrayBroadcastChannel;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;ILjava/lang/Object;)V // method@a7ca
+326a28: 0e00                                   |002a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=140
+        0x0014 line=142
+        0x0027 line=145
+      locals        :
+        0x0000 - 0x002b reg=4 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+
+    #5              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'computeMinHead'
+      type          : '()J'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 6
+      ins           : 1
+      outs          : 4
+      insns size    : 33 16-bit code units
+32688c:                                        |[32688c] kotlinx.coroutines.channels.ArrayBroadcastChannel.computeMinHead:()J
+32689c: 5450 b340                              |0000: iget-object v0, v5, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.subscribers:Ljava/util/List; // field@40b3
+3268a0: 7210 1475 0000                         |0002: invoke-interface {v0}, Ljava/util/List;.iterator:()Ljava/util/Iterator; // method@7514
+3268a6: 0c00                                   |0005: move-result-object v0
+3268a8: 1801 ffff ffff ffff ff7f               |0006: const-wide v1, #double nan // #7fffffffffffffff
+3268b2: 7210 f274 0000                         |000b: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@74f2
+3268b8: 0a03                                   |000e: move-result v3
+3268ba: 3803 1100                              |000f: if-eqz v3, 0020 // +0011
+3268be: 7210 f374 0000                         |0011: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@74f3
+3268c4: 0c03                                   |0014: move-result-object v3
+3268c6: 1f03 6117                              |0015: check-cast v3, Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber; // type@1761
+3268ca: 6e10 a3a7 0300                         |0017: invoke-virtual {v3}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;.getSubHead:()J // method@a7a3
+3268d0: 0b03                                   |001a: move-result-wide v3
+3268d2: 7140 3297 2143                         |001b: invoke-static {v1, v2, v3, v4}, Lkotlin/ranges/RangesKt;.coerceAtMost:(JJ)J // method@9732
+3268d8: 0b01                                   |001e: move-result-wide v1
+3268da: 28ec                                   |001f: goto 000b // -0014
+3268dc: 1001                                   |0020: return-wide v1
+      catches       : (none)
+      positions     :
+        0x0000 line=206
+        0x0017 line=207
+      locals        :
+        0x0000 - 0x0021 reg=5 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+
+    #6              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'elementAt'
+      type          : '(J)Ljava/lang/Object;'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 6
+      ins           : 3
+      outs          : 0
+      insns size    : 10 16-bit code units
+326624:                                        |[326624] kotlinx.coroutines.channels.ArrayBroadcastChannel.elementAt:(J)Ljava/lang/Object;
+326634: 5430 b040                              |0000: iget-object v0, v3, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.buffer:[Ljava/lang/Object; // field@40b0
+326638: 5231 b240                              |0002: iget v1, v3, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.capacity:I // field@40b2
+32663c: 8111                                   |0004: int-to-long v1, v1
+32663e: bf14                                   |0005: rem-long/2addr v4, v1
+326640: 8444                                   |0006: long-to-int v4, v4
+326642: 4604 0004                              |0007: aget-object v4, v0, v4
+326646: 1104                                   |0009: return-object v4
+      catches       : (none)
+      positions     :
+        0x0000 line=212
+      locals        :
+        0x0000 - 0x000a reg=3 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x000a reg=4 (null) J
+
+    #7              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'getHead'
+      type          : '()J'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+3268e0:                                        |[3268e0] kotlinx.coroutines.channels.ArrayBroadcastChannel.getHead:()J
+3268f0: 5320 ad40                              |0000: iget-wide v0, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;._head:J // field@40ad
+3268f4: 1000                                   |0002: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0000 line=55
+      locals        :
+        0x0000 - 0x0003 reg=2 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+
+    #8              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'getSize'
+      type          : '()I'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+3265f0:                                        |[3265f0] kotlinx.coroutines.channels.ArrayBroadcastChannel.getSize:()I
+326600: 5210 ae40                              |0000: iget v0, v1, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;._size:I // field@40ae
+326604: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=65
+      locals        :
+        0x0000 - 0x0003 reg=1 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+
+    #9              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'getSubscribers$annotations'
+      type          : '()V'
+      access        : 0x100a (PRIVATE STATIC SYNTHETIC)
+      code          -
+      registers     : 0
+      ins           : 0
+      outs          : 0
+      insns size    : 1 16-bit code units
+326a2c:                                        |[326a2c] kotlinx.coroutines.channels.ArrayBroadcastChannel.getSubscribers$annotations:()V
+326a3c: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #10              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'getTail'
+      type          : '()J'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+3268f8:                                        |[3268f8] kotlinx.coroutines.channels.ArrayBroadcastChannel.getTail:()J
+326908: 5320 af40                              |0000: iget-wide v0, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;._tail:J // field@40af
+32690c: 1000                                   |0002: return-wide v0
+      catches       : (none)
+      positions     :
+        0x0000 line=60
+      locals        :
+        0x0000 - 0x0003 reg=2 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+
+    #11              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'setHead'
+      type          : '(J)V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 0
+      insns size    : 3 16-bit code units
+326a40:                                        |[326a40] kotlinx.coroutines.channels.ArrayBroadcastChannel.setHead:(J)V
+326a50: 5a01 ad40                              |0000: iput-wide v1, v0, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;._head:J // field@40ad
+326a54: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=56
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x0003 reg=1 (null) J
+
+    #12              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'setSize'
+      type          : '(I)V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+326a58:                                        |[326a58] kotlinx.coroutines.channels.ArrayBroadcastChannel.setSize:(I)V
+326a68: 5901 ae40                              |0000: iput v1, v0, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;._size:I // field@40ae
+326a6c: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=66
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x0003 reg=1 (null) I
+
+    #13              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'setTail'
+      type          : '(J)V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 0
+      insns size    : 3 16-bit code units
+326a70:                                        |[326a70] kotlinx.coroutines.channels.ArrayBroadcastChannel.setTail:(J)V
+326a80: 5a01 af40                              |0000: iput-wide v1, v0, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;._tail:J // field@40af
+326a84: 0e00                                   |0002: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=61
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x0003 reg=1 (null) J
+
+    #14              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'updateHead'
+      type          : '(Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;)V'
+      access        : 0x0012 (PRIVATE FINAL)
+      code          -
+      registers     : 15
+      ins           : 3
+      outs          : 4
+      insns size    : 203 16-bit code units
+326ab8:                                        |[326ab8] kotlinx.coroutines.channels.ArrayBroadcastChannel.updateHead:(Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;)V
+326ac8: 54c0 b140                              |0000: iget-object v0, v12, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.bufferLock:Ljava/util/concurrent/locks/ReentrantLock; // field@40b1
+326acc: 1f00 7212                              |0002: check-cast v0, Ljava/util/concurrent/locks/Lock; // type@1272
+326ad0: 7210 4576 0000                         |0004: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.lock:()V // method@7645
+326ad6: 380d 1d00                              |0007: if-eqz v13, 0024 // +001d
+326ada: 7010 bfa7 0c00                         |0009: invoke-direct {v12}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getTail:()J // method@a7bf
+326ae0: 0b01                                   |000c: move-result-wide v1
+326ae2: 6e30 aca7 1d02                         |000d: invoke-virtual {v13, v1, v2}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;.setSubHead:(J)V // method@a7ac
+326ae8: 54c1 b340                              |0010: iget-object v1, v12, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.subscribers:Ljava/util/List; // field@40b3
+326aec: 7210 1375 0100                         |0012: invoke-interface {v1}, Ljava/util/List;.isEmpty:()Z // method@7513
+326af2: 0a01                                   |0015: move-result v1
+326af4: 54c2 b340                              |0016: iget-object v2, v12, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.subscribers:Ljava/util/List; // field@40b3
+326af8: 7220 0c75 d200                         |0018: invoke-interface {v2, v13}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@750c
+326afe: 3901 0900                              |001b: if-nez v1, 0024 // +0009
+326b02: 7210 4676 0000                         |001d: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+326b08: 0e00                                   |0020: return-void
+326b0a: 0d0d                                   |0021: move-exception v13
+326b0c: 2900 a500                              |0022: goto/16 00c7 // +00a5
+326b10: 380e 1700                              |0024: if-eqz v14, 003b // +0017
+326b14: 54cd b340                              |0026: iget-object v13, v12, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.subscribers:Ljava/util/List; // field@40b3
+326b18: 7220 1875 ed00                         |0028: invoke-interface {v13, v14}, Ljava/util/List;.remove:(Ljava/lang/Object;)Z // method@7518
+326b1e: 7010 bca7 0c00                         |002b: invoke-direct {v12}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getHead:()J // method@a7bc
+326b24: 0b01                                   |002e: move-result-wide v1
+326b26: 6e10 a3a7 0e00                         |002f: invoke-virtual {v14}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;.getSubHead:()J // method@a7a3
+326b2c: 0b0d                                   |0032: move-result-wide v13
+326b2e: 310d 010d                              |0033: cmp-long v13, v1, v13
+326b32: 380d 0600                              |0035: if-eqz v13, 003b // +0006
+326b36: 7210 4676 0000                         |0037: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+326b3c: 0e00                                   |003a: return-void
+326b3e: 7010 b6a7 0c00                         |003b: invoke-direct {v12}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.computeMinHead:()J // method@a7b6
+326b44: 0b0d                                   |003e: move-result-wide v13
+326b46: 7010 bfa7 0c00                         |003f: invoke-direct {v12}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getTail:()J // method@a7bf
+326b4c: 0b01                                   |0042: move-result-wide v1
+326b4e: 7010 bca7 0c00                         |0043: invoke-direct {v12}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getHead:()J // method@a7bc
+326b54: 0b03                                   |0046: move-result-wide v3
+326b56: 7140 3297 ed21                         |0047: invoke-static {v13, v14, v1, v2}, Lkotlin/ranges/RangesKt;.coerceAtMost:(JJ)J // method@9732
+326b5c: 0b0d                                   |004a: move-result-wide v13
+326b5e: 3105 0d03                              |004b: cmp-long v5, v13, v3
+326b62: 3c05 0600                              |004d: if-gtz v5, 0053 // +0006
+326b66: 7210 4676 0000                         |004f: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+326b6c: 0e00                                   |0052: return-void
+326b6e: 7010 bda7 0c00                         |0053: invoke-direct {v12}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getSize:()I // method@a7bd
+326b74: 0a05                                   |0056: move-result v5
+326b76: 3106 030d                              |0057: cmp-long v6, v3, v13
+326b7a: 3b06 6a00                              |0059: if-gez v6, 00c3 // +006a
+326b7e: 54c6 b040                              |005b: iget-object v6, v12, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.buffer:[Ljava/lang/Object; // field@40b0
+326b82: 52c7 b240                              |005d: iget v7, v12, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.capacity:I // field@40b2
+326b86: 8178                                   |005f: int-to-long v8, v7
+326b88: 9f08 0308                              |0060: rem-long v8, v3, v8
+326b8c: 8488                                   |0062: long-to-int v8, v8
+326b8e: 1209                                   |0063: const/4 v9, #int 0 // #0
+326b90: 4d09 0608                              |0064: aput-object v9, v6, v8
+326b94: 3475 0400                              |0066: if-lt v5, v7, 006a // +0004
+326b98: 1216                                   |0068: const/4 v6, #int 1 // #1
+326b9a: 2802                                   |0069: goto 006b // +0002
+326b9c: 1206                                   |006a: const/4 v6, #int 0 // #0
+326b9e: 1607 0100                              |006b: const-wide/16 v7, #int 1 // #1
+326ba2: bb73                                   |006d: add-long/2addr v3, v7
+326ba4: 7030 c5a7 3c04                         |006e: invoke-direct {v12, v3, v4}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.setHead:(J)V // method@a7c5
+326baa: d80a 05ff                              |0071: add-int/lit8 v10, v5, #int -1 // #ff
+326bae: 7020 c6a7 ac00                         |0073: invoke-direct {v12, v10}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.setSize:(I)V // method@a7c6
+326bb4: 3806 4b00                              |0076: if-eqz v6, 00c1 // +004b
+326bb8: 6e10 c8a7 0c00                         |0078: invoke-virtual {v12}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.takeFirstSendOrPeekClosed:()Lkotlinx/coroutines/channels/Send; // method@a7c8
+326bbe: 0c06                                   |007b: move-result-object v6
+326bc0: 3906 0300                              |007c: if-nez v6, 007f // +0003
+326bc4: 2843                                   |007e: goto 00c1 // +0043
+326bc6: 206b aa17                              |007f: instance-of v11, v6, Lkotlinx/coroutines/channels/Closed; // type@17aa
+326bca: 390b 4000                              |0081: if-nez v11, 00c1 // +0040
+326bce: 7110 d293 0600                         |0083: invoke-static {v6}, Lkotlin/jvm/internal/Intrinsics;.checkNotNull:(Ljava/lang/Object;)V // method@93d2
+326bd4: 6e20 56aa 9600                         |0086: invoke-virtual {v6, v9}, Lkotlinx/coroutines/channels/Send;.tryResumeSend:(Lkotlinx/coroutines/internal/LockFreeLinkedListNode$PrepareOp;)Lkotlinx/coroutines/internal/Symbol; // method@aa56
+326bda: 0c0b                                   |0089: move-result-object v11
+326bdc: 380b eeff                              |008a: if-eqz v11, 0078 // -0012
+326be0: 7100 f4a3 0000                         |008c: invoke-static {}, Lkotlinx/coroutines/DebugKt;.getASSERTIONS_ENABLED:()Z // method@a3f4
+326be6: 0a0d                                   |008f: move-result v13
+326be8: 380d 0d00                              |0090: if-eqz v13, 009d // +000d
+326bec: 620d aa3f                              |0092: sget-object v13, Lkotlinx/coroutines/CancellableContinuationImplKt;.RESUME_TOKEN:Lkotlinx/coroutines/internal/Symbol; // field@3faa
+326bf0: 33db 0300                              |0094: if-ne v11, v13, 0097 // +0003
+326bf4: 2807                                   |0096: goto 009d // +0007
+326bf6: 220d 5311                              |0097: new-instance v13, Ljava/lang/AssertionError; // type@1153
+326bfa: 7010 d570 0d00                         |0099: invoke-direct {v13}, Ljava/lang/AssertionError;.<init>:()V // method@70d5
+326c00: 270d                                   |009c: throw v13
+326c02: 54cd b040                              |009d: iget-object v13, v12, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.buffer:[Ljava/lang/Object; // field@40b0
+326c06: 52ce b240                              |009f: iget v14, v12, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.capacity:I // field@40b2
+326c0a: 81e3                                   |00a1: int-to-long v3, v14
+326c0c: 9f03 0103                              |00a2: rem-long v3, v1, v3
+326c10: 843e                                   |00a4: long-to-int v14, v3
+326c12: 6e10 54aa 0600                         |00a5: invoke-virtual {v6}, Lkotlinx/coroutines/channels/Send;.getPollResult:()Ljava/lang/Object; // method@aa54
+326c18: 0c03                                   |00a8: move-result-object v3
+326c1a: 4d03 0d0e                              |00a9: aput-object v3, v13, v14
+326c1e: 7020 c6a7 5c00                         |00ab: invoke-direct {v12, v5}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.setSize:(I)V // method@a7c6
+326c24: bb71                                   |00ae: add-long/2addr v1, v7
+326c26: 7030 c7a7 1c02                         |00af: invoke-direct {v12, v1, v2}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.setTail:(J)V // method@a7c7
+326c2c: 620d 873a                              |00b2: sget-object v13, Lkotlin/Unit;.INSTANCE:Lkotlin/Unit; // field@3a87
+326c30: 7210 4676 0000                         |00b4: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+326c36: 6e10 53aa 0600                         |00b7: invoke-virtual {v6}, Lkotlinx/coroutines/channels/Send;.completeResumeSend:()V // method@aa53
+326c3c: 7010 b4a7 0c00                         |00ba: invoke-direct {v12}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.checkSubOffers:()V // method@a7b4
+326c42: 079d                                   |00bd: move-object v13, v9
+326c44: 07de                                   |00be: move-object v14, v13
+326c46: 2900 41ff                              |00bf: goto/16 0000 // -00bf
+326c4a: 01a5                                   |00c1: move v5, v10
+326c4c: 2895                                   |00c2: goto 0057 // -006b
+326c4e: 7210 4676 0000                         |00c3: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+326c54: 0e00                                   |00c6: return-void
+326c56: 7210 4676 0000                         |00c7: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+326c5c: 270d                                   |00ca: throw v13
+      catches       : 4
+        0x0009 - 0x001b
+          <any> -> 0x0021
+        0x0026 - 0x0033
+          <any> -> 0x0021
+        0x003b - 0x004b
+          <any> -> 0x0021
+        0x0053 - 0x00b4
+          <any> -> 0x0021
+      positions     :
+        0x0000 line=152
+        0x0002 line=389
+        0x0009 line=154
+        0x0010 line=155
+        0x0016 line=156
+        0x001d line=157
+        0x0026 line=160
+        0x002b line=161
+        0x003b line=163
+        0x003f line=164
+        0x0043 line=165
+        0x0047 line=166
+        0x004f line=167
+        0x0053 line=168
+        0x005b line=171
+        0x006e line=174
+        0x0073 line=175
+        0x0078 line=178
+        0x007f line=179
+        0x0083 line=180
+        0x008c line=182
+        0x009d line=184
+        0x00ab line=185
+        0x00af line=186
+        0x00b2 line=194
+        0x00b7 line=197
+        0x00ba line=199
+        0x00c3 line=194
+      locals        :
+        0x0000 - 0x00cb reg=12 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x00cb reg=13 (null) Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;
+        0x0000 - 0x00cb reg=14 (null) Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;
+
+    #15              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'updateHead$default'
+      type          : '(Lkotlinx/coroutines/channels/ArrayBroadcastChannel;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;ILjava/lang/Object;)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 6
+      ins           : 5
+      outs          : 3
+      insns size    : 15 16-bit code units
+326a88:                                        |[326a88] kotlinx.coroutines.channels.ArrayBroadcastChannel.updateHead$default:(Lkotlinx/coroutines/channels/ArrayBroadcastChannel;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;ILjava/lang/Object;)V
+326a98: dd05 0401                              |0000: and-int/lit8 v5, v4, #int 1 // #01
+326a9c: 1200                                   |0002: const/4 v0, #int 0 // #0
+326a9e: 3805 0300                              |0003: if-eqz v5, 0006 // +0003
+326aa2: 0702                                   |0005: move-object v2, v0
+326aa4: dd04 0402                              |0006: and-int/lit8 v4, v4, #int 2 // #02
+326aa8: 3804 0300                              |0008: if-eqz v4, 000b // +0003
+326aac: 0703                                   |000a: move-object v3, v0
+326aae: 7030 c9a7 2103                         |000b: invoke-direct {v1, v2, v3}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.updateHead:(Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;)V // method@a7c9
+326ab4: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x000b line=149
+      locals        :
+        0x0000 - 0x000f reg=1 (null) Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x000f reg=2 (null) Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;
+        0x0000 - 0x000f reg=3 (null) Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;
+        0x0000 - 0x000f reg=4 (null) I
+        0x0000 - 0x000f reg=5 (null) Ljava/lang/Object;
+
+  Virtual methods   -
+    #0              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'cancel'
+      type          : '(Ljava/util/concurrent/CancellationException;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 6 16-bit code units
+3269a8:                                        |[3269a8] kotlinx.coroutines.channels.ArrayBroadcastChannel.cancel:(Ljava/util/concurrent/CancellationException;)V
+3269b8: 1f01 8f11                              |0000: check-cast v1, Ljava/lang/Throwable; // type@118f
+3269bc: 7020 b3a7 1000                         |0002: invoke-direct {v0, v1}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.cancelInternal:(Ljava/lang/Throwable;)Z // method@a7b3
+3269c2: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=90
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x0006 reg=1 (null) Ljava/util/concurrent/CancellationException;
+
+    #1              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'cancel'
+      type          : '(Ljava/lang/Throwable;)Z'
+      access        : 0x1001 (PUBLIC SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 5 16-bit code units
+32650c:                                        |[32650c] kotlinx.coroutines.channels.ArrayBroadcastChannel.cancel:(Ljava/lang/Throwable;)Z
+32651c: 7020 b3a7 1000                         |0000: invoke-direct {v0, v1}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.cancelInternal:(Ljava/lang/Throwable;)Z // method@a7b3
+326522: 0a01                                   |0003: move-result v1
+326524: 0f01                                   |0004: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=87
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x0005 reg=1 (null) Ljava/lang/Throwable;
+
+    #2              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'close'
+      type          : '(Ljava/lang/Throwable;)Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 13 16-bit code units
+326570:                                        |[326570] kotlinx.coroutines.channels.ArrayBroadcastChannel.close:(Ljava/lang/Throwable;)Z
+326580: 6f20 69a7 1000                         |0000: invoke-super {v0, v1}, Lkotlinx/coroutines/channels/AbstractSendChannel;.close:(Ljava/lang/Throwable;)Z // method@a769
+326586: 0a01                                   |0003: move-result v1
+326588: 3901 0400                              |0004: if-nez v1, 0008 // +0004
+32658c: 1201                                   |0006: const/4 v1, #int 0 // #0
+32658e: 0f01                                   |0007: return v1
+326590: 7010 b4a7 0000                         |0008: invoke-direct {v0}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.checkSubOffers:()V // method@a7b4
+326596: 1211                                   |000b: const/4 v1, #int 1 // #1
+326598: 0f01                                   |000c: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=80
+        0x0008 line=81
+      locals        :
+        0x0000 - 0x000d reg=0 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x000d reg=1 (null) Ljava/lang/Throwable;
+
+    #3              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'getBufferDebugString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 39 16-bit code units
+3267e4:                                        |[3267e4] kotlinx.coroutines.channels.ArrayBroadcastChannel.getBufferDebugString:()Ljava/lang/String;
+3267f4: 2200 8811                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1188
+3267f8: 1a01 fd13                              |0002: const-string v1, "(buffer:capacity=" // string@13fd
+3267fc: 7020 4e72 1000                         |0004: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@724e
+326802: 5421 b040                              |0007: iget-object v1, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.buffer:[Ljava/lang/Object; // field@40b0
+326806: 2111                                   |0009: array-length v1, v1
+326808: 6e20 5272 1000                         |000a: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+32680e: 0c00                                   |000d: move-result-object v0
+326810: 1a01 aa15                              |000e: const-string v1, ",size=" // string@15aa
+326814: 6e20 5772 1000                         |0010: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@7257
+32681a: 0c00                                   |0013: move-result-object v0
+32681c: 7010 bda7 0200                         |0014: invoke-direct {v2}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getSize:()I // method@a7bd
+326822: 0a01                                   |0017: move-result v1
+326824: 6e20 5272 1000                         |0018: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@7252
+32682a: 0c00                                   |001b: move-result-object v0
+32682c: 1301 2900                              |001c: const/16 v1, #int 41 // #29
+326830: 6e20 4f72 1000                         |001e: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@724f
+326836: 0c00                                   |0021: move-result-object v0
+326838: 6e10 6b72 0000                         |0022: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@726b
+32683e: 0c00                                   |0025: move-result-object v0
+326840: 1100                                   |0026: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=383
+      locals        :
+        0x0000 - 0x0027 reg=2 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+
+    #4              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'getCapacity'
+      type          : '()I'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+3265d8:                                        |[3265d8] kotlinx.coroutines.channels.ArrayBroadcastChannel.getCapacity:()I
+3265e8: 5210 b240                              |0000: iget v0, v1, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.capacity:I // field@40b2
+3265ec: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=30
+      locals        :
+        0x0000 - 0x0003 reg=1 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+
+    #5              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'isBufferAlwaysFull'
+      type          : '()Z'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+32659c:                                        |[32659c] kotlinx.coroutines.channels.ArrayBroadcastChannel.isBufferAlwaysFull:()Z
+3265ac: 1200                                   |0000: const/4 v0, #int 0 // #0
+3265ae: 0f00                                   |0001: return v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #6              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'isBufferFull'
+      type          : '()Z'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 12 16-bit code units
+3265b0:                                        |[3265b0] kotlinx.coroutines.channels.ArrayBroadcastChannel.isBufferFull:()Z
+3265c0: 7010 bda7 0200                         |0000: invoke-direct {v2}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getSize:()I // method@a7bd
+3265c6: 0a00                                   |0003: move-result v0
+3265c8: 5221 b240                              |0004: iget v1, v2, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.capacity:I // field@40b2
+3265cc: 3410 0400                              |0006: if-lt v0, v1, 000a // +0004
+3265d0: 1210                                   |0008: const/4 v0, #int 1 // #1
+3265d2: 0f00                                   |0009: return v0
+3265d4: 1200                                   |000a: const/4 v0, #int 0 // #0
+3265d6: 0f00                                   |000b: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=72
+      locals        :
+        0x0000 - 0x000c reg=2 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+
+    #7              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'offerInternal'
+      type          : '(Ljava/lang/Object;)Ljava/lang/Object;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 9
+      ins           : 2
+      outs          : 3
+      insns size    : 72 16-bit code units
+326648:                                        |[326648] kotlinx.coroutines.channels.ArrayBroadcastChannel.offerInternal:(Ljava/lang/Object;)Ljava/lang/Object;
+326658: 5470 b140                              |0000: iget-object v0, v7, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.bufferLock:Ljava/util/concurrent/locks/ReentrantLock; // field@40b1
+32665c: 1f00 7212                              |0002: check-cast v0, Ljava/util/concurrent/locks/Lock; // type@1272
+326660: 7210 4576 0000                         |0004: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.lock:()V // method@7645
+326666: 6e10 bba7 0700                         |0007: invoke-virtual {v7}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getClosedForSend:()Lkotlinx/coroutines/channels/Closed; // method@a7bb
+32666c: 0c01                                   |000a: move-result-object v1
+32666e: 3801 0600                              |000b: if-eqz v1, 0011 // +0006
+326672: 7210 4676 0000                         |000d: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+326678: 1101                                   |0010: return-object v1
+32667a: 7010 bda7 0700                         |0011: invoke-direct {v7}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getSize:()I // method@a7bd
+326680: 0a01                                   |0014: move-result v1
+326682: 5272 b240                              |0015: iget v2, v7, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.capacity:I // field@40b2
+326686: 3421 0800                              |0017: if-lt v1, v2, 001f // +0008
+32668a: 6208 9940                              |0019: sget-object v8, Lkotlinx/coroutines/channels/AbstractChannelKt;.OFFER_FAILED:Lkotlinx/coroutines/internal/Symbol; // field@4099
+32668e: 7210 4676 0000                         |001b: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+326694: 1108                                   |001e: return-object v8
+326696: 7010 bfa7 0700                         |001f: invoke-direct {v7}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getTail:()J // method@a7bf
+32669c: 0b02                                   |0022: move-result-wide v2
+32669e: 5474 b040                              |0023: iget-object v4, v7, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.buffer:[Ljava/lang/Object; // field@40b0
+3266a2: 5275 b240                              |0025: iget v5, v7, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.capacity:I // field@40b2
+3266a6: 8155                                   |0027: int-to-long v5, v5
+3266a8: 9f05 0205                              |0028: rem-long v5, v2, v5
+3266ac: 8455                                   |002a: long-to-int v5, v5
+3266ae: 4d08 0405                              |002b: aput-object v8, v4, v5
+3266b2: d801 0101                              |002d: add-int/lit8 v1, v1, #int 1 // #01
+3266b6: 7020 c6a7 1700                         |002f: invoke-direct {v7, v1}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.setSize:(I)V // method@a7c6
+3266bc: 1604 0100                              |0032: const-wide/16 v4, #int 1 // #1
+3266c0: bb42                                   |0034: add-long/2addr v2, v4
+3266c2: 7030 c7a7 2703                         |0035: invoke-direct {v7, v2, v3}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.setTail:(J)V // method@a7c7
+3266c8: 6208 873a                              |0038: sget-object v8, Lkotlin/Unit;.INSTANCE:Lkotlin/Unit; // field@3a87
+3266cc: 7210 4676 0000                         |003a: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+3266d2: 7010 b4a7 0700                         |003d: invoke-direct {v7}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.checkSubOffers:()V // method@a7b4
+3266d8: 6208 9a40                              |0040: sget-object v8, Lkotlinx/coroutines/channels/AbstractChannelKt;.OFFER_SUCCESS:Lkotlinx/coroutines/internal/Symbol; // field@409a
+3266dc: 1108                                   |0042: return-object v8
+3266de: 0d08                                   |0043: move-exception v8
+3266e0: 7210 4676 0000                         |0044: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+3266e6: 2708                                   |0047: throw v8
+      catches       : 3
+        0x0007 - 0x000b
+          <any> -> 0x0043
+        0x0011 - 0x001b
+          <any> -> 0x0043
+        0x001f - 0x003a
+          <any> -> 0x0043
+      positions     :
+        0x0000 line=100
+        0x0002 line=387
+        0x0007 line=102
+        0x0011 line=103
+        0x0015 line=104
+        0x001f line=105
+        0x0023 line=106
+        0x002f line=107
+        0x0035 line=108
+        0x0038 line=109
+        0x003d line=111
+        0x0040 line=112
+        0x0044 line=109
+      locals        :
+        0x0000 - 0x0048 reg=7 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x0048 reg=8 (null) Ljava/lang/Object;
+
+    #8              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'offerSelectInternal'
+      type          : '(Ljava/lang/Object;Lkotlinx/coroutines/selects/SelectInstance;)Ljava/lang/Object;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 9
+      ins           : 3
+      outs          : 3
+      insns size    : 86 16-bit code units
+326704:                                        |[326704] kotlinx.coroutines.channels.ArrayBroadcastChannel.offerSelectInternal:(Ljava/lang/Object;Lkotlinx/coroutines/selects/SelectInstance;)Ljava/lang/Object;
+326714: 5460 b140                              |0000: iget-object v0, v6, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.bufferLock:Ljava/util/concurrent/locks/ReentrantLock; // field@40b1
+326718: 1f00 7212                              |0002: check-cast v0, Ljava/util/concurrent/locks/Lock; // type@1272
+32671c: 7210 4576 0000                         |0004: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.lock:()V // method@7645
+326722: 6e10 bba7 0600                         |0007: invoke-virtual {v6}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getClosedForSend:()Lkotlinx/coroutines/channels/Closed; // method@a7bb
+326728: 0c01                                   |000a: move-result-object v1
+32672a: 3801 0600                              |000b: if-eqz v1, 0011 // +0006
+32672e: 7210 4676 0000                         |000d: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+326734: 1101                                   |0010: return-object v1
+326736: 7010 bda7 0600                         |0011: invoke-direct {v6}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getSize:()I // method@a7bd
+32673c: 0a01                                   |0014: move-result v1
+32673e: 5262 b240                              |0015: iget v2, v6, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.capacity:I // field@40b2
+326742: 3421 0800                              |0017: if-lt v1, v2, 001f // +0008
+326746: 6207 9940                              |0019: sget-object v7, Lkotlinx/coroutines/channels/AbstractChannelKt;.OFFER_FAILED:Lkotlinx/coroutines/internal/Symbol; // field@4099
+32674a: 7210 4676 0000                         |001b: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+326750: 1107                                   |001e: return-object v7
+326752: 7210 e8b3 0800                         |001f: invoke-interface {v8}, Lkotlinx/coroutines/selects/SelectInstance;.trySelect:()Z // method@b3e8
+326758: 0a08                                   |0022: move-result v8
+32675a: 3908 0a00                              |0023: if-nez v8, 002d // +000a
+32675e: 7100 eeb3 0000                         |0025: invoke-static {}, Lkotlinx/coroutines/selects/SelectKt;.getALREADY_SELECTED:()Ljava/lang/Object; // method@b3ee
+326764: 0c07                                   |0028: move-result-object v7
+326766: 7210 4676 0000                         |0029: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+32676c: 1107                                   |002c: return-object v7
+32676e: 7010 bfa7 0600                         |002d: invoke-direct {v6}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.getTail:()J // method@a7bf
+326774: 0b02                                   |0030: move-result-wide v2
+326776: 5468 b040                              |0031: iget-object v8, v6, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.buffer:[Ljava/lang/Object; // field@40b0
+32677a: 5264 b240                              |0033: iget v4, v6, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.capacity:I // field@40b2
+32677e: 8144                                   |0035: int-to-long v4, v4
+326780: 9f04 0204                              |0036: rem-long v4, v2, v4
+326784: 8444                                   |0038: long-to-int v4, v4
+326786: 4d07 0804                              |0039: aput-object v7, v8, v4
+32678a: d801 0101                              |003b: add-int/lit8 v1, v1, #int 1 // #01
+32678e: 7020 c6a7 1600                         |003d: invoke-direct {v6, v1}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.setSize:(I)V // method@a7c6
+326794: 1607 0100                              |0040: const-wide/16 v7, #int 1 // #1
+326798: bb72                                   |0042: add-long/2addr v2, v7
+32679a: 7030 c7a7 2603                         |0043: invoke-direct {v6, v2, v3}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.setTail:(J)V // method@a7c7
+3267a0: 6207 873a                              |0046: sget-object v7, Lkotlin/Unit;.INSTANCE:Lkotlin/Unit; // field@3a87
+3267a4: 7210 4676 0000                         |0048: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+3267aa: 7010 b4a7 0600                         |004b: invoke-direct {v6}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.checkSubOffers:()V // method@a7b4
+3267b0: 6207 9a40                              |004e: sget-object v7, Lkotlinx/coroutines/channels/AbstractChannelKt;.OFFER_SUCCESS:Lkotlinx/coroutines/internal/Symbol; // field@409a
+3267b4: 1107                                   |0050: return-object v7
+3267b6: 0d07                                   |0051: move-exception v7
+3267b8: 7210 4676 0000                         |0052: invoke-interface {v0}, Ljava/util/concurrent/locks/Lock;.unlock:()V // method@7646
+3267be: 2707                                   |0055: throw v7
+      catches       : 4
+        0x0007 - 0x000b
+          <any> -> 0x0051
+        0x0011 - 0x001b
+          <any> -> 0x0051
+        0x001f - 0x0029
+          <any> -> 0x0051
+        0x002d - 0x0048
+          <any> -> 0x0051
+      positions     :
+        0x0000 line=117
+        0x0002 line=388
+        0x0007 line=119
+        0x0011 line=120
+        0x0015 line=121
+        0x001f line=123
+        0x0025 line=124
+        0x002d line=126
+        0x0031 line=127
+        0x003d line=128
+        0x0043 line=129
+        0x0046 line=130
+        0x004b line=132
+        0x004e line=133
+        0x0052 line=130
+      locals        :
+        0x0000 - 0x0056 reg=6 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+        0x0000 - 0x0056 reg=7 (null) Ljava/lang/Object;
+        0x0000 - 0x0056 reg=8 (null) Lkotlinx/coroutines/selects/SelectInstance;
+
+    #9              : (in Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)
+      name          : 'openSubscription'
+      type          : '()Lkotlinx/coroutines/channels/ReceiveChannel;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 5
+      insns size    : 13 16-bit code units
+326844:                                        |[326844] kotlinx.coroutines.channels.ArrayBroadcastChannel.openSubscription:()Lkotlinx/coroutines/channels/ReceiveChannel;
+326854: 2200 6117                              |0000: new-instance v0, Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber; // type@1761
+326858: 7020 9ea7 3000                         |0002: invoke-direct {v0, v3}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;.<init>:(Lkotlinx/coroutines/channels/ArrayBroadcastChannel;)V // method@a79e
+32685e: 1201                                   |0005: const/4 v1, #int 0 // #0
+326860: 1222                                   |0006: const/4 v2, #int 2 // #2
+326862: 7151 caa7 0321                         |0007: invoke-static {v3, v0, v1, v2, v1}, Lkotlinx/coroutines/channels/ArrayBroadcastChannel;.updateHead$default:(Lkotlinx/coroutines/channels/ArrayBroadcastChannel;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;Lkotlinx/coroutines/channels/ArrayBroadcastChannel$Subscriber;ILjava/lang/Object;)V // method@a7ca
+326868: 1f00 c317                              |000a: check-cast v0, Lkotlinx/coroutines/channels/ReceiveChannel; // type@17c3
+32686c: 1100                                   |000c: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=75
+        0x0007 line=76
+        0x000a line=75
+      locals        :
+        0x0000 - 0x000d reg=3 this Lkotlinx/coroutines/channels/ArrayBroadcastChannel;
+
+  source_file_idx   : 7224 (ArrayBroadcastChannel.kt)
+

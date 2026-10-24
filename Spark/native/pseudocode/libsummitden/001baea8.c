@@ -1,0 +1,15 @@
+// Ghidra pseudocode. Not original C/C++ source.
+// Program: libsummitden.so
+// Executable SHA256: b85ed734818451c37b81675640c83cc17609fd83ad5e4b1b14a7c18f7d6e0fa0
+// Entry: 001baea8; body: [[001baea8, 001baee3]]
+
+uint FUN_001baea8(void)
+
+{
+  uint uVar1;
+  
+  uVar1 = (*(code *)(&PTR_FUN_002026b0)[(long)DAT_00202f98 ^ 0x1ffffffff28caaed])();
+  return (uVar1 ^ 0xffffffff) & 1;
+}
+
+

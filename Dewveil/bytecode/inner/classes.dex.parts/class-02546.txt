@@ -1,0 +1,386 @@
+Class #2546            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/core/io/BigDecimalParser;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/core/io/BigDecimalParser;)
+      name          : 'chars'
+      type          : '[C'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/core/io/BigDecimalParser;)
+      name          : '<init>'
+      type          : '([C)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 6 16-bit code units
+5c3728:                                        |[5c3728] com.fasterxml.jackson.core.io.BigDecimalParser.<init>:([C)V
+5c3738: 7010 c8d1 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@d1c8
+5c373e: 5b01 d945                              |0003: iput-object v1, v0, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.chars:[C // field@45d9
+5c3742: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=26
+        0x0003 line=27
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/fasterxml/jackson/core/io/BigDecimalParser;
+        0x0000 - 0x0006 reg=1 (null) [C
+
+    #1              : (in Lcom/fasterxml/jackson/core/io/BigDecimalParser;)
+      name          : 'adjustScale'
+      type          : '(IJ)I'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 8
+      ins           : 4
+      outs          : 3
+      insns size    : 59 16-bit code units
+5c3744:                                        |[5c3744] com.fasterxml.jackson.core.io.BigDecimalParser.adjustScale:(IJ)I
+5c3754: 8150                                   |0000: int-to-long v0, v5
+5c3756: bc60                                   |0001: sub-long/2addr v0, v6
+5c3758: 1702 ffff ff7f                         |0002: const-wide/32 v2, #float nan // #7fffffff
+5c375e: 3104 0002                              |0005: cmp-long v4, v0, v2
+5c3762: 3c04 0b00                              |0007: if-gtz v4, 0012 // +000b
+5c3766: 1702 0000 0080                         |0009: const-wide/32 v2, #float -0 // #80000000
+5c376c: 3104 0002                              |000c: cmp-long v4, v0, v2
+5c3770: 3a04 0400                              |000e: if-ltz v4, 0012 // +0004
+5c3774: 8404                                   |0010: long-to-int v4, v0
+5c3776: 0f04                                   |0011: return v4
+5c3778: 2204 8a1a                              |0012: new-instance v4, Ljava/lang/NumberFormatException; // type@1a8a
+5c377c: 2202 991a                              |0014: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+5c3780: 1a03 bb61                              |0016: const-string v3, "Scale out of range: " // string@61bb
+5c3784: 7020 3cd2 3200                         |0018: invoke-direct {v2, v3}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5c378a: 6e30 41d2 0201                         |001b: invoke-virtual {v2, v0, v1}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+5c3790: 0c00                                   |001e: move-result-object v0
+5c3792: 1a01 f704                              |001f: const-string v1, " while adjusting scale " // string@04f7
+5c3796: 6e20 45d2 1000                         |0021: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c379c: 0c00                                   |0024: move-result-object v0
+5c379e: 6e20 40d2 5000                         |0025: invoke-virtual {v0, v5}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+5c37a4: 0c05                                   |0028: move-result-object v5
+5c37a6: 1a00 d104                              |0029: const-string v0, " to exponent " // string@04d1
+5c37aa: 6e20 45d2 0500                         |002b: invoke-virtual {v5, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c37b0: 0c05                                   |002e: move-result-object v5
+5c37b2: 6e30 41d2 6507                         |002f: invoke-virtual {v5, v6, v7}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+5c37b8: 0c05                                   |0032: move-result-object v5
+5c37ba: 6e10 58d2 0500                         |0033: invoke-virtual {v5}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5c37c0: 0c05                                   |0036: move-result-object v5
+5c37c2: 7020 c6d1 5400                         |0037: invoke-direct {v4, v5}, Ljava/lang/NumberFormatException;.<init>:(Ljava/lang/String;)V // method@d1c6
+5c37c8: 2704                                   |003a: throw v4
+      catches       : (none)
+      positions     :
+        0x0012 line=160
+      locals        :
+        0x0000 - 0x003b reg=4 this Lcom/fasterxml/jackson/core/io/BigDecimalParser;
+        0x0000 - 0x003b reg=5 (null) I
+        0x0000 - 0x003b reg=6 (null) J
+
+    #2              : (in Lcom/fasterxml/jackson/core/io/BigDecimalParser;)
+      name          : 'parse'
+      type          : '(Ljava/lang/String;)Ljava/math/BigDecimal;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+5c37cc:                                        |[5c37cc] com.fasterxml.jackson.core.io.BigDecimalParser.parse:(Ljava/lang/String;)Ljava/math/BigDecimal;
+5c37dc: 6e10 25d2 0000                         |0000: invoke-virtual {v0}, Ljava/lang/String;.toCharArray:()[C // method@d225
+5c37e2: 0c00                                   |0003: move-result-object v0
+5c37e4: 7110 6065 0000                         |0004: invoke-static {v0}, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.parse:([C)Ljava/math/BigDecimal; // method@6560
+5c37ea: 0c00                                   |0007: move-result-object v0
+5c37ec: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=31
+      locals        :
+        0x0000 - 0x0009 reg=0 (null) Ljava/lang/String;
+
+    #3              : (in Lcom/fasterxml/jackson/core/io/BigDecimalParser;)
+      name          : 'parse'
+      type          : '([C)Ljava/math/BigDecimal;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 68 16-bit code units
+5c37f0:                                        |[5c37f0] com.fasterxml.jackson.core.io.BigDecimalParser.parse:([C)Ljava/math/BigDecimal;
+5c3800: 2140                                   |0000: array-length v0, v4
+5c3802: 1301 f401                              |0001: const/16 v1, #int 500 // #1f4
+5c3806: 3510 0800                              |0003: if-ge v0, v1, 000b // +0008
+5c380a: 2200 c11a                              |0005: new-instance v0, Ljava/math/BigDecimal; // type@1ac1
+5c380e: 7020 fdd2 4000                         |0007: invoke-direct {v0, v4}, Ljava/math/BigDecimal;.<init>:([C)V // method@d2fd
+5c3814: 1100                                   |000a: return-object v0
+5c3816: 2201 6b0c                              |000b: new-instance v1, Lcom/fasterxml/jackson/core/io/BigDecimalParser; // type@0c6b
+5c381a: 7020 5d65 4100                         |000d: invoke-direct {v1, v4}, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.<init>:([C)V // method@655d
+5c3820: db00 000a                              |0010: div-int/lit8 v0, v0, #int 10 // #0a
+5c3824: 7020 6265 0100                         |0012: invoke-direct {v1, v0}, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.parseBigDecimal:(I)Ljava/math/BigDecimal; // method@6562
+5c382a: 0c04                                   |0015: move-result-object v4
+5c382c: 1104                                   |0016: return-object v4
+5c382e: 0d00                                   |0017: move-exception v0
+5c3830: 6e10 c7d1 0000                         |0018: invoke-virtual {v0}, Ljava/lang/NumberFormatException;.getMessage:()Ljava/lang/String; // method@d1c7
+5c3836: 0c00                                   |001b: move-result-object v0
+5c3838: 3900 0400                              |001c: if-nez v0, 0020 // +0004
+5c383c: 1a00 b958                              |001e: const-string v0, "Not a valid number representation" // string@58b9
+5c3840: 2201 8a1a                              |0020: new-instance v1, Ljava/lang/NumberFormatException; // type@1a8a
+5c3844: 2202 991a                              |0022: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+5c3848: 1a03 296e                              |0024: const-string v3, "Value \"" // string@6e29
+5c384c: 7020 3cd2 3200                         |0026: invoke-direct {v2, v3}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5c3852: 2203 971a                              |0029: new-instance v3, Ljava/lang/String; // type@1a97
+5c3856: 7020 f4d1 4300                         |002b: invoke-direct {v3, v4}, Ljava/lang/String;.<init>:([C)V // method@d1f4
+5c385c: 6e20 45d2 3200                         |002e: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c3862: 0c04                                   |0031: move-result-object v4
+5c3864: 1a02 1005                              |0032: const-string v2, "\" can not be represented as `java.math.BigDecimal`, reason: " // string@0510
+5c3868: 6e20 45d2 2400                         |0034: invoke-virtual {v4, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c386e: 0c04                                   |0037: move-result-object v4
+5c3870: 6e20 45d2 0400                         |0038: invoke-virtual {v4, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c3876: 0c04                                   |003b: move-result-object v4
+5c3878: 6e10 58d2 0400                         |003c: invoke-virtual {v4}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5c387e: 0c04                                   |003f: move-result-object v4
+5c3880: 7020 c6d1 4100                         |0040: invoke-direct {v1, v4}, Ljava/lang/NumberFormatException;.<init>:(Ljava/lang/String;)V // method@d1c6
+5c3886: 2701                                   |0043: throw v1
+      catches       : 1
+        0x0005 - 0x0016
+          Ljava/lang/NumberFormatException; -> 0x0017
+      positions     :
+        0x0000 line=42
+        0x0005 line=45
+        0x000b line=47
+        0x0018 line=49
+        0x001e line=52
+        0x0020 line=54
+      locals        :
+        0x0000 - 0x0044 reg=4 (null) [C
+
+    #4              : (in Lcom/fasterxml/jackson/core/io/BigDecimalParser;)
+      name          : 'parse'
+      type          : '([CII)Ljava/math/BigDecimal;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 4
+      ins           : 3
+      outs          : 3
+      insns size    : 15 16-bit code units
+5c3898:                                        |[5c3898] com.fasterxml.jackson.core.io.BigDecimalParser.parse:([CII)Ljava/math/BigDecimal;
+5c38a8: 3c02 0500                              |0000: if-gtz v2, 0005 // +0005
+5c38ac: 2110                                   |0002: array-length v0, v1
+5c38ae: 3203 0700                              |0003: if-eq v3, v0, 000a // +0007
+5c38b2: b023                                   |0005: add-int/2addr v3, v2
+5c38b4: 7130 cfd4 2103                         |0006: invoke-static {v1, v2, v3}, Ljava/util/Arrays;.copyOfRange:([CII)[C // method@d4cf
+5c38ba: 0c01                                   |0009: move-result-object v1
+5c38bc: 7110 6065 0100                         |000a: invoke-static {v1}, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.parse:([C)Ljava/math/BigDecimal; // method@6560
+5c38c2: 0c01                                   |000d: move-result-object v1
+5c38c4: 1101                                   |000e: return-object v1
+      catches       : (none)
+      positions     :
+        0x0002 line=35
+        0x0006 line=36
+        0x000a line=38
+      locals        :
+        0x0000 - 0x000f reg=1 (null) [C
+        0x0000 - 0x000f reg=2 (null) I
+        0x0000 - 0x000f reg=3 (null) I
+
+    #5              : (in Lcom/fasterxml/jackson/core/io/BigDecimalParser;)
+      name          : 'parseBigDecimal'
+      type          : '(I)Ljava/math/BigDecimal;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 18
+      ins           : 2
+      outs          : 5
+      insns size    : 193 16-bit code units
+5c38c8:                                        |[5c38c8] com.fasterxml.jackson.core.io.BigDecimalParser.parseBigDecimal:(I)Ljava/math/BigDecimal;
+5c38d8: 0800 1000                              |0000: move-object/from16 v0, v16
+5c38dc: 0201 1100                              |0002: move/from16 v1, v17
+5c38e0: 5402 d945                              |0004: iget-object v2, v0, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.chars:[C // field@45d9
+5c38e4: 2122                                   |0006: array-length v2, v2
+5c38e6: 12f4                                   |0007: const/4 v4, #int -1 // #ff
+5c38e8: 0146                                   |0008: move v6, v4
+5c38ea: 0168                                   |0009: move v8, v6
+5c38ec: 1205                                   |000a: const/4 v5, #int 0 // #0
+5c38ee: 1207                                   |000b: const/4 v7, #int 0 // #0
+5c38f0: 1209                                   |000c: const/4 v9, #int 0 // #0
+5c38f2: 120a                                   |000d: const/4 v10, #int 0 // #0
+5c38f4: 120b                                   |000e: const/4 v11, #int 0 // #0
+5c38f6: 120c                                   |000f: const/4 v12, #int 0 // #0
+5c38f8: 3525 6f00                              |0010: if-ge v5, v2, 007f // +006f
+5c38fc: 540e d945                              |0012: iget-object v14, v0, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.chars:[C // field@45d9
+5c3900: 490e 0e05                              |0014: aget-char v14, v14, v5
+5c3904: 130f 2b00                              |0016: const/16 v15, #int 43 // #2b
+5c3908: 1a03 0657                              |0018: const-string v3, "Multiple signs in exponent" // string@5706
+5c390c: 1a0d 0757                              |001a: const-string v13, "Multiple signs in number" // string@5707
+5c3910: 32fe 4900                              |001c: if-eq v14, v15, 0065 // +0049
+5c3914: 130f 4500                              |001e: const/16 v15, #int 69 // #45
+5c3918: 32fe 3900                              |0020: if-eq v14, v15, 0059 // +0039
+5c391c: 130f 6500                              |0022: const/16 v15, #int 101 // #65
+5c3920: 32fe 3500                              |0024: if-eq v14, v15, 0059 // +0035
+5c3924: 130f 2d00                              |0026: const/16 v15, #int 45 // #2d
+5c3928: 32fe 1900                              |0028: if-eq v14, v15, 0041 // +0019
+5c392c: 1303 2e00                              |002a: const/16 v3, #int 46 // #2e
+5c3930: 323e 0900                              |002c: if-eq v14, v3, 0035 // +0009
+5c3934: 3a08 4800                              |002e: if-ltz v8, 0076 // +0048
+5c3938: 3346 4600                              |0030: if-ne v6, v4, 0076 // +0046
+5c393c: d807 0701                              |0032: add-int/lit8 v7, v7, #int 1 // #01
+5c3940: 2842                                   |0034: goto 0076 // +0042
+5c3942: 3b08 0400                              |0035: if-gez v8, 0039 // +0004
+5c3946: 0158                                   |0037: move v8, v5
+5c3948: 283e                                   |0038: goto 0076 // +003e
+5c394a: 2200 8a1a                              |0039: new-instance v0, Ljava/lang/NumberFormatException; // type@1a8a
+5c394e: 1a01 0257                              |003b: const-string v1, "Multiple decimal points" // string@5702
+5c3952: 7020 c6d1 1000                         |003d: invoke-direct {v0, v1}, Ljava/lang/NumberFormatException;.<init>:(Ljava/lang/String;)V // method@d1c6
+5c3958: 2700                                   |0040: throw v0
+5c395a: 3a06 0b00                              |0041: if-ltz v6, 004c // +000b
+5c395e: 390a 0300                              |0043: if-nez v10, 0046 // +0003
+5c3962: 2824                                   |0045: goto 0069 // +0024
+5c3964: 2200 8a1a                              |0046: new-instance v0, Ljava/lang/NumberFormatException; // type@1a8a
+5c3968: 7020 c6d1 3000                         |0048: invoke-direct {v0, v3}, Ljava/lang/NumberFormatException;.<init>:(Ljava/lang/String;)V // method@d1c6
+5c396e: 2700                                   |004b: throw v0
+5c3970: 3909 0700                              |004c: if-nez v9, 0053 // +0007
+5c3974: d80b 0501                              |004e: add-int/lit8 v11, v5, #int 1 // #01
+5c3978: 1219                                   |0050: const/4 v9, #int 1 // #1
+5c397a: 121c                                   |0051: const/4 v12, #int 1 // #1
+5c397c: 2824                                   |0052: goto 0076 // +0024
+5c397e: 2200 8a1a                              |0053: new-instance v0, Ljava/lang/NumberFormatException; // type@1a8a
+5c3982: 7020 c6d1 d000                         |0055: invoke-direct {v0, v13}, Ljava/lang/NumberFormatException;.<init>:(Ljava/lang/String;)V // method@d1c6
+5c3988: 2700                                   |0058: throw v0
+5c398a: 3b06 0400                              |0059: if-gez v6, 005d // +0004
+5c398e: 0156                                   |005b: move v6, v5
+5c3990: 281a                                   |005c: goto 0076 // +001a
+5c3992: 2200 8a1a                              |005d: new-instance v0, Ljava/lang/NumberFormatException; // type@1a8a
+5c3996: 1a01 0457                              |005f: const-string v1, "Multiple exponent markers" // string@5704
+5c399a: 7020 c6d1 1000                         |0061: invoke-direct {v0, v1}, Ljava/lang/NumberFormatException;.<init>:(Ljava/lang/String;)V // method@d1c6
+5c39a0: 2700                                   |0064: throw v0
+5c39a2: 3a06 0c00                              |0065: if-ltz v6, 0071 // +000c
+5c39a6: 390a 0400                              |0067: if-nez v10, 006b // +0004
+5c39aa: 121a                                   |0069: const/4 v10, #int 1 // #1
+5c39ac: 280c                                   |006a: goto 0076 // +000c
+5c39ae: 2200 8a1a                              |006b: new-instance v0, Ljava/lang/NumberFormatException; // type@1a8a
+5c39b2: 7020 c6d1 3000                         |006d: invoke-direct {v0, v3}, Ljava/lang/NumberFormatException;.<init>:(Ljava/lang/String;)V // method@d1c6
+5c39b8: 2700                                   |0070: throw v0
+5c39ba: 3909 0800                              |0071: if-nez v9, 0079 // +0008
+5c39be: d80b 0501                              |0073: add-int/lit8 v11, v5, #int 1 // #01
+5c39c2: 1219                                   |0075: const/4 v9, #int 1 // #1
+5c39c4: d805 0501                              |0076: add-int/lit8 v5, v5, #int 1 // #01
+5c39c8: 2898                                   |0078: goto 0010 // -0068
+5c39ca: 2200 8a1a                              |0079: new-instance v0, Ljava/lang/NumberFormatException; // type@1a8a
+5c39ce: 7020 c6d1 d000                         |007b: invoke-direct {v0, v13}, Ljava/lang/NumberFormatException;.<init>:(Ljava/lang/String;)V // method@d1c6
+5c39d4: 2700                                   |007e: throw v0
+5c39d6: 3a06 1900                              |007f: if-ltz v6, 0098 // +0019
+5c39da: 2203 971a                              |0081: new-instance v3, Ljava/lang/String; // type@1a97
+5c39de: 5404 d945                              |0083: iget-object v4, v0, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.chars:[C // field@45d9
+5c39e2: d805 0601                              |0085: add-int/lit8 v5, v6, #int 1 // #01
+5c39e6: b162                                   |0087: sub-int/2addr v2, v6
+5c39e8: 1219                                   |0088: const/4 v9, #int 1 // #1
+5c39ea: b192                                   |0089: sub-int/2addr v2, v9
+5c39ec: 7040 f5d1 4325                         |008a: invoke-direct {v3, v4, v5, v2}, Ljava/lang/String;.<init>:([CII)V // method@d1f5
+5c39f2: 7110 60d1 0300                         |008d: invoke-static {v3}, Ljava/lang/Integer;.parseInt:(Ljava/lang/String;)I // method@d160
+5c39f8: 0a03                                   |0090: move-result v3
+5c39fa: 8134                                   |0091: int-to-long v4, v3
+5c39fc: 7040 5e65 7054                         |0092: invoke-direct {v0, v7, v4, v5}, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.adjustScale:(IJ)I // method@655e
+5c3a02: 0a07                                   |0095: move-result v7
+5c3a04: 0162                                   |0096: move v2, v6
+5c3a06: 2803                                   |0097: goto 009a // +0003
+5c3a08: 1219                                   |0098: const/4 v9, #int 1 // #1
+5c3a0a: 1203                                   |0099: const/4 v3, #int 0 // #0
+5c3a0c: 3a08 1500                              |009a: if-ltz v8, 00af // +0015
+5c3a10: 9104 080b                              |009c: sub-int v4, v8, v11
+5c3a14: 7051 6365 b034                         |009e: invoke-direct {v0, v11, v4, v3, v1}, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.toBigDecimalRec:(IIII)Ljava/math/BigDecimal; // method@6563
+5c3a1a: 0c04                                   |00a1: move-result-object v4
+5c3a1c: b182                                   |00a2: sub-int/2addr v2, v8
+5c3a1e: b192                                   |00a3: sub-int/2addr v2, v9
+5c3a20: b098                                   |00a4: add-int/2addr v8, v9
+5c3a22: b123                                   |00a5: sub-int/2addr v3, v2
+5c3a24: 7051 6365 8032                         |00a6: invoke-direct {v0, v8, v2, v3, v1}, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.toBigDecimalRec:(IIII)Ljava/math/BigDecimal; // method@6563
+5c3a2a: 0c00                                   |00a9: move-result-object v0
+5c3a2c: 6e20 ffd2 0400                         |00aa: invoke-virtual {v4, v0}, Ljava/math/BigDecimal;.add:(Ljava/math/BigDecimal;)Ljava/math/BigDecimal; // method@d2ff
+5c3a32: 0c00                                   |00ad: move-result-object v0
+5c3a34: 2806                                   |00ae: goto 00b4 // +0006
+5c3a36: b1b2                                   |00af: sub-int/2addr v2, v11
+5c3a38: 7051 6365 b032                         |00b0: invoke-direct {v0, v11, v2, v3, v1}, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.toBigDecimalRec:(IIII)Ljava/math/BigDecimal; // method@6563
+5c3a3e: 0c00                                   |00b3: move-result-object v0
+5c3a40: 3807 0600                              |00b4: if-eqz v7, 00ba // +0006
+5c3a44: 6e20 0cd3 7000                         |00b6: invoke-virtual {v0, v7}, Ljava/math/BigDecimal;.setScale:(I)Ljava/math/BigDecimal; // method@d30c
+5c3a4a: 0c00                                   |00b9: move-result-object v0
+5c3a4c: 380c 0600                              |00ba: if-eqz v12, 00c0 // +0006
+5c3a50: 6e10 08d3 0000                         |00bc: invoke-virtual {v0}, Ljava/math/BigDecimal;.negate:()Ljava/math/BigDecimal; // method@d308
+5c3a56: 0c00                                   |00bf: move-result-object v0
+5c3a58: 1100                                   |00c0: return-object v0
+      catches       : (none)
+      positions     :
+        0x0004 line=67
+        0x0012 line=70
+        0x0018 line=71
+        0x0039 line=110
+        0x0046 line=89
+        0x0053 line=94
+        0x005d line=104
+        0x006b line=75
+        0x0079 line=80
+        0x0081 line=125
+        0x008d line=126
+        0x0092 line=127
+        0x009e line=136
+        0x00a6 line=139
+        0x00aa line=141
+        0x00b0 line=143
+        0x00b6 line=147
+        0x00bc line=151
+      locals        :
+        0x0000 - 0x00c1 reg=16 this Lcom/fasterxml/jackson/core/io/BigDecimalParser;
+        0x0000 - 0x00c1 reg=17 (null) I
+
+    #6              : (in Lcom/fasterxml/jackson/core/io/BigDecimalParser;)
+      name          : 'toBigDecimalRec'
+      type          : '(IIII)Ljava/math/BigDecimal;'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 7
+      ins           : 5
+      outs          : 5
+      insns size    : 39 16-bit code units
+5c3a5c:                                        |[5c3a5c] com.fasterxml.jackson.core.io.BigDecimalParser.toBigDecimalRec:(IIII)Ljava/math/BigDecimal;
+5c3a6c: 3764 1600                              |0000: if-le v4, v6, 0016 // +0016
+5c3a70: db00 0402                              |0002: div-int/lit8 v0, v4, #int 2 // #02
+5c3a74: 9001 0504                              |0004: add-int v1, v5, v4
+5c3a78: b101                                   |0006: sub-int/2addr v1, v0
+5c3a7a: 7056 6365 3210                         |0007: invoke-direct {v2, v3, v0, v1, v6}, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.toBigDecimalRec:(IIII)Ljava/math/BigDecimal; // method@6563
+5c3a80: 0c01                                   |000a: move-result-object v1
+5c3a82: b003                                   |000b: add-int/2addr v3, v0
+5c3a84: b104                                   |000c: sub-int/2addr v4, v0
+5c3a86: 7056 6365 3254                         |000d: invoke-direct {v2, v3, v4, v5, v6}, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.toBigDecimalRec:(IIII)Ljava/math/BigDecimal; // method@6563
+5c3a8c: 0c02                                   |0010: move-result-object v2
+5c3a8e: 6e20 ffd2 2100                         |0011: invoke-virtual {v1, v2}, Ljava/math/BigDecimal;.add:(Ljava/math/BigDecimal;)Ljava/math/BigDecimal; // method@d2ff
+5c3a94: 0c02                                   |0014: move-result-object v2
+5c3a96: 1102                                   |0015: return-object v2
+5c3a98: 3904 0500                              |0016: if-nez v4, 001b // +0005
+5c3a9c: 6202 2d8a                              |0018: sget-object v2, Ljava/math/BigDecimal;.ZERO:Ljava/math/BigDecimal; // field@8a2d
+5c3aa0: 280c                                   |001a: goto 0026 // +000c
+5c3aa2: 2206 c11a                              |001b: new-instance v6, Ljava/math/BigDecimal; // type@1ac1
+5c3aa6: 5422 d945                              |001d: iget-object v2, v2, Lcom/fasterxml/jackson/core/io/BigDecimalParser;.chars:[C // field@45d9
+5c3aaa: 7040 fed2 2643                         |001f: invoke-direct {v6, v2, v3, v4}, Ljava/math/BigDecimal;.<init>:([CII)V // method@d2fe
+5c3ab0: 6e20 06d3 5600                         |0022: invoke-virtual {v6, v5}, Ljava/math/BigDecimal;.movePointRight:(I)Ljava/math/BigDecimal; // method@d306
+5c3ab6: 0c02                                   |0025: move-result-object v2
+5c3ab8: 1102                                   |0026: return-object v2
+      catches       : (none)
+      positions     :
+        0x0002 line=169
+        0x0007 line=170
+        0x000d line=171
+        0x0011 line=173
+        0x0018 line=176
+      locals        :
+        0x0000 - 0x0027 reg=2 this Lcom/fasterxml/jackson/core/io/BigDecimalParser;
+        0x0000 - 0x0027 reg=3 (null) I
+        0x0000 - 0x0027 reg=4 (null) I
+        0x0000 - 0x0027 reg=5 (null) I
+        0x0000 - 0x0027 reg=6 (null) I
+
+  Virtual methods   -
+  source_file_idx   : 6427 (BigDecimalParser.java)
+

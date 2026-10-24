@@ -1,0 +1,382 @@
+Class #1646            -
+  Class descriptor  : 'Landroidx/core/view/VelocityTrackerCompat;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+  Static fields     -
+    #0              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'sFallbackTrackers'
+      type          : 'Ljava/util/Map;'
+      access        : 0x000a (PRIVATE STATIC)
+  Instance fields   -
+  Direct methods    -
+    #0              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 12 16-bit code units
+18f034:                                        |[18f034] androidx.core.view.VelocityTrackerCompat.<clinit>:()V
+18f044: 2200 4812                              |0000: new-instance v0, Ljava/util/WeakHashMap; // type@1248
+18f048: 7010 9e75 0000                         |0002: invoke-direct {v0}, Ljava/util/WeakHashMap;.<init>:()V // method@759e
+18f04e: 7110 c174 0000                         |0005: invoke-static {v0}, Ljava/util/Collections;.synchronizedMap:(Ljava/util/Map;)Ljava/util/Map; // method@74c1
+18f054: 0c00                                   |0008: move-result-object v0
+18f056: 6900 da18                              |0009: sput-object v0, Landroidx/core/view/VelocityTrackerCompat;.sFallbackTrackers:Ljava/util/Map; // field@18da
+18f05a: 0e00                                   |000b: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=78
+        0x0005 line=79
+      locals        :
+
+    #1              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : '<init>'
+      type          : '()V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+18f05c:                                        |[18f05c] androidx.core.view.VelocityTrackerCompat.<init>:()V
+18f06c: 7010 df71 0000                         |0000: invoke-direct {v0}, Ljava/lang/Object;.<init>:()V // method@71df
+18f072: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=325
+      locals        :
+        0x0000 - 0x0004 reg=0 this Landroidx/core/view/VelocityTrackerCompat;
+
+    #2              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'addMovement'
+      type          : '(Landroid/view/VelocityTracker;Landroid/view/MotionEvent;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 3
+      insns size    : 48 16-bit code units
+18f074:                                        |[18f074] androidx.core.view.VelocityTrackerCompat.addMovement:(Landroid/view/VelocityTracker;Landroid/view/MotionEvent;)V
+18f084: 6e20 610a 3200                         |0000: invoke-virtual {v2, v3}, Landroid/view/VelocityTracker;.addMovement:(Landroid/view/MotionEvent;)V // method@0a61
+18f08a: 6000 d600                              |0003: sget v0, Landroid/os/Build$VERSION;.SDK_INT:I // field@00d6
+18f08e: 1301 2200                              |0005: const/16 v1, #int 34 // #22
+18f092: 3410 0300                              |0007: if-lt v0, v1, 000a // +0003
+18f096: 2826                                   |0009: goto 002f // +0026
+18f098: 6e10 470a 0300                         |000a: invoke-virtual {v3}, Landroid/view/MotionEvent;.getSource:()I // method@0a47
+18f09e: 0a00                                   |000d: move-result v0
+18f0a0: 1501 4000                              |000e: const/high16 v1, #int 4194304 // #40
+18f0a4: 3310 1f00                              |0010: if-ne v0, v1, 002f // +001f
+18f0a8: 6200 da18                              |0012: sget-object v0, Landroidx/core/view/VelocityTrackerCompat;.sFallbackTrackers:Ljava/util/Map; // field@18da
+18f0ac: 7220 3a75 2000                         |0014: invoke-interface {v0, v2}, Ljava/util/Map;.containsKey:(Ljava/lang/Object;)Z // method@753a
+18f0b2: 0a00                                   |0017: move-result v0
+18f0b4: 3900 0c00                              |0018: if-nez v0, 0024 // +000c
+18f0b8: 6200 da18                              |001a: sget-object v0, Landroidx/core/view/VelocityTrackerCompat;.sFallbackTrackers:Ljava/util/Map; // field@18da
+18f0bc: 2201 cf08                              |001c: new-instance v1, Landroidx/core/view/VelocityTrackerFallback; // type@08cf
+18f0c0: 7010 573d 0100                         |001e: invoke-direct {v1}, Landroidx/core/view/VelocityTrackerFallback;.<init>:()V // method@3d57
+18f0c6: 7230 4175 2001                         |0021: invoke-interface {v0, v2, v1}, Ljava/util/Map;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@7541
+18f0cc: 6200 da18                              |0024: sget-object v0, Landroidx/core/view/VelocityTrackerCompat;.sFallbackTrackers:Ljava/util/Map; // field@18da
+18f0d0: 7220 3d75 2000                         |0026: invoke-interface {v0, v2}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@753d
+18f0d6: 0c02                                   |0029: move-result-object v2
+18f0d8: 1f02 cf08                              |002a: check-cast v2, Landroidx/core/view/VelocityTrackerFallback; // type@08cf
+18f0dc: 6e20 583d 3200                         |002c: invoke-virtual {v2, v3}, Landroidx/core/view/VelocityTrackerFallback;.addMovement:(Landroid/view/MotionEvent;)V // method@3d58
+18f0e2: 0e00                                   |002f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=278
+        0x0003 line=279
+        0x000a line=284
+        0x0012 line=287
+        0x001a line=288
+        0x0024 line=290
+      locals        :
+        0x0000 - 0x0030 reg=2 (null) Landroid/view/VelocityTracker;
+        0x0000 - 0x0030 reg=3 (null) Landroid/view/MotionEvent;
+
+    #3              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'clear'
+      type          : '(Landroid/view/VelocityTracker;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+18f0e4:                                        |[18f0e4] androidx.core.view.VelocityTrackerCompat.clear:(Landroid/view/VelocityTracker;)V
+18f0f4: 6e10 620a 0000                         |0000: invoke-virtual {v0}, Landroid/view/VelocityTracker;.clear:()V // method@0a62
+18f0fa: 7110 563d 0000                         |0003: invoke-static {v0}, Landroidx/core/view/VelocityTrackerCompat;.removeFallbackForTracker:(Landroid/view/VelocityTracker;)V // method@3d56
+18f100: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=211
+        0x0003 line=212
+      locals        :
+        0x0000 - 0x0007 reg=0 (null) Landroid/view/VelocityTracker;
+
+    #4              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'computeCurrentVelocity'
+      type          : '(Landroid/view/VelocityTracker;I)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 3
+      insns size    : 7 16-bit code units
+18f104:                                        |[18f104] androidx.core.view.VelocityTrackerCompat.computeCurrentVelocity:(Landroid/view/VelocityTracker;I)V
+18f114: 1400 ffff 7f7f                         |0000: const v0, #float 3.40282e+38 // #7f7fffff
+18f11a: 7130 4e3d 2100                         |0003: invoke-static {v1, v2, v0}, Landroidx/core/view/VelocityTrackerCompat;.computeCurrentVelocity:(Landroid/view/VelocityTracker;IF)V // method@3d4e
+18f120: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0003 line=262
+      locals        :
+        0x0000 - 0x0007 reg=1 (null) Landroid/view/VelocityTracker;
+        0x0000 - 0x0007 reg=2 (null) I
+
+    #5              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'computeCurrentVelocity'
+      type          : '(Landroid/view/VelocityTracker;IF)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 13 16-bit code units
+18f124:                                        |[18f124] androidx.core.view.VelocityTrackerCompat.computeCurrentVelocity:(Landroid/view/VelocityTracker;IF)V
+18f134: 6e30 640a 1002                         |0000: invoke-virtual {v0, v1, v2}, Landroid/view/VelocityTracker;.computeCurrentVelocity:(IF)V // method@0a64
+18f13a: 7110 513d 0000                         |0003: invoke-static {v0}, Landroidx/core/view/VelocityTrackerCompat;.getFallbackTrackerOrNull:(Landroid/view/VelocityTracker;)Landroidx/core/view/VelocityTrackerFallback; // method@3d51
+18f140: 0c00                                   |0006: move-result-object v0
+18f142: 3800 0500                              |0007: if-eqz v0, 000c // +0005
+18f146: 6e30 5b3d 1002                         |0009: invoke-virtual {v0, v1, v2}, Landroidx/core/view/VelocityTrackerFallback;.computeCurrentVelocity:(IF)V // method@3d5b
+18f14c: 0e00                                   |000c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=250
+        0x0003 line=251
+        0x0009 line=253
+      locals        :
+        0x0000 - 0x000d reg=0 (null) Landroid/view/VelocityTracker;
+        0x0000 - 0x000d reg=1 (null) I
+        0x0000 - 0x000d reg=2 (null) F
+
+    #6              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'getAxisVelocity'
+      type          : '(Landroid/view/VelocityTracker;I)F'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 39 16-bit code units
+18ef54:                                        |[18ef54] androidx.core.view.VelocityTrackerCompat.getAxisVelocity:(Landroid/view/VelocityTracker;I)F
+18ef64: 6000 d600                              |0000: sget v0, Landroid/os/Build$VERSION;.SDK_INT:I // field@00d6
+18ef68: 1301 2200                              |0002: const/16 v1, #int 34 // #22
+18ef6c: 3410 0700                              |0004: if-lt v0, v1, 000b // +0007
+18ef70: 7120 463d 3200                         |0006: invoke-static {v2, v3}, Landroidx/core/view/VelocityTrackerCompat$Api34Impl;.getAxisVelocity:(Landroid/view/VelocityTracker;I)F // method@3d46
+18ef76: 0a02                                   |0009: move-result v2
+18ef78: 0f02                                   |000a: return v2
+18ef7a: 3903 0700                              |000b: if-nez v3, 0012 // +0007
+18ef7e: 6e10 670a 0200                         |000d: invoke-virtual {v2}, Landroid/view/VelocityTracker;.getXVelocity:()F // method@0a67
+18ef84: 0a02                                   |0010: move-result v2
+18ef86: 0f02                                   |0011: return v2
+18ef88: 1210                                   |0012: const/4 v0, #int 1 // #1
+18ef8a: 3303 0700                              |0013: if-ne v3, v0, 001a // +0007
+18ef8e: 6e10 690a 0200                         |0015: invoke-virtual {v2}, Landroid/view/VelocityTracker;.getYVelocity:()F // method@0a69
+18ef94: 0a02                                   |0018: move-result v2
+18ef96: 0f02                                   |0019: return v2
+18ef98: 7110 513d 0200                         |001a: invoke-static {v2}, Landroidx/core/view/VelocityTrackerCompat;.getFallbackTrackerOrNull:(Landroid/view/VelocityTracker;)Landroidx/core/view/VelocityTrackerFallback; // method@3d51
+18ef9e: 0c02                                   |001d: move-result-object v2
+18efa0: 3802 0700                              |001e: if-eqz v2, 0025 // +0007
+18efa4: 6e20 5c3d 3200                         |0020: invoke-virtual {v2, v3}, Landroidx/core/view/VelocityTrackerFallback;.getAxisVelocity:(I)F // method@3d5c
+18efaa: 0a02                                   |0023: move-result v2
+18efac: 0f02                                   |0024: return v2
+18efae: 1202                                   |0025: const/4 v2, #int 0 // #0
+18efb0: 0f02                                   |0026: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=145
+        0x0006 line=146
+        0x000d line=151
+        0x0015 line=154
+        0x001a line=159
+        0x0020 line=161
+      locals        :
+        0x0000 - 0x0027 reg=2 (null) Landroid/view/VelocityTracker;
+        0x0000 - 0x0027 reg=3 (null) I
+
+    #7              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'getAxisVelocity'
+      type          : '(Landroid/view/VelocityTracker;II)F'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 3
+      insns size    : 28 16-bit code units
+18efb4:                                        |[18efb4] androidx.core.view.VelocityTrackerCompat.getAxisVelocity:(Landroid/view/VelocityTracker;II)F
+18efc4: 6000 d600                              |0000: sget v0, Landroid/os/Build$VERSION;.SDK_INT:I // field@00d6
+18efc8: 1301 2200                              |0002: const/16 v1, #int 34 // #22
+18efcc: 3410 0700                              |0004: if-lt v0, v1, 000b // +0007
+18efd0: 7130 473d 3204                         |0006: invoke-static {v2, v3, v4}, Landroidx/core/view/VelocityTrackerCompat$Api34Impl;.getAxisVelocity:(Landroid/view/VelocityTracker;II)F // method@3d47
+18efd6: 0a02                                   |0009: move-result v2
+18efd8: 0f02                                   |000a: return v2
+18efda: 3903 0700                              |000b: if-nez v3, 0012 // +0007
+18efde: 6e20 680a 4200                         |000d: invoke-virtual {v2, v4}, Landroid/view/VelocityTracker;.getXVelocity:(I)F // method@0a68
+18efe4: 0a02                                   |0010: move-result v2
+18efe6: 0f02                                   |0011: return v2
+18efe8: 1210                                   |0012: const/4 v0, #int 1 // #1
+18efea: 3303 0700                              |0013: if-ne v3, v0, 001a // +0007
+18efee: 6e20 6a0a 4200                         |0015: invoke-virtual {v2, v4}, Landroid/view/VelocityTracker;.getYVelocity:(I)F // method@0a6a
+18eff4: 0a02                                   |0018: move-result v2
+18eff6: 0f02                                   |0019: return v2
+18eff8: 1202                                   |001a: const/4 v2, #int 0 // #0
+18effa: 0f02                                   |001b: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=197
+        0x0006 line=198
+        0x000d line=201
+        0x0015 line=204
+      locals        :
+        0x0000 - 0x001c reg=2 (null) Landroid/view/VelocityTracker;
+        0x0000 - 0x001c reg=3 (null) I
+        0x0000 - 0x001c reg=4 (null) I
+
+    #8              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'getFallbackTrackerOrNull'
+      type          : '(Landroid/view/VelocityTracker;)Landroidx/core/view/VelocityTrackerFallback;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 9 16-bit code units
+18eef0:                                        |[18eef0] androidx.core.view.VelocityTrackerCompat.getFallbackTrackerOrNull:(Landroid/view/VelocityTracker;)Landroidx/core/view/VelocityTrackerFallback;
+18ef00: 6200 da18                              |0000: sget-object v0, Landroidx/core/view/VelocityTrackerCompat;.sFallbackTrackers:Ljava/util/Map; // field@18da
+18ef04: 7220 3d75 1000                         |0002: invoke-interface {v0, v1}, Ljava/util/Map;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@753d
+18ef0a: 0c01                                   |0005: move-result-object v1
+18ef0c: 1f01 cf08                              |0006: check-cast v1, Landroidx/core/view/VelocityTrackerFallback; // type@08cf
+18ef10: 1101                                   |0008: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=300
+      locals        :
+        0x0000 - 0x0009 reg=1 (null) Landroid/view/VelocityTracker;
+
+    #9              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'getXVelocity'
+      type          : '(Landroid/view/VelocityTracker;I)F'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 5 16-bit code units
+18effc:                                        |[18effc] androidx.core.view.VelocityTrackerCompat.getXVelocity:(Landroid/view/VelocityTracker;I)F
+18f00c: 6e20 680a 1000                         |0000: invoke-virtual {v0, v1}, Landroid/view/VelocityTracker;.getXVelocity:(I)F // method@0a68
+18f012: 0a00                                   |0003: move-result v0
+18f014: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=90
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Landroid/view/VelocityTracker;
+        0x0000 - 0x0005 reg=1 (null) I
+
+    #10              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'getYVelocity'
+      type          : '(Landroid/view/VelocityTracker;I)F'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 2
+      insns size    : 5 16-bit code units
+18f018:                                        |[18f018] androidx.core.view.VelocityTrackerCompat.getYVelocity:(Landroid/view/VelocityTracker;I)F
+18f028: 6e20 6a0a 1000                         |0000: invoke-virtual {v0, v1}, Landroid/view/VelocityTracker;.getYVelocity:(I)F // method@0a6a
+18f02e: 0a00                                   |0003: move-result v0
+18f030: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=102
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Landroid/view/VelocityTracker;
+        0x0000 - 0x0005 reg=1 (null) I
+
+    #11              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'isAxisSupported'
+      type          : '(Landroid/view/VelocityTracker;I)Z'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 24 16-bit code units
+18ef14:                                        |[18ef14] androidx.core.view.VelocityTrackerCompat.isAxisSupported:(Landroid/view/VelocityTracker;I)Z
+18ef24: 6000 d600                              |0000: sget v0, Landroid/os/Build$VERSION;.SDK_INT:I // field@00d6
+18ef28: 1301 2200                              |0002: const/16 v1, #int 34 // #22
+18ef2c: 3410 0700                              |0004: if-lt v0, v1, 000b // +0007
+18ef30: 7120 483d 3200                         |0006: invoke-static {v2, v3}, Landroidx/core/view/VelocityTrackerCompat$Api34Impl;.isAxisSupported:(Landroid/view/VelocityTracker;I)Z // method@3d48
+18ef36: 0a02                                   |0009: move-result v2
+18ef38: 0f02                                   |000a: return v2
+18ef3a: 1302 1a00                              |000b: const/16 v2, #int 26 // #1a
+18ef3e: 1210                                   |000d: const/4 v0, #int 1 // #1
+18ef40: 3223 0900                              |000e: if-eq v3, v2, 0017 // +0009
+18ef44: 3803 0700                              |0010: if-eqz v3, 0017 // +0007
+18ef48: 3303 0300                              |0012: if-ne v3, v0, 0015 // +0003
+18ef4c: 2803                                   |0014: goto 0017 // +0003
+18ef4e: 1202                                   |0015: const/4 v2, #int 0 // #0
+18ef50: 0f02                                   |0016: return v2
+18ef52: 0f00                                   |0017: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=123
+        0x0006 line=124
+      locals        :
+        0x0000 - 0x0018 reg=2 (null) Landroid/view/VelocityTracker;
+        0x0000 - 0x0018 reg=3 (null) I
+
+    #12              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'recycle'
+      type          : '(Landroid/view/VelocityTracker;)V'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 7 16-bit code units
+18f150:                                        |[18f150] androidx.core.view.VelocityTrackerCompat.recycle:(Landroid/view/VelocityTracker;)V
+18f160: 6e10 6d0a 0000                         |0000: invoke-virtual {v0}, Landroid/view/VelocityTracker;.recycle:()V // method@0a6d
+18f166: 7110 563d 0000                         |0003: invoke-static {v0}, Landroidx/core/view/VelocityTrackerCompat;.removeFallbackForTracker:(Landroid/view/VelocityTracker;)V // method@3d56
+18f16c: 0e00                                   |0006: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=229
+        0x0003 line=230
+      locals        :
+        0x0000 - 0x0007 reg=0 (null) Landroid/view/VelocityTracker;
+
+    #13              : (in Landroidx/core/view/VelocityTrackerCompat;)
+      name          : 'removeFallbackForTracker'
+      type          : '(Landroid/view/VelocityTracker;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 6 16-bit code units
+18f170:                                        |[18f170] androidx.core.view.VelocityTrackerCompat.removeFallbackForTracker:(Landroid/view/VelocityTracker;)V
+18f180: 6200 da18                              |0000: sget-object v0, Landroidx/core/view/VelocityTrackerCompat;.sFallbackTrackers:Ljava/util/Map; // field@18da
+18f184: 7220 4375 1000                         |0002: invoke-interface {v0, v1}, Ljava/util/Map;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@7543
+18f18a: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=295
+      locals        :
+        0x0000 - 0x0006 reg=1 (null) Landroid/view/VelocityTracker;
+
+  Virtual methods   -
+  source_file_idx   : 23461 (VelocityTrackerCompat.java)
+

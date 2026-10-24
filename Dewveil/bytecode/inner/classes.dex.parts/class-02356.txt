@@ -1,0 +1,136 @@
+Class #2356            -
+  Class descriptor  : 'Lcom/android/volley/toolbox/AdaptedHttpStack;'
+  Access flags      : 0x0000 ()
+  Superclass        : 'Lcom/android/volley/toolbox/BaseHttpStack;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/android/volley/toolbox/AdaptedHttpStack;)
+      name          : 'mHttpStack'
+      type          : 'Lcom/android/volley/toolbox/HttpStack;'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/android/volley/toolbox/AdaptedHttpStack;)
+      name          : '<init>'
+      type          : '(Lcom/android/volley/toolbox/HttpStack;)V'
+      access        : 0x10000 (CONSTRUCTOR)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 1
+      insns size    : 6 16-bit code units
+5ac8fc:                                        |[5ac8fc] com.android.volley.toolbox.AdaptedHttpStack.<init>:(Lcom/android/volley/toolbox/HttpStack;)V
+5ac90c: 7010 bc5d 0000                         |0000: invoke-direct {v0}, Lcom/android/volley/toolbox/BaseHttpStack;.<init>:()V // method@5dbc
+5ac912: 5b01 2443                              |0003: iput-object v1, v0, Lcom/android/volley/toolbox/AdaptedHttpStack;.mHttpStack:Lcom/android/volley/toolbox/HttpStack; // field@4324
+5ac916: 0e00                                   |0005: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=39
+        0x0003 line=40
+      locals        :
+        0x0000 - 0x0006 reg=0 this Lcom/android/volley/toolbox/AdaptedHttpStack;
+        0x0000 - 0x0006 reg=1 (null) Lcom/android/volley/toolbox/HttpStack;
+
+  Virtual methods   -
+    #0              : (in Lcom/android/volley/toolbox/AdaptedHttpStack;)
+      name          : 'executeRequest'
+      type          : '(Lcom/android/volley/Request;Ljava/util/Map;)Lcom/android/volley/toolbox/HttpResponse;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 9
+      ins           : 3
+      outs          : 5
+      insns size    : 130 16-bit code units
+5ac918:                                        |[5ac918] com.android.volley.toolbox.AdaptedHttpStack.executeRequest:(Lcom/android/volley/Request;Ljava/util/Map;)Lcom/android/volley/toolbox/HttpResponse;
+5ac928: 5466 2443                              |0000: iget-object v6, v6, Lcom/android/volley/toolbox/AdaptedHttpStack;.mHttpStack:Lcom/android/volley/toolbox/HttpStack; // field@4324
+5ac92c: 7230 365e 7608                         |0002: invoke-interface {v6, v7, v8}, Lcom/android/volley/toolbox/HttpStack;.performRequest:(Lcom/android/volley/Request;Ljava/util/Map;)Lorg/apache/http/HttpResponse; // method@5e36
+5ac932: 0c06                                   |0005: move-result-object v6
+5ac934: 7210 90fe 0600                         |0006: invoke-interface {v6}, Lorg/apache/http/HttpResponse;.getStatusLine:()Lorg/apache/http/StatusLine; // method@fe90
+5ac93a: 0c07                                   |0009: move-result-object v7
+5ac93c: 7210 92fe 0700                         |000a: invoke-interface {v7}, Lorg/apache/http/StatusLine;.getStatusCode:()I // method@fe92
+5ac942: 0a07                                   |000d: move-result v7
+5ac944: 7210 8efe 0600                         |000e: invoke-interface {v6}, Lorg/apache/http/HttpResponse;.getAllHeaders:()[Lorg/apache/http/Header; // method@fe8e
+5ac94a: 0c08                                   |0011: move-result-object v8
+5ac94c: 2200 3a1b                              |0012: new-instance v0, Ljava/util/ArrayList; // type@1b3a
+5ac950: 2181                                   |0014: array-length v1, v8
+5ac952: 7020 a0d4 1000                         |0015: invoke-direct {v0, v1}, Ljava/util/ArrayList;.<init>:(I)V // method@d4a0
+5ac958: 2181                                   |0018: array-length v1, v8
+5ac95a: 1202                                   |0019: const/4 v2, #int 0 // #0
+5ac95c: 3512 1700                              |001a: if-ge v2, v1, 0031 // +0017
+5ac960: 4603 0802                              |001c: aget-object v3, v8, v2
+5ac964: 2204 8f0b                              |001e: new-instance v4, Lcom/android/volley/Header; // type@0b8f
+5ac968: 7210 8afe 0300                         |0020: invoke-interface {v3}, Lorg/apache/http/Header;.getName:()Ljava/lang/String; // method@fe8a
+5ac96e: 0c05                                   |0023: move-result-object v5
+5ac970: 7210 8bfe 0300                         |0024: invoke-interface {v3}, Lorg/apache/http/Header;.getValue:()Ljava/lang/String; // method@fe8b
+5ac976: 0c03                                   |0027: move-result-object v3
+5ac978: 7030 f95c 5403                         |0028: invoke-direct {v4, v5, v3}, Lcom/android/volley/Header;.<init>:(Ljava/lang/String;Ljava/lang/String;)V // method@5cf9
+5ac97e: 7220 c9d5 4000                         |002b: invoke-interface {v0, v4}, Ljava/util/List;.add:(Ljava/lang/Object;)Z // method@d5c9
+5ac984: d802 0201                              |002e: add-int/lit8 v2, v2, #int 1 // #01
+5ac988: 28ea                                   |0030: goto 001a // -0016
+5ac98a: 7210 8ffe 0600                         |0031: invoke-interface {v6}, Lorg/apache/http/HttpResponse;.getEntity:()Lorg/apache/http/HttpEntity; // method@fe8f
+5ac990: 0c08                                   |0034: move-result-object v8
+5ac992: 3908 0800                              |0035: if-nez v8, 003d // +0008
+5ac996: 2206 c90b                              |0037: new-instance v6, Lcom/android/volley/toolbox/HttpResponse; // type@0bc9
+5ac99a: 7030 2e5e 7600                         |0039: invoke-direct {v6, v7, v0}, Lcom/android/volley/toolbox/HttpResponse;.<init>:(ILjava/util/List;)V // method@5e2e
+5ac9a0: 1106                                   |003c: return-object v6
+5ac9a2: 7210 8ffe 0600                         |003d: invoke-interface {v6}, Lorg/apache/http/HttpResponse;.getEntity:()Lorg/apache/http/HttpEntity; // method@fe8f
+5ac9a8: 0c08                                   |0040: move-result-object v8
+5ac9aa: 7210 8dfe 0800                         |0041: invoke-interface {v8}, Lorg/apache/http/HttpEntity;.getContentLength:()J // method@fe8d
+5ac9b0: 0b01                                   |0044: move-result-wide v1
+5ac9b2: 8418                                   |0045: long-to-int v8, v1
+5ac9b4: 8183                                   |0046: int-to-long v3, v8
+5ac9b6: 3108 0301                              |0047: cmp-long v8, v3, v1
+5ac9ba: 3908 1900                              |0049: if-nez v8, 0062 // +0019
+5ac9be: 2208 c90b                              |004b: new-instance v8, Lcom/android/volley/toolbox/HttpResponse; // type@0bc9
+5ac9c2: 7210 8ffe 0600                         |004d: invoke-interface {v6}, Lorg/apache/http/HttpResponse;.getEntity:()Lorg/apache/http/HttpEntity; // method@fe8f
+5ac9c8: 0c01                                   |0050: move-result-object v1
+5ac9ca: 7210 8dfe 0100                         |0051: invoke-interface {v1}, Lorg/apache/http/HttpEntity;.getContentLength:()J // method@fe8d
+5ac9d0: 0b01                                   |0054: move-result-wide v1
+5ac9d2: 8411                                   |0055: long-to-int v1, v1
+5ac9d4: 7210 8ffe 0600                         |0056: invoke-interface {v6}, Lorg/apache/http/HttpResponse;.getEntity:()Lorg/apache/http/HttpEntity; // method@fe8f
+5ac9da: 0c06                                   |0059: move-result-object v6
+5ac9dc: 7210 8cfe 0600                         |005a: invoke-interface {v6}, Lorg/apache/http/HttpEntity;.getContent:()Ljava/io/InputStream; // method@fe8c
+5ac9e2: 0c06                                   |005d: move-result-object v6
+5ac9e4: 7056 2f5e 7810                         |005e: invoke-direct {v8, v7, v0, v1, v6}, Lcom/android/volley/toolbox/HttpResponse;.<init>:(ILjava/util/List;ILjava/io/InputStream;)V // method@5e2f
+5ac9ea: 1108                                   |0061: return-object v8
+5ac9ec: 2206 481a                              |0062: new-instance v6, Ljava/io/IOException; // type@1a48
+5ac9f0: 2207 991a                              |0064: new-instance v7, Ljava/lang/StringBuilder; // type@1a99
+5ac9f4: 1a08 495e                              |0066: const-string v8, "Response too large: " // string@5e49
+5ac9f8: 7020 3cd2 8700                         |0068: invoke-direct {v7, v8}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+5ac9fe: 6e30 41d2 1702                         |006b: invoke-virtual {v7, v1, v2}, Ljava/lang/StringBuilder;.append:(J)Ljava/lang/StringBuilder; // method@d241
+5aca04: 0c07                                   |006e: move-result-object v7
+5aca06: 6e10 58d2 0700                         |006f: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5aca0c: 0c07                                   |0072: move-result-object v7
+5aca0e: 7020 14d0 7600                         |0073: invoke-direct {v6, v7}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+5aca14: 2706                                   |0076: throw v6
+5aca16: 0d06                                   |0077: move-exception v6
+5aca18: 2207 da1a                              |0078: new-instance v7, Ljava/net/SocketTimeoutException; // type@1ada
+5aca1c: 6e10 a2fe 0600                         |007a: invoke-virtual {v6}, Lorg/apache/http/conn/ConnectTimeoutException;.getMessage:()Ljava/lang/String; // method@fea2
+5aca22: 0c06                                   |007d: move-result-object v6
+5aca24: 7020 7ad3 6700                         |007e: invoke-direct {v7, v6}, Ljava/net/SocketTimeoutException;.<init>:(Ljava/lang/String;)V // method@d37a
+5aca2a: 2707                                   |0081: throw v7
+      catches       : 1
+        0x0000 - 0x0006
+          Lorg/apache/http/conn/ConnectTimeoutException; -> 0x0077
+      positions     :
+        0x0000 line=48
+        0x0006 line=55
+        0x000e line=57
+        0x0012 line=58
+        0x0018 line=59
+        0x001e line=60
+        0x0031 line=63
+        0x0037 line=64
+        0x003d line=67
+        0x004b line=72
+        0x004d line=75
+        0x0056 line=76
+        0x0062 line=69
+        0x0078 line=52
+      locals        :
+        0x0000 - 0x0082 reg=6 this Lcom/android/volley/toolbox/AdaptedHttpStack;
+        0x0000 - 0x0082 reg=7 (null) Lcom/android/volley/Request;
+        0x0000 - 0x0082 reg=8 (null) Ljava/util/Map;
+
+  source_file_idx   : 5308 (AdaptedHttpStack.java)
+

@@ -1,0 +1,2043 @@
+Class #5813            -
+  Class descriptor  : 'Lcom/jakewharton/disklrucache/DiskLruCache;'
+  Access flags      : 0x0011 (PUBLIC FINAL)
+  Superclass        : 'Ljava/lang/Object;'
+  Interfaces        -
+    #0              : 'Ljava/io/Closeable;'
+  Static fields     -
+    #0              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'ANY_SEQUENCE_NUMBER'
+      type          : 'J'
+      access        : 0x0018 (STATIC FINAL)
+      value         : -1
+    #1              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'CLEAN'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "CLEAN"
+    #2              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'DIRTY'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "DIRTY"
+    #3              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'JOURNAL_FILE'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "journal"
+    #4              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'JOURNAL_FILE_BACKUP'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "journal.bkp"
+    #5              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'JOURNAL_FILE_TEMP'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "journal.tmp"
+    #6              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'LEGAL_KEY_PATTERN'
+      type          : 'Ljava/util/regex/Pattern;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : null
+    #7              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'MAGIC'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "libcore.io.DiskLruCache"
+    #8              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'NULL_OUTPUT_STREAM'
+      type          : 'Ljava/io/OutputStream;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : null
+    #9              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'READ'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "READ"
+    #10              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'REMOVE'
+      type          : 'Ljava/lang/String;'
+      access        : 0x001a (PRIVATE STATIC FINAL)
+      value         : "REMOVE"
+    #11              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'VERSION_1'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0018 (STATIC FINAL)
+      value         : "1"
+  Instance fields   -
+    #0              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'appVersion'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+    #1              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'cleanupCallable'
+      type          : 'Ljava/util/concurrent/Callable;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #2              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'directory'
+      type          : 'Ljava/io/File;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #3              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'executorService'
+      type          : 'Ljava/util/concurrent/ThreadPoolExecutor;'
+      access        : 0x0010 (FINAL)
+    #4              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'journalFile'
+      type          : 'Ljava/io/File;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #5              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'journalFileBackup'
+      type          : 'Ljava/io/File;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #6              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'journalFileTmp'
+      type          : 'Ljava/io/File;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #7              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'journalWriter'
+      type          : 'Ljava/io/Writer;'
+      access        : 0x0002 (PRIVATE)
+    #8              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'lruEntries'
+      type          : 'Ljava/util/LinkedHashMap;'
+      access        : 0x0012 (PRIVATE FINAL)
+    #9              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'maxSize'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+    #10              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'nextSequenceNumber'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+    #11              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'redundantOpCount'
+      type          : 'I'
+      access        : 0x0002 (PRIVATE)
+    #12              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'size'
+      type          : 'J'
+      access        : 0x0002 (PRIVATE)
+    #13              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'valueCount'
+      type          : 'I'
+      access        : 0x0012 (PRIVATE FINAL)
+  Direct methods    -
+    #0              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : '<clinit>'
+      type          : '()V'
+      access        : 0x10008 (STATIC CONSTRUCTOR)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 1
+      insns size    : 16 16-bit code units
+74907c:                                        |[74907c] com.jakewharton.disklrucache.DiskLruCache.<clinit>:()V
+74908c: 1a00 7e72                              |0000: const-string v0, "[a-z0-9_-]{1,64}" // string@727e
+749090: 7110 47d7 0000                         |0002: invoke-static {v0}, Ljava/util/regex/Pattern;.compile:(Ljava/lang/String;)Ljava/util/regex/Pattern; // method@d747
+749096: 0c00                                   |0005: move-result-object v0
+749098: 6900 1486                              |0006: sput-object v0, Lcom/jakewharton/disklrucache/DiskLruCache;.LEGAL_KEY_PATTERN:Ljava/util/regex/Pattern; // field@8614
+74909c: 2200 2c19                              |0008: new-instance v0, Lcom/jakewharton/disklrucache/DiskLruCache$2; // type@192c
+7490a0: 7010 f2c7 0000                         |000a: invoke-direct {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$2;.<init>:()V // method@c7f2
+7490a6: 6900 1686                              |000d: sput-object v0, Lcom/jakewharton/disklrucache/DiskLruCache;.NULL_OUTPUT_STREAM:Ljava/io/OutputStream; // field@8616
+7490aa: 0e00                                   |000f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=95
+        0x0008 line=713
+      locals        :
+
+    #1              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : '<init>'
+      type          : '(Ljava/io/File;IIJ)V'
+      access        : 0x10002 (PRIVATE CONSTRUCTOR)
+      code          -
+      registers     : 21
+      ins           : 6
+      outs          : 7
+      insns size    : 91 16-bit code units
+7490ac:                                        |[7490ac] com.jakewharton.disklrucache.DiskLruCache.<init>:(Ljava/io/File;IIJ)V
+7490bc: 07f0                                   |0000: move-object v0, v15
+7490be: 0801 1000                              |0001: move-object/from16 v1, v16
+7490c2: 7010 c8d1 0f00                         |0003: invoke-direct {v15}, Ljava/lang/Object;.<init>:()V // method@d1c8
+7490c8: 1602 0000                              |0006: const-wide/16 v2, #int 0 // #0
+7490cc: 5a02 2686                              |0008: iput-wide v2, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.size:J // field@8626
+7490d0: 2204 4e1b                              |000a: new-instance v4, Ljava/util/LinkedHashMap; // type@1b4e
+7490d4: 1505 403f                              |000c: const/high16 v5, #int 1061158912 // #3f40
+7490d8: 1216                                   |000e: const/4 v6, #int 1 // #1
+7490da: 1207                                   |000f: const/4 v7, #int 0 // #0
+7490dc: 7040 a5d5 7465                         |0010: invoke-direct {v4, v7, v5, v6}, Ljava/util/LinkedHashMap;.<init>:(IFZ)V // method@d5a5
+7490e2: 5b04 2286                              |0013: iput-object v4, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+7490e6: 5a02 2486                              |0015: iput-wide v2, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.nextSequenceNumber:J // field@8624
+7490ea: 2202 8c1b                              |0017: new-instance v2, Ljava/util/concurrent/ThreadPoolExecutor; // type@1b8c
+7490ee: 620d 4b8a                              |0019: sget-object v13, Ljava/util/concurrent/TimeUnit;.SECONDS:Ljava/util/concurrent/TimeUnit; // field@8a4b
+7490f2: 220e 821b                              |001b: new-instance v14, Ljava/util/concurrent/LinkedBlockingQueue; // type@1b82
+7490f6: 7010 c4d6 0e00                         |001d: invoke-direct {v14}, Ljava/util/concurrent/LinkedBlockingQueue;.<init>:()V // method@d6c4
+7490fc: 1209                                   |0020: const/4 v9, #int 0 // #0
+7490fe: 121a                                   |0021: const/4 v10, #int 1 // #1
+749100: 160b 3c00                              |0022: const-wide/16 v11, #int 60 // #3c
+749104: 0728                                   |0024: move-object v8, v2
+749106: 7607 dfd6 0800                         |0025: invoke-direct/range {v8, v9, v10, v11, v12, v13, v14}, Ljava/util/concurrent/ThreadPoolExecutor;.<init>:(IIJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/BlockingQueue;)V // method@d6df
+74910c: 5b02 1d86                              |0028: iput-object v2, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.executorService:Ljava/util/concurrent/ThreadPoolExecutor; // field@861d
+749110: 2202 2b19                              |002a: new-instance v2, Lcom/jakewharton/disklrucache/DiskLruCache$1; // type@192b
+749114: 7020 efc7 f200                         |002c: invoke-direct {v2, v15}, Lcom/jakewharton/disklrucache/DiskLruCache$1;.<init>:(Lcom/jakewharton/disklrucache/DiskLruCache;)V // method@c7ef
+74911a: 5b02 1b86                              |002f: iput-object v2, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.cleanupCallable:Ljava/util/concurrent/Callable; // field@861b
+74911e: 5b01 1c86                              |0031: iput-object v1, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.directory:Ljava/io/File; // field@861c
+749122: 0202 1100                              |0033: move/from16 v2, v17
+749126: 5902 1a86                              |0035: iput v2, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.appVersion:I // field@861a
+74912a: 2202 3d1a                              |0037: new-instance v2, Ljava/io/File; // type@1a3d
+74912e: 1a03 6fae                              |0039: const-string v3, "journal" // string@ae6f
+749132: 7030 d8cf 1203                         |003b: invoke-direct {v2, v1, v3}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@cfd8
+749138: 5b02 1e86                              |003e: iput-object v2, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFile:Ljava/io/File; // field@861e
+74913c: 2202 3d1a                              |0040: new-instance v2, Ljava/io/File; // type@1a3d
+749140: 1a03 71ae                              |0042: const-string v3, "journal.tmp" // string@ae71
+749144: 7030 d8cf 1203                         |0044: invoke-direct {v2, v1, v3}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@cfd8
+74914a: 5b02 2086                              |0047: iput-object v2, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFileTmp:Ljava/io/File; // field@8620
+74914e: 2202 3d1a                              |0049: new-instance v2, Ljava/io/File; // type@1a3d
+749152: 1a03 70ae                              |004b: const-string v3, "journal.bkp" // string@ae70
+749156: 7030 d8cf 1203                         |004d: invoke-direct {v2, v1, v3}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@cfd8
+74915c: 5b02 1f86                              |0050: iput-object v2, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFileBackup:Ljava/io/File; // field@861f
+749160: 0201 1200                              |0052: move/from16 v1, v18
+749164: 5901 2786                              |0054: iput v1, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+749168: 0501 1300                              |0056: move-wide/from16 v1, v19
+74916c: 5a01 2386                              |0058: iput-wide v1, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.maxSize:J // field@8623
+749170: 0e00                                   |005a: return-void
+      catches       : (none)
+      positions     :
+        0x0003 line=180
+        0x0008 line=148
+        0x000a line=150
+        0x0015 line=159
+        0x0017 line=162
+        0x002a line=164
+        0x0031 line=181
+        0x0035 line=182
+        0x0037 line=183
+        0x0040 line=184
+        0x0049 line=185
+        0x0054 line=186
+        0x0058 line=187
+      locals        :
+        0x0000 - 0x005b reg=15 this Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x005b reg=16 (null) Ljava/io/File;
+        0x0000 - 0x005b reg=17 (null) I
+        0x0000 - 0x005b reg=18 (null) I
+        0x0000 - 0x005b reg=19 (null) J
+
+    #2              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$000'
+      type          : '(Lcom/jakewharton/disklrucache/DiskLruCache;)Ljava/io/Writer;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+749174:                                        |[749174] com.jakewharton.disklrucache.DiskLruCache.access$000:(Lcom/jakewharton/disklrucache/DiskLruCache;)Ljava/io/Writer;
+749184: 5400 2186                              |0000: iget-object v0, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+749188: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #3              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$100'
+      type          : '(Lcom/jakewharton/disklrucache/DiskLruCache;)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+74918c:                                        |[74918c] com.jakewharton.disklrucache.DiskLruCache.access$100:(Lcom/jakewharton/disklrucache/DiskLruCache;)V
+74919c: 7010 41c8 0000                         |0000: invoke-direct {v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.trimToSize:()V // method@c841
+7491a2: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #4              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$1600'
+      type          : '(Lcom/jakewharton/disklrucache/DiskLruCache;Ljava/lang/String;J)Lcom/jakewharton/disklrucache/DiskLruCache$Editor;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 4
+      insns size    : 5 16-bit code units
+7491a4:                                        |[7491a4] com.jakewharton.disklrucache.DiskLruCache.access$1600:(Lcom/jakewharton/disklrucache/DiskLruCache;Ljava/lang/String;J)Lcom/jakewharton/disklrucache/DiskLruCache$Editor;
+7491b4: 7040 30c8 1032                         |0000: invoke-direct {v0, v1, v2, v3}, Lcom/jakewharton/disklrucache/DiskLruCache;.edit:(Ljava/lang/String;J)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c830
+7491ba: 0c00                                   |0003: move-result-object v0
+7491bc: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x0005 reg=1 (null) Ljava/lang/String;
+        0x0000 - 0x0005 reg=2 (null) J
+
+    #5              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$1700'
+      type          : '(Ljava/io/InputStream;)Ljava/lang/String;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+7491c0:                                        |[7491c0] com.jakewharton.disklrucache.DiskLruCache.access$1700:(Ljava/io/InputStream;)Ljava/lang/String;
+7491d0: 7110 35c8 0000                         |0000: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.inputStreamToString:(Ljava/io/InputStream;)Ljava/lang/String; // method@c835
+7491d6: 0c00                                   |0003: move-result-object v0
+7491d8: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Ljava/io/InputStream;
+
+    #6              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$1800'
+      type          : '(Lcom/jakewharton/disklrucache/DiskLruCache;)I'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+7491dc:                                        |[7491dc] com.jakewharton.disklrucache.DiskLruCache.access$1800:(Lcom/jakewharton/disklrucache/DiskLruCache;)I
+7491ec: 5200 2786                              |0000: iget v0, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+7491f0: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #7              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$1900'
+      type          : '(Lcom/jakewharton/disklrucache/DiskLruCache;)Ljava/io/File;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+7491f4:                                        |[7491f4] com.jakewharton.disklrucache.DiskLruCache.access$1900:(Lcom/jakewharton/disklrucache/DiskLruCache;)Ljava/io/File;
+749204: 5400 1c86                              |0000: iget-object v0, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.directory:Ljava/io/File; // field@861c
+749208: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #8              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$200'
+      type          : '(Lcom/jakewharton/disklrucache/DiskLruCache;)Z'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+74920c:                                        |[74920c] com.jakewharton.disklrucache.DiskLruCache.access$200:(Lcom/jakewharton/disklrucache/DiskLruCache;)Z
+74921c: 7010 37c8 0000                         |0000: invoke-direct {v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.journalRebuildRequired:()Z // method@c837
+749222: 0a00                                   |0003: move-result v0
+749224: 0f00                                   |0004: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0005 reg=0 (null) Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #9              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$2000'
+      type          : '()Ljava/io/OutputStream;'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 0
+      outs          : 0
+      insns size    : 3 16-bit code units
+749228:                                        |[749228] com.jakewharton.disklrucache.DiskLruCache.access$2000:()Ljava/io/OutputStream;
+749238: 6200 1686                              |0000: sget-object v0, Lcom/jakewharton/disklrucache/DiskLruCache;.NULL_OUTPUT_STREAM:Ljava/io/OutputStream; // field@8616
+74923c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+
+    #10              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$2200'
+      type          : '(Lcom/jakewharton/disklrucache/DiskLruCache;Lcom/jakewharton/disklrucache/DiskLruCache$Editor;Z)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 3
+      insns size    : 4 16-bit code units
+749240:                                        |[749240] com.jakewharton.disklrucache.DiskLruCache.access$2200:(Lcom/jakewharton/disklrucache/DiskLruCache;Lcom/jakewharton/disklrucache/DiskLruCache$Editor;Z)V
+749250: 7030 2cc8 1002                         |0000: invoke-direct {v0, v1, v2}, Lcom/jakewharton/disklrucache/DiskLruCache;.completeEdit:(Lcom/jakewharton/disklrucache/DiskLruCache$Editor;Z)V // method@c82c
+749256: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x0004 reg=1 (null) Lcom/jakewharton/disklrucache/DiskLruCache$Editor;
+        0x0000 - 0x0004 reg=2 (null) Z
+
+    #11              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$300'
+      type          : '(Lcom/jakewharton/disklrucache/DiskLruCache;)V'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 4 16-bit code units
+749258:                                        |[749258] com.jakewharton.disklrucache.DiskLruCache.access$300:(Lcom/jakewharton/disklrucache/DiskLruCache;)V
+749268: 7010 3cc8 0000                         |0000: invoke-direct {v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.rebuildJournal:()V // method@c83c
+74926e: 0e00                                   |0003: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0004 reg=0 (null) Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #12              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'access$402'
+      type          : '(Lcom/jakewharton/disklrucache/DiskLruCache;I)I'
+      access        : 0x1008 (STATIC SYNTHETIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 3 16-bit code units
+749270:                                        |[749270] com.jakewharton.disklrucache.DiskLruCache.access$402:(Lcom/jakewharton/disklrucache/DiskLruCache;I)I
+749280: 5901 2586                              |0000: iput v1, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.redundantOpCount:I // field@8625
+749284: 0f01                                   |0002: return v1
+      catches       : (none)
+      positions     :
+        0x0000 line=88
+      locals        :
+        0x0000 - 0x0003 reg=0 (null) Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x0003 reg=1 (null) I
+
+    #13              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'checkNotClosed'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 2
+      insns size    : 13 16-bit code units
+749288:                                        |[749288] com.jakewharton.disklrucache.DiskLruCache.checkNotClosed:()V
+749298: 5411 2186                              |0000: iget-object v1, v1, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+74929c: 3801 0300                              |0002: if-eqz v1, 0005 // +0003
+7492a0: 0e00                                   |0004: return-void
+7492a2: 2201 7b1a                              |0005: new-instance v1, Ljava/lang/IllegalStateException; // type@1a7b
+7492a6: 1a00 e983                              |0007: const-string v0, "cache is closed" // string@83e9
+7492aa: 7020 4cd1 0100                         |0009: invoke-direct {v1, v0}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+7492b0: 2701                                   |000c: throw v1
+      catches       : (none)
+      positions     :
+        0x0000 line=613
+        0x0005 line=614
+      locals        :
+        0x0000 - 0x000d reg=1 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #14              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'completeEdit'
+      type          : '(Lcom/jakewharton/disklrucache/DiskLruCache$Editor;Z)V'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 12
+      ins           : 3
+      outs          : 3
+      insns size    : 284 16-bit code units
+7492b4:                                        |[7492b4] com.jakewharton.disklrucache.DiskLruCache.completeEdit:(Lcom/jakewharton/disklrucache/DiskLruCache$Editor;Z)V
+7492c4: 1d09                                   |0000: monitor-enter v9
+7492c6: 7110 fec7 0a00                         |0001: invoke-static {v10}, Lcom/jakewharton/disklrucache/DiskLruCache$Editor;.access$1400:(Lcom/jakewharton/disklrucache/DiskLruCache$Editor;)Lcom/jakewharton/disklrucache/DiskLruCache$Entry; // method@c7fe
+7492cc: 0c00                                   |0004: move-result-object v0
+7492ce: 7110 0ec8 0000                         |0005: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$700:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80e
+7492d4: 0c01                                   |0008: move-result-object v1
+7492d6: 33a1 0a01                              |0009: if-ne v1, v10, 0113 // +010a
+7492da: 1201                                   |000b: const/4 v1, #int 0 // #0
+7492dc: 380b 4300                              |000c: if-eqz v11, 004f // +0043
+7492e0: 7110 0cc8 0000                         |000e: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$600:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Z // method@c80c
+7492e6: 0a02                                   |0011: move-result v2
+7492e8: 3902 3d00                              |0012: if-nez v2, 004f // +003d
+7492ec: 0112                                   |0014: move v2, v1
+7492ee: 5293 2786                              |0015: iget v3, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+7492f2: 3532 3800                              |0017: if-ge v2, v3, 004f // +0038
+7492f6: 7110 ffc7 0a00                         |0019: invoke-static {v10}, Lcom/jakewharton/disklrucache/DiskLruCache$Editor;.access$1500:(Lcom/jakewharton/disklrucache/DiskLruCache$Editor;)[Z // method@c7ff
+7492fc: 0c03                                   |001c: move-result-object v3
+7492fe: 4703 0302                              |001d: aget-boolean v3, v3, v2
+749302: 3803 1400                              |001f: if-eqz v3, 0033 // +0014
+749306: 6e20 12c8 2000                         |0021: invoke-virtual {v0, v2}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.getDirtyFile:(I)Ljava/io/File; // method@c812
+74930c: 0c03                                   |0024: move-result-object v3
+74930e: 6e10 dfcf 0300                         |0025: invoke-virtual {v3}, Ljava/io/File;.exists:()Z // method@cfdf
+749314: 0a03                                   |0028: move-result v3
+749316: 3903 0700                              |0029: if-nez v3, 0030 // +0007
+74931a: 6e10 fcc7 0a00                         |002b: invoke-virtual {v10}, Lcom/jakewharton/disklrucache/DiskLruCache$Editor;.abort:()V // method@c7fc
+749320: 1e09                                   |002e: monitor-exit v9
+749322: 0e00                                   |002f: return-void
+749324: d802 0201                              |0030: add-int/lit8 v2, v2, #int 1 // #01
+749328: 28e3                                   |0032: goto 0015 // -001d
+74932a: 6e10 fcc7 0a00                         |0033: invoke-virtual {v10}, Lcom/jakewharton/disklrucache/DiskLruCache$Editor;.abort:()V // method@c7fc
+749330: 220a 7b1a                              |0036: new-instance v10, Ljava/lang/IllegalStateException; // type@1a7b
+749334: 220b 991a                              |0038: new-instance v11, Ljava/lang/StringBuilder; // type@1a99
+749338: 7010 39d2 0b00                         |003a: invoke-direct {v11}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+74933e: 1a00 2658                              |003d: const-string v0, "Newly created entry didn't create value for index " // string@5826
+749342: 6e20 45d2 0b00                         |003f: invoke-virtual {v11, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749348: 0c0b                                   |0042: move-result-object v11
+74934a: 6e20 40d2 2b00                         |0043: invoke-virtual {v11, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+749350: 0c0b                                   |0046: move-result-object v11
+749352: 6e10 58d2 0b00                         |0047: invoke-virtual {v11}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+749358: 0c0b                                   |004a: move-result-object v11
+74935a: 7020 4cd1 ba00                         |004b: invoke-direct {v10, v11}, Ljava/lang/IllegalStateException;.<init>:(Ljava/lang/String;)V // method@d14c
+749360: 270a                                   |004e: throw v10
+749362: 529a 2786                              |004f: iget v10, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+749366: 35a1 3200                              |0051: if-ge v1, v10, 0083 // +0032
+74936a: 6e20 12c8 1000                         |0053: invoke-virtual {v0, v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.getDirtyFile:(I)Ljava/io/File; // method@c812
+749370: 0c0a                                   |0056: move-result-object v10
+749372: 380b 2600                              |0057: if-eqz v11, 007d // +0026
+749376: 6e10 dfcf 0a00                         |0059: invoke-virtual {v10}, Ljava/io/File;.exists:()Z // method@cfdf
+74937c: 0a02                                   |005c: move-result v2
+74937e: 3802 2300                              |005d: if-eqz v2, 0080 // +0023
+749382: 6e20 11c8 1000                         |005f: invoke-virtual {v0, v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.getCleanFile:(I)Ljava/io/File; // method@c811
+749388: 0c02                                   |0062: move-result-object v2
+74938a: 6e20 f1cf 2a00                         |0063: invoke-virtual {v10, v2}, Ljava/io/File;.renameTo:(Ljava/io/File;)Z // method@cff1
+749390: 7110 08c8 0000                         |0066: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1000:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)[J // method@c808
+749396: 0c0a                                   |0069: move-result-object v10
+749398: 4503 0a01                              |006a: aget-wide v3, v10, v1
+74939c: 6e10 eacf 0200                         |006c: invoke-virtual {v2}, Ljava/io/File;.length:()J // method@cfea
+7493a2: 0b05                                   |006f: move-result-wide v5
+7493a4: 7110 08c8 0000                         |0070: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1000:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)[J // method@c808
+7493aa: 0c0a                                   |0073: move-result-object v10
+7493ac: 4c05 0a01                              |0074: aput-wide v5, v10, v1
+7493b0: 5397 2686                              |0076: iget-wide v7, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.size:J // field@8626
+7493b4: bc37                                   |0078: sub-long/2addr v7, v3
+7493b6: bb57                                   |0079: add-long/2addr v7, v5
+7493b8: 5a97 2686                              |007a: iput-wide v7, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.size:J // field@8626
+7493bc: 2804                                   |007c: goto 0080 // +0004
+7493be: 7110 2ec8 0a00                         |007d: invoke-static {v10}, Lcom/jakewharton/disklrucache/DiskLruCache;.deleteIfExists:(Ljava/io/File;)V // method@c82e
+7493c4: d801 0101                              |0080: add-int/lit8 v1, v1, #int 1 // #01
+7493c8: 28cd                                   |0082: goto 004f // -0033
+7493ca: 529a 2586                              |0083: iget v10, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.redundantOpCount:I // field@8625
+7493ce: 1211                                   |0085: const/4 v1, #int 1 // #1
+7493d0: b01a                                   |0086: add-int/2addr v10, v1
+7493d2: 599a 2586                              |0087: iput v10, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.redundantOpCount:I // field@8625
+7493d6: 120a                                   |0089: const/4 v10, #int 0 // #0
+7493d8: 7120 0fc8 a000                         |008a: invoke-static {v0, v10}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$702:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;Lcom/jakewharton/disklrucache/DiskLruCache$Editor;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80f
+7493de: 7110 0cc8 0000                         |008d: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$600:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Z // method@c80c
+7493e4: 0a0a                                   |0090: move-result v10
+7493e6: b6ba                                   |0091: or-int/2addr v10, v11
+7493e8: 1302 0a00                              |0092: const/16 v2, #int 10 // #a
+7493ec: 380a 3a00                              |0094: if-eqz v10, 00ce // +003a
+7493f0: 7120 0dc8 1000                         |0096: invoke-static {v0, v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$602:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;Z)Z // method@c80d
+7493f6: 549a 2186                              |0099: iget-object v10, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+7493fa: 2201 991a                              |009b: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+7493fe: 7010 39d2 0100                         |009d: invoke-direct {v1}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+749404: 1a03 311a                              |00a0: const-string v3, "CLEAN " // string@1a31
+749408: 6e20 45d2 3100                         |00a2: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74940e: 0c01                                   |00a5: move-result-object v1
+749410: 7110 09c8 0000                         |00a6: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1100:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Ljava/lang/String; // method@c809
+749416: 0c03                                   |00a9: move-result-object v3
+749418: 6e20 45d2 3100                         |00aa: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74941e: 0c01                                   |00ad: move-result-object v1
+749420: 6e10 13c8 0000                         |00ae: invoke-virtual {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.getLengths:()Ljava/lang/String; // method@c813
+749426: 0c03                                   |00b1: move-result-object v3
+749428: 6e20 45d2 3100                         |00b2: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74942e: 0c01                                   |00b5: move-result-object v1
+749430: 6e20 3dd2 2100                         |00b6: invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+749436: 0c01                                   |00b9: move-result-object v1
+749438: 6e10 58d2 0100                         |00ba: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+74943e: 0c01                                   |00bd: move-result-object v1
+749440: 6e20 8ad0 1a00                         |00be: invoke-virtual {v10, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749446: 380b 3600                              |00c1: if-eqz v11, 00f7 // +0036
+74944a: 539a 2486                              |00c3: iget-wide v10, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.nextSequenceNumber:J // field@8624
+74944e: 1601 0100                              |00c5: const-wide/16 v1, #int 1 // #1
+749452: bba1                                   |00c7: add-long/2addr v1, v10
+749454: 5a91 2486                              |00c8: iput-wide v1, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.nextSequenceNumber:J // field@8624
+749458: 7130 0bc8 a00b                         |00ca: invoke-static {v0, v10, v11}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1202:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;J)J // method@c80b
+74945e: 282a                                   |00cd: goto 00f7 // +002a
+749460: 549a 2286                              |00ce: iget-object v10, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+749464: 7110 09c8 0000                         |00d0: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1100:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Ljava/lang/String; // method@c809
+74946a: 0c0b                                   |00d3: move-result-object v11
+74946c: 6e20 afd5 ba00                         |00d4: invoke-virtual {v10, v11}, Ljava/util/LinkedHashMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5af
+749472: 549a 2186                              |00d7: iget-object v10, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+749476: 220b 991a                              |00d9: new-instance v11, Ljava/lang/StringBuilder; // type@1a99
+74947a: 7010 39d2 0b00                         |00db: invoke-direct {v11}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+749480: 1a01 105d                              |00de: const-string v1, "REMOVE " // string@5d10
+749484: 6e20 45d2 1b00                         |00e0: invoke-virtual {v11, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74948a: 0c0b                                   |00e3: move-result-object v11
+74948c: 7110 09c8 0000                         |00e4: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1100:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Ljava/lang/String; // method@c809
+749492: 0c00                                   |00e7: move-result-object v0
+749494: 6e20 45d2 0b00                         |00e8: invoke-virtual {v11, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74949a: 0c0b                                   |00eb: move-result-object v11
+74949c: 6e20 3dd2 2b00                         |00ec: invoke-virtual {v11, v2}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+7494a2: 0c0b                                   |00ef: move-result-object v11
+7494a4: 6e10 58d2 0b00                         |00f0: invoke-virtual {v11}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+7494aa: 0c0b                                   |00f3: move-result-object v11
+7494ac: 6e20 8ad0 ba00                         |00f4: invoke-virtual {v10, v11}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+7494b2: 549a 2186                              |00f7: iget-object v10, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+7494b6: 6e10 88d0 0a00                         |00f9: invoke-virtual {v10}, Ljava/io/Writer;.flush:()V // method@d088
+7494bc: 539a 2686                              |00fc: iget-wide v10, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.size:J // field@8626
+7494c0: 5390 2386                              |00fe: iget-wide v0, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.maxSize:J // field@8623
+7494c4: 310a 0a00                              |0100: cmp-long v10, v10, v0
+7494c8: 3c0a 0800                              |0102: if-gtz v10, 010a // +0008
+7494cc: 7010 37c8 0900                         |0104: invoke-direct {v9}, Lcom/jakewharton/disklrucache/DiskLruCache;.journalRebuildRequired:()Z // method@c837
+7494d2: 0a0a                                   |0107: move-result v10
+7494d4: 380a 0900                              |0108: if-eqz v10, 0111 // +0009
+7494d8: 549a 1d86                              |010a: iget-object v10, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.executorService:Ljava/util/concurrent/ThreadPoolExecutor; // field@861d
+7494dc: 549b 1b86                              |010c: iget-object v11, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.cleanupCallable:Ljava/util/concurrent/Callable; // field@861b
+7494e0: 6e20 e5d6 ba00                         |010e: invoke-virtual {v10, v11}, Ljava/util/concurrent/ThreadPoolExecutor;.submit:(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future; // method@d6e5
+7494e6: 1e09                                   |0111: monitor-exit v9
+7494e8: 0e00                                   |0112: return-void
+7494ea: 220a 7b1a                              |0113: new-instance v10, Ljava/lang/IllegalStateException; // type@1a7b
+7494ee: 7010 4bd1 0a00                         |0115: invoke-direct {v10}, Ljava/lang/IllegalStateException;.<init>:()V // method@d14b
+7494f4: 270a                                   |0118: throw v10
+7494f6: 0d0a                                   |0119: move-exception v10
+7494f8: 1e09                                   |011a: monitor-exit v9
+7494fa: 270a                                   |011b: throw v10
+      catches       : 3
+        0x0001 - 0x002e
+          <any> -> 0x0119
+        0x0033 - 0x0111
+          <any> -> 0x0119
+        0x0113 - 0x011b
+          <any> -> 0x0119
+      positions     :
+        0x0001 line=509
+        0x0005 line=510
+        0x000e line=515
+        0x0015 line=516
+        0x0019 line=517
+        0x0021 line=521
+        0x002b line=522
+        0x002e line=523
+        0x0033 line=518
+        0x0036 line=519
+        0x004f line=528
+        0x0053 line=529
+        0x0059 line=531
+        0x005f line=532
+        0x0063 line=533
+        0x0066 line=534
+        0x006c line=535
+        0x0070 line=536
+        0x0076 line=537
+        0x007d line=540
+        0x0083 line=544
+        0x008a line=545
+        0x008d line=546
+        0x0096 line=547
+        0x0099 line=548
+        0x00c3 line=550
+        0x00ce line=553
+        0x00d7 line=554
+        0x00f7 line=556
+        0x00fc line=558
+        0x010a line=559
+        0x0111 line=561
+        0x0113 line=511
+      locals        :
+        0x0000 - 0x011c reg=9 this Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x011c reg=10 (null) Lcom/jakewharton/disklrucache/DiskLruCache$Editor;
+        0x0000 - 0x011c reg=11 (null) Z
+
+    #15              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'deleteIfExists'
+      type          : '(Ljava/io/File;)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 20 16-bit code units
+749518:                                        |[749518] com.jakewharton.disklrucache.DiskLruCache.deleteIfExists:(Ljava/io/File;)V
+749528: 6e10 dfcf 0100                         |0000: invoke-virtual {v1}, Ljava/io/File;.exists:()Z // method@cfdf
+74952e: 0a00                                   |0003: move-result v0
+749530: 3800 0f00                              |0004: if-eqz v0, 0013 // +000f
+749534: 6e10 decf 0100                         |0006: invoke-virtual {v1}, Ljava/io/File;.delete:()Z // method@cfde
+74953a: 0a01                                   |0009: move-result v1
+74953c: 3801 0300                              |000a: if-eqz v1, 000d // +0003
+749540: 2807                                   |000c: goto 0013 // +0007
+749542: 2201 481a                              |000d: new-instance v1, Ljava/io/IOException; // type@1a48
+749546: 7010 13d0 0100                         |000f: invoke-direct {v1}, Ljava/io/IOException;.<init>:()V // method@d013
+74954c: 2701                                   |0012: throw v1
+74954e: 0e00                                   |0013: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=385
+        0x000d line=386
+      locals        :
+        0x0000 - 0x0014 reg=1 (null) Ljava/io/File;
+
+    #16              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'edit'
+      type          : '(Ljava/lang/String;J)Lcom/jakewharton/disklrucache/DiskLruCache$Editor;'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 10
+      ins           : 4
+      outs          : 4
+      insns size    : 99 16-bit code units
+749550:                                        |[749550] com.jakewharton.disklrucache.DiskLruCache.edit:(Ljava/lang/String;J)Lcom/jakewharton/disklrucache/DiskLruCache$Editor;
+749560: 1a00 4621                              |0000: const-string v0, "DIRTY " // string@2146
+749564: 1d06                                   |0002: monitor-enter v6
+749566: 7010 2ac8 0600                         |0003: invoke-direct {v6}, Lcom/jakewharton/disklrucache/DiskLruCache;.checkNotClosed:()V // method@c82a
+74956c: 7020 42c8 7600                         |0006: invoke-direct {v6, v7}, Lcom/jakewharton/disklrucache/DiskLruCache;.validateKey:(Ljava/lang/String;)V // method@c842
+749572: 5461 2286                              |0009: iget-object v1, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+749576: 6e20 aad5 7100                         |000b: invoke-virtual {v1, v7}, Ljava/util/LinkedHashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5aa
+74957c: 0c01                                   |000e: move-result-object v1
+74957e: 1f01 2f19                              |000f: check-cast v1, Lcom/jakewharton/disklrucache/DiskLruCache$Entry; // type@192f
+749582: 1602 ffff                              |0011: const-wide/16 v2, #int -1 // #ffff
+749586: 3102 0802                              |0013: cmp-long v2, v8, v2
+74958a: 1203                                   |0015: const/4 v3, #int 0 // #0
+74958c: 3802 0e00                              |0016: if-eqz v2, 0024 // +000e
+749590: 3801 0a00                              |0018: if-eqz v1, 0022 // +000a
+749594: 7110 0ac8 0100                         |001a: invoke-static {v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1200:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)J // method@c80a
+74959a: 0b04                                   |001d: move-result-wide v4
+74959c: 3108 0408                              |001e: cmp-long v8, v4, v8
+7495a0: 3808 0400                              |0020: if-eqz v8, 0024 // +0004
+7495a4: 1e06                                   |0022: monitor-exit v6
+7495a6: 1103                                   |0023: return-object v3
+7495a8: 3901 0d00                              |0024: if-nez v1, 0031 // +000d
+7495ac: 2201 2f19                              |0026: new-instance v1, Lcom/jakewharton/disklrucache/DiskLruCache$Entry; // type@192f
+7495b0: 7040 07c8 6137                         |0028: invoke-direct {v1, v6, v7, v3}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.<init>:(Lcom/jakewharton/disklrucache/DiskLruCache;Ljava/lang/String;Lcom/jakewharton/disklrucache/DiskLruCache$1;)V // method@c807
+7495b6: 5468 2286                              |002b: iget-object v8, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+7495ba: 6e30 add5 7801                         |002d: invoke-virtual {v8, v7, v1}, Ljava/util/LinkedHashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d5ad
+7495c0: 2809                                   |0030: goto 0039 // +0009
+7495c2: 7110 0ec8 0100                         |0031: invoke-static {v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$700:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80e
+7495c8: 0c08                                   |0034: move-result-object v8
+7495ca: 3808 0400                              |0035: if-eqz v8, 0039 // +0004
+7495ce: 1e06                                   |0037: monitor-exit v6
+7495d0: 1103                                   |0038: return-object v3
+7495d2: 2208 2e19                              |0039: new-instance v8, Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // type@192e
+7495d6: 7040 fbc7 6831                         |003b: invoke-direct {v8, v6, v1, v3}, Lcom/jakewharton/disklrucache/DiskLruCache$Editor;.<init>:(Lcom/jakewharton/disklrucache/DiskLruCache;Lcom/jakewharton/disklrucache/DiskLruCache$Entry;Lcom/jakewharton/disklrucache/DiskLruCache$1;)V // method@c7fb
+7495dc: 7120 0fc8 8100                         |003e: invoke-static {v1, v8}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$702:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;Lcom/jakewharton/disklrucache/DiskLruCache$Editor;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80f
+7495e2: 5469 2186                              |0041: iget-object v9, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+7495e6: 2201 991a                              |0043: new-instance v1, Ljava/lang/StringBuilder; // type@1a99
+7495ea: 7020 3cd2 0100                         |0045: invoke-direct {v1, v0}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+7495f0: 6e20 45d2 7100                         |0048: invoke-virtual {v1, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7495f6: 0c07                                   |004b: move-result-object v7
+7495f8: 1300 0a00                              |004c: const/16 v0, #int 10 // #a
+7495fc: 6e20 3dd2 0700                         |004e: invoke-virtual {v7, v0}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+749602: 0c07                                   |0051: move-result-object v7
+749604: 6e10 58d2 0700                         |0052: invoke-virtual {v7}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+74960a: 0c07                                   |0055: move-result-object v7
+74960c: 6e20 8ad0 7900                         |0056: invoke-virtual {v9, v7}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749612: 5467 2186                              |0059: iget-object v7, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+749616: 6e10 88d0 0700                         |005b: invoke-virtual {v7}, Ljava/io/Writer;.flush:()V // method@d088
+74961c: 1e06                                   |005e: monitor-exit v6
+74961e: 1108                                   |005f: return-object v8
+749620: 0d07                                   |0060: move-exception v7
+749622: 1e06                                   |0061: monitor-exit v6
+749624: 2707                                   |0062: throw v7
+      catches       : 4
+        0x0003 - 0x001e
+          <any> -> 0x0060
+        0x0026 - 0x0035
+          <any> -> 0x0060
+        0x0039 - 0x005e
+          <any> -> 0x0060
+        0x0061 - 0x0062
+          <any> -> 0x0060
+      positions     :
+        0x0003 line=454
+        0x0006 line=455
+        0x0009 line=456
+        0x001a line=457
+        0x0022 line=459
+        0x0026 line=462
+        0x002b line=463
+        0x0031 line=464
+        0x0037 line=465
+        0x0039 line=468
+        0x003e line=469
+        0x0041 line=472
+        0x0059 line=473
+        0x005e line=474
+      locals        :
+        0x0000 - 0x0063 reg=6 this Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x0063 reg=7 (null) Ljava/lang/String;
+        0x0000 - 0x0063 reg=8 (null) J
+
+    #17              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'inputStreamToString'
+      type          : '(Ljava/io/InputStream;)Ljava/lang/String;'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 3
+      insns size    : 12 16-bit code units
+74964c:                                        |[74964c] com.jakewharton.disklrucache.DiskLruCache.inputStreamToString:(Ljava/io/InputStream;)Ljava/lang/String;
+74965c: 2200 4a1a                              |0000: new-instance v0, Ljava/io/InputStreamReader; // type@1a4a
+749660: 6201 3386                              |0002: sget-object v1, Lcom/jakewharton/disklrucache/Util;.UTF_8:Ljava/nio/charset/Charset; // field@8633
+749664: 7030 28d0 2001                         |0004: invoke-direct {v0, v2, v1}, Ljava/io/InputStreamReader;.<init>:(Ljava/io/InputStream;Ljava/nio/charset/Charset;)V // method@d028
+74966a: 7110 4fc8 0000                         |0007: invoke-static {v0}, Lcom/jakewharton/disklrucache/Util;.readFully:(Ljava/io/Reader;)Ljava/lang/String; // method@c84f
+749670: 0c02                                   |000a: move-result-object v2
+749672: 1102                                   |000b: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=665
+      locals        :
+        0x0000 - 0x000c reg=2 (null) Ljava/io/InputStream;
+
+    #18              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'journalRebuildRequired'
+      type          : '()Z'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 1
+      insns size    : 18 16-bit code units
+749674:                                        |[749674] com.jakewharton.disklrucache.DiskLruCache.journalRebuildRequired:()Z
+749684: 5220 2586                              |0000: iget v0, v2, Lcom/jakewharton/disklrucache/DiskLruCache;.redundantOpCount:I // field@8625
+749688: 1301 d007                              |0002: const/16 v1, #int 2000 // #7d0
+74968c: 3410 0c00                              |0004: if-lt v0, v1, 0010 // +000c
+749690: 5422 2286                              |0006: iget-object v2, v2, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+749694: 6e10 b0d5 0200                         |0008: invoke-virtual {v2}, Ljava/util/LinkedHashMap;.size:()I // method@d5b0
+74969a: 0a02                                   |000b: move-result v2
+74969c: 3420 0400                              |000c: if-lt v0, v2, 0010 // +0004
+7496a0: 1212                                   |000e: const/4 v2, #int 1 // #1
+7496a2: 2802                                   |000f: goto 0011 // +0002
+7496a4: 1202                                   |0010: const/4 v2, #int 0 // #0
+7496a6: 0f02                                   |0011: return v2
+      catches       : (none)
+      positions     :
+        0x0000 line=569
+      locals        :
+        0x0000 - 0x0012 reg=2 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #19              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'open'
+      type          : '(Ljava/io/File;IIJ)Lcom/jakewharton/disklrucache/DiskLruCache;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 14
+      ins           : 5
+      outs          : 6
+      insns size    : 166 16-bit code units
+7496a8:                                        |[7496a8] com.jakewharton.disklrucache.DiskLruCache.open:(Ljava/io/File;IIJ)Lcom/jakewharton/disklrucache/DiskLruCache;
+7496b8: 1600 0000                              |0000: const-wide/16 v0, #int 0 // #0
+7496bc: 3100 0c00                              |0002: cmp-long v0, v12, v0
+7496c0: 3d00 9a00                              |0004: if-lez v0, 009e // +009a
+7496c4: 3d0b 9000                              |0006: if-lez v11, 0096 // +0090
+7496c8: 2200 3d1a                              |0008: new-instance v0, Ljava/io/File; // type@1a3d
+7496cc: 1a01 70ae                              |000a: const-string v1, "journal.bkp" // string@ae70
+7496d0: 7030 d8cf 9001                         |000c: invoke-direct {v0, v9, v1}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@cfd8
+7496d6: 6e10 dfcf 0000                         |000f: invoke-virtual {v0}, Ljava/io/File;.exists:()Z // method@cfdf
+7496dc: 0a01                                   |0012: move-result v1
+7496de: 3801 1700                              |0013: if-eqz v1, 002a // +0017
+7496e2: 2201 3d1a                              |0015: new-instance v1, Ljava/io/File; // type@1a3d
+7496e6: 1a02 6fae                              |0017: const-string v2, "journal" // string@ae6f
+7496ea: 7030 d8cf 9102                         |0019: invoke-direct {v1, v9, v2}, Ljava/io/File;.<init>:(Ljava/io/File;Ljava/lang/String;)V // method@cfd8
+7496f0: 6e10 dfcf 0100                         |001c: invoke-virtual {v1}, Ljava/io/File;.exists:()Z // method@cfdf
+7496f6: 0a02                                   |001f: move-result v2
+7496f8: 3802 0600                              |0020: if-eqz v2, 0026 // +0006
+7496fc: 6e10 decf 0000                         |0022: invoke-virtual {v0}, Ljava/io/File;.delete:()Z // method@cfde
+749702: 2805                                   |0025: goto 002a // +0005
+749704: 1202                                   |0026: const/4 v2, #int 0 // #0
+749706: 7130 3ec8 1002                         |0027: invoke-static {v0, v1, v2}, Lcom/jakewharton/disklrucache/DiskLruCache;.renameTo:(Ljava/io/File;Ljava/io/File;Z)V // method@c83e
+74970c: 2200 3119                              |002a: new-instance v0, Lcom/jakewharton/disklrucache/DiskLruCache; // type@1931
+749710: 0703                                   |002c: move-object v3, v0
+749712: 0794                                   |002d: move-object v4, v9
+749714: 01a5                                   |002e: move v5, v10
+749716: 01b6                                   |002f: move v6, v11
+749718: 04c7                                   |0030: move-wide v7, v12
+74971a: 7606 1ec8 0300                         |0031: invoke-direct/range {v3, v4, v5, v6, v7, v8}, Lcom/jakewharton/disklrucache/DiskLruCache;.<init>:(Ljava/io/File;IIJ)V // method@c81e
+749720: 5401 1e86                              |0034: iget-object v1, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFile:Ljava/io/File; // field@861e
+749724: 6e10 dfcf 0100                         |0036: invoke-virtual {v1}, Ljava/io/File;.exists:()Z // method@cfdf
+74972a: 0a01                                   |0039: move-result v1
+74972c: 3801 4b00                              |003a: if-eqz v1, 0085 // +004b
+749730: 7010 3ac8 0000                         |003c: invoke-direct {v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.readJournal:()V // method@c83a
+749736: 7010 39c8 0000                         |003f: invoke-direct {v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.processJournal:()V // method@c839
+74973c: 2201 311a                              |0042: new-instance v1, Ljava/io/BufferedWriter; // type@1a31
+749740: 2202 571a                              |0044: new-instance v2, Ljava/io/OutputStreamWriter; // type@1a57
+749744: 2203 421a                              |0046: new-instance v3, Ljava/io/FileOutputStream; // type@1a42
+749748: 5404 1e86                              |0048: iget-object v4, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFile:Ljava/io/File; // field@861e
+74974c: 1215                                   |004a: const/4 v5, #int 1 // #1
+74974e: 7030 05d0 4305                         |004b: invoke-direct {v3, v4, v5}, Ljava/io/FileOutputStream;.<init>:(Ljava/io/File;Z)V // method@d005
+749754: 6204 3286                              |004e: sget-object v4, Lcom/jakewharton/disklrucache/Util;.US_ASCII:Ljava/nio/charset/Charset; // field@8632
+749758: 7030 52d0 3204                         |0050: invoke-direct {v2, v3, v4}, Ljava/io/OutputStreamWriter;.<init>:(Ljava/io/OutputStream;Ljava/nio/charset/Charset;)V // method@d052
+74975e: 7020 afcf 2100                         |0053: invoke-direct {v1, v2}, Ljava/io/BufferedWriter;.<init>:(Ljava/io/Writer;)V // method@cfaf
+749764: 5b01 2186                              |0056: iput-object v1, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+749768: 1100                                   |0058: return-object v0
+74976a: 0d01                                   |0059: move-exception v1
+74976c: 6202 1d8a                              |005a: sget-object v2, Ljava/lang/System;.out:Ljava/io/PrintStream; // field@8a1d
+749770: 2203 991a                              |005c: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+749774: 1a04 8d22                              |005e: const-string v4, "DiskLruCache " // string@228d
+749778: 7020 3cd2 4300                         |0060: invoke-direct {v3, v4}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+74977e: 6e20 44d2 9300                         |0063: invoke-virtual {v3, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+749784: 0c03                                   |0066: move-result-object v3
+749786: 1a04 0204                              |0067: const-string v4, " is corrupt: " // string@0402
+74978a: 6e20 45d2 4300                         |0069: invoke-virtual {v3, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749790: 0c03                                   |006c: move-result-object v3
+749792: 6e10 18d0 0100                         |006d: invoke-virtual {v1}, Ljava/io/IOException;.getMessage:()Ljava/lang/String; // method@d018
+749798: 0c01                                   |0070: move-result-object v1
+74979a: 6e20 45d2 1300                         |0071: invoke-virtual {v3, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7497a0: 0c01                                   |0074: move-result-object v1
+7497a2: 1a03 b00e                              |0075: const-string v3, ", removing" // string@0eb0
+7497a6: 6e20 45d2 3100                         |0077: invoke-virtual {v1, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7497ac: 0c01                                   |007a: move-result-object v1
+7497ae: 6e10 58d2 0100                         |007b: invoke-virtual {v1}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+7497b4: 0c01                                   |007e: move-result-object v1
+7497b6: 6e20 64d0 1200                         |007f: invoke-virtual {v2, v1}, Ljava/io/PrintStream;.println:(Ljava/lang/String;)V // method@d064
+7497bc: 6e10 2dc8 0000                         |0082: invoke-virtual {v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.delete:()V // method@c82d
+7497c2: 6e10 f0cf 0900                         |0085: invoke-virtual {v9}, Ljava/io/File;.mkdirs:()Z // method@cff0
+7497c8: 2200 3119                              |0088: new-instance v0, Lcom/jakewharton/disklrucache/DiskLruCache; // type@1931
+7497cc: 0703                                   |008a: move-object v3, v0
+7497ce: 0794                                   |008b: move-object v4, v9
+7497d0: 01a5                                   |008c: move v5, v10
+7497d2: 01b6                                   |008d: move v6, v11
+7497d4: 04c7                                   |008e: move-wide v7, v12
+7497d6: 7606 1ec8 0300                         |008f: invoke-direct/range {v3, v4, v5, v6, v7, v8}, Lcom/jakewharton/disklrucache/DiskLruCache;.<init>:(Ljava/io/File;IIJ)V // method@c81e
+7497dc: 7010 3cc8 0000                         |0092: invoke-direct {v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.rebuildJournal:()V // method@c83c
+7497e2: 1100                                   |0095: return-object v0
+7497e4: 2209 7a1a                              |0096: new-instance v9, Ljava/lang/IllegalArgumentException; // type@1a7a
+7497e8: 1a0a 21e6                              |0098: const-string v10, "valueCount <= 0" // string@e621
+7497ec: 7020 47d1 a900                         |009a: invoke-direct {v9, v10}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+7497f2: 2709                                   |009d: throw v9
+7497f4: 2209 7a1a                              |009e: new-instance v9, Ljava/lang/IllegalArgumentException; // type@1a7a
+7497f8: 1a0a d0bf                              |00a0: const-string v10, "maxSize <= 0" // string@bfd0
+7497fc: 7020 47d1 a900                         |00a2: invoke-direct {v9, v10}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+749802: 2709                                   |00a5: throw v9
+      catches       : 1
+        0x003c - 0x0058
+          Ljava/io/IOException; -> 0x0059
+      positions     :
+        0x0008 line=209
+        0x000f line=210
+        0x0015 line=211
+        0x001c line=213
+        0x0022 line=214
+        0x0027 line=216
+        0x002a line=221
+        0x0034 line=222
+        0x003c line=224
+        0x003f line=225
+        0x0042 line=226
+        0x005a line=230
+        0x0082 line=236
+        0x0085 line=241
+        0x0088 line=242
+        0x0092 line=243
+        0x0096 line=205
+        0x009e line=202
+      locals        :
+        0x0000 - 0x00a6 reg=9 (null) Ljava/io/File;
+        0x0000 - 0x00a6 reg=10 (null) I
+        0x0000 - 0x00a6 reg=11 (null) I
+        0x0000 - 0x00a6 reg=12 (null) J
+
+    #20              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'processJournal'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 9
+      ins           : 1
+      outs          : 2
+      insns size    : 82 16-bit code units
+749814:                                        |[749814] com.jakewharton.disklrucache.DiskLruCache.processJournal:()V
+749824: 5480 2086                              |0000: iget-object v0, v8, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFileTmp:Ljava/io/File; // field@8620
+749828: 7110 2ec8 0000                         |0002: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.deleteIfExists:(Ljava/io/File;)V // method@c82e
+74982e: 5480 2286                              |0005: iget-object v0, v8, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+749832: 6e10 b1d5 0000                         |0007: invoke-virtual {v0}, Ljava/util/LinkedHashMap;.values:()Ljava/util/Collection; // method@d5b1
+749838: 0c00                                   |000a: move-result-object v0
+74983a: 7210 37d5 0000                         |000b: invoke-interface {v0}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+749840: 0c00                                   |000e: move-result-object v0
+749842: 7210 a0d5 0000                         |000f: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+749848: 0a01                                   |0012: move-result v1
+74984a: 3801 3e00                              |0013: if-eqz v1, 0051 // +003e
+74984e: 7210 a1d5 0000                         |0015: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+749854: 0c01                                   |0018: move-result-object v1
+749856: 1f01 2f19                              |0019: check-cast v1, Lcom/jakewharton/disklrucache/DiskLruCache$Entry; // type@192f
+74985a: 7110 0ec8 0100                         |001b: invoke-static {v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$700:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80e
+749860: 0c02                                   |001e: move-result-object v2
+749862: 1203                                   |001f: const/4 v3, #int 0 // #0
+749864: 3902 1400                              |0020: if-nez v2, 0034 // +0014
+749868: 5282 2786                              |0022: iget v2, v8, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+74986c: 3523 ebff                              |0024: if-ge v3, v2, 000f // -0015
+749870: 5384 2686                              |0026: iget-wide v4, v8, Lcom/jakewharton/disklrucache/DiskLruCache;.size:J // field@8626
+749874: 7110 08c8 0100                         |0028: invoke-static {v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1000:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)[J // method@c808
+74987a: 0c02                                   |002b: move-result-object v2
+74987c: 4506 0203                              |002c: aget-wide v6, v2, v3
+749880: bb64                                   |002e: add-long/2addr v4, v6
+749882: 5a84 2686                              |002f: iput-wide v4, v8, Lcom/jakewharton/disklrucache/DiskLruCache;.size:J // field@8626
+749886: d803 0301                              |0031: add-int/lit8 v3, v3, #int 1 // #01
+74988a: 28ef                                   |0033: goto 0022 // -0011
+74988c: 1202                                   |0034: const/4 v2, #int 0 // #0
+74988e: 7120 0fc8 2100                         |0035: invoke-static {v1, v2}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$702:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;Lcom/jakewharton/disklrucache/DiskLruCache$Editor;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80f
+749894: 5282 2786                              |0038: iget v2, v8, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+749898: 3523 1300                              |003a: if-ge v3, v2, 004d // +0013
+74989c: 6e20 11c8 3100                         |003c: invoke-virtual {v1, v3}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.getCleanFile:(I)Ljava/io/File; // method@c811
+7498a2: 0c02                                   |003f: move-result-object v2
+7498a4: 7110 2ec8 0200                         |0040: invoke-static {v2}, Lcom/jakewharton/disklrucache/DiskLruCache;.deleteIfExists:(Ljava/io/File;)V // method@c82e
+7498aa: 6e20 12c8 3100                         |0043: invoke-virtual {v1, v3}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.getDirtyFile:(I)Ljava/io/File; // method@c812
+7498b0: 0c02                                   |0046: move-result-object v2
+7498b2: 7110 2ec8 0200                         |0047: invoke-static {v2}, Lcom/jakewharton/disklrucache/DiskLruCache;.deleteIfExists:(Ljava/io/File;)V // method@c82e
+7498b8: d803 0301                              |004a: add-int/lit8 v3, v3, #int 1 // #01
+7498bc: 28ec                                   |004c: goto 0038 // -0014
+7498be: 7210 a2d5 0000                         |004d: invoke-interface {v0}, Ljava/util/Iterator;.remove:()V // method@d5a2
+7498c4: 28bf                                   |0050: goto 000f // -0041
+7498c6: 0e00                                   |0051: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=323
+        0x0005 line=324
+        0x0015 line=325
+        0x001b line=326
+        0x0022 line=327
+        0x0026 line=328
+        0x0035 line=331
+        0x0038 line=332
+        0x003c line=333
+        0x0043 line=334
+        0x004d line=336
+      locals        :
+        0x0000 - 0x0052 reg=8 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #21              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'readJournal'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 1
+      outs          : 3
+      insns size    : 164 16-bit code units
+7498c8:                                        |[7498c8] com.jakewharton.disklrucache.DiskLruCache.readJournal:()V
+7498d8: 1a00 0a0e                              |0000: const-string v0, ", " // string@0e0a
+7498dc: 1a01 81e3                              |0002: const-string v1, "unexpected journal header: [" // string@e381
+7498e0: 2202 3319                              |0004: new-instance v2, Lcom/jakewharton/disklrucache/StrictLineReader; // type@1933
+7498e4: 2203 401a                              |0006: new-instance v3, Ljava/io/FileInputStream; // type@1a40
+7498e8: 5494 1e86                              |0008: iget-object v4, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFile:Ljava/io/File; // field@861e
+7498ec: 7020 f9cf 4300                         |000a: invoke-direct {v3, v4}, Ljava/io/FileInputStream;.<init>:(Ljava/io/File;)V // method@cff9
+7498f2: 6204 3286                              |000d: sget-object v4, Lcom/jakewharton/disklrucache/Util;.US_ASCII:Ljava/nio/charset/Charset; // field@8632
+7498f6: 7030 46c8 3204                         |000f: invoke-direct {v2, v3, v4}, Lcom/jakewharton/disklrucache/StrictLineReader;.<init>:(Ljava/io/InputStream;Ljava/nio/charset/Charset;)V // method@c846
+7498fc: 6e10 4ac8 0200                         |0012: invoke-virtual {v2}, Lcom/jakewharton/disklrucache/StrictLineReader;.readLine:()Ljava/lang/String; // method@c84a
+749902: 0c03                                   |0015: move-result-object v3
+749904: 6e10 4ac8 0200                         |0016: invoke-virtual {v2}, Lcom/jakewharton/disklrucache/StrictLineReader;.readLine:()Ljava/lang/String; // method@c84a
+74990a: 0c04                                   |0019: move-result-object v4
+74990c: 6e10 4ac8 0200                         |001a: invoke-virtual {v2}, Lcom/jakewharton/disklrucache/StrictLineReader;.readLine:()Ljava/lang/String; // method@c84a
+749912: 0c05                                   |001d: move-result-object v5
+749914: 6e10 4ac8 0200                         |001e: invoke-virtual {v2}, Lcom/jakewharton/disklrucache/StrictLineReader;.readLine:()Ljava/lang/String; // method@c84a
+74991a: 0c06                                   |0021: move-result-object v6
+74991c: 6e10 4ac8 0200                         |0022: invoke-virtual {v2}, Lcom/jakewharton/disklrucache/StrictLineReader;.readLine:()Ljava/lang/String; // method@c84a
+749922: 0c07                                   |0025: move-result-object v7
+749924: 1a08 f2b0                              |0026: const-string v8, "libcore.io.DiskLruCache" // string@b0f2
+749928: 6e20 03d2 3800                         |0028: invoke-virtual {v8, v3}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+74992e: 0a08                                   |002b: move-result v8
+749930: 3808 4200                              |002c: if-eqz v8, 006e // +0042
+749934: 1a08 3710                              |002e: const-string v8, "1" // string@1037
+749938: 6e20 03d2 4800                         |0030: invoke-virtual {v8, v4}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+74993e: 0a08                                   |0033: move-result v8
+749940: 3808 3a00                              |0034: if-eqz v8, 006e // +003a
+749944: 5298 1a86                              |0036: iget v8, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.appVersion:I // field@861a
+749948: 7110 69d1 0800                         |0038: invoke-static {v8}, Ljava/lang/Integer;.toString:(I)Ljava/lang/String; // method@d169
+74994e: 0c08                                   |003b: move-result-object v8
+749950: 6e20 03d2 5800                         |003c: invoke-virtual {v8, v5}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+749956: 0a05                                   |003f: move-result v5
+749958: 3805 2e00                              |0040: if-eqz v5, 006e // +002e
+74995c: 5295 2786                              |0042: iget v5, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+749960: 7110 69d1 0500                         |0044: invoke-static {v5}, Ljava/lang/Integer;.toString:(I)Ljava/lang/String; // method@d169
+749966: 0c05                                   |0047: move-result-object v5
+749968: 6e20 03d2 6500                         |0048: invoke-virtual {v5, v6}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+74996e: 0a05                                   |004b: move-result v5
+749970: 3805 2200                              |004c: if-eqz v5, 006e // +0022
+749974: 1a05 0000                              |004e: const-string v5, "" // string@0000
+749978: 6e20 03d2 7500                         |0050: invoke-virtual {v5, v7}, Ljava/lang/String;.equals:(Ljava/lang/Object;)Z // method@d203
+74997e: 0a05                                   |0053: move-result v5
+749980: 3805 1a00                              |0054: if-eqz v5, 006e // +001a
+749984: 1200                                   |0056: const/4 v0, #int 0 // #0
+749986: 6e10 4ac8 0200                         |0057: invoke-virtual {v2}, Lcom/jakewharton/disklrucache/StrictLineReader;.readLine:()Ljava/lang/String; // method@c84a
+74998c: 0c01                                   |005a: move-result-object v1
+74998e: 7020 3bc8 1900                         |005b: invoke-direct {v9, v1}, Lcom/jakewharton/disklrucache/DiskLruCache;.readJournalLine:(Ljava/lang/String;)V // method@c83b
+749994: d800 0001                              |005e: add-int/lit8 v0, v0, #int 1 // #01
+749998: 28f7                                   |0060: goto 0057 // -0009
+74999a: 5491 2286                              |0061: iget-object v1, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+74999e: 6e10 b0d5 0100                         |0063: invoke-virtual {v1}, Ljava/util/LinkedHashMap;.size:()I // method@d5b0
+7499a4: 0a01                                   |0066: move-result v1
+7499a6: b110                                   |0067: sub-int/2addr v0, v1
+7499a8: 5990 2586                              |0068: iput v0, v9, Lcom/jakewharton/disklrucache/DiskLruCache;.redundantOpCount:I // field@8625
+7499ac: 7110 4dc8 0200                         |006a: invoke-static {v2}, Lcom/jakewharton/disklrucache/Util;.closeQuietly:(Ljava/io/Closeable;)V // method@c84d
+7499b2: 0e00                                   |006d: return-void
+7499b4: 2209 481a                              |006e: new-instance v9, Ljava/io/IOException; // type@1a48
+7499b8: 2205 991a                              |0070: new-instance v5, Ljava/lang/StringBuilder; // type@1a99
+7499bc: 7020 3cd2 1500                         |0072: invoke-direct {v5, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+7499c2: 6e20 45d2 3500                         |0075: invoke-virtual {v5, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7499c8: 0c01                                   |0078: move-result-object v1
+7499ca: 6e20 45d2 0100                         |0079: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7499d0: 0c01                                   |007c: move-result-object v1
+7499d2: 6e20 45d2 4100                         |007d: invoke-virtual {v1, v4}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7499d8: 0c01                                   |0080: move-result-object v1
+7499da: 6e20 45d2 0100                         |0081: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7499e0: 0c01                                   |0084: move-result-object v1
+7499e2: 6e20 45d2 6100                         |0085: invoke-virtual {v1, v6}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7499e8: 0c01                                   |0088: move-result-object v1
+7499ea: 6e20 45d2 0100                         |0089: invoke-virtual {v1, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7499f0: 0c00                                   |008c: move-result-object v0
+7499f2: 6e20 45d2 7000                         |008d: invoke-virtual {v0, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+7499f8: 0c00                                   |0090: move-result-object v0
+7499fa: 1a01 d072                              |0091: const-string v1, "]" // string@72d0
+7499fe: 6e20 45d2 1000                         |0093: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749a04: 0c00                                   |0096: move-result-object v0
+749a06: 6e10 58d2 0000                         |0097: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+749a0c: 0c00                                   |009a: move-result-object v0
+749a0e: 7020 14d0 0900                         |009b: invoke-direct {v9, v0}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+749a14: 2709                                   |009e: throw v9
+749a16: 0d09                                   |009f: move-exception v9
+749a18: 7110 4dc8 0200                         |00a0: invoke-static {v2}, Lcom/jakewharton/disklrucache/Util;.closeQuietly:(Ljava/io/Closeable;)V // method@c84d
+749a1e: 2709                                   |00a3: throw v9
+      catches       : 4
+        0x0012 - 0x0054
+          <any> -> 0x009f
+        0x0057 - 0x005e
+          Ljava/io/EOFException; -> 0x0061
+          <any> -> 0x009f
+        0x0061 - 0x006a
+          <any> -> 0x009f
+        0x006e - 0x009f
+          <any> -> 0x009f
+      positions     :
+        0x0000 line=248
+        0x0002 line=0
+        0x0004 line=248
+        0x0012 line=250
+        0x0016 line=251
+        0x001a line=252
+        0x001e line=253
+        0x0022 line=254
+        0x0026 line=255
+        0x0057 line=267
+        0x0061 line=273
+        0x006a line=275
+        0x006e line=260
+        0x00a0 line=275
+      locals        :
+        0x0000 - 0x00a4 reg=9 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #22              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'readJournalLine'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 10
+      ins           : 2
+      outs          : 4
+      insns size    : 173 16-bit code units
+749a4c:                                        |[749a4c] com.jakewharton.disklrucache.DiskLruCache.readJournalLine:(Ljava/lang/String;)V
+749a5c: 1300 2000                              |0000: const/16 v0, #int 32 // #20
+749a60: 6e20 0cd2 0900                         |0002: invoke-virtual {v9, v0}, Ljava/lang/String;.indexOf:(I)I // method@d20c
+749a66: 0a01                                   |0005: move-result v1
+749a68: 1a02 82e3                              |0006: const-string v2, "unexpected journal line: " // string@e382
+749a6c: 12f3                                   |0008: const/4 v3, #int -1 // #ff
+749a6e: 3231 9100                              |0009: if-eq v1, v3, 009a // +0091
+749a72: d804 0101                              |000b: add-int/lit8 v4, v1, #int 1 // #01
+749a76: 6e30 0dd2 0904                         |000d: invoke-virtual {v9, v0, v4}, Ljava/lang/String;.indexOf:(II)I // method@d20d
+749a7c: 0a00                                   |0010: move-result v0
+749a7e: 3330 1700                              |0011: if-ne v0, v3, 0028 // +0017
+749a82: 6e20 23d2 4900                         |0013: invoke-virtual {v9, v4}, Ljava/lang/String;.substring:(I)Ljava/lang/String; // method@d223
+749a88: 0c04                                   |0016: move-result-object v4
+749a8a: 1265                                   |0017: const/4 v5, #int 6 // #6
+749a8c: 3351 1400                              |0018: if-ne v1, v5, 002c // +0014
+749a90: 1a05 0f5d                              |001a: const-string v5, "REMOVE" // string@5d0f
+749a94: 6e20 20d2 5900                         |001c: invoke-virtual {v9, v5}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@d220
+749a9a: 0a05                                   |001f: move-result v5
+749a9c: 3805 0c00                              |0020: if-eqz v5, 002c // +000c
+749aa0: 5488 2286                              |0022: iget-object v8, v8, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+749aa4: 6e20 afd5 4800                         |0024: invoke-virtual {v8, v4}, Ljava/util/LinkedHashMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5af
+749aaa: 0e00                                   |0027: return-void
+749aac: 6e30 24d2 4900                         |0028: invoke-virtual {v9, v4, v0}, Ljava/lang/String;.substring:(II)Ljava/lang/String; // method@d224
+749ab2: 0c04                                   |002b: move-result-object v4
+749ab4: 5485 2286                              |002c: iget-object v5, v8, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+749ab8: 6e20 aad5 4500                         |002e: invoke-virtual {v5, v4}, Ljava/util/LinkedHashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5aa
+749abe: 0c05                                   |0031: move-result-object v5
+749ac0: 1f05 2f19                              |0032: check-cast v5, Lcom/jakewharton/disklrucache/DiskLruCache$Entry; // type@192f
+749ac4: 1206                                   |0034: const/4 v6, #int 0 // #0
+749ac6: 3905 0c00                              |0035: if-nez v5, 0041 // +000c
+749aca: 2205 2f19                              |0037: new-instance v5, Lcom/jakewharton/disklrucache/DiskLruCache$Entry; // type@192f
+749ace: 7040 07c8 8564                         |0039: invoke-direct {v5, v8, v4, v6}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.<init>:(Lcom/jakewharton/disklrucache/DiskLruCache;Ljava/lang/String;Lcom/jakewharton/disklrucache/DiskLruCache$1;)V // method@c807
+749ad4: 5487 2286                              |003c: iget-object v7, v8, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+749ad8: 6e30 add5 4705                         |003e: invoke-virtual {v7, v4, v5}, Ljava/util/LinkedHashMap;.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; // method@d5ad
+749ade: 1254                                   |0041: const/4 v4, #int 5 // #5
+749ae0: 3230 2200                              |0042: if-eq v0, v3, 0064 // +0022
+749ae4: 3341 2000                              |0044: if-ne v1, v4, 0064 // +0020
+749ae8: 1a07 301a                              |0046: const-string v7, "CLEAN" // string@1a30
+749aec: 6e20 20d2 7900                         |0048: invoke-virtual {v9, v7}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@d220
+749af2: 0a07                                   |004b: move-result v7
+749af4: 3807 1800                              |004c: if-eqz v7, 0064 // +0018
+749af8: 1218                                   |004e: const/4 v8, #int 1 // #1
+749afa: b080                                   |004f: add-int/2addr v0, v8
+749afc: 6e20 23d2 0900                         |0050: invoke-virtual {v9, v0}, Ljava/lang/String;.substring:(I)Ljava/lang/String; // method@d223
+749b02: 0c09                                   |0053: move-result-object v9
+749b04: 1a00 bc02                              |0054: const-string v0, " " // string@02bc
+749b08: 6e20 1ed2 0900                         |0056: invoke-virtual {v9, v0}, Ljava/lang/String;.split:(Ljava/lang/String;)[Ljava/lang/String; // method@d21e
+749b0e: 0c09                                   |0059: move-result-object v9
+749b10: 7120 0dc8 8500                         |005a: invoke-static {v5, v8}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$602:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;Z)Z // method@c80d
+749b16: 7120 0fc8 6500                         |005d: invoke-static {v5, v6}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$702:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;Lcom/jakewharton/disklrucache/DiskLruCache$Editor;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80f
+749b1c: 7120 10c8 9500                         |0060: invoke-static {v5, v9}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$800:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;[Ljava/lang/String;)V // method@c810
+749b22: 2823                                   |0063: goto 0086 // +0023
+749b24: 3330 1500                              |0064: if-ne v0, v3, 0079 // +0015
+749b28: 3341 1300                              |0066: if-ne v1, v4, 0079 // +0013
+749b2c: 1a04 4521                              |0068: const-string v4, "DIRTY" // string@2145
+749b30: 6e20 20d2 4900                         |006a: invoke-virtual {v9, v4}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@d220
+749b36: 0a04                                   |006d: move-result v4
+749b38: 3804 0b00                              |006e: if-eqz v4, 0079 // +000b
+749b3c: 2209 2e19                              |0070: new-instance v9, Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // type@192e
+749b40: 7040 fbc7 8965                         |0072: invoke-direct {v9, v8, v5, v6}, Lcom/jakewharton/disklrucache/DiskLruCache$Editor;.<init>:(Lcom/jakewharton/disklrucache/DiskLruCache;Lcom/jakewharton/disklrucache/DiskLruCache$Entry;Lcom/jakewharton/disklrucache/DiskLruCache$1;)V // method@c7fb
+749b46: 7120 0fc8 9500                         |0075: invoke-static {v5, v9}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$702:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;Lcom/jakewharton/disklrucache/DiskLruCache$Editor;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80f
+749b4c: 280e                                   |0078: goto 0086 // +000e
+749b4e: 3330 0e00                              |0079: if-ne v0, v3, 0087 // +000e
+749b52: 1248                                   |007b: const/4 v8, #int 4 // #4
+749b54: 3381 0b00                              |007c: if-ne v1, v8, 0087 // +000b
+749b58: 1a08 d75c                              |007e: const-string v8, "READ" // string@5cd7
+749b5c: 6e20 20d2 8900                         |0080: invoke-virtual {v9, v8}, Ljava/lang/String;.startsWith:(Ljava/lang/String;)Z // method@d220
+749b62: 0a08                                   |0083: move-result v8
+749b64: 3808 0300                              |0084: if-eqz v8, 0087 // +0003
+749b68: 0e00                                   |0086: return-void
+749b6a: 2208 481a                              |0087: new-instance v8, Ljava/io/IOException; // type@1a48
+749b6e: 2200 991a                              |0089: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+749b72: 7020 3cd2 2000                         |008b: invoke-direct {v0, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+749b78: 6e20 45d2 9000                         |008e: invoke-virtual {v0, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749b7e: 0c09                                   |0091: move-result-object v9
+749b80: 6e10 58d2 0900                         |0092: invoke-virtual {v9}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+749b86: 0c09                                   |0095: move-result-object v9
+749b88: 7020 14d0 9800                         |0096: invoke-direct {v8, v9}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+749b8e: 2708                                   |0099: throw v8
+749b90: 2208 481a                              |009a: new-instance v8, Ljava/io/IOException; // type@1a48
+749b94: 2200 991a                              |009c: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+749b98: 7020 3cd2 2000                         |009e: invoke-direct {v0, v2}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+749b9e: 6e20 45d2 9000                         |00a1: invoke-virtual {v0, v9}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749ba4: 0c09                                   |00a4: move-result-object v9
+749ba6: 6e10 58d2 0900                         |00a5: invoke-virtual {v9}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+749bac: 0c09                                   |00a8: move-result-object v9
+749bae: 7020 14d0 9800                         |00a9: invoke-direct {v8, v9}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+749bb4: 2708                                   |00ac: throw v8
+      catches       : (none)
+      positions     :
+        0x0002 line=280
+        0x0006 line=281
+        0x000d line=286
+        0x0013 line=289
+        0x001a line=290
+        0x0022 line=291
+        0x0028 line=295
+        0x002c line=298
+        0x0037 line=300
+        0x003c line=301
+        0x0046 line=304
+        0x0050 line=305
+        0x005a line=306
+        0x005d line=307
+        0x0060 line=308
+        0x0068 line=309
+        0x0070 line=310
+        0x007e line=311
+        0x0087 line=314
+        0x009a line=282
+      locals        :
+        0x0000 - 0x00ad reg=8 this Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x00ad reg=9 (null) Ljava/lang/String;
+
+    #23              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'rebuildJournal'
+      type          : '()V'
+      access        : 0x20002 (PRIVATE DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 7
+      ins           : 1
+      outs          : 3
+      insns size    : 243 16-bit code units
+749bb8:                                        |[749bb8] com.jakewharton.disklrucache.DiskLruCache.rebuildJournal:()V
+749bc8: 1d06                                   |0000: monitor-enter v6
+749bca: 5460 2186                              |0001: iget-object v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+749bce: 3800 0500                              |0003: if-eqz v0, 0008 // +0005
+749bd2: 6e10 87d0 0000                         |0005: invoke-virtual {v0}, Ljava/io/Writer;.close:()V // method@d087
+749bd8: 2200 311a                              |0008: new-instance v0, Ljava/io/BufferedWriter; // type@1a31
+749bdc: 2201 571a                              |000a: new-instance v1, Ljava/io/OutputStreamWriter; // type@1a57
+749be0: 2202 421a                              |000c: new-instance v2, Ljava/io/FileOutputStream; // type@1a42
+749be4: 5463 2086                              |000e: iget-object v3, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFileTmp:Ljava/io/File; // field@8620
+749be8: 7020 04d0 3200                         |0010: invoke-direct {v2, v3}, Ljava/io/FileOutputStream;.<init>:(Ljava/io/File;)V // method@d004
+749bee: 6203 3286                              |0013: sget-object v3, Lcom/jakewharton/disklrucache/Util;.US_ASCII:Ljava/nio/charset/Charset; // field@8632
+749bf2: 7030 52d0 2103                         |0015: invoke-direct {v1, v2, v3}, Ljava/io/OutputStreamWriter;.<init>:(Ljava/io/OutputStream;Ljava/nio/charset/Charset;)V // method@d052
+749bf8: 7020 afcf 1000                         |0018: invoke-direct {v0, v1}, Ljava/io/BufferedWriter;.<init>:(Ljava/io/Writer;)V // method@cfaf
+749bfe: 1a01 f2b0                              |001b: const-string v1, "libcore.io.DiskLruCache" // string@b0f2
+749c02: 6e20 8ad0 1000                         |001d: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749c08: 1a01 9502                              |0020: const-string v1, "\n" // string@0295
+749c0c: 6e20 8ad0 1000                         |0022: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749c12: 1a01 3710                              |0025: const-string v1, "1" // string@1037
+749c16: 6e20 8ad0 1000                         |0027: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749c1c: 1a01 9502                              |002a: const-string v1, "\n" // string@0295
+749c20: 6e20 8ad0 1000                         |002c: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749c26: 5261 1a86                              |002f: iget v1, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.appVersion:I // field@861a
+749c2a: 7110 69d1 0100                         |0031: invoke-static {v1}, Ljava/lang/Integer;.toString:(I)Ljava/lang/String; // method@d169
+749c30: 0c01                                   |0034: move-result-object v1
+749c32: 6e20 8ad0 1000                         |0035: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749c38: 1a01 9502                              |0038: const-string v1, "\n" // string@0295
+749c3c: 6e20 8ad0 1000                         |003a: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749c42: 5261 2786                              |003d: iget v1, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+749c46: 7110 69d1 0100                         |003f: invoke-static {v1}, Ljava/lang/Integer;.toString:(I)Ljava/lang/String; // method@d169
+749c4c: 0c01                                   |0042: move-result-object v1
+749c4e: 6e20 8ad0 1000                         |0043: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749c54: 1a01 9502                              |0046: const-string v1, "\n" // string@0295
+749c58: 6e20 8ad0 1000                         |0048: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749c5e: 1a01 9502                              |004b: const-string v1, "\n" // string@0295
+749c62: 6e20 8ad0 1000                         |004d: invoke-virtual {v0, v1}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749c68: 5461 2286                              |0050: iget-object v1, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+749c6c: 6e10 b1d5 0100                         |0052: invoke-virtual {v1}, Ljava/util/LinkedHashMap;.values:()Ljava/util/Collection; // method@d5b1
+749c72: 0c01                                   |0055: move-result-object v1
+749c74: 7210 37d5 0100                         |0056: invoke-interface {v1}, Ljava/util/Collection;.iterator:()Ljava/util/Iterator; // method@d537
+749c7a: 0c01                                   |0059: move-result-object v1
+749c7c: 7210 a0d5 0100                         |005a: invoke-interface {v1}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+749c82: 0a02                                   |005d: move-result v2
+749c84: 3802 5600                              |005e: if-eqz v2, 00b4 // +0056
+749c88: 7210 a1d5 0100                         |0060: invoke-interface {v1}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+749c8e: 0c02                                   |0063: move-result-object v2
+749c90: 1f02 2f19                              |0064: check-cast v2, Lcom/jakewharton/disklrucache/DiskLruCache$Entry; // type@192f
+749c94: 7110 0ec8 0200                         |0066: invoke-static {v2}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$700:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80e
+749c9a: 0c03                                   |0069: move-result-object v3
+749c9c: 1304 0a00                              |006a: const/16 v4, #int 10 // #a
+749ca0: 3803 2100                              |006c: if-eqz v3, 008d // +0021
+749ca4: 2203 991a                              |006e: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+749ca8: 7010 39d2 0300                         |0070: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+749cae: 1a05 4621                              |0073: const-string v5, "DIRTY " // string@2146
+749cb2: 6e20 45d2 5300                         |0075: invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749cb8: 0c03                                   |0078: move-result-object v3
+749cba: 7110 09c8 0200                         |0079: invoke-static {v2}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1100:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Ljava/lang/String; // method@c809
+749cc0: 0c02                                   |007c: move-result-object v2
+749cc2: 6e20 45d2 2300                         |007d: invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749cc8: 0c02                                   |0080: move-result-object v2
+749cca: 6e20 3dd2 4200                         |0081: invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+749cd0: 0c02                                   |0084: move-result-object v2
+749cd2: 6e10 58d2 0200                         |0085: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+749cd8: 0c02                                   |0088: move-result-object v2
+749cda: 6e20 8ad0 2000                         |0089: invoke-virtual {v0, v2}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749ce0: 28ce                                   |008c: goto 005a // -0032
+749ce2: 2203 991a                              |008d: new-instance v3, Ljava/lang/StringBuilder; // type@1a99
+749ce6: 7010 39d2 0300                         |008f: invoke-direct {v3}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+749cec: 1a05 311a                              |0092: const-string v5, "CLEAN " // string@1a31
+749cf0: 6e20 45d2 5300                         |0094: invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749cf6: 0c03                                   |0097: move-result-object v3
+749cf8: 7110 09c8 0200                         |0098: invoke-static {v2}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1100:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Ljava/lang/String; // method@c809
+749cfe: 0c05                                   |009b: move-result-object v5
+749d00: 6e20 45d2 5300                         |009c: invoke-virtual {v3, v5}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749d06: 0c03                                   |009f: move-result-object v3
+749d08: 6e10 13c8 0200                         |00a0: invoke-virtual {v2}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.getLengths:()Ljava/lang/String; // method@c813
+749d0e: 0c02                                   |00a3: move-result-object v2
+749d10: 6e20 45d2 2300                         |00a4: invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749d16: 0c02                                   |00a7: move-result-object v2
+749d18: 6e20 3dd2 4200                         |00a8: invoke-virtual {v2, v4}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+749d1e: 0c02                                   |00ab: move-result-object v2
+749d20: 6e10 58d2 0200                         |00ac: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+749d26: 0c02                                   |00af: move-result-object v2
+749d28: 6e20 8ad0 2000                         |00b0: invoke-virtual {v0, v2}, Ljava/io/Writer;.write:(Ljava/lang/String;)V // method@d08a
+749d2e: 28a7                                   |00b3: goto 005a // -0059
+749d30: 6e10 87d0 0000                         |00b4: invoke-virtual {v0}, Ljava/io/Writer;.close:()V // method@d087
+749d36: 5460 1e86                              |00b7: iget-object v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFile:Ljava/io/File; // field@861e
+749d3a: 6e10 dfcf 0000                         |00b9: invoke-virtual {v0}, Ljava/io/File;.exists:()Z // method@cfdf
+749d40: 0a00                                   |00bc: move-result v0
+749d42: 1211                                   |00bd: const/4 v1, #int 1 // #1
+749d44: 3800 0900                              |00be: if-eqz v0, 00c7 // +0009
+749d48: 5460 1e86                              |00c0: iget-object v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFile:Ljava/io/File; // field@861e
+749d4c: 5462 1f86                              |00c2: iget-object v2, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFileBackup:Ljava/io/File; // field@861f
+749d50: 7130 3ec8 2001                         |00c4: invoke-static {v0, v2, v1}, Lcom/jakewharton/disklrucache/DiskLruCache;.renameTo:(Ljava/io/File;Ljava/io/File;Z)V // method@c83e
+749d56: 5460 2086                              |00c7: iget-object v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFileTmp:Ljava/io/File; // field@8620
+749d5a: 5462 1e86                              |00c9: iget-object v2, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFile:Ljava/io/File; // field@861e
+749d5e: 1203                                   |00cb: const/4 v3, #int 0 // #0
+749d60: 7130 3ec8 2003                         |00cc: invoke-static {v0, v2, v3}, Lcom/jakewharton/disklrucache/DiskLruCache;.renameTo:(Ljava/io/File;Ljava/io/File;Z)V // method@c83e
+749d66: 5460 1f86                              |00cf: iget-object v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFileBackup:Ljava/io/File; // field@861f
+749d6a: 6e10 decf 0000                         |00d1: invoke-virtual {v0}, Ljava/io/File;.delete:()Z // method@cfde
+749d70: 2200 311a                              |00d4: new-instance v0, Ljava/io/BufferedWriter; // type@1a31
+749d74: 2202 571a                              |00d6: new-instance v2, Ljava/io/OutputStreamWriter; // type@1a57
+749d78: 2203 421a                              |00d8: new-instance v3, Ljava/io/FileOutputStream; // type@1a42
+749d7c: 5464 1e86                              |00da: iget-object v4, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalFile:Ljava/io/File; // field@861e
+749d80: 7030 05d0 4301                         |00dc: invoke-direct {v3, v4, v1}, Ljava/io/FileOutputStream;.<init>:(Ljava/io/File;Z)V // method@d005
+749d86: 6201 3286                              |00df: sget-object v1, Lcom/jakewharton/disklrucache/Util;.US_ASCII:Ljava/nio/charset/Charset; // field@8632
+749d8a: 7030 52d0 3201                         |00e1: invoke-direct {v2, v3, v1}, Ljava/io/OutputStreamWriter;.<init>:(Ljava/io/OutputStream;Ljava/nio/charset/Charset;)V // method@d052
+749d90: 7020 afcf 2000                         |00e4: invoke-direct {v0, v2}, Ljava/io/BufferedWriter;.<init>:(Ljava/io/Writer;)V // method@cfaf
+749d96: 5b60 2186                              |00e7: iput-object v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+749d9a: 1e06                                   |00e9: monitor-exit v6
+749d9c: 0e00                                   |00ea: return-void
+749d9e: 0d01                                   |00eb: move-exception v1
+749da0: 6e10 87d0 0000                         |00ec: invoke-virtual {v0}, Ljava/io/Writer;.close:()V // method@d087
+749da6: 2701                                   |00ef: throw v1
+749da8: 0d00                                   |00f0: move-exception v0
+749daa: 1e06                                   |00f1: monitor-exit v6
+749dac: 2700                                   |00f2: throw v0
+      catches       : 4
+        0x0001 - 0x001b
+          <any> -> 0x00f0
+        0x001b - 0x00b3
+          <any> -> 0x00eb
+        0x00b4 - 0x00e9
+          <any> -> 0x00f0
+        0x00ec - 0x00f2
+          <any> -> 0x00f0
+      positions     :
+        0x0001 line=346
+        0x0005 line=347
+        0x0008 line=350
+        0x001b line=353
+        0x0020 line=354
+        0x0025 line=355
+        0x002a line=356
+        0x002f line=357
+        0x0038 line=358
+        0x003d line=359
+        0x0046 line=360
+        0x004b line=361
+        0x0050 line=363
+        0x0066 line=364
+        0x006e line=365
+        0x008d line=367
+        0x00b4 line=371
+        0x00b7 line=374
+        0x00c0 line=375
+        0x00c7 line=377
+        0x00cf line=378
+        0x00d4 line=380
+        0x00e9 line=382
+        0x00ec line=371
+      locals        :
+        0x0000 - 0x00f3 reg=6 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #24              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'renameTo'
+      type          : '(Ljava/io/File;Ljava/io/File;Z)V'
+      access        : 0x000a (PRIVATE STATIC)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 18 16-bit code units
+749dd8:                                        |[749dd8] com.jakewharton.disklrucache.DiskLruCache.renameTo:(Ljava/io/File;Ljava/io/File;Z)V
+749de8: 3802 0500                              |0000: if-eqz v2, 0005 // +0005
+749dec: 7110 2ec8 0100                         |0002: invoke-static {v1}, Lcom/jakewharton/disklrucache/DiskLruCache;.deleteIfExists:(Ljava/io/File;)V // method@c82e
+749df2: 6e20 f1cf 1000                         |0005: invoke-virtual {v0, v1}, Ljava/io/File;.renameTo:(Ljava/io/File;)Z // method@cff1
+749df8: 0a00                                   |0008: move-result v0
+749dfa: 3800 0300                              |0009: if-eqz v0, 000c // +0003
+749dfe: 0e00                                   |000b: return-void
+749e00: 2200 481a                              |000c: new-instance v0, Ljava/io/IOException; // type@1a48
+749e04: 7010 13d0 0000                         |000e: invoke-direct {v0}, Ljava/io/IOException;.<init>:()V // method@d013
+749e0a: 2700                                   |0011: throw v0
+      catches       : (none)
+      positions     :
+        0x0002 line=392
+        0x0005 line=394
+        0x000c line=395
+      locals        :
+        0x0000 - 0x0012 reg=0 (null) Ljava/io/File;
+        0x0000 - 0x0012 reg=1 (null) Ljava/io/File;
+        0x0000 - 0x0012 reg=2 (null) Z
+
+    #25              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'trimToSize'
+      type          : '()V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 2
+      insns size    : 35 16-bit code units
+749e0c:                                        |[749e0c] com.jakewharton.disklrucache.DiskLruCache.trimToSize:()V
+749e1c: 5340 2686                              |0000: iget-wide v0, v4, Lcom/jakewharton/disklrucache/DiskLruCache;.size:J // field@8626
+749e20: 5342 2386                              |0002: iget-wide v2, v4, Lcom/jakewharton/disklrucache/DiskLruCache;.maxSize:J // field@8623
+749e24: 3100 0002                              |0004: cmp-long v0, v0, v2
+749e28: 3d00 1c00                              |0006: if-lez v0, 0022 // +001c
+749e2c: 5440 2286                              |0008: iget-object v0, v4, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+749e30: 6e10 a9d5 0000                         |000a: invoke-virtual {v0}, Ljava/util/LinkedHashMap;.entrySet:()Ljava/util/Set; // method@d5a9
+749e36: 0c00                                   |000d: move-result-object v0
+749e38: 7210 32d6 0000                         |000e: invoke-interface {v0}, Ljava/util/Set;.iterator:()Ljava/util/Iterator; // method@d632
+749e3e: 0c00                                   |0011: move-result-object v0
+749e40: 7210 a1d5 0000                         |0012: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+749e46: 0c00                                   |0015: move-result-object v0
+749e48: 1f00 551b                              |0016: check-cast v0, Ljava/util/Map$Entry; // type@1b55
+749e4c: 7210 fcd5 0000                         |0018: invoke-interface {v0}, Ljava/util/Map$Entry;.getKey:()Ljava/lang/Object; // method@d5fc
+749e52: 0c00                                   |001b: move-result-object v0
+749e54: 1f00 971a                              |001c: check-cast v0, Ljava/lang/String; // type@1a97
+749e58: 6e20 3dc8 0400                         |001e: invoke-virtual {v4, v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.remove:(Ljava/lang/String;)Z // method@c83d
+749e5e: 28df                                   |0021: goto 0000 // -0021
+749e60: 0e00                                   |0022: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=641
+        0x0008 line=642
+        0x0018 line=643
+      locals        :
+        0x0000 - 0x0023 reg=4 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #26              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'validateKey'
+      type          : '(Ljava/lang/String;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 40 16-bit code units
+749e64:                                        |[749e64] com.jakewharton.disklrucache.DiskLruCache.validateKey:(Ljava/lang/String;)V
+749e74: 6202 1486                              |0000: sget-object v2, Lcom/jakewharton/disklrucache/DiskLruCache;.LEGAL_KEY_PATTERN:Ljava/util/regex/Pattern; // field@8614
+749e78: 6e20 4ad7 3200                         |0002: invoke-virtual {v2, v3}, Ljava/util/regex/Pattern;.matcher:(Ljava/lang/CharSequence;)Ljava/util/regex/Matcher; // method@d74a
+749e7e: 0c02                                   |0005: move-result-object v2
+749e80: 6e10 3cd7 0200                         |0006: invoke-virtual {v2}, Ljava/util/regex/Matcher;.matches:()Z // method@d73c
+749e86: 0a02                                   |0009: move-result v2
+749e88: 3802 0300                              |000a: if-eqz v2, 000d // +0003
+749e8c: 0e00                                   |000c: return-void
+749e8e: 2202 7a1a                              |000d: new-instance v2, Ljava/lang/IllegalArgumentException; // type@1a7a
+749e92: 2200 991a                              |000f: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+749e96: 1a01 acae                              |0011: const-string v1, "keys must match regex [a-z0-9_-]{1,64}: \"" // string@aeac
+749e9a: 7020 3cd2 1000                         |0013: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(Ljava/lang/String;)V // method@d23c
+749ea0: 6e20 45d2 3000                         |0016: invoke-virtual {v0, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749ea6: 0c03                                   |0019: move-result-object v3
+749ea8: 1a00 0c05                              |001a: const-string v0, "\"" // string@050c
+749eac: 6e20 45d2 0300                         |001c: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+749eb2: 0c03                                   |001f: move-result-object v3
+749eb4: 6e10 58d2 0300                         |0020: invoke-virtual {v3}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+749eba: 0c03                                   |0023: move-result-object v3
+749ebc: 7020 47d1 3200                         |0024: invoke-direct {v2, v3}, Ljava/lang/IllegalArgumentException;.<init>:(Ljava/lang/String;)V // method@d147
+749ec2: 2702                                   |0027: throw v2
+      catches       : (none)
+      positions     :
+        0x0000 line=658
+        0x0006 line=659
+        0x000d line=660
+      locals        :
+        0x0000 - 0x0028 reg=2 this Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x0028 reg=3 (null) Ljava/lang/String;
+
+  Virtual methods   -
+    #0              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'close'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 2
+      insns size    : 64 16-bit code units
+749ec4:                                        |[749ec4] com.jakewharton.disklrucache.DiskLruCache.close:()V
+749ed4: 1d03                                   |0000: monitor-enter v3
+749ed6: 5430 2186                              |0001: iget-object v0, v3, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+749eda: 3900 0400                              |0003: if-nez v0, 0007 // +0004
+749ede: 1e03                                   |0005: monitor-exit v3
+749ee0: 0e00                                   |0006: return-void
+749ee2: 2200 3a1b                              |0007: new-instance v0, Ljava/util/ArrayList; // type@1b3a
+749ee6: 5431 2286                              |0009: iget-object v1, v3, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+749eea: 6e10 b1d5 0100                         |000b: invoke-virtual {v1}, Ljava/util/LinkedHashMap;.values:()Ljava/util/Collection; // method@d5b1
+749ef0: 0c01                                   |000e: move-result-object v1
+749ef2: 7020 a1d4 1000                         |000f: invoke-direct {v0, v1}, Ljava/util/ArrayList;.<init>:(Ljava/util/Collection;)V // method@d4a1
+749ef8: 6e10 aed4 0000                         |0012: invoke-virtual {v0}, Ljava/util/ArrayList;.iterator:()Ljava/util/Iterator; // method@d4ae
+749efe: 0c00                                   |0015: move-result-object v0
+749f00: 7210 a0d5 0000                         |0016: invoke-interface {v0}, Ljava/util/Iterator;.hasNext:()Z // method@d5a0
+749f06: 0a01                                   |0019: move-result v1
+749f08: 3801 1600                              |001a: if-eqz v1, 0030 // +0016
+749f0c: 7210 a1d5 0000                         |001c: invoke-interface {v0}, Ljava/util/Iterator;.next:()Ljava/lang/Object; // method@d5a1
+749f12: 0c01                                   |001f: move-result-object v1
+749f14: 1f01 2f19                              |0020: check-cast v1, Lcom/jakewharton/disklrucache/DiskLruCache$Entry; // type@192f
+749f18: 7110 0ec8 0100                         |0022: invoke-static {v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$700:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80e
+749f1e: 0c02                                   |0025: move-result-object v2
+749f20: 3802 f0ff                              |0026: if-eqz v2, 0016 // -0010
+749f24: 7110 0ec8 0100                         |0028: invoke-static {v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$700:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80e
+749f2a: 0c01                                   |002b: move-result-object v1
+749f2c: 6e10 fcc7 0100                         |002c: invoke-virtual {v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Editor;.abort:()V // method@c7fc
+749f32: 28e7                                   |002f: goto 0016 // -0019
+749f34: 7010 41c8 0300                         |0030: invoke-direct {v3}, Lcom/jakewharton/disklrucache/DiskLruCache;.trimToSize:()V // method@c841
+749f3a: 5430 2186                              |0033: iget-object v0, v3, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+749f3e: 6e10 87d0 0000                         |0035: invoke-virtual {v0}, Ljava/io/Writer;.close:()V // method@d087
+749f44: 1200                                   |0038: const/4 v0, #int 0 // #0
+749f46: 5b30 2186                              |0039: iput-object v0, v3, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+749f4a: 1e03                                   |003b: monitor-exit v3
+749f4c: 0e00                                   |003c: return-void
+749f4e: 0d00                                   |003d: move-exception v0
+749f50: 1e03                                   |003e: monitor-exit v3
+749f52: 2700                                   |003f: throw v0
+      catches       : 3
+        0x0001 - 0x0003
+          <any> -> 0x003d
+        0x0007 - 0x003b
+          <any> -> 0x003d
+        0x003e - 0x003f
+          <any> -> 0x003d
+      positions     :
+        0x0001 line=627
+        0x0005 line=628
+        0x0007 line=630
+        0x0022 line=631
+        0x0028 line=632
+        0x0030 line=635
+        0x0033 line=636
+        0x0039 line=637
+        0x003b line=638
+      locals        :
+        0x0000 - 0x0040 reg=3 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #1              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'delete'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 9 16-bit code units
+749f70:                                        |[749f70] com.jakewharton.disklrucache.DiskLruCache.delete:()V
+749f80: 6e10 2bc8 0000                         |0000: invoke-virtual {v0}, Lcom/jakewharton/disklrucache/DiskLruCache;.close:()V // method@c82b
+749f86: 5400 1c86                              |0003: iget-object v0, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.directory:Ljava/io/File; // field@861c
+749f8a: 7110 4ec8 0000                         |0005: invoke-static {v0}, Lcom/jakewharton/disklrucache/Util;.deleteContents:(Ljava/io/File;)V // method@c84e
+749f90: 0e00                                   |0008: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=653
+        0x0003 line=654
+      locals        :
+        0x0000 - 0x0009 reg=0 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #2              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'edit'
+      type          : '(Ljava/lang/String;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 4
+      insns size    : 7 16-bit code units
+749f94:                                        |[749f94] com.jakewharton.disklrucache.DiskLruCache.edit:(Ljava/lang/String;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor;
+749fa4: 1600 ffff                              |0000: const-wide/16 v0, #int -1 // #ffff
+749fa8: 7040 30c8 3210                         |0002: invoke-direct {v2, v3, v0, v1}, Lcom/jakewharton/disklrucache/DiskLruCache;.edit:(Ljava/lang/String;J)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c830
+749fae: 0c02                                   |0005: move-result-object v2
+749fb0: 1102                                   |0006: return-object v2
+      catches       : (none)
+      positions     :
+        0x0002 line=450
+      locals        :
+        0x0000 - 0x0007 reg=2 this Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x0007 reg=3 (null) Ljava/lang/String;
+
+    #3              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'flush'
+      type          : '()V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 1
+      insns size    : 17 16-bit code units
+749fb4:                                        |[749fb4] com.jakewharton.disklrucache.DiskLruCache.flush:()V
+749fc4: 1d01                                   |0000: monitor-enter v1
+749fc6: 7010 2ac8 0100                         |0001: invoke-direct {v1}, Lcom/jakewharton/disklrucache/DiskLruCache;.checkNotClosed:()V // method@c82a
+749fcc: 7010 41c8 0100                         |0004: invoke-direct {v1}, Lcom/jakewharton/disklrucache/DiskLruCache;.trimToSize:()V // method@c841
+749fd2: 5410 2186                              |0007: iget-object v0, v1, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+749fd6: 6e10 88d0 0000                         |0009: invoke-virtual {v0}, Ljava/io/Writer;.flush:()V // method@d088
+749fdc: 1e01                                   |000c: monitor-exit v1
+749fde: 0e00                                   |000d: return-void
+749fe0: 0d00                                   |000e: move-exception v0
+749fe2: 1e01                                   |000f: monitor-exit v1
+749fe4: 2700                                   |0010: throw v0
+      catches       : 2
+        0x0001 - 0x000c
+          <any> -> 0x000e
+        0x000f - 0x0010
+          <any> -> 0x000e
+      positions     :
+        0x0001 line=620
+        0x0004 line=621
+        0x0007 line=622
+        0x000c line=623
+      locals        :
+        0x0000 - 0x0011 reg=1 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #4              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'get'
+      type          : '(Ljava/lang/String;)Lcom/jakewharton/disklrucache/DiskLruCache$Snapshot;'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 13
+      ins           : 2
+      outs          : 8
+      insns size    : 139 16-bit code units
+749ffc:                                        |[749ffc] com.jakewharton.disklrucache.DiskLruCache.get:(Ljava/lang/String;)Lcom/jakewharton/disklrucache/DiskLruCache$Snapshot;
+74a00c: 1d0b                                   |0000: monitor-enter v11
+74a00e: 7010 2ac8 0b00                         |0001: invoke-direct {v11}, Lcom/jakewharton/disklrucache/DiskLruCache;.checkNotClosed:()V // method@c82a
+74a014: 7020 42c8 cb00                         |0004: invoke-direct {v11, v12}, Lcom/jakewharton/disklrucache/DiskLruCache;.validateKey:(Ljava/lang/String;)V // method@c842
+74a01a: 54b0 2286                              |0007: iget-object v0, v11, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+74a01e: 6e20 aad5 c000                         |0009: invoke-virtual {v0, v12}, Ljava/util/LinkedHashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5aa
+74a024: 0c00                                   |000c: move-result-object v0
+74a026: 1f00 2f19                              |000d: check-cast v0, Lcom/jakewharton/disklrucache/DiskLruCache$Entry; // type@192f
+74a02a: 1201                                   |000f: const/4 v1, #int 0 // #0
+74a02c: 3900 0400                              |0010: if-nez v0, 0014 // +0004
+74a030: 1e0b                                   |0012: monitor-exit v11
+74a032: 1101                                   |0013: return-object v1
+74a034: 7110 0cc8 0000                         |0014: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$600:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Z // method@c80c
+74a03a: 0a02                                   |0017: move-result v2
+74a03c: 3902 0400                              |0018: if-nez v2, 001c // +0004
+74a040: 1e0b                                   |001a: monitor-exit v11
+74a042: 1101                                   |001b: return-object v1
+74a044: 52b2 2786                              |001c: iget v2, v11, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+74a048: 2328 9f20                              |001e: new-array v8, v2, [Ljava/io/InputStream; // type@209f
+74a04c: 1202                                   |0020: const/4 v2, #int 0 // #0
+74a04e: 0123                                   |0021: move v3, v2
+74a050: 52b4 2786                              |0022: iget v4, v11, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+74a054: 3543 1000                              |0024: if-ge v3, v4, 0034 // +0010
+74a058: 2204 401a                              |0026: new-instance v4, Ljava/io/FileInputStream; // type@1a40
+74a05c: 6e20 11c8 3000                         |0028: invoke-virtual {v0, v3}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.getCleanFile:(I)Ljava/io/File; // method@c811
+74a062: 0c05                                   |002b: move-result-object v5
+74a064: 7020 f9cf 5400                         |002c: invoke-direct {v4, v5}, Ljava/io/FileInputStream;.<init>:(Ljava/io/File;)V // method@cff9
+74a06a: 4d04 0803                              |002f: aput-object v4, v8, v3
+74a06e: d803 0301                              |0031: add-int/lit8 v3, v3, #int 1 // #01
+74a072: 28ef                                   |0033: goto 0022 // -0011
+74a074: 52b1 2586                              |0034: iget v1, v11, Lcom/jakewharton/disklrucache/DiskLruCache;.redundantOpCount:I // field@8625
+74a078: d801 0101                              |0036: add-int/lit8 v1, v1, #int 1 // #01
+74a07c: 59b1 2586                              |0038: iput v1, v11, Lcom/jakewharton/disklrucache/DiskLruCache;.redundantOpCount:I // field@8625
+74a080: 54b1 2186                              |003a: iget-object v1, v11, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+74a084: 2202 991a                              |003c: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+74a088: 7010 39d2 0200                         |003e: invoke-direct {v2}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+74a08e: 1a03 d85c                              |0041: const-string v3, "READ " // string@5cd8
+74a092: 6e20 45d2 3200                         |0043: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74a098: 0c02                                   |0046: move-result-object v2
+74a09a: 6e20 45d2 c200                         |0047: invoke-virtual {v2, v12}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74a0a0: 0c02                                   |004a: move-result-object v2
+74a0a2: 1303 0a00                              |004b: const/16 v3, #int 10 // #a
+74a0a6: 6e20 3dd2 3200                         |004d: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+74a0ac: 0c02                                   |0050: move-result-object v2
+74a0ae: 6e10 58d2 0200                         |0051: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+74a0b4: 0c02                                   |0054: move-result-object v2
+74a0b6: 6e20 86d0 2100                         |0055: invoke-virtual {v1, v2}, Ljava/io/Writer;.append:(Ljava/lang/CharSequence;)Ljava/io/Writer; // method@d086
+74a0bc: 7010 37c8 0b00                         |0058: invoke-direct {v11}, Lcom/jakewharton/disklrucache/DiskLruCache;.journalRebuildRequired:()Z // method@c837
+74a0c2: 0a01                                   |005b: move-result v1
+74a0c4: 3801 0900                              |005c: if-eqz v1, 0065 // +0009
+74a0c8: 54b1 1d86                              |005e: iget-object v1, v11, Lcom/jakewharton/disklrucache/DiskLruCache;.executorService:Ljava/util/concurrent/ThreadPoolExecutor; // field@861d
+74a0cc: 54b2 1b86                              |0060: iget-object v2, v11, Lcom/jakewharton/disklrucache/DiskLruCache;.cleanupCallable:Ljava/util/concurrent/Callable; // field@861b
+74a0d0: 6e20 e5d6 2100                         |0062: invoke-virtual {v1, v2}, Ljava/util/concurrent/ThreadPoolExecutor;.submit:(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future; // method@d6e5
+74a0d6: 2201 3019                              |0065: new-instance v1, Lcom/jakewharton/disklrucache/DiskLruCache$Snapshot; // type@1930
+74a0da: 7110 0ac8 0000                         |0067: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1200:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)J // method@c80a
+74a0e0: 0b06                                   |006a: move-result-wide v6
+74a0e2: 7110 08c8 0000                         |006b: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1000:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)[J // method@c808
+74a0e8: 0c09                                   |006e: move-result-object v9
+74a0ea: 120a                                   |006f: const/4 v10, #int 0 // #0
+74a0ec: 0713                                   |0070: move-object v3, v1
+74a0ee: 07b4                                   |0071: move-object v4, v11
+74a0f0: 07c5                                   |0072: move-object v5, v12
+74a0f2: 7608 17c8 0300                         |0073: invoke-direct/range {v3, v4, v5, v6, v7, v8, v9, v10}, Lcom/jakewharton/disklrucache/DiskLruCache$Snapshot;.<init>:(Lcom/jakewharton/disklrucache/DiskLruCache;Ljava/lang/String;J[Ljava/io/InputStream;[JLcom/jakewharton/disklrucache/DiskLruCache$1;)V // method@c817
+74a0f8: 1e0b                                   |0076: monitor-exit v11
+74a0fa: 1101                                   |0077: return-object v1
+74a0fc: 52bc 2786                              |0078: iget v12, v11, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+74a100: 35c2 0c00                              |007a: if-ge v2, v12, 0086 // +000c
+74a104: 460c 0802                              |007c: aget-object v12, v8, v2
+74a108: 380c 0800                              |007e: if-eqz v12, 0086 // +0008
+74a10c: 7110 4dc8 0c00                         |0080: invoke-static {v12}, Lcom/jakewharton/disklrucache/Util;.closeQuietly:(Ljava/io/Closeable;)V // method@c84d
+74a112: d802 0201                              |0083: add-int/lit8 v2, v2, #int 1 // #01
+74a116: 28f3                                   |0085: goto 0078 // -000d
+74a118: 1e0b                                   |0086: monitor-exit v11
+74a11a: 1101                                   |0087: return-object v1
+74a11c: 0d0c                                   |0088: move-exception v12
+74a11e: 1e0b                                   |0089: monitor-exit v11
+74a120: 270c                                   |008a: throw v12
+      catches       : 7
+        0x0001 - 0x000f
+          <any> -> 0x0088
+        0x0014 - 0x0018
+          <any> -> 0x0088
+        0x001c - 0x0020
+          <any> -> 0x0088
+        0x0022 - 0x0031
+          Ljava/io/FileNotFoundException; -> 0x0078
+          <any> -> 0x0088
+        0x0034 - 0x0076
+          <any> -> 0x0088
+        0x0078 - 0x0083
+          <any> -> 0x0088
+        0x0089 - 0x008a
+          <any> -> 0x0088
+      positions     :
+        0x0001 line=405
+        0x0004 line=406
+        0x0007 line=407
+        0x0012 line=409
+        0x0014 line=412
+        0x001a line=413
+        0x001c line=419
+        0x0022 line=421
+        0x0026 line=422
+        0x0034 line=436
+        0x003a line=437
+        0x0058 line=438
+        0x005e line=439
+        0x0065 line=442
+        0x0078 line=426
+        0x007c line=427
+        0x0080 line=428
+        0x0086 line=433
+      locals        :
+        0x0000 - 0x008b reg=11 this Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x008b reg=12 (null) Ljava/lang/String;
+
+    #5              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'getDirectory'
+      type          : '()Ljava/io/File;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+74a168:                                        |[74a168] com.jakewharton.disklrucache.DiskLruCache.getDirectory:()Ljava/io/File;
+74a178: 5400 1c86                              |0000: iget-object v0, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.directory:Ljava/io/File; // field@861c
+74a17c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=479
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #6              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'getMaxSize'
+      type          : '()J'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+74a180:                                        |[74a180] com.jakewharton.disklrucache.DiskLruCache.getMaxSize:()J
+74a190: 1d02                                   |0000: monitor-enter v2
+74a192: 5320 2386                              |0001: iget-wide v0, v2, Lcom/jakewharton/disklrucache/DiskLruCache;.maxSize:J // field@8623
+74a196: 1e02                                   |0003: monitor-exit v2
+74a198: 1000                                   |0004: return-wide v0
+74a19a: 0d00                                   |0005: move-exception v0
+74a19c: 1e02                                   |0006: monitor-exit v2
+74a19e: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=487
+      locals        :
+        0x0000 - 0x0008 reg=2 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #7              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'isClosed'
+      type          : '()Z'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 2
+      ins           : 1
+      outs          : 0
+      insns size    : 13 16-bit code units
+74a1b4:                                        |[74a1b4] com.jakewharton.disklrucache.DiskLruCache.isClosed:()Z
+74a1c4: 1d01                                   |0000: monitor-enter v1
+74a1c6: 5410 2186                              |0001: iget-object v0, v1, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+74a1ca: 3900 0400                              |0003: if-nez v0, 0007 // +0004
+74a1ce: 1210                                   |0005: const/4 v0, #int 1 // #1
+74a1d0: 2802                                   |0006: goto 0008 // +0002
+74a1d2: 1200                                   |0007: const/4 v0, #int 0 // #0
+74a1d4: 1e01                                   |0008: monitor-exit v1
+74a1d6: 0f00                                   |0009: return v0
+74a1d8: 0d00                                   |000a: move-exception v0
+74a1da: 1e01                                   |000b: monitor-exit v1
+74a1dc: 2700                                   |000c: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x000a
+        0x000b - 0x000c
+          <any> -> 0x000a
+      positions     :
+        0x0001 line=609
+      locals        :
+        0x0000 - 0x000d reg=1 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+    #8              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'remove'
+      type          : '(Ljava/lang/String;)Z'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 8
+      ins           : 2
+      outs          : 2
+      insns size    : 155 16-bit code units
+74a1f4:                                        |[74a1f4] com.jakewharton.disklrucache.DiskLruCache.remove:(Ljava/lang/String;)Z
+74a204: 1d06                                   |0000: monitor-enter v6
+74a206: 7010 2ac8 0600                         |0001: invoke-direct {v6}, Lcom/jakewharton/disklrucache/DiskLruCache;.checkNotClosed:()V // method@c82a
+74a20c: 7020 42c8 7600                         |0004: invoke-direct {v6, v7}, Lcom/jakewharton/disklrucache/DiskLruCache;.validateKey:(Ljava/lang/String;)V // method@c842
+74a212: 5460 2286                              |0007: iget-object v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+74a216: 6e20 aad5 7000                         |0009: invoke-virtual {v0, v7}, Ljava/util/LinkedHashMap;.get:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5aa
+74a21c: 0c00                                   |000c: move-result-object v0
+74a21e: 1f00 2f19                              |000d: check-cast v0, Lcom/jakewharton/disklrucache/DiskLruCache$Entry; // type@192f
+74a222: 1201                                   |000f: const/4 v1, #int 0 // #0
+74a224: 3800 8600                              |0010: if-eqz v0, 0096 // +0086
+74a228: 7110 0ec8 0000                         |0012: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$700:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)Lcom/jakewharton/disklrucache/DiskLruCache$Editor; // method@c80e
+74a22e: 0c02                                   |0015: move-result-object v2
+74a230: 3802 0400                              |0016: if-eqz v2, 001a // +0004
+74a234: 2900 7e00                              |0018: goto/16 0096 // +007e
+74a238: 5262 2786                              |001a: iget v2, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.valueCount:I // field@8627
+74a23c: 3521 4200                              |001c: if-ge v1, v2, 005e // +0042
+74a240: 6e20 11c8 1000                         |001e: invoke-virtual {v0, v1}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.getCleanFile:(I)Ljava/io/File; // method@c811
+74a246: 0c02                                   |0021: move-result-object v2
+74a248: 6e10 dfcf 0200                         |0022: invoke-virtual {v2}, Ljava/io/File;.exists:()Z // method@cfdf
+74a24e: 0a03                                   |0025: move-result v3
+74a250: 3803 2200                              |0026: if-eqz v3, 0048 // +0022
+74a254: 6e10 decf 0200                         |0028: invoke-virtual {v2}, Ljava/io/File;.delete:()Z // method@cfde
+74a25a: 0a03                                   |002b: move-result v3
+74a25c: 3803 0300                              |002c: if-eqz v3, 002f // +0003
+74a260: 281a                                   |002e: goto 0048 // +001a
+74a262: 2207 481a                              |002f: new-instance v7, Ljava/io/IOException; // type@1a48
+74a266: 2200 991a                              |0031: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+74a26a: 7010 39d2 0000                         |0033: invoke-direct {v0}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+74a270: 1a01 5d93                              |0036: const-string v1, "failed to delete " // string@935d
+74a274: 6e20 45d2 1000                         |0038: invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74a27a: 0c00                                   |003b: move-result-object v0
+74a27c: 6e20 44d2 2000                         |003c: invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/Object;)Ljava/lang/StringBuilder; // method@d244
+74a282: 0c00                                   |003f: move-result-object v0
+74a284: 6e10 58d2 0000                         |0040: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+74a28a: 0c00                                   |0043: move-result-object v0
+74a28c: 7020 14d0 0700                         |0044: invoke-direct {v7, v0}, Ljava/io/IOException;.<init>:(Ljava/lang/String;)V // method@d014
+74a292: 2707                                   |0047: throw v7
+74a294: 5362 2686                              |0048: iget-wide v2, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.size:J // field@8626
+74a298: 7110 08c8 0000                         |004a: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1000:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)[J // method@c808
+74a29e: 0c04                                   |004d: move-result-object v4
+74a2a0: 4504 0401                              |004e: aget-wide v4, v4, v1
+74a2a4: bc42                                   |0050: sub-long/2addr v2, v4
+74a2a6: 5a62 2686                              |0051: iput-wide v2, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.size:J // field@8626
+74a2aa: 7110 08c8 0000                         |0053: invoke-static {v0}, Lcom/jakewharton/disklrucache/DiskLruCache$Entry;.access$1000:(Lcom/jakewharton/disklrucache/DiskLruCache$Entry;)[J // method@c808
+74a2b0: 0c02                                   |0056: move-result-object v2
+74a2b2: 1603 0000                              |0057: const-wide/16 v3, #int 0 // #0
+74a2b6: 4c03 0201                              |0059: aput-wide v3, v2, v1
+74a2ba: d801 0101                              |005b: add-int/lit8 v1, v1, #int 1 // #01
+74a2be: 28bd                                   |005d: goto 001a // -0043
+74a2c0: 5260 2586                              |005e: iget v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.redundantOpCount:I // field@8625
+74a2c4: 1211                                   |0060: const/4 v1, #int 1 // #1
+74a2c6: b010                                   |0061: add-int/2addr v0, v1
+74a2c8: 5960 2586                              |0062: iput v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.redundantOpCount:I // field@8625
+74a2cc: 5460 2186                              |0064: iget-object v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.journalWriter:Ljava/io/Writer; // field@8621
+74a2d0: 2202 991a                              |0066: new-instance v2, Ljava/lang/StringBuilder; // type@1a99
+74a2d4: 7010 39d2 0200                         |0068: invoke-direct {v2}, Ljava/lang/StringBuilder;.<init>:()V // method@d239
+74a2da: 1a03 105d                              |006b: const-string v3, "REMOVE " // string@5d10
+74a2de: 6e20 45d2 3200                         |006d: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74a2e4: 0c02                                   |0070: move-result-object v2
+74a2e6: 6e20 45d2 7200                         |0071: invoke-virtual {v2, v7}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+74a2ec: 0c02                                   |0074: move-result-object v2
+74a2ee: 1303 0a00                              |0075: const/16 v3, #int 10 // #a
+74a2f2: 6e20 3dd2 3200                         |0077: invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+74a2f8: 0c02                                   |007a: move-result-object v2
+74a2fa: 6e10 58d2 0200                         |007b: invoke-virtual {v2}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+74a300: 0c02                                   |007e: move-result-object v2
+74a302: 6e20 86d0 2000                         |007f: invoke-virtual {v0, v2}, Ljava/io/Writer;.append:(Ljava/lang/CharSequence;)Ljava/io/Writer; // method@d086
+74a308: 5460 2286                              |0082: iget-object v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.lruEntries:Ljava/util/LinkedHashMap; // field@8622
+74a30c: 6e20 afd5 7000                         |0084: invoke-virtual {v0, v7}, Ljava/util/LinkedHashMap;.remove:(Ljava/lang/Object;)Ljava/lang/Object; // method@d5af
+74a312: 7010 37c8 0600                         |0087: invoke-direct {v6}, Lcom/jakewharton/disklrucache/DiskLruCache;.journalRebuildRequired:()Z // method@c837
+74a318: 0a07                                   |008a: move-result v7
+74a31a: 3807 0900                              |008b: if-eqz v7, 0094 // +0009
+74a31e: 5467 1d86                              |008d: iget-object v7, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.executorService:Ljava/util/concurrent/ThreadPoolExecutor; // field@861d
+74a322: 5460 1b86                              |008f: iget-object v0, v6, Lcom/jakewharton/disklrucache/DiskLruCache;.cleanupCallable:Ljava/util/concurrent/Callable; // field@861b
+74a326: 6e20 e5d6 0700                         |0091: invoke-virtual {v7, v0}, Ljava/util/concurrent/ThreadPoolExecutor;.submit:(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future; // method@d6e5
+74a32c: 1e06                                   |0094: monitor-exit v6
+74a32e: 0f01                                   |0095: return v1
+74a330: 1e06                                   |0096: monitor-exit v6
+74a332: 0f01                                   |0097: return v1
+74a334: 0d07                                   |0098: move-exception v7
+74a336: 1e06                                   |0099: monitor-exit v6
+74a338: 2707                                   |009a: throw v7
+      catches       : 2
+        0x0001 - 0x0094
+          <any> -> 0x0098
+        0x0099 - 0x009a
+          <any> -> 0x0098
+      positions     :
+        0x0001 line=580
+        0x0004 line=581
+        0x0007 line=582
+        0x0012 line=583
+        0x001a line=587
+        0x001e line=588
+        0x0022 line=589
+        0x002f line=590
+        0x0048 line=592
+        0x0053 line=593
+        0x005e line=596
+        0x0064 line=597
+        0x0082 line=598
+        0x0087 line=600
+        0x008d line=601
+        0x0094 line=604
+        0x0096 line=584
+      locals        :
+        0x0000 - 0x009b reg=6 this Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x009b reg=7 (null) Ljava/lang/String;
+
+    #9              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'setMaxSize'
+      type          : '(J)V'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 3
+      outs          : 2
+      insns size    : 15 16-bit code units
+74a350:                                        |[74a350] com.jakewharton.disklrucache.DiskLruCache.setMaxSize:(J)V
+74a360: 1d00                                   |0000: monitor-enter v0
+74a362: 5a01 2386                              |0001: iput-wide v1, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.maxSize:J // field@8623
+74a366: 5401 1d86                              |0003: iget-object v1, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.executorService:Ljava/util/concurrent/ThreadPoolExecutor; // field@861d
+74a36a: 5402 1b86                              |0005: iget-object v2, v0, Lcom/jakewharton/disklrucache/DiskLruCache;.cleanupCallable:Ljava/util/concurrent/Callable; // field@861b
+74a36e: 6e20 e5d6 2100                         |0007: invoke-virtual {v1, v2}, Ljava/util/concurrent/ThreadPoolExecutor;.submit:(Ljava/util/concurrent/Callable;)Ljava/util/concurrent/Future; // method@d6e5
+74a374: 1e00                                   |000a: monitor-exit v0
+74a376: 0e00                                   |000b: return-void
+74a378: 0d01                                   |000c: move-exception v1
+74a37a: 1e00                                   |000d: monitor-exit v0
+74a37c: 2701                                   |000e: throw v1
+      catches       : 2
+        0x0001 - 0x000a
+          <any> -> 0x000c
+        0x000d - 0x000e
+          <any> -> 0x000c
+      positions     :
+        0x0001 line=495
+        0x0003 line=496
+        0x000a line=497
+      locals        :
+        0x0000 - 0x000f reg=0 this Lcom/jakewharton/disklrucache/DiskLruCache;
+        0x0000 - 0x000f reg=1 (null) J
+
+    #10              : (in Lcom/jakewharton/disklrucache/DiskLruCache;)
+      name          : 'size'
+      type          : '()J'
+      access        : 0x20001 (PUBLIC DECLARED_SYNCHRONIZED)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+74a394:                                        |[74a394] com.jakewharton.disklrucache.DiskLruCache.size:()J
+74a3a4: 1d02                                   |0000: monitor-enter v2
+74a3a6: 5320 2686                              |0001: iget-wide v0, v2, Lcom/jakewharton/disklrucache/DiskLruCache;.size:J // field@8626
+74a3aa: 1e02                                   |0003: monitor-exit v2
+74a3ac: 1000                                   |0004: return-wide v0
+74a3ae: 0d00                                   |0005: move-exception v0
+74a3b0: 1e02                                   |0006: monitor-exit v2
+74a3b2: 2700                                   |0007: throw v0
+      catches       : 2
+        0x0001 - 0x0003
+          <any> -> 0x0005
+        0x0006 - 0x0007
+          <any> -> 0x0005
+      positions     :
+        0x0001 line=505
+      locals        :
+        0x0000 - 0x0008 reg=2 this Lcom/jakewharton/disklrucache/DiskLruCache;
+
+  source_file_idx   : 8846 (DiskLruCache.java)
+

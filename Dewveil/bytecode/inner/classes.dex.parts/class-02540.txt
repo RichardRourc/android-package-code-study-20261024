@@ -1,0 +1,794 @@
+Class #2540            -
+  Class descriptor  : 'Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+  Access flags      : 0x0001 (PUBLIC)
+  Superclass        : 'Lcom/fasterxml/jackson/core/JsonStreamContext;'
+  Interfaces        -
+  Static fields     -
+  Instance fields   -
+    #0              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : '_child'
+      type          : 'Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+      access        : 0x0004 (PROTECTED)
+    #1              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : '_currentName'
+      type          : 'Ljava/lang/String;'
+      access        : 0x0004 (PROTECTED)
+    #2              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : '_filter'
+      type          : 'Lcom/fasterxml/jackson/core/filter/TokenFilter;'
+      access        : 0x0004 (PROTECTED)
+    #3              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : '_needToHandleName'
+      type          : 'Z'
+      access        : 0x0004 (PROTECTED)
+    #4              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : '_parent'
+      type          : 'Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+      access        : 0x0014 (PROTECTED FINAL)
+    #5              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : '_startHandled'
+      type          : 'Z'
+      access        : 0x0004 (PROTECTED)
+  Direct methods    -
+    #0              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : '<init>'
+      type          : '(ILcom/fasterxml/jackson/core/filter/TokenFilterContext;Lcom/fasterxml/jackson/core/filter/TokenFilter;Z)V'
+      access        : 0x10004 (PROTECTED CONSTRUCTOR)
+      code          -
+      registers     : 5
+      ins           : 5
+      outs          : 1
+      insns size    : 18 16-bit code units
+5c2ae4:                                        |[5c2ae4] com.fasterxml.jackson.core.filter.TokenFilterContext.<init>:(ILcom/fasterxml/jackson/core/filter/TokenFilterContext;Lcom/fasterxml/jackson/core/filter/TokenFilter;Z)V
+5c2af4: 7010 b062 0000                         |0000: invoke-direct {v0}, Lcom/fasterxml/jackson/core/JsonStreamContext;.<init>:()V // method@62b0
+5c2afa: 5901 c245                              |0003: iput v1, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c2afe: 5b02 c045                              |0005: iput-object v2, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2b02: 5b03 bd45                              |0007: iput-object v3, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2b06: 12f1                                   |0009: const/4 v1, #int -1 // #ff
+5c2b08: 5901 be45                              |000a: iput v1, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._index:I // field@45be
+5c2b0c: 5c04 c145                              |000c: iput-boolean v4, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c2b10: 1201                                   |000e: const/4 v1, #int 0 // #0
+5c2b12: 5c01 bf45                              |000f: iput-boolean v1, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2b16: 0e00                                   |0011: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=71
+        0x0003 line=72
+        0x0005 line=73
+        0x0007 line=74
+        0x000a line=75
+        0x000c line=76
+        0x000f line=77
+      locals        :
+        0x0000 - 0x0012 reg=0 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0012 reg=1 (null) I
+        0x0000 - 0x0012 reg=2 (null) Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0012 reg=3 (null) Lcom/fasterxml/jackson/core/filter/TokenFilter;
+        0x0000 - 0x0012 reg=4 (null) Z
+
+    #1              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : '_writePath'
+      type          : '(Lcom/fasterxml/jackson/core/JsonGenerator;)V'
+      access        : 0x0002 (PRIVATE)
+      code          -
+      registers     : 6
+      ins           : 2
+      outs          : 2
+      insns size    : 64 16-bit code units
+5c2b18:                                        |[5c2b18] com.fasterxml.jackson.core.filter.TokenFilterContext._writePath:(Lcom/fasterxml/jackson/core/JsonGenerator;)V
+5c2b28: 5440 bd45                              |0000: iget-object v0, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2b2c: 3800 3d00                              |0002: if-eqz v0, 003f // +003d
+5c2b30: 6201 ba45                              |0004: sget-object v1, Lcom/fasterxml/jackson/core/filter/TokenFilter;.INCLUDE_ALL:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45ba
+5c2b34: 3310 0300                              |0006: if-ne v0, v1, 0009 // +0003
+5c2b38: 2837                                   |0008: goto 003f // +0037
+5c2b3a: 5440 c045                              |0009: iget-object v0, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2b3e: 3800 0500                              |000b: if-eqz v0, 0010 // +0005
+5c2b42: 7020 2265 5000                         |000d: invoke-direct {v0, v5}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._writePath:(Lcom/fasterxml/jackson/core/JsonGenerator;)V // method@6522
+5c2b48: 5540 c145                              |0010: iget-boolean v0, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c2b4c: 1201                                   |0012: const/4 v1, #int 0 // #0
+5c2b4e: 3800 0e00                              |0013: if-eqz v0, 0021 // +000e
+5c2b52: 5540 bf45                              |0015: iget-boolean v0, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2b56: 3800 2800                              |0017: if-eqz v0, 003f // +0028
+5c2b5a: 5c41 bf45                              |0019: iput-boolean v1, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2b5e: 5444 bc45                              |001b: iget-object v4, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c2b62: 6e20 ab61 4500                         |001d: invoke-virtual {v5, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5c2b68: 281f                                   |0020: goto 003f // +001f
+5c2b6a: 1210                                   |0021: const/4 v0, #int 1 // #1
+5c2b6c: 5c40 c145                              |0022: iput-boolean v0, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c2b70: 5242 c245                              |0024: iget v2, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c2b74: 1223                                   |0026: const/4 v3, #int 2 // #2
+5c2b76: 3332 1100                              |0027: if-ne v2, v3, 0038 // +0011
+5c2b7a: 6e10 d461 0500                         |0029: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:()V // method@61d4
+5c2b80: 5540 bf45                              |002c: iget-boolean v0, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2b84: 3800 1100                              |002e: if-eqz v0, 003f // +0011
+5c2b88: 5c41 bf45                              |0030: iput-boolean v1, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2b8c: 5444 bc45                              |0032: iget-object v4, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c2b90: 6e20 ab61 4500                         |0034: invoke-virtual {v5, v4}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5c2b96: 2808                                   |0037: goto 003f // +0008
+5c2b98: 5244 c245                              |0038: iget v4, v4, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c2b9c: 3304 0500                              |003a: if-ne v4, v0, 003f // +0005
+5c2ba0: 6e10 d061 0500                         |003c: invoke-virtual {v5}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:()V // method@61d0
+5c2ba6: 0e00                                   |003f: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=206
+        0x0009 line=209
+        0x000d line=210
+        0x0010 line=212
+        0x0015 line=214
+        0x0019 line=215
+        0x001b line=216
+        0x0022 line=219
+        0x0024 line=220
+        0x0029 line=221
+        0x002c line=222
+        0x0030 line=223
+        0x0032 line=224
+        0x0038 line=226
+        0x003c line=227
+      locals        :
+        0x0000 - 0x0040 reg=4 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0040 reg=5 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+
+    #2              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'createRootContext'
+      type          : '(Lcom/fasterxml/jackson/core/filter/TokenFilter;)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+      access        : 0x0009 (PUBLIC STATIC)
+      code          -
+      registers     : 5
+      ins           : 1
+      outs          : 5
+      insns size    : 9 16-bit code units
+5c2ba8:                                        |[5c2ba8] com.fasterxml.jackson.core.filter.TokenFilterContext.createRootContext:(Lcom/fasterxml/jackson/core/filter/TokenFilter;)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+5c2bb8: 2200 650c                              |0000: new-instance v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // type@0c65
+5c2bbc: 1201                                   |0002: const/4 v1, #int 0 // #0
+5c2bbe: 1212                                   |0003: const/4 v2, #int 1 // #1
+5c2bc0: 1203                                   |0004: const/4 v3, #int 0 // #0
+5c2bc2: 7052 2165 3041                         |0005: invoke-direct {v0, v3, v1, v4, v2}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;.<init>:(ILcom/fasterxml/jackson/core/filter/TokenFilterContext;Lcom/fasterxml/jackson/core/filter/TokenFilter;Z)V // method@6521
+5c2bc8: 1100                                   |0008: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=100
+      locals        :
+        0x0000 - 0x0009 reg=4 (null) Lcom/fasterxml/jackson/core/filter/TokenFilter;
+
+  Virtual methods   -
+    #0              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'appendDesc'
+      type          : '(Ljava/lang/StringBuilder;)V'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 75 16-bit code units
+5c2bcc:                                        |[5c2bcc] com.fasterxml.jackson.core.filter.TokenFilterContext.appendDesc:(Ljava/lang/StringBuilder;)V
+5c2bdc: 5420 c045                              |0000: iget-object v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2be0: 3800 0500                              |0002: if-eqz v0, 0007 // +0005
+5c2be4: 6e20 2365 3000                         |0004: invoke-virtual {v0, v3}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;.appendDesc:(Ljava/lang/StringBuilder;)V // method@6523
+5c2bea: 5220 c245                              |0007: iget v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c2bee: 1221                                   |0009: const/4 v1, #int 2 // #2
+5c2bf0: 3310 2400                              |000a: if-ne v0, v1, 002e // +0024
+5c2bf4: 1300 7b00                              |000c: const/16 v0, #int 123 // #7b
+5c2bf8: 6e20 3dd2 0300                         |000e: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+5c2bfe: 5420 bc45                              |0011: iget-object v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c2c02: 3800 1000                              |0013: if-eqz v0, 0023 // +0010
+5c2c06: 1300 2200                              |0015: const/16 v0, #int 34 // #22
+5c2c0a: 6e20 3dd2 0300                         |0017: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+5c2c10: 5422 bc45                              |001a: iget-object v2, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c2c14: 6e20 45d2 2300                         |001c: invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c2c1a: 6e20 3dd2 0300                         |001f: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+5c2c20: 2806                                   |0022: goto 0028 // +0006
+5c2c22: 1302 3f00                              |0023: const/16 v2, #int 63 // #3f
+5c2c26: 6e20 3dd2 2300                         |0025: invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+5c2c2c: 1302 7d00                              |0028: const/16 v2, #int 125 // #7d
+5c2c30: 6e20 3dd2 2300                         |002a: invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+5c2c36: 281d                                   |002d: goto 004a // +001d
+5c2c38: 5220 c245                              |002e: iget v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c2c3c: 1211                                   |0030: const/4 v1, #int 1 // #1
+5c2c3e: 3310 1400                              |0031: if-ne v0, v1, 0045 // +0014
+5c2c42: 1300 5b00                              |0033: const/16 v0, #int 91 // #5b
+5c2c46: 6e20 3dd2 0300                         |0035: invoke-virtual {v3, v0}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+5c2c4c: 6e10 2c65 0200                         |0038: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;.getCurrentIndex:()I // method@652c
+5c2c52: 0a02                                   |003b: move-result v2
+5c2c54: 6e20 40d2 2300                         |003c: invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;.append:(I)Ljava/lang/StringBuilder; // method@d240
+5c2c5a: 1302 5d00                              |003f: const/16 v2, #int 93 // #5d
+5c2c5e: 6e20 3dd2 2300                         |0041: invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;.append:(C)Ljava/lang/StringBuilder; // method@d23d
+5c2c64: 2806                                   |0044: goto 004a // +0006
+5c2c66: 1a02 0110                              |0045: const-string v2, "/" // string@1001
+5c2c6a: 6e20 45d2 2300                         |0047: invoke-virtual {v3, v2}, Ljava/lang/StringBuilder;.append:(Ljava/lang/String;)Ljava/lang/StringBuilder; // method@d245
+5c2c70: 0e00                                   |004a: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=317
+        0x0004 line=318
+        0x0007 line=320
+        0x000e line=321
+        0x0011 line=322
+        0x0017 line=323
+        0x001a line=325
+        0x001f line=326
+        0x0025 line=328
+        0x002a line=330
+        0x002e line=331
+        0x0035 line=332
+        0x0038 line=333
+        0x0041 line=334
+        0x0045 line=337
+      locals        :
+        0x0000 - 0x004b reg=2 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x004b reg=3 (null) Ljava/lang/StringBuilder;
+
+    #1              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'checkValue'
+      type          : '(Lcom/fasterxml/jackson/core/filter/TokenFilter;)Lcom/fasterxml/jackson/core/filter/TokenFilter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 2
+      outs          : 2
+      insns size    : 26 16-bit code units
+5c2c74:                                        |[5c2c74] com.fasterxml.jackson.core.filter.TokenFilterContext.checkValue:(Lcom/fasterxml/jackson/core/filter/TokenFilter;)Lcom/fasterxml/jackson/core/filter/TokenFilter;
+5c2c84: 5220 c245                              |0000: iget v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c2c88: 1221                                   |0002: const/4 v1, #int 2 // #2
+5c2c8a: 3310 0300                              |0003: if-ne v0, v1, 0006 // +0003
+5c2c8e: 1103                                   |0005: return-object v3
+5c2c90: 5220 be45                              |0006: iget v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._index:I // field@45be
+5c2c94: 1211                                   |0008: const/4 v1, #int 1 // #1
+5c2c96: b010                                   |0009: add-int/2addr v0, v1
+5c2c98: 5920 be45                              |000a: iput v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._index:I // field@45be
+5c2c9c: 5222 c245                              |000c: iget v2, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c2ca0: 3312 0700                              |000e: if-ne v2, v1, 0015 // +0007
+5c2ca4: 6e20 1165 0300                         |0010: invoke-virtual {v3, v0}, Lcom/fasterxml/jackson/core/filter/TokenFilter;.includeElement:(I)Lcom/fasterxml/jackson/core/filter/TokenFilter; // method@6511
+5c2caa: 0c02                                   |0013: move-result-object v2
+5c2cac: 1102                                   |0014: return-object v2
+5c2cae: 6e20 1c65 0300                         |0015: invoke-virtual {v3, v0}, Lcom/fasterxml/jackson/core/filter/TokenFilter;.includeRootValue:(I)Lcom/fasterxml/jackson/core/filter/TokenFilter; // method@651c
+5c2cb4: 0c02                                   |0018: move-result-object v2
+5c2cb6: 1102                                   |0019: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=143
+        0x0006 line=147
+        0x000c line=148
+        0x0010 line=149
+        0x0015 line=151
+      locals        :
+        0x0000 - 0x001a reg=2 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x001a reg=3 (null) Lcom/fasterxml/jackson/core/filter/TokenFilter;
+
+    #2              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'closeArray'
+      type          : '(Lcom/fasterxml/jackson/core/JsonGenerator;)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 23 16-bit code units
+5c2cb8:                                        |[5c2cb8] com.fasterxml.jackson.core.filter.TokenFilterContext.closeArray:(Lcom/fasterxml/jackson/core/JsonGenerator;)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+5c2cc8: 5510 c145                              |0000: iget-boolean v0, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c2ccc: 3800 0500                              |0002: if-eqz v0, 0007 // +0005
+5c2cd0: 6e10 a761 0200                         |0004: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndArray:()V // method@61a7
+5c2cd6: 5412 bd45                              |0007: iget-object v2, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2cda: 3802 0b00                              |0009: if-eqz v2, 0014 // +000b
+5c2cde: 6200 ba45                              |000b: sget-object v0, Lcom/fasterxml/jackson/core/filter/TokenFilter;.INCLUDE_ALL:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45ba
+5c2ce2: 3202 0700                              |000d: if-eq v2, v0, 0014 // +0007
+5c2ce6: 5412 bd45                              |000f: iget-object v2, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2cea: 6e10 0b65 0200                         |0011: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/filter/TokenFilter;.filterFinishArray:()V // method@650b
+5c2cf0: 5411 c045                              |0014: iget-object v1, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2cf4: 1101                                   |0016: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=234
+        0x0004 line=235
+        0x0007 line=237
+        0x000f line=238
+        0x0014 line=240
+      locals        :
+        0x0000 - 0x0017 reg=1 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0017 reg=2 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+
+    #3              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'closeObject'
+      type          : '(Lcom/fasterxml/jackson/core/JsonGenerator;)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 1
+      insns size    : 23 16-bit code units
+5c2cf8:                                        |[5c2cf8] com.fasterxml.jackson.core.filter.TokenFilterContext.closeObject:(Lcom/fasterxml/jackson/core/JsonGenerator;)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+5c2d08: 5510 c145                              |0000: iget-boolean v0, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c2d0c: 3800 0500                              |0002: if-eqz v0, 0007 // +0005
+5c2d10: 6e10 a861 0200                         |0004: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeEndObject:()V // method@61a8
+5c2d16: 5412 bd45                              |0007: iget-object v2, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2d1a: 3802 0b00                              |0009: if-eqz v2, 0014 // +000b
+5c2d1e: 6200 ba45                              |000b: sget-object v0, Lcom/fasterxml/jackson/core/filter/TokenFilter;.INCLUDE_ALL:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45ba
+5c2d22: 3202 0700                              |000d: if-eq v2, v0, 0014 // +0007
+5c2d26: 5412 bd45                              |000f: iget-object v2, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2d2a: 6e10 0c65 0200                         |0011: invoke-virtual {v2}, Lcom/fasterxml/jackson/core/filter/TokenFilter;.filterFinishObject:()V // method@650c
+5c2d30: 5411 c045                              |0014: iget-object v1, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2d34: 1101                                   |0016: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=245
+        0x0004 line=246
+        0x0007 line=248
+        0x000f line=249
+        0x0014 line=251
+      locals        :
+        0x0000 - 0x0017 reg=1 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0017 reg=2 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+
+    #4              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'createChildArrayContext'
+      type          : '(Lcom/fasterxml/jackson/core/filter/TokenFilter;Z)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 5
+      insns size    : 18 16-bit code units
+5c2d38:                                        |[5c2d38] com.fasterxml.jackson.core.filter.TokenFilterContext.createChildArrayContext:(Lcom/fasterxml/jackson/core/filter/TokenFilter;Z)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+5c2d48: 5420 bb45                              |0000: iget-object v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._child:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45bb
+5c2d4c: 1211                                   |0002: const/4 v1, #int 1 // #1
+5c2d4e: 3900 0a00                              |0003: if-nez v0, 000d // +000a
+5c2d52: 2200 650c                              |0005: new-instance v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // type@0c65
+5c2d56: 7054 2165 1032                         |0007: invoke-direct {v0, v1, v2, v3, v4}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;.<init>:(ILcom/fasterxml/jackson/core/filter/TokenFilterContext;Lcom/fasterxml/jackson/core/filter/TokenFilter;Z)V // method@6521
+5c2d5c: 5b20 bb45                              |000a: iput-object v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._child:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45bb
+5c2d60: 1100                                   |000c: return-object v0
+5c2d62: 6e40 3665 1043                         |000d: invoke-virtual {v0, v1, v3, v4}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;.reset:(ILcom/fasterxml/jackson/core/filter/TokenFilter;Z)Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // method@6536
+5c2d68: 0c02                                   |0010: move-result-object v2
+5c2d6a: 1102                                   |0011: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=104
+        0x0005 line=106
+        0x000d line=109
+      locals        :
+        0x0000 - 0x0012 reg=2 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0012 reg=3 (null) Lcom/fasterxml/jackson/core/filter/TokenFilter;
+        0x0000 - 0x0012 reg=4 (null) Z
+
+    #5              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'createChildObjectContext'
+      type          : '(Lcom/fasterxml/jackson/core/filter/TokenFilter;Z)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 3
+      outs          : 5
+      insns size    : 18 16-bit code units
+5c2d6c:                                        |[5c2d6c] com.fasterxml.jackson.core.filter.TokenFilterContext.createChildObjectContext:(Lcom/fasterxml/jackson/core/filter/TokenFilter;Z)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+5c2d7c: 5420 bb45                              |0000: iget-object v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._child:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45bb
+5c2d80: 1221                                   |0002: const/4 v1, #int 2 // #2
+5c2d82: 3900 0a00                              |0003: if-nez v0, 000d // +000a
+5c2d86: 2200 650c                              |0005: new-instance v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // type@0c65
+5c2d8a: 7054 2165 1032                         |0007: invoke-direct {v0, v1, v2, v3, v4}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;.<init>:(ILcom/fasterxml/jackson/core/filter/TokenFilterContext;Lcom/fasterxml/jackson/core/filter/TokenFilter;Z)V // method@6521
+5c2d90: 5b20 bb45                              |000a: iput-object v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._child:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45bb
+5c2d94: 1100                                   |000c: return-object v0
+5c2d96: 6e40 3665 1043                         |000d: invoke-virtual {v0, v1, v3, v4}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;.reset:(ILcom/fasterxml/jackson/core/filter/TokenFilter;Z)Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // method@6536
+5c2d9c: 0c02                                   |0010: move-result-object v2
+5c2d9e: 1102                                   |0011: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=113
+        0x0005 line=115
+        0x000d line=118
+      locals        :
+        0x0000 - 0x0012 reg=2 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0012 reg=3 (null) Lcom/fasterxml/jackson/core/filter/TokenFilter;
+        0x0000 - 0x0012 reg=4 (null) Z
+
+    #6              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'ensureFieldNameWritten'
+      type          : '(Lcom/fasterxml/jackson/core/JsonGenerator;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 2
+      insns size    : 13 16-bit code units
+5c2da0:                                        |[5c2da0] com.fasterxml.jackson.core.filter.TokenFilterContext.ensureFieldNameWritten:(Lcom/fasterxml/jackson/core/JsonGenerator;)V
+5c2db0: 5510 bf45                              |0000: iget-boolean v0, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2db4: 3800 0a00                              |0002: if-eqz v0, 000c // +000a
+5c2db8: 1200                                   |0004: const/4 v0, #int 0 // #0
+5c2dba: 5c10 bf45                              |0005: iput-boolean v0, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2dbe: 5411 bc45                              |0007: iget-object v1, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c2dc2: 6e20 ab61 1200                         |0009: invoke-virtual {v2, v1}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5c2dc8: 0e00                                   |000c: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=165
+        0x0005 line=166
+        0x0007 line=167
+      locals        :
+        0x0000 - 0x000d reg=1 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x000d reg=2 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+
+    #7              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'findChildOf'
+      type          : '(Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 2
+      outs          : 0
+      insns size    : 16 16-bit code units
+5c2dcc:                                        |[5c2dcc] com.fasterxml.jackson.core.filter.TokenFilterContext.findChildOf:(Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+5c2ddc: 5410 c045                              |0000: iget-object v0, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2de0: 3320 0300                              |0002: if-ne v0, v2, 0005 // +0003
+5c2de4: 1101                                   |0004: return-object v1
+5c2de6: 3800 0900                              |0005: if-eqz v0, 000e // +0009
+5c2dea: 5401 c045                              |0007: iget-object v1, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2dee: 3321 0300                              |0009: if-ne v1, v2, 000c // +0003
+5c2df2: 1100                                   |000b: return-object v0
+5c2df4: 0710                                   |000c: move-object v0, v1
+5c2df6: 28f8                                   |000d: goto 0005 // -0008
+5c2df8: 1201                                   |000e: const/4 v1, #int 0 // #0
+5c2dfa: 1101                                   |000f: return-object v1
+      catches       : (none)
+      positions     :
+        0x0000 line=299
+        0x0007 line=304
+      locals        :
+        0x0000 - 0x0010 reg=1 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0010 reg=2 (null) Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+
+    #8              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'getCurrentName'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+5c2dfc:                                        |[5c2dfc] com.fasterxml.jackson.core.filter.TokenFilterContext.getCurrentName:()Ljava/lang/String;
+5c2e0c: 5400 bc45                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c2e10: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=274
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+
+    #9              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'getCurrentValue'
+      type          : '()Ljava/lang/Object;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 2 16-bit code units
+5c2e14:                                        |[5c2e14] com.fasterxml.jackson.core.filter.TokenFilterContext.getCurrentValue:()Ljava/lang/Object;
+5c2e24: 1200                                   |0000: const/4 v0, #int 0 // #0
+5c2e26: 1100                                   |0001: return-object v0
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #10              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'getFilter'
+      type          : '()Lcom/fasterxml/jackson/core/filter/TokenFilter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+5c2e28:                                        |[5c2e28] com.fasterxml.jackson.core.filter.TokenFilterContext.getFilter:()Lcom/fasterxml/jackson/core/filter/TokenFilter;
+5c2e38: 5400 bd45                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2e3c: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=278
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+
+    #11              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'getParent'
+      type          : '()Lcom/fasterxml/jackson/core/JsonStreamContext;'
+      access        : 0x1041 (PUBLIC BRIDGE SYNTHETIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 1
+      insns size    : 5 16-bit code units
+5c2e40:                                        |[5c2e40] com.fasterxml.jackson.core.filter.TokenFilterContext.getParent:()Lcom/fasterxml/jackson/core/JsonStreamContext;
+5c2e50: 6e10 3165 0000                         |0000: invoke-virtual {v0}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;.getParent:()Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // method@6531
+5c2e56: 0c00                                   |0003: move-result-object v0
+5c2e58: 1100                                   |0004: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=13
+      locals        :
+        0x0000 - 0x0005 reg=0 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+
+    #12              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'getParent'
+      type          : '()Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+      access        : 0x0011 (PUBLIC FINAL)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+5c2e5c:                                        |[5c2e5c] com.fasterxml.jackson.core.filter.TokenFilterContext.getParent:()Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+5c2e6c: 5400 c045                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2e70: 1100                                   |0002: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=273
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+
+    #13              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'hasCurrentName'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 8 16-bit code units
+5c2e74:                                        |[5c2e74] com.fasterxml.jackson.core.filter.TokenFilterContext.hasCurrentName:()Z
+5c2e84: 5400 bc45                              |0000: iget-object v0, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c2e88: 3800 0400                              |0002: if-eqz v0, 0006 // +0004
+5c2e8c: 1210                                   |0004: const/4 v0, #int 1 // #1
+5c2e8e: 2802                                   |0005: goto 0007 // +0002
+5c2e90: 1200                                   |0006: const/4 v0, #int 0 // #0
+5c2e92: 0f00                                   |0007: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=276
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+
+    #14              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'isStartHandled'
+      type          : '()Z'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 1
+      ins           : 1
+      outs          : 0
+      insns size    : 3 16-bit code units
+5c2e94:                                        |[5c2e94] com.fasterxml.jackson.core.filter.TokenFilterContext.isStartHandled:()Z
+5c2ea4: 5500 c145                              |0000: iget-boolean v0, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c2ea8: 0f00                                   |0002: return v0
+      catches       : (none)
+      positions     :
+        0x0000 line=279
+      locals        :
+        0x0000 - 0x0003 reg=0 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+
+    #15              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'nextTokenToRead'
+      type          : '()Lcom/fasterxml/jackson/core/JsonToken;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 0
+      insns size    : 34 16-bit code units
+5c2eac:                                        |[5c2eac] com.fasterxml.jackson.core.filter.TokenFilterContext.nextTokenToRead:()Lcom/fasterxml/jackson/core/JsonToken;
+5c2ebc: 5520 c145                              |0000: iget-boolean v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c2ec0: 1221                                   |0002: const/4 v1, #int 2 // #2
+5c2ec2: 3900 0f00                              |0003: if-nez v0, 0012 // +000f
+5c2ec6: 1210                                   |0005: const/4 v0, #int 1 // #1
+5c2ec8: 5c20 c145                              |0006: iput-boolean v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c2ecc: 5222 c245                              |0008: iget v2, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c2ed0: 3312 0500                              |000a: if-ne v2, v1, 000f // +0005
+5c2ed4: 6202 dc44                              |000c: sget-object v2, Lcom/fasterxml/jackson/core/JsonToken;.START_OBJECT:Lcom/fasterxml/jackson/core/JsonToken; // field@44dc
+5c2ed8: 1102                                   |000e: return-object v2
+5c2eda: 6202 db44                              |000f: sget-object v2, Lcom/fasterxml/jackson/core/JsonToken;.START_ARRAY:Lcom/fasterxml/jackson/core/JsonToken; // field@44db
+5c2ede: 1102                                   |0011: return-object v2
+5c2ee0: 5520 bf45                              |0012: iget-boolean v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2ee4: 3800 0c00                              |0014: if-eqz v0, 0020 // +000c
+5c2ee8: 5220 c245                              |0016: iget v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c2eec: 3310 0800                              |0018: if-ne v0, v1, 0020 // +0008
+5c2ef0: 1200                                   |001a: const/4 v0, #int 0 // #0
+5c2ef2: 5c20 bf45                              |001b: iput-boolean v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2ef6: 6202 d944                              |001d: sget-object v2, Lcom/fasterxml/jackson/core/JsonToken;.FIELD_NAME:Lcom/fasterxml/jackson/core/JsonToken; // field@44d9
+5c2efa: 1102                                   |001f: return-object v2
+5c2efc: 1202                                   |0020: const/4 v2, #int 0 // #0
+5c2efe: 1102                                   |0021: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=282
+        0x0006 line=283
+        0x0008 line=284
+        0x000c line=285
+        0x000f line=288
+        0x0012 line=291
+        0x001b line=292
+        0x001d line=293
+      locals        :
+        0x0000 - 0x0022 reg=2 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+
+    #16              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'reset'
+      type          : '(ILcom/fasterxml/jackson/core/filter/TokenFilter;Z)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;'
+      access        : 0x0004 (PROTECTED)
+      code          -
+      registers     : 4
+      ins           : 4
+      outs          : 0
+      insns size    : 16 16-bit code units
+5c2f00:                                        |[5c2f00] com.fasterxml.jackson.core.filter.TokenFilterContext.reset:(ILcom/fasterxml/jackson/core/filter/TokenFilter;Z)Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+5c2f10: 5901 c245                              |0000: iput v1, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c2f14: 5b02 bd45                              |0002: iput-object v2, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2f18: 12f1                                   |0004: const/4 v1, #int -1 // #ff
+5c2f1a: 5901 be45                              |0005: iput v1, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._index:I // field@45be
+5c2f1e: 1201                                   |0007: const/4 v1, #int 0 // #0
+5c2f20: 5b01 bc45                              |0008: iput-object v1, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c2f24: 5c03 c145                              |000a: iput-boolean v3, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c2f28: 1201                                   |000c: const/4 v1, #int 0 // #0
+5c2f2a: 5c01 bf45                              |000d: iput-boolean v1, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2f2e: 1100                                   |000f: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=83
+        0x0002 line=84
+        0x0005 line=85
+        0x0008 line=86
+        0x000a line=87
+        0x000d line=88
+      locals        :
+        0x0000 - 0x0010 reg=0 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0010 reg=1 (null) I
+        0x0000 - 0x0010 reg=2 (null) Lcom/fasterxml/jackson/core/filter/TokenFilter;
+        0x0000 - 0x0010 reg=3 (null) Z
+
+    #17              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'setCurrentValue'
+      type          : '(Ljava/lang/Object;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 1 16-bit code units
+5c2f30:                                        |[5c2f30] com.fasterxml.jackson.core.filter.TokenFilterContext.setCurrentValue:(Ljava/lang/Object;)V
+5c2f40: 0e00                                   |0000: return-void
+      catches       : (none)
+      positions     :
+      locals        :
+
+    #18              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'setFieldName'
+      type          : '(Ljava/lang/String;)Lcom/fasterxml/jackson/core/filter/TokenFilter;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 2
+      ins           : 2
+      outs          : 0
+      insns size    : 8 16-bit code units
+5c2f44:                                        |[5c2f44] com.fasterxml.jackson.core.filter.TokenFilterContext.setFieldName:(Ljava/lang/String;)Lcom/fasterxml/jackson/core/filter/TokenFilter;
+5c2f54: 5b01 bc45                              |0000: iput-object v1, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c2f58: 1211                                   |0002: const/4 v1, #int 1 // #1
+5c2f5a: 5c01 bf45                              |0003: iput-boolean v1, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c2f5e: 5400 bd45                              |0005: iget-object v0, v0, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2f62: 1100                                   |0007: return-object v0
+      catches       : (none)
+      positions     :
+        0x0000 line=128
+        0x0003 line=129
+        0x0005 line=130
+      locals        :
+        0x0000 - 0x0008 reg=0 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0008 reg=1 (null) Ljava/lang/String;
+
+    #19              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'skipParentChecks'
+      type          : '()V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 4
+      ins           : 1
+      outs          : 0
+      insns size    : 15 16-bit code units
+5c2f64:                                        |[5c2f64] com.fasterxml.jackson.core.filter.TokenFilterContext.skipParentChecks:()V
+5c2f74: 1200                                   |0000: const/4 v0, #int 0 // #0
+5c2f76: 5b30 bd45                              |0001: iput-object v0, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2f7a: 5431 c045                              |0003: iget-object v1, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2f7e: 3801 0900                              |0005: if-eqz v1, 000e // +0009
+5c2f82: 5432 c045                              |0007: iget-object v2, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2f86: 5b20 bd45                              |0009: iput-object v0, v2, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2f8a: 5411 c045                              |000b: iget-object v1, v1, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2f8e: 28f8                                   |000d: goto 0005 // -0008
+5c2f90: 0e00                                   |000e: return-void
+      catches       : (none)
+      positions     :
+        0x0001 line=255
+        0x0003 line=256
+        0x0007 line=257
+        0x000b line=256
+      locals        :
+        0x0000 - 0x000f reg=3 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+
+    #20              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'toString'
+      type          : '()Ljava/lang/String;'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 3
+      ins           : 1
+      outs          : 2
+      insns size    : 15 16-bit code units
+5c2f94:                                        |[5c2f94] com.fasterxml.jackson.core.filter.TokenFilterContext.toString:()Ljava/lang/String;
+5c2fa4: 2200 991a                              |0000: new-instance v0, Ljava/lang/StringBuilder; // type@1a99
+5c2fa8: 1301 4000                              |0002: const/16 v1, #int 64 // #40
+5c2fac: 7020 3ad2 1000                         |0004: invoke-direct {v0, v1}, Ljava/lang/StringBuilder;.<init>:(I)V // method@d23a
+5c2fb2: 6e20 2365 0200                         |0007: invoke-virtual {v2, v0}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;.appendDesc:(Ljava/lang/StringBuilder;)V // method@6523
+5c2fb8: 6e10 58d2 0000                         |000a: invoke-virtual {v0}, Ljava/lang/StringBuilder;.toString:()Ljava/lang/String; // method@d258
+5c2fbe: 0c02                                   |000d: move-result-object v2
+5c2fc0: 1102                                   |000e: return-object v2
+      catches       : (none)
+      positions     :
+        0x0000 line=346
+        0x0007 line=347
+        0x000a line=348
+      locals        :
+        0x0000 - 0x000f reg=2 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+
+    #21              : (in Lcom/fasterxml/jackson/core/filter/TokenFilterContext;)
+      name          : 'writePath'
+      type          : '(Lcom/fasterxml/jackson/core/JsonGenerator;)V'
+      access        : 0x0001 (PUBLIC)
+      code          -
+      registers     : 5
+      ins           : 2
+      outs          : 2
+      insns size    : 55 16-bit code units
+5c2fc4:                                        |[5c2fc4] com.fasterxml.jackson.core.filter.TokenFilterContext.writePath:(Lcom/fasterxml/jackson/core/JsonGenerator;)V
+5c2fd4: 5430 bd45                              |0000: iget-object v0, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._filter:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45bd
+5c2fd8: 3800 3400                              |0002: if-eqz v0, 0036 // +0034
+5c2fdc: 6201 ba45                              |0004: sget-object v1, Lcom/fasterxml/jackson/core/filter/TokenFilter;.INCLUDE_ALL:Lcom/fasterxml/jackson/core/filter/TokenFilter; // field@45ba
+5c2fe0: 3310 0300                              |0006: if-ne v0, v1, 0009 // +0003
+5c2fe4: 282e                                   |0008: goto 0036 // +002e
+5c2fe6: 5430 c045                              |0009: iget-object v0, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._parent:Lcom/fasterxml/jackson/core/filter/TokenFilterContext; // field@45c0
+5c2fea: 3800 0500                              |000b: if-eqz v0, 0010 // +0005
+5c2fee: 7020 2265 4000                         |000d: invoke-direct {v0, v4}, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._writePath:(Lcom/fasterxml/jackson/core/JsonGenerator;)V // method@6522
+5c2ff4: 5530 c145                              |0010: iget-boolean v0, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c2ff8: 3800 0c00                              |0012: if-eqz v0, 001e // +000c
+5c2ffc: 5530 bf45                              |0014: iget-boolean v0, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._needToHandleName:Z // field@45bf
+5c3000: 3800 2000                              |0016: if-eqz v0, 0036 // +0020
+5c3004: 5433 bc45                              |0018: iget-object v3, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c3008: 6e20 ab61 3400                         |001a: invoke-virtual {v4, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5c300e: 2819                                   |001d: goto 0036 // +0019
+5c3010: 1210                                   |001e: const/4 v0, #int 1 // #1
+5c3012: 5c30 c145                              |001f: iput-boolean v0, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._startHandled:Z // field@45c1
+5c3016: 5231 c245                              |0021: iget v1, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c301a: 1222                                   |0023: const/4 v2, #int 2 // #2
+5c301c: 3321 0b00                              |0024: if-ne v1, v2, 002f // +000b
+5c3020: 6e10 d461 0400                         |0026: invoke-virtual {v4}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartObject:()V // method@61d4
+5c3026: 5433 bc45                              |0029: iget-object v3, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._currentName:Ljava/lang/String; // field@45bc
+5c302a: 6e20 ab61 3400                         |002b: invoke-virtual {v4, v3}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeFieldName:(Ljava/lang/String;)V // method@61ab
+5c3030: 2808                                   |002e: goto 0036 // +0008
+5c3032: 5233 c245                              |002f: iget v3, v3, Lcom/fasterxml/jackson/core/filter/TokenFilterContext;._type:I // field@45c2
+5c3036: 3303 0500                              |0031: if-ne v3, v0, 0036 // +0005
+5c303a: 6e10 d061 0400                         |0033: invoke-virtual {v4}, Lcom/fasterxml/jackson/core/JsonGenerator;.writeStartArray:()V // method@61d0
+5c3040: 0e00                                   |0036: return-void
+      catches       : (none)
+      positions     :
+        0x0000 line=182
+        0x0009 line=185
+        0x000d line=186
+        0x0010 line=188
+        0x0014 line=190
+        0x0018 line=191
+        0x001f line=194
+        0x0021 line=195
+        0x0026 line=196
+        0x0029 line=197
+        0x002f line=198
+        0x0033 line=199
+      locals        :
+        0x0000 - 0x0037 reg=3 this Lcom/fasterxml/jackson/core/filter/TokenFilterContext;
+        0x0000 - 0x0037 reg=4 (null) Lcom/fasterxml/jackson/core/JsonGenerator;
+
+  source_file_idx   : 26817 (TokenFilterContext.java)
+
