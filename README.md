@@ -13,7 +13,7 @@
 
 每份指令的 `index.tsv` 关联类名和小文件；`evidence/*-raw-dex-class-map.tsv` 已更新为仓库内文件路径和行号。`bytecode-splits.json` 保存原文件散列、片段顺序和重组校验，全部片段可以逐字节重组成原指令文件。
 
-`provenance/local-export-file-manifest.json` 核对原本地导出，根目录 `file-manifest.json` 核对本仓库初始上传内容。材料中的本地绝对路径仅记录来源，不是运行依赖。
+`provenance/local-export-file-manifest.json` 核对原本地导出，根目录 `file-manifest.json` 核对当前仓库文件内容。材料中的本地绝对路径仅记录来源，不是运行依赖。
 
 以下是导出范围和阅读说明。
 
@@ -99,3 +99,7 @@ JADX GUI 可以打开某个模块目录里的原始 DEX。不同模块请分别�
 5. 本目录用于阅读，不是已验证可构建的 Android Studio/Gradle 原项目。
 
 本轮为静态文件导出，没有运行样本或获取远程业务内容。
+
+## Spark 离线恢复补充（2026-10-24）
+
+新增 [Spark 业务模块恢复目录](Spark/recovery/README.md)：载荷、解码器、对应原生函数、仿真对照与剩余缺口。最终业务 DEX 仍未取得。目录是当前更新内容；先前生成的 ZIP 保留初始导出快照，未包含本次新增材料。
